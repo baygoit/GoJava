@@ -9,6 +9,7 @@ public class Project {
 	private String projectDescription;
 	private String projectDetailedDescription;
 	private String projectUrl;
+	private String projectQuestion;
 	private int projectNecessaryAmount;
 	private int projectAmountCollected;
 	private int projectDaysToEnd;
@@ -19,6 +20,7 @@ public class Project {
 		this.projectNecessaryAmount = projectNecessaryAmount;
 		this.projectAmountCollected = projectAmountCollected;
 		this.projectDaysToEnd = projectDaysToEnd;
+		this.projectQuestion = "While no one not leave any question";
 	}
 
 	public String getProjectName() {
@@ -49,6 +51,10 @@ public class Project {
 		return projectDaysToEnd;
 	}
 
+	public String getProjectQuestion() {
+		return projectQuestion;
+	}
+
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
@@ -71,6 +77,10 @@ public class Project {
 
 	public void setProjectAmountCollected(int projectAmountCollected) {
 		this.projectAmountCollected += projectAmountCollected;
+	}
+
+	public void setProjectQuestion(String projectQuestin) {
+		this.projectQuestion = projectQuestin;
 	}
 
 	public void setProjectDaysToEnd(int projectDaysToEnd) {

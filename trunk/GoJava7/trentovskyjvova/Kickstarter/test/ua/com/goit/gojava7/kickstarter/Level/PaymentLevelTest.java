@@ -31,12 +31,12 @@ public class PaymentLevelTest {
 	@Before 
 	public void setUp() {
 		categories = new ArrayList<Category>();
-		Category category = new Category("Some Category");
-		project1 = new Project("proj 1");
-		project1.setPledged(10);
+		Category category = new Category("Some Category", 1);
+		project1 = new Project("proj 1", 1);
+		//project1.setPledged(10);
 		category.addProject(project1);
 		categories.add(category);
-		categories.add(new Category("Second Category"));
+		categories.add(new Category("Second Category", 2));
 		selectedCategory = category;
 	}
 	
@@ -51,7 +51,7 @@ public class PaymentLevelTest {
 		
 		when(consoleScanner.scanLine()).thenReturn("name", "card");
 		when(consoleScanner.scan()).thenReturn(290);
-		String result = paymentLevel.fillOutForm(project1, 1, consoleScanner);
+		String result = paymentLevel.fillOutForm(project1, 1, consoleScanner, null, null);
 		
 		assertThat(project1.getPledged(), is(300));
 	}

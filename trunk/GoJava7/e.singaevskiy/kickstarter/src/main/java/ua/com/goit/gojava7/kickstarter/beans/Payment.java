@@ -8,6 +8,10 @@ public class Payment {
     private long sum;
     private Date date;
 
+    public Payment() {
+        // default bean constructor
+    }
+    
     public Payment(User user, long cardId, long sum, Date date) {
         this.user = user;
         this.cardId = cardId;
@@ -45,6 +49,43 @@ public class Payment {
 
     public Date getDate() {
         return date;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (int) (cardId ^ (cardId >>> 32));
+        result = prime * result + ((date == null) ? 0 : date.hashCode());
+        result = prime * result + (int) (sum ^ (sum >>> 32));
+        result = prime * result + ((user == null) ? 0 : user.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Payment other = (Payment) obj;
+        if (cardId != other.cardId)
+            return false;
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        if (sum != other.sum)
+            return false;
+        if (user == null) {
+            if (other.user != null)
+                return false;
+        } else if (!user.equals(other.user))
+            return false;
+        return true;
     }
 
 }

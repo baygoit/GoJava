@@ -5,30 +5,34 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ConsoleScanner {
-	private static final String PROBLEMS = "Problems with stream...";
+	private static final String PROBLEM_ENTERED_FORBIDDEN_SYMBOL = "You entered forbidden symbol. Please try again";
 	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 	public int getInt() {
-		int userNumber = Integer.MAX_VALUE;
+		int userNumber = Integer.MIN_VALUE;
+		do {
+			try {
+				String inputedUserString = bufferedReader.readLine();
+				userNumber = Integer.parseInt(inputedUserString);
+			} catch (NumberFormatException | IOException e) {
+				System.out.print(PROBLEM_ENTERED_FORBIDDEN_SYMBOL);
+			}
+		} while (userNumber == Integer.MIN_VALUE);
 		
-		try {
-			String inputedUserString = bufferedReader.readLine();
-			userNumber = Integer.parseInt(inputedUserString);
-		} catch (NumberFormatException | IOException e) {
-			System.out.print("You entered forbidden symbol. ");
-		}
 		return userNumber;
 	}
 	
 	public long getLong() {
-		long userNumber = Long.MAX_VALUE;
+		long userNumber = Long.MIN_VALUE;
+		do {
+			try {
+				String inputedUserString = bufferedReader.readLine();
+				userNumber = Integer.parseInt(inputedUserString);
+			} catch (NumberFormatException | IOException e) {
+				System.out.println(PROBLEM_ENTERED_FORBIDDEN_SYMBOL);
+			}
+		} while (userNumber == Long.MIN_VALUE);
 		
-		try {
-			String inputedUserString = bufferedReader.readLine();
-			userNumber = Integer.parseInt(inputedUserString);
-		} catch (NumberFormatException | IOException e) {
-			System.out.print("You entered forbidden symbol. ");
-		}
 		return userNumber;
 	}
 
@@ -38,28 +42,20 @@ public class ConsoleScanner {
 		try {
 			name = bufferedReader.readLine();
 		} catch (IOException e) {
-			System.out.println(PROBLEMS);
+			System.out.println("Problems with stream...");
 		}
 		return name;
 	}
 
 	public int parseDonatingAmount() {
-		int donatingAmount = -1;
-		do {
-			System.out.println("Please enter donating sum : ");
-			donatingAmount = getInt();
-		} while (donatingAmount < 0);
-		
+		System.out.println("Please enter donating sum : ");
+		int	donatingAmount = getInt();
 		return donatingAmount;
 	}
 	
 	public long parseCreditCardNumber() {
-		long creditCardNumber = -1;
-		do {
-			System.out.println("Please enter you card number : ");
-			creditCardNumber = getLong();
-		} while (creditCardNumber < 0);
-		
+		System.out.println("Please enter you card number : ");
+		long creditCardNumber = getLong();
 		return creditCardNumber;
 	}
 	
@@ -81,7 +77,7 @@ public class ConsoleScanner {
 				bufferedReader.close();
 			}
 		} catch (IOException e) {
-			System.out.println(PROBLEMS);
+			System.out.println("Problems with stream closing...");
 		}
 	}
 }

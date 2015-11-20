@@ -33,6 +33,7 @@ public class ConsolePrinter {
 					+ currentProject.getProjectNecessaryAmount() + NEXT_LINE + "Collected amount"
 					+ SEPARETOR + currentProject.getProjectAmountCollected() + NEXT_LINE
 					+ "Days to go" + SEPARETOR + currentProject.getProjectDaysToEnd() + NEXT_LINE
+					+ "Question" + SEPARETOR + currentProject.getProjectQuestion() + NEXT_LINE
 					+ INDENT);
 		}
 	}
@@ -48,6 +49,7 @@ public class ConsolePrinter {
 				+ "Days to go" + SEPARETOR + project.getProjectDaysToEnd() + NEXT_LINE
 				+ "About this project" + SEPARETOR + project.getProjectDetailedDescription()
 				+ NEXT_LINE + "Reference on project" + SEPARETOR + project.getProjectUrl()
-				+ NEXT_LINE + INDENT);
+				+ NEXT_LINE + "Question" + SEPARETOR + project.getProjectQuestion() + NEXT_LINE
+				+ INDENT);
 	}
 }

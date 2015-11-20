@@ -65,13 +65,13 @@ public class ProjectFileDAOTest {
     
     @Test
     public void testGetByCategory() {
-        Category category = new Category("cat");
+        Category category = new Category(1, "cat");
         List<Project> pList = new ArrayList<>();
         pList.add(new Project("p1", null, category));
         pList.add(new Project("p2", null, category));
         
         fs.addAll(pList);
-        fs.add(new Project("p3", null, new Category("cat2")));
+        fs.add(new Project("p3", null, new Category(2, "cat2")));
 
         assertThat(fs.getAll(), not(pList));
         assertThat(fs.getByCategory(category), is(pList));

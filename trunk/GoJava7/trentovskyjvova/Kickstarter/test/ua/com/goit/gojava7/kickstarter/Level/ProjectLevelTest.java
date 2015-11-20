@@ -25,12 +25,12 @@ public class ProjectLevelTest {
 	@Before 
 	public void setUp() {
 		categories = new ArrayList<Category>();
-		Category category = new Category("Some Category");
-		project1 = new Project("proj 1");
-		project1.setPledged(10);
+		Category category = new Category("Some Category", 1);
+		project1 = new Project("proj 1", 1);
+
 		category.addProject(project1);
 		categories.add(category);
-		categories.add(new Category("Second Category"));
+		categories.add(new Category("Second Category", 1));
 		selectedCategory = category;
 	}
 	
@@ -42,19 +42,19 @@ public class ProjectLevelTest {
 	
 	@Test
 	public void testValidateUserChoise1() {
-		String result = projectLevel.validateUserChoise(new ArrayList<Category>(), 1, selectedCategory);
+		String result = projectLevel.validateUserChoise(new ArrayList<Category>(), 1, selectedCategory, project1);
 		assertThat(result, is(""));
 	}
 	
 	@Test
 	public void testValidateUserChoise2() {
-		String result = projectLevel.validateUserChoise(new ArrayList<Category>(), 3, selectedCategory);
+		String result = projectLevel.validateUserChoise(new ArrayList<Category>(), 3, selectedCategory, project1);
 		assertThat(result, is(ANSVER));
 	}
 	
 	@Test
 	public void testValidateUserChoiseMinus1() {
-		String result = projectLevel.validateUserChoise(categories, -1, selectedCategory);
+		String result = projectLevel.validateUserChoise(categories, -1, selectedCategory, project1);
 		assertThat(result, is(ANSVER));
 	}
 	
