@@ -3,41 +3,44 @@ package com.azuiev.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Masta on 31.10.2015.
  */
 
 @Entity
-@Table(name="city")
+@Table(name="city", catalog = "airbnb")
 public class City {
     private Long id;
     private String name;
-    private String image;
+
+    private List<Image> image = new ArrayList<Image>();
 
     public City() {
     }
 
+    //getters and setters
     @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     public Long getId() {
         return id;
     }
-
 
     @Column(name="name")
     public String getName() {
         return name;
     }
 
-    public String getImage() {
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "city")
+    public List<Image> getImage() {
         return image;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImage(List<Image> image) {
+        this.image=image;
     }
 
     public void setId(Long id) {
@@ -48,7 +51,8 @@ public class City {
         this.name = name;
     }
 
+    //other
     public String imagePath(){
-        return "city/images/"+image;
+        return "images/city/"+image.get(0).getName();
     }
 }

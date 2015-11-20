@@ -29,6 +29,7 @@ public class ControllerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("loginFail",false);
         ServletContext context = getServletContext();
         String path = request.getServletPath();
         if ("/login".equals(path)){
@@ -36,9 +37,13 @@ public class ControllerServlet extends HttpServlet {
             String password = (String)request.getParameter("password");
             UserService userService = new UserService();
             User user = userService.login(email, password);
+            //temp
+            user = new User();
+
             if (user==null) {
+                request.setAttribute("loginFail",true);
                 request.getRequestDispatcher(context.getInitParameter("path")+path+".jsp").forward(request, response);
-                response.sendError(1);
+
             }
             HttpSession session = request.getSession(true);
             session.setAttribute("user", user);

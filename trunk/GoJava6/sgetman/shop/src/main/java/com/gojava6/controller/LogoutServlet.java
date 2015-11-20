@@ -29,6 +29,6 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = req.getSession();
         session.invalidate();
         logger.info("you are logged out");
-        resp.sendRedirect("/admin/admin.jsp");
+        resp.sendRedirect("/admin");
     }
 }

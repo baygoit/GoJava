@@ -55,9 +55,11 @@ public class Product implements Serializable {
     @Column(name = "last_update")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+
+    /*@JoinColumn(name = "category_id", referencedColumnName = "id")*/
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Category category;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Collection<OrderedProduct> orderedProductCollection;
 

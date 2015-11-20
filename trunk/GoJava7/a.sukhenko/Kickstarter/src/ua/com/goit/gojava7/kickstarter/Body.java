@@ -1,48 +1,87 @@
 package ua.com.goit.gojava7.kickstarter;
 
-import ua.com.goit.gojava7.kickstarter.model.Lang;
+import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
+import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 
-public class Body {
-	private Lang language = Lang.English;
-	Kickstarter kickstarter;
-	
-	public Body(Kickstarter kickstarter) {
+public class Body{
+	public static final String CATEGORIES = "Categories: ";
+	public static final String GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO = "GoIT Kickstarter (c) by Artur Sukhenko";
+	public static final String WELCOME_TO_KICKSTARTER_BETA = "Welcome to Kickstarter Beta";
+	private Kickstarter		kickstarter;
+	public Kickstarter getKickstarter() {
+		return kickstarter;
+	}
+	public void setKickstarter(Kickstarter kickstarter) {
 		this.kickstarter = kickstarter;
 	}
+	public ConsolePrinter getConsolePrinter() {
+		return consolePrinter;
+	}
+	public void setConsolePrinter(ConsolePrinter consolePrinter) {
+		this.consolePrinter = consolePrinter;
+	}
 
-	public void generateHeader(){
-		if(language == Lang.Russian)
-		ConsolePrinter.println(LanguageConst.RU_HELLO_MSG);
-		else{
-			ConsolePrinter.println(LanguageConst.ENG_HELLO_MSG);
-		}
+	private ConsolePrinter	consolePrinter;
+
+	public Body(Kickstarter kickstarter, ConsolePrinter consolePrinter2) {
+		this.kickstarter = kickstarter;
+		this.consolePrinter = consolePrinter2;
 	}
-	
-	public void generateFooter(){
-		ConsolePrinter.println("GoIT Kickstarter (c) by Artur Sukhenko");
+	public Body() {
+		
 	}
-	public void generateBody(){
-		ConsolePrinter.printDeflector();
-		Project first = kickstarter.getProjectById(0);
-		ConsolePrinter.println("Project: " + first.getProjectName() + "   |  Category: " + first.getProjectCategory().toString());
-		ConsolePrinter.println(first.getProjectDescription());
-		ConsolePrinter.println("Backers: " + first.getBackers().size() + " | Pledged: $" + first.getMoneyPledged());
-		ConsolePrinter.printDeflector();
+	public void generateHeader() {
+		consolePrinter.print(WELCOME_TO_KICKSTARTER_BETA);
 	}
-	
-	public void generateQuoteBlock(){
+
+	public void generateFooter() {
+		consolePrinter.print(GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO);
+	}
+
+	public void generateBody() {
+		Project first = kickstarter.getProjectManager().getProjectById(0);
+		generateProjectInfo(first);
+	}
+
+	public void generateQuoteBlock() {
 		Quote quote = kickstarter.getQuoteStorage().getRandomQuote();
-		ConsolePrinter.printDeflector();
-		ConsolePrinter.println(quote);
+		consolePrinter.printHorizontalLine();
+		consolePrinter.println(quote);
+	}
+
+	public void generateCategories() {
+		consolePrinter.printHorizontalLine();
+		consolePrinter.print(CATEGORIES);
+		kickstarter.getCategoryStorage().getCategories().forEach(a -> {
+			generateCategoryInfo(a);
+		});
 	}
 
 	public void generateMainPage() {
 		generateHeader();
 		generateQuoteBlock();
 		generateBody();
-		generateFooter();		
+		generateFooter();
 	}
-	
+
+	public void generateCategoryInfo(Category category) {
+		consolePrinter.printCategory(category);
+	}
+
+	public void generateProjectInfo(Project project) {
+
+		consolePrinter.printHorizontalLine();
+		consolePrinter.print(
+				"Project: " + project.getProjectName() + "   |  Category: "
+						+ project.getProjectCategory().getCategoryName());
+		consolePrinter.print(project.getProjectEndTime());
+		consolePrinter.print("[ " + project.getProjectDescription() + " ]");
+		consolePrinter.print("Funded: " + project.getFundedPercentage()
+				+ " Backers: " + project.getBackers().size() + " | Pledged: $"
+				+ project.getMoneyPledged());
+
+	}
+
 }

@@ -4,29 +4,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectStorage {
 	private List<Project> projects = new ArrayList<>();
 
-	public List<Project> getProgects(Category category) {
-		List<Project> projectsOfCategory = new ArrayList<>();
+	public List<Project> getProjects() {
+		return Collections.unmodifiableList(projects);
+	}
 
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+	
+	public Project getProject(int projectId) {
+		Project result = null;
 		for (Project project : projects) {
-			if (project.getCategorie() == category) {
-				projectsOfCategory.add(project);
+			if(project.getId() == projectId){
+				result = project;
+				break;
 			}
 		}
-
-		return Collections.unmodifiableList(projectsOfCategory);
+		return result;
 	}
-
-	public void add(Project progect) {
-		projects.add(progect);
-	}
-
-/*	public int size(Category category) {
-		return getProgects(category).size();
-	}*/
 }

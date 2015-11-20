@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<categories>
+    <category categoryId="1">
+        <categoryName>Movie</categoryName>
+    </category>
+    <category categoryId="2">
+        <categoryName>Technology</categoryName>
+    </category>
+    <category categoryId="3">
+        <categoryName>Games</categoryName>
+    </category>
+    <category categoryId="4">
+        <categoryName>Books</categoryName>
+    </category>
+</categories>

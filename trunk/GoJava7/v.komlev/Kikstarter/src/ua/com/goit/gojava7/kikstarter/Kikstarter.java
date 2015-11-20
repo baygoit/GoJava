@@ -1,43 +1,113 @@
 package ua.com.goit.gojava7.kikstarter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Kikstarter {
 
-	/**
-	 * 
-	 */
-	public static void main(String[] args) {
-		int selectCategorie;
-		Scanner input = new Scanner(System.in);
-		Quote quote = new Quote();
-		Project project = new Project();
+	private static final String INDENT = "===============================";
+	private ConsoleReader consoleReader;
+	private ConsolePrinter consolePrinter;
+	private QuotesStorage quotesStorage;
+	private CategoryStorage categoryStorage;
+	private PaymentStorage paymentStorage;
 
-		// show quote random
-		System.out.println(quote.getQuote());
-		System.out.println("====================");
-
-		// create object class Category for display list categories
-		Categorie categorie = new Categorie();
-		for (int i = 0; i < categorie.listCategoies.size(); i++) {
-			System.out.println(i + " : " + categorie.listCategoies.get(i));
-		}
-
-		System.out.println("====================");
-
-		// offer the customer to select a category from the list
-		System.out.println("Select number categorie from list");
-		selectCategorie = Integer.parseInt(input.nextLine());
-		System.out.println("You selected categorie - "
-				+ categorie.getCategoie(selectCategorie));
-
-		if (selectCategorie >= 0) {
-			System.out.println("Selected category contain projects: "
-					+ project.listPoject.get(selectCategorie));
-		}
+	public Kikstarter(ConsoleReader consoleReader, ConsolePrinter consolePrinter,
+			QuotesStorage quotesStorage, CategoryStorage categoryStorage) {
+		this.consoleReader = consoleReader;
+		this.consolePrinter = consolePrinter;
+		this.quotesStorage = quotesStorage;
+		this.categoryStorage = categoryStorage;
+		paymentStorage = new PaymentStorage();
 	}
 
+	public void startUp() throws IOException {
+		consolePrinter.printQuote(quotesStorage.getRandomQuote());
+		boolean stopWhile = true;
+
+		do {
+			consolePrinter.printAllCategories(categoryStorage);
+			consolePrinter.printString("Please choose the category from list; Enter 0 to exit");
+
+			int numberOfSelectedCategory = (consoleReader.getNumberFromConsoel()) - 1;
+			if (numberOfSelectedCategory == -1) {
+				consolePrinter.printString("You entered 0. Bye!");
+				stopWhile = false;
+				break;
+			} else {
+				try {
+					consolePrinter.printCategory(categoryStorage
+							.getCategory(numberOfSelectedCategory));
+				} catch (Exception e) {
+					System.out.println("there is no such category!");
+					continue;
+				}
+
+				do {
+					consolePrinter.printProjectsOfCurrentCategory(categoryStorage,
+							numberOfSelectedCategory);
+
+					consolePrinter
+							.printString("Enter number project; Enter 0 ot see all categories");
+					int numberOfselectedProject = (consoleReader.getNumberFromConsoel()) - 1;
+					if (numberOfselectedProject == -1) {
+						break;
+					} else {
+						consolePrinter.printString(INDENT);
+						consolePrinter.printPoject(categoryStorage.getCategory(
+								numberOfSelectedCategory).getProject(numberOfselectedProject));
+					}
+
+					consolePrinter
+							.printString("Enter 1 to make a payment; Enter 2 to to ask question; 0 - all porjects");
+					int numberOfselecedProjectPayment = (consoleReader.getNumberFromConsoel());
+					if (numberOfselecedProjectPayment == 0) {
+						continue;
+					} else if (numberOfselecedProjectPayment == 1) {
+						setPaymentFromUser(categoryStorage.getCategory(numberOfSelectedCategory)
+								.getProject(numberOfselectedProject));
+					} else if (numberOfselecedProjectPayment == 2) {
+						setQuestionFromUser(categoryStorage.getCategory(numberOfSelectedCategory)
+								.getProject(numberOfselectedProject));
+					}
+					consolePrinter.printString("Enter 1 to see all projects; 0 - to exit");
+					int numberOfselecedProjectExitOrNot = (consoleReader.getNumberFromConsoel());
+					if (numberOfselecedProjectExitOrNot == 0) {
+						consolePrinter.printString("You entered 0. Bye!");
+						stopWhile = false;
+						break;
+					} else {
+						continue;
+					}
+				} while (stopWhile);
+			}
+
+		} while (stopWhile);
+	}
+
+	public void setPaymentFromUser(Project project) throws IOException {
+		consolePrinter.printString(INDENT);
+		consolePrinter.printString("Enter User name");
+		String currentUserName = (consoleReader.getStringFromConsoel());
+		consolePrinter.printString("Enter number card");
+		long currentNumberCard = consoleReader.getLongFromConsoel();
+		consolePrinter.printString("Enter the desired amount");
+		int currentEnteredAmount = consoleReader.getNumberFromConsoel();
+
+		consolePrinter.printString(INDENT);
+
+		Payment payment = new Payment(currentUserName, currentNumberCard, currentEnteredAmount);
+		project.setProjectSumFromUser(currentEnteredAmount);
+		paymentStorage.setPayment(payment);
+		consolePrinter.printPoject(project);
+	}
+
+	public void setQuestionFromUser(Project project) throws IOException {
+		consolePrinter.printString("Enter your question:");
+		String currentUserQuestion = (consoleReader.getStringFromConsoel());
+
+		consolePrinter.printString(INDENT);
+
+		project.setProjectQuestion(currentUserQuestion);
+		consolePrinter.printPoject(project);
+	}
 }

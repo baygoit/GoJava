@@ -16,6 +16,9 @@
         <property name="current_session_context_class">thread</property>
 
         <mapping class="com.azuiev.model.City" />
+        <mapping class="com.azuiev.model.Image" />
+        <mapping class="com.azuiev.model.User" />
+        <mapping class="com.azuiev.model.Apartment" />
 
     </session-factory>
 </hibernate-configuration>

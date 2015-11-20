@@ -5,31 +5,57 @@ import com.azuiev.enums.ApartType;
 import com.azuiev.enums.UserRoles;
 import com.azuiev.interfaces.Observer;
 import com.azuiev.Validator;
+
+import javax.persistence.*;
 import java.util.*;
 
 /**
  * Created by Lera on 21.09.2015.
  */
+
+@Entity
+@Table(name = "user", catalog = "airbnb")
+
 public class User implements Observer {
     private String name;
     private String surName;
     private String email;
-    private Integer id;
+    private String password;
+    private Long id;
+
+    @Transient
     private List<UserRoles> myRoles = new LinkedList<UserRoles>();
 
-     private User(String name, String surName, String email) {
+    public User() {
+    }
+
+    private User(String name, String surName, String email) {
+
         this.name = name;
         this.surName = surName;
         this.email = email;
     }
 
-    private User(String name, String surName, String email, Integer id) {
+    private User(String name, String surName, String email, Long id) {
         this.name = name;
         this.surName = surName;
         this.email = email;
         this.id = id;
     }
 
+    //getters and setters
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -38,6 +64,7 @@ public class User implements Observer {
         this.name = name;
     }
 
+    @Column(name = "surname")
     public String getSurName() {
         return surName;
     }
@@ -46,10 +73,34 @@ public class User implements Observer {
         this.surName = surName;
     }
 
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Transient
+    public List<UserRoles> getMyRoles() {
+        return myRoles;
+    }
+
+    public void setMyRoles(List<UserRoles> myRoles) {
+        this.myRoles = myRoles;
+    }
+
+    //other methods
     public void notifyObserver(String s) {
         System.out.println(s);
     }
@@ -69,9 +120,9 @@ public class User implements Observer {
         }
     }
 
-    public Apartment registerBook(String city, String address, ApartType apartType) {
+    public Apartment registerBook(City city, String address, ApartType apartType) {
         if (hasRole(UserRoles.HOST)) {
-            return Apartment.registerBook(this, city, address, apartType);
+            return new Apartment(address, apartType, city, this);
         } else {
             AirBnB.log.error("User: " + this + "has`t role " + UserRoles.HOST);
             return null;
@@ -93,11 +144,11 @@ public class User implements Observer {
         return String.format("name = '%s', surName = '%s', email = '%s'", name, surName, email);
     }
 
-    public static Builder createBuilder(){
+    public static Builder createBuilder() {
         return new Builder();
     }
 
-    public static class Builder{
+    public static class Builder {
         private Builder() {
         }
 
@@ -106,10 +157,11 @@ public class User implements Observer {
 
         public User createUser(String name, String surName, String email) {
 
-          return createUser(-1,name, surName,email);
+            return createUser(-1, name, surName, email);
 
         }
-        public User createUser(Integer id, String name, String surName, String email) {
+
+        public User createUser(Long id, String name, String surName, String email) {
 
             User user = new User(name, surName, email, id);
 
@@ -122,22 +174,23 @@ public class User implements Observer {
 
         public User createUser(Integer id, String name, String surName, String email, UserRoles... roles) {
 
-            User user = createUser(id,name, surName, email);
-            if (user != null){
-                for (UserRoles userRoles :roles) {
+            User user = createUser(id, name, surName, email);
+            if (user != null) {
+                for (UserRoles userRoles : roles) {
                     user.addRole(userRoles);
                 }
 
             }
             return user;
         }
+
         public User createUser(String name, String surName, String email, UserRoles... roles) {
-            return createUser(-1,name,surName,email,roles);
+            return createUser(-1, name, surName, email, roles);
 
         }
 
         private boolean validate(User user) {
-            if (emails.contains(user.getEmail())){
+            if (emails.contains(user.getEmail())) {
                 AirBnB.log.error("Failed to create user. Email is busy - " + user.getEmail());
                 return false;
             }

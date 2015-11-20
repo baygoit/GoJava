@@ -2,20 +2,14 @@ package dao.file;
 
 import model.Reservation;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ReservationFileDao {
     private FileAccess fileAccess;
 
     public ReservationFileDao() {
-        String path = this.getClass().getResource("/reservation").getPath();
+        String path = this.getClass().getResource("/files/reservation").getPath();
         this.fileAccess = new FileAccess(path);
     }
 
@@ -36,8 +30,8 @@ public class ReservationFileDao {
             params[i] = params[i].trim();
         }
 
-        res.setUser(Integer.parseInt(params[0]));
-        res.setHome(Integer.parseInt(params[1]));
+        res.setUserId(Integer.parseInt(params[0]));
+        res.setHomeId(Integer.parseInt(params[1]));
         res.setStart(new SimpleDateFormat("dd/MM/yyyy").parse(params[2]));
         res.setEnd(new SimpleDateFormat("dd/MM/yyyy").parse(params[3]));
 
