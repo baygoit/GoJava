@@ -2,9 +2,6 @@ package ua.com.goit.gojava7.kickstarter.view.page;
 
 import ua.com.goit.gojava7.kickstarter.view.ConsoleView;
 
-/**
- * Created by Dmytro on 08.11.2015.
- */
 public class HelpPage implements Page {
     ConsoleView view;
 
