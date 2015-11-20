@@ -1,12 +1,10 @@
 package ua.com.goit.gojava7.kickstarter.storage;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.core.IsNot;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;

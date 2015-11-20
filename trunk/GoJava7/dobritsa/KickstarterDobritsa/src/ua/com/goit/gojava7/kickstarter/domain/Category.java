@@ -1,8 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ua.com.goit.gojava7.kickstarter.storage.Storage;
 
 public class Category extends Storage<Project> {
