@@ -112,7 +112,7 @@ public class KickstarterTest {
 	}
 
 	@Test
-	public void testInvestInTheProject() {
+	public void testOwnAmontDonateInTheProject() {
 		List<Category> categories = new ArrayList<Category>();
 		Category category = new Category("category name", 1);
 		Project project = new Project("project 1", 1);
@@ -121,7 +121,7 @@ public class KickstarterTest {
 		categories.add(category);
 
 		when(categoryStorage.getAllCategories()).thenReturn(categories);
-		when(consoleScanner.scan()).thenReturn(1, 1, 1, 290, 0);
+		when(consoleScanner.scan()).thenReturn(1, 1, 1, 1, 290, 0);
 		when(consoleScanner.scanLine()).thenReturn("sf", "234234");
 
 		kickstarter.runKickstarter();
@@ -129,9 +129,9 @@ public class KickstarterTest {
 		verify(consolePrinter, times(2)).print(contains("1 : category name"));
 		verify(consolePrinter, times(2)).print(
 				contains("You selected 'project 1' project"));
-		verify(consolePrinter, times(2)).print(
+		verify(consolePrinter, times(4)).print(
 				contains("to invest in the project"));
-		verify(consolePrinter, times(2)).print(contains("290"));
+		verify(consolePrinter).print(contains("pledged: 290"));
 		verify(consolePrinter).print("Goodbye!");
 	}
 }
