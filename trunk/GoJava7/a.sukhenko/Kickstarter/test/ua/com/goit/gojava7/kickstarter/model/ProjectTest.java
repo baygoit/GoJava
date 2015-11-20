@@ -23,7 +23,14 @@ public class ProjectTest {
 	public void testProject() {
 		assertNotNull(project);
 	}
-
+	
+	@Test
+	public void testPayment(){
+		PaymentBonus paymentBonus = new PaymentBonus();
+		project.setPaymentBonus(paymentBonus);
+		assertThat(project.getPaymentBonus(),is(paymentBonus));
+	}
+	
 	@Test
 	public void testProject4() {
 		Category projectCategory = new Category();
