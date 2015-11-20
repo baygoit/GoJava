@@ -2,9 +2,9 @@ package ua.com.goit.gojava7.kickstarter.storage_in_memory;
 
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.beans.Payment;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractMemoryStorage;
-import ua.com.goit.gojava7.kickstarter.model.Payment;
-import ua.com.goit.gojava7.kickstarter.model.Project;
 
 public class PaymentStorage extends AbstractMemoryStorage<Payment> {
 	

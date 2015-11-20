@@ -1,13 +1,14 @@
 package ua.com.goit.gojava7.kickstarter.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.beans.Faq;
+import ua.com.goit.gojava7.kickstarter.beans.Payment;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.beans.Quote;
 import ua.com.goit.gojava7.kickstarter.dao.Templateble;
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.Faq;
-import ua.com.goit.gojava7.kickstarter.model.Payment;
-import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 public class ConsolePrinter {
 	private static final TextModifer TEXT_MODIFER = new TextModifer();
@@ -62,14 +63,20 @@ public class ConsolePrinter {
 
 	public void printFAQs(Templateble<Faq> faqStorage, Project project) {
 		List<Faq> allFaqs = faqStorage.getAll();
-		if (allFaqs.size() == 0) {
+		List<Faq> projectsFaqs = new ArrayList<>();
+		
+		for (Faq faq : allFaqs) {
+			if (faq.getProjectID() == project.getUniqueID()) {
+				projectsFaqs.add(faq);
+			}
+		}
+		
+		if (projectsFaqs.isEmpty()) {
 			System.out.println("There is no questions in this projects");
 		} else {
 			System.out.println("FAQ : ");
-			for (int index = 0; index < allFaqs.size(); index++) {
-				if (allFaqs.get(index).getProjectID() == project.getUniqueID()) {
-					System.out.println("  question : " + allFaqs.get(index).getQuestion());
-				}
+			for (Faq faq : projectsFaqs) {
+				System.out.println("  question : " + faq.getQuestion());
 			}
 		}
 	}
