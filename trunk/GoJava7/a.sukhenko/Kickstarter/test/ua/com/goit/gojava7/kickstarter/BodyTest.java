@@ -58,41 +58,7 @@ public class BodyTest {
 		assertThat(outContent.toString(), is(Body.GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO + newLine));
 	}
 
-	@Test
-	public void testGenerateQuoteBlock() {
-		fail("Not yet implemented");
-	}
-
-<<<<<<< remotes/origin/master
-=======
-<<<<<<< HEAD
-	@Test
-	public void testGenerateCategories() {
-		String stuff = ConsolePrinter.HORIZONTAL_LINE+newLine;
-		stuff += Body.CATEGORIES;
-		consolePrinter.printHorizontalLine();
-		body.generateCategories();	
-				//assertThat()
-				
-	}
-
-=======
->>>>>>> local
-	/*
-	 * @Test public void testGenerateCategories() { String stuff =
-	 * ConsolePrinter.HORIZONTAL_LINE+newLine; stuff += Body.CATEGORIES;
-	 * //body.getKickstarter().getCategoryStorage(). // stuff +=
-	 * b.getCategoryId() + "# " + b.getCategoryName());
-	 * consolePrinter.printHorizontalLine();
-	 * 
-	 * // body.generateCategories(); //assertThat()
-	 * 
-	 * }
-	 */
-<<<<<<< remotes/origin/master
-=======
->>>>>>> accd4d656a713313320a4cdf7cd29ca6eacfb972
->>>>>>> local
+	
 	@Test
 	public void testGenerateMainPage() {
 		fail("Not yet implemented");
