@@ -13,7 +13,7 @@ public class QuestionSystem {
 	public void provideNewQuestion(int projectNumber, int categoryNumber, String categoryTitle) {
 		String newQuestion = reciveQuestion();
 		addNewQuestion(newQuestion, projectNumber, categoryTitle);
-		consolePrintView.singleCategorysProjectsView(prm.getProject(categoryTitle, projectNumber));
+		consolePrintView.singleCategorysProjectsView(prm.getOne(categoryTitle, projectNumber));
 		kr.projectSelector(categoryNumber, categoryTitle);
 	}
 
@@ -23,7 +23,7 @@ public class QuestionSystem {
 	}
 
 	public void addNewQuestion(String newQuestion, int projectNumber, String categoryTitle) {
-		Project p = prm.getProject(categoryTitle, projectNumber);
+		Project p = prm.getOne(categoryTitle, projectNumber);
 		String questionSection = p.getQuestionSection();
 		p.setQuestionSection(questionSection += newQuestion + "\n");
 	}

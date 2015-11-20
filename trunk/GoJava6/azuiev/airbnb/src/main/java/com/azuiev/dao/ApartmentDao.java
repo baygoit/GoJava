@@ -1,56 +1,49 @@
 package com.azuiev.dao;
 
-import com.azuiev.db.AirbnbDBDao;
-import com.azuiev.enums.ApartType;
 import com.azuiev.model.Apartment;
-import com.azuiev.model.City;
-import com.azuiev.model.User;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import org.hibernate.Session;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 02.11.15.
+ * Created by Masta on 02.11.15.
  */
 //TODO reimplement metods
-public class ApartmentDao implements ModelDao {
+public class ApartmentDao implements ModelDao<Apartment> {
 
-    static ModelDao dao = new AbstractModelDao(new Apartment());
-
+    static ModelDao dao = new BasicModelDao<Apartment>(Apartment.class);
     @Override
-    public List<?> getAll() throws SQLException {
-        return (List<Apartment>) dao.getAll();
+    public List<Apartment> getAll() throws SQLException {
+        return dao.getAll();
     }
-
 
     @Override
     public Apartment getById(Long id) throws SQLException {
 
-        return null;
-
+        Apartment Apartment = (Apartment) dao.getById(id);
+        return Apartment;
     }
 
     public List<Apartment> getByCity(Long id) throws SQLException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        return null;
+        List<Apartment> list = session.createQuery("from Apartment where city = "+ id).list();
+        return list;
+
     }
 
     @Override
-    public void update(Object obj) {
-        //TODO
+    public void update(Apartment apartment) throws SQLException {
+        dao.update(apartment);
     }
 
     @Override
-    public void add(Object obj) {
-        //TODO
+    public void add(Apartment apartment) throws SQLException {
+        dao.add(apartment);
     }
 
     @Override
-    public void delete(Object obj) {
-        //TODO
+    public void delete(Apartment apartment) throws SQLException {
+        dao.delete(apartment);
     }
 }

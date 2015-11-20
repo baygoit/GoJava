@@ -1,11 +1,17 @@
 package ua.com.goit.gojava7.salivon.state;
 
 import java.util.Scanner;
+import ua.com.goit.gojava7.salivon.ManagerData;
+import ua.com.goit.gojava7.salivon.ManagerFileData;
+import ua.com.goit.gojava7.salivon.ObjectDataManager;
 import ua.com.goit.gojava7.salivon.handlers.ErrorHandler;
 import ua.com.goit.gojava7.salivon.context.Console;
 
 public abstract class State {
 
+    protected static final int FILE_DATA = 1;
+    protected static final int OBJECT_DATA = 2;
+    private ManagerData managerData;
     protected static Scanner scan = new Scanner(System.in);
     protected String menu;
     protected ErrorHandler handler;
@@ -13,10 +19,42 @@ public abstract class State {
     private static int indexProject;
     private boolean commandExit = true;
     private boolean commandZero = true;
+    private static String inData;
+    private static int currentData;
+
+    public State() {
+        setManagerData();
+    }
 
     public abstract void outputContentState();
 
-    protected abstract void changeState(Console context, String inData);
+    public abstract void changeState(Console context);
+
+    public static int getCurrentData() {
+        return currentData;
+    }
+
+    public static void setCurrentData(int command) {
+        State.currentData = command;
+    }
+
+    public ManagerData getManagerData() {
+        return managerData;
+    }
+
+    public void setManagerData() {
+        if (currentData == FILE_DATA) {
+            managerData = new ManagerFileData();
+        }
+        if (currentData == OBJECT_DATA) {
+            managerData = new ObjectDataManager();
+        }
+
+    }
+
+    protected String getInData() {
+        return inData;
+    }
 
     public boolean isCommandZero() {
         return commandZero;
@@ -54,30 +92,27 @@ public abstract class State {
         State.indexProject = indexProject;
     }
 
-    public void verification(Console context) {
+    public void verification() {
 
         while (true) {
-            String inData = readUserInformations();
+            inData = readUserInformations().trim();
             if (inData.equalsIgnoreCase("q") && commandExit) {
-                performExit();
+                return;
             }
             if (inData.equals("0") && commandZero) {
-                changeState(context, inData);
                 return;
             }
             if (!handler.validate(inData)) {
                 System.out.println("Enter the correct data!");
                 System.out.println(menu);
                 continue;
-            } else {
-                changeState(context, inData);
-                return;
             }
+            return;
         }
     }
 
     public String readUserInformations() {
-        String inData = State.scan.next();
+        String inData = State.scan.nextLine();
         return inData;
     }
 
@@ -85,6 +120,10 @@ public abstract class State {
         System.out.println("Goodbye my LORD!");
         State.getScan().close();
         Runtime.getRuntime().exit(0);
+    }
+
+    public void nextState(Console context) {
+        context.execute();
     }
 
 }

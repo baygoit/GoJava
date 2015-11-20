@@ -1,41 +1,103 @@
 package ua.com.goit.gojava7.kickstarter.storage_in_files;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import ua.com.goit.gojava7.kickstarter.model.Quote;
-import ua.com.goit.gojava7.kickstarter.templates.AbstractTemplateFiles;
+import ua.com.goit.gojava7.kickstarter.beans.Quote;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
 
-public class QuotesStorage extends AbstractTemplateFiles<Quote>{
+public class QuotesStorage extends AbstractFilesStorage<Quote> {
 	
+//	private static final File FILE_FOR_TEST = new File("./resources/quotes.csv");
+	private static final File REWARDS_FILE = new File("./quotes.csv");
 	private static final Random RANDOM = new Random();
 	
-	public QuotesStorage() {
+	private static final int AUTHOR = 0;
+	private static final int QUOTE_TEXT = 1;
+
+	@Override
+	public void add(Quote element) {
 		
-		Quote quote1 = new Quote("B. Franklin", 
-				"Liberty will not descend to a people, a people must "
-				+ "raise themselves to liberty; it is a blessing that must " 
-				+ "be earned before it can be enjoyed.");
+		FileWriter fileWriter = null;
 
-		Quote quote2 = new Quote("Ronald Reagan", 
-				"Government's first duty is to protect the people, not " 
-				+ "run their lives.");
+		try {
 
-		Quote quote3 = new Quote("Ronald Reagan", 
-				"The most terrifying words in the English language are: "
-				+ "I'm from the government and I'm here to help.");
+			fileWriter = new FileWriter(REWARDS_FILE, true);
 
-		add(quote1);
-		add(quote2);
-		add(quote3);
+			fileWriter.append(element.getQuoteText());
+			fileWriter.append(SEMICOLON_DELIMITER);
+			fileWriter.append(element.getAuthor());
+			fileWriter.append(NEW_LINE_SEPARATOR);
+
+			fileWriter.flush();
+			
+		} catch (IOException e) {
+			System.err.println("Error in CSVFileReader...");
+		} finally {
+	
+			try {
+				if (fileWriter != null ) {
+					fileWriter.close();
+				}
+			} catch (IOException e) {
+				System.err.println("Error with closing fileReader...");
+			}
+		}
+	}
+
+	@Override
+	public List<Quote> getAll() {
+		List<Quote> quotes = new ArrayList<>();
+		String line = "";
+		
+		BufferedReader fileReader = null;
+		
+		try {
+			
+			fileReader = new BufferedReader(new FileReader(REWARDS_FILE));
+			
+			fileReader.readLine();
+			
+			while ((line = fileReader.readLine()) != null) {
+				String[] tokens = line.split(SEMICOLON_DELIMITER);
+				if (tokens.length > 0) {
+					Quote quote = new Quote(tokens[QUOTE_TEXT], tokens[AUTHOR]);
+					quotes.add(quote);
+				}
+			}
+		} catch (IOException e) {
+			System.err.println("Error in CSVFileReader...");
+		} finally {
+	
+			try {
+				if (fileReader != null ) {
+					fileReader.close();
+				}
+			} catch (IOException e) {
+				System.err.println("Error with closing fileReader...");
+			}
+		}
+
+		return quotes;
 	}
 	
-	
 	public Quote getRandomQuote() {
-		List<Quote> listQuotes = convertSetInList(getAll());
-		
+		List<Quote> listQuotes = getAll();
+
 		int randomNumber = RANDOM.nextInt(listQuotes.size());
-		
+
 		return listQuotes.get(randomNumber);
+	}
+	
+	@Override
+	public void remove(Quote element) {
+		// TODO Auto-generated method stub
+
 	}
 }

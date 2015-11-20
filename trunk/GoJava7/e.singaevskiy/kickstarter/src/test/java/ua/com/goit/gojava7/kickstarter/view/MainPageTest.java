@@ -43,7 +43,7 @@ public class MainPageTest {
 	}
 
 	private Project getMockProject() {
-		Project project = new Project("Xpand Lacing System", new User("Charles Harris"), new Category("Art"));
+		Project project = new Project("Xpand Lacing System", new User("Charles Harris"), new Category(1, "Art"));
 		project.setDescription("Get your shoes on in 3 seconds flat! No more bows, no more knots, no more tying!");
 		project.setStartDate(Utils.dateFromString("dd.MM.yyyy", "25.10.2015"));
 		project.setEndDate(Utils.dateFromString("dd.MM.yyyy", "25.11.2015"));

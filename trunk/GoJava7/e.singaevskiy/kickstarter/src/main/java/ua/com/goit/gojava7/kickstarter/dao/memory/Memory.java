@@ -9,6 +9,7 @@ import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Pledge;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
+import ua.com.goit.gojava7.kickstarter.beans.Reward;
 import ua.com.goit.gojava7.kickstarter.beans.User;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
@@ -18,6 +19,7 @@ public class Memory {
     private List<Project> projects = new ArrayList<>();
     private List<Payment> payments = new ArrayList<>();
     private List<Pledge> pledges = new ArrayList<>();
+    private List<Reward> rewards = new ArrayList<>();
     
     public Memory() {
         initQuotes();
@@ -29,6 +31,8 @@ public class Memory {
         initPayments();
         
         initPledges();
+        
+        initRewards();
     }
 
     private void initQuotes() {
@@ -38,9 +42,9 @@ public class Memory {
     }
 
     private void initCategories() {
-        categories.add(new Category("Art"));
-        categories.add(new Category("Music"));
-        categories.add(new Category("Sports"));
+        categories.add(new Category(1, "Art"));
+        categories.add(new Category(2, "Music"));
+        categories.add(new Category(3, "Sports"));
     }
 
     private void initProjects() {
@@ -48,7 +52,8 @@ public class Memory {
         
         Project project;
         
-        project = new Project("Xpand Lacing System", new User("Charles Harris"), new Category("Sports"));
+        project = new Project("Xpand Lacing System", new User("Charles Harris"), categories.get(2));
+        project.setId(1);
         project.setDescription("Get your shoes on in 3 seconds flat! No more bows, no more knots, no more tying!");
         project.setStartDate(Utils.dateFromString("25.10.2015"));
         project.setEndDate(Utils.dateFromString("25.11.2015"));
@@ -58,7 +63,8 @@ public class Memory {
         project.addQnA(new QnA("q2", "a2"));
         projects.add(project);
         
-        project = new Project("Draw Like a Boss : The Physical Book", new User("Ash and Eli"), new Category("Art"));
+        project = new Project("Draw Like a Boss : The Physical Book", new User("Ash and Eli"), categories.get(0));
+        project.setId(2);
         project.setDescription("Two years in the making and it's finally ready to become a physical instructional book about drawing.");
         project.setStartDate(Utils.dateFromString("11.10.2015"));
         project.setEndDate(Utils.dateFromString("27.11.2015"));
@@ -68,7 +74,8 @@ public class Memory {
         project.addQnA(new QnA("q4", "a4"));
         projects.add(project);
         
-        project = new Project("Mini Museum 2: The Second Edition", new User("Hans Fex"), new Category("Art"));
+        project = new Project("Mini Museum 2: The Second Edition", new User("Hans Fex"), categories.get(0));
+        project.setId(3);
         project.setDescription("Billions of years of life, science and history in the palm of your hand! Curated and handcrafted to inspire for generations.");
         project.setStartDate(Utils.dateFromString("30.10.2015"));
         project.setEndDate(Utils.dateFromString("25.12.2015"));
@@ -78,7 +85,8 @@ public class Memory {
         project.addQnA(new QnA("q6", "a6"));
         projects.add(project);
         
-        project = new Project("FlyKly Smart Ped", new User("FlyKly"), new Category("Sports"));
+        project = new Project("FlyKly Smart Ped", new User("FlyKly"), categories.get(2));
+        project.setId(4);
         project.setDescription("This beautifully practical kick assist e-bike is the smartest move around the city as it extends your ride and folds easily.");
         project.setStartDate(Utils.dateFromString("29.10.2015"));
         project.setEndDate(Utils.dateFromString("01.01.2016"));
@@ -88,7 +96,8 @@ public class Memory {
         project.addQnA(new QnA("q8", "a8"));
         projects.add(project);
         
-        project = new Project("Music for Cats", new User("David Teie"), new Category("Music"));
+        project = new Project("Music for Cats", new User("David Teie"), categories.get(1));
+        project.setId(5);
         project.setDescription("We need your help to create an album featuring the first-ever music scientifically proven to enrich cats' lives.");
         project.setStartDate(Utils.dateFromString("15.09.2015"));
         project.setEndDate(Utils.dateFromString("05.01.2016"));
@@ -124,6 +133,19 @@ public class Memory {
         pledges.add(new Pledge(projects.get(3), payments.get(6)));
     }
     
+    private void initRewards() {
+        rewards.add(new Reward(projects.get(0), "Get one package", 5L));
+        rewards.add(new Reward(projects.get(0), "Get 3 packages", 15L));
+        rewards.add(new Reward(projects.get(0), "Get 7 packages", 30L));
+        
+        rewards.add(new Reward(projects.get(1), "Get copy of a book", 10L));
+        rewards.add(new Reward(projects.get(1), "Get 2 copys of a book and a poster", 30L));
+        rewards.add(new Reward(projects.get(1), "Get 2 copys of a book, poster and set of brushes", 50L));
+        
+        rewards.add(new Reward(projects.get(2), "Get one sample", 5L));
+        rewards.add(new Reward(projects.get(2), "Get one sample and discount for next purchase", 10L));
+    }
+    
     
     public List<Quote> getQuotes() {
         return quotes;
@@ -143,5 +165,9 @@ public class Memory {
 
     public List<Pledge> getPledges() {
         return pledges;
+    }
+
+    public List<Reward> getRewards() {
+        return rewards;
     }
 }

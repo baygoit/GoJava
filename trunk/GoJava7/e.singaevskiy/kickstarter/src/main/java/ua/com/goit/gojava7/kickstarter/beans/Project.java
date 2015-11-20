@@ -6,12 +6,13 @@ import java.util.List;
 
 public class Project {
 
+    private int id;
     private String name;
     private long goalSum;
     private long balanceSum;
     private Date startDate;
     private Date endDate;
-    private List<Category> categories = new ArrayList<>();
+    private Category category;
     private String description;
     private String videoUrl;
     private List<QnA> questionsAndAnswers = new ArrayList<>();
@@ -24,7 +25,7 @@ public class Project {
     public Project(String name, User author, Category category) {
         super();
         this.name = name;
-        this.categories.add(category);
+        this.category = category;
         this.author = author;
     }
 
@@ -66,18 +67,6 @@ public class Project {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
-    public void addCategory(Category category) {
-        this.categories.add(category);
     }
 
     public List<QnA> getQuestionsAndAnswers() {
@@ -174,6 +163,22 @@ public class Project {
 
     public void addQnA(QnA faq) {
         this.questionsAndAnswers.add(faq);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
 }

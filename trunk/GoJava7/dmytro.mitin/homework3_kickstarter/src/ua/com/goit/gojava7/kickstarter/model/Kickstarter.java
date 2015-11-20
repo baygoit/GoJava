@@ -1,22 +1,20 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import ua.com.goit.gojava7.kickstarter.model.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.model.storage.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
-import ua.com.goit.gojava7.kickstarter.model.storage.*;
 import ua.com.goit.gojava7.kickstarter.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Dmytro on 07.11.2015.
- */
 public class Kickstarter implements KickstarterObservable {
-    CategoryStorage categoryStorage;
+    private CategoryStorage categoryStorage;
 
-    QuoteStorage quoteStorage;
+    private QuoteStorage quoteStorage;
 
     // implementing Observer pattern
-    List<View> views;
+    private List<View> views;
 
     public Kickstarter(CategoryStorage categoryStorage, QuoteStorage quoteStorage) {
         this.categoryStorage = categoryStorage;
@@ -41,7 +39,7 @@ public class Kickstarter implements KickstarterObservable {
     @Override
     public void notifyView() throws ExitException {
         for (View view : views) {
-            view.reloadPage();
+            view.handleNotification();
         }
     }
 

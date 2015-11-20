@@ -1,14 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.model.storage;
 
-import ua.com.goit.gojava7.kickstarter.model.*;
+import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by Dmytro on 06.11.2015.
- */
 public class QuoteStorage {
     private List<Quote> quotes;
 

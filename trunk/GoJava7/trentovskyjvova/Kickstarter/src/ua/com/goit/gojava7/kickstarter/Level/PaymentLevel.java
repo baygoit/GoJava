@@ -6,13 +6,31 @@ import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
+import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuestionStorage;
 
 public class PaymentLevel implements Level {
 
 	public String generateAnswer(List<Category> categories, int userChoise,
 			Category selectedCategory, Project selectedProject) {
-
-		return "";
+		if (userChoise == 1) { // TODO 
+			return "";
+		}
+		
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("You selected 'to invest in the project'\n");
+		
+		int index = 1;
+		for (Reward reward : selectedProject.getRewards()) {
+			stringBuilder.append(index++).append(" : Pledge $")
+					.append(reward.getPledge()).append(" - get ")
+					.append(reward.getBenefit()).append("\n");
+		}
+		stringBuilder.append(index).append(" : own amount\n");
+		stringBuilder.append("0 : to project list");
+		return stringBuilder.toString();
 	}
 
 	public Category findSelectedCategory(List<Category> categories,
@@ -21,31 +39,32 @@ public class PaymentLevel implements Level {
 	}
 
 	public String validateUserChoise(List<Category> categories, int userChoise,
-			Category selectedCategory) {
+			Category selectedCategory, Project selectedProject) {
+		
+		StringBuilder stringBuilder = new StringBuilder();
 
-		return "";
+		if (userChoise < 0 || userChoise > selectedProject.rewardsSize()+1) {
+			stringBuilder.append("Please, enter the number between 0 and ")
+					.append(selectedProject.rewardsSize()+1);
+		}
+		return stringBuilder.toString();
 	}
 
 	public String fillOutForm(Project project, int userChoise,
-			ConsoleScanner consoleScanner) {
+			ConsoleScanner consoleScanner, QuestionStorage questionStorage,
+			PaymentStorage paymentStorage) {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 
-		if (userChoise == 1) {
-			consolePrinter.print("Enter your name");
-			String name = consoleScanner.scanLine();
-			consolePrinter.print("Enter card number");
-			String card = consoleScanner.scanLine();
-			consolePrinter.print("Enter amount to donate");
-			int donate = consoleScanner.scan();
-
-			project.setPledged(project.getPledged() + donate);
-
-			return "Thank you!\n0 : back to project";
-		} else if (userChoise == 2) {
+		if (userChoise == 2) {
 			consolePrinter.print("Enter your question");
-			String question = consoleScanner.scanLine();
+			String questionText = consoleScanner.scanLine();
+			
+			Question question = new Question(questionStorage.generateIdOfNewElement());
+			question.setProjectId(project.getId());
+			question.setQuestionText(questionText);
 			
 			project.addQuestion(question);
+			questionStorage.addQuestion(question);
 			
 			return "Thank for your question!\n0 : back to project";
 		} else {

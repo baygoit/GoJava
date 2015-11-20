@@ -2,7 +2,6 @@ package com.azuiev;
 
 import com.azuiev.dao.DBDao;
 import com.azuiev.dao.UserDao;
-import com.azuiev.db.AirbnbDBDao;
 import com.azuiev.enums.ApartType;
 import com.azuiev.model.Apartment;
 import com.azuiev.model.Organization;
@@ -26,22 +25,5 @@ public class AirBnB {
             log.error("Organization creating failed");
         }
 
-        DBDao db = new AirbnbDBDao();
-        UserDao dao = new UserDao(db.getConnection());
-        User user = null;
-        try {
-            user = dao.getById(new Long(1));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        sportLife.register(user);
-
-//        Apartment book1 = user.registerBook("Kiev", "Lenina 1", ApartType.APARTAMENT);
-//        Apartment book2 = user.registerBook("Moskva", "Pushkina 1", ApartType.PLACE);
-
-        System.out.println(user);
-        ApartType t = ApartType.values()[0];
-        System.out.println(t);
-    }
+     }
 }
