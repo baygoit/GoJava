@@ -63,6 +63,21 @@ public class BodyTest {
 		fail("Not yet implemented");
 	}
 
+<<<<<<< remotes/origin/master
+=======
+<<<<<<< HEAD
+	@Test
+	public void testGenerateCategories() {
+		String stuff = ConsolePrinter.HORIZONTAL_LINE+newLine;
+		stuff += Body.CATEGORIES;
+		consolePrinter.printHorizontalLine();
+		body.generateCategories();	
+				//assertThat()
+				
+	}
+
+=======
+>>>>>>> local
 	/*
 	 * @Test public void testGenerateCategories() { String stuff =
 	 * ConsolePrinter.HORIZONTAL_LINE+newLine; stuff += Body.CATEGORIES;
@@ -74,6 +89,10 @@ public class BodyTest {
 	 * 
 	 * }
 	 */
+<<<<<<< remotes/origin/master
+=======
+>>>>>>> accd4d656a713313320a4cdf7cd29ca6eacfb972
+>>>>>>> local
 	@Test
 	public void testGenerateMainPage() {
 		fail("Not yet implemented");
