@@ -12,7 +12,7 @@ public class ProjectTest extends Assert {
 
 	private Project projectEmpty = new Project();
 	private Project project;
-	private String time = new java.util.Date().toLocaleString();
+	private String time = new java.util.Date().toString();
 
 	@Before
 	public void testSetQ() {

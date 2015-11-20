@@ -8,12 +8,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.Project;
 
 public class ProjectsStorage extends AbstractFilesStorage<Project> {
-	private final File file = new File("D:\\projects.csv");
+	
+//	private static final File FILE_FOR_TEST = new File("./resources/projects.csv");
+	private static final File REWARDS_FILE = new File("./projects.csv");
 	
 	private static final int UNIQUE_ID = 0;
 	private static final int CATEGORY_ID = 1;
@@ -24,18 +26,6 @@ public class ProjectsStorage extends AbstractFilesStorage<Project> {
 	private static final int REQUIREMENT_SUM = 6;
 	private static final int COLLECTED_SUM = 7;
 	private static final int DAYS_LEFT = 8;
-	
-	public List<Project> getProjectsFromCategory(Category category) {
-		List<Project> projects = getAll();
-		List<Project> projectsFromSelectedCategory = new ArrayList<>();
-
-		for (Project project : projects) {
-			if (project.getCategoryID() == category.getUniqueID()) {
-				projectsFromSelectedCategory.add(project);
-			}
-		}
-		return projectsFromSelectedCategory;
-	}
 
 	@Override
 	public void add(Project element) {
@@ -44,7 +34,7 @@ public class ProjectsStorage extends AbstractFilesStorage<Project> {
 
 		try {
 
-			fileWriter = new FileWriter(file, true);
+			fileWriter = new FileWriter(REWARDS_FILE, true);
 
 			fileWriter.append(String.valueOf(element.getUniqueID()));
 			fileWriter.append(SEMICOLON_DELIMITER);
@@ -90,7 +80,8 @@ public class ProjectsStorage extends AbstractFilesStorage<Project> {
 		BufferedReader fileReader = null;
 		
 		try {
-			fileReader = new BufferedReader(new FileReader(file));
+			
+			fileReader = new BufferedReader(new FileReader(REWARDS_FILE));
 			
 			fileReader.readLine();
 			
@@ -125,6 +116,18 @@ public class ProjectsStorage extends AbstractFilesStorage<Project> {
 		}
 
 		return projects;
+	}
+	
+	public List<Project> getProjectsFromCategory(Category category) {
+		List<Project> projects = getAll();
+		List<Project> projectsFromSelectedCategory = new ArrayList<>();
+
+		for (Project project : projects) {
+			if (project.getCategoryID() == category.getUniqueID()) {
+				projectsFromSelectedCategory.add(project);
+			}
+		}
+		return projectsFromSelectedCategory;
 	}
 	
 	@Override

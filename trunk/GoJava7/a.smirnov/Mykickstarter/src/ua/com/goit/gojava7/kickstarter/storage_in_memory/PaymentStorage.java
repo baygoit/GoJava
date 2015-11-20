@@ -2,9 +2,9 @@ package ua.com.goit.gojava7.kickstarter.storage_in_memory;
 
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.beans.Payment;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractMemoryStorage;
-import ua.com.goit.gojava7.kickstarter.model.Payment;
-import ua.com.goit.gojava7.kickstarter.model.Project;
 
 public class PaymentStorage extends AbstractMemoryStorage<Payment> {
 	
@@ -14,7 +14,6 @@ public class PaymentStorage extends AbstractMemoryStorage<Payment> {
 		if (allProjectPayments.size() == 0) {
 			return 0;
 		} else {
-			
 			int result = 0;		
 			for (int index = 0; index < allProjectPayments.size(); index++) {
 				Payment payment = allProjectPayments.get(index);
@@ -22,7 +21,6 @@ public class PaymentStorage extends AbstractMemoryStorage<Payment> {
 					result += payment.getDonatingSum();
 				}
 			}
-			
 			return result;
 		}
 	}

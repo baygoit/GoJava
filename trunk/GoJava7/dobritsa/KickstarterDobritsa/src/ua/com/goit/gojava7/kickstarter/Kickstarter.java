@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.console.CategoryPrinter;
@@ -31,7 +30,6 @@ public class Kickstarter {
 	private Category currentCategory = null;
 
 	private String BORDER = "\n________________________________________________________";
-	private int NUMBER_OF_FIRST_PROJECT = 1;
 
 	public Kickstarter(QuoteStorage quoteStorage, CategoryStorage categoryStorage) {
 		this.quoteStorage = quoteStorage;
@@ -41,9 +39,9 @@ public class Kickstarter {
 	public void run() {
 		quotePrinter.printRandomQuote(quoteStorage);
 		do {
-			currentCategory = chooseCategory();
+			currentCategory = chooseCategory(categoryStorage);
 			if (currentCategory == null) {
-				System.out.println("See you soon!");
+				printer.print("See you soon!");
 				break;
 			}
 			do {
@@ -58,19 +56,19 @@ public class Kickstarter {
 		} while (currentCategory != null);
 	}
 
-	public Category chooseCategory() {
-		printAboutCategories();
-		return setCurrentCategory();
+	public Category chooseCategory(CategoryStorage categoryStorage) {
+		printAboutCategories(categoryStorage);
+		return setCurrentCategory(categoryStorage);
 	}
 
-	public void printAboutCategories() {
+	public void printAboutCategories(CategoryStorage categoryStorage) {
 		printer.print(BORDER + "\nList of categories:\n");
 		categoryPrinter.printCategories(categoryStorage.getAll());
 		printer.print("\nChoose a category by number ('0' for exit): ");
 	}
 
-	public Category setCurrentCategory() {
-		int numberOfCategory = consoleScanner.getInt(NUMBER_OF_FIRST_PROJECT, categoryStorage.size());
+	public Category setCurrentCategory(CategoryStorage categoryStorage) {
+		int numberOfCategory = consoleScanner.getInt(0, categoryStorage.size());
 		if (numberOfCategory == 0)
 			return null;	
 		return categoryStorage.get(numberOfCategory - 1);
@@ -118,9 +116,9 @@ public class Kickstarter {
 
 	public void donate(Project project) {
 		printer.print(BORDER + "\n\nEnter your name:");
-		consoleScanner.getName();
+		consoleScanner.getString();
 		printer.print("\nEnter your card's number:");
-		consoleScanner.getCreditCard();
+		consoleScanner.getString();
 		chooseReward(project);		
 	}
 

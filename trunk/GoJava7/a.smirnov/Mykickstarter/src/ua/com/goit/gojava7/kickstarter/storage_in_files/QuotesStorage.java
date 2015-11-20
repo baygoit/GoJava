@@ -9,23 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ua.com.goit.gojava7.kickstarter.beans.Quote;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
-import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 public class QuotesStorage extends AbstractFilesStorage<Quote> {
+	
+//	private static final File FILE_FOR_TEST = new File("./resources/quotes.csv");
+	private static final File REWARDS_FILE = new File("./quotes.csv");
 	private static final Random RANDOM = new Random();
-	private final File file = new File("D:\\quotes.csv");
 	
 	private static final int AUTHOR = 0;
 	private static final int QUOTE_TEXT = 1;
-
-	public Quote getRandomQuote() {
-		List<Quote> listQuotes = getAll();
-
-		int randomNumber = RANDOM.nextInt(listQuotes.size());
-
-		return listQuotes.get(randomNumber);
-	}
 
 	@Override
 	public void add(Quote element) {
@@ -34,7 +28,7 @@ public class QuotesStorage extends AbstractFilesStorage<Quote> {
 
 		try {
 
-			fileWriter = new FileWriter(file, true);
+			fileWriter = new FileWriter(REWARDS_FILE, true);
 
 			fileWriter.append(element.getQuoteText());
 			fileWriter.append(SEMICOLON_DELIMITER);
@@ -65,7 +59,8 @@ public class QuotesStorage extends AbstractFilesStorage<Quote> {
 		BufferedReader fileReader = null;
 		
 		try {
-			fileReader = new BufferedReader(new FileReader(file));
+			
+			fileReader = new BufferedReader(new FileReader(REWARDS_FILE));
 			
 			fileReader.readLine();
 			
@@ -90,6 +85,14 @@ public class QuotesStorage extends AbstractFilesStorage<Quote> {
 		}
 
 		return quotes;
+	}
+	
+	public Quote getRandomQuote() {
+		List<Quote> listQuotes = getAll();
+
+		int randomNumber = RANDOM.nextInt(listQuotes.size());
+
+		return listQuotes.get(randomNumber);
 	}
 	
 	@Override

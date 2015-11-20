@@ -8,17 +8,53 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
-import ua.com.goit.gojava7.kickstarter.model.Payment;
 
 public class PaymentStorage extends AbstractFilesStorage<Payment> {
-	private final File file = new File("D:\\payments.csv");
+	
+//	private static final File FILE_FOR_TEST = new File("./resources/payments.csv");
+	private static final File REWARDS_FILE = new File("./payments.csv");
 	
 	private static final int PRJECT_ID = 0;
 	private static final int USER_NAME = 1;
 	private static final int CREDIT_CARD_NUMBER = 2;
 	private static final int DONATING_SUM = 3;
 
+	@Override
+	public void add(Payment element) {
+		
+		FileWriter fileWriter = null;
+
+		try {
+
+			fileWriter = new FileWriter(REWARDS_FILE, true);
+
+			fileWriter.append(String.valueOf(element.getProjectID()));
+			fileWriter.append(SEMICOLON_DELIMITER);
+			fileWriter.append(element.getUserName());
+			fileWriter.append(SEMICOLON_DELIMITER);
+			fileWriter.append(String.valueOf(element.getCreditCardNumber()));
+			fileWriter.append(SEMICOLON_DELIMITER);
+			fileWriter.append(String.valueOf(element.getDonatingSum()));
+			fileWriter.append(NEW_LINE_SEPARATOR);
+
+			fileWriter.flush();
+			
+		} catch (IOException e) {
+			System.err.println("Error in CSVFileReader...");
+		} finally {
+	
+			try {
+				if (fileWriter != null ) {
+					fileWriter.close();
+				}
+			} catch (IOException e) {
+				System.err.println("Error with closing fileReader...");
+			}
+		}
+	}
+	
 	@Override
 	public List<Payment> getAll() {
 		List<Payment> payments = new ArrayList<>();
@@ -27,7 +63,8 @@ public class PaymentStorage extends AbstractFilesStorage<Payment> {
 		BufferedReader fileReader = null;
 		
 		try {
-			fileReader = new BufferedReader(new FileReader(file));
+			
+			fileReader = new BufferedReader(new FileReader(REWARDS_FILE));
 			
 			fileReader.readLine();
 			
@@ -56,39 +93,6 @@ public class PaymentStorage extends AbstractFilesStorage<Payment> {
 			}
 		}
 		return payments;
-	}
-	
-	@Override
-	public void add(Payment element) {
-		FileWriter fileWriter = null;
-
-		try {
-
-			fileWriter = new FileWriter(file, true);
-
-			fileWriter.append(String.valueOf(element.getProjectID()));
-			fileWriter.append(SEMICOLON_DELIMITER);
-			fileWriter.append(element.getUserName());
-			fileWriter.append(SEMICOLON_DELIMITER);
-			fileWriter.append(String.valueOf(element.getCreditCardNumber()));
-			fileWriter.append(SEMICOLON_DELIMITER);
-			fileWriter.append(String.valueOf(element.getDonatingSum()));
-			fileWriter.append(NEW_LINE_SEPARATOR);
-
-			fileWriter.flush();
-			
-		} catch (IOException e) {
-			System.err.println("Error in CSVFileReader...");
-		} finally {
-	
-			try {
-				if (fileWriter != null ) {
-					fileWriter.close();
-				}
-			} catch (IOException e) {
-				System.err.println("Error with closing fileReader...");
-			}
-		}
 	}
 	
 	@Override
