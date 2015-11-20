@@ -14,6 +14,22 @@
         <demoLink>www.catana.game</demoLink>
         <enddate/>
         <moneyNeeded>50000.0</moneyNeeded>
+        <paymentBonus>
+            <bonuses>
+                <entry>
+                    <key>1</key>
+                    <value>Bonus for 1</value>
+                </entry>
+                <entry>
+                    <key>40</key>
+                    <value>Bonus for 40</value>
+                </entry>
+                <entry>
+                    <key>10</key>
+                    <value>Bonus for 10</value>
+                </entry>
+            </bonuses>
+        </paymentBonus>
         <projectCategory categoryId="3">
             <categoryName>Games</categoryName>
         </projectCategory>
@@ -33,6 +49,22 @@
         <backers/>
         <enddate/>
         <moneyNeeded>50000.0</moneyNeeded>
+        <paymentBonus>
+            <bonuses>
+                <entry>
+                    <key>1</key>
+                    <value>Bonus for 1</value>
+                </entry>
+                <entry>
+                    <key>40</key>
+                    <value>Bonus for 40</value>
+                </entry>
+                <entry>
+                    <key>10</key>
+                    <value>Bonus for 10</value>
+                </entry>
+            </bonuses>
+        </paymentBonus>
         <projectCategory categoryId="3">
             <categoryName>Games</categoryName>
         </projectCategory>
@@ -43,6 +75,22 @@
         <backers/>
         <enddate/>
         <moneyNeeded>50000.0</moneyNeeded>
+        <paymentBonus>
+            <bonuses>
+                <entry>
+                    <key>1</key>
+                    <value>Bonus for 1</value>
+                </entry>
+                <entry>
+                    <key>40</key>
+                    <value>Bonus for 40</value>
+                </entry>
+                <entry>
+                    <key>10</key>
+                    <value>Bonus for 10</value>
+                </entry>
+            </bonuses>
+        </paymentBonus>
         <projectCategory categoryId="1">
             <categoryName>Movie</categoryName>
         </projectCategory>

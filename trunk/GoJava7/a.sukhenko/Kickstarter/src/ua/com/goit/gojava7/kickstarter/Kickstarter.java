@@ -82,7 +82,7 @@ public class Kickstarter {
 
 	public void showCategoryInfo(User guest) {
 		projectManager.getProjectsByCategory(guest.getSettings().getCategory()).forEach(project -> {
-			getBody().generateProjectInfo(project,consolePrinter);
+			getBody().generateProjectInfo(project, consolePrinter);
 		});
 
 	}
@@ -91,7 +91,8 @@ public class Kickstarter {
 		Kickstarter kickstarter = new Kickstarter();
 		kickstarter.init();
 		User guest = new User();
-		kickstarter.getBody().generateMainPage(kickstarter.getQuoteStorage(), kickstarter.getProjectManager(),kickstarter.getConsolePrinter());
+		kickstarter.getBody().generateMainPage(kickstarter.getQuoteStorage(), kickstarter.getProjectManager(),
+				kickstarter.getConsolePrinter());
 		kickstarter.saveCagories();
 		kickstarter.saveQuotes();
 		kickstarter.saveProjects();
@@ -149,7 +150,7 @@ public class Kickstarter {
 		projectManager.getProjectByName("Catana").addBacker(new User(), Double.valueOf(25000));
 		Project project = new Project("GoIT Java 7", "Movie about our GoIT Java 7 Group",
 				getCategoryStorage().getCategoryById(1), LocalDateTime.now().plusHours(23));
-		
+
 		getProjectManager().getProjectByName("Catana").setDemoLink("www.catana.game");
 		Map<String, String> qa = new HashMap<String, String>();
 		qa.put("What is project about?", "It is about our goit7 group");

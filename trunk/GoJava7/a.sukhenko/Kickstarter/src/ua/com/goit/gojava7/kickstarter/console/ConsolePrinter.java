@@ -33,7 +33,7 @@ public class ConsolePrinter {
 	public static void print(List<Category> categories) {
 		System.out.println("Categories: ");
 		for (int i = 0; i < categories.size(); i++) {
-			System.out.println(i+1 + "#" + categories.get(i).getCategoryName());
+			System.out.println(i + 1 + "#" + categories.get(i).getCategoryName());
 		}
 	}
 
@@ -45,7 +45,7 @@ public class ConsolePrinter {
 
 	}
 
-	public static  void printFullProjectInfo(Project project) {
+	public static void printFullProjectInfo(Project project) {
 		printHorizontalLine();
 		print("Project: " + project.getProjectName() + "   |  Category: "
 				+ project.getProjectCategory().getCategoryName());
@@ -59,7 +59,7 @@ public class ConsolePrinter {
 
 	}
 
-	public  static void printQuestionsAndAnswers(Map<String, String> qa) {
+	public static void printQuestionsAndAnswers(Map<String, String> qa) {
 		print("Questions and Answers:");
 		qa.forEach((q, a) -> {
 			print("Q: " + q);

@@ -25,11 +25,11 @@ public class CategoryStorage {
 	}
 
 	public Category getCategoryById(int id) {
-	for (Category category : categories) {
-		if(category.getCategoryId() == id){
-			return category;
+		for (Category category : categories) {
+			if (category.getCategoryId() == id) {
+				return category;
+			}
 		}
-	}
 		throw new NoSuchElementException();
 	}
 

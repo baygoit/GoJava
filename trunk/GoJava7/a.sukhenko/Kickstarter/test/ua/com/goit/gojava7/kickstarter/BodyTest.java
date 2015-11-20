@@ -84,14 +84,14 @@ public class BodyTest {
 		Category cat = new Category();
 		cat.setCategoryId(1);
 		cat.setCategoryName("category");
-		body.generateCategoryInfo(cat,consolePrinter);
+		body.generateCategoryInfo(cat, consolePrinter);
 		assertThat(outContent.toString(), is(cat.getCategoryId() + "# " + cat.getCategoryName() + newLine));
 	}
 
 	@Test
 	public void testGenerateProjectInfo() {
 		Project project = getProject();
-		body.generateProjectInfo(project,consolePrinter);
+		body.generateProjectInfo(project, consolePrinter);
 
 		String stuff = "===========================" + newLine;
 		stuff += PROJECT2 + project.getProjectName() + "   |  Category: "

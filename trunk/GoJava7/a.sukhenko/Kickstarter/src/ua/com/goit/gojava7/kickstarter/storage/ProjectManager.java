@@ -9,8 +9,6 @@ import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.User;
 
-
-
 @XmlRootElement(name = "projects")
 public class ProjectManager {
 	private ArrayList<Project> projects = new ArrayList<Project>();
@@ -26,8 +24,6 @@ public class ProjectManager {
 		return projects;
 	}
 
-	
-	
 	@XmlElement(name = "project")
 	public void setProjects(ArrayList<Project> projects) {
 		this.projects = projects;

@@ -13,57 +13,56 @@ public class Body {
 	public static final String GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO = "GoIT Kickstarter (c) by Artur Sukhenko";
 	public static final String WELCOME_TO_KICKSTARTER_BETA = "Welcome to Kickstarter Beta";
 
-
-
 	public Body() {
 
 	}
 
 	public void generateHeader(ConsolePrinter consolePrinter) {
-		consolePrinter.print(WELCOME_TO_KICKSTARTER_BETA);
+		ConsolePrinter.print(WELCOME_TO_KICKSTARTER_BETA);
 	}
 
 	public void generateFooter(ConsolePrinter consolePrinter) {
-		consolePrinter.print(GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO);
+		ConsolePrinter.print(GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO);
 	}
 
-	public void generateBody(ProjectManager projectManager,ConsolePrinter consolePrinter) {
-		generateProjectInfo(projectManager.getProjectById(0),consolePrinter);
+	public void generateBody(ProjectManager projectManager, ConsolePrinter consolePrinter) {
+		generateProjectInfo(projectManager.getProjectById(0), consolePrinter);
 	}
 
-	public void generateQuoteBlock(QuoteStorage quoteStorage,ConsolePrinter consolePrinter) {
+	public void generateQuoteBlock(QuoteStorage quoteStorage, ConsolePrinter consolePrinter) {
 		Quote quote = quoteStorage.getRandomQuote();
-		consolePrinter.printHorizontalLine();
-		consolePrinter.println(quote);
+		ConsolePrinter.printHorizontalLine();
+		ConsolePrinter.println(quote);
 	}
 
-	public void generateCategories(CategoryStorage categoryStorage,ConsolePrinter consolePrinter) {
-		consolePrinter.printHorizontalLine();
-		consolePrinter.print(CATEGORIES);
+	public void generateCategories(CategoryStorage categoryStorage, ConsolePrinter consolePrinter) {
+		ConsolePrinter.printHorizontalLine();
+		ConsolePrinter.print(CATEGORIES);
 		categoryStorage.getCategories().forEach(a -> {
-			generateCategoryInfo(a,consolePrinter);
+			generateCategoryInfo(a, consolePrinter);
 		});
 	}
 
-	public void generateMainPage(QuoteStorage quoteStorage, ProjectManager projectManager,ConsolePrinter consolePrinter) {
+	public void generateMainPage(QuoteStorage quoteStorage, ProjectManager projectManager,
+			ConsolePrinter consolePrinter) {
 		generateHeader(consolePrinter);
-		generateQuoteBlock(quoteStorage,consolePrinter);
-		generateBody(projectManager,consolePrinter);
+		generateQuoteBlock(quoteStorage, consolePrinter);
+		generateBody(projectManager, consolePrinter);
 		generateFooter(consolePrinter);
 	}
 
-	public void generateCategoryInfo(Category category,ConsolePrinter consolePrinter) {
-		consolePrinter.printCategory(category);
+	public void generateCategoryInfo(Category category, ConsolePrinter consolePrinter) {
+		ConsolePrinter.printCategory(category);
 	}
 
-	public void generateProjectInfo(Project project,ConsolePrinter consolePrinter) {
+	public void generateProjectInfo(Project project, ConsolePrinter consolePrinter) {
 
-		consolePrinter.printHorizontalLine();
-		consolePrinter.print("Project: " + project.getProjectName() + "   |  Category: "
+		ConsolePrinter.printHorizontalLine();
+		ConsolePrinter.print("Project: " + project.getProjectName() + "   |  Category: "
 				+ project.getProjectCategory().getCategoryName());
-		consolePrinter.print(project.getProjectEndTime());
-		consolePrinter.print("[ " + project.getProjectDescription() + " ]");
-		consolePrinter.print("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
+		ConsolePrinter.print(project.getProjectEndTime());
+		ConsolePrinter.print("[ " + project.getProjectDescription() + " ]");
+		ConsolePrinter.print("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
 				+ " | Pledged: $" + project.getMoneyPledged());
 
 	}

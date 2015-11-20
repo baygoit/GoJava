@@ -23,7 +23,7 @@ public class Project {
 	private HashMap<User, Double> backers = new HashMap<>();
 	private LocalDateTime enddate;
 	private PaymentBonus paymentBonus = new PaymentBonus();
-	
+
 	public LocalDateTime getEnddate() {
 		return enddate;
 	}
