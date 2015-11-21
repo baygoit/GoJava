@@ -1,7 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.runner;
-
-import ua.com.goit.gojava7.kickstarter.control.KickstarterForFiles;
-import ua.com.goit.gojava7.kickstarter.control.KickstarterForMemory;
+package ua.com.goit.gojava7.kickstarter.control;
 
 public class KickstarterRunner {
 	private static final String SEPARATOR = "**********************************************************************";
