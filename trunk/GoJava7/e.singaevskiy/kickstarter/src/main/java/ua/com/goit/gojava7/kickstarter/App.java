@@ -27,18 +27,16 @@ public class App {
     }
 
     private static DataType initDataType(String[] args) {
-        DataType dataType = DataType.MEMORY;
-        for (String param : args) {
-            if (param.equals("m")) {
-                dataType = DataType.MEMORY;
-            } else if (param.equals("f")) {
-                dataType = DataType.FILE;
-            }
+        DataType dataType;
+        if (args.length > 0) {
+            dataType = DataType.getByStartupKey(args[0]);
+        } else {
+            dataType = DataType.MEMORY;
         }
         
         System.out.println("Kickstarter runs in " + dataType + " mode");
-        System.out.println("Run with 'm' to work in "  + DataType.MEMORY + " mode");
-        System.out.println("Run with 'f' to work in "  + DataType.FILE + " mode");
+        System.out.println("Run with '" + DataType.MEMORY.getStartupKey() + "' to work in "  + DataType.MEMORY + " mode");
+        System.out.println("Run with '" + DataType.FILE.getStartupKey() + "' to work in "  + DataType.FILE + " mode");
         return dataType;
     }
 

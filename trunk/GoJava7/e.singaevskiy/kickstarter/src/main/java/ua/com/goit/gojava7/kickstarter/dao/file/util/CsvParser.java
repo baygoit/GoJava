@@ -79,7 +79,7 @@ public class CsvParser {
         parsersToString.put(fieldName.toLowerCase(), parser);
     }
 
-    public <T> void write(T element, String filePath) throws ReflectiveOperationException, IOException {
+    public <T> void write(T element, String filePath) {
         List<T> list = new ArrayList<>();
         list.add(element);
         write(list, filePath);
@@ -91,10 +91,19 @@ public class CsvParser {
 
             try {
                 writeToFile(collection, filePath, getFieldsDescription(clazz, MethodType.get));
-            } catch (IOException | ReflectiveOperationException e) {
+            } catch (ReflectiveOperationException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void clear(String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getDataFile(filePath)));) {
+            writer.write("");
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
@@ -125,7 +134,8 @@ public class CsvParser {
 
                 methods.add(new FieldDescription(fieldName.toLowerCase(), field, method));
 
-            } catch (Exception e) {
+            } catch (ReflectiveOperationException e) {
+             // TODO: handle exception
                 e.printStackTrace();
             }
         }
@@ -133,26 +143,28 @@ public class CsvParser {
     }
 
     private <T> void writeToFile(List<T> collection, String filePath, List<FieldDescription> descriptions)
-            throws IOException, ReflectiveOperationException {
+            throws ReflectiveOperationException {
 
         ArrayList<T> list = filterUniques(collection);
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(getDataFile(filePath)));
-        if (hasHeader) {
-            for (FieldDescription entry : descriptions) {
-                writer.append(entry.name).append(delimiter);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getDataFile(filePath)));) {
+            if (hasHeader) {
+                for (FieldDescription entry : descriptions) {
+                    writer.append(entry.name).append(delimiter);
+                }
+                writer.write(lineSeparator);
             }
-            writer.write(lineSeparator);
-        }
 
-        for (T element : list) {
-            for (FieldDescription entry : descriptions) {
-                String fieldValue = getFieldValue(element, entry);
-                writer.append(fieldValue).append(delimiter);
+            for (T element : list) {
+                for (FieldDescription entry : descriptions) {
+                    String fieldValue = getFieldValue(element, entry);
+                    writer.append(fieldValue).append(delimiter);
+                }
+                writer.write(lineSeparator);
             }
-            writer.write(lineSeparator);
+        } catch (IOException e) {
+            // TODO: handle exception
         }
-        writer.close();
     }
 
     private <T> ArrayList<T> filterUniques(List<T> collection) {
@@ -174,7 +186,7 @@ public class CsvParser {
 
         try {
             list = readFile(filePath, clazz);
-        } catch (IOException | ReflectiveOperationException e) {
+        } catch (ReflectiveOperationException e) {
             // TODO Auto-generated catch block
             System.out.println(e.getMessage());
         }
@@ -182,38 +194,39 @@ public class CsvParser {
         return filterUniques(list);
     }
 
-    private <U> List<U> readFile(String filePath, Class<U> clazz) throws ReflectiveOperationException, IOException {
+    private <U> List<U> readFile(String filePath, Class<U> clazz) throws ReflectiveOperationException {
 
         List<U> list = new ArrayList<>();
 
         Constructor<U> defaultBeanConstructor = clazz.getDeclaredConstructor();
         List<FieldDescription> fieldDescriptions = getFieldsDescription(clazz, MethodType.set);
 
-        BufferedReader reader = new BufferedReader(new FileReader(filePath));
-
-        if (hasHeader) {
-            reader.readLine();
-        }
-
-        Pattern pattern = Pattern.compile(delimiter + "(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))");
-
-        while (reader.ready()) {
-            U newInstance = defaultBeanConstructor.newInstance();
-            String[] split = pattern.split(reader.readLine());
-
-            int i = 0;
-            for (FieldDescription entry : fieldDescriptions) {
-                try {
-                    String stringValue = split[i++].replaceAll("\"", "");
-                    setFieldValue(newInstance, entry, stringValue);
-                } catch (Exception e) {
-                    // TODO: handle exception
-                }
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath));) {
+            if (hasHeader) {
+                reader.readLine();
             }
-            list.add(newInstance);
-        }
 
-        reader.close();
+            Pattern pattern = Pattern.compile(delimiter + "(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+
+            while (reader.ready()) {
+                U newInstance = defaultBeanConstructor.newInstance();
+                String[] split = pattern.split(reader.readLine());
+
+                int i = 0;
+                for (FieldDescription entry : fieldDescriptions) {
+                    try {
+                        String stringValue = split[i++].replaceAll("\"", "");
+                        setFieldValue(newInstance, entry, stringValue);
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+                }
+                list.add(newInstance);
+            }
+
+        } catch (IOException e) {
+            // TODO: handle exception
+        }
 
         return list;
     }

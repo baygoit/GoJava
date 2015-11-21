@@ -1,7 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.dao.file;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 import java.nio.file.Files;
@@ -14,9 +14,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
-import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentStorage;
 import ua.com.goit.gojava7.kickstarter.dao.memory.util.Memory;
 
@@ -40,10 +38,10 @@ public class PaymentFileDAOTest {
     
     @After
     public void tearDown() throws Exception {
-        Path path = Paths.get(filePath);
+        /*Path path = Paths.get(filePath);
         if (path.toFile().exists()) {
             Files.delete(path);
-        }
+        }*/
     }
     
     @Test
@@ -63,7 +61,7 @@ public class PaymentFileDAOTest {
     
     @Test
     public void testGetByProject() {
-        Project project2 = new Memory().getProjects().get(0);
+/*        Project project2 = new Memory().getProjects().get(0);
         Project project = new Project("proj", "usr", new Category(1,"cat"));
         List<Payment> pList = new ArrayList<>();
         pList.add(new Payment(project2, null, 0, 0, null));
@@ -73,7 +71,9 @@ public class PaymentFileDAOTest {
         fs.add(new Payment(new Project(), null, null, 0, 0, null));
 
         assertThat(fs.getAll(), not(pList));
-        assertThat(fs.getByProject(project2), is(pList));
+        assertThat(fs.getByProject(project2), is(pList));*/
+        
+        assertFalse("not implemented", true);
     }
 
 }
