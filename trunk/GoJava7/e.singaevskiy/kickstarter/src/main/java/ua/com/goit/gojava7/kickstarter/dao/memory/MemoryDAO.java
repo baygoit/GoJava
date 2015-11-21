@@ -31,5 +31,10 @@ public class MemoryDAO<T> implements DataStorage<T> {
     public void addAll(List<T> elemens) {
         dataSource.addAll(elemens);
     }
+    
+    @Override
+    public void clear() {
+        dataSource.clear();
+    }
 
 }

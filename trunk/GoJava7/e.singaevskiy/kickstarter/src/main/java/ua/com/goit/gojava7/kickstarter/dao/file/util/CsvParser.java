@@ -1,9 +1,14 @@
 package ua.com.goit.gojava7.kickstarter.dao.file.util;
 
+import java.beans.PropertyEditor;
+import java.beans.PropertyEditorManager;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -15,6 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class CsvParser {
 
@@ -22,6 +28,9 @@ public class CsvParser {
     private String delimiter = ";";
     private String lineSeparator = "\n";
     private Set<Class<?>> simpleTypes;
+    private boolean hasHeader = true;
+    private Map<String, ParserFromString<?>> parsersFromString = new HashMap<>();
+    private Map<String, ParserToString<?>> parsersToString = new HashMap<>();
 
     public CsvParser() {
         simpleTypes = new HashSet<>();
@@ -54,28 +63,43 @@ public class CsvParser {
         this.dateTimeFormat = dateTimeFormat;
     }
 
-    public <T> void write(T element, String filePath)
-            throws ReflectiveOperationException, IOException {
+    public void setHasHeader(boolean hasHeader) {
+        this.hasHeader = hasHeader;
+    }
+
+    public boolean hasHeader() {
+        return hasHeader;
+    }
+
+    public void addParserFromString(String fieldName, ParserFromString<?> parser) {
+        parsersFromString.put(fieldName.toLowerCase(), parser);
+    }
+
+    public void addParserToString(String fieldName, ParserToString<?> parser) {
+        parsersToString.put(fieldName.toLowerCase(), parser);
+    }
+
+    public <T> void write(T element, String filePath) throws ReflectiveOperationException, IOException {
         List<T> list = new ArrayList<>();
         list.add(element);
         write(list, filePath);
     }
 
-    public <T> void write(List<T> collection, String filePath)
-            throws IOException, ReflectiveOperationException {
-
+    public <T> void write(List<T> collection, String filePath) {
         if (!collection.isEmpty()) {
             Class<?> clazz = collection.get(0).getClass();
-            
-            Map<String, Method> methods = getMethods(clazz, "get");
 
-            writeToFile(collection, filePath, methods);
+            try {
+                writeToFile(collection, filePath, getFieldsDescription(clazz, MethodType.get));
+            } catch (IOException | ReflectiveOperationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
-        
     }
-    
-    private Map<String, Method> getMethods(Class<?> clazz, String methodType){
-        Map<String, Method> methods = new HashMap<>();
+
+    private List<FieldDescription> getFieldsDescription(Class<?> clazz, MethodType methodType) {
+        List<FieldDescription> methods = new ArrayList<>();
 
         for (Field field : clazz.getDeclaredFields()) {
 
@@ -83,67 +107,56 @@ public class CsvParser {
                 continue;
             }
 
-            String name = field.getName();
+            String fieldName = field.getName();
             try {
-                name = name.substring(0, 1).toUpperCase() + name.substring(1);
+                fieldName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
                 Method method;
-                
-                if (methodType.equals("get")) {
-                    method = clazz.getMethod(methodType + name);
-                }else {
-                    method = clazz.getMethod(methodType + name, field.getType());
+
+                switch (methodType) {
+                case get:
+                    method = clazz.getMethod(methodType + fieldName);
+                    break;
+                case set:
+                    method = clazz.getMethod(methodType + fieldName, field.getType());
+                    break;
+                default:
+                    continue;
                 }
-                
-                methods.put(name.toLowerCase(), method);
+
+                methods.add(new FieldDescription(fieldName.toLowerCase(), field, method));
 
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println(name + " not found");
             }
         }
         return methods;
     }
 
-    private <T> void writeToFile(List<T> collection, String filePath, Map<String, Method> methods)
+    private <T> void writeToFile(List<T> collection, String filePath, List<FieldDescription> descriptions)
             throws IOException, ReflectiveOperationException {
-        
-        StringBuilder header = new StringBuilder();
-        for (String fieldName : methods.keySet()) {
-            header.append(fieldName).append(delimiter);
-        }
-        header.append(lineSeparator);
-       
-        
+
+        ArrayList<T> list = filterUniques(collection);
+
         BufferedWriter writer = new BufferedWriter(new FileWriter(getDataFile(filePath)));
-        writer.write(header.toString());
+        if (hasHeader) {
+            for (FieldDescription entry : descriptions) {
+                writer.append(entry.name).append(delimiter);
+            }
+            writer.write(lineSeparator);
+        }
 
-        for (T element : collection) {
-            System.out.println(element);
-            for (Method method : methods.values()) {
-                Object value = method.invoke(element);
-
-                if (value.getClass().isPrimitive() || simpleTypes.contains(value.getClass())) {
-                    writer.write("\"" + value.toString() + "\"");
-                } else if (value instanceof Date) {
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateTimeFormat);
-                    writer.write("\"" + simpleDateFormat.format(value) + "\"");
-                } else {
-
-                    try {
-                        Object id = value.getClass().getMethod("getId").invoke(value);
-                        writer.write("\"" + id.toString() + "\"");
-                    } catch (Exception e) {
-                        writer.write("\"" + value.toString() + "\"");
-                        System.err.println(value.getClass() + " does not have method 'getId'");
-                    }
-                }
-
-                writer.write(delimiter);
-
+        for (T element : list) {
+            for (FieldDescription entry : descriptions) {
+                String fieldValue = getFieldValue(element, entry);
+                writer.append(fieldValue).append(delimiter);
             }
             writer.write(lineSeparator);
         }
         writer.close();
+    }
+
+    private <T> ArrayList<T> filterUniques(List<T> collection) {
+        return new ArrayList<>(new HashSet<>(collection));
     }
 
     private File getDataFile(String path) throws IOException {
@@ -154,5 +167,139 @@ public class CsvParser {
             file.createNewFile();
         }
         return file;
+    }
+
+    public <U> List<U> read(String filePath, Class<U> clazz) {
+        List<U> list = new ArrayList<>();
+
+        try {
+            list = readFile(filePath, clazz);
+        } catch (IOException | ReflectiveOperationException e) {
+            // TODO Auto-generated catch block
+            System.out.println(e.getMessage());
+        }
+
+        return filterUniques(list);
+    }
+
+    private <U> List<U> readFile(String filePath, Class<U> clazz) throws ReflectiveOperationException, IOException {
+
+        List<U> list = new ArrayList<>();
+
+        Constructor<U> defaultBeanConstructor = clazz.getDeclaredConstructor();
+        List<FieldDescription> fieldDescriptions = getFieldsDescription(clazz, MethodType.set);
+
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+
+        if (hasHeader) {
+            reader.readLine();
+        }
+
+        Pattern pattern = Pattern.compile(delimiter + "(?=([^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+
+        while (reader.ready()) {
+            U newInstance = defaultBeanConstructor.newInstance();
+            String[] split = pattern.split(reader.readLine());
+
+            int i = 0;
+            for (FieldDescription entry : fieldDescriptions) {
+                try {
+                    String stringValue = split[i++].replaceAll("\"", "");
+                    setFieldValue(newInstance, entry, stringValue);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+            }
+            list.add(newInstance);
+        }
+
+        reader.close();
+
+        return list;
+    }
+
+    private <U> void setFieldValue(U object, FieldDescription entry, String stringValue)
+            throws ReflectiveOperationException {
+
+        Object value;
+        if (parsersFromString.get(entry.name) != null) {
+            value = parsersFromString.get(entry.name).parse(stringValue);
+        } else {
+            value = stringToValue(entry.field.getType(), stringValue);
+        }
+        entry.method.invoke(object, value);
+
+    }
+
+    private <U> String getFieldValue(U object, FieldDescription entry) {
+        String stringValue = "";
+        try {
+            Object value = entry.method.invoke(object);
+            if (parsersToString.get(entry.name) != null) {
+                stringValue = parsersToString.get(entry.name).parse(value, true);
+            } else {
+                stringValue = valueToString(value);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return stringValue;
+    }
+
+    private Object stringToValue(Class<?> targetType, String text) {
+        try {
+            if (targetType.equals(Date.class)) {
+                return new SimpleDateFormat(dateTimeFormat).parse(text);
+            } else {
+                PropertyEditor editor = PropertyEditorManager.findEditor(targetType);
+                editor.setAsText(text);
+                return editor.getValue();
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+            return null;
+        }
+    }
+
+    private <U> String valueToString(U value) {
+        if (value == null) {
+            return "";
+        } else if (value.getClass().equals(String.class)) {
+            return "\"" + value.toString() + "\"";
+        } else if (value.getClass().isPrimitive() || simpleTypes.contains(value.getClass())) {
+            return value.toString();
+        } else if (value instanceof Date) {
+            return new SimpleDateFormat(dateTimeFormat).format(value);
+        }
+        return "";
+    }
+
+    class FieldDescription {
+        public final String name;
+        public final Field field;
+        public final Method method;
+
+        public FieldDescription(String name, Field field, Method method) {
+            this.name = name;
+            this.field = field;
+            this.method = method;
+        }
+    }
+
+    enum MethodType {
+        get, set
+    }
+
+    public interface ParserFromString<U> {
+        U parse(String stringValue);
+    }
+
+    public interface ParserToString<U> {
+        String parseValue(U value);
+
+        @SuppressWarnings("unchecked")
+        default String parse(Object value, boolean b) {
+            return parseValue((U) value);
+        };
     }
 }

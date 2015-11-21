@@ -3,12 +3,12 @@ package ua.com.goit.gojava7.kickstarter.dao;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ua.com.goit.gojava7.kickstarter.beans.Pledge;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.beans.Payment;
 
-public interface PledgeStorage extends DataStorage<Pledge>{
+public interface PaymentStorage extends DataStorage<Payment>{
     
-    default List<Pledge> getByProject(Project project) {
+    default List<Payment> getByProject(Project project) {
         return getAll().stream()
                 .filter(pledge -> pledge.getProject().equals(project))
                 .collect(Collectors.toList());
@@ -17,7 +17,8 @@ public interface PledgeStorage extends DataStorage<Pledge>{
     default long getSum(Project project) {
         return getAll().stream()
                 .filter(pledge -> pledge.getProject().equals(project))
-                .mapToLong(Pledge::paymentPledgeSum)
+                .mapToLong(Payment::getSum)
                 .sum();
     }
+    
 }

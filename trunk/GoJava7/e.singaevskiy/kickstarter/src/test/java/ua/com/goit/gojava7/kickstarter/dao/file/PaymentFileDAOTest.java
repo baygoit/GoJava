@@ -15,21 +15,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentStorage;
 import ua.com.goit.gojava7.kickstarter.dao.memory.util.Memory;
 
-public class ProjectFileDAOTest {
-    Class<Project> persistentClass = Project.class;
-    ProjectFileDAO fs;
-    List<Project> list = new ArrayList<>();
+public class PaymentFileDAOTest {
+    Class<Payment> persistentClass = Payment.class;
+    PaymentStorage fs;
+    List<Payment> list = new ArrayList<>();
     private String filePath = "src/test/resources/storages/file/%name%.CSV".replace("%name%", persistentClass.getSimpleName());
     
     @Before
     public void setUp(){
         
-        fs = new ProjectFileDAO(filePath);
+        fs = new PaymentFileDAO(filePath);
         
-        list = new Memory().getProjects();
+        list = new Memory().getPayments();
         
         fs.clear();
         fs.addAll(list);
@@ -45,43 +47,33 @@ public class ProjectFileDAOTest {
     }
     
     @Test
-    public void testGetAll() {
+    public void testAddAllGetAll() {
+        fs.clear();
+        fs.addAll(list);
         assertThat(fs.getAll(), is(list));
     }
 
     @Test
     public void testAddGet() {
-        int id = 33;
-        Project element = new Project();
-        element.setId(id);
-        fs.add(element);
-        assertThat(fs.get(id), is(element));
-    }
-
-    @Test
-    public void testAddAll() {
-        fs.clear();
-        fs.addAll(list);
-        assertThat(fs.getAll(), is(list));
+        int id = 42;
+        Payment payment = new Payment(new Memory().getProjects().get(0), null, 0, 0, null);
+        fs.add(payment);
+        assertThat(fs.get(id), is(payment));
     }
     
     @Test
-    public void testGetByCategory() {
-        Category category = new Category(44, "cat");
-        new CategoryFileDAO().add(category);
-        List<Project> pList = new ArrayList<>();
-        Project e = new Project("p1", null, category);
-        e.setId(22);
-        pList.add(e);
-        Project e2 = new Project("p2", null, category);
-        e2.setId(44);
-        pList.add(e2);
+    public void testGetByProject() {
+        Project project2 = new Memory().getProjects().get(0);
+        Project project = new Project("proj", "usr", new Category(1,"cat"));
+        List<Payment> pList = new ArrayList<>();
+        pList.add(new Payment(project2, null, 0, 0, null));
+        pList.add(new Payment(project2, null, 0, 0, null));
         
         fs.addAll(pList);
-        fs.add(new Project("p3", null, new Category(2, "cat2")));
+        fs.add(new Payment(new Project(), null, null, 0, 0, null));
 
         assertThat(fs.getAll(), not(pList));
-        assertThat(fs.getByCategory(category), is(pList));
+        assertThat(fs.getByProject(project2), is(pList));
     }
-    
+
 }

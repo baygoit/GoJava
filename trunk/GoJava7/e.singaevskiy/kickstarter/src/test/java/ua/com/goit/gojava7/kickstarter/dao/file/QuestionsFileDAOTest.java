@@ -14,22 +14,23 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Quote;
+import ua.com.goit.gojava7.kickstarter.beans.Question;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionsStorage;
 
-public class QuoteFileDAOTest {
-    Class<Quote> persistentClass = Quote.class;
-    FileDAO<Quote> fs;
-    List<Quote> list = new ArrayList<>();
+public class QuestionsFileDAOTest {
+    Class<Question> persistentClass = Question.class;
+    QuestionsStorage fs;
+    List<Question> list = new ArrayList<>();
     private String filePath = "src/test/resources/storages/file/%name%.CSV".replace("%name%", persistentClass.getSimpleName());
     
     @Before
     public void setUp(){
         
-        fs = new FileDAO<Quote>(persistentClass, filePath);
+        fs = new QuestionsFileDAO(filePath);
         
-        list.add(new Quote("a1", "t1"));
-        list.add(new Quote("a2", "t2"));
-        list.add(new Quote(null, null));
+        list.add(new Question(null, "a1", "t1"));
+        list.add(new Question(null, null, null));
+        list.add(new Question(null, "a2", "t2"));        
         
         fs.clear();
         fs.addAll(list);
@@ -48,16 +49,12 @@ public class QuoteFileDAOTest {
     public void testAddAllGetAll() {
         fs.clear();
         fs.addAll(list);
-        List<Quote> all = fs.getAll();
-        for (Quote quote : list) {
-            assertThat(all, hasItem(quote));
-        }
-        assertThat(all.size(), is(list.size()));
+        assertThat(fs.getAll(), is(list));
     }
 
     @Test
     public void testAdd() {
-        Quote element = new Quote("", "");
+        Question element = new Question(null, "", "");
         fs.add(element);
         assertThat(fs.getAll(), hasItem(element));
     }
@@ -65,8 +62,7 @@ public class QuoteFileDAOTest {
     @Test
     public void testGet() {
         int index = 0;
-        Quote element = fs.getAll().get(index);
-        assertThat(list, hasItem(element));
+        Question element = fs.getAll().get(index);
         assertThat(fs.get(index), is(element));
     }
 

@@ -13,4 +13,14 @@ public class ProjectFileDAO extends FileDAO<Project> implements ProjectStorage {
         super(Project.class, pathToFile);
     }
 
+    @Override
+    public Project get(int index) {
+        for (Project element : getAll()) {
+            if (element.getId() == index) {
+                return element;
+            }
+        }
+        return null;
+    }
+
 }
