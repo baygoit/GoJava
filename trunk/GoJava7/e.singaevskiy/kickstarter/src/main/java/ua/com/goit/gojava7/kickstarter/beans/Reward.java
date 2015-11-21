@@ -74,7 +74,7 @@ public class Reward {
 
     @Override
     public String toString() {
-        return "Reward [id=" + id + ", project=" + project.getId() + ", description=" + description + ", pledgeSum=" + pledgeSum
+        return "Reward [id=" + id + ", project=" + project + ", description=" + description + ", pledgeSum=" + pledgeSum
                 + "]";
     }
 }
