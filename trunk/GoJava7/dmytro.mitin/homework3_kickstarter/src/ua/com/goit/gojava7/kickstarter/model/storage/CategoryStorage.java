@@ -1,14 +1,12 @@
 package ua.com.goit.gojava7.kickstarter.model.storage;
 
-import ua.com.goit.gojava7.kickstarter.model.*;
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Project;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by Dmytro on 06.11.2015.
- */
 public class CategoryStorage {
     private List<Category> categories;
 

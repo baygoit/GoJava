@@ -18,10 +18,6 @@ import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 public class KickstarterRunner {
 
 	private static final File QUOTES_FILE = new File("./resources/Quotes.txt");
-	//private static final File CATEGORY_MUSIC_FILE = new File("./resources/CategoryMusic.txt");	
-	//private static final File CATEGORY_FOOD_FILE = new File("./resources/CategoryFood.txt");
-	//private static final File CATEGORY_DANCE_FILE = new File("./resources/CategoryDances.txt");
-	//private static final List<File> CATEGORIES_FILE = new ArrayList<File>(Arrays.asList(CATEGORY_MUSIC_FILE, CATEGORY_FOOD_FILE, CATEGORY_DANCE_FILE));
 	private static final File CATEGORIES_FILE = new File("./resources/Category.txt");
 	
 	private static QuoteReader getQuoteReader(boolean isFromFile) {

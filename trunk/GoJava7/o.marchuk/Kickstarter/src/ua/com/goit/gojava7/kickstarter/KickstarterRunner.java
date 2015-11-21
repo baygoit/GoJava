@@ -13,6 +13,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class KickstarterRunner {
@@ -36,7 +37,7 @@ public class KickstarterRunner {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 		ConsoleScanner consoleScanner = new ConsoleScanner();
 
-		QuoteStorage quoteStorage = initQuotes(isFromFile);
+		QuoteDao quoteStorage = initQuotes(isFromFile);
 		CategoryStorage categoryStorage = initCategories();
 
 		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteStorage, categoryStorage);
@@ -44,7 +45,7 @@ public class KickstarterRunner {
 		kickstarter.shutdown();
 	}
 
-	private static QuoteStorage initQuotes(boolean isFromFile) {
+	private static QuoteDao initQuotes(boolean isFromFile) {
 		QuoteStorage quoteStorage = new QuoteStorage(new Random());
 		QuoteReader quoteReader = getQuoteReader(isFromFile);
 		List<Quote> quotes = quoteReader.readQuotes();

@@ -111,7 +111,7 @@ public class Project {
         this.faq += faq + "\n";
     }
 
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

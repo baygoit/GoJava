@@ -1,8 +1,8 @@
 package ua.com.goit.gojava7.kickstarter.payment;
 
-public class CreditCardSystem extends PaymentSystem{
-	private String	holderName;
-	private int		cardNumber;
+public class CreditCardSystem extends PaymentSystem {
+	private String holderName;
+	private int cardNumber;
 
 	public CreditCardSystem() {
 		paymentSystemID = 1;

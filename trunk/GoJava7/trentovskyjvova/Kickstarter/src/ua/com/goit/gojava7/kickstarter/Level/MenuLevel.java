@@ -5,6 +5,8 @@ import java.util.List;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.storage.QuestionStorage;
 
 public class MenuLevel implements Level {
 
@@ -30,7 +32,7 @@ public class MenuLevel implements Level {
 	}
 
 	public String validateUserChoise(List<Category> categories, int userChoise,
-			Category selectedCategory) {
+			Category selectedCategory, Project selectedProject) {
 		StringBuilder stringBuilder = new StringBuilder();
 
 		if (userChoise < 0 || userChoise > categories.size()) {
@@ -41,7 +43,8 @@ public class MenuLevel implements Level {
 	}
 
 	public String fillOutForm(Project project, int userChoise,
-			ConsoleScanner consoleScanner) {
+			ConsoleScanner consoleScanner, QuestionStorage questionStorage,
+			PaymentStorage paymentStorage) {
 
 		return "";
 	}

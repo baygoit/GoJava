@@ -1,16 +1,16 @@
 package ua.com.goit.gojava7.kickstarter.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.Faq;
-import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.model.Quote;
-import ua.com.goit.gojava7.kickstarter.storage_in_memory.FaqStorage;
-import ua.com.goit.gojava7.kickstarter.storage_in_memory.PaymentStorage;;
+import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.beans.Faq;
+import ua.com.goit.gojava7.kickstarter.beans.Payment;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.beans.Quote;
+import ua.com.goit.gojava7.kickstarter.dao.Templateble;
 
 public class ConsolePrinter {
-	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
 	private static final TextModifer TEXT_MODIFER = new TextModifer();
 
 	public void print(Quote quote) {
@@ -26,16 +26,17 @@ public class ConsolePrinter {
 		System.out.println(string);
 	}
 
-	public void printShortProjectInfo(Project project, FaqStorage faqStorage, PaymentStorage paymentStorage) {
+	public void printShortProjectInfo(Project project, Templateble<Faq> faqStorage, Templateble<Payment> paymentStorage) {
+		List<Payment> payments = paymentStorage.getAll();
 		System.out.println("Title : " + project.getTitle());
 		System.out.println("Short description : " + project.getBriefDescription());
 		System.out.println("Required amount : " + project.getRequiredSum());
-		System.out.println("Gathered amount : " + paymentStorage.getPayments(project));
+		System.out.println("Gathered amount : " + project.getSumProjectPayments(payments));
 		System.out.println("Days left : " + project.getDaysLeft());
 		printFAQs(faqStorage, project);
 	}
 
-	public void printFullProjectInfo(Project project, FaqStorage faqStorage, PaymentStorage paymentStorage) {
+	public void printFullProjectInfo(Project project, Templateble<Faq> faqStorage, Templateble<Payment> paymentStorage) {
 		printShortProjectInfo(project, faqStorage, paymentStorage);
 		System.out.println("History : " + project.getFullDescription());
 		System.out.println("Video : " + project.getVideoLink());
@@ -49,7 +50,7 @@ public class ConsolePrinter {
 		}
 	}
 
-	public void printProjects(List<Project> projects, FaqStorage faqStorage, PaymentStorage paymentStorage) {
+	public void printProjects(List<Project> projects, Templateble<Faq> faqStorage, Templateble<Payment> paymentStorage) {
 		System.out.println("All projects from selected category : ");
 		
 		for (int index = 0; index < projects.size(); index++) {
@@ -60,16 +61,22 @@ public class ConsolePrinter {
 		}	
 	}
 
-	public void printFAQs(FaqStorage faqStorage, Project project) {
+	public void printFAQs(Templateble<Faq> faqStorage, Project project) {
 		List<Faq> allFaqs = faqStorage.getAll();
-		if (allFaqs.size() == 0) {
+		List<Faq> projectsFaqs = new ArrayList<>();
+		
+		for (Faq faq : allFaqs) {
+			if (faq.getProjectID() == project.getUniqueID()) {
+				projectsFaqs.add(faq);
+			}
+		}
+		
+		if (projectsFaqs.isEmpty()) {
 			System.out.println("There is no questions in this projects");
 		} else {
 			System.out.println("FAQ : ");
-			for (int index = 0; index < allFaqs.size(); index++) {
-				if (allFaqs.get(index).getProjectID() == project.getUniqueID()) {
-					System.out.println("  question : " + allFaqs.get(index).getQuestion());
-				}
+			for (Faq faq : projectsFaqs) {
+				System.out.println("  question : " + faq.getQuestion());
 			}
 		}
 	}

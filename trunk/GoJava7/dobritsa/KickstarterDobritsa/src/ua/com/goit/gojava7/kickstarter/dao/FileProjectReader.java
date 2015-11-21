@@ -23,8 +23,10 @@ public class FileProjectReader extends FileReader<Project> {
 			project.setDaysToGo(new Integer(fileReader.readLine()));
 			project.setHistory(fileReader.readLine());
 			project.setLink(fileReader.readLine());
-			project.setQuestionFile(fileReader.readLine());
-			project.setRewardFile(fileReader.readLine());
+			FileQuestionReader fileQuestionReader = new FileQuestionReader(new File(fileReader.readLine()));
+			project.setQuestions(fileQuestionReader.read());			
+			FileRewardReader fileRewardReader = new FileRewardReader(new File(fileReader.readLine()));
+			project.setRewards(fileRewardReader.read());			
 			data.add(project);
 		}
 		return data;

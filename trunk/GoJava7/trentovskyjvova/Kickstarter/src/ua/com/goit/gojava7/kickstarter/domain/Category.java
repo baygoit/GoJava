@@ -4,12 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Category {
-
+	private final int id;
 	private String name;
 	private Set<Project> projects;
 
-	public Category(String name) {
+	public Category(String name, int categoryId) {
 		setName(name);
+		this.id = categoryId;
 		projects = new HashSet<Project>();
 	}
 
@@ -23,6 +24,10 @@ public class Category {
 
 	public Set<Project> getProjects() {
 		return projects;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public void addProject(Project project) {

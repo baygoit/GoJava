@@ -25,7 +25,10 @@ public abstract class ManagerType {
 
 	}
 
-	public void setType(ProjectManagerInterface manager) {
+	 public void setType(ProjectManagerInterface manager) {
 		this.manager = manager;
 	}
+	 public Map<Integer, Project> getWholeProjectMap() {
+			return manager.getWholeProjectMap();
+		}
 }

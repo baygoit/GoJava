@@ -1,9 +1,9 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-public class UserSettings{
-	private Category		category;
-	private Project			selectedProject;
-	private MenuOptions	menuOption	= MenuOptions.SHOW_MAIN_MENU;
+public class UserSettings {
+	private Category category;
+	private Project selectedProject;
+	private MenuOptions menuOption = MenuOptions.SHOW_MAIN_MENU;
 
 	public UserSettings() {
 	}
