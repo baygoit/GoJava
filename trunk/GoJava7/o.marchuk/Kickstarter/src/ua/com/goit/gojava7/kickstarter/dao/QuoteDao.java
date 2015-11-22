@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.storage;
+package ua.com.goit.gojava7.kickstarter.dao;
 
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 

@@ -1,8 +1,9 @@
-package ua.com.goit.gojava7.kickstarter.dao;
+package ua.com.goit.gojava7.kickstarter.dao.memory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.dao.QuoteReader;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class MemoryQuoteReader implements QuoteReader {

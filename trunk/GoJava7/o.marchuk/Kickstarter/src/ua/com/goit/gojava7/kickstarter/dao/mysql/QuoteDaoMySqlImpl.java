@@ -1,16 +1,17 @@
-package ua.com.goit.gojava7.kickstarter.storage;
+package ua.com.goit.gojava7.kickstarter.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-public class QuoteMySqlDaoImpl implements QuoteDao {
+public class QuoteDaoMySqlImpl implements QuoteDao {
 	private Connection connection;
 
-	public QuoteMySqlDaoImpl(Connection connection) {
+	public QuoteDaoMySqlImpl(Connection connection) {
 		this.connection = connection;
 	}
 

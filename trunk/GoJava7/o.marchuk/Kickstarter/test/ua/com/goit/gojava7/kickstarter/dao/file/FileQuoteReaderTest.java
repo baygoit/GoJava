@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao;
+package ua.com.goit.gojava7.kickstarter.dao.file;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -6,6 +6,8 @@ import static org.junit.Assert.assertThat;
 import java.io.File;
 
 import org.junit.Test;
+
+import ua.com.goit.gojava7.kickstarter.dao.file.FileQuoteReader;
 
 public class FileQuoteReaderTest {
 
