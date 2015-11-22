@@ -3,32 +3,35 @@ package ua.com.goit.gojava7.kickstarter.dao.memory;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
+@RunWith(MockitoJUnitRunner.class)
 public class QuoteDaoMemoryImplTest {
 
-	private QuoteDaoMemoryImpl quoteStorage = new QuoteDaoMemoryImpl(new FakeRandom());
+	@Mock
+	private Random random;
 
-	private class FakeRandom extends Random {
+	@InjectMocks
+	private QuoteDaoMemoryImpl quoteStorage = new QuoteDaoMemoryImpl(random);
 
-		private boolean one = true;
-
-		@Override
-		public int nextInt(int i) {
-			int ret = one ? 0 : 1;
-			one = !one;
-			return ret;
-		}
-
+	@Before
+	public void setUp() {
+		when(random.nextInt(anyInt())).thenReturn(0, 1);
 	}
 
 	@Ignore
