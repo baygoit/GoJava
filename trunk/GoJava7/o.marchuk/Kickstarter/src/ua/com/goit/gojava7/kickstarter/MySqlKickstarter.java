@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kickstarter.dao.mysql.QuoteMySqlDaoImpl;
+import ua.com.goit.gojava7.kickstarter.dao.mysql.QuoteDaoMySqlImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class MySqlKickstarter {
@@ -15,7 +15,7 @@ public class MySqlKickstarter {
 		try {
 			connection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/gojava4omarchuk?user=gojava4omarchuk&password=somepassword");
 
-			QuoteDao quoteDao = new QuoteMySqlDaoImpl(connection);
+			QuoteDao quoteDao = new QuoteDaoMySqlImpl(connection);
 			Quote quote = quoteDao.getRandomQuote();
 			System.out.println(quote);
 		} catch (SQLException e) {

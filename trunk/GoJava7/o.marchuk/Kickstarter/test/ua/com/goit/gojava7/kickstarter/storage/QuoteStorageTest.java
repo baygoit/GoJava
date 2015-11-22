@@ -11,12 +11,12 @@ import java.util.Random;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class QuoteStorageTest {
 
-	private QuoteStorage quoteStorage = new QuoteStorage(new FakeRandom());
+	private QuoteDaoMemoryImpl quoteStorage = new QuoteDaoMemoryImpl(new FakeRandom());
 
 	private class FakeRandom extends Random {
 
