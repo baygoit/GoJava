@@ -1,7 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class Project {
