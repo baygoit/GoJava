@@ -1,8 +1,10 @@
 package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,95 +14,88 @@ import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
 
 public class CategoryPostgreDAO implements CategoryStorage {
 
-    private Connection connection;
+    private JdbcDispatcher dispatcher;
     
-    public CategoryPostgreDAO(Connection connection) {
-        this.connection = connection;
+    public CategoryPostgreDAO(JdbcDispatcher dispatcher) {
+        this.dispatcher = dispatcher;
     }
 
     @Override
     public void clear() {
-        new JdbcDispatcher(connection)  {           
-            @Override
-            public void executeStatement() throws SQLException {
-                String sql = "delete from category";
-                statement = connection.createStatement(); 
-                statement.execute(sql);              
-            }
-        }.execute();
+        String sql = "delete from category";
+        try(Connection connection = dispatcher.getConnection();
+            Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+            connection.commit();
+        } catch (SQLException e) {
+            dispatcher.processException(e);
+        }
     }
 
     @Override
     public Category get(int index) {
-        List<Category> result = new ArrayList<>();
-        new JdbcDispatcher(connection)  {           
-            @Override
-            public void executeStatement() throws SQLException {
-                String sql = "select id, name from category where id = ?";
-                preparedStatement = connection.prepareStatement(sql); 
-                preparedStatement.setInt(1, index);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                if (resultSet.next()) {
-                    Category category = new Category(resultSet.getInt("id"), 
-                            resultSet.getString("name"));
-                    result.add(category);
-                }
+        String sql = "select id, name from category where id = " + index;
+        Category category = null;
+        try(Connection connection = dispatcher.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);) {    
+            if (resultSet.next()) {
+                category = new Category(
+                        resultSet.getInt("id"), 
+                        resultSet.getString("name"));
             }
-        }.execute(); 
-        
-        if (result.isEmpty()) {
-            return null;
+        } catch (SQLException e) {
+            dispatcher.processException(e);
         }
-        return result.get(0);
+        return category;
     }
 
     @Override
     public void add(Category element) {
-        new JdbcDispatcher(connection)  {           
-            @Override
-            public void executeStatement() throws SQLException {
-                String sql = "insert into category (id, name) values (?, ?);";
-                preparedStatement = connection.prepareStatement(sql); 
-                preparedStatement.setInt(1, element.getId());
-                preparedStatement.setString(2, element.getName());
-                preparedStatement.executeUpdate();                
-            }
-        }.execute();
+        String sql = "insert into category (id, name) values (?, ?)";
+        try(Connection connection = dispatcher.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, element.getId());
+            statement.setString(2, element.getName());
+            statement.executeUpdate();  
+            connection.commit();
+        } catch (SQLException e) {
+            dispatcher.processException(e);
+        }
     }
 
     @Override
     public void addAll(List<Category> elemens) {
-        new JdbcDispatcher(connection)  {           
-            @Override
-            public void executeStatement() throws SQLException {
-                String sql = "insert into category (id, name) values (?, ?);";
-                preparedStatement = connection.prepareStatement(sql); 
-                
-                for (Category category : elemens) {
-                    preparedStatement.setInt(1, category.getId());
-                    preparedStatement.setString(2, category.getName());
-                    preparedStatement.executeUpdate();
-                }  
-            }
-        }.execute();    
+        String sql = "insert into category (id, name) values (?, ?)";
+        try(Connection connection = dispatcher.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            for (Category category : elemens) {
+                statement.setInt(1, category.getId());
+                statement.setString(2, category.getName());
+                statement.executeUpdate();
+            } 
+            connection.commit();
+        } catch (SQLException e) {
+            dispatcher.processException(e);
+        } 
     }
 
     @Override
     public List<Category> getAll() {
+        String sql = "select id, name from category";
         List<Category> result = new ArrayList<>();
-        new JdbcDispatcher(connection)  {           
-            @Override
-            public void executeStatement() throws SQLException {
-                String sql = "select id, name from category";
-                statement = connection.createStatement(); 
-                ResultSet resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    Category quote = new Category(resultSet.getInt("id"), 
-                            resultSet.getString("name"));
-                    result.add(quote);
-                }
+        try(Connection connection = dispatcher.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql)) {
+            while (resultSet.next()) {
+                Category category = new Category(
+                        resultSet.getInt("id"), 
+                        resultSet.getString("name"));
+                result.add(category);
             }
-        }.execute(); 
+        } catch (SQLException e) {
+            dispatcher.processException(e);
+        }       
         return result;
     }
 }

@@ -3,14 +3,13 @@ package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
 import ua.com.goit.gojava7.kickstarter.dao.memory.util.Memory;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
@@ -22,24 +21,21 @@ public class CategoryPostgreDAOTest {
     @Before
     public void setUp() throws Exception {
         Properties properties = Utils.readProperties("./kicks-files/config.properties");
-        Connection connection = DriverManager.getConnection(
-                properties.getProperty("driver") + "://" + 
-                properties.getProperty("url") + "/" + 
-                properties.getProperty("database"),
+        JdbcDispatcher dispatcher = new JdbcDispatcher(
+                properties.getProperty("driver"),
+                properties.getProperty("url"),
                 properties.getProperty("user"), 
                 properties.getProperty("password"));
-        
-        mem = new Memory();
-        
-        dao = new CategoryPostgreDAO(connection);
-        dao.clear();
-        
+  
+        mem = new Memory();        
+        dao = new CategoryPostgreDAO(dispatcher);
+        dao.clear();      
     }
 
     @Test
     public void testAddGetAll() {
         dao.addAll(mem.getCategories());
-        assertThat(mem.getCategories(), is(dao.getAll()));
+        assertThat(dao.getAll(), is(mem.getCategories()));
     }
     
     @Test
@@ -57,5 +53,4 @@ public class CategoryPostgreDAOTest {
         dao.add(element);
         dao.add(element);
     }
-
 }

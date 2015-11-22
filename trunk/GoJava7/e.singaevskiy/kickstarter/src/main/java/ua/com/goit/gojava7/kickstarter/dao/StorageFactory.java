@@ -1,7 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -12,6 +10,7 @@ import ua.com.goit.gojava7.kickstarter.dao.file.PaymentFileDAO;
 import ua.com.goit.gojava7.kickstarter.dao.file.ProjectFileDAO;
 import ua.com.goit.gojava7.kickstarter.dao.file.QuestionsFileDAO;
 import ua.com.goit.gojava7.kickstarter.dao.file.RewardFileDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.CategoryPostgreDAO;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuotePostgreDAO;
 import ua.com.goit.gojava7.kickstarter.dao.memory.MemoryDAO;
@@ -79,15 +78,14 @@ public class StorageFactory {
         Properties properties = Utils.readProperties("./kicks-files/config.properties");
 
         try {
-            Connection connection = DriverManager.getConnection(
-                    properties.getProperty("driver") + "://" + 
-                    properties.getProperty("url") + "/" + 
-                    properties.getProperty("database"),
+            JdbcDispatcher dispatcher = new JdbcDispatcher(
+                    properties.getProperty("driver"),
+                    properties.getProperty("url"),
                     properties.getProperty("user"), 
                     properties.getProperty("password"));
             
-            quoteDAO = new QuotePostgreDAO(connection);
-            categoryDAO = new CategoryPostgreDAO(connection);
+            quoteDAO = new QuotePostgreDAO(dispatcher);
+            categoryDAO = new CategoryPostgreDAO(dispatcher);
             
         } catch (SQLException e) {
             // TODO Auto-generated catch block

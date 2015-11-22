@@ -1,63 +1,42 @@
 package ua.com.goit.gojava7.kickstarter.dao.jdbc;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public abstract class JdbcDispatcher {
+import org.apache.commons.dbcp2.BasicDataSource;
 
-    protected Connection connection;
-    protected PreparedStatement preparedStatement;
-    protected Statement statement;
-
-    public JdbcDispatcher(Connection connection) {
-        this.connection = connection;
-    }
-
-    protected abstract void executeStatement() throws SQLException;
-
-    public void execute() {
-        try {
-
-            connection.setAutoCommit(false);
-
-            executeStatement();
-
-            if (statement != null) {
-                statement.close();
-            }
-            if (preparedStatement != null) {
-                preparedStatement.close();
-            }
-
-            connection.commit();
-            connection.setAutoCommit(true);
-
-        } catch (SQLException e) {
-            printSQLException(e);
-            if (connection != null) {
-                try {
-                    System.err.print("Transaction is being rolled back");
-                    connection.rollback();
-                } catch (SQLException excep) {
-                    printSQLException(excep);
-                }
-            }
-        }
-    }
+public class JdbcDispatcher {
     
+    private BasicDataSource datasource;
+
+    public JdbcDispatcher(String driver, String url, String user, String password)
+            throws SQLException {
+        
+        datasource = new BasicDataSource();
+        datasource.setDriverClassName(driver);
+        datasource.setUrl(url);
+        datasource.setUsername(user);
+        datasource.setPassword(password);
+    }
+
+    public Connection getConnection() throws SQLException {
+        Connection connection = datasource.getConnection();
+        connection.setAutoCommit(false);
+        return connection;
+    }
+
+    public void processException(SQLException ex) {
+        printSQLException(ex);
+    }
+
     public static void printSQLException(SQLException ex) {
 
         for (Throwable e : ex) {
             if (e instanceof SQLException) {
                 if (ignoreSQLException(((SQLException) e).getSQLState()) == false) {
 
-                    //e.printStackTrace(System.err);
                     System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-
                     System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-
                     System.err.println("Message: " + e.getMessage());
 
                     Throwable t = ex.getCause();
@@ -86,8 +65,6 @@ public abstract class JdbcDispatcher {
             return true;
 
         return false;
-        
-        
     }
 
 }

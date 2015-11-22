@@ -1,8 +1,10 @@
 package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,95 +13,90 @@ import ua.com.goit.gojava7.kickstarter.dao.DataStorage;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
 
 public class QuotePostgreDAO implements DataStorage<Quote> {
-
-    private Connection connection;
     
-    public QuotePostgreDAO(Connection connection) {
-        this.connection = connection;
+    private JdbcDispatcher dispatcher;
+    
+    public QuotePostgreDAO(JdbcDispatcher dispatcher) {
+        this.dispatcher = dispatcher;
     }
 
     @Override
     public List<Quote> getAll() {
+        String sql = "select text, author from quote";
         List<Quote> result = new ArrayList<>();
-        new JdbcDispatcher(connection)  {           
-            @Override
-            public void executeStatement() throws SQLException {
-                String sql = "select text, author from quote";
-                statement = connection.createStatement(); 
-                ResultSet resultSet = statement.executeQuery(sql);
-                while (resultSet.next()) {
-                    Quote quote = new Quote(resultSet.getString("author"), 
-                            resultSet.getString("text"));
-                    result.add(quote);
-                }
+        try(Connection connection = dispatcher.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql)) {
+            while (resultSet.next()) {
+                Quote quote = new Quote(
+                        resultSet.getString("author"), 
+                        resultSet.getString("text"));
+                result.add(quote);
             }
-        }.execute(); 
+            connection.commit();
+        } catch (SQLException e) {
+            dispatcher.processException(e);
+        }
         return result;
     }
 
     @Override
-    public Quote get(int index) {      
-        List<Quote> result = new ArrayList<>();
-        new JdbcDispatcher(connection)  {           
-            @Override
-            public void executeStatement() throws SQLException {
-                String sql = "select text, author from quote limit 1 offset " + index;
-                statement = connection.createStatement(); 
-                ResultSet resultSet = statement.executeQuery(sql);
-                if (resultSet.next()) {
-                    Quote quote = new Quote(resultSet.getString("author"), 
-                            resultSet.getString("text"));
-                    result.add(quote);
-                }
+    public Quote get(int index) {
+        String sql = "select text, author from quote limit 1 offset " + index;
+        Quote quote = null;
+        try(Connection connection = dispatcher.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql)) {
+            if (resultSet.next()) {
+                quote = new Quote(
+                        resultSet.getString("author"), 
+                        resultSet.getString("text"));
             }
-        }.execute(); 
-        
-        if (result.isEmpty()) {
-            return null;
+        } catch (SQLException e) {
+            dispatcher.processException(e);
         }
-        return result.get(0);
+        return quote;
     }
 
     @Override
     public void add(Quote element) {
-        new JdbcDispatcher(connection)  {           
-            @Override
-            public void executeStatement() throws SQLException {
-                String sql = "insert into quote (text, author) values (?, ?);";
-                preparedStatement = connection.prepareStatement(sql); 
-                preparedStatement.setString(1, element.getText());
-                preparedStatement.setString(2, element.getAuthor());
-                preparedStatement.executeUpdate();                
-            }
-        }.execute();   
+        String sql = "insert into quote (text, author) values (?, ?)";
+        try(Connection connection = dispatcher.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, element.getText());
+            statement.setString(2, element.getAuthor());
+            statement.executeUpdate();  
+            connection.commit();
+        } catch (SQLException e) {
+            dispatcher.processException(e);
+        } 
     }
 
     @Override
-    public void addAll(List<Quote> elemens) {       
-        new JdbcDispatcher(connection)  {           
-            @Override
-            public void executeStatement() throws SQLException {
-                String sql = "insert into quote (text, author) values (?, ?);";
-                preparedStatement = connection.prepareStatement(sql); 
-                
-                for (Quote quote : elemens) {
-                    preparedStatement.setString(1, quote.getText());
-                    preparedStatement.setString(2, quote.getAuthor());
-                    preparedStatement.executeUpdate();
-                }  
-            }
-        }.execute();    
+    public void addAll(List<Quote> elemens) {      
+        String sql = "insert into quote (text, author) values (?, ?)";
+        try(Connection connection = dispatcher.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+            for (Quote element : elemens) {
+                statement.setString(1, element.getText());
+                statement.setString(2, element.getAuthor());
+                statement.executeUpdate(); 
+            } 
+            connection.commit();
+        } catch (SQLException e) {
+            dispatcher.processException(e);
+        } 
     }
 
     @Override
     public void clear() {
-        new JdbcDispatcher(connection)  {           
-            @Override
-            public void executeStatement() throws SQLException {
-                String sql = "delete from quote";
-                statement = connection.createStatement(); 
-                statement.execute(sql);              
-            }
-        }.execute();
+        String sql = "delete from quote";
+        try(Connection connection = dispatcher.getConnection();
+            Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+            connection.commit();
+        } catch (SQLException e) {
+            dispatcher.processException(e);
+        }
     }
 }

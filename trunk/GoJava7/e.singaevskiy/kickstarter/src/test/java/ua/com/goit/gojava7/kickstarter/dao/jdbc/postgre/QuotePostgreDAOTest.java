@@ -1,16 +1,15 @@
 package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
 import ua.com.goit.gojava7.kickstarter.dao.memory.util.Memory;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
@@ -24,16 +23,16 @@ public class QuotePostgreDAOTest {
 
         Properties properties = Utils.readProperties("./kicks-files/config.properties");
 
-        Connection connection = DriverManager.getConnection(
-                properties.getProperty("driver") + "://" + 
-                properties.getProperty("url") + "/" + 
-                properties.getProperty("database"),
+        JdbcDispatcher dispatcher = new JdbcDispatcher(
+                properties.getProperty("driver"),
+                properties.getProperty("url"),
                 properties.getProperty("user"), 
                 properties.getProperty("password"));
+        
+        dao = new QuotePostgreDAO(dispatcher);
 
         mem = new Memory();
 
-        dao = new QuotePostgreDAO(connection);
         dao.clear();
 
     }
@@ -41,11 +40,11 @@ public class QuotePostgreDAOTest {
     @Test
     public void testAddGetAll() {
         dao.addAll(mem.getQuotes());
-        assertThat(mem.getQuotes(), is(dao.getAll()));
+        assertThat(dao.getAll(), is(mem.getQuotes()));
     }
 
     @Test
-    public void testAddGetl() {
+    public void testAddGet() {
         Quote element = new Quote("a1", "t1");
         dao.add(new Quote("a0", "t0"));
         dao.add(element);
