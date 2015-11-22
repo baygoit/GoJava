@@ -4,7 +4,7 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.PledgeStorage;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentStorage;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
 
 public class ProjectListPageController extends PageController<Category> {
@@ -15,10 +15,10 @@ public class ProjectListPageController extends PageController<Category> {
     protected void handle() {
         
         ProjectStorage projectDAO = storageFactory.getProjectDAO();
-        PledgeStorage pledgeDAO = storageFactory.getPledgeDAO();
+        PaymentStorage paymentDAO = storageFactory.getPaymentDAO();
         
         foundProjects = projectDAO.getByCategory(request);
-        foundProjects.forEach(project -> project.setBalanceSum(pledgeDAO.getSum(project)));
+        foundProjects.forEach(project -> project.setBalanceSum(paymentDAO.getSum(project)));
         page.showProjects(foundProjects);
 
         

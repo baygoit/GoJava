@@ -1,7 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class Project {
@@ -15,15 +15,19 @@ public class Project {
     private Category category;
     private String description;
     private String videoUrl;
-    private List<QnA> questionsAndAnswers = new ArrayList<>();
-    private User author;
+    private String author;
+    private List<Question> questions = new ArrayList<Question>();
 
     public Project() {
         // default bean constructor
     }
+    
+    public Project(int id, String name, String author, Category category) {
+        this(name, author, category);
+        this.id = id;
+    }
 
-    public Project(String name, User author, Category category) {
-        super();
+    public Project(String name, String author, Category category) {
         this.name = name;
         this.category = category;
         this.author = author;
@@ -69,18 +73,6 @@ public class Project {
         this.endDate = endDate;
     }
 
-    public List<QnA> getQuestionsAndAnswers() {
-        return questionsAndAnswers;
-    }
-
-    public void setQuestionsAndAnswers(List<QnA> questionsAndAnswers) {
-        this.questionsAndAnswers = questionsAndAnswers;
-    }
-
-    public void addQuestionAndAnswer(QnA questionAndAnswer) {
-        this.questionsAndAnswers.add(questionAndAnswer);
-    }
-
     public String getDescription() {
         return description;
     }
@@ -97,11 +89,11 @@ public class Project {
         this.videoUrl = videoUrl;
     }
 
-    public User getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -117,10 +109,7 @@ public class Project {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((author == null) ? 0 : author.hashCode());
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+        result = prime * result + id;
         return result;
     }
 
@@ -133,36 +122,14 @@ public class Project {
         if (getClass() != obj.getClass())
             return false;
         Project other = (Project) obj;
-        if (author == null) {
-            if (other.author != null)
-                return false;
-        } else if (!author.equals(other.author))
-            return false;
-        if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (startDate == null) {
-            if (other.startDate != null)
-                return false;
-        } else if (!startDate.equals(other.startDate))
+        if (id != other.id)
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Project \"" + name + "\" by " + author;
-    }
-
-    public void addQnA(QnA faq) {
-        this.questionsAndAnswers.add(faq);
+        return "Project \"" + name.substring(0, Math.min(15, name.length())) + "..." + "\" by " + author;
     }
 
     public int getId() {
@@ -179,6 +146,14 @@ public class Project {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
 }

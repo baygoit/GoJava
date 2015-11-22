@@ -6,7 +6,7 @@ import org.mockito.Matchers;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
-import ua.com.goit.gojava7.salivon.ManagerData;
+import ua.com.goit.gojava7.salivon.util.ManagerData;
 import ua.com.goit.gojava7.salivon.beans.Payment;
 import ua.com.goit.gojava7.salivon.beans.Project;
 import ua.com.goit.gojava7.salivon.context.Console;

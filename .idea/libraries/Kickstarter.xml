@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Kickstarter">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/branches/dataFromMemory/src/main/resources/Kickstarter.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

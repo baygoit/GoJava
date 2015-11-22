@@ -5,12 +5,14 @@ public class Reward {
     private long pledgeSum;
     private String description;
     private Project project;
+    private int id;
 
     public Reward() {
         // default bean constructor
     }
     
-    public Reward(Project project, String description, Long pledgeSum) {
+    public Reward(int id, Project project, String description, Long pledgeSum) {
+        this.id = id;
         this.project = project;
         this.description = description;
         this.pledgeSum = pledgeSum;
@@ -44,9 +46,7 @@ public class Reward {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
-        result = prime * result + (int) (pledgeSum ^ (pledgeSum >>> 32));
-        result = prime * result + ((project == null) ? 0 : project.hashCode());
+        result = prime * result + id;
         return result;
     }
 
@@ -59,18 +59,22 @@ public class Reward {
         if (getClass() != obj.getClass())
             return false;
         Reward other = (Reward) obj;
-        if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
-        if (pledgeSum != other.pledgeSum)
-            return false;
-        if (project == null) {
-            if (other.project != null)
-                return false;
-        } else if (!project.equals(other.project))
+        if (id != other.id)
             return false;
         return true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Reward [id=" + id + ", project=" + project + ", description=" + description + ", pledgeSum=" + pledgeSum
+                + "]";
     }
 }

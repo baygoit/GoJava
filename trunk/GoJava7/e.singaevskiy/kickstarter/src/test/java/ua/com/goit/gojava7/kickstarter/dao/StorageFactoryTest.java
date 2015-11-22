@@ -7,10 +7,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.dao.file.FileDAO;
-import ua.com.goit.gojava7.kickstarter.dao.file.PledgeFileDAO;
+import ua.com.goit.gojava7.kickstarter.dao.file.QuestionsFileDAO;
 import ua.com.goit.gojava7.kickstarter.dao.file.ProjectFileDAO;
 import ua.com.goit.gojava7.kickstarter.dao.memory.MemoryDAO;
-import ua.com.goit.gojava7.kickstarter.dao.memory.PledgeMemoryDAO;
+import ua.com.goit.gojava7.kickstarter.dao.memory.QuestionsMemoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.memory.ProjectMemoryDAO;
 
 public class StorageFactoryTest {
@@ -47,8 +47,8 @@ public class StorageFactoryTest {
 
     @Test
     public void testGetPledgeDAO() {
-        assertThat(new StorageFactory(DataType.MEMORY).getPledgeDAO(), instanceOf(PledgeMemoryDAO.class));
-        assertThat(new StorageFactory(DataType.FILE).getPledgeDAO(), instanceOf(PledgeFileDAO.class));
+        assertThat(new StorageFactory(DataType.MEMORY).getQuestionsDAO(), instanceOf(QuestionsMemoryDAO.class));
+        assertThat(new StorageFactory(DataType.FILE).getQuestionsDAO(), instanceOf(QuestionsFileDAO.class));
     }
 
     @Test
