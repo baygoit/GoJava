@@ -8,16 +8,16 @@ public class KickstarterRunner {
 		if (args.length == 0) {
 			System.out.println(SEPARATOR);
 			System.out.println("Starting program using files storages");
-			KickstarterForFiles kickstarterForFiles = new KickstarterForFiles();
-			kickstarterForFiles.start();
-			kickstarterForFiles.stop();
+			AbstractKickstarter kickstarter = new KickstarterFilesStorage();
+			kickstarter.start();
+			kickstarter.stop();
 
 		} else {
 			System.out.println(SEPARATOR);
 			System.out.println("Starting program using memory storages");
-			KickstarterForMemory kickstarterForMemory = new KickstarterForMemory();
-			kickstarterForMemory.start();
-			kickstarterForMemory.stop();
+			AbstractKickstarter kickstarter = new KickstarterMemoryStorage();
+			kickstarter.start();
+			kickstarter.stop();
 		}
 	}
 }

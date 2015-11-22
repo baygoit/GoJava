@@ -6,63 +6,55 @@ import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.storage_in_files.CategoriesStorage;
-import ua.com.goit.gojava7.kickstarter.storage_in_files.FaqStorage;
-import ua.com.goit.gojava7.kickstarter.storage_in_files.PaymentStorage;
-import ua.com.goit.gojava7.kickstarter.storage_in_files.ProjectsStorage;
-import ua.com.goit.gojava7.kickstarter.storage_in_files.QuotesStorage;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
+import ua.com.goit.gojava7.kickstarter.dao.FaqDAO;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
+
 import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
 
-public class KickstarterForFiles {
-
+public class AbstractKickstarter {
 	private static final String SEPARATOR = "**********************************************************************";
 	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
 	
-	private ConsolePrinter consolePrinter;
-	private ConsoleScanner consoleScanner;
-	private CategoriesStorage categoriesStorage;
-	private ProjectsStorage projectsStorage;
-	private QuotesStorage quotesStorage;
-	private PaymentStorage paymentStorage;
-	private FaqStorage faqStorage;
+	ConsolePrinter consolePrinter;
+	ConsoleScanner consoleScanner;
+	
+	Category selectedCategoryByUser;
+	Project selectedProjectByUser;
+	
+	CategoryDAO categories;
+	ProjectDAO projects;
+	QuoteDAO quotes;
+	PaymentDAO payments;
+	FaqDAO faqs;
 
-	private Category selectedCategoryByUser;
-	private Project selectedProjectByUser;
-
-	public KickstarterForFiles() {
-		this.consoleScanner = new ConsoleScanner();
-		this.consolePrinter = new ConsolePrinter();
-		this.categoriesStorage = new CategoriesStorage();
-		this.quotesStorage = new QuotesStorage();
-		this.paymentStorage = new PaymentStorage();
-		this.projectsStorage = new ProjectsStorage();
-		this.faqStorage = new FaqStorage();
-	}
-
+	
 	public void start() {
-		consolePrinter.print(quotesStorage.getRandomQuote());
+		consolePrinter.print(quotes.getRandomQuote());
 		selectCategory();
 	}
 	
-protected void selectCategory() {
+	protected void selectCategory() {
 		
 		int selectedNumber;
 		boolean userChoise = true;
 		
 		do {
-			consolePrinter.printCategories(categoriesStorage.getAll());
+			consolePrinter.printCategories(categories);
 			consolePrinter.print(SEPARATOR);
 			consolePrinter.print("Please select category (0 for exit): ");
 			selectedNumber = consoleScanner.getInt();
 
-			if (selectedNumber < 0 || selectedNumber > categoriesStorage.getSize()) {
-				consolePrinter.print("Please, enter the number between 0 and " + categoriesStorage.getSize());
+			if (selectedNumber < 0 || selectedNumber > categories.getSize()) {
+				consolePrinter.print("Please, enter the number between 0 and " + categories.getSize());
 				consolePrinter.print(SEPARATOR);
 				
 			} else if (selectedNumber != 0) {
 				consolePrinter.print("You selected category number : " + selectedNumber);
-				selectedCategoryByUser = categoriesStorage.getAll().get(selectedNumber - 1);
+				selectedCategoryByUser = categories.getAll().get(selectedNumber - 1);
 				consolePrinter.print(selectedCategoryByUser);
 				consolePrinter.print(SEPARATOR);
 				
@@ -78,7 +70,7 @@ protected void selectCategory() {
 	}
 
 	protected void selectProjects(Category category) {
-		List<Project> projectsFromCategory = projectsStorage.getProjectsFromCategory(category);
+		List<Project> projectsFromCategory = projects.getProjectsFromCategory(category);
 		
 		int numberOfSelectedProject;
 		
@@ -90,7 +82,7 @@ protected void selectCategory() {
 		} else {
 			boolean userChoise = true;
 			do {
-				consolePrinter.printProjects(projectsFromCategory, faqStorage, paymentStorage);
+				consolePrinter.printProjects(projectsFromCategory, faqs, payments);
 				consolePrinter.print(SEPARATOR);
 				consolePrinter.print("Please select project (0 for back to categories): ");
 				
@@ -104,7 +96,7 @@ protected void selectCategory() {
 					consolePrinter.print("You selected project number : " + numberOfSelectedProject);
 					selectedProjectByUser = projectsFromCategory.get(numberOfSelectedProject - 1);
 					consolePrinter.print(SEPARATOR);
-					consolePrinter.printFullProjectInfo(selectedProjectByUser, faqStorage, paymentStorage);
+					consolePrinter.printFullProjectInfo(selectedProjectByUser, faqs, payments);
 					consolePrinter.print(SEPARATOR);
 					
 					activityInsideSelectedProject(selectedProjectByUser);
@@ -163,17 +155,17 @@ protected void selectCategory() {
 		
 		providePaymentMethods(project, userName, cardNumber);
 		
-		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);	
+		consolePrinter.printShortProjectInfo(project, faqs, payments);	
 	}
 	
 	protected void askQuestion(Project project) {
 		String question = consoleScanner.parseAskingQuestion();
 		Faq faq = new Faq(question);
 		faq.setProjectID(project.getUniqueID());
-		faqStorage.add(faq);
+		faqs.add(faq);
 		
 		consolePrinter.print(SEPARATOR);
-		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);
+		consolePrinter.printShortProjectInfo(project, faqs, payments);
 		
 	}
 	
@@ -197,7 +189,7 @@ protected void selectCategory() {
 				payment = new Payment(userName, creditCardNumber, 1);
 				payment.setProjectID(project.getUniqueID());
 				project.setCollectedSum(payment.getDonatingSum());
-				paymentStorage.add(payment);
+				payments.add(payment);
 				
 			} else if (userNumber == 2) {
 				consolePrinter.print("Thank you. You donated 10$.");
@@ -205,7 +197,7 @@ protected void selectCategory() {
 				payment = new Payment(userName, creditCardNumber, 10);
 				payment.setProjectID(project.getUniqueID());
 				project.setCollectedSum(payment.getDonatingSum());
-				paymentStorage.add(payment);
+				payments.add(payment);
 				
 			} else if (userNumber == 3) {
 				consolePrinter.print("Thank you. You donated 40$.");
@@ -213,7 +205,7 @@ protected void selectCategory() {
 				payment = new Payment(userName, creditCardNumber, 40);
 				payment.setProjectID(project.getUniqueID());
 				project.setCollectedSum(payment.getDonatingSum());
-				paymentStorage.add(payment);
+				payments.add(payment);
 				
 			} else if (userNumber == 4) {
 				int donatingSum = consoleScanner.parseDonatingAmount();
@@ -222,7 +214,7 @@ protected void selectCategory() {
 				payment = new Payment(userName, creditCardNumber, donatingSum);
 				payment.setProjectID(project.getUniqueID());
 				project.setCollectedSum(payment.getDonatingSum());
-				paymentStorage.add(payment);
+				payments.add(payment);
 				
 			} else {
 				System.out.println("Please enter number between 1 and 4");
@@ -234,5 +226,3 @@ protected void selectCategory() {
 		consoleScanner.close();
 	}
 }
-	
-

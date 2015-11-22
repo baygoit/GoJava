@@ -10,9 +10,11 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 
-public class ProjectsStorage extends AbstractFilesStorage<Project> {
+public class ProjectsStorage implements ProjectDAO {
+	private static final String SEMICOLON_DELIMITER = ";";
+	private static final String NEW_LINE_SEPARATOR = "\n";
 	
 //	private static final File FILE_FOR_TEST = new File("./resources/projects.csv");
 	private static final File REWARDS_FILE = new File("./projects.csv");
@@ -28,7 +30,7 @@ public class ProjectsStorage extends AbstractFilesStorage<Project> {
 	private static final int DAYS_LEFT = 8;
 
 	@Override
-	public void add(Project element) {
+	public void add(Project project) {
 
 		FileWriter fileWriter = null;
 
@@ -36,23 +38,23 @@ public class ProjectsStorage extends AbstractFilesStorage<Project> {
 
 			fileWriter = new FileWriter(REWARDS_FILE, true);
 
-			fileWriter.append(String.valueOf(element.getUniqueID()));
+			fileWriter.append(String.valueOf(project.getUniqueID()));
 			fileWriter.append(SEMICOLON_DELIMITER);
-			fileWriter.append(String.valueOf(element.getCategoryID()));
+			fileWriter.append(String.valueOf(project.getCategoryID()));
 			fileWriter.append(SEMICOLON_DELIMITER);
-			fileWriter.append(element.getTitle());
+			fileWriter.append(project.getTitle());
 			fileWriter.append(SEMICOLON_DELIMITER);
-			fileWriter.append(element.getBriefDescription());
+			fileWriter.append(project.getBriefDescription());
 			fileWriter.append(SEMICOLON_DELIMITER);
-			fileWriter.append(element.getFullDescription());
+			fileWriter.append(project.getFullDescription());
 			fileWriter.append(SEMICOLON_DELIMITER);
-			fileWriter.append(element.getVideoLink());
+			fileWriter.append(project.getVideoLink());
 			fileWriter.append(SEMICOLON_DELIMITER);
-			fileWriter.append(String.valueOf(element.getRequiredSum()));
+			fileWriter.append(String.valueOf(project.getRequiredSum()));
 			fileWriter.append(SEMICOLON_DELIMITER);
-			fileWriter.append(String.valueOf(element.getCollectedSum()));
+			fileWriter.append(String.valueOf(project.getCollectedSum()));
 			fileWriter.append(SEMICOLON_DELIMITER);
-			fileWriter.append(String.valueOf(element.getDaysLeft()));
+			fileWriter.append(String.valueOf(project.getDaysLeft()));
 			fileWriter.append(NEW_LINE_SEPARATOR);
 
 			fileWriter.flush();
@@ -83,6 +85,7 @@ public class ProjectsStorage extends AbstractFilesStorage<Project> {
 			
 			fileReader = new BufferedReader(new FileReader(REWARDS_FILE));
 			
+			// read header
 			fileReader.readLine();
 			
 			while ((line = fileReader.readLine()) != null) {
@@ -94,7 +97,7 @@ public class ProjectsStorage extends AbstractFilesStorage<Project> {
 					
 					project.setUniqueID(Integer.parseInt(tokens[UNIQUE_ID]));
 					project.setCategoryID(Integer.parseInt(tokens[CATEGORY_ID]));
-					project.addFullDescription(tokens[FULL_DESCRIPTION]);
+					project.setFullDescription(tokens[FULL_DESCRIPTION]);
 					project.setVideoLink(tokens[VIDEO_LINK]);
 					project.setCollectedSum(Integer.parseInt(tokens[COLLECTED_SUM]));
 					project.setDaysLeft(Integer.parseInt(tokens[DAYS_LEFT]));
@@ -118,21 +121,26 @@ public class ProjectsStorage extends AbstractFilesStorage<Project> {
 		return projects;
 	}
 	
-	public List<Project> getProjectsFromCategory(Category category) {
-		List<Project> projects = getAll();
-		List<Project> projectsFromSelectedCategory = new ArrayList<>();
-
-		for (Project project : projects) {
-			if (project.getCategoryID() == category.getUniqueID()) {
-				projectsFromSelectedCategory.add(project);
-			}
-		}
-		return projectsFromSelectedCategory;
+	@Override
+	public int getSize() {
+		return getAll().size();
 	}
 	
 	@Override
-	public void remove(Project element) {
-		// TODO Auto-generated method stub
+	public List<Project> getProjectsFromCategory(Category category) {
+		List<Project> projects = getAll();
+		List<Project> projectsFromCategory = new ArrayList<>();
+		
+		for (Project project : projects) {
+			if (project.getCategoryID() == category.getUniqueID()) {
+				projectsFromCategory.add(project);
+			}
+		}
+		return projectsFromCategory;
+	}
+	
+	@Override
+	public void remove(Project project) {
 		
 	}
 }
