@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.storage;
+package ua.com.goit.gojava7.kickstarter.dao.memory;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -14,7 +14,7 @@ import org.junit.Test;
 import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-public class QuoteStorageTest {
+public class QuoteDaoMemoryImplTest {
 
 	private QuoteDaoMemoryImpl quoteStorage = new QuoteDaoMemoryImpl(new FakeRandom());
 
