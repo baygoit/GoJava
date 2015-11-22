@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
+import ua.com.goit.gojava7.kickstarter.dao.mysql.QuoteMySqlDaoImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteMySqlDaoImpl;
 
 public class MySqlKickstarter {
 
