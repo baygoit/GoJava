@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.salivon;
+package ua.com.goit.gojava7.salivon.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

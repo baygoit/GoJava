@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.salivon;
+package ua.com.goit.gojava7.salivon.util;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,7 +31,6 @@ public class DataManagerDB implements ManagerData {
             Logger.getLogger(DataManagerDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         int number = ((int) (random.nextDouble() * count)) + 1;
-        System.out.println(number);
         String query = "SELECT Text, Author FROM quote WHERE IdQuote = " + number;
         res = util.executeQuery(query);
         try {
@@ -170,7 +169,7 @@ public class DataManagerDB implements ManagerData {
         res = util.executeQuery(query);
         try {
             while (res.next()) {
-                total+=res.getInt("Total");
+                total += res.getInt("Total");
             }
         } catch (SQLException ex) {
             Logger.getLogger(DataManagerDB.class.getName()).log(Level.SEVERE, null, ex);

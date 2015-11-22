@@ -5,6 +5,7 @@
  */
 package ua.com.goit.gojava7.salivon;
 
+import ua.com.goit.gojava7.salivon.util.ManagerFileData;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;

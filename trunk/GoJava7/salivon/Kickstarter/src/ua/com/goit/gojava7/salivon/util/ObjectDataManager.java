@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.salivon;
+package ua.com.goit.gojava7.salivon.util;
 
 import java.util.ArrayList;
 import java.util.List;

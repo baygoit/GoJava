@@ -1,10 +1,10 @@
 package ua.com.goit.gojava7.salivon.state;
 
 import java.util.Scanner;
-import ua.com.goit.gojava7.salivon.DataManagerDB;
-import ua.com.goit.gojava7.salivon.ManagerData;
-import ua.com.goit.gojava7.salivon.ManagerFileData;
-import ua.com.goit.gojava7.salivon.ObjectDataManager;
+import ua.com.goit.gojava7.salivon.util.DataManagerDB;
+import ua.com.goit.gojava7.salivon.util.ManagerData;
+import ua.com.goit.gojava7.salivon.util.ManagerFileData;
+import ua.com.goit.gojava7.salivon.util.ObjectDataManager;
 import ua.com.goit.gojava7.salivon.handlers.ErrorHandler;
 import ua.com.goit.gojava7.salivon.context.Console;
 
