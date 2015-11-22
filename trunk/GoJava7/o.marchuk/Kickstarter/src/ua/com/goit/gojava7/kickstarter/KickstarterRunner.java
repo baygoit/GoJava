@@ -10,11 +10,11 @@ import ua.com.goit.gojava7.kickstarter.dao.FileQuoteReader;
 import ua.com.goit.gojava7.kickstarter.dao.MemoryQuoteReader;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteReader;
+import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class KickstarterRunner {
 
