@@ -2,7 +2,7 @@ package ua.com.goit.gojava7.kickstarter.dao;
 
 public enum DataType {
 
-    MEMORY("m"), FILE("f");
+    MEMORY("m"), FILE("f"), POSTGRE("p");
 
     private final String startupKey;
 

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.salivon;
+package ua.com.goit.gojava7.salivon.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +86,7 @@ public class ObjectDataManager implements ManagerData {
     }
 
     @Override
-    public String getFaq(int idProject) {
+    public String getContextFaq(int idProject) {
         return null;
     }
 
