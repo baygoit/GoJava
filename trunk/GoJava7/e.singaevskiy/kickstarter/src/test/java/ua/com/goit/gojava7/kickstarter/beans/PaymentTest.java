@@ -7,13 +7,13 @@ import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetter
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.junit.Assert.assertThat;
 
-import java.util.Date;
+import java.sql.Date;
 
 import org.junit.Test;
 
 public class PaymentTest {
 	
-	Payment testObject = new Payment(null, "testUser", 123, 456, new Date());
+	Payment testObject = new Payment(null, "testUser", 123, 456, new Date(System.currentTimeMillis()));
 
     @Test
     public void testBean() {

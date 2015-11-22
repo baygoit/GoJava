@@ -1,7 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.controller;
 
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Date;
 
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
@@ -30,7 +30,7 @@ public class PaymentWithRewardPageController extends PageController<Reward> {
                 
                 PaymentStorage paymentDAO = storageFactory.getPaymentDAO();
                 
-                Payment payment = new Payment(project, request, username, cardID, sum, new Date());
+                Payment payment = new Payment(project, request, username, cardID, sum, new Date(System.currentTimeMillis()));
                 paymentDAO.add(payment);
 
                 project.setBalanceSum(paymentDAO.getSum(project));

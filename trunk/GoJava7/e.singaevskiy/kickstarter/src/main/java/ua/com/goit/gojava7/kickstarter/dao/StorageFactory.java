@@ -12,7 +12,11 @@ import ua.com.goit.gojava7.kickstarter.dao.file.QuestionsFileDAO;
 import ua.com.goit.gojava7.kickstarter.dao.file.RewardFileDAO;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.CategoryPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.PaymentPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.ProjectPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuestionsPostgreDAO;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuotePostgreDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.RewardsPostgreDAO;
 import ua.com.goit.gojava7.kickstarter.dao.memory.MemoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.memory.PaymentMemoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.memory.ProjectMemoryDAO;
@@ -86,18 +90,15 @@ public class StorageFactory {
             
             quoteDAO = new QuotePostgreDAO(dispatcher);
             categoryDAO = new CategoryPostgreDAO(dispatcher);
+            projectDAO = new ProjectPostgreDAO(dispatcher);
+            questionsDAO = new QuestionsPostgreDAO(dispatcher);
+            rewardDAO = new RewardsPostgreDAO(dispatcher);
+            paymentDAO = new PaymentPostgreDAO(dispatcher);        
             
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-        
-        Memory mem = new Memory();
-
-        paymentDAO = new PaymentMemoryDAO(mem.getPayments());        
-        projectDAO = new ProjectMemoryDAO(mem.getProjects());
-        questionsDAO = new QuestionsMemoryDAO(mem.getQuestions());
-        rewardDAO = new RewardMemoryDAO(mem.getRewards());
+        }       
     }
 
     public DataStorage<Category> getCategoryDAO() {
