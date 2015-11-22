@@ -129,7 +129,7 @@ public class ManagerFileDataTest {
     }
 
     /**
-     * Test of getFaq method, of class ManagerFileData.
+     * Test of getContextFaq method, of class ManagerFileData.
      */
     @Test
     public void testGetFaq() {
@@ -137,7 +137,7 @@ public class ManagerFileDataTest {
         int idProject = 0;
         ManagerFileData instance = new ManagerFileData();
         String expResult = "";
-        String result = instance.getFaq(idProject);
+        String result = instance.getContextFaq(idProject);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

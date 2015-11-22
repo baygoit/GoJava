@@ -86,7 +86,7 @@ public class ObjectDataManager implements ManagerData {
     }
 
     @Override
-    public String getFaq(int idProject) {
+    public String getContextFaq(int idProject) {
         return null;
     }
 

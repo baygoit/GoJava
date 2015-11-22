@@ -118,7 +118,7 @@ public class ManagerFileData implements ManagerData {
                 int idCategoryOfProject = Integer.parseInt(arr[3].trim());
                 if (idCategoryOfProject == idCategory) {
                     Project p = new Project(title, total, idCategoryOfProject, id);
-                    p.setFaq(getFaq(id));
+                    p.setFaq(getContextFaq(id));
                     p.setCollectedAmount(getTotal(id));
                     projects.add(p);
                 }
@@ -146,7 +146,7 @@ public class ManagerFileData implements ManagerData {
                 int idCategory = Integer.parseInt(arr[3].trim());
                 if (id == idProject) {
                     requestedProject = new Project(title, total, idCategory, id);
-                    requestedProject.setFaq(getFaq(idProject));
+                    requestedProject.setFaq(getContextFaq(idProject));
                     requestedProject.setCollectedAmount(getTotal(idProject));
                     break;
                 }
@@ -173,7 +173,7 @@ public class ManagerFileData implements ManagerData {
     }
 
     @Override
-    public String getFaq(int idProject) {
+    public String getContextFaq(int idProject) {
         String faq = "";
         File file = new File(PATH_TO_FAQ);
         String line = null;
