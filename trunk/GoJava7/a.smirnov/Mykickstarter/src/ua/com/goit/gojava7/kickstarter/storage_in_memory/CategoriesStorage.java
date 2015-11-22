@@ -1,10 +1,15 @@
 
 package ua.com.goit.gojava7.kickstarter.storage_in_memory;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractMemoryStorage;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CategoriesStorage extends AbstractMemoryStorage<Category> {
+import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
+
+public class CategoriesStorage implements CategoryDAO {
+	
+	private List<Category> categories = new ArrayList<>();
 	
 	public CategoriesStorage() {
 		Category category1 = new Category("Arts");
@@ -23,7 +28,26 @@ public class CategoriesStorage extends AbstractMemoryStorage<Category> {
 		add(category2);
 		add(category3);
 		add(category4);
-		add(category5);
-		
+		add(category5);	
+	}
+
+	@Override
+	public void add(Category category) {
+		categories.add(category);
+	}
+
+	@Override
+	public void remove(Category category) {
+		categories.remove(category);
+	}
+
+	@Override
+	public List<Category> getAll() {
+		return categories;
+	}
+
+	@Override
+	public int getSize() {
+		return categories.size();
 	}
 }

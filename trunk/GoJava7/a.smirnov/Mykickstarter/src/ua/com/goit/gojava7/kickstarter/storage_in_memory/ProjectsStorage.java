@@ -5,11 +5,13 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractMemoryStorage;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 
-public class ProjectsStorage extends AbstractMemoryStorage<Project> {
+public class ProjectsStorage implements ProjectDAO {
 	
-	public ProjectsStorage(CategoriesStorage categoriesStorage) {
+	private List<Project> projects = new ArrayList<>();
+	
+	public ProjectsStorage() {
 	
 		Project project1 = new Project("Project 1", "Brief description 1", 30_000);
 		project1.setDeadline(7, 12, 2015);
@@ -43,12 +45,34 @@ public class ProjectsStorage extends AbstractMemoryStorage<Project> {
 		add(project5);
 
 	}
+
+	@Override
+	public void add(Project project) {
+		projects.add(project);
+		
+	}
+
+	@Override
+	public void remove(Project project) {
+		projects.remove(project);
+		
+	}
+
+	@Override
+	public List<Project> getAll() {
+		return projects;
+	}
+
+	@Override
+	public int getSize() {
+		return projects.size();
+	}
 	
+	@Override
 	public List<Project> getProjectsFromCategory(Category category) {
-		List<Project> allExistingProjects = getAll();
 		List<Project> projectsFromCategory = new ArrayList<>();
 		
-		for (Project project : allExistingProjects) {
+		for (Project project : projects) {
 			if (project.getCategoryID() == category.getUniqueID()) {
 				projectsFromCategory.add(project);
 			}

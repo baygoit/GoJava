@@ -9,16 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.dao.FaqDAO;
 
-public class FaqStorage extends AbstractFilesStorage<Faq>{
+public class FaqStorage implements FaqDAO {
+	
+	protected static final String SEMICOLON_DELIMITER = ";";
+	protected static final String NEW_LINE_SEPARATOR = "\n";
 	
 //	private static final File FILE_FOR_TEST = new File("./resources/FAQs.csv");
 	private static final File REWARDS_FILE = new File("./FAQs.csv");
 	
 	private static final int PROJECT_ID = 0;
 	private static final int QUESTION = 1;
-	private static final int ANSWER = 1;
+	private static final int ANSWER = 2;
 	
 	@Override
 	public void add(Faq element) {
@@ -64,6 +68,7 @@ public class FaqStorage extends AbstractFilesStorage<Faq>{
 			
 			fileReader = new BufferedReader(new FileReader(REWARDS_FILE));
 			
+			// read header
 			fileReader.readLine();
 			
 			while ((line = fileReader.readLine()) != null) {
@@ -98,4 +103,33 @@ public class FaqStorage extends AbstractFilesStorage<Faq>{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int getSize() {
+		return getAll().size();
+	}
+	
+	@Override
+	public String getProjectFaqs(Project project) {
+		List<Faq> allFaqs = getAll();
+		StringBuilder resultFaqs = new StringBuilder();
+		
+		for (int index = 0; index < allFaqs.size(); index ++) {
+			if (allFaqs.get(index).getProjectID() == project.getUniqueID()) {
+				resultFaqs.append("\n  question : " + allFaqs.get(index).getQuestion() + "\n");
+				
+				if (allFaqs.get(index).getAnswer() == null || allFaqs.get(index).getAnswer().isEmpty()) {
+					resultFaqs.append("  answer: There is no answer yet \n");
+				} else {
+					resultFaqs.append("  answer : " + allFaqs.get(index).getAnswer() + "\n");
+				}	
+			}
+		}
+		
+		if (resultFaqs.length() == 0) {
+			return "no questions";
+		} else {
+			return resultFaqs.toString();
+		}
+	}	
 }
