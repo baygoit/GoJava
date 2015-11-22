@@ -37,10 +37,10 @@ public class KickstarterRunner {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 		ConsoleScanner consoleScanner = new ConsoleScanner();
 
-		QuoteDao quoteStorage = initQuotes(isFromFile);
+		QuoteDao quoteDao = initQuotes(isFromFile);
 		CategoryStorage categoryStorage = initCategories();
 
-		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteStorage, categoryStorage);
+		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteDao, categoryStorage);
 		kickstarter.run();
 		kickstarter.shutdown();
 	}
