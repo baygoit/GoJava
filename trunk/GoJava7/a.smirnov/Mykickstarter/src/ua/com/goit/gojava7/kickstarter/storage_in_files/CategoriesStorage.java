@@ -10,9 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 
-public class CategoriesStorage extends AbstractFilesStorage<Category> {
+public class CategoriesStorage implements CategoryDAO {
+	
+	private static final String SEMICOLON_DELIMITER = ";";
+	private static final String NEW_LINE_SEPARATOR = "\n";
 	
 //	private static final File FILE_FOR_TEST = new File("./resources/categories.csv");
 	private static final File REWARDS_FILE = new File("./categories.csv");
@@ -61,8 +64,7 @@ public class CategoriesStorage extends AbstractFilesStorage<Category> {
 			
 			fileReader = new BufferedReader(new FileReader(REWARDS_FILE));
 			
-			fileReader.readLine();
-			
+			// read header
 			fileReader.readLine();
 			
 			while ((line = fileReader.readLine()) != null) {
@@ -94,6 +96,7 @@ public class CategoriesStorage extends AbstractFilesStorage<Category> {
 		return categories;
 	}
 	
+	@Override
 	public int getSize() {
 		return getAll().size();
 	}

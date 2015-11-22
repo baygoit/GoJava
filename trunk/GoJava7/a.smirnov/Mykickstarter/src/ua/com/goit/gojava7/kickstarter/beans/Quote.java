@@ -3,9 +3,7 @@ package ua.com.goit.gojava7.kickstarter.beans;
 import java.io.Serializable;
 
 public class Quote implements Serializable {
-
 	private static final long serialVersionUID = 1L;
-	
 	private String quoteText;
 	private String author;
 	
@@ -28,5 +26,10 @@ public class Quote implements Serializable {
 	
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+	
+	@Override
+	public String toString() {
+		return "text : " + quoteText + ",\n author : " + author;
 	}
 }

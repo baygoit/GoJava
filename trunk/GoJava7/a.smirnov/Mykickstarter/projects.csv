@@ -1,5 +1,5 @@
 UniqueID;CategoryID;Title;Short description;Full description;Video;Required $;Collected $;Days left
-1;1;Project 1;Short description 1;----;----;30000;0;18
-2;1;Project 2;Short description 2;----;----;250000;0;40
-3;2;Project 3;Short description 3;----;----;10000;0;28
+1;2;Project 1;Short description 1;----;----;30000;0;18
+2;2;Project 2;Short description 2;----;----;250000;0;40
+3;3;Project 3;Short description 3;----;----;10000;0;28
 4;3;Project 4;Short description 4;----;----;27000;0;22

@@ -13,4 +13,13 @@ public class RewardFileDAO extends FileDAO<Reward> implements RewardStorage {
         super(Reward.class, pathToFile);
     }
 
+    @Override
+    public Reward get(int index) {
+        for (Reward element : getAll()) {
+            if (element.getId() == index) {
+                return element;
+            }
+        }
+        return null;
+    }
 }

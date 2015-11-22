@@ -7,7 +7,7 @@ public class TextModifer {
 	private static final char QUOTE_START_AND_FINAL_SYMBOL = '"';
 	private static final String SYMBOL_BEFORE_AUTHOR_NAME = "(c)";
 
-	public String getModifiedQuoteBeforePrint(String quoteText, String quoteAuthor) {
+	public String getModifiedQuote(String quoteText, String quoteAuthor) {
 		StringBuilder result = new StringBuilder();
 		StringBuilder spaces = new StringBuilder();
 

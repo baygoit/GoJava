@@ -9,7 +9,8 @@ public class PreloadingState extends State {
         handler = new ErrorHandlerStatePreloading();
         menu = "Select data source:\n"
                 + "- enter 1 - data from the file system\n"
-                + "- enter 2 - data of the object model\n";
+                + "- enter 2 - data of the object model\n"
+                + "- enter 3 - data of the DB model\n";
         setCommandZero(false);
         setCommandExit(false);
     }
@@ -30,8 +31,12 @@ public class PreloadingState extends State {
     protected void selectCurrentData(int inData) {
         if (inData == FILE_DATA) {
             setCurrentData(FILE_DATA);
-        } else {
+        }
+        if(inData == OBJECT_DATA) {
             setCurrentData(OBJECT_DATA);
+        }
+        if(inData == DB_DATA) {
+            setCurrentData(DB_DATA);
         }
     }
 

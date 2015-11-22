@@ -12,4 +12,6 @@ public interface DataStorage<T> {
     
     void addAll(List<T> elemens);
     
+    void clear();
+    
 }

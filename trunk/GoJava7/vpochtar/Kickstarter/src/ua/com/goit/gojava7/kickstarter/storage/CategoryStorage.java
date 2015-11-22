@@ -18,5 +18,4 @@ public class CategoryStorage {
 	public Category getCategory(int i) {
 		return categories.get(i);
 	}
-	
 }

@@ -10,9 +10,12 @@ import java.util.List;
 import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
 
-public class QuotesStorage extends AbstractFilesStorage<Quote> {
+public class QuotesStorage implements QuoteDAO {
+	
+	private static final String SEMICOLON_DELIMITER = ";";
+	private static final String NEW_LINE_SEPARATOR = "\n";
 	
 //	private static final File FILE_FOR_TEST = new File("./resources/quotes.csv");
 	private static final File REWARDS_FILE = new File("./quotes.csv");
@@ -62,8 +65,9 @@ public class QuotesStorage extends AbstractFilesStorage<Quote> {
 			
 			fileReader = new BufferedReader(new FileReader(REWARDS_FILE));
 			
+			// read header
 			fileReader.readLine();
-			
+	
 			while ((line = fileReader.readLine()) != null) {
 				String[] tokens = line.split(SEMICOLON_DELIMITER);
 				if (tokens.length > 0) {
@@ -83,21 +87,23 @@ public class QuotesStorage extends AbstractFilesStorage<Quote> {
 				System.err.println("Error with closing fileReader...");
 			}
 		}
-
 		return quotes;
 	}
-	
-	public Quote getRandomQuote() {
-		List<Quote> listQuotes = getAll();
 
-		int randomNumber = RANDOM.nextInt(listQuotes.size());
-
-		return listQuotes.get(randomNumber);
+	@Override
+	public int getSize() {
+		return getAll().size();
 	}
+	
+	@Override
+	public Quote getRandomQuote() {
+		List<Quote> quotes = getAll();
+		int randomNumber = RANDOM.nextInt(quotes.size());
+		return quotes.get(randomNumber);
+	}	
 	
 	@Override
 	public void remove(Quote element) {
 		// TODO Auto-generated method stub
-
 	}
 }

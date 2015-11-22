@@ -43,7 +43,8 @@ public class MainPage {
     }
 
     public void showProjectDetails(Project project) {
-        outStream.println(project);
+        outStream.println(project.getName());
+        outStream.println("Author: " + project.getAuthor());
         outStream.println(project.getDescription());
         outStream.println("Goal: " + project.getGoalSum());
         outStream.println("Balance: " + project.getBalanceSum());
@@ -51,7 +52,8 @@ public class MainPage {
         outStream.println("Days left: " + project.daysLeft());
         outStream.println("Video: " + project.getVideoUrl());
         outStream.println("FAQ:");
-        project.getQuestionsAndAnswers().stream().map(faq -> "\t" + faq.toString()).forEach(outStream::println);
+        project.getQuestions().stream().map(faq -> "\t" + faq.getQuestion() + " : " + faq.getAnswer())
+                .forEach(outStream::println);
 
         outStream.println("1. Send message");
         outStream.println("2. Pay");
