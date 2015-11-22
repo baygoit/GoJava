@@ -16,7 +16,7 @@ public class FileDAO<T> implements DataStorage<T> {
     long lastAccess;
 
     public FileDAO(Class<T> persistentClass) {
-        this(persistentClass, "./kicks-files/%name%.CSV".replace("%name%", persistentClass.getSimpleName()));
+        this(persistentClass, "./kicks-files/storage/files/%name%.CSV".replace("%name%", persistentClass.getSimpleName()));
     }
 
     public FileDAO(Class<T> persistentClass, String pathToFile) {

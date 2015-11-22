@@ -1,6 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Payment {
     private String user;
