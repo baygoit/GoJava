@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Random;
 
+import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.dao.FileQuoteReader;
@@ -28,16 +29,28 @@ public class KickstarterRunner {
 		}
 	}
 
+	/**
+	 * args[0] is a type of data source
+	 * 
+	 * Supported types are memory, file and mysql. Memory by default
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		boolean isFromFile = false;
-		if (args.length != 0) {
-			isFromFile = true;
+		DataSource dataSource = DataSource.MEMORY;
+		if (args.length != 0 && args[0] != null) {
+			try {
+				dataSource = DataSource.valueOf(args[0].toUpperCase());
+			} catch (IllegalArgumentException e) {
+				System.err.println("Type of data source " + args[0] + " if not supported. Fall back to memory");
+			}
 		}
+		System.err.println("Using " + dataSource + " data source");
 
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 		ConsoleScanner consoleScanner = new ConsoleScanner();
 
-		QuoteDao quoteDao = initQuotes(isFromFile);
+		QuoteDao quoteDao = initQuotes("FILE".equals(dataSource.name()));
 		CategoryStorage categoryStorage = initCategories();
 
 		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteDao, categoryStorage);
