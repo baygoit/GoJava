@@ -12,10 +12,16 @@ public class KickstarterRunner {
 			kickstarter.start();
 			kickstarter.stop();
 
+//		} else if (args.length == 1){
+//			System.out.println(SEPARATOR);
+//			System.out.println("Starting program using memory storages");
+//			AbstractKickstarter kickstarter = new KickstarterMemoryStorage();
+//			kickstarter.start();
+//			kickstarter.stop();
 		} else {
 			System.out.println(SEPARATOR);
-			System.out.println("Starting program using memory storages");
-			AbstractKickstarter kickstarter = new KickstarterMemoryStorage();
+			System.out.println("Starting program using database storages");
+			AbstractKickstarter kickstarter = new KickstarterDatabaseStorage();
 			kickstarter.start();
 			kickstarter.stop();
 		}

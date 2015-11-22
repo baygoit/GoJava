@@ -16,15 +16,7 @@ public class PaymentStorage implements PaymentDAO {
 	private static final String DATABASE_URL = "jdbc:mysql://localhost/kickstarter";
 	private static final String USER_NAME = "root";
 	private static final String PASSWORD = "root";
-	
-	public static void main(String[] args) {
-		Payment payment = new Payment("Smirnov Anton", 12345678, 12_000);
-		payment.setProjectID(7);
 		
-		System.out.println(new PaymentStorage().getSize());
-		
-	}
-	
 	@Override
 	public void add(Payment payment) {
 		String insertPayment = "INSERT INTO payments (project_id, user_name, creditCardNumber, donating_sum) VALUES ('" 

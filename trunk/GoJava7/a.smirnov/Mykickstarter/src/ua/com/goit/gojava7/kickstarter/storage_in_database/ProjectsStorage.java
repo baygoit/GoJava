@@ -155,7 +155,7 @@ public class ProjectsStorage implements ProjectDAO {
 	public List<Project> getProjectsFromCategory(Category category) {
 		String selectProjectsFilds = "SELECT id, category_id, title, brief_description, full_description, "
 				+ "video_link, required_sum, collected_sum, days_left FROM projects WHERE category_id = " 
-				+ category.getCategoryName();
+				+ category.getUniqueID();
 		
 		List<Project> projectFromCategory = new ArrayList<>();
 		
