@@ -1,9 +1,12 @@
 package ua.com.goit.gojava7.kickstarter.util;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,5 +37,15 @@ public class Utils {
         calendar.setTime(date);
         calendar.add(type, value);
         return calendar.getTime();
+    }
+    
+    public static Properties readProperties(String path) {
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileReader(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return properties;
     }
 }
