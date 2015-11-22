@@ -4,12 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ConsoleScanner {
-	static BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
+public class ConsoleReader {
+	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
-	public static int getInt() throws IOException {
-		String input = READER.readLine();
-		int inputInt = Integer.parseInt(input);
-		return inputInt;
+	public static int getUserChoice() throws IOException {
+		String userChoise = reader.readLine();
+		int userChoiseInt = Integer.parseInt(userChoise);
+		return userChoiseInt;
 	}
 }
