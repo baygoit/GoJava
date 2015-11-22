@@ -25,6 +25,7 @@ public class AbstractKickstarter {
 	Category selectedCategoryByUser;
 	Project selectedProjectByUser;
 	
+	
 	CategoryDAO categories;
 	ProjectDAO projects;
 	QuoteDAO quotes;

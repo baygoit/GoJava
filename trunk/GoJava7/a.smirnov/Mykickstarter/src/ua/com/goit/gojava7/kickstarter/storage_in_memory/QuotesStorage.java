@@ -14,18 +14,15 @@ public class QuotesStorage implements QuoteDAO {
 	
 	public QuotesStorage() {
 		
-		Quote quote1 = new Quote("B. Franklin", 
-				"Liberty will not descend to a people, a people must "
+		Quote quote1 = new Quote("Liberty will not descend to a people, a people must "
 				+ "raise themselves to liberty; it is a blessing that must " 
-				+ "be earned before it can be enjoyed.");
+				+ "be earned before it can be enjoyed.", "B. Franklin");
 
-		Quote quote2 = new Quote("Ronald Reagan", 
-				"Government's first duty is to protect the people, not " 
-				+ "run their lives.");
+		Quote quote2 = new Quote("Government's first duty is to protect the people, not " 
+				+ "run their lives.", "Ronald Reagan");
 
-		Quote quote3 = new Quote("Ronald Reagan", 
-				"The most terrifying words in the English language are: "
-				+ "I'm from the government and I'm here to help.");
+		Quote quote3 = new Quote("The most terrifying words in the English language are: "
+				+ "I'm from the government and I'm here to help.", "Ronald Reagan");
 
 		add(quote1);
 		add(quote2);
