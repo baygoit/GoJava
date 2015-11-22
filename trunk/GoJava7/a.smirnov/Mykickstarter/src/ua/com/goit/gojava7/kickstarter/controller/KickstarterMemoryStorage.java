@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.control;
+package ua.com.goit.gojava7.kickstarter.controller;
 
 import ua.com.goit.gojava7.kickstarter.storage_in_memory.CategoriesStorage;
 import ua.com.goit.gojava7.kickstarter.storage_in_memory.FaqStorage;

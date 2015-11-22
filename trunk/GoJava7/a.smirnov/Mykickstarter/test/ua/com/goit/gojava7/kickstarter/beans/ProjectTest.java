@@ -126,21 +126,4 @@ public class ProjectTest {
 		project.setUniqueID(uniqueID);
 		assertThat(project.getUniqueID(), is(uniqueID));
 	}
-
-	@Test
-	public void testGetSumProjectPayments() {
-		
-		Payment payment1 = new Payment("Anton", 1111, 100);
-		payment1.setProjectID(projectID);
-		
-		Payment payment2 = new Payment("Alex", 2222, 250);
-		payment2.setProjectID(projectID);
-		
-
-		PaymentStorage payments = new PaymentStorage();
-		payments.add(payment1);
-		payments.add(payment2);
-		
-		assertThat(payments.getSumProjectPayments(project), is(2450));
-	}
 }

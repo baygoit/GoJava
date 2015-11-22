@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.control;
+package ua.com.goit.gojava7.kickstarter.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
