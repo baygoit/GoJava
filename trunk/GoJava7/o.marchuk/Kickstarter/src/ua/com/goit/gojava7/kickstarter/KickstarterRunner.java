@@ -1,33 +1,15 @@
 package ua.com.goit.gojava7.kickstarter;
 
-import java.io.File;
-import java.util.List;
-import java.util.Random;
-
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
-import ua.com.goit.gojava7.kickstarter.dao.FileQuoteReader;
-import ua.com.goit.gojava7.kickstarter.dao.MemoryQuoteReader;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteReader;
-import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 
 public class KickstarterRunner {
-
-	private static final File QUOTES_FILE = new File("./quotes.txt");
-
-	private static QuoteReader getQuoteReader(boolean isFromFile) {
-		if (!isFromFile) {
-			return new MemoryQuoteReader();
-		} else {
-			return new FileQuoteReader(QUOTES_FILE);
-		}
-	}
 
 	/**
 	 * args[0] is a type of data source
@@ -50,21 +32,19 @@ public class KickstarterRunner {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 		ConsoleScanner consoleScanner = new ConsoleScanner();
 
-		QuoteDao quoteDao = initQuotes("FILE".equals(dataSource.name()));
+		DaoProvider daoProvider = new DaoProvider(dataSource);
+		daoProvider.open();
+
+		QuoteDao quoteDao = daoProvider.getQuoteDao();
 		CategoryStorage categoryStorage = initCategories();
 
 		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteDao, categoryStorage);
 		kickstarter.run();
 		kickstarter.shutdown();
+
+		daoProvider.close();
 	}
 
-	private static QuoteDao initQuotes(boolean isFromFile) {
-		QuoteDaoMemoryImpl quoteStorage = new QuoteDaoMemoryImpl(new Random());
-		QuoteReader quoteReader = getQuoteReader(isFromFile);
-		List<Quote> quotes = quoteReader.readQuotes();
-		quoteStorage.setQuotes(quotes);
-		return quoteStorage;
-	}
 
 	private static CategoryStorage initCategories() {
 		CategoryStorage categoryStorage = new CategoryStorage();
