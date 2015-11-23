@@ -2,18 +2,19 @@ package ua.com.goit.gojava7.kickstarter.console;
 
 import java.util.Scanner;
 
-public class ConsoleScanner{
-	private Scanner scanner = new Scanner(System.in);
+public class ConsoleScanner {
+	private static Scanner scanner = new Scanner(System.in);
 
-	public int getInt() {
+	public static int getInt() {
 		while (!scanner.hasNextInt()) {
 			scanner.next();
 		}
 		int inputedInt = scanner.nextInt();
+		scanner.nextLine();
 		return inputedInt;
 	}
 
-	public String getString() {
+	public static String getString() {
 		while (!scanner.hasNextLine()) {
 			scanner.next();
 		}

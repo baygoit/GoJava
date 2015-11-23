@@ -1,15 +1,12 @@
 package ua.com.goit.gojava7.kickstarter.controller;
 
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Date;
 
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
-import ua.com.goit.gojava7.kickstarter.beans.Pledge;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Reward;
-import ua.com.goit.gojava7.kickstarter.beans.User;
-import ua.com.goit.gojava7.kickstarter.dao.DataStorage;
-import ua.com.goit.gojava7.kickstarter.dao.PledgeStorage;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentStorage;
 
 public class PaymentWithRewardPageController extends PageController<Reward> {
 
@@ -31,16 +28,12 @@ public class PaymentWithRewardPageController extends PageController<Reward> {
                 long cardID = Long.parseLong(paymentParameters[1]);
                 String username = paymentParameters[0];
                 
-                PledgeStorage pledgeDAO = storageFactory.getPledgeDAO();
-                DataStorage<Payment> paymentDAO = storageFactory.getPaymentDAO();
+                PaymentStorage paymentDAO = storageFactory.getPaymentDAO();
                 
-                Payment payment = new Payment(new User(username), cardID, sum, new Date());
+                Payment payment = new Payment(project, request, username, cardID, sum, new Date(System.currentTimeMillis()));
                 paymentDAO.add(payment);
-                Pledge pledge = new Pledge(project, payment);
-                pledge.setReward(request);
-                pledgeDAO.add(pledge);
 
-                project.setBalanceSum(pledgeDAO.getSum(project));
+                project.setBalanceSum(paymentDAO.getSum(project));
 
             } catch (NumberFormatException e) {
                 return false;

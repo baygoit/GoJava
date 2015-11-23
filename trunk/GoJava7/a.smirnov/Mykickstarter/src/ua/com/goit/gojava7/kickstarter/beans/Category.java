@@ -3,13 +3,21 @@ package ua.com.goit.gojava7.kickstarter.beans;
 import java.io.Serializable;
 
 public class Category implements Serializable {
-	
 	private static final long serialVersionUID = 1L;
-	private String name;
+	
 	private int uniqueID;
+	private String name;
 
 	public Category(String name) {
 		this.name = name;
+	}
+	
+	public int getUniqueID() {
+		return uniqueID;
+	}
+	
+	public void setUniqueID(int uniqueID) {
+		this.uniqueID = uniqueID;
 	}
 
 	public String getCategoryName() {
@@ -20,11 +28,8 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 	
-	public int getUniqueID() {
-		return uniqueID;
-	}
-	
-	public void setUniqueID(int uniqueID) {
-		this.uniqueID = uniqueID;
+	@Override
+	public String toString() {
+		return "id : " + uniqueID + ", name : " + name;
 	}
 }

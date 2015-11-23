@@ -21,17 +21,17 @@
 <h1>Available cities:</h1>
 
 <div id="#cities" style="float: left; margin-top: 20px">
-    <c:forEach var="city" items="${applicationScope.availableCities}">
+    <c:forEach var="city" items="${availableCities}">
         <div><a href="/search?${city.name}">${city.name}</a></div>
     </c:forEach>
 </div>
 
 <div id="#apartments" style="float: left;">
-    <c:if test="${empty requestScope.apartments}">
+    <c:if test="${empty apartments}">
         <div style="color: red; margin: 20px;">No apartments</div>
     </c:if>
 
-    <c:forEach var="apartment" items="${requestScope.apartments}">
+    <c:forEach var="apartment" items="${apartments}">
         <div class="apartment">${apartment.id}: ${apartment.apartmentType}</div>
     </c:forEach>
 </div>

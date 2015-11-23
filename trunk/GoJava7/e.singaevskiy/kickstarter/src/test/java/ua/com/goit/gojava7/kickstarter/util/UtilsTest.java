@@ -4,7 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 
 import org.junit.Test;
 

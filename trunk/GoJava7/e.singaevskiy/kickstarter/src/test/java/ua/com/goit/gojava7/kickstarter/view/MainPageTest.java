@@ -14,7 +14,6 @@ import org.junit.Test;
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.beans.User;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
 public class MainPageTest {
@@ -43,7 +42,7 @@ public class MainPageTest {
 	}
 
 	private Project getMockProject() {
-		Project project = new Project("Xpand Lacing System", new User("Charles Harris"), new Category(1, "Art"));
+		Project project = new Project("Xpand Lacing System", "Charles Harris", new Category(1, "Art"));
 		project.setDescription("Get your shoes on in 3 seconds flat! No more bows, no more knots, no more tying!");
 		project.setStartDate(Utils.dateFromString("dd.MM.yyyy", "25.10.2015"));
 		project.setEndDate(Utils.dateFromString("dd.MM.yyyy", "25.11.2015"));

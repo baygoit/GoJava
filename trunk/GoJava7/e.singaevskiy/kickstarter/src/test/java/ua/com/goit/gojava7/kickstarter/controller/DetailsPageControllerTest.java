@@ -13,7 +13,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.PledgeStorage;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionsStorage;
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
 import ua.com.goit.gojava7.kickstarter.view.MainPage;
 
@@ -24,7 +25,10 @@ public class DetailsPageControllerTest {
     BufferedReader reader;
     
     @Mock
-    PledgeStorage pledgeStorage;
+    PaymentStorage paymentStorage;
+    
+    @Mock
+    QuestionsStorage questionsStorage;
     
     @Mock
     StorageFactory factory;
@@ -40,8 +44,10 @@ public class DetailsPageControllerTest {
     @Before
     public void setUp() throws Exception {      
         
-        when(factory.getPledgeDAO()).thenReturn(pledgeStorage);
-        when(pledgeStorage.getSum(project)).thenReturn(123L);
+        when(factory.getQuestionsDAO()).thenReturn(questionsStorage);
+        
+        when(factory.getPaymentDAO()).thenReturn(paymentStorage);
+        when(paymentStorage.getSum(project)).thenReturn(123L);
     
         controller = new ProjectDetailsPageController();
         controller.setInputReader(reader); 
