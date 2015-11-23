@@ -1,14 +1,15 @@
-package main.java.Services;
+package services;
 
-import main.java.Models.Apartment;
-import main.java.Models.User;
+import models.Apartment;
+import models.User;
 
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created by user on 26.09.2015.
+ * @autor A_Nakonechnyi
+ * @date 26.09.2015.
  */
 public class Searches {
     public static LinkedList<User> hostList;

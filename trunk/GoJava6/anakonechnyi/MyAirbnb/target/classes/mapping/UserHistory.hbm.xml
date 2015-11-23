@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 16, 2013 7:24:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.gojava6.hibernate.UserHistory" table="USERHISTORY">
+        <cache usage="read-write"/>
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="user" class="com.gojava6.hibernate.User" not-null="true">
+            <column name="USER_ID" />
+        </many-to-one>
+        <property name="entryTime" type="java.util.Date">
+            <column name="ENTRYTIME" />
+        </property>
+        <property name="entry" type="java.lang.String">
+            <column name="ENTRY" />
+        </property>
+    </class>
+</hibernate-mapping>
