@@ -1,0 +1,31 @@
+log4j2
+
+validation date of registration is free
+
+table reservebook+
+table reviews
+table registr history
+
+check if you can delete apartments -->sending msg for renters
+
+conn closa and open+
+manager
+valid. is registered on date+
+price on apartm
+
+
+search by city / apartment type / is free on date in city / is free on date in city by type /
+
+reserveid
+
+read about enum benefits
+delete renter and host
+
+validation compare name and surname
+check regex
+
+
+
+
+
+

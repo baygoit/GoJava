@@ -1,0 +1,138 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.gojava6</groupId>
+  <artifactId>intro</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+
+  <!--<firstName>intro</firstName>-->
+  <!--<url>http://maven.apache.org</url>-->
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>1.8</java.version>
+    <junit.version>4.11</junit.version>
+    <mysql.version>5.1.36</mysql.version>
+    <jstl.version>1.2</jstl.version>
+    <log4japi.version>2.4</log4japi.version>
+    <log4jcore.version>2.4</log4jcore.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+      <scope>db</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>${jstl.version}</version>
+      <scope>java servlet</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4japi.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4jcore.version}</version>
+    </dependency>
+  </dependencies>
+
+  <!--<properties>-->
+    <!--<java.version>1.7</java.version>-->
+    <!--<spring.mvc>4.0.3.RELEASE</spring.mvc>-->
+    <!--<spring.data>1.3.4.RELEASE</spring.data>-->
+    <!--<javax.servlet>3.0.1</javax.servlet>-->
+    <!--<mysql.version>5.1.29</mysql.version>-->
+    <!--<hb.manager>4.2.5.Final</hb.manager>-->
+    <!--<spring.test>3.2.4.RELEASE</spring.test>-->
+    <!--<junit.version>4.11</junit.version>-->
+  <!--</properties>-->
+
+  <!--<dependencies>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-webmvc</artifactId>-->
+      <!--<version>${spring.mvc}</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>javax.servlet</groupId>-->
+      <!--<artifactId>javax.servlet-api</artifactId>-->
+      <!--<version>${javax.servlet}</version>-->
+      <!--<scope>provided</scope>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>mysql</groupId>-->
+      <!--<artifactId>mysql-connector-java</artifactId>-->
+      <!--<version>${mysql.version}</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.springframework.data</groupId>-->
+      <!--<artifactId>spring-data-jpa</artifactId>-->
+      <!--<version>${spring.data}</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.hibernate</groupId>-->
+      <!--<artifactId>hibernate-entitymanager</artifactId>-->
+      <!--<version>${hb.manager}</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>junit</groupId>-->
+      <!--<artifactId>junit</artifactId>-->
+      <!--<version>${junit.version}</version>-->
+      <!--<scope>test</scope>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-test</artifactId>-->
+      <!--<version>${spring.test}</version>-->
+      <!--<scope>test</scope>-->
+    <!--</dependency>-->
+
+  <!--</dependencies>-->
+
+  <build>
+    <finalName>airbnb</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

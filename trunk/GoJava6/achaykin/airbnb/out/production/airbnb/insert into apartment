@@ -1,0 +1,6 @@
+INSERT INTO `airbnb`.`apartment` (`hostID`, `apartmentType`, `city`, `address`, `rooms`, `accommodates`, `squareFootage`) VALUES ('1', 'ENTIRE_HOME', 'KIEV', 'address 1', '1', '1', '1');
+INSERT INTO `airbnb`.`apartment` (`hostID`, `apartmentType`, `city`, `address`, `rooms`, `accommodates`, `squareFootage`) VALUES ('1', 'ENTIRE_HOME', 'KIEV', 'address 2', '2', '2', '2');
+INSERT INTO `airbnb`.`apartment` (`hostID`, `apartmentType`, `city`, `address`, `rooms`, `accommodates`, `squareFootage`) VALUES ('1', 'ENTIRE_HOME', 'KIEV', 'address 3', '3', '3', '3');
+INSERT INTO `airbnb`.`apartment` (`hostID`, `apartmentType`, `city`, `address`, `rooms`, `accommodates`, `squareFootage`) VALUES ('2', 'ENTIRE_HOME', 'KIEV', 'address 4', '4', '4', '4');
+INSERT INTO `airbnb`.`apartment` (`hostID`, `apartmentType`, `city`, `address`, `rooms`, `accommodates`, `squareFootage`) VALUES ('2', 'ENTIRE_HOME', 'KIEV', 'address 5', '5', '5', '5');
+INSERT INTO `airbnb`.`apartment` (`hostID`, `apartmentType`, `city`, `address`, `rooms`, `accommodates`, `squareFootage`) VALUES ('3', 'ENTIRE_HOME', 'KIEV', 'address 6', '6', '6', '6');
