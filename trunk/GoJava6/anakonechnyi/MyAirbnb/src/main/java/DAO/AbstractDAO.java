@@ -1,4 +1,4 @@
-package main.java.DAO;
+package dao;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -7,7 +7,8 @@ import java.util.List;
 //import java.sql.SQLException;
 
 /**
- * Created by A_Nakonechnyi on 21.10.2015.
+ * @autor A_Nakonechnyi
+ * @date 21.10.2015.
  */
 public abstract class AbstractDAO {
      void updateDB(String sqlQuery) {
@@ -34,7 +35,7 @@ public abstract class AbstractDAO {
         }
     }
     List<Object> readDB (String sqlQuery){
-        List<Object> getList = new ArrayList<Object>();
+        List<Object> getList = new ArrayList<>();
         Connection conn = null;
         Statement sttmnt = null;
         ResultSet resultSet = null;

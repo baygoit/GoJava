@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - @localhost" uuid="28c663bd-cb28-415d-9d88-5350d13a2a07">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>airbnb.*</schema-pattern>
+      <default-schemas>airbnb.*</default-schemas>
+    </data-source>
+  </component>
+</project>
