@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao;
+package ua.com.goit.gojava7.kickstarter.dao.file;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,7 +13,6 @@ public abstract class FileReader<T> {
 
 	private File file;
 	protected List<T> data;
-	BufferedReader fileReader = null;
 
 	public FileReader(File file) {
 		this.file = file;
@@ -21,28 +20,20 @@ public abstract class FileReader<T> {
 
 	public List<T> read() {
 		data = new ArrayList<>();
-		try {
-			InputStream quotesFileSteam = new FileInputStream(file);
-			fileReader = new BufferedReader(new InputStreamReader(quotesFileSteam));
-			data = readIt();
+		try (InputStream inputStream = new FileInputStream(file);
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+			data = readFromFile(bufferedReader);
 		} catch (IOException e) {
 			throw new IllegalStateException("File not found or read error " + file, e);
-		} finally {
-			if (fileReader != null) {
-				try {
-					fileReader.close();
-				} catch (IOException e) {
-					System.err.println("Cannot close file " + file);
-				}
-			}
 		}
+
 		if (data.isEmpty()) {
 			throw new IllegalStateException("There are not dates in file " + file);
 		}
 		return data;
 	}
 
-	public List<T> readIt() throws IOException {
+	public List<T> readFromFile(BufferedReader bufferedReader) throws IOException {
 		return data;
 	}
 

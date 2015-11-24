@@ -4,12 +4,9 @@ public class Reward {
 
 	private int amount;
 	private String reward;
-	
-	public Reward() {		
-		
-	}
-	
-	public Reward(int amount, String reward) {		
+	private String projectName;
+
+	public Reward(int amount, String reward) {
 		this.amount = amount;
 		this.reward = reward;
 	}
@@ -18,15 +15,15 @@ public class Reward {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-
 	public String getReward() {
 		return reward;
 	}
 
-	public void setReward(String reward) {
-		this.reward = reward;
-	}	
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 }

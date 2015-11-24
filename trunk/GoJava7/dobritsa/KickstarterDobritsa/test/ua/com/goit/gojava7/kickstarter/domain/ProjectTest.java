@@ -10,13 +10,18 @@ import java.util.List;
 
 public class ProjectTest extends Assert {
 
-	private Project projectEmpty = new Project();
+	
 	private Project project;
 	private String time = new java.util.Date().toString();
 
 	@Before
-	public void testSetQ() {
-		project = new Project("NameTest", "DescriptionTest", 111111, 22222, 33333, "HistoryTest", "LinkTest");
+	public void testSetUp() {	
+		project = new Project("NameTest", "DescriptionTest", 111111, 22222, 33333);
+	}
+	
+	@Test
+	public void tectCreateFullProject() {
+		project = new Project("NameTest", "DescriptionTest", 111111, 22222, 33333, "HistoryTest", "NoLink");
 	}
 
 	@Test
@@ -29,9 +34,9 @@ public class ProjectTest extends Assert {
 
 	@Test
 	public void testAddQuestions() {
-		assertThat(projectEmpty.getQuestions().size(), is(0));
-		projectEmpty.addQuestion(new Question());
-		assertThat(projectEmpty.getQuestions().size(), is(1));
+		assertThat(project.getQuestions().size(), is(0));
+		project.addQuestion(new Question("Question"));
+		assertThat(project.getQuestions().size(), is(1));
 	}
 
 	@Test
@@ -44,52 +49,40 @@ public class ProjectTest extends Assert {
 	}
 
 	@Test
-	public void testGetSetName() {
-		projectEmpty.setName("Name of empty project");
-		assertThat(project.getName(), is("NameTest"));
-		assertThat(projectEmpty.getName(), is("Name of empty project"));
+	public void testGetName() {
+		assertThat(project.getName(), is("NameTest"));		
 	}
 
 	@Test
-	public void testGetSetDescription() {
-		projectEmpty.setDescription("Description of empty project");
-		assertThat(project.getDescription(), is("DescriptionTest"));
-		assertThat(projectEmpty.getDescription(), is("Description of empty project"));
+	public void testGetDescription() {		
+		assertThat(project.getDescription(), is("DescriptionTest"));		
 	}
 
 	@Test
-	public void testGetSetGoal() {
-		projectEmpty.setGoal(300000);
-		assertThat(project.getGoal(), is(111111));
-		assertThat(projectEmpty.getGoal(), is(300000));
+	public void testGetGoal() {	
+		assertThat(project.getGoal(), is(111111));		
 	}
 
 	@Test
-	public void testGetSetPledged() {
-		projectEmpty.setPledged(100000);
-		assertThat(project.getPledged(), is(22222));
-		assertThat(projectEmpty.getPledged(), is(100000));
+	public void testGetPledged() {	
+		assertThat(project.getPledged(), is(22222));		
 	}
 
 	@Test
-	public void testGetSetDaysToGo() {
-		projectEmpty.setDaysToGo(22);
-		assertThat(project.getDaysToGo(), is(33333));
-		assertThat(projectEmpty.getDaysToGo(), is(22));
+	public void testGetDaysToGo() {		
+		assertThat(project.getDaysToGo(), is(33333));		
 	}
 
 	@Test
 	public void testGetHistory() {
-		projectEmpty.setHistory("History of empty project");
-		assertThat(project.getHistory(), is("HistoryTest"));
-		assertThat(projectEmpty.getHistory(), is("History of empty project"));
+		project.setHistory("History of empty project");	
+		assertThat(project.getHistory(), is("History of empty project"));
 	}
 
 	@Test
 	public void testGetSetLink() {
-		projectEmpty.setLink("Link of empty project");
-		assertThat(project.getLink(), is("LinkTest"));
-		assertThat(projectEmpty.getLink(), is("Link of empty project"));
+		project.setLink("Link of empty project");	
+		assertThat(project.getLink(), is("Link of empty project"));
 	}
 
 	@Test

@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 @RunWith(MockitoJUnitRunner.class)
 public class QuotePrinterTest {
@@ -35,16 +34,6 @@ public class QuotePrinterTest {
 	@Test
 	public void testPrint() {		
 		quotePrinter.print(new Quote("text1", "author"));
-		verify(printSteam).println(contains("text"));
-		verify(printSteam).println(contains("author"));
-	}
-
-	@Test
-	public void testPrintRandomQuote() {		
-		QuoteStorage quoteStorage = new QuoteStorage();
-		quoteStorage.add(new Quote("text1", "author"));
-		
-		quotePrinter.printRandomQuote(quoteStorage);
 		verify(printSteam).println(contains("text"));
 		verify(printSteam).println(contains("author"));
 	}

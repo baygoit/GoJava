@@ -1,0 +1,39 @@
+package ua.com.goit.gojava7.kickstarter.dao.file;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+
+public class ProjectFileReader extends FileReader<Project> {
+
+	public ProjectFileReader(File file) {
+		super(file);
+	}
+
+	@Override
+	public List<Project> readFromFile(BufferedReader bufferedReader) throws IOException {
+		while ((bufferedReader.readLine()) != null) {		
+			String name = bufferedReader.readLine();
+			String description = bufferedReader.readLine();
+			int goal = new Integer(bufferedReader.readLine());
+			int pledged = new Integer(bufferedReader.readLine());
+			int daysToGo = new Integer(bufferedReader.readLine());
+			
+			Project project = new Project(name, description, goal, pledged, daysToGo);			
+			project.setHistory(bufferedReader.readLine());
+			project.setLink(bufferedReader.readLine());
+			
+			QuestionFileReader fileQuestionReader = new QuestionFileReader(new File(bufferedReader.readLine()));
+			project.setQuestions(fileQuestionReader.read());	
+			
+			RewardFileReader fileRewardReader = new RewardFileReader(new File(bufferedReader.readLine()));
+			project.setRewards(fileRewardReader.read());
+			
+			data.add(project);
+		}
+		return data;
+	}
+}

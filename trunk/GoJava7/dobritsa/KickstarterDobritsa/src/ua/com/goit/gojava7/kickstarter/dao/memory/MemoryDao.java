@@ -1,31 +1,33 @@
-package ua.com.goit.gojava7.kickstarter.storage;
+package ua.com.goit.gojava7.kickstarter.dao.memory;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class Storage<T> {
-	
+import ua.com.goit.gojava7.kickstarter.dao.Storage;
+
+public abstract class MemoryDao<T> implements Storage<T> {
+
 	protected List<T> data;
 
-	protected Storage() {
-		data = new ArrayList<>();
+	protected MemoryDao(List<T> data) {
+		this.data = data;
 	}
 
+	@Override
 	public List<T> getAll() {
 		return Collections.unmodifiableList(data);
 	}
-	
+
 	public void setAll(List<T> data) {
 		this.data = data;
 	}
-	
+
+	@Override
 	public T get(int index) {
-		if(data.size() == 0) {
+		if (data.size() == 0) {
 			System.out.println("Nothing to show");
-			//System.exit(0);
 			return null;
-		}		
+		}
 		return data.get(index);
 	}
 
@@ -33,8 +35,9 @@ public abstract class Storage<T> {
 		data.add(element);
 	}
 
+	@Override
 	public int size() {
 		return data.size();
 	}
-	
+
 }

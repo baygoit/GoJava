@@ -1,5 +1,5 @@
 
-(File) Heather's Choice // Meals for Adventuring
+Heather's Choice // Meals for Adventuring
 Dehydrated meals + snacks for your next adventure! Gluten, soy, and dairy free, sustainably sourced + delicious. 
 48000
 7281
@@ -9,7 +9,7 @@ https://d2pq0u4uni88oo.cloudfront.net/projects/908102/video-607860-h264_high.mp4
 ./resources/Questions_Heathers Choice.txt
 ./resources/Reward_Heathers Choice.txt
 
-(File) TRUEnergy - World's First Organic Sports Shot
+TRUEnergy - World's First Organic Sports Shot
 Infused with vitamins, electrolytes, and green tea extract, TRUEnergy is a honey sweetened sports beverage to help you perform better. 
 20000
 1397
@@ -19,7 +19,7 @@ https://d2pq0u4uni88oo.cloudfront.net/projects/2177700/video-606530-h264_high.mp
 ./resources/Questions_TRUEnergy.txt
 ./resources/Reward_TRUEnergy.txt
 
-(File) The Cafe Meow: First Cat Cafe in Minneapolis
+The Cafe Meow: First Cat Cafe in Minneapolis
 A new coffee shop experience for a cool city. A place for quality coffee and cat companionship. Join us in making it a reality! 
 15000
 6183

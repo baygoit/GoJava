@@ -1,66 +1,40 @@
 package ua.com.goit.gojava7.kickstarter;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryReader;
-import ua.com.goit.gojava7.kickstarter.dao.FileCategoryReader;
-import ua.com.goit.gojava7.kickstarter.dao.FileQuoteReader;
-import ua.com.goit.gojava7.kickstarter.dao.MemoryCategoryReader;
-import ua.com.goit.gojava7.kickstarter.dao.MemoryQuoteReader;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteReader;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.Quote;
-import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
+import ua.com.goit.gojava7.kickstarter.config.DataSource;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionsStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.RewardStorage;
+import ua.com.goit.gojava7.kickstarter.dao.file.CategoryStorage;
 
 public class KickstarterRunner {
 
-	private static final File QUOTES_FILE = new File("./resources/Quotes.txt");
-	private static final File CATEGORIES_FILE = new File("./resources/Category.txt");
-	
-	private static QuoteReader getQuoteReader(boolean isFromFile) {
-		if (!isFromFile) {
-			return new MemoryQuoteReader();		
-		} else {
-			return new FileQuoteReader(QUOTES_FILE);
-		}
-	}
-	
-	private static CategoryReader getCategoryReader(boolean isFromFile) {
-		if (!isFromFile) {		
-			return new MemoryCategoryReader();
-		} else {		
-			return new FileCategoryReader(CATEGORIES_FILE);			
-		}
-	}
-
 	public static void main(String[] args) throws FileNotFoundException {
-		boolean isFromFile = false;
-		if (args.length != 0) {
-			isFromFile = true;
+		DataSource dataSource = DataSource.MEMORY;
+		if (args.length != 0 && args[0] != null) {
+			try {
+				dataSource = DataSource.getByStartupKey(args[0].toLowerCase());
+			} catch (IllegalArgumentException e) {
+				System.err.println("Type of data source " + args[0] + " if not supported. Fall back to memory");
+			}
 		}
-		QuoteStorage quoteStorage = initQuotes(isFromFile);
-		CategoryStorage categoryStorage = initCategories(isFromFile);	
-		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage);
+		System.out.println("-------Kickstarter runs in " + dataSource + " mode-------\n");
+
+		DaoProvider daoProvider = new DaoProvider(dataSource);
+		daoProvider.open();
+
+		QuoteStorage quoteStorage = daoProvider.getQuoteDAO();
+		CategoryStorage categoryStorage = daoProvider.getCategoryDAO();
+		ProjectStorage projectStorage = daoProvider.getProjectDAO();
+		QuestionsStorage questionsStorage = daoProvider.getQuestionsDAO();
+		RewardStorage rewardStorage = daoProvider.getRewardDAO();
+
+		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage, projectStorage, questionsStorage,
+				rewardStorage);
 		kickstarter.run();
 		kickstarter.shutdown();
-	}
-
-	private static QuoteStorage initQuotes(boolean isFromFile) {
-		QuoteStorage quoteStorage = new QuoteStorage();
-		QuoteReader quoteReader = getQuoteReader(isFromFile);
-		List<Quote> quotes = quoteReader.read();
-		quoteStorage.setAll(quotes);
-		return quoteStorage;
-	}
-	
-	private static CategoryStorage initCategories(boolean isFromFile) {
-		CategoryStorage categoryStorage = new CategoryStorage();
-		CategoryReader categoryReader = getCategoryReader(isFromFile);
-		List<Category> categories = categoryReader.read();
-		categoryStorage.setAll(categories);
-		return categoryStorage;
 	}
 }

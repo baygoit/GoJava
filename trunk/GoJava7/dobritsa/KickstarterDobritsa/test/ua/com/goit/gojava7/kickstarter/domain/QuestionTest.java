@@ -12,23 +12,12 @@ public class QuestionTest {
 
 	String time = new Date().toString();
 
-	@Test
-	public void testCreateEmptyQuestion() {
-		Question question = new Question();
-		question.setTime(time);
-		question.setQuestion("Test Question");
-		question.setAnswer("Test answer");
-		assertThat(question.getTime(), is(time));
-		assertThat(question.getQuestion(), is("Test Question"));
-		assertThat(question.getAnswer(), is("Test answer"));
-	}
-
-	@Test
-	public void testNotNullParameters() {
-		Question question = new Question();
-		assertNotNull(question.getTime());
-		assertNotNull(question.getQuestion());
+		@Test
+	public void testNotNullAnswer() {
+		Question question = new Question("Question");
 		assertNotNull(question.getAnswer());
+		question.setAnswer("Answer");
+		question.setTime("Time");
 	}
 	
 	@Test

@@ -1,5 +1,5 @@
 
-(File) HYMN: A Solo for 7
+HYMN: A Solo for 7
 Anneke Hansen Dance premieres 6 performances of a new work at the gorgeous Irondale Theater in Brooklyn, December 2nd through 5th! 
 3138
 3000
@@ -9,7 +9,7 @@ https://d2pq0u4uni88oo.cloudfront.net/projects/2145080/video-604200-h264_high.mp
 ./resources/Questions_HYMN.txt
 ./resources/Reward_HYMN.txt
 
-(File) The Brooklyn Nutcracker Sweet!
+The Brooklyn Nutcracker Sweet!
 Be a part of Brooklyn dance history--The Brooklyn Nutcracker Sweet!, a sparkling production updated from the original Nutcracker.
 15000
 3982
@@ -19,7 +19,7 @@ https://d2pq0u4uni88oo.cloudfront.net/projects/2138491/video-605929-h264_high.mp
 ./resources/Questions_The Brooklyn.txt
 ./resources/Reward_The Brooklyn.txt
 
-(File) Shift the Grid presents Vacancy
+Shift the Grid presents Vacancy
 Vacancy: A contemporary dance performance produced collaboratively by 6 minds exploring what it feels like to be in two places at once. 
 3200
 2895

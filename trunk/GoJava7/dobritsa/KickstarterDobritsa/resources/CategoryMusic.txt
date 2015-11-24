@@ -1,5 +1,5 @@
 
-(File) Flobots' TWO NEW ALBUMS for 2016 "NOENEMIES"
+Flobots' TWO NEW ALBUMS for 2016 "NOENEMIES"
 NEW ALBUM by FLOBOTS. We've been asking you to raise your voice. Now it is time to raise ours. Actually, let's raise them together. 
 72390
 50000
@@ -9,7 +9,7 @@ https://d2pq0u4uni88oo.cloudfront.net/projects/2119077/video-596491-h264_high.mp
 ./resources/Questions_Flobots.txt
 ./resources/Reward_Flobots.txt
 
-(File) North Eugene Ukulele Allstars Uke It Old-School!
+North Eugene Ukulele Allstars Uke It Old-School!
 We're back for a second album. This time with new kids, new songs, and a new name! 
 10000
 543
@@ -19,7 +19,7 @@ https://d2pq0u4uni88oo.cloudfront.net/projects/2128669/video-608005-h264_high.mp
 ./resources/Questions_North Eugene.txt
 ./resources/Reward_North Eugene.txt
 
-(File) PATAGONIA - A new full-length album from Sheridan Fox
+ATAGONIA - A new full-length album from Sheridan Fox
 Help Sheridan finish manufacturing his new album so he can send it to you. Yeah, you! @thesheridanfox sheridanfox.com #patagoniaalbum
 35000
 3500

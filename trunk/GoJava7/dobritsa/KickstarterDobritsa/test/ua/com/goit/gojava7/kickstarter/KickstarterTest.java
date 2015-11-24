@@ -1,21 +1,20 @@
 package ua.com.goit.gojava7.kickstarter;
 
-import org.junit.After;
-
-import org.junit.Before;
+//import org.junit.Ignore;
+//import org.junit.After;
+//import org.junit.Before;
 import org.junit.Test;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,18 +23,17 @@ import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.console.Printer;
 import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
 import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
-import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.old.CategoryDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class KickstarterTest {
 
-	private PrintStream systemOut;
-	
 	@Mock
 	private ConsoleScanner consoleScanner;
 	@Mock
@@ -47,27 +45,28 @@ public class KickstarterTest {
 	private ProjectPrinter projectPrinter;
 	@Mock
 	private QuotePrinter quotePrinter;
-	
-	private QuoteStorage quoteStorage;
 	@Mock
-	private CategoryStorage categoryStorage;
+	private QuoteDao quoteStorage;
+	@Mock
+	private CategoryDao categoryStorage;
 	
 	@InjectMocks
 	private Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage);
 	
-	@Test
-	public void testRunEntered0SaysFarewell() {		
+	@Test	
+	public void testRunEntered0SaysFarewell() {
+		when(quoteStorage.getRandomQuote()).thenReturn(new Quote("Quote", "Author"));		
 		when(categoryStorage.size()).thenReturn(1);
 		when(consoleScanner.getInt(0, categoryStorage.size())).thenReturn(0);
+		
 		kickstarter.run();
+		verify(quotePrinter).print(any(Quote.class));		
 		verify(printer).print(contains("List of categories:"));		
 		assertNull(kickstarter.chooseCategory(categoryStorage));
 		verify(printer).print(contains("See you soon!"));			
 	}
 	
-
-	
-	@Test	
+	@Test		
 	public void testRunEntered1Has1Category() {
 		Category category = new Category("Category1 for test");	
 		when(categoryStorage.size()).thenReturn(1);
@@ -99,37 +98,6 @@ public class KickstarterTest {
 		verify(printer).print(contains("Current project: #"));		
 		verify(printer).print(contains("See you soon!"));			
 	}
-		
-	@Test
-	public void testChooseCategory() {
-		CategoryStorage categoryStorage = new CategoryStorage();
-		categoryStorage.add(new Category("Category1 for test"));
-		categoryStorage.add(new Category("Category2 for test"));
-		
-		kickstarter.chooseCategory(categoryStorage);
-		verify(printer).print(contains("List of categories:"));
-	}
-	
-	@Test
-	public void testSetCurrentCategoryEntered0() {
-		CategoryStorage categoryStorage = new CategoryStorage();
-		categoryStorage.add(new Category("Category1 for test"));
-		categoryStorage.add(new Category("Category2 for test"));
-		
-		when(consoleScanner.getInt(0, categoryStorage.size())).thenReturn(0);
-		assertNull(kickstarter.setCurrentCategory(categoryStorage));		
-	}
-	
-	@Test
-	public void testSetCurrentCategoryEnteredCorrectNumberOfCategory() {
-		CategoryStorage categoryStorage = new CategoryStorage();
-		categoryStorage.add(new Category("Category1 for test"));
-		categoryStorage.add(new Category("Category2 for test"));
-		
-		when(consoleScanner.getInt(0, categoryStorage.size())).thenReturn(1);
-		assertNotNull(kickstarter.setCurrentCategory(categoryStorage));		
-	}
-	
 	
 	@Test
 	public void testChooseProject() {

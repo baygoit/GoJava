@@ -13,8 +13,15 @@ public class Project {
 	private String link;
 	private List<Reward> rewards = new ArrayList<>();
 	private List<Question> questions = new ArrayList<>();
-	
-	public Project() {
+	private String categoryName;
+
+	public Project(String name, String description, Integer goal, Integer pledged, Integer daysToGo) {
+		this.name = name;
+		this.description = description;
+		this.goal = goal;
+		this.pledged = pledged;
+		this.daysToGo = daysToGo;
+
 	}
 
 	public Project(String name, String description, Integer goal, Integer pledged, Integer daysToGo, String history,
@@ -27,45 +34,25 @@ public class Project {
 		this.history = history;
 		this.link = link;
 	}
-	
+
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public Integer getGoal() {
 		return goal;
-	}
-
-	public void setGoal(Integer goal) {
-		this.goal = goal;
 	}
 
 	public Integer getPledged() {
 		return pledged;
 	}
 
-	public void setPledged(Integer pledged) {
-		this.pledged = pledged;
-	}
-
 	public Integer getDaysToGo() {
 		return daysToGo;
-	}
-
-	public void setDaysToGo(Integer daysToGo) {
-		this.daysToGo = daysToGo;
 	}
 
 	public String getHistory() {
@@ -84,7 +71,6 @@ public class Project {
 		this.link = link;
 	}
 
-	
 	public List<Reward> getRewards() {
 		return rewards;
 	}
@@ -99,12 +85,20 @@ public class Project {
 
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
-	}	
-	
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
 	public void addToPledged(int amount) {
 		this.pledged += amount;
 	}
-	
+
 	public void addQuestion(Question question) {
 		questions.add(question);
 	}
