@@ -5,6 +5,11 @@ public class Quote {
 	private String text;
 	private String author;
 
+	public Quote(String text, String author) {
+		this.text = text;
+		this.author = author;
+	}
+
 	public String getText() {
 		return text;
 	}
@@ -13,8 +18,8 @@ public class Quote {
 		return author;
 	}
 
-	public Quote(String text, String author) {
-		this.text = text;
-		this.author = author;
+	@Override
+	public String toString() {
+		return "Quote [text=" + text + ", author=" + author + "]";
 	}
 }

@@ -47,7 +47,7 @@ public class KickstarterTest {
 	private ProjectPrinter projectPrinter;
 	@Mock
 	private QuotePrinter quotePrinter;
-	//@Mock
+	
 	private QuoteStorage quoteStorage;
 	@Mock
 	private CategoryStorage categoryStorage;
@@ -55,16 +55,6 @@ public class KickstarterTest {
 	@InjectMocks
 	private Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage);
 	
-	@Before
-	public void setUp() {
-		systemOut = System.out;		
-	}
-	
-	@After
-	public void tearDown() {
-		System.setOut(systemOut);
-	}
-
 	@Test
 	public void testRunEntered0SaysFarewell() {		
 		when(categoryStorage.size()).thenReturn(1);

@@ -15,23 +15,19 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class PrinterTest {
 
-	private PrintStream defaultSystemOut;
-	
 	@Mock
 	private PrintStream printSteam;
 	
 	private Printer printer = new Printer();
 	
 	@Before
-	public void setUp() {
-		defaultSystemOut = System.out;
+	public void setUp() {		
 		System.setOut(printSteam);
 	}
 	
 	@After
 	public void tearDown() {
-		verifyNoMoreInteractions(printSteam);
-		System.setOut(defaultSystemOut);
+		verifyNoMoreInteractions(printSteam);		
 	}
 	
 	@Test
@@ -40,5 +36,4 @@ public class PrinterTest {
 
 		verify(printSteam).println("string");
 	}
-
 }

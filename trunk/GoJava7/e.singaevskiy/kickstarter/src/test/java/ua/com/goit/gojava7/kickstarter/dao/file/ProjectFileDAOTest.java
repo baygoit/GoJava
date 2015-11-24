@@ -1,8 +1,12 @@
 package ua.com.goit.gojava7.kickstarter.dao.file;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,17 +16,18 @@ import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.memory.Memory;
+import ua.com.goit.gojava7.kickstarter.dao.memory.util.Memory;
 
 public class ProjectFileDAOTest {
-    
+    Class<Project> persistentClass = Project.class;
     ProjectFileDAO fs;
     List<Project> list = new ArrayList<>();
+    private String filePath = "src/test/resources/storages/file/%name%.CSV".replace("%name%", persistentClass.getSimpleName());
     
     @Before
     public void setUp(){
-        Class<Project> persistentClass = Project.class;
-        fs = new ProjectFileDAO("src/test/resources/storages/file/%name%.txt".replace("%name%", persistentClass.getSimpleName()));
+        
+        fs = new ProjectFileDAO(filePath);
         
         list = new Memory().getProjects();
         
@@ -32,8 +37,11 @@ public class ProjectFileDAOTest {
     }
     
     @After
-    public void tearDown() {
-        //fsQuote.clear();
+    public void tearDown() throws Exception {
+        Path path = Paths.get(filePath);
+        if (path.toFile().exists()) {
+            Files.delete(path);
+        }
     }
     
     @Test
@@ -42,18 +50,12 @@ public class ProjectFileDAOTest {
     }
 
     @Test
-    public void testGet() {
-        for (int i = 0; i < list.size(); i++) {
-            assertThat(fs.get(i), is(list.get(i)));
-        }
-    }
-
-    @Test
-    public void testAdd() {
-        int lastIndex = list.size()-1;
+    public void testAddGet() {
+        int id = 33;
         Project element = new Project();
+        element.setId(id);
         fs.add(element);
-        assertThat(fs.get(++lastIndex), is(element));
+        assertThat(fs.get(id), is(element));
     }
 
     @Test
@@ -65,10 +67,15 @@ public class ProjectFileDAOTest {
     
     @Test
     public void testGetByCategory() {
-        Category category = new Category(1, "cat");
+        Category category = new Category(44, "cat");
+        new CategoryFileDAO().add(category);
         List<Project> pList = new ArrayList<>();
-        pList.add(new Project("p1", null, category));
-        pList.add(new Project("p2", null, category));
+        Project e = new Project("p1", null, category);
+        e.setId(22);
+        pList.add(e);
+        Project e2 = new Project("p2", null, category);
+        e2.setId(44);
+        pList.add(e2);
         
         fs.addAll(pList);
         fs.add(new Project("p3", null, new Category(2, "cat2")));

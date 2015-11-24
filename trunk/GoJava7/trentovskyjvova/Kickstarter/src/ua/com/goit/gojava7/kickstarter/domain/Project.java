@@ -157,6 +157,7 @@ public class Project {
 	}
 
 	public int getFunded() {
-		return getPledged() * 100 / getGoal();
+		int goal = getGoal();
+		return goal == 0 ? 0 : getPledged() * 100 / goal;
 	}
 }

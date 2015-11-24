@@ -1,22 +1,21 @@
 package ua.com.goit.gojava7.kickstarter.controller;
 
-import ua.com.goit.gojava7.kickstarter.model.*;
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Kickstarter;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Quote;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
 
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Dmytro on 06.11.2015.
- */
 public class Controller {
-    private Kickstarter kickstarter;
-
     private static final Random RANDOM = new Random();
+
+    private Kickstarter kickstarter;
 
     public Controller(Kickstarter kickstarter) {
         this.kickstarter = kickstarter;
-
     }
 
     public Kickstarter getKickstarter() {

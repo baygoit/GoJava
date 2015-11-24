@@ -1,31 +1,20 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Project {
-	private Category category;
 	private String name;
+	private String summary;
 	private String info;
-	private int goal;
-	private int pledged;
+	private long goal;
+	private long pledged;
 	private int daysToGo;
 	private String history;
 	private String video;
-	private String faq;
+	private String questions;
 	
-	public Project(Category category, String name, String info, int goal, 
-			int pledged, int daysToGo, String history, String video, String faq) {
-		this.category = category;
+	public Project(String name, String summary, long goal) {
 		this.name = name;
-		this.info = info;
-		this.pledged = pledged;
+		this.summary = summary;
 		this.goal = goal;
-		this.daysToGo = daysToGo;
-		this.history = history;
-		this.video = video;
-		this.faq = faq;
-	}
-	
-	public Category getCategory() {
-		return category;
 	}
 	
 	public String getName() {
@@ -33,18 +22,54 @@ public class Project {
 	}
 	
 	public String getSummary() {
+		return summary;
+	}
+	
+	public String getInfo() {
 		return info;
 	}
 
-	public int getGoal() {
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	
+	public long getGoal() {
 		return goal;
 	}
 
-	public int getPledged() {
+	public long getPledged() {
 		return pledged;
+	}
+	
+	public void setPledged(long pledged) {
+		this.pledged = pledged;
 	}
 
 	public int getDaysToGo() {
 		return daysToGo;
+	}
+	
+	public String getHistory() {
+		return history;
+	}
+	
+	public void setHistory(String history) {
+		this.history = history;
+	}
+	
+	public String getVideo() {
+		return video;
+	}
+	
+	public void setVideo(String video) {
+		this.video = video;
+	}
+	
+	public String getQuestions() {
+		return questions;
+	}
+	
+	public void setQuestions(String questions) {
+		this.questions = questions;
 	}
 }

@@ -1,14 +1,13 @@
 package ua.com.goit.gojava7.kickstarter.controller;
 
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.PledgeStorage;
 
 public class ProjectDetailsPageController extends PageController<Project> {
 
     @Override
     protected void handle() {        
-        PledgeStorage pledgeDAO = storageFactory.getPledgeDAO();
-        request.setBalanceSum(pledgeDAO.getSum(request));
+        request.setQuestions(storageFactory.getQuestionsDAO().getByProject(request));
+        request.setBalanceSum(storageFactory.getPaymentDAO().getSum(request));
         page.showProjectDetails(request);    
     }
 

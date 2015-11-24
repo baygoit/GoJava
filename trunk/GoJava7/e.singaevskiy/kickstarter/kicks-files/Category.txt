@@ -1,3 +1,0 @@
-{"name":"Art"}
-{"name":"Music"}
-{"name":"Sports"}

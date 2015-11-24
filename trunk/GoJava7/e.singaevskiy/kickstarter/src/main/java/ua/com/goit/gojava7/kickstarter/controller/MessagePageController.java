@@ -3,7 +3,7 @@ package ua.com.goit.gojava7.kickstarter.controller;
 import java.io.IOException;
 
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.beans.QnA;
+import ua.com.goit.gojava7.kickstarter.beans.Question;
 
 public class MessagePageController extends PageController<Project> {
 
@@ -19,8 +19,8 @@ public class MessagePageController extends PageController<Project> {
     protected boolean isDone() {
         try {
             String text = inputReader.readLine();
-            QnA message = new QnA(text, "");
-            request.addQnA(message);
+            Question message = new Question(request, text, "");
+            this.storageFactory.getQuestionsDAO().add(message);
             
             return true;
         } catch (IOException e) {

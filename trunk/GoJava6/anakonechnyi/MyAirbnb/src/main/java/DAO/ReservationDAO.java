@@ -1,8 +1,8 @@
-package main.java.DAO;
+package dao;
 
-import main.java.Models.Apartment;
-import main.java.Models.Reservation;
-import main.java.Models.User;
+
+import models.Apartment;
+import models.Reservation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,10 +15,10 @@ import java.util.List;
 public class ReservationDAO extends AbstractDAO{
     public void createReservation ( Reservation reservation) {
         String sqlQuery = "INSERT INTO `airbnb`.`reservations` (`idapartment`, `start`, `finish` , 'client_id') VALUES ('"+
-                reservation.getApartmentId()+"`, `"+
+                reservation.getApartment().getApartmentId()+"`, `"+
                 reservation.getStart()+"`, `"+
                 reservation.getFinish()+"`, `"+
-                reservation.getClientId()+");";
+                reservation.getClient().getClientId()+");";
         updateDB(sqlQuery);
     }
 
@@ -47,11 +47,10 @@ public class ReservationDAO extends AbstractDAO{
 
     @Override
     Reservation readObj(ResultSet resultSet) throws SQLException {
-        Reservation result = new Reservation(resultSet.getInt("reserv_id"),
+        return null; /*new Reservation(resultSet.getInt("reserv_id"),
                     resultSet.getInt("idapartment"),
                     resultSet.getDate("start"),
                     resultSet.getDate("finish"),
-                    resultSet.getInt("clientId"));
-        return result;
+                    resultSet.getInt("clientId"));*/
     }
 }

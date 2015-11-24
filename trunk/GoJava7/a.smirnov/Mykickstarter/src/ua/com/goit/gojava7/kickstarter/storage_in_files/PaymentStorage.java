@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractFilesStorage;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
 
-public class PaymentStorage extends AbstractFilesStorage<Payment> {
+public class PaymentStorage implements PaymentDAO {
 	
+	private static final String SEMICOLON_DELIMITER = ";";
+	private static final String NEW_LINE_SEPARATOR = "\n";
 //	private static final File FILE_FOR_TEST = new File("./resources/payments.csv");
 	private static final File REWARDS_FILE = new File("./payments.csv");
 	
@@ -66,14 +69,17 @@ public class PaymentStorage extends AbstractFilesStorage<Payment> {
 			
 			fileReader = new BufferedReader(new FileReader(REWARDS_FILE));
 			
+			// read header
 			fileReader.readLine();
 			
 			while ((line = fileReader.readLine()) != null) {
 				String[] tokens = line.split(SEMICOLON_DELIMITER);
 				if (tokens.length > 0) {
 					
-					Payment payment = new Payment(tokens[USER_NAME], 
-							Long.parseLong(tokens[CREDIT_CARD_NUMBER]), Integer.parseInt(tokens[DONATING_SUM]));
+					Payment payment = new Payment(
+							tokens[USER_NAME], 
+							Long.parseLong(tokens[CREDIT_CARD_NUMBER]), 
+							Integer.parseInt(tokens[DONATING_SUM]));
 					
 					payment.setProjectID(Integer.parseInt(tokens[PRJECT_ID]));
 					
@@ -94,10 +100,36 @@ public class PaymentStorage extends AbstractFilesStorage<Payment> {
 		}
 		return payments;
 	}
+
+	@Override
+	public int getSize() {
+		return getAll().size();
+	}
 	
 	@Override
 	public void remove(Payment element) {
 		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public int getSumProjectPayments(Project project) {
+		List<Payment> projectPayments = new ArrayList<>();
+		List<Payment> payments = getAll();
 		
+		for (Payment payment : payments) {
+			if (payment.getProjectID() == project.getUniqueID()) {
+				projectPayments.add(payment);
+			}
+		}
+		
+		if (projectPayments.isEmpty()) {
+			return 0;
+		} else {	
+			int sumPayments = 0;		
+			for (Payment payment : projectPayments) {
+				sumPayments += payment.getDonatingSum();
+			}	
+			return sumPayments;
+		}
 	}
 }
