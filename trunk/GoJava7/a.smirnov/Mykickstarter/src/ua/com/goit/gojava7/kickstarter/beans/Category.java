@@ -1,10 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-import java.io.Serializable;
-
-public class Category implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+public class Category {
 	private int uniqueID;
 	private String name;
 

@@ -6,11 +6,11 @@ import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
-import ua.com.goit.gojava7.kickstarter.dao.FaqDAO;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractCategoryStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteStorage;
 
 import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
@@ -26,11 +26,11 @@ public class AbstractKickstarter {
 	Project selectedProjectByUser;
 	
 	
-	CategoryDAO categories;
-	ProjectDAO projects;
-	QuoteDAO quotes;
-	PaymentDAO payments;
-	FaqDAO faqs;
+	AbstractCategoryStorage categories;
+	AbstractProjectStorage projects;
+	AbstractQuoteStorage quotes;
+	AbstractPaymentStorage payments;
+	AbstractFaqStorage faqs;
 
 	
 	public void start() {

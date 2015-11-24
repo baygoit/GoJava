@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.handlers.TextModifer;
+
 public class TextModiferTest {
 	
 	private TextModifer modifer;
