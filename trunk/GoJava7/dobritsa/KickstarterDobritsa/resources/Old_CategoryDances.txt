@@ -8,6 +8,7 @@ Anneke Hansen Dance premieres 6 performances of a new work at the gorgeous Irond
 https://d2pq0u4uni88oo.cloudfront.net/projects/2145080/video-604200-h264_high.mp4
 ./resources/Questions_HYMN.txt
 ./resources/Reward_HYMN.txt
+Dances
 
 The Brooklyn Nutcracker Sweet!
 Be a part of Brooklyn dance history--The Brooklyn Nutcracker Sweet!, a sparkling production updated from the original Nutcracker.
@@ -18,6 +19,7 @@ Be a part of Brooklyn dance history! -- Brooklyn Ballet's The Brooklyn Nutcracke
 https://d2pq0u4uni88oo.cloudfront.net/projects/2138491/video-605929-h264_high.mp4
 ./resources/Questions_The Brooklyn.txt
 ./resources/Reward_The Brooklyn.txt
+Dances
 
 Shift the Grid presents Vacancy
 Vacancy: A contemporary dance performance produced collaboratively by 6 minds exploring what it feels like to be in two places at once. 
@@ -28,3 +30,4 @@ So we embarked on the impossible. Collaborating with the usual six minds in the 
 https://d2pq0u4uni88oo.cloudfront.net/projects/2153340/video-600743-h264_high.mp4
 ./resources/Questions_Shift the Grid presents Vacancy.txt
 ./resources/Reward_Shift the Grid presents Vacancy.txt
+Dances

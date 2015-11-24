@@ -26,12 +26,8 @@ public class ProjectFileReader extends FileReader<Project> {
 			project.setHistory(bufferedReader.readLine());
 			project.setLink(bufferedReader.readLine());
 			
-			QuestionFileReader fileQuestionReader = new QuestionFileReader(new File(bufferedReader.readLine()));
-			project.setQuestions(fileQuestionReader.read());	
-			
-			RewardFileReader fileRewardReader = new RewardFileReader(new File(bufferedReader.readLine()));
-			project.setRewards(fileRewardReader.read());
-			
+			String categoryName = bufferedReader.readLine();
+			project.setCategoryName(categoryName);
 			data.add(project);
 		}
 		return data;

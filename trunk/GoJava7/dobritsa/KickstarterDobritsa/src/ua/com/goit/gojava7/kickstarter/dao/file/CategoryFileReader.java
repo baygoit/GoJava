@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.old;
+package ua.com.goit.gojava7.kickstarter.dao.file;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.old.CategoryReader;
 
-public class CategoryFileReader //extends FileReader<Category> implements CategoryReader 
-{
-/*
+public class CategoryFileReader extends FileReader<Category> implements CategoryReader {
+
 	public CategoryFileReader(File file) {
 		super(file);
 	}
@@ -20,11 +20,9 @@ public class CategoryFileReader //extends FileReader<Category> implements Catego
 
 		String line;
 		while ((line = bufferedReader.readLine()) != null) {
-			Category category = new Category(line);		
-			ProjectFileReader fileProjectReader = new ProjectFileReader(new File(bufferedReader.readLine()));
-			category.setAll(fileProjectReader.read());
+			Category category = new Category(line);
 			data.add(category);
-		}	
+		}
 		return data;
-	}*/
+	}
 }

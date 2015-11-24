@@ -9,7 +9,13 @@ import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionsStorage;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.dao.RewardStorage;
+import ua.com.goit.gojava7.kickstarter.dao.file.CategoryFileDao;
+import ua.com.goit.gojava7.kickstarter.dao.file.CategoryFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.file.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.dao.file.ProjectFileDao;
+import ua.com.goit.gojava7.kickstarter.dao.file.ProjectFileReader;
+import ua.com.goit.gojava7.kickstarter.dao.file.QuoteFileDao;
+import ua.com.goit.gojava7.kickstarter.dao.file.QuoteFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.memory.CategoryMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.Memory;
 import ua.com.goit.gojava7.kickstarter.dao.memory.ProjectMemoryDao;
@@ -26,7 +32,8 @@ public class DaoProvider {
 	private RewardStorage rewardDAO;
 
 	private static final File QUOTES_FILE = new File("./resources/Quotes.txt");
-	private static final File CATEGORIES_FILE = new File("./resources/Category.txt");
+	private static final File CATEGORIES_FILE = new File("./resources/Categories.txt");
+	private static final File PROJECTS_FILE = new File("./resources/Projects.txt");
 	private DataSource dataSource;
 
 	private Connection connection = null;
@@ -86,13 +93,19 @@ public class DaoProvider {
 	}
 
 	private void initFileStorage() {
-		/*quoteDAO = new QuoteFileDao(mem.getQuotes());
-		categoryDAO = new CategoryFileDao(mem.getCategories());
+		QuoteFileReader quoteFileReader = new QuoteFileReader(QUOTES_FILE);
+		quoteDAO = new QuoteFileDao(quoteFileReader.read());
+		
+		CategoryFileReader categoryFileReader = new CategoryFileReader(CATEGORIES_FILE);
+		categoryDAO = new CategoryFileDao(categoryFileReader.read());
 
-		projectDAO = new ProjectFileDao(mem.getProjects());
-		questionsDAO = new QuestionsFileDao(mem.getQuestions());
-		rewardDAO = new RewardFileDao(mem.getRewards());
-*/
+		ProjectFileReader projectFileReader = new ProjectFileReader(PROJECTS_FILE);
+		projectDAO = new ProjectFileDao(projectFileReader.read());
+		
+		//projectDAO = new ProjectFileDao(mem.getProjects());
+		//questionsDAO = new QuestionsFileDao(mem.getQuestions());
+		//rewardDAO = new RewardFileDao(mem.getRewards());
+
 	}
 
 	private void initDbStorage() {
