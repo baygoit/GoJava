@@ -13,7 +13,7 @@ public class Project {
 
     private final String description;
 
-    private final int moneyNeeded;
+    private int moneyNeeded;
 
     private int moneyDonated;
 
@@ -72,6 +72,12 @@ public class Project {
     }
 
     public void addMoneyDonated(int money) {
-        this.moneyDonated += money;
+        moneyDonated += money;
+
+        if (money < moneyNeeded) {
+            moneyNeeded -= money;
+        } else {
+            moneyNeeded = 0;
+        }
     }
 }
