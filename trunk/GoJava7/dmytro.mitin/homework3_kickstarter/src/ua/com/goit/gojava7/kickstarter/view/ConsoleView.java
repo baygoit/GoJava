@@ -35,6 +35,7 @@ public class ConsoleView implements View {
         return scannerIn;
     }
 
+    @Override
     public void run() {
         while (true) {
             try {
@@ -49,6 +50,7 @@ public class ConsoleView implements View {
         }
     }
 
+    @Override
     public Page updatePageToStandard(String command) {
         if (command.equals("h") || command.equals("H")) {
             return new HelpPage(this);
@@ -82,11 +84,13 @@ public class ConsoleView implements View {
         currentPage.show();
     }
 
+    @Override
     public void printRandomQuote() {
         Quote quote = controller.getRandomQuote();
         System.out.println(quote.getText() + " (" + quote.getAuthor() + ")");
     }
 
+    @Override
     public void printCategories() {
         List<Category> categories = controller.getKickstarter().getCategoryStorage().getCategories();
         System.out.println("Categories:");
@@ -95,6 +99,7 @@ public class ConsoleView implements View {
         }
     }
 
+    @Override
     public void printProjects(Category category) {
         List<Project> projects = category.getProjects();
         System.out.println("Category: " + category.getName() + ".");
@@ -108,6 +113,7 @@ public class ConsoleView implements View {
         }
     }
 
+    @Override
     public void printProjectInfo(Project project) {
         System.out.println("Project: " + project.getName());
         System.out.println("Description: " + project.getShortDescription());
@@ -116,6 +122,7 @@ public class ConsoleView implements View {
         System.out.println("Days left: " + project.getDaysLeft());
     }
 
+    @Override
     public void printProjectDetailedInfo(Project project) {
         System.out.println("Category: " + project.getCategory().getName());
         System.out.println("Project: " + project.getName());

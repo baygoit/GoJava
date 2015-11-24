@@ -71,6 +71,6 @@ public class ProjectPage implements Page {
     @Override
     public Page getUpdated(String command) {
         return new CategoryPage(view, project.getCategory());
-    }
+}
 
 }

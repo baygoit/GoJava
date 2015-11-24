@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Category {
@@ -10,7 +11,7 @@ public class Category {
 
     public Category(String name) {
         this.name = name;
-        this.projects = new ArrayList<>();
+        projects = new ArrayList<>();
     }
 
     public String getName() {
@@ -18,6 +19,11 @@ public class Category {
     }
 
     public List<Project> getProjects() {
-        return projects;
+        return Collections.unmodifiableList(projects);
     }
+
+    public void add(Project project) {
+        projects.add(project);
+    }
+
 }
