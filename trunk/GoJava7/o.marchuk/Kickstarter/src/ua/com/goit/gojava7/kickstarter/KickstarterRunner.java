@@ -49,7 +49,8 @@ public class KickstarterRunner {
 	private static CategoryStorage initCategories() {
 		CategoryStorage categoryStorage = new CategoryStorage();
 
-		Category category = new Category("Movie");
+		Category category = new Category();
+		category.setName("Movie");
 
 		Project project = new Project("New funnny movie", "The movie about new funny story", 5000000L, 30);
 		project.setHistory("No history");
@@ -62,7 +63,8 @@ public class KickstarterRunner {
 
 		categoryStorage.add(category);
 		// cut
-		category = new Category("Dances");
+		category = new Category();
+		category.setName("Dances");
 
 		project = new Project("Dance with me", "It's about tango", 50000L, 30);
 		category.getProjects().add(project);
@@ -72,7 +74,8 @@ public class KickstarterRunner {
 
 		categoryStorage.add(category);
 		// cut
-		category = new Category("Food");
+		category = new Category();
+		category.setName("Food");
 
 		project = new Project("Prosciutto ", "Italian ham", 5000L, 10);
 		category.getProjects().add(project);

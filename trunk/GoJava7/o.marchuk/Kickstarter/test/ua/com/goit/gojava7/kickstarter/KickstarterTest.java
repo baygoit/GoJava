@@ -74,7 +74,9 @@ public class KickstarterTest {
 	@Test
 	public void testShowCategoriesMenuEnter1Has1Category() {
 		List<Category> categories = new ArrayList<Category>();
-		categories.add(new Category("category name"));
+		Category category = new Category();
+		category.setName("category name");
+		categories.add(category);
 
 		when(categoryStorage.getAllCategories()).thenReturn(categories);
 		when(consoleScanner.getInt()).thenReturn(1, 0);
@@ -88,7 +90,7 @@ public class KickstarterTest {
 	// cut
 	@Test
 	public void testShowProjectsMenuEntered0SaysBye() {
-		Category selectedCategory = new Category("category name");
+		Category selectedCategory = new Category();
 
 		kickstarter.showProjectsMenu(selectedCategory);
 
@@ -97,7 +99,7 @@ public class KickstarterTest {
 
 	@Test
 	public void testShowProjectsMenuEnter1NoProjectsAtAll() {
-		Category selectedCategory = new Category("category name");
+		Category selectedCategory = new Category();
 
 		when(consoleScanner.getInt()).thenReturn(1, 0);
 
@@ -109,7 +111,7 @@ public class KickstarterTest {
 
 	@Test
 	public void testShowProjectsMenuEnter_1NoProjectsAtAll() {
-		Category selectedCategory = new Category("category name");
+		Category selectedCategory = new Category();
 
 		when(consoleScanner.getInt()).thenReturn(-1, 0);
 
@@ -121,7 +123,7 @@ public class KickstarterTest {
 
 	@Test
 	public void testShowProjectsMenuEnter1Has1Project() {
-		Category selectedCategory = new Category("category name");
+		Category selectedCategory = new Category();
 
 		Set<Project> projects = new HashSet<Project>();
 		projects.add(new Project("project name", "short description", 50, 10));
