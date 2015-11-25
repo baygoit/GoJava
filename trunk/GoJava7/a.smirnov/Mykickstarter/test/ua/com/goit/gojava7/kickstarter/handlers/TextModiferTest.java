@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.view;
+package ua.com.goit.gojava7.kickstarter.handlers;
 
 import static org.junit.Assert.*;
 

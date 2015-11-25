@@ -41,7 +41,7 @@ public class FaqMemoryDAO extends AbstractFaqStorage {
 				resultFaqs.append("\n  question : " + allFaqs.get(index).getQuestion() + "\n");
 				
 				if (allFaqs.get(index).getAnswer() == null || allFaqs.get(index).getAnswer().isEmpty()) {
-					resultFaqs.append("  answer: There is no answer yet \n");
+					resultFaqs.append("  answer : There is no answer yet \n");
 				} else {
 					resultFaqs.append("  answer : " + allFaqs.get(index).getAnswer() + "\n");
 				}	
