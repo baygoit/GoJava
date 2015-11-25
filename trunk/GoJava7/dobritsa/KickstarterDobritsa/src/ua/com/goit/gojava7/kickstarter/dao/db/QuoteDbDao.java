@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class QuoteDbDao implements QuoteStorage {
@@ -37,8 +38,18 @@ public class QuoteDbDao implements QuoteStorage {
 
 	@Override
 	public Quote get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		Quote quote = null;
+		String query = "select text, author from quote where id = " + index;
+
+		try (PreparedStatement ps = connection.prepareStatement(query); 
+				ResultSet resultSet = ps.executeQuery()) {
+			if (resultSet.next()) {
+				quote = new Quote(resultSet.getString("text"), resultSet.getString("author"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quote;
 	}
 
 	@Override

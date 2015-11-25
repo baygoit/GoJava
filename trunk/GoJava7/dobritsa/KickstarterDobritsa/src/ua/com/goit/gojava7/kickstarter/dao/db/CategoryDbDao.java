@@ -10,8 +10,7 @@ import java.util.List;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-public class CategoryDbDao implements CategoryStorage 
-{
+public class CategoryDbDao implements CategoryStorage {
 
 	private Connection connection;
 
