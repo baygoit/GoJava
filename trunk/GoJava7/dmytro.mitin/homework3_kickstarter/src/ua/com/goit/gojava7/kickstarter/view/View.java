@@ -5,13 +5,15 @@ import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
 import ua.com.goit.gojava7.kickstarter.view.page.Page;
 
+import java.io.IOException;
+
 public interface View {
     void run();
 
     Page updatePageToStandard(String command);
 
     // implementing Observer pattern
-    void handleNotification() throws ExitException;
+    void handleNotification() throws ExitException, IOException;
 
     void printRandomQuote();
 

@@ -4,6 +4,9 @@ import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleView;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+
 public class ProjectPage implements Page {
     ConsoleView view;
 
@@ -15,27 +18,29 @@ public class ProjectPage implements Page {
     }
 
     @Override
-    public void show() throws ExitException {
+    public void show() throws ExitException, IOException {
         view.printProjectDetailedInfo(project);
 
         System.out.println();
 
         System.out.println("Would you like to donate? (Enter \"y\" if so or any key otherwise.)");
 
-        String confirmation = view.getScanner().nextLine();
+        BufferedReader reader = view.getReader();
+
+        String confirmation = reader.readLine();
 
         if (confirmation.equals("y") || confirmation.equals("Y")) {
             System.out.println("Enter your name please.");
 
-            String name = view.getScanner().nextLine(); // currently ignored
+            String name = reader.readLine(); // currently ignored
 
             System.out.println("Enter number of your card please.");
 
-            String card = view.getScanner().nextLine(); // currently ignored
+            String card = reader.readLine(); // currently ignored
 
             System.out.println("What sum would you like to donate?");
 
-            String money = view.getScanner().nextLine();
+            String money = reader.readLine();
 
             int sum;
             try {

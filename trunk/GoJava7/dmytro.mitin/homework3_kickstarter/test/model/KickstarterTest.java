@@ -10,13 +10,15 @@ import ua.com.goit.gojava7.kickstarter.model.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.model.storage.InMemoryCategoryStorage;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
 
+import java.io.IOException;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class KickstarterTest {
 
     @Test
-    public void testDonating() throws ExitException {
+    public void testDonating() throws ExitException, IOException {
         Category category = new Category("category1");
         int moneyNeeded = 200;
         Project project = new Project("project1", category, "", "", "", "", moneyNeeded, 10);
@@ -32,7 +34,7 @@ public class KickstarterTest {
     }
 
     @Test
-    public void testDonatingMuch() throws ExitException {
+    public void testDonatingMuch() throws ExitException, IOException {
         Category category = new Category("category1");
         int moneyNeeded = 100;
         Project project = new Project("project1", category, "", "", "", "", moneyNeeded, 10);
