@@ -19,10 +19,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 
 @RunWith(MockitoJUnitRunner.class)
 public class KickstarterTest {
@@ -33,9 +33,9 @@ public class KickstarterTest {
 	private ConsoleScanner consoleScanner;
 	private QuoteDao quoteStorage;
 	@Mock
-	private CategoryStorage categoryStorage;
+	private CategoryDao categoryDao;
 	@InjectMocks
-	private Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteStorage, categoryStorage);
+	private Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteStorage, categoryDao);
 
 	@Test
 	public void testShutdown() {
@@ -78,7 +78,7 @@ public class KickstarterTest {
 		category.setName("category name");
 		categories.add(category);
 
-		when(categoryStorage.getAllCategories()).thenReturn(categories);
+		when(categoryDao.getAll()).thenReturn(categories);
 		when(consoleScanner.getInt()).thenReturn(1, 0);
 
 		kickstarter.showCategoriesMenu();

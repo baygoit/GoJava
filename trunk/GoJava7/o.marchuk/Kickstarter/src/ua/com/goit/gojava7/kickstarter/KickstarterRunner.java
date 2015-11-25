@@ -4,6 +4,7 @@ import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
@@ -36,9 +37,10 @@ public class KickstarterRunner {
 		daoProvider.open();
 
 		QuoteDao quoteDao = daoProvider.getQuoteDao();
-		CategoryStorage categoryStorage = initCategories();
+		CategoryDao categoryDao = daoProvider.getCategoryDao();
+		// initCategories();
 
-		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteDao, categoryStorage);
+		Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteDao, categoryDao);
 		kickstarter.run();
 		kickstarter.shutdown();
 

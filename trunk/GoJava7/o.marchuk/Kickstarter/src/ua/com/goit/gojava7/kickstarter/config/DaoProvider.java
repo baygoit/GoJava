@@ -6,11 +6,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Random;
 
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteReader;
 import ua.com.goit.gojava7.kickstarter.dao.file.FileQuoteReader;
 import ua.com.goit.gojava7.kickstarter.dao.memory.MemoryQuoteReader;
 import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteDaoMemoryImpl;
+import ua.com.goit.gojava7.kickstarter.dao.mysql.CategoryDaoMySqlImpl;
 import ua.com.goit.gojava7.kickstarter.dao.mysql.QuoteDaoMySqlImpl;
 
 public class DaoProvider {
@@ -68,6 +70,10 @@ public class DaoProvider {
 		}
 
 		return quoteDao;
+	}
+
+	public CategoryDao getCategoryDao() {
+		return new CategoryDaoMySqlImpl(connection);
 	}
 
 }
