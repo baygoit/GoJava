@@ -10,6 +10,8 @@ import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteReader;
 import ua.com.goit.gojava7.kickstarter.dao.file.FileQuoteReader;
+import ua.com.goit.gojava7.kickstarter.dao.memory.CategoryDaoMemoryImpl;
+import ua.com.goit.gojava7.kickstarter.dao.memory.MemoryCategoryReader;
 import ua.com.goit.gojava7.kickstarter.dao.memory.MemoryQuoteReader;
 import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.dao.mysql.CategoryDaoMySqlImpl;
@@ -73,7 +75,21 @@ public class DaoProvider {
 	}
 
 	public CategoryDao getCategoryDao() {
-		return new CategoryDaoMySqlImpl(connection);
+		CategoryDao categoryDao;
+
+		if (dataSource == DataSource.MEMORY) {
+			CategoryDaoMemoryImpl categoryDaoMemoryImpl = new CategoryDaoMemoryImpl();
+			MemoryCategoryReader categoryReader = new MemoryCategoryReader();
+			categoryDaoMemoryImpl.setCategories(categoryReader.readCategories());
+			categoryDao = categoryDaoMemoryImpl;
+		} else if (dataSource == DataSource.FILE) {
+			throw new IllegalArgumentException("Unsupported data source " + dataSource);
+		} else if (dataSource == DataSource.MYSQL) {
+			categoryDao = new CategoryDaoMySqlImpl(connection);
+		} else {
+			throw new IllegalArgumentException("Unknown data source " + dataSource);
+		}
+		return categoryDao;
 	}
 
 }
