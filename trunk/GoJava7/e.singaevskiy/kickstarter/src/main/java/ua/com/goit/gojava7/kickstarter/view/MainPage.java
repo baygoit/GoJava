@@ -69,8 +69,7 @@ public class MainPage {
         outStream.println(project);
     }
 
-    public void showPaymentRequest(Project project) {
-        showShortProject(project);
+    public void showPaymentRequest() {
         outStream.println("Enter your name, card ID and sum, divided by ' '");
     }
 

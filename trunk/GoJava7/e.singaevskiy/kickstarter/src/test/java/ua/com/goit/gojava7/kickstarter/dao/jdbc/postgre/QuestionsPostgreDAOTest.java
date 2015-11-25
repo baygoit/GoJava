@@ -1,49 +1,61 @@
 package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.beans.Question;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
-import ua.com.goit.gojava7.kickstarter.dao.memory.util.Memory;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
 public class QuestionsPostgreDAOTest {
 
-    Memory mem;
+    List<Question> list;
     QuestionsPostgreDAO dao;
 
     @Before
     public void setUp() throws Exception {
-        Properties properties = Utils.readProperties("./kicks-files/config.properties");
+        Properties properties = Utils.readProperties("./src/test/resources/storages/db/config.properties");
         JdbcDispatcher dispatcher = new JdbcDispatcher(
                 properties.getProperty("driver"),
                 properties.getProperty("url"),
                 properties.getProperty("user"), 
                 properties.getProperty("password"));
-  
-        mem = new Memory();        
-        dao = new QuestionsPostgreDAO(dispatcher);         
+        
+        dao = new QuestionsPostgreDAO(dispatcher); 
+        
+        list = new ArrayList<>();
+        list.add(new Question(0, "a1", "t1"));
+        list.add(new Question(1, "a2", "t2"));
+    }
+    
+    
+    @After
+    public void tearDown() throws Exception {
+        dao.clear();
     }
 
     @Test
     public void testAddGetAll() {
-        dao.clear();
-        dao.addAll(mem.getQuestions());
-        assertThat(dao.getAll(), is(mem.getProjects()));
+        dao.addAll(list);
+        assertThat(dao.getAll(), is(list));
     }
     
     @Test
     public void testAddGet() {
-        assertFalse(true);
+        dao.clear();
+        dao.addAll(list);
+        int index = 1;
+        assertThat(dao.get(index), is(list.get(index)));
     }
     
     @SuppressWarnings("unchecked")
@@ -53,8 +65,8 @@ public class QuestionsPostgreDAOTest {
         Mockito.when(dispatcher.getConnection()).thenThrow(SQLException.class);
         dao = new QuestionsPostgreDAO(dispatcher); 
         dao.clear();
-        dao.addAll(mem.getQuestions());
+        dao.addAll(list);
         dao.getAll();
-        dao.getByProject(new Project());
+        dao.getByProject(1);
     }
 }

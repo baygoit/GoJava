@@ -70,18 +70,18 @@ public class ProjectFileDAOTest {
         Category category = new Category(44, "cat");
         new CategoryFileDAO().add(category);
         List<Project> pList = new ArrayList<>();
-        Project e = new Project("p1", null, category);
+        Project e = new Project("p1", null, category.getId());
         e.setId(22);
         pList.add(e);
-        Project e2 = new Project("p2", null, category);
+        Project e2 = new Project("p2", null, category.getId());
         e2.setId(44);
         pList.add(e2);
         
         fs.addAll(pList);
-        fs.add(new Project("p3", null, new Category(2, "cat2")));
+        fs.add(new Project("p3", null, 123));
 
         assertThat(fs.getAll(), not(pList));
-        assertThat(fs.getByCategory(category), is(pList));
+        assertThat(fs.getByCategory(category.getId()), is(pList));
     }
     
 }

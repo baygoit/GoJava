@@ -2,8 +2,6 @@ package ua.com.goit.gojava7.kickstarter.dao.file;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.DataStorage;
 import ua.com.goit.gojava7.kickstarter.dao.file.util.CsvParser;
 
@@ -22,12 +20,6 @@ public class FileDAO<T> implements DataStorage<T> {
     public FileDAO(Class<T> persistentClass, String pathToFile) {
         this.pathToFile = pathToFile;
         this.persistentClass = persistentClass;
-
-        parser.addParserFromString("project", stringValue -> new ProjectFileDAO().get(Integer.parseInt(stringValue)));
-        parser.addParserFromString("category", stringValue -> new CategoryFileDAO().get(Integer.parseInt(stringValue)));
-
-        parser.addParserToString("project", (Project value) -> String.valueOf(value.getId()));
-        parser.addParserToString("category", (Category value) -> String.valueOf(value.getId()));
     }
 
     @Override
