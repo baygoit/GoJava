@@ -1,11 +1,9 @@
 package ua.com.goit.gojava7.kickstarter.dao;
 
-import java.util.List;
-
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-public interface QuoteReader {
+public interface QuoteDao extends Dao {
 	
-	List<Quote> readQuotes();
+	Quote getRandomQuote();
 	
 }

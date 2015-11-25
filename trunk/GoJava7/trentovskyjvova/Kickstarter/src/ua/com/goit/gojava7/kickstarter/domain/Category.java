@@ -6,12 +6,12 @@ import java.util.Set;
 public class Category {
 	private final int id;
 	private String name;
-	private Set<Project> projects;
+	//private Set<Project> projects;
 
 	public Category(String name, int categoryId) {
 		setName(name);
 		this.id = categoryId;
-		projects = new HashSet<Project>();
+		//projects = new HashSet<Project>();
 	}
 
 	public String getName() {
@@ -22,15 +22,15 @@ public class Category {
 		this.name = name;
 	}
 
-	public Set<Project> getProjects() {
+/*	public Set<Project> getProjects() {
 		return projects;
 	}
-
+*/
 	public int getId() {
 		return id;
 	}
 
-	public void addProject(Project project) {
+	/*public void addProject(Project project) {
 		projects.add(project);
 	}
 
@@ -41,6 +41,6 @@ public class Category {
 
 	public int projectsSize() {
 		return projects.size();
-	}
+	}*/
 
 }

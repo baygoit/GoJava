@@ -5,57 +5,64 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
+import ua.com.goit.gojava7.kickstarter.dao.memory.QuestionDaoMemoryImpl;
+import ua.com.goit.gojava7.kickstarter.dao.memory.RewardDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuestionStorage;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentLevelTest {
+	private static final String ANSVER = "Please, enter the number between 0 and 1";
 	
-	List<Category> categories;
-	Category selectedCategory;
-	Project selectedProject;
-	Level paymentLevel = new PaymentLevel();
-	Project project1;
+	private List<Reward> rewards;
+	private Category selectedCategory;
+	private Project selectedProject;
+
+	private QuestionDaoMemoryImpl questionDao = new QuestionDaoMemoryImpl();
 	@Mock
-	ConsoleScanner consoleScanner;
-	QuestionStorage questionStorage = new QuestionStorage();
+	private RewardDao rewardDao = new RewardDaoMemoryImpl();
+	@InjectMocks
+	private Level paymentLevel = new PaymentLevel(questionDao, rewardDao);
+	private Project project1;
+	@Mock
+	private ConsoleScanner consoleScanner;
+
 	
 	@Before 
 	public void setUp() {
-		categories = new ArrayList<Category>();
 		Category category = new Category("Some Category", 1);
-		project1 = new Project("proj 1", 1);
-		//project1.setPledged(10);
-		category.addProject(project1);
-		categories.add(category);
-		categories.add(new Category("Second Category", 2));
+		project1 = new Project("proj 1", 4);
 		selectedCategory = category;
+		rewards = rewardDao.getRewards(project1.getId());
 	}
 	
 	@Test
-	public void testGenerateAnswer() {
-		String result = paymentLevel.generateAnswer(categories, 1, selectedCategory, project1);
+	public void testGenerateAnswer1() {
+		String result = paymentLevel.generateAnswer(1, selectedCategory, project1);
 		assertThat(result, containsString(""));
 	}
 	
 	@Test
 	public void testFillOutForm() {	
 		when(consoleScanner.scanLine()).thenReturn("question");
-		String result = paymentLevel.fillOutForm(project1, 2, consoleScanner, questionStorage, null);
+		String result = paymentLevel.fillOutForm(project1, 2, consoleScanner);
 		
-		assertThat(project1.getQuestions().size(), is(1));
+		List<Question> questions = questionDao.getQuestions(project1.getId());
+		
+		assertThat(questions.size(), is(1));
 		assertThat(result, is("Thank for your question!\n0 : back to project"));
 	}
 	
@@ -69,18 +76,38 @@ public class PaymentLevelTest {
 	@Test
 	public void testFindSelectedCategory() {	
 		selectedCategory = new Category("name", 1);
-		Category result = paymentLevel.findSelectedCategory(categories, 0, selectedCategory);
+		Category result = paymentLevel.findSelectedCategory(0, selectedCategory);
 		assertThat(result, is(selectedCategory));
 	}
 	
-/*  move to another test class
 	@Test
-	public void testFillOutForm() {
+	public void testValidateUserChoise1() {
+		when(rewardDao.size()).thenReturn(rewards.size());
+		String result = paymentLevel.validateUserChoise(1, selectedCategory, project1);
+		assertThat(result, is(""));
+	}
+	
+	@Test
+	public void testValidateUserChoise2() {
+		when(rewardDao.size()).thenReturn(rewards.size());
+		String result = paymentLevel.validateUserChoise(2, selectedCategory, project1);
+		assertThat(result, is(ANSVER));
+	}
+	
+	@Test
+	public void testValidateUserChoiseMinus1() {
+		when(rewardDao.size()).thenReturn(rewards.size());
+		String result = paymentLevel.validateUserChoise(-1, selectedCategory, project1);
+		assertThat(result, is(ANSVER));
+	}
+	
+
+	@Test
+	public void testGenerateAnswer2() {
+		when(rewardDao.getRewards(project1.getId())).thenReturn(rewards);
 		
-		when(consoleScanner.scanLine()).thenReturn("name", "card");
-		when(consoleScanner.scan()).thenReturn(290);
-		String result = paymentLevel.fillOutForm(project1, 2, consoleScanner, null, paymentStorage);
-		
-		assertThat(project1.getPledged(), is(290));
-	}*/
+		String result = paymentLevel.generateAnswer(2, selectedCategory, project1);
+		assertThat(result, containsString("You selected 'to invest in the project"));
+		assertThat(result, containsString(": own amount"));
+	}
 }

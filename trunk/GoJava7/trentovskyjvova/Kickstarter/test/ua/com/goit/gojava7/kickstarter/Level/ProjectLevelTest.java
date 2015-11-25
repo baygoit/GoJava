@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.dao.memory.PaymentDaoMemoryImpl;
+import ua.com.goit.gojava7.kickstarter.dao.memory.QuestionDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
@@ -19,7 +21,7 @@ public class ProjectLevelTest {
 	
 	List<Category> categories;
 	Category selectedCategory;
-	Level projectLevel = new ProjectLevel();
+	Level projectLevel = new ProjectLevel(new PaymentDaoMemoryImpl(), new QuestionDaoMemoryImpl());
 	Project project1;
 	
 	@Before 
@@ -28,7 +30,6 @@ public class ProjectLevelTest {
 		Category category = new Category("Some Category", 1);
 		project1 = new Project("proj 1", 1);
 
-		category.addProject(project1);
 		categories.add(category);
 		categories.add(new Category("Second Category", 1));
 		selectedCategory = category;
@@ -36,31 +37,31 @@ public class ProjectLevelTest {
 	
 	@Test
 	public void testFindSelectedCategory() {
-		Category result = projectLevel.findSelectedCategory(new ArrayList<Category>(), 0, selectedCategory);
+		Category result = projectLevel.findSelectedCategory(0, selectedCategory);
 		assertThat(result, is(selectedCategory));
 	}
 	
 	@Test
 	public void testValidateUserChoise1() {
-		String result = projectLevel.validateUserChoise(new ArrayList<Category>(), 1, selectedCategory, project1);
+		String result = projectLevel.validateUserChoise(1, selectedCategory, project1);
 		assertThat(result, is(""));
 	}
 	
 	@Test
 	public void testValidateUserChoise2() {
-		String result = projectLevel.validateUserChoise(new ArrayList<Category>(), 3, selectedCategory, project1);
+		String result = projectLevel.validateUserChoise(3, selectedCategory, project1);
 		assertThat(result, is(ANSVER));
 	}
 	
 	@Test
 	public void testValidateUserChoiseMinus1() {
-		String result = projectLevel.validateUserChoise(categories, -1, selectedCategory, project1);
+		String result = projectLevel.validateUserChoise(-1, selectedCategory, project1);
 		assertThat(result, is(ANSVER));
 	}
 	
 	@Test
 	public void testGenerateAnswer() {
-		String result = projectLevel.generateAnswer(categories, 0, selectedCategory, project1);
+		String result = projectLevel.generateAnswer(0, selectedCategory, project1);
 		assertThat(result, containsString("You selected 'proj 1' project"));
 		assertThat(result, containsString("daysToGo"));
 		assertThat(result, containsString("1 : to invest in the project"));

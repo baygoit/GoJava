@@ -4,8 +4,10 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-public interface CategoryReader {
+public interface CategoryDao extends Dao {
+	List<Category> getCategories();
 	
-	List<Category> readCategories();
+	Category getCategory(int id);
 	
+	int size();
 }
