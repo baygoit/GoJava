@@ -6,10 +6,10 @@ import java.io.IOException;
 
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.dao.FileReader;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.old.CategoryReader;
 
-public class CategoryFileReader extends FileReader<Category> implements CategoryReader {
+public class CategoryFileReader extends FileReader<Category>{
 
 	public CategoryFileReader(File file) {
 		super(file);

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.old;
+package ua.com.goit.gojava7.kickstarter.dao.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,14 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.dao.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-public class CategoryDaoDbImpl// implements CategoryDao 
+public class CategoryDbDao implements CategoryStorage 
 {
-/*
+
 	private Connection connection;
 
-	public CategoryDaoDbImpl(Connection connection) {
+	public CategoryDbDao(Connection connection) {
 		this.connection = connection;
 	}
 
@@ -63,6 +64,5 @@ public class CategoryDaoDbImpl// implements CategoryDao
 			e.printStackTrace();
 		}
 		return size;
-	}*/
-
+	}
 }

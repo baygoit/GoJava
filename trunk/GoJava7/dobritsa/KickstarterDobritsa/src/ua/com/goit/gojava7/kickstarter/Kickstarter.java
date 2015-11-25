@@ -8,11 +8,11 @@ import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.console.Printer;
 import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
 import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.QuestionsStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionStorage;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.dao.RewardStorage;
-import ua.com.goit.gojava7.kickstarter.dao.file.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
@@ -29,7 +29,7 @@ public class Kickstarter {
 	private QuoteStorage quoteStorage;
 	private CategoryStorage categoryStorage;
 	private ProjectStorage projectStorage;
-	private QuestionsStorage questionsStorage;
+	private QuestionStorage questionsStorage;
 	private RewardStorage rewardStorage;
 
 	private Project currentProject = null;
@@ -38,7 +38,7 @@ public class Kickstarter {
 	private String BORDER = "\n________________________________________________________";
 
 	public Kickstarter(QuoteStorage quoteStorage, CategoryStorage categoryStorage, ProjectStorage projectStorage,
-			QuestionsStorage questionsStorage, RewardStorage rewardStorage) {
+			QuestionStorage questionsStorage, RewardStorage rewardStorage) {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
 		this.projectStorage = projectStorage;

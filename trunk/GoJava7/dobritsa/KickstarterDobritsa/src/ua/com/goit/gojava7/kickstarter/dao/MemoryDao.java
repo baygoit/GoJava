@@ -1,9 +1,7 @@
-package ua.com.goit.gojava7.kickstarter.dao.memory;
+package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.util.Collections;
 import java.util.List;
-
-import ua.com.goit.gojava7.kickstarter.dao.Storage;
 
 public abstract class MemoryDao<T> implements Storage<T> {
 

@@ -2,6 +2,7 @@ package ua.com.goit.gojava7.kickstarter.dao.file;
 
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.dao.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.dao.FileDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 

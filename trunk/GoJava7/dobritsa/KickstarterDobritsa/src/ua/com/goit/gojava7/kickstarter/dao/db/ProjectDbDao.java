@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.old;
+package ua.com.goit.gojava7.kickstarter.dao.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,15 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-public class ProjectDaoDbImpl //implements ProjectDao
-{
-/*
+public class ProjectDbDao implements ProjectStorage{
 	private Connection connection;
 	
-	public ProjectDaoDbImpl(Connection connection) {
+	public ProjectDbDao(Connection connection) {
 		this.connection = connection;
 	}
 	
@@ -74,5 +73,5 @@ public class ProjectDaoDbImpl //implements ProjectDao
 		}
 		return size;
 	}
-*/
+
 }

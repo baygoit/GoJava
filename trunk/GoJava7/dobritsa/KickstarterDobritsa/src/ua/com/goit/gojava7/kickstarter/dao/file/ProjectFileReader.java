@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.dao.FileReader;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectFileReader extends FileReader<Project> {

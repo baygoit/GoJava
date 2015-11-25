@@ -3,6 +3,7 @@ package ua.com.goit.gojava7.kickstarter.dao.memory;
 import java.util.List;
 import java.util.Random;
 
+import ua.com.goit.gojava7.kickstarter.dao.MemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 

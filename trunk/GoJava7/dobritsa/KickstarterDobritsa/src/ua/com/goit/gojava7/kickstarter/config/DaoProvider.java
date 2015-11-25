@@ -5,13 +5,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import ua.com.goit.gojava7.kickstarter.dao.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.QuestionsStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionStorage;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.dao.RewardStorage;
 import ua.com.goit.gojava7.kickstarter.dao.file.CategoryFileDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.CategoryFileReader;
-import ua.com.goit.gojava7.kickstarter.dao.file.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.dao.file.ProjectFileDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.ProjectFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.file.QuoteFileDao;
@@ -21,7 +21,7 @@ import ua.com.goit.gojava7.kickstarter.dao.file.RewardFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.memory.CategoryMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.Memory;
 import ua.com.goit.gojava7.kickstarter.dao.memory.ProjectMemoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.memory.QuestionsMemoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.memory.QuestionMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.RewardMemoryDao;
 
@@ -30,7 +30,7 @@ public class DaoProvider {
 	private QuoteStorage quoteDAO;
 	private CategoryStorage categoryDAO;
 	private ProjectStorage projectDAO;
-	private QuestionsStorage questionsDAO;
+	private QuestionStorage questionsDAO;
 	private RewardStorage rewardDAO;
 
 	private static final File QUOTES_FILE = new File("./resources/Quotes.txt");
@@ -87,35 +87,33 @@ public class DaoProvider {
 
 	private void initMemoryStorage() {
 		Memory data = new Memory();
+		
 		quoteDAO = new QuoteMemoryDao(data.getQuotes());
 		categoryDAO = new CategoryMemoryDao(data.getCategories());
-
 		projectDAO = new ProjectMemoryDao(data.getProjects());
-		questionsDAO = new QuestionsMemoryDao(data.getQuestions());
+		questionsDAO = new QuestionMemoryDao(data.getQuestions());
 		rewardDAO = new RewardMemoryDao(data.getRewards());
 	}
 
-	private void initFileStorage() {
-		QuoteFileReader quoteFileReader = new QuoteFileReader(QUOTES_FILE);
-		quoteDAO = new QuoteFileDao(quoteFileReader.read());
-		
-		CategoryFileReader categoryFileReader = new CategoryFileReader(CATEGORIES_FILE);
-		categoryDAO = new CategoryFileDao(categoryFileReader.read());
-
-		ProjectFileReader projectFileReader = new ProjectFileReader(PROJECTS_FILE);
-		projectDAO = new ProjectFileDao(projectFileReader.read());
-		
-		RewardFileReader rewardFileReader = new RewardFileReader(REWARDS_FILE);
-		 rewardDAO = new RewardFileDao(rewardFileReader.read());
+	private void initFileStorage() {	
+		quoteDAO = new QuoteFileDao((new QuoteFileReader(QUOTES_FILE)).read());
+		categoryDAO = new CategoryFileDao((new CategoryFileReader(CATEGORIES_FILE)).read());	
+		projectDAO = new ProjectFileDao((new ProjectFileReader(PROJECTS_FILE)).read());	
+		rewardDAO = new RewardFileDao((new RewardFileReader(REWARDS_FILE)).read());
 		
 		//questionsDAO = new QuestionsFileDao(mem.getQuestions());
-		//rewardDAO = new RewardFileDao(mem.getRewards());
-
 	}
 
 	private void initDbStorage() {
 		// TODO Auto-generated method stub
-
+		
+		
+		
+		//quoteDAO = new QuoteMemoryDao(data.getQuotes());
+		//categoryDAO = new CategoryMemoryDao(data.getCategories());
+		//projectDAO = new ProjectMemoryDao(data.getProjects());
+		//questionsDAO = new QuestionsMemoryDao(data.getQuestions());
+		//rewardDAO = new RewardMemoryDao(data.getRewards());
 	}
 
 	public CategoryStorage getCategoryDAO() {
@@ -130,7 +128,7 @@ public class DaoProvider {
 		return projectDAO;
 	}
 
-	public QuestionsStorage getQuestionsDAO() {
+	public QuestionStorage getQuestionsDAO() {
 		return questionsDAO;
 	}
 

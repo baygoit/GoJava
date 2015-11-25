@@ -4,11 +4,11 @@ import java.io.FileNotFoundException;
 
 import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.config.DataSource;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.QuestionsStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionStorage;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.dao.RewardStorage;
-import ua.com.goit.gojava7.kickstarter.dao.file.CategoryStorage;
 
 public class KickstarterRunner {
 
@@ -29,7 +29,7 @@ public class KickstarterRunner {
 		QuoteStorage quoteStorage = daoProvider.getQuoteDAO();
 		CategoryStorage categoryStorage = daoProvider.getCategoryDAO();
 		ProjectStorage projectStorage = daoProvider.getProjectDAO();
-		QuestionsStorage questionsStorage = daoProvider.getQuestionsDAO();
+		QuestionStorage questionsStorage = daoProvider.getQuestionsDAO();
 		RewardStorage rewardStorage = daoProvider.getRewardDAO();
 
 		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage, projectStorage, questionsStorage,

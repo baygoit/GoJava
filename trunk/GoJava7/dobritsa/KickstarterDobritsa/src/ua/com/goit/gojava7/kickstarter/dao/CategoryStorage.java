@@ -1,6 +1,5 @@
-package ua.com.goit.gojava7.kickstarter.dao.file;
+package ua.com.goit.gojava7.kickstarter.dao;
 
-import ua.com.goit.gojava7.kickstarter.dao.Storage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public interface CategoryStorage extends Storage<Category>{
