@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.storage_in_files.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.dao.file.PaymentFileDAO;
 
 public class ProjectTest {
 
