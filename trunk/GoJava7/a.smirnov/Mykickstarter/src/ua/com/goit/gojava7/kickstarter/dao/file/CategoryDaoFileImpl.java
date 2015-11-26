@@ -13,14 +13,13 @@ import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractCategoryDao;
 
 public class CategoryDaoFileImpl extends AbstractCategoryDao {
-	
-	private static final File FILE_STORAGE = new File("./resources/categories.csv");
+	private static final File STORAGE_FILE = new File("./resources/categories.csv");
 	private static final int CATEGORY_ID = 0;
 	private static final int CATEGORY_NAME = 1;
-
+	
 	@Override
 	public void add(Category element) {
-		try (FileWriter fileWriter = new FileWriter(FILE_STORAGE, true)){
+		try (FileWriter fileWriter = new FileWriter(STORAGE_FILE, true)){
 	
 			fileWriter.append(String.valueOf(element.getUniqueID()));
 			fileWriter.append(SEMICOLON_DELIMITER);
@@ -39,7 +38,7 @@ public class CategoryDaoFileImpl extends AbstractCategoryDao {
 		List<Category> categories = new ArrayList<>();
 		String line = "";
 		
-		try (BufferedReader fileReader = new BufferedReader(new FileReader(FILE_STORAGE))){	
+		try (BufferedReader fileReader = new BufferedReader(new FileReader(STORAGE_FILE))){	
 			
 			// read header
 			fileReader.readLine();

@@ -13,12 +13,12 @@ public class CategoryFileDAOTest {
 	private CategoryDaoFileImpl categoryFile;
 	private Category category;
 	
-	@Before
-	public void setUp() throws Exception {
-		categoryFile = new CategoryDaoFileImpl();
-		category = new Category("Ukraine");
-		category.setUniqueID(12);
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		categoryFile = new CategoryDaoFileImpl();
+//		category = new Category("Ukraine");
+//		category.setUniqueID(12);
+//	}
 
 	@Test
 	public void testAdd() {

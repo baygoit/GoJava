@@ -15,15 +15,15 @@ public class FaqFileDAOTest {
 	private Faq faq;
 	private Project project;
 	
-	@Before
-	public void setUp() throws Exception {
-		faqFile = new FaqDaoFileImpl();
-		faq = new Faq("How are you?");
-		
-		project = new Project("Project 1", "XXX", 10_000);
-		project.setUniqueID(1);
-		faq.setProjectID(1);
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		faqFile = new FaqDaoFileImpl();
+//		faq = new Faq("How are you?");
+//		
+//		project = new Project("Project 1", "XXX", 10_000);
+//		project.setUniqueID(1);
+//		faq.setProjectID(1);
+//	}
 
 	@Test
 	public void testAdd() {

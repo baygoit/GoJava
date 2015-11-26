@@ -12,10 +12,10 @@ public class QuoteTest {
 	String quoteText = "Hello world";
 	String author = "Smirnov Anton";
 	
-	@Before
-	public void setUp() throws Exception {
-		quote = new Quote(quoteText, author);
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		quote = new Quote(quoteText, author);
+//	}
 
 	@Test
 	public void testQuote() {

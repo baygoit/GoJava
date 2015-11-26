@@ -2,6 +2,7 @@ package ua.com.goit.gojava7.kickstarter.dao.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,91 +14,70 @@ import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentDao;
 
 public class PaymentDaoMysqlImpl extends AbstractPaymentDao {
+	private static final String INSERT_PAYMENT = "INSERT INTO payments (project_id, user_name, credit_card_number, donating_sum) VALUES (?, ?, ?, ?)";
+	private static final String DELETE_PAYMENT = "DELETE FROM payments WHERE project_id = ?";
+	private static final String SELECT_ALL_PAYMENTS = "SELECT project_id, user_name, credit_card_number, donating_sum  FROM payments";
+	private static final String COUNT_ALL_PAYMENTS = "SELECT count(*) FROM payments";
+	private static final String SELECT_PROJECT_PAYMENTS = "SELECT donating_sum FROM payments WHERE project_id = ?";
 
 	@Override
 	public void add(Payment payment) {
-		String insertPayment = "INSERT INTO payments (project_id, user_name, creditCardNumber, donating_sum) VALUES ('" 
-				+ payment.getProjectID() + "' , '"+ payment.getUserName() + "', '" 
-				+ payment.getCreditCardNumber() + "' , '" + payment.getDonatingSum() + "')";
-		
-		Connection connection = null;
-		Statement statement = null;
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				PreparedStatement statement = connection.prepareStatement(INSERT_PAYMENT)) {
 
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			statement.executeUpdate(insertPayment);
+			statement.setInt(1, payment.getProjectID());
+			statement.setString(2, payment.getUserName());
+			statement.setLong(3, payment.getCreditCardNumber());
+			statement.setInt(4, payment.getDonatingSum());
+			statement.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
+		}
+	}
+
+	@Override
+	public void remove(Payment payment) {
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				PreparedStatement statement = connection.prepareStatement(DELETE_PAYMENT)) {
+
+			statement.setInt(1, payment.getProjectID());
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
 	@Override
 	public List<Payment> getAll() {
-		String selectPaymentFilds = "SELECT project_id, user_name, creditCardNumber, donating_sum from payments";
 		List<Payment> payments = new ArrayList<>();
-		
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery(SELECT_ALL_PAYMENTS)) {
+					
+			while (resultSet.next()) {
+				Payment payment = new Payment();
+				payment.setProjectID(resultSet.getInt("project_id"));
+				payment.setUserName(resultSet.getString("user_name"));
+				payment.setCreditCardNumber(resultSet.getLong("creditCardNumber"));
+				payment.setDonatingSum(resultSet.getInt("donating_sum"));
 
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(selectPaymentFilds);
-			
-			 while (resultSet.next()) {
-			        int projectID = resultSet.getInt("project_id");
-			        String userName = resultSet.getString("user_name");
-			        long creditCardNumber = resultSet.getLong("creditCardNumber");
-			        int donatingSum = resultSet.getInt("donating_sum");
-			        
-			        Payment payment = new Payment(userName, creditCardNumber, donatingSum);
-			        payment.setProjectID(projectID);
-			        payments.add(payment);
-			 }
+				payments.add(payment);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
-		}
+		} 
 		return payments;
 	}
 
 	@Override
 	public int getSize() {
-		String selectCountPayments = "SELECT count(*) from payments";
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-
 		int amountOfPayments = 0;
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(selectCountPayments);
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery(COUNT_ALL_PAYMENTS)) {
 
 			while (resultSet.next()) {
 				amountOfPayments = resultSet.getInt(1);
@@ -105,59 +85,27 @@ public class PaymentDaoMysqlImpl extends AbstractPaymentDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
 		}
 		return amountOfPayments;
 	}
 
 	@Override
 	public int getSumProjectPayments(Project project) {
-		String selectPaymentFilds = "SELECT donating_sum from payments WHERE project_id = " + project.getUniqueID();
-		
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-
-		int overalDonatingSum = 0; 
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(selectPaymentFilds);
+		int collectedSum = 0;
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				PreparedStatement statement = connection.prepareStatement(SELECT_PROJECT_PAYMENTS)) {
 			
-			 while (resultSet.next()) {
-				 int donatingSum = resultSet.getInt("donating_sum");
-				 overalDonatingSum += donatingSum;
-			 }
+			statement.setInt(1, project.getUniqueID());
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				int donatingSum = resultSet.getInt("donating_sum");
+				collectedSum += donatingSum;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
-		}
-		return overalDonatingSum;
-	}
-	
-	@Override
-	public void remove(Payment payment) {
-		// TODO Auto-generated method stub
+		} 
+		return collectedSum;
 	}
 }

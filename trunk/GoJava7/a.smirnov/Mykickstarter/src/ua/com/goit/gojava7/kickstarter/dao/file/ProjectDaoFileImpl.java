@@ -13,8 +13,7 @@ import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractProjectDao;
 
 public class ProjectDaoFileImpl extends AbstractProjectDao {	
-	private static final File REWARDS_FILE = new File("./resources/projects.csv");
-	
+	private static final File STORAGE_FILE = new File("./resources/projects.csv");
 	private static final int PROJECT_ID = 0;
 	private static final int CATEGORY_ID = 1;
 	private static final int TITLE = 2;
@@ -29,7 +28,7 @@ public class ProjectDaoFileImpl extends AbstractProjectDao {
 	public void add(Project project) {
 		FileWriter fileWriter = null;
 		try {
-			fileWriter = new FileWriter(REWARDS_FILE, true);
+			fileWriter = new FileWriter(STORAGE_FILE, true);
 
 			fileWriter.append(String.valueOf(project.getUniqueID()));
 			fileWriter.append(SEMICOLON_DELIMITER);
@@ -67,22 +66,21 @@ public class ProjectDaoFileImpl extends AbstractProjectDao {
 	@Override
 	public List<Project> getAll() {
 		List<Project> projects = new ArrayList<>();
-		String line = "";
 		
-		BufferedReader fileReader = null;
-		try {
-			fileReader = new BufferedReader(new FileReader(REWARDS_FILE));
+		try (BufferedReader fileReader = new BufferedReader(new FileReader(STORAGE_FILE))) {
 			
 			// read header
 			fileReader.readLine();
 			
+			String line = "";
 			while ((line = fileReader.readLine()) != null) {
 				String[] tokens = line.split(SEMICOLON_DELIMITER);
 				if (tokens.length > 0) {
+					Project project = new Project();
 					
-					Project project = new Project(tokens[TITLE], 
-							tokens[BRIEF_DESCRIPTION], Integer.parseInt(tokens[REQUIREMENT_SUM]));
-					
+					project.setTitle(tokens[TITLE]);
+					project.setBriefDescription(tokens[BRIEF_DESCRIPTION]);
+					project.setRequiredSum(Integer.parseInt(tokens[REQUIREMENT_SUM]));
 					project.setUniqueID(Integer.parseInt(tokens[PROJECT_ID]));
 					project.setCategoryID(Integer.parseInt(tokens[CATEGORY_ID]));
 					project.setFullDescription(tokens[FULL_DESCRIPTION]);
@@ -95,16 +93,7 @@ public class ProjectDaoFileImpl extends AbstractProjectDao {
 			}
 		} catch (IOException e) {
 			System.err.println("Error in CSVFileReader...");
-		} finally {
-			try {
-				if (fileReader != null ) {
-					fileReader.close();
-				}
-			} catch (IOException e) {
-				System.err.println("Error with closing fileReader...");
-			}
-		}
-
+		} 
 		return projects;
 	}
 	

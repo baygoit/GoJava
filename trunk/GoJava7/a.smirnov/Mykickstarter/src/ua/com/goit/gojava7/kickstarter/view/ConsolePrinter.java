@@ -19,7 +19,7 @@ public class ConsolePrinter {
 	}
 
 	public void print(Category category) {
-		System.out.println("Category : " + category.getCategoryName());
+		System.out.println("Category : " + category.getName());
 	}
 
 	public void print(String string) {
@@ -47,7 +47,7 @@ public class ConsolePrinter {
 		System.out.println("All categories : ");
 		for (int index = 0; index < categories.size(); index++) {
 			Category category = categories.get(index);
-			System.out.println((index + 1) + " : " + category.getCategoryName());
+			System.out.println((index + 1) + " : " + category.getName());
 		}
 	}
 

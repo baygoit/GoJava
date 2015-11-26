@@ -2,97 +2,53 @@ package ua.com.goit.gojava7.kickstarter.dao.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteDao;
 
 public class QuoteDaoMysqlImpl extends AbstractQuoteDao {
+	private static final String INSERT_QUOTE = "INSERT INTO quotes (text, author) VALUES (?, ?)";
+	private static final String DELETE_QUOTE = "DELETE FROM quotes WHERE author = ?";
+	private static final String SELECT_RANDOM_QUOTE = "SELECT text, author FROM quotes ORDER BY RAND() LIMIT 1";
+	private static final String COUNT_ALL_QUOTES = "SELECT count(*) FROM quotes";
 
 	@Override
 	public void add(Quote quote) {
-		String insertQuote = "INSERT INTO quotes (text, author) VALUES ('" 
-				+ quote.getQuoteText() + "' , '"+ quote.getAuthor() + "')";
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				PreparedStatement statement = connection.prepareStatement(INSERT_QUOTE)) {		
 		
-		Connection connection = null;
-		Statement statement = null;
-
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			statement.executeUpdate(insertQuote);
+			statement.setString(1, quote.getQuoteText());
+			statement.setString(2, quote.getAuthor());
+			statement.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
 		}
 	}
-
+	
 	@Override
-	public List<Quote> getAll() {
-		String selectQuoteFilds = "SELECT text, author from quotes";
-		List<Quote> quotes = new ArrayList<>();
+	public void remove(Quote quote) {
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				PreparedStatement statement = connection.prepareStatement(DELETE_QUOTE)){		
 		
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(selectQuoteFilds);
-			
-			 while (resultSet.next()) {
-			        String quoteText = resultSet.getString("text");
-			        String author = resultSet.getString("author");
-			 
-			        Quote quote = new Quote(quoteText, author);
-			        quotes.add(quote);
-			 }
+			statement.setString(1, quote.getAuthor());
+			statement.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
 		}
-		return quotes;
 	}
 
 	@Override
 	public int getSize() {
-		String SelectCountCategories = "SELECT count(*) from quotes";
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-
 		int amountOfQuotes = 0;
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(SelectCountCategories);
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery(COUNT_ALL_QUOTES)) {
 
 			while (resultSet.next()) {
 				amountOfQuotes = resultSet.getInt(1);
@@ -100,61 +56,26 @@ public class QuoteDaoMysqlImpl extends AbstractQuoteDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
-		}
+		} 
 		return amountOfQuotes;
 	}
 
 	@Override
 	public Quote getRandomQuote() {
-		String randomQuoteRequest = "SELECT text, author from quotes order by rand() limit 1";
 		Quote randomQuote = null;
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery(SELECT_RANDOM_QUOTE)) {
 		
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(randomQuoteRequest);
-			
 			 while (resultSet.next()) {
-			        String quoteText = resultSet.getString("text");
-			        String author = resultSet.getString("author");
-			 
-			        randomQuote = new Quote(quoteText, author);
+				 randomQuote = new Quote();
+				 randomQuote.setQuoteText(resultSet.getString("text"));
+				 randomQuote.setAuthor(resultSet.getString("author"));
 			 }
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
-		}
+		} 
 		return randomQuote;
-	}
-	
-	@Override
-	public void remove(Quote quote) {
-		// TODO Auto-generated method stub
 	}
 }
