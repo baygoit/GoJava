@@ -7,8 +7,10 @@ import ua.com.goit.gojava7.kickstarter.model.Quote;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
 import ua.com.goit.gojava7.kickstarter.view.page.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Scanner;
 
 public class ConsoleView implements View {
     private Page currentPage;
@@ -17,7 +19,7 @@ public class ConsoleView implements View {
 
     private Controller controller;
 
-    Scanner scannerIn = new Scanner(System.in);
+    private BufferedReader reader;
 
     public ConsoleView(Controller controller) {
         this.currentPage = new GreetingPage(this);
@@ -27,26 +29,34 @@ public class ConsoleView implements View {
         controller.getKickstarter().addObserver(this);
     }
 
+    public BufferedReader getReader() {
+        return reader;
+    }
+
     public Controller getController() {
         return controller;
     }
 
-    public Scanner getScanner() {
-        return scannerIn;
-    }
-
     @Override
     public void run() {
-        while (true) {
-            try {
-                handleNotification();
-                String command = scannerIn.nextLine();
-                Page nextPage = currentPage.getUpdated(command);
-                previousPage = currentPage;
-                currentPage = nextPage;
-            } catch (ExitException e) {
-                break;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            this.reader = reader;
+            while (true) {
+                try {
+                    currentPage.show();
+                    String command = reader.readLine();
+                    if (command == null) {
+                        break;
+                    }
+                    Page nextPage = currentPage.getUpdated(command);
+                    previousPage = currentPage;
+                    currentPage = nextPage;
+                } catch (ExitException e) {
+                    break;
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -80,7 +90,7 @@ public class ConsoleView implements View {
 
     // implementing Observer pattern
     @Override
-    public void handleNotification() throws ExitException {
+    public void handleNotification() throws ExitException, IOException {
         currentPage.show();
     }
 

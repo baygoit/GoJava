@@ -4,8 +4,10 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
-public interface RewardReader {
+public interface RewardDao extends Dao {
+	List<Reward> getRewards(int projectId);
 	
-	List<Reward> readRewards();
+	Reward getReward(int id);
 	
+	int size();
 }

@@ -11,7 +11,6 @@ import java.util.Collection;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
@@ -42,7 +41,7 @@ public class MainPageTest {
 	}
 
 	private Project getMockProject() {
-		Project project = new Project("Xpand Lacing System", "Charles Harris", new Category(1, "Art"));
+		Project project = new Project("Xpand Lacing System", "Charles Harris", 1);
 		project.setDescription("Get your shoes on in 3 seconds flat! No more bows, no more knots, no more tying!");
 		project.setStartDate(Utils.dateFromString("dd.MM.yyyy", "25.10.2015"));
 		project.setEndDate(Utils.dateFromString("dd.MM.yyyy", "25.11.2015"));
@@ -61,8 +60,7 @@ public class MainPageTest {
 	
 	@Test
 	public void showPaymentRequest() {
-		Project project = getMockProject();
-		page.showPaymentRequest(project);
+		page.showPaymentRequest();
 		
 		String content = outContent.toString();
 		assertThat(content.isEmpty(), is(false));
@@ -72,9 +70,9 @@ public class MainPageTest {
 	public void showProjects() {
 
 		Collection<Project> projects = new ArrayList<>();
-		projects.add(new Project("pr1", null, null));
+		projects.add(new Project("pr1", null, 1));
 		
-		projects.add(new Project("pr2", null, null));
+		projects.add(new Project("pr2", null, 2));
 
 		page.showProjects(projects);
 		
