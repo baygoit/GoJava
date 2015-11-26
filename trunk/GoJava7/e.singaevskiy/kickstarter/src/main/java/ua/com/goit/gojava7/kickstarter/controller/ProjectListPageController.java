@@ -17,8 +17,8 @@ public class ProjectListPageController extends PageController<Category> {
         ProjectStorage projectDAO = storageFactory.getProjectDAO();
         PaymentStorage paymentDAO = storageFactory.getPaymentDAO();
         
-        foundProjects = projectDAO.getByCategory(request);
-        foundProjects.forEach(project -> project.setBalanceSum(paymentDAO.getSum(project)));
+        foundProjects = projectDAO.getByCategory(request.getId());
+        foundProjects.forEach(project -> project.setBalanceSum(paymentDAO.getSum(project.getId())));
         page.showProjects(foundProjects);
 
         

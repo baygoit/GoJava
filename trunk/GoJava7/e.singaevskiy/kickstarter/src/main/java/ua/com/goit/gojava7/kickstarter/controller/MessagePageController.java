@@ -19,7 +19,7 @@ public class MessagePageController extends PageController<Project> {
     protected boolean isDone() {
         try {
             String text = inputReader.readLine();
-            Question message = new Question(request, text, "");
+            Question message = new Question(request.getId(), text, "");
             this.storageFactory.getQuestionsDAO().add(message);
             
             return true;

@@ -135,7 +135,7 @@ public class CsvParser {
                 methods.add(new FieldDescription(fieldName.toLowerCase(), field, method));
 
             } catch (ReflectiveOperationException e) {
-             // TODO: handle exception
+                // TODO: handle exception
                 e.printStackTrace();
             }
         }
@@ -263,6 +263,8 @@ public class CsvParser {
         try {
             if (targetType.equals(Date.class)) {
                 return new SimpleDateFormat(dateTimeFormat).parse(text);
+            } else if (targetType.equals(java.sql.Date.class)) {
+                return new java.sql.Date(new SimpleDateFormat(dateTimeFormat).parse(text).getTime());
             } else {
                 PropertyEditor editor = PropertyEditorManager.findEditor(targetType);
                 editor.setAsText(text);

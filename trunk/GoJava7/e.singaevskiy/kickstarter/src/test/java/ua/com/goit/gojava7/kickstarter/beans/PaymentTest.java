@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class PaymentTest {
 	
-	Payment testObject = new Payment(null, "testUser", 123, 456, new Date(System.currentTimeMillis()));
+	Payment testObject = new Payment(1, "testUser", 123, 456, new Date(System.currentTimeMillis()));
 
     @Test
     public void testBean() {

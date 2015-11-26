@@ -5,20 +5,22 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.beans.Reward;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
-import ua.com.goit.gojava7.kickstarter.dao.memory.util.Memory;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
 public class RewardPostgreDAOTest {
 
-    Memory mem;
+    List<Reward> list;
     RewardsPostgreDAO dao;
 
     @Before
@@ -29,16 +31,23 @@ public class RewardPostgreDAOTest {
                 properties.getProperty("url"),
                 properties.getProperty("user"), 
                 properties.getProperty("password"));
-  
-        mem = new Memory();        
+        
+        list = new ArrayList<>();
+        list.add(new Reward(1, 2, "r1", 113));
+        list.add(new Reward(2, 2, "r2", 44));
+        
         dao = new RewardsPostgreDAO(dispatcher);         
+    }
+    
+    @After
+    public void tearDown() throws Exception {
+        dao.clear();
     }
 
     @Test
     public void testAddGetAll() {
-        dao.clear();
-        dao.addAll(mem.getRewards());
-        assertThat(dao.getAll(), is(mem.getProjects()));
+        dao.addAll(list);
+        assertThat(dao.getAll(), is(list));
     }
     
     @Test
@@ -53,8 +62,8 @@ public class RewardPostgreDAOTest {
         Mockito.when(dispatcher.getConnection()).thenThrow(SQLException.class);
         dao = new RewardsPostgreDAO(dispatcher); 
         dao.clear();
-        dao.addAll(mem.getRewards());
+        dao.addAll(list);
         dao.getAll();
-        dao.getByProject(new Project());
+        dao.getByProject(1);
     }
 }

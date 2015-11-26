@@ -6,6 +6,7 @@ import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -22,7 +23,7 @@ public class Controller {
         return kickstarter;
     }
 
-    public void donate(Project project, int sum) throws ExitException {
+    public void donate(Project project, int sum) throws ExitException, IOException {
         kickstarter.addDonation(project, sum);
     }
 

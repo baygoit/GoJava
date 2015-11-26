@@ -7,8 +7,10 @@ import ua.com.goit.gojava7.kickstarter.model.Quote;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
 import ua.com.goit.gojava7.kickstarter.view.page.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
-import java.util.Scanner;
 
 public class ConsoleView implements View {
     private Page currentPage;
@@ -17,7 +19,7 @@ public class ConsoleView implements View {
 
     private Controller controller;
 
-    Scanner scannerIn = new Scanner(System.in);
+    private BufferedReader reader;
 
     public ConsoleView(Controller controller) {
         this.currentPage = new GreetingPage(this);
@@ -27,28 +29,38 @@ public class ConsoleView implements View {
         controller.getKickstarter().addObserver(this);
     }
 
+    public BufferedReader getReader() {
+        return reader;
+    }
+
     public Controller getController() {
         return controller;
     }
 
-    public Scanner getScanner() {
-        return scannerIn;
-    }
-
+    @Override
     public void run() {
-        while (true) {
-            try {
-                handleNotification();
-                String command = scannerIn.nextLine();
-                Page nextPage = currentPage.getUpdated(command);
-                previousPage = currentPage;
-                currentPage = nextPage;
-            } catch (ExitException e) {
-                break;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            this.reader = reader;
+            while (true) {
+                try {
+                    currentPage.show();
+                    String command = reader.readLine();
+                    if (command == null) {
+                        break;
+                    }
+                    Page nextPage = currentPage.getUpdated(command);
+                    previousPage = currentPage;
+                    currentPage = nextPage;
+                } catch (ExitException e) {
+                    break;
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
+    @Override
     public Page updatePageToStandard(String command) {
         if (command.equals("h") || command.equals("H")) {
             return new HelpPage(this);
@@ -78,15 +90,17 @@ public class ConsoleView implements View {
 
     // implementing Observer pattern
     @Override
-    public void handleNotification() throws ExitException {
+    public void handleNotification() throws ExitException, IOException {
         currentPage.show();
     }
 
+    @Override
     public void printRandomQuote() {
         Quote quote = controller.getRandomQuote();
         System.out.println(quote.getText() + " (" + quote.getAuthor() + ")");
     }
 
+    @Override
     public void printCategories() {
         List<Category> categories = controller.getKickstarter().getCategoryStorage().getCategories();
         System.out.println("Categories:");
@@ -95,6 +109,7 @@ public class ConsoleView implements View {
         }
     }
 
+    @Override
     public void printProjects(Category category) {
         List<Project> projects = category.getProjects();
         System.out.println("Category: " + category.getName() + ".");
@@ -108,6 +123,7 @@ public class ConsoleView implements View {
         }
     }
 
+    @Override
     public void printProjectInfo(Project project) {
         System.out.println("Project: " + project.getName());
         System.out.println("Description: " + project.getShortDescription());
@@ -116,6 +132,7 @@ public class ConsoleView implements View {
         System.out.println("Days left: " + project.getDaysLeft());
     }
 
+    @Override
     public void printProjectDetailedInfo(Project project) {
         System.out.println("Category: " + project.getCategory().getName());
         System.out.println("Project: " + project.getName());

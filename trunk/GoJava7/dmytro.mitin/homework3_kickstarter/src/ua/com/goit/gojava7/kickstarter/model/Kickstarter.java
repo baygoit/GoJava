@@ -5,6 +5,7 @@ import ua.com.goit.gojava7.kickstarter.model.storage.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
 import ua.com.goit.gojava7.kickstarter.view.View;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,14 +31,14 @@ public class Kickstarter implements KickstarterObservable {
         return quoteStorage;
     }
 
-    public void addDonation(Project project, int money) throws ExitException {
+    public void addDonation(Project project, int money) throws ExitException, IOException {
         project.addMoneyDonated(money);
         notifyView();
     }
 
     // implementing Observer pattern
     @Override
-    public void notifyView() throws ExitException {
+    public void notifyView() throws ExitException, IOException {
         for (View view : views) {
             view.handleNotification();
         }

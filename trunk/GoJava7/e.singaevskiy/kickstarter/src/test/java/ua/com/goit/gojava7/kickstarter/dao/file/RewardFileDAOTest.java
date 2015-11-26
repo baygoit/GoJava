@@ -14,12 +14,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Reward;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
 
 @RunWith(value=MockitoJUnitRunner.class)
 public class RewardFileDAOTest {
@@ -27,22 +24,17 @@ public class RewardFileDAOTest {
     RewardFileDAO fs;
     List<Reward> list = new ArrayList<>();
     @Mock
-    private ProjectStorage projectFileDAO;
+
     private String filePath = "src/test/resources/storages/file/%name%.CSV".replace("%name%", persistentClass.getSimpleName());
     
     @Before
     public void setUp(){
         
         fs = new RewardFileDAO(filePath);
-        List<Project> pr = new ArrayList<>();
-        pr.add(new Project(1, "p1", "a1", null));
-        pr.add(new Project(2, "p2", "a2", null));
         
-        Mockito.when(projectFileDAO.getAll()).thenReturn(pr);
-        
-        list.add(new Reward(1, projectFileDAO.get(1), "a1", 100L));
-        list.add(new Reward(2, projectFileDAO.get(1), "a2", 200L));
-        list.add(new Reward(3, projectFileDAO.get(2), "a3", 300L));
+        list.add(new Reward(1, 1, "a1", 100L));
+        list.add(new Reward(2, 1, "a2", 200L));
+        list.add(new Reward(3, 2, "a3", 300L));
         
         fs.clear();
         fs.addAll(list);
@@ -65,7 +57,7 @@ public class RewardFileDAOTest {
     @Test
     public void testAddGet() {
         int id = 42;
-        Reward reward = new Reward(id, projectFileDAO.get(2), "a1", 100L);
+        Reward reward = new Reward(id, 1, "a1", 100L);
         fs.add(reward);
         assertThat(fs.get(id), is(reward));
     }

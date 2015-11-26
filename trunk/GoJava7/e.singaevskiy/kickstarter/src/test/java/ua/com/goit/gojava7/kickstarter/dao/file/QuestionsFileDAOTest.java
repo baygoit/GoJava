@@ -28,9 +28,9 @@ public class QuestionsFileDAOTest {
         
         fs = new QuestionsFileDAO(filePath);
         
-        list.add(new Question(null, "a1", "t1"));
-        list.add(new Question(null, null, null));
-        list.add(new Question(null, "a2", "t2"));        
+        list.add(new Question(1, "a1", "t1"));
+        list.add(new Question(2, null, null));
+        list.add(new Question(3, "a2", "t2"));        
         
         fs.clear();
         fs.addAll(list);
@@ -54,7 +54,7 @@ public class QuestionsFileDAOTest {
 
     @Test
     public void testAdd() {
-        Question element = new Question(null, "", "");
+        Question element = new Question(1, "", "");
         fs.add(element);
         assertThat(fs.getAll(), hasItem(element));
     }
