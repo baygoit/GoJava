@@ -5,9 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -15,11 +13,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
+import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 @RunWith(MockitoJUnitRunner.class)
 public class KickstarterTest {
@@ -27,16 +23,17 @@ public class KickstarterTest {
 	private ConsolePrinter consolePrinter;
 	@Mock
 	private ConsoleScanner consoleScanner;
-	@Mock
-	private QuoteStorage quoteStorage;
-	@Mock
-	private CategoryStorage categoryStorage;
-	
-	private DaoProvider initializer;
-	
+
+	private DaoProvider initializer = new DaoProvider(DataSource.MEMORY);
+
 	@InjectMocks
 	private Kickstarter kickstarter = new Kickstarter(consolePrinter,
 			consoleScanner, initializer);
+
+	@Before
+	public void setUp() {
+
+	}
 
 	@Test
 	public void testShowCategoriesMenuEntered0SaysBye() {
@@ -56,77 +53,58 @@ public class KickstarterTest {
 
 	@Test
 	public void testShowCategoriesMenuEnter1Has1Category() {
-		List<Category> categories = new ArrayList<Category>();
-		categories.add(new Category("category name", 1));
 
-		when(categoryStorage.getAllCategories()).thenReturn(categories);
 		when(consoleScanner.scan()).thenReturn(1, 0);
 
 		kickstarter.runKickstarter();
 
-		verify(consolePrinter, times(2)).print(contains("1 : category name"));
+		verify(consolePrinter, times(2)).print(contains("1 : Games"));
 		verify(consolePrinter).print("Goodbye!");
 	}
 
 	@Test
 	public void testShowProjectsMenuEnter1Has1Project() {
-		List<Category> categories = new ArrayList<Category>();
-		Category category = new Category("category name", 1);
-		//category.addProject(new Project("project 1", 1));
-		categories.add(category);
 
-		when(categoryStorage.getAllCategories()).thenReturn(categories);
 		when(consoleScanner.scan()).thenReturn(1, 6, 0, 1, 0);
 
 		kickstarter.runKickstarter();
 
-		verify(consolePrinter, times(3)).print(contains("1 : category name"));
+		verify(consolePrinter, times(3)).print(contains("1 : Games"));
 		verify(consolePrinter).print(
 				contains("Please, enter the number between 0 and"));
-		verify(consolePrinter, times(2)).print(contains("project 1"));
+		verify(consolePrinter, times(2)).print(contains("Super project"));
 		verify(consolePrinter).print("Goodbye!");
 	}
 
 	@Test
 	public void testShowProjectDetails() {
-		List<Category> categories = new ArrayList<Category>();
-		Category category = new Category("category name", 1);
-		//category.addProject(new Project("project 1", 1));
-		categories.add(category);
 
-		when(categoryStorage.getAllCategories()).thenReturn(categories);
 		when(consoleScanner.scan()).thenReturn(1, 1, 0);
 
 		kickstarter.runKickstarter();
 
-		verify(consolePrinter, times(2)).print(contains("1 : category name"));
+		verify(consolePrinter, times(2)).print(contains("1 : Games"));
 		verify(consolePrinter).print(
-				contains("You selected 'project 1' project"));
+				contains("You selected 'Super project' project"));
 		verify(consolePrinter).print(contains("to invest in the project"));
 		verify(consolePrinter).print("Goodbye!");
 	}
 
 	@Test
 	public void testOwnAmontDonateInTheProject() {
-		List<Category> categories = new ArrayList<Category>();
-		Category category = new Category("category name", 1);
-		//Project project = new Project("project 1", 1);
 
-		//category.addProject(project);
-		categories.add(category);
-
-		when(categoryStorage.getAllCategories()).thenReturn(categories);
-		when(consoleScanner.scan()).thenReturn(1, 1, 1, 1, 290, 0);
+		when(consoleScanner.scan()).thenReturn(1, 1, 1, 1, 0);
 		when(consoleScanner.scanLine()).thenReturn("sf", "234234");
 
 		kickstarter.runKickstarter();
 
-		verify(consolePrinter, times(2)).print(contains("1 : category name"));
+		verify(consolePrinter, times(2)).print(contains("1 : Games"));
 		verify(consolePrinter, times(2)).print(
-				contains("You selected 'project 1' project"));
+				contains("You selected 'Super project' project"));
 		verify(consolePrinter, times(4)).print(
 				contains("to invest in the project"));
-		verify(consolePrinter).print(contains("pledged: 290"));
+		verify(consolePrinter, times(4)).print(contains("0 : to project list"));
+		verify(consolePrinter).print(contains("pledged: 31"));
 		verify(consolePrinter).print("Goodbye!");
 	}
 }

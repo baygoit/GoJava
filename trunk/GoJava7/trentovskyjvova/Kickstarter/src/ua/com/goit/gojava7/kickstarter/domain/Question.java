@@ -1,24 +1,20 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Question {
-	private final int id;
+	private int id;
 	private int projectId;
 	private String questionText;
 
-	public Question(int id) {
-		this.id = id;
+	public Question() {
+
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public String getQuestionText() {
-		return questionText;
-	}
-
-	public void setQuestionText(String questionText) {
-		this.questionText = questionText;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getProjectId() {
@@ -29,4 +25,11 @@ public class Question {
 		this.projectId = projectId;
 	}
 
+	public String getQuestionText() {
+		return questionText;
+	}
+
+	public void setQuestionText(String questionText) {
+		this.questionText = questionText;
+	}
 }

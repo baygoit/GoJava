@@ -7,6 +7,7 @@ import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public class PledgeLevel implements Level {
 	private PaymentDao paymentDao;
@@ -60,19 +61,13 @@ public class PledgeLevel implements Level {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 
 		int donate = 0;
-		String mistakeText = "";
 
-		if (userChoise == rewardDao.size()+ 1) {
+		if (userChoise == rewardDao.size() + 1) {
 			consolePrinter.print("Enter amount to donate");
 			donate = consoleScanner.scan();
-		} else if (userChoise > 0) {
-			mistakeText = validateUserChoise(userChoise, new Category("", 0),
-					project);
-			if (mistakeText.equals("")) {
-				donate = rewardDao.getReward(userChoise - 1).getPledge();
-			} else {
-				consolePrinter.print(mistakeText);
-			}
+		} else if (userChoise > 0) {		
+			Reward reward = rewardDao.getReward(userChoise - 1);
+			donate = reward.getPledge();	
 		}
 
 		if (donate == 0) {

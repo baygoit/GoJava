@@ -81,8 +81,7 @@ public class PaymentLevel implements Level {
 			consolePrinter.print("Enter your question");
 			String questionText = consoleScanner.scanLine();
 
-			Question question = new Question(
-					questionDao.generateIdOfNewElement());
+			Question question = new Question();
 			question.setProjectId(selectedProject.getId());
 			question.setQuestionText(questionText);
 

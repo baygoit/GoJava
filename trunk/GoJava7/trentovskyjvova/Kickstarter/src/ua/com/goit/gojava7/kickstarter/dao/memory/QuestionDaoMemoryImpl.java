@@ -25,6 +25,7 @@ public class QuestionDaoMemoryImpl implements QuestionDao {
 
 	@Override
 	public void addQuestion(Question question) {
+		question.setId(generateIdOfNewElement());
 		questions.add(question);
 	}
 
@@ -52,7 +53,8 @@ public class QuestionDaoMemoryImpl implements QuestionDao {
 
 			questions = new ArrayList<>();
 
-			Question question1 = new Question(1);
+			Question question1 = new Question();
+			question1.setId(generateIdOfNewElement());
 			question1.setProjectId(1);
 			question1.setQuestionText("What the heck is going on?");
 			
