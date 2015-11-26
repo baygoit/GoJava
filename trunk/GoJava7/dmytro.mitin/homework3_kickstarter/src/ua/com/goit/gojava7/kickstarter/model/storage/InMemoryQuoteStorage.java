@@ -22,6 +22,10 @@ public class InMemoryQuoteStorage implements QuoteStorage {
                 "Ralph Marston"));
     }
 
+    public InMemoryQuoteStorage(List<Quote> quotes) {
+        this.quotes = quotes;
+    }
+
     @Override
     public List<Quote> getQuotes() {
         return Collections.unmodifiableList(quotes);
