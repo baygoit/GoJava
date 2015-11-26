@@ -1,7 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
 public class Question {
-    private Project project;
+    private int projectId;
     private String question;
     private String answer;
 
@@ -9,8 +9,8 @@ public class Question {
         // default bean constructor
     }
 
-    public Question(Project project, String question, String answer) {
-        this.project = project;
+    public Question(int projectId, String question, String answer) {
+        this.projectId = projectId;
         this.question = question;
         this.answer = answer;
     }
@@ -31,24 +31,25 @@ public class Question {
         this.answer = answer;
     }
 
-    public Project getProject() {
-        return project;
+    public int getProjectId() {
+        return projectId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     @Override
     public String toString() {
-        return "Question [project=" + project + ", question=" + question + ", answer=" + answer + "]";
+        return "Question [question=" + question + ", answer=" + answer + ", projectId=" + projectId + "]";
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((project == null) ? 0 : project.hashCode());
+        result = prime * result + ((answer == null) ? 0 : answer.hashCode());
+        result = prime * result + projectId;
         result = prime * result + ((question == null) ? 0 : question.hashCode());
         return result;
     }
@@ -62,10 +63,12 @@ public class Question {
         if (getClass() != obj.getClass())
             return false;
         Question other = (Question) obj;
-        if (project == null) {
-            if (other.project != null)
+        if (answer == null) {
+            if (other.answer != null)
                 return false;
-        } else if (!project.equals(other.project))
+        } else if (!answer.equals(other.answer))
+            return false;
+        if (projectId != other.projectId)
             return false;
         if (question == null) {
             if (other.question != null)

@@ -44,10 +44,9 @@ public class DetailsPageControllerTest {
     @Before
     public void setUp() throws Exception {      
         
-        when(factory.getQuestionsDAO()).thenReturn(questionsStorage);
-        
+        when(factory.getQuestionsDAO()).thenReturn(questionsStorage);        
         when(factory.getPaymentDAO()).thenReturn(paymentStorage);
-        when(paymentStorage.getSum(project)).thenReturn(123L);
+        when(paymentStorage.getSum(0)).thenReturn(123L);
     
         controller = new ProjectDetailsPageController();
         controller.setInputReader(reader); 

@@ -12,7 +12,7 @@ public class PaymentPageController extends PageController<Project> {
     @Override
     protected void handle() {
         
-        page.showPaymentRequest(request);
+        page.showPaymentRequest();
         
     }
 
@@ -29,10 +29,10 @@ public class PaymentPageController extends PageController<Project> {
                 
                 PaymentStorage paymentDAO = storageFactory.getPaymentDAO();
                 
-                Payment payment = new Payment(project, username, cardID, sum, new Date(System.currentTimeMillis()));
+                Payment payment = new Payment(project.getId(), username, cardID, sum, new Date(System.currentTimeMillis()));
                 paymentDAO.add(payment);
 
-                project.setBalanceSum(paymentDAO.getSum(project));
+                project.setBalanceSum(paymentDAO.getSum(project.getId()));
 
             } catch (NumberFormatException e) {
                 return false;

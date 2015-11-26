@@ -6,8 +6,8 @@ public class ProjectDetailsPageController extends PageController<Project> {
 
     @Override
     protected void handle() {        
-        request.setQuestions(storageFactory.getQuestionsDAO().getByProject(request));
-        request.setBalanceSum(storageFactory.getPaymentDAO().getSum(request));
+        request.setQuestions(storageFactory.getQuestionsDAO().getByProject(request.getId()));
+        request.setBalanceSum(storageFactory.getPaymentDAO().getSum(request.getId()));
         page.showProjectDetails(request);    
     }
 

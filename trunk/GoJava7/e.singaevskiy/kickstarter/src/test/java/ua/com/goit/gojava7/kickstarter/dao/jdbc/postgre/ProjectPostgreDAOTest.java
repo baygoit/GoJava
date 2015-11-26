@@ -1,60 +1,78 @@
 package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
-import ua.com.goit.gojava7.kickstarter.dao.memory.util.Memory;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
 public class ProjectPostgreDAOTest {
 
-    Memory mem;
+    List<Project> list;
     ProjectPostgreDAO dao;
 
     @Before
     public void setUp() throws Exception {
-        Properties properties = Utils.readProperties("./kicks-files/config.properties");
-        JdbcDispatcher dispatcher = new JdbcDispatcher(
-                properties.getProperty("driver"),
-                properties.getProperty("url"),
-                properties.getProperty("user"), 
-                properties.getProperty("password"));
-  
-        mem = new Memory();        
-        dao = new ProjectPostgreDAO(dispatcher);         
+        Properties properties = Utils.readProperties("./src/test/resources/storages/db/config.properties");
+        JdbcDispatcher dispatcher = new JdbcDispatcher(properties.getProperty("driver"), properties.getProperty("url"),
+                properties.getProperty("user"), properties.getProperty("password"));
+
+        list = new ArrayList<>();
+        list.add(new Project(1, "p1", "a1", 1));
+        list.add(new Project(2, "p2", "a2", 1));
+        list.add(new Project(3, "p3", "a3", 2));
+        dao = new ProjectPostgreDAO(dispatcher);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        dao.clear();
     }
 
     @Test
     public void testAddGetAll() {
-        dao.clear();
-        dao.addAll(mem.getProjects());
-        assertThat(dao.getAll(), is(mem.getProjects()));
+        dao.addAll(list);
+        assertThat(dao.getAll(), is(list));
     }
-    
+
     @Test
     public void testAddGet() {
-        assertFalse(true);
+        Project project = list.get(1);
+        list.forEach(dao::add);
+        assertThat(dao.get(project.getId()), is(project));
     }
-    
+
+    @Test
+    public void testGetByCategory() {
+        dao.addAll(list);
+        int catId = 1;
+        dao.getByCategory(1).forEach(p -> assertThat(p.getCategoryId(), is(catId)));
+    }
+
     @SuppressWarnings("unchecked")
     @Test
-    public void testException() throws Exception {
+    public void testGoDespiteException() throws Exception {
         JdbcDispatcher dispatcher = Mockito.mock(JdbcDispatcher.class);
         Mockito.when(dispatcher.getConnection()).thenThrow(SQLException.class);
-        dao = new ProjectPostgreDAO(dispatcher); 
+        dao = new ProjectPostgreDAO(dispatcher);
         dao.clear();
-        dao.addAll(mem.getProjects());
+        dao.add(null);
+        dao.addAll(list);
         dao.getAll();
-        dao.getByCategory(new Category());
+        dao.get(0);
+        dao.getByCategory(42);
+        assertTrue(true);
     }
 }

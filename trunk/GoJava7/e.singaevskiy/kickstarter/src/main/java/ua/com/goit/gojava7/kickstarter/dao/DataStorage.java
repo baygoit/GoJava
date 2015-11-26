@@ -14,4 +14,12 @@ public interface DataStorage<T> {
     
     void clear();
     
+    default <K> void addFieldHandler(String fieldName, FieldHandler<K> handler){};
+    
+    public interface FieldHandler<K> {
+        
+        K handle(Object value);        
+        
+    }
+
 }
