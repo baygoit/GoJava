@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteDao;
 
-public class QuoteMemoryDAO extends AbstractQuoteStorage {
+public class QuoteDaoMemoryImpl extends AbstractQuoteDao {
 	
 	private static final Random RANDOM = new Random();
 	private List<Quote> quotes = new ArrayList<>();
 	
-	public QuoteMemoryDAO() {
+	public QuoteDaoMemoryImpl() {
 		Quote quote1 = new Quote("Liberty will not descend to a people, a people must "
 				+ "raise themselves to liberty; it is a blessing that must " 
 				+ "be earned before it can be enjoyed.", "B. Franklin");

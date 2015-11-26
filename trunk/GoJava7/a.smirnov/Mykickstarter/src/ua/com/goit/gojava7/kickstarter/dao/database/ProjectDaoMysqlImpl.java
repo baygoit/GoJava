@@ -10,9 +10,9 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractProjectDao;
 
-public class ProjectMysqlDAO extends AbstractProjectStorage {
+public class ProjectDaoMysqlImpl extends AbstractProjectDao {
 	
 	@Override
 	public void add(Project project) {

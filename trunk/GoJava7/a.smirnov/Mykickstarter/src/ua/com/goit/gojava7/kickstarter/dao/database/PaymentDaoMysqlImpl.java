@@ -8,16 +8,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Faq;
+import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentDao;
 
-public class FaqMysqlDAO extends AbstractFaqStorage  {
-	
+public class PaymentDaoMysqlImpl extends AbstractPaymentDao {
+
 	@Override
-	public void add(Faq faq) {
-		String insertFaq = "INSERT INTO faqs (project_id, question) VALUES ('" 
-				+ faq.getProjectID() + "' , '"+ faq.getQuestion() + "')";
+	public void add(Payment payment) {
+		String insertPayment = "INSERT INTO payments (project_id, user_name, creditCardNumber, donating_sum) VALUES ('" 
+				+ payment.getProjectID() + "' , '"+ payment.getUserName() + "', '" 
+				+ payment.getCreditCardNumber() + "' , '" + payment.getDonatingSum() + "')";
 		
 		Connection connection = null;
 		Statement statement = null;
@@ -25,7 +26,7 @@ public class FaqMysqlDAO extends AbstractFaqStorage  {
 		try {
 			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
 			statement = connection.createStatement();
-			statement.executeUpdate(insertFaq);
+			statement.executeUpdate(insertPayment);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -42,11 +43,11 @@ public class FaqMysqlDAO extends AbstractFaqStorage  {
 			}
 		}
 	}
-
+	
 	@Override
-	public List<Faq> getAll() {
-		String selectFaqFilds = "SELECT project_id, question, answer from faqs";
-		List<Faq> faqs = new ArrayList<>();
+	public List<Payment> getAll() {
+		String selectPaymentFilds = "SELECT project_id, user_name, creditCardNumber, donating_sum from payments";
+		List<Payment> payments = new ArrayList<>();
 		
 		Connection connection = null;
 		Statement statement = null;
@@ -55,17 +56,17 @@ public class FaqMysqlDAO extends AbstractFaqStorage  {
 		try {
 			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery(selectFaqFilds);
+			resultSet = statement.executeQuery(selectPaymentFilds);
 			
 			 while (resultSet.next()) {
-			        int prjectID = resultSet.getInt("project_id");
-			        String question = resultSet.getString("question");
-			        String answer = resultSet.getString("answer");
-			 
-			        Faq faq = new Faq(question);
-			        faq.setProjectID(prjectID);
-			        faq.setAnswer(answer);
-			        faqs.add(faq);
+			        int projectID = resultSet.getInt("project_id");
+			        String userName = resultSet.getString("user_name");
+			        long creditCardNumber = resultSet.getLong("creditCardNumber");
+			        int donatingSum = resultSet.getInt("donating_sum");
+			        
+			        Payment payment = new Payment(userName, creditCardNumber, donatingSum);
+			        payment.setProjectID(projectID);
+			        payments.add(payment);
 			 }
 
 		} catch (SQLException e) {
@@ -82,24 +83,24 @@ public class FaqMysqlDAO extends AbstractFaqStorage  {
 				System.out.println("Problems with closing connection...");
 			}
 		}
-		return faqs;
+		return payments;
 	}
 
 	@Override
 	public int getSize() {
-		String selectCountFaqs = "SELECT count(*) from faqs";
+		String selectCountPayments = "SELECT count(*) from payments";
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 
-		int amountOfCatrgories = 0;
+		int amountOfPayments = 0;
 		try {
 			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery(selectCountFaqs);
+			resultSet = statement.executeQuery(selectCountPayments);
 
 			while (resultSet.next()) {
-				amountOfCatrgories = resultSet.getInt(1);
+				amountOfPayments = resultSet.getInt(1);
 			}
 
 		} catch (SQLException e) {
@@ -116,33 +117,26 @@ public class FaqMysqlDAO extends AbstractFaqStorage  {
 				System.out.println("Problems with closing connection...");
 			}
 		}
-		return amountOfCatrgories;
+		return amountOfPayments;
 	}
 
 	@Override
-	public String getProjectFaqs(Project project) {
-		String selectFaqFilds = "SELECT question, answer from faqs WHERE project_id = " + project.getUniqueID();
-		StringBuilder result = new StringBuilder();
+	public int getSumProjectPayments(Project project) {
+		String selectPaymentFilds = "SELECT donating_sum from payments WHERE project_id = " + project.getUniqueID();
 		
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 
+		int overalDonatingSum = 0; 
 		try {
 			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery(selectFaqFilds);
+			resultSet = statement.executeQuery(selectPaymentFilds);
 			
 			 while (resultSet.next()) {
-			        String question = resultSet.getString("question");
-			        result.append("\n  question : " + question + "\n");
-			        
-			        String answer = resultSet.getString("answer");
-			        if (answer == null || answer.isEmpty()) {
-			        	result.append("  answer: There is no answer yet \n");
-					} else {
-						result.append("  answer : " + answer + "\n");
-					}	
+				 int donatingSum = resultSet.getInt("donating_sum");
+				 overalDonatingSum += donatingSum;
 			 }
 
 		} catch (SQLException e) {
@@ -159,13 +153,11 @@ public class FaqMysqlDAO extends AbstractFaqStorage  {
 				System.out.println("Problems with closing connection...");
 			}
 		}
-		return result.toString();
+		return overalDonatingSum;
 	}
 	
 	@Override
-	public void remove(Faq faq) {
+	public void remove(Payment payment) {
 		// TODO Auto-generated method stub
-		
 	}
-
 }

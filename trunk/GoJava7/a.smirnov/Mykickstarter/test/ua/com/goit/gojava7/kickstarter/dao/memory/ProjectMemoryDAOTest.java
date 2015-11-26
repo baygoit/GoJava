@@ -11,13 +11,13 @@ import ua.com.goit.gojava7.kickstarter.beans.Project;
 
 public class ProjectMemoryDAOTest {
 
-	private ProjectMemoryDAO projectMemory;
+	private ProjectDaoMemoryImpl projectMemory;
 	private Project project;
 	private Category category;
 	
 	@Before
 	public void setUp() throws Exception {
-		projectMemory = new ProjectMemoryDAO();
+		projectMemory = new ProjectDaoMemoryImpl();
 		project = new Project("Project 1", "XXX", 10_000);
 		project.setUniqueID(6);		
 		category = new Category("Ukraine");

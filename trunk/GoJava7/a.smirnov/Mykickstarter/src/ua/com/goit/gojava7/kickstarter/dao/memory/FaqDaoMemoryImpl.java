@@ -5,9 +5,9 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqDao;
 
-public class FaqMemoryDAO extends AbstractFaqStorage {
+public class FaqDaoMemoryImpl extends AbstractFaqDao {
 
 	private List<Faq> faqs = new ArrayList<>();
 	

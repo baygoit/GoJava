@@ -10,9 +10,9 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqDao;
 
-public class FaqFileDAO extends AbstractFaqStorage {
+public class FaqDaoFileImpl extends AbstractFaqDao {
 	
 	private static final File FILE_STORAGE = new File("./resources/FAQs.csv");
 	private static final int PROJECT_ID = 0;

@@ -5,9 +5,9 @@ import java.util.List;
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractCategoryStorage;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqStorage;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractCategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqDao;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentDao;
 import ua.com.goit.gojava7.kickstarter.handlers.TextModifer;
 
 public class ConsolePrinter {
@@ -26,7 +26,7 @@ public class ConsolePrinter {
 		System.out.println(string);
 	}
 
-	public void printShortProjectInfo(Project project, AbstractFaqStorage faqs, AbstractPaymentStorage payments) {
+	public void printShortProjectInfo(Project project, AbstractFaqDao faqs, AbstractPaymentDao payments) {
 		System.out.println("Title : " + project.getTitle());
 		System.out.println("Short description : " + project.getBriefDescription());
 		System.out.println("Required amount : " + project.getRequiredSum());
@@ -35,13 +35,13 @@ public class ConsolePrinter {
 		System.out.println("FAQ : " + faqs.getProjectFaqs(project));
 	}
 
-	public void printFullProjectInfo(Project project, AbstractFaqStorage faqStorage, AbstractPaymentStorage paymentStorage) {
+	public void printFullProjectInfo(Project project, AbstractFaqDao faqStorage, AbstractPaymentDao paymentStorage) {
 		printShortProjectInfo(project, faqStorage, paymentStorage);
 		System.out.println("Full description : " + project.getFullDescription());
 		System.out.println("Video : " + project.getVideoLink());
 	}
 
-	public void printCategories(AbstractCategoryStorage allCategories) {
+	public void printCategories(AbstractCategoryDao allCategories) {
 		List<Category> categories = allCategories.getAll();
 		
 		System.out.println("All categories : ");
@@ -51,7 +51,7 @@ public class ConsolePrinter {
 		}
 	}
 
-	public void printProjects(List<Project> projects, AbstractFaqStorage faqStorage, AbstractPaymentStorage paymentStorage) {
+	public void printProjects(List<Project> projects, AbstractFaqDao faqStorage, AbstractPaymentDao paymentStorage) {
 		System.out.println("All projects from selected category : ");
 		for (int index = 0; index < projects.size(); index++) {
 			Project project = projects.get(index);				

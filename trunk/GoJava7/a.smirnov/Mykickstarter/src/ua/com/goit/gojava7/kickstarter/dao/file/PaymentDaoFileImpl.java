@@ -10,9 +10,9 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentDao;
 
-public class PaymentFileDAO extends AbstractPaymentStorage {
+public class PaymentDaoFileImpl extends AbstractPaymentDao {
 
 	private static final File REWARDS_FILE = new File("./resources/payments.csv");
 	private static final int PROJECT_ID = 0;

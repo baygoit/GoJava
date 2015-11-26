@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteDao;
 
-public class QuoteFileDAO extends AbstractQuoteStorage {
+public class QuoteDaoFileImpl extends AbstractQuoteDao {
 	
 	private static final String SEMICOLON_DELIMITER = ";";
 	private static final String NEW_LINE_SEPARATOR = "\n";

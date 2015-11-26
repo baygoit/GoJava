@@ -10,11 +10,11 @@ import ua.com.goit.gojava7.kickstarter.beans.Category;
 
 public class CategoryMemoryDAOTest {
 
-	private CategoryMemoryDAO categoryMemory;
+	private CategoryDaoMemoryImpl categoryMemory;
 
 	@Before
 	public void setUp() throws Exception {
-		categoryMemory = new CategoryMemoryDAO();
+		categoryMemory = new CategoryDaoMemoryImpl();
 	}
 
 	@Test

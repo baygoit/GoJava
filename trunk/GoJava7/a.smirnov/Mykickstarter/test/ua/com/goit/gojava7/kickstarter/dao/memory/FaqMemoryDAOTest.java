@@ -11,10 +11,10 @@ import ua.com.goit.gojava7.kickstarter.beans.Project;
 
 public class FaqMemoryDAOTest {
 
-	private FaqMemoryDAO faqMemory;
+	private FaqDaoMemoryImpl faqMemory;
 	@Before
 	public void setUp() throws Exception {
-		faqMemory = new FaqMemoryDAO();
+		faqMemory = new FaqDaoMemoryImpl();
 	}
 
 	@Test

@@ -10,12 +10,12 @@ import ua.com.goit.gojava7.kickstarter.beans.Category;
 
 public class CategoryFileDAOTest {
 
-	private CategoryFileDAO categoryFile;
+	private CategoryDaoFileImpl categoryFile;
 	private Category category;
 	
 	@Before
 	public void setUp() throws Exception {
-		categoryFile = new CategoryFileDAO();
+		categoryFile = new CategoryDaoFileImpl();
 		category = new Category("Ukraine");
 		category.setUniqueID(12);
 	}

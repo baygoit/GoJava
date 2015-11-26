@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteDao;
 
-public class QuoteMysqlDAO extends AbstractQuoteStorage {
+public class QuoteDaoMysqlImpl extends AbstractQuoteDao {
 
 	@Override
 	public void add(Quote quote) {

@@ -10,9 +10,9 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractProjectDao;
 
-public class ProjectFileDAO extends AbstractProjectStorage {	
+public class ProjectDaoFileImpl extends AbstractProjectDao {	
 	private static final File REWARDS_FILE = new File("./resources/projects.csv");
 	
 	private static final int PROJECT_ID = 0;

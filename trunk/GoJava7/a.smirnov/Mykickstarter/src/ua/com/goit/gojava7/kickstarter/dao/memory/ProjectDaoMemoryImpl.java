@@ -5,13 +5,13 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractProjectDao;
 
-public class ProjectMemoryDAO extends AbstractProjectStorage {
+public class ProjectDaoMemoryImpl extends AbstractProjectDao {
 	
 	private List<Project> projects = new ArrayList<>();
 	
-	public ProjectMemoryDAO() {
+	public ProjectDaoMemoryImpl() {
 		Project project1 = new Project("Project 1", "Brief description 1", 30_000);
 		project1.setDeadline(7, 12, 2015);
 		project1.setUniqueID(1);
