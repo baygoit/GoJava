@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class QuoteDbDao implements QuoteStorage {

@@ -21,7 +21,7 @@ public class CategoryDbDao implements CategoryStorage {
 	@Override
 	public Category get(int index) {
 		Category category = null;
-		String query = "select id, name from category where id = " + index;
+		String query = "select id, name from category where id = " + (index + 1);
 
 		try (PreparedStatement ps = connection.prepareStatement(query); 
 				ResultSet resultSet = ps.executeQuery()) {

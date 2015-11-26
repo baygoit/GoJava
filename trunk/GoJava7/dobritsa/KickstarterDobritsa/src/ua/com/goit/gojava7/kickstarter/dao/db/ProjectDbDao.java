@@ -20,7 +20,7 @@ public class ProjectDbDao implements ProjectStorage {
 	@Override
 	public Project get(int index) {
 		Project project = null;
-		String query = "select name, descrition, goal, pledged, daysToGo from project where id = " + index;
+		String query = "select name, descrition, goal, pledged, daysToGo from project where id = " + (index + 1);
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
 				String name = resultSet.getString("name");

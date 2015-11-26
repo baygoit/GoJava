@@ -10,11 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.old.CategoryDaoMemoryImpl;
 
-public class CategoryDaoMemoryImplTest {
+public class CategoryMemoryDaoTemp {
 
-	CategoryDaoMemoryImpl categoryStorage = new CategoryDaoMemoryImpl();
+	CategoryMemoryDao categoryStorage = new CategoryMemoryDao();
 	List<Category> categories = new ArrayList<>();		
 	
 	@Before
