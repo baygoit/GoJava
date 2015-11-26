@@ -3,7 +3,7 @@ package ua.com.goit.gojava7.kickstarter.dao.file;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.FileDao;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class QuoteFileDao extends FileDao<Quote> implements QuoteStorage {

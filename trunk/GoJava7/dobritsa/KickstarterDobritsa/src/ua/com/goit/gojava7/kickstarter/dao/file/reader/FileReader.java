@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao;
+package ua.com.goit.gojava7.kickstarter.dao.file.reader;
 
 import java.io.BufferedReader;
 import java.io.File;

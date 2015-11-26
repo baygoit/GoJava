@@ -2,13 +2,13 @@ package ua.com.goit.gojava7.kickstarter;
 
 import java.io.FileNotFoundException;
 
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.config.DataSource;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.QuestionStorage;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
-import ua.com.goit.gojava7.kickstarter.dao.RewardStorage;
+import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
+import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.QuestionStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.RewardStorage;
 
 public class KickstarterRunner {
 
@@ -23,7 +23,7 @@ public class KickstarterRunner {
 		}
 		System.out.println("-------Kickstarter runs in " + dataSource + " mode-------\n");
 
-		DaoProvider daoProvider = new DaoProvider(dataSource);
+		DaoFactory daoProvider = new DaoFactory(dataSource);
 		daoProvider.open();
 
 		QuoteStorage quoteStorage = daoProvider.getQuoteDAO();

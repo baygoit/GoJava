@@ -8,11 +8,11 @@ import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.console.Printer;
 import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
 import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.QuestionStorage;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
-import ua.com.goit.gojava7.kickstarter.dao.RewardStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.QuestionStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.RewardStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
@@ -66,36 +66,29 @@ public class Kickstarter {
 		} while (currentCategory != null);
 	}
 
-	public Category chooseCategory(CategoryStorage categoryStorage) {
-		printAboutCategories(categoryStorage);
-		return setCurrentCategory(categoryStorage);
-	}
-
-	public void printAboutCategories(CategoryStorage categoryStorage) {
+	public Category chooseCategory(CategoryStorage categoryStorage) {		
 		printer.print(BORDER + "\nList of categories:\n");
 		categoryPrinter.printCategories(categoryStorage.getAll());
 		printer.print("\nChoose a category by number ('0' for exit): ");
+		return setCurrentCategory(categoryStorage);
 	}
-
+	
 	public Category setCurrentCategory(CategoryStorage categoryStorage) {
 		int numberOfCategory = consoleScanner.getInt(0, categoryStorage.size());
 		if (numberOfCategory == 0)
 			return null;
-		return categoryStorage.get(numberOfCategory - 1);
+		return categoryStorage.getByNumber(numberOfCategory);
 	}
 
-	public Project chooseProject(Category category, ProjectStorage projects) {
+	public Project chooseProject(Category category, ProjectStorage projectStorage) {
 		List<Project> projectsInCategory = new ArrayList<>();
-		projectsInCategory = projects.getByCategory(category.getName());
-		printAboutProjects(category, projectsInCategory);
+		projectsInCategory = projectStorage.getByCategory(category.getName());
+		printer.print(BORDER + "\nCurrent category: " + category.getName() + "\nList of projects:");		
+		projectPrinter.printProjects(projectsInCategory);
+		printer.print("\nChoose a project by number ('0' to choose another category): ");
 		return setCurrentProject(projectsInCategory);
 	}
 
-	public void printAboutProjects(Category category, List<Project> projects) {
-		printer.print(BORDER + "\nCurrent category: " + category.getName() + "\nList of projects:");
-		projectPrinter.printProjects(projects);
-		printer.print("\nChoose a project by number ('0' to choose another category): ");
-	}
 
 	public Project setCurrentProject(List<Project> projects) {
 		int numberOfProject = consoleScanner.getInt(0, projects.size());
@@ -114,8 +107,8 @@ public class Kickstarter {
 
 	public boolean chooseOptionOfProject(Project project) {
 		String text = consoleScanner.getOption();
-		if (text.equals("b")) {
-			donate(project);
+		if (text.equals("p")) {
+			pledge(project);
 		}
 		if (text.equals("a")) {
 			addQuestion(project);
@@ -126,7 +119,7 @@ public class Kickstarter {
 		return false;
 	}
 
-	public void donate(Project project) {
+	public void pledge(Project project) {
 		printer.print(BORDER + "\n\nEnter your name:");
 		consoleScanner.getString();
 		printer.print("\nEnter your card's number:");
@@ -164,7 +157,7 @@ public class Kickstarter {
 
 	public void addQuestion(Project project) {
 		printer.print("Ask your question about project: ");
-		project.addQuestion(new Question(consoleScanner.getString()));
+		//project.addQuestion(new Question(consoleScanner.getString()));
 	}
 
 	public void shutdown() {

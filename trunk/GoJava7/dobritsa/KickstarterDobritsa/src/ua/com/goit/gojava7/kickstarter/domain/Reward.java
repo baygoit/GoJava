@@ -6,17 +6,20 @@ public class Reward {
 	private String reward;
 	private String projectName;
 
-	public Reward(int amount, String reward) {
-		this.amount = amount;
-		this.reward = reward;
-	}
-
 	public int getAmount() {
 		return amount;
 	}
 
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
 	public String getReward() {
 		return reward;
+	}
+
+	public void setReward(String reward) {
+		this.reward = reward;
 	}
 
 	public String getProjectName() {

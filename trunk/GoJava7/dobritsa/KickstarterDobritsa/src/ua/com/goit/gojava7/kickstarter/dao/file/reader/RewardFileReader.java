@@ -1,11 +1,10 @@
-package ua.com.goit.gojava7.kickstarter.dao.file;
+package ua.com.goit.gojava7.kickstarter.dao.file.reader;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.FileReader;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public class RewardFileReader extends FileReader<Reward> {
@@ -22,11 +21,11 @@ public class RewardFileReader extends FileReader<Reward> {
 			while ((amount = (bufferedReader.readLine())) != null) {
 				if (amount.equals(""))
 					break;
-				String text = bufferedReader.readLine();
-				Reward reward = new Reward(new Integer(amount), text);
+				Reward reward = new Reward();
+				reward.setAmount(new Integer(amount));
+				reward.setReward(bufferedReader.readLine());
 				reward.setProjectName(projectName);
 				data.add(reward);
-
 			}
 		}
 		return data;

@@ -3,6 +3,8 @@ package ua.com.goit.gojava7.kickstarter.dao;
 import java.util.Collections;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.dao.storage.Storage;
+
 public abstract class MemoryDao<T> implements Storage<T> {
 
 	protected List<T> data;
@@ -19,7 +21,7 @@ public abstract class MemoryDao<T> implements Storage<T> {
 	public void setAll(List<T> data) {
 		this.data = data;
 	}
-
+	
 	@Override
 	public T get(int index) {
 		if (data.size() == 0) {

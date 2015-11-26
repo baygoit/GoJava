@@ -15,44 +15,48 @@ public class Project {
 	private List<Question> questions = new ArrayList<>();
 	private String categoryName;
 
-	public Project(String name, String description, Integer goal, Integer pledged, Integer daysToGo) {
-		this.name = name;
-		this.description = description;
-		this.goal = goal;
-		this.pledged = pledged;
-		this.daysToGo = daysToGo;
-
-	}
-
-	public Project(String name, String description, Integer goal, Integer pledged, Integer daysToGo, String history,
-			String link) {
-		this.name = name;
-		this.description = description;
-		this.goal = goal;
-		this.pledged = pledged;
-		this.daysToGo = daysToGo;
-		this.history = history;
-		this.link = link;
-	}
-
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
 		return description;
 	}
 
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public Integer getGoal() {
 		return goal;
 	}
+
+	public void setGoal(Integer goal) {
+		this.goal = goal;
+	}
+
 
 	public Integer getPledged() {
 		return pledged;
 	}
 
+	
+	public void setPledged(Integer pledged) {
+		this.pledged = pledged;
+	}
+
+
 	public Integer getDaysToGo() {
 		return daysToGo;
+	}
+
+	
+	public void setDaysToGo(Integer daysToGo) {
+		this.daysToGo = daysToGo;
 	}
 
 	public String getHistory() {

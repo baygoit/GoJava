@@ -1,34 +1,35 @@
-package ua.com.goit.gojava7.kickstarter.config;
+package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.QuestionStorage;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteStorage;
-import ua.com.goit.gojava7.kickstarter.dao.RewardStorage;
+import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuoteDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.CategoryFileDao;
-import ua.com.goit.gojava7.kickstarter.dao.file.CategoryFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.file.ProjectFileDao;
-import ua.com.goit.gojava7.kickstarter.dao.file.ProjectFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.file.QuoteFileDao;
-import ua.com.goit.gojava7.kickstarter.dao.file.QuoteFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.file.RewardFileDao;
-import ua.com.goit.gojava7.kickstarter.dao.file.RewardFileReader;
+import ua.com.goit.gojava7.kickstarter.dao.file.reader.CategoryFileReader;
+import ua.com.goit.gojava7.kickstarter.dao.file.reader.ProjectFileReader;
+import ua.com.goit.gojava7.kickstarter.dao.file.reader.QuoteFileReader;
+import ua.com.goit.gojava7.kickstarter.dao.file.reader.RewardFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.memory.CategoryMemoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.memory.Memory;
 import ua.com.goit.gojava7.kickstarter.dao.memory.ProjectMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.QuestionMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.RewardMemoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.memory.reader.Memory;
+import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.QuestionStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.RewardStorage;
 
-public class DaoProvider {
+public class DaoFactory {
 
 	private QuoteStorage quoteDAO;
 	private CategoryStorage categoryDAO;
@@ -44,7 +45,7 @@ public class DaoProvider {
 
 	private Connection connection = null;
 
-	public DaoProvider(DataSource dataSource) {
+	public DaoFactory(DataSource dataSource) {
 		this.dataSource = dataSource;
 
 		switch (dataSource) {

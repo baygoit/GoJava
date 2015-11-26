@@ -3,6 +3,8 @@ package ua.com.goit.gojava7.kickstarter.dao;
 import java.util.Collections;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.dao.storage.Storage;
+
 public abstract class FileDao<T> implements Storage<T>{
 	protected List<T> data;
 
@@ -10,7 +12,7 @@ public abstract class FileDao<T> implements Storage<T>{
 		this.data = data;
 	}
 
-	@Override
+	@Override 
 	public List<T> getAll() {
 		return Collections.unmodifiableList(data);
 	}

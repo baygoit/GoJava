@@ -177,7 +177,7 @@ public class KickstarterTest {
 	@Test
 	public void testDonate() {
 		Project project = new Project("NameTest", "DescriptionTest", 100000, 100, 10, "HistoryTest", "LinkTest");	
-		kickstarter.donate(project);
+		kickstarter.pledge(project);
 		when(consoleScanner.getString()).thenReturn("jjkljfhc").thenReturn("kjblvycyx");
 		verify(printer).print(contains("Enter your name:"));
 		verify(printer).print(contains("Enter your card's number:"));

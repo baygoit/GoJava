@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectDbDao implements ProjectStorage {
@@ -16,19 +16,21 @@ public class ProjectDbDao implements ProjectStorage {
 	public ProjectDbDao(Connection connection) {
 		this.connection = connection;
 	}
+	
+	List<Project> projects = new ArrayList<>();
 
 	@Override
 	public Project get(int index) {
 		Project project = null;
-		String query = "select name, descrition, goal, pledged, daysToGo from project where id = " + (index + 1);
+		String query = "select name, description, goal, pledged, daysToGo from project where id = " + (index + 1);
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
-				String name = resultSet.getString("name");
-				String descrition = resultSet.getString("descrition");
-				int goal = resultSet.getInt("goal");
-				int pledged = resultSet.getInt("pledged");
-				int daysToGo = resultSet.getInt("daysToGo");
-				project = new Project(name, descrition, goal, pledged, daysToGo);
+				project = new Project();
+				project.setName(resultSet.getString("name"));
+				project.setDescription(resultSet.getString("description"));
+				project.setGoal(resultSet.getInt("goal"));
+				project.setPledged(resultSet.getInt("pledged"));
+				project.setDaysToGo(resultSet.getInt("daysToGo"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -42,12 +44,13 @@ public class ProjectDbDao implements ProjectStorage {
 		String query = "select name, description, goal, pledged, daysToGo from project";
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
-				String name = resultSet.getString("name");
-				String description = resultSet.getString("description");
-				int goal = resultSet.getInt("goal");
-				int pledged = resultSet.getInt("pledged");
-				int daysToGo = resultSet.getInt("daysToGo");
-				Project project = new Project(name, description, goal, pledged, daysToGo);
+				Project project;
+				project = new Project();
+				project.setName(resultSet.getString("name"));
+				project.setDescription(resultSet.getString("description"));
+				project.setGoal(resultSet.getInt("goal"));
+				project.setPledged(resultSet.getInt("pledged"));
+				project.setDaysToGo(resultSet.getInt("daysToGo"));
 				projects.add(project);
 			}
 		} catch (SQLException e) {
@@ -74,22 +77,33 @@ public class ProjectDbDao implements ProjectStorage {
 	public List<Project> getByCategory(String categoryName) {
 
 		String query = "select name, description, goal, pledged, daysToGo from project where category_id = "
-				+ "(select id from category where name = '" + categoryName+ "')";
+				+ "(select id from category where name = '" + categoryName + "')";
 		List<Project> projects = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
-				String name = resultSet.getString("name");
-				String description = resultSet.getString("description");
-				int goal = resultSet.getInt("goal");
-				int pledged = resultSet.getInt("pledged");
-				int daysToGo = resultSet.getInt("daysToGo");
-				Project project = new Project(name, description, goal, pledged, daysToGo);
+				Project project;
+				project = new Project();
+				project.setName(resultSet.getString("name"));
+				project.setDescription(resultSet.getString("description"));
+				project.setGoal(resultSet.getInt("goal"));
+				project.setPledged(resultSet.getInt("pledged"));
+				project.setDaysToGo(resultSet.getInt("daysToGo"));
 				projects.add(project);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return projects;
+	}
+
+	@Override
+	public Project getByNumber(int number) {		
+		return get(number);
+	}
+
+	@Override
+	public void setAll(List<Project> projects) {
+		this.projects = projects;
 	}
 
 }

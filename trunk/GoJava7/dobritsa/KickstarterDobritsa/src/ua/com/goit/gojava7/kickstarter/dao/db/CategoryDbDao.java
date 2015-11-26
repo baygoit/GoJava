@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public class CategoryDbDao implements CategoryStorage {
 
+	
+	private List<Category> categories = new ArrayList<>();
 	private Connection connection;
 
 	public CategoryDbDao(Connection connection) {
@@ -21,12 +23,13 @@ public class CategoryDbDao implements CategoryStorage {
 	@Override
 	public Category get(int index) {
 		Category category = null;
-		String query = "select id, name from category where id = " + (index + 1);
+		String query = "select id, name from category where id = " + (index);
 
 		try (PreparedStatement ps = connection.prepareStatement(query); 
 				ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
-				category = new Category(resultSet.getString("name"));
+				category = new Category();
+				category.setName(resultSet.getString("name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,7 +44,8 @@ public class CategoryDbDao implements CategoryStorage {
 		try (PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
-				Category category = new Category(resultSet.getString("name"));
+				Category category = new Category();
+				category.setName(resultSet.getString("name"));
 				categories.add(category);
 			}
 		} catch (SQLException e) {
@@ -64,4 +68,15 @@ public class CategoryDbDao implements CategoryStorage {
 		}
 		return size;
 	}
+
+	@Override
+	public Category getByNumber(int number) {		
+		return get(number);
+	}
+
+	@Override
+	public void setAll(List<Category> categories) {
+		this.categories = categories;
+	}
+
 }
