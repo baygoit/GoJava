@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.beans;
+package ua.com.goit.gojava7.kickstarter.domain;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;

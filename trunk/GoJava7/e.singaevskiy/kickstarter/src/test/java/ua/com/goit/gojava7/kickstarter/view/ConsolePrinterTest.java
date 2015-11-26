@@ -15,7 +15,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
-public class MainPageTest {
+public class ConsolePrinterTest {
 
 	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	ConsolePrinter page = new ConsolePrinter(new PrintStream(outContent));

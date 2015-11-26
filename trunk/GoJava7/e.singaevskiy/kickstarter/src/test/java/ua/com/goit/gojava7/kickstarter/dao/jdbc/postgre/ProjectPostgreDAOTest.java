@@ -30,9 +30,9 @@ public class ProjectPostgreDAOTest {
                 properties.getProperty("user"), properties.getProperty("password"));
 
         list = new ArrayList<>();
-        list.add(new Project(1, "p1", "a1", 1));
-        list.add(new Project(2, "p2", "a2", 1));
-        list.add(new Project(3, "p3", "a3", 2));
+        list.add(new Project(1, "p1", "a1", 0));
+        list.add(new Project(2, "p2", "a2", 0));
+        list.add(new Project(3, "p3", "a3", 0));
         dao = new ProjectPostgreDAO(dispatcher);
     }
 

@@ -17,7 +17,6 @@ public class PaymentPostgreDAO implements PaymentDAO {
     private static final String TABLE = "payment";
     private static final String FIELDS = "cardid,date,username,sum,project_id,reward_id";
     private static final String INSERTION = FIELDS.replaceAll("[^,]+", "?");
-    private static final String KEY = "id";
     
     private JdbcDispatcher dispatcher;
 
@@ -39,7 +38,7 @@ public class PaymentPostgreDAO implements PaymentDAO {
 
     @Override
     public Payment get(int index) {
-        String sql = "select " + FIELDS + " from " + TABLE + " where " + KEY + " = " + index;
+        String sql = "select " + FIELDS + " from " + TABLE + " limit 1 offset " + index;
         Payment element = null;
         try(Connection connection = dispatcher.getConnection();
             Statement statement = connection.createStatement();
@@ -130,7 +129,11 @@ public class PaymentPostgreDAO implements PaymentDAO {
         statement.setDate(2, element.getDate());
         statement.setString(3, element.getUser());
         statement.setLong(4, element.getSum());
-        statement.setInt(5, element.getProjectId());
+        if (element.getProjectId() == 0) {
+            statement.setNull(5, java.sql.Types.INTEGER);   
+        } else {
+            statement.setInt(5, element.getProjectId());             
+        }
         if (element.getRewardId() == 0) {
             statement.setNull(6, java.sql.Types.INTEGER);   
         } else {

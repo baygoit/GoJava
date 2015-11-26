@@ -140,7 +140,11 @@ public class ProjectPostgreDAO implements ProjectDAO {
         statement.setLong(++i, element.getGoalSum());
         statement.setDate(++i, element.getStartDate());
         statement.setDate(++i, element.getEndDate());
-        statement.setInt(++i, element.getCategoryId());
+        if (element.getCategoryId() == 0) {
+            statement.setNull(++i, java.sql.Types.INTEGER);   
+        } else {
+            statement.setInt(++i, element.getCategoryId());             
+        }
         statement.setString(++i, element.getDescription());
         statement.setString(++i, element.getVideoUrl());
         statement.setString(++i, element.getAuthor());

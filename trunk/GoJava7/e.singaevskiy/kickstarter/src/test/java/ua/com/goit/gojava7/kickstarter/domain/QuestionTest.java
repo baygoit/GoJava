@@ -1,8 +1,6 @@
-package ua.com.goit.gojava7.kickstarter.beans;
+package ua.com.goit.gojava7.kickstarter.domain;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEqualsFor;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCodeFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.CoreMatchers.allOf;
@@ -11,30 +9,28 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
 
-public class CategoryTest {
+public class QuestionTest {
 	
     @Test
     public void testConstructor() {
         
-        String name = "name";
-        Category category = new Category(1, name);
+        int projectId = 1;
+        Question question = new Question(projectId , "q1","a1");
         
-        assertThat(category.getName(), is(name));
+        assertThat(question.getProjectId(), is(projectId));
          
     }
     
-	@Test
+    @Test
     public void testBean() {
-        assertThat(Category.class, allOf(
+        assertThat(Question.class, allOf(
                 hasValidBeanConstructor(),
                 hasValidGettersAndSetters(),
-                hasValidBeanHashCodeFor("id"),
-                hasValidBeanEqualsFor("id"),
                 hasValidBeanToString()
         ));
          
     }
-	
+
 }

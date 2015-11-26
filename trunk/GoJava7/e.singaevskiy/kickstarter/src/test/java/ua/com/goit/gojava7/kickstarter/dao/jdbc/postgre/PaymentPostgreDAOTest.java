@@ -1,12 +1,8 @@
 package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +33,8 @@ public class PaymentPostgreDAOTest {
   
         
         list = new ArrayList<>();
-        list.add(new Payment(1, "u1", 21312312, 10, null));
-        list.add(new Payment(2, "u2", 21312312, 20, null));       
+        list.add(new Payment(0, "u1", 21312312, 10, null));
+        list.add(new Payment(0, "u2", 21312312, 20, null));       
         
         dao = new PaymentPostgreDAO(dispatcher);         
     }
@@ -56,7 +52,10 @@ public class PaymentPostgreDAOTest {
     
     @Test
     public void testAddGet() {
-        assertFalse(true);
+        int index = 1;
+        Payment payment = list.get(index);
+        list.forEach(dao::add);
+        assertThat(dao.get(index), is(payment));
     }
     
     @SuppressWarnings("unchecked")
@@ -69,25 +68,5 @@ public class PaymentPostgreDAOTest {
         dao.addAll(list);
         dao.getAll();
         dao.getByProject(1);
-    }
-    
-    @Test
-    public void testException1() throws Exception {
-        Properties properties = Utils.readProperties("./kicks-files/config.properties");
-        JdbcDispatcher dispatcher = new JdbcDispatcher(
-                properties.getProperty("driver"),
-                properties.getProperty("url"),
-                properties.getProperty("user"), 
-                properties.getProperty("password"));
-        
-        Connection connection = dispatcher.getConnection();
-        PreparedStatement prepareStatement = connection.prepareStatement("INSERT INTO payment("
-                + "            cardid, date, username, sum, project_id, reward_id)"
-                + "    VALUES (?,      null, 'qwe' ,   123, 1,          ?)");
-        prepareStatement.setLong(1, 36798653222L);
-        prepareStatement.setNull(2, java.sql.Types.INTEGER);
-        prepareStatement.executeUpdate();
-        connection.commit();
-        assertTrue(true);
     }
 }

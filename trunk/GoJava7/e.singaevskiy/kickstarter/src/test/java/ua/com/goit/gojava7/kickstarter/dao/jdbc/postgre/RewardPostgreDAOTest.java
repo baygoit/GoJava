@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 
 import java.sql.SQLException;
@@ -52,7 +51,10 @@ public class RewardPostgreDAOTest {
     
     @Test
     public void testAddGet() {
-        assertFalse(true);
+        list.forEach(dao::add);
+        Reward reward = list.get(1);
+        int index = reward.getId();
+        assertThat(dao.get(index), is(reward));
     }
     
     @SuppressWarnings("unchecked")

@@ -122,7 +122,11 @@ public class QuestionPostgreDAO implements QuestionsDAO {
 
     private void writeElementToRecord(Question element, PreparedStatement statement) throws SQLException {
         int i = 0;
-        statement.setInt(++i, element.getProjectId());
+        if (element.getProjectId() == 0) {
+            statement.setNull(++i, java.sql.Types.INTEGER);   
+        } else {
+            statement.setInt(++i, element.getProjectId());             
+        }
         statement.setString(++i, element.getQuestion());
         statement.setString(++i, element.getAnswer());
     }

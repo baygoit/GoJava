@@ -35,7 +35,7 @@ public class QuestionsPostgreDAOTest {
         
         list = new ArrayList<>();
         list.add(new Question(0, "a1", "t1"));
-        list.add(new Question(1, "a2", "t2"));
+        list.add(new Question(0, "a2", "t2"));
     }
     
     
@@ -52,8 +52,7 @@ public class QuestionsPostgreDAOTest {
     
     @Test
     public void testAddGet() {
-        dao.clear();
-        dao.addAll(list);
+        list.forEach(dao::add);
         int index = 1;
         assertThat(dao.get(index), is(list.get(index)));
     }
