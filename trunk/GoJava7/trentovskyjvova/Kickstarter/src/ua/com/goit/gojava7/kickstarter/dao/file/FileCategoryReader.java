@@ -9,22 +9,22 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryReader;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.exception.CategoryReadException;
+import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class FileCategoryReader implements CategoryReader {
+public class FileCategoryReader implements CategoryDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File categoriesFile;
-
+	
 	public FileCategoryReader(File categoriesFile) {
 		this.categoriesFile = categoriesFile;
 	}
 
 	@Override
-	public List<Category> readCategories() {
+	public List<Category> getCategories() {
 		List<Category> categories = new ArrayList<>();
-
+		
 		BufferedReader fileReader = null;
 		try {
 			InputStream categoriesFileSteam = new FileInputStream(
@@ -38,12 +38,12 @@ public class FileCategoryReader implements CategoryReader {
 			while (null != (line = fileReader.readLine())) {
 				String[] category = line.split(CSV_SPLIT_BY);
 				if (category.length < 2) {
-					throw new CategoryReadException("Wrong categories.csv format.");
+					throw new WrongFileFormatException("Wrong categories.csv format.");
 				} else if (category[0] == "") {
-					throw new CategoryReadException(
+					throw new WrongFileFormatException(
 							"Wrong categories.csv format. Cannot find category id");
 				} else if (category[1] == "") {
-					throw new CategoryReadException(
+					throw new WrongFileFormatException(
 							"Wrong categories.csv format. Cannot find category name");
 				}
 				categoryId = Integer.parseInt(category[0]);
@@ -51,7 +51,7 @@ public class FileCategoryReader implements CategoryReader {
 				categories.add(new Category(categoryName, categoryId));
 			}
 		} catch (IOException e) {
-			throw new CategoryReadException("File not found or read error", e);
+			throw new WrongFileFormatException("File not found or read error", e);
 		} finally {
 			if (fileReader != null) {
 				try {
@@ -63,10 +63,27 @@ public class FileCategoryReader implements CategoryReader {
 		}
 
 		if (categories.isEmpty()) {
-			throw new CategoryReadException("There is not categories in file");
+			throw new WrongFileFormatException("There is not categories in file");
 		}
 
 		return categories;
+	}
+
+	@Override
+	public int size() {
+		return getCategories().size();
+	}
+
+	@Override
+	public Category getCategory(int id) {
+		Category result = null;
+		for (Category category : getCategories()) {
+			if(category.getId() == id){
+				result = category;
+				break;
+			}
+		}
+		return result;
 	}
 
 }

@@ -1,9 +1,8 @@
 package com.kickstarter.dao.interfaces;
 
-import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +13,12 @@ public class DbProjectDaoImpl extends DbConnector implements ProjectDaoInterface
 
 	public List<Project> getAll(Category category) {
 		ResultSet rs = null;
-		Statement statement = null;
 		List<Project> list = new ArrayList<>();
 
-		try (Connection conection = getConnection();) {
-			statement = conection.createStatement();
-			rs = statement
-					.executeQuery("select * from projects where categoryTitle =" + "'" + category.getTitle() + "'");
-
+		try (PreparedStatement pStatement = getConnection()
+				.prepareStatement("select * from projects where categoryTitle = ? ")) {
+			pStatement.setString(1, category.getTitle());
+			rs = pStatement.executeQuery();
 			while (rs.next()) {
 				Project project = filler(rs);
 				list.add(project);
@@ -35,12 +32,12 @@ public class DbProjectDaoImpl extends DbConnector implements ProjectDaoInterface
 
 	public Project getOne(int projectNumber) {
 		ResultSet rs = null;
-		Statement statement = null;
 		Project project = new Project();
 
-		try (Connection conection = getConnection()) {
-			statement = conection.createStatement();
-			rs = statement.executeQuery("select * from projects where id = " + "'" + projectNumber + "'");
+		try (PreparedStatement pStatement = getConnection()
+				.prepareStatement("select * from projects where projectId =  ? ")) {
+			pStatement.setInt(1, projectNumber);
+			rs = pStatement.executeQuery();
 			while (rs.next()) {
 				project = filler(rs);
 			}
@@ -51,14 +48,18 @@ public class DbProjectDaoImpl extends DbConnector implements ProjectDaoInterface
 	}
 
 	public void update(Project p) {
-		Statement statement = null;
 
-		try (Connection conection = getConnection()) {
-			statement = conection.createStatement();
-			statement.executeUpdate("update projects set discription = '" + p.getDiscription() + "'," + " daysLeft = '"
-					+ p.getDaysLeft() + "'," + " requiredSum = '" + p.getRequiredSum() + "'," + " gainedSum = '"
-					+ p.getGainedSum() + "'," + " projectHistory = '" + p.getProjectHistory() + "'," + " videoLink = '"
-					+ p.getVideoLink() + "'" + " where id = '" + p.getId() + "'");
+		try (PreparedStatement pStatement = getConnection().prepareStatement(
+				"update projects set discription = ? , daysLeft = ?, requiredSum = ?, gainedSum = ?, projectHistory = ?, videoLink = ? where projectId = ? ")) {
+			pStatement.setString(1, p.getDiscription());
+			pStatement.setInt(2, p.getDaysLeft());
+			pStatement.setInt(3, p.getRequiredSum());
+			pStatement.setInt(4, p.getGainedSum());
+			pStatement.setString(5, p.getProjectHistory());
+			pStatement.setString(6, p.getVideoLink());
+			pStatement.setInt(7, p.getId());
+
+			pStatement.executeUpdate();
 
 		} catch (SQLException e) {
 			System.out.println(" Project update MySql connection problem");
@@ -67,18 +68,16 @@ public class DbProjectDaoImpl extends DbConnector implements ProjectDaoInterface
 
 	public List<Project> getAllList() {
 		ResultSet rs = null;
-		Statement statement = null;
 		List<Project> list = new ArrayList<>();
 
-		try (Connection conection = getConnection()) {
-			statement = conection.createStatement();
-			rs = statement.executeQuery("select * from projects");
+		try (PreparedStatement pStatement = getConnection().prepareStatement("select * from projects")) {
+
+			rs = pStatement.executeQuery();
 
 			while (rs.next()) {
 				Project project = filler(rs);
 				list.add(project);
 			}
-
 		} catch (SQLException e) {
 			System.out.println("Project getAllList MySql connection problem");
 		}
@@ -89,7 +88,7 @@ public class DbProjectDaoImpl extends DbConnector implements ProjectDaoInterface
 
 		Project project = new Project();
 
-		project.setId(rs.getInt("id"));
+		project.setId(rs.getInt("projectId"));
 		project.setTitle(rs.getString("title"));
 		project.setDiscription(rs.getString("discription"));
 		project.setDaysLeft(rs.getInt("daysLeft"));

@@ -9,21 +9,22 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.ProjectReader;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.exception.ProjectReadException;
+import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class FileProjectReader implements ProjectReader {
+public class FileProjectReader implements ProjectDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File projectsFile;
-
+	private List<Project> projects = new ArrayList<>();
+	
 	public FileProjectReader(File projectsFile) {
 		this.projectsFile = projectsFile;
 	}
 
 	@Override
-	public List<Project> readProjects() {
-		List<Project> projects = new ArrayList<>();
+	public List<Project> getProjects(int categoryId) {
+		projects = new ArrayList<>();
 
 		BufferedReader fileReader = null;
 		try {
@@ -38,22 +39,27 @@ public class FileProjectReader implements ProjectReader {
 			while (null != (line = fileReader.readLine())) {
 				String[] loadedProject = line.split(CSV_SPLIT_BY);
 				if (loadedProject.length < 8) {
-					throw new ProjectReadException(
+					throw new WrongFileFormatException(
 							"Wrong projects.csv format.");
 				} else if (loadedProject[0] == "") {
-					throw new ProjectReadException(
+					throw new WrongFileFormatException(
 							"Wrong projects.csv format. Cannot find project id");
 				} else if (loadedProject[1] == "") {
-					throw new ProjectReadException(
+					throw new WrongFileFormatException(
 							"Wrong projects.csv format. Cannot find project name");
 				} else if (loadedProject[2] == "") {
-					throw new ProjectReadException(
+					throw new WrongFileFormatException(
 							"Wrong projects.csv format. Cannot find category id of project");
 				}
+				
+				if(Integer.parseInt(loadedProject[2]) != categoryId){
+					continue;
+				}
+				
 				projectId = Integer.parseInt(loadedProject[0]);
 				projectName = loadedProject[1];
 				project = new Project(projectName, projectId);
-				project.setCategoryId(Integer.parseInt(loadedProject[2]));
+				project.setCategoryId(categoryId);
 				project.setDaysToGo(Integer.parseInt(loadedProject[3]));
 				project.setDescription(loadedProject[4]);
 				project.setOwner(loadedProject[5]);
@@ -63,7 +69,7 @@ public class FileProjectReader implements ProjectReader {
 				projects.add(project);
 			}
 		} catch (IOException e) {
-			throw new ProjectReadException("File not found or read error", e);
+			throw new WrongFileFormatException("File not found or read error", e);
 		} finally {
 			if (fileReader != null) {
 				try {
@@ -74,11 +80,48 @@ public class FileProjectReader implements ProjectReader {
 			}
 		}
 
-		if (projects.isEmpty()) {
-			throw new ProjectReadException("There is not projects in file");
-		}
+		/*if (projects.isEmpty()) {
+			throw new WrongFileFormatException("There is not projects in file");
+		}*/
 
 		return projects;
+	}
+
+	@Override
+	public Project getProject(int id) {
+		Project result = null;
+		for (Project project : projects) {
+			if(project.getId() == id){
+				result = project;
+				break;
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int size() {
+		return projects.size();
+	}
+
+	@Override
+	public String getProjectDetails(int id) {
+		Project project = getProject(id);
+		StringBuilder projectDetails = new StringBuilder();
+
+		projectDetails.append("name: ").append(project.getName()).append("\n");
+		//projectDetails.append("funded: ").append(project.getFunded()).append("\n");
+		projectDetails.append("daysToGo: ").append(project.getDaysToGo()).append("\n");
+		//projectDetails.append("pledged: ").append(project.getPledged()).append("\n");
+		projectDetails.append("description: ").append(project.getDescription()).append("\n");
+		projectDetails.append("owner: ").append(project.getOwner()).append("\n");
+		projectDetails.append("goal: ").append(project.getGoal()).append("\n");
+		projectDetails.append("linkVideo: ").append(project.getLinkVideo()).append("\n");
+		/*for (Question question : questions) {
+			projectDetails.append("Question: '")
+					.append(question.getQuestionText()).append("'\n");
+		}*/
+		return projectDetails.toString();
 	}
 
 }

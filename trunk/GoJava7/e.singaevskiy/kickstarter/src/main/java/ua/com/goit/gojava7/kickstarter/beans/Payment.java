@@ -6,25 +6,25 @@ public class Payment {
     private String user;
     private long cardId;
     private long sum;
-    private Project project;
-    private Reward reward;
+    private int projectId;
+    private int rewardId;
     private Date date;
 
     public Payment() {
         // default bean constructor
     }
     
-    public Payment(Project project, String user, long cardId, long sum, Date date) {
-        this.project = project;
+    public Payment(int projectId, String user, long cardId, long sum, Date date) {
+        this.projectId = projectId;
         this.user = user;
         this.cardId = cardId;
         this.sum = sum;
         this.date = date;
     }
     
-    public Payment(Project project, Reward reward, String user, long cardId, long sum, Date date) {
-        this(project, user, cardId, sum, date);
-        this.reward = reward;
+    public Payment(int projectId, int rewardId, String user, long cardId, long sum, Date date) {
+        this(projectId, user, cardId, sum, date);
+        this.rewardId = rewardId;
     }
 
     public long getCardId() {
@@ -59,14 +59,30 @@ public class Payment {
         return date;
     }
 
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
+    public int getRewardId() {
+        return rewardId;
+    }
+
+    public void setRewardId(int rewardId) {
+        this.rewardId = rewardId;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + (int) (cardId ^ (cardId >>> 32));
         result = prime * result + ((date == null) ? 0 : date.hashCode());
-        result = prime * result + ((project == null) ? 0 : project.hashCode());
-        result = prime * result + ((reward == null) ? 0 : reward.hashCode());
+        result = prime * result + projectId;
+        result = prime * result + rewardId;
         result = prime * result + (int) (sum ^ (sum >>> 32));
         result = prime * result + ((user == null) ? 0 : user.hashCode());
         return result;
@@ -88,15 +104,9 @@ public class Payment {
                 return false;
         } else if (!date.equals(other.date))
             return false;
-        if (project == null) {
-            if (other.project != null)
-                return false;
-        } else if (!project.equals(other.project))
+        if (projectId != other.projectId)
             return false;
-        if (reward == null) {
-            if (other.reward != null)
-                return false;
-        } else if (!reward.equals(other.reward))
+        if (rewardId != other.rewardId)
             return false;
         if (sum != other.sum)
             return false;
@@ -108,26 +118,10 @@ public class Payment {
         return true;
     }
 
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public Reward getReward() {
-        return reward;
-    }
-
-    public void setReward(Reward reward) {
-        this.reward = reward;
-    }
-
     @Override
     public String toString() {
-        return "Payment [user=" + user + ", cardId=" + cardId + ", sum=" + sum + ", project=" + project + ", reward="
-                + reward + ", date=" + date + "]";
+        return "Payment [user=" + user + ", cardId=" + cardId + ", sum=" + sum + ", projectId=" + projectId
+                + ", rewardId=" + rewardId + ", date=" + date + "]";
     }
 
 }

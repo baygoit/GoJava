@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
@@ -19,6 +18,12 @@ public class ProjectPostgreDAO implements ProjectStorage {
     private static final String FIELDS = "id,name,goalSum,startDate,endDate,category_id,description,videoUrl,author";
     private static final String INSERTION = FIELDS.replaceAll("[^,]+", "?");
     private static final String KEY = "id";
+    
+    private static final String SELECTION =
+    "   SELECT project.id, project.name, project.goalsum, project.balancesum, project.startdate, project.enddate, "
+     +" project.description, project.videourl, project.author, category.id as category_id, category.name as category_name "
+     +" FROM project left join category "
+     +" ON project.category_id = category.id ";
     
     private JdbcDispatcher dispatcher;
 
@@ -40,7 +45,7 @@ public class ProjectPostgreDAO implements ProjectStorage {
 
     @Override
     public Project get(int index) {
-        String sql = "select " + FIELDS + " from " + TABLE + " where " + KEY + " = " + index;
+        String sql = SELECTION + " where " + TABLE + "." + KEY + " = " + index;
         Project element = null;
         try(Connection connection = dispatcher.getConnection();
             Statement statement = connection.createStatement();
@@ -84,7 +89,7 @@ public class ProjectPostgreDAO implements ProjectStorage {
 
     @Override
     public List<Project> getAll() {
-        String sql = "select " + FIELDS + " from " + TABLE;
+        String sql = SELECTION;
         List<Project> result = new ArrayList<>();
         try(Connection connection = dispatcher.getConnection();
             Statement statement = connection.createStatement();
@@ -99,8 +104,8 @@ public class ProjectPostgreDAO implements ProjectStorage {
     }
 
     @Override
-    public List<Project> getByCategory(Category category) {
-        String sql = "select " + FIELDS + " from " + TABLE + " where category_id = " + category.getId();
+    public List<Project> getByCategory(int categoryId) {
+        String sql = SELECTION + " where project.category_id = " + categoryId;
         List<Project> result = new ArrayList<>();
         try(Connection connection = dispatcher.getConnection();
             Statement statement = connection.createStatement();
@@ -124,7 +129,7 @@ public class ProjectPostgreDAO implements ProjectStorage {
         project.setStartDate(resultSet.getDate("startDate"));
         project.setEndDate(resultSet.getDate("endDate"));
         project.setGoalSum(resultSet.getLong("goalSum"));
-        project.setCategory(null);//resultSet.getInt("category_id"));
+        project.setCategoryId(resultSet.getInt("category_id"));
         return project;
     }
 
@@ -135,7 +140,7 @@ public class ProjectPostgreDAO implements ProjectStorage {
         statement.setLong(++i, element.getGoalSum());
         statement.setDate(++i, element.getStartDate());
         statement.setDate(++i, element.getEndDate());
-        statement.setInt(++i, element.getCategory().getId());
+        statement.setInt(++i, element.getCategoryId());
         statement.setString(++i, element.getDescription());
         statement.setString(++i, element.getVideoUrl());
         statement.setString(++i, element.getAuthor());

@@ -14,14 +14,14 @@ import org.junit.Test;
 
 public class PaymentMemoryDAOTest {
 
-	private PaymentMemoryDAO paymentMemory;
+	private PaymentDaoMemoryImpl paymentMemory;
 	private Payment payment;
 	private Project project;
 	
 	
 	@Before
 	public void setUp() throws Exception {
-		paymentMemory = new PaymentMemoryDAO();
+		paymentMemory = new PaymentDaoMemoryImpl();
 		payment = new Payment("Anton", 123456789, 1000);
 		project = new Project("Project 1", "XXX", 10_000);
 	}

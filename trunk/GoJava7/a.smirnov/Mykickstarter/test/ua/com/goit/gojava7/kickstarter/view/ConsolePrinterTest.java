@@ -13,9 +13,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import ua.com.goit.gojava7.kickstarter.beans.*;
-import ua.com.goit.gojava7.kickstarter.dao.memory.CategoryMemoryDAO;
-import ua.com.goit.gojava7.kickstarter.dao.memory.FaqMemoryDAO;
-import ua.com.goit.gojava7.kickstarter.dao.memory.PaymentMemoryDAO;
+import ua.com.goit.gojava7.kickstarter.dao.memory.CategoryDaoMemoryImpl;
+import ua.com.goit.gojava7.kickstarter.dao.memory.FaqDaoMemoryImpl;
+import ua.com.goit.gojava7.kickstarter.dao.memory.PaymentDaoMemoryImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConsolePrinterTest {
@@ -79,10 +79,10 @@ public class ConsolePrinterTest {
 		Payment payment = new Payment(userName, creditCardNumber, donatingSum);
 		payment.setProjectID(projectID);
 		
-		PaymentMemoryDAO paymentStorage = new PaymentMemoryDAO();
+		PaymentDaoMemoryImpl paymentStorage = new PaymentDaoMemoryImpl();
 		paymentStorage.add(payment);
 		
-		FaqMemoryDAO faqStorage = new FaqMemoryDAO();
+		FaqDaoMemoryImpl faqStorage = new FaqDaoMemoryImpl();
 		
 		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);
 		
@@ -112,13 +112,13 @@ public class ConsolePrinterTest {
 		Payment payment = new Payment(userName, creditCardNumber, donatingSum);
 		payment.setProjectID(projectID);
 		
-		PaymentMemoryDAO paymentStorage = new PaymentMemoryDAO();
+		PaymentDaoMemoryImpl paymentStorage = new PaymentDaoMemoryImpl();
 		paymentStorage.add(payment);
 		
 		Faq faq = new Faq(question);
 		faq.setProjectID(projectID);
 		
-		FaqMemoryDAO faqStorage = new FaqMemoryDAO();
+		FaqDaoMemoryImpl faqStorage = new FaqDaoMemoryImpl();
 		faqStorage.add(faq);	
 		
 		consolePrinter.printFullProjectInfo(project, faqStorage, paymentStorage);
@@ -138,7 +138,7 @@ public class ConsolePrinterTest {
 		Category category1 = new Category(categoryName1);
 		Category category2 = new Category(categoryName2);
 		
-		CategoryMemoryDAO categoriesStorage = new CategoryMemoryDAO();
+		CategoryDaoMemoryImpl categoriesStorage = new CategoryDaoMemoryImpl();
 		categoriesStorage.add(category1);
 		categoriesStorage.add(category2);
 		consolePrinter.printCategories(categoriesStorage);
@@ -170,13 +170,13 @@ public class ConsolePrinterTest {
 		Payment payment = new Payment(userName, creditCardNumber, donatingSum);
 		payment.setProjectID(projectID);
 		
-		PaymentMemoryDAO paymentStorage = new PaymentMemoryDAO();
+		PaymentDaoMemoryImpl paymentStorage = new PaymentDaoMemoryImpl();
 		paymentStorage.add(payment);
 		
 		Faq faq = new Faq(question);
 		faq.setProjectID(projectID);
 		
-		FaqMemoryDAO faqStorage = new FaqMemoryDAO();
+		FaqDaoMemoryImpl faqStorage = new FaqDaoMemoryImpl();
 		faqStorage.add(faq);	
 		
 		consolePrinter.printProjects(projects, faqStorage, paymentStorage);

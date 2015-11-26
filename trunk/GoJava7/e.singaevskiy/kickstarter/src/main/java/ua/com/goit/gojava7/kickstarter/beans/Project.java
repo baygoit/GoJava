@@ -12,7 +12,7 @@ public class Project {
     private long balanceSum;
     private Date startDate;
     private Date endDate;
-    private Category category;
+    private int categoryId;
     private String description;
     private String videoUrl;
     private String author;
@@ -22,14 +22,14 @@ public class Project {
         // default bean constructor
     }
     
-    public Project(int id, String name, String author, Category category) {
-        this(name, author, category);
+    public Project(int id, String name, String author, int categoryId) {
+        this(name, author, categoryId);
         this.id = id;
     }
 
-    public Project(String name, String author, Category category) {
+    public Project(String name, String author, int categoryId) {
         this.name = name;
-        this.category = category;
+        this.categoryId = categoryId;
         this.author = author;
     }
 
@@ -140,12 +140,12 @@ public class Project {
         this.id = id;
     }
 
-    public Category getCategory() {
-        return category;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public List<Question> getQuestions() {

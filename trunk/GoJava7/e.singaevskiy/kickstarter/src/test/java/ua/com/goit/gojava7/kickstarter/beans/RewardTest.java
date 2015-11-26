@@ -10,7 +10,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 
 public class RewardTest {
 
@@ -25,11 +24,11 @@ public class RewardTest {
 
     @Test
     public void testConstructor() {
-        Project project = Mockito.mock(Project.class);
+        int projectId = 42;
         long pledgeSum = 100L;
         String description = "d1";
-        Reward reward = new Reward(1, project, description, pledgeSum);
-        assertThat(reward.getProject(), is(project));
+        Reward reward = new Reward(1, projectId, description, pledgeSum);
+        assertThat(reward.getProjectId(), is(projectId));
         assertThat(reward.getDescription(), is(description));
         assertThat(reward.getPledgeSum(), is(pledgeSum));
     }

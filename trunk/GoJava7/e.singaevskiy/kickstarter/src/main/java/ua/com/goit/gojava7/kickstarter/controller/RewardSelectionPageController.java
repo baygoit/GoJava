@@ -11,7 +11,7 @@ public class RewardSelectionPageController extends PageController<Project> {
 
     @Override
     protected void handle() {
-        rewards = storageFactory.getRewardDAO().getByProject(request);
+        rewards = storageFactory.getRewardDAO().getByProject(request.getId());
         page.showRewards(rewards);
 
     }

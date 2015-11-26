@@ -10,14 +10,14 @@ import ua.com.goit.gojava7.kickstarter.beans.Quote;
 
 public class QuoteMemoryDAOTest {
 
-	private QuoteMemoryDAO qouteMemory;
+	private QuoteDaoMemoryImpl qouteMemory;
 	private Quote quote;
 	
 	
 	@Before
 	public void setUp() throws Exception {
 		quote = new Quote("Hello", "Anton");
-		qouteMemory = new QuoteMemoryDAO();
+		qouteMemory = new QuoteDaoMemoryImpl();
 	}
 
 	@Test
