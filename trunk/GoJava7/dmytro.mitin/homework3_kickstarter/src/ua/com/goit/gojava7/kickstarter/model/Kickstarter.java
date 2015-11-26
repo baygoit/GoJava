@@ -36,6 +36,11 @@ public class Kickstarter implements KickstarterObservable {
         notifyView();
     }
 
+    public void addQuestion(Project project, String question) throws IOException, ExitException {
+        project.addQuestion(question);
+        notifyView();
+    }
+
     // implementing Observer pattern
     @Override
     public void notifyView() throws ExitException, IOException {
@@ -53,4 +58,6 @@ public class Kickstarter implements KickstarterObservable {
     public void removeObserver(View view) {
         views.remove(view);
     }
+
+
 }

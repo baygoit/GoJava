@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class Project {
 
     private final List<String> benefits;
 
+    private List<Integer> sumForBenefit;
+
     public Project(String name, Category category, String shortDescription, String description, String history,
                    String videoUrl, int moneyNeeded, int daysLeft)
     {
@@ -42,6 +45,7 @@ public class Project {
         this.daysLeft = daysLeft;
         this.questions = new ArrayList<>();
         this.benefits = new ArrayList<>();
+        this.sumForBenefit = Arrays.asList(1, 10, 40); // currently hardcoded
     }
 
     public String getName() {
@@ -86,6 +90,10 @@ public class Project {
 
     public List<String> getBenefits() {
         return Collections.unmodifiableList(benefits);
+    }
+
+    public List<Integer> getSumForBenefit() {
+        return sumForBenefit;
     }
 
     public void addMoneyDonated(int money) {

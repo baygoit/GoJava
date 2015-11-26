@@ -41,6 +41,13 @@ public class ProjectPage implements Page {
 
         System.out.println("Would you like to donate? (Enter \"y\" if so or any key otherwise.)");
 
+        if (project.getBenefits().size() > 0) {
+            for (int i = 0; i < Math.min(project.getBenefits().size(), project.getSumForBenefit().size()); i++) {
+                System.out.println("If you donate " + project.getSumForBenefit().get(i)
+                        + "$ you will get " + project.getBenefits().get(i));
+            }
+        }
+
         String donationConfirmation = reader.readLine();
 
         if (donationConfirmation.equals("y") || donationConfirmation.equals("Y")) {
