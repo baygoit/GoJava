@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.beans.Reward;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 @RunWith(value=MockitoJUnitRunner.class)
 public class RewardFileDAOTest {

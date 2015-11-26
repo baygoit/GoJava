@@ -14,14 +14,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import ua.com.goit.gojava7.kickstarter.beans.Reward;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
 public class RewardPostgreDAOTest {
 
     List<Reward> list;
-    RewardsPostgreDAO dao;
+    RewardPostgreDAO dao;
 
     @Before
     public void setUp() throws Exception {
@@ -36,7 +36,7 @@ public class RewardPostgreDAOTest {
         list.add(new Reward(1, 2, "r1", 113));
         list.add(new Reward(2, 2, "r2", 44));
         
-        dao = new RewardsPostgreDAO(dispatcher);         
+        dao = new RewardPostgreDAO(dispatcher);         
     }
     
     @After
@@ -60,7 +60,7 @@ public class RewardPostgreDAOTest {
     public void testException() throws Exception {
         JdbcDispatcher dispatcher = Mockito.mock(JdbcDispatcher.class);
         Mockito.when(dispatcher.getConnection()).thenThrow(SQLException.class);
-        dao = new RewardsPostgreDAO(dispatcher); 
+        dao = new RewardPostgreDAO(dispatcher); 
         dao.clear();
         dao.addAll(list);
         dao.getAll();

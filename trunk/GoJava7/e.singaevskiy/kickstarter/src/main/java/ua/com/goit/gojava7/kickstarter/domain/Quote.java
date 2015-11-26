@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.beans;
+package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Quote {
     private String author;

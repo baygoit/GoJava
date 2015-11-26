@@ -1,11 +1,10 @@
-package ua.com.goit.gojava7.kickstarter.dao.file;
+package ua.com.goit.gojava7.kickstarter.dao.file.util;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.DataStorage;
-import ua.com.goit.gojava7.kickstarter.dao.file.util.CsvParser;
+import ua.com.goit.gojava7.kickstarter.dao.DataSource;
 
-public class FileDAO<T> implements DataStorage<T> {
+public class FileDAO<T> implements DataSource<T> {
 
     private String pathToFile;
     private Class<T> persistentClass;

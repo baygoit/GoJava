@@ -4,11 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
-import ua.com.goit.gojava7.kickstarter.view.MainPage;
+import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 
-public abstract class PageController <T> {
+public abstract class AbstractPageController <T> {
     
-    protected MainPage page;
+    protected ConsolePrinter printer;
     
     protected StorageFactory storageFactory;
     protected BufferedReader inputReader;    
@@ -27,23 +27,23 @@ public abstract class PageController <T> {
         this.inputReader = inputReader;
     }
     
-    public void setMainPage(MainPage page) {
-        this.page = page;
+    public void setView(ConsolePrinter page) {
+        this.printer = page;
     }
 
     public final void dispatch(){
         do{
-            page.showDivider();
+            printer.showDivider();
             handle();
         }
         while (!isDone());
     }
     
-    public final <U> void dispatchNext(U nextRequest, PageController<U> nextPage){
+    public final <U> void dispatchNext(U nextRequest, AbstractPageController<U> nextPage){
         nextPage.setRequest(nextRequest);
         nextPage.setStorageFactory(storageFactory);
         nextPage.setInputReader(inputReader);
-        nextPage.setMainPage(page);
+        nextPage.setView(printer);
         nextPage.dispatch();
     }
     
@@ -62,7 +62,7 @@ public abstract class PageController <T> {
             }
 
             if (option > limit || option < 0) {
-                page.showMessage("Use positive numeric index not higher than " + limit);
+                printer.showMessage("Use positive numeric index not higher than " + limit);
             }
         } while (option > limit || option < 0);
 

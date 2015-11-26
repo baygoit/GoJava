@@ -5,16 +5,16 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.beans.Reward;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
-public class MainPage {
+public class ConsolePrinter {
 
     PrintStream outStream;
 
-    public MainPage(PrintStream outStream) {
+    public ConsolePrinter(PrintStream outStream) {
         this.outStream = outStream;
     }
 

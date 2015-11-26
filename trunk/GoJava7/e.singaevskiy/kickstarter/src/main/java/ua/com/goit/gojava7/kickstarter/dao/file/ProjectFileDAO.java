@@ -1,9 +1,13 @@
 package ua.com.goit.gojava7.kickstarter.dao.file;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class ProjectFileDAO extends FileDAO<Project> implements ProjectStorage {
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
+import ua.com.goit.gojava7.kickstarter.dao.file.util.FileDAO;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+
+public class ProjectFileDAO extends FileDAO<Project> implements ProjectDAO {
 
     public ProjectFileDAO() {
         super(Project.class);
@@ -21,6 +25,13 @@ public class ProjectFileDAO extends FileDAO<Project> implements ProjectStorage {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<Project> getByCategory(int categoryId) {
+        return this.getAll().stream()
+                .filter(project -> project.getCategoryId() == categoryId)
+                .collect(Collectors.toList());
     }
 
 }

@@ -1,11 +1,11 @@
-package ua.com.goit.gojava7.kickstarter.dao.memory;
+package ua.com.goit.gojava7.kickstarter.dao.memory.util;
 
 import java.util.Collections;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.DataStorage;
+import ua.com.goit.gojava7.kickstarter.dao.DataSource;
 
-public class MemoryDAO<T> implements DataStorage<T> {
+public abstract class MemoryDAO<T> implements DataSource<T> {
     protected List<T> dataSource;
 
     public MemoryDAO(List<T> dataSource) {

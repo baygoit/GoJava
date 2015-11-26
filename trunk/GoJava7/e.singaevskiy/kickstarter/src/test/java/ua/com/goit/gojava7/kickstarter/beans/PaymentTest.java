@@ -11,6 +11,8 @@ import java.sql.Date;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.domain.Payment;
+
 public class PaymentTest {
 	
 	Payment testObject = new Payment(1, "testUser", 123, 456, new Date(System.currentTimeMillis()));

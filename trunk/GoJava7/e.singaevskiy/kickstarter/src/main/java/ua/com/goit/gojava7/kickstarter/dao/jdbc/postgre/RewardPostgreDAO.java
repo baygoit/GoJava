@@ -8,19 +8,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Question;
-import ua.com.goit.gojava7.kickstarter.dao.QuestionsStorage;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
-public class QuestionsPostgreDAO implements QuestionsStorage {
+public class RewardPostgreDAO implements RewardDAO {
 
-    private static final String TABLE = "question";
-    private static final String FIELDS = "project_id,question,answer";
+    private static final String TABLE = "reward";
+    private static final String FIELDS = "id,description,pledgeSum,project_id";
     private static final String INSERTION = FIELDS.replaceAll("[^,]+", "?");
-   
+    private static final String KEY = "id";
+    
     private JdbcDispatcher dispatcher;
 
-    public QuestionsPostgreDAO(JdbcDispatcher dispatcher) {
+    public RewardPostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
     }
 
@@ -37,9 +38,9 @@ public class QuestionsPostgreDAO implements QuestionsStorage {
     }
 
     @Override
-    public Question get(int index) {
-        String sql = "select " + FIELDS + " from " + TABLE + " limit 1 offset  " + index;
-        Question element = null;
+    public Reward get(int index) {
+        String sql = "select " + FIELDS + " from " + TABLE + " where " + KEY + " = " + index;
+        Reward element = null;
         try(Connection connection = dispatcher.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);) {    
@@ -53,7 +54,7 @@ public class QuestionsPostgreDAO implements QuestionsStorage {
     }
 
     @Override
-    public void add(Question element) {
+    public void add(Reward element) {
         String sql = "insert into " + TABLE + " (" + FIELDS + ") values (" + INSERTION + ")";
         try(Connection connection = dispatcher.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -66,11 +67,11 @@ public class QuestionsPostgreDAO implements QuestionsStorage {
     }
 
     @Override
-    public void addAll(List<Question> elements) {
+    public void addAll(List<Reward> elements) {
         String sql = "insert into " + TABLE + " (" + FIELDS + ") values (" + INSERTION + ")";
         try(Connection connection = dispatcher.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
-            for (Question element : elements) {
+            for (Reward element : elements) {
                 writeElementToRecord(element, statement);
                 statement.executeUpdate();
             } 
@@ -81,9 +82,9 @@ public class QuestionsPostgreDAO implements QuestionsStorage {
     }
 
     @Override
-    public List<Question> getAll() {
+    public List<Reward> getAll() {
         String sql = "select " + FIELDS + " from " + TABLE;
-        List<Question> result = new ArrayList<>();
+        List<Reward> result = new ArrayList<>();
         try(Connection connection = dispatcher.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)) {
@@ -97,9 +98,9 @@ public class QuestionsPostgreDAO implements QuestionsStorage {
     }
 
     @Override
-    public List<Question> getByProject(int projectId) {
+    public List<Reward> getByProject(int projectId) {
         String sql = "select " + FIELDS + " from " + TABLE + " where project_id = " + projectId;
-        List<Question> result = new ArrayList<>();
+        List<Reward> result = new ArrayList<>();
         try(Connection connection = dispatcher.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)) {
@@ -112,18 +113,20 @@ public class QuestionsPostgreDAO implements QuestionsStorage {
         return result;
     }
 
-    private Question readElementFromRecord(ResultSet resultSet) throws SQLException {
-        Question element = new Question();
-        element.setQuestion(resultSet.getString("question"));
-        element.setAnswer(resultSet.getString("answer"));
+    private Reward readElementFromRecord(ResultSet resultSet) throws SQLException {
+        Reward element = new Reward();
+        element.setId(resultSet.getInt("id"));
+        element.setDescription(resultSet.getString("description"));
+        element.setPledgeSum(resultSet.getLong("pledgeSum"));
         element.setProjectId(resultSet.getInt("project_id"));
         return element;
     }
 
-    private void writeElementToRecord(Question element, PreparedStatement statement) throws SQLException {
+    private void writeElementToRecord(Reward element, PreparedStatement statement) throws SQLException {
         int i = 0;
+        statement.setInt(++i, element.getId());
+        statement.setString(++i, element.getDescription());
+        statement.setLong(++i, element.getPledgeSum());
         statement.setInt(++i, element.getProjectId());
-        statement.setString(++i, element.getQuestion());
-        statement.setString(++i, element.getAnswer());
     }
 }

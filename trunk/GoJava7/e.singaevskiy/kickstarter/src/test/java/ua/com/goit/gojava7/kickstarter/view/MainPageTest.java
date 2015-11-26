@@ -11,14 +11,14 @@ import java.util.Collection;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.beans.Quote;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
 public class MainPageTest {
 
 	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	MainPage page = new MainPage(new PrintStream(outContent));
+	ConsolePrinter page = new ConsolePrinter(new PrintStream(outContent));
 
 	@Test
 	public void showQuote() {

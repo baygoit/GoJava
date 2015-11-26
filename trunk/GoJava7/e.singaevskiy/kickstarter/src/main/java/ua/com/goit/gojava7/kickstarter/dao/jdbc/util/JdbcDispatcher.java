@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.jdbc;
+package ua.com.goit.gojava7.kickstarter.dao.jdbc.util;
 
 import java.sql.Connection;
 import java.sql.SQLException;

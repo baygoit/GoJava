@@ -12,11 +12,11 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentStorage;
-import ua.com.goit.gojava7.kickstarter.dao.QuestionsStorage;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionsDAO;
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
-import ua.com.goit.gojava7.kickstarter.view.MainPage;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DetailsPageControllerTest {
@@ -25,18 +25,18 @@ public class DetailsPageControllerTest {
     BufferedReader reader;
     
     @Mock
-    PaymentStorage paymentStorage;
+    PaymentDAO paymentStorage;
     
     @Mock
-    QuestionsStorage questionsStorage;
+    QuestionsDAO questionsStorage;
     
     @Mock
     StorageFactory factory;
     
     @Mock
-    MainPage page;
+    ConsolePrinter page;
     
-    PageController<Project> controller;
+    AbstractPageController<Project> controller;
     
     @Mock
     Project project;  
@@ -51,7 +51,7 @@ public class DetailsPageControllerTest {
         controller = new ProjectDetailsPageController();
         controller.setInputReader(reader); 
         controller.setStorageFactory(factory);
-        controller.setMainPage(page);
+        controller.setView(page);
         controller.setRequest(project);
     }
 

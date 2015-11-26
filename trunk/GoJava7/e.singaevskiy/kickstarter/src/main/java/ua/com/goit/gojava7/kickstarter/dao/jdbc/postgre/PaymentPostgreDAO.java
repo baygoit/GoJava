@@ -8,11 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Payment;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentStorage;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.domain.Payment;
 
-public class PaymentPostgreDAO implements PaymentStorage {
+public class PaymentPostgreDAO implements PaymentDAO {
 
     private static final String TABLE = "payment";
     private static final String FIELDS = "cardid,date,username,sum,project_id,reward_id";
@@ -136,5 +136,11 @@ public class PaymentPostgreDAO implements PaymentStorage {
         } else {
             statement.setInt(6, element.getRewardId());             
         }
+    }
+
+    @Override
+    public long getSum(int projectId) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 }

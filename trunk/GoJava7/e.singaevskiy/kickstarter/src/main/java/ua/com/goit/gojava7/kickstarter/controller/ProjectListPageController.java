@@ -2,24 +2,24 @@ package ua.com.goit.gojava7.kickstarter.controller;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentStorage;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-public class ProjectListPageController extends PageController<Category> {
+public class ProjectListPageController extends AbstractPageController<Category> {
 
     private List<Project> foundProjects;
 
     @Override
     protected void handle() {
         
-        ProjectStorage projectDAO = storageFactory.getProjectDAO();
-        PaymentStorage paymentDAO = storageFactory.getPaymentDAO();
+        ProjectDAO projectDAO = storageFactory.getProjectDAO();
+        PaymentDAO paymentDAO = storageFactory.getPaymentDAO();
         
         foundProjects = projectDAO.getByCategory(request.getId());
         foundProjects.forEach(project -> project.setBalanceSum(paymentDAO.getSum(project.getId())));
-        page.showProjects(foundProjects);
+        printer.showProjects(foundProjects);
 
         
     }
@@ -32,7 +32,7 @@ public class ProjectListPageController extends PageController<Category> {
             return true;
         } else { 
             
-            PageController<Project> nextPage = new ProjectDetailsPageController();
+            AbstractPageController<Project> nextPage = new ProjectDetailsPageController();
             dispatchNext(foundProjects.get(option-1), nextPage);
             
             return false;

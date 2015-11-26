@@ -8,20 +8,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Reward;
-import ua.com.goit.gojava7.kickstarter.dao.RewardStorage;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionsDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
 
-public class RewardsPostgreDAO implements RewardStorage {
+public class QuestionPostgreDAO implements QuestionsDAO {
 
-    private static final String TABLE = "reward";
-    private static final String FIELDS = "id,description,pledgeSum,project_id";
+    private static final String TABLE = "question";
+    private static final String FIELDS = "project_id,question,answer";
     private static final String INSERTION = FIELDS.replaceAll("[^,]+", "?");
-    private static final String KEY = "id";
-    
+   
     private JdbcDispatcher dispatcher;
 
-    public RewardsPostgreDAO(JdbcDispatcher dispatcher) {
+    public QuestionPostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
     }
 
@@ -38,9 +37,9 @@ public class RewardsPostgreDAO implements RewardStorage {
     }
 
     @Override
-    public Reward get(int index) {
-        String sql = "select " + FIELDS + " from " + TABLE + " where " + KEY + " = " + index;
-        Reward element = null;
+    public Question get(int index) {
+        String sql = "select " + FIELDS + " from " + TABLE + " limit 1 offset  " + index;
+        Question element = null;
         try(Connection connection = dispatcher.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);) {    
@@ -54,7 +53,7 @@ public class RewardsPostgreDAO implements RewardStorage {
     }
 
     @Override
-    public void add(Reward element) {
+    public void add(Question element) {
         String sql = "insert into " + TABLE + " (" + FIELDS + ") values (" + INSERTION + ")";
         try(Connection connection = dispatcher.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -67,11 +66,11 @@ public class RewardsPostgreDAO implements RewardStorage {
     }
 
     @Override
-    public void addAll(List<Reward> elements) {
+    public void addAll(List<Question> elements) {
         String sql = "insert into " + TABLE + " (" + FIELDS + ") values (" + INSERTION + ")";
         try(Connection connection = dispatcher.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
-            for (Reward element : elements) {
+            for (Question element : elements) {
                 writeElementToRecord(element, statement);
                 statement.executeUpdate();
             } 
@@ -82,9 +81,9 @@ public class RewardsPostgreDAO implements RewardStorage {
     }
 
     @Override
-    public List<Reward> getAll() {
+    public List<Question> getAll() {
         String sql = "select " + FIELDS + " from " + TABLE;
-        List<Reward> result = new ArrayList<>();
+        List<Question> result = new ArrayList<>();
         try(Connection connection = dispatcher.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)) {
@@ -98,9 +97,9 @@ public class RewardsPostgreDAO implements RewardStorage {
     }
 
     @Override
-    public List<Reward> getByProject(int projectId) {
+    public List<Question> getByProject(int projectId) {
         String sql = "select " + FIELDS + " from " + TABLE + " where project_id = " + projectId;
-        List<Reward> result = new ArrayList<>();
+        List<Question> result = new ArrayList<>();
         try(Connection connection = dispatcher.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql)) {
@@ -113,20 +112,18 @@ public class RewardsPostgreDAO implements RewardStorage {
         return result;
     }
 
-    private Reward readElementFromRecord(ResultSet resultSet) throws SQLException {
-        Reward element = new Reward();
-        element.setId(resultSet.getInt("id"));
-        element.setDescription(resultSet.getString("description"));
-        element.setPledgeSum(resultSet.getLong("pledgeSum"));
+    private Question readElementFromRecord(ResultSet resultSet) throws SQLException {
+        Question element = new Question();
+        element.setQuestion(resultSet.getString("question"));
+        element.setAnswer(resultSet.getString("answer"));
         element.setProjectId(resultSet.getInt("project_id"));
         return element;
     }
 
-    private void writeElementToRecord(Reward element, PreparedStatement statement) throws SQLException {
+    private void writeElementToRecord(Question element, PreparedStatement statement) throws SQLException {
         int i = 0;
-        statement.setInt(++i, element.getId());
-        statement.setString(++i, element.getDescription());
-        statement.setLong(++i, element.getPledgeSum());
         statement.setInt(++i, element.getProjectId());
+        statement.setString(++i, element.getQuestion());
+        statement.setString(++i, element.getAnswer());
     }
 }

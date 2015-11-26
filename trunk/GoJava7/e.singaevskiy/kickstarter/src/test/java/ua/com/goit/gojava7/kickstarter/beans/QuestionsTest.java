@@ -9,6 +9,8 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.domain.Question;
+
 public class QuestionsTest {
 	
     @Test
