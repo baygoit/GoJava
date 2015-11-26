@@ -1,56 +1,75 @@
 package ua.com.goit.gojava7.kickstarter.Level;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuestionStorage;
 
 public class PledgeLevel implements Level {
+	private PaymentDao paymentDao;
+	private RewardDao rewardDao;
+	
+	public PledgeLevel(PaymentDao paymentDao, RewardDao rewardDao) {
+		setPaymentDao(paymentDao);
+		setRewardDao(rewardDao);
+	}
 
+	public PaymentDao getPaymentDao() {
+		return paymentDao;
+	}
+
+	public void setPaymentDao(PaymentDao paymentDao) {
+		this.paymentDao = paymentDao;
+	}
+	
+	public RewardDao getRewardDao() {
+		return rewardDao;
+	}
+
+	public void setRewardDao(RewardDao rewardDao) {
+		this.rewardDao = rewardDao;
+	}
+	
 	@Override
-	public String generateAnswer(List<Category> categories, int userChoise,
-			Category selectedCategory, Project selectedProject) {
+	public String generateAnswer(int userChoise, Category selectedCategory,
+			Project selectedProject) {
 
 		return "";
 	}
 
 	@Override
-	public Category findSelectedCategory(List<Category> categories,
-			int userChoise, Category selectedCategory) {
+	public Category findSelectedCategory(int userChoise,
+			Category selectedCategory) {
 
 		return selectedCategory;
 	}
 
 	@Override
-	public String validateUserChoise(List<Category> categories, int userChoise,
-			Category selectedCategory, Project selectedProject) {
+	public String validateUserChoise(int userChoise, Category selectedCategory,
+			Project selectedProject) {
 
 		return "";
 	}
 
 	@Override
 	public String fillOutForm(Project project, int userChoise,
-			ConsoleScanner consoleScanner, QuestionStorage questionStorage,
-			PaymentStorage paymentStorage) {
+			ConsoleScanner consoleScanner) {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 
 		int donate = 0;
 		String mistakeText = "";
 
-		if (userChoise == project.rewardsSize() + 1) {
+		if (userChoise == rewardDao.size()+ 1) {
 			consolePrinter.print("Enter amount to donate");
 			donate = consoleScanner.scan();
 		} else if (userChoise > 0) {
-			mistakeText = validateUserChoise(new ArrayList<Category>(),
-					userChoise, new Category("", 0), project);
+			mistakeText = validateUserChoise(userChoise, new Category("", 0),
+					project);
 			if (mistakeText.equals("")) {
-				donate = project.getReward(userChoise - 1).getPledge();
+				donate = rewardDao.getReward(userChoise - 1).getPledge();
 			} else {
 				consolePrinter.print(mistakeText);
 			}
@@ -64,15 +83,14 @@ public class PledgeLevel implements Level {
 		consolePrinter.print("Enter card number");
 		String cardNumber = consoleScanner.scanLine();
 
-		Payment payment = new Payment(paymentStorage.generateIdOfNewElement());
+		Payment payment = new Payment(paymentDao.generateIdOfNewElement());
 		payment.setProjectId(project.getId());
 		payment.setName(name);
-		payment.setCardNumber(cardNumber);		
+		payment.setCardNumber(cardNumber);
 		payment.setPledge(donate);
-		
-		project.addPayment(payment);	
-		paymentStorage.addPayment(payment);
-		
+
+		paymentDao.addPayment(payment);
+
 		return "Thank you!\n0 : back to rewards";
 	}
 

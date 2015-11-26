@@ -26,7 +26,7 @@ public class JdbcDispatcher {
     }
 
     public void processException(SQLException ex) {
-        ex.printStackTrace();
+        //ex.printStackTrace();
         printSQLException(ex);
     }
 

@@ -11,24 +11,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
 import java.util.List;
 
 @Controller
 @RequestMapping("/search")
 public class SearchController {
     @Autowired
-    private SearchService searchService;
+    private ServletContext servletContext;
 
-    private List<City> availableCities;
+    @Autowired
+    private SearchService searchService;
 
     @PostConstruct
     private void init() {
-        availableCities = searchService.getAllCities();
+        List<City> availableCities = searchService.getAllCities();
+        servletContext.setAttribute("availableCities", availableCities);
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getSearch(Model model) {
-        model.addAttribute("availableCities", availableCities);
+    public String getSearch() {
         return "search";
     }
 

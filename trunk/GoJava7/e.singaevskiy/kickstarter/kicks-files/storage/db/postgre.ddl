@@ -43,7 +43,7 @@ CREATE TABLE reward
 CREATE TABLE payment
 (
   id SERIAL NOT NULL PRIMARY KEY,
-  cardId integer,
+  cardId bigint,
   date date,
   username text,
   sum bigint,

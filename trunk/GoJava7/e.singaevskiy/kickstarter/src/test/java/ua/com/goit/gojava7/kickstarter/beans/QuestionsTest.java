@@ -14,10 +14,10 @@ public class QuestionsTest {
     @Test
     public void testConstructor() {
         
-        Project project = new Project();
-        Question question = new Question(project , "q1","a1");
+        int projectId = 1;
+        Question question = new Question(projectId , "q1","a1");
         
-        assertThat(question.getProject(), is(project));
+        assertThat(question.getProjectId(), is(projectId));
          
     }
     

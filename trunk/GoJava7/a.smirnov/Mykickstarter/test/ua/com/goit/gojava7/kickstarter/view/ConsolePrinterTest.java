@@ -13,7 +13,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import ua.com.goit.gojava7.kickstarter.beans.*;
-import ua.com.goit.gojava7.kickstarter.storage_in_memory.*;
+import ua.com.goit.gojava7.kickstarter.dao.memory.CategoryMemoryDAO;
+import ua.com.goit.gojava7.kickstarter.dao.memory.FaqMemoryDAO;
+import ua.com.goit.gojava7.kickstarter.dao.memory.PaymentMemoryDAO;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConsolePrinterTest {
@@ -77,10 +79,10 @@ public class ConsolePrinterTest {
 		Payment payment = new Payment(userName, creditCardNumber, donatingSum);
 		payment.setProjectID(projectID);
 		
-		PaymentStorage paymentStorage = new PaymentStorage();
+		PaymentMemoryDAO paymentStorage = new PaymentMemoryDAO();
 		paymentStorage.add(payment);
 		
-		FaqStorage faqStorage = new FaqStorage();
+		FaqMemoryDAO faqStorage = new FaqMemoryDAO();
 		
 		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);
 		
@@ -110,13 +112,13 @@ public class ConsolePrinterTest {
 		Payment payment = new Payment(userName, creditCardNumber, donatingSum);
 		payment.setProjectID(projectID);
 		
-		PaymentStorage paymentStorage = new PaymentStorage();
+		PaymentMemoryDAO paymentStorage = new PaymentMemoryDAO();
 		paymentStorage.add(payment);
 		
 		Faq faq = new Faq(question);
 		faq.setProjectID(projectID);
 		
-		FaqStorage faqStorage = new FaqStorage();
+		FaqMemoryDAO faqStorage = new FaqMemoryDAO();
 		faqStorage.add(faq);	
 		
 		consolePrinter.printFullProjectInfo(project, faqStorage, paymentStorage);
@@ -136,7 +138,7 @@ public class ConsolePrinterTest {
 		Category category1 = new Category(categoryName1);
 		Category category2 = new Category(categoryName2);
 		
-		CategoriesStorage categoriesStorage = new CategoriesStorage();
+		CategoryMemoryDAO categoriesStorage = new CategoryMemoryDAO();
 		categoriesStorage.add(category1);
 		categoriesStorage.add(category2);
 		consolePrinter.printCategories(categoriesStorage);
@@ -168,13 +170,13 @@ public class ConsolePrinterTest {
 		Payment payment = new Payment(userName, creditCardNumber, donatingSum);
 		payment.setProjectID(projectID);
 		
-		PaymentStorage paymentStorage = new PaymentStorage();
+		PaymentMemoryDAO paymentStorage = new PaymentMemoryDAO();
 		paymentStorage.add(payment);
 		
 		Faq faq = new Faq(question);
 		faq.setProjectID(projectID);
 		
-		FaqStorage faqStorage = new FaqStorage();
+		FaqMemoryDAO faqStorage = new FaqMemoryDAO();
 		faqStorage.add(faq);	
 		
 		consolePrinter.printProjects(projects, faqStorage, paymentStorage);

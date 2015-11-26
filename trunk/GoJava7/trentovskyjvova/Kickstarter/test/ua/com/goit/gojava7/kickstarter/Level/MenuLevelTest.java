@@ -4,22 +4,32 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
+import ua.com.goit.gojava7.kickstarter.dao.memory.CategoryDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
+@RunWith(MockitoJUnitRunner.class)
 public class MenuLevelTest {
 	private static final String ANSVER = "Please, enter the number between 0 and 1";
 	
 	List<Category> categories;
 	Category selectedCategory;
-	Level menuLevel = new MenuLevel();
+	@Mock
+	CategoryDaoMemoryImpl categoryDao = new CategoryDaoMemoryImpl();
+	@InjectMocks
+	Level menuLevel = new MenuLevel(categoryDao);
 	Project project;
 	
 	@Before 
@@ -31,31 +41,36 @@ public class MenuLevelTest {
 	
 	@Test
 	public void testFindSelectedCategory() {
-		Category result = menuLevel.findSelectedCategory(new ArrayList<Category>(), 1, selectedCategory);
+		when(categoryDao.getCategories()).thenReturn(categories);
+		Category result = menuLevel.findSelectedCategory(1, selectedCategory);
 		assertThat(result, nullValue());
 	}
 
 	@Test
 	public void testValidateUserChoise1() {
-		String result = menuLevel.validateUserChoise(categories, 1, selectedCategory, project);
+		when(categoryDao.size()).thenReturn(categories.size());
+		String result = menuLevel.validateUserChoise(1, selectedCategory, project);
 		assertThat(result, is(""));
 	}
 	
 	@Test
 	public void testValidateUserChoise2() {
-		String result = menuLevel.validateUserChoise(categories, 2, selectedCategory, project);
+		when(categoryDao.size()).thenReturn(categories.size());
+		String result = menuLevel.validateUserChoise(2, selectedCategory, project);
 		assertThat(result, is(ANSVER));
 	}
 	
 	@Test
 	public void testValidateUserChoiseMinus1() {
-		String result = menuLevel.validateUserChoise(categories, -1, selectedCategory, project);
+		when(categoryDao.size()).thenReturn(categories.size());
+		String result = menuLevel.validateUserChoise(-1, selectedCategory, project);
 		assertThat(result, is(ANSVER));
 	}
 	
 	@Test
 	public void testGenerateAnswer() {
-		String result = menuLevel.generateAnswer(categories, 0, selectedCategory, null);
+		when(categoryDao.getCategories()).thenReturn(categories);
+		String result = menuLevel.generateAnswer(0, selectedCategory, null);
 		assertThat(result, containsString("1 : Some Category"));
 		assertThat(result, containsString("0 : Exit from application"));
 		assertThat(result, containsString("Select a category"));

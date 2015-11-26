@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Reward;
 import ua.com.goit.gojava7.kickstarter.dao.RewardStorage;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
@@ -99,8 +98,8 @@ public class RewardsPostgreDAO implements RewardStorage {
     }
 
     @Override
-    public List<Reward> getByProject(Project category) {
-        String sql = "select " + FIELDS + " from " + TABLE + " where project_id = " + category.getId();
+    public List<Reward> getByProject(int projectId) {
+        String sql = "select " + FIELDS + " from " + TABLE + " where project_id = " + projectId;
         List<Reward> result = new ArrayList<>();
         try(Connection connection = dispatcher.getConnection();
             Statement statement = connection.createStatement();
@@ -119,7 +118,7 @@ public class RewardsPostgreDAO implements RewardStorage {
         element.setId(resultSet.getInt("id"));
         element.setDescription(resultSet.getString("description"));
         element.setPledgeSum(resultSet.getLong("pledgeSum"));
-        element.setProject(null);//resultSet.getInt("project_id"));
+        element.setProjectId(resultSet.getInt("project_id"));
         return element;
     }
 
@@ -128,6 +127,6 @@ public class RewardsPostgreDAO implements RewardStorage {
         statement.setInt(++i, element.getId());
         statement.setString(++i, element.getDescription());
         statement.setLong(++i, element.getPledgeSum());
-        statement.setInt(++i, element.getProject().getId());
+        statement.setInt(++i, element.getProjectId());
     }
 }

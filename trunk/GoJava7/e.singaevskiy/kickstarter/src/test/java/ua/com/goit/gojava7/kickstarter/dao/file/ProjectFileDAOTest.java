@@ -14,7 +14,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.memory.util.Memory;
 
@@ -67,21 +66,16 @@ public class ProjectFileDAOTest {
     
     @Test
     public void testGetByCategory() {
-        Category category = new Category(44, "cat");
-        new CategoryFileDAO().add(category);
         List<Project> pList = new ArrayList<>();
-        Project e = new Project("p1", null, category);
-        e.setId(22);
-        pList.add(e);
-        Project e2 = new Project("p2", null, category);
-        e2.setId(44);
-        pList.add(e2);
+        int categoryId = 33;
+        pList.add(new Project(22, "p1", null, categoryId));
+        pList.add(new Project(44,"p2", null, categoryId));
         
         fs.addAll(pList);
-        fs.add(new Project("p3", null, new Category(2, "cat2")));
+        fs.add(new Project(55, "p3", null, 2));
 
         assertThat(fs.getAll(), not(pList));
-        assertThat(fs.getByCategory(category), is(pList));
+        assertThat(fs.getByCategory(categoryId), is(pList));
     }
     
 }

@@ -1,12 +1,10 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class Project implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class Project {
 	private int uniqueID;
 	private int categoryID;
 	private String title;

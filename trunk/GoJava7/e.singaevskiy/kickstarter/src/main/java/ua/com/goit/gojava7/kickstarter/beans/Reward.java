@@ -4,26 +4,26 @@ public class Reward {
     
     private long pledgeSum;
     private String description;
-    private Project project;
+    private int projectId;
     private int id;
 
     public Reward() {
         // default bean constructor
     }
     
-    public Reward(int id, Project project, String description, Long pledgeSum) {
+    public Reward(int id, int projectId, String description, long pledgeSum) {
         this.id = id;
-        this.project = project;
+        this.projectId = projectId;
         this.description = description;
         this.pledgeSum = pledgeSum;
     }
 
-    public Project getProject() {
-        return project;
+    public int getProjectId() {
+        return projectId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public long getPledgeSum() {
@@ -40,6 +40,14 @@ public class Reward {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -64,17 +72,9 @@ public class Reward {
         return true;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
-        return "Reward [id=" + id + ", project=" + project + ", description=" + description + ", pledgeSum=" + pledgeSum
-                + "]";
+        return "Reward [id=" + id + ", projectId=" + projectId + ", description=" + description + ", pledgeSum="
+                + pledgeSum + "]";
     }
 }
