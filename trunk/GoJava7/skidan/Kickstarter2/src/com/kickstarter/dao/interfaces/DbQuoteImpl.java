@@ -3,7 +3,7 @@ package com.kickstarter.dao.interfaces;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +13,12 @@ public class DbQuoteImpl extends DbConnector implements QuoteDaoInterface {
 
 	public Quote get() {
 		ResultSet rs = null;
-		Statement statement = null;
+		PreparedStatement pStatement = null;
 		List<Quote> list = new ArrayList<>();
 
 		try (Connection conection = getConnection()) {
-			statement = conection.createStatement();
-			rs = statement.executeQuery("select * from quotes");
+			pStatement = conection.prepareStatement("select * from quotes");
+			rs = pStatement.executeQuery();
 
 			while (rs.next()) {
 				Quote quote = new Quote();
@@ -26,12 +26,9 @@ public class DbQuoteImpl extends DbConnector implements QuoteDaoInterface {
 				quote.setQuoteText(rs.getString("quote"));
 				list.add(quote);
 			}
-
 		} catch (SQLException e) {
 			System.out.println("Quote MySql connection problem");
-
 		}
 		return list.get((int) (Math.random() * list.size()));
-
 	}
 }
