@@ -19,10 +19,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteDao;
 
 @RunWith(MockitoJUnitRunner.class)
 public class KickstarterTest {

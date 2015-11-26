@@ -44,7 +44,7 @@ public class KickstarterFlow {
 		projectInArt1.setHistory("ArtHistory1");
 		projectInArt1.setPledged(23400L);
 		projectInArt1.setVideo("ArtVideo1");
-		projectInArt1.setQuestionsAndAnswers("ArtFaq1");
+		projectInArt1.setQuestions("ArtQuestion1");
 		
 		Project projectInArt2 = new Project("Art2", "ArtSummury2", 75000L);
 		

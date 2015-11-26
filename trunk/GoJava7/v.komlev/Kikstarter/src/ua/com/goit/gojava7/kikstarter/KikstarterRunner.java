@@ -4,20 +4,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kikstarter.dao.memory.QuoteDaoMemory;
+import ua.com.goit.gojava7.kikstarter.domain.Category;
+import ua.com.goit.gojava7.kikstarter.domain.Project;
+import ua.com.goit.gojava7.kikstarter.domain.Quote;
+
 public class KikstarterRunner {
 
-	/**
-	 * @param args
-	 * @throws IOException
-	 */
-
 	public static void main(String[] args) throws IOException {
-		QuotesStorage quotesStorage = initQuotes();
+		QuoteDaoMemory quoteDaoMemory = initQuotes();
 		CategoryStorage categoryStorage = initCategories();
 		ConsoleReader consoleReader = new ConsoleReader();
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 
-		Kikstarter kikstarter = new Kikstarter(consoleReader, consolePrinter, quotesStorage,
+		Kikstarter kikstarter = new Kikstarter(consoleReader, consolePrinter, quoteDaoMemory,
 				categoryStorage);
 
 		kikstarter.startUp();
@@ -106,31 +106,23 @@ public class KikstarterRunner {
 		return projectsList;
 	}
 
-	private static QuotesStorage initQuotes() {
-		QuotesStorage quotesStorage = new QuotesStorage();
+	private static QuoteDaoMemory initQuotes() {
+		QuoteDaoMemory quoteDaoMemory = new QuoteDaoMemory();
 
-		Quote quote1 = new Quote();
-		quote1.setQuoteContent("Two things are infinite: the universe and human stupidity and I'm not sure about the universe.");
-		quote1.setQuoteAuthor("Albert Einstein");
+		Quote quote1 = new Quote("Two things are infinite: the universe and human stupidity and I'm not sure about the universe.","Albert Einstein");
 
-		Quote quote2 = new Quote();
-		quote2.setQuoteContent("Coming together is a beginning; keeping together is progress; working together is success.");
-		quote2.setQuoteAuthor("Henry Ford");
+		Quote quote2 = new Quote("Coming together is a beginning; keeping together is progress; working together is success.","Henry Ford");
+		
+		Quote quote3 = new Quote("Mistakes are always forgivable, if one has the courage to admit them.","Bruce Lee");
 
-		Quote quote3 = new Quote();
-		quote3.setQuoteContent("Mistakes are always forgivable, if one has the courage to admit them.");
-		quote3.setQuoteAuthor("Bruce Lee");
+		Quote quote4 = new Quote("Give me six hours to chop down a tree and I will spend the first four sharpening the axe.","Abraham Lincoln");
 
-		Quote quote4 = new Quote();
-		quote4.setQuoteContent("Give me six hours to chop down a tree and I will spend the first four sharpening the axe.");
-		quote4.setQuoteAuthor("Abraham Lincoln");
+		quoteDaoMemory.add(quote1);
+		quoteDaoMemory.add(quote2);
+		quoteDaoMemory.add(quote3);
+		quoteDaoMemory.add(quote4);
 
-		quotesStorage.addQuote(quote1);
-		quotesStorage.addQuote(quote2);
-		quotesStorage.addQuote(quote3);
-		quotesStorage.addQuote(quote4);
-
-		return quotesStorage;
+		return quoteDaoMemory;
 	}
 
 }

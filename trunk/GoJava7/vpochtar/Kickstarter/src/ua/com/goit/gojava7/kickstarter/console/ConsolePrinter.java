@@ -60,6 +60,6 @@ public class ConsolePrinter {
 		System.out.println("\t Days to go: " + project.getDaysToGo());
 		System.out.println("\t History of the project: " + project.getHistory());
 		System.out.println("\t Video link: " + project.getVideo());
-		System.out.println("\t Q&A: " + project.getQuestionsAndAnswers());
+		System.out.println("\t Q&A: " + project.getQuestions());
 	}
 }

@@ -1,16 +1,10 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
-public class Project implements Serializable{
-
-	private static final long serialVersionUID = 1L;
-	
+public class Project {
 	private int uniqueID;
 	private int categoryID;
 	private String title;
@@ -43,7 +37,7 @@ public class Project implements Serializable{
 		return briefDescription;
 	}
 	
-	public void addBriefDescription(String briefDescription) {
+	public void setBriefDescription(String briefDescription) {
 		this.briefDescription = briefDescription;
 	}
 
@@ -51,7 +45,7 @@ public class Project implements Serializable{
 		return fullDescription;
 	}
 	
-	public void addFullDescription(String fullDescription) {
+	public void setFullDescription(String fullDescription) {
 		this.fullDescription = fullDescription;
 	}
 
@@ -124,26 +118,5 @@ public class Project implements Serializable{
 		long days = difference / (1000 * 60 * 60 * 24);
 
 		return (int) days;
-	}
-	
-	public int getSumProjectPayments(List<Payment> payments) {
-		List<Payment> projectsPayments = new ArrayList<>();
-		
-		for (Payment payment : payments) {
-			if (payment.getProjectID() == this.uniqueID) {
-				projectsPayments.add(payment);
-			}
-		}
-		
-		if (projectsPayments.isEmpty()) {
-			return 0;
-			
-		} else {	
-			int result = 0;		
-			for (Payment payment : projectsPayments) {
-				result += payment.getDonatingSum();
-			}	
-			return result;
-		}
 	}
 }

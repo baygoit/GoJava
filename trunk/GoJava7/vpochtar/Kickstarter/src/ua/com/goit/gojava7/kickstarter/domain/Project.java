@@ -9,7 +9,7 @@ public class Project {
 	private int daysToGo;
 	private String history;
 	private String video;
-	private String questionsAndAnswers;
+	private String questions;
 	
 	public Project(String name, String summary, long goal) {
 		this.name = name;
@@ -65,11 +65,11 @@ public class Project {
 		this.video = video;
 	}
 	
-	public String getQuestionsAndAnswers() {
-		return questionsAndAnswers;
+	public String getQuestions() {
+		return questions;
 	}
 	
-	public void setQuestionsAndAnswers(String questionsAndAnswers) {
-		this.questionsAndAnswers = questionsAndAnswers;
+	public void setQuestions(String questions) {
+		this.questions = questions;
 	}
 }

@@ -1,8 +1,8 @@
-package main.java.DAO;
+package dao;
 
-import main.java.Models.Apartment;
-import main.java.Models.ApartmentType;
-import main.java.Models.User;
+
+import models.Apartment;
+import models.ApartmentType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,15 +16,15 @@ public class ApartmentDAO extends AbstractDAO{
 
     public void createApartment (Apartment apartment) {
         String sqlQuery = "INSERT INTO `airbnb`.`apartments` (`host_id`, `type`, `city`) VALUES ('"+
-                apartment.host+"`, `"+
-                apartment.apartmentType+"`, `"+
+                apartment.getHost()+"`, `"+
+                apartment.getApartmentType()+"`, `"+
                 apartment.getCity()+");";
         updateDB(sqlQuery);
     }
 
     public void updateApartmentByID (Apartment apartment) {
         String sqlQuery = "UPDATE airbnb.apartments SET " +
-                "type = '"+ apartment.apartmentType +
+                "type = '"+ apartment.getApartmentType() +
                 "WHERE idapartment = "+ apartment.getApartmentId();
         updateDB(sqlQuery);
     }
@@ -46,11 +46,11 @@ public class ApartmentDAO extends AbstractDAO{
 
     @Override
     Object readObj(ResultSet resultSet) throws SQLException {
-        Apartment result;
-        result = new Apartment(resultSet.getInt("idapartments"),
-                resultSet.getInt("host_id"),
-                ApartmentType.valueOf(resultSet.getString("type")),
-                resultSet.getString("city"));
+        Apartment result = null; /*new Apartment(resultSet.getInt("idapartments"),
+                                         resultSet.getInt("host_id"),
+                                         ApartmentType.valueOf(resultSet.getString("type")),
+                                         resultSet.getString("address"),
+                                         resultSet.getInt("city_id"));*/
         return result;
     }
 }

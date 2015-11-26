@@ -88,14 +88,14 @@ public class Kickstarter {
 			else if (userChoice != 0) {
 				consolePrinter.print("You selected project number " + userChoice);
 				Project project = projects.get(userChoice - 1);
-				showProjectActionsMenu(project);
+				showProjectActionsMenu(category, project);
 			} else {
 				consolePrinter.print("You entered 0. Getting back to the categories menu.");
 			}
 		} while (userChoice != 0);
 	}
 
-	private void showProjectActionsMenu(Project project) throws IOException {
+	private void showProjectActionsMenu(Category category, Project project) throws IOException {
 		List<String> projectActions = new ArrayList<>();
 		projectActions.add("Ask a question");
 		projectActions.add("Pledge");
@@ -116,12 +116,33 @@ public class Kickstarter {
 				consolePrinter.print("Please type the number between 0 and " 
 			+ projectActions.size());
 				continue;
-			} else if (userChoice != 0) {
+			} else if (userChoice == 1) {
 				String selectedAction = projectActions.get(userChoice - 1).toLowerCase();
 				consolePrinter.print("You selected to " + selectedAction);
+				pledge(project);
+			} else if (userChoice == 2) {
+				String selectedAction = projectActions.get(userChoice - 1).toLowerCase();
+				consolePrinter.print("You selected to " + selectedAction);
+				askQuestion(project);
 			} else {
 				consolePrinter.print("You entered 0. Getting back to the projects menu.");
 			}
 		} while (userChoice != 0);
+	}
+	
+	private void askQuestion(Project project) throws IOException {
+		consolePrinter.print("Enter your question");
+		String question = consoleReader.getString();
+		project.setQuestions(question);
+	}
+
+	private void pledge(Project project) throws IOException {
+		consolePrinter.print("Enter the amount to pledge");
+		long pledgeAmount = consoleReader.getLongInput();
+		project.setPledged(project.getPledged() + pledgeAmount);
+	}
+
+	public void exit() throws IOException {
+		consoleReader.close();
 	}
 }

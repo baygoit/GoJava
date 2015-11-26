@@ -1,12 +1,18 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Reward {
+	private final int id;
 	private int projectId;
 	private int pledge;
 	private String benefit;
 	
-	public Reward(int projectId) {
-		this.setProjectId(projectId);
+	public Reward(int id, int projectId) {
+		this.id = id;
+		setProjectId(projectId);
+	}
+
+	public int getId() {
+		return id;
 	}
 	
 	public int getProjectId() {

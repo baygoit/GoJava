@@ -1,8 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Project {
 	private String name;
 	private final int id;
@@ -12,9 +9,9 @@ public class Project {
 	private String owner;
 	private int goal;
 	private String linkVideo;
-	private List<Question> questions;
+	/*private List<Question> questions;
 	private List<Reward> rewards;
-	private List<Payment> payments;
+	private List<Payment> payments;*/
 
 	public Project(String name, int id) {
 		setName(name);
@@ -25,10 +22,10 @@ public class Project {
 		setOwner("");
 		setGoal(0);
 		setLinkVideo("");
-		questions = new ArrayList<Question>();
+/*		questions = new ArrayList<Question>();
 		rewards = new ArrayList<Reward>();
 		payments = new ArrayList<Payment>();
-	}
+*/	}
 
 	public String getName() {
 		return name;
@@ -90,7 +87,7 @@ public class Project {
 		this.categoryId = categoryId;
 	}
 
-	public String getAllDetails() {
+	/*public String getAllDetails() {
 		StringBuilder projectDetails = new StringBuilder();
 
 		projectDetails.append("name: ").append(name).append("\n");
@@ -106,9 +103,9 @@ public class Project {
 					.append(question.getQuestionText()).append("'\n");
 		}
 		return projectDetails.toString();
-	}
+	}*/
 
-	public void addQuestion(Question question) {
+	/*public void addQuestion(Question question) {
 		questions.add(question);
 	}
 
@@ -154,10 +151,10 @@ public class Project {
 			pledged += payment.getPledge();
 		}
 		return pledged;
-	}
+	}*/
 
-	public int getFunded() {
+	public int getFunded(int pledged) {
 		int goal = getGoal();
-		return goal == 0 ? 0 : getPledged() * 100 / goal;
+		return goal == 0 ? 0 : pledged * 100 / goal;
 	}
 }

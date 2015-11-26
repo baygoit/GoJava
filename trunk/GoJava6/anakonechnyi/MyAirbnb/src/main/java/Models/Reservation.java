@@ -1,24 +1,39 @@
-package main.java.Models;
+package models;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * @autor A_Nakonechnyi
  * @date 30.09.2015.
  */
-public class Reservation {
-    private  int reservId;
-    private int apartmentId;
-    private Date start;
-    private Date finish;
-    private final int clientId;
 
-    public Reservation(int reservId, int apartmentId, Date start, Date finish, int clientId) {
+@Entity
+@Table (name = "reservations")
+public class Reservation {
+    @Id
+    @Column (name = "reserv_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int reservId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idapartment")
+    private Apartment apartment;
+    @Column(name = "start")
+    @Temporal(TemporalType.DATE)
+    private Date start;
+    @Column(name = "finish")
+    @Temporal(TemporalType.DATE)
+    private Date finish;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clientId")
+    private User client;
+
+    public Reservation(int reservId, Apartment apartment, Date start, Date finish, User client) {
         this.reservId = reservId;
-        this.apartmentId = apartmentId;
+        this.apartment = apartment;
         this.start = start;
         this.finish = finish;
-        this.clientId = clientId;
+        this.client = client;
         System.out.println("Succesfull reserve");
     }
 
@@ -29,20 +44,22 @@ public class Reservation {
         return finish;
     }
 
-    public Boolean idClientChecker (int clientId) {
-        return this.clientId == clientId;
+    public Boolean clientChecker (User client) {
+        return this.client == client;
 
     }
 
-    public int getApartmentId() {
-        return apartmentId;
+    public Apartment getApartment() {
+        return apartment;
     }
 
-    public int getClientId() {
-        return clientId;
+    public User getClient() {
+        return client;
     }
 
     public int getReservId() {
         return reservId;
     }
+
+
 }

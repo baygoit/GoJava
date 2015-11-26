@@ -14,13 +14,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.PaymentStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuestionStorage;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -33,15 +31,12 @@ public class KickstarterTest {
 	private QuoteStorage quoteStorage;
 	@Mock
 	private CategoryStorage categoryStorage;
-	@Mock
-	private QuestionStorage questionStorage;
-	@Mock
-	private PaymentStorage paymentStorage;
-
+	
+	private DaoProvider initializer;
+	
 	@InjectMocks
 	private Kickstarter kickstarter = new Kickstarter(consolePrinter,
-			consoleScanner, quoteStorage, categoryStorage, questionStorage,
-			paymentStorage);
+			consoleScanner, initializer);
 
 	@Test
 	public void testShowCategoriesMenuEntered0SaysBye() {
@@ -77,7 +72,7 @@ public class KickstarterTest {
 	public void testShowProjectsMenuEnter1Has1Project() {
 		List<Category> categories = new ArrayList<Category>();
 		Category category = new Category("category name", 1);
-		category.addProject(new Project("project 1", 1));
+		//category.addProject(new Project("project 1", 1));
 		categories.add(category);
 
 		when(categoryStorage.getAllCategories()).thenReturn(categories);
@@ -96,7 +91,7 @@ public class KickstarterTest {
 	public void testShowProjectDetails() {
 		List<Category> categories = new ArrayList<Category>();
 		Category category = new Category("category name", 1);
-		category.addProject(new Project("project 1", 1));
+		//category.addProject(new Project("project 1", 1));
 		categories.add(category);
 
 		when(categoryStorage.getAllCategories()).thenReturn(categories);
@@ -115,9 +110,9 @@ public class KickstarterTest {
 	public void testOwnAmontDonateInTheProject() {
 		List<Category> categories = new ArrayList<Category>();
 		Category category = new Category("category name", 1);
-		Project project = new Project("project 1", 1);
+		//Project project = new Project("project 1", 1);
 
-		category.addProject(project);
+		//category.addProject(project);
 		categories.add(category);
 
 		when(categoryStorage.getAllCategories()).thenReturn(categories);

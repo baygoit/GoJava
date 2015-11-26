@@ -2,20 +2,40 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-    <servlet>
-        <servlet-name>MainController</servlet-name>
-        <servlet-class>com.donishchenko.airbnb.controller.MainController</servlet-class>
-    </servlet>
 
-    <servlet-mapping>
-        <servlet-name>MainController</servlet-name>
-        <url-pattern>/</url-pattern>
-        <url-pattern>/search</url-pattern>
-        <url-pattern>/profile</url-pattern>
-        <url-pattern>/login</url-pattern>
-        <url-pattern>/registration</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>MainDispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/MainDispatcher-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     
+    <servlet-mapping>
+        <servlet-name>MainDispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!--<listener>-->
+        <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+    <!--</listener>-->
+
+    <!--<servlet>-->
+        <!--<servlet-name>MainController</servlet-name>-->
+        <!--<servlet-class>com.donishchenko.airbnb.controller.MainController</servlet-class>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>MainController</servlet-name>-->
+        <!--<url-pattern>/</url-pattern>-->
+        <!--<url-pattern>/search</url-pattern>-->
+        <!--<url-pattern>/profile</url-pattern>-->
+        <!--<url-pattern>/login</url-pattern>-->
+        <!--<url-pattern>/registration</url-pattern>-->
+    <!--</servlet-mapping>-->
+
     <filter>
         <filter-name>SimpleAuthFilter</filter-name>
         <filter-class>com.donishchenko.airbnb.filter.SimpleAuthFilter</filter-class>

@@ -12,4 +12,19 @@ public class ConsoleReader {
 		int userChoiseInt = Integer.parseInt(userChoise);
 		return userChoiseInt;
 	}
+	
+	public String getString() throws IOException {
+		String input = reader.readLine();
+		return input;
+	}
+	
+	public long getLongInput() throws IOException {
+		String input = reader.readLine();
+		long longInput = Long.parseLong(input);
+		return longInput;
+	}
+	
+	public void close() throws IOException {
+		reader.close();
+	}
 }

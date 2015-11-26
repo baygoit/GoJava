@@ -1,11 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-import java.io.Serializable;
-
-public class Payment implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-	
+public class Payment {
 	private int projectID;
 	private String userName;
 	private long creditCardNumber;
@@ -15,6 +10,14 @@ public class Payment implements Serializable {
 		this.userName = userName;
 		this.creditCardNumber = creditCardNumber;
 		this.donatingSum = donatingSum;
+	}
+	
+	public int getProjectID() {
+		return projectID;
+	}
+	
+	public void setProjectID(int projectID) {
+		this.projectID = projectID;
 	}
 	
 	public String getUserName() {
@@ -39,13 +42,5 @@ public class Payment implements Serializable {
 	
 	public void setDonatingSum(int donatingSum) {
 		this.donatingSum = donatingSum;
-	}
-	
-	public int getProjectID() {
-		return projectID;
-	}
-	
-	public void setProjectID(int projectID) {
-		this.projectID = projectID;
 	}
 }

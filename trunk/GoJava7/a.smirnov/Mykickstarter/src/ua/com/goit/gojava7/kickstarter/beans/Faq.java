@@ -1,17 +1,20 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-import java.io.Serializable;
-
-public class Faq implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-	
+public class Faq {
 	private int projectID;
 	private String question;
 	private String answer;
 	
 	public Faq(String question) {
 		this.question = question;
+	}
+	
+	public int getProjectID() {
+		return projectID;
+	}
+	
+	public void setProjectID(int projectID) {
+		this.projectID = projectID;
 	}
 	
 	public String getQuestion() {
@@ -28,13 +31,5 @@ public class Faq implements Serializable {
 	
 	public void setAnswer(String answer) {
 		this.answer = answer;
-	}
-	
-	public int getProjectID() {
-		return projectID;
-	}
-	
-	public void setProjectID(int projectID) {
-		this.projectID = projectID;
 	}
 }

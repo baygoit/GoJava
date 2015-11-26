@@ -1,16 +1,21 @@
-package main.java;
 
-import main.java.Models.ApartmentType;
-import main.java.Models.User;
+import models.ApartmentType;
+import models.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.InputMismatchException;
 
 /**
- * Created by A_Nakonechnyi on 19.09.2015.
+ * @autor A_Nakonechnyi
+ * @date 19.09.2015.
  */
 public class Application {
     public void register (User user){
         System.out.println("Register");
+
+        System.out.println("");
     }
 
     public static void main(String[] args) {
@@ -34,7 +39,22 @@ public class Application {
         } catch (InputMismatchException err) {
             System.out.println("Illegal name / sername / email");
         }*/
-        System.out.println(ApartmentType.PLACE);
+        //System.out.println(ApartmentType.PLACE);
+        EntityManagerFactory factory = null;
+        EntityManager manager = null;
+        try {
+            factory = Persistence.createEntityManagerFactory("my-persistence-unit");
+            manager = factory.createEntityManager();
+            manager.getTransaction().begin();
+            manager.persist( new User("Blo", "Thisost", "bt@mail", false) );
+            //manager.persist( new BlogPost("Just another blog post", "This is second blog post", new Date(), true) );
+            manager.getTransaction().commit();
 
+            //TODO: Read all entities from database using EntityManager
+
+        } finally {
+            if (manager!=null) manager.close();
+            if (factory!=null) factory.close();
+        }
     }
 }

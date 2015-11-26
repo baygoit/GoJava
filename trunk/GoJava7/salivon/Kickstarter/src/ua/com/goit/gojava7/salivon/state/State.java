@@ -1,9 +1,10 @@
 package ua.com.goit.gojava7.salivon.state;
 
 import java.util.Scanner;
-import ua.com.goit.gojava7.salivon.ManagerData;
-import ua.com.goit.gojava7.salivon.ManagerFileData;
-import ua.com.goit.gojava7.salivon.ObjectDataManager;
+import ua.com.goit.gojava7.salivon.util.DataManagerDB;
+import ua.com.goit.gojava7.salivon.util.ManagerData;
+import ua.com.goit.gojava7.salivon.util.ManagerFileData;
+import ua.com.goit.gojava7.salivon.util.ObjectDataManager;
 import ua.com.goit.gojava7.salivon.handlers.ErrorHandler;
 import ua.com.goit.gojava7.salivon.context.Console;
 
@@ -11,6 +12,7 @@ public abstract class State {
 
     protected static final int FILE_DATA = 1;
     protected static final int OBJECT_DATA = 2;
+    protected static final int DB_DATA = 3;
     private ManagerData managerData;
     protected static Scanner scan = new Scanner(System.in);
     protected String menu;
@@ -48,6 +50,9 @@ public abstract class State {
         }
         if (currentData == OBJECT_DATA) {
             managerData = new ObjectDataManager();
+        }
+        if (currentData == DB_DATA) {
+            managerData = new DataManagerDB();
         }
 
     }
