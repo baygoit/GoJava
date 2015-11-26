@@ -142,5 +142,9 @@ public class ConsoleView implements View {
         System.out.println("Money needed: $" + project.getMoneyNeeded());
         System.out.println("Money donated: $" + project.getMoneyDonated());
         System.out.println("Days left: " + project.getDaysLeft());
+        System.out.println("Questions:");
+        for (String question : project.getQuestions()) {
+            System.out.println(question);
+        }
     }
 }

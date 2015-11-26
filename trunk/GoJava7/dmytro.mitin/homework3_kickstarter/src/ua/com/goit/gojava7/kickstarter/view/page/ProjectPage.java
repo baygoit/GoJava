@@ -23,13 +23,27 @@ public class ProjectPage implements Page {
 
         System.out.println();
 
-        System.out.println("Would you like to donate? (Enter \"y\" if so or any key otherwise.)");
+        System.out.println("Would you like to ask a question? (Enter \"y\" if so or any key otherwise.)");
 
         BufferedReader reader = view.getReader();
 
-        String confirmation = reader.readLine();
+        String questionConfirmation = reader.readLine();
 
-        if (confirmation.equals("y") || confirmation.equals("Y")) {
+        if (questionConfirmation.equals("y") || questionConfirmation.equals("Y")) {
+            System.out.println("Enter your question please.");
+
+            String question = reader.readLine();
+
+            view.getController().askQuestion(project, question);
+
+            System.out.println("Thank you.");
+        }
+
+        System.out.println("Would you like to donate? (Enter \"y\" if so or any key otherwise.)");
+
+        String donationConfirmation = reader.readLine();
+
+        if (donationConfirmation.equals("y") || donationConfirmation.equals("Y")) {
             System.out.println("Enter your name please.");
 
             String name = reader.readLine(); // currently ignored

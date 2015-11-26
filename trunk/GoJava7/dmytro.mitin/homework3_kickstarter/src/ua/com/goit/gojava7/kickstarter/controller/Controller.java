@@ -49,4 +49,8 @@ public class Controller {
         }
         return projects.get(number);
     }
+
+    public void askQuestion(Project project, String question) {
+        project.addQuestion(question);
+    }
 }
