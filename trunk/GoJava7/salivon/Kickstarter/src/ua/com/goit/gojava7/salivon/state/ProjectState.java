@@ -1,15 +1,14 @@
 package ua.com.goit.gojava7.salivon.state;
 
 import ua.com.goit.gojava7.salivon.beans.Project;
-import ua.com.goit.gojava7.salivon.handlers.ErrorHandlerStateProject;
 import ua.com.goit.gojava7.salivon.context.Console;
+import ua.com.goit.gojava7.salivon.dao.DaoFactory;
 
 public class ProjectState extends State {
 
-    private Project project = getManagerData().getProject(State.getIndexProject());
+    private Project project = DaoFactory.getProjectDao(getCurrentDataType()).getProject(State.getIdProject());
 
     public ProjectState() {
-        handler = new ErrorHandlerStateProject();
         menu = "Enter 1 - invest in the project.\n"
                 + "Enter 2 - ask a question.\n"
                 + "Enter 0 - return to above.\n"
@@ -30,6 +29,18 @@ public class ProjectState extends State {
         System.out.println("  FAQ " + project.getFaq() + "\n");
         System.out.println("--------------------------------------------------");
         System.out.println(menu);
+    }
+
+    @Override
+    public boolean validate(String data) {
+        try {
+            int n = Integer.parseInt(data);
+
+            return n == 0 || n == 1 || n == 2;
+
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     @Override

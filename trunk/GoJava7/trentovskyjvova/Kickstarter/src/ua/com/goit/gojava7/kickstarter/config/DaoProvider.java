@@ -24,6 +24,7 @@ import ua.com.goit.gojava7.kickstarter.dao.memory.ProjectDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.dao.memory.QuestionDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.dao.memory.RewardDaoMemoryImpl;
+import ua.com.goit.gojava7.kickstarter.dao.mysql.CategoryDaoMySqlImpl;
 import ua.com.goit.gojava7.kickstarter.dao.mysql.QuoteDaoMySqlImpl;
 
 
@@ -89,11 +90,18 @@ public class DaoProvider {
 	}
 
 	public CategoryDao getCategoryReader() {
-		if (dataSource != DataSource.FILE) {
-			return new CategoryDaoMemoryImpl();
+		CategoryDao categoryDao;
+		
+		if (dataSource == DataSource.MYSQL) {
+			categoryDao = new CategoryDaoMySqlImpl(connection);
+		} else if (dataSource == DataSource.MEMORY) {	
+			categoryDao = new CategoryDaoMemoryImpl();
+		} else if (dataSource == DataSource.FILE) {
+			categoryDao = new FileCategoryReader(CATEGORIES_FILE);
 		} else {
-			return new FileCategoryReader(CATEGORIES_FILE);
+			throw new IllegalArgumentException("Unknown data source " + dataSource);
 		}
+		return categoryDao;
 	}
 
 	public ProjectDao getProjectReader() {

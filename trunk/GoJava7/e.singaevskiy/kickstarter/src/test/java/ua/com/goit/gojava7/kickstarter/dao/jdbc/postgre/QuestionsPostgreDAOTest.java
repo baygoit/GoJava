@@ -13,14 +13,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import ua.com.goit.gojava7.kickstarter.beans.Question;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
 public class QuestionsPostgreDAOTest {
 
     List<Question> list;
-    QuestionsPostgreDAO dao;
+    QuestionPostgreDAO dao;
 
     @Before
     public void setUp() throws Exception {
@@ -31,11 +31,11 @@ public class QuestionsPostgreDAOTest {
                 properties.getProperty("user"), 
                 properties.getProperty("password"));
         
-        dao = new QuestionsPostgreDAO(dispatcher); 
+        dao = new QuestionPostgreDAO(dispatcher); 
         
         list = new ArrayList<>();
         list.add(new Question(0, "a1", "t1"));
-        list.add(new Question(1, "a2", "t2"));
+        list.add(new Question(0, "a2", "t2"));
     }
     
     
@@ -52,8 +52,7 @@ public class QuestionsPostgreDAOTest {
     
     @Test
     public void testAddGet() {
-        dao.clear();
-        dao.addAll(list);
+        list.forEach(dao::add);
         int index = 1;
         assertThat(dao.get(index), is(list.get(index)));
     }
@@ -63,7 +62,7 @@ public class QuestionsPostgreDAOTest {
     public void testException() throws Exception {
         JdbcDispatcher dispatcher = Mockito.mock(JdbcDispatcher.class);
         Mockito.when(dispatcher.getConnection()).thenThrow(SQLException.class);
-        dao = new QuestionsPostgreDAO(dispatcher); 
+        dao = new QuestionPostgreDAO(dispatcher); 
         dao.clear();
         dao.addAll(list);
         dao.getAll();

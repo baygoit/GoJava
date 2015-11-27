@@ -8,11 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.dao.DataStorage;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-public class QuotePostgreDAO implements DataStorage<Quote> {
+public class QuotePostgreDAO implements QuoteDAO {
     
     private JdbcDispatcher dispatcher;
     

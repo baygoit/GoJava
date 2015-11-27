@@ -1,9 +1,19 @@
 CREATE DATABASE `kickstarter`;
 CREATE TABLE `category` (
-    `CategoryId` INT(11) NOT NULL AUTO_INCREMENT,
-    `Name` VARCHAR(45) NOT NULL,
-    PRIMARY KEY (`CategoryId`)
-)  ENGINE=INNODB DEFAULT CHARSET=LATIN1;
+  `IdCategory` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(45) NOT NULL,
+  PRIMARY KEY (`IdCategory`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+CREATE TABLE `project` (
+
+  `IdProject` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(200) NOT NULL,
+  `Total` int(11) NOT NULL,
+  `IdCategory` int(11) DEFAULT NULL,
+  PRIMARY KEY (`IdProject`),
+  KEY `IdCategory_idx` (`IdCategory`),
+  CONSTRAINT `IdCategory` FOREIGN KEY (`IdCategory`) REFERENCES `category` (`IdCategory`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 CREATE TABLE `faq` (
   `IdProject` int(11) NOT NULL,
   `Context` text NOT NULL,
@@ -19,15 +29,6 @@ CREATE TABLE `payment` (
   PRIMARY KEY (`IdInvestor`),
   KEY `ProjectId_idx` (`IdProject`),
   CONSTRAINT `ProjectId` FOREIGN KEY (`IdProject`) REFERENCES `project` (`IdProject`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-CREATE TABLE `project` (
-  `IdProject` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(200) NOT NULL,
-  `Total` int(11) NOT NULL,
-  `IdCategory` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdProject`),
-  KEY `IdCategory_idx` (`IdCategory`),
-  CONSTRAINT `IdCategory` FOREIGN KEY (`IdCategory`) REFERENCES `category` (`IdCategory`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 CREATE TABLE `quote` (
   `IdQuote` int(11) NOT NULL AUTO_INCREMENT,

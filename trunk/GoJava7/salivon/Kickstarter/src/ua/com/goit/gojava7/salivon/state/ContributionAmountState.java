@@ -2,7 +2,7 @@ package ua.com.goit.gojava7.salivon.state;
 
 import ua.com.goit.gojava7.salivon.beans.Payment;
 import ua.com.goit.gojava7.salivon.context.Console;
-import ua.com.goit.gojava7.salivon.handlers.ErrorHandlerStateContributionAmount;
+import ua.com.goit.gojava7.salivon.dao.DaoFactory;
 
 class ContributionAmountState extends PaymentState {
 
@@ -10,7 +10,6 @@ class ContributionAmountState extends PaymentState {
 
     public ContributionAmountState(Payment payment) {
         this.payment = payment;
-        handler = new ErrorHandlerStateContributionAmount();
         menu = "Enter the contribution amount:";
     }
 
@@ -18,6 +17,18 @@ class ContributionAmountState extends PaymentState {
     public void outputContentState() {
         System.out.println("--------------------------------------------------");
         System.out.println(menu);
+    }
+
+    @Override
+    public boolean validate(String data) {
+        int amount = 0;
+        try {
+            amount = Integer.parseInt(data);
+        } catch (NumberFormatException e) {
+
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -30,7 +41,7 @@ class ContributionAmountState extends PaymentState {
 
     protected void savePayment(int amount) {
         payment.setTotal(amount);
-        getManagerData().savePayment(payment);
+        DaoFactory.getPaymentDao(getCurrentDataType()).savePayment(payment);
     }
 
 }

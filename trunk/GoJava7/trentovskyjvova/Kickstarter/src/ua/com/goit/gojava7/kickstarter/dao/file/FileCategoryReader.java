@@ -33,22 +33,26 @@ public class FileCategoryReader implements CategoryDao {
 					categoriesFileSteam));
 
 			String line = null;
-			int categoryId = 0;
-			String categoryName = null;
+			int id = 0;
+			String name = null;
 			while (null != (line = fileReader.readLine())) {
-				String[] category = line.split(CSV_SPLIT_BY);
-				if (category.length < 2) {
+				String[] categoryLine = line.split(CSV_SPLIT_BY);
+				if (categoryLine.length < 2) {
 					throw new WrongFileFormatException("Wrong categories.csv format.");
-				} else if (category[0] == "") {
+				} else if (categoryLine[0] == "") {
 					throw new WrongFileFormatException(
 							"Wrong categories.csv format. Cannot find category id");
-				} else if (category[1] == "") {
+				} else if (categoryLine[1] == "") {
 					throw new WrongFileFormatException(
 							"Wrong categories.csv format. Cannot find category name");
 				}
-				categoryId = Integer.parseInt(category[0]);
-				categoryName = category[1];
-				categories.add(new Category(categoryName, categoryId));
+				id = Integer.parseInt(categoryLine[0]);
+				name = categoryLine[1];
+				
+				Category category = new Category();
+				category.setId(id);
+				category.setName(name);
+				categories.add(category);
 			}
 		} catch (IOException e) {
 			throw new WrongFileFormatException("File not found or read error", e);

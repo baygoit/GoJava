@@ -13,7 +13,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.dao.file.util.FileDAO;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public class CategoryFileDAOTest {
     FileDAO<Category> fs;

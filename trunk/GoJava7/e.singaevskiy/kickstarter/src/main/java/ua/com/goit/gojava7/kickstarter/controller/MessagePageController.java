@@ -2,15 +2,15 @@ package ua.com.goit.gojava7.kickstarter.controller;
 
 import java.io.IOException;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.beans.Question;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
 
-public class MessagePageController extends PageController<Project> {
+public class MessagePageController extends AbstractPageController<Project> {
 
     @Override
     protected void handle() {
-        page.showShortProject(request);
-        page.showMessageRequest();
+        printer.showShortProject(request);
+        printer.showMessageRequest();
         
 
     }

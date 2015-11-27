@@ -104,24 +104,4 @@ public class FileProjectReader implements ProjectDao {
 		return projects.size();
 	}
 
-	@Override
-	public String getProjectDetails(int id) {
-		Project project = getProject(id);
-		StringBuilder projectDetails = new StringBuilder();
-
-		projectDetails.append("name: ").append(project.getName()).append("\n");
-		//projectDetails.append("funded: ").append(project.getFunded()).append("\n");
-		projectDetails.append("daysToGo: ").append(project.getDaysToGo()).append("\n");
-		//projectDetails.append("pledged: ").append(project.getPledged()).append("\n");
-		projectDetails.append("description: ").append(project.getDescription()).append("\n");
-		projectDetails.append("owner: ").append(project.getOwner()).append("\n");
-		projectDetails.append("goal: ").append(project.getGoal()).append("\n");
-		projectDetails.append("linkVideo: ").append(project.getLinkVideo()).append("\n");
-		/*for (Question question : questions) {
-			projectDetails.append("Question: '")
-					.append(question.getQuestionText()).append("'\n");
-		}*/
-		return projectDetails.toString();
-	}
-
 }

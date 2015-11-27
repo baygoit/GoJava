@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.salivon.state;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 import ua.com.goit.gojava7.salivon.context.Console;
@@ -10,6 +11,13 @@ public class NameInvestStateTest {
     public void testOutputContentState() {
         NameInvestState instance = new NameInvestState();
         instance.outputContentState();
+    }
+
+    @Test
+    public void testValidate() {
+        NameInvestState instance = new NameInvestState();
+        assertEquals(true, instance.validate(""));
+
     }
 
     @Test
