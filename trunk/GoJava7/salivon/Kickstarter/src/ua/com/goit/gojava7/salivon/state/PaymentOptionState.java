@@ -28,6 +28,7 @@ public class PaymentOptionState extends PaymentState {
     public void changeState(Console context) {
         String inData = getInData();
         int inDateToInt = Integer.parseInt(inData);
+        //TODO Extract to method 
         if (inDateToInt == 1) {
             savePayment(1);
             context.setCurrentState(new ProjectState());
@@ -40,6 +41,7 @@ public class PaymentOptionState extends PaymentState {
         } else if (inDateToInt == 4) {
             context.setCurrentState(new ContributionAmountState(payment));
         }
+        // TODO till here
     }
 
     protected void savePayment(int amount) {
