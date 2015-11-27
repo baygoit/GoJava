@@ -7,7 +7,7 @@ public class Category {
 
 	private int id;
 	private String name;
-	private Set<Project> projects = new HashSet<>();
+	private Set<Project> projects = new HashSet<Project>();
 
 	public Category() {
 	}

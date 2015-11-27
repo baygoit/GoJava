@@ -8,7 +8,7 @@ import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public class CategoryDaoMemoryImpl implements CategoryDao {
-	private List<Category> categories = new ArrayList<>();
+	private List<Category> categories = new ArrayList<Category>();
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
