@@ -3,7 +3,6 @@ package ua.com.goit.gojava7.kickstarter.dao.storage;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public interface ProjectStorage extends Storage<Project> {
@@ -15,5 +14,8 @@ public interface ProjectStorage extends Storage<Project> {
 	}
 	
 	public Project getByNumber(int number);
+	
+	public void addToPledged(String projectName, int amount);
+	public int getPledged(String projectName);
 
 }

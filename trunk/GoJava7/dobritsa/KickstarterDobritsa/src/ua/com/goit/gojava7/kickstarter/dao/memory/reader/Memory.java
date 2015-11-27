@@ -213,14 +213,17 @@ public class Memory {
 		question = new Question();
 		question.setQuestion("some question 1");
 		question.setProjectName("The Cookie Counter: vegan bakery, espresso bar, & ice cream!");
+		questions.add(question);
 
 		question = new Question();
 		question.setQuestion("some question 2");
 		question.setProjectName("'Critical Mass': New solo music from Jerry Chamberlain!");
+		questions.add(question);
 
 		question = new Question();
 		question.setQuestion("some question 3");
 		question.setProjectName("Shift the Grid presents Vacancy");
+		questions.add(question);
 	}
 
 	private void initRewards() {
@@ -230,16 +233,19 @@ public class Memory {
 		reward.setAmount(2);
 		reward.setReward("2 bonuses");	
 		reward.setProjectName("The Cookie Counter: vegan bakery, espresso bar, & ice cream!");
+		rewards.add(reward);
 		
 		reward = new Reward();
 		reward.setAmount(5);
-		reward.setReward("52 bonuses");	
+		reward.setReward("5 bonuses");	
 		reward.setProjectName("'Critical Mass': New solo music from Jerry Chamberlain!");
+		rewards.add(reward);
 		
 		reward = new Reward();
 		reward.setAmount(7);
 		reward.setReward("7 bonuses");	
-		reward.setProjectName("Shift the Grid presents Vacancy");		
+		reward.setProjectName("Shift the Grid presents Vacancy");	
+		rewards.add(reward);
 	}
 
 	public List<Quote> getQuotes() {

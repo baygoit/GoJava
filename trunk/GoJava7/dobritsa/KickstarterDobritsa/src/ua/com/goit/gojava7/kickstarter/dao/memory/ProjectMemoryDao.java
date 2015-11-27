@@ -17,6 +17,18 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 		int index = number - 1;
 		return get(index);
 	}
+
+	@Override
+	public void addToPledged(String projectName, int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getPledged(String projectName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 

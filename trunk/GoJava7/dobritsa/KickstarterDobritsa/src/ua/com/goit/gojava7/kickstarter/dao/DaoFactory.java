@@ -9,6 +9,7 @@ import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuoteDbDao;
+import ua.com.goit.gojava7.kickstarter.dao.db.RewardDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.CategoryFileDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.ProjectFileDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.QuoteFileDao;
@@ -115,7 +116,7 @@ public class DaoFactory {
 		categoryDAO = new CategoryDbDao(connection);
 		projectDAO = new ProjectDbDao(connection);
 		//questionsDAO = new QuestionsMemoryDao(data.getQuestions());
-		//rewardDAO = new RewardMemoryDao(data.getRewards());
+		rewardDAO = new RewardDbDao(connection);
 	}
 
 	public CategoryStorage getCategoryDAO() {

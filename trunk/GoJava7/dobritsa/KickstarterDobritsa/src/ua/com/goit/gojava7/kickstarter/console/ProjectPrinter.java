@@ -50,7 +50,7 @@ public class ProjectPrinter {
 		for (int i = 0; i < rewards.size(); i++) {
 			System.out.println((i + 1) + ": \t$" + rewards.get(i).getAmount() + "\t-\t" + rewards.get(i).getReward());
 		}
-		System.out.println("\n" + (rewards.size() + 1) + ":\tNo thanks, I just want to help the project."
+		System.out.println((rewards.size() + 1) + ":\tNo thanks, I just want to help the project."
 				+ "\n0:\tTo choose another project");
 	
 	}

@@ -7,10 +7,11 @@ import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public interface RewardStorage extends Storage<Reward> {
 
-	public default List<Reward> getByProject(String projectName) {
-
-		return this.getAll().stream().filter(project -> project.getProjectName().equals(projectName))
+	public default List<Reward> getByProject(String projectName) {		
+		return this.getAll().stream().filter(reward -> reward.getProjectName().equals(projectName))
 				.collect(Collectors.toList());
 	}
+	
+	
 
 }

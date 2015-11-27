@@ -42,6 +42,8 @@ public class Kickstarter {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
 		this.projectStorage = projectStorage;
+		this.questionsStorage = questionsStorage;
+		this.rewardStorage = rewardStorage;
 	}
 
 	public void run() {
@@ -128,31 +130,37 @@ public class Kickstarter {
 	}
 
 	public void chooseReward(Project project) {
-		printer.print("\nLet's choose your reward!\n");
-		List<Reward> rewards = new ArrayList<>(project.getRewards());
-		projectPrinter.printRewards(rewards);
-		int numberOfReward = consoleScanner.getInt(0, rewards.size() + 1);
-		if (numberOfReward == 0)
+		printer.print("\nLet's choose your reward!\n");				
+		List<Reward> rewardsInProject = new ArrayList<>();				
+		rewardsInProject = rewardStorage.getByProject(project.getName());	
+		projectPrinter.printRewards(rewardsInProject);
+		int numberOfReward = consoleScanner.getInt(0, rewardsInProject.size() + 1);
+		if (numberOfReward == 0) {
+			printer.print(BORDER);
 			return;
-		if (numberOfReward == (rewards.size() + 1)) {
+		} else if (numberOfReward == (rewardsInProject.size() + 1)) {
 			int minDonation = 1;
 			int maxDonation = project.getGoal() - project.getPledged();
 			printer.print("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
 			int amount = consoleScanner.getInt(minDonation, maxDonation);
-			printer.print("\nIt was collected before: $" + project.getPledged());
-			doDonate(project, amount);
-			printer.print("Now collected: $" + project.getPledged());
-		} else {
-			printer.print("\nAmount of your donation is $" + rewards.get(numberOfReward - 1).getAmount());
+			printer.print("\nAmount of your donation is $" + amount);
 			printer.print("It was collected before: $" + project.getPledged());
-			doDonate(project, project.getRewards().get(numberOfReward - 1).getAmount());
+			project = pledge(project, amount);
 			printer.print("Now collected: $" + project.getPledged());
-			printer.print(BORDER + "\n");
+			printer.print(BORDER);
+		} else {
+			printer.print("\nAmount of your donation is $" + rewardsInProject.get(numberOfReward - 1).getAmount());
+			printer.print("It was collected before: $" + project.getPledged());
+			pledge(project, rewardsInProject.get(numberOfReward - 1).getAmount());
+			printer.print("Now collected: $" + project.getPledged());
+			printer.print(BORDER);
 		}
 	}
 
-	public void doDonate(Project project, int amount) {
-		project.addToPledged(amount);
+	public Project pledge(Project project, int amount) {
+		projectStorage.addToPledged(project.getName(), amount);
+		project.setPledged(projectStorage.getPledged(project.getName()));
+		return project;		
 	}
 
 	public void addQuestion(Project project) {
