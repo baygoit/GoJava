@@ -32,9 +32,12 @@ public class DaoProvider {
 	public void open() {
 		if (dataSource == DataSource.MYSQL) {
 			try {
+				Class.forName("com.mysql.jdbc.Driver");
 				connection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/gojava4omarchuk?user=gojava4omarchuk&password=somepassword");
 			} catch (SQLException e) {
 				throw new IllegalStateException("Cannot open connection. " + e.getMessage(), e);
+			} catch (ClassNotFoundException e) {
+				throw new IllegalStateException("Cannot open load mysql driver. " + e.getMessage(), e);
 			}
 		}
 	}

@@ -17,6 +17,9 @@ public class KickstarterRunner {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println(System.getenv());
+		System.out.println(System.getProperties());
+
 		DataSource dataSource = DataSource.MEMORY;
 		if (args.length != 0 && args[0] != null) {
 			try {
