@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.NumberFormatException;
 
-public class ConsoleScanner {
+public class ConsoleScanner { 
 
 	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 

@@ -33,8 +33,12 @@ public class QuotePrinterTest {
 
 	@Test
 	public void testPrint() {		
-		quotePrinter.print(new Quote("text1", "author"));
-		verify(printSteam).println(contains("text"));
-		verify(printSteam).println(contains("author"));
+		Quote quote = new Quote();
+		quote.setText("TestQuote");
+		quote.setAuthor("TestAuthor");
+		
+		quotePrinter.print(quote);
+		verify(printSteam).println(contains("TestQuote"));
+		verify(printSteam).println(contains("TestAuthor"));
 	}
 }

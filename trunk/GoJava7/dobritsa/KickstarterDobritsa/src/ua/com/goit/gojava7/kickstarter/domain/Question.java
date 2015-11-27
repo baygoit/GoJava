@@ -4,7 +4,7 @@ public class Question {
 	private String time = "";
 	private String question = "";
 	private String answer = "";
-	private String projectName;
+	private String projectName = "";
 
 	public String getTime() {
 		return time;
@@ -17,11 +17,10 @@ public class Question {
 	public String getQuestion() {
 		return question;
 	}
-	
+
 	public void setQuestion(String question) {
 		this.question = question;
 	}
-
 
 	public String getAnswer() {
 		return answer;
@@ -38,5 +37,9 @@ public class Question {
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Time: " + time + "; Question: " + question + "; Answer: " + answer + "; Project: " + projectName;
+	}
 }

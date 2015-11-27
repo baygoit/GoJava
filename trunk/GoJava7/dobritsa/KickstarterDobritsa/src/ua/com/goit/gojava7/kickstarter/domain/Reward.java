@@ -29,9 +29,9 @@ public class Reward {
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Amount: " + amount + " - " + reward;		
+		return "Amount: " + amount + "; Reward: " + reward;
 	}
 }

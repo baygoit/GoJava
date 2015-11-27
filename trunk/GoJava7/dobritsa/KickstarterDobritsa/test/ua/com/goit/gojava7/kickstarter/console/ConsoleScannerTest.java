@@ -17,7 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class) 
 public class ConsoleScannerTest {	
 
 	BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
@@ -66,9 +66,9 @@ public class ConsoleScannerTest {
 	}
 
 	@Test
-	public void testGetOptionEnteredB() throws IOException {
-		when(bufferedReader.readLine()).thenReturn("b");
-		assertThat(consoleScanner.getOption(), is("b"));
+	public void testGetOptionEnteredP() throws IOException {
+		when(bufferedReader.readLine()).thenReturn("p");
+		assertThat(consoleScanner.getOption(), is("p"));
 	}
 
 	@Test
