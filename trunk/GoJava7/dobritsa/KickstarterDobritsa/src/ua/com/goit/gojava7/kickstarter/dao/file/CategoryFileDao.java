@@ -11,11 +11,4 @@ public class CategoryFileDao extends FileDao<Category> implements CategoryStorag
 	public CategoryFileDao(List<Category> data) {
 		super(data);
 	}
-
-	@Override
-	public Category getByNumber(int number) {
-		int index = number - 1;
-		return get(index);
-	}
-
 }

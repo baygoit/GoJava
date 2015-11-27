@@ -92,7 +92,7 @@ public class DaoFactory {
 
 	private void initMemoryStorage() {
 		Memory data = new Memory();
-		
+
 		quoteDAO = new QuoteMemoryDao(data.getQuotes());
 		categoryDAO = new CategoryMemoryDao(data.getCategories());
 		projectDAO = new ProjectMemoryDao(data.getProjects());
@@ -100,22 +100,22 @@ public class DaoFactory {
 		rewardDAO = new RewardMemoryDao(data.getRewards());
 	}
 
-	private void initFileStorage() {	
+	private void initFileStorage() {
 		quoteDAO = new QuoteFileDao((new QuoteFileReader(QUOTES_FILE)).read());
-		categoryDAO = new CategoryFileDao((new CategoryFileReader(CATEGORIES_FILE)).read());	
-		projectDAO = new ProjectFileDao((new ProjectFileReader(PROJECTS_FILE)).read());	
+		categoryDAO = new CategoryFileDao((new CategoryFileReader(CATEGORIES_FILE)).read());
+		projectDAO = new ProjectFileDao((new ProjectFileReader(PROJECTS_FILE)).read());
 		rewardDAO = new RewardFileDao((new RewardFileReader(REWARDS_FILE)).read());
-		
-		//TODO
-		//questionsDAO = new QuestionsFileDao(mem.getQuestions());
+
+		// TODO
+		// questionsDAO = new QuestionsFileDao(mem.getQuestions());
 	}
 
 	private void initDbStorage() {
-		open();	
+		open();
 		quoteDAO = new QuoteDbDao(connection);
 		categoryDAO = new CategoryDbDao(connection);
 		projectDAO = new ProjectDbDao(connection);
-		//questionsDAO = new QuestionsMemoryDao(data.getQuestions());
+		// questionsDAO = new QuestionsMemoryDao(data.getQuestions());
 		rewardDAO = new RewardDbDao(connection);
 	}
 

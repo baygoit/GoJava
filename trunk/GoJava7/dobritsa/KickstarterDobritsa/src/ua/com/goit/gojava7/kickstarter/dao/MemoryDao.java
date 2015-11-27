@@ -21,7 +21,7 @@ public abstract class MemoryDao<T> implements Storage<T> {
 	public void setAll(List<T> data) {
 		this.data = data;
 	}
-	
+
 	@Override
 	public T get(int index) {
 		if (data.size() == 0) {

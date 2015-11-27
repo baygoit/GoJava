@@ -4,15 +4,16 @@ import java.util.Collections;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.storage.Storage;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-public abstract class FileDao<T> implements Storage<T>{
+public abstract class FileDao<T> implements Storage<T> {
 	protected List<T> data;
 
 	protected FileDao(List<T> data) {
 		this.data = data;
 	}
 
-	@Override 
+	@Override
 	public List<T> getAll() {
 		return Collections.unmodifiableList(data);
 	}
@@ -37,5 +38,11 @@ public abstract class FileDao<T> implements Storage<T>{
 	@Override
 	public int size() {
 		return data.size();
+	}
+	
+	
+	public T getByNumber(int number) {
+		int index = number - 1;
+		return get(index);
 	}
 }

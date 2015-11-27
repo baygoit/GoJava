@@ -19,9 +19,9 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectStorage {
 	}
 
 	@Override
-	public void addToPledged(String projectName, int amount) {
-		// TODO Auto-generated method stub
-		
+	public void updatePledged(Project project, int amount) {
+		//TODO implement writing to file
+		project.updatePledged(amount);
 	}
 
 	@Override

@@ -4,62 +4,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.dao.DbDao;
 import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-public class CategoryDbDao implements CategoryStorage {
+public class CategoryDbDao extends DbDao<Category> implements CategoryStorage {
 
-	
-	private List<Category> categories = new ArrayList<>();
-	private Connection connection;
+	private static String TABLE = "category";
+	private static String FIELDS = "name";
 
 	public CategoryDbDao(Connection connection) {
-		this.connection = connection;
-	}
-
-	@Override
-	public Category get(int index) {
-		Category category = null;
-		String query = "select id, name from category where id = " + (index);
-
-		try (PreparedStatement ps = connection.prepareStatement(query); 
-				ResultSet resultSet = ps.executeQuery()) {
-			if (resultSet.next()) {
-				category = new Category();
-				category.setName(resultSet.getString("name"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return category;
-	}
-
-	@Override
-	public List<Category> getAll() {
-		List<Category> categories = new ArrayList<>();
-		String query = "select name from category";
-		try (PreparedStatement ps = connection.prepareStatement(query);
-				ResultSet resultSet = ps.executeQuery()) {
-			while (resultSet.next()) {
-				Category category = new Category();
-				category.setName(resultSet.getString("name"));
-				categories.add(category);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return categories;
+		super(connection, FIELDS, TABLE);
 	}
 
 	@Override
 	public int size() {
 		int size = 0;
 		String query = "select count(*) from category";
-		try (PreparedStatement ps = connection.prepareStatement(query);
-				ResultSet resultSet = ps.executeQuery()) {
+		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
 				size = resultSet.getInt(1);
 			}
@@ -70,13 +33,9 @@ public class CategoryDbDao implements CategoryStorage {
 	}
 
 	@Override
-	public Category getByNumber(int number) {		
-		return get(number);
+	protected Category readElement(ResultSet resultSet) throws SQLException {
+		Category category = new Category();
+		category.setName(resultSet.getString("name"));
+		return category;
 	}
-
-	@Override
-	public void setAll(List<Category> categories) {
-		this.categories = categories;
-	}
-
 }

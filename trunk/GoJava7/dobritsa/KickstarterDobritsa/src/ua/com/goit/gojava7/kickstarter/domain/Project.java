@@ -99,7 +99,7 @@ public class Project {
 		this.categoryName = categoryName;
 	}
 
-	public void addToPledged(int amount) {
+	public void updatePledged(int amount) {
 		this.pledged += amount;
 	}
 

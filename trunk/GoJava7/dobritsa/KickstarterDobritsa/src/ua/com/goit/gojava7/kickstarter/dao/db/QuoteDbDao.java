@@ -4,59 +4,30 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.dao.DbDao;
 import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-public class QuoteDbDao implements QuoteStorage {
-	private Connection connection;
-	List<Quote> quotes = new ArrayList<>();
-	
-	
+public class QuoteDbDao extends DbDao<Quote> implements QuoteStorage {
+
+	private static String TABLE = "quote";
+	private static String FIELDS = "text, author";
+
 	public QuoteDbDao(Connection connection) {
-		this.connection = connection;
+		super(connection, FIELDS, TABLE);
 	}
 
 	@Override
 	public Quote getRandomQuote() {
-		Quote quote = null;
 		String query = "SELECT text, author FROM quote order by rand() limit 1 ";
-
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
-				quote = new Quote();
-				quote.setText(resultSet.getString("text"));
-				quote.setAuthor(resultSet.getString("author"));
-			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-		return quote;
-	}
-
-	@Override
-	public Quote get(int index) {
-		Quote quote = null;
-		String query = "select text, author from quote where id = " + index;
-
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-			if (resultSet.next()) {
-				quote = new Quote();
-				quote.setText(resultSet.getString("text"));
-				quote.setAuthor(resultSet.getString("author"));
+				return readElement(resultSet);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return quote;
-	}
-
-	@Override
-	public List<Quote> getAll() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -67,8 +38,10 @@ public class QuoteDbDao implements QuoteStorage {
 	}
 
 	@Override
-	public void setAll(List<Quote> quotes) {
-		this.quotes = quotes;
+	protected Quote readElement(ResultSet resultSet) throws SQLException {
+		Quote quote = new Quote();
+		quote.setText(resultSet.getString("text"));
+		quote.setAuthor(resultSet.getString("author"));
+		return quote;
 	}
-
 }

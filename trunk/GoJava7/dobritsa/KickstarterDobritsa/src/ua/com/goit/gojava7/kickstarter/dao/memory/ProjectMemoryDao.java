@@ -19,9 +19,8 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 	}
 
 	@Override
-	public void addToPledged(String projectName, int amount) {
-		// TODO Auto-generated method stub
-		
+	public void updatePledged(Project project, int amount) {
+		project.updatePledged(amount);
 	}
 
 	@Override
