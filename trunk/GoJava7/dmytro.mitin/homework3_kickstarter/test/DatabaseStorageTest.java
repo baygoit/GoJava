@@ -9,26 +9,31 @@ import ua.com.goit.gojava7.kickstarter.model.Quote;
 import ua.com.goit.gojava7.kickstarter.model.storage.*;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleView;
 import ua.com.goit.gojava7.kickstarter.view.View;
-import util.ConsoleMock.ConfigurableInputStream;
+import util.ConsoleMock;
 
-import java.io.*;
-import java.util.Arrays;
-import java.util.List;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.io.PrintStream;
 
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class ConsoleViewMemoryStorageTest {
+public class DatabaseStorageTest {
+
     private PrintStream oldOut;
+
     private ByteArrayOutputStream out;
+
     private InputStream oldIn;
-    private ConfigurableInputStream in;
+
+    private ConsoleMock.ConfigurableInputStream in;
 
     @Before
-    public void setUpStreams() {
+    public void setUp() {
         oldIn = System.in;
 
-        in = new ConfigurableInputStream();
+        in = new ConsoleMock.ConfigurableInputStream();
 
         oldOut = System.out;
 
@@ -40,24 +45,25 @@ public class ConsoleViewMemoryStorageTest {
 
     @Test
     public void test() {
-        List<Quote> quotes = Arrays.asList(new Quote("text1", "author1"));
-        QuoteStorage quoteStorage = new InMemoryQuoteStorage(quotes);
-        Category category = new Category("category1");
-        List<Category> categories = Arrays.asList(category);
-        new Project("project1", category, "description", "description", "history", "http://...", 1_000_000, 7);
-        CategoryStorage categoryStorage = new InMemoryCategoryStorage(categories);
+        in.add("h");
 
+        QuoteStorage quoteStorage = new DatabaseQuoteStorage();
+        Quote quote = new Quote("quote1", "author1");
+        quoteStorage.add(quote);
+
+        CategoryStorage categoryStorage = new DatabaseCategoryStorage();
+        Category category = new Category("category1");
+        categoryStorage.add(category);
+        new Project("project1", category, "short description", "long description", "history...",
+                "http://wwww.youtube.com/...", 100, 10);
         Kickstarter kickstarter = new Kickstarter(categoryStorage, quoteStorage);
         Controller controller = new Controller(kickstarter);
         View view = new ConsoleView(controller);
-
-        in.add("h");
-
         view.run();
 
         assertThat(out.toString(), is("Hello! You are at Kickstarter.\r\n" +
                 "\r\n" +
-                "text1 (author1)\r\n" +
+                "quote1 (author1)\r\n" +
                 "\r\n" +
                 "Categories:\r\n" +
                 "1. category1\r\n" +
@@ -76,8 +82,8 @@ public class ConsoleViewMemoryStorageTest {
     }
 
     @After
-    public void cleanUpStreams() {
-        System.setOut(oldOut);
-        System.setIn(oldIn);
+    public void tearDown() {
+
+
     }
 }

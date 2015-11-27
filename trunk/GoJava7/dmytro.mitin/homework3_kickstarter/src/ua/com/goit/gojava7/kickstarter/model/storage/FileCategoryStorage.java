@@ -46,7 +46,7 @@ public class FileCategoryStorage implements CategoryStorage {
             final int numberOfProjectParameters = 8;
             int lineNumber = 0;
             String projectName = "";
-            String projectCategory = "";
+            String projectCategoryName = "";
             String shortDescription = "";
             String description = "";
             String history = "";
@@ -57,7 +57,7 @@ public class FileCategoryStorage implements CategoryStorage {
                 if (lineNumber % (numberOfProjectParameters + 1) == 0) {
                     projectName = line;
                 } else if (lineNumber % (numberOfProjectParameters + 1) == 1) {
-                    projectCategory = line;
+                    projectCategoryName = line;
                 } else if (lineNumber % (numberOfProjectParameters + 1) == 2) {
                     shortDescription = line;
                 } else if (lineNumber % (numberOfProjectParameters + 1) == 3) {
@@ -71,13 +71,16 @@ public class FileCategoryStorage implements CategoryStorage {
                 } else if (lineNumber % (numberOfProjectParameters + 1) == 7) {
                     daysLeft = Integer.parseInt(line);
 
-                    int categoryIndex = Collections.binarySearch(categories, new Category(projectCategory),
-                            (category1, category2) -> category1.getName().compareTo(category2.getName()));
-                    Category category;
-                    if (categoryIndex >= 0) {
-                        category = categories.get(categoryIndex);
-                    } else {
-                        category = new Category(projectCategory);
+                    Category category = null;
+                    for (Category currentCategory : categories) {
+                        if (currentCategory.getName().equals(projectCategoryName)) {
+                            category = currentCategory;
+                            break;
+                        }
+                    }
+
+                    if (category == null) {
+                        category = new Category(projectCategoryName);
                         categories.add(category);
                     }
 

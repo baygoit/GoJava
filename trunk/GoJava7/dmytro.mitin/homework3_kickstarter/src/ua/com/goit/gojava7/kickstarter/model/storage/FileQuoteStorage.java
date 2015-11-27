@@ -37,8 +37,7 @@ public class FileQuoteStorage implements QuoteStorage {
                 } else if (lineNumber % 3 == 1) {
                     author = line;
 
-                    Quote quote = new Quote(text, author);
-                    quotes.add(quote);
+                    quotes.add(new Quote(text, author));
                 }
 
                 lineNumber++;

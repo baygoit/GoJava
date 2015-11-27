@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertThat;
 
-public class LauncherConsoleViewMemoryStorageTest {
+public class LauncherMemoryStorageTest {
     private PrintStream oldOut;
     private ByteArrayOutputStream out;
     private InputStream oldIn;

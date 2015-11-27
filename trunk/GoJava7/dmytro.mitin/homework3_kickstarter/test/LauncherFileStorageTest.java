@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertThat;
 import static util.ConsoleMock.*;
 
-public class LauncherConsoleViewFileStorageTest {
+public class LauncherFileStorageTest {
     private PrintStream oldOut;
     private ByteArrayOutputStream out;
     private InputStream oldIn;
@@ -33,6 +33,7 @@ public class LauncherConsoleViewFileStorageTest {
     @Test
     public void test() {
         in.add("h");
+
         Launcher.main(new String[]{"f"});
         assertThat(out.toString(), startsWith("Hello! You are at Kickstarter.\r\n" +
                 "\r\n"));

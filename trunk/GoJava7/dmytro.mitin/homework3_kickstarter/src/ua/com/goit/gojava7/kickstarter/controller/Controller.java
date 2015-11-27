@@ -23,10 +23,6 @@ public class Controller {
         return kickstarter;
     }
 
-    public void donate(Project project, int sum) throws ExitException, IOException {
-        kickstarter.addDonation(project, sum);
-    }
-
     public Quote getRandomQuote() {
         List<Quote> quotes = kickstarter.getQuoteStorage().getQuotes();
         int numberOfQuotes = quotes.size();
@@ -48,5 +44,13 @@ public class Controller {
             return null;
         }
         return projects.get(number);
+    }
+
+    public void askQuestion(Project project, String question) throws IOException, ExitException {
+        kickstarter.addQuestion(project, question);
+    }
+
+    public void donate(Project project, int sum) throws ExitException, IOException {
+        kickstarter.addDonation(project, sum);
     }
 }
