@@ -1,19 +1,17 @@
-package dao.db;
+package dao.hibernate;
 
 import dbutils.HibernateUtil;
-import model.Home;
+import model.Reservation;
 import org.hibernate.Session;
 
-public class HomeDao {
-
+public class ReservationDao {
     private Session session;
 
-    public void create(Home home) {
+    public void create(Reservation reservation) {
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        session.save(home);
+        session.save(reservation);
         session.getTransaction().commit();
         session.close();
-
     }
 }

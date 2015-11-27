@@ -1,4 +1,4 @@
-package dao.db;
+package dao.hibernate;
 
 import dbutils.HibernateUtil;
 import model.User;
