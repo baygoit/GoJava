@@ -3,16 +3,16 @@ package ua.com.goit.gojava7.kickstarter.controller;
 import java.io.IOException;
 import java.sql.Date;
 
-import ua.com.goit.gojava7.kickstarter.beans.Payment;
-import ua.com.goit.gojava7.kickstarter.beans.Reward;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
+import ua.com.goit.gojava7.kickstarter.domain.Payment;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
-public class PaymentWithRewardPageController extends PageController<Reward> {
+public class PaymentWithRewardPageController extends AbstractPageController<Reward> {
 
     @Override
     protected void handle() {
         
-        page.showPaymentRequest();
+        printer.showPaymentRequest();
         
     }
 
@@ -27,12 +27,10 @@ public class PaymentWithRewardPageController extends PageController<Reward> {
                 long cardID = Long.parseLong(paymentParameters[1]);
                 String username = paymentParameters[0];
                 
-                PaymentStorage paymentDAO = storageFactory.getPaymentDAO();
+                PaymentDAO paymentDAO = storageFactory.getPaymentDAO();
                 
                 Payment payment = new Payment(reward.getProjectId(), reward.getId(), username, cardID, sum, new Date(System.currentTimeMillis()));
                 paymentDAO.add(payment);
-/*
-                project.setBalanceSum(paymentDAO.getSum(project.getId()));*/
 
             } catch (NumberFormatException e) {
                 return false;

@@ -41,24 +41,28 @@ public class KickstarterRunner {
 				System.out.println("Program using memory storage");
 				AbstractKickstarter kickstarter = new KickstarterMemory();
 				kickstarter.start();
+				kickstarter.stop();
 				break;
 			}
 			case 2 : {
 				System.out.println("Program using files storage");
 				AbstractKickstarter kickstarter = new KickstarterFile();
 				kickstarter.start();
+				kickstarter.stop();
 				break;
 			}
 			case 3 : {
 				System.out.println("Program using database storage");
 				AbstractKickstarter kickstarter = new KickstarterDatabase();
 				kickstarter.start();
+				kickstarter.stop();
 				break;
 			}
 			default:
 				System.out.println("Program using memory storage");
 				AbstractKickstarter kickstarter = new KickstarterMemory();
 				kickstarter.start();
+				kickstarter.stop();
 				break;
 		}
 	}

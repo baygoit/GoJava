@@ -11,16 +11,23 @@ import ua.com.goit.gojava7.kickstarter.beans.Faq;
 public class FaqTest {
 
 	private String question = "Who?";
-	private Faq faq;
+	private String answer = "I am";
+	private int projectID = 1;
+	private Faq faq = new Faq();
 	
 	@Before
 	public void setUp() throws Exception {
-		faq = new Faq(question);
+		faq.setProjectID(projectID);
+		faq.setQuestion(question);
+		faq.setAnswer(answer);
 	}
 
-	@Test
+	@Test (expected = NullPointerException.class)
 	public void testFaq() {
-		assertThat(faq.getQuestion(), is(question));
+		Faq myFaq = new Faq();
+		assertThat(myFaq.getQuestion().length(), is(0));
+		assertThat(myFaq.getAnswer().length(), is(0));
+		assertThat(myFaq.getProjectID(), is(0));
 	}
 
 	@Test
@@ -37,7 +44,7 @@ public class FaqTest {
 
 	@Test
 	public void testGetAnswer() {
-		assertEquals(faq.getAnswer(), null);
+		assertThat(faq.getAnswer().contains(answer), is(true));
 	}
 
 	@Test
@@ -49,14 +56,13 @@ public class FaqTest {
 
 	@Test
 	public void testGetProjectID() {
-		assertThat(faq.getProjectID(), is(0));
+		assertThat(faq.getProjectID(), is(projectID));
 	}
 
 	@Test
 	public void testSetProjectID() {
-		int projectID = 1;
-		faq.setProjectID(projectID);
-		assertThat(faq.getProjectID(), is(1));
+		int newProjectID = 2;
+		faq.setProjectID(newProjectID);
+		assertThat(faq.getProjectID(), is(newProjectID));
 	}
-
 }

@@ -1,14 +1,14 @@
 package ua.com.goit.gojava7.kickstarter.controller;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-public class ProjectDetailsPageController extends PageController<Project> {
+public class ProjectDetailsPageController extends AbstractPageController<Project> {
 
     @Override
     protected void handle() {        
         request.setQuestions(storageFactory.getQuestionsDAO().getByProject(request.getId()));
         request.setBalanceSum(storageFactory.getPaymentDAO().getSum(request.getId()));
-        page.showProjectDetails(request);    
+        printer.showProjectDetails(request);    
     }
 
     @Override

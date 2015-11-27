@@ -25,14 +25,12 @@ public class AbstractKickstarter {
 	Category selectedCategoryByUser;
 	Project selectedProjectByUser;
 	
-	
 	AbstractCategoryDao categories;
 	AbstractProjectDao projects;
 	AbstractQuoteDao quotes;
 	AbstractPaymentDao payments;
 	AbstractFaqDao faqs;
 
-	
 	public void start() {
 		consolePrinter.print(quotes.getRandomQuote());
 		selectCategory();
@@ -161,7 +159,8 @@ public class AbstractKickstarter {
 	
 	protected void askQuestion(Project project) {
 		String question = consoleScanner.parseAskingQuestion();
-		Faq faq = new Faq(question);
+		Faq faq = new Faq();
+		faq.setQuestion(question);
 		faq.setProjectID(project.getUniqueID());
 		faqs.add(faq);
 		
@@ -187,24 +186,39 @@ public class AbstractKickstarter {
 			if (userNumber == 1) {
 				consolePrinter.print("Thank you. You donated 1$.");
 				consolePrinter.print(SEPARATOR);
-				payment = new Payment(userName, creditCardNumber, 1);
+				
+				payment = new Payment();
+				payment.setUserName(userName);
+				payment.setCreditCardNumber(creditCardNumber);
+				payment.setDonatingSum(1);
 				payment.setProjectID(project.getUniqueID());
+				
 				project.setCollectedSum(payment.getDonatingSum());
 				payments.add(payment);
 				
 			} else if (userNumber == 2) {
 				consolePrinter.print("Thank you. You donated 10$.");
 				consolePrinter.print(SEPARATOR);
-				payment = new Payment(userName, creditCardNumber, 10);
+				
+				payment = new Payment();
+				payment.setUserName(userName);
+				payment.setCreditCardNumber(creditCardNumber);
+				payment.setDonatingSum(10);
 				payment.setProjectID(project.getUniqueID());
+				
 				project.setCollectedSum(payment.getDonatingSum());
 				payments.add(payment);
 				
 			} else if (userNumber == 3) {
 				consolePrinter.print("Thank you. You donated 40$.");
 				consolePrinter.print(SEPARATOR);
-				payment = new Payment(userName, creditCardNumber, 40);
+				
+				payment = new Payment();
+				payment.setUserName(userName);
+				payment.setCreditCardNumber(creditCardNumber);
+				payment.setDonatingSum(40);
 				payment.setProjectID(project.getUniqueID());
+				
 				project.setCollectedSum(payment.getDonatingSum());
 				payments.add(payment);
 				
@@ -212,8 +226,13 @@ public class AbstractKickstarter {
 				int donatingSum = consoleScanner.parseDonatingAmount();
 				consolePrinter.print("Thank you. You donated " + donatingSum + ".");
 				consolePrinter.print(SEPARATOR);
-				payment = new Payment(userName, creditCardNumber, donatingSum);
+				
+				payment = new Payment();
+				payment.setUserName(userName);
+				payment.setCreditCardNumber(creditCardNumber);
+				payment.setDonatingSum(donatingSum);
 				payment.setProjectID(project.getUniqueID());
+				
 				project.setCollectedSum(payment.getDonatingSum());
 				payments.add(payment);
 				

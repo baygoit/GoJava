@@ -8,11 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-public class ProjectPostgreDAO implements ProjectStorage {
+public class ProjectPostgreDAO implements ProjectDAO {
 
     private static final String TABLE = "project";
     private static final String FIELDS = "id,name,goalSum,startDate,endDate,category_id,description,videoUrl,author";
@@ -140,7 +140,11 @@ public class ProjectPostgreDAO implements ProjectStorage {
         statement.setLong(++i, element.getGoalSum());
         statement.setDate(++i, element.getStartDate());
         statement.setDate(++i, element.getEndDate());
-        statement.setInt(++i, element.getCategoryId());
+        if (element.getCategoryId() == 0) {
+            statement.setNull(++i, java.sql.Types.INTEGER);   
+        } else {
+            statement.setInt(++i, element.getCategoryId());             
+        }
         statement.setString(++i, element.getDescription());
         statement.setString(++i, element.getVideoUrl());
         statement.setString(++i, element.getAuthor());

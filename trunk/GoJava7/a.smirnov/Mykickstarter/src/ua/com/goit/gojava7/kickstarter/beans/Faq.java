@@ -5,10 +5,6 @@ public class Faq {
 	private String question;
 	private String answer;
 	
-	public Faq(String question) {
-		this.question = question;
-	}
-	
 	public int getProjectID() {
 		return projectID;
 	}

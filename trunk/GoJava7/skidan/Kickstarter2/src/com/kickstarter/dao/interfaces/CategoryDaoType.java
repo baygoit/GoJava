@@ -6,7 +6,7 @@ import com.kickstarter.model.Category;
 
 public abstract class CategoryDaoType {
 
-	protected CategoryDaoInterface categoryDaoInterface;
+	public CategoryDaoInterface categoryDaoInterface;
 
 	public CategoryDaoType() {
 

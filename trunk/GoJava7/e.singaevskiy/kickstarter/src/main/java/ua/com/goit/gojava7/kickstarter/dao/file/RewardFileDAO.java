@@ -1,9 +1,13 @@
 package ua.com.goit.gojava7.kickstarter.dao.file;
 
-import ua.com.goit.gojava7.kickstarter.beans.Reward;
-import ua.com.goit.gojava7.kickstarter.dao.RewardStorage;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class RewardFileDAO extends FileDAO<Reward> implements RewardStorage {
+import ua.com.goit.gojava7.kickstarter.dao.RewardDAO;
+import ua.com.goit.gojava7.kickstarter.dao.file.util.FileDAO;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
+
+public class RewardFileDAO extends FileDAO<Reward> implements RewardDAO {
 
     public RewardFileDAO() {
         super(Reward.class);
@@ -21,5 +25,12 @@ public class RewardFileDAO extends FileDAO<Reward> implements RewardStorage {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<Reward> getByProject(int projectId) {
+        return getAll().stream()
+                .filter(reward -> reward.getProjectId() == projectId)
+                .collect(Collectors.toList());
     }
 }

@@ -1,9 +1,8 @@
 package com.kickstarter.dao.interfaces;
 
-import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,45 +12,37 @@ public class DbCategoryDaoImpl extends DbConnector implements CategoryDaoInterfa
 
 	public List<Category> getAll() {
 		ResultSet rs = null;
-		Statement statement = null;
 		List<Category> list = new ArrayList<>();
 
-		try (Connection conection = getConnection()) {
-			statement = conection.createStatement();
-			rs = statement.executeQuery("select * from categories");
-
+		try (PreparedStatement pStatement = getConnection().prepareStatement("select * from categories")) {
+			rs = pStatement.executeQuery();
 			while (rs.next()) {
 				Category category = new Category();
-				category.setId(rs.getInt("id"));
-				category.setTitle(rs.getString("title"));
+				category.setId(rs.getInt("categoryId"));
+				category.setTitle(rs.getString("categoryTitle"));
 				list.add(category);
 			}
-
 		} catch (SQLException e) {
 			System.out.println("Category getAll MySql connection problem");
 		}
 		return list;
-
 	}
 
 	public Category getByNumber(int categoryNumber) {
 		ResultSet rs = null;
-		Statement statement = null;
 		Category category = new Category();
 
-		try (Connection conection = getConnection()) {
-			statement = conection.createStatement();
-			rs = statement.executeQuery("select id, title from categories where id = " + "'" + categoryNumber + "'");
+		try (PreparedStatement pStatement = getConnection()
+				.prepareStatement("select * from categories where categoryId = ?")) {
+			pStatement.setInt(1, categoryNumber);
+			rs = pStatement.executeQuery();
 			while (rs.next()) {
-				category.setId(rs.getInt("id"));
-				category.setTitle(rs.getString("title"));
+				category.setId(rs.getInt("categoryId"));
+				category.setTitle(rs.getString("categoryTitle"));
 			}
-
 		} catch (SQLException e) {
 			System.out.println("Category getCategorieByNumber MySql connection problem");
-
 		}
 		return category;
 	}
-
 }

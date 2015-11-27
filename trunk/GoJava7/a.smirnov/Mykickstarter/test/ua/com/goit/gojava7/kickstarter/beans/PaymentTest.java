@@ -12,19 +12,24 @@ public class PaymentTest {
 
 	private String userName = "Anton";
 	private long creditCardNumber = 123456789;
-	private int donatingSum = 1000;
-	private Payment payment;
+	private int donatingSum = 1_000_000;
+	private int projectID = 1;
+	private Payment payment = new Payment();
 	
 	@Before
 	public void setUp() throws Exception {
-		payment = new Payment(userName, creditCardNumber, donatingSum);
+		payment.setUserName(userName);
+		payment.setCreditCardNumber(creditCardNumber);
+		payment.setDonatingSum(donatingSum);
+		payment.setProjectID(projectID);
 	}
 
 	@Test
 	public void testPayment() {
-		assertThat(payment.getUserName(), is(userName));
-		assertThat(payment.getCreditCardNumber(), is(creditCardNumber));
-		assertThat(payment.getDonatingSum(), is(donatingSum));
+		Payment myPayment = new Payment();
+		assertThat(myPayment.getUserName().length(), is(0));
+		assertThat(myPayment.getCreditCardNumber(), is(0));
+		assertThat(myPayment.getDonatingSum(), is(0));
 	}
 
 	@Test
@@ -65,14 +70,14 @@ public class PaymentTest {
 
 	@Test
 	public void testGetProjectID() {
-		assertThat(payment.getProjectID(), is(0));
+		assertThat(payment.getProjectID(), is(projectID));
 	}
 
 	@Test
 	public void testSetProjectID() {
-		int projectID = 1;
-		payment.setProjectID(projectID);
-		assertThat(payment.getProjectID(), is(1));
+		int newProjectID = 2;
+		payment.setProjectID(newProjectID);
+		assertThat(payment.getProjectID(), is(newProjectID));
 	}
 
 }
