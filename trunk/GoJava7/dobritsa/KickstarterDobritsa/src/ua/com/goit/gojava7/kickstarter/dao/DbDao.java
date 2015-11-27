@@ -63,6 +63,19 @@ public abstract class DbDao<T> implements Storage<T> {
 		}
 		return data;
 	}
+	
+	@Override
+	public int size() {	
+		String query = "select count(*) as cnt from " + TABLE;
+		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+			if (resultSet.next()) {
+				return resultSet.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 	
 	protected abstract T readElement(ResultSet resultSet) throws SQLException;	

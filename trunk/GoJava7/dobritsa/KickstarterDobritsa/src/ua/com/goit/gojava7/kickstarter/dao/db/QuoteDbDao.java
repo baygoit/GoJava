@@ -30,13 +30,7 @@ public class QuoteDbDao extends DbDao<Quote> implements QuoteStorage {
 		}
 		return null;
 	}
-
-	@Override
-	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 	@Override
 	protected Quote readElement(ResultSet resultSet) throws SQLException {
 		Quote quote = new Quote();

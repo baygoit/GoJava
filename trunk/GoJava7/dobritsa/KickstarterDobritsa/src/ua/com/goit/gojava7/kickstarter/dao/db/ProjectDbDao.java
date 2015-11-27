@@ -72,20 +72,5 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 		project.setHistory(resultSet.getString("history"));
 		project.setLink(resultSet.getString("link"));
 		return project;
-	}
-
-	@Override
-	public int size() {
-		int size = 0;
-		String query = "select count(*) as cnt from project";
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-			// if (resultSet.next()) {
-			size = resultSet.getInt("cnt");
-			// }
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return size;
-	}
-
+	}	
 }

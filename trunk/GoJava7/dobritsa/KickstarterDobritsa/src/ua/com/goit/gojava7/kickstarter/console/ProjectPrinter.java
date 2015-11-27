@@ -44,6 +44,11 @@ public class ProjectPrinter {
 	public void printRewards(List<Reward> rewards) {	
 		if(rewards.size() == 0) {
 			System.out.println("There are no rewards. You can just help the project.");
+			System.out.println("\nType:");			
+			System.out.println("1: To choose amount of your pledge");
+			System.out.println("0: To choose another project");
+
+			
 			return;
 		}	
 		System.out.println("Type:");

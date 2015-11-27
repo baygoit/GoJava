@@ -39,20 +39,6 @@ public class RewardDbDao extends DbDao<Reward> implements RewardStorage {
 	}
 
 	@Override
-	public int size() {
-		int size = 0;
-		String query = "select count(*) as cnt from reward";
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-			if (resultSet.next()) {
-				size = (resultSet.getInt("cnt"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return size;
-	}
-
-	@Override
 	protected Reward readElement(ResultSet resultSet) throws SQLException {
 		Reward reward = new Reward();
 		reward.setAmount(resultSet.getInt("amount"));
