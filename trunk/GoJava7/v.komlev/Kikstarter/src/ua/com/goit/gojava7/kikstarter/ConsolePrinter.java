@@ -1,5 +1,9 @@
 package ua.com.goit.gojava7.kikstarter;
 
+import ua.com.goit.gojava7.kikstarter.domain.Category;
+import ua.com.goit.gojava7.kikstarter.domain.Project;
+import ua.com.goit.gojava7.kikstarter.domain.Quote;
+
 public class ConsolePrinter {
 
 	private static final String NEXT_LINE = "\n";
@@ -11,7 +15,7 @@ public class ConsolePrinter {
 	}
 
 	public void printQuote(Quote quote) {
-		System.out.println(quote.getQuoteContent() + NEXT_LINE + quote.getQuoteAuthor() + NEXT_LINE
+		System.out.println(quote.getContent() + NEXT_LINE + quote.getAuthor() + NEXT_LINE
 				+ INDENT);
 	}
 
@@ -33,6 +37,7 @@ public class ConsolePrinter {
 					+ currentProject.getProjectNecessaryAmount() + NEXT_LINE + "Collected amount"
 					+ SEPARETOR + currentProject.getProjectAmountCollected() + NEXT_LINE
 					+ "Days to go" + SEPARETOR + currentProject.getProjectDaysToEnd() + NEXT_LINE
+					+ "Question" + SEPARETOR + currentProject.getProjectQuestion() + NEXT_LINE
 					+ INDENT);
 		}
 	}
@@ -48,6 +53,7 @@ public class ConsolePrinter {
 				+ "Days to go" + SEPARETOR + project.getProjectDaysToEnd() + NEXT_LINE
 				+ "About this project" + SEPARETOR + project.getProjectDetailedDescription()
 				+ NEXT_LINE + "Reference on project" + SEPARETOR + project.getProjectUrl()
-				+ NEXT_LINE + INDENT);
+				+ NEXT_LINE + "Question" + SEPARETOR + project.getProjectQuestion() + NEXT_LINE
+				+ INDENT);
 	}
 }

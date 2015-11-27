@@ -3,6 +3,9 @@ package ua.com.goit.gojava7.kickstarter.dao.file;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,25 +13,22 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.dao.memory.Memory;
+import ua.com.goit.gojava7.kickstarter.dao.file.util.FileDAO;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public class CategoryFileDAOTest {
-    
     FileDAO<Category> fs;
     List<Category> list = new ArrayList<>();
+    String filePath = "src/test/resources/storages/file/%name%.CSV".replace("%name%", Category.class.getSimpleName());
     
     @Before
     public void setUp(){
-        Class<Category> persistentClass = Category.class;
-        fs = new FileDAO<Category>(persistentClass, 
-                "src/test/resources/storages/file/%name%.txt".replace("%name%", persistentClass.getSimpleName()));
         
-        list.add(new Category("c1"));
-        list.add(new Category("c2"));
-        list.add(new Category(null));
+        fs = new CategoryFileDAO(filePath);
         
-        list = new Memory().getCategories();
+        list.add(new Category(1, "c1"));
+        list.add(new Category(2, "c2"));
+        list.add(new Category(3, "c3"));
         
         fs.clear();
         fs.addAll(list);
@@ -36,8 +36,11 @@ public class CategoryFileDAOTest {
     }
     
     @After
-    public void tearDown() {
-        //fsQuote.clear();
+    public void tearDown() throws Exception {
+        Path path = Paths.get(filePath);
+        if (path.toFile().exists()) {
+            Files.delete(path);
+        }
     }
     
     @Test
@@ -46,18 +49,12 @@ public class CategoryFileDAOTest {
     }
 
     @Test
-    public void testGet() {
-        for (int i = 0; i < list.size(); i++) {
-            assertThat(fs.get(i), is(list.get(i)));
-        }
-    }
-
-    @Test
-    public void testAdd() {
-        int lastIndex = list.size()-1;
-        Category element = new Category("cat");
+    public void testAddGet() {
+        int id = 55;
+        Category element = new Category(4, "cat");
+        element.setId(id);
         fs.add(element);
-        assertThat(fs.get(++lastIndex), is(element));
+        assertThat(fs.get(id), is(element));
     }
 
     @Test

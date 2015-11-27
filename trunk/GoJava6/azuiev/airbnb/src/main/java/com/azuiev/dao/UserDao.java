@@ -1,102 +1,56 @@
 package com.azuiev.dao;
-import com.azuiev.db.AirbnbDBDao;
-import com.azuiev.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.azuiev.model.User;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 08.10.15.
+ * Created by Masta on 08.10.15.
  */
-public class UserDao implements ModelDao {
 
-    private final Connection connection;
+public class UserDao implements ModelDao<User> {
+    static ModelDao dao = new BasicModelDao<User>(User.class);
 
-
-    public UserDao(Connection connection) {
-        this.connection = connection;
-    }
     public UserDao() {
-        connection = new AirbnbDBDao().getConnection();
-
     }
+
     @Override
     public List<User> getAll() throws SQLException {
-        String sql = "select * from user;";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-
-        ResultSet rs = stmt.executeQuery();
-        User user = null;
-        List<User> list = new ArrayList<User>();
-
-
-            while (rs.next()){
-                User.Builder builder = User.createBuilder();
-                user = builder.createUser(rs.getString(2), rs.getString(3), rs.getString(4));
-                list.add(user);
-            }
-
-
-        return list;
+        return dao.getAll();
     }
 
     @Override
     public User getById(Long id) throws SQLException {
-
-        String sql = "select * from user where id = ?;";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setLong(1, id);
-
-        ResultSet rs = stmt.executeQuery();
-
-        User user = null;
-
-            while (rs.next()){
-                User.Builder builder = User.createBuilder();
-                user = builder.createUser(rs.getString(2), rs.getString(3), rs.getString(4));
-
-            }
-
-        return user;
-
+        return (User) dao.getById(id);
     }
 
     public User login(String email, String password) throws SQLException {
-        String sql = "select id, name, surname, email  from user where email = ? and password = ?;";
-        PreparedStatement stmt = connection.prepareStatement(sql);
-        stmt.setString(1, email);
-        stmt.setString(2, password);
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-        ResultSet rs = stmt.executeQuery();
-
-        User user = null;
-
-        while (rs.next()){
-            User.Builder builder = User.createBuilder();
-            user = builder.createUser(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
-
-        }
-
-        return user;
+        List<User> list = session.createCriteria(User.class)
+                .add(Restrictions.eq("email", email))
+                .add(Restrictions.eq("password", password)).list();
+        if (list.size() == 0)
+            return null;
+        else
+            return list.get(0);
     }
 
     @Override
-    public void update(Object obj) {
-        //TODO
+    public void update(User user) throws SQLException {
+        dao.update(user);
     }
 
     @Override
-    public void add(Object obj) {
-        //TODO
+    public void add(User user) throws SQLException {
+        dao.add(user);
     }
 
 
     @Override
-    public void delete(Object obj) {
-        //TODO
+    public void delete(User user) throws SQLException {
+        dao.delete(user);
     }
 }

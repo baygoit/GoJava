@@ -26,3 +26,7 @@ AC: While in the project description -> I see a menu item to invest in the proje
 7. Question
 As a guest, I want to ask a question to the project owner
 AC: While a particular project -> I see a menu item to ask a question -> I choose it -> I see a request to enter the issue -> I enter a question, send -> I see a description of the project with my question.
+
+8. Benefit
+As a guest, I want to understand what I get for my investment of the project.
+AC: On the payment page -> I see the payment options (1 - $1, 2 - $10, 3 - $ 40) with a description of what I get for it -> I can choose one of them, or as they used to transfer any amount of what I want.

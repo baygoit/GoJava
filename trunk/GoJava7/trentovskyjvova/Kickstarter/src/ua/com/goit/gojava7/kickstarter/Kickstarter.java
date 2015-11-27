@@ -9,47 +9,60 @@ import ua.com.goit.gojava7.kickstarter.Level.CategoryLevel;
 import ua.com.goit.gojava7.kickstarter.Level.Level;
 import ua.com.goit.gojava7.kickstarter.Level.MenuLevel;
 import ua.com.goit.gojava7.kickstarter.Level.PaymentLevel;
+import ua.com.goit.gojava7.kickstarter.Level.PledgeLevel;
 import ua.com.goit.gojava7.kickstarter.Level.ProjectLevel;
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class Kickstarter {
-
-	private QuoteStorage quoteStorage;
-	private CategoryStorage categoryStorage;
 	private ConsolePrinter consolePrinter;
 	private ConsoleScanner consoleScanner;
 
+	private DaoProvider daoProvider;
+
 	private List<Level> levels;
 
-	public Kickstarter(ConsolePrinter consolePrinter, ConsoleScanner consoleScanner, QuoteStorage quoteStorage,
-			CategoryStorage categoryStorage) {
-		this.quoteStorage = quoteStorage;
-		this.categoryStorage = categoryStorage;
+	public Kickstarter(ConsolePrinter consolePrinter,
+			ConsoleScanner consoleScanner, DaoProvider daoProvider) {	
 		this.consolePrinter = consolePrinter;
-		this.consoleScanner = consoleScanner;
+		this.consoleScanner = consoleScanner;	
 
-		levels = new LinkedList<>(Arrays.asList(new MenuLevel(),
-				new CategoryLevel(), new ProjectLevel(), new PaymentLevel()));
+		this.daoProvider = daoProvider;
+		ProjectDao projectDao = daoProvider.getProjectReader();
+		RewardDao rewardDao = daoProvider.getRewardsReader();
+		QuestionDao questionDao = daoProvider.getQuestionReader();
+		PaymentDao paymentDao = daoProvider.getPaymentReader();
+		
+		levels = new LinkedList<>(Arrays.asList(
+				new MenuLevel(daoProvider.getCategoryReader()),
+				new CategoryLevel(projectDao, paymentDao),
+				new ProjectLevel(paymentDao, questionDao),
+				new PaymentLevel(questionDao, rewardDao),
+				new PledgeLevel(paymentDao, rewardDao)));
 	}
 
 	public void runKickstarter() {
-		consolePrinter.print(quoteStorage.getRandomQuote());
-		
-		ListIterator<Level> levelsIterator = levels.listIterator();
-		List<Category> categories = categoryStorage.getAllCategories();
+		QuoteDao quoteDao = daoProvider.getQuoteReader();
+		consolePrinter.print(quoteDao.getRandomQuote());
 
+		ListIterator<Level> levelsIterator = levels.listIterator();
+		
 		Level userPositionLevel = levelsIterator.next();
 		int userChoise = 0;
 		Category selectedCategory = null;
 		Project selectedProject = null;
 		String answer;
 
-		answer = userPositionLevel.generateAnswer(categories, userChoise, selectedCategory, selectedProject);
+		answer = userPositionLevel.generateAnswer(userChoise,
+				selectedCategory, selectedProject);
 
 		consolePrinter.print(answer);
 
@@ -65,24 +78,30 @@ public class Kickstarter {
 				}
 			}
 
-			answer = userPositionLevel.validateUserChoise(categories, userChoise, selectedCategory);
+			answer = userPositionLevel.validateUserChoise(userChoise,
+					selectedCategory, selectedProject);
 			if (!answer.equals("")) {
 				consolePrinter.print(answer);
 				continue;
 			}
+			
+			selectedCategory = userPositionLevel.findSelectedCategory(
+					userChoise, selectedCategory);
+			selectedProject = userPositionLevel.findSelectedProject(
+					userChoise, selectedCategory, selectedProject);
 
-			userPositionLevel = findNewUserPositionLevel(levelsIterator, userChoise);
+			userPositionLevel = findNewUserPositionLevel(levelsIterator,
+					userChoise);
 			userChoise--;
 
-			selectedCategory = userPositionLevel.findSelectedCategory(categories, userChoise, selectedCategory);
-			selectedProject = userPositionLevel.findSelectedProject(userChoise, selectedCategory, selectedProject);	
-			
-			answer = userPositionLevel.generateAnswer(categories, userChoise, selectedCategory, selectedProject);
+			answer = userPositionLevel.generateAnswer(userChoise,
+					selectedCategory, selectedProject);
 			if (!answer.equals("")) {
 				consolePrinter.print(answer);
 			}
-						
-			answer = userPositionLevel.fillOutForm(selectedProject, userChoise+1, consoleScanner);			
+
+			answer = userPositionLevel.fillOutForm(selectedProject,
+					userChoise + 1, consoleScanner);
 			if (!answer.equals("")) {
 				consolePrinter.print(answer);
 			}
@@ -95,13 +114,14 @@ public class Kickstarter {
 		consoleScanner.close();
 	}
 
-	private Level findNewUserPositionLevel(ListIterator<Level> listIterator, int userChoise) {
+	private Level findNewUserPositionLevel(ListIterator<Level> listIterator,
+			int userChoise) {
 
 		if (userChoise == 0) {
 			listIterator.hasPrevious();
-				listIterator.previous();
-				listIterator.previous();
-			
+			listIterator.previous();
+			listIterator.previous();
+
 		}
 		return listIterator.next();
 	}

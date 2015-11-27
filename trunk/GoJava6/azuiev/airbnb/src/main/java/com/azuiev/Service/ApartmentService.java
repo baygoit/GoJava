@@ -1,6 +1,7 @@
 package com.azuiev.service;
 
 import com.azuiev.dao.ApartmentDao;
+import com.azuiev.dao.CityDao;
 import com.azuiev.model.Apartment;
 
 import java.sql.SQLException;
@@ -36,8 +37,7 @@ public class ApartmentService  {
 
         List<Apartment> list = new ArrayList<Apartment>();
         try {
-           // list = (List<Apartment>) dao.getByCity(id);
-            list = (List<Apartment>) dao.getAll();
+          list = (List<Apartment>) dao.getByCity(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

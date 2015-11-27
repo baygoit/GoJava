@@ -2,26 +2,29 @@ package ua.com.goit.gojava7.kikstarter;
 
 import java.io.IOException;
 
+import ua.com.goit.gojava7.kikstarter.dao.memory.QuoteDaoMemory;
+import ua.com.goit.gojava7.kikstarter.domain.Project;
+
 public class Kikstarter {
 
 	private static final String INDENT = "===============================";
 	private ConsoleReader consoleReader;
 	private ConsolePrinter consolePrinter;
-	private QuotesStorage quotesStorage;
+	private QuoteDaoMemory quoteDaoMemory;
 	private CategoryStorage categoryStorage;
 	private PaymentStorage paymentStorage;
 
 	public Kikstarter(ConsoleReader consoleReader, ConsolePrinter consolePrinter,
-			QuotesStorage quotesStorage, CategoryStorage categoryStorage) {
+			QuoteDaoMemory quoteDaoMemory, CategoryStorage categoryStorage) {
 		this.consoleReader = consoleReader;
 		this.consolePrinter = consolePrinter;
-		this.quotesStorage = quotesStorage;
+		this.quoteDaoMemory = quoteDaoMemory;
 		this.categoryStorage = categoryStorage;
 		paymentStorage = new PaymentStorage();
 	}
 
 	public void startUp() throws IOException {
-		consolePrinter.printQuote(quotesStorage.getRandomQuote());
+		consolePrinter.printQuote(quoteDaoMemory.getRandomQuote());
 		boolean stopWhile = true;
 
 		do {
@@ -31,6 +34,7 @@ public class Kikstarter {
 			int numberOfSelectedCategory = (consoleReader.getNumberFromConsoel()) - 1;
 			if (numberOfSelectedCategory == -1) {
 				consolePrinter.printString("You entered 0. Bye!");
+				stopWhile = false;
 				break;
 			} else {
 				try {
@@ -51,18 +55,31 @@ public class Kikstarter {
 					if (numberOfselectedProject == -1) {
 						break;
 					} else {
+						consolePrinter.printString(INDENT);
 						consolePrinter.printPoject(categoryStorage.getCategory(
 								numberOfSelectedCategory).getProject(numberOfselectedProject));
 					}
 
 					consolePrinter
-							.printString("Enter 1 to make a payment; Enter 0 to see all projects");
+							.printString("Enter 1 to make a payment; Enter 2 to to ask question; 0 - all porjects");
 					int numberOfselecedProjectPayment = (consoleReader.getNumberFromConsoel());
 					if (numberOfselecedProjectPayment == 0) {
 						continue;
-					} else {
+					} else if (numberOfselecedProjectPayment == 1) {
 						setPaymentFromUser(categoryStorage.getCategory(numberOfSelectedCategory)
 								.getProject(numberOfselectedProject));
+					} else if (numberOfselecedProjectPayment == 2) {
+						setQuestionFromUser(categoryStorage.getCategory(numberOfSelectedCategory)
+								.getProject(numberOfselectedProject));
+					}
+					consolePrinter.printString("Enter 1 to see all projects; 0 - to exit");
+					int numberOfselecedProjectExitOrNot = (consoleReader.getNumberFromConsoel());
+					if (numberOfselecedProjectExitOrNot == 0) {
+						consolePrinter.printString("You entered 0. Bye!");
+						stopWhile = false;
+						break;
+					} else {
+						continue;
 					}
 				} while (stopWhile);
 			}
@@ -85,6 +102,15 @@ public class Kikstarter {
 		project.setProjectSumFromUser(currentEnteredAmount);
 		paymentStorage.setPayment(payment);
 		consolePrinter.printPoject(project);
+	}
 
+	public void setQuestionFromUser(Project project) throws IOException {
+		consolePrinter.printString("Enter your question:");
+		String currentUserQuestion = (consoleReader.getStringFromConsoel());
+
+		consolePrinter.printString(INDENT);
+
+		project.setProjectQuestion(currentUserQuestion);
+		consolePrinter.printPoject(project);
 	}
 }

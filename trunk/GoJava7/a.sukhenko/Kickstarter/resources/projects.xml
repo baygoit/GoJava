@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<projects>
+    <project projectName="Catana">
+        <backers>
+            <entry>
+                <key>
+                    <settings>
+                        <menuOption>SHOW_MAIN_MENU</menuOption>
+                    </settings>
+                </key>
+                <value>25000.0</value>
+            </entry>
+        </backers>
+        <demoLink>www.catana.game</demoLink>
+        <enddate/>
+        <moneyNeeded>50000.0</moneyNeeded>
+        <paymentBonus>
+            <bonuses>
+                <entry>
+                    <key>1</key>
+                    <value>You will be mentioned in the project</value>
+                </entry>
+                <entry>
+                    <key>40</key>
+                    <value>Same as for 10$ + Early Access pack.</value>
+                </entry>
+                <entry>
+                    <key>10</key>
+                    <value>Tea Cup with Catana + mentioned in the project</value>
+                </entry>
+            </bonuses>
+        </paymentBonus>
+        <projectCategory categoryId="3">
+            <categoryName>Games</categoryName>
+        </projectCategory>
+        <projectDescription>New sword-fighting game</projectDescription>
+        <questionsAndAnswers>
+            <entry>
+                <key>What is project about?</key>
+                <value>It is about our goit7 group</value>
+            </entry>
+            <entry>
+                <key>When was it started</key>
+                <value>October 2015</value>
+            </entry>
+        </questionsAndAnswers>
+    </project>
+    <project projectName="Terminator Exodus">
+        <backers/>
+        <enddate/>
+        <moneyNeeded>50000.0</moneyNeeded>
+        <paymentBonus>
+            <bonuses>
+                <entry>
+                    <key>1</key>
+                    <value>Bonus for 1</value>
+                </entry>
+                <entry>
+                    <key>40</key>
+                    <value>Bonus for 40</value>
+                </entry>
+                <entry>
+                    <key>10</key>
+                    <value>Bonus for 10</value>
+                </entry>
+            </bonuses>
+        </paymentBonus>
+        <projectCategory categoryId="3">
+            <categoryName>Games</categoryName>
+        </projectCategory>
+        <projectDescription>New game about fighting as Terminator</projectDescription>
+        <questionsAndAnswers/>
+    </project>
+    <project projectName="GoIT Java 7">
+        <backers/>
+        <enddate/>
+        <moneyNeeded>50000.0</moneyNeeded>
+        <paymentBonus>
+            <bonuses>
+                <entry>
+                    <key>1</key>
+                    <value>Bonus for 1</value>
+                </entry>
+                <entry>
+                    <key>40</key>
+                    <value>Bonus for 40</value>
+                </entry>
+                <entry>
+                    <key>10</key>
+                    <value>Bonus for 10</value>
+                </entry>
+            </bonuses>
+        </paymentBonus>
+        <projectCategory categoryId="1">
+            <categoryName>Movie</categoryName>
+        </projectCategory>
+        <projectDescription>Movie about our GoIT Java 7 Group</projectDescription>
+        <questionsAndAnswers/>
+    </project>
+</projects>
