@@ -24,19 +24,29 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 public class MenuLevelTest {
 	private static final String ANSVER = "Please, enter the number between 0 and 1";
 	
-	List<Category> categories;
-	Category selectedCategory;
+	private List<Category> categories;
+	private Category selectedCategory;
+	private Project selectedProject;
+	
 	@Mock
-	CategoryDaoMemoryImpl categoryDao = new CategoryDaoMemoryImpl();
+	private CategoryDaoMemoryImpl categoryDao;
 	@InjectMocks
-	Level menuLevel = new MenuLevel(categoryDao);
-	Project project;
+	private Level menuLevel = new MenuLevel(categoryDao);
+	private Project project;
 	
 	@Before 
-	public void setUp() {
+	public void setUp() {	
+		selectedCategory = new Category("Some Category", 1);
+		selectedProject = new Project("project name", 1);
+		
 		categories = new ArrayList<Category>();
-		Category category = new Category("Some Category", 1);
-		categories.add(category);
+		categories.add(selectedCategory);
+	}
+	
+	@Test
+	public void testFillOutForm(){
+		String result = menuLevel.fillOutForm(null, 1, null);
+		assertThat(result, is(""));
 	}
 	
 	@Test
@@ -45,7 +55,13 @@ public class MenuLevelTest {
 		Category result = menuLevel.findSelectedCategory(1, selectedCategory);
 		assertThat(result, nullValue());
 	}
-
+	
+	@Test
+	public void testFindSelectedProject() {
+		Project result = menuLevel.findSelectedProject(0, selectedCategory, selectedProject);
+		assertThat(result, nullValue());
+	}
+	
 	@Test
 	public void testValidateUserChoise1() {
 		when(categoryDao.size()).thenReturn(categories.size());

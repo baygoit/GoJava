@@ -13,26 +13,26 @@ public class CategoryTest {
 	private String categoryName = "Film";
 	private Category category;
 	
-	@Before
-	public void setUp() throws Exception {
-		category = new Category(categoryName);
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		category = new Category(categoryName);
+//	}
 
 	@Test
 	public void testCategory() {
-		assertThat(category.getCategoryName(), is(categoryName));
+		assertThat(category.getName(), is(categoryName));
 	}
 
 	@Test
 	public void testGetCategoryName() {
-		assertThat(category.getCategoryName(), is(categoryName));
+		assertThat(category.getName(), is(categoryName));
 	}
 
 	@Test
 	public void testSetCategoryName() {
 		String name = "Movie";
-		category.setCategoryName(name);
-		assertThat(category.getCategoryName(), is(name));
+		category.setName(name);
+		assertThat(category.getName(), is(name));
 	}
 
 	@Test

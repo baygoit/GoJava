@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
-import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
@@ -63,7 +62,8 @@ public class FileQuestionReader implements QuestionDao {
 				id = Integer.parseInt(questionLine[0]);
 				questionText = questionLine[2];
 
-				Question question = new Question(id);
+				Question question = new Question();
+				question.setId(id);
 				question.setProjectId(projectId);
 				question.setQuestionText(questionText);
 				questions.add(question);
@@ -96,7 +96,7 @@ public class FileQuestionReader implements QuestionDao {
 			fileWriter = new FileWriter(questionsFile, true);
 
 			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.append(question.getId()).append(";");
+			stringBuilder.append(generateIdOfNewElement()).append(";");
 			stringBuilder.append(question.getProjectId()).append(";");
 			stringBuilder.append(question.getQuestionText()).append(";");
 			stringBuilder.append("\n");

@@ -4,10 +4,6 @@ public class Category {
 	private int uniqueID;
 	private String name;
 
-	public Category(String name) {
-		this.name = name;
-	}
-	
 	public int getUniqueID() {
 		return uniqueID;
 	}
@@ -16,11 +12,11 @@ public class Category {
 		this.uniqueID = uniqueID;
 	}
 
-	public String getCategoryName() {
+	public String getName() {
 		return name;
 	}
 	
-	public void setCategoryName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	

@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.file.PaymentFileDAO;
+import ua.com.goit.gojava7.kickstarter.dao.file.PaymentDaoFileImpl;
 
 public class ProjectTest {
 
@@ -19,11 +19,11 @@ public class ProjectTest {
 	
 	private Project project;
 	
-	@Before
-	public void setUp() throws Exception {
-		project = new Project(title, briefDescription, requiredSum);
-		project.setUniqueID(projectID);
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		project = new Project(title, briefDescription, requiredSum);
+//		project.setUniqueID(projectID);
+//	}
 
 	@Test
 	public void testProject() {

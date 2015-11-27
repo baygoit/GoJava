@@ -15,16 +15,6 @@ public class Project {
 	private int collectedSum;
 	private int daysLeft;
 
-	public Project(String title, String briefDescription, int requiredSum) {
-		this.title = title;
-		this.briefDescription = briefDescription;
-		this.fullDescription = "----";
-		this.videoLink = "----";
-		this.requiredSum = requiredSum;	
-		this.collectedSum = 0;
-		this.daysLeft = 0;
-	}
-
 	public String getTitle() {
 		return title;
 	}

@@ -11,19 +11,19 @@ import ua.com.goit.gojava7.kickstarter.beans.Project;
 
 public class FaqFileDAOTest {
 
-	private FaqFileDAO faqFile;
+	private FaqDaoFileImpl faqFile;
 	private Faq faq;
 	private Project project;
 	
-	@Before
-	public void setUp() throws Exception {
-		faqFile = new FaqFileDAO();
-		faq = new Faq("How are you?");
-		
-		project = new Project("Project 1", "XXX", 10_000);
-		project.setUniqueID(1);
-		faq.setProjectID(1);
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		faqFile = new FaqDaoFileImpl();
+//		faq = new Faq("How are you?");
+//		
+//		project = new Project("Project 1", "XXX", 10_000);
+//		project.setUniqueID(1);
+//		faq.setProjectID(1);
+//	}
 
 	@Test
 	public void testAdd() {

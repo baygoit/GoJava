@@ -10,74 +10,47 @@ import java.util.List;
 import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteDao;
 
-public class QuoteFileDAO extends AbstractQuoteStorage {
-	
-	private static final String SEMICOLON_DELIMITER = ";";
-	private static final String NEW_LINE_SEPARATOR = "\n";
-	
-	private static final File REWARDS_FILE = new File("./resources/quotes.csv");
+public class QuoteDaoFileImpl extends AbstractQuoteDao {
+	private static final File STORAGE_FILE = new File("./resources/quotes.csv");
 	private static final Random RANDOM = new Random();
-	
 	private static final int AUTHOR = 0;
 	private static final int QUOTE_TEXT = 1;
 
 	@Override
 	public void add(Quote element) {
-		
-		FileWriter fileWriter = null;
-		try {
-			fileWriter = new FileWriter(REWARDS_FILE, true);
-
+		try (FileWriter fileWriter = new FileWriter(STORAGE_FILE, true)) {
 			fileWriter.append(element.getQuoteText());
 			fileWriter.append(SEMICOLON_DELIMITER);
 			fileWriter.append(element.getAuthor());
 			fileWriter.append(NEW_LINE_SEPARATOR);
-
 			fileWriter.flush();
 		} catch (IOException e) {
 			System.err.println("Error in CSVFileReader...");
-		} finally {
-			try {
-				if (fileWriter != null ) {
-					fileWriter.close();
-				}
-			} catch (IOException e) {
-				System.err.println("Error with closing fileReader...");
-			}
-		}
+		} 
 	}
 
-	@Override
 	public List<Quote> getAll() {
 		List<Quote> quotes = new ArrayList<>();
-		String line = "";
 		
-		BufferedReader fileReader = null;
-		try {
-			fileReader = new BufferedReader(new FileReader(REWARDS_FILE));
+		try (BufferedReader fileReader = new BufferedReader(new FileReader(STORAGE_FILE))) {
 			
 			// read header
 			fileReader.readLine();
 	
+			String line = "";
 			while ((line = fileReader.readLine()) != null) {
 				String[] tokens = line.split(SEMICOLON_DELIMITER);
 				if (tokens.length > 0) {
-					Quote quote = new Quote(tokens[QUOTE_TEXT], tokens[AUTHOR]);
+					Quote quote = new Quote();
+					quote.setQuoteText(tokens[QUOTE_TEXT]);
+					quote.setAuthor(tokens[AUTHOR]);
 					quotes.add(quote);
 				}
 			}
 		} catch (IOException e) {
 			System.err.println("Error in CSVFileReader...");
-		} finally {
-			try {
-				if (fileReader != null ) {
-					fileReader.close();
-				}
-			} catch (IOException e) {
-				System.err.println("Error with closing fileReader...");
-			}
 		}
 		return quotes;
 	}

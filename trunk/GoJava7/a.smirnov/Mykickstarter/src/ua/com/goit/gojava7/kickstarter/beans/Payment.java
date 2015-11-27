@@ -5,13 +5,7 @@ public class Payment {
 	private String userName;
 	private long creditCardNumber;
 	private int donatingSum;
-	
-	public Payment(String userName, long creditCardNumber, int donatingSum) {
-		this.userName = userName;
-		this.creditCardNumber = creditCardNumber;
-		this.donatingSum = donatingSum;
-	}
-	
+		
 	public int getProjectID() {
 		return projectID;
 	}

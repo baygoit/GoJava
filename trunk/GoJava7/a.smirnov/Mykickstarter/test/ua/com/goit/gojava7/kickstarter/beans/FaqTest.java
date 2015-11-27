@@ -13,10 +13,10 @@ public class FaqTest {
 	private String question = "Who?";
 	private Faq faq;
 	
-	@Before
-	public void setUp() throws Exception {
-		faq = new Faq(question);
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		faq = new Faq(question);
+//	}
 
 	@Test
 	public void testFaq() {

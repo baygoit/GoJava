@@ -5,9 +5,9 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentDao;
 
-public class PaymentMemoryDAO extends AbstractPaymentStorage {
+public class PaymentDaoMemoryImpl extends AbstractPaymentDao {
 
 	private List<Payment> payments = new ArrayList<>();
 	

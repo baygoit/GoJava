@@ -15,10 +15,10 @@ public class PaymentTest {
 	private int donatingSum = 1000;
 	private Payment payment;
 	
-	@Before
-	public void setUp() throws Exception {
-		payment = new Payment(userName, creditCardNumber, donatingSum);
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		payment = new Payment(userName, creditCardNumber, donatingSum);
+//	}
 
 	@Test
 	public void testPayment() {
