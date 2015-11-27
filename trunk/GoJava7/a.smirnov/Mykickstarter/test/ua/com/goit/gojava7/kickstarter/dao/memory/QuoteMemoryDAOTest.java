@@ -3,7 +3,6 @@ package ua.com.goit.gojava7.kickstarter.dao.memory;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
