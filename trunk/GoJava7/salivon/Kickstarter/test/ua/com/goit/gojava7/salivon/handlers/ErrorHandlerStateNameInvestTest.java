@@ -7,9 +7,6 @@ public class ErrorHandlerStateNameInvestTest {
 
     ErrorHandlerStateNameInvest instance = new ErrorHandlerStateNameInvest();
 
-    /**
-     * Test of validate method, of class ErrorHandlerStateNameInvest.
-     */
     @Test
     public void testValidate() {
         System.out.println("validate");

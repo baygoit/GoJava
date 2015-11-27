@@ -3,10 +3,11 @@ package ua.com.goit.gojava7.salivon.state;
 import ua.com.goit.gojava7.salivon.beans.Project;
 import ua.com.goit.gojava7.salivon.handlers.ErrorHandlerStateProject;
 import ua.com.goit.gojava7.salivon.context.Console;
+import ua.com.goit.gojava7.salivon.dao.DaoFactory;
 
 public class ProjectState extends State {
 
-    private Project project = getManagerData().getProject(State.getIndexProject());
+    private Project project = DaoFactory.getProjectDao(getCurrentDataType()).getProject(State.getIdProject());
 
     public ProjectState() {
         handler = new ErrorHandlerStateProject();

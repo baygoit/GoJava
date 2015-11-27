@@ -2,6 +2,7 @@ package ua.com.goit.gojava7.salivon.state;
 
 import ua.com.goit.gojava7.salivon.context.Console;
 import ua.com.goit.gojava7.salivon.handlers.ErrorHandlerStatePreloading;
+import ua.com.goit.gojava7.salivon.dao.DataType;
 
 public class PreloadingState extends State {
 
@@ -29,14 +30,14 @@ public class PreloadingState extends State {
     }
 
     protected void selectCurrentData(int inData) {
-        if (inData == FILE_DATA) {
-            setCurrentData(FILE_DATA);
+        if (inData == 1) {
+            setCurrentDataType(DataType.FILE);
         }
-        if(inData == OBJECT_DATA) {
-            setCurrentData(OBJECT_DATA);
+        if (inData == 2) {
+            setCurrentDataType(DataType.MEMORY);
         }
-        if(inData == DB_DATA) {
-            setCurrentData(DB_DATA);
+        if (inData == 3) {
+            setCurrentDataType(DataType.DB);
         }
     }
 

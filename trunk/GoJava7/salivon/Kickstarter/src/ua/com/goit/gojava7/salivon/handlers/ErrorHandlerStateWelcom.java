@@ -1,20 +1,17 @@
 package ua.com.goit.gojava7.salivon.handlers;
 
 import java.util.List;
-import ua.com.goit.gojava7.salivon.util.ManagerData;
 import ua.com.goit.gojava7.salivon.beans.Category;
-import ua.com.goit.gojava7.salivon.handlers.ErrorHandler;
 import ua.com.goit.gojava7.salivon.state.State;
-import ua.com.goit.gojava7.salivon.stores.StoreCategories;
+import ua.com.goit.gojava7.salivon.dao.DaoFactory;
 
 public class ErrorHandlerStateWelcom implements ErrorHandler {
 
     private List<Category> categories;
 
-    public ErrorHandlerStateWelcom(ManagerData managerData) {
-        this.categories = managerData.getAllCategories();
+    public ErrorHandlerStateWelcom() {
+        this.categories = DaoFactory.getCategoryDao(State.getCurrentDataType()).getAllCategories();
     }
-     
 
     @Override
     public boolean validate(String inData) {

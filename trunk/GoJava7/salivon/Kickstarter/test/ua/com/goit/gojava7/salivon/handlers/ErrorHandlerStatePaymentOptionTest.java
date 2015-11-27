@@ -7,9 +7,6 @@ public class ErrorHandlerStatePaymentOptionTest {
 
     ErrorHandlerStatePaymentOption instance = new ErrorHandlerStatePaymentOption();
 
-    /**
-     * Test of validate method, of class ErrorHandlerStatePaymentOption.
-     */
     @Test
     public void testValidate() {
         System.out.println("validate");

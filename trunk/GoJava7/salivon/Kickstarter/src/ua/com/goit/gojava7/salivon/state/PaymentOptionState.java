@@ -3,6 +3,7 @@ package ua.com.goit.gojava7.salivon.state;
 import ua.com.goit.gojava7.salivon.beans.Payment;
 import ua.com.goit.gojava7.salivon.context.Console;
 import ua.com.goit.gojava7.salivon.handlers.ErrorHandlerStatePaymentOption;
+import ua.com.goit.gojava7.salivon.dao.DaoFactory;
 
 public class PaymentOptionState extends PaymentState {
 
@@ -43,7 +44,7 @@ public class PaymentOptionState extends PaymentState {
 
     protected void savePayment(int amount) {
         payment.setTotal(amount);
-        getManagerData().savePayment(payment);
+        DaoFactory.getPaymentDao(getCurrentDataType()).savePayment(payment);
     }
 
 }

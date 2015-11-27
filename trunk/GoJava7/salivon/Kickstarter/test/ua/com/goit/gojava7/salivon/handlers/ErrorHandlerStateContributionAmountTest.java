@@ -7,9 +7,6 @@ public class ErrorHandlerStateContributionAmountTest {
 
     ErrorHandlerStateContributionAmount instance = new ErrorHandlerStateContributionAmount();
 
-    /**
-     * Test of validate method, of class ErrorHandlerStateContributionAmount.
-     */
     @Test
     public void testValidate() {
         System.out.println("validate");

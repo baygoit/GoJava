@@ -6,7 +6,7 @@ import ua.com.goit.gojava7.salivon.handlers.ErrorHandlerStateNameInvest;
 
 public class NameInvestState extends PaymentState {
 
-    private Payment payment = new Payment(State.getIndexProject());
+    private Payment payment = new Payment(State.getIdProject());
 
     public NameInvestState() {
         handler = new ErrorHandlerStateNameInvest();

@@ -7,9 +7,6 @@ public class ErrorHandlerStateQuestionTest {
 
     ErrorHandlerStateQuestion instance = new ErrorHandlerStateQuestion();
 
-    /**
-     * Test of validate method, of class ErrorHandlerStateQuestion.
-     */
     @Test
     public void testValidate() {
         System.out.println("validate");
