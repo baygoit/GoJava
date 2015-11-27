@@ -11,46 +11,41 @@ import ua.com.goit.gojava7.kickstarter.beans.Project;
 
 public class FaqMemoryDAOTest {
 
-	private FaqMemoryDAO faqMemory;
+	private FaqDaoMemoryImpl faqMemory = new FaqDaoMemoryImpl();
+	private Faq faq = new Faq();
+	private Project project = new Project();
+	private int projectID = 1;
+	
 	@Before
 	public void setUp() throws Exception {
-		faqMemory = new FaqMemoryDAO();
+		faq.setProjectID(projectID);
+		project.setUniqueID(projectID);
 	}
 
 	@Test
+	public void testFaqMemoryDAO() {
+		assertThat(faqMemory.getSize(), is(0));
+	}
+	
+	@Test
 	public void testGetProjectFaqs() {
-		int projectID = 0;
-		Project project = new Project("Project 1", "XXX", 10_000);
-		project.setUniqueID(projectID);
-		
-		String question = "Hello amigo";
-		Faq faq = new Faq(question);
-		faq.setProjectID(projectID);
-
+		faqMemory.add(faq);
 		assertEquals(faqMemory.getProjectFaqs(project).contains("question"), true);
+		assertEquals(faqMemory.getProjectFaqs(project).contains("answer"), true);
 	}
 
 	@Test
 	public void testAdd() {
-		String question = "Hello amigo";
-		int projectID = 1;
-		Faq faq = new Faq(question);
-		faq.setProjectID(projectID);
-		
 		faqMemory.add(faq);
 		
 		assertThat(faqMemory.getSize(), is(1));
-		assertThat(faqMemory.getAll().get(0).getQuestion(), is(question));
+		assertThat(faqMemory.getAll().get(0).getQuestion().length(), is(0));
+		assertThat(faqMemory.getAll().get(0).getAnswer().length(), is(0));
 		assertThat(faqMemory.getAll().get(0).getProjectID(), is(projectID));
 	}
 
 	@Test
 	public void testRemove() {
-		String question = "Hello amigo";
-		int projectID = 1;
-		Faq faq = new Faq(question);
-		faq.setProjectID(projectID);
-		
 		faqMemory.add(faq);
 		assertThat(faqMemory.getSize(), is(1));
 		

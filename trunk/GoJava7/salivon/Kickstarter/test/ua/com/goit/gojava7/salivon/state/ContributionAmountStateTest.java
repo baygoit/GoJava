@@ -6,10 +6,10 @@ import org.mockito.Matchers;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
-import ua.com.goit.gojava7.salivon.util.ManagerData;
 import ua.com.goit.gojava7.salivon.beans.Payment;
 import ua.com.goit.gojava7.salivon.beans.Project;
 import ua.com.goit.gojava7.salivon.context.Console;
+import ua.com.goit.gojava7.salivon.dao.DataType;
 
 public class ContributionAmountStateTest {
 
@@ -21,23 +21,48 @@ public class ContributionAmountStateTest {
     }
 
     @Test
-    public void testChangeState() {
+    public void testValidate() {
+        Payment payment = mock(Payment.class);
+        ContributionAmountState instance = new ContributionAmountState(payment);
+        assertEquals(true, instance.validate("1"));
+        assertEquals(false, instance.validate("1df"));
+    }
+
+    @Test
+    public void testChangeStateForFile() {
         Console context = new Console();
-        State.setCurrentData(State.FILE_DATA);
+        State.setCurrentDataType(DataType.FILE);
         Payment payment = mock(Payment.class);
         ContributionAmountState instance = new ContributionAmountState(payment);
         Project project = mock(Project.class);
-        ManagerData md = mock(ManagerData.class);
         ContributionAmountState spy = spy(instance);
-        when(spy.getManagerData()).thenReturn(md);
         when(spy.getInData()).thenReturn("1");
-        when(md.getProject(anyInt())).thenReturn(project);
         spy.changeState(context);
     }
 
     @Test
-    public void testSavePayment() {
-        State.setCurrentData(State.FILE_DATA);
+    public void testSavePaymentForFile() {
+        State.setCurrentDataType(DataType.FILE);
+        Payment payment = mock(Payment.class);
+        ContributionAmountState instance = new ContributionAmountState(payment);
+        instance.savePayment(anyInt());
+    }
+
+    @Test
+    public void testChangeStateForMemory() {
+        Console context = new Console();
+        State.setCurrentDataType(DataType.MEMORY);
+        Payment payment = mock(Payment.class);
+        ContributionAmountState instance = new ContributionAmountState(payment);
+        Project project = mock(Project.class);
+        ContributionAmountState spy = spy(instance);
+        when(spy.getInData()).thenReturn("1");
+        spy.changeState(context);
+    }
+
+    @Test
+    public void testSavePaymentForMemory() {
+        State.setCurrentDataType(DataType.MEMORY);
         Payment payment = mock(Payment.class);
         ContributionAmountState instance = new ContributionAmountState(payment);
         instance.savePayment(anyInt());

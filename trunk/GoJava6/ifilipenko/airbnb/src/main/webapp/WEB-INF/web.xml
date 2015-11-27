@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app  version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<web-app  version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <welcome-file-list>
-        <welcome-file>/WEB-INF/view/index.jsp</welcome-file>
-    </welcome-file-list>
+    <!--spring mvc dispatcher-->
+    <servlet>
+        <servlet-name>MainDispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainDispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+    </context-param>
 
-    <listener>
-        <listener-class>DBContextListener</listener-class>
-    </listener>
-
+    <!--servlet controller-->
     <servlet>
         <servlet-name>ControllerServlet</servlet-name>
         <servlet-class>controller.MainController</servlet-class>
@@ -18,11 +27,12 @@
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-   <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>*.css</url-pattern>
     </servlet-mapping>
 
+    <!--jsp-->
     <jsp-config>
         <jsp-property-group>
             <url-pattern>/WEB-INF/view/index.jsp</url-pattern>
@@ -30,6 +40,33 @@
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>
-
     </jsp-config>
+
+    <!--welcome-->
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/view/index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!--listener-->
+    <listener>
+        <listener-class>DBContextListener</listener-class>
+    </listener>
+
+    <!--session-->
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+
+    <!--filter-->
+    <filter>
+        <filter-name>SessionTimeoutFilter</filter-name>
+        <filter-class>SessionTimeoutFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SessionTimeoutFilter</filter-name>
+        <servlet-name>ControllerServlet</servlet-name>
+    </filter-mapping>
+
 </web-app>

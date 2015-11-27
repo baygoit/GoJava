@@ -6,11 +6,11 @@ import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractCategoryStorage;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqStorage;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentStorage;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractCategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqDao;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentDao;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractProjectDao;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractQuoteDao;
 
 import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
@@ -25,14 +25,12 @@ public class AbstractKickstarter {
 	Category selectedCategoryByUser;
 	Project selectedProjectByUser;
 	
-	
-	AbstractCategoryStorage categories;
-	AbstractProjectStorage projects;
-	AbstractQuoteStorage quotes;
-	AbstractPaymentStorage payments;
-	AbstractFaqStorage faqs;
+	AbstractCategoryDao categories;
+	AbstractProjectDao projects;
+	AbstractQuoteDao quotes;
+	AbstractPaymentDao payments;
+	AbstractFaqDao faqs;
 
-	
 	public void start() {
 		consolePrinter.print(quotes.getRandomQuote());
 		selectCategory();
@@ -161,7 +159,8 @@ public class AbstractKickstarter {
 	
 	protected void askQuestion(Project project) {
 		String question = consoleScanner.parseAskingQuestion();
-		Faq faq = new Faq(question);
+		Faq faq = new Faq();
+		faq.setQuestion(question);
 		faq.setProjectID(project.getUniqueID());
 		faqs.add(faq);
 		
@@ -187,24 +186,39 @@ public class AbstractKickstarter {
 			if (userNumber == 1) {
 				consolePrinter.print("Thank you. You donated 1$.");
 				consolePrinter.print(SEPARATOR);
-				payment = new Payment(userName, creditCardNumber, 1);
+				
+				payment = new Payment();
+				payment.setUserName(userName);
+				payment.setCreditCardNumber(creditCardNumber);
+				payment.setDonatingSum(1);
 				payment.setProjectID(project.getUniqueID());
+				
 				project.setCollectedSum(payment.getDonatingSum());
 				payments.add(payment);
 				
 			} else if (userNumber == 2) {
 				consolePrinter.print("Thank you. You donated 10$.");
 				consolePrinter.print(SEPARATOR);
-				payment = new Payment(userName, creditCardNumber, 10);
+				
+				payment = new Payment();
+				payment.setUserName(userName);
+				payment.setCreditCardNumber(creditCardNumber);
+				payment.setDonatingSum(10);
 				payment.setProjectID(project.getUniqueID());
+				
 				project.setCollectedSum(payment.getDonatingSum());
 				payments.add(payment);
 				
 			} else if (userNumber == 3) {
 				consolePrinter.print("Thank you. You donated 40$.");
 				consolePrinter.print(SEPARATOR);
-				payment = new Payment(userName, creditCardNumber, 40);
+				
+				payment = new Payment();
+				payment.setUserName(userName);
+				payment.setCreditCardNumber(creditCardNumber);
+				payment.setDonatingSum(40);
 				payment.setProjectID(project.getUniqueID());
+				
 				project.setCollectedSum(payment.getDonatingSum());
 				payments.add(payment);
 				
@@ -212,8 +226,13 @@ public class AbstractKickstarter {
 				int donatingSum = consoleScanner.parseDonatingAmount();
 				consolePrinter.print("Thank you. You donated " + donatingSum + ".");
 				consolePrinter.print(SEPARATOR);
-				payment = new Payment(userName, creditCardNumber, donatingSum);
+				
+				payment = new Payment();
+				payment.setUserName(userName);
+				payment.setCreditCardNumber(creditCardNumber);
+				payment.setDonatingSum(donatingSum);
 				payment.setProjectID(project.getUniqueID());
+				
 				project.setCollectedSum(payment.getDonatingSum());
 				payments.add(payment);
 				

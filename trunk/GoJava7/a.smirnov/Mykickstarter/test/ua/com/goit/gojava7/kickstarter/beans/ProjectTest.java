@@ -6,30 +6,43 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.file.PaymentFileDAO;
 
 public class ProjectTest {
 
 	private String title = "Game FIFA 2020";
-	private String briefDescription = "The best game in the world!";
+	private String briefDescription = "Project brief description...";
+	private String fullDescription = "Project full description...";
+	private String videoLink = "youtube.com";
 	private int requiredSum = 100_000;
-	private int projectID = 2;
-	
-	private Project project;
+	private int collectedSum = 20_000;
+	private int uniqueID = 1;
+	private int categoryID = 2;
+	private Project project = new  Project();
 	
 	@Before
 	public void setUp() throws Exception {
-		project = new Project(title, briefDescription, requiredSum);
-		project.setUniqueID(projectID);
+		project.setTitle(title);
+		project.setBriefDescription(briefDescription);
+		project.setFullDescription(fullDescription);
+		project.setRequiredSum(requiredSum);
+		project.setCollectedSum(collectedSum);
+		project.setUniqueID(uniqueID);
+		project.setCategoryID(categoryID);
+		project.setVideoLink(videoLink);
 	}
 
 	@Test
 	public void testProject() {
-		assertThat(project.getTitle(), is(title));
-		assertThat(project.getBriefDescription(), is(briefDescription));
-		assertThat(project.getRequiredSum(), is(requiredSum));
+		Project myProject = new Project();
+		assertThat(myProject.getTitle().length(), is(0));
+		assertThat(myProject.getBriefDescription().length(), is(0));
+		assertThat(myProject.getFullDescription().length(), is(0));
+		assertThat(myProject.getVideoLink().length(), is(0));
+		assertThat(myProject.getRequiredSum(), is(0));
+		assertThat(myProject.getCollectedSum(), is(0));
+		assertThat(myProject.getCategoryID(), is(0));
+		assertThat(myProject.getUniqueID(), is(0));
 	}
 
 	@Test
@@ -57,7 +70,7 @@ public class ProjectTest {
 
 	@Test
 	public void testGetFullDescription() {
-		assertEquals(project.getFullDescription(), "----");
+		assertThat(project.getFullDescription(), is (fullDescription));
 	}
 
 	@Test
@@ -81,7 +94,7 @@ public class ProjectTest {
 
 	@Test
 	public void testGetCollectedSum() {
-		assertThat(project.getCollectedSum(), is(0));
+		assertThat(project.getCollectedSum(), is(collectedSum));
 	}
 
 	@Test
@@ -93,37 +106,37 @@ public class ProjectTest {
 
 	@Test
 	public void testGetVideoLink() {
-		assertEquals(project.getVideoLink(), "----");
-	}
-
-	@Test
-	public void testSetVideoLink() {
-		String videoLink = "youtube.com";
-		project.setVideoLink(videoLink);
 		assertThat(project.getVideoLink(), is(videoLink));
 	}
 
 	@Test
-	public void testGetCategoryID() {
-		assertThat(project.getCategoryID(), is(0));
+	public void testSetVideoLink() {
+		String newVideoLink = "rutube.com";
+		project.setVideoLink(newVideoLink);
+		assertThat(project.getVideoLink(), is(newVideoLink));
 	}
 
 	@Test
-	public void testSetCategoryID() {
-		int categoryID = 1;
-		project.setCategoryID(categoryID);
+	public void testGetCategoryID() {
 		assertThat(project.getCategoryID(), is(categoryID));
 	}
 
 	@Test
+	public void testSetCategoryID() {
+		int newCategoryID = 2;
+		project.setCategoryID(newCategoryID);
+		assertThat(project.getCategoryID(), is(newCategoryID));
+	}
+
+	@Test
 	public void testGetUniqueID() {
-		assertThat(project.getUniqueID(), is(2));
+		assertThat(project.getUniqueID(), is(uniqueID));
 	}
 
 	@Test
 	public void testSetUniqueID() {
-		int uniqueID = 1;
-		project.setUniqueID(uniqueID);
-		assertThat(project.getUniqueID(), is(uniqueID));
+		int newUniqueID = 3;
+		project.setUniqueID(newUniqueID);
+		assertThat(project.getUniqueID(), is(newUniqueID));
 	}
 }

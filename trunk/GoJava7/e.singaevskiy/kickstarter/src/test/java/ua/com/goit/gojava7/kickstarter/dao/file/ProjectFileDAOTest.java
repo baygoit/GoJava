@@ -14,8 +14,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.memory.util.Memory;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectFileDAOTest {
     Class<Project> persistentClass = Project.class;

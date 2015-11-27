@@ -11,30 +11,25 @@ import ua.com.goit.gojava7.kickstarter.beans.Project;
 
 public class ProjectMemoryDAOTest {
 
-	private ProjectMemoryDAO projectMemory;
-	private Project project;
-	private Category category;
+	private ProjectDaoMemoryImpl projectMemory = new ProjectDaoMemoryImpl();
+	private Project project = new Project();
+	private Category category = new Category();
+	private int categoryID = 10;
 	
 	@Before
 	public void setUp() throws Exception {
-		projectMemory = new ProjectMemoryDAO();
-		project = new Project("Project 1", "XXX", 10_000);
-		project.setUniqueID(6);		
-		category = new Category("Ukraine");
-		category.setUniqueID(10);
-		project.setCategoryID(10);
-	}
-
-	@Test
-	public void testGetProjectsFromCategory() {
-		projectMemory.add(project);
-		assertThat(projectMemory.getProjectsFromCategory(category).size(), is(1));
-		assertThat(projectMemory.getProjectsFromCategory(category).get(0).getCategoryID(), is(10));
+		category.setUniqueID(categoryID);
 	}
 
 	@Test
 	public void testProjectMemoryDAO() {
 		assertThat(projectMemory.getSize(), is(5));
+	}
+	
+	@Test
+	public void testGetProjectsFromCategory() {
+		projectMemory.add(project);
+		assertThat(projectMemory.getProjectsFromCategory(category).size(), is(1));
 	}
 
 	@Test

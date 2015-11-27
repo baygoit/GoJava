@@ -8,21 +8,28 @@ import org.junit.Test;
 
 public class QuoteTest {
 
-	private Quote quote;
+private Quote quote = new Quote();
 	String quoteText = "Hello world";
 	String author = "Smirnov Anton";
 	
 	@Before
 	public void setUp() throws Exception {
-		quote = new Quote(quoteText, author);
+		quote.setQuoteText(quoteText);
+		quote.setAuthor(author);
 	}
 
 	@Test
 	public void testQuote() {
-		assertThat(quote.getQuoteText(), is(quoteText));
-		assertThat(quote.getAuthor(), is(author));
+		Quote muQuote = new Quote();
+		assertThat(muQuote.getQuoteText().length(), is(0));
+		assertThat(muQuote.getAuthor().length(), is(0));
 	}
 
+	@Test
+	public void testGetQuoteText() {
+		assertThat(quote.getQuoteText(), is(quoteText));
+	}
+	
 	@Test
 	public void testSetQuoteText() {
 		String newQuoteText = "Some text....";
@@ -31,19 +38,14 @@ public class QuoteTest {
 	}
 
 	@Test
-	public void testGetQuoteText() {
-		assertThat(quote.getQuoteText(), is(quoteText));
+	public void testGetAuthor() {
+		assertThat(quote.getAuthor(), is(author));
 	}
-
+	
 	@Test
 	public void testSetAuthor() {
 		String name = "Alex";
 		quote.setAuthor(name);
 		assertThat(quote.getAuthor(), is(name));
-	}
-
-	@Test
-	public void testGetAuthor() {
-		assertThat(quote.getAuthor(), is(author));
 	}
 }

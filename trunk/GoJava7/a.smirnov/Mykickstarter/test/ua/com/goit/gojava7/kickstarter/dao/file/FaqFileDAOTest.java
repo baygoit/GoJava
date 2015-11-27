@@ -3,7 +3,6 @@ package ua.com.goit.gojava7.kickstarter.dao.file;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
@@ -11,20 +10,10 @@ import ua.com.goit.gojava7.kickstarter.beans.Project;
 
 public class FaqFileDAOTest {
 
-	private FaqFileDAO faqFile;
-	private Faq faq;
-	private Project project;
+	private FaqDaoFileImpl faqFile = new FaqDaoFileImpl();
+	private Faq faq = new Faq();
+	private Project project = new Project();
 	
-	@Before
-	public void setUp() throws Exception {
-		faqFile = new FaqFileDAO();
-		faq = new Faq("How are you?");
-		
-		project = new Project("Project 1", "XXX", 10_000);
-		project.setUniqueID(1);
-		faq.setProjectID(1);
-	}
-
 	@Test
 	public void testAdd() {
 		faqFile.add(faq);

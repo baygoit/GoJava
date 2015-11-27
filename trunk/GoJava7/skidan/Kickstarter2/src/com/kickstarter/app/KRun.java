@@ -29,12 +29,13 @@ public class KRun {
 		try {
 			consolePrint.allCategoriesView(categoryDao.getAllCategories());
 			consolePrint.categorySelectionInform();
-			int categoryNumber = UserConsoleInputReader.readInput();
-			if (categoryNumber == EXIT_SIGN) {
+			int selectedCategoryNumber = UserConsoleInputReader.readInput();
+			if (selectedCategoryNumber == EXIT_SIGN) {
 				consolePrint.programExitInform();
 			} else {
-				String categoryTitle = categoryDao.getCategorieByNumber(categoryNumber).getTitle();
-				Category selectedCategory = categoryDao.getCategorieByNumber(categoryNumber);
+				int selectedCategoryId = categoryDao.getAllCategories().get(selectedCategoryNumber - 1).getId();
+				String categoryTitle = categoryDao.getCategorieByNumber(selectedCategoryId).getTitle();
+				Category selectedCategory = categoryDao.getCategorieByNumber(selectedCategoryId);
 				consolePrint.selectedCategoryInformer(categoryTitle);
 				consolePrint.categorysProjectsView(projectDao.getAll(selectedCategory));
 				projectSelector(selectedCategory);
@@ -52,11 +53,11 @@ public class KRun {
 			consolePrint.exitInformer();
 			consolePrint.viewSelectedCategoryProjects(projectDao.getAll(selectedCategory));
 			while (true) {
-				int projectNumber = UserConsoleInputReader.readInput();
-				if (projectNumber == EXIT_SIGN) {
+				int userSelectedProjectNumber = UserConsoleInputReader.readInput();
+				if (userSelectedProjectNumber == EXIT_SIGN) {
 					categorySelector();
 				} else {
-					int projectId = projectDao.getAll(selectedCategory).get(projectNumber -1).getId();
+					int projectId = projectDao.getAll(selectedCategory).get(userSelectedProjectNumber -1).getId();
 					Project p = projectDao.getOne(projectId);
 					String projectTitle = projectDao.getOne(projectId).getTitle();
 					consolePrint.choosenProjectTitleInform(projectTitle);
