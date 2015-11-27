@@ -7,31 +7,50 @@ import java.io.File;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
+
 public class TestFileProjectReader {
-	private File testQuotesFile;
+	private File testProjectsFile;
 	private FileProjectReader fileProjectReader;
 
 	@Test
-	public void testGetProjects1() {
-		testQuotesFile = new File("./resources/projects.csv");
+	public void testGetProjects() {
+		testProjectsFile = new File("./resources/projects.csv");
 		fileProjectReader = new FileProjectReader(
-				testQuotesFile);
+				testProjectsFile);
 		assertThat(fileProjectReader.getProjects(1).size(), is(2));
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = WrongFileFormatException.class)
 	public void testGetProjectsNotProjectsInFile() {
-		testQuotesFile = new File("./resources/noProjects.csv");
+		testProjectsFile = new File("./resources/noprojects.csv");
 		fileProjectReader = new FileProjectReader(
-				testQuotesFile);
+				testProjectsFile);
 		fileProjectReader.getProjects(1);
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = WrongFileFormatException.class)
 	public void testGetProjectsNoProjectsFile() {
-		testQuotesFile = new File("./resources/notExistentProjects.csv");
+		testProjectsFile = new File("./resources/notExistentProjects.csv");
 		fileProjectReader = new FileProjectReader(
-				testQuotesFile);
+				testProjectsFile);
 		fileProjectReader.getProjects(0);
 	}
+	
+	@Test
+	public void testGetProject() {
+		testProjectsFile = new File("./resources/projects.csv");
+		fileProjectReader = new FileProjectReader(
+				testProjectsFile);
+		assertThat(fileProjectReader.getProject(2).getName(), is("Second project"));
+	}
+	
+	@Test
+	public void testSize() {
+		testProjectsFile = new File("./resources/projects.csv");
+		fileProjectReader = new FileProjectReader(
+				testProjectsFile);
+		assertThat(fileProjectReader.size(), is(3));
+	}
+	
 }
