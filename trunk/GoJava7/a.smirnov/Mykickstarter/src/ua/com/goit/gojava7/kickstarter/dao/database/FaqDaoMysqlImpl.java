@@ -16,8 +16,8 @@ import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqDao;
 public class FaqDaoMysqlImpl extends AbstractFaqDao  {
 	private static final String INSERT_FAQ = "INSERT INTO faqs (project_id, question, answer) VALUES (?, ?, ?)";
 	private static final String DELETE_FAQ = "DELETE FROM faqs WHERE project_id = ?";
-	private static final String SELECT_ALL_FAQS = "SELECT id, name FROM catigories";
-	private static final String COUNT_ALL_CATEGORIES = "SELECT count(*) FROM categories";
+	private static final String SELECT_ALL_FAQS = "SELECT id, name FROM faqs";
+	private static final String COUNT_ALL_FAQS = "SELECT count(*) FROM faqs";
 	
 	
 	@Override
