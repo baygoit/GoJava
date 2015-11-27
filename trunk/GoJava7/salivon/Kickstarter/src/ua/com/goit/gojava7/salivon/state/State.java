@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.salivon.state;
 
 import java.util.Scanner;
-import ua.com.goit.gojava7.salivon.handlers.ErrorHandler;
 import ua.com.goit.gojava7.salivon.context.Console;
 import ua.com.goit.gojava7.salivon.dao.DataType;
 
@@ -9,7 +8,6 @@ public abstract class State {
 
     protected static Scanner scan = new Scanner(System.in);
     protected String menu;
-    protected ErrorHandler handler;
     private static int idCategory;
     private static int idProject;
     private boolean commandExit = true;
@@ -20,6 +18,8 @@ public abstract class State {
     public abstract void outputContentState();
 
     public abstract void changeState(Console context);
+
+    public abstract boolean validate(String data);
 
     public static DataType getCurrentDataType() {
         return currentDataType;
@@ -79,7 +79,7 @@ public abstract class State {
             if (inData.equals("0") && commandZero) {
                 return;
             }
-            if (!handler.validate(inData)) {
+            if (!validate(inData)) {
                 System.out.println("Enter the correct data!");
                 System.out.println(menu);
                 continue;

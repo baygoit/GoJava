@@ -1,13 +1,11 @@
 package ua.com.goit.gojava7.salivon.state;
 
 import ua.com.goit.gojava7.salivon.context.Console;
-import ua.com.goit.gojava7.salivon.handlers.ErrorHandlerStatePreloading;
 import ua.com.goit.gojava7.salivon.dao.DataType;
 
 public class PreloadingState extends State {
 
     public PreloadingState() {
-        handler = new ErrorHandlerStatePreloading();
         menu = "Select data source:\n"
                 + "- enter 1 - data from the file system\n"
                 + "- enter 2 - data of the object model\n"
@@ -23,6 +21,18 @@ public class PreloadingState extends State {
     }
 
     @Override
+    public boolean validate(String data) {
+        try {
+            int n = Integer.parseInt(data);
+
+            return n == 1 || n == 2 || n == 3;
+
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    @Override
     public void changeState(Console context) {
         int inDateToInt = Integer.parseInt(getInData());
         selectCurrentData(inDateToInt);
@@ -30,15 +40,19 @@ public class PreloadingState extends State {
     }
 
     protected void selectCurrentData(int inData) {
-        if (inData == 1) {
-            setCurrentDataType(DataType.FILE);
+        switch (inData) {
+
+            case 1:
+                setCurrentDataType(DataType.FILE);
+                break;
+            case 2:
+                setCurrentDataType(DataType.MEMORY);
+                break;
+            case 3:
+                setCurrentDataType(DataType.DB);
+                break;
         }
-        if (inData == 2) {
-            setCurrentDataType(DataType.MEMORY);
-        }
-        if (inData == 3) {
-            setCurrentDataType(DataType.DB);
-        }
+
     }
 
 }

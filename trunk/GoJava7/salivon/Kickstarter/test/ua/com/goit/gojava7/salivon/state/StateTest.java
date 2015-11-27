@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import org.junit.Ignore;
 import ua.com.goit.gojava7.salivon.context.Console;
 import static org.mockito.Mockito.*;
-import ua.com.goit.gojava7.salivon.handlers.ErrorHandler;
 
 public class StateTest {
 
@@ -118,11 +117,9 @@ public class StateTest {
     @Test
     public void testVerification() {
         State instance = new StateImpl();
-        ErrorHandler mock = mock(ErrorHandler.class);
         State spy = spy(instance);
-        spy.handler = mock;
         spy.setCommandExit(true);
-        when(mock.validate(anyString())).thenReturn(true);
+        when(spy.validate(anyString())).thenReturn(true);
         doReturn("q").when(spy).readUserInformations();
         spy.verification();
         doReturn("0").when(spy).readUserInformations();
@@ -164,6 +161,11 @@ public class StateTest {
         }
 
         public void changeState(Console context) {
+        }
+
+        @Override
+        public boolean validate(String data) {
+            return true;
         }
     }
 

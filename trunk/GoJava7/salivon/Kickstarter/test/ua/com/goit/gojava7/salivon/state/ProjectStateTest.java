@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.salivon.state;
 
 import junit.framework.AssertionFailedError;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 import ua.com.goit.gojava7.salivon.context.Console;
@@ -15,6 +16,31 @@ public class ProjectStateTest {
         State.setIdProject(3);
         ProjectState instance = new ProjectState();
         instance.outputContentState();
+    }
+
+    @Test
+    public void testValidateForFile() {
+        State.setCurrentDataType(DataType.FILE);
+        State.setIdCategory(1);
+        State.setIdProject(3);
+        ProjectState instance = new ProjectState();
+        assertEquals(false, instance.validate("q"));
+        assertEquals(true, instance.validate("1"));
+        assertEquals(true, instance.validate("2"));
+        assertEquals(true, instance.validate("0"));
+        assertEquals(false, instance.validate("3"));
+    }
+     @Test
+    public void testValidateForMemory() {
+        State.setCurrentDataType(DataType.MEMORY);
+        State.setIdCategory(1);
+        State.setIdProject(3);
+        ProjectState instance = new ProjectState();
+        assertEquals(false, instance.validate("q"));
+        assertEquals(true, instance.validate("1"));
+        assertEquals(true, instance.validate("2"));
+        assertEquals(true, instance.validate("0"));
+        assertEquals(false, instance.validate("3"));
     }
 
     @Test

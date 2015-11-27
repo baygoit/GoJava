@@ -1,6 +1,8 @@
 package ua.com.goit.gojava7.salivon.state;
 
 import junit.framework.AssertionFailedError;
+import static org.junit.Assert.assertEquals;
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 import ua.com.goit.gojava7.salivon.context.Console;
@@ -47,6 +49,44 @@ public class CategoryStateTest {
         State.setIdCategory(1);
         CategoryState instance = new CategoryState();
         instance.outputContentState();
+    }
+
+    @Test
+    public void testValidateForFile() {
+        State.setIdProject(1);
+        State.setIdCategory(1);
+        State.setCurrentDataType(DataType.FILE);
+        CategoryState instance = new CategoryState();
+        assertEquals(false, instance.validate(""));
+        assertEquals(false, instance.validate("0"));
+        assertEquals(true, instance.validate("1"));
+        assertEquals(false, instance.validate("200"));
+    }
+
+    @Test
+    public void testValidateForMemory() {
+        State.setIdProject(1);
+        State.setIdCategory(1);
+        State.setCurrentDataType(DataType.MEMORY);
+        CategoryState instance = new CategoryState();
+        assertEquals(false, instance.validate(""));
+        assertEquals(false, instance.validate("0"));
+        assertEquals(true, instance.validate("1"));
+        assertEquals(false, instance.validate("200"));
+
+    }
+
+    @Test
+    @Ignore
+    public void testValidateForDb() {
+        State.setIdProject(1);
+        State.setIdCategory(1);
+        State.setCurrentDataType(DataType.DB);
+        CategoryState instance = new CategoryState();
+        assertEquals(false, instance.validate(""));
+        assertEquals(false, instance.validate("0"));
+        assertEquals(true, instance.validate("1"));
+
     }
 
     @Test

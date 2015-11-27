@@ -21,6 +21,14 @@ public class ContributionAmountStateTest {
     }
 
     @Test
+    public void testValidate() {
+        Payment payment = mock(Payment.class);
+        ContributionAmountState instance = new ContributionAmountState(payment);
+        assertEquals(true, instance.validate("1"));
+        assertEquals(false, instance.validate("1df"));
+    }
+
+    @Test
     public void testChangeStateForFile() {
         Console context = new Console();
         State.setCurrentDataType(DataType.FILE);
@@ -39,7 +47,8 @@ public class ContributionAmountStateTest {
         ContributionAmountState instance = new ContributionAmountState(payment);
         instance.savePayment(anyInt());
     }
-     @Test
+
+    @Test
     public void testChangeStateForMemory() {
         Console context = new Console();
         State.setCurrentDataType(DataType.MEMORY);

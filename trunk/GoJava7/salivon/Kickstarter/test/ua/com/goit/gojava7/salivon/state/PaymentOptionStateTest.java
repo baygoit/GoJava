@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.salivon.state;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 import ua.com.goit.gojava7.salivon.beans.Payment;
@@ -13,6 +14,19 @@ public class PaymentOptionStateTest {
         Payment payment = mock(Payment.class);
         PaymentOptionState instance = new PaymentOptionState(payment);
         instance.outputContentState();
+    }
+
+    @Test
+    public void testValidate() {
+        Payment payment = mock(Payment.class);
+        PaymentOptionState instance = new PaymentOptionState(payment);
+        assertEquals(true, instance.validate("1"));
+        assertEquals(true, instance.validate("2"));
+        assertEquals(true, instance.validate("3"));
+        assertEquals(true, instance.validate("4"));
+        assertEquals(false, instance.validate(""));
+        assertEquals(false, instance.validate("0"));
+        assertEquals(false, instance.validate("5"));
     }
 
     @Test

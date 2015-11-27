@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.salivon.state;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
@@ -17,6 +18,16 @@ public class PreloadingStateTest {
     @Test
     public void testOutputContentState() {
         instance.outputContentState();
+    }
+
+    @Test
+    public void testValidate() {
+        assertEquals(false, instance.validate(""));
+        assertEquals(true, instance.validate("3"));
+        assertEquals(true, instance.validate("1"));
+        assertEquals(true, instance.validate("2"));
+        assertEquals(false, instance.validate("4"));
+
     }
 
     @Test

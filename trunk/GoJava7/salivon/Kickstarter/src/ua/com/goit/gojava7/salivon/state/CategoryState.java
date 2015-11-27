@@ -3,7 +3,6 @@ package ua.com.goit.gojava7.salivon.state;
 import ua.com.goit.gojava7.salivon.beans.Category;
 import ua.com.goit.gojava7.salivon.beans.Project;
 import java.util.List;
-import ua.com.goit.gojava7.salivon.handlers.ErrorHandlerStateCategory;
 import ua.com.goit.gojava7.salivon.context.Console;
 import static ua.com.goit.gojava7.salivon.state.State.getCurrentDataType;
 import ua.com.goit.gojava7.salivon.dao.DaoFactory;
@@ -14,7 +13,6 @@ public class CategoryState extends State {
     private List<Project> projects = DaoFactory.getProjectDao(getCurrentDataType()).getProjectsOfCategory(State.getIdCategory());
 
     public CategoryState() {
-        handler = new ErrorHandlerStateCategory();
         menu = "Enter the number of projects to select it.\n"
                 + "Enter 0 return to above.\n"
                 + "Enter 'q' to exit.\n";
@@ -41,6 +39,16 @@ public class CategoryState extends State {
     }
 
     @Override
+    public boolean validate(String data) {
+        try {
+            int n = Integer.parseInt(data);
+            return n - 1 >= 0 && n - 1 < projects.size();
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    @Override
     public void changeState(Console context) {
         String inData = getInData();
         if (inData.equalsIgnoreCase("q")) {
@@ -58,8 +66,6 @@ public class CategoryState extends State {
     }
 
     protected int convertIndexToId(int index) {
-        index--;
-        int id = projects.get(index).getId();
-        return id;
+        return projects.get(index - 1).getId();
     }
 }

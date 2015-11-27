@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.salivon.state;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 import ua.com.goit.gojava7.salivon.context.Console;
@@ -13,6 +14,20 @@ public class QuestionStateTest {
         QuestionState instance = new QuestionState();
         instance.outputContentState();
 
+    }
+
+    @Test
+    public void testValidateForFile() {
+        State.setCurrentDataType(DataType.FILE);
+        QuestionState instance = new QuestionState();
+        assertEquals(true, instance.validate(""));
+    }
+
+    @Test
+    public void testValidateForMemory() {
+        State.setCurrentDataType(DataType.MEMORY);
+        QuestionState instance = new QuestionState();
+        assertEquals(true, instance.validate(""));
     }
 
     @Test
