@@ -38,7 +38,9 @@ public class ProjectLevelTest {
 	
 	@Before 
 	public void setUp() {	
-		selectedCategory = new Category("Some Category", 1);
+		selectedCategory = new Category();
+		selectedCategory.setId(1);
+		selectedCategory.setName("Some Category");
 		selectedProject = new Project("proj 1", 1);
 	}
 	

@@ -41,7 +41,9 @@ public class PledgeLevelTest {
 	
 	@Before 
 	public void setUp() {
-		selectedCategory = new Category("Some Category", 1);
+		selectedCategory = new Category();
+		selectedCategory.setId(1);
+		selectedCategory.setName("Some Category");
 		selectedProject = new Project("proj 1", 4);		
 		
 		reward = new Reward(1, 1);
