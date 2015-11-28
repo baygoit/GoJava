@@ -3,21 +3,20 @@ package ua.com.goit.gojava7.kickstarter.controller;
 import java.io.IOException;
 import java.sql.Date;
 
-import ua.com.goit.gojava7.kickstarter.beans.Payment;
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.beans.Reward;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentStorage;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
+import ua.com.goit.gojava7.kickstarter.domain.Payment;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
-public class PaymentWithRewardPageController extends PageController<Reward> {
+public class PaymentWithRewardPageController extends AbstractPageController<Reward> {
 
     @Override
     protected void handle() {
         
-        page.showPaymentRequest(request.getProject());
+        printer.showPaymentRequest();
         
     }
 
-    public boolean processPayment(Project project, String paymentRequest) {
+    public boolean processPayment(Reward reward, String paymentRequest) {
         String[] paymentParameters = paymentRequest.split(" ");
 
         if (paymentParameters.length != 3) {
@@ -28,12 +27,10 @@ public class PaymentWithRewardPageController extends PageController<Reward> {
                 long cardID = Long.parseLong(paymentParameters[1]);
                 String username = paymentParameters[0];
                 
-                PaymentStorage paymentDAO = storageFactory.getPaymentDAO();
+                PaymentDAO paymentDAO = storageFactory.getPaymentDAO();
                 
-                Payment payment = new Payment(project, request, username, cardID, sum, new Date(System.currentTimeMillis()));
+                Payment payment = new Payment(reward.getProjectId(), reward.getId(), username, cardID, sum, new Date(System.currentTimeMillis()));
                 paymentDAO.add(payment);
-
-                project.setBalanceSum(paymentDAO.getSum(project));
 
             } catch (NumberFormatException e) {
                 return false;
@@ -46,7 +43,7 @@ public class PaymentWithRewardPageController extends PageController<Reward> {
     @Override
     protected boolean isDone() {
         try {
-            if (!processPayment(request.getProject(), inputReader.readLine())) {
+            if (!processPayment(request, inputReader.readLine())) {
                 return false;
             }
         } catch (IOException e) {

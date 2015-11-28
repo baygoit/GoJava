@@ -1,0 +1,12 @@
+CREATE TABLE Apartment (
+apartmentID INT AUTO_INCREMENT,
+hostID INT NOT NULL,
+apartmentType CHAR(30) NOT NULL,
+city CHAR(30) NOT NULL,
+address CHAR(35) NOT NULL,
+rooms int,
+accommodates int,
+squareFootage int,
+PRIMARY KEY(apartmentID),
+FOREIGN KEY(hostID) REFERENCES user(userID)
+);

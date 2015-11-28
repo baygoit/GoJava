@@ -1,17 +1,9 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-import java.io.Serializable;
-
-public class Category implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+public class Category {
 	private int uniqueID;
 	private String name;
 
-	public Category(String name) {
-		this.name = name;
-	}
-	
 	public int getUniqueID() {
 		return uniqueID;
 	}
@@ -20,11 +12,11 @@ public class Category implements Serializable {
 		this.uniqueID = uniqueID;
 	}
 
-	public String getCategoryName() {
+	public String getName() {
 		return name;
 	}
 	
-	public void setCategoryName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	

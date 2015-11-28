@@ -1,29 +1,44 @@
-package main.java.Models;
+package models;
 
-import main.java.Services.Searches;
-import main.java.Subject;
-import main.java.Observer;
 
+
+import observerFr.Observer;
+import observerFr.Subject;
+
+import javax.persistence.*;
 import java.util.InputMismatchException;
 import java.util.List;
 
 /**
- * Created by A_Nakonechnyi on 19.09.2015.
+ * @autor A_Nakonechnyi
+ * @date 19.09.2015.
  */
+
+@Entity
+@Table (name = "users")
 public class User implements Observer {
+    @Id
+    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int clientId;
+    @Column (name = "name")
     private String name;
-    private String sername;
+    @Column (name = "sur_name")
+    private String surname;
+    @Column (name = "email")
     private String email;
+    @Column (name = "is_host")
     private Boolean isHost;
+    @OneToMany (mappedBy = "host_id")
     public List<Apartment> apartments;
     //private String city;
-    public final int clientId;
 
 
-    public User (int clientId, String name, String sername, String email , boolean isHost){
-        if (this.setName(name)&&this.setSername(sername)&&this.setEmail(email)) {
+
+    public User (/*int clientId,*/ String name, String surname, String email , boolean isHost){
+        if (this.setName(name)&&this.setSurname(surname)&&this.setEmail(email)) {
             this.isHost=isHost;
-            this.clientId= clientId;
+            /*this.clientId= clientId;*/
             System.out.println("Successful Host registration");
             //Searches.hostList.add(this);
             //TODO addToDB method
@@ -31,8 +46,8 @@ public class User implements Observer {
             throw new InputMismatchException();
         }
     }
-    /*public User (String name, String sername, String email){
-        if (this.setName(name)&&this.setSername(sername)&&this.setEmail(email)) {
+    /*public User (String name, String surname, String email){
+        if (this.setName(name)&&this.setSurname(surname)&&this.setEmail(email)) {
             this.isHost=false;
             clientId= (int) Math.random();
             System.out.println("Successful Host registration");
@@ -53,13 +68,13 @@ public class User implements Observer {
         return true;
     }
 
-    public String getSername() {
-        return sername;
+    public String getSurname() {
+        return surname;
     }
 
-    public boolean setSername(String sername) {
-        if (sername.isEmpty()||sername.equals("Null")||sername.matches(".*\\d+.*")) {return false;}
-        this.sername = sername;
+    public boolean setSurname(String surname) {
+        if (surname.isEmpty()||surname.equals("Null")||surname.matches(".*\\d+.*")) {return false;}
+        this.surname = surname;
         return true;
 
     }
@@ -102,9 +117,13 @@ public class User implements Observer {
 
     }
 
-//    @Override
+    @Override
     public void loyalty(int discountPercent, Subject s) {
 
         System.out.println("Hello, "+getName()+". You have "+discountPercent+"% discount  from "+s.toString());
+    }
+
+    public int getClientId() {
+        return clientId;
     }
 }

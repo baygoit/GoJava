@@ -3,6 +3,8 @@ package ua.com.goit.gojava7.kikstarter;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kikstarter.domain.Category;
+
 public class CategoryStorage {
 
 	private List<Category> categoriesList = new ArrayList<>();

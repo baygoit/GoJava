@@ -1,12 +1,10 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class Project implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class Project {
 	private int uniqueID;
 	private int categoryID;
 	private String title;
@@ -16,16 +14,6 @@ public class Project implements Serializable{
 	private int requiredSum;
 	private int collectedSum;
 	private int daysLeft;
-
-	public Project(String title, String briefDescription, int requiredSum) {
-		this.title = title;
-		this.briefDescription = briefDescription;
-		this.fullDescription = "----";
-		this.videoLink = "----";
-		this.requiredSum = requiredSum;	
-		this.collectedSum = 0;
-		this.daysLeft = 0;
-	}
 
 	public String getTitle() {
 		return title;

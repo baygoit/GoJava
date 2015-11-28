@@ -12,11 +12,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.beans.Reward;
 import ua.com.goit.gojava7.kickstarter.dao.DataType;
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public class CsvParserTest {
 

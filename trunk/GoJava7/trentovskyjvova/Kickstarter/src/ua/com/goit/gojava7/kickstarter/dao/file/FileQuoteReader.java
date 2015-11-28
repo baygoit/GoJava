@@ -8,23 +8,26 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-import ua.com.goit.gojava7.kickstarter.dao.QuoteReader;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
-import ua.com.goit.gojava7.kickstarter.exception.QuoteReadException;
+import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class FileQuoteReader implements QuoteReader {
+public class FileQuoteReader implements QuoteDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File quotesFile;
-
-	public FileQuoteReader(File quotesFile) {
+	private Random random;
+	
+	public FileQuoteReader(File quotesFile, Random random) {
 		this.quotesFile = quotesFile;
+		this.random = random;
 	}
 
 	@Override
-	public List<Quote> readQuotes() {
+	public Quote getRandomQuote() {
 		List<Quote> quotes = new ArrayList<>();
-
+		
 		BufferedReader fileReader = null;
 		try {
 			InputStream quotesFileSteam = new FileInputStream(quotesFile);
@@ -37,13 +40,13 @@ public class FileQuoteReader implements QuoteReader {
 			while (null != (line = fileReader.readLine())) {
 				String[] quote = line.split(CSV_SPLIT_BY);
 				if (quote.length < 2) {
-					throw new QuoteReadException(
+					throw new WrongFileFormatException(
 							"Wrong quotes.csv format.");
 				} else if (quote[0] == "") {
-					throw new QuoteReadException(
+					throw new WrongFileFormatException(
 							"Wrong quotes.csv format. Cannot find quote text");
 				} else if (quote[1] == "") {
-					throw new QuoteReadException(
+					throw new WrongFileFormatException(
 							"Wrong quotes.csv format. Cannot find author");
 				}
 				quoteText = quote[0];
@@ -51,7 +54,7 @@ public class FileQuoteReader implements QuoteReader {
 				quotes.add(new Quote(quoteText, author));
 			}
 		} catch (IOException e) {
-			throw new QuoteReadException("File not found or read error", e);
+			throw new WrongFileFormatException("File not found or read error", e);
 		} finally {
 			if (fileReader != null) {
 				try {
@@ -63,9 +66,10 @@ public class FileQuoteReader implements QuoteReader {
 		}
 
 		if (quotes.isEmpty()) {
-			throw new QuoteReadException("There is not quotes in file");
+			throw new WrongFileFormatException("There is not quotes in file");
 		}
 
-		return quotes;
+		int randomNumber = random.nextInt(quotes.size());
+		return quotes.get(randomNumber);
 	}
 }

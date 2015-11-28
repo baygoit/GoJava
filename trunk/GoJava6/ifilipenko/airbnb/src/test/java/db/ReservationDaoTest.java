@@ -1,6 +1,6 @@
 package db;
 
-import dao.db.ReservationDao;
+import dao.hibernate.ReservationDao;
 import dbutils.HibernateUtil;
 import model.Home;
 import model.Reservation;

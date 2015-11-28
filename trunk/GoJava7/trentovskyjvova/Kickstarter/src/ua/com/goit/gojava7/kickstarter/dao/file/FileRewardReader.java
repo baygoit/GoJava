@@ -9,20 +9,21 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.RewardReader;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
-import ua.com.goit.gojava7.kickstarter.exception.RewardReadException;
+import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class FileRewardReader implements RewardReader {
+public class FileRewardReader implements RewardDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File reswardsFile;
-
+	
 	public FileRewardReader(File reswardsFile) {
 		this.reswardsFile = reswardsFile;
 	}
 
 	@Override
-	public List<Reward> readRewards() {
+	public List<Reward> getRewards(int projectId) {
 		List<Reward> rewards = new ArrayList<>();
 
 		BufferedReader fileReader = null;
@@ -32,34 +33,41 @@ public class FileRewardReader implements RewardReader {
 					reswardsFileSteam));
 
 			String line = null;
-			int projectId = 0;
+			int id = 0;
 			int pledge = 0;
 			String benefit = null;
 			while (null != (line = fileReader.readLine())) {
 				String[] rewardLine = line.split(CSV_SPLIT_BY);
-				if (rewardLine.length < 3) {
-					throw new RewardReadException("Wrong reswards.csv format.");
+				if (rewardLine.length < 4) {
+					throw new WrongFileFormatException("Wrong reswards.csv format.");
 				} else if (rewardLine[0] == "") {
-					throw new RewardReadException(
-							"Wrong reswards.csv format. Cannot find project id");
+					throw new WrongFileFormatException(
+							"Wrong reswards.csv format. Cannot find id");
 				} else if (rewardLine[1] == "") {
-					throw new RewardReadException(
-							"Wrong reswards.csv format. Cannot find pledge of resward");
+					throw new WrongFileFormatException(
+							"Wrong reswards.csv format. Cannot find project id");
 				} else if (rewardLine[2] == "") {
-					throw new RewardReadException(
+					throw new WrongFileFormatException(
+							"Wrong reswards.csv format. Cannot find pledge of resward");
+				} else if (rewardLine[3] == "") {
+					throw new WrongFileFormatException(
 							"Wrong reswards.csv format. Cannot find benefit of resward");
 				}
-				projectId = Integer.parseInt(rewardLine[0]);
-				pledge = Integer.parseInt(rewardLine[1]);
-				benefit = rewardLine[2];
+				if (projectId != 0
+						&& projectId != Integer.parseInt(rewardLine[1])) {
+					continue;
+				}
+				id = Integer.parseInt(rewardLine[0]);
+				pledge = Integer.parseInt(rewardLine[2]);
+				benefit = rewardLine[3];
 				
-				Reward reward = new Reward(projectId);
+				Reward reward = new Reward(id, projectId);
 				reward.setPledge(pledge);
 				reward.setBenefit(benefit);
 				rewards.add(reward);
 			}
 		} catch (IOException e) {
-			throw new RewardReadException("File not found or read error", e);
+			throw new WrongFileFormatException("File not found or read error", e);
 		} finally {
 			if (fileReader != null) {
 				try {
@@ -70,11 +78,26 @@ public class FileRewardReader implements RewardReader {
 			}
 		}
 
-		if (rewards.isEmpty()) {
-			throw new RewardReadException("There is not rewards in file");
-		}
-
 		return rewards;
+	}
+
+	@Override
+	public int size() {
+		List<Reward> rewards = getRewards(0);
+		return rewards.size();
+	}
+
+	@Override
+	public Reward getReward(int id) {
+		List<Reward> rewards = getRewards(0);
+		Reward result = null;
+		for (Reward reward : rewards) {
+			if(reward.getId() == id){
+				result = reward;
+				break;
+			}
+		}
+		return result;
 	}
 
 }

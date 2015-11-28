@@ -2,17 +2,17 @@ package ua.com.goit.gojava7.kickstarter.controller;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.beans.Reward;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
-public class RewardSelectionPageController extends PageController<Project> {
+public class RewardSelectionPageController extends AbstractPageController<Project> {
 
     private List<Reward> rewards;
 
     @Override
     protected void handle() {
-        rewards = storageFactory.getRewardDAO().getByProject(request);
-        page.showRewards(rewards);
+        rewards = storageFactory.getRewardDAO().getByProject(request.getId());
+        printer.showRewards(rewards);
 
     }
 

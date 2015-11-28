@@ -1,9 +1,10 @@
 package ua.com.goit.gojava7.kickstarter.dao.file;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
+import ua.com.goit.gojava7.kickstarter.dao.file.util.FileDAO;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-public class CategoryFileDAO extends FileDAO<Category> implements CategoryStorage {
+public class CategoryFileDAO extends FileDAO<Category> implements CategoryDAO {
 
     public CategoryFileDAO() {
         super(Category.class);
