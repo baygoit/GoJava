@@ -4,12 +4,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-import ua.com.goit.gojava7.kickstarter.controller.PageController;
 import ua.com.goit.gojava7.kickstarter.controller.WelcomePageController;
 import ua.com.goit.gojava7.kickstarter.dao.DataType;
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
-import ua.com.goit.gojava7.kickstarter.view.MainPage;
+import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 
 public class App {
 
@@ -17,13 +16,12 @@ public class App {
         start(initDataType(args));
     }
 
-    @SuppressWarnings("rawtypes")
     public static void start(DataType dataType) {  
 
-        PageController page = new WelcomePageController();
+        WelcomePageController page = new WelcomePageController();
         page.setStorageFactory(new StorageFactory(dataType));
         page.setInputReader(new BufferedReader(new InputStreamReader(System.in))); 
-        page.setMainPage(new MainPage(System.out));
+        page.setView(new ConsolePrinter(System.out));
         page.dispatch();
 
     }

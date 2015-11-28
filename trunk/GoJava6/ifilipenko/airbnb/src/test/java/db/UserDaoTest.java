@@ -1,6 +1,6 @@
 package db;
 
-import dao.db.UserDao;
+import dao.hibernate.UserDao;
 import dbutils.HibernateUtil;
 import model.User;
 import model.enums.CityList;

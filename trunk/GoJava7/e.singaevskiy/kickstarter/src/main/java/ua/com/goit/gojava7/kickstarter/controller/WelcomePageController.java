@@ -3,11 +3,11 @@ package ua.com.goit.gojava7.kickstarter.controller;
 import java.util.List;
 import java.util.Random;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.beans.Quote;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @SuppressWarnings("rawtypes")
-public class WelcomePageController extends PageController {
+public class WelcomePageController extends AbstractPageController {
 
     private List<Category> categories;
 
@@ -19,11 +19,11 @@ public class WelcomePageController extends PageController {
         List<Quote> quotes = storageFactory.getQuoteDAO().getAll();
 
         if (!quotes.isEmpty()) {
-            page.showQuote(quotes.get(rnd.nextInt(quotes.size())));
+            printer.showQuote(quotes.get(rnd.nextInt(quotes.size())));
         }
         
         categories = storageFactory.getCategoryDAO().getAll();
-        page.showCategories(categories);       
+        printer.showCategories(categories);       
         
     }
 

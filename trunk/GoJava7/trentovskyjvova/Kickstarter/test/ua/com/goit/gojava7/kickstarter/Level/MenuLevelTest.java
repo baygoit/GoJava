@@ -36,7 +36,9 @@ public class MenuLevelTest {
 	
 	@Before 
 	public void setUp() {	
-		selectedCategory = new Category("Some Category", 1);
+		selectedCategory = new Category();
+		selectedCategory.setId(1);
+		selectedCategory.setName("Some Category");
 		selectedProject = new Project("project name", 1);
 		
 		categories = new ArrayList<Category>();

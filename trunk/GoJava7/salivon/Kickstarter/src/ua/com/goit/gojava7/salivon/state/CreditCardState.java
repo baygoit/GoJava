@@ -2,7 +2,6 @@ package ua.com.goit.gojava7.salivon.state;
 
 import ua.com.goit.gojava7.salivon.beans.Payment;
 import ua.com.goit.gojava7.salivon.context.Console;
-import ua.com.goit.gojava7.salivon.handlers.ErrorHandlerStateCreditCard;
 
 class CreditCardState extends PaymentState {
 
@@ -10,7 +9,6 @@ class CreditCardState extends PaymentState {
 
     public CreditCardState(Payment payment) {
         this.payment = payment;
-        handler = new ErrorHandlerStateCreditCard();
         menu = "Enter credit card number:";
     }
 
@@ -18,6 +16,18 @@ class CreditCardState extends PaymentState {
     public void outputContentState() {
         System.out.println("--------------------------------------------------");
         System.out.println(menu);
+    }
+
+    @Override
+    public boolean validate(String data) {
+        long number = 0;
+        try {
+            number = Long.parseLong(data);
+        } catch (NumberFormatException e) {
+
+            return false;
+        }
+        return true;
     }
 
     @Override

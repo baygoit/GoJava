@@ -20,15 +20,15 @@ public class KickstarterRunner {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 		ConsoleScanner consoleReader = new ConsoleScanner();
 		
-		DaoProvider initializer = new DaoProvider(daoType);
-		initializer.open();
+		DaoProvider daoProvider = new DaoProvider(daoType);
+		daoProvider.open();
 		
 		Kickstarter kickstarter = new Kickstarter(consolePrinter,
-				consoleReader, initializer);
+				consoleReader, daoProvider);
 		kickstarter.runKickstarter();
 		kickstarter.shutdown();
 		
-		initializer.close();
+		daoProvider.close();
 	}
 
 	

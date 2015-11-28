@@ -21,7 +21,6 @@ import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 public class FileQuestionReader implements QuestionDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File questionsFile;
-	private List<Question> questions;
 
 	public FileQuestionReader(File questionsFile) {
 		this.questionsFile = questionsFile;
@@ -29,7 +28,7 @@ public class FileQuestionReader implements QuestionDao {
 
 	@Override
 	public List<Question> getQuestions(int projectId) {
-		questions = new ArrayList<>();
+		List<Question> questions = new ArrayList<>();
 
 		BufferedReader fileReader = null;
 		try {
@@ -79,10 +78,6 @@ public class FileQuestionReader implements QuestionDao {
 					System.err.println("Cannot close file " + questionsFile);
 				}
 			}
-		}
-
-		if (questions.isEmpty()) {
-			throw new WrongFileFormatException("There is not questions in file");
 		}
 
 		return questions;

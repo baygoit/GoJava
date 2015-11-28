@@ -13,10 +13,25 @@ public class CategoryDaoMemoryImpl implements CategoryDao {
 	public List<Category> getCategories() {		
 		categories = new ArrayList<>();
 				
-		categories.add(new Category("Games", 1));
-		categories.add(new Category("Design", 2));
-		categories.add(new Category("Film & Video", 3));
-		categories.add(new Category("Technology", 4));
+		Category category1 = new Category();
+		category1.setId(1);
+		category1.setName("Games");
+		categories.add(category1);
+		
+		Category category2 = new Category();
+		category2.setId(2);
+		category2.setName("Design");
+		categories.add(category2);
+		
+		Category category3 = new Category();
+		category3.setId(3);
+		category3.setName("Film & Video");
+		categories.add(category3);
+		
+		Category category4 = new Category();
+		category4.setId(4);
+		category4.setName("Technology");
+		categories.add(category4);
 		return categories;
 	}
 

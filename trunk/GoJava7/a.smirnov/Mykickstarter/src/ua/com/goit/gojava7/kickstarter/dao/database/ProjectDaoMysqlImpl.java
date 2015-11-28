@@ -2,6 +2,7 @@ package ua.com.goit.gojava7.kickstarter.dao.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,119 +14,86 @@ import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractProjectDao;
 
 public class ProjectDaoMysqlImpl extends AbstractProjectDao {
-	
+	private static final String INSERT_PROJECT = "INSERT INTO projects (category_id, title, brief_description, full_description, "
+			+ "video_link, required_sum, collected_sum, days_left) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String DELETE_PROJECT = "DELETE FROM projects WHERE id = ?";
+
+	private static final String SELECT_ALL_PROJECTS = "SELECT id, category_id, title, brief_description, full_description, "
+			+ "video_link, required_sum, collected_sum, days_left FROM projects";
+	private static final String COUNT_ALL_PROJECTS = "SELECT count(*) FROM projects";
+	private static final String SELECT_PROJECTS_FROM_CATEGORY = "SELECT id, category_id, title, brief_description, full_description, "
+			+ "video_link, required_sum, collected_sum, days_left FROM projects WHERE category_id = ?";
+
 	@Override
 	public void add(Project project) {
-		String insertPrject = "INSERT INTO projects ("
-				+ "category_id, "
-				+ "title, "
-				+ "brief_description, "
-				+ "full_description, "
-				+ "video_link, "
-				+ "required_sum, "
-				+ "collected_sum, "
-				+ "days_left)"
-				+ "VALUES ('" 
-				+ project.getCategoryID() + "', '" 
-				+ project.getTitle() + "', '" 
-				+ project.getBriefDescription() + "', '" 
-				+ project.getFullDescription() + "', '"
-				+ project.getVideoLink() + "', '"
-				+ project.getRequiredSum() + "', '" 
-				+ project.getCollectedSum() + "', '"
-				+ project.getDaysLeft() + "')";
-		
-		Connection connection = null;
-		Statement statement = null;
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				PreparedStatement statement = connection.prepareStatement(INSERT_PROJECT)) {
 
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			statement.executeUpdate(insertPrject);
+			statement.setInt(1, project.getCategoryID());
+			statement.setString(2, project.getTitle());
+			statement.setString(3, project.getBriefDescription());
+			statement.setString(4, project.getFullDescription());
+			statement.setString(5, project.getVideoLink());
+			statement.setInt(6, project.getRequiredSum());
+			statement.setInt(7, project.getCollectedSum());
+			statement.setInt(8, project.getDaysLeft());
+
+			statement.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
 		}
-		
+	}
+
+	@Override
+	public void remove(Project project) {
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				PreparedStatement statement = connection.prepareStatement(DELETE_PROJECT)) {
+
+			statement.setInt(1, project.getUniqueID());
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public List<Project> getAll() {
-		String selectProjectsFilds = "SELECT id, category_id, title, brief_description, full_description, "
-				+ "video_link, required_sum, collected_sum, days_left FROM projects";
 		List<Project> projects = new ArrayList<>();
-		
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
 
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(selectProjectsFilds);
-			
-			 while (resultSet.next()) {
-			        int uniqueID = resultSet.getInt("id");
-			        int categoryID = resultSet.getInt("category_id");
-			        String title = resultSet.getString("title");
-			        String briefDescription = resultSet.getString("brief_description");
-			        String fullDescription = resultSet.getString("full_description");
-			        String videoLink = resultSet.getString("video_link");
-			        int requiredSum = resultSet.getInt("required_sum");
-			        int collectedSum = resultSet.getInt("collected_sum");
-			        int daysLeft = resultSet.getInt("days_left");
-			      			 
-			        Project project = new Project(title, briefDescription, requiredSum);
-			        project.setUniqueID(uniqueID);
-			        project.setCategoryID(categoryID);
-			        project.setFullDescription(fullDescription);
-			        project.setVideoLink(videoLink);
-			        project.setCollectedSum(collectedSum);
-			        project.setDaysLeft(daysLeft);
-			       
-			        projects.add(project);
-			 }
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery(SELECT_ALL_PROJECTS)) {
+
+			while (resultSet.next()) {
+				Project project = new Project();
+
+				project.setUniqueID(resultSet.getInt("id"));
+				project.setCategoryID(resultSet.getInt("category_id"));
+				project.setTitle(resultSet.getString("title"));
+				project.setBriefDescription(resultSet.getString("brief_description"));
+				project.setFullDescription(resultSet.getString("full_description"));
+				project.setVideoLink(resultSet.getString("video_link"));
+				project.setRequiredSum(resultSet.getInt("required_sum"));
+				project.setCollectedSum(resultSet.getInt("collected_sum"));
+				project.setDaysLeft(resultSet.getInt("days_left"));
+
+				projects.add(project);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
 		}
 		return projects;
 	}
 
 	@Override
 	public int getSize() {
-		String selectCountProjects = "SELECT count(*) from projects";
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-
 		int amountOfProjects = 0;
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(selectCountProjects);
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery(COUNT_ALL_PROJECTS)) {
 
 			while (resultSet.next()) {
 				amountOfProjects = resultSet.getInt(1);
@@ -133,80 +101,37 @@ public class ProjectDaoMysqlImpl extends AbstractProjectDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
 		}
 		return amountOfProjects;
 	}
 
 	@Override
 	public List<Project> getProjectsFromCategory(Category category) {
-		String selectProjectsFilds = "SELECT id, category_id, title, brief_description, full_description, "
-				+ "video_link, required_sum, collected_sum, days_left FROM projects WHERE category_id = " 
-				+ category.getUniqueID();
-		
 		List<Project> projectFromCategory = new ArrayList<>();
-		
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
+		try (Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
+				PreparedStatement statement = connection.prepareStatement(SELECT_PROJECTS_FROM_CATEGORY)) {
 
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(selectProjectsFilds);
-			
-			 while (resultSet.next()) {
-			        int uniqueID = resultSet.getInt("id");
-			        int categoryID = resultSet.getInt("category_id");
-			        String title = resultSet.getString("title");
-			        String briefDescription = resultSet.getString("brief_description");
-			        String fullDescription = resultSet.getString("full_description");
-			        String videoLink = resultSet.getString("video_link");
-			        int requiredSum = resultSet.getInt("required_sum");
-			        int collectedSum = resultSet.getInt("collected_sum");
-			        int daysLeft = resultSet.getInt("days_left");
-			      			 
-			        Project project = new Project(title, briefDescription, requiredSum);
-			        project.setUniqueID(uniqueID);
-			        project.setCategoryID(categoryID);
-			        project.setFullDescription(fullDescription);
-			        project.setVideoLink(videoLink);
-			        project.setCollectedSum(collectedSum);
-			        project.setDaysLeft(daysLeft);
-			       
-			        projectFromCategory.add(project);
-			 }
+			statement.setInt(1, category.getUniqueID());
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				Project project = new Project();
+				project.setUniqueID(resultSet.getInt("id"));
+				project.setCategoryID(resultSet.getInt("category_id"));
+				project.setTitle(resultSet.getString("title"));
+				project.setBriefDescription(resultSet.getString("brief_description"));
+				project.setFullDescription(resultSet.getString("full_description"));
+				project.setVideoLink(resultSet.getString("video_link"));
+				project.setRequiredSum(resultSet.getInt("required_sum"));
+				project.setCollectedSum(resultSet.getInt("collected_sum"));
+				project.setDaysLeft(resultSet.getInt("days_left"));
+
+				projectFromCategory.add(project);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try { 
-				if (statement != null) {
-					 statement.close();
-			    }
-				if (connection != null) {
-					 connection.close();
-			    }
-			} catch (SQLException e) {
-				System.out.println("Problems with closing connection...");
-			}
 		}
 		return projectFromCategory;
 	}
-	
-	@Override
-	public void remove(Project project) {
-		// TODO Auto-generated method stub
-	}
-
 }

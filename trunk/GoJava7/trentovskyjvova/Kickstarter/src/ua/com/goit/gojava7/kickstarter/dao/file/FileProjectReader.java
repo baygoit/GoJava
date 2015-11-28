@@ -16,7 +16,6 @@ import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 public class FileProjectReader implements ProjectDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File projectsFile;
-	private List<Project> projects = new ArrayList<>();
 	
 	public FileProjectReader(File projectsFile) {
 		this.projectsFile = projectsFile;
@@ -24,7 +23,7 @@ public class FileProjectReader implements ProjectDao {
 
 	@Override
 	public List<Project> getProjects(int categoryId) {
-		projects = new ArrayList<>();
+		List<Project> projects = new ArrayList<>();
 
 		BufferedReader fileReader = null;
 		try {
@@ -52,7 +51,8 @@ public class FileProjectReader implements ProjectDao {
 							"Wrong projects.csv format. Cannot find category id of project");
 				}
 				
-				if(Integer.parseInt(loadedProject[2]) != categoryId){
+				if (categoryId != 0
+						&& Integer.parseInt(loadedProject[2]) != categoryId) {
 					continue;
 				}
 				
@@ -80,15 +80,12 @@ public class FileProjectReader implements ProjectDao {
 			}
 		}
 
-		/*if (projects.isEmpty()) {
-			throw new WrongFileFormatException("There is not projects in file");
-		}*/
-
 		return projects;
 	}
 
 	@Override
 	public Project getProject(int id) {
+		List<Project> projects = getProjects(0);
 		Project result = null;
 		for (Project project : projects) {
 			if(project.getId() == id){
@@ -101,27 +98,8 @@ public class FileProjectReader implements ProjectDao {
 
 	@Override
 	public int size() {
+		List<Project> projects = getProjects(0);
 		return projects.size();
-	}
-
-	@Override
-	public String getProjectDetails(int id) {
-		Project project = getProject(id);
-		StringBuilder projectDetails = new StringBuilder();
-
-		projectDetails.append("name: ").append(project.getName()).append("\n");
-		//projectDetails.append("funded: ").append(project.getFunded()).append("\n");
-		projectDetails.append("daysToGo: ").append(project.getDaysToGo()).append("\n");
-		//projectDetails.append("pledged: ").append(project.getPledged()).append("\n");
-		projectDetails.append("description: ").append(project.getDescription()).append("\n");
-		projectDetails.append("owner: ").append(project.getOwner()).append("\n");
-		projectDetails.append("goal: ").append(project.getGoal()).append("\n");
-		projectDetails.append("linkVideo: ").append(project.getLinkVideo()).append("\n");
-		/*for (Question question : questions) {
-			projectDetails.append("Question: '")
-					.append(question.getQuestionText()).append("'\n");
-		}*/
-		return projectDetails.toString();
 	}
 
 }

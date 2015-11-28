@@ -26,23 +26,23 @@ public class Kickstarter {
 	private ConsolePrinter consolePrinter;
 	private ConsoleScanner consoleScanner;
 
-	private DaoProvider initializer;
+	private DaoProvider daoProvider;
 
 	private List<Level> levels;
 
 	public Kickstarter(ConsolePrinter consolePrinter,
-			ConsoleScanner consoleScanner, DaoProvider initializer) {	
+			ConsoleScanner consoleScanner, DaoProvider daoProvider) {	
 		this.consolePrinter = consolePrinter;
 		this.consoleScanner = consoleScanner;	
 
-		this.initializer = initializer;
-		ProjectDao projectDao = initializer.getProjectReader();
-		RewardDao rewardDao = initializer.getRewardsReader();
-		QuestionDao questionDao = initializer.getQuestionReader();
-		PaymentDao paymentDao = initializer.getPaymentReader();
+		this.daoProvider = daoProvider;
+		ProjectDao projectDao = daoProvider.getProjectReader();
+		RewardDao rewardDao = daoProvider.getRewardsReader();
+		QuestionDao questionDao = daoProvider.getQuestionReader();
+		PaymentDao paymentDao = daoProvider.getPaymentReader();
 		
 		levels = new LinkedList<>(Arrays.asList(
-				new MenuLevel(initializer.getCategoryReader()),
+				new MenuLevel(daoProvider.getCategoryReader()),
 				new CategoryLevel(projectDao, paymentDao),
 				new ProjectLevel(paymentDao, questionDao),
 				new PaymentLevel(questionDao, rewardDao),
@@ -50,7 +50,7 @@ public class Kickstarter {
 	}
 
 	public void runKickstarter() {
-		QuoteDao quoteDao = initializer.getQuoteReader();
+		QuoteDao quoteDao = daoProvider.getQuoteReader();
 		consolePrinter.print(quoteDao.getRandomQuote());
 
 		ListIterator<Level> levelsIterator = levels.listIterator();

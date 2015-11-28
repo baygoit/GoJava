@@ -15,12 +15,14 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.dao.DataStorage;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
-import ua.com.goit.gojava7.kickstarter.view.MainPage;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
+import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WelcomePageControllerTest {
@@ -29,24 +31,26 @@ public class WelcomePageControllerTest {
     BufferedReader reader;
     
     @Mock
-    DataStorage<Quote> quotesStorage;
+    QuoteDAO quotesStorage;
     
     @Mock
-    DataStorage<Category> catStorage;
+    CategoryDAO catStorage;
     
     @Mock
-    ProjectStorage projectStorage;
+    ProjectDAO projectStorage;
     
     @Mock
     StorageFactory factory;
     
     @Mock
-    MainPage page;
+    ConsolePrinter page;
     
     @SuppressWarnings("rawtypes")
-    PageController controller;
+    AbstractPageController controller;
 
     private List<Category> cats;
+
+    private ArrayList<Project> projects;
     
     @Before
     public void setUp() throws Exception {
@@ -65,12 +69,13 @@ public class WelcomePageControllerTest {
         when(catStorage.getAll()).thenReturn(cats);
         
         when(factory.getProjectDAO()).thenReturn(projectStorage);
-        when(projectStorage.getAll()).thenReturn(new ArrayList<>());
+        projects = new ArrayList<>();
+        when(projectStorage.getAll()).thenReturn(projects);
     
         controller = new WelcomePageController();
         controller.setInputReader(reader); 
         controller.setStorageFactory(factory);
-        controller.setMainPage(page);
+        controller.setView(page);
         
     }
 
@@ -86,6 +91,13 @@ public class WelcomePageControllerTest {
         when(reader.readLine()).thenReturn("0");
         controller.dispatch();
         verify(page).showCategories(Matchers.eq(cats));
+    }
+    
+    @Test
+    public void testPageProjectsByCat()  throws Exception {
+        when(reader.readLine()).thenReturn("1", "0");
+        controller.dispatch();
+        verify(page).showProjects(Matchers.eq(projects));
     }
 
 }

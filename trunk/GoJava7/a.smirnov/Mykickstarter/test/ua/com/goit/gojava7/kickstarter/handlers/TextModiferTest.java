@@ -2,24 +2,18 @@ package ua.com.goit.gojava7.kickstarter.handlers;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.handlers.TextModifer;
 
 public class TextModiferTest {
 	
-	private TextModifer modifer;
+	private TextModifer modifer = new TextModifer();
 	
-	@Before
-	public void setUp() throws Exception {
-		modifer = new TextModifer();
-	}
-
 	@Test
 	public void testGetModifiedQuote() {
 		String textQuote = "Hello world";
-		String author = "Anton Smirniv";
+		String author = "Anton Smirnov";
 		
 		String result = modifer.getModifiedQuote(textQuote, author);
 		String[] array = result.split("\n");

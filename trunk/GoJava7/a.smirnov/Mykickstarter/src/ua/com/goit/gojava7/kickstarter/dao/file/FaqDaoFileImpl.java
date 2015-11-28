@@ -13,7 +13,6 @@ import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqDao;
 
 public class FaqDaoFileImpl extends AbstractFaqDao {
-	
 	private static final File FILE_STORAGE = new File("./resources/FAQs.csv");
 	private static final int PROJECT_ID = 0;
 	private static final int QUESTION = 1;
@@ -21,48 +20,33 @@ public class FaqDaoFileImpl extends AbstractFaqDao {
 	
 	@Override
 	public void add(Faq element) {
-		FileWriter fileWriter = null;
-		try {
-
-			fileWriter = new FileWriter(FILE_STORAGE, true);
-
+		try (FileWriter fileWriter = new FileWriter(FILE_STORAGE, true)) {
 			fileWriter.append(String.valueOf(element.getProjectID()));
 			fileWriter.append(SEMICOLON_DELIMITER);
 			fileWriter.append(element.getQuestion());
 			fileWriter.append(SEMICOLON_DELIMITER);
 			fileWriter.append(element.getAnswer());
 			fileWriter.append(NEW_LINE_SEPARATOR);
-
 			fileWriter.flush();
 		} catch (IOException e) {
 			System.err.println("Error in CSVFileReader...");
-		} finally {
-			try {
-				if (fileWriter != null ) {
-					fileWriter.close();
-				}
-			} catch (IOException e) {
-				System.err.println("Error with closing fileReader...");
-			}
 		}
 	}
 
 	@Override
 	public List<Faq> getAll() {
-		List<Faq> faqs = new ArrayList<>();
-		String line = "";
-		
-		BufferedReader fileReader = null;
-		try {
-			fileReader = new BufferedReader(new FileReader(FILE_STORAGE));
-			
+		List<Faq> faqs = new ArrayList<>();		
+		try (BufferedReader fileReader = new BufferedReader(new FileReader(FILE_STORAGE))) {
+				
 			// read header
 			fileReader.readLine();
-			
+		
+			String line = "";
 			while ((line = fileReader.readLine()) != null) {
 				String[] tokens = line.split(SEMICOLON_DELIMITER);
 				if (tokens.length > 0) {
-					Faq faq = new Faq(tokens[QUESTION]);
+					Faq faq = new Faq();
+					faq.setQuestion(tokens[QUESTION]);
 					faq.setAnswer(tokens[ANSWER]);
 					faq.setProjectID(Integer.parseInt(tokens[PROJECT_ID]));
 					faqs.add(faq);
@@ -70,21 +54,8 @@ public class FaqDaoFileImpl extends AbstractFaqDao {
 			}
 		} catch (IOException e) {
 			System.err.println("Error in CSVFileReader...");
-		} finally {
-			try {
-				if (fileReader != null ) {
-					fileReader.close();
-				}
-			} catch (IOException e) {
-				System.err.println("Error with closing fileReader...");
-			}
-		}
+		} 
 		return faqs;
-	}
-	
-	@Override
-	public void remove(Faq element) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -115,4 +86,9 @@ public class FaqDaoFileImpl extends AbstractFaqDao {
 			return resultFaqs.toString();
 		}
 	}	
+	
+	@Override
+	public void remove(Faq element) {
+		// TODO Auto-generated method stub
+	}
 }
