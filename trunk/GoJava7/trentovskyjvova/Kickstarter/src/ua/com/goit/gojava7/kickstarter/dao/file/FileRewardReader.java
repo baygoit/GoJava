@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
 public class FileRewardReader implements RewardDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File reswardsFile;
-	private List<Reward> rewards = new ArrayList<>();
 	
 	public FileRewardReader(File reswardsFile) {
 		this.reswardsFile = reswardsFile;
@@ -24,7 +24,7 @@ public class FileRewardReader implements RewardDao {
 
 	@Override
 	public List<Reward> getRewards(int projectId) {
-		rewards = new ArrayList<>();
+		List<Reward> rewards = new ArrayList<>();
 
 		BufferedReader fileReader = null;
 		try {
@@ -53,7 +53,8 @@ public class FileRewardReader implements RewardDao {
 					throw new WrongFileFormatException(
 							"Wrong reswards.csv format. Cannot find benefit of resward");
 				}
-				if(projectId != Integer.parseInt(rewardLine[1])){
+				if (projectId != 0
+						&& projectId != Integer.parseInt(rewardLine[1])) {
 					continue;
 				}
 				id = Integer.parseInt(rewardLine[0]);
@@ -77,21 +78,26 @@ public class FileRewardReader implements RewardDao {
 			}
 		}
 
-		if (rewards.isEmpty()) {
-			throw new WrongFileFormatException("There is not rewards in file");
-		}
-
 		return rewards;
 	}
 
 	@Override
 	public int size() {
+		List<Reward> rewards = getRewards(0);
 		return rewards.size();
 	}
 
 	@Override
 	public Reward getReward(int id) {
-		return rewards.get(id);
+		List<Reward> rewards = getRewards(0);
+		Reward result = null;
+		for (Reward reward : rewards) {
+			if(reward.getId() == id){
+				result = reward;
+				break;
+			}
+		}
+		return result;
 	}
 
 }

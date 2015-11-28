@@ -16,41 +16,37 @@ public class TestFileProjectReader {
 	@Test
 	public void testGetProjects() {
 		testProjectsFile = new File("./resources/projects.csv");
-		fileProjectReader = new FileProjectReader(
-				testProjectsFile);
+		fileProjectReader = new FileProjectReader(testProjectsFile);
 		assertThat(fileProjectReader.getProjects(1).size(), is(2));
 	}
 
-	@Test(expected = WrongFileFormatException.class)
+	@Test
 	public void testGetProjectsNotProjectsInFile() {
 		testProjectsFile = new File("./resources/noprojects.csv");
-		fileProjectReader = new FileProjectReader(
-				testProjectsFile);
-		fileProjectReader.getProjects(1);
+		fileProjectReader = new FileProjectReader(testProjectsFile);
+		assertThat(fileProjectReader.getProjects(1).size(), is(0));
 	}
 
 	@Test(expected = WrongFileFormatException.class)
 	public void testGetProjectsNoProjectsFile() {
 		testProjectsFile = new File("./resources/notExistentProjects.csv");
-		fileProjectReader = new FileProjectReader(
-				testProjectsFile);
+		fileProjectReader = new FileProjectReader(testProjectsFile);
 		fileProjectReader.getProjects(0);
 	}
-	
+
 	@Test
 	public void testGetProject() {
 		testProjectsFile = new File("./resources/projects.csv");
-		fileProjectReader = new FileProjectReader(
-				testProjectsFile);
-		assertThat(fileProjectReader.getProject(2).getName(), is("Second project"));
+		fileProjectReader = new FileProjectReader(testProjectsFile);
+		assertThat(fileProjectReader.getProject(2).getName(),
+				is("Second project"));
 	}
-	
+
 	@Test
 	public void testSize() {
 		testProjectsFile = new File("./resources/projects.csv");
-		fileProjectReader = new FileProjectReader(
-				testProjectsFile);
+		fileProjectReader = new FileProjectReader(testProjectsFile);
 		assertThat(fileProjectReader.size(), is(3));
 	}
-	
+
 }

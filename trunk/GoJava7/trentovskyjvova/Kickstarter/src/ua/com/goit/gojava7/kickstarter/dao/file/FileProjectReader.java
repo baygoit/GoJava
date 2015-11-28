@@ -80,10 +80,6 @@ public class FileProjectReader implements ProjectDao {
 			}
 		}
 
-		/*if (projects.isEmpty()) {
-			throw new WrongFileFormatException("There is not projects in file");
-		}*/
-
 		return projects;
 	}
 
