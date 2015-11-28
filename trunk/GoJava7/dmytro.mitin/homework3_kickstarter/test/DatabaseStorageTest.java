@@ -1,5 +1,6 @@
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import ua.com.goit.gojava7.kickstarter.controller.Controller;
 import ua.com.goit.gojava7.kickstarter.model.Category;
@@ -12,7 +13,6 @@ import ua.com.goit.gojava7.kickstarter.view.View;
 import util.ConsoleMock;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.io.PrintStream;
 
@@ -43,15 +43,16 @@ public class DatabaseStorageTest {
         System.setOut(new PrintStream(out));
     }
 
+    @Ignore
     @Test
     public void test() {
         in.add("h");
 
-        QuoteStorage quoteStorage = new DatabaseQuoteStorage();
+        QuoteStorage quoteStorage = new DatabaseQuoteStorage("test_quotes");
         Quote quote = new Quote("quote1", "author1");
         quoteStorage.add(quote);
 
-        CategoryStorage categoryStorage = new DatabaseCategoryStorage();
+        CategoryStorage categoryStorage = new DatabaseCategoryStorage("test_categories", "test_projects");
         Category category = new Category("category1");
         categoryStorage.add(category);
         new Project("project1", category, "short description", "long description", "history...",
