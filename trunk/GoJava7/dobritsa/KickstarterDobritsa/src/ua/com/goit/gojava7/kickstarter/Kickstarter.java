@@ -159,7 +159,7 @@ public class Kickstarter {
 
 	public Project pledge(Project project, int amount) {
 		projectStorage.updatePledged(project, amount);
-		project.setPledged(projectStorage.getPledged(project.getName()));
+		project.setPledged(projectStorage.getPledged(project.getName()));		
 		return project;		
 	}
 

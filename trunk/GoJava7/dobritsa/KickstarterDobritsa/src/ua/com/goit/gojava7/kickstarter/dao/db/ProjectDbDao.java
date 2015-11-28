@@ -72,5 +72,5 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 		project.setHistory(resultSet.getString("history"));
 		project.setLink(resultSet.getString("link"));
 		return project;
-	}	
+	}
 }

@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.dao.memory;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import ua.com.goit.gojava7.kickstarter.dao.MemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
@@ -28,7 +29,11 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
+	@Override
+	public List<Project> getByCategory(String categoryName) {
+		return this.getAll().stream().filter(project -> project.getCategoryName().equals(categoryName))
+				.collect(Collectors.toList());
+	}
 
 }
