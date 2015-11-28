@@ -64,9 +64,15 @@ public class ConsolePrinterTest {
 	@Test
 	public void testPrintListCategory() {
 		List<Category> categories = new ArrayList<Category>();
-		categories.add(new Category("category 1"));
-		categories.add(new Category("category 2"));
-		categories.add(new Category("category 3"));
+		Category category1 = new Category();
+		category1.setName("category 1");
+		categories.add(category1);
+		Category category2 = new Category();
+		category2.setName("category 2");
+		categories.add(category2);
+		Category category3 = new Category();
+		category3.setName("category 3");
+		categories.add(category3);
 
 		consolePrinter.print(categories);
 
@@ -78,7 +84,8 @@ public class ConsolePrinterTest {
 
 	@Test
 	public void testPrintCategory() {
-		Category category = new Category("category name");
+		Category category = new Category();
+		category.setName("category name");
 
 		consolePrinter.print(category);
 
@@ -108,7 +115,8 @@ public class ConsolePrinterTest {
 
 	@Test
 	public void testPrintCategoryProjects() {
-		Category category = new Category("category name");
+		Category category = new Category();
+		category.setName("category name");
 		category.getProjects().add(new Project("project name", "short description", 50, 10));
 
 		consolePrinter.printCategoryWithProjects(category);

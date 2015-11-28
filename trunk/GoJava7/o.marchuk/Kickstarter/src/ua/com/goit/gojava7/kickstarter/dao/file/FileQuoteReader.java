@@ -22,7 +22,7 @@ public class FileQuoteReader implements QuoteReader {
 
 	@Override
 	public List<Quote> readQuotes() {
-		List<Quote> quotes = new ArrayList<>();
+		List<Quote> quotes = new ArrayList<Quote>();
 
 		BufferedReader fileReader = null;
 		try {

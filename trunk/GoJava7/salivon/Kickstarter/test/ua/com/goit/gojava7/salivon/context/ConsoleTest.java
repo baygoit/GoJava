@@ -3,7 +3,6 @@ package ua.com.goit.gojava7.salivon.context;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
-import ua.com.goit.gojava7.salivon.state.QuestionState;
 import ua.com.goit.gojava7.salivon.state.State;
 import static org.mockito.Mockito.*;
 

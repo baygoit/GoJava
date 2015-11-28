@@ -15,8 +15,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.dao.memory.PaymentDaoMemoryImpl;
-import ua.com.goit.gojava7.kickstarter.dao.memory.ProjectDaoMemoryImpl;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
@@ -24,23 +24,33 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 public class CategoryLevelTest {
 	private static final String ANSVER = "Please, enter the number between 0 and 1";
 	
-	List<Project> projects;
-	Category selectedCategory;
+	private List<Project> projects;
+	private Category selectedCategory;
+	private Project selectedProject;
+	
 	@Mock
-	ProjectDaoMemoryImpl projectDao = new ProjectDaoMemoryImpl();
+	private ProjectDao projectDao;
+	@Mock
+	private PaymentDao paymentDao;
 	@InjectMocks
-	Level categoryLevel = new CategoryLevel(projectDao, new PaymentDaoMemoryImpl());
-	Project project;
+	private Level categoryLevel = new CategoryLevel(projectDao, paymentDao);
+	
 	
 	@Before 
 	public void setUp() {
+		selectedCategory = new Category();
+		selectedCategory.setId(1);
+		selectedCategory.setName("Some Category");
+		selectedProject = new Project("proj 1", 1);
+		
 		projects = new ArrayList<Project>();
-		Category category = new Category("Some Category", 1);
-		project = new Project("proj 1", 1);
-		//category.addProject(project);
-		projects.add(project);
-		//projects.add(new Category("Second Category", 2));
-		selectedCategory = category;
+		projects.add(selectedProject);
+	}
+	
+	@Test
+	public void testFillOutForm(){
+		String result = categoryLevel.fillOutForm(null, 1, null);
+		assertThat(result, is(""));
 	}
 	
 	@Test
@@ -50,30 +60,37 @@ public class CategoryLevelTest {
 	}
 	
 	@Test
+	public void testFindSelectedProject() {
+		when(projectDao.getProject(0)).thenReturn(selectedProject);
+		Project result = categoryLevel.findSelectedProject(0, selectedCategory, null);
+		assertThat(result, is(selectedProject));
+	}
+	
+	@Test
 	public void testValidateUserChoise1() {
 		when(projectDao.size()).thenReturn(projects.size());
-		String result = categoryLevel.validateUserChoise(1, selectedCategory, project);
+		String result = categoryLevel.validateUserChoise(1, selectedCategory, selectedProject);
 		assertThat(result, is(""));
 	}
 	
 	@Test
 	public void testValidateUserChoise2() {
 		when(projectDao.size()).thenReturn(projects.size());
-		String result = categoryLevel.validateUserChoise(2, selectedCategory, project);
+		String result = categoryLevel.validateUserChoise(2, selectedCategory, selectedProject);
 		assertThat(result, is(ANSVER));
 	}
 	
 	@Test
 	public void testValidateUserChoiseMinus1() {
 		when(projectDao.size()).thenReturn(projects.size());
-		String result = categoryLevel.validateUserChoise(-1, selectedCategory, project);
+		String result = categoryLevel.validateUserChoise(-1, selectedCategory, selectedProject);
 		assertThat(result, is(ANSVER));
 	}
 	
 	@Test
 	public void testGenerateAnswer() {
 		when(projectDao.getProjects(selectedCategory.getId())).thenReturn(projects);
-		String result = categoryLevel.generateAnswer(0, selectedCategory, project);
+		String result = categoryLevel.generateAnswer(0, selectedCategory, selectedProject);
 		assertThat(result, containsString("You selected 'Some Category' category"));
 		assertThat(result, containsString("proj 1"));
 		assertThat(result, containsString("0 : main menu"));

@@ -6,7 +6,7 @@ import org.junit.Before;
 
 public class CategoryTest {
 
-    Category instance = new Category("Art", 5);
+    Category instance;
 
     @Before
     public void setUp() {

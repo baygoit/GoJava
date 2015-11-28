@@ -1,0 +1,259 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.4.4
+-- Dumped by pg_dump version 9.4.4
+-- Started on 2015-11-27 15:55:10
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 178 (class 3079 OID 11855)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2027 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 176 (class 1259 OID 16435)
+-- Name: category_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE category_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE category_sequence OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 173 (class 1259 OID 16414)
+-- Name: categories; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE categories (
+    id integer DEFAULT nextval('category_sequence'::regclass) NOT NULL,
+    name text
+);
+
+
+ALTER TABLE categories OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 16437)
+-- Name: project_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE project_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE project_sequence OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 16424)
+-- Name: projects; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projects (
+    id integer DEFAULT nextval('project_sequence'::regclass) NOT NULL,
+    name text,
+    category text,
+    "shortDescription" text,
+    description text,
+    history text,
+    "videoUrl" text,
+    "moneyNeeded" integer,
+    "moneyDonated" integer,
+    "daysLeft" integer,
+    questions text[],
+    benefits text[]
+);
+
+
+ALTER TABLE projects OWNER TO postgres;
+
+--
+-- TOC entry 175 (class 1259 OID 16432)
+-- Name: quote_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE quote_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE quote_sequence OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 16406)
+-- Name: quotes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE quotes (
+    text text,
+    author text,
+    id integer DEFAULT nextval('quote_sequence'::regclass) NOT NULL
+);
+
+
+ALTER TABLE quotes OWNER TO postgres;
+
+--
+-- TOC entry 2015 (class 0 OID 16414)
+-- Dependencies: 173
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY categories (id, name) FROM stdin;
+1	Art
+2	Comics
+3	Crafts
+4	Dance
+5	Design
+6	Fashion
+7	Film & Video
+8	Food
+9	Games
+10	Journalism
+11	Music
+12	Photography
+13	Publishing
+14	Technology
+15	Theater
+\.
+
+
+--
+-- TOC entry 2028 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: category_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('category_sequence', 15, true);
+
+
+--
+-- TOC entry 2029 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: project_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('project_sequence', 6, true);
+
+
+--
+-- TOC entry 2016 (class 0 OID 16424)
+-- Dependencies: 174
+-- Data for Name: projects; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY projects (id, name, category, "shortDescription", description, history, "videoUrl", "moneyNeeded", "moneyDonated", "daysLeft", questions, benefits) FROM stdin;
+1	Multi-Purpose, All-Occasion Greeting Cards	Art	Be ready for any occasion, with funny, tick-your-own-sentiment greeting cards. General AND holiday cards available!\r\n	Be ready for any occasion, with funny, tick-your-own-sentiment greeting cards. General AND holiday cards available!\r\n	Very interesting history...\r\n	http://youtube...\r\n	23363	\N	1	\N	\N
+2	RADICALLY UNIQUE FOOTWEAR: The Coolest Pair You'll Ever Wear\r\n	Art	Designed for those who aren't afraid to stand out in a crowd, INKKAS are the perfect mix of comfort, durability & eye-catching style.\r\n	Designed for those who aren't afraid to stand out in a crowd, INKKAS are the perfect mix of comfort, durability & eye-catching style.\r\n	Very interesting history...\r\n	http://vimeo...\r\n	20091	\N	28	\N	\N
+3	Infinity: Battlescape\r\n	Art	An epic space sim where 100's of players wage war across a seamless, procedurally generated, true to scale solar system!\r\n	An epic space sim where 100's of players wage war across a seamless, procedurally generated, true to scale solar system!\r\n	Very interesting history...\r\n	http://video.facebook...\r\n	220677	\N	13	\N	\N
+4	BRIAN PULIDO'S NEW GRAPHIC NOVEL: LA MUERTA #1: DESCENT!\r\n	Comics	Help Lady Death's creator, Brian Pulido, bring hard-boiled revenge story La Muerta #1: Descent -- to life!\r\n	Help Lady Death's creator, Brian Pulido, bring hard-boiled revenge story La Muerta #1: Descent -- to life!\r\n	Very interesting history...\r\n	http://youtube...\r\n	28005	\N	28	\N	\N
+5	Ascent from Akeron\r\n	Comics	Interactive motion comic of 12 episodes about a group of superhero-inspired youngsters in an enslaved post-apocalyptic society.Interactive motion comic of 12 episodes about a group of superhero-inspired youngsters in an enslaved post-apocalyptic society.\r\n	Interactive motion comic of 12 episodes about a group of superhero-inspired youngsters in an enslaved post-apocalyptic society.\r\n	Very interesting history...\r\n	http://youtube...\r\n	8966	\N	4	\N	\N
+6	name	Comics	short description\r\n	long description\r\n	\N	video...\r\n	100000	\N	10	\N	\N
+\.
+
+
+--
+-- TOC entry 2030 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: quote_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('quote_sequence', 3, true);
+
+
+--
+-- TOC entry 2014 (class 0 OID 16406)
+-- Dependencies: 172
+-- Data for Name: quotes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY quotes (text, author, id) FROM stdin;
+Life is 10% what happens to you and 90% how you react to it.	Charles R. Swindoll	1
+Failure will never overtake me if my determination to succeed is strong enough.	Og Mandino	2
+What you do today can improve all your tomorrows.	Ralph Marston	3
+\.
+
+
+--
+-- TOC entry 1902 (class 2606 OID 16421)
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY categories
+    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1904 (class 2606 OID 16431)
+-- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projects
+    ADD CONSTRAINT projects_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1900 (class 2606 OID 16423)
+-- Name: quotes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY quotes
+    ADD CONSTRAINT quotes_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2026 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2015-11-27 15:55:11
+
+--
+-- PostgreSQL database dump complete
+--
+

@@ -11,7 +11,7 @@ public class QuoteDaoMemoryImpl implements QuoteDao {
 
 	private Random random;
 
-	private List<Quote> quotes = new ArrayList<>();
+	private List<Quote> quotes = new ArrayList<Quote>();
 
 	public QuoteDaoMemoryImpl(Random random) {
 		this.random = random;

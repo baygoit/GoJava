@@ -11,9 +11,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <property name="db.cache.region.factory_class">
-            net.sf.ehcache.hibernadbtonEhCacheRegionFactory
-        </property>
+        <property name="db.cache.region.factory_class">net.sf.ehcache.hibernadbtonEhCacheRegionFactory</property>
+        <org.spring-version>4.2.3.RELEASE</org.spring-version>
     </properties>
 
     <dependencies>
@@ -116,6 +115,17 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-commons-annotations</artifactId>
             <version>3.2.0.Final</version>
+        </dependency>
+        <!-- spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.spring-version}</version>
         </dependency>
     </dependencies>
 

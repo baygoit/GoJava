@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.Level;
 
+import java.util.List;
+
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
@@ -51,8 +53,9 @@ public class ProjectLevel implements Level {
 		stringBuilder.append("goal: ").append(selectedProject.getGoal()).append("\n");
 		stringBuilder.append("linkVideo: ").append(selectedProject.getLinkVideo()).append("\n");
 
-		for (Question question : questionDao.getQuestions(selectedProject
-				.getId())) {
+		List<Question> questions = questionDao.getQuestions(selectedProject
+				.getId());
+		for (Question question : questions) {
 			stringBuilder.append("Question: '")
 					.append(question.getQuestionText()).append("'\n");
 		}

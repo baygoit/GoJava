@@ -2,9 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/1/git/GoJava/trunk/GoJava7/trentovskyjvova/Kickstarter/libs/mockito-all-1.10.19.jar"/>
 	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.37-bin.jar"/>
+	<classpathentry kind="lib" path="libs/mockito-all-1.10.19.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

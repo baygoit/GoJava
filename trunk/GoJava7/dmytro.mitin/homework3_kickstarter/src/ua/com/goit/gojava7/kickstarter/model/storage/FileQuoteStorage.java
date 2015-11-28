@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileQuoteStorage implements QuoteStorage {
-    private final String path = "D:\\workspace\\goit-kickstarter\\resources\\quotes.txt";
+    private final String path;
 
-    public FileQuoteStorage() {
+    public FileQuoteStorage(String path) {
+        this.path = path;
         File file = new File(path);
         try {
             if (!file.exists()) {
@@ -35,9 +36,10 @@ public class FileQuoteStorage implements QuoteStorage {
                     text = line;
                 } else if (lineNumber % 3 == 1) {
                     author = line;
+
+                    quotes.add(new Quote(text, author));
                 }
-                Quote quote = new Quote(text, author);
-                quotes.add(quote);
+
                 lineNumber++;
             }
         } catch (IOException e) {

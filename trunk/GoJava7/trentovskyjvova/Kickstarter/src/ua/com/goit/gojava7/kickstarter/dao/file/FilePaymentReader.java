@@ -94,11 +94,6 @@ public class FilePaymentReader implements PaymentDao {
 			}
 		}
 
-		/*
-		 * if (payments.isEmpty()) { throw new
-		 * WrongFileFormatException("There is not payments in file"); }
-		 */
-
 		return payments;
 	}
 

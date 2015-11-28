@@ -1,6 +1,6 @@
 package db;
 
-import dao.db.HomeDao;
+import dao.hibernate.HomeDao;
 import dbutils.HibernateUtil;
 import model.Home;
 import model.User;

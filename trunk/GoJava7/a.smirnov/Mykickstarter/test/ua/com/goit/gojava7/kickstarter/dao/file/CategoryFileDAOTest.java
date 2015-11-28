@@ -3,22 +3,14 @@ package ua.com.goit.gojava7.kickstarter.dao.file;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 
 public class CategoryFileDAOTest {
 
-	private CategoryFileDAO categoryFile;
-	private Category category;
-	
-	@Before
-	public void setUp() throws Exception {
-		categoryFile = new CategoryFileDAO();
-		category = new Category("Ukraine");
-		category.setUniqueID(12);
-	}
+	private CategoryDaoFileImpl categoryFile = new CategoryDaoFileImpl();
+	private Category category = new Category();
 
 	@Test
 	public void testAdd() {

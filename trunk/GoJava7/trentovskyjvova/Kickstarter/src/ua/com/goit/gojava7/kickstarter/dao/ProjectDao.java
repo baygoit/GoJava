@@ -9,8 +9,6 @@ public interface ProjectDao extends Dao{
 	
 	Project getProject(int id);
 	
-	String getProjectDetails(int id);
-	
 	int size();
 
 	
