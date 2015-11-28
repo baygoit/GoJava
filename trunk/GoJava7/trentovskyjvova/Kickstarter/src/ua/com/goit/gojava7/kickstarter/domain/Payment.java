@@ -1,20 +1,23 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Payment {
-	private final int id;
+	private int id;
 	private int projectId;
 	private String name;
 	private String cardNumber;
 	private int pledge;
 	
-	public Payment(int id) {
-		this.id = id;
+	public Payment() {
+
 	}
 
 	public int getId() {
 		return id;
 	}
-
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getProjectId() {
 		return projectId;
 	}
@@ -46,4 +49,5 @@ public class Payment {
 	public void setPledge(int pledge) {
 		this.pledge = pledge;
 	}
+
 }

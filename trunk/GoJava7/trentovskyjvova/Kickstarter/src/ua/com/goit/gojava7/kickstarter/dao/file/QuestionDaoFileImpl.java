@@ -18,11 +18,11 @@ import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class FileQuestionReader implements QuestionDao {
+public class QuestionDaoFileImpl implements QuestionDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File questionsFile;
 
-	public FileQuestionReader(File questionsFile) {
+	public QuestionDaoFileImpl(File questionsFile) {
 		this.questionsFile = questionsFile;
 	}
 
@@ -113,8 +113,7 @@ public class FileQuestionReader implements QuestionDao {
 
 	}
 
-	@Override
-	public int generateIdOfNewElement() {
+	private int generateIdOfNewElement() {
 		int maxId = 0;
 		for (Question question : getQuestions(0)) {
 			if (maxId < question.getId()) {

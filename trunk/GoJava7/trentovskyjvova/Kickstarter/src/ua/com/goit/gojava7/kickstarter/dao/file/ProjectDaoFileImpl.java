@@ -13,11 +13,11 @@ import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class FileProjectReader implements ProjectDao {
+public class ProjectDaoFileImpl implements ProjectDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File projectsFile;
 	
-	public FileProjectReader(File projectsFile) {
+	public ProjectDaoFileImpl(File projectsFile) {
 		this.projectsFile = projectsFile;
 	}
 
@@ -84,21 +84,18 @@ public class FileProjectReader implements ProjectDao {
 	}
 
 	@Override
-	public Project getProject(int id) {
-		List<Project> projects = getProjects(0);
-		Project result = null;
-		for (Project project : projects) {
-			if(project.getId() == id){
-				result = project;
-				break;
-			}
+	public Project getProject(int userChoise, int categoryId) {
+		if(userChoise == 0){
+			return null;
+		} else {
+			List<Project> projects = getProjects(categoryId);
+			return projects.get(userChoise - 1);
 		}
-		return result;
 	}
 
 	@Override
-	public int size() {
-		List<Project> projects = getProjects(0);
+	public int size(int categoryId) {
+		List<Project> projects = getProjects(categoryId);
 		return projects.size();
 	}
 

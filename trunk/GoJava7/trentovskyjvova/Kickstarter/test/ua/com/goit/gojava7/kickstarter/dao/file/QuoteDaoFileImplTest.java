@@ -10,29 +10,30 @@ import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class TestFileQuoteReader {
+public class QuoteDaoFileImplTest {
 	private File testQuotesFile;
-	private FileQuoteReader fileQuoteReader;
+	private QuoteDaoFileImpl quoteDaoFileImpl;
 	private Random randon = new Random(42);
-	
+
 	@Test
 	public void testReadQuotes() {
 		testQuotesFile = new File("./resources/quotes.csv");
-		fileQuoteReader = new FileQuoteReader(testQuotesFile, randon);
-		assertThat(fileQuoteReader.getRandomQuote().getText(), is("I am quote3"));
+		quoteDaoFileImpl = new QuoteDaoFileImpl(testQuotesFile, randon);
+		assertThat(quoteDaoFileImpl.getRandomQuote().getText(),
+				is("I am quote3"));
 	}
 
 	@Test(expected = WrongFileFormatException.class)
 	public void testReadQuotesNotQuotesInFile() {
 		testQuotesFile = new File("./resources/noquotes.csv");
-		fileQuoteReader = new FileQuoteReader(testQuotesFile, randon);
-		fileQuoteReader.getRandomQuote();
+		quoteDaoFileImpl = new QuoteDaoFileImpl(testQuotesFile, randon);
+		quoteDaoFileImpl.getRandomQuote();
 	}
 
 	@Test(expected = WrongFileFormatException.class)
 	public void testReadQuotesNoQuotesFile() {
 		testQuotesFile = new File("./resources/notExistentQuotes.csv");
-		fileQuoteReader = new FileQuoteReader(testQuotesFile, randon);
-		fileQuoteReader.getRandomQuote();
+		quoteDaoFileImpl = new QuoteDaoFileImpl(testQuotesFile, randon);
+		quoteDaoFileImpl.getRandomQuote();
 	}
 }

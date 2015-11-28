@@ -16,7 +16,8 @@ public class PaymentDaoMemoryImpl implements PaymentDao {
 		}
 		payments = new ArrayList<>();
 		
-		Payment payment1 = new Payment(1);
+		Payment payment1 = new Payment();
+		payment1.setId(1);
 		payment1.setProjectId(1);
 		payment1.setName("Julio");
 		payment1.setPledge(30);
@@ -31,20 +32,8 @@ public class PaymentDaoMemoryImpl implements PaymentDao {
 
 	@Override
 	public void addPayment(Payment payment) {
+		payment.setId(generateIdOfNewElement());
 		payments.add(payment);
-	}
-
-	@Override
-	public int generateIdOfNewElement() {
-		cachePayments(0);
-		
-		int maxId = 0;
-		for (Payment payment : payments) {
-			if (maxId < payment.getId()) {
-				maxId = payment.getId();
-			}
-		}
-		return maxId + 1;
 	}
 
 	@Override
@@ -60,7 +49,19 @@ public class PaymentDaoMemoryImpl implements PaymentDao {
 		return pledged;
 	}
 	
-	public void cachePayments(int projectId){
+	private int generateIdOfNewElement() {
+		cachePayments(0);
+		
+		int maxId = 0;
+		for (Payment payment : payments) {
+			if (maxId < payment.getId()) {
+				maxId = payment.getId();
+			}
+		}
+		return maxId + 1;
+	}
+	
+	private void cachePayments(int projectId){
 		if(payments == null){
 			getPayments(projectId);
 		}

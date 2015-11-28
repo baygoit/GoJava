@@ -20,7 +20,7 @@ import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
-public class TestQuoteDaoMySqlImpl {
+public class QuoteDaoMySqlImplTest {
 
 	@Mock
 	private Connection connection = mock(Connection.class);
