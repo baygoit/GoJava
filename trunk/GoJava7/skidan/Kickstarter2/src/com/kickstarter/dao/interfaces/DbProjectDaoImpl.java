@@ -20,7 +20,7 @@ public class DbProjectDaoImpl extends DbConnector implements ProjectDaoInterface
 			pStatement.setString(1, category.getTitle());
 			rs = pStatement.executeQuery();
 			while (rs.next()) {
-				Project project = filler(rs);
+				Project project = fill(rs);
 				list.add(project);
 			}
 		} catch (SQLException e) {
@@ -39,7 +39,7 @@ public class DbProjectDaoImpl extends DbConnector implements ProjectDaoInterface
 			pStatement.setInt(1, projectNumber);
 			rs = pStatement.executeQuery();
 			while (rs.next()) {
-				project = filler(rs);
+				project = fill(rs);
 			}
 		} catch (SQLException e) {
 			System.out.println(" Project getOne MySql connection problem");
@@ -75,7 +75,7 @@ public class DbProjectDaoImpl extends DbConnector implements ProjectDaoInterface
 			rs = pStatement.executeQuery();
 
 			while (rs.next()) {
-				Project project = filler(rs);
+				Project project = fill(rs);
 				list.add(project);
 			}
 		} catch (SQLException e) {
@@ -84,7 +84,7 @@ public class DbProjectDaoImpl extends DbConnector implements ProjectDaoInterface
 		return list;
 	}
 
-	public Project filler(ResultSet rs) throws SQLException {
+	public Project fill(ResultSet rs) throws SQLException {
 
 		Project project = new Project();
 

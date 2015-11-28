@@ -11,7 +11,7 @@ import com.kickstarter.dao.impl.MemoryCategoryDaoImpl;
 import com.kickstarter.memory.storage.CategoryDB;
 import com.kickstarter.model.Category;
 
-public class CategoryDaoTest {
+public class MemoryCategoryDaoTest {
 
 	MemoryCategoryDaoImpl cd;
 	CategoryDB cdb;
