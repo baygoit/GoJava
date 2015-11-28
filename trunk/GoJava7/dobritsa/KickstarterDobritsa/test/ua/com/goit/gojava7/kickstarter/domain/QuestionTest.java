@@ -1,56 +1,55 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
-import java.util.Date;
+import java.io.PrintStream;
 
 import static org.hamcrest.CoreMatchers.is;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
-public class QuestionTest {
+@RunWith(MockitoJUnitRunner.class)
+public class QuestionTest extends Assert {
 
-	String time = new Date().toString();
+	Question question;
 
-	@Test
-	public void testCreateEmptyQuestion() {
-		Question question = new Question();
-		question.setTime(time);
-		question.setQuestion("Test Question");
-		question.setAnswer("Test answer");
-		assertThat(question.getTime(), is(time));
-		assertThat(question.getQuestion(), is("Test Question"));
-		assertThat(question.getAnswer(), is("Test answer"));
+	@Mock
+	private PrintStream printSteam;
+
+	@Before
+	public void setUp() {
+		question = new Question();
+		question.setTime("TestTime");
+		question.setQuestion("TestQuestion");
+		question.setAnswer("TestAnswer");
+		question.setProjectName("TestProject");
+		System.setOut(printSteam);
+	}
+
+	@After
+	public void tearDown() {
+		verifyNoMoreInteractions(printSteam);
 	}
 
 	@Test
-	public void testNotNullParameters() {
-		Question question = new Question();
-		assertNotNull(question.getTime());
-		assertNotNull(question.getQuestion());
-		assertNotNull(question.getAnswer());
+	public void testGet() {
+		assertThat(question.getTime(), is("TestTime"));
+		assertThat(question.getQuestion(), is("TestQuestion"));
+		assertThat(question.getAnswer(), is("TestAnswer"));
+		assertThat(question.getProjectName(), is("TestProject"));
 	}
 	
 	@Test
-	public void testCreateQuestionWithOneParameter() {
-		Question question = new Question("Test Question with One");	
-		assertNotNull(question.getTime());
-		assertThat(question.getQuestion(), is("Test Question with One"));
-		assertThat(question.getAnswer(), is("There is no answer yet"));
+	public void testToString() {
+		System.out.println(question.toString());
+		verify(printSteam).println("Time: TestTime; Question: TestQuestion; Answer: TestAnswer; Project: TestProject");
 	}
-	
-	
-	@Test
-	public void testCreateQuestionWithTwoParameters() {
-		Question question = new Question(time, "Test Full Question");
-		assertThat(question.getTime(), is(time));
-		assertThat(question.getQuestion(), is("Test Full Question"));
-		assertNotNull(question.getAnswer());
-	}
-	
-	@Test
-	public void testCreateQuestionWithThreeParameters() {
-		Question question = new Question(time, "Test Full Question", "Test Full answer");
-		assertThat(question.getQuestion(), is("Test Full Question"));
-	}
+
 }

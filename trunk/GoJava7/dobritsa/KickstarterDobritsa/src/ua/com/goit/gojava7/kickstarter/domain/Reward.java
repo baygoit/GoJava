@@ -4,15 +4,7 @@ public class Reward {
 
 	private int amount;
 	private String reward;
-	
-	public Reward() {		
-		
-	}
-	
-	public Reward(int amount, String reward) {		
-		this.amount = amount;
-		this.reward = reward;
-	}
+	private String projectName;
 
 	public int getAmount() {
 		return amount;
@@ -28,5 +20,18 @@ public class Reward {
 
 	public void setReward(String reward) {
 		this.reward = reward;
-	}	
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	@Override
+	public String toString() {
+		return "Amount: " + amount + "; Reward: " + reward;
+	}
 }

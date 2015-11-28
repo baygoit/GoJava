@@ -10,10 +10,11 @@ import org.junit.Test;
 
 public class CategoryTest {
 
-	private Category category = new Category("category");
+	private Category category = new Category();
 
 	@Test
 	public void testCategoryAndGetName() {
+		category.setName("category");
 		assertThat(category.getName(), is("category"));
 	}
 

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.NumberFormatException;
 
-public class ConsoleScanner {
+public class ConsoleScanner { 
 
 	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -33,7 +33,7 @@ public class ConsoleScanner {
 	public String getOption() {
 		String text = null;
 		while (true) {
-			System.out.println("\nType:" + "\nb: to back this project" + "\na: to ask a questions"
+			System.out.println("\nType:" + "\np: to pledge this project" + "\na: to ask a questions"
 					+ "\n0: to choose another project");
 			try {
 				text = bufferedReader.readLine();
@@ -42,8 +42,8 @@ public class ConsoleScanner {
 			}
 			if (text.equals("0"))
 				return "0";
-			else if (text.equals("b"))
-				return "b";
+			else if (text.equals("p"))
+				return "p";
 			else if (text.equals("a"))
 				return "a";
 		}
