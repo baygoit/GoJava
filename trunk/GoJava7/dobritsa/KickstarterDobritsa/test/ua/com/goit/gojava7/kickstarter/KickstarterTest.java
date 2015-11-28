@@ -234,7 +234,7 @@ public class KickstarterTest {
 		Project currentProject = new Project("NameTest", "DescriptionTest", 100000, 100, 10, "HistoryTest", "LinkTest");
 		
 		assertThat(currentProject.getPledged(), is(100));
-		kickstarter.doDonate(currentProject, 20);
+		kickstarter.pledge(currentProject, 20);
 		assertThat(currentProject.getPledged(), is(120));
 	}
 	

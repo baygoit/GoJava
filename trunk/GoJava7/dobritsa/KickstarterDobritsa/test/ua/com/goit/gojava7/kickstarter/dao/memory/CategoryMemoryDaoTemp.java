@@ -12,32 +12,24 @@ import org.junit.Test;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public class CategoryMemoryDaoTemp {
+	List<Category> categories = new ArrayList<>();
+	CategoryMemoryDao categoryStorage;
 
-	CategoryMemoryDao categoryStorage = new CategoryMemoryDao();
-	List<Category> categories = new ArrayList<>();		
-	
 	@Before
 	public void setUp() {
-		categories.add(new Category("SomeName"));
-		categoryStorage.setCategories(categories);
+		Category category1 = new Category();
+		category1.setName("TestCategory1");
+		Category category2 = new Category();
+		category2.setName("TestCategory2");
+		categories.add(category1);
+		categories.add(category2);
+		categoryStorage = new CategoryMemoryDao(categories);
 	}
-	
+
 	@Test
-	public void testGet() {		
-		assertThat(categoryStorage.get(0).getName(), is("SomeName"));	
+	public void testGetByNumber() {
+		categoryStorage.getByNumber(1);
+		assertThat(categoryStorage.getByNumber(1).getName(), is("TestCategory1"));
 	}
-	
-	@Test
-	public void testSize() {
-		assertThat(categoryStorage.size(), is(1));
-	}
-	
-	@Test
-	public void testGetCategories() {
-		assertThat(categoryStorage.getAll().get(0).getName(), is("SomeName"));
-	}
-	
-		
-	
-	
+
 }
