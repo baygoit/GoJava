@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.storage.Storage;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public abstract class FileDao<T> implements Storage<T> {
 	protected List<T> data;

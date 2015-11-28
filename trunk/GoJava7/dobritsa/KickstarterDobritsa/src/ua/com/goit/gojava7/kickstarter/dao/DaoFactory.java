@@ -12,10 +12,12 @@ import ua.com.goit.gojava7.kickstarter.dao.db.QuoteDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.RewardDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.CategoryFileDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.ProjectFileDao;
+import ua.com.goit.gojava7.kickstarter.dao.file.QuestionsFileDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.QuoteFileDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.RewardFileDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.reader.CategoryFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.file.reader.ProjectFileReader;
+import ua.com.goit.gojava7.kickstarter.dao.file.reader.QuestionFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.file.reader.QuoteFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.file.reader.RewardFileReader;
 import ua.com.goit.gojava7.kickstarter.dao.memory.CategoryMemoryDao;
@@ -42,6 +44,7 @@ public class DaoFactory {
 	private static final File CATEGORIES_FILE = new File("./resources/Categories.txt");
 	private static final File PROJECTS_FILE = new File("./resources/Projects.txt");
 	private static final File REWARDS_FILE = new File("./resources/Rewards.txt");
+	private static final File QUESTIONS_FILE = new File("./resources/Questions.txt");
 	private DataSource dataSource;
 
 	private Connection connection = null;
@@ -105,7 +108,7 @@ public class DaoFactory {
 		categoryDAO = new CategoryFileDao((new CategoryFileReader(CATEGORIES_FILE)).read());
 		projectDAO = new ProjectFileDao((new ProjectFileReader(PROJECTS_FILE)).read());
 		rewardDAO = new RewardFileDao((new RewardFileReader(REWARDS_FILE)).read());
-
+		questionsDAO = new QuestionsFileDao((new QuestionFileReader(QUESTIONS_FILE)).read());
 		// TODO
 		// questionsDAO = new QuestionsFileDao(mem.getQuestions());
 	}

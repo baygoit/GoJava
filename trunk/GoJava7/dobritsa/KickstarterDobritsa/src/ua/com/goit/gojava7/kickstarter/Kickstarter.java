@@ -29,7 +29,7 @@ public class Kickstarter {
 	private QuoteStorage quoteStorage;
 	private CategoryStorage categoryStorage;
 	private ProjectStorage projectStorage;
-	private QuestionStorage questionsStorage;
+	private QuestionStorage questionStorage;
 	private RewardStorage rewardStorage;
 
 	private Project currentProject = null;
@@ -38,11 +38,11 @@ public class Kickstarter {
 	private String BORDER = "\n________________________________________________________";
 
 	public Kickstarter(QuoteStorage quoteStorage, CategoryStorage categoryStorage, ProjectStorage projectStorage,
-			QuestionStorage questionsStorage, RewardStorage rewardStorage) {
+			QuestionStorage questionStorage, RewardStorage rewardStorage) {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
 		this.projectStorage = projectStorage;
-		this.questionsStorage = questionsStorage;
+		this.questionStorage = questionStorage;
 		this.rewardStorage = rewardStorage;
 	}
 
@@ -102,8 +102,11 @@ public class Kickstarter {
 	public void viewProject(Project project) {
 		boolean exit = false;
 		while (!exit) {
+			List<Question> quoestionsInProject = new ArrayList<>();				
+			quoestionsInProject = questionStorage.getByProject(project.getName());	
 			projectPrinter.printFull(project);
-			exit = chooseOptionOfProject(project);
+			projectPrinter.printQuestions(quoestionsInProject);
+			exit = chooseOptionOfProject(project);			
 		}
 	}
 

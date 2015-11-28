@@ -15,17 +15,19 @@ public class QuestionFileReader extends FileReader<Question> {
  
 	@Override
 	public List<Question> readFromFile(BufferedReader bufferedReader) throws IOException {
+		String projectName;
 		String lineTime;
-		while ((lineTime = (bufferedReader.readLine())) != null) {					
-			Question question = new Question();
-			question.setTime(lineTime);
-			question.setQuestion(bufferedReader.readLine());
-			String lineAnswer;
-			if ((lineAnswer = (bufferedReader.readLine())) != null)				
-				question.setAnswer(lineAnswer);
-			else
-				question.setAnswer("There is no answer yet");
+		while ((projectName = (bufferedReader.readLine())) != null) {					
+			while ((lineTime = (bufferedReader.readLine())) != null) {
+				if (lineTime.equals(""))
+					break;
+				Question question = new Question();
+				question.setTime(lineTime);
+				question.setQuestion(bufferedReader.readLine());
+				question.setAnswer(bufferedReader.readLine());
+				question.setProjectName(projectName);
 				data.add(question);
+			}
 		}
 		
 		//TODO if Empty

@@ -18,7 +18,7 @@ public class RewardDbDao extends DbDao<Reward> implements RewardStorage {
 
 	public RewardDbDao(Connection connection) {
 		super(connection, FIELDS, TABLE);
-	}
+	} 
 
 	@Override
 	public List<Reward> getByProject(String projectName) {
