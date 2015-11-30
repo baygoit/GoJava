@@ -14,21 +14,21 @@ public class FileQuoteReaderTest {
 
 	@Test
 	public void testReadQuotes() {
-		File testQuotesFile = new File("./resources/quotes.txt");
+		File testQuotesFile = new File("./quotes.txt");
 		FileQuoteReader fileQuoteReader = new FileQuoteReader(testQuotesFile);
 		assertThat(fileQuoteReader.readQuotes().size(), is(2));
 	}
 
 	@Test(expected = IllegalStateException.class)
 	public void testReadQuotesNotQuotesInFile() {
-		File testQuotesFile = new File("./resources/noQuotes.txt");
+		File testQuotesFile = new File("./noQuotes.txt");
 		FileQuoteReader fileQuoteReader = new FileQuoteReader(testQuotesFile);
 		fileQuoteReader.readQuotes();
 	}
 
 	@Test(expected = IllegalStateException.class)
 	public void testReadQuotesNoQuotesFile() {
-		File testQuotesFile = new File("./resources/notExistentQuotes.txt");
+		File testQuotesFile = new File("./notExistentQuotes.txt");
 		FileQuoteReader fileQuoteReader = new FileQuoteReader(testQuotesFile);
 		fileQuoteReader.readQuotes();
 	}
