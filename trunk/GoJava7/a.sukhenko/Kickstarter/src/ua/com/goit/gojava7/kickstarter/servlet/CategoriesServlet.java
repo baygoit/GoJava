@@ -7,13 +7,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
+import ua.com.goit.gojava7.kickstarter.config.DataSource;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+
 /**
  * Servlet implementation class CategoriesServlet
  */
 @WebServlet("/CategoriesServlet")
 public class CategoriesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    public CategoryDao categoryDao;
+    public DaoProvider daoProvider;
+	public void init(){
+		daoProvider = new DaoProvider(DataSource.MEMORY);
+		categoryDao = daoProvider.getCategoryDao();
+	}
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -26,7 +36,6 @@ public class CategoriesServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

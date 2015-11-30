@@ -1,9 +1,12 @@
 package ua.com.goit.gojava7.kickstarter.config;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.memory.CategoryDaoMemoryImpl;
+import ua.com.goit.gojava7.kickstarter.dao.memory.MemoryCategoryReader;
 
 public class DaoProvider {
 
@@ -38,6 +41,19 @@ public class DaoProvider {
 				throw new IllegalStateException("Cannot close connection " + connection + ". " + e.getMessage(), e);
 			}
 		}
+	}
+	
+	public CategoryDao getCategoryDao(){
+		CategoryDao categoryDao;
+		if(dataSource == DataSource.MEMORY){
+			CategoryDaoMemoryImpl categoryDaoMemoryImpl = new CategoryDaoMemoryImpl();
+			MemoryCategoryReader memoryCategoryReader = new MemoryCategoryReader();
+			categoryDaoMemoryImpl.setCategories(memoryCategoryReader.readCategories());
+			categoryDao = categoryDaoMemoryImpl;
+		}else{
+			throw new IllegalArgumentException("Unknown data source " + dataSource);
+		}
+		return categoryDao;
 	}
 
 
