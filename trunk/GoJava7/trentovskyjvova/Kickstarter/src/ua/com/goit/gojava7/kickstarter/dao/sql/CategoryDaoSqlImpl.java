@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.mysql;
+package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,20 +7,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
-public class CategoryDaoMySqlImpl implements CategoryDao {
-	private Connection connection;
+public class CategoryDaoSqlImpl implements CategoryDao {
+	private DaoProvider daoProvider;
 
-	public CategoryDaoMySqlImpl(Connection connection) {
-		this.connection = connection;
+	public CategoryDaoSqlImpl(DaoProvider daoProvider) {
+		this.daoProvider = daoProvider;
 	}
 	
 	@Override
 	public List<Category> getCategories() {
 		List<Category> categories = new ArrayList<>();
+		Connection connection = daoProvider.open();
 		
 		try (PreparedStatement ps = connection
 				.prepareStatement("SELECT id, name FROM category");
@@ -36,8 +38,8 @@ public class CategoryDaoMySqlImpl implements CategoryDao {
 				categories.add(category);
 			}
 		} catch (SQLException e) {
-		
-			throw new IODatabaseException("Problem with database", e);
+			getCategories();
+			//throw new IODatabaseException("Problem with database", e);
 		}
 		return categories;
 	}
@@ -45,6 +47,7 @@ public class CategoryDaoMySqlImpl implements CategoryDao {
 	@Override
 	public Category getCategory(int id) {
 		Category category = null;
+		Connection connection = daoProvider.open();
 		
 		try (PreparedStatement ps = connection
 				.prepareStatement("SELECT name FROM category WHERE id = " + id);
@@ -60,8 +63,8 @@ public class CategoryDaoMySqlImpl implements CategoryDao {
 				
 			}
 		} catch (SQLException e) {
-		
-			throw new IODatabaseException("Problem with database", e);
+			getCategory(id);
+			//throw new IODatabaseException("Problem with database", e);
 		}
 		return category;
 	}
@@ -69,6 +72,8 @@ public class CategoryDaoMySqlImpl implements CategoryDao {
 	@Override
 	public int size() {
 		int size = 0;
+		Connection connection = daoProvider.open();
+		
 		try (PreparedStatement ps = connection
 				.prepareStatement("SELECT COUNT(*) size FROM category");
 				ResultSet rs = ps.executeQuery()) {
@@ -79,8 +84,8 @@ public class CategoryDaoMySqlImpl implements CategoryDao {
 				
 			}
 		} catch (SQLException e) {
-		
-			throw new IODatabaseException("Problem with database", e);
+			size();
+			//throw new IODatabaseException("Problem with database", e);
 		}
 		
 		return size;

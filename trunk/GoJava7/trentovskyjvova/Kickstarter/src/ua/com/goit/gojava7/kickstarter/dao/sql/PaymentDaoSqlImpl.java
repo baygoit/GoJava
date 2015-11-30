@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.mysql;
+package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,21 +7,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
-public class PaymentDaoMySqlImpl implements PaymentDao {
-	private Connection connection;
+public class PaymentDaoSqlImpl implements PaymentDao {
+	private DaoProvider daoProvider;
 
-	public PaymentDaoMySqlImpl(Connection connection) {
-		this.connection = connection;
+	public PaymentDaoSqlImpl(DaoProvider daoProvider) {
+		this.daoProvider = daoProvider;
 	}
 
 	@Override
 	public List<Payment> getPayments(int projectId) {
 		List<Payment> payments = new ArrayList<>();
-
+		Connection connection = daoProvider.open();
+		
 		try (PreparedStatement ps = connection
 				.prepareStatement("SELECT id, name, cardNumber, pledge FROM payment WHERE projectId ="
 						+ projectId);
@@ -43,14 +45,16 @@ public class PaymentDaoMySqlImpl implements PaymentDao {
 				payments.add(payment);
 			}
 		} catch (SQLException e) {
-
-			throw new IODatabaseException("Problem with database", e);
+			getPayments(projectId);
+			//throw new IODatabaseException("Problem with database", e);
 		}
 		return payments;
 	}
 
 	@Override
 	public void addPayment(Payment payment) {
+		Connection connection = daoProvider.open();
+		
 		try (PreparedStatement ps = connection
 				.prepareStatement("INSERT INTO payment (projectId, name, cardNumber, pledge) VALUES ('"
 						+ payment.getProjectId()
@@ -64,8 +68,8 @@ public class PaymentDaoMySqlImpl implements PaymentDao {
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
-
-			throw new IODatabaseException("Problem with database", e);
+			addPayment(payment);
+			//throw new IODatabaseException("Problem with database", e);
 		}
 
 	}
@@ -73,6 +77,7 @@ public class PaymentDaoMySqlImpl implements PaymentDao {
 	@Override
 	public int getPledged(int projectId) {
 		int pledged = 0;
+		Connection connection = daoProvider.open();
 		
 		try (PreparedStatement ps = connection
 				.prepareStatement("SELECT SUM(pledge) pledged FROM payment WHERE projectId ="
@@ -83,8 +88,8 @@ public class PaymentDaoMySqlImpl implements PaymentDao {
 				pledged = rs.getInt("pledged");
 			}
 		} catch (SQLException e) {
-
-			throw new IODatabaseException("Problem with database", e);
+			getPledged(projectId);
+			//throw new IODatabaseException("Problem with database", e);
 		}
 		return pledged;
 	}

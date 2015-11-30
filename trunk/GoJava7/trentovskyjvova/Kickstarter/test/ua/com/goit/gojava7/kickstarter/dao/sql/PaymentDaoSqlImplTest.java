@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.mysql;
+package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -17,20 +17,24 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.dao.sql.PaymentDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 
-public class PaymentDaoMySqlImplTest {
+public class PaymentDaoSqlImplTest {
 	@Mock
 	private Connection connection = mock(Connection.class);
-	
+	@Mock
+	DaoProvider daoProvider = mock(DaoProvider.class);
 	@InjectMocks
-	private PaymentDao paymentDaoMySqlImpl = new PaymentDaoMySqlImpl(connection);
+	private PaymentDao paymentDaoMySqlImpl = new PaymentDaoSqlImpl(daoProvider);
 	
 	@Test
 	public void testGetPayments() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
+		when(daoProvider.open()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -44,6 +48,7 @@ public class PaymentDaoMySqlImplTest {
 	@Test
 	public void testAddPayment() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
+		when(daoProvider.open()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeUpdate()).thenReturn(1);
 		
@@ -57,6 +62,7 @@ public class PaymentDaoMySqlImplTest {
 	public void testGetPledged() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
+		when(daoProvider.open()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
