@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS `kickstarter`.`question` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `question` VARCHAR(200) NOT NULL,
   `answer` VARCHAR(200) NULL,
-  `time` DATE NOT NULL,
+  `time` VARCHAR(200) NOT NULL,
   `project_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_question_project1_idx` (`project_id` ASC),

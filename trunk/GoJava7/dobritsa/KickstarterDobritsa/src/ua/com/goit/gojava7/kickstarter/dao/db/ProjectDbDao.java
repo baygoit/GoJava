@@ -39,8 +39,9 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 	public void updatePledged(Project project, int amount) {
 		String query = "update project set pledged = pledged + " + amount + " where name = '"
 				+ prepareStringForDb(project.getName()) + "'";
-		try (PreparedStatement ps = connection.prepareStatement(query);) {
+		try (PreparedStatement ps = connection.prepareStatement(query);) {			
 			ps.executeUpdate();
+			project.updatePledged(amount);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -72,5 +73,11 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 		project.setHistory(resultSet.getString("history"));
 		project.setLink(resultSet.getString("link"));
 		return project;
+	}
+
+	@Override
+	public void add(Project element) {
+		// TODO Auto-generated method stub
+		
 	}
 }

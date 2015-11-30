@@ -76,6 +76,8 @@ public abstract class DbDao<T> implements Storage<T> {
 		}
 		return 0;
 	}
+	
+	
 
 	
 	protected abstract T readElement(ResultSet resultSet) throws SQLException;	

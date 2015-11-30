@@ -21,7 +21,8 @@ public class QuoteDbDao extends DbDao<Quote> implements QuoteStorage {
 	@Override
 	public Quote getRandomQuote() {
 		String query = "SELECT text, author FROM quote order by rand() limit 1 ";
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+		try (PreparedStatement ps = connection.prepareStatement(query); 
+				ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				return readElement(resultSet);
 			}
@@ -30,7 +31,7 @@ public class QuoteDbDao extends DbDao<Quote> implements QuoteStorage {
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected Quote readElement(ResultSet resultSet) throws SQLException {
 		Quote quote = new Quote();
@@ -38,4 +39,19 @@ public class QuoteDbDao extends DbDao<Quote> implements QuoteStorage {
 		quote.setAuthor(resultSet.getString("author"));
 		return quote;
 	}
+
+	@Override
+	public void add(Quote element) {
+		String query = "insert into quote (text, author) values (?, ?)";
+		try (PreparedStatement ps = connection.prepareStatement(query)) {
+			ps.setString(1, element.getText());
+			ps.setString(2, element.getAuthor());
+			ps.executeUpdate();
+			connection.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }

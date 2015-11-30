@@ -29,7 +29,7 @@ public class QuoteMemoryDaoTest extends Assert{
 	private Quote quote2;
 	private List<Quote> quotes = new ArrayList<>();	
 	
-	@InjectMocks
+	//@InjectMocks
 	QuoteMemoryDao quoteStorage;
 	
 
@@ -47,12 +47,15 @@ public class QuoteMemoryDaoTest extends Assert{
 		quotes.add(quote2);		
 		quoteStorage = new QuoteMemoryDao(quotes);
 		
-		when(random.nextInt(anyInt())).thenReturn(0);		
+		when(random.nextInt(anyInt())).thenReturn(1);		
 	}
 
 	@Test	
-	public void testGetRandomQuote() {			
-		//assertThat(quoteStorage.getRandomQuote().getText(), is("TestQuote1"));
-		//assertThat(quoteStorage.getRandomQuote().getText(), is("TestQuote2"));		
+	public void testGetRandomQuote() {		
+		//TODO
+		//System.out.println(quoteStorage.getRandomQuote().toString());
+		//System.out.println(quoteStorage.get(0).toString());
+		//	assertThat(quoteStorage.getRandomQuote().getText(), is("TestQuote1"));
+		//	assertThat(quoteStorage.getRandomQuote().getText(), is("TestQuote2"));		
 	}	
 }

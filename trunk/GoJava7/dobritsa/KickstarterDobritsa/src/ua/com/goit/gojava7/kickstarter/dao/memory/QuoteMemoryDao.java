@@ -17,8 +17,8 @@ public class QuoteMemoryDao extends MemoryDao<Quote> implements QuoteStorage {
 	// TODO fix it
 	@Override
 	public Quote getRandomQuote() {
-		int randomNumber = random.nextInt(data.size());
-		return data.get(randomNumber);
+		int randomNumber = random.nextInt(this.size());
+		return this.get(randomNumber);
 	}
-
+	
 }

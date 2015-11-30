@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDbDao;
+import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuoteDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.RewardDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.file.CategoryFileDao;
@@ -58,7 +59,7 @@ public class DaoFactory {
 			break;
 
 		case FILE:
-			initFileStorage();
+			initFileStorage(); 
 			break;
 
 		case DB:
@@ -109,8 +110,6 @@ public class DaoFactory {
 		projectDAO = new ProjectFileDao((new ProjectFileReader(PROJECTS_FILE)).read());
 		rewardDAO = new RewardFileDao((new RewardFileReader(REWARDS_FILE)).read());
 		questionsDAO = new QuestionsFileDao((new QuestionFileReader(QUESTIONS_FILE)).read());
-		// TODO
-		// questionsDAO = new QuestionsFileDao(mem.getQuestions());
 	}
 
 	private void initDbStorage() {
@@ -118,13 +117,13 @@ public class DaoFactory {
 		quoteDAO = new QuoteDbDao(connection);
 		categoryDAO = new CategoryDbDao(connection);
 		projectDAO = new ProjectDbDao(connection);
-		// questionsDAO = new QuestionsMemoryDao(data.getQuestions());
+		questionsDAO = new QuestionDbDao(connection);
 		rewardDAO = new RewardDbDao(connection);
 	}
 
 	public CategoryStorage getCategoryDAO() {
 		return categoryDAO;
-	}
+	} 
 
 	public QuoteStorage getQuoteDAO() {
 		return quoteDAO;

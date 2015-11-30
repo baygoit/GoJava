@@ -1,11 +1,16 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import java.util.Date;
 public class Question {
 	private String time = "";
 	private String question = "";
 	private String answer = "";
 	private String projectName = "";
 
+	public Question() {
+		this.time = new Date().toString();
+	}
+	
 	public String getTime() {
 		return time;
 	}

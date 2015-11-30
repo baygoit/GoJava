@@ -292,14 +292,7 @@ public class KickstarterTest {
 		verify(printer).print(contains("Now collected: $300"));
 	}
 
-	@Test	
-	@Ignore
-	public void testPledge() {	
-		assertThat(project1.getPledged(), is(100));
-		kickstarter.pledge(project1, 20);
-		assertThat(project1.getPledged(), is(120));
-	}
-
+	
 	@Test
 	@Ignore
 	public void testAddQuestion() {

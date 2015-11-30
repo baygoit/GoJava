@@ -147,28 +147,26 @@ public class Kickstarter {
 			printer.print("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
 			int amount = consoleScanner.getInt(minDonation, maxDonation);
 			printer.print("\nAmount of your donation is $" + amount);
-			printer.print("It was collected before: $" + project.getPledged());
-			project = pledge(project, amount);
+			printer.print("It was collected before: $" + project.getPledged());					
+			projectStorage.updatePledged(project, amount);		
 			printer.print("Now collected: $" + project.getPledged());
 			printer.print(BORDER);
 		} else {
 			printer.print("\nAmount of your donation is $" + rewardsInProject.get(numberOfReward - 1).getAmount());
-			printer.print("It was collected before: $" + project.getPledged());
-			pledge(project, rewardsInProject.get(numberOfReward - 1).getAmount());
+			printer.print("It was collected before: $" + project.getPledged());			
+			projectStorage.updatePledged(project, rewardsInProject.get(numberOfReward - 1).getAmount());		
 			printer.print("Now collected: $" + project.getPledged());
 			printer.print(BORDER);
 		}
 	}
 
-	public Project pledge(Project project, int amount) {
-		projectStorage.updatePledged(project, amount);
-		project.setPledged(projectStorage.getPledged(project.getName()));		
-		return project;		
-	}
-
 	public void addQuestion(Project project) {
 		printer.print("Ask your question about project: ");
-		//project.addQuestion(new Question(consoleScanner.getString()));
+		
+		Question question = new Question();
+		question.setQuestion(consoleScanner.getString());
+		question.setProjectName(project.getName());
+		questionStorage.add(question);
 	}
 
 	public void shutdown() {

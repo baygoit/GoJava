@@ -26,12 +26,9 @@ public class ProjectPrinter {
 	public void printFull(Project project) {
 		printShort(project);
 		System.out.println("History: \t" + project.getHistory());
-		System.out.println("Demo video: \t" + project.getLink());
-		// TODO print Question
-		// printQuestions(project.getQuestions());
+		System.out.println("Demo video: \t" + project.getLink());	
 	}
 
-	// TODO check method
 	public void printQuestions(List<Question> questions) {
 		if (questions.size() == 0) {
 			System.out.println("Questions: \tThere are no questions yet.");
