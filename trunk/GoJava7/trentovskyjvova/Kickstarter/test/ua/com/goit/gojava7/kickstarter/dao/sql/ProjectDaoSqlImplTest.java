@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.mysql;
+package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -16,55 +16,60 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.dao.sql.ProjectDaoSqlImpl;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-public class CategoryDaoMySqlImplTest {
-	
+public class ProjectDaoSqlImplTest {
 	@Mock
 	private Connection connection = mock(Connection.class);
-	
+	@Mock
+	DaoProvider daoProvider = mock(DaoProvider.class);
 	@InjectMocks
-	private CategoryDao categoryDaoMySqlImpl = new CategoryDaoMySqlImpl(connection);
+	private ProjectDao projectDaoMySqlImpl = new ProjectDaoSqlImpl(daoProvider);
 	
 	@Test
-	public void testGetCategory() throws SQLException {
+	public void testGetProject() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
+		when(daoProvider.open()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
-		when(rs.getString("name")).thenReturn("some cotegory name");
+		when(rs.getString("name")).thenReturn("some project name");
+		
+		Project project = projectDaoMySqlImpl.getProject(1, 1);
 
-		Category category = categoryDaoMySqlImpl.getCategory(1);
-
-		assertThat(category.getName(), is("some cotegory name"));
+		assertThat(project.getName(), is("some project name"));
 	}
 	
 	@Test
-	public void testGetCategories() throws SQLException {
+	public void testGetProjects() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
+		when(daoProvider.open()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
-		when(rs.getString("name")).thenReturn("some cotegory name");
+		when(rs.getString("name")).thenReturn("some project name");
 
-		List<Category> categories = categoryDaoMySqlImpl.getCategories();
+		List<Project> projects = projectDaoMySqlImpl.getProjects(1);
 
-		assertThat(categories.get(0).getName(), is("some cotegory name"));
+		assertThat(projects.get(0).getName(), is("some project name"));
 	}
 	
 	@Test
 	public void testSize() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
+		when(daoProvider.open()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
 		when(rs.getInt("size")).thenReturn(1);
 
-		int size = categoryDaoMySqlImpl.size();
+		int size = projectDaoMySqlImpl.size(1);
 
 		assertThat(size, is(1));
 	}

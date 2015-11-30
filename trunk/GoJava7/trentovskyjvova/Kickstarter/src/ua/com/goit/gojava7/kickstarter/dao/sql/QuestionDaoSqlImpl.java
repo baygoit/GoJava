@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.mysql;
+package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,21 +7,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
-public class QuestionDaoMySqlImpl implements QuestionDao {
-	private Connection connection;
+public class QuestionDaoSqlImpl implements QuestionDao {
+	private DaoProvider daoProvider;
 
-	public QuestionDaoMySqlImpl(Connection connection) {
-		this.connection = connection;
+	public QuestionDaoSqlImpl(DaoProvider daoProvider) {
+		this.daoProvider = daoProvider;
 	}
 
 	@Override
 	public List<Question> getQuestions(int projectId) {
 		List<Question> questions = new ArrayList<>();
-
+		Connection connection = daoProvider.open();
+		
 		try (PreparedStatement ps = connection
 				.prepareStatement("SELECT id, questionText FROM question WHERE projectId ="
 						+ projectId);
@@ -40,14 +42,16 @@ public class QuestionDaoMySqlImpl implements QuestionDao {
 				questions.add(question);
 			}
 		} catch (SQLException e) {
-
-			throw new IODatabaseException("Problem with database", e);
+			getQuestions(projectId);
+			//throw new IODatabaseException("Problem with database", e);
 		}
 		return questions;
 	}
 
 	@Override
 	public void addQuestion(Question question) {
+		Connection connection = daoProvider.open();
+		
 		try (PreparedStatement ps = connection
 				.prepareStatement("INSERT INTO question (projectId, questionText) VALUES ('"
 						+ question.getProjectId()
@@ -56,8 +60,8 @@ public class QuestionDaoMySqlImpl implements QuestionDao {
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
-
-			throw new IODatabaseException("Problem with database", e);
+			addQuestion( question);
+			//throw new IODatabaseException("Problem with database", e);
 		}
 
 	}

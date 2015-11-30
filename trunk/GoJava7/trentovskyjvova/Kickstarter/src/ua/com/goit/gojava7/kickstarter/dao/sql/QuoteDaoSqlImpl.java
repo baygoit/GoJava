@@ -1,27 +1,30 @@
-package ua.com.goit.gojava7.kickstarter.dao.mysql;
+package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
-import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
-public class QuoteDaoMySqlImpl implements QuoteDao {
-	private Connection connection;
 
-	public QuoteDaoMySqlImpl(Connection connection) {
-		this.connection = connection;
+public class QuoteDaoSqlImpl implements QuoteDao {
+	private DaoProvider daoProvider;
+
+	public QuoteDaoSqlImpl(DaoProvider daoProvider) {
+		this.daoProvider = daoProvider;
 	}
 
 	@Override
 	public Quote getRandomQuote() {
 		Quote quote = null;
-
+		
+		Connection connection = daoProvider.open();
+				
 		try (PreparedStatement ps = connection
-				.prepareStatement("SELECT text, author FROM quote order by rand() limit 1 ");
+				.prepareStatement("SELECT text, author FROM quote order by random() limit 1 ");
 				ResultSet rs = ps.executeQuery()) {
 
 			while (rs.next()) {
@@ -30,8 +33,8 @@ public class QuoteDaoMySqlImpl implements QuoteDao {
 				quote = new Quote(text, author);
 			}
 		} catch (SQLException e) {
-
-			throw new IODatabaseException("Problem with database", e);
+			getRandomQuote();
+			//throw new IODatabaseException("Problem with database", e);
 		}
 
 		return quote;

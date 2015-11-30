@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.mysql;
+package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,20 +7,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
-public class RewardDaoMySqlImpl implements RewardDao{
-	private Connection connection;
+public class RewardDaoSqlImpl implements RewardDao{
+	private DaoProvider daoProvider;
 
-	public RewardDaoMySqlImpl(Connection connection) {
-		this.connection = connection;
+	public RewardDaoSqlImpl(DaoProvider daoProvider) {
+		this.daoProvider = daoProvider;
 	}
 	
 	@Override
 	public List<Reward> getRewards(int projectId) {
 		List<Reward> rewards = new ArrayList<>();
+		Connection connection = daoProvider.open();
 
 		try (PreparedStatement ps = connection
 				.prepareStatement("SELECT id, pledge, benefit FROM reward WHERE projectId ="
@@ -40,8 +42,8 @@ public class RewardDaoMySqlImpl implements RewardDao{
 				rewards.add(reward);
 			}
 		} catch (SQLException e) {
-
-			throw new IODatabaseException("Problem with database", e);
+			getRewards(projectId);
+			//throw new IODatabaseException("Problem with database", e);
 		}
 		return rewards;
 	}

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.mysql;
+package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -18,20 +18,24 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
+import ua.com.goit.gojava7.kickstarter.dao.sql.QuestionDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
-public class QuestionDaoMySqlImplTest {
+public class QuestionDaoSqlImplTest {
 	@Mock
 	private Connection connection = mock(Connection.class);
-	
+	@Mock
+	DaoProvider daoProvider = mock(DaoProvider.class);
 	@InjectMocks
-	private QuestionDao questionDaoMySqlImpl = new QuestionDaoMySqlImpl(connection);
+	private QuestionDao questionDaoMySqlImpl = new QuestionDaoSqlImpl(daoProvider);
 	
 	@Test
 	public void testGetQuestions() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
+		when(daoProvider.open()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -45,6 +49,7 @@ public class QuestionDaoMySqlImplTest {
 	@Test
 	public void testAddQuestion() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
+		when(daoProvider.open()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeUpdate()).thenReturn(1);
 		

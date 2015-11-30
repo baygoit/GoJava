@@ -7,5 +7,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.37-bin.jar"/>
 	<classpathentry kind="lib" path="libs/mockito-all-1.10.19.jar"/>
+	<classpathentry kind="lib" path="libs/postgresql-9.4-1206-jdbc42.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

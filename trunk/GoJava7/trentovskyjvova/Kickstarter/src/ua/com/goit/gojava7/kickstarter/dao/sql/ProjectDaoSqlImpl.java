@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.mysql;
+package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,21 +7,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
-public class ProjectDaoMySqlImpl implements ProjectDao {
-	private Connection connection;
+public class ProjectDaoSqlImpl implements ProjectDao {
+	private DaoProvider daoProvider;
 
-	public ProjectDaoMySqlImpl(Connection connection) {
-		this.connection = connection;
+	public ProjectDaoSqlImpl(DaoProvider daoProvider) {
+		this.daoProvider = daoProvider;
 	}
 
 	@Override
 	public List<Project> getProjects(int categoryId) {
 		List<Project> projects = new ArrayList<>();
-
+		Connection connection = daoProvider.open();
+		
 		try (PreparedStatement ps = connection
 				.prepareStatement("SELECT id, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE categoryId ="
 						+ categoryId);
@@ -48,8 +50,8 @@ public class ProjectDaoMySqlImpl implements ProjectDao {
 				projects.add(project);
 			}
 		} catch (SQLException e) {
-
-			throw new IODatabaseException("Problem with database", e);
+			getProjects(categoryId);
+			//throw new IODatabaseException("Problem with database", e);
 		}
 		return projects;
 	}
