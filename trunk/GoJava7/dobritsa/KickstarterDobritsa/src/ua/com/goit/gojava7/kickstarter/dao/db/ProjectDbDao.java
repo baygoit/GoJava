@@ -22,8 +22,8 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 
 	@Override
 	public List<Project> getByCategory(String categoryName) {
-		String query = "select " + FIELDS + " from " + TABLE + " where category_id = "
-				+ "(select id from category where name = '" + categoryName + "')";
+		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE category_id = "
+				+ "(SELECT id FROM category WHERE name = '" + categoryName + "')";
 		List<Project> data = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
@@ -37,9 +37,9 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 
 	@Override
 	public void updatePledged(Project project, int amount) {
-		String query = "update project set pledged = pledged + " + amount + " where name = '"
+		String query = "UPDATE " + TABLE + " SET pledged = pledged + " + amount + " WHERE name = '"
 				+ prepareStringForDb(project.getName()) + "'";
-		try (PreparedStatement ps = connection.prepareStatement(query);) {			
+		try (PreparedStatement ps = connection.prepareStatement(query);) {
 			ps.executeUpdate();
 			project.updatePledged(amount);
 		} catch (SQLException e) {
@@ -49,7 +49,7 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 
 	@Override
 	public int getPledged(String projectName) {
-		String query = "select pledged from project where name = '" + prepareStringForDb(projectName) + "'";
+		String query = "SELECT pledged FROM " + TABLE + " WHERE name = '" + prepareStringForDb(projectName) + "'";
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
 				int pledged = resultSet.getInt("pledged");
@@ -73,11 +73,5 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 		project.setHistory(resultSet.getString("history"));
 		project.setLink(resultSet.getString("link"));
 		return project;
-	}
-
-	@Override
-	public void add(Project element) {
-		// TODO Auto-generated method stub
-		
-	}
+	}	
 }

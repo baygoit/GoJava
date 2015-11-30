@@ -22,20 +22,17 @@ public class RewardDbDao extends DbDao<Reward> implements RewardStorage {
 
 	@Override
 	public List<Reward> getByProject(String projectName) {	
-		String query = "select amount, reward from reward where project_id = "
-				+ "(select id from project where name = '" + prepareStringForDb(projectName) + "')";
-		List<Reward> rewards = new ArrayList<>();
+		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE project_id = "
+				+ "(SELECT id FROM project WHERE name = '" + prepareStringForDb(projectName) + "')";
+		List<Reward> data = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
-				Reward reward = new Reward();
-				reward.setAmount(resultSet.getInt("amount"));
-				reward.setReward(resultSet.getString("reward"));
-				rewards.add(reward);
+				data.add(readElement(resultSet));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return rewards;
+		return data;
 	}
 
 	@Override
@@ -44,12 +41,5 @@ public class RewardDbDao extends DbDao<Reward> implements RewardStorage {
 		reward.setAmount(resultSet.getInt("amount"));
 		reward.setReward(resultSet.getString("reward"));
 		return reward;
-	}
-
-	@Override
-	public void add(Reward element) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	}	
 }

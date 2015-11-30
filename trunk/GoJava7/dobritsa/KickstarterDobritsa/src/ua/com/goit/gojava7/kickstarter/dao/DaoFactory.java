@@ -85,7 +85,7 @@ public class DaoFactory {
 	public void close() {
 		if (dataSource == DataSource.DB) {
 			try {
-				if (connection != null) {
+				if (connection != null) {	
 					connection.close();
 				}
 			} catch (SQLException e) {

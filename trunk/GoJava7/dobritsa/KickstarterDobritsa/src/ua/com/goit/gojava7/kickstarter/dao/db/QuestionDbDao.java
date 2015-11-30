@@ -15,48 +15,41 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionStorage {
 
 	private static String TABLE = "question";
 	private static String FIELDS = "time, question, answer, project_id";
+	private static final String INSERTION = "?, ?, ?, ?";
 
 	public QuestionDbDao(Connection connection) {
 		super(connection, FIELDS, TABLE);
-
 	}
-
+	
 	@Override
 	public void add(Question element) {
-		String query = "INSERT INTO question (time, question, answer, project_id) VALUES (" + FIELDS + ")";
+		String query = "INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + INSERTION + ")";
 		try (PreparedStatement ps = connection.prepareStatement(query)) {
-			writeElementToRecord(element, ps);
+			writeElement(element, ps);
 			ps.executeUpdate();
-			connection.commit();
+			ps.close();
 		} catch (SQLException e) {
+			System.err.println("Error! INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + element.getTime() + ", "
+					+ element.getTime() + "," + element.getTime() + ", " + element.getTime() + ")");
+
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
 	public List<Question> getByProject(String projectName) {
-		
-		System.out.println(projectName);
-		System.out.println(prepareStringForDb(projectName));
-		//String query = "select time, question, answer from question where project_id = 44')";
-		String query = "select time, question, answer from question where project_id = (select id from project where name = '"
-				+ prepareStringForDb(projectName) + "')";
-		List<Question> questions = new ArrayList<>();
+		String query = "SELECT time, question, answer FROM " + TABLE
+				+ " WHERE project_id = (SELECT id FROM project WHERE name = '" + prepareStringForDb(projectName) + "')";
+		List<Question> data = new ArrayList<>();
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
-				Question question;
-				question = new Question();
-				question.setTime(resultSet.getString("time"));
-				question.setQuestion(resultSet.getString("question"));
-				question.setAnswer(resultSet.getString("answer"));
-				questions.add(question);
-				
+				data.add(readElement(resultSet));
 			}
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 		}
-		return questions;
+		return data;
 	}
 
 	@Override
@@ -69,11 +62,25 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionStorage {
 		return question;
 	}
 
-	private void writeElementToRecord(Question element, PreparedStatement statement) throws SQLException {
-		statement.setString(size() + 1, element.getTime());
-		statement.setString(size() + 1, element.getQuestion());
-		statement.setString(size() + 1, element.getAnswer());
-		statement.setString(size() + 1, element.getProjectName());
+	private void writeElement(Question question, PreparedStatement statement) throws SQLException {
+		statement.setString(1, question.getTime());
+		statement.setString(2, question.getQuestion());
+		statement.setString(3, question.getAnswer());
+		statement.setInt(4, findProjectId(question.getProjectName()));
+	}
+
+	private int findProjectId(String projectName) {
+		int id;
+		String query = "select id from project where name = '" + prepareStringForDb(projectName) + "'";
+		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+			while (resultSet.next()) {
+				id = resultSet.getInt("id");
+				return id;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 }

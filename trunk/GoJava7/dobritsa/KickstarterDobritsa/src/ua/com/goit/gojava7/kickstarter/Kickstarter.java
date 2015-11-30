@@ -68,13 +68,13 @@ public class Kickstarter {
 		} while (currentCategory != null);
 	}
 
-	public Category chooseCategory(CategoryStorage categoryStorage) {		
+	public Category chooseCategory(CategoryStorage categoryStorage) {
 		printer.print(BORDER + "\nList of categories:\n");
 		categoryPrinter.printCategories(categoryStorage.getAll());
 		printer.print("\nChoose a category by number ('0' for exit): ");
 		return setCurrentCategory(categoryStorage);
 	}
-	
+
 	public Category setCurrentCategory(CategoryStorage categoryStorage) {
 		int numberOfCategory = consoleScanner.getInt(0, categoryStorage.size());
 		if (numberOfCategory == 0)
@@ -85,12 +85,11 @@ public class Kickstarter {
 	public Project chooseProject(Category category, ProjectStorage projectStorage) {
 		List<Project> projectsInCategory = new ArrayList<>();
 		projectsInCategory = projectStorage.getByCategory(category.getName());
-		printer.print(BORDER + "\nCurrent category: " + category.getName() + "\nList of projects:");		
+		printer.print(BORDER + "\nCurrent category: " + category.getName() + "\nList of projects:");
 		projectPrinter.printProjects(projectsInCategory);
 		printer.print("\nChoose a project by number ('0' to choose another category): ");
 		return setCurrentProject(projectsInCategory);
 	}
-
 
 	public Project setCurrentProject(List<Project> projects) {
 		int numberOfProject = consoleScanner.getInt(0, projects.size());
@@ -102,11 +101,11 @@ public class Kickstarter {
 	public void viewProject(Project project) {
 		boolean exit = false;
 		while (!exit) {
-			List<Question> quoestionsInProject = new ArrayList<>();				
-			quoestionsInProject = questionStorage.getByProject(project.getName());	
+			List<Question> quoestionsInProject = new ArrayList<>();
+			quoestionsInProject = questionStorage.getByProject(project.getName());
 			projectPrinter.printFull(project);
 			projectPrinter.printQuestions(quoestionsInProject);
-			exit = chooseOptionOfProject(project);			
+			exit = chooseOptionOfProject(project);
 		}
 	}
 
@@ -133,9 +132,9 @@ public class Kickstarter {
 	}
 
 	public void chooseReward(Project project) {
-		printer.print("\nLet's choose your reward!\n");				
-		List<Reward> rewardsInProject = new ArrayList<>();				
-		rewardsInProject = rewardStorage.getByProject(project.getName());	
+		printer.print("\nLet's choose your reward!\n");
+		List<Reward> rewardsInProject = new ArrayList<>();
+		rewardsInProject = rewardStorage.getByProject(project.getName());
 		projectPrinter.printRewards(rewardsInProject);
 		int numberOfReward = consoleScanner.getInt(0, rewardsInProject.size() + 1);
 		if (numberOfReward == 0) {
@@ -147,14 +146,14 @@ public class Kickstarter {
 			printer.print("\nEnter amount from " + minDonation + " to " + maxDonation + " :");
 			int amount = consoleScanner.getInt(minDonation, maxDonation);
 			printer.print("\nAmount of your donation is $" + amount);
-			printer.print("It was collected before: $" + project.getPledged());					
-			projectStorage.updatePledged(project, amount);		
+			printer.print("It was collected before: $" + project.getPledged());
+			projectStorage.updatePledged(project, amount);
 			printer.print("Now collected: $" + project.getPledged());
 			printer.print(BORDER);
 		} else {
 			printer.print("\nAmount of your donation is $" + rewardsInProject.get(numberOfReward - 1).getAmount());
-			printer.print("It was collected before: $" + project.getPledged());			
-			projectStorage.updatePledged(project, rewardsInProject.get(numberOfReward - 1).getAmount());		
+			printer.print("It was collected before: $" + project.getPledged());
+			projectStorage.updatePledged(project, rewardsInProject.get(numberOfReward - 1).getAmount());
 			printer.print("Now collected: $" + project.getPledged());
 			printer.print(BORDER);
 		}
@@ -162,7 +161,7 @@ public class Kickstarter {
 
 	public void addQuestion(Project project) {
 		printer.print("Ask your question about project: ");
-		
+
 		Question question = new Question();
 		question.setQuestion(consoleScanner.getString());
 		question.setProjectName(project.getName());

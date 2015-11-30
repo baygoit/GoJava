@@ -9,7 +9,6 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.storage.Storage;
 
-
 public abstract class DbDao<T> implements Storage<T> {
 
 	protected String FIELDS = null;
@@ -22,7 +21,9 @@ public abstract class DbDao<T> implements Storage<T> {
 		this.FIELDS = FIELDS;
 		this.TABLE = TABLE;
 	}
-	
+
+	protected abstract T readElement(ResultSet resultSet) throws SQLException;
+
 	public T getByNumber(int number) {
 		return get(number);
 	}
@@ -35,12 +36,11 @@ public abstract class DbDao<T> implements Storage<T> {
 	public String prepareStringForDb(String original) {
 		return original.replace("'", "\\'");
 	}
-	
+
 	@Override
 	public T get(int index) {
 		String query = "select " + FIELDS + " from " + TABLE + " where id = " + index;
-		try (PreparedStatement ps = connection.prepareStatement(query); 
-				ResultSet resultSet = ps.executeQuery()) {
+		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
 				return readElement(resultSet);
 			}
@@ -49,13 +49,13 @@ public abstract class DbDao<T> implements Storage<T> {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public List<T> getAll() {
 		List<T> data = new ArrayList<>();
 		String query = "select " + FIELDS + " from " + TABLE;
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-			while (resultSet.next()) {				
+			while (resultSet.next()) {
 				data.add(readElement(resultSet));
 			}
 		} catch (SQLException e) {
@@ -63,9 +63,9 @@ public abstract class DbDao<T> implements Storage<T> {
 		}
 		return data;
 	}
-	
+
 	@Override
-	public int size() {	
+	public int size() {
 		String query = "select count(*) as cnt from " + TABLE;
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
@@ -76,10 +76,5 @@ public abstract class DbDao<T> implements Storage<T> {
 		}
 		return 0;
 	}
-	
-	
-
-	
-	protected abstract T readElement(ResultSet resultSet) throws SQLException;	
 
 }

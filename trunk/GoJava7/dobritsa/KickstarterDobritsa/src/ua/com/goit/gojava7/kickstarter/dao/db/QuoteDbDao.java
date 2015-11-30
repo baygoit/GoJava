@@ -40,7 +40,6 @@ public class QuoteDbDao extends DbDao<Quote> implements QuoteStorage {
 		return quote;
 	}
 
-	@Override
 	public void add(Quote element) {
 		String query = "insert into quote (text, author) values (?, ?)";
 		try (PreparedStatement ps = connection.prepareStatement(query)) {

@@ -23,18 +23,18 @@ public class KickstarterRunner {
 		}
 		System.out.println("-------Kickstarter runs in " + dataSource + " mode-------\n");
 
-		DaoFactory daoProvider = new DaoFactory(dataSource);
-		daoProvider.open();
-
-		QuoteStorage quoteStorage = daoProvider.getQuoteDAO();
-		CategoryStorage categoryStorage = daoProvider.getCategoryDAO();
-		ProjectStorage projectStorage = daoProvider.getProjectDAO();
-		QuestionStorage questionsStorage = daoProvider.getQuestionsDAO();
-		RewardStorage rewardStorage = daoProvider.getRewardDAO();
+		DaoFactory daoFactory = new DaoFactory(dataSource);
+		
+		QuoteStorage quoteStorage = daoFactory.getQuoteDAO();
+		CategoryStorage categoryStorage = daoFactory.getCategoryDAO();
+		ProjectStorage projectStorage = daoFactory.getProjectDAO();
+		QuestionStorage questionsStorage = daoFactory.getQuestionsDAO();
+		RewardStorage rewardStorage = daoFactory.getRewardDAO();
 
 		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage, projectStorage, questionsStorage,
 				rewardStorage);
 		kickstarter.run();
 		kickstarter.shutdown();
+		daoFactory.close();
 	}
 }

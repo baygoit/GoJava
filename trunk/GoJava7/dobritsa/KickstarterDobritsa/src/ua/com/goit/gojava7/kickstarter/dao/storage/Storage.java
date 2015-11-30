@@ -12,6 +12,4 @@ public interface Storage<T> {
 
 	int size();
 	
-	void add(T element);
-
 }
