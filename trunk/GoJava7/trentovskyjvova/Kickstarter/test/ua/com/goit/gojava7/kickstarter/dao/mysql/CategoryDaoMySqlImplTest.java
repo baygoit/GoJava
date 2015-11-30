@@ -19,7 +19,7 @@ import org.mockito.Mock;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-public class TestCategoryDaoMySqlImpl {
+public class CategoryDaoMySqlImplTest {
 	
 	@Mock
 	private Connection connection = mock(Connection.class);
@@ -28,7 +28,7 @@ public class TestCategoryDaoMySqlImpl {
 	private CategoryDao categoryDaoMySqlImpl = new CategoryDaoMySqlImpl(connection);
 	
 	@Test
-	public void testGetgetCategory() throws SQLException {
+	public void testGetCategory() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
@@ -42,13 +42,12 @@ public class TestCategoryDaoMySqlImpl {
 	}
 	
 	@Test
-	public void testGetgetCategories() throws SQLException {
+	public void testGetCategories() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
-		when(rs.getInt("id")).thenReturn(1);
 		when(rs.getString("name")).thenReturn("some cotegory name");
 
 		List<Category> categories = categoryDaoMySqlImpl.getCategories();

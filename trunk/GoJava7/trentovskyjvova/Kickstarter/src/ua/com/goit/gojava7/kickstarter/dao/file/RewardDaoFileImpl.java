@@ -10,15 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class FileRewardReader implements RewardDao {
+public class RewardDaoFileImpl implements RewardDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File reswardsFile;
 	
-	public FileRewardReader(File reswardsFile) {
+	public RewardDaoFileImpl(File reswardsFile) {
 		this.reswardsFile = reswardsFile;
 	}
 
@@ -82,22 +81,18 @@ public class FileRewardReader implements RewardDao {
 	}
 
 	@Override
-	public int size() {
-		List<Reward> rewards = getRewards(0);
-		return rewards.size();
+	public Reward getReward(int userChoise, int projectId) {
+		if (userChoise == 0) {
+			return null;
+		} else {
+			List<Reward> reward = getRewards(projectId);
+			return reward.get(userChoise - 1);
+		}
 	}
 
 	@Override
-	public Reward getReward(int id) {
-		List<Reward> rewards = getRewards(0);
-		Reward result = null;
-		for (Reward reward : rewards) {
-			if(reward.getId() == id){
-				result = reward;
-				break;
-			}
-		}
-		return result;
+	public int size(int projectId) {
+		return getRewards(projectId).size();
 	}
 
 }

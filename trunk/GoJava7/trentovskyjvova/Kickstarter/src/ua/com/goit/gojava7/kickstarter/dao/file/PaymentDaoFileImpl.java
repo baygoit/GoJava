@@ -18,11 +18,11 @@ import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class FilePaymentReader implements PaymentDao {
+public class PaymentDaoFileImpl implements PaymentDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File paymentsFile;
 
-	public FilePaymentReader(File paymentsFile) {
+	public PaymentDaoFileImpl(File paymentsFile) {
 		this.paymentsFile = paymentsFile;
 	}
 
@@ -73,7 +73,8 @@ public class FilePaymentReader implements PaymentDao {
 				cardNumber = questionLine[3];
 				pledge = Integer.parseInt(questionLine[4]);
 
-				Payment payment = new Payment(id);
+				Payment payment = new Payment();
+				payment.setId(id);
 				payment.setProjectId(projectId);
 				payment.setName(name);
 				payment.setCardNumber(cardNumber);
@@ -104,7 +105,7 @@ public class FilePaymentReader implements PaymentDao {
 			fileWriter = new FileWriter(paymentsFile, true);
 
 			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.append(payment.getId()).append(";");
+			stringBuilder.append(generateIdOfNewElement()).append(";");
 			stringBuilder.append(payment.getProjectId()).append(";");
 			stringBuilder.append(payment.getName()).append(";");
 			stringBuilder.append(payment.getCardNumber()).append(";");
@@ -129,17 +130,6 @@ public class FilePaymentReader implements PaymentDao {
 	}
 
 	@Override
-	public int generateIdOfNewElement() {
-		int maxId = 0;
-		for (Payment payment : getPayments(0)) {
-			if (maxId < payment.getId()) {
-				maxId = payment.getId();
-			}
-		}
-		return maxId + 1;
-	}
-
-	@Override
 	public int getPledged(int projectId) {
 		int pledged = 0;
 		for (Payment payment : getPayments(projectId)) {
@@ -148,6 +138,16 @@ public class FilePaymentReader implements PaymentDao {
 			}
 		}
 		return pledged;
+	}
+	
+	private int generateIdOfNewElement() {
+		int maxId = 0;
+		for (Payment payment : getPayments(0)) {
+			if (maxId < payment.getId()) {
+				maxId = payment.getId();
+			}
+		}
+		return maxId + 1;
 	}
 
 }

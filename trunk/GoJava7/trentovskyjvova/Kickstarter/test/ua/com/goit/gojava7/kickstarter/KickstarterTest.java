@@ -104,7 +104,7 @@ public class KickstarterTest {
 		verify(consolePrinter, times(4)).print(
 				contains("to invest in the project"));
 		verify(consolePrinter, times(4)).print(contains("0 : to project list"));
-		verify(consolePrinter).print(contains("pledged: 31"));
+		verify(consolePrinter).print(contains("pledged: 30"));
 		verify(consolePrinter).print("Goodbye!");
 	}
 }

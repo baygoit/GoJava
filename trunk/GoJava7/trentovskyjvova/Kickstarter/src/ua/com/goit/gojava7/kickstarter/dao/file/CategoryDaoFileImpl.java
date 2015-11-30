@@ -13,11 +13,11 @@ import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class FileCategoryReader implements CategoryDao {
+public class CategoryDaoFileImpl implements CategoryDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File categoriesFile;
 	
-	public FileCategoryReader(File categoriesFile) {
+	public CategoryDaoFileImpl(File categoriesFile) {
 		this.categoriesFile = categoriesFile;
 	}
 

@@ -14,12 +14,12 @@ import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class FileQuoteReader implements QuoteDao {
+public class QuoteDaoFileImpl implements QuoteDao {
 	private static final String CSV_SPLIT_BY = ";";
 	private File quotesFile;
 	private Random random;
 	
-	public FileQuoteReader(File quotesFile, Random random) {
+	public QuoteDaoFileImpl(File quotesFile, Random random) {
 		this.quotesFile = quotesFile;
 		this.random = random;
 	}

@@ -9,47 +9,42 @@ import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.exception.WrongFileFormatException;
 
-public class TestFileCategoryReader {
+public class CategoryDaoFileImplTest {
 	private File testCategoriesFile;
-	private FileCategoryReader fileCategoryReader;
+	private CategoryDaoFileImpl ñategoryDaoFileImpl;
 
 	@Test
 	public void testGetCategories() {
 		testCategoriesFile = new File("./resources/categories.csv");
-		fileCategoryReader = new FileCategoryReader(
-				testCategoriesFile);
-		assertThat(fileCategoryReader.getCategories().size(), is(3));
+		ñategoryDaoFileImpl = new CategoryDaoFileImpl(testCategoriesFile);
+		assertThat(ñategoryDaoFileImpl.getCategories().size(), is(3));
 	}
 
 	@Test(expected = WrongFileFormatException.class)
 	public void testGetcategoriesNotcategoriesInFile() {
 		testCategoriesFile = new File("./resources/nocategories.csv");
-		fileCategoryReader = new FileCategoryReader(
-				testCategoriesFile);
-		fileCategoryReader.getCategories();
+		ñategoryDaoFileImpl = new CategoryDaoFileImpl(testCategoriesFile);
+		ñategoryDaoFileImpl.getCategories();
 	}
 
 	@Test(expected = WrongFileFormatException.class)
 	public void testGetcategoriesNocategoriesFile() {
 		testCategoriesFile = new File("./resources/notExistentcategories.csv");
-		fileCategoryReader = new FileCategoryReader(
-				testCategoriesFile);
-		fileCategoryReader.getCategories();
+		ñategoryDaoFileImpl = new CategoryDaoFileImpl(testCategoriesFile);
+		ñategoryDaoFileImpl.getCategories();
 	}
-	
+
 	@Test
-	public void testGetProject() {
+	public void testGetCategory() {
 		testCategoriesFile = new File("./resources/categories.csv");
-		fileCategoryReader = new FileCategoryReader(
-				testCategoriesFile);
-		assertThat(fileCategoryReader.getCategory(3).getName(), is("Categ3"));
+		ñategoryDaoFileImpl = new CategoryDaoFileImpl(testCategoriesFile);
+		assertThat(ñategoryDaoFileImpl.getCategory(3).getName(), is("Categ3"));
 	}
-	
+
 	@Test
 	public void testSize() {
 		testCategoriesFile = new File("./resources/categories.csv");
-		fileCategoryReader = new FileCategoryReader(
-				testCategoriesFile);
-		assertThat(fileCategoryReader.size(), is(3));
+		ñategoryDaoFileImpl = new CategoryDaoFileImpl(testCategoriesFile);
+		assertThat(ñategoryDaoFileImpl.size(), is(3));
 	}
 }
