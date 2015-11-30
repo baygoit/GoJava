@@ -43,7 +43,7 @@ public class CategoriesServlet extends HttpServlet {
 		}
 
 		stringBuilder.append("</body></html>");
-		resp.getWriter().append(stringBuilder);
+		resp.getWriter().append(stringBuilder.toString());
 	}
 
 	@Override
