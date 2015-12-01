@@ -7,6 +7,7 @@ import java.util.Map;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
+import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 
 public class ConsolePrinter {
@@ -45,10 +46,10 @@ public class ConsolePrinter {
 
 	}
 
-	public static void printFullProjectInfo(Project project) {
+	public static void printFullProjectInfo(Project project, CategoryStorage categoryStorage) {
 		printHorizontalLine();
 		print("Project: " + project.getProjectName() + "   |  Category: "
-				+ project.getProjectCategory().getCategoryName());
+				+ categoryStorage.getCategoryById(project.getProjectCategoryId()).getCategoryName());
 		print(project.getProjectEndTime());
 		print("[ " + project.getProjectDescription() + " ]");
 		print("History: " + getBlankStringIfNull(project.getProjectHistory()));
@@ -56,8 +57,8 @@ public class ConsolePrinter {
 		print("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size() + " | Pledged: $"
 				+ project.getMoneyPledged());
 		ConsolePrinter.print("Donate bonuses:");
-		project.getPaymentBonus().getBonuses().forEach((money,bonus) -> {
-			ConsolePrinter.print(money+ "$ - " + bonus);
+		project.getPaymentBonus().getBonuses().forEach((money, bonus) -> {
+			ConsolePrinter.print(money + "$ - " + bonus);
 		});
 		printQuestionsAndAnswers(project.getQuestionsAndAnswers());
 

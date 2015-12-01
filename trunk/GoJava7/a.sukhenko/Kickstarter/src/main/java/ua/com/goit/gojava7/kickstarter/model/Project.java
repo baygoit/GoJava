@@ -19,7 +19,7 @@ public class Project {
 	private String projectHistory;
 	private String demoLink;
 	private Map<String, String> questionsAndAnswers = new HashMap<>();
-	private Category projectCategory;
+	private int projectCategoryId;
 	private HashMap<User, Double> backers = new HashMap<>();
 	private LocalDateTime enddate;
 	private PaymentBonus paymentBonus = new PaymentBonus();
@@ -36,11 +36,11 @@ public class Project {
 
 	}
 
-	public Project(String projectName, String projectDescription, Category projectCategory, LocalDateTime enddate) {
+	public Project(String projectName, String projectDescription, int projectCategoryId, LocalDateTime enddate) {
 		super();
 		this.projectName = projectName;
 		this.projectDescription = projectDescription;
-		this.projectCategory = projectCategory;
+		this.setProjectCategoryId(projectCategoryId);
 		this.enddate = enddate;
 	}
 
@@ -108,15 +108,6 @@ public class Project {
 		return moneyPledged;
 	}
 
-	public Category getProjectCategory() {
-		return projectCategory;
-	}
-
-	@XmlElement
-	public void setProjectCategory(Category projectCategory) {
-		this.projectCategory = projectCategory;
-	}
-
 	public HashMap<User, Double> getBackers() {
 		return backers;
 	}
@@ -125,7 +116,6 @@ public class Project {
 		return enddate;
 	}
 
-	@XmlElement
 	public void setEnddate(LocalDateTime enddate) {
 		this.enddate = enddate;
 	}
@@ -134,7 +124,6 @@ public class Project {
 		return projectHistory;
 	}
 
-	@XmlElement
 	public void setProjectHistory(String projectHistory) {
 		this.projectHistory = projectHistory;
 	}
@@ -143,7 +132,6 @@ public class Project {
 		return questionsAndAnswers;
 	}
 
-	@XmlElement
 	public void setQuestionsAndAnswers(Map<String, String> questionsAndAnswers) {
 		this.questionsAndAnswers = questionsAndAnswers;
 	}
@@ -152,7 +140,6 @@ public class Project {
 		return demoLink;
 	}
 
-	@XmlElement
 	public void setDemoLink(String demoLink) {
 		this.demoLink = demoLink;
 	}
@@ -163,6 +150,14 @@ public class Project {
 
 	public void setPaymentBonus(PaymentBonus paymentBonus) {
 		this.paymentBonus = paymentBonus;
+	}
+
+	public int getProjectCategoryId() {
+		return projectCategoryId;
+	}
+
+	public void setProjectCategoryId(int projectCategoryId) {
+		this.projectCategoryId = projectCategoryId;
 	}
 
 }

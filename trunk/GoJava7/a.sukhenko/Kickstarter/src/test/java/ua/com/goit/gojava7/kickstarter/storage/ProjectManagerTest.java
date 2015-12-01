@@ -22,7 +22,8 @@ public class ProjectManagerTest {
 	@Test
 	public void testGetProjectsByCategory(){
 		Category cat1 = new Category();
-		Project project = new Project("Testname", "Test desc", cat1, null);
+		cat1.setCategoryId(5);
+		Project project = new Project("Testname", "Test desc", 5, null);
 		projectManager.addProject(project);
 		
 		assertThat(projectManager.getProjectsByCategory(cat1).get(0),is(project));

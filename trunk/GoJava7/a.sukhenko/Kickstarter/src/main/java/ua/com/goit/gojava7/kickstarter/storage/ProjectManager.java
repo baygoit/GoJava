@@ -41,7 +41,7 @@ public class ProjectManager {
 	public ArrayList<Project> getProjectsByCategory(Category cat) {
 		ArrayList<Project> projectsByCategory = new ArrayList<>();
 		for (Project project : projects) {
-			if (project.getProjectCategory().getCategoryId() == cat.getCategoryId())
+			if (project.getProjectCategoryId() == cat.getCategoryId())
 				projectsByCategory.add(project);
 		}
 		return projectsByCategory;

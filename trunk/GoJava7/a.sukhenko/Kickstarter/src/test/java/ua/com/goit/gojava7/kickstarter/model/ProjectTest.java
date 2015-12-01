@@ -34,20 +34,20 @@ public class ProjectTest {
 	@Test
 	public void testProject4() {
 		Category projectCategory = new Category();
+		projectCategory.setCategoryId(5);
 		LocalDateTime now = LocalDateTime.now();
 		String projectName = "project";
-		project = new Project(projectName, "2", projectCategory, now);
+		project = new Project(projectName, "2", 5, now);
 		assertThat(project.getProjectName(), is(projectName));
 		assertThat(project.getProjectDescription(), is("2"));
-		assertThat(project.getProjectCategory(), is(projectCategory));
+		assertThat(project.getProjectCategoryId(), is(projectCategory.getCategoryId()));
 		assertThat(project.getEndDate(), is(now));
 	}
 
 	@Test
 	public void testGetProjectEndTime() {
-		Category projectCategory = new Category();
 		LocalDateTime now = LocalDateTime.now().plusDays(14).minusHours(1);
-		project = new Project("1", "2", projectCategory, now);
+		project = new Project("1", "2", 5, now);
 		assertThat(project.getProjectEndTime(), is("13 days left"));
 
 		project.setEnddate(LocalDateTime.now().plusHours(4).minusMinutes(1));
@@ -105,8 +105,8 @@ public class ProjectTest {
 	@Test
 	public void testGetProjectCategory() {
 		Category cat = new Category("NameCategory", 1);
-		project.setProjectCategory(cat);
-		assertThat(project.getProjectCategory(), is(cat));
+		project.setProjectCategoryId(1);
+		assertThat(project.getProjectCategoryId(), is(cat.getCategoryId()));
 	}
 
 	@Test

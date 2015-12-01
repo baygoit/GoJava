@@ -25,8 +25,9 @@ public class Body {
 		ConsolePrinter.print(GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO);
 	}
 
-	public void generateBody(ProjectManager projectManager, ConsolePrinter consolePrinter) {
-		generateProjectInfo(projectManager.getProjectById(0), consolePrinter);
+	public void generateBody(ProjectManager projectManager, ConsolePrinter consolePrinter,
+			CategoryStorage categoryStorage) {
+		generateProjectInfo(projectManager.getProjectById(0), consolePrinter, categoryStorage);
 	}
 
 	public void generateQuoteBlock(QuoteStorage quoteStorage, ConsolePrinter consolePrinter) {
@@ -44,10 +45,10 @@ public class Body {
 	}
 
 	public void generateMainPage(QuoteStorage quoteStorage, ProjectManager projectManager,
-			ConsolePrinter consolePrinter) {
+			ConsolePrinter consolePrinter, CategoryStorage categoryStorage) {
 		generateHeader(consolePrinter);
 		generateQuoteBlock(quoteStorage, consolePrinter);
-		generateBody(projectManager, consolePrinter);
+		generateBody(projectManager, consolePrinter, categoryStorage);
 		generateFooter(consolePrinter);
 	}
 
@@ -55,16 +56,15 @@ public class Body {
 		ConsolePrinter.printCategory(category);
 	}
 
-	public void generateProjectInfo(Project project, ConsolePrinter consolePrinter) {
+	public void generateProjectInfo(Project project, ConsolePrinter consolePrinter, CategoryStorage categoryStorage) {
 
 		ConsolePrinter.printHorizontalLine();
 		ConsolePrinter.print("Project: " + project.getProjectName() + "   |  Category: "
-				+ project.getProjectCategory().getCategoryName());
+				+ categoryStorage.getCategoryById(project.getProjectCategoryId()).getCategoryName());
 		ConsolePrinter.print(project.getProjectEndTime());
 		ConsolePrinter.print("[ " + project.getProjectDescription() + " ]");
 		ConsolePrinter.print("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
 				+ " | Pledged: $" + project.getMoneyPledged());
-	
 
 	}
 

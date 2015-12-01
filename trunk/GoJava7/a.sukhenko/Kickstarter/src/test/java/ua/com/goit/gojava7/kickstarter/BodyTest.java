@@ -18,6 +18,7 @@ import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.User;
+import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 
 public class BodyTest {
 	public static final String PROJECT2 = "Project: ";
@@ -25,6 +26,7 @@ public class BodyTest {
 	Body body = new Body();
 	ConsolePrinter consolePrinter = new ConsolePrinter();
 	Kickstarter kickstarter = new Kickstarter();
+	CategoryStorage categoryStorage = new CategoryStorage();
 
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -71,11 +73,12 @@ public class BodyTest {
 	@Test
 	public void testGenerateProjectInfo() {
 		Project project = getProject();
-		body.generateProjectInfo(project, consolePrinter);
+		
+		body.generateProjectInfo(project, consolePrinter,categoryStorage);
 
 		String stuff = "===========================" + newLine;
 		stuff += PROJECT2 + project.getProjectName() + "   |  Category: "
-				+ project.getProjectCategory().getCategoryName() + newLine;
+				+ categoryStorage.getCategoryById(project.getProjectCategoryId()).getCategoryName() + newLine;
 		stuff += "59 minutes left" + newLine;
 		stuff += "[ Description ]" + newLine;
 		stuff += "Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
@@ -87,7 +90,8 @@ public class BodyTest {
 		Project project = new Project();
 		Map<String, String> qa = new HashMap<String, String>();
 		Category cat = new Category("cat", 1);
-		project.setProjectCategory(cat);
+		categoryStorage.addCategory(cat);
+		project.setProjectCategoryId(1);
 		project.setMoneyNeeded(100000.0);
 		project.addBacker(new User(), 50000.0);
 		qa.put("Question", "Answer");

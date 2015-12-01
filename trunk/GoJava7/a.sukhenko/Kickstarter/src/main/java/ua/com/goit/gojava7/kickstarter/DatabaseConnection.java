@@ -10,31 +10,34 @@ public class DatabaseConnection {
 	Connection connection = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
-	public void connect(){
-		try{
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gojava7?user=Java7&password=superpass");
-		if(connection.isValid(1000)){
-			System.out.println("Connection established.");
-		}
-		} catch (SQLException e){
+
+	public void connect() {
+		try {
+			connection = DriverManager
+					.getConnection("jdbc:mysql://localhost:3306/gojava7?user=Java7&password=superpass");
+			if (connection.isValid(1000)) {
+				System.out.println("Connection established.");
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally {
-			if(connection != null){
-				try{
+		} finally {
+			if (connection != null) {
+				try {
 					connection.close();
-				}catch(SQLException e){
+				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
 		}
 	}
-	public void loadCategories(){
-		
+
+	public void loadCategories() {
+
 	}
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		DatabaseConnection databaseConnection = new DatabaseConnection();
 		databaseConnection.connect();
 	}
-	
+
 }

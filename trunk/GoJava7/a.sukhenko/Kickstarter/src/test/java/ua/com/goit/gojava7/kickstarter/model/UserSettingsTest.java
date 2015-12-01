@@ -3,6 +3,9 @@ package ua.com.goit.gojava7.kickstarter.model;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import ua.com.goit.gojava7.kickstarter.model.user.UserSettings;
+
 import static org.hamcrest.CoreMatchers.is;
 public class UserSettingsTest {
 	private UserSettings userSettings = new UserSettings();

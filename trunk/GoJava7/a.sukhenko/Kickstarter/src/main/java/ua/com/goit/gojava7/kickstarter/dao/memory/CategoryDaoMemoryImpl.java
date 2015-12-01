@@ -6,8 +6,9 @@ import java.util.List;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 
-public class CategoryDaoMemoryImpl implements CategoryDao{
+public class CategoryDaoMemoryImpl implements CategoryDao {
 	private List<Category> categories = new ArrayList<>();
+
 	@Override
 	public List<Category> getAll() {
 		return categories;
@@ -15,13 +16,11 @@ public class CategoryDaoMemoryImpl implements CategoryDao{
 
 	@Override
 	public int count() {
-		// TODO Auto-generated method stub
 		return categories.size();
 	}
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
-	
-	
+
 }

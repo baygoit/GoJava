@@ -62,7 +62,7 @@ public class Menu {
 			break;
 		case DONATE_TO_PROJECT:
 			showDonateInfo();
-			//donateToProject(4);
+			// donateToProject(4);
 			break;
 		case ADD_PAYMENT_SYSTEM_TO_ACCOUNT:
 			addPaymentSystem();
@@ -127,11 +127,11 @@ public class Menu {
 	}
 
 	public void donateToProject(int option) {
-			if (isPaymentOption(option)) {
-				donateMoney(DONATE_OPTIONS[option]);
-			} else {
-				donateMoney(0);
-			}
+		if (isPaymentOption(option)) {
+			donateMoney(DONATE_OPTIONS[option]);
+		} else {
+			donateMoney(0);
+		}
 		showMenu();
 	}
 
@@ -140,7 +140,7 @@ public class Menu {
 	}
 
 	public void showFullProjectInfo() {
-		ConsolePrinter.printFullProjectInfo(user.getSettings().getSelectedProject());
+		ConsolePrinter.printFullProjectInfo(user.getSettings().getSelectedProject(), categoryStorage);
 		int selectedOption = MENU_DEFAULT_OPTION;
 		while (selectedOption == MENU_DEFAULT_OPTION) {
 			ConsolePrinter.print("(2) - Ask question (1) - Donate (0) - Go back");
@@ -149,14 +149,14 @@ public class Menu {
 				user.getSettings().setMenuOption(MenuOptions.ASK_QUESTION);
 
 			} else if (selectedOption == 1) {
-				if(user.getPaymentSystem() == null){
+				if (user.getPaymentSystem() == null) {
 					user.getSettings().setMenuOption(MenuOptions.ADD_PAYMENT_SYSTEM_TO_ACCOUNT);
-				}else{
-				user.getSettings().setMenuOption(MenuOptions.DONATE_TO_PROJECT);
-				
+				} else {
+					user.getSettings().setMenuOption(MenuOptions.DONATE_TO_PROJECT);
+
 				}
-				
-			} else if(selectedOption == 0){
+
+			} else if (selectedOption == 0) {
 				user.getSettings().setMenuOption(MenuOptions.SHOW_PROJECTS_IN_SPECIFIC_CATEGORY);
 			}
 

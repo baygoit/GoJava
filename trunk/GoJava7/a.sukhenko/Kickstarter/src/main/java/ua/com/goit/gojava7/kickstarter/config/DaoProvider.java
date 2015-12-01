@@ -22,7 +22,8 @@ public class DaoProvider {
 		if (dataSource == DataSource.MYSQL) {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
-				connection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/kickstarter?user=kickadmin&password=kickpass");
+				connection = DriverManager
+						.getConnection("jdbc:mysql://db4free.net:3306/kickstarter?user=kickadmin&password=kickpass");
 			} catch (SQLException e) {
 				throw new IllegalStateException("Cannot open connection. " + e.getMessage(), e);
 			} catch (ClassNotFoundException e) {
@@ -42,20 +43,18 @@ public class DaoProvider {
 			}
 		}
 	}
-	
-	public CategoryDao getCategoryDao(){
+
+	public CategoryDao getCategoryDao() {
 		CategoryDao categoryDao;
-		if(dataSource == DataSource.MEMORY){
+		if (dataSource == DataSource.MEMORY) {
 			CategoryDaoMemoryImpl categoryDaoMemoryImpl = new CategoryDaoMemoryImpl();
 			MemoryCategoryReader memoryCategoryReader = new MemoryCategoryReader();
 			categoryDaoMemoryImpl.setCategories(memoryCategoryReader.readCategories());
 			categoryDao = categoryDaoMemoryImpl;
-		}else{
+		} else {
 			throw new IllegalArgumentException("Unknown data source " + dataSource);
 		}
 		return categoryDao;
 	}
-
-
 
 }
