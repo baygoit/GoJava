@@ -36,4 +36,11 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public List<Project> getByCategory(int categoryId) {
+		 return this.getAll().stream()
+	                .filter(project -> project.getCategoryId() == categoryId)
+	                .collect(Collectors.toList());
+	}
+
 }

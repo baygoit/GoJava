@@ -14,11 +14,11 @@ import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-@WebServlet(urlPatterns = "/categories")
+@WebServlet("/categories")
 public class CategoriesServlet extends HttpServlet {
 
-	private QuoteStorage quoteStorage;
 	private DaoFactory daoFactory;
+	private QuoteStorage quoteStorage;	
 	private CategoryStorage categoryStorage;
 
 	@Override
@@ -30,7 +30,7 @@ public class CategoriesServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Quote quote = quoteStorage.get(1);
 		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Categories</title></head><body>");
 
@@ -38,21 +38,10 @@ public class CategoriesServlet extends HttpServlet {
 		stringBuilder.append("List of categories:</br>");
 	
 		for (int i = 1; i <= categoryStorage.size(); i++) {		
-			stringBuilder.append("<a href=\"category?id=" + categoryStorage.get(i).getId() + "\">" + categoryStorage.get(i).getName() + "</a><br/>");
+			stringBuilder.append("<a href=\"projects?id=" + categoryStorage.get(i).getId() + "\">" + categoryStorage.get(i).getName() + "</a><br/>");			
 		}
 
 		stringBuilder.append("</body></html>");
-		resp.getWriter().append(stringBuilder);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+		response.getWriter().append(stringBuilder);
+	}	
 }

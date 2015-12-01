@@ -37,4 +37,11 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectStorage {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public List<Project> getByCategory(int categoryId) {
+		 return this.getAll().stream()
+	                .filter(project -> project.getCategoryId() == categoryId)
+	                .collect(Collectors.toList());
+	}
+
 }

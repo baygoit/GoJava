@@ -14,7 +14,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 
 	private static final String TABLE = "project";
-	private static final String FIELDS = "name, description, goal, pledged, daysToGo, history, link";
+	private static final String FIELDS = "id, name, description, goal, pledged, daysToGo, history, link";
 
 	public ProjectDbDao(Connection connection) {
 		super(connection, FIELDS, TABLE);
@@ -65,6 +65,7 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 	protected Project readElement(ResultSet resultSet) throws SQLException {
 		Project project;
 		project = new Project();
+		project.setId(resultSet.getInt("id"));
 		project.setName(resultSet.getString("name"));
 		project.setDescription(resultSet.getString("description"));
 		project.setGoal(resultSet.getInt("goal"));
@@ -73,5 +74,19 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 		project.setHistory(resultSet.getString("history"));
 		project.setLink(resultSet.getString("link"));
 		return project;
+	}
+
+	@Override
+	public List<Project> getByCategory(int categoryId) {
+		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE category_id = " + categoryId;
+		List<Project> data = new ArrayList<>();
+		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+			while (resultSet.next()) {
+				data.add(readElement(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return data;
 	}	
 }
