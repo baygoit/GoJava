@@ -25,11 +25,11 @@ import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.console.Printer;
 import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
 import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
-import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuestionStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.RewardStorage;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
@@ -51,15 +51,15 @@ public class KickstarterTest {
 	@Mock
 	private QuotePrinter quotePrinter;
 	@Mock
-	private QuoteStorage quoteStorage;
+	private QuoteDao quoteStorage;
 	@Mock
-	private CategoryStorage categoryStorage;
+	private CategoryDao categoryStorage;
 	@Mock
-	private ProjectStorage projectStorage;
+	private ProjectDao projectStorage;
 	@Mock
-	private QuestionStorage questionsStorage;
+	private QuestionDao questionsStorage;
 	@Mock
-	private RewardStorage rewardStorage;
+	private RewardDao rewardStorage;
 
 	@InjectMocks
 	private Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage, projectStorage, questionsStorage,

@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
-import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
+public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 
 	private static final String TABLE = "project";
 	private static final String FIELDS = "id, name, description, goal, pledged, daysToGo, history, link";

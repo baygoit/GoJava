@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
-import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 @WebServlet("/projects")
-public class ProjectsInCategory extends HttpServlet {
+public class ProjectsServlet extends HttpServlet {
 
 	private DaoFactory daoFactory;
-	private ProjectStorage projectStorage;
+	private ProjectDao projectStorage;
 
 	@Override
 	public void init() throws ServletException {

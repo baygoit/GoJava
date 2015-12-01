@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ua.com.goit.gojava7.kickstarter.dao.MemoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStorage {
+public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectDao {
 
 	public ProjectMemoryDao(List<Project> data) {
 		super(data);

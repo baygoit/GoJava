@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
-import ua.com.goit.gojava7.kickstarter.dao.storage.RewardStorage;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
-public class RewardDbDao extends DbDao<Reward> implements RewardStorage {
+public class RewardDbDao extends DbDao<Reward> implements RewardDao {
 
 	private static final String TABLE = "reward";
 	private static final String FIELDS = "amount, reward";

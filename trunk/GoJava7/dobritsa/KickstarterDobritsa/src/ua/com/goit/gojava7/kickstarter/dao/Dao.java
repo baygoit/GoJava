@@ -1,8 +1,8 @@
-package ua.com.goit.gojava7.kickstarter.dao.storage;
+package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.util.List;
 
-public interface Storage<T> {
+public interface Dao<T> {
 		
 	List<T> getAll();
 	

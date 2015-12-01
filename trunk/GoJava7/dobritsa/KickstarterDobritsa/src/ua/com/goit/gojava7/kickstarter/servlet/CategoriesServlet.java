@@ -9,17 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava7.kickstarter.config.DataSource;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
-import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @WebServlet("/categories")
 public class CategoriesServlet extends HttpServlet {
 
 	private DaoFactory daoFactory;
-	private QuoteStorage quoteStorage;	
-	private CategoryStorage categoryStorage;
+	private QuoteDao quoteStorage;	
+	private CategoryDao categoryStorage;
 
 	@Override
 	public void init() throws ServletException {

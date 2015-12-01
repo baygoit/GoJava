@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuestionStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
-public class QuestionDbDao extends DbDao<Question> implements QuestionStorage {
+public class QuestionDbDao extends DbDao<Question> implements QuestionDao {
 
 	private static final String TABLE = "question";
 	private static final String FIELDS = "time, question, answer, project_id";

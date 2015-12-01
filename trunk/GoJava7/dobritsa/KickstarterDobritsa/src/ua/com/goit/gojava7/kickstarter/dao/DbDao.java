@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.storage.Storage;
-
-public abstract class DbDao<T> implements Storage<T> {
+public abstract class DbDao<T> implements Dao<T> {
 
 	protected String FIELDS = null;
 	protected String TABLE = null;

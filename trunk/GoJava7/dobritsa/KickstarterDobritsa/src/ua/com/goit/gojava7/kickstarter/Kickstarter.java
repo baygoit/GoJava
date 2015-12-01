@@ -8,11 +8,11 @@ import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.console.Printer;
 import ua.com.goit.gojava7.kickstarter.console.ProjectPrinter;
 import ua.com.goit.gojava7.kickstarter.console.QuotePrinter;
-import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuestionStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.RewardStorage;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
@@ -26,19 +26,19 @@ public class Kickstarter {
 	private ProjectPrinter projectPrinter = new ProjectPrinter();
 	private QuotePrinter quotePrinter = new QuotePrinter();
 
-	private QuoteStorage quoteStorage;
-	private CategoryStorage categoryStorage;
-	private ProjectStorage projectStorage;
-	private QuestionStorage questionStorage;
-	private RewardStorage rewardStorage;
+	private QuoteDao quoteStorage;
+	private CategoryDao categoryStorage;
+	private ProjectDao projectStorage;
+	private QuestionDao questionStorage;
+	private RewardDao rewardStorage;
 
 	private Project currentProject = null;
 	private Category currentCategory = null;
 
 	private String BORDER = "\n________________________________________________________";
 
-	public Kickstarter(QuoteStorage quoteStorage, CategoryStorage categoryStorage, ProjectStorage projectStorage,
-			QuestionStorage questionStorage, RewardStorage rewardStorage) {
+	public Kickstarter(QuoteDao quoteStorage, CategoryDao categoryStorage, ProjectDao projectStorage,
+			QuestionDao questionStorage, RewardDao rewardStorage) {
 		this.quoteStorage = quoteStorage;
 		this.categoryStorage = categoryStorage;
 		this.projectStorage = projectStorage;
@@ -68,21 +68,21 @@ public class Kickstarter {
 		} while (currentCategory != null);
 	}
 
-	public Category chooseCategory(CategoryStorage categoryStorage) {
+	public Category chooseCategory(CategoryDao categoryStorage) {
 		printer.print(BORDER + "\nList of categories:\n");
 		categoryPrinter.printCategories(categoryStorage.getAll());
 		printer.print("\nChoose a category by number ('0' for exit): ");
 		return setCurrentCategory(categoryStorage);
 	}
 
-	public Category setCurrentCategory(CategoryStorage categoryStorage) {
+	public Category setCurrentCategory(CategoryDao categoryStorage) {
 		int numberOfCategory = consoleScanner.getInt(0, categoryStorage.size());
 		if (numberOfCategory == 0)
 			return null;
 		return categoryStorage.getByNumber(numberOfCategory);
 	}
 
-	public Project chooseProject(Category category, ProjectStorage projectStorage) {
+	public Project chooseProject(Category category, ProjectDao projectStorage) {
 		List<Project> projectsInCategory = new ArrayList<>();
 		projectsInCategory = projectStorage.getByCategory(category.getName());
 		printer.print(BORDER + "\nCurrent category: " + category.getName() + "\nList of projects:");

@@ -1,10 +1,10 @@
-package ua.com.goit.gojava7.kickstarter.dao.storage;
+package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-public interface ProjectStorage extends Storage<Project> {
+public interface ProjectDao extends Dao<Project> {
 
 	public Project getByNumber(int number);
 

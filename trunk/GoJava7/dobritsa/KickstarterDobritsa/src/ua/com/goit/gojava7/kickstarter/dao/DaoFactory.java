@@ -27,19 +27,14 @@ import ua.com.goit.gojava7.kickstarter.dao.memory.QuestionMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.RewardMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.reader.Memory;
-import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuestionStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.RewardStorage;
 
 public class DaoFactory {
 
-	private QuoteStorage quoteDAO;
-	private CategoryStorage categoryDAO;
-	private ProjectStorage projectDAO;
-	private QuestionStorage questionsDAO;
-	private RewardStorage rewardDAO;
+	private QuoteDao quoteDAO;
+	private CategoryDao categoryDAO;
+	private ProjectDao projectDAO;
+	private QuestionDao questionDAO;
+	private RewardDao rewardDAO;
 
 	private static final File QUOTES_FILE = new File("./resources/Quotes.txt");
 	private static final File CATEGORIES_FILE = new File("./resources/Categories.txt");
@@ -103,7 +98,7 @@ public class DaoFactory {
 		quoteDAO = new QuoteMemoryDao(data.getQuotes());
 		categoryDAO = new CategoryMemoryDao(data.getCategories());
 		projectDAO = new ProjectMemoryDao(data.getProjects());
-		questionsDAO = new QuestionMemoryDao(data.getQuestions());
+		questionDAO = new QuestionMemoryDao(data.getQuestions());
 		rewardDAO = new RewardMemoryDao(data.getRewards());
 	}
 
@@ -112,7 +107,7 @@ public class DaoFactory {
 		categoryDAO = new CategoryFileDao((new CategoryFileReader(CATEGORIES_FILE)).read());
 		projectDAO = new ProjectFileDao((new ProjectFileReader(PROJECTS_FILE)).read());
 		rewardDAO = new RewardFileDao((new RewardFileReader(REWARDS_FILE)).read());
-		questionsDAO = new QuestionsFileDao((new QuestionFileReader(QUESTIONS_FILE)).read());
+		questionDAO = new QuestionsFileDao((new QuestionFileReader(QUESTIONS_FILE)).read());
 	}
 
 	private void initDbStorage() {
@@ -120,27 +115,27 @@ public class DaoFactory {
 		quoteDAO = new QuoteDbDao(connection);
 		categoryDAO = new CategoryDbDao(connection);
 		projectDAO = new ProjectDbDao(connection);
-		questionsDAO = new QuestionDbDao(connection);
+		questionDAO = new QuestionDbDao(connection);
 		rewardDAO = new RewardDbDao(connection);
 	}
 
-	public CategoryStorage getCategoryDAO() {
+	public CategoryDao getCategoryDAO() {
 		return categoryDAO;
 	} 
 
-	public QuoteStorage getQuoteDAO() {
+	public QuoteDao getQuoteDAO() {
 		return quoteDAO;
 	}
 
-	public ProjectStorage getProjectDAO() {
+	public ProjectDao getProjectDAO() {
 		return projectDAO;
 	}
 
-	public QuestionStorage getQuestionsDAO() {
-		return questionsDAO;
+	public QuestionDao getQuestionDAO() {
+		return questionDAO;
 	}
 
-	public RewardStorage getRewardDAO() {
+	public RewardDao getRewardDAO() {
 		return rewardDAO;
 	}
 
