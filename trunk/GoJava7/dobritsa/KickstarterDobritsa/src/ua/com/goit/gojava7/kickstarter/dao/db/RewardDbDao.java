@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
@@ -16,8 +18,8 @@ public class RewardDbDao extends DbDao<Reward> implements RewardDao {
 	private static final String TABLE = "reward";
 	private static final String FIELDS = "amount, reward";
 
-	public RewardDbDao(Connection connection) {
-		super(connection, FIELDS, TABLE);
+	public RewardDbDao(BasicDataSource basicDataSource) {
+		super(basicDataSource, FIELDS, TABLE);
 	} 
 
 	@Override
@@ -25,7 +27,7 @@ public class RewardDbDao extends DbDao<Reward> implements RewardDao {
 		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE project_id = "
 				+ "(SELECT id FROM project WHERE name = '" + prepareStringForDb(projectName) + "')";
 		List<Reward> data = new ArrayList<>();
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+		try (Connection connection = basicDataSource.getConnection(); PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				data.add(readElement(resultSet));
 			}

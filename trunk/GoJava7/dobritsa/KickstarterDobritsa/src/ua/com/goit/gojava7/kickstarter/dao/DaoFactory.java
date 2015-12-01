@@ -46,7 +46,7 @@ public class DaoFactory {
 	private static final File QUESTIONS_FILE = new File("./resources/Questions.txt");
 	private MyDataSource dataSource;
 
-	private Connection connection = null;
+	//private Connection connection = null;
 
 	public DaoFactory(MyDataSource dataSource) {
 		this.dataSource = dataSource;
@@ -78,7 +78,8 @@ public class DaoFactory {
 		return ds;
 	}
 
-	public void open() {
+	public Connection open() {
+		Connection connection = null;
 		if (dataSource == MyDataSource.DB) {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
@@ -91,18 +92,19 @@ public class DaoFactory {
 				throw new IllegalStateException("Cannot open load mysql driver. " + e.getMessage(), e);
 			}
 		}
+		return connection;
 	}
 
 	public void close() {
-		if (dataSource == MyDataSource.DB) {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				throw new IllegalStateException("Cannot close connection " + connection + ". " + e.getMessage(), e);
-			}
-		}
+		//if (dataSource == MyDataSource.DB) {
+			//try {
+				//if (connection != null) {
+				//	connection.close();
+			//	}
+			//} catch (SQLException e) {
+			//	throw new IllegalStateException("Cannot close connection " + connection + ". " + e.getMessage(), e);
+			//}
+		//}
 	}
 
 	private void initMemoryStorage() {
@@ -125,11 +127,16 @@ public class DaoFactory {
 
 	private void initDbStorage() {
 		open();
-		quoteDAO = new QuoteDbDao(connection);
-		categoryDAO = new CategoryDbDao(connection);
-		projectDAO = new ProjectDbDao(connection);
-		questionDAO = new QuestionDbDao(connection);
-		rewardDAO = new RewardDbDao(connection);
+		quoteDAO = new QuoteDbDao(setupDataSource("com.mysql.jdbc.Driver",
+				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
+		categoryDAO = new CategoryDbDao(setupDataSource("com.mysql.jdbc.Driver",
+				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
+		projectDAO = new ProjectDbDao(setupDataSource("com.mysql.jdbc.Driver",
+				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
+		questionDAO = new QuestionDbDao(setupDataSource("com.mysql.jdbc.Driver",
+				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
+		rewardDAO = new RewardDbDao(setupDataSource("com.mysql.jdbc.Driver",
+				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
 	}
 
 	public CategoryDao getCategoryDAO() {
