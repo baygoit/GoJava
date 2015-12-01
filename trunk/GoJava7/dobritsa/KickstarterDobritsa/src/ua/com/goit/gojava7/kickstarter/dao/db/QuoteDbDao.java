@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-public class QuoteDbDao extends DbDao<Quote> implements QuoteStorage {
+public class QuoteDbDao extends DbDao<Quote> implements QuoteDao {
 
-	private static String TABLE = "quote";
-	private static String FIELDS = "text, author";
+	private static final String TABLE = "quote";
+	private static final String FIELDS = "text, author";
 
 	public QuoteDbDao(Connection connection) {
 		super(connection, FIELDS, TABLE);

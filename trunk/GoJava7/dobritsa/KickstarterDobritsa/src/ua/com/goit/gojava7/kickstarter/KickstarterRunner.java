@@ -3,12 +3,12 @@ package ua.com.goit.gojava7.kickstarter;
 import java.io.FileNotFoundException;
 
 import ua.com.goit.gojava7.kickstarter.config.DataSource;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
-import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuestionStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.RewardStorage;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 
 public class KickstarterRunner {
 
@@ -25,11 +25,11 @@ public class KickstarterRunner {
 
 		DaoFactory daoFactory = new DaoFactory(dataSource);
 		
-		QuoteStorage quoteStorage = daoFactory.getQuoteDAO();
-		CategoryStorage categoryStorage = daoFactory.getCategoryDAO();
-		ProjectStorage projectStorage = daoFactory.getProjectDAO();
-		QuestionStorage questionsStorage = daoFactory.getQuestionsDAO();
-		RewardStorage rewardStorage = daoFactory.getRewardDAO();
+		QuoteDao quoteStorage = daoFactory.getQuoteDAO();
+		CategoryDao categoryStorage = daoFactory.getCategoryDAO();
+		ProjectDao projectStorage = daoFactory.getProjectDAO();
+		QuestionDao questionsStorage = daoFactory.getQuestionDAO();
+		RewardDao rewardStorage = daoFactory.getRewardDAO();
 
 		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage, projectStorage, questionsStorage,
 				rewardStorage);
