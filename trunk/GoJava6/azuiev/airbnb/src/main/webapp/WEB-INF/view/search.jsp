@@ -19,7 +19,7 @@
         <tr>
         <c:forEach var="item" items="${apartment}">
             <th class="headtab2">
-            <a href="/search?userid=${item.getId()}">${item.getCity()} ${item.getAddress()}</a>
+            <a href="/search?userid=${item.getId()}">${item.getCity().getName()} ${item.getAddress()}</a>
             </th>
         </c:forEach>
         </tr>

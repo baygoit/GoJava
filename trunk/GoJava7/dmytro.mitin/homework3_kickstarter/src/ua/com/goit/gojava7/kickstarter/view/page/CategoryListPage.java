@@ -1,11 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.view.page;
 
-import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleView;
 
-/**
- * Created by Dmytro on 07.11.2015.
- */
 public class CategoryListPage implements Page {
     ConsoleView view;
 
@@ -29,19 +25,6 @@ public class CategoryListPage implements Page {
 
     @Override
     public Page getUpdated(String command) {
-        if (ConsoleView.isStandard(command)) {
-            return view.updatePageToStandard(command);
-        }
-        int code;
-        try {
-            code = Integer.parseInt(command) - 1;
-        } catch (NumberFormatException | NullPointerException e) {
-            return new ErrorPage(view);
-        }
-        Category category = view.getController().getCategory(code);
-        if (category == null) {
-            return new ErrorPage(view);
-        }
-        return new CategoryPage(view, category);
+        return new GreetingPage(view).getUpdated(command);
     }
 }

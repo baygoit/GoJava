@@ -3,68 +3,94 @@ package ua.com.goit.gojava7.kickstarter.Level;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CategoryLevelTest {
 	private static final String ANSVER = "Please, enter the number between 0 and 1";
 	
-	List<Category> categories;
-	Category selectedCategory;
-	Level categoryLevel = new CategoryLevel();
-	Project project;
+	private List<Project> projects;
+	private Category selectedCategory;
+	private Project selectedProject;
+	
+	@Mock
+	private ProjectDao projectDao;
+	@Mock
+	private PaymentDao paymentDao;
+	@InjectMocks
+	private Level categoryLevel = new CategoryLevel(projectDao, paymentDao);
+	
 	
 	@Before 
 	public void setUp() {
-		categories = new ArrayList<Category>();
-		Category category = new Category("Some Category");
-		project = new Project("proj 1");
-		category.addProject(project);
-		categories.add(category);
-		categories.add(new Category("Second Category"));
-		selectedCategory = category;
+		selectedCategory = new Category();
+		selectedCategory.setId(1);
+		selectedCategory.setName("Some Category");
+		selectedProject = new Project("proj 1", 1);
+		
+		projects = new ArrayList<Project>();
+		projects.add(selectedProject);
 	}
 	
 	@Test
-	public void testFindSelectedCategory1() {
-		Category result = categoryLevel.findSelectedCategory(categories, 0, null);
+	public void testFillOutForm(){
+		String result = categoryLevel.fillOutForm(null, 1, null);
+		assertThat(result, is(""));
+	}
+	
+	@Test
+	public void testFindSelectedCategory() {
+		Category result = categoryLevel.findSelectedCategory(0, selectedCategory);
 		assertThat(result, is(selectedCategory));
 	}
 	
 	@Test
-	public void testFindSelectedCategory2() {
-		Category result = categoryLevel.findSelectedCategory(categories, 0, selectedCategory);
-		assertThat(result, is(selectedCategory));
+	public void testFindSelectedProject() {
+		when(projectDao.getProject(0, 1)).thenReturn(selectedProject);
+		Project result = categoryLevel.findSelectedProject(0, selectedCategory, null);
+		assertThat(result, is(selectedProject));
 	}
 	
 	@Test
 	public void testValidateUserChoise1() {
-		String result = categoryLevel.validateUserChoise(categories, 1, selectedCategory);
+		when(projectDao.size(1)).thenReturn(projects.size());
+		String result = categoryLevel.validateUserChoise(1, selectedCategory, selectedProject);
 		assertThat(result, is(""));
 	}
 	
 	@Test
 	public void testValidateUserChoise2() {
-		String result = categoryLevel.validateUserChoise(categories, 2, selectedCategory);
+		when(projectDao.size(1)).thenReturn(projects.size());
+		String result = categoryLevel.validateUserChoise(2, selectedCategory, selectedProject);
 		assertThat(result, is(ANSVER));
 	}
 	
 	@Test
 	public void testValidateUserChoiseMinus1() {
-		String result = categoryLevel.validateUserChoise(categories, -1, selectedCategory);
+		when(projectDao.size(1)).thenReturn(projects.size());
+		String result = categoryLevel.validateUserChoise(-1, selectedCategory, selectedProject);
 		assertThat(result, is(ANSVER));
 	}
 	
 	@Test
 	public void testGenerateAnswer() {
-		String result = categoryLevel.generateAnswer(categories, 0, selectedCategory, project);
+		when(projectDao.getProjects(selectedCategory.getId())).thenReturn(projects);
+		String result = categoryLevel.generateAnswer(0, selectedCategory, selectedProject);
 		assertThat(result, containsString("You selected 'Some Category' category"));
 		assertThat(result, containsString("proj 1"));
 		assertThat(result, containsString("0 : main menu"));

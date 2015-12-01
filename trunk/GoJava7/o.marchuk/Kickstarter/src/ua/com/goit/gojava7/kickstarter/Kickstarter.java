@@ -5,25 +5,24 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class Kickstarter {
-	private QuoteStorage quoteStorage;
-	private CategoryStorage categoryStorage;
+	private QuoteDao quoteStorage;
+	private CategoryDao categoryDao;
 
 	private ConsolePrinter consolePrinter;
 	private ConsoleScanner consoleScanner;
 
-	public Kickstarter(ConsolePrinter consolePrinter, ConsoleScanner consoleScanner,
-			QuoteStorage quoteStorage, CategoryStorage categoryStorage) {
+	public Kickstarter(ConsolePrinter consolePrinter, ConsoleScanner consoleScanner, QuoteDao quoteStorage, CategoryDao categoryDao) {
 		this.consolePrinter = consolePrinter;
 		this.consoleScanner = consoleScanner;
 
 		this.quoteStorage = quoteStorage;
-		this.categoryStorage = categoryStorage;
+		this.categoryDao = categoryDao;
 	}
 
 	/**
@@ -36,7 +35,7 @@ public class Kickstarter {
 	}
 
 	void showCategoriesMenu() {
-		List<Category> categories = categoryStorage.getAllCategories();
+		List<Category> categories = categoryDao.getAll();
 
 		int selectedCategoryIndex;
 		do {

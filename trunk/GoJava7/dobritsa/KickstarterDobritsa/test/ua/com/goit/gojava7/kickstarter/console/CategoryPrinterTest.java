@@ -11,54 +11,37 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryPrinterTest {
 
 	private CategoryPrinter categoryPrinter = new CategoryPrinter();
-	private PrintStream systemOut;
+	List<Category> categories = new ArrayList<Category>();
+	
+	
+	@Mock
+	private PrintStream printSteam;
 
 	@Before
 	public void setUp() {
-		systemOut = System.out;
+		Category category = new Category();
+		category.setName("TestName");
+		categories.add(category);
+		System.setOut(printSteam);
 	}
 
 	@After
 	public void tearDown() {
-		System.setOut(systemOut);
+		verifyNoMoreInteractions(printSteam);		
 	}
 
 	@Test
-	public void testPrint() {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);
-		List<Category> categories = new ArrayList<Category>();
-		categories.add(new Category("Category1"));
+	public void testPrint() {				
 		categoryPrinter.printCategories(categories);
-		verify(printSteam).println(contains("Category1"));
+		verify(printSteam).println(contains("TestName"));
 	}
-
-	@Test
-	public void testPrintProjects() {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);
-		Category category = new Category("Category1");
-		List<String> questions = new ArrayList<String>();
-		questions.add("QuestionsTest");
-		Project project1 = new Project("NameTest", "DescriptionTest", 1000000, 10000, 10, "HistoryTest", "LinkTest",
-				questions);
-		category.add(project1);
-		List<Category> categories = new ArrayList<Category>();
-		categories.add(category);
-
-		categoryPrinter.printProjects(categories.get(0).getAll());
-		verify(printSteam).println(contains("NameTest"));
-		verify(printSteam).println(contains("DescriptionTest"));
-		verify(printSteam).println(endsWith("10"));
-	}
-
 }

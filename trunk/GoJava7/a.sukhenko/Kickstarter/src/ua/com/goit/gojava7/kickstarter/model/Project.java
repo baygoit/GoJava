@@ -5,26 +5,38 @@ import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Project{
-	private static final String		MINUTES_LEFT		= " minutes left";
-	private static final String		HOURS_LEFT			= " hours left";
-	private static final String		DAYS_LEFT			= " days left";
-	private static final String		SECONDS_LEFT		= " seconds left";
-	private String					projectName;
-	private String					projectDescription;
-	private double					moneyNeeded;
-	private String					projectHistory;
-	private String					demoLink;
-	private Map<String, String>		questionsAndAnswers	= new HashMap<>();
-	private Category				projectCategory;
-	private HashMap<User, Double>	backers				= new HashMap<>();
-	private LocalDateTime			enddate;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+
+public class Project {
+	private static final String MINUTES_LEFT = " minutes left";
+	private static final String HOURS_LEFT = " hours left";
+	private static final String DAYS_LEFT = " days left";
+	private static final String SECONDS_LEFT = " seconds left";
+	private String projectName;
+	private String projectDescription;
+	private double moneyNeeded;
+	private String projectHistory;
+	private String demoLink;
+	private Map<String, String> questionsAndAnswers = new HashMap<>();
+	private Category projectCategory;
+	private HashMap<User, Double> backers = new HashMap<>();
+	private LocalDateTime enddate;
+	private PaymentBonus paymentBonus = new PaymentBonus();
+
+	public LocalDateTime getEnddate() {
+		return enddate;
+	}
+
+	public void setBackers(HashMap<User, Double> backers) {
+		this.backers = backers;
+	}
 
 	public Project() {
 
 	}
-	public Project(String projectName, String projectDescription,
-			Category projectCategory, LocalDateTime enddate) {
+
+	public Project(String projectName, String projectDescription, Category projectCategory, LocalDateTime enddate) {
 		super();
 		this.projectName = projectName;
 		this.projectDescription = projectDescription;
@@ -36,6 +48,7 @@ public class Project{
 		return moneyNeeded;
 	}
 
+	@XmlElement
 	public void setMoneyNeeded(double moneyNeeded) {
 		this.moneyNeeded = moneyNeeded;
 	}
@@ -65,8 +78,7 @@ public class Project{
 	}
 
 	public String getFundedPercentage() {
-		String percentage = (float) ((getMoneyPledged() * 100)
-				/ getMoneyNeeded()) + "%";
+		String percentage = (float) ((getMoneyPledged() * 100) / getMoneyNeeded()) + "%";
 		return percentage;
 	}
 
@@ -74,6 +86,7 @@ public class Project{
 		return projectName;
 	}
 
+	@XmlAttribute
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
@@ -82,6 +95,7 @@ public class Project{
 		return projectDescription;
 	}
 
+	@XmlElement
 	public void setProjectDescription(String projectDescription) {
 		this.projectDescription = projectDescription;
 	}
@@ -98,6 +112,7 @@ public class Project{
 		return projectCategory;
 	}
 
+	@XmlElement
 	public void setProjectCategory(Category projectCategory) {
 		this.projectCategory = projectCategory;
 	}
@@ -110,6 +125,7 @@ public class Project{
 		return enddate;
 	}
 
+	@XmlElement
 	public void setEnddate(LocalDateTime enddate) {
 		this.enddate = enddate;
 	}
@@ -118,6 +134,7 @@ public class Project{
 		return projectHistory;
 	}
 
+	@XmlElement
 	public void setProjectHistory(String projectHistory) {
 		this.projectHistory = projectHistory;
 	}
@@ -126,8 +143,8 @@ public class Project{
 		return questionsAndAnswers;
 	}
 
-	public void setQuestionsAndAnswers(
-			Map<String, String> questionsAndAnswers) {
+	@XmlElement
+	public void setQuestionsAndAnswers(Map<String, String> questionsAndAnswers) {
 		this.questionsAndAnswers = questionsAndAnswers;
 	}
 
@@ -135,8 +152,17 @@ public class Project{
 		return demoLink;
 	}
 
+	@XmlElement
 	public void setDemoLink(String demoLink) {
 		this.demoLink = demoLink;
+	}
+
+	public PaymentBonus getPaymentBonus() {
+		return paymentBonus;
+	}
+
+	public void setPaymentBonus(PaymentBonus paymentBonus) {
+		this.paymentBonus = paymentBonus;
 	}
 
 }

@@ -2,9 +2,10 @@ package ua.com.goit.gojava7.kickstarter.model;
 
 import ua.com.goit.gojava7.kickstarter.payment.PaymentSystem;
 
-public class User{
-	private PaymentSystem	paymentSystem;
-	private UserSettings	settings	= new UserSettings();
+public class User {
+	private PaymentSystem paymentSystem;
+	private UserSettings settings = new UserSettings();
+
 	public User() {
 	}
 

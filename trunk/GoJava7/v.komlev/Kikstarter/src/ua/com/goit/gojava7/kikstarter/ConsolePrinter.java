@@ -1,5 +1,9 @@
 package ua.com.goit.gojava7.kikstarter;
 
+import ua.com.goit.gojava7.kikstarter.domain.Category;
+import ua.com.goit.gojava7.kikstarter.domain.Project;
+import ua.com.goit.gojava7.kikstarter.domain.Quote;
+
 public class ConsolePrinter {
 
 	private static final String NEXT_LINE = "\n";
@@ -11,14 +15,14 @@ public class ConsolePrinter {
 	}
 
 	public void printQuote(Quote quote) {
-		System.out.println(quote.getQuoteContent() + NEXT_LINE + quote.getQuoteAuthor() + NEXT_LINE
+		System.out.println(quote.getContent() + NEXT_LINE + quote.getAuthor() + NEXT_LINE
 				+ INDENT);
 	}
 
 	public void printAllCategories(CategoryStorage categoryStorage) {
 		System.out.println("All categories:");
 		for (int i = 0; i < categoryStorage.getAllCategories().size(); i++) {
-			System.out.println((i + 1) + " : " + categoryStorage.getCategory(i).getNameCategory());
+			System.out.println((i + 1) + " : " + categoryStorage.getCategory(i).getName());
 		}
 		System.out.println(INDENT);
 	}
@@ -27,27 +31,29 @@ public class ConsolePrinter {
 		Category projectsCategory = categoryStorage.getCategory(numberOfCategory);
 		for (int i = 0; i < projectsCategory.getAllProjectsInThisCategory().size(); i++) {
 			Project currentProject = projectsCategory.getAllProjectsInThisCategory().get(i);
-			System.out.println("¹" + (i + 1) + SEPARETOR + currentProject.getProjectName()
-					+ NEXT_LINE + "Title" + SEPARETOR + currentProject.getProjectDescription()
+			System.out.println("¹" + (i + 1) + SEPARETOR + currentProject.getName()
+					+ NEXT_LINE + "Title" + SEPARETOR + currentProject.getDescription()
 					+ NEXT_LINE + "Necessary amount" + SEPARETOR
-					+ currentProject.getProjectNecessaryAmount() + NEXT_LINE + "Collected amount"
-					+ SEPARETOR + currentProject.getProjectAmountCollected() + NEXT_LINE
-					+ "Days to go" + SEPARETOR + currentProject.getProjectDaysToEnd() + NEXT_LINE
+					+ currentProject.getNecessaryAmount() + NEXT_LINE + "Collected amount"
+					+ SEPARETOR + currentProject.getAmountCollected() + NEXT_LINE
+					+ "Days to go" + SEPARETOR + currentProject.getEndOfDays() + NEXT_LINE
+					+ "Question" + SEPARETOR + currentProject.getProjectQuestion() + NEXT_LINE
 					+ INDENT);
 		}
 	}
 
 	public void printCategory(Category category) {
-		System.out.println(INDENT + NEXT_LINE + category.getNameCategory() + NEXT_LINE + INDENT);
+		System.out.println(INDENT + NEXT_LINE + category.getName() + NEXT_LINE + INDENT);
 	}
 
 	public void printPoject(Project project) {
-		System.out.println("Title" + SEPARETOR + project.getProjectDescription() + NEXT_LINE
-				+ "Necessary amount" + SEPARETOR + project.getProjectNecessaryAmount() + NEXT_LINE
-				+ "Collected amount" + SEPARETOR + project.getProjectAmountCollected() + NEXT_LINE
-				+ "Days to go" + SEPARETOR + project.getProjectDaysToEnd() + NEXT_LINE
-				+ "About this project" + SEPARETOR + project.getProjectDetailedDescription()
-				+ NEXT_LINE + "Reference on project" + SEPARETOR + project.getProjectUrl()
-				+ NEXT_LINE + INDENT);
+		System.out.println("Title" + SEPARETOR + project.getDescription() + NEXT_LINE
+				+ "Necessary amount" + SEPARETOR + project.getNecessaryAmount() + NEXT_LINE
+				+ "Collected amount" + SEPARETOR + project.getAmountCollected() + NEXT_LINE
+				+ "Days to go" + SEPARETOR + project.getEndOfDays() + NEXT_LINE
+				+ "About this project" + SEPARETOR + project.getDetailedDescription()
+				+ NEXT_LINE + "Reference on project" + SEPARETOR + project.getUrl()
+				+ NEXT_LINE + "Question" + SEPARETOR + project.getProjectQuestion() + NEXT_LINE
+				+ INDENT);
 	}
 }

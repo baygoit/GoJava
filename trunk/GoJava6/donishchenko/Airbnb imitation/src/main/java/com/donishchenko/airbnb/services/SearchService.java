@@ -1,17 +1,19 @@
 package com.donishchenko.airbnb.services;
 
 import com.donishchenko.airbnb.dao.ApartmentDao;
-import com.donishchenko.airbnb.dao.ApartmentHibernateDao;
 import com.donishchenko.airbnb.dao.CityDao;
-import com.donishchenko.airbnb.dao.CityHibernateDao;
 import com.donishchenko.airbnb.model.Apartment;
 import com.donishchenko.airbnb.model.City;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class SearchService {
-    private CityDao cityDao             = new CityHibernateDao();
-    private ApartmentDao apartmentDao   = new ApartmentHibernateDao();
+    @Autowired
+    private CityDao cityDao;
+
+    @Autowired
+    private ApartmentDao apartmentDao;
 
     public List<City> getAllCities() {
         return cityDao.getAll();

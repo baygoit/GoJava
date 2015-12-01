@@ -1,143 +1,63 @@
 package ua.com.goit.gojava7.kickstarter.view;
 
-import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 
-
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.Faq;
-import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.model.Quote;
-import ua.com.goit.gojava7.kickstarter.storage_in_memory.FaqStorage;
-import ua.com.goit.gojava7.kickstarter.templates.Templateble;
+import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.beans.Quote;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractCategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqDao;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentDao;
+import ua.com.goit.gojava7.kickstarter.handlers.TextModifer;
 
 public class ConsolePrinter {
-	private static final String MOVE_TO_THE_NEXT_LINE = "\n";
 	private static final TextModifer TEXT_MODIFER = new TextModifer();
 
 	public void print(Quote quote) {
-		String result = TEXT_MODIFER.getModifiedQuoteBeforePrint(quote.getQuoteText(), quote.getAuthor());
+		String result = TEXT_MODIFER.getModifiedQuote(quote.getQuoteText(), quote.getAuthor());
 		System.out.println(result);
 	}
 
 	public void print(Category category) {
 		System.out.println("Category : " + category.getName());
 	}
-	
+
 	public void print(String string) {
 		System.out.println(string);
-	}		
-	
-	public void printBriefProjectInfo(Project project) {
-		StringBuilder result = new StringBuilder();
-		
-		result.
-			append("Title : ").
-			append(TEXT_MODIFER.getModifiedText(project.getTitle())).
-			append(MOVE_TO_THE_NEXT_LINE).
-			append("About : ").
-			append(TEXT_MODIFER.getModifiedText(project.getBriefDescription())).
-			append(MOVE_TO_THE_NEXT_LINE).
-			append(project.getCurrentAmoutOfMoney()).
-			append(" pledged of $ ").
-			append(project.getRequiredAmountOfMoney()).
-			append(" goal").
-			append(MOVE_TO_THE_NEXT_LINE).
-			append("Days to go : ").
-			append(project.getExpiryDays());
-		System.out.println(result.toString());
-	}
-	
-	public void printFullProjectInfo(Project project) {
-		StringBuilder result = new StringBuilder();
-		
-		printBriefProjectInfo(project);
-		
-		result.
-			append("History : ").
-			append(TEXT_MODIFER.getModifiedText(project.getFullDescription())).
-			append(MOVE_TO_THE_NEXT_LINE).
-			append("Video : ").
-			append(project.getLinkOnVideo()).
-			append(MOVE_TO_THE_NEXT_LINE);
-		System.out.println(result.toString());
-		
 	}
 
-	public void printCategories(Set<Category> categories) {
-		Iterator<Category> categoryIterator = categories.iterator();
-		StringBuilder categoriesInfo = new StringBuilder();
-		
-		categoriesInfo.
-			append("All categories : ").
-			append(MOVE_TO_THE_NEXT_LINE);
-			
-		int categoryNumber = 0;
-		while (categoryIterator.hasNext()) {
-			categoryNumber ++;
-			Category category = categoryIterator.next();
-			
-			categoriesInfo.
-				append(categoryNumber).
-				append(" : ").
-				append(category.getName()).
-				append(MOVE_TO_THE_NEXT_LINE);
-		}
-		System.out.println(categoriesInfo.toString());
+	public void printShortProjectInfo(Project project, AbstractFaqDao faqs, AbstractPaymentDao payments) {
+		System.out.println("Title : " + project.getTitle());
+		System.out.println("Short description : " + project.getBriefDescription());
+		System.out.println("Required amount : " + project.getRequiredSum());
+		System.out.println("Gathered amount : " + payments.getSumProjectPayments(project));
+		System.out.println("Days left : " + project.getDaysLeft());
+		System.out.println("FAQ : " + faqs.getProjectFaqs(project));
 	}
+
+	public void printFullProjectInfo(Project project, AbstractFaqDao faqStorage, AbstractPaymentDao paymentStorage) {
+		printShortProjectInfo(project, faqStorage, paymentStorage);
+		System.out.println("Full description : " + project.getFullDescription());
+		System.out.println("Video : " + project.getVideoLink());
+	}
+
+	public void printCategories(AbstractCategoryDao allCategories) {
+		List<Category> categories = allCategories.getAll();
 		
-	public void printProjects(Set<Project> projects, boolean userChoise) {	
-		StringBuilder projectInfo = new StringBuilder();
-		
-		projectInfo.
-			append("All projects from selected category : ").
-			append(MOVE_TO_THE_NEXT_LINE);
-		
-		int stepCounter = 0;
-		Iterator<Project> projectIterator = projects.iterator();
-		
-		while (projectIterator.hasNext()) {				
-			projectInfo.
-				append(MOVE_TO_THE_NEXT_LINE).
-				append("Project ¹ ").
-				append(++ stepCounter);
-			System.out.println(projectInfo.toString());
-			projectInfo.delete(0, projectInfo.length());
-			
-			printBriefProjectInfo(projectIterator.next());
+		System.out.println("All categories : ");
+		for (int index = 0; index < categories.size(); index++) {
+			Category category = categories.get(index);
+			System.out.println((index + 1) + " : " + category.getName());
 		}
 	}
-	
-	public void printFAQs(Set<Faq> FAQs) {
-		Set<Faq> AllFAQsInSelectedProject = FAQs;
-		
-		if (AllFAQsInSelectedProject.size() == 0) {
-			return;
-		} else {
-			StringBuilder result = new StringBuilder();
-			
-			result.
-				append("FAQ : ").
-				append(MOVE_TO_THE_NEXT_LINE);
-			
-			Iterator<Faq> iteratorFAQ = AllFAQsInSelectedProject.iterator();
-			
-			int stepsCounter = 0;
-			while (iteratorFAQ.hasNext()) {
-				stepsCounter ++;
-				
-				Faq faq = iteratorFAQ.next();
-				
-				if (!faq.getQuestion().isEmpty()) {
-					result.
-						append(" ").
-						append(stepsCounter).
-						append(" question : ").
-						append(faq.getQuestion()).
-						append(MOVE_TO_THE_NEXT_LINE);
-				} 
-			}
-			System.out.println(result.toString());
-		}
+
+	public void printProjects(List<Project> projects, AbstractFaqDao faqStorage, AbstractPaymentDao paymentStorage) {
+		System.out.println("All projects from selected category : ");
+		for (int index = 0; index < projects.size(); index++) {
+			Project project = projects.get(index);				
+			System.out.println("Project ¹ " + (index + 1));
+			printShortProjectInfo(project, faqStorage, paymentStorage);
+			System.out.println();		
+		}	
 	}
 }

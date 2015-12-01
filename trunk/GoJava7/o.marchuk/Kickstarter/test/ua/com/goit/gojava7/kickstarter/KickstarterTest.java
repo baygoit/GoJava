@@ -19,10 +19,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 @RunWith(MockitoJUnitRunner.class)
 public class KickstarterTest {
@@ -31,11 +31,11 @@ public class KickstarterTest {
 	private ConsolePrinter consolePrinter;
 	@Mock
 	private ConsoleScanner consoleScanner;
-	private QuoteStorage quoteStorage;
+	private QuoteDao quoteStorage;
 	@Mock
-	private CategoryStorage categoryStorage;
+	private CategoryDao categoryDao;
 	@InjectMocks
-	private Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteStorage, categoryStorage);
+	private Kickstarter kickstarter = new Kickstarter(consolePrinter, consoleScanner, quoteStorage, categoryDao);
 
 	@Test
 	public void testShutdown() {
@@ -74,9 +74,11 @@ public class KickstarterTest {
 	@Test
 	public void testShowCategoriesMenuEnter1Has1Category() {
 		List<Category> categories = new ArrayList<Category>();
-		categories.add(new Category("category name"));
+		Category category = new Category();
+		category.setName("category name");
+		categories.add(category);
 
-		when(categoryStorage.getAllCategories()).thenReturn(categories);
+		when(categoryDao.getAll()).thenReturn(categories);
 		when(consoleScanner.getInt()).thenReturn(1, 0);
 
 		kickstarter.showCategoriesMenu();
@@ -88,7 +90,7 @@ public class KickstarterTest {
 	// cut
 	@Test
 	public void testShowProjectsMenuEntered0SaysBye() {
-		Category selectedCategory = new Category("category name");
+		Category selectedCategory = new Category();
 
 		kickstarter.showProjectsMenu(selectedCategory);
 
@@ -97,7 +99,7 @@ public class KickstarterTest {
 
 	@Test
 	public void testShowProjectsMenuEnter1NoProjectsAtAll() {
-		Category selectedCategory = new Category("category name");
+		Category selectedCategory = new Category();
 
 		when(consoleScanner.getInt()).thenReturn(1, 0);
 
@@ -109,7 +111,7 @@ public class KickstarterTest {
 
 	@Test
 	public void testShowProjectsMenuEnter_1NoProjectsAtAll() {
-		Category selectedCategory = new Category("category name");
+		Category selectedCategory = new Category();
 
 		when(consoleScanner.getInt()).thenReturn(-1, 0);
 
@@ -121,7 +123,7 @@ public class KickstarterTest {
 
 	@Test
 	public void testShowProjectsMenuEnter1Has1Project() {
-		Category selectedCategory = new Category("category name");
+		Category selectedCategory = new Category();
 
 		Set<Project> projects = new HashSet<Project>();
 		projects.add(new Project("project name", "short description", 50, 10));

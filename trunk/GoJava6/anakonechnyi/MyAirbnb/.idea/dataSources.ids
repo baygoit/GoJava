@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - @localhost" uuid="28c663bd-cb28-415d-9d88-5350d13a2a07">
+    <database-info product="MySQL" version="5.6.24-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="airbnb"/>
+    <table name="apartments" schema="" catalog="airbnb" type="TABLE">
+      <column name="idapartments" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="host_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="type" sqlType="ENUM" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="address" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="city_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idapartments"/>
+      <foreign-key name="host_id" columns="host_id" ref-table="users" ref-schema="" ref-catalog="airbnb" ref-columns="user_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="idapartment" table="reservations" schema="" catalog="airbnb" columns="idapartment"/>
+      <index name="city_id_idx" unique="false" columns="city_id"/>
+      <index name="host_id_idx" unique="false" columns="host_id"/>
+    </table>
+    <table name="cities" schema="" catalog="airbnb" type="TABLE">
+      <column name="city_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="city_name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="city_id"/>
+    </table>
+    <table name="reservations" schema="" catalog="airbnb" type="TABLE">
+      <column name="reserv_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idapartment" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="start" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="finish" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="clientId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="reserv_id"/>
+      <foreign-key name="clientId" columns="clientId" ref-table="users" ref-schema="" ref-catalog="airbnb" ref-columns="user_id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="idapartment" columns="idapartment" ref-table="apartments" ref-schema="" ref-catalog="airbnb" ref-columns="idapartments" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="reserv_id_UNIQUE" unique="true" columns="reserv_id"/>
+      <index name="clientId_idx" unique="false" columns="clientId"/>
+      <index name="idapartment_idx" unique="false" columns="idapartment"/>
+    </table>
+    <table name="users" schema="" catalog="airbnb" type="TABLE">
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="sur_name" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="is_host" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="user_id"/>
+      <exported-key name="host_id" table="apartments" schema="" catalog="airbnb" columns="host_id"/>
+      <exported-key name="clientId" table="reservations" schema="" catalog="airbnb" columns="clientId"/>
+      <index name="user_id_UNIQUE" unique="true" columns="user_id"/>
+    </table>
+  </data-source>
+</component>

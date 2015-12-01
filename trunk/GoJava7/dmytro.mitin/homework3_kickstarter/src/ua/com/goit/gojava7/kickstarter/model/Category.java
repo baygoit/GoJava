@@ -1,26 +1,29 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by Dmytro on 06.11.2015.
- */
 public class Category {
     private final String name;
 
     private final List<Project> projects;
+
+    public Category(String name) {
+        this.name = name;
+        projects = new ArrayList<>();
+    }
 
     public String getName() {
         return name;
     }
 
     public List<Project> getProjects() {
-        return projects;
+        return Collections.unmodifiableList(projects);
     }
 
-    public Category(String name) {
-        this.name = name;
-        this.projects = new ArrayList<>();
+    public void add(Project project) {
+        projects.add(project);
     }
+
 }

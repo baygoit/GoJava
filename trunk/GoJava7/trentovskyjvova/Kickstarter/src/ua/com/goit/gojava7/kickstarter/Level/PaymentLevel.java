@@ -1,52 +1,92 @@
 package ua.com.goit.gojava7.kickstarter.Level;
 
-import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public class PaymentLevel implements Level {
-
-	public String generateAnswer(List<Category> categories, int userChoise,
-			Category selectedCategory, Project selectedProject) {
-
-		return "";
+	private QuestionDao questionDao;
+	private RewardDao rewardDao;
+	
+	public PaymentLevel(QuestionDao questionDao, RewardDao rewardDao) {
+		setQuestionDao(questionDao);
+		setRewardDao(rewardDao);
 	}
 
-	public Category findSelectedCategory(List<Category> categories,
-			int userChoise, Category selectedCategory) {
+	public QuestionDao getQuestionDao() {
+		return questionDao;
+	}
+
+	public void setQuestionDao(QuestionDao questionDao) {
+		this.questionDao = questionDao;
+	}
+	
+	public RewardDao getRewardDao() {
+		return rewardDao;
+	}
+
+	public void setRewardDao(RewardDao rewardDao) {
+		this.rewardDao = rewardDao;
+	}
+	
+	public String generateAnswer(int userChoise, Category selectedCategory,
+			Project selectedProject) {
+		if (userChoise == 1) { // TODO
+			return "";
+		}
+
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("You selected 'to invest in the project'\n");
+
+		int index = 1;
+		for (Reward reward : rewardDao.getRewards(selectedProject.getId())) {
+			stringBuilder.append(index++).append(" : Pledge $")
+					.append(reward.getPledge()).append(" - get ")
+					.append(reward.getBenefit()).append("\n");
+		}
+		stringBuilder.append(index).append(" : own amount\n");
+		stringBuilder.append("0 : to project list");
+		return stringBuilder.toString();
+	}
+
+	public Category findSelectedCategory(int userChoise,
+			Category selectedCategory) {
 		return selectedCategory;
 	}
 
-	public String validateUserChoise(List<Category> categories, int userChoise,
-			Category selectedCategory) {
+	public String validateUserChoise(int userChoise, Category selectedCategory,
+			Project selectedProject) {
 
-		return "";
+		StringBuilder stringBuilder = new StringBuilder();
+
+		int rewardSize = rewardDao.size(selectedProject.getId()) + 1;
+		if (userChoise < 0 || userChoise > rewardSize) {
+			stringBuilder.append("Please, enter the number between 0 and ")
+					.append(rewardSize);
+		}
+		return stringBuilder.toString();
 	}
 
-	public String fillOutForm(Project project, int userChoise,
+	public String fillOutForm(Project selectedProject, int userChoise,
 			ConsoleScanner consoleScanner) {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 
-		if (userChoise == 1) {
-			consolePrinter.print("Enter your name");
-			String name = consoleScanner.scanLine();
-			consolePrinter.print("Enter card number");
-			String card = consoleScanner.scanLine();
-			consolePrinter.print("Enter amount to donate");
-			int donate = consoleScanner.scan();
-
-			project.setPledged(project.getPledged() + donate);
-
-			return "Thank you!\n0 : back to project";
-		} else if (userChoise == 2) {
+		if (userChoise == 2) {
 			consolePrinter.print("Enter your question");
-			String question = consoleScanner.scanLine();
-			
-			project.addQuestion(question);
-			
+			String questionText = consoleScanner.scanLine();
+
+			Question question = new Question();
+			question.setProjectId(selectedProject.getId());
+			question.setQuestionText(questionText);
+
+			questionDao.addQuestion(question);
+
 			return "Thank for your question!\n0 : back to project";
 		} else {
 			return "";
@@ -58,5 +98,7 @@ public class PaymentLevel implements Level {
 
 		return selectedProject;
 	}
+
+
 
 }
