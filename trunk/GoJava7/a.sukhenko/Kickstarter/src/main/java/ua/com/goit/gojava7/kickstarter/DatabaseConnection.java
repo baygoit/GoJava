@@ -5,12 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class DatabaseConnection {
 	Connection connection = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
-
 	public void connect() {
 		try {
 			connection = DriverManager
@@ -31,9 +31,6 @@ public class DatabaseConnection {
 		}
 	}
 
-	public void loadCategories() {
-
-	}
 
 	public static void main(String[] args) {
 		DatabaseConnection databaseConnection = new DatabaseConnection();

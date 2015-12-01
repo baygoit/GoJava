@@ -10,6 +10,11 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.PaymentBonus;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.User;
+
 public class ProjectTest {
 	Project project = new Project();
 

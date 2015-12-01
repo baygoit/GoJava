@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 @WebServlet("/categories")
 public class CategoriesServlet extends HttpServlet {

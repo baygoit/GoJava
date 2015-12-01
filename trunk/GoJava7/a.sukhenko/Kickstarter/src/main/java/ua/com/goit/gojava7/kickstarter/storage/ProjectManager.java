@@ -3,9 +3,9 @@ package ua.com.goit.gojava7.kickstarter.storage;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.model.User;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.User;
 
 public class ProjectManager {
 	private ArrayList<Project> projects = new ArrayList<Project>();

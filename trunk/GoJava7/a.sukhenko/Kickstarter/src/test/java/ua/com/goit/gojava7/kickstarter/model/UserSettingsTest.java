@@ -4,7 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.model.user.UserSettings;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.MenuOptions;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.user.UserSettings;
 
 import static org.hamcrest.CoreMatchers.is;
 public class UserSettingsTest {

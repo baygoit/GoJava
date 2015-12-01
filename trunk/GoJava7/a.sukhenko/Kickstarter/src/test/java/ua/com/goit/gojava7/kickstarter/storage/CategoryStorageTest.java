@@ -8,8 +8,10 @@ import java.util.NoSuchElementException;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+
 import static org.hamcrest.CoreMatchers.is;
-import ua.com.goit.gojava7.kickstarter.model.Category;
 
 public class CategoryStorageTest {
 	private CategoryStorage categoryStorage = new CategoryStorage();

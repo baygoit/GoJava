@@ -1,6 +1,6 @@
-package ua.com.goit.gojava7.kickstarter.model;
+package ua.com.goit.gojava7.kickstarter.domain;
 
-import ua.com.goit.gojava7.kickstarter.model.user.UserSettings;
+import ua.com.goit.gojava7.kickstarter.domain.user.UserSettings;
 import ua.com.goit.gojava7.kickstarter.payment.PaymentSystem;
 
 public class User {

@@ -1,9 +1,9 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.MenuOptions;
-import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.model.User;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.MenuOptions;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.User;
 import ua.com.goit.gojava7.kickstarter.payment.CreditCardSystem;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
@@ -21,7 +21,17 @@ public class Menu {
 	private static final String PLEASE_ENTER_THE_NUMBER_BETWEEN_1_AND = "Please, enter the number between 1 and ";
 	private User user;
 	private ProjectManager projectManager;
+	private CategoryStorage categoryStorage;
+	
 
+	
+
+	public Menu(User u, ProjectManager projectManager, CategoryStorage categoryStorage) {
+		this.user = u;
+		this.setProjectManager(projectManager);
+		this.categoryStorage = categoryStorage;
+	}
+	
 	public CategoryStorage getCategoryStorage() {
 		return categoryStorage;
 	}
@@ -29,15 +39,6 @@ public class Menu {
 	public void setCategoryStorage(CategoryStorage categoryStorage) {
 		this.categoryStorage = categoryStorage;
 	}
-
-	private CategoryStorage categoryStorage;
-
-	public Menu(User u, ProjectManager projectManager, CategoryStorage categoryStorage) {
-		this.user = u;
-		this.setProjectManager(projectManager);
-		this.categoryStorage = categoryStorage;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -62,7 +63,6 @@ public class Menu {
 			break;
 		case DONATE_TO_PROJECT:
 			showDonateInfo();
-			// donateToProject(4);
 			break;
 		case ADD_PAYMENT_SYSTEM_TO_ACCOUNT:
 			addPaymentSystem();

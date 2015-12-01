@@ -5,7 +5,8 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.model.user.UserSettings;
+import ua.com.goit.gojava7.kickstarter.domain.User;
+import ua.com.goit.gojava7.kickstarter.domain.user.UserSettings;
 import ua.com.goit.gojava7.kickstarter.payment.PaymentSystem;
 
 public class UserTest {

@@ -7,6 +7,8 @@ import java.util.HashMap;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.domain.PaymentBonus;
+
 public class PaymentBonusTest {
 	private PaymentBonus paymentBonus = new PaymentBonus();
 	private HashMap<Integer, String> bonuses = new HashMap<>();

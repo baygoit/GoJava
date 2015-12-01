@@ -15,9 +15,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.model.User;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.User;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 
 public class BodyTest {
@@ -50,13 +50,13 @@ public class BodyTest {
 
 	@Test
 	public void testGenerateHeader() {
-		body.generateHeader(consolePrinter);
+		body.generateHeader();
 		assertThat(outContent.toString(), is(Body.WELCOME_TO_KICKSTARTER_BETA + newLine));
 	}
 
 	@Test
 	public void testGenerateFooter() {
-		body.generateFooter(consolePrinter);
+		body.generateFooter();
 		assertThat(outContent.toString(), is(Body.GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO + newLine));
 	}
 
@@ -66,7 +66,7 @@ public class BodyTest {
 		Category cat = new Category();
 		cat.setCategoryId(1);
 		cat.setCategoryName("category");
-		body.generateCategoryInfo(cat, consolePrinter);
+		body.generateCategoryInfo(cat);
 		assertThat(outContent.toString(), is(cat.getCategoryId() + "# " + cat.getCategoryName() + newLine));
 	}
 
@@ -74,7 +74,7 @@ public class BodyTest {
 	public void testGenerateProjectInfo() {
 		Project project = getProject();
 		
-		body.generateProjectInfo(project, consolePrinter,categoryStorage);
+		body.generateProjectInfo(project, categoryStorage);
 
 		String stuff = "===========================" + newLine;
 		stuff += PROJECT2 + project.getProjectName() + "   |  Category: "

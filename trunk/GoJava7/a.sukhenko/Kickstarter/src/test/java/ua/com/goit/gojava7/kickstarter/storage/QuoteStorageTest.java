@@ -6,8 +6,10 @@ import java.util.HashSet;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
+
 import static org.hamcrest.CoreMatchers.is;
-import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 public class QuoteStorageTest {
 	private QuoteStorage quoteStorage = new QuoteStorage();

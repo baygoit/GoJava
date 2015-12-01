@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.model;
+package ua.com.goit.gojava7.kickstarter.domain;
 
 import java.util.HashMap;
 

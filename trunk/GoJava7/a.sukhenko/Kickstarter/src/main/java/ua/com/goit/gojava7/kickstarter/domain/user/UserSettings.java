@@ -1,8 +1,8 @@
-package ua.com.goit.gojava7.kickstarter.model.user;
+package ua.com.goit.gojava7.kickstarter.domain.user;
 
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.MenuOptions;
-import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.MenuOptions;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class UserSettings {
 	private Category category;

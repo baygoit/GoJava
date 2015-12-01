@@ -36,8 +36,10 @@
 			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
+		
 
 
+	
 	</dependencies>
 
 	<build>
@@ -54,4 +56,14 @@
 		</plugins>
 	</build>
 
+	<description>GoIT Java 7 project of Artur Sukhenko</description>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>2.4.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

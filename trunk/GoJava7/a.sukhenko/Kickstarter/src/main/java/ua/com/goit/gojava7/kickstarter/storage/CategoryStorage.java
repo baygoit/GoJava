@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-public class CategoryStorage {
+public class CategoryStorage{
 	private List<Category> categories = new ArrayList<Category>();
 
 	public void setCategories(List<Category> categories) {

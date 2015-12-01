@@ -3,7 +3,7 @@ package ua.com.goit.gojava7.kickstarter.dao.memory;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.model.Quote;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
 public class MemoryQuoteReader {

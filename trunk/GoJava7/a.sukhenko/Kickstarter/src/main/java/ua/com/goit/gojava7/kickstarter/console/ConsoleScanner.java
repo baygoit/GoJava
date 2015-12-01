@@ -18,8 +18,7 @@ public class ConsoleScanner {
 		while (!scanner.hasNextLine()) {
 			scanner.next();
 		}
-		String inputString = scanner.nextLine();
-		return inputString;
+		return scanner.nextLine();
 	}
 
 	public void close() {

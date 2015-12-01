@@ -3,7 +3,7 @@ package ua.com.goit.gojava7.kickstarter;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 import ua.com.goit.gojava7.kickstarter.console.Menu;
-import ua.com.goit.gojava7.kickstarter.model.User;
+import ua.com.goit.gojava7.kickstarter.domain.User;
 import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
@@ -17,9 +17,6 @@ public class Kickstarter {
 	private Body body = new Body();
 	private ProjectManager projectManager = new ProjectManager();
 
-	public Kickstarter() {
-
-	}
 
 	public ConsoleScanner getConsoleScanner() {
 		return consoleScanner;
@@ -65,12 +62,7 @@ public class Kickstarter {
 		this.consolePrinter = consolePrinter;
 	}
 
-	public void showCategoryInfo(User guest) {
-		projectManager.getProjectsByCategory(guest.getSettings().getCategory()).forEach(project -> {
-			getBody().generateProjectInfo(project, consolePrinter, categoryStorage);
-		});
 
-	}
 
 	public static void main(String[] args) {
 		Kickstarter kickstarter = new Kickstarter();
