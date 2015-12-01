@@ -42,10 +42,13 @@ public class StorageFactory {
     }
     
     public StorageFactory(DataType dataType) {
+        this(dataType, "./kicks-files/config.properties");    
+    }
+    
+    public StorageFactory(DataType dataType, String pathToFile) {
         this.dataType = dataType;
-        properties = Utils.readProperties("./kicks-files/config.properties");        
-        init();
-        
+        properties = Utils.readProperties(pathToFile);        
+        init();    
     }
     
     public StorageFactory(DataType dataType, InputStream resourceStream) {
