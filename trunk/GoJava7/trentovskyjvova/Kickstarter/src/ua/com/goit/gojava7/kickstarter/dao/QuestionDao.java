@@ -9,6 +9,4 @@ public interface QuestionDao extends Dao{
 	
 	void addQuestion(Question question);
 
-	int generateIdOfNewElement();
-
 }

@@ -20,9 +20,6 @@ import org.hibernate.annotations.*;
  */
 @Entity
 @Cacheable
-@NamedQueries({@NamedQuery(name = "select.title", query = "select cd from CD cd "
-        + "where cd.title = :title",
-        hints = {@QueryHint(name = "org.hibernate.cacheable", value = "true")})})
 public class CD extends Item {
 
   // ======================================

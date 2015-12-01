@@ -1,8 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Project {
 	private String name;
 	private String description;
@@ -11,23 +8,8 @@ public class Project {
 	private Integer daysToGo;
 	private String history;
 	private String link;
-	private List<Reward> rewards = new ArrayList<>();
-	private List<Question> questions = new ArrayList<>();
-	
-	public Project() {
-	}
+	private String categoryName;
 
-	public Project(String name, String description, Integer goal, Integer pledged, Integer daysToGo, String history,
-			String link) {
-		this.name = name;
-		this.description = description;
-		this.goal = goal;
-		this.pledged = pledged;
-		this.daysToGo = daysToGo;
-		this.history = history;
-		this.link = link;
-	}
-	
 	public String getName() {
 		return name;
 	}
@@ -84,29 +66,15 @@ public class Project {
 		this.link = link;
 	}
 
-	
-	public List<Reward> getRewards() {
-		return rewards;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setRewards(List<Reward> rewards) {
-		this.rewards = rewards;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
-	public List<Question> getQuestions() {
-		return questions;
-	}
-
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}	
-	
-	public void addToPledged(int amount) {
+	public void updatePledged(int amount) {
 		this.pledged += amount;
 	}
-	
-	public void addQuestion(Question question) {
-		questions.add(question);
-	}
-
 }

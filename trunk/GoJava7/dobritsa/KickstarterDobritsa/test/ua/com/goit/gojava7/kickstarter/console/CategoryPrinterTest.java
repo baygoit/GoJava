@@ -20,25 +20,28 @@ import ua.com.goit.gojava7.kickstarter.domain.Category;
 public class CategoryPrinterTest {
 
 	private CategoryPrinter categoryPrinter = new CategoryPrinter();
-
+	List<Category> categories = new ArrayList<Category>();
+	
+	
 	@Mock
 	private PrintStream printSteam;
 
 	@Before
 	public void setUp() {
+		Category category = new Category();
+		category.setName("TestName");
+		categories.add(category);
 		System.setOut(printSteam);
 	}
 
 	@After
 	public void tearDown() {
-		
+		verifyNoMoreInteractions(printSteam);		
 	}
 
 	@Test
-	public void testPrint() {		
-		List<Category> categories = new ArrayList<Category>();
-		categories.add(new Category("Category1"));
+	public void testPrint() {				
 		categoryPrinter.printCategories(categories);
-		verify(printSteam).println(contains("Category1"));
+		verify(printSteam).println(contains("TestName"));
 	}
 }
