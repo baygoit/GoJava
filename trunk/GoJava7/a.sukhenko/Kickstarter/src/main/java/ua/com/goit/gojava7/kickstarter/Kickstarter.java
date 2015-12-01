@@ -23,8 +23,6 @@ public class Kickstarter {
 	private ConsolePrinter consolePrinter = new ConsolePrinter();
 	private Body body = new Body();
 	private ProjectManager projectManager = new ProjectManager();
-	private boolean loadFromFile = false;
-	private boolean saveToFile = true;
 
 	public Kickstarter() {
 
@@ -93,19 +91,10 @@ public class Kickstarter {
 		User guest = new User();
 		kickstarter.getBody().generateMainPage(kickstarter.getQuoteStorage(), kickstarter.getProjectManager(),
 				kickstarter.getConsolePrinter());
-		kickstarter.saveCagories();
-		kickstarter.saveQuotes();
-		kickstarter.saveProjects();
 		kickstarter.generateMenu(guest).showMenu();
 
 	}
 
-	private void saveProjects() {
-		if (saveToFile) {
-			FileLoader.saveProjects(projectManager);
-		}
-
-	}
 
 	public Menu generateMenu(User u) {
 		return new Menu(u, projectManager, categoryStorage);
@@ -128,18 +117,6 @@ public class Kickstarter {
 
 	}
 
-	private void saveQuotes() {
-		if (saveToFile) {
-			FileLoader.saveQuotes(quoteStorage);
-		}
-
-	}
-
-	protected void saveCagories() {
-		if (saveToFile) {
-			FileLoader.saveCategories(categoryStorage);
-		}
-	}
 
 	private void initProjects() {
 		LocalDateTime dateTime = LocalDateTime.now();
@@ -166,8 +143,5 @@ public class Kickstarter {
 
 	}
 
-	public boolean isLoadFromFile() {
-		return loadFromFile;
-	}
 
 }

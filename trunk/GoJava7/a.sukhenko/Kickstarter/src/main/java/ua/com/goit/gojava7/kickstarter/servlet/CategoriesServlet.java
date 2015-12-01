@@ -15,7 +15,7 @@ import ua.com.goit.gojava7.kickstarter.model.Category;
 /**
  * Servlet implementation class CategoriesServlet
  */
-@WebServlet("/CategoriesServlet")
+@WebServlet("/categories")
 public class CategoriesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public CategoryDao categoryDao;
