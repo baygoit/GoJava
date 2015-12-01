@@ -13,8 +13,8 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectDbDao extends DbDao<Project> implements ProjectStorage {
 
-	private static String TABLE = "project";
-	private static String FIELDS = "name, description, goal, pledged, daysToGo, history, link";
+	private static final String TABLE = "project";
+	private static final String FIELDS = "name, description, goal, pledged, daysToGo, history, link";
 
 	public ProjectDbDao(Connection connection) {
 		super(connection, FIELDS, TABLE);

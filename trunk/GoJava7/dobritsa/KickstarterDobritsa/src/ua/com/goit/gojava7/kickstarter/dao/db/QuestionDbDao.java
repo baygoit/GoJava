@@ -13,8 +13,8 @@ import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 public class QuestionDbDao extends DbDao<Question> implements QuestionStorage {
 
-	private static String TABLE = "question";
-	private static String FIELDS = "time, question, answer, project_id";
+	private static final String TABLE = "question";
+	private static final String FIELDS = "time, question, answer, project_id";
 	private static final String INSERTION = "?, ?, ?, ?";
 
 	public QuestionDbDao(Connection connection) {
@@ -26,8 +26,7 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionStorage {
 		String query = "INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + INSERTION + ")";
 		try (PreparedStatement ps = connection.prepareStatement(query)) {
 			writeElement(element, ps);
-			ps.executeUpdate();
-			ps.close();
+			ps.executeUpdate();			
 		} catch (SQLException e) {
 			System.err.println("Error! INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + element.getTime() + ", "
 					+ element.getTime() + "," + element.getTime() + ", " + element.getTime() + ")");
@@ -71,7 +70,7 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionStorage {
 
 	private int findProjectId(String projectName) {
 		int id;
-		String query = "select id from project where name = '" + prepareStringForDb(projectName) + "'";
+		String query = "SELECT id FROM " + TABLE + " WHERE name = '" + prepareStringForDb(projectName) + "'";
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				id = resultSet.getInt("id");

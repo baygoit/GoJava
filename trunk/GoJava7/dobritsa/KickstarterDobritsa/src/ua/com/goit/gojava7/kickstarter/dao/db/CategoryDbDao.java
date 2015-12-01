@@ -10,8 +10,8 @@ import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public class CategoryDbDao extends DbDao<Category> implements CategoryStorage {
 
-	private static String TABLE = "category";
-	private static String FIELDS = "name";
+	private static final String TABLE = "category";
+	private static final String FIELDS = "name";
 
 	public CategoryDbDao(Connection connection) {
 		super(connection, FIELDS, TABLE);

@@ -11,8 +11,8 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class QuoteDbDao extends DbDao<Quote> implements QuoteStorage {
 
-	private static String TABLE = "quote";
-	private static String FIELDS = "text, author";
+	private static final String TABLE = "quote";
+	private static final String FIELDS = "text, author";
 
 	public QuoteDbDao(Connection connection) {
 		super(connection, FIELDS, TABLE);
