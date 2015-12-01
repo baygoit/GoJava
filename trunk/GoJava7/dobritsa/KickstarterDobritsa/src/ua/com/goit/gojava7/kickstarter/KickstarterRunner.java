@@ -34,7 +34,6 @@ public class KickstarterRunner {
 		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage, projectStorage, questionsStorage,
 				rewardStorage);
 		kickstarter.run();
-		kickstarter.shutdown();
-		daoFactory.close();
+		kickstarter.shutdown();		
 	}
 }

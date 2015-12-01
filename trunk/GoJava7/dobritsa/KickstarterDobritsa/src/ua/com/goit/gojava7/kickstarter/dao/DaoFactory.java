@@ -1,11 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
@@ -38,19 +33,19 @@ public class DaoFactory {
 	private ProjectDao projectDAO;
 	private QuestionDao questionDAO;
 	private RewardDao rewardDAO;
-
+	
 	private static final File QUOTES_FILE = new File("./resources/Quotes.txt");
 	private static final File CATEGORIES_FILE = new File("./resources/Categories.txt");
 	private static final File PROJECTS_FILE = new File("./resources/Projects.txt");
 	private static final File REWARDS_FILE = new File("./resources/Rewards.txt");
 	private static final File QUESTIONS_FILE = new File("./resources/Questions.txt");
-	private MyDataSource dataSource;
 
-	//private Connection connection = null;
+	private static String dbDriver = "com.mysql.jdbc.Driver";
+	private static String dbURL = "jdbc:mysql://localhost:3306/kickstarter";
+	private static String user = "root";
+	private static String password = "temppassword";
 
 	public DaoFactory(MyDataSource dataSource) {
-		this.dataSource = dataSource;
-
 		switch (dataSource) {
 		case MEMORY:
 			initMemoryStorage();
@@ -78,14 +73,13 @@ public class DaoFactory {
 		return ds;
 	}
 
-	public Connection open() {
-		Connection connection = null;
+	/*public Connection open() {
+	Connection connection = null;
 		if (dataSource == MyDataSource.DB) {
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				DataSource dataSource = setupDataSource("com.mysql.jdbc.Driver",
-						"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword");
-				connection = dataSource.getConnection();
+				Class.forName(dbDriver);
+				DataSource dataSource = setupDataSource(dbDriver, dbURL, user, password);
+			connection = dataSource.getConnection();
 			} catch (SQLException e) {
 				throw new IllegalStateException("Cannot open connection. " + e.getMessage(), e);
 			} catch (ClassNotFoundException e) {
@@ -93,19 +87,21 @@ public class DaoFactory {
 			}
 		}
 		return connection;
-	}
+	}*/
 
-	public void close() {
-		//if (dataSource == MyDataSource.DB) {
-			//try {
-				//if (connection != null) {
-				//	connection.close();
-			//	}
-			//} catch (SQLException e) {
-			//	throw new IllegalStateException("Cannot close connection " + connection + ". " + e.getMessage(), e);
-			//}
-		//}
-	}
+	/*public void close(DataSource ds) {
+		if (dataSource == MyDataSource.DB) {
+			BasicDataSource bds = (BasicDataSource) ds;
+			try {
+
+				bds.close();
+
+			} catch (SQLException e) {
+				throw new IllegalStateException("Cannot close connection " + bds + ". " + e.getMessage(), e);
+
+			}
+		}
+	}*/
 
 	private void initMemoryStorage() {
 		Memory data = new Memory();
@@ -125,18 +121,12 @@ public class DaoFactory {
 		questionDAO = new QuestionsFileDao((new QuestionFileReader(QUESTIONS_FILE)).read());
 	}
 
-	private void initDbStorage() {
-		open();
-		quoteDAO = new QuoteDbDao(setupDataSource("com.mysql.jdbc.Driver",
-				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
-		categoryDAO = new CategoryDbDao(setupDataSource("com.mysql.jdbc.Driver",
-				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
-		projectDAO = new ProjectDbDao(setupDataSource("com.mysql.jdbc.Driver",
-				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
-		questionDAO = new QuestionDbDao(setupDataSource("com.mysql.jdbc.Driver",
-				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
-		rewardDAO = new RewardDbDao(setupDataSource("com.mysql.jdbc.Driver",
-				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
+	private void initDbStorage() {	
+		quoteDAO = new QuoteDbDao(setupDataSource(dbDriver, dbURL, user, password));
+		categoryDAO = new CategoryDbDao(setupDataSource(dbDriver, dbURL, user, password));
+		projectDAO = new ProjectDbDao(setupDataSource(dbDriver, dbURL, user, password));
+		questionDAO = new QuestionDbDao(setupDataSource(dbDriver, dbURL, user, password));
+		rewardDAO = new RewardDbDao(setupDataSource(dbDriver, dbURL, user, password));
 	}
 
 	public CategoryDao getCategoryDAO() {

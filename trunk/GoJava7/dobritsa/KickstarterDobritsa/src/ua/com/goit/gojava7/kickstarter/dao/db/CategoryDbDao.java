@@ -1,6 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -15,8 +14,8 @@ public class CategoryDbDao extends DbDao<Category> implements CategoryDao {
 	private static final String TABLE = "category";
 	private static final String FIELDS = "id, name";
 
-	public CategoryDbDao(BasicDataSource connection) {
-		super(connection, FIELDS, TABLE);
+	public CategoryDbDao(BasicDataSource basicDataSource) {
+		super(basicDataSource, FIELDS, TABLE);
 	}
 
 	@Override

@@ -24,7 +24,6 @@ public class ProjectsServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		daoFactory = new DaoFactory(MyDataSource.DB);
-		daoFactory.open();
 		projectStorage = daoFactory.getProjectDAO();
 	}
 

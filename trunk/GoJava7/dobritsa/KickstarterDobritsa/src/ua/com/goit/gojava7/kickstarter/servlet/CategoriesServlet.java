@@ -23,8 +23,7 @@ public class CategoriesServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		daoFactory = new DaoFactory(MyDataSource.DB);
-		daoFactory.open();
+		daoFactory = new DaoFactory(MyDataSource.DB);		
 		quoteStorage = daoFactory.getQuoteDAO();
 		categoryStorage = daoFactory.getCategoryDAO();
 	}

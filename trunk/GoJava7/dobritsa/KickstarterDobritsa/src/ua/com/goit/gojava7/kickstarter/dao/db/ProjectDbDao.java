@@ -18,8 +18,8 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 	private static final String TABLE = "project";
 	private static final String FIELDS = "id, name, description, goal, pledged, daysToGo, history, link";
 
-	public ProjectDbDao(BasicDataSource connection) {
-		super(connection, FIELDS, TABLE);
+	public ProjectDbDao(BasicDataSource basicDataSource) {
+		super(basicDataSource, FIELDS, TABLE);
 	}
 
 	@Override
