@@ -74,10 +74,13 @@ public class DaoFactory {
 	public void open() {
 		if (dataSource == DataSource.DB) {
 			try {
+				Class.forName("com.mysql.jdbc.Driver");
 				connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kickstarter", "root",
 						"temppassword");
 			} catch (SQLException e) {
 				throw new IllegalStateException("Cannot open connection. " + e.getMessage(), e);
+			} catch (ClassNotFoundException e) {
+				throw new IllegalStateException("Cannot open load mysql driver. " + e.getMessage(), e);
 			}
 		}
 	}

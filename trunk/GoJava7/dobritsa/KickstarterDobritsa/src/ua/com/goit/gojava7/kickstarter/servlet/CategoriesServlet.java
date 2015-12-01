@@ -12,12 +12,8 @@ import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
 import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
-
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-/**
- * Servlet implementation class CategoriesServlets
- */
 @WebServlet(urlPatterns = "/categories")
 public class CategoriesServlet extends HttpServlet {
 
@@ -26,29 +22,24 @@ public class CategoriesServlet extends HttpServlet {
 	private CategoryStorage categoryStorage;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		daoFactory = new DaoFactory(DataSource.MEMORY);
+	public void init() throws ServletException {
+		daoFactory = new DaoFactory(DataSource.DB);
 		daoFactory.open();
 		quoteStorage = daoFactory.getQuoteDAO();
 		categoryStorage = daoFactory.getCategoryDAO();
-		
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Quote quote = quoteStorage.get(1);
 		StringBuilder stringBuilder = new StringBuilder();
-	
-		
-		stringBuilder.append(quote.getText() + "\n" + quote.getAuthor() + "\n");
+
+		stringBuilder.append(quote.getText() + "\n" + quote.getAuthor() + "\n\n");
 		stringBuilder.append("\nList of categories:\n");
 
-		
-	
-	for (int i = 0; i < categoryStorage.size(); i++) {
-			System.out.println(i + 1 + ": " + categoryStorage.get(i).getName());
-			stringBuilder.append((i + 1) + ": " + categoryStorage.get(i).getName() + "\n");
+		for (int i = 1; i <= categoryStorage.size(); i++) {
+			stringBuilder.append((i) + ": " + categoryStorage.get(i).getName() + "\n");
 		}
-		
-		
-			
-		
 
 		resp.getWriter().append(stringBuilder);
 	}
