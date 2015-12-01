@@ -32,15 +32,16 @@ public class CategoriesServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Quote quote = quoteStorage.get(1);
-		StringBuilder stringBuilder = new StringBuilder();
+		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Categories</title></head><body>");
 
-		stringBuilder.append(quote.getText() + "\n" + quote.getAuthor() + "\n\n");
-		stringBuilder.append("\nList of categories:\n");
-
-		for (int i = 1; i <= categoryStorage.size(); i++) {
-			stringBuilder.append((i) + ": " + categoryStorage.get(i).getName() + "\n");
+		stringBuilder.append(quote.getText() + "  (c) " + quote.getAuthor() + "</br></br>");	
+		stringBuilder.append("List of categories:</br>");
+	
+		for (int i = 1; i <= categoryStorage.size(); i++) {		
+			stringBuilder.append("<a href=\"category?id=" + categoryStorage.get(i).getId() + "\">" + categoryStorage.get(i).getName() + "</a><br/>");
 		}
 
+		stringBuilder.append("</body></html>");
 		resp.getWriter().append(stringBuilder);
 	}
 
