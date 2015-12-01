@@ -1,12 +1,12 @@
-package ua.com.goit.gojava7.kickstarter.config;
+package ua.com.goit.gojava7.kickstarter.dao;
 
-public enum DataSource {
+public enum MyDataSource {
 
 	MEMORY("m"), FILE("f"), DB("d");
 
 	private final String startupKey;
 
-	DataSource(String startupKey) {
+	MyDataSource(String startupKey) {
 		this.startupKey = startupKey;
 	}
 
@@ -14,8 +14,8 @@ public enum DataSource {
 		return startupKey;
 	}
 
-	public static DataSource getByStartupKey(String startupKey) {
-		for (DataSource element : DataSource.values()) {
+	public static MyDataSource getByStartupKey(String startupKey) {
+		for (MyDataSource element : MyDataSource.values()) {
 			if (element.getStartupKey().equals(startupKey)) {
 				return element;
 			}

@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
+import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
@@ -23,7 +23,7 @@ public class CategoriesServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		daoFactory = new DaoFactory(DataSource.DB);
+		daoFactory = new DaoFactory(MyDataSource.DB);
 		daoFactory.open();
 		quoteStorage = daoFactory.getQuoteDAO();
 		categoryStorage = daoFactory.getCategoryDAO();

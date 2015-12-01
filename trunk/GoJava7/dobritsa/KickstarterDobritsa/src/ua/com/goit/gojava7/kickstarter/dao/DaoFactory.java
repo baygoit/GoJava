@@ -5,7 +5,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import ua.com.goit.gojava7.kickstarter.config.DataSource;
+import javax.sql.DataSource;
+
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+
 import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDbDao;
@@ -41,11 +44,11 @@ public class DaoFactory {
 	private static final File PROJECTS_FILE = new File("./resources/Projects.txt");
 	private static final File REWARDS_FILE = new File("./resources/Rewards.txt");
 	private static final File QUESTIONS_FILE = new File("./resources/Questions.txt");
-	private DataSource dataSource;
+	private MyDataSource dataSource;
 
 	private Connection connection = null;
 
-	public DaoFactory(DataSource dataSource) {
+	public DaoFactory(MyDataSource dataSource) {
 		this.dataSource = dataSource;
 
 		switch (dataSource) {
@@ -54,7 +57,7 @@ public class DaoFactory {
 			break;
 
 		case FILE:
-			initFileStorage(); 
+			initFileStorage();
 			break;
 
 		case DB:
@@ -66,12 +69,22 @@ public class DaoFactory {
 		}
 	}
 
+	public static BasicDataSource setupDataSource(String dbDriver, String dbURL, String user, String password) {
+		BasicDataSource ds = new BasicDataSource();
+		ds.setDriverClassName(dbDriver);
+		ds.setUrl(dbURL);
+		ds.setUsername(user);
+		ds.setPassword(password);
+		return ds;
+	}
+
 	public void open() {
-		if (dataSource == DataSource.DB) {
+		if (dataSource == MyDataSource.DB) {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
-				connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kickstarter", "root",
-						"temppassword");
+				DataSource dataSource = setupDataSource("com.mysql.jdbc.Driver",
+						"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword");
+				connection = dataSource.getConnection();
 			} catch (SQLException e) {
 				throw new IllegalStateException("Cannot open connection. " + e.getMessage(), e);
 			} catch (ClassNotFoundException e) {
@@ -81,9 +94,9 @@ public class DaoFactory {
 	}
 
 	public void close() {
-		if (dataSource == DataSource.DB) {
+		if (dataSource == MyDataSource.DB) {
 			try {
-				if (connection != null) {	
+				if (connection != null) {
 					connection.close();
 				}
 			} catch (SQLException e) {
@@ -121,7 +134,7 @@ public class DaoFactory {
 
 	public CategoryDao getCategoryDAO() {
 		return categoryDAO;
-	} 
+	}
 
 	public QuoteDao getQuoteDAO() {
 		return quoteDAO;

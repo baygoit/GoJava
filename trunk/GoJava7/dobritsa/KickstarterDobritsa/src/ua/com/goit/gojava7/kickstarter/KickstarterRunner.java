@@ -2,9 +2,9 @@ package ua.com.goit.gojava7.kickstarter;
 
 import java.io.FileNotFoundException;
 
-import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
+import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
@@ -13,10 +13,10 @@ import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 public class KickstarterRunner {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		DataSource dataSource = DataSource.MEMORY;
+		MyDataSource dataSource = MyDataSource.MEMORY;
 		if (args.length != 0 && args[0] != null) {
 			try {
-				dataSource = DataSource.getByStartupKey(args[0].toLowerCase());
+				dataSource = MyDataSource.getByStartupKey(args[0].toLowerCase());
 			} catch (IllegalArgumentException e) {
 				System.err.println("Type of data source " + args[0] + " if not supported. Fall back to memory");
 			}

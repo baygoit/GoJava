@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
+import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
@@ -23,7 +23,7 @@ public class ProjectsServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		daoFactory = new DaoFactory(DataSource.DB);
+		daoFactory = new DaoFactory(MyDataSource.DB);
 		daoFactory.open();
 		projectStorage = daoFactory.getProjectDAO();
 	}
