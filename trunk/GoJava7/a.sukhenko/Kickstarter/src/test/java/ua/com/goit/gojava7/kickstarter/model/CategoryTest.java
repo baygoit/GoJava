@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-public class CategoryTest {
+public class CategoryTest{
 	Category category = new Category();
 
 	@Test

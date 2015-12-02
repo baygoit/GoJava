@@ -2,29 +2,32 @@ package ua.com.goit.gojava7.kickstarter.domain;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
-public class Quote {
-	private String quote;
-	private String author;
+public class Quote{
+	private String	text;
+	private String	author;
 
-	public Quote(String quote, String author) {
-		this.setQuoteName(quote);
-		this.setAuthor(author);
+	public Quote() {
+
 	}
 
-	public String getQuoteName() {
-		return quote;
+	public Quote(String text, String author) {
+		super();
+		this.text = text;
+		this.author = author;
 	}
 
-	@XmlAttribute
-	public void setQuoteName(String quote) {
-		this.quote = quote;
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public String getAuthor() {
 		return author;
 	}
 
-	@XmlAttribute
 	public void setAuthor(String author) {
 		this.author = author;
 	}

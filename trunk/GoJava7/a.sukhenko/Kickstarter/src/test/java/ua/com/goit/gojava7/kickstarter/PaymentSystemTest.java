@@ -1,20 +1,21 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.is;
 
+import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.User;
 import ua.com.goit.gojava7.kickstarter.payment.PaymentSystem;
-import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 
-public class PaymentSystemTest {
-	ProjectManager projectManager = new ProjectManager();
-	Project project = new Project();
-	User payer = new User();
-	PaymentSystem paymentSystem = new PaymentSystem();
+public class PaymentSystemTest{
+	ProjectStorage	projectManager;
+	Project			project			= new Project();
+	User			payer			= new User();
+	PaymentSystem	paymentSystem	= new PaymentSystem();
 
 	@Before
 	public void setUp() {

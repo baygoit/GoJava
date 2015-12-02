@@ -1,6 +1,8 @@
 package ua.com.goit.gojava7.kickstarter;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -8,28 +10,24 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.hamcrest.CoreMatchers.is;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
+import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.User;
-import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
 
-public class BodyTest {
-	public static final String PROJECT2 = "Project: ";
-	String newLine = "\r\n";
-	Body body = new Body();
-	ConsolePrinter consolePrinter = new ConsolePrinter();
-	Kickstarter kickstarter = new Kickstarter();
-	CategoryStorage categoryStorage = new CategoryStorage();
+public class BodyTest{
+	public static final String			PROJECT2	= "Project: ";
+	String								newLine		= "\r\n";
+	Body								body		= new Body();
+	CategoryStorage						categoryStorage;
 
-	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+	private final ByteArrayOutputStream	outContent	= new ByteArrayOutputStream();
+	private final ByteArrayOutputStream	errContent	= new ByteArrayOutputStream();
 
 	@Before
 	public void setUpStreams() {
@@ -60,7 +58,6 @@ public class BodyTest {
 		assertThat(outContent.toString(), is(Body.GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO + newLine));
 	}
 
-	
 	@Test
 	public void testGenerateCategoryInfo() {
 		Category cat = new Category();
@@ -73,7 +70,7 @@ public class BodyTest {
 	@Test
 	public void testGenerateProjectInfo() {
 		Project project = getProject();
-		
+
 		body.generateProjectInfo(project, categoryStorage);
 
 		String stuff = "===========================" + newLine;
@@ -89,8 +86,6 @@ public class BodyTest {
 	private Project getProject() {
 		Project project = new Project();
 		Map<String, String> qa = new HashMap<String, String>();
-		Category cat = new Category("cat", 1);
-		categoryStorage.addCategory(cat);
 		project.setProjectCategoryId(1);
 		project.setMoneyNeeded(100000.0);
 		project.addBacker(new User(), 50000.0);

@@ -3,9 +3,9 @@ package ua.com.goit.gojava7.kickstarter.domain;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-public class Category {
-	private String categoryName;
-	private int categoryId;
+public class Category{
+	private String	categoryName;
+	private int		categoryId;
 
 	public Category() {
 	}

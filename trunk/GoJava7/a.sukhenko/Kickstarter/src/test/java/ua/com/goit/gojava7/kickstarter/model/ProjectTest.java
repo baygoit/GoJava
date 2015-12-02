@@ -15,7 +15,7 @@ import ua.com.goit.gojava7.kickstarter.domain.PaymentBonus;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.User;
 
-public class ProjectTest {
+public class ProjectTest{
 	Project project = new Project();
 
 	@Test
@@ -28,14 +28,14 @@ public class ProjectTest {
 	public void testProject() {
 		assertNotNull(project);
 	}
-	
+
 	@Test
-	public void testPayment(){
+	public void testPayment() {
 		PaymentBonus paymentBonus = new PaymentBonus();
 		project.setPaymentBonus(paymentBonus);
-		assertThat(project.getPaymentBonus(),is(paymentBonus));
+		assertThat(project.getPaymentBonus(), is(paymentBonus));
 	}
-	
+
 	@Test
 	public void testProject4() {
 		Category projectCategory = new Category();

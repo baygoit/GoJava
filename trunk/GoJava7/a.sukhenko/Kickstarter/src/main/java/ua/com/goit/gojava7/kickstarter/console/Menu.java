@@ -1,37 +1,34 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
+import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.MenuOptions;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.User;
 import ua.com.goit.gojava7.kickstarter.payment.CreditCardSystem;
-import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
 
-public class Menu {
-	private static final int[] DONATE_OPTIONS = { 0, 1, 10, 40 };
-	private static final int MENU_EXIT_OPTION = 0;
-	private static final int MENU_DEFAULT_OPTION = -1;
-	private static final String PLEASE_SELECT = "Please select";
-	private static final String PROJECT = " project";
-	private static final String CATEGORY = " category";
-	private static final String O_FOR_EXIT = " (0 to go back): ";
-	private static final String YOU_SELECTED_PROJECT = "You selected project: ";
-	private static final String YOU_SELECTED_CATEGORY_NUMBER = "You selected category number ";
-	private static final String PLEASE_ENTER_THE_NUMBER_BETWEEN_1_AND = "Please, enter the number between 1 and ";
-	private User user;
-	private ProjectManager projectManager;
-	private CategoryStorage categoryStorage;
-	
+public class Menu{
+	private static final int[]	DONATE_OPTIONS							= {0, 1, 10, 40};
+	private static final int	MENU_EXIT_OPTION						= 0;
+	private static final int	MENU_DEFAULT_OPTION						= -1;
+	private static final String	PLEASE_SELECT							= "Please select";
+	private static final String	PROJECT									= " project";
+	private static final String	CATEGORY								= " category";
+	private static final String	O_FOR_EXIT								= " (0 to go back): ";
+	private static final String	YOU_SELECTED_PROJECT					= "You selected project: ";
+	private static final String	YOU_SELECTED_CATEGORY_NUMBER			= "You selected category number ";
+	private static final String	PLEASE_ENTER_THE_NUMBER_BETWEEN_1_AND	= "Please, enter the number between 1 and ";
+	private User				user;
+	private ProjectStorage		projectManager;
+	private CategoryStorage		categoryStorage;
 
-	
-
-	public Menu(User u, ProjectManager projectManager, CategoryStorage categoryStorage) {
+	public Menu(User u, ProjectStorage projectManager, CategoryStorage categoryStorage) {
 		this.user = u;
 		this.setProjectManager(projectManager);
 		this.categoryStorage = categoryStorage;
 	}
-	
+
 	public CategoryStorage getCategoryStorage() {
 		return categoryStorage;
 	}
@@ -39,6 +36,7 @@ public class Menu {
 	public void setCategoryStorage(CategoryStorage categoryStorage) {
 		this.categoryStorage = categoryStorage;
 	}
+
 	public User getUser() {
 		return user;
 	}
@@ -49,32 +47,32 @@ public class Menu {
 
 	public void showMenu() {
 		switch (user.getSettings().getMenuOption()) {
-		case SHOW_MAIN_MENU:
-			chooseCategory();
-			break;
-		case SHOW_CATEGORIES:
-			chooseCategory();
-			break;
-		case SHOW_PROJECTS_IN_SPECIFIC_CATEGORY:
-			chooseProject();
-			break;
-		case SHOW_SPECIFIC_PROJECT:
-			showFullProjectInfo();
-			break;
-		case DONATE_TO_PROJECT:
-			showDonateInfo();
-			break;
-		case ADD_PAYMENT_SYSTEM_TO_ACCOUNT:
-			addPaymentSystem();
-			break;
-		case ASK_QUESTION:
-			askQuestion();
-			break;
-		case EXIT:
-			ConsolePrinter.print("Exiting menu");
-			break;
-		default:
-			break;
+			case SHOW_MAIN_MENU :
+				chooseCategory();
+				break;
+			case SHOW_CATEGORIES :
+				chooseCategory();
+				break;
+			case SHOW_PROJECTS_IN_SPECIFIC_CATEGORY :
+				chooseProject();
+				break;
+			case SHOW_SPECIFIC_PROJECT :
+				showFullProjectInfo();
+				break;
+			case DONATE_TO_PROJECT :
+				showDonateInfo();
+				break;
+			case ADD_PAYMENT_SYSTEM_TO_ACCOUNT :
+				addPaymentSystem();
+				break;
+			case ASK_QUESTION :
+				askQuestion();
+				break;
+			case EXIT :
+				ConsolePrinter.print("Exiting menu");
+				break;
+			default :
+				break;
 		}
 	}
 
@@ -192,7 +190,7 @@ public class Menu {
 		int selectedCategory = MENU_DEFAULT_OPTION;
 		while (selectedCategory == MENU_DEFAULT_OPTION) {
 
-			ConsolePrinter.print(categoryStorage.getCategories());
+			ConsolePrinter.print(categoryStorage.getAll());
 			ConsolePrinter.print(PLEASE_SELECT + CATEGORY + O_FOR_EXIT);
 			selectedCategory = ConsoleScanner.getInt();
 
@@ -222,11 +220,12 @@ public class Menu {
 			selectedOption = ConsoleScanner.getInt();
 
 			if (selectedOption < MENU_EXIT_OPTION
-					|| selectedOption > projectManager.getProjectsByCategory(category).size()) {
+					|| selectedOption > projectManager.getByCategory(category.getCategoryName()).size()) {
 				ConsolePrinter.print(PLEASE_ENTER_THE_NUMBER_BETWEEN_1_AND + getCategoryStorage().size() + 1);
 				continue;
 			} else if (selectedOption != 0) {
-				Project selectedProject = projectManager.getProjectsByCategory(category).get(selectedOption - 1);
+				Project selectedProject = projectManager.getByCategory(category.getCategoryName())
+						.get(selectedOption - 1);
 				ConsolePrinter.print(YOU_SELECTED_PROJECT + selectedProject.getProjectName());
 				user.getSettings().setSelectedProject(selectedProject);
 				user.getSettings().setMenuOption(MenuOptions.SHOW_SPECIFIC_PROJECT);
@@ -239,11 +238,11 @@ public class Menu {
 		showMenu();
 	}
 
-	public ProjectManager getProjectManager() {
+	public ProjectStorage getProjectManager() {
 		return projectManager;
 	}
 
-	public void setProjectManager(ProjectManager projectManager) {
+	public void setProjectManager(ProjectStorage projectManager) {
 		this.projectManager = projectManager;
 	}
 

@@ -4,13 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ConsolePrinterTest {
+public class ConsolePrinterTest{
 	ConsolePrinter consolePrinter = new ConsolePrinter();
 
 	@Test
 	public void testPrintString() {
 
 	}
-
 
 }

@@ -2,7 +2,7 @@ package ua.com.goit.gojava7.kickstarter.domain;
 
 import java.util.HashMap;
 
-public class PaymentBonus {
+public class PaymentBonus{
 	private HashMap<Integer, String> bonuses = new HashMap<>();
 
 	public PaymentBonus() {

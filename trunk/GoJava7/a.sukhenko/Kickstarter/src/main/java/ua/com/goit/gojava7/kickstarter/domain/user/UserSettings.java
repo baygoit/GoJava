@@ -4,10 +4,10 @@ import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.MenuOptions;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-public class UserSettings {
-	private Category category;
-	private Project selectedProject;
-	private MenuOptions menuOption = MenuOptions.SHOW_MAIN_MENU;
+public class UserSettings{
+	private Category	category;
+	private Project		selectedProject;
+	private MenuOptions	menuOption	= MenuOptions.SHOW_MAIN_MENU;
 
 	public UserSettings() {
 	}

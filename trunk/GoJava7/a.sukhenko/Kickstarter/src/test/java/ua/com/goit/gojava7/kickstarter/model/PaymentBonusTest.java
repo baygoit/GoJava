@@ -9,9 +9,10 @@ import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.domain.PaymentBonus;
 
-public class PaymentBonusTest {
-	private PaymentBonus paymentBonus = new PaymentBonus();
-	private HashMap<Integer, String> bonuses = new HashMap<>();
+public class PaymentBonusTest{
+	private PaymentBonus				paymentBonus	= new PaymentBonus();
+	private HashMap<Integer, String>	bonuses			= new HashMap<>();
+
 	@Test
 	public void testPaymentBonus() {
 		assertNotNull(paymentBonus);
@@ -20,7 +21,7 @@ public class PaymentBonusTest {
 	@Test
 	public void testSetBonuses() {
 		paymentBonus.setBonuses(bonuses);
-		assertThat(paymentBonus.getBonuses(),is(bonuses));
+		assertThat(paymentBonus.getBonuses(), is(bonuses));
 	}
 
 }

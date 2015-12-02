@@ -2,7 +2,7 @@ package ua.com.goit.gojava7.kickstarter.console;
 
 import java.util.Scanner;
 
-public class ConsoleScanner {
+public class ConsoleScanner{
 	private static Scanner scanner = new Scanner(System.in);
 
 	public static int getInt() {

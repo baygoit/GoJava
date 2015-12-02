@@ -1,18 +1,17 @@
 package ua.com.goit.gojava7.kickstarter;
 
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
+import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
-import ua.com.goit.gojava7.kickstarter.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.storage.ProjectManager;
-import ua.com.goit.gojava7.kickstarter.storage.QuoteStorage;
 
-public class Body {
-	public static final String CATEGORIES = "Categories: ";
-	public static final String GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO = "GoIT Kickstarter (c) by Artur Sukhenko";
-	public static final String WELCOME_TO_KICKSTARTER_BETA = "Welcome to Kickstarter Beta";
-
+public class Body{
+	public static final String	CATEGORIES								= "Categories: ";
+	public static final String	GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO	= "GoIT Kickstarter (c) by Artur Sukhenko";
+	public static final String	WELCOME_TO_KICKSTARTER_BETA				= "Welcome to Kickstarter Beta";
 
 	public void generateHeader() {
 		ConsolePrinter.print(WELCOME_TO_KICKSTARTER_BETA);
@@ -22,9 +21,8 @@ public class Body {
 		ConsolePrinter.print(GO_IT_KICKSTARTER_C_BY_ARTUR_SUKHENKO);
 	}
 
-	public void generateBody(ProjectManager projectManager,
-			CategoryStorage categoryStorage) {
-		generateProjectInfo(projectManager.getProjectById(0), categoryStorage);
+	public void generateBody(ProjectStorage projectStorage, CategoryStorage categoryStorage) {
+		generateProjectInfo(projectStorage.getByNumber(0), categoryStorage);
 	}
 
 	public void generateQuoteBlock(QuoteStorage quoteStorage) {
@@ -36,14 +34,14 @@ public class Body {
 	public void generateCategories(CategoryStorage categoryStorage) {
 		ConsolePrinter.printHorizontalLine();
 		ConsolePrinter.print(CATEGORIES);
-		categoryStorage.getCategories().forEach(a -> generateCategoryInfo(a));
+		categoryStorage.getAll().forEach(a -> generateCategoryInfo(a));
 	}
 
-	public void generateMainPage(QuoteStorage quoteStorage, ProjectManager projectManager,
-			ConsolePrinter consolePrinter, CategoryStorage categoryStorage) {
+	public void generateMainPage(QuoteStorage quoteStorage, ProjectStorage projectStorage,
+			CategoryStorage categoryStorage) {
 		generateHeader();
 		generateQuoteBlock(quoteStorage);
-		generateBody(projectManager, categoryStorage);
+		generateBody(projectStorage, categoryStorage);
 		generateFooter();
 	}
 
@@ -51,7 +49,7 @@ public class Body {
 		ConsolePrinter.printCategory(category);
 	}
 
-	public void generateProjectInfo(Project project,CategoryStorage categoryStorage) {
+	public void generateProjectInfo(Project project, CategoryStorage categoryStorage) {
 
 		ConsolePrinter.printHorizontalLine();
 		ConsolePrinter.print("Project: " + project.getProjectName() + "   |  Category: "

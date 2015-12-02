@@ -8,21 +8,23 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
-public class Project {
-	private static final String MINUTES_LEFT = " minutes left";
-	private static final String HOURS_LEFT = " hours left";
-	private static final String DAYS_LEFT = " days left";
-	private static final String SECONDS_LEFT = " seconds left";
-	private String projectName;
-	private String projectDescription;
-	private double moneyNeeded;
-	private String projectHistory;
-	private String demoLink;
-	private Map<String, String> questionsAndAnswers = new HashMap<>();
-	private int projectCategoryId;
-	private HashMap<User, Double> backers = new HashMap<>();
-	private LocalDateTime enddate;
-	private PaymentBonus paymentBonus = new PaymentBonus();
+public class Project{
+	private static final String		MINUTES_LEFT		= " minutes left";
+	private static final String		HOURS_LEFT			= " hours left";
+	private static final String		DAYS_LEFT			= " days left";
+	private static final String		SECONDS_LEFT		= " seconds left";
+	private String					projectName;
+	private String					projectDescription;
+	private double					moneyNeeded;
+	private String					projectHistory;
+	private String					demoLink;
+	private Map<String, String>		questionsAndAnswers	= new HashMap<>();
+	private int						projectCategoryId;
+	private String					categoryName;
+	private HashMap<User, Double>	backers				= new HashMap<>();
+	private Integer					pledged;
+	private LocalDateTime			enddate;
+	private PaymentBonus			paymentBonus		= new PaymentBonus();
 
 	public LocalDateTime getEnddate() {
 		return enddate;
@@ -160,4 +162,23 @@ public class Project {
 		this.projectCategoryId = projectCategoryId;
 	}
 
+	public Integer getPledged() {
+		return pledged;
+	}
+
+	public void setPledged(Integer pledged) {
+		this.pledged = pledged;
+	}
+
+	public void updatePledged(int amount) {
+		this.pledged += amount;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 }
