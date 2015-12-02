@@ -20,14 +20,16 @@ public class RewardDbDao extends DbDao<Reward> implements RewardDao {
 
 	public RewardDbDao(BasicDataSource basicDataSource) {
 		super(basicDataSource, FIELDS, TABLE);
-	} 
+	}
 
 	@Override
-	public List<Reward> getByProject(String projectName) {	
+	public List<Reward> getByProject(String projectName) {
 		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE project_id = "
 				+ "(SELECT id FROM project WHERE name = '" + prepareStringForDb(projectName) + "')";
 		List<Reward> data = new ArrayList<>();
-		try (Connection connection = basicDataSource.getConnection(); PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query);
+				ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				data.add(readElement(resultSet));
 			}
@@ -43,5 +45,21 @@ public class RewardDbDao extends DbDao<Reward> implements RewardDao {
 		reward.setAmount(resultSet.getInt("amount"));
 		reward.setReward(resultSet.getString("reward"));
 		return reward;
-	}	
+	}
+
+	@Override
+	public List<Reward> getByProject(int projectId) {
+		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE project_id = " + projectId;
+		List<Reward> data = new ArrayList<>();
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query);
+				ResultSet resultSet = ps.executeQuery()) {
+			while (resultSet.next()) {
+				data.add(readElement(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
 }

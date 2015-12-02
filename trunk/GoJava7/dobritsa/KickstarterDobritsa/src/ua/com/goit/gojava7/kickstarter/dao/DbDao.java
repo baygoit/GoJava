@@ -18,7 +18,6 @@ public abstract class DbDao<T> implements Dao<T> {
 	protected BasicDataSource basicDataSource;
 
 	protected DbDao(BasicDataSource basicDataSource, String FIELDS, String TABLE) {
-		//this.connection = basicDataSource;
 		this.basicDataSource = basicDataSource;
 		this.FIELDS = FIELDS;
 		this.TABLE = TABLE;

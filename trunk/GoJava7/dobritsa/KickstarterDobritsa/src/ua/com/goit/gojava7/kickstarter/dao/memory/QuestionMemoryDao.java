@@ -18,4 +18,11 @@ public class QuestionMemoryDao extends MemoryDao<Question> implements QuestionDa
 		return this.getAll().stream().filter(reward -> reward.getProjectName().equals(projectName))
 				.collect(Collectors.toList());
 	}
+
+	@Override
+	public List<Question> getByProject(int projectId) {
+		return this.getAll().stream()
+                .filter(project -> project.getProjectId() == projectId)
+                .collect(Collectors.toList());
+	}
 }

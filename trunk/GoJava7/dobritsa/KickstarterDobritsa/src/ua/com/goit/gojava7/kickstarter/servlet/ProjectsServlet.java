@@ -19,27 +19,30 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 public class ProjectsServlet extends HttpServlet {
 
 	private DaoFactory daoFactory;
-	private ProjectDao projectStorage;
+	private ProjectDao projectDao;
 
 	@Override
 	public void init() throws ServletException {
 		daoFactory = new DaoFactory(MyDataSource.DB);
-		projectStorage = daoFactory.getProjectDAO();
+		projectDao = daoFactory.getProjectDAO();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int categoryId = Integer.parseInt(request.getParameter("id"));
-
-		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Projects</title></head><body>");
-		stringBuilder.append("List of projects:</br>");
-
+		
+		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Projects</title></head><body>");		
+		
+		int categoryId = Integer.parseInt(request.getParameter("id"));		
 		List<Project> projects = new ArrayList<>();
-		projects = projectStorage.getByCategory(categoryId);
+		projects = projectDao.getByCategory(categoryId);
 
 		for (int i = 0; i < projects.size(); i++) {
-			stringBuilder.append("<a href=\"project?id=" + projects.get(i).getId() + "\">" + projects.get(i).getName()
-					+ "</a><br/>");
+			stringBuilder.append("<br/><a href=\"project?id=" + projects.get(i).getId() + "\">" + projects.get(i).getName()
+					+ "</a>");
+			stringBuilder.append("</br>Description: \t" + projects.get(i).getDescription());
+			stringBuilder.append("</br>Goal: \t\t" + projects.get(i).getGoal());
+			stringBuilder.append("</br>Pledged: \t" + projects.get(i).getPledged());
+			stringBuilder.append("</br>Days to go: \t" + projects.get(i).getDaysToGo() + "<br/>");	
 		}
 
 		response.getWriter().append(stringBuilder);

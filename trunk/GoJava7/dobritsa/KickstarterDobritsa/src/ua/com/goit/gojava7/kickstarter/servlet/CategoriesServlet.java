@@ -34,7 +34,6 @@ public class CategoriesServlet extends HttpServlet {
 		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Categories</title></head><body>");
 
 		stringBuilder.append(quote.getText() + "  (c) " + quote.getAuthor() + "</br></br>");	
-		stringBuilder.append("List of categories:</br>");
 	
 		for (int i = 1; i <= categoryStorage.size(); i++) {		
 			stringBuilder.append("<a href=\"projects?id=" + categoryStorage.get(i).getId() + "\">" + categoryStorage.get(i).getName() + "</a><br/>");			

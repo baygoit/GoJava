@@ -84,4 +84,20 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionDao {
 		return 0;
 	}
 
+	@Override
+	public List<Question> getByProject(int projectId) {
+		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE project_id = " + projectId;
+		List<Question> data = new ArrayList<>();
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query);
+				ResultSet resultSet = ps.executeQuery()) {
+			while (resultSet.next()) {
+				data.add(readElement(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+
 }
