@@ -16,7 +16,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Reward;
 public class RewardDbDao extends DbDao<Reward> implements RewardDao {
 
 	private static final String TABLE = "reward";
-	private static final String FIELDS = "amount, reward";
+	private static final String FIELDS = "id, amount, reward, project_id";
 
 	public RewardDbDao(BasicDataSource basicDataSource) {
 		super(basicDataSource, FIELDS, TABLE);
@@ -42,8 +42,10 @@ public class RewardDbDao extends DbDao<Reward> implements RewardDao {
 	@Override
 	protected Reward readElement(ResultSet resultSet) throws SQLException {
 		Reward reward = new Reward();
+		reward.setId(resultSet.getInt("id"));
 		reward.setAmount(resultSet.getInt("amount"));
 		reward.setReward(resultSet.getString("reward"));
+		reward.setProjectId(resultSet.getInt("project_id"));
 		return reward;
 	}
 

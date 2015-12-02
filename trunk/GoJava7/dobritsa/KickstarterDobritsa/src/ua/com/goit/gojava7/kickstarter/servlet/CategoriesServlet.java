@@ -31,8 +31,8 @@ public class CategoriesServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Quote quote = quoteStorage.get(1);
+		
 		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Categories</title></head><body>");
-
 		stringBuilder.append(quote.getText() + "  (c) " + quote.getAuthor() + "</br></br>");	
 	
 		for (int i = 1; i <= categoryStorage.size(); i++) {		

@@ -40,11 +40,6 @@ public class Reward {
 		this.projectName = projectName;
 	}
 
-	@Override
-	public String toString() {
-		return "Amount: " + amount + "; Reward: " + reward;
-	}
-
 	public int getProjectId() {
 		return projectId;
 	}
@@ -53,4 +48,8 @@ public class Reward {
 		this.projectId = projectId;
 	}
 
+	@Override
+	public String toString() {
+		return "id: " + id + "; Amount: " + amount + "; Reward: " + reward + "; projectId: " + projectId;
+	}
 }

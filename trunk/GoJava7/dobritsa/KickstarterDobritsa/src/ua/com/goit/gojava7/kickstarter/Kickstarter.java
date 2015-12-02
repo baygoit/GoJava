@@ -26,10 +26,10 @@ public class Kickstarter {
 	private ProjectPrinter projectPrinter = new ProjectPrinter();
 	private QuotePrinter quotePrinter = new QuotePrinter();
 
-	private QuoteDao quoteStorage;
-	private CategoryDao categoryStorage;
-	private ProjectDao projectStorage;
-	private QuestionDao questionStorage;
+	private QuoteDao quoteDao;
+	private CategoryDao categoryDao;
+	private ProjectDao projectDao;
+	private QuestionDao questionDao;
 	private RewardDao rewardStorage;
 
 	private Project currentProject = null;
@@ -39,25 +39,25 @@ public class Kickstarter {
 
 	public Kickstarter(QuoteDao quoteStorage, CategoryDao categoryStorage, ProjectDao projectStorage,
 			QuestionDao questionStorage, RewardDao rewardStorage) {
-		this.quoteStorage = quoteStorage;
-		this.categoryStorage = categoryStorage;
-		this.projectStorage = projectStorage;
-		this.questionStorage = questionStorage;
+		this.quoteDao = quoteStorage;
+		this.categoryDao = categoryStorage;
+		this.projectDao = projectStorage;
+		this.questionDao = questionStorage;
 		this.rewardStorage = rewardStorage;
 	}
 
 	public void run() {
 		// TODO random
 		// quotePrinter.print(quoteStorage.getRandomQuote());
-		quotePrinter.print(quoteStorage.get(1));
+		quotePrinter.print(quoteDao.get(1));
 		do {
-			currentCategory = chooseCategory(categoryStorage);
+			currentCategory = chooseCategory(categoryDao);
 			if (currentCategory == null) {
 				printer.print("See you soon!");
 				break;
 			}
 			do {
-				currentProject = chooseProject(currentCategory, projectStorage);
+				currentProject = chooseProject(currentCategory, projectDao);
 				if (currentProject != null) {
 					printer.print(BORDER + "\nCurrent category: " + currentCategory.getName()
 							+ "\nCurrent project: #_____\n");
@@ -102,7 +102,7 @@ public class Kickstarter {
 		boolean exit = false;
 		while (!exit) {
 			List<Question> quoestionsInProject = new ArrayList<>();
-			quoestionsInProject = questionStorage.getByProject(project.getName());
+			quoestionsInProject = questionDao.getByProject(project.getName());
 			projectPrinter.printFull(project);
 			projectPrinter.printQuestions(quoestionsInProject);
 			exit = chooseOptionOfProject(project);
@@ -147,13 +147,13 @@ public class Kickstarter {
 			int amount = consoleScanner.getInt(minDonation, maxDonation);
 			printer.print("\nAmount of your donation is $" + amount);
 			printer.print("It was collected before: $" + project.getPledged());
-			projectStorage.updatePledged(project, amount);
+			projectDao.updatePledged(project, amount);
 			printer.print("Now collected: $" + project.getPledged());
 			printer.print(BORDER);
 		} else {
 			printer.print("\nAmount of your donation is $" + rewardsInProject.get(numberOfReward - 1).getAmount());
 			printer.print("It was collected before: $" + project.getPledged());
-			projectStorage.updatePledged(project, rewardsInProject.get(numberOfReward - 1).getAmount());
+			projectDao.updatePledged(project, rewardsInProject.get(numberOfReward - 1).getAmount());
 			printer.print("Now collected: $" + project.getPledged());
 			printer.print(BORDER);
 		}
@@ -165,7 +165,7 @@ public class Kickstarter {
 		Question question = new Question();
 		question.setQuestion(consoleScanner.getString());
 		question.setProjectName(project.getName());
-		questionStorage.add(question);
+		questionDao.add(question);
 	}
 
 	public void shutdown() {

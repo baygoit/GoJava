@@ -47,8 +47,7 @@ public class ProjectServlet extends HttpServlet {
 		stringBuilder.append("<h3>" + project.getDescription() + "</h3>");
 		stringBuilder.append("<cite>Goal: </cite>" + project.getGoal());
 		stringBuilder.append("</br><cite>Pledged: </cite>" + project.getPledged());
-		stringBuilder.append("</br><cite>Days to go: </cite>" + project.getDaysToGo());
-		
+		stringBuilder.append("</br><cite>Days to go: </cite>" + project.getDaysToGo());		
 		stringBuilder.append("<h3>About this project</h3>");
 		stringBuilder.append(project.getHistory());
 		stringBuilder.append("</br></br><cite>Demo video: " + project.getLink() + "</cite>");
@@ -64,11 +63,17 @@ public class ProjectServlet extends HttpServlet {
 			stringBuilder.append("</br></br>");
 		}
 
-		stringBuilder
-				.append("<br/></br><a href=\"questions?projectId=" + project.getId() + "\">" + "Ask a question" + "</a>");
+		stringBuilder.append("<form action=\"question\"  method=\"post\">");
+		stringBuilder.append("</br></br>Ask a question:<br>");
+		stringBuilder.append(" <input type=\"text\" name=\"question\">");
+		stringBuilder.append(" <input type=\"hidden\" name=\"projectId\" value =" + "\"" + projectId + "\"/>");			
+		stringBuilder.append("<input type=\"submit\" value=\"Submit\">");
+		stringBuilder.append("</form>");				
+	
 		stringBuilder
 				.append("<br/></br><a href=\"rewards?projectId=" + project.getId() + "\">" + "See rewards" + "</a>");
-
+		
+		stringBuilder.append("</body></html>");
 		response.getWriter().append(stringBuilder);
 	}
 

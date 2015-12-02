@@ -19,4 +19,11 @@ public class QuestionsFileDao extends FileDao<Question> implements QuestionDao {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public List<Question> getByProject(int projectId) {
+		 return this.getAll().stream()
+	                .filter(project -> project.getProjectId() == projectId)
+	                .collect(Collectors.toList());
+	}
+
 }

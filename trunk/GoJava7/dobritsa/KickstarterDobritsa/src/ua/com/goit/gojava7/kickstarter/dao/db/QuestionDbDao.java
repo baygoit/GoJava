@@ -31,7 +31,7 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionDao {
 			ps.executeUpdate();			
 		} catch (SQLException e) {
 			System.err.println("Error! INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + element.getTime() + ", "
-					+ element.getTime() + "," + element.getTime() + ", " + element.getTime() + ")");
+					+ element.getQuestion() + "," + element.getAnswer() + ", " + element.getProjectId() + ")");
 
 			e.printStackTrace();
 		}
@@ -67,7 +67,7 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionDao {
 		statement.setString(1, question.getTime());
 		statement.setString(2, question.getQuestion());
 		statement.setString(3, question.getAnswer());
-		statement.setInt(4, findProjectId(question.getProjectName()));
+		statement.setInt(4, question.getProjectId());
 	}
 
 	private int findProjectId(String projectName) {
