@@ -97,7 +97,10 @@ public class Memory{
 		project = new Project(GAME_2,"Game 2 Description", 3, LocalDateTime.now().plusDays(6));
 		project.setCategoryName(categoryNameGames);
 		project.setDemoLink(demolink);
+		project.setProjectHistory("Some Project History");
 		projects.add(project);
+		
+		projects.forEach(pr -> pr.setMoneyNeeded(50000));
 		
 		
 	}

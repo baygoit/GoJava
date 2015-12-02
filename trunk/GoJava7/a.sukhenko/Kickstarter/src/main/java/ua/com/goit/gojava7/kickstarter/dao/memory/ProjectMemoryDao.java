@@ -16,7 +16,7 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 
 	@Override
 	public Project getByNumber(int number) {
-		int index = number - 1;
+		int index = number;
 		return get(index);
 	}
 
@@ -27,7 +27,6 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 
 	@Override
 	public int getPledged(String projectName) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -38,15 +37,15 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 	}
 
 	@Override
-	public void userContributeToProject(User user, Double valueOf) {
+	public void userContributeToProject(User user, Double valueOf, String projectName) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void addProject(Project project) {
-		// TODO Auto-generated method stub
-
+		super.add(project);
 	}
+
 
 }

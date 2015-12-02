@@ -11,5 +11,7 @@ public interface Storage<T> {
 	T get(int index);
 
 	int size();
+	
+	void add(T element);
 
 }

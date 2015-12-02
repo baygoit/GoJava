@@ -16,7 +16,7 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectStorage{
 
 	@Override
 	public Project getByNumber(int number) {
-		int index = number - 1;
+		int index = number;
 		return get(index);
 	}
 
@@ -38,16 +38,18 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectStorage{
 				.collect(Collectors.toList());
 	}
 
-	@Override
-	public void userContributeToProject(User user, Double valueOf) {
-		// TODO Auto-generated method stub
 
-	}
 
 	@Override
 	public void addProject(Project project) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void userContributeToProject(User user, Double valueOf, String projectName) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

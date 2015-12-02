@@ -29,4 +29,10 @@ public class CategoryDatabaseDao extends DatabaseDao<Category> implements Catego
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void add(Category element) {
+		// TODO Auto-generated method stub
+		
+	}
 }

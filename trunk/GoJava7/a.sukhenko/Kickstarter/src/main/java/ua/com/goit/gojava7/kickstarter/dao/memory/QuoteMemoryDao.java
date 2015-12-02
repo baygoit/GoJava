@@ -8,7 +8,7 @@ import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class QuoteMemoryDao extends MemoryDao<Quote> implements QuoteStorage{
-	private Random random;
+	private Random random = new Random();
 
 	public QuoteMemoryDao(List<Quote> data) {
 		super(data);

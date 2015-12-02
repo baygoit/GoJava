@@ -20,7 +20,7 @@ public class Menu{
 	private static final String	YOU_SELECTED_CATEGORY_NUMBER			= "You selected category number ";
 	private static final String	PLEASE_ENTER_THE_NUMBER_BETWEEN_1_AND	= "Please, enter the number between 1 and ";
 	private User				user;
-	private ProjectStorage		projectManager;
+	private ProjectStorage		projectStorage;
 	private CategoryStorage		categoryStorage;
 
 	public Menu(User u, ProjectStorage projectManager, CategoryStorage categoryStorage) {
@@ -96,12 +96,12 @@ public class Menu{
 
 	public void donateMoney(int option) {
 		if (isPaymentOption(option)) {
-			projectManager.userContributeToProject(user, Double.valueOf(DONATE_OPTIONS[option]));
+			projectStorage.userContributeToProject(user, Double.valueOf(DONATE_OPTIONS[option]),user.getSettings().getSelectedProject().getProjectName());
 			ConsolePrinter.print("Payment of " + DONATE_OPTIONS[option] + "$ is done.");
 			user.getSettings().setMenuOption(MenuOptions.SHOW_SPECIFIC_PROJECT);
 		} else {
 			double enterAmount = enterAmount();
-			projectManager.userContributeToProject(user, enterAmount);
+			projectStorage.userContributeToProject(user, enterAmount,user.getSettings().getSelectedProject().getProjectName());
 			ConsolePrinter.print("Payment of " + enterAmount + "$ is done.");
 			user.getSettings().setMenuOption(MenuOptions.SHOW_SPECIFIC_PROJECT);
 
@@ -215,16 +215,16 @@ public class Menu{
 		Category category = user.getSettings().getCategory();
 		do {
 			ConsolePrinter.print("Projects in category " + user.getSettings().getCategory().getCategoryName());
-			ConsolePrinter.showProjectList(user.getSettings().getCategory(), projectManager);
+			ConsolePrinter.showProjectList(user.getSettings().getCategory(), projectStorage);
 			ConsolePrinter.print(PLEASE_SELECT + PROJECT + O_FOR_EXIT);
 			selectedOption = ConsoleScanner.getInt();
 
 			if (selectedOption < MENU_EXIT_OPTION
-					|| selectedOption > projectManager.getByCategory(category.getCategoryName()).size()) {
+					|| selectedOption > projectStorage.getByCategory(category.getCategoryName()).size()) {
 				ConsolePrinter.print(PLEASE_ENTER_THE_NUMBER_BETWEEN_1_AND + getCategoryStorage().size() + 1);
 				continue;
 			} else if (selectedOption != 0) {
-				Project selectedProject = projectManager.getByCategory(category.getCategoryName())
+				Project selectedProject = projectStorage.getByCategory(category.getCategoryName())
 						.get(selectedOption - 1);
 				ConsolePrinter.print(YOU_SELECTED_PROJECT + selectedProject.getProjectName());
 				user.getSettings().setSelectedProject(selectedProject);
@@ -239,11 +239,11 @@ public class Menu{
 	}
 
 	public ProjectStorage getProjectManager() {
-		return projectManager;
+		return projectStorage;
 	}
 
 	public void setProjectManager(ProjectStorage projectManager) {
-		this.projectManager = projectManager;
+		this.projectStorage = projectManager;
 	}
 
 }

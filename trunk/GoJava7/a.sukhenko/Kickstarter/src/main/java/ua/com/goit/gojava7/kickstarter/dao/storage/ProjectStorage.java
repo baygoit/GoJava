@@ -15,7 +15,7 @@ public interface ProjectStorage extends Storage<Project>{
 
 	public List<Project> getByCategory(String categoryName);
 
-	public void userContributeToProject(User user, Double valueOf);
+	public void userContributeToProject(User user, Double valueOf,String projectName);
 
 	public void addProject(Project project);
 

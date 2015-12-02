@@ -24,7 +24,7 @@ public abstract class MemoryDao<T> implements Storage<T>{
 
 	@Override
 	public T get(int index) {
-		if (data.size() == 0) {
+		if (data.isEmpty()) {
 			System.out.println("Nothing to show");
 			return null;
 		}

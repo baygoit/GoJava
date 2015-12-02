@@ -14,7 +14,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
+import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
 import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
@@ -24,7 +26,8 @@ public class BodyTest{
 	public static final String			PROJECT2	= "Project: ";
 	String								newLine		= "\r\n";
 	Body								body		= new Body();
-	CategoryStorage						categoryStorage;
+	DaoFactory daoFactory = new DaoFactory(DataSource.MEMORY);
+	CategoryStorage						categoryStorage = daoFactory.getCategoryStorage();
 
 	private final ByteArrayOutputStream	outContent	= new ByteArrayOutputStream();
 	private final ByteArrayOutputStream	errContent	= new ByteArrayOutputStream();

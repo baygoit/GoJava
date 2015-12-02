@@ -25,10 +25,10 @@ public class KickstarterRunner{
 
 		DaoFactory daoFactory = new DaoFactory(dataSource);
 
-		QuoteStorage quoteStorage = daoFactory.getQuoteDAO();
-		CategoryStorage categoryStorage = daoFactory.getCategoryDAO();
-		ProjectStorage projectStorage = daoFactory.getProjectDAO();
-		QuestionStorage questionsStorage = daoFactory.getQuestionsDAO();
+		QuoteStorage quoteStorage = daoFactory.getQuoteStorage();
+		CategoryStorage categoryStorage = daoFactory.getCategoryStorage();
+		ProjectStorage projectStorage = daoFactory.getProjectStorage();
+		QuestionStorage questionsStorage = daoFactory.getQuestionsStorage();
 		Body body = new Body();
 		
 		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage, body, projectStorage, questionsStorage);

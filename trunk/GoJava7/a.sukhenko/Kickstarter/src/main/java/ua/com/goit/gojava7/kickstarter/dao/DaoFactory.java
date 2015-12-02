@@ -111,19 +111,19 @@ public class DaoFactory{
 		questionsDAO = new QuestionDatabaseDao(connection);
 	}
 
-	public CategoryStorage getCategoryDAO() {
+	public CategoryStorage getCategoryStorage() {
 		return categoryDAO;
 	}
 
-	public QuoteStorage getQuoteDAO() {
+	public QuoteStorage getQuoteStorage() {
 		return quoteDAO;
 	}
 
-	public ProjectStorage getProjectDAO() {
+	public ProjectStorage getProjectStorage() {
 		return projectDAO;
 	}
 
-	public QuestionStorage getQuestionsDAO() {
+	public QuestionStorage getQuestionsStorage() {
 		return questionsDAO;
 	}
 

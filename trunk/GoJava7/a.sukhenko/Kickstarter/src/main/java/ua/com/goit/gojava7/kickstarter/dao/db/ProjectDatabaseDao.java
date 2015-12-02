@@ -77,15 +77,23 @@ public class ProjectDatabaseDao extends DatabaseDao<Project> implements ProjectS
 		return project;
 	}
 
-	@Override
-	public void userContributeToProject(User user, Double valueOf) {
-		// TODO Auto-generated method stub
 
-	}
 
 	@Override
 	public void addProject(Project project) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void add(Project element) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void userContributeToProject(User user, Double valueOf, String projectName) {
+		// TODO Auto-generated method stub
+		
 	}
 }
