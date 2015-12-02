@@ -15,19 +15,6 @@ public class Payment extends HttpServlet {
 
 	    @Override
 	    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	        int projectId = Integer.parseInt(request.getParameter("project"));
-	
-	        HtmlPageWriter htmlPageWriter = new HtmlPageWriter();
-	        htmlPageWriter.setTitle("Pay");
-	        htmlPageWriter.addControl("hidden", "projectId", String.valueOf(projectId));
-	        htmlPageWriter.addControl("hidden", "rewardId", String.valueOf(rewardId));        
-	        htmlPageWriter.addControl("hidden", "operation", "payment");
-	        htmlPageWriter.addControl("User", "text", "user", "User");
-	        htmlPageWriter.addControl("Card ID", "number", "cardId", "Card ID");
-	        htmlPageWriter.addControl("Amount", "number", "amount", request.getParameter("amount"));
-	        htmlPageWriter.addControl("submit", "submit", "Submit");
-	        htmlPageWriter.setAction("project");
-
-	        response.getWriter().print(htmlPageWriter.prepare());
+	       
 	    }
 }
