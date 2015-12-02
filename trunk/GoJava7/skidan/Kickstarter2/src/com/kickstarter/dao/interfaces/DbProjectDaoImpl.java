@@ -11,13 +11,13 @@ import com.kickstarter.model.Project;
 
 public class DbProjectDaoImpl extends DbConnector implements ProjectDaoInterface {
 
-	public List<Project> getAll(Category category) {
+	public List<Project> getAll(String categoryTitle) {
 		ResultSet rs = null;
 		List<Project> list = new ArrayList<>();
 
 		try (PreparedStatement pStatement = getConnection()
 				.prepareStatement("select * from projects where categoryTitle = ? ")) {
-			pStatement.setString(1, category.getTitle());
+			pStatement.setString(1, categoryTitle);
 			rs = pStatement.executeQuery();
 			while (rs.next()) {
 				Project project = fill(rs);

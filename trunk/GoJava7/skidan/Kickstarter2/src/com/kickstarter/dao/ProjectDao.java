@@ -1,6 +1,6 @@
 package com.kickstarter.dao;
 
-import com.kickstarter.dao.impl.MemoryProjectDaoImpl;
+
 import com.kickstarter.dao.interfaces.DbProjectDaoImpl;
 import com.kickstarter.dao.interfaces.ProjectDaoType;
 
