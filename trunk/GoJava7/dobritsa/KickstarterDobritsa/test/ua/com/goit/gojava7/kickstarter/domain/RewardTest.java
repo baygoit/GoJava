@@ -1,27 +1,51 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
+import java.io.PrintStream;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
 import static org.hamcrest.CoreMatchers.is;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RewardTest {
 
-	@Test
-	public void testCreateEmptyReward() {
-		Reward reward = new Reward();		
-		assertNull(reward.getReward());
-		
-		reward.setAmount(22);
-		reward.setReward("something");
-		assertThat(reward.getAmount(), is(22));
-		assertThat(reward.getReward(), is("something"));
+	@Mock
+	private PrintStream printSteam;
+
+	Reward reward = new Reward();
+
+	@Before
+	public void setUp() {
+		reward.setAmount(10);
+		reward.setReward("TestReward");
+		reward.setProjectName("TestProject");
+		System.setOut(printSteam);
 	}
-	
+
+	@After
+	public void tearDown() {
+		verifyNoMoreInteractions(printSteam);
+	}
+
 	@Test
-	public void testCreateReward() {
-		Reward reward = new Reward(10, "you are will be happy");	
+	public void testGet() {
 		assertThat(reward.getAmount(), is(10));
-		assertThat(reward.getReward(), is("you are will be happy"));
+		assertThat(reward.getReward(), is("TestReward"));
+		assertThat(reward.getProjectName(), is("TestProject"));
+	}
+
+	@Test
+	public void testToString() {
+		System.out.println(reward.toString());
+		verify(printSteam).println("Amount: 10; Reward: TestReward");
 	}
 }

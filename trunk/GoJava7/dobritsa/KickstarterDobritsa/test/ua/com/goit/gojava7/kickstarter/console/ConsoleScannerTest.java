@@ -3,7 +3,6 @@ package ua.com.goit.gojava7.kickstarter.console;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,20 +17,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class) 
 public class ConsoleScannerTest {	
 
 	BufferedReader bufferedReader = org.mockito.Mockito.mock(BufferedReader.class);
 
 	@Mock
-	private PrintStream printSteam;
+	private PrintStream printStream;
 
 	@InjectMocks
 	private ConsoleScanner consoleScanner = new ConsoleScanner();
 
 	@Before
 	public void setUp() {		
-		System.setOut(printSteam);
+		System.setOut(printStream);
 	}
 	
 	@Test
@@ -47,21 +46,17 @@ public class ConsoleScannerTest {
 	}
 
 	@Test
-	public void testGetIntEnteredWrongNumberThenEntered0() throws IOException {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);
+	public void testGetIntEnteredWrongNumberThenEntered0() throws IOException {	
 		when(bufferedReader.readLine()).thenReturn("10").thenReturn("0");
 		assertThat(consoleScanner.getInt(0, 3), is(0));
-		verify(printSteam).println(contains("You should type a number FROM 0 TO 3"));
+		verify(printStream).println(contains("You should type a number FROM 0 TO 3"));
 	}
 
 	@Test
-	public void testGetIntEnteredNotNumberThenEntered0() throws IOException {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);
+	public void testGetIntEnteredNotNumberThenEntered0() throws IOException {	
 		when(bufferedReader.readLine()).thenReturn("ssssss").thenReturn("0");
 		assertThat(consoleScanner.getInt(0, 3), is(0));
-		verify(printSteam).println(contains("You should type a NUMBER from 0 to 3"));
+		verify(printStream).println(contains("You should type a NUMBER from 0 to 3"));
 	}
 
 	@Test
@@ -71,27 +66,23 @@ public class ConsoleScannerTest {
 	}
 
 	@Test
-	public void testGetOptionEnteredB() throws IOException {
-		when(bufferedReader.readLine()).thenReturn("b");
-		assertThat(consoleScanner.getOption(), is("b"));
+	public void testGetOptionEnteredP() throws IOException {
+		when(bufferedReader.readLine()).thenReturn("p");
+		assertThat(consoleScanner.getOption(), is("p"));
 	}
 
 	@Test
-	public void testGetOptionEntered0() throws IOException {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);
+	public void testGetOptionEntered0() throws IOException {	
 		when(bufferedReader.readLine()).thenReturn("0");
 		assertThat(consoleScanner.getOption(), is("0"));
-		verify(printSteam).println(contains("Type:"));
+		verify(printStream).println(contains("Type:"));
 	}
 
 	@Test
 	public void testGetOptionEnteredWrongCharacterThan0() throws IOException {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);
 		when(bufferedReader.readLine()).thenReturn("5").thenReturn("0");
 		assertThat(consoleScanner.getOption(), is("0"));
-		verify(printSteam, times(2)).println(contains("Type:"));
+		verify(printStream, times(2)).println(contains("Type:"));
 	}
 
 	@Test
@@ -101,7 +92,8 @@ public class ConsoleScannerTest {
 	}
 	
 	@Test
-	public void testClose() {
-		
+	public void testClose() throws IOException {
+		consoleScanner.close();
+		verify(bufferedReader).close();
 	}
 }

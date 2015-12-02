@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>%title%</title>
+<style type="text/css">
+.container {
+	width: 100%;
+	clear: both;
+}
+
+.container input {
+	width: 50%;
+	clear: both;
+}
+
+.container textarea {
+	width: 50%;
+	clear: both;
+}
+</style>
+</head>
+<body>
+
+	<div class="container" align="center">
+		%body%
+
+		<form action="%action%" method="post" align="center">	
+			<table class="container">
+				%form%
+			</table>
+		</form>
+		<a href="#" onclick="goBack()">Go Back</a>
+		<script>
+			function goBack() {
+				window.history.go(-1);
+			}
+		</script>
+
+	</div>
+</body>
+</html>

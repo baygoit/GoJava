@@ -68,7 +68,7 @@ public class CategoryLevel implements Level {
 			Project selectedProject) {
 		StringBuilder stringBuilder = new StringBuilder();
 		
-		int projectsSize = projectDao.size();
+		int projectsSize = projectDao.size(selectedCategory.getId());
 		if (userChoise < 0 || userChoise > projectsSize) {
 			stringBuilder.append("Please, enter the number between 0 and ")
 					.append(projectsSize);
@@ -86,7 +86,7 @@ public class CategoryLevel implements Level {
 	public Project findSelectedProject(int userChoise,
 			Category selectedCategory, Project selectedProject) {
 
-		selectedProject = projectDao.getProject(userChoise);
+		selectedProject = projectDao.getProject(userChoise, selectedCategory.getId());
 
 		return selectedProject;
 	}

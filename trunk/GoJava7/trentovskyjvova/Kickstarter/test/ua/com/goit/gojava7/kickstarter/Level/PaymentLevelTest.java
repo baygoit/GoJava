@@ -33,7 +33,6 @@ public class PaymentLevelTest {
 	private Category selectedCategory;
 	private Project selectedProject;
 	private Reward reward;
-	private Question question;
 	
 	@Mock
 	private QuestionDao questionDao;
@@ -74,7 +73,7 @@ public class PaymentLevelTest {
 
 	@Test
 	public void testValidateUserChoise1() {
-		when(rewardDao.size()).thenReturn(rewards.size() + 1);
+		when(rewardDao.size(selectedProject.getId())).thenReturn(rewards.size() + 1);
 		String result = paymentLevel.validateUserChoise(1, selectedCategory,
 				selectedProject);
 		assertThat(result, is(""));
@@ -82,7 +81,7 @@ public class PaymentLevelTest {
 
 	@Test
 	public void testValidateUserChoise2() {
-		when(rewardDao.size()).thenReturn(rewards.size() + 1);
+		when(rewardDao.size(selectedProject.getId())).thenReturn(rewards.size() + 1);
 		String result = paymentLevel.validateUserChoise(4, selectedCategory,
 				selectedProject);
 		assertThat(result, is(ANSVER));
@@ -90,7 +89,7 @@ public class PaymentLevelTest {
 
 	@Test
 	public void testValidateUserChoiseMinus1() {
-		when(rewardDao.size()).thenReturn(rewards.size() + 1);
+		when(rewardDao.size(selectedProject.getId())).thenReturn(rewards.size() + 1);
 		String result = paymentLevel.validateUserChoise(-1, selectedCategory,
 				selectedProject);
 		assertThat(result, is(ANSVER));
