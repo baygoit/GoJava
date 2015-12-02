@@ -7,17 +7,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.storage.Storage;
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
-public abstract class DbDao<T> implements Storage<T> {
+public abstract class DbDao<T> implements Dao<T> {
 
 	protected String FIELDS = null;
 	protected String TABLE = null;
 	protected List<T> data;
 	protected Connection connection;
+	protected BasicDataSource basicDataSource;
 
-	protected DbDao(Connection connection, String FIELDS, String TABLE) {
-		this.connection = connection;
+	protected DbDao(BasicDataSource basicDataSource, String FIELDS, String TABLE) {
+		//this.connection = basicDataSource;
+		this.basicDataSource = basicDataSource;
 		this.FIELDS = FIELDS;
 		this.TABLE = TABLE;
 	}
@@ -40,7 +42,8 @@ public abstract class DbDao<T> implements Storage<T> {
 	@Override
 	public T get(int index) {
 		String query = "select " + FIELDS + " from " + TABLE + " where id = " + index;
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
 				return readElement(resultSet);
 			}
@@ -54,7 +57,7 @@ public abstract class DbDao<T> implements Storage<T> {
 	public List<T> getAll() {
 		List<T> data = new ArrayList<>();
 		String query = "select " + FIELDS + " from " + TABLE;
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+		try (Connection connection = basicDataSource.getConnection(); PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				data.add(readElement(resultSet));
 			}
@@ -67,7 +70,7 @@ public abstract class DbDao<T> implements Storage<T> {
 	@Override
 	public int size() {
 		String query = "select count(*) as cnt from " + TABLE;
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+		try (Connection connection = basicDataSource.getConnection(); PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
 				return resultSet.getInt("cnt");
 			}

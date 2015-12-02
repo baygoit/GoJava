@@ -12,6 +12,13 @@ public class JdbcDispatcher {
     public JdbcDispatcher(String driver, String url, String user, String password)
             throws SQLException {
         
+        try {
+            Class.forName(driver);
+            Class.forName("org.apache.commons.dbcp2.BasicDataSource");
+        } catch (ClassNotFoundException e) {
+            throw new IllegalStateException(e.getMessage());
+        }       
+        
         datasource = new BasicDataSource();
         datasource.setDriverClassName(driver);
         datasource.setUrl(url);

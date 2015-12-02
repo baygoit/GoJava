@@ -5,23 +5,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-public class QuoteDbDao extends DbDao<Quote> implements QuoteStorage {
+public class QuoteDbDao extends DbDao<Quote> implements QuoteDao {
 
-	private static String TABLE = "quote";
-	private static String FIELDS = "text, author";
+	private static final String TABLE = "quote";
+	private static final String FIELDS = "text, author";
 
-	public QuoteDbDao(Connection connection) {
-		super(connection, FIELDS, TABLE);
+	public QuoteDbDao(BasicDataSource basicDataSource) {
+		super(basicDataSource, FIELDS, TABLE);
 	}
 
 	@Override
 	public Quote getRandomQuote() {
 		String query = "SELECT text, author FROM quote order by rand() limit 1 ";
-		try (PreparedStatement ps = connection.prepareStatement(query); 
+		try (Connection connection = basicDataSource.getConnection(); PreparedStatement ps = connection.prepareStatement(query); 
 				ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				return readElement(resultSet);
@@ -42,7 +44,7 @@ public class QuoteDbDao extends DbDao<Quote> implements QuoteStorage {
 
 	public void add(Quote element) {
 		String query = "insert into quote (text, author) values (?, ?)";
-		try (PreparedStatement ps = connection.prepareStatement(query)) {
+		try (Connection connection = basicDataSource.getConnection(); PreparedStatement ps = connection.prepareStatement(query)) {
 			ps.setString(1, element.getText());
 			ps.setString(2, element.getAuthor());
 			ps.executeUpdate();

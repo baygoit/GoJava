@@ -7,27 +7,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuestionStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
-public class QuestionDbDao extends DbDao<Question> implements QuestionStorage {
+public class QuestionDbDao extends DbDao<Question> implements QuestionDao {
 
-	private static String TABLE = "question";
-	private static String FIELDS = "time, question, answer, project_id";
+	private static final String TABLE = "question";
+	private static final String FIELDS = "time, question, answer, project_id";
 	private static final String INSERTION = "?, ?, ?, ?";
 
-	public QuestionDbDao(Connection connection) {
-		super(connection, FIELDS, TABLE);
+	public QuestionDbDao(BasicDataSource basicDataSource) {
+		super(basicDataSource, FIELDS, TABLE);
 	}
 	
 	@Override
 	public void add(Question element) {
 		String query = "INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + INSERTION + ")";
-		try (PreparedStatement ps = connection.prepareStatement(query)) {
+		try (Connection connection = basicDataSource.getConnection(); PreparedStatement ps = connection.prepareStatement(query)) {
 			writeElement(element, ps);
-			ps.executeUpdate();
-			ps.close();
+			ps.executeUpdate();			
 		} catch (SQLException e) {
 			System.err.println("Error! INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + element.getTime() + ", "
 					+ element.getTime() + "," + element.getTime() + ", " + element.getTime() + ")");
@@ -41,7 +42,7 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionStorage {
 		String query = "SELECT time, question, answer FROM " + TABLE
 				+ " WHERE project_id = (SELECT id FROM project WHERE name = '" + prepareStringForDb(projectName) + "')";
 		List<Question> data = new ArrayList<>();
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+		try (Connection connection = basicDataSource.getConnection(); PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				data.add(readElement(resultSet));
 			}
@@ -71,8 +72,8 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionStorage {
 
 	private int findProjectId(String projectName) {
 		int id;
-		String query = "select id from project where name = '" + prepareStringForDb(projectName) + "'";
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+		String query = "SELECT id FROM " + TABLE + " WHERE name = '" + prepareStringForDb(projectName) + "'";
+		try (Connection connection = basicDataSource.getConnection(); PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				id = resultSet.getInt("id");
 				return id;

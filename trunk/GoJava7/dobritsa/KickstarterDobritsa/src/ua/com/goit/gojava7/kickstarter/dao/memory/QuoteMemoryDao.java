@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.dao.MemoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-public class QuoteMemoryDao extends MemoryDao<Quote> implements QuoteStorage {
+public class QuoteMemoryDao extends MemoryDao<Quote> implements QuoteDao {
 	private Random random;
 
 	public QuoteMemoryDao(List<Quote> data) {
