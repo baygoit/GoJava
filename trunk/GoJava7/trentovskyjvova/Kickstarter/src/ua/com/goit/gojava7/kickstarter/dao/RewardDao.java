@@ -11,4 +11,6 @@ public interface RewardDao extends Dao {
 
 	int size(int projectId);
 
+	Reward getReward(int rewardId);
+
 }

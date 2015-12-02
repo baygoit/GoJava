@@ -22,19 +22,22 @@ public class PaymentDaoSqlImpl implements PaymentDao {
 	@Override
 	public List<Payment> getPayments(int projectId) {
 		List<Payment> payments = new ArrayList<>();
-		Connection connection = daoProvider.open();
 		
-		try (PreparedStatement ps = connection
-				.prepareStatement("SELECT id, name, cardNumber, pledge FROM payment WHERE projectId ="
-						+ projectId);
-				ResultSet rs = ps.executeQuery()) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+		try {
+			conn = daoProvider.getConnection();
+			stmt = conn.prepareStatement(
+					"SELECT id, name, cardNumber, pledge FROM payment WHERE projectId = " + projectId);
+			rset = stmt.executeQuery();
 
 			Payment payment;
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				String cardNumber = rs.getString("cardNumber");
-				int pledge = rs.getInt("pledge");
+			while (rset.next()) {
+				int id = rset.getInt("id");
+				String name = rset.getString("name");
+				String cardNumber = rset.getString("cardNumber");
+				int pledge = rset.getInt("pledge");
 
 				payment = new Payment();
 				payment.setId(id);
@@ -45,31 +48,33 @@ public class PaymentDaoSqlImpl implements PaymentDao {
 				payments.add(payment);
 			}
 		} catch (SQLException e) {
-			getPayments(projectId);
-			//throw new IODatabaseException("Problem with database", e);
+			throw new IODatabaseException("Problem with database", e);
+		} finally {
+            try { if (rset != null) rset.close(); } catch(Exception e) { }
+            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
+            try { if (conn != null) conn.close(); } catch(Exception e) { }
 		}
+		
 		return payments;
 	}
 
 	@Override
 	public void addPayment(Payment payment) {
-		Connection connection = daoProvider.open();
 		
-		try (PreparedStatement ps = connection
-				.prepareStatement("INSERT INTO payment (projectId, name, cardNumber, pledge) VALUES ('"
-						+ payment.getProjectId()
-						+ "', '"
-						+ payment.getName()
-						+ "', '"
-						+ payment.getCardNumber()
-						+ "', '"
-						+ payment.getPledge()
-						+ "');");) {
-			ps.executeUpdate();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = daoProvider.getConnection();
+			stmt = conn.prepareStatement("INSERT INTO payment (projectId, name, cardNumber, pledge) VALUES ('"
+					+ payment.getProjectId() + "', '" + payment.getName() + "', '" + payment.getCardNumber() + "', '"
+					+ payment.getPledge() + "');");
+			stmt.executeUpdate();
 
 		} catch (SQLException e) {
-			addPayment(payment);
-			//throw new IODatabaseException("Problem with database", e);
+			throw new IODatabaseException("Problem with database", e);
+		} finally {
+            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
+            try { if (conn != null) conn.close(); } catch(Exception e) { }
 		}
 
 	}
@@ -77,19 +82,24 @@ public class PaymentDaoSqlImpl implements PaymentDao {
 	@Override
 	public int getPledged(int projectId) {
 		int pledged = 0;
-		Connection connection = daoProvider.open();
 		
-		try (PreparedStatement ps = connection
-				.prepareStatement("SELECT SUM(pledge) pledged FROM payment WHERE projectId ="
-						+ projectId);
-				ResultSet rs = ps.executeQuery()) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+		try {
+			conn = daoProvider.getConnection();
+			stmt = conn.prepareStatement("SELECT SUM(pledge) pledged FROM payment WHERE projectId =" + projectId);
+			rset = stmt.executeQuery();
 
-			while (rs.next()) {
-				pledged = rs.getInt("pledged");
+			while (rset.next()) {
+				pledged = rset.getInt("pledged");
 			}
 		} catch (SQLException e) {
-			getPledged(projectId);
-			//throw new IODatabaseException("Problem with database", e);
+			throw new IODatabaseException("Problem with database", e);
+		} finally {
+            try { if (rset != null) rset.close(); } catch(Exception e) { }
+            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
+            try { if (conn != null) conn.close(); } catch(Exception e) { }
 		}
 		return pledged;
 	}

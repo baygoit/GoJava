@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public class RewardDaoMemoryImpl implements RewardDao {
@@ -49,6 +50,21 @@ public class RewardDaoMemoryImpl implements RewardDao {
 	@Override
 	public int size(int projectId) {
 		return getRewards(projectId).size();
+	}
+
+	@Override
+	public Reward getReward(int rewardId) {
+		if(rewardId == 0){
+			return null;
+		} else {
+			List<Reward> rewards = getRewards(0);
+			for (Reward reward : rewards) {
+				if(reward.getId() == rewardId) {
+					return reward;
+				}
+			} 		
+			return null;
+		}
 	}
 
 }
