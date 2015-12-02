@@ -13,9 +13,9 @@ public abstract class ProjectDaoType {
 
 	}
 
-	public List<Project> getAll(Category category) {
+	public List<Project> getAll(String categoryTitle) {
 
-		return projectDaoInterface.getAll(category);
+		return projectDaoInterface.getAll(categoryTitle);
 	}
 
 	public Project getOne(int projectNumber) {
