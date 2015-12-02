@@ -9,7 +9,7 @@ public interface ProjectDaoInterface {
 
 	public List<Project> getAllList();
 	
-	public List<Project> getAll(Category category);
+	public List<Project> getAll(String categoryTitle);
 
 	public Project getOne(int projectNumber);
 
