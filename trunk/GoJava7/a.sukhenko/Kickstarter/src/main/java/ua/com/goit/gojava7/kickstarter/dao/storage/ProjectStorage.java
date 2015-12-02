@@ -11,7 +11,7 @@ public interface ProjectStorage extends Storage<Project>{
 
 	public void updatePledged(Project project, int amount);
 
-	public int getPledged(String projectName);
+	public double getPledged(String projectName);
 
 	public List<Project> getByCategory(String categoryName);
 

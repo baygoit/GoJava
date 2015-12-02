@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.dao.memory;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import ua.com.goit.gojava7.kickstarter.dao.MemoryDao;
@@ -26,8 +27,13 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 	}
 
 	@Override
-	public int getPledged(String projectName) {
-		return 0;
+	public double getPledged(String projectName) {
+		for (Project project : data) {
+		if(project.getProjectName() == projectName){
+			return project.getPledged();
+		}
+		}
+		throw new NoSuchElementException();
 	}
 
 	@Override
@@ -38,7 +44,16 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 
 	@Override
 	public void userContributeToProject(User user, Double valueOf, String projectName) {
-		// TODO Auto-generated method stub
+		boolean success = false;
+		for (Project project : data) {
+			if(project.getProjectName() == projectName){
+				project.setPledged((project.getPledged()+valueOf));
+				success = true;
+			}
+		}
+		if(!success){
+			throw new NoSuchElementException();
+		}
 
 	}
 

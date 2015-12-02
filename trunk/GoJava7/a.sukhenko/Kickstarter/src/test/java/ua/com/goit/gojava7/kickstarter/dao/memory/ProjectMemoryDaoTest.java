@@ -33,13 +33,10 @@ public class ProjectMemoryDaoTest{
 
 	@Test
 	public void testUpdatePledged() {
-	
+		fail();
 	}
 
-	@Test
-	public void testGetPledged() {
-		fail("Not yet implemented");
-	}
+
 
 	@Test
 	public void testGetByCategory() {
@@ -57,9 +54,15 @@ public class ProjectMemoryDaoTest{
 
 	@Test
 	public void testUserContributeToProject() {
+		
+		final String projectName = "Project Test";
 		User user = new User();
-		//assertThat(projectStorage.getPledged(projectName))
-		projectStorage.userContributeToProject(user, 45123.0,"Project Test");
+		Project project = new Project();
+		project.setProjectName(projectName);
+		projectStorage.add(project);
+		final double contributed = 45123.0;
+		projectStorage.userContributeToProject(user, contributed,projectName);
+		assertThat(projectStorage.getPledged(projectName), is(contributed));
 	}
 
 	@Test

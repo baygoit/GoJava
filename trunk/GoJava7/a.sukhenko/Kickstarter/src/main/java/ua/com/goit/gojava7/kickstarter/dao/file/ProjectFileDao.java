@@ -27,7 +27,7 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectStorage{
 	}
 
 	@Override
-	public int getPledged(String projectName) {
+	public double getPledged(String projectName) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

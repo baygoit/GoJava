@@ -22,7 +22,7 @@ public class Project{
 	private int						projectCategoryId;
 	private String					categoryName;
 	private HashMap<User, Double>	backers				= new HashMap<>();
-	private Integer					pledged;
+	private double					pledged  = 0;
 	private LocalDateTime			enddate;
 	private PaymentBonus			paymentBonus		= new PaymentBonus();
 
@@ -162,12 +162,12 @@ public class Project{
 		this.projectCategoryId = projectCategoryId;
 	}
 
-	public Integer getPledged() {
+	public double getPledged() {
 		return pledged;
 	}
 
-	public void setPledged(Integer pledged) {
-		this.pledged = pledged;
+	public void setPledged(double d) {
+		this.pledged = d;
 	}
 
 	public void updatePledged(int amount) {

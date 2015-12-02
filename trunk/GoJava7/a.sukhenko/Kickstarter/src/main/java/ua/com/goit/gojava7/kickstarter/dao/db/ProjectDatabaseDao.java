@@ -49,7 +49,7 @@ public class ProjectDatabaseDao extends DatabaseDao<Project> implements ProjectS
 	}
 
 	@Override
-	public int getPledged(String projectName) {
+	public double getPledged(String projectName) {
 		String query = "SELECT pledged FROM " + TABLE + " WHERE name = '" + prepareStringForDb(projectName) + "'";
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
