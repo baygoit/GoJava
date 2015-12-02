@@ -61,28 +61,28 @@ public class CategoryLevelTest {
 	
 	@Test
 	public void testFindSelectedProject() {
-		when(projectDao.getProject(0)).thenReturn(selectedProject);
+		when(projectDao.getProject(0, 1)).thenReturn(selectedProject);
 		Project result = categoryLevel.findSelectedProject(0, selectedCategory, null);
 		assertThat(result, is(selectedProject));
 	}
 	
 	@Test
 	public void testValidateUserChoise1() {
-		when(projectDao.size()).thenReturn(projects.size());
+		when(projectDao.size(1)).thenReturn(projects.size());
 		String result = categoryLevel.validateUserChoise(1, selectedCategory, selectedProject);
 		assertThat(result, is(""));
 	}
 	
 	@Test
 	public void testValidateUserChoise2() {
-		when(projectDao.size()).thenReturn(projects.size());
+		when(projectDao.size(1)).thenReturn(projects.size());
 		String result = categoryLevel.validateUserChoise(2, selectedCategory, selectedProject);
 		assertThat(result, is(ANSVER));
 	}
 	
 	@Test
 	public void testValidateUserChoiseMinus1() {
-		when(projectDao.size()).thenReturn(projects.size());
+		when(projectDao.size(1)).thenReturn(projects.size());
 		String result = categoryLevel.validateUserChoise(-1, selectedCategory, selectedProject);
 		assertThat(result, is(ANSVER));
 	}

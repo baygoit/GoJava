@@ -65,7 +65,7 @@ public class PaymentLevel implements Level {
 
 		StringBuilder stringBuilder = new StringBuilder();
 
-		int rewardSize = rewardDao.size() + 1;
+		int rewardSize = rewardDao.size(selectedProject.getId()) + 1;
 		if (userChoise < 0 || userChoise > rewardSize) {
 			stringBuilder.append("Please, enter the number between 0 and ")
 					.append(rewardSize);

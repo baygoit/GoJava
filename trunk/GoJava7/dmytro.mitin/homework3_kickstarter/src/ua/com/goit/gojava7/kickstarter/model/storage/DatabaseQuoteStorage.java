@@ -7,17 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseQuoteStorage implements QuoteStorage {
-    private Connection connection = null;
+    private Connection connection;
 
-    public DatabaseQuoteStorage() {
+    private String quoteTable;
+
+    public DatabaseQuoteStorage(String quoteTable) {
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection(
+            this.connection = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/kickstarter", "postgres", "password");
+
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        this.quoteTable = quoteTable;
 
     }
 
@@ -25,7 +30,7 @@ public class DatabaseQuoteStorage implements QuoteStorage {
     public List<Quote> getQuotes() {
         List<Quote> quotes = new ArrayList<>();
 
-        String query = "SELECT text, author FROM quotes";
+        String query = "SELECT text, author FROM " + quoteTable;
         try (PreparedStatement statement = connection.prepareStatement(query))
         {
             ResultSet result = statement.executeQuery();
@@ -43,7 +48,7 @@ public class DatabaseQuoteStorage implements QuoteStorage {
 
     @Override
     public void add(Quote quote) {
-        String query = "INSERT INTO quotes (text, author) VALUES (?,?)";
+        String query = "INSERT INTO " + quoteTable + " (text, author) VALUES (?,?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, quote.getText());

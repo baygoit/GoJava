@@ -37,7 +37,7 @@ public class KRun {
 				String categoryTitle = categoryDao.getCategorieByNumber(selectedCategoryId).getTitle();
 				Category selectedCategory = categoryDao.getCategorieByNumber(selectedCategoryId);
 				consolePrint.selectedCategoryInformer(categoryTitle);
-				consolePrint.categorysProjectsView(projectDao.getAll(selectedCategory));
+				consolePrint.categorysProjectsView(projectDao.getAll(categoryTitle));
 				projectSelector(selectedCategory);
 			}
 		} catch (Exception e) {
@@ -51,13 +51,13 @@ public class KRun {
 		try {
 			consolePrint.projectSelectionInform();
 			consolePrint.exitInformer();
-			consolePrint.viewSelectedCategoryProjects(projectDao.getAll(selectedCategory));
+			consolePrint.viewSelectedCategoryProjects(projectDao.getAll(selectedCategory.getTitle()));
 			while (true) {
 				int userSelectedProjectNumber = UserConsoleInputReader.readInput();
 				if (userSelectedProjectNumber == EXIT_SIGN) {
 					categorySelector();
 				} else {
-					int projectId = projectDao.getAll(selectedCategory).get(userSelectedProjectNumber -1).getId();
+					int projectId = projectDao.getAll(selectedCategory.getTitle()).get(userSelectedProjectNumber -1).getId();
 					Project p = projectDao.getOne(projectId);
 					String projectTitle = projectDao.getOne(projectId).getTitle();
 					consolePrint.choosenProjectTitleInform(projectTitle);

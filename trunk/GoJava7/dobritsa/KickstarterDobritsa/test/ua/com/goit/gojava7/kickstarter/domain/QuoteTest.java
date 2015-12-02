@@ -1,35 +1,50 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import static org.hamcrest.CoreMatchers.is;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
+import java.io.PrintStream;
+
+@RunWith(MockitoJUnitRunner.class)
 public class QuoteTest extends Assert{
 	
-	private Quote quote = new Quote("TestText", "TestAuthor");
-	private Quote quote1 = new Quote();
+	@Mock
+	private PrintStream printSteam;
+	
+	private Quote quote = new Quote();
+	
+	@Before
+	public void setUp() {
+		quote.setText("TestQuote");
+		quote.setAuthor("TestAuthor");
+		System.setOut(printSteam);
+	}
 
-	@Test
-	public void testGetText() {		
-		assertThat(quote.getText(), is("TestText"));
+	@After
+	public void tearDown() {
+		verifyNoMoreInteractions(printSteam);
 	}
 	
 	@Test
-	public void testGetAuthor() {		
+	public void testGet() {		
+		assertThat(quote.getText(), is("TestQuote"));
 		assertThat(quote.getAuthor(), is("TestAuthor"));
-	}	
+	}
 	
 	@Test
-	public void testSetAuthor() {		
-		quote1.setAuthor("Author1");
-		assertThat(quote1.getAuthor(), is("Author1"));
-	}	
-	
-	@Test
-	public void testSetText() {		
-		quote1.setText("Text1");
-		assertThat(quote1.getText(), is("Text1"));
-	}	
+	public void testToString() {
+		System.out.println(quote.toString());
+		verify(printSteam).println("Quote: TestQuote; Author: TestAuthor");
+	}
 	
 	
 }

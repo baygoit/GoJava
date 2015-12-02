@@ -1,94 +1,140 @@
 package ua.com.goit.gojava7.kikstarter.domain;
 
-/**
- * class contain list projects, short description and amount first payment
- */
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
 public class Project {
 
-	private String projectName;
-	private String projectDescription;
-	private String projectDetailedDescription;
-	private String projectUrl;
-	private String projectQuestion;
-	private int projectNecessaryAmount;
-	private int projectAmountCollected;
-	private int projectDaysToEnd;
+	private int uniqueID;
+	private int categoryID;
+	private String name;
+	private String description;
+	private String detailedDescription;
+	private String url;
+	private String question;
+	private int necessaryAmount;
+	private int amountCollected;
+	private int endOfDays;
 
-	public Project(String projectName, int projectNecessaryAmount, int projectAmountCollected,
-			int projectDaysToEnd) {
-		this.projectName = projectName;
-		this.projectNecessaryAmount = projectNecessaryAmount;
-		this.projectAmountCollected = projectAmountCollected;
-		this.projectDaysToEnd = projectDaysToEnd;
-		this.projectQuestion = "While no one not leave any question";
+	public Project(int uniqueID, int categoryID, String name, int necessaryAmount,
+			int amountCollected) {
+		this.uniqueID = uniqueID;
+		this.categoryID = categoryID;
+		this.name = name;
+		this.necessaryAmount = necessaryAmount;
+		this.amountCollected = amountCollected;
+		this.question = "While no one not leave any question";
 	}
 
-	public String getProjectName() {
-		return projectName;
+	public Project() {
 	}
 
-	public String getProjectDescription() {
-		return projectDescription;
+	public int getUniqueID() {
+		return uniqueID;
 	}
 
-	public String getProjectDetailedDescription() {
-		return projectDetailedDescription;
+	public int getCategoryID() {
+		return categoryID;
 	}
 
-	public String getProjectUrl() {
-		return projectUrl;
+	public String getName() {
+		return name;
 	}
 
-	public int getProjectNecessaryAmount() {
-		return projectNecessaryAmount;
+	public String getDescription() {
+		return description;
 	}
 
-	public int getProjectAmountCollected() {
-		return projectAmountCollected;
+	public String getDetailedDescription() {
+		return detailedDescription;
 	}
 
-	public int getProjectDaysToEnd() {
-		return projectDaysToEnd;
+	public String getUrl() {
+		return url;
+	}
+
+	public int getNecessaryAmount() {
+		return necessaryAmount;
+	}
+
+	public int getAmountCollected() {
+		return amountCollected;
+	}
+
+	public int getEndOfDays() {
+		return endOfDays;
 	}
 
 	public String getProjectQuestion() {
-		return projectQuestion;
+		return question;
 	}
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+	public void setUniqueID(int uniqueID) {
+		this.uniqueID = uniqueID;
 	}
 
-	public void setProjectDescription(String projectDescription) {
-		this.projectDescription = projectDescription;
+	public void setCategoryID(int categoryID) {
+		this.categoryID = categoryID;
 	}
 
-	public void setProjectDetailedDescription(String projectDetailedDescription) {
-		this.projectDetailedDescription = projectDetailedDescription;
+	public void setName(String projectName) {
+		this.name = projectName;
 	}
 
-	public void setProjectUrl(String projectUrl) {
-		this.projectUrl = projectUrl;
+	public void setDescription(String projectDescription) {
+		this.description = projectDescription;
 	}
 
-	public void setProjectNecessaryAmount(int projectNecessaryAmount) {
-		this.projectNecessaryAmount = projectNecessaryAmount;
+	public void setDetailedDescription(String projectDetailedDescription) {
+		this.detailedDescription = projectDetailedDescription;
 	}
 
-	public void setProjectAmountCollected(int projectAmountCollected) {
-		this.projectAmountCollected += projectAmountCollected;
+	public void setUrl(String projectUrl) {
+		this.url = projectUrl;
 	}
 
-	public void setProjectQuestion(String projectQuestin) {
-		this.projectQuestion = projectQuestin;
+	public void setNecessaryAmount(int projectNecessaryAmount) {
+		this.necessaryAmount = projectNecessaryAmount;
+	}
+
+	public void setAmountCollected(int projectAmountCollected) {
+		this.amountCollected += projectAmountCollected;
+	}
+
+	public void setQuestion(String projectQuestin) {
+		this.question = projectQuestin;
 	}
 
 	public void setProjectDaysToEnd(int projectDaysToEnd) {
-		this.projectDaysToEnd = projectDaysToEnd;
+		this.endOfDays = projectDaysToEnd;
 	}
 
-	public void setProjectSumFromUser(int enteredAmount) {
-		projectAmountCollected += enteredAmount;
+	public void setSumFromUser(int enteredAmount) {
+		amountCollected += enteredAmount;
+	}
+
+	public void setEndOfDays(int endOfDays) {
+		this.endOfDays = endOfDays;
+	}
+
+	public int setEndOfDaysProject(int day, int month, int year) {
+		TimeZone timeZone = TimeZone.getTimeZone("Europe/Kiev");
+		Calendar currentCalendar = Calendar.getInstance();
+		Date date = new Date();
+
+		currentCalendar.setTimeZone(timeZone);
+		currentCalendar.setTime(date);
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_MONTH, day);
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, Math.abs(month - 1));
+
+		long difference = calendar.getTimeInMillis() - currentCalendar.getTimeInMillis();
+		long days = difference / (1000 * 60 * 60 * 24);
+
+		return (int) days;
 	}
 
 }

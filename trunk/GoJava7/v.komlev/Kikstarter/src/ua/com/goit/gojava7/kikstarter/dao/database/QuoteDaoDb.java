@@ -14,8 +14,8 @@ import ua.com.goit.gojava7.kikstarter.domain.Quote;
 public class QuoteDaoDb implements QuoteDao {
 
 	private static final String DATABASE_URL = "jdbc:oracle:thin:@localhost:1521:PROBA";
-	private static final String USER_NAME = "system";
-	private static final String PASSWORD = "manager";
+	private static final String USER_NAME = "MILLER";
+	private static final String PASSWORD = "KOLOBOK";
 	private Connection connection;
 	private Statement statement;
 	private ResultSet resultSet;
@@ -23,13 +23,15 @@ public class QuoteDaoDb implements QuoteDao {
 	@Override
 	public void add(Quote quote) {
 		String insertQuote = "INSERT INTO quotes (content, author) VALUES('" + quote.getContent()
-				+ "', '" + quote.getAuthor() + "');";
+				+ "', '" + quote.getAuthor() + "')";
+
+		System.out.println(insertQuote);
 
 		connection = null;
 		statement = null;
 
 		try {
-			connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:PROBA","SYSTEM","MANAGER");
+			connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, PASSWORD);
 			statement = connection.createStatement();
 			statement.executeUpdate(insertQuote);
 		} catch (SQLException e) {
@@ -38,7 +40,8 @@ public class QuoteDaoDb implements QuoteDao {
 			try {
 				if (statement != null) {
 					statement.close();
-				} else if (connection != null) {
+				}
+				if (connection != null) {
 					connection.close();
 				}
 			} catch (SQLException e) {
@@ -79,7 +82,8 @@ public class QuoteDaoDb implements QuoteDao {
 			try {
 				if (statement != null) {
 					statement.close();
-				} else if (connection != null) {
+				}
+				if (connection != null) {
 					connection.close();
 				}
 			} catch (SQLException e) {
@@ -92,7 +96,7 @@ public class QuoteDaoDb implements QuoteDao {
 
 	@Override
 	public Quote getRandomQuote() {
-		String selectRandomQuote = "SELECT * FROM (SELECT * FROM quotes ORDER BY DBMS_RANDOM.VALUE) WHERE = 1;";
+		String selectRandomQuote = "SELECT * FROM (SELECT * FROM quotes ORDER BY DBMS_RANDOM.VALUE) WHERE rownum = 1";
 		Quote randomQuote = null;
 
 		connection = null;
@@ -116,7 +120,8 @@ public class QuoteDaoDb implements QuoteDao {
 			try {
 				if (statement != null) {
 					statement.close();
-				} else if (connection != null) {
+				}
+				if (connection != null) {
 					connection.close();
 				}
 			} catch (SQLException e) {

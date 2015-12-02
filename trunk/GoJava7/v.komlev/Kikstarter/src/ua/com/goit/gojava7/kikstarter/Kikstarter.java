@@ -99,7 +99,7 @@ public class Kikstarter {
 		consolePrinter.printString(INDENT);
 
 		Payment payment = new Payment(currentUserName, currentNumberCard, currentEnteredAmount);
-		project.setProjectSumFromUser(currentEnteredAmount);
+		project.setSumFromUser(currentEnteredAmount);
 		paymentStorage.setPayment(payment);
 		consolePrinter.printPoject(project);
 	}
@@ -110,7 +110,7 @@ public class Kikstarter {
 
 		consolePrinter.printString(INDENT);
 
-		project.setProjectQuestion(currentUserQuestion);
+		project.setQuestion(currentUserQuestion);
 		consolePrinter.printPoject(project);
 	}
 }

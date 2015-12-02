@@ -15,8 +15,8 @@ public class Launcher {
             categoryStorage = new FileCategoryStorage("D:\\workspace\\goit-kickstarter\\resources\\categories.txt",
                                                       "D:\\workspace\\goit-kickstarter\\resources\\projects.txt");
         } else if (args != null && args.length > 0 && args[0].equals("d")) {
-            quoteStorage = new DatabaseQuoteStorage();
-            categoryStorage = new DatabaseCategoryStorage();
+            quoteStorage = new DatabaseQuoteStorage("quotes");
+            categoryStorage = new DatabaseCategoryStorage("categories", "projects");
         } else {
             quoteStorage = new InMemoryQuoteStorage();
             categoryStorage = new InMemoryCategoryStorage();

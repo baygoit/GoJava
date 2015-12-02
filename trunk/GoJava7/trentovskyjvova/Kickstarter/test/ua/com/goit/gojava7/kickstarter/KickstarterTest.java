@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
-import ua.com.goit.gojava7.kickstarter.config.DataSource;
+import ua.com.goit.gojava7.kickstarter.config.DataSourceTypes;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 
@@ -24,7 +24,7 @@ public class KickstarterTest {
 	@Mock
 	private ConsoleScanner consoleScanner;
 
-	private DaoProvider initializer = new DaoProvider(DataSource.MEMORY);
+	private DaoProvider initializer = new DaoProvider(DataSourceTypes.MEMORY);
 
 	@InjectMocks
 	private Kickstarter kickstarter = new Kickstarter(consolePrinter,
@@ -104,7 +104,7 @@ public class KickstarterTest {
 		verify(consolePrinter, times(4)).print(
 				contains("to invest in the project"));
 		verify(consolePrinter, times(4)).print(contains("0 : to project list"));
-		verify(consolePrinter).print(contains("pledged: 31"));
+		verify(consolePrinter).print(contains("pledged: 30"));
 		verify(consolePrinter).print("Goodbye!");
 	}
 }

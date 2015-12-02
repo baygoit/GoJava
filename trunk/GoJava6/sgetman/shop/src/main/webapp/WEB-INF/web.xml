@@ -49,7 +49,7 @@
         </session-timeout>
     </session-config>
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>ControllerServlet</servlet-name>
         <servlet-class>com.gojava6.controller.ControllerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -65,7 +65,13 @@
     <servlet-mapping>
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/viewCart</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
+
+    <welcome-file-list>
+        <welcome-file>
+            index.jsp
+        </welcome-file>
+    </welcome-file-list>
 
     <jsp-config>
         <jsp-property-group>
@@ -81,9 +87,34 @@
         <filter-class>com.gojava6.filter.SessionTimeoutFilter</filter-class>
     </filter>
 
-    <filter-mapping>
+    <!--<filter-mapping>
        <filter-name>SessionTimeoutFilter</filter-name>
        <servlet-name>ControllerServlet</servlet-name>
-    </filter-mapping>
+    </filter-mapping>-->
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext*.xml</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value></param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
 
 </web-app>

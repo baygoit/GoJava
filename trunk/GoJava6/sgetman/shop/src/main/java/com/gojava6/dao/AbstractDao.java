@@ -8,6 +8,7 @@ import com.gojava6.entity.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -16,13 +17,14 @@ import java.util.List;
  */
 public abstract class AbstractDao<T, S> {
 
+    @PersistenceContext
     protected EntityManager entityManager;
 
     public AbstractDao() {
-        entityManager = Persistence.createEntityManagerFactory("AffableBeanPU").createEntityManager();
     }
 
     public abstract List<T> findAll();
 
     public abstract T find(S id);
+
 }
