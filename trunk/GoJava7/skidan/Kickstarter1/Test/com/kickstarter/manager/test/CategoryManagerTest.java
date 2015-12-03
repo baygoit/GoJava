@@ -16,7 +16,7 @@ public class CategoryManagerTest {
 		CategoryManager cm = new CategoryManager();
 		Category category = new Category("it", 1);
 		assertThat(cm.getCategorieByNumber(1).getTitle(), is("it"));
-		assertThat(cm.getAllCategories().size(), is(4));
+		assertThat(cm.getAllCategories().size(), is(3));
 		assertThat(cm.getCategorieByNumber(1).getId(), is(1));
 		assertThat(cm.getCategorieByNumber(1).getProjectList().size(), is(4));
 	}

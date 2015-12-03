@@ -59,17 +59,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="ua.com.goit.gojava7.kickstarter.dao.QuoteReader" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/QuoteReader.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="160" x="774" y="1233"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="8" language="java" name="ua.com.goit.gojava7.kickstarter.dao.FileCategoryReader" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/FileCategoryReader.java" binary="false" 
+  <class id="7" language="java" name="ua.com.goit.gojava7.kickstarter.dao.file.reader.CategoryFileReader" 
+    project="Kickstarter" 
+    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/file/reader/CategoryFileReader.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="99" width="160" x="374" y="500"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -78,9 +70,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="ua.com.goit.gojava7.kickstarter.dao.FileProjectReader" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/FileProjectReader.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="ua.com.goit.gojava7.kickstarter.dao.file.reader.ProjectFileReader" 
+    project="Kickstarter" file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/file/reader/ProjectFileReader.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="99" width="160" x="774" y="500"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -88,29 +80,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="ua.com.goit.gojava7.kickstarter.dao.MemoryCategoryReader" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/MemoryCategoryReader.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="153" width="175" x="159" y="500"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="11" language="java" name="ua.com.goit.gojava7.kickstarter.dao.MemoryQuoteReader" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/MemoryQuoteReader.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="99" width="160" x="574" y="500"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="12" language="java" name="ua.com.goit.gojava7.kickstarter.dao.FileQuoteReader" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/FileQuoteReader.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="ua.com.goit.gojava7.kickstarter.dao.file.reader.QuoteFileReader" 
+    project="Kickstarter" file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/file/reader/QuoteFileReader.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="99" width="160" x="974" y="500"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -118,17 +90,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="13" language="java" name="ua.com.goit.gojava7.kickstarter.dao.CategoryReader" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/CategoryReader.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="160" x="267" y="1233"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="14" language="java" name="ua.com.goit.gojava7.kickstarter.dao.FileReader" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/FileReader.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="ua.com.goit.gojava7.kickstarter.dao.file.reader.FileReader" project="Kickstarter" 
+    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/dao/file/reader/FileReader.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="171" width="160" x="974" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -136,7 +100,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="ua.com.goit.gojava7.kickstarter.domain.Category" project="Kickstarter" 
+  <class id="11" language="java" name="ua.com.goit.gojava7.kickstarter.domain.Category" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/domain/Category.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="225" width="175" x="1216" y="500"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -145,7 +109,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="ua.com.goit.gojava7.kickstarter.domain.Project" project="Kickstarter" 
+  <class id="12" language="java" name="ua.com.goit.gojava7.kickstarter.domain.Project" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/domain/Project.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="693" width="293" x="1863" y="500"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -154,7 +118,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="ua.com.goit.gojava7.kickstarter.domain.Reward" project="Kickstarter" 
+  <class id="13" language="java" name="ua.com.goit.gojava7.kickstarter.domain.Reward" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/domain/Reward.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="189" width="175" x="329" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -163,7 +127,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="ua.com.goit.gojava7.kickstarter.domain.Quote" project="Kickstarter" 
+  <class id="14" language="java" name="ua.com.goit.gojava7.kickstarter.domain.Quote" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/domain/Quote.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="207" width="175" x="759" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -172,7 +136,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="ua.com.goit.gojava7.kickstarter.domain.Question" project="Kickstarter" 
+  <class id="15" language="java" name="ua.com.goit.gojava7.kickstarter.domain.Question" project="Kickstarter" 
     file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/domain/Question.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="189" width="175" x="544" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -181,170 +145,85 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="ua.com.goit.gojava7.kickstarter.storage.Storage" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/storage/Storage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="176" x="1176" y="37"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="21" language="java" name="ua.com.goit.gojava7.kickstarter.storage.CategoryStorage" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/storage/CategoryStorage.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="81" width="176" x="1431" y="500"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="22" language="java" name="ua.com.goit.gojava7.kickstarter.storage.QuoteStorage" project="Kickstarter" 
-    file="/Kickstarter/src/ua/com/goit/gojava7/kickstarter/storage/QuoteStorage.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="117" width="176" x="1647" y="500"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <association id="23">    
+  <association id="16">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="24" name="projectPrinter">        
+      <attribute id="17" name="currentCategory">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="25" minimum="0" maximum="1">        
+      <multiplicity id="18" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="26">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
-  <realization id="27">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <association id="28">    
+  <association id="19">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="29" name="categoryPrinter">        
+      <attribute id="20" name="categoryPrinter">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="30" minimum="0" maximum="1">        
+      <multiplicity id="21" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="31">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <realization id="32">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <association id="33">    
+  <association id="22">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="34" name="categoryStorage">        
+      <attribute id="23" name="quotePrinter">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="35" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="36">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="37" name="currentCategory">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="38" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="39">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="40" name="quoteStorage">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="41" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="42">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="20"/>  
-  </generalization>  
-  <realization id="43">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <generalization id="44">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="20"/>  
-  </generalization>  
-  <generalization id="45">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
-  <generalization id="46">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="14"/>  
-  </generalization>  
-  <association id="47">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="48" name="quotePrinter">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="49" minimum="0" maximum="1">        
+      <multiplicity id="24" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="50">    
+  <association id="25">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="51" name="currentProject">        
+      <attribute id="26" name="projectPrinter">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="52" minimum="0" maximum="1">        
+      <multiplicity id="27" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="53">    
+  <association id="28">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="54" name="consoleScanner">        
+      <attribute id="29" name="consoleScanner">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="55" minimum="0" maximum="1">        
+      <multiplicity id="30" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="56">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="20"/>  
+  <generalization id="31">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="32">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="33" name="currentProject">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="34" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="35">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

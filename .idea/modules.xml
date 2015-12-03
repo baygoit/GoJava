@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/branches/dataFromMemory/src/dataFromMemory.iml" filepath="$PROJECT_DIR$/branches/dataFromMemory/src/dataFromMemory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trunk/GoJava6/sgetman/intro/src/main/main.iml" filepath="$PROJECT_DIR$/trunk/GoJava6/sgetman/intro/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/trunk/GoJava6/sgetman/intro/src/test/test.iml" filepath="$PROJECT_DIR$/trunk/GoJava6/sgetman/intro/src/test/test.iml" />
+    </modules>
+  </component>
+</project>

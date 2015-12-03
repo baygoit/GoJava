@@ -16,8 +16,8 @@ public class HibernateUtil {
         try {
             Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
             configuration.addAnnotatedClass(User.class)
-                         .addAnnotatedClass(Home.class)
-                         .addAnnotatedClass(Reservation.class);
+                    .addAnnotatedClass(Home.class)
+                    .addAnnotatedClass(Reservation.class);
             System.out.println("Hibernate Configuration loaded");
 
             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().
@@ -34,7 +34,14 @@ public class HibernateUtil {
 
     }
 
+
     public static SessionFactory getSessionFactory() {
         return hibernateUtil.sessionFactory;
+    }
+
+    public static void closeSessionFactory() {
+        if (sessionFactory != null) {
+            hibernateUtil.sessionFactory.close();
+        }
     }
 }

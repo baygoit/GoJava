@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
@@ -19,28 +20,28 @@ import ua.com.goit.gojava7.kickstarter.domain.Category;
 public class CategoryPrinterTest {
 
 	private CategoryPrinter categoryPrinter = new CategoryPrinter();
-	private PrintStream systemOut;
+	List<Category> categories = new ArrayList<Category>();
+	
+	
+	@Mock
+	private PrintStream printSteam;
 
 	@Before
 	public void setUp() {
-		systemOut = System.out;
+		Category category = new Category();
+		category.setName("TestName");
+		categories.add(category);
+		System.setOut(printSteam);
 	}
 
 	@After
 	public void tearDown() {
-		System.setOut(systemOut);
+		verifyNoMoreInteractions(printSteam);		
 	}
 
 	@Test
-	public void testPrint() {
-		PrintStream printSteam = mock(PrintStream.class);
-		System.setOut(printSteam);
-		List<Category> categories = new ArrayList<Category>();
-		categories.add(new Category("Category1"));
+	public void testPrint() {				
 		categoryPrinter.printCategories(categories);
-		verify(printSteam).println(contains("Category1"));
+		verify(printSteam).println(contains("TestName"));
 	}
-
-	
-
 }

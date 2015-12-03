@@ -2,75 +2,62 @@ package ua.com.goit.gojava7.kickstarter.view;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.Templateble;
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.Faq;
-import ua.com.goit.gojava7.kickstarter.model.Payment;
-import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.model.Quote;
+import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.beans.Quote;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractCategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractFaqDao;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractPaymentDao;
+import ua.com.goit.gojava7.kickstarter.handlers.TextModifer;
 
 public class ConsolePrinter {
 	private static final TextModifer TEXT_MODIFER = new TextModifer();
 
 	public void print(Quote quote) {
-		String result = TEXT_MODIFER.getModifiedQuoteBeforePrint(quote.getQuoteText(), quote.getAuthor());
+		String result = TEXT_MODIFER.getModifiedQuote(quote.getQuoteText(), quote.getAuthor());
 		System.out.println(result);
 	}
 
 	public void print(Category category) {
-		System.out.println("Category : " + category.getCategoryName());
+		System.out.println("Category : " + category.getName());
 	}
 
 	public void print(String string) {
 		System.out.println(string);
 	}
 
-	public void printShortProjectInfo(Project project, Templateble<Faq> faqStorage, Templateble<Payment> paymentStorage) {
-		List<Payment> payments = paymentStorage.getAll();
+	public void printShortProjectInfo(Project project, AbstractFaqDao faqs, AbstractPaymentDao payments) {
 		System.out.println("Title : " + project.getTitle());
 		System.out.println("Short description : " + project.getBriefDescription());
 		System.out.println("Required amount : " + project.getRequiredSum());
-		System.out.println("Gathered amount : " + project.getSumProjectPayments(payments));
+		System.out.println("Gathered amount : " + payments.getSumProjectPayments(project));
 		System.out.println("Days left : " + project.getDaysLeft());
-		printFAQs(faqStorage, project);
+		System.out.println("FAQ : " + faqs.getProjectFaqs(project));
 	}
 
-	public void printFullProjectInfo(Project project, Templateble<Faq> faqStorage, Templateble<Payment> paymentStorage) {
+	public void printFullProjectInfo(Project project, AbstractFaqDao faqStorage, AbstractPaymentDao paymentStorage) {
 		printShortProjectInfo(project, faqStorage, paymentStorage);
-		System.out.println("History : " + project.getFullDescription());
+		System.out.println("Full description : " + project.getFullDescription());
 		System.out.println("Video : " + project.getVideoLink());
 	}
 
-	public void printCategories(List<Category> categories) {
+	public void printCategories(AbstractCategoryDao allCategories) {
+		List<Category> categories = allCategories.getAll();
+		
 		System.out.println("All categories : ");
 		for (int index = 0; index < categories.size(); index++) {
 			Category category = categories.get(index);
-			System.out.println((index + 1) + " : " + category.getCategoryName());
+			System.out.println((index + 1) + " : " + category.getName());
 		}
 	}
 
-	public void printProjects(List<Project> projects, Templateble<Faq> faqStorage, Templateble<Payment> paymentStorage) {
+	public void printProjects(List<Project> projects, AbstractFaqDao faqStorage, AbstractPaymentDao paymentStorage) {
 		System.out.println("All projects from selected category : ");
-		
 		for (int index = 0; index < projects.size(); index++) {
-			Project project = projects.get(index);
+			Project project = projects.get(index);				
 			System.out.println("Project ¹ " + (index + 1));
 			printShortProjectInfo(project, faqStorage, paymentStorage);
-			System.out.println();
+			System.out.println();		
 		}	
-	}
-
-	public void printFAQs(Templateble<Faq> faqStorage, Project project) {
-		List<Faq> allFaqs = faqStorage.getAll();
-		if (allFaqs.size() == 0) {
-			System.out.println("There is no questions in this projects");
-		} else {
-			System.out.println("FAQ : ");
-			for (int index = 0; index < allFaqs.size(); index++) {
-				if (allFaqs.get(index).getProjectID() == project.getUniqueID()) {
-					System.out.println("  question : " + allFaqs.get(index).getQuestion());
-				}
-			}
-		}
 	}
 }

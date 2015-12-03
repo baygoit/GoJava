@@ -1,31 +1,28 @@
 package ua.com.goit.gojava7.kickstarter.console;
 
-import java.io.InputStream;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.NumberFormatException;
 
-public class ConsoleScanner {
-	private Scanner sc = new Scanner(System.in);
+public class ConsoleScanner { 
 
-	public ConsoleScanner() {
-		sc = new Scanner(System.in);
-	}
-
-	public ConsoleScanner(InputStream inputStream) {
-		sc = new Scanner(inputStream);
-	}
+	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
 	public int getInt(int start, int end) {
+		int number;		
 		while (true) {
-			while (!sc.hasNextInt()) {
-				System.out.println("You should type a NUMBER from " + start + " to " + end + ": ");
-				sc.next();
-			}
-			int number = sc.nextInt();
+			while (true) {							
+				try {
+				number = Integer.parseInt(bufferedReader.readLine());
+				} catch (NumberFormatException | IOException e) {
+					System.out.println("You should type a NUMBER from " + start + " to " + end + ": ");					
+					continue;
+				}
+				break;
+			}			
 			if ((number < start | number > end) & number != 0) {
-				if (end == 0)
-					System.out.println("Type 0 to exit to the previous menu:");
-				else
-					System.out.println("You should type a number FROM " + start + " TO " + end + ": ");
+				System.out.println("You should type a number FROM " + start + " TO " + end + ": ");
 				continue;
 			} else {
 				return number;
@@ -34,39 +31,40 @@ public class ConsoleScanner {
 	}
 
 	public String getOption() {
-		String text;
+		String text = null;
 		while (true) {
-			System.out.println("\nType:" + "\nb: to back this project" + "\na: to ask a questions"
+			System.out.println("\nType:" + "\np: to pledge this project" + "\na: to ask a questions"
 					+ "\n0: to choose another project");
-			text = sc.next();
+			try {
+				text = bufferedReader.readLine();
+			} catch (IOException e) {
+				continue;
+			}
 			if (text.equals("0"))
 				return "0";
-			else if (text.equals("b"))
-				return "b";
+			else if (text.equals("p"))
+				return "p";
 			else if (text.equals("a"))
 				return "a";
 		}
 	}
 
-	public String getName() {
-		// TODO check
-		String text = sc.next();
-		return text;
-	}
-
-	public String getCreditCard() {
-		// TODO check
-		String text = sc.next();
-		return text;
-	}
-
 	public String getString() {
-		String text = sc.next();
+		String text = null;
+		try {
+			text = bufferedReader.readLine();
+		} catch (IOException e) {		
+			e.printStackTrace();
+		}
 		return text;
 	}	
 
 	public void close() {
-		sc.close();
+		try {
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

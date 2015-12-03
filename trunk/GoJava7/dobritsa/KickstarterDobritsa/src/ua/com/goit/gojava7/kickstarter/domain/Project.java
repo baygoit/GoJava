@@ -1,9 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Project {
+	private int id;
 	private String name;
 	private String description;
 	private Integer goal;
@@ -11,23 +9,17 @@ public class Project {
 	private Integer daysToGo;
 	private String history;
 	private String link;
-	private List<Reward> rewards = new ArrayList<>();
-	private List<Question> questions = new ArrayList<>();
-	
-	public Project() {
+	private int categoryId;
+	private String categoryName;
+
+	public int getId() {
+		return id;
 	}
 
-	public Project(String name, String description, Integer goal, Integer pledged, Integer daysToGo, String history,
-			String link) {
-		this.name = name;
-		this.description = description;
-		this.goal = goal;
-		this.pledged = pledged;
-		this.daysToGo = daysToGo;
-		this.history = history;
-		this.link = link;
+	public void setId(int id) {
+		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -84,29 +76,23 @@ public class Project {
 		this.link = link;
 	}
 
-	
-	public List<Reward> getRewards() {
-		return rewards;
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	public void setRewards(List<Reward> rewards) {
-		this.rewards = rewards;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
-	public List<Question> getQuestions() {
-		return questions;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}	
-	
-	public void addToPledged(int amount) {
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public void updatePledged(int amount) {
 		this.pledged += amount;
 	}
-	
-	public void addQuestion(Question question) {
-		questions.add(question);
-	}
-
 }

@@ -1,15 +1,19 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-import ua.com.goit.gojava7.kickstarter.storage.Storage;
+public class Category {
 
-public class Category extends Storage<Project> {
+	private String name;
+	private int id;
 
-	private String name;	
-	
-	public Category() {		
+	public int getId() {
+		return id;
 	}
-	
-	public Category(String name) {
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -17,8 +21,8 @@ public class Category extends Storage<Project> {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	@Override
+	public String toString() {
+		return "Category: " + name;
 	}
-
 }

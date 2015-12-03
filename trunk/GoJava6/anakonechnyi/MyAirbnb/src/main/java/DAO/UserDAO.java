@@ -1,6 +1,6 @@
-package main.java.DAO;
+package dao;
 
-import main.java.Models.User;
+import models.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,9 +13,9 @@ public class UserDAO extends AbstractDAO {
     public void createUser (User user) {
         String sqlQuery = "INSERT INTO `airbnb`.`users` (`name`, `ser_name`, `email`, `is_host`) VALUES ('"+
                 user.getName()+"`, `"+
-                user.getSername()+"`, `"+
+                user.getSurname()+"`, `"+
                 user.getEmail()+"`, `";
-        if (user.getIsHost()==true) {
+        if (user.getIsHost()) {
             sqlQuery+="1`);";
         } else {
             sqlQuery+="0`);";
@@ -26,10 +26,10 @@ public class UserDAO extends AbstractDAO {
     public void updateUserByID (User user) {
         String sqlQuery = "UPDATE airbnb.users SET " +
                 "name = '"+ user.getName()+
-                "ser_name = '"+ user.getSername()+
+                "ser_name = '"+ user.getSurname()+
                 "email = '"+ user.getEmail()+
                 "is_host = '"+user.getIsHost() +
-                "WHERE user_id = "+ user.clientId;
+                "WHERE user_id = "+ user.getClientId();
         updateDB(sqlQuery);
     }
 
@@ -38,23 +38,23 @@ public class UserDAO extends AbstractDAO {
     }
 
     public void deleteUserByID (User user) {
-        String sqlQuery = "DELETE FROM users WHERE user_id = "+user.clientId;
+        String sqlQuery = "DELETE FROM users WHERE user_id = "+user.getClientId();
         updateDB(sqlQuery);
     }
 
     public User getUserByID (User user) {
-        String sqlQuery = "SELECT * FROM users WHERE user_id =" + user.clientId;
+        String sqlQuery = "SELECT * FROM users WHERE user_id =" + user.getClientId();
         List<User> userList = (List<User>)(List<?>) readDB(sqlQuery);
         return userList.get(0);
     }
 
     @Override
     User readObj(ResultSet resultSet) throws SQLException {
-        User result = new User(resultSet.getInt("user_id"),
+        //TODO
+        return null;/*new User(resultSet.getInt("user_id"),
                                resultSet.getString("name"),
                                resultSet.getString("ser_name"),
                                resultSet.getString("email"),
-                               resultSet.getBoolean("is_host") );
-        return result;
+                               resultSet.getBoolean("is_host") );*/
     }
 }

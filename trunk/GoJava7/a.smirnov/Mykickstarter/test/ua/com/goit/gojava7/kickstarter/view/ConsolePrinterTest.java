@@ -1,67 +1,128 @@
 package ua.com.goit.gojava7.kickstarter.view;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.mockito.Matchers.contains;
+import static org.mockito.Mockito.verify;
 
-import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
-import org.omg.CORBA.portable.OutputStream;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+import ua.com.goit.gojava7.kickstarter.beans.*;
+import ua.com.goit.gojava7.kickstarter.dao.memory.CategoryDaoMemoryImpl;
+import ua.com.goit.gojava7.kickstarter.dao.memory.FaqDaoMemoryImpl;
+import ua.com.goit.gojava7.kickstarter.dao.memory.PaymentDaoMemoryImpl;
 
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.Quote;
-import ua.com.goit.gojava7.kickstarter.storage_in_files.CategoriesStorage;
-import ua.com.goit.gojava7.kickstarter.storage_in_files.QuotesStorage;
-
+@RunWith(MockitoJUnitRunner.class)
 public class ConsolePrinterTest {
-	static CategoriesStorage categoriesStorage;
-	ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-	PrintStream printStream = new PrintStream(outputStream);
 
-	static Quote qoute1; 
+	private ConsolePrinter consolePrinter = new ConsolePrinter();
+		
+	@Mock
+	private PrintStream printSteam;
+
 	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		categoriesStorage = new CategoriesStorage();
-		Category category1 = new Category("First");
-		Category category2 = new Category("Second");
+	@Before
+	public void setUp() throws Exception {
+		System.setOut(printSteam);
+	}
+	
+	@Test
+	public void testPrintQuote() {
+		String quoteText = "Hello world!";
+		String author = "Anton Smirnov";
 		
-		qoute1 = new Quote("Anton", "ttt");
-//		Quote quote2 = new Quote("Vova", "123");
+		Quote quote = new Quote();
+		quote.setQuoteText(quoteText);
+		quote.setAuthor(author);
 		
-//		categoriesStorage.addCategory(category1);
-//		categoriesStorage.addCategory(category2);
-//	
-	}
-
-
-
-	@Test
-	public void testPrintProjects() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetBriefInfoProject() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testPrintFullInfoProject() {
-		fail("Not yet implemented");
+		consolePrinter.print(quote);
+		verify(printSteam).println(contains(quoteText));
+		verify(printSteam).println(contains(author));
+		verify(printSteam).println(contains("(c)"));
 	}
 
 	@Test
 	public void testPrintCategory() {
-		fail("Not yet implemented");
+		String categoryName = "Stars";
+		
+		Category category = new Category();
+		category.setName(categoryName);
+		
+		consolePrinter.print(category);
+		verify(printSteam).println(contains(categoryName));	
 	}
 
 	@Test
 	public void testPrintString() {
-		fail("Not yet implemented");
+		String line = "Some text...";
+		consolePrinter.print(line);
+		verify(printSteam).println(line);
 	}
 
+	@Test
+	public void testPrintShortProjectInfo() {				
+		Project project = new Project();
+		PaymentDaoMemoryImpl paymentStorage = new PaymentDaoMemoryImpl();		
+		FaqDaoMemoryImpl faqStorage = new FaqDaoMemoryImpl();
+		
+		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);
+		verify(printSteam).println(contains("Title : "));
+		verify(printSteam).println(contains("Short description : "));
+		verify(printSteam).println(contains("Required amount : "));
+		verify(printSteam).println(contains("Gathered amount : "));
+		verify(printSteam).println(contains("Days left : "));
+		verify(printSteam).println(contains("FAQ : "));
+	}
+
+	@Test
+	public void testPrintFullProjectInfo() {
+		Project project = new Project();		
+		PaymentDaoMemoryImpl paymentStorage = new PaymentDaoMemoryImpl();		
+		FaqDaoMemoryImpl faqStorage = new FaqDaoMemoryImpl();
+		
+		consolePrinter.printShortProjectInfo(project, faqStorage, paymentStorage);
+		verify(printSteam).println(contains("Title : "));
+		verify(printSteam).println(contains("Short description : "));
+		verify(printSteam).println(contains("Required amount : "));
+		verify(printSteam).println(contains("Gathered amount : "));
+		verify(printSteam).println(contains("Days left : "));
+	}
+
+	@Test
+	public void testPrintCategories() {
+		Category category1 = new Category();
+		Category category2 = new Category();
+		CategoryDaoMemoryImpl categoriesStorage = new CategoryDaoMemoryImpl();
+		
+		categoriesStorage.add(category1);
+		categoriesStorage.add(category2);
+		
+		consolePrinter.printCategories(categoriesStorage);
+		verify(printSteam).println(contains("All categories : "));
+		verify(printSteam).println(contains(String.valueOf(String.valueOf(1))));
+		verify(printSteam).println(contains(String.valueOf(String.valueOf(2))));
+	}
+
+	@Test
+	public void testPrintProjects() {		
+		Project project = new Project();
+		PaymentDaoMemoryImpl paymentStorage = new PaymentDaoMemoryImpl();
+		FaqDaoMemoryImpl faqStorage = new FaqDaoMemoryImpl();
+		
+		List<Project> projects = new ArrayList<>();
+		projects.add(project);
+		
+		consolePrinter.printProjects(projects, faqStorage, paymentStorage);	
+		verify(printSteam).println(contains("Title : "));
+		verify(printSteam).println(contains("Short description : "));
+		verify(printSteam).println(contains("Required amount : "));
+		verify(printSteam).println(contains("Gathered amount : "));
+		verify(printSteam).println(contains("Days left : "));
+		verify(printSteam).println(contains("FAQ : "));
+	}
 }

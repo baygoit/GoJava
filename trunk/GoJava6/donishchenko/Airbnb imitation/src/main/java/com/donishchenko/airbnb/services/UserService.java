@@ -2,18 +2,19 @@ package com.donishchenko.airbnb.services;
 
 
 import com.donishchenko.airbnb.dao.UserDao;
-import com.donishchenko.airbnb.dao.UserHibernateDao;
 import com.donishchenko.airbnb.model.User;
 import com.google.common.base.Joiner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class UserService {
     public static Logger log = LogManager.getLogger(UserService.class.getName());
 
-    private UserDao userDao = new UserHibernateDao();
+    @Autowired
+    private UserDao userDao;
 
     public void register(User user) {
         log.entry();

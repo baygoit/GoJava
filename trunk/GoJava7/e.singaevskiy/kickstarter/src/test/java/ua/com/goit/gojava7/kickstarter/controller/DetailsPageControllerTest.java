@@ -12,10 +12,11 @@ import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.PledgeStorage;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionsDAO;
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
-import ua.com.goit.gojava7.kickstarter.view.MainPage;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DetailsPageControllerTest {
@@ -24,15 +25,18 @@ public class DetailsPageControllerTest {
     BufferedReader reader;
     
     @Mock
-    PledgeStorage pledgeStorage;
+    PaymentDAO paymentStorage;
+    
+    @Mock
+    QuestionsDAO questionsStorage;
     
     @Mock
     StorageFactory factory;
     
     @Mock
-    MainPage page;
+    ConsolePrinter page;
     
-    PageController<Project> controller;
+    AbstractPageController<Project> controller;
     
     @Mock
     Project project;  
@@ -40,13 +44,14 @@ public class DetailsPageControllerTest {
     @Before
     public void setUp() throws Exception {      
         
-        when(factory.getPledgeDAO()).thenReturn(pledgeStorage);
-        when(pledgeStorage.getSum(project)).thenReturn(123L);
+        when(factory.getQuestionsDAO()).thenReturn(questionsStorage);        
+        when(factory.getPaymentDAO()).thenReturn(paymentStorage);
+        when(paymentStorage.getSum(0)).thenReturn(123L);
     
         controller = new ProjectDetailsPageController();
         controller.setInputReader(reader); 
         controller.setStorageFactory(factory);
-        controller.setMainPage(page);
+        controller.setView(page);
         controller.setRequest(project);
     }
 

@@ -1,22 +1,21 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import ua.com.goit.gojava7.kickstarter.model.storage.CategoryStorage;
+import ua.com.goit.gojava7.kickstarter.model.storage.QuoteStorage;
 import ua.com.goit.gojava7.kickstarter.view.exception.ExitException;
-import ua.com.goit.gojava7.kickstarter.model.storage.*;
 import ua.com.goit.gojava7.kickstarter.view.View;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Dmytro on 07.11.2015.
- */
 public class Kickstarter implements KickstarterObservable {
-    CategoryStorage categoryStorage;
+    private CategoryStorage categoryStorage;
 
-    QuoteStorage quoteStorage;
+    private QuoteStorage quoteStorage;
 
     // implementing Observer pattern
-    List<View> views;
+    private List<View> views;
 
     public Kickstarter(CategoryStorage categoryStorage, QuoteStorage quoteStorage) {
         this.categoryStorage = categoryStorage;
@@ -32,16 +31,21 @@ public class Kickstarter implements KickstarterObservable {
         return quoteStorage;
     }
 
-    public void addDonation(Project project, int money) throws ExitException {
+    public void addDonation(Project project, int money) throws ExitException, IOException {
         project.addMoneyDonated(money);
+        notifyView();
+    }
+
+    public void addQuestion(Project project, String question) throws IOException, ExitException {
+        project.addQuestion(question);
         notifyView();
     }
 
     // implementing Observer pattern
     @Override
-    public void notifyView() throws ExitException {
+    public void notifyView() throws ExitException, IOException {
         for (View view : views) {
-            view.reloadPage();
+            view.handleNotification();
         }
     }
 
@@ -54,4 +58,6 @@ public class Kickstarter implements KickstarterObservable {
     public void removeObserver(View view) {
         views.remove(view);
     }
+
+
 }

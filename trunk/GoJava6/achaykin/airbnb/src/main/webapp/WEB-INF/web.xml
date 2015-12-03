@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+<servlet>
+    <servlet-name>index</servlet-name>
+    <servlet-class>com.gojava6.airbnb.servlets.IndexPage</servlet-class>
+</servlet>
+    <servlet-mapping>index</servlet-mapping>
+    <url-pattern>/index</url-pattern>
+</web-app>

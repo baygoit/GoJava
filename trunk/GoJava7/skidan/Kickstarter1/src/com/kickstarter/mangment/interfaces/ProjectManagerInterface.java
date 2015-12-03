@@ -9,5 +9,7 @@ interface ProjectManagerInterface {
 	public Map<Integer, Project> getAll(String categoryTitle);
 
 	public Project getOne(String categoryTitle, int projectNumber);
+	
+	public Map<Integer, Project> getWholeProjectMap();
 
 }
