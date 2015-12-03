@@ -5,7 +5,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import ua.com.goit.gojava7.kickstarter.config.DataSource;
+import javax.sql.DataSource;
+
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+
 import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDbDao;
@@ -27,30 +30,25 @@ import ua.com.goit.gojava7.kickstarter.dao.memory.QuestionMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.RewardMemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.memory.reader.Memory;
-import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuestionStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
-import ua.com.goit.gojava7.kickstarter.dao.storage.RewardStorage;
 
 public class DaoFactory {
 
-	private QuoteStorage quoteDAO;
-	private CategoryStorage categoryDAO;
-	private ProjectStorage projectDAO;
-	private QuestionStorage questionsDAO;
-	private RewardStorage rewardDAO;
+	private QuoteDao quoteDAO;
+	private CategoryDao categoryDAO;
+	private ProjectDao projectDAO;
+	private QuestionDao questionDAO;
+	private RewardDao rewardDAO;
 
 	private static final File QUOTES_FILE = new File("./resources/Quotes.txt");
 	private static final File CATEGORIES_FILE = new File("./resources/Categories.txt");
 	private static final File PROJECTS_FILE = new File("./resources/Projects.txt");
 	private static final File REWARDS_FILE = new File("./resources/Rewards.txt");
 	private static final File QUESTIONS_FILE = new File("./resources/Questions.txt");
-	private DataSource dataSource;
+	private MyDataSource dataSource;
 
-	private Connection connection = null;
+	//private Connection connection = null;
 
-	public DaoFactory(DataSource dataSource) {
+	public DaoFactory(MyDataSource dataSource) {
 		this.dataSource = dataSource;
 
 		switch (dataSource) {
@@ -59,7 +57,7 @@ public class DaoFactory {
 			break;
 
 		case FILE:
-			initFileStorage(); 
+			initFileStorage();
 			break;
 
 		case DB:
@@ -71,27 +69,42 @@ public class DaoFactory {
 		}
 	}
 
-	public void open() {
-		if (dataSource == DataSource.DB) {
+	public static BasicDataSource setupDataSource(String dbDriver, String dbURL, String user, String password) {
+		BasicDataSource ds = new BasicDataSource();
+		ds.setDriverClassName(dbDriver);
+		ds.setUrl(dbURL);
+		ds.setUsername(user);
+		ds.setPassword(password);
+		return ds;
+	}
+
+	public Connection open() {
+		Connection connection = null;
+		if (dataSource == MyDataSource.DB) {
 			try {
-				connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kickstarter", "root",
-						"temppassword");
+				Class.forName("com.mysql.jdbc.Driver");
+				DataSource dataSource = setupDataSource("com.mysql.jdbc.Driver",
+						"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword");
+				connection = dataSource.getConnection();
 			} catch (SQLException e) {
 				throw new IllegalStateException("Cannot open connection. " + e.getMessage(), e);
+			} catch (ClassNotFoundException e) {
+				throw new IllegalStateException("Cannot open load mysql driver. " + e.getMessage(), e);
 			}
 		}
+		return connection;
 	}
 
 	public void close() {
-		if (dataSource == DataSource.DB) {
-			try {
-				if (connection != null) {	
-					connection.close();
-				}
-			} catch (SQLException e) {
-				throw new IllegalStateException("Cannot close connection " + connection + ". " + e.getMessage(), e);
-			}
-		}
+		//if (dataSource == MyDataSource.DB) {
+			//try {
+				//if (connection != null) {
+				//	connection.close();
+			//	}
+			//} catch (SQLException e) {
+			//	throw new IllegalStateException("Cannot close connection " + connection + ". " + e.getMessage(), e);
+			//}
+		//}
 	}
 
 	private void initMemoryStorage() {
@@ -100,7 +113,7 @@ public class DaoFactory {
 		quoteDAO = new QuoteMemoryDao(data.getQuotes());
 		categoryDAO = new CategoryMemoryDao(data.getCategories());
 		projectDAO = new ProjectMemoryDao(data.getProjects());
-		questionsDAO = new QuestionMemoryDao(data.getQuestions());
+		questionDAO = new QuestionMemoryDao(data.getQuestions());
 		rewardDAO = new RewardMemoryDao(data.getRewards());
 	}
 
@@ -109,35 +122,40 @@ public class DaoFactory {
 		categoryDAO = new CategoryFileDao((new CategoryFileReader(CATEGORIES_FILE)).read());
 		projectDAO = new ProjectFileDao((new ProjectFileReader(PROJECTS_FILE)).read());
 		rewardDAO = new RewardFileDao((new RewardFileReader(REWARDS_FILE)).read());
-		questionsDAO = new QuestionsFileDao((new QuestionFileReader(QUESTIONS_FILE)).read());
+		questionDAO = new QuestionsFileDao((new QuestionFileReader(QUESTIONS_FILE)).read());
 	}
 
 	private void initDbStorage() {
 		open();
-		quoteDAO = new QuoteDbDao(connection);
-		categoryDAO = new CategoryDbDao(connection);
-		projectDAO = new ProjectDbDao(connection);
-		questionsDAO = new QuestionDbDao(connection);
-		rewardDAO = new RewardDbDao(connection);
+		quoteDAO = new QuoteDbDao(setupDataSource("com.mysql.jdbc.Driver",
+				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
+		categoryDAO = new CategoryDbDao(setupDataSource("com.mysql.jdbc.Driver",
+				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
+		projectDAO = new ProjectDbDao(setupDataSource("com.mysql.jdbc.Driver",
+				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
+		questionDAO = new QuestionDbDao(setupDataSource("com.mysql.jdbc.Driver",
+				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
+		rewardDAO = new RewardDbDao(setupDataSource("com.mysql.jdbc.Driver",
+				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
 	}
 
-	public CategoryStorage getCategoryDAO() {
+	public CategoryDao getCategoryDAO() {
 		return categoryDAO;
-	} 
+	}
 
-	public QuoteStorage getQuoteDAO() {
+	public QuoteDao getQuoteDAO() {
 		return quoteDAO;
 	}
 
-	public ProjectStorage getProjectDAO() {
+	public ProjectDao getProjectDAO() {
 		return projectDAO;
 	}
 
-	public QuestionStorage getQuestionsDAO() {
-		return questionsDAO;
+	public QuestionDao getQuestionDAO() {
+		return questionDAO;
 	}
 
-	public RewardStorage getRewardDAO() {
+	public RewardDao getRewardDAO() {
 		return rewardDAO;
 	}
 

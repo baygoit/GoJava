@@ -3,9 +3,7 @@ package ua.com.goit.gojava7.kickstarter.dao;
 import java.util.Collections;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.dao.storage.Storage;
-
-public abstract class MemoryDao<T> implements Storage<T> {
+public abstract class MemoryDao<T> implements Dao<T> {
 
 	protected List<T> data;
 

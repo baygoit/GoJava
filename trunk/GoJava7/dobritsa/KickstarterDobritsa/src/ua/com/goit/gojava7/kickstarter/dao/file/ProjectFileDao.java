@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ua.com.goit.gojava7.kickstarter.dao.FileDao;
-import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-public class ProjectFileDao extends FileDao<Project> implements ProjectStorage {
+public class ProjectFileDao extends FileDao<Project> implements ProjectDao {
 
 	public ProjectFileDao(List<Project> data) {
 		super(data);
@@ -35,6 +35,13 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectStorage {
 	public List<Project> getByCategory(String categoryName) {
 		return this.getAll().stream().filter(project -> project.getCategoryName().equals(categoryName))
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Project> getByCategory(int categoryId) {
+		 return this.getAll().stream()
+	                .filter(project -> project.getCategoryId() == categoryId)
+	                .collect(Collectors.toList());
 	}
 
 }

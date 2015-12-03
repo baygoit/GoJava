@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Project {
+	private int id;
 	private String name;
 	private String description;
 	private Integer goal;
@@ -8,7 +9,16 @@ public class Project {
 	private Integer daysToGo;
 	private String history;
 	private String link;
+	private int categoryId;
 	private String categoryName;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -64,6 +74,14 @@ public class Project {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public String getCategoryName() {

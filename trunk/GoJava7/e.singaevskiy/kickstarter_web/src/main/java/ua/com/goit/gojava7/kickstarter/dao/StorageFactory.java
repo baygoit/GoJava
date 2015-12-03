@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.Properties;
 
 import ua.com.goit.gojava7.kickstarter.dao.file.CategoryFileDAO;
@@ -43,10 +42,13 @@ public class StorageFactory {
     }
     
     public StorageFactory(DataType dataType) {
+        this(dataType, "./kicks-files/config.properties");    
+    }
+    
+    public StorageFactory(DataType dataType, String pathToFile) {
         this.dataType = dataType;
-        properties = Utils.readProperties("./kicks-files/config.properties");        
-        init();
-        
+        properties = Utils.readProperties(pathToFile);        
+        init();    
     }
     
     public StorageFactory(DataType dataType, InputStream resourceStream) {
@@ -99,6 +101,7 @@ public class StorageFactory {
     private void initPostgreStorage(){
 
         try {
+            Class.forName(properties.getProperty("driver"));
             JdbcDispatcher dispatcher = new JdbcDispatcher(
                     properties.getProperty("driver"),
                     properties.getProperty("url"),
@@ -112,7 +115,7 @@ public class StorageFactory {
             rewardDAO = new RewardPostgreDAO(dispatcher);
             paymentDAO = new PaymentPostgreDAO(dispatcher);        
             
-        } catch (SQLException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }       

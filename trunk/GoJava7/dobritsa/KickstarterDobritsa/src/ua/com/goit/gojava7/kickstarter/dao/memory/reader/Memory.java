@@ -33,24 +33,24 @@ public class Memory {
 		Quote quote;
 
 		quote = new Quote();
-		quote.setText("(Memory) There is only one boss. The customer. And he can fire everybody in the company "
+		quote.setText("There is only one boss. The customer. And he can fire everybody in the company "
 				+ "from the chairman on down, simply by  spending his money somewhere else.");
 		quote.setAuthor("Sam Walton");
 		quotes.add(quote);
 
 		quote = new Quote();
-		quote.setText("(Memory) Ideas pull the trigger, but instinct loads the gun.");
+		quote.setText("Ideas pull the trigger, but instinct loads the gun.");
 		quote.setAuthor("Don Marquis");
 		quotes.add(quote);
 
 		quote = new Quote();
-		quote.setText("(Memory) There are no secrets to success. It is the result of preparation, "
+		quote.setText("There are no secrets to success. It is the result of preparation, "
 				+ "hard work, and learning from failure.");
 		quote.setAuthor("Colin Powell");
 		quotes.add(quote);
 
 		quote = new Quote();
-		quote.setText("(Memory) Happiness does not come from doing easy work but from the afterglow "
+		quote.setText("Happiness does not come from doing easy work but from the afterglow "
 				+ "of satisfaction that comes after the achievement of a difficult task that demanded our best.");
 		quote.setAuthor("Theodore Isaac Rubin");
 		quotes.add(quote);

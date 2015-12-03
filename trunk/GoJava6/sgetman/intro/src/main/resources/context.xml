@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:annotation-config/>
+
+
+    <bean class="com.gojava6.springioc.quoters.EnvParamAnnotationBeanPostProcessor"/>
+
+    <bean id="shakespearQuoter" class="com.gojava6.springioc.quoters.ShakespearQuoter">
+
+        <constructor-arg value="2 b || ! 2 b" name="message"/>
+    </bean>
+
+    <bean class="com.gojava6.springioc.quoters.TalkingRobotImpl">
+
+    </bean>
+    <bean id="terminatorQuoter" class="com.gojava6.springioc.quoters.TerminatorQuoter">
+        <property name="messages">
+            <list>
+                <value>I'll be back</value>
+                <value>Atalavista baby</value>
+            </list>
+        </property>
+    </bean>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
