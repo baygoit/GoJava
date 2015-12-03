@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDbDao;

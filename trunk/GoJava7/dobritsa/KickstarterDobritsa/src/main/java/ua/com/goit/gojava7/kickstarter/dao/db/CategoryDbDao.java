@@ -3,7 +3,7 @@ package ua.com.goit.gojava7.kickstarter.dao.db;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;

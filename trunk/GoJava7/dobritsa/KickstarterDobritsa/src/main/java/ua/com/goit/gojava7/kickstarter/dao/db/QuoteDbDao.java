@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
