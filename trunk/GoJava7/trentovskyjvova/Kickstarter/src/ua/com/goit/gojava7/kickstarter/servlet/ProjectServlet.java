@@ -53,8 +53,7 @@ public class ProjectServlet extends HttpServlet {
 		stringBuilder.append("goal: ").append(selectedProject.getGoal()).append("</br>");
 		stringBuilder.append("linkVideo: ").append(selectedProject.getLinkVideo()).append("</br>");
 
-		List<Question> questions = questionDao.getQuestions(selectedProject
-				.getId());
+		List<Question> questions = questionDao.getQuestions(projectId);
 		for (Question question : questions) {
 			stringBuilder.append("Question: '")
 					.append(question.getQuestionText()).append("'</br>");

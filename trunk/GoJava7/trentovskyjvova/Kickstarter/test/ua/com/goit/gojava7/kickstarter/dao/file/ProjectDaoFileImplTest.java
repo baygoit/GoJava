@@ -38,8 +38,7 @@ public class ProjectDaoFileImplTest {
 	public void testGetProject() {
 		testProjectsFile = new File("./resources/projects.csv");
 		projectDaoFileImpl = new ProjectDaoFileImpl(testProjectsFile);
-		assertThat(projectDaoFileImpl.getProject(2, 1).getName(),
-				is("Second project"));
+		assertThat(projectDaoFileImpl.getProject(2, 1).getName(), is("Second project"));
 	}
 
 	@Test
@@ -49,4 +48,10 @@ public class ProjectDaoFileImplTest {
 		assertThat(projectDaoFileImpl.size(1), is(2));
 	}
 
+	@Test
+	public void testGetProjectById() {
+		testProjectsFile = new File("./resources/projects.csv");
+		projectDaoFileImpl = new ProjectDaoFileImpl(testProjectsFile);
+		assertThat(projectDaoFileImpl.getProject(2).getId(), is(2));
+	}
 }

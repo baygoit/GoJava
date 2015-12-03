@@ -73,4 +73,19 @@ public class ProjectDaoSqlImplTest {
 
 		assertThat(size, is(1));
 	}
+	
+	@Test
+	public void testGetProjectById() throws SQLException {
+		PreparedStatement ps = mock(PreparedStatement.class);
+		ResultSet rs = mock(ResultSet.class);
+		when(daoProvider.getConnection()).thenReturn(connection);
+		when(connection.prepareStatement(anyString())).thenReturn(ps);
+		when(ps.executeQuery()).thenReturn(rs);
+		when(rs.next()).thenReturn(true, false);
+		when(rs.getString("name")).thenReturn("some project name");
+		
+		Project project = projectDaoMySqlImpl.getProject(12);
+
+		assertThat(project.getId(), is(12));
+	}
 }
