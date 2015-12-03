@@ -70,6 +70,12 @@ public class DaoFactory {
 	}
 
 	public static BasicDataSource setupDataSource(String dbDriver, String dbURL, String user, String password) {
+		try {
+			Class.forName("org.apache.commons.dbcp2.BasicDataSource");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		BasicDataSource ds = new BasicDataSource();
 		ds.setDriverClassName(dbDriver);
 		ds.setUrl(dbURL);
@@ -82,7 +88,9 @@ public class DaoFactory {
 		Connection connection = null;
 		if (dataSource == MyDataSource.DB) {
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
+			//	Class.forName("com.mysql.jdbc.Driver");
+			//	Class.forName("org.apache.tomcat.jdbc.pool.DataSource");
+				Class.forName("org.apache.commons.dbcp2.BasicDataSource");
 				DataSource dataSource = setupDataSource("com.mysql.jdbc.Driver",
 						"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword");
 				connection = dataSource.getConnection();
@@ -128,7 +136,7 @@ public class DaoFactory {
 	}
 
 	private void initDbStorage() {
-		open();
+		//open();
 		quoteDAO = new QuoteDbDao(setupDataSource("com.mysql.jdbc.Driver",
 				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
 		categoryDAO = new CategoryDbDao(setupDataSource("com.mysql.jdbc.Driver",

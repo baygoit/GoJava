@@ -31,7 +31,8 @@ public class QuestionServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendRedirect("project?id=44");
+		int projectId = Integer.parseInt(request.getParameter("projectId"));
+		response.sendRedirect("project?id=" + projectId);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
