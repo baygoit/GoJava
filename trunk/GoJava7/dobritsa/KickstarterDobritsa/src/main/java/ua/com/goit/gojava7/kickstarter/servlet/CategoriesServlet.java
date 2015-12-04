@@ -14,7 +14,7 @@ import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-@WebServlet("/categories")
+@WebServlet("/")
 public class CategoriesServlet extends HttpServlet {
 
 	private DaoFactory daoFactory;

@@ -4,7 +4,7 @@
 	<name>Kickstarter</name>
 	<groupId>ua.com.goit.gojava7</groupId>
 	<artifactId>Kickstarter</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 
 
 	<dependencies>
