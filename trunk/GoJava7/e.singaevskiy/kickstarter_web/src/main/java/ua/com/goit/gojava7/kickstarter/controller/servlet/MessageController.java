@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.com.goit.gojava7.kickstarter.controller.servlet.util.HtmlPageWriter;
 
 @WebServlet("/message")
-public class SendMessage extends HttpServlet {
+public class MessageController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override

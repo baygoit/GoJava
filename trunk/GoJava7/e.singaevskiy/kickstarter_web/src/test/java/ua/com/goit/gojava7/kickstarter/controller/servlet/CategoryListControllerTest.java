@@ -20,7 +20,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CategoryListTest {
+public class CategoryListControllerTest {
 
     @Mock
     QuoteDAO quoteDAO;
@@ -38,7 +38,7 @@ public class CategoryListTest {
     HttpServletResponse resp;
     
     @InjectMocks
-    CategoryList servlet;
+    CategoryListController servlet;
     
     @Before
     public void setUp() throws Exception {

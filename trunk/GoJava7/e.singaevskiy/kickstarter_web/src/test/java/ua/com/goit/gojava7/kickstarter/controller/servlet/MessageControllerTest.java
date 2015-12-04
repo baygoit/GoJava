@@ -14,7 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SendMessageTest {
+public class MessageControllerTest {
     
     @Mock
     private PrintWriter writer;   
@@ -26,7 +26,7 @@ public class SendMessageTest {
     private HttpServletResponse resp;
     
     @InjectMocks
-    private SendMessage servlet;
+    private MessageController servlet;
     
     @Before
     public void setUp() throws Exception {

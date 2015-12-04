@@ -21,7 +21,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProjectsByCategoryTest {
+public class ProjectListControllerTest {
 
     @Mock
     private PaymentDAO paymentDAO;
@@ -42,7 +42,7 @@ public class ProjectsByCategoryTest {
     private HttpServletResponse resp;
     
     @InjectMocks
-    private ProjectsByCategory servlet;
+    private ProjectListController servlet;
     
     @Before
     public void setUp() throws Exception {

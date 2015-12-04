@@ -1,29 +1,26 @@
-package ua.com.goit.gojava7.kickstarter.controller;
+package ua.com.goit.gojava7.kickstarter.controller.console;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.BufferedReader;
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.controller.console.AbstractPageController;
-import ua.com.goit.gojava7.kickstarter.controller.console.ProjectListPageController;
+import ua.com.goit.gojava7.kickstarter.controller.console.PaymentPageController;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionsDAO;
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProjectListPageControllerTest {
+public class PaymentPageControllerTest {
 
     @Mock
     BufferedReader reader;
@@ -32,42 +29,42 @@ public class ProjectListPageControllerTest {
     PaymentDAO paymentStorage;
     
     @Mock
-    ProjectDAO projectDAO;
+    QuestionsDAO questionsStorage;
     
     @Mock
     StorageFactory factory;
     
     @Mock
-    ConsolePrinter printer;
+    ConsolePrinter page;
     
-    AbstractPageController<Category> controller;
+    AbstractPageController<Project> controller;
     
     @Mock
-    Category request;
+    Project project;
 
-    private ArrayList<Project> projects;  
+    private long value;  
     
     @Before
     public void setUp() throws Exception {      
-        projects = new ArrayList<>();
-        projects.add(new Project());
-        when(factory.getProjectDAO()).thenReturn(projectDAO);
-        when(projectDAO.getByCategory(0)).thenReturn(projects);
+        
+        when(factory.getQuestionsDAO()).thenReturn(questionsStorage);        
         when(factory.getPaymentDAO()).thenReturn(paymentStorage);
-        when(paymentStorage.getSum(0)).thenReturn(123L);
+        value = 123L;
+        when(paymentStorage.getSum(0)).thenReturn(value);
     
-        controller = new ProjectListPageController();
+        controller = new PaymentPageController();
         controller.setInputReader(reader); 
         controller.setStorageFactory(factory);
-        controller.setView(printer);
-        controller.setRequest(request);
+        controller.setView(page);
+        controller.setRequest(project);
     }
-
+    
     @Test
-    public void showProjects()  throws Exception {
-        when(reader.readLine()).thenReturn("0");
+    public void validPaymentRequest()  throws Exception {
+        when(reader.readLine()).thenReturn("0 0 " + value);
         controller.dispatch();
-        verify(printer).showProjects(Matchers.eq(projects));
+        verify(page).showPaymentRequest();
+        verify(project).setBalanceSum(value);
     }
 
 }

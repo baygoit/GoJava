@@ -12,14 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava7.kickstarter.controller.servlet.util.HtmlPageWriter;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
-import ua.com.goit.gojava7.kickstarter.dao.DataType;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @WebServlet("/categories")
-public class CategoryList extends HttpServlet {
+public class CategoryListController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private QuoteDAO quoteDAO;
     private CategoryDAO categoryDAO; 
@@ -54,11 +53,7 @@ public class CategoryList extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        super.init();
-        
-        StorageFactory factory = new StorageFactory(DataType.POSTGRE, 
-                getClass().getClassLoader().getResourceAsStream("config.properties"));
-        
+    	StorageFactory factory = (StorageFactory) getServletContext().getAttribute(ContextInitializer.STORAGE_FACTORY);   
         quoteDAO = factory.getQuoteDAO();
         categoryDAO = factory.getCategoryDAO();
 

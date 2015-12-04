@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava7.kickstarter.controller.servlet.util.HtmlPageWriter;
-import ua.com.goit.gojava7.kickstarter.dao.DataType;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionsDAO;
@@ -20,7 +19,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 @WebServlet("/project")
-public class ProjectDetails extends HttpServlet {
+public class ProjectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private QuestionsDAO questionsDAO;
     private PaymentDAO paymentDAO;
@@ -66,10 +65,7 @@ public class ProjectDetails extends HttpServlet {
 	
 	@Override
     public void init() throws ServletException {
-        super.init();
-
-        StorageFactory factory = new StorageFactory(DataType.POSTGRE, 
-                getClass().getClassLoader().getResourceAsStream("config.properties"));
+		StorageFactory factory = (StorageFactory) getServletContext().getAttribute(ContextInitializer.STORAGE_FACTORY);
         projectDAO = factory.getProjectDAO();
         paymentDAO = factory.getPaymentDAO();
         questionsDAO = factory.getQuestionsDAO();

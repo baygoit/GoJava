@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.com.goit.gojava7.kickstarter.controller.servlet.util.HtmlPageWriter;
 
 @WebServlet("/payment")
-public class Pay extends HttpServlet {
+public class PaymentController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override

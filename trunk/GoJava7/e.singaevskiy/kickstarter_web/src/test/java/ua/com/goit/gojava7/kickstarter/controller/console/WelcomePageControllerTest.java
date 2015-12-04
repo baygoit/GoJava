@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.controller;
+package ua.com.goit.gojava7.kickstarter.controller.console;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
