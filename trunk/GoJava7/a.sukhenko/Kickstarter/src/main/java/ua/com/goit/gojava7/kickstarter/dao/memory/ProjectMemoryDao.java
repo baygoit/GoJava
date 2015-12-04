@@ -62,4 +62,15 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 		super.add(project);
 	}
 
+	@Override
+	public Project getProjectByName(String projectName) {
+	for (Project project : data) {
+		if(project.getProjectName().equals(projectName)){
+			return project;
+		}
+	}
+	throw new NoSuchElementException();
+	}
+
+
 }

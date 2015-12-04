@@ -50,4 +50,11 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectStorage{
 
 	}
 
+
+	@Override
+	public Project getProjectByName(String projectName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

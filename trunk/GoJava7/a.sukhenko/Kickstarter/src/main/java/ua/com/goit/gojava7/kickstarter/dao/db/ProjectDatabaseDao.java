@@ -94,4 +94,12 @@ public class ProjectDatabaseDao extends DatabaseDao<Project> implements ProjectS
 		// TODO Auto-generated method stub
 
 	}
+
+
+
+	@Override
+	public Project getProjectByName(String projectName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

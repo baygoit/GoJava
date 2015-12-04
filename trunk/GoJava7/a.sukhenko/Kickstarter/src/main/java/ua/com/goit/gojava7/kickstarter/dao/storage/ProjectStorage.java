@@ -19,4 +19,6 @@ public interface ProjectStorage extends Storage<Project>{
 
 	public void addProject(Project project);
 
+	public Project getProjectByName(String projectName);
+
 }
