@@ -48,10 +48,7 @@ public class Kickstarter {
 
 	public void run() {
 		// TODO random
-		// quotePrinter.print(quoteStorage.getRandomQuote());
-		
-		boolean t = true;
-		System.out.println(t);
+		// quotePrinter.print(quoteStorage.getRandomQuote());		
 		quotePrinter.print(quoteDao.get(1));
 		do {
 			currentCategory = chooseCategory(categoryDao);
@@ -71,23 +68,23 @@ public class Kickstarter {
 		} while (currentCategory != null);
 	}
 
-	public Category chooseCategory(CategoryDao categoryStorage) {
+	public Category chooseCategory(CategoryDao categoryDao) {
 		printer.print(BORDER + "\nList of categories:\n");
-		categoryPrinter.printCategories(categoryStorage.getAll());
+		categoryPrinter.printCategories(categoryDao.getAll());
 		printer.print("\nChoose a category by number ('0' for exit): ");
-		return setCurrentCategory(categoryStorage);
+		return setCurrentCategory(categoryDao);
 	}
 
-	public Category setCurrentCategory(CategoryDao categoryStorage) {
-		int numberOfCategory = consoleScanner.getInt(0, categoryStorage.size());
+	public Category setCurrentCategory(CategoryDao categoryDao) {
+		int numberOfCategory = consoleScanner.getInt(0, categoryDao.size());
 		if (numberOfCategory == 0)
 			return null;
-		return categoryStorage.getByNumber(numberOfCategory);
+		return categoryDao.getByNumber(numberOfCategory);
 	}
 
-	public Project chooseProject(Category category, ProjectDao projectStorage) {
+	public Project chooseProject(Category category, ProjectDao projectDao) {
 		List<Project> projectsInCategory = new ArrayList<>();
-		projectsInCategory = projectStorage.getByCategory(category.getName());
+		projectsInCategory = projectDao.getByCategory(category.getName());
 		printer.print(BORDER + "\nCurrent category: " + category.getName() + "\nList of projects:");
 		projectPrinter.printProjects(projectsInCategory);
 		printer.print("\nChoose a project by number ('0' to choose another category): ");
@@ -101,7 +98,7 @@ public class Kickstarter {
 		return projects.get(numberOfProject - 1);
 	}
 
-	public void viewProject(Project project) {
+	public void viewProject(Project project) { 
 		boolean exit = false;
 		while (!exit) {
 			List<Question> quoestionsInProject = new ArrayList<>();

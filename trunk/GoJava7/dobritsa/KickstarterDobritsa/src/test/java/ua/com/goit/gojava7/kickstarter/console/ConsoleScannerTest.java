@@ -97,4 +97,9 @@ public class ConsoleScannerTest {
 		verify(bufferedReader).close();
 	}
 	
+	//TODO check exceptions
+	 //  when(mock.get(anyInt())).thenReturn(null);
+	  //  doThrow(new RuntimeException()).when(mock).someVoidMethod(anyObject());
+	  //  verify(mock).someMethod(contains("foo"))
+	// when(mockedList.get(1)).thenThrow(new RuntimeException());
 }
