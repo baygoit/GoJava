@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.kickstarter.model.Quote;
 
-public class DbQuoteImpl extends DbConnector implements QuoteDaoInterface {
+public class DbQuoteImpl extends DBCon implements QuoteDaoInterface {
 
 	public Quote get() {
 		ResultSet rs = null;

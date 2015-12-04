@@ -10,14 +10,14 @@ import java.util.List;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.Question;
 
-public class DbQuestionDaoImpl extends DbConnector implements QuestionDaoInterface {
+public class DbQuestionDaoImpl extends DbConnector  implements QuestionDaoInterface {
 
-	public List<Question> getProjectQuestions(Project p) {
+	public List<Question> getProjectQuestions(Project p){
 		ResultSet rs = null;
 		List<Question> list = new ArrayList<>();
 
 		try (PreparedStatement pStatement = getConnection().prepareStatement("select * from questions where projectTitle = ?")) {
-			pStatement.setString(1, p.getTitle());
+			pStatement.setString(1,p.getTitle());
 			rs = pStatement.executeQuery();
 
 			while (rs.next()) {
@@ -42,4 +42,10 @@ public class DbQuestionDaoImpl extends DbConnector implements QuestionDaoInterfa
 			System.out.println("Question add MySql connection problem");
 		}
 	}
+
+	
+
+
+
+
 }

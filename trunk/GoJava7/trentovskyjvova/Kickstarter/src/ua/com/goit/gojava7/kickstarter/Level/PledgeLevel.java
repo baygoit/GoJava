@@ -62,11 +62,11 @@ public class PledgeLevel implements Level {
 
 		int donate = 0;
 
-		if (userChoise == rewardDao.size() + 1) {
+		if (userChoise == rewardDao.size(project.getId()) + 1) {
 			consolePrinter.print("Enter amount to donate");
 			donate = consoleScanner.scan();
 		} else if (userChoise > 0) {		
-			Reward reward = rewardDao.getReward(userChoise - 1);
+			Reward reward = rewardDao.getReward(userChoise, project.getId());
 			donate = reward.getPledge();	
 		}
 
@@ -78,7 +78,7 @@ public class PledgeLevel implements Level {
 		consolePrinter.print("Enter card number");
 		String cardNumber = consoleScanner.scanLine();
 
-		Payment payment = new Payment(paymentDao.generateIdOfNewElement());
+		Payment payment = new Payment();
 		payment.setProjectId(project.getId());
 		payment.setName(name);
 		payment.setCardNumber(cardNumber);

@@ -1,39 +1,34 @@
 package ua.com.goit.gojava7.kikstarter.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * create class Category which contain list categories
- * 
- */
 public class Category {
 
-	private String categoryName;
-	private List<Project> projectsList = new ArrayList<>();
+	private int uniqueID;
+	private String name;
 
-	public Category(String categoryName) {
-		this.categoryName = categoryName;
+	public Category(int uniqueID, String name) {
+		this.uniqueID = uniqueID;
+		this.name = name;
 	}
 
-	public String getNameCategory() {
-		return categoryName;
+	public int getUniqueID() {
+		return uniqueID;
 	}
 
-	public void setNameCategory(String nameCategory) {
-		this.categoryName = nameCategory;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public List<Project> getAllProjectsInThisCategory() {
-		return projectsList;
+	public String getName() {
+		return name;
 	}
 
-	public void setProject(Project project) {
-		projectsList.add(project);
+	public void setNameCategory(String name) {
+		this.name = name;
 	}
 
-	public Project getProject(int num) {
-		return projectsList.get(num);
+	@Override
+	public String toString() {
+		return "ID: " + uniqueID + ", Name: " + name;
 	}
 
 }

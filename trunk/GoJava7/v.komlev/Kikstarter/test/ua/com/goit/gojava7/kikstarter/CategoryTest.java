@@ -24,7 +24,7 @@ public class CategoryTest {
 
 	@Test
 	public void test() {
-		assertThat(categoryTest.getNameCategory(), is("Test name"));
+		assertThat(categoryTest.getName(), is("Test name"));
 		assertThat(categoryTest.getProject(0), is(projectTest));
 		assertThat(categoryTest.getAllProjectsInThisCategory().get(0), is(projectTest));
 	}

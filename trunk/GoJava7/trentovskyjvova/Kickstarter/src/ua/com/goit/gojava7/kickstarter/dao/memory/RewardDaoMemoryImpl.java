@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public class RewardDaoMemoryImpl implements RewardDao {
-	private List<Reward> rewards;
 	
 	@Override
 	public List<Reward> getRewards(int projectId) {
-		rewards = new ArrayList<>();
+		List<Reward> rewards = new ArrayList<>();
 		
 		Reward reward1 = new Reward(1, 1);
 		reward1.setPledge(1);
@@ -38,20 +38,33 @@ public class RewardDaoMemoryImpl implements RewardDao {
 	}
 
 	@Override
-	public int size() {
-		cacheRewards(1);
-		
-		return rewards.size();
+	public Reward getReward(int userChoise, int projectId) {
+		if (userChoise == 0) {
+			return null;
+		} else {
+			List<Reward> reward = getRewards(projectId);
+			return reward.get(userChoise - 1);
+		}
+	}
+	
+	@Override
+	public int size(int projectId) {
+		return getRewards(projectId).size();
 	}
 
 	@Override
-	public Reward getReward(int id) {	
-		return rewards.get(id);
-	}
-	
-	public void cacheRewards(int projectId){
-		if(rewards == null){
-			getRewards(projectId);
+	public Reward getReward(int rewardId) {
+		if(rewardId == 0){
+			return null;
+		} else {
+			List<Reward> rewards = getRewards(0);
+			for (Reward reward : rewards) {
+				if(reward.getId() == rewardId) {
+					return reward;
+				}
+			} 		
+			return null;
 		}
 	}
+
 }

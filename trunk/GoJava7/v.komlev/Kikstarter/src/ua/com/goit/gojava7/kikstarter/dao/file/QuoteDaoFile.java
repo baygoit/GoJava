@@ -16,11 +16,11 @@ import ua.com.goit.gojava7.kikstarter.domain.Quote;
 public class QuoteDaoFile implements QuoteDao {
 
 	private static final String SEMICOLON = ";";
-	private File quoteFile;
+	private File file;
 	private FileWriter fileWriter;
 
 	public QuoteDaoFile() {
-		quoteFile = new File("./resources/quotes.csv");
+		file = new File("./resources/quotes.csv");
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class QuoteDaoFile implements QuoteDao {
 		String quoteString = (quote.getContent() + SEMICOLON + quote.getAuthor() + "\n");
 		fileWriter = null;
 		try {
-			fileWriter = new FileWriter(quoteFile);
+			fileWriter = new FileWriter(file, true);
 			fileWriter.append(quoteString);
 			fileWriter.flush();
 		} catch (IOException e) {
@@ -56,8 +56,7 @@ public class QuoteDaoFile implements QuoteDao {
 		BufferedReader fileReader = null;
 
 		try {
-			fileReader = new BufferedReader(new FileReader(quoteFile));
-//			fileReader.readLine();
+			fileReader = new BufferedReader(new FileReader(file));
 
 			while ((line = fileReader.readLine()) != null) {
 				String[] splitContentOfAuthor = line.split(SEMICOLON);

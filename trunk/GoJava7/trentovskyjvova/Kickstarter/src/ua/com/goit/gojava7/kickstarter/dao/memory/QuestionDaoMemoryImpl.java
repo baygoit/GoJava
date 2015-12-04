@@ -29,8 +29,7 @@ public class QuestionDaoMemoryImpl implements QuestionDao {
 		questions.add(question);
 	}
 
-	@Override
-	public int generateIdOfNewElement() {
+	private int generateIdOfNewElement() {
 		initQuestions();
 
 		int maxId = 0;
@@ -42,13 +41,13 @@ public class QuestionDaoMemoryImpl implements QuestionDao {
 		return maxId + 1;
 	}
 
-	public void cacheQuestions() {
+	private void cacheQuestions() {
 		if (questions == null) {
 			initQuestions();
 		}
 	}
 
-	public void initQuestions() {
+	private void initQuestions() {
 		if (questions == null) {
 
 			questions = new ArrayList<>();
