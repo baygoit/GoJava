@@ -2,7 +2,6 @@ package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -87,9 +86,7 @@ public class DaoFactory {
 	public Connection open() {
 		Connection connection = null;
 		if (dataSource == MyDataSource.DB) {
-			try {
-			//	Class.forName("com.mysql.jdbc.Driver");
-			//	Class.forName("org.apache.tomcat.jdbc.pool.DataSource");
+			try {			
 				Class.forName("org.apache.commons.dbcp2.BasicDataSource");
 				DataSource dataSource = setupDataSource("com.mysql.jdbc.Driver",
 						"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword");
@@ -103,7 +100,7 @@ public class DaoFactory {
 		return connection;
 	}
 
-	/*public void close(DataSource ds) {
+	public void close(DataSource ds) {
 		if (dataSource == MyDataSource.DB) {
 			BasicDataSource bds = (BasicDataSource) ds;
 			try {
@@ -115,7 +112,7 @@ public class DaoFactory {
 
 			}
 		}
-	}*/
+	}
 
 	private void initMemoryStorage() {
 		Memory data = new Memory();

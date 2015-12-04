@@ -5,10 +5,10 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 public class QuotePrinter {
 	
 	public void print(Quote quote) {
-		if(quote.equals(null)) {
-			System.err.println("There are no quotes");
+		if(quote.isEmpty()) {
+			System.out.println("There are no quotes");
 			return;
-		}
+		} else 
 		System.out.println(quote.getText() + 
 				"\n " +	 quote.getAuthor());
 	}

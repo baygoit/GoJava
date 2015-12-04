@@ -7,11 +7,11 @@ import java.io.InputStreamReader;
 
 public class HtmlPageWriter {
 
+	private static final String SAMPLE_HTML = "sample.html";
+	private static final String TITLE = "%title%";
+	private static final String BODY = "%body%";
     private static final String ACTION = "%action%";
-    private static final String FORM = "%form%";
-    private static final String SAMPLE_HTML = "sample.html";
-    private static final String BODY = "%body%";
-    private static final String TITLE = "%title%";
+    private static final String FORM = "<tr><td>%form%<td></tr>";
     private StringBuilder content;
 
     public HtmlPageWriter() {
