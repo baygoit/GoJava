@@ -74,5 +74,16 @@ public class JdbcDispatcher {
 
         return false;
     }
+    
+    public void close() {
+    	try {
+    		if (datasource != null && !datasource.isClosed()) {
+    			datasource.close();
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

@@ -26,126 +26,196 @@ import ua.com.goit.gojava7.kickstarter.dao.memory.util.Memory;
 import ua.com.goit.gojava7.kickstarter.util.Utils;
 
 public class StorageFactory {
-    private DataType dataType;
-    private QuoteDAO quoteDAO;
-    private CategoryDAO categoryDAO;
-    private ProjectDAO projectDAO;
-    private QuestionsDAO questionsDAO;
-    private PaymentDAO paymentDAO;
-    private RewardDAO rewardDAO;
-    private Properties properties;
-    
-    public StorageFactory(DataType dataType, Properties properties){
-        this.dataType = dataType;
-        this.properties = properties;
-        init();
-    }
-    
-    public StorageFactory(DataType dataType) {
-        this(dataType, "./kicks-files/config.properties");    
-    }
-    
-    public StorageFactory(DataType dataType, String pathToFile) {
-        this.dataType = dataType;
-        properties = Utils.readProperties(pathToFile);        
-        init();    
-    }
-    
-    public StorageFactory(DataType dataType, InputStream resourceStream) {
-        this.dataType = dataType;
-        properties = Utils.readProperties(resourceStream);        
-        init();
-        
-    }
+	private DataType dataType;
+	private QuoteDAO quoteDAO;
+	private CategoryDAO categoryDAO;
+	private ProjectDAO projectDAO;
+	private QuestionsDAO questionsDAO;
+	private PaymentDAO paymentDAO;
+	private RewardDAO rewardDAO;
+	private Properties properties;
+	private Memory mem;
+	private JdbcDispatcher dispatcher;
 
-    private void init() {
-        switch (dataType) {
-        case MEMORY:
-            initMemoryStorage();
-            break;
-            
-        case FILE:
-            initFileStorage();
-            break;
-            
-        case POSTGRE:
-            initPostgreStorage();
-            break;
+	public StorageFactory(DataType dataType, Properties properties) {
+		this.dataType = dataType;
+		this.properties = properties;
+	}
 
-        default:
-            break;
-        }
-    }
-    
-    private void initMemoryStorage(){
-        Memory mem = new Memory();
-        quoteDAO = new QuoteMemoryDAO(mem.getQuotes());
-        categoryDAO = new CategoryMemoryDAO(mem.getCategories());
-        paymentDAO = new PaymentMemoryDAO(mem.getPayments());
-        
-        projectDAO = new ProjectMemoryDAO(mem.getProjects());
-        questionsDAO = new QuestionMemoryDAO(mem.getQuestions());
-        rewardDAO = new RewardMemoryDAO(mem.getRewards());
-    }
-    
-    private void initFileStorage(){
-        quoteDAO = new QuoteFileDAO();
-        categoryDAO = new CategoryFileDAO();
-        
-        paymentDAO = new PaymentFileDAO();       
-        projectDAO = new ProjectFileDAO();
-        questionsDAO = new QuestionFileDAO();
-        rewardDAO = new RewardFileDAO();
-    }
-    
-    private void initPostgreStorage(){
+	public StorageFactory(DataType dataType) {
+		this(dataType, "./kicks-files/config.properties");
+	}
 
-        try {
-            Class.forName(properties.getProperty("driver"));
-            JdbcDispatcher dispatcher = new JdbcDispatcher(
-                    properties.getProperty("driver"),
-                    properties.getProperty("url"),
-                    properties.getProperty("user"), 
-                    properties.getProperty("password"));
-            
-            quoteDAO = new QuotePostgreDAO(dispatcher);
-            categoryDAO = new CategoryPostgreDAO(dispatcher);
-            projectDAO = new ProjectPostgreDAO(dispatcher);
-            questionsDAO = new QuestionPostgreDAO(dispatcher);
-            rewardDAO = new RewardPostgreDAO(dispatcher);
-            paymentDAO = new PaymentPostgreDAO(dispatcher);        
-            
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }       
-    }
+	public StorageFactory(DataType dataType, String pathToFile) {
+		this.dataType = dataType;
+		properties = Utils.readProperties(pathToFile);
+	}
 
-    public CategoryDAO getCategoryDAO() {
-        return categoryDAO;
-    }
+	public StorageFactory(DataType dataType, InputStream resourceStream) {
+		System.out.println("Storage created");
+		this.dataType = dataType;
+		properties = Utils.readProperties(resourceStream);
+	}
 
-    public DataType getDataType() {
-        return dataType;
-    }
+	private Memory getMemory() {
+		if (mem == null) {
+			mem = new Memory();
+		}
+		return mem;
+	}
 
-    public QuoteDAO getQuoteDAO() {
-        return quoteDAO;
-    }
+	private JdbcDispatcher getDispatcher() {
+		if (dispatcher == null) {
+			try {
+				Class.forName(properties.getProperty("driver"));
+				dispatcher = new JdbcDispatcher(properties.getProperty("driver"), properties.getProperty("url"),
+						properties.getProperty("user"), properties.getProperty("password"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return dispatcher;
+	}
 
-    public ProjectDAO getProjectDAO() {
-        return projectDAO;
-    }
+	public DataType getDataType() {
+		return dataType;
+	}
+	
+	public void close() {
+		if (dataType.equals(DataType.POSTGRE) && dispatcher != null) {
+			dispatcher.close();
+		}
+	}
 
-    public QuestionsDAO getQuestionsDAO() {
-        return questionsDAO;
-    }
+	public QuoteDAO getQuoteDAO() {
+		if (quoteDAO == null) {
+			switch (dataType) {
+			case MEMORY:
+				quoteDAO = new QuoteMemoryDAO(getMemory().getQuotes());
+				break;
+	
+			case FILE:
+				quoteDAO = new QuoteFileDAO();
+				break;
+	
+			case POSTGRE:
+				quoteDAO = new QuotePostgreDAO(getDispatcher());
+				break;
+	
+			default:
+				break;
+			}
+		}		
+		return quoteDAO;
+	}
 
-    public PaymentDAO getPaymentDAO() {
-        return paymentDAO;
-    }
+	public CategoryDAO getCategoryDAO() {
+		if (categoryDAO == null) {
+			switch (dataType) {
+			case MEMORY:
+				categoryDAO = new CategoryMemoryDAO(getMemory().getCategories());
+				break;
 
-    public RewardDAO getRewardDAO() {
-        return rewardDAO;
-    }
+			case FILE:
+				categoryDAO = new CategoryFileDAO();
+				break;
+
+			case POSTGRE:
+				categoryDAO = new CategoryPostgreDAO(getDispatcher());
+				break;
+
+			default:
+				break;
+			}
+		}
+		return categoryDAO;
+	}
+
+	public ProjectDAO getProjectDAO() {
+		if (projectDAO == null) {
+			switch (dataType) {
+			case MEMORY:
+				projectDAO = new ProjectMemoryDAO(getMemory().getProjects());
+				break;
+
+			case FILE:
+				projectDAO = new ProjectFileDAO();
+				break;
+
+			case POSTGRE:
+				projectDAO = new ProjectPostgreDAO(getDispatcher());
+				break;
+
+			default:
+				break;
+			}
+		}
+		return projectDAO;
+	}
+
+	public QuestionsDAO getQuestionsDAO() {
+		if (questionsDAO == null) {
+			switch (dataType) {
+			case MEMORY:
+				questionsDAO = new QuestionMemoryDAO(getMemory().getQuestions());
+				break;
+
+			case FILE:
+				questionsDAO = new QuestionFileDAO();
+				break;
+
+			case POSTGRE:
+				questionsDAO = new QuestionPostgreDAO(getDispatcher());
+				break;
+
+			default:
+				break;
+			}
+		}
+		return questionsDAO;
+	}
+
+	public PaymentDAO getPaymentDAO() {
+		if (paymentDAO == null) {
+			switch (dataType) {
+			case MEMORY:
+				paymentDAO = new PaymentMemoryDAO(getMemory().getPayments());
+				break;
+
+			case FILE:
+				paymentDAO = new PaymentFileDAO();
+				break;
+
+			case POSTGRE:
+				paymentDAO = new PaymentPostgreDAO(getDispatcher());
+				break;
+
+			default:
+				break;
+			}
+		}
+		return paymentDAO;
+	}
+
+	public RewardDAO getRewardDAO() {
+		if (rewardDAO == null) {
+			switch (dataType) {
+			case MEMORY:
+				rewardDAO = new RewardMemoryDAO(getMemory().getRewards());
+				break;
+
+			case FILE:
+				rewardDAO = new RewardFileDAO();
+				break;
+
+			case POSTGRE:
+				rewardDAO = new RewardPostgreDAO(getDispatcher());
+				break;
+
+			default:
+				break;
+			}
+		}
+		return rewardDAO;
+	}
 }
