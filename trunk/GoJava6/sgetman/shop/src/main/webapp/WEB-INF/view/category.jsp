@@ -18,7 +18,7 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <a href="<c:url value='category?${category.id}'/>" class="categoryButton">
+                <a href="<c:url value='category?id=${category.id}'/>" class="categoryButton">
                     <span class="categoryText">
                         ${category.name}
                     </span>

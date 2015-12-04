@@ -35,7 +35,7 @@ public class QuestionDaoSqlImplTest {
 	public void testGetQuestions() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.open()).thenReturn(connection);
+		when(daoProvider.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -49,7 +49,7 @@ public class QuestionDaoSqlImplTest {
 	@Test
 	public void testAddQuestion() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
-		when(daoProvider.open()).thenReturn(connection);
+		when(daoProvider.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeUpdate()).thenReturn(1);
 		

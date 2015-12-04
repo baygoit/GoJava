@@ -22,17 +22,19 @@ public class QuestionDaoSqlImpl implements QuestionDao {
 	@Override
 	public List<Question> getQuestions(int projectId) {
 		List<Question> questions = new ArrayList<>();
-		Connection connection = daoProvider.open();
-		
-		try (PreparedStatement ps = connection
-				.prepareStatement("SELECT id, questionText FROM question WHERE projectId ="
-						+ projectId);
-				ResultSet rs = ps.executeQuery()) {
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+		try {
+			conn = daoProvider.getConnection();
+			stmt = conn.prepareStatement("SELECT id, questionText FROM question WHERE projectId =" + projectId);
+			rset = stmt.executeQuery();
 
 			Question question;
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String questionText = rs.getString("questionText");
+			while (rset.next()) {
+				int id = rset.getInt("id");
+				String questionText = rset.getString("questionText");
 
 				question = new Question();
 				question.setId(id);
@@ -42,28 +44,32 @@ public class QuestionDaoSqlImpl implements QuestionDao {
 				questions.add(question);
 			}
 		} catch (SQLException e) {
-			getQuestions(projectId);
-			//throw new IODatabaseException("Problem with database", e);
+			throw new IODatabaseException("Problem with database", e);
+		} finally {
+            try { if (rset != null) rset.close(); } catch(Exception e) { }
+            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
+            try { if (conn != null) conn.close(); } catch(Exception e) { }
 		}
 		return questions;
 	}
 
 	@Override
 	public void addQuestion(Question question) {
-		Connection connection = daoProvider.open();
-		
-		try (PreparedStatement ps = connection
-				.prepareStatement("INSERT INTO question (projectId, questionText) VALUES ('"
-						+ question.getProjectId()
-						+ "', '"
-						+ question.getQuestionText() + "');");) {
-			ps.executeUpdate();
+			
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = daoProvider.getConnection();
+			stmt = conn.prepareStatement("INSERT INTO question (projectId, questionText) VALUES ('"
+					+ question.getProjectId() + "', '" + question.getQuestionText() + "');");
+			stmt.executeUpdate();
 
 		} catch (SQLException e) {
-			addQuestion( question);
-			//throw new IODatabaseException("Problem with database", e);
+			throw new IODatabaseException("Problem with database", e);
+		} finally {
+            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
+            try { if (conn != null) conn.close(); } catch(Exception e) { }
 		}
-
 	}
 
 }

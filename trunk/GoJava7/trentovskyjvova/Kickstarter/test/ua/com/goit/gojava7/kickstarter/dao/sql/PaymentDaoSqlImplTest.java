@@ -34,7 +34,7 @@ public class PaymentDaoSqlImplTest {
 	public void testGetPayments() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.open()).thenReturn(connection);
+		when(daoProvider.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -48,7 +48,7 @@ public class PaymentDaoSqlImplTest {
 	@Test
 	public void testAddPayment() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
-		when(daoProvider.open()).thenReturn(connection);
+		when(daoProvider.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeUpdate()).thenReturn(1);
 		
@@ -62,7 +62,7 @@ public class PaymentDaoSqlImplTest {
 	public void testGetPledged() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.open()).thenReturn(connection);
+		when(daoProvider.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);

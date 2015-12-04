@@ -95,4 +95,19 @@ public class RewardDaoFileImpl implements RewardDao {
 		return getRewards(projectId).size();
 	}
 
+	@Override
+	public Reward getReward(int rewardId) {
+		if(rewardId == 0){
+			return null;
+		} else {
+			List<Reward> rewards = getRewards(0);
+			for (Reward reward : rewards) {
+				if(reward.getId() == rewardId) {
+					return reward;
+				}
+			} 		
+			return null;
+		}
+	}
+
 }

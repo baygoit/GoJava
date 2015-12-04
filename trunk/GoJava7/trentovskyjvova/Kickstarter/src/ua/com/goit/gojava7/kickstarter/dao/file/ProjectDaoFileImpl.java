@@ -99,4 +99,19 @@ public class ProjectDaoFileImpl implements ProjectDao {
 		return projects.size();
 	}
 
+	@Override
+	public Project getProject(int projectId) {
+		if(projectId == 0){
+			return null;
+		} else {
+			List<Project> projects = getProjects(0);
+			for (Project project : projects) {
+				if(project.getId() == projectId) {
+					return project;
+				}
+			} 		
+			return null;
+		}
+	}
+	
 }

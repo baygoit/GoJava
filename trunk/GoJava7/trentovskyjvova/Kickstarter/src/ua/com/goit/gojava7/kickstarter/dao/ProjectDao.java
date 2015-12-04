@@ -11,4 +11,6 @@ public interface ProjectDao extends Dao{
 	
 	int size(int categoryId);
 
+	Project getProject(int projectId);
+
 }

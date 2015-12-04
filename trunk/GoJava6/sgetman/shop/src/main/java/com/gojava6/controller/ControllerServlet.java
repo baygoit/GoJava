@@ -28,26 +28,25 @@ import javax.servlet.http.HttpSession;
  *
  * @author tgiunipero
  */
-public class ControllerServlet extends HttpServlet {
+public class ControllerServlet {
 
     private String surcharge;
 
-    private CategoryService categoryService = new CategoryService();
+    private CategoryService categoryService;
 
-    private ProductService productService = new ProductService();
+    private ProductService productService;
 
     private OrderService orderManager;
 
-    @Override
     public void init(ServletConfig servletConfig) throws ServletException {
 
-        super.init(servletConfig);
+        //super.init(servletConfig);
 
         // initialize servlet with configuration information
         surcharge = servletConfig.getServletContext().getInitParameter("deliverySurcharge");
 
         // store category list in servlet context
-        getServletContext().setAttribute("categories", categoryService.findAll());
+        //getServletContext().setAttribute("categories", categoryService.findAll());
     }
 
     /**
@@ -57,7 +56,6 @@ public class ControllerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -137,7 +135,6 @@ public class ControllerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
