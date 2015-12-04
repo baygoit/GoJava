@@ -49,6 +49,9 @@ public class Kickstarter {
 	public void run() {
 		// TODO random
 		// quotePrinter.print(quoteStorage.getRandomQuote());
+		
+		boolean t = true;
+		System.out.println(t);
 		quotePrinter.print(quoteDao.get(1));
 		do {
 			currentCategory = chooseCategory(categoryDao);

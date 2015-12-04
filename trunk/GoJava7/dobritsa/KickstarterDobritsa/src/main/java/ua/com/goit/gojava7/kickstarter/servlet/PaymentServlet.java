@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.db;
+package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
