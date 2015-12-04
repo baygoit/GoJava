@@ -22,13 +22,11 @@ public class CategoryMemoryDao extends MemoryDao<Category> implements CategorySt
 	@Override
 	public Category getCategoryById(int projectCategoryId) {
 		for (int i = 0; i < data.size(); i++) {
-			if(data.get(i).getCategoryId() == projectCategoryId){
+			if (data.get(i).getCategoryId() == projectCategoryId) {
 				return data.get(i);
 			}
 		}
 		throw new NoSuchElementException();
 	}
 
-
-	
 }

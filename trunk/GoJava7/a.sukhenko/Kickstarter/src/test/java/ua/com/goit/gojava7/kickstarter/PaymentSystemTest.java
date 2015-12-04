@@ -14,8 +14,8 @@ import ua.com.goit.gojava7.kickstarter.domain.User;
 import ua.com.goit.gojava7.kickstarter.payment.PaymentSystem;
 
 public class PaymentSystemTest{
-	DaoFactory daoFactory = new DaoFactory(DataSource.MEMORY);
-	ProjectStorage	projectManager = daoFactory.getProjectStorage();
+	DaoFactory		daoFactory		= new DaoFactory(DataSource.MEMORY);
+	ProjectStorage	projectManager	= daoFactory.getProjectStorage();
 	Project			project			= new Project();
 	User			payer			= new User();
 	PaymentSystem	paymentSystem	= new PaymentSystem();

@@ -30,7 +30,7 @@ public class KickstarterRunner{
 		ProjectStorage projectStorage = daoFactory.getProjectStorage();
 		QuestionStorage questionsStorage = daoFactory.getQuestionsStorage();
 		Body body = new Body();
-		
+
 		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage, body, projectStorage, questionsStorage);
 		kickstarter.run();
 		kickstarter.shutdown();

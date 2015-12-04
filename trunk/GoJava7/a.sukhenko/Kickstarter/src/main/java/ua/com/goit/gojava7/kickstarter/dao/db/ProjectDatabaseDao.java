@@ -37,7 +37,7 @@ public class ProjectDatabaseDao extends DatabaseDao<Project> implements ProjectS
 	}
 
 	@Override
-	public void updatePledged(Project project, int amount) {
+	public void updatePledged(Project project, double amount) {
 		String query = "UPDATE " + TABLE + " SET pledged = pledged + " + amount + " WHERE name = '"
 				+ prepareStringForDb(project.getProjectName()) + "'";
 		try (PreparedStatement ps = connection.prepareStatement(query);) {
@@ -77,8 +77,6 @@ public class ProjectDatabaseDao extends DatabaseDao<Project> implements ProjectS
 		return project;
 	}
 
-
-
 	@Override
 	public void addProject(Project project) {
 		// TODO Auto-generated method stub
@@ -88,12 +86,12 @@ public class ProjectDatabaseDao extends DatabaseDao<Project> implements ProjectS
 	@Override
 	public void add(Project element) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void userContributeToProject(User user, Double valueOf, String projectName) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

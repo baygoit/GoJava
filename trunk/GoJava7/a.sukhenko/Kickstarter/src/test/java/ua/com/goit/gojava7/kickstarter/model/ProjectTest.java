@@ -63,15 +63,8 @@ public class ProjectTest{
 	}
 
 	@Test
-	public void testAddBacker() {
-		project.addBacker(new User(), 4321.0);
-		assertThat(project.getBackers().size(), is(1));
-		// test that it is our User
-	}
-
-	@Test
 	public void testGetFundedPercentage() {
-		project.addBacker(new User(), 50000.0);
+		project.setPledged(project.getPledged() + 50000.0);
 		project.setMoneyNeeded(100000.0);
 		assertThat(project.getFundedPercentage(), is("50.0%"));
 	}
@@ -104,7 +97,7 @@ public class ProjectTest{
 	public void testGetMoneyPledged() {
 		project.addBacker(new User(), 50000.0);
 		project.addBacker(new User(), 48000.0);
-		assertThat(project.getMoneyPledged(), is(98000.0));
+		assertThat(project.getPledged(), is(98000.0));
 	}
 
 	@Test

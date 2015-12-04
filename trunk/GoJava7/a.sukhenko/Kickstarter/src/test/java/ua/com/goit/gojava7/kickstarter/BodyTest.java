@@ -15,22 +15,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.config.DataSource;
-import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
 import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.domain.User;
 
 public class BodyTest{
-	public static final String			PROJECT2	= "Project: ";
-	String								newLine		= "\r\n";
-	Body								body		= new Body();
-	DaoFactory daoFactory = new DaoFactory(DataSource.MEMORY);
-	CategoryStorage						categoryStorage = daoFactory.getCategoryStorage();
+	public static final String			PROJECT2		= "Project: ";
+	String								newLine			= "\r\n";
+	Body								body			= new Body();
+	DaoFactory							daoFactory		= new DaoFactory(DataSource.MEMORY);
+	CategoryStorage						categoryStorage	= daoFactory.getCategoryStorage();
 
-	private final ByteArrayOutputStream	outContent	= new ByteArrayOutputStream();
-	private final ByteArrayOutputStream	errContent	= new ByteArrayOutputStream();
+	private final ByteArrayOutputStream	outContent		= new ByteArrayOutputStream();
+	private final ByteArrayOutputStream	errContent		= new ByteArrayOutputStream();
 
 	@Before
 	public void setUpStreams() {
@@ -81,8 +79,7 @@ public class BodyTest{
 				+ categoryStorage.getCategoryById(project.getProjectCategoryId()).getCategoryName() + newLine;
 		stuff += "59 minutes left" + newLine;
 		stuff += "[ Description ]" + newLine;
-		stuff += "Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
-				+ " | Pledged: $" + project.getMoneyPledged() + newLine;
+		stuff += "Funded: " + project.getFundedPercentage() + " | Pledged: $" + project.getPledged() + newLine;
 		assertThat(outContent.toString(), is(stuff));
 	}
 
@@ -91,7 +88,6 @@ public class BodyTest{
 		Map<String, String> qa = new HashMap<String, String>();
 		project.setProjectCategoryId(1);
 		project.setMoneyNeeded(100000.0);
-		project.addBacker(new User(), 50000.0);
 		qa.put("Question", "Answer");
 		project.setDemoLink("http");
 		project.setEnddate(LocalDateTime.now().plusHours(1).minusMinutes(1));

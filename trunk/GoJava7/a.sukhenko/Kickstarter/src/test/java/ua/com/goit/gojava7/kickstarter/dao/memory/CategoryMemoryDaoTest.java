@@ -1,6 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.dao.memory;
 
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -12,14 +11,13 @@ import ua.com.goit.gojava7.kickstarter.dao.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public class CategoryMemoryDaoTest{
-	DataSource dataSource = DataSource.MEMORY;
-	DaoFactory daoFactory = new DaoFactory(dataSource);
-	CategoryStorage categoryStorage = daoFactory.getCategoryStorage();
-	
-	
+	DataSource		dataSource		= DataSource.MEMORY;
+	DaoFactory		daoFactory		= new DaoFactory(dataSource);
+	CategoryStorage	categoryStorage	= daoFactory.getCategoryStorage();
+
 	@Test
 	public void testCategoryMemoryDao() {
-		assertThat(categoryStorage,is(daoFactory.getCategoryStorage()));
+		assertThat(categoryStorage, is(daoFactory.getCategoryStorage()));
 	}
 
 	@Test
@@ -35,7 +33,7 @@ public class CategoryMemoryDaoTest{
 		category.setCategoryId(15);
 		category.setCategoryName("testCategory");
 		categoryStorage.add(category);
-		assertThat(categoryStorage.getCategoryById(15),is(category));
+		assertThat(categoryStorage.getCategoryById(15), is(category));
 	}
 
 }

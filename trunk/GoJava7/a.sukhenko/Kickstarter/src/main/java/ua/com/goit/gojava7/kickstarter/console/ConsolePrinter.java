@@ -53,8 +53,8 @@ public class ConsolePrinter{
 		print("[ " + project.getProjectDescription() + " ]");
 		print("History: " + getBlankStringIfNull(project.getProjectHistory()));
 		print("Demo: " + getBlankStringIfNull(project.getDemoLink()));
-		print("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size() + " | Pledged: $"
-				+ project.getMoneyPledged());
+		print("Funded: " + project.getFundedPercentage() + " | Pledged: $"
+				+ project.getPledged());
 		ConsolePrinter.print("Donate bonuses:");
 		project.getPaymentBonus().getBonuses().forEach((money, bonus) -> {
 			ConsolePrinter.print(money + "$ - " + bonus);

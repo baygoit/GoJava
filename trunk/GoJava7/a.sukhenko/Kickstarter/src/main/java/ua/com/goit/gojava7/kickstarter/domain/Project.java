@@ -9,29 +9,24 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 public class Project{
-	private static final String		MINUTES_LEFT		= " minutes left";
-	private static final String		HOURS_LEFT			= " hours left";
-	private static final String		DAYS_LEFT			= " days left";
-	private static final String		SECONDS_LEFT		= " seconds left";
-	private String					projectName;
-	private String					projectDescription;
-	private double					moneyNeeded;
-	private String					projectHistory;
-	private String					demoLink;
-	private Map<String, String>		questionsAndAnswers	= new HashMap<>();
-	private int						projectCategoryId;
-	private String					categoryName;
-	private HashMap<User, Double>	backers				= new HashMap<>();
-	private double					pledged  = 0;
-	private LocalDateTime			enddate;
-	private PaymentBonus			paymentBonus		= new PaymentBonus();
+	private static final String	MINUTES_LEFT		= " minutes left";
+	private static final String	HOURS_LEFT			= " hours left";
+	private static final String	DAYS_LEFT			= " days left";
+	private static final String	SECONDS_LEFT		= " seconds left";
+	private String				projectName;
+	private String				projectDescription;
+	private double				moneyNeeded;
+	private String				projectHistory;
+	private String				demoLink;
+	private Map<String, String>	questionsAndAnswers	= new HashMap<>();
+	private int					projectCategoryId;
+	private String				categoryName;
+	private double				pledged				= 0;
+	private LocalDateTime		enddate;
+	private PaymentBonus		paymentBonus		= new PaymentBonus();
 
 	public LocalDateTime getEnddate() {
 		return enddate;
-	}
-
-	public void setBackers(HashMap<User, Double> backers) {
-		this.backers = backers;
 	}
 
 	public Project() {
@@ -71,16 +66,8 @@ public class Project{
 		return msg;
 	}
 
-	public void addBacker(User u, Double money) {
-		if (backers.containsKey(u)) {
-			backers.put(u, backers.get(u) + money);
-		} else {
-			backers.put(u, money);
-		}
-	}
-
 	public String getFundedPercentage() {
-		String percentage = (float) ((getMoneyPledged() * 100) / getMoneyNeeded()) + "%";
+		String percentage = (float) ((pledged * 100) / getMoneyNeeded()) + "%";
 		return percentage;
 	}
 
@@ -100,18 +87,6 @@ public class Project{
 	@XmlElement
 	public void setProjectDescription(String projectDescription) {
 		this.projectDescription = projectDescription;
-	}
-
-	public double getMoneyPledged() {
-		double moneyPledged = 0;
-		for (Double money : backers.values()) {
-			moneyPledged += money;
-		}
-		return moneyPledged;
-	}
-
-	public HashMap<User, Double> getBackers() {
-		return backers;
 	}
 
 	public LocalDateTime getEndDate() {
@@ -170,7 +145,7 @@ public class Project{
 		this.pledged = d;
 	}
 
-	public void updatePledged(int amount) {
+	public void updatePledged(double amount) {
 		this.pledged += amount;
 	}
 
@@ -180,5 +155,10 @@ public class Project{
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	public void addBacker(User user, double d) {
+		pledged += d;
+
 	}
 }

@@ -13,17 +13,17 @@ import ua.com.goit.gojava7.kickstarter.dao.storage.QuestionStorage;
 import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
 
 public class KickstarterTest{
-	QuestionStorage questionStorage;
-	CategoryStorage categoryStorage;
-	Body body = new Body();
-	ProjectStorage projectStorage;
-	QuoteStorage quoteStorage;
-	Kickstarter kickstarter;
-	DataSource dataSource = DataSource.MEMORY;
-	DaoFactory daoFactory = new DaoFactory(dataSource);
+	QuestionStorage	questionStorage;
+	CategoryStorage	categoryStorage;
+	Body			body		= new Body();
+	ProjectStorage	projectStorage;
+	QuoteStorage	quoteStorage;
+	Kickstarter		kickstarter;
+	DataSource		dataSource	= DataSource.MEMORY;
+	DaoFactory		daoFactory	= new DaoFactory(dataSource);
 	@Before
-	public void setUp(){
-		
+	public void setUp() {
+
 		questionStorage = daoFactory.getQuestionsStorage();
 		categoryStorage = daoFactory.getCategoryStorage();
 		projectStorage = daoFactory.getProjectStorage();
@@ -37,45 +37,29 @@ public class KickstarterTest{
 
 	@Test
 	public void testGetQuoteStorage() {
-		assertThat(kickstarter.getQuoteStorage(),is(daoFactory.getQuoteStorage()));
+		assertThat(kickstarter.getQuoteStorage(), is(daoFactory.getQuoteStorage()));
 	}
 
 	@Test
 	public void testGetBody() {
-		assertThat(kickstarter.getBody(),is(body));
+		assertThat(kickstarter.getBody(), is(body));
 	}
-
-
 
 	@Test
 	public void testGetCategoryStorage() {
-		assertThat(kickstarter.getCategoryStorage(),is(daoFactory.getCategoryStorage()));
+		assertThat(kickstarter.getCategoryStorage(), is(daoFactory.getCategoryStorage()));
 	}
-
-
 
 	@Test
 	public void testGetProjectManager() {
-		assertThat(kickstarter.getProjectManager(),is(daoFactory.getProjectStorage()));
+		assertThat(kickstarter.getProjectManager(), is(daoFactory.getProjectStorage()));
 	}
 
 
-
-	@Test
-	public void testRun() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testShutdown() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testGetQuestionStorage() {
 		assertThat(kickstarter.getQuestionStorage(), is(daoFactory.getQuestionsStorage()));
 	}
-
-
 
 }

@@ -13,7 +13,7 @@ public class Kickstarter{
 	private CategoryStorage	categoryStorage;
 	private Body			body;
 	private ProjectStorage	projectStorage;
-	private QuestionStorage questionStorage;
+	private QuestionStorage	questionStorage;
 	public Kickstarter(QuoteStorage quoteStorage, CategoryStorage categoryStorage, Body body,
 			ProjectStorage projectStorage, QuestionStorage questionStorage) {
 		super();

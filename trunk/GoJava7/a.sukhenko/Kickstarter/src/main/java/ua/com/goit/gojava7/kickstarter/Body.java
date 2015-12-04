@@ -56,8 +56,7 @@ public class Body{
 				+ categoryStorage.getCategoryById(project.getProjectCategoryId()).getCategoryName());
 		ConsolePrinter.print(project.getProjectEndTime());
 		ConsolePrinter.print("[ " + project.getProjectDescription() + " ]");
-		ConsolePrinter.print("Funded: " + project.getFundedPercentage() + " Backers: " + project.getBackers().size()
-				+ " | Pledged: $" + project.getMoneyPledged());
+		ConsolePrinter.print("Funded: " + project.getFundedPercentage() + " | Pledged: $" + project.getPledged());
 
 	}
 

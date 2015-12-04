@@ -10,9 +10,9 @@ import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
 
 @SuppressWarnings("unused")
 public class QuoteMemoryDaoTest{
-	DataSource dataSource = DataSource.MEMORY;
-	DaoFactory daoFactory = new DaoFactory(dataSource);
-	QuoteStorage quoteStorage = daoFactory.getQuoteStorage();
+	DataSource		dataSource		= DataSource.MEMORY;
+	DaoFactory		daoFactory		= new DaoFactory(dataSource);
+	QuoteStorage	quoteStorage	= daoFactory.getQuoteStorage();
 	@Test
 	public void testQuoteMemoryDao() {
 		assertNotNull(quoteStorage);

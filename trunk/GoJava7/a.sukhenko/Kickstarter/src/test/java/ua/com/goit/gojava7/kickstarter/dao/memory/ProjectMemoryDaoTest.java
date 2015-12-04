@@ -15,9 +15,9 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.User;
 
 public class ProjectMemoryDaoTest{
-	DataSource dataSource = DataSource.MEMORY;
-	DaoFactory daoFactory = new DaoFactory(dataSource);
-	ProjectStorage projectStorage= daoFactory.getProjectStorage();
+	DataSource		dataSource		= DataSource.MEMORY;
+	DaoFactory		daoFactory		= new DaoFactory(dataSource);
+	ProjectStorage	projectStorage	= daoFactory.getProjectStorage();
 	@Test
 	public void testProjectMemoryDao() {
 		assertNotNull(projectStorage);
@@ -28,15 +28,16 @@ public class ProjectMemoryDaoTest{
 		int last = projectStorage.getAll().size();
 		Project project = new Project();
 		projectStorage.add(project);
-		assertThat(projectStorage.getByNumber(last),is(project));
+		assertThat(projectStorage.getByNumber(last), is(project));
 	}
 
 	@Test
 	public void testUpdatePledged() {
-		fail();
+		Project project = new Project();
+		projectStorage.add(project);
+		
+		projectStorage.updatePledged(project, 45000.0);
 	}
-
-
 
 	@Test
 	public void testGetByCategory() {
@@ -54,14 +55,14 @@ public class ProjectMemoryDaoTest{
 
 	@Test
 	public void testUserContributeToProject() {
-		
+
 		final String projectName = "Project Test";
 		User user = new User();
 		Project project = new Project();
 		project.setProjectName(projectName);
 		projectStorage.add(project);
 		final double contributed = 45123.0;
-		projectStorage.userContributeToProject(user, contributed,projectName);
+		projectStorage.userContributeToProject(user, contributed, projectName);
 		assertThat(projectStorage.getPledged(projectName), is(contributed));
 	}
 

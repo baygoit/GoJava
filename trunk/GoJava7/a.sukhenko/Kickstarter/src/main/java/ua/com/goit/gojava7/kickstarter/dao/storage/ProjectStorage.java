@@ -9,13 +9,13 @@ public interface ProjectStorage extends Storage<Project>{
 
 	public Project getByNumber(int number);
 
-	public void updatePledged(Project project, int amount);
+	public void updatePledged(Project project, double d);
 
 	public double getPledged(String projectName);
 
 	public List<Project> getByCategory(String categoryName);
 
-	public void userContributeToProject(User user, Double valueOf,String projectName);
+	public void userContributeToProject(User user, Double valueOf, String projectName);
 
 	public void addProject(Project project);
 

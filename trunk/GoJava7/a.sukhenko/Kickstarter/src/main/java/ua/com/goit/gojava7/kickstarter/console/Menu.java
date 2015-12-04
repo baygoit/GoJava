@@ -96,12 +96,12 @@ public class Menu{
 
 	public void donateMoney(int option) {
 		if (isPaymentOption(option)) {
-			projectStorage.userContributeToProject(user, Double.valueOf(DONATE_OPTIONS[option]),user.getSettings().getSelectedProject().getProjectName());
+			projectStorage.userContributeToProject(user, Double.valueOf(DONATE_OPTIONS[option]), user.getSettings().getSelectedProject().getProjectName());
 			ConsolePrinter.print("Payment of " + DONATE_OPTIONS[option] + "$ is done.");
 			user.getSettings().setMenuOption(MenuOptions.SHOW_SPECIFIC_PROJECT);
 		} else {
 			double enterAmount = enterAmount();
-			projectStorage.userContributeToProject(user, enterAmount,user.getSettings().getSelectedProject().getProjectName());
+			projectStorage.userContributeToProject(user, enterAmount, user.getSettings().getSelectedProject().getProjectName());
 			ConsolePrinter.print("Payment of " + enterAmount + "$ is done.");
 			user.getSettings().setMenuOption(MenuOptions.SHOW_SPECIFIC_PROJECT);
 

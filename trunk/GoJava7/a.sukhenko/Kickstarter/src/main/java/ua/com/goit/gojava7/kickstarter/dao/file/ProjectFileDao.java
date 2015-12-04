@@ -21,7 +21,7 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectStorage{
 	}
 
 	@Override
-	public void updatePledged(Project project, int amount) {
+	public void updatePledged(Project project, double amount) {
 		// TODO implement writing to file
 		project.updatePledged(amount);
 	}
@@ -38,8 +38,6 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectStorage{
 				.collect(Collectors.toList());
 	}
 
-
-
 	@Override
 	public void addProject(Project project) {
 		// TODO Auto-generated method stub
@@ -49,7 +47,7 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectStorage{
 	@Override
 	public void userContributeToProject(User user, Double valueOf, String projectName) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -22,16 +22,16 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 	}
 
 	@Override
-	public void updatePledged(Project project, int amount) {
+	public void updatePledged(Project project, double amount) {
 		project.updatePledged(amount);
 	}
 
 	@Override
 	public double getPledged(String projectName) {
 		for (Project project : data) {
-		if(project.getProjectName() == projectName){
-			return project.getPledged();
-		}
+			if (project.getProjectName() == projectName) {
+				return project.getPledged();
+			}
 		}
 		throw new NoSuchElementException();
 	}
@@ -46,12 +46,12 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 	public void userContributeToProject(User user, Double valueOf, String projectName) {
 		boolean success = false;
 		for (Project project : data) {
-			if(project.getProjectName() == projectName){
-				project.setPledged((project.getPledged()+valueOf));
+			if (project.getProjectName() == projectName) {
+				project.setPledged((project.getPledged() + valueOf));
 				success = true;
 			}
 		}
-		if(!success){
+		if (!success) {
 			throw new NoSuchElementException();
 		}
 
@@ -61,6 +61,5 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectStora
 	public void addProject(Project project) {
 		super.add(project);
 	}
-
 
 }

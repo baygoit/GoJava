@@ -1,7 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-import javax.xml.bind.annotation.XmlAttribute;
-
 public class Quote{
 	private String	text;
 	private String	author;

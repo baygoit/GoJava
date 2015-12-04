@@ -33,6 +33,6 @@ public class CategoryDatabaseDao extends DatabaseDao<Category> implements Catego
 	@Override
 	public void add(Category element) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
