@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    <servlet>
+    <!--<servlet>
         <servlet-name>ControllerServlet</servlet-name>
         <servlet-class>servlets.ControllerServlet</servlet-class>
     </servlet>
@@ -13,6 +13,11 @@
         <servlet-name>ControllerServlet</servlet-name>
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>-->
+
     <!--<context-param>
         <description>User login</description>
         <param-name>username</param-name>

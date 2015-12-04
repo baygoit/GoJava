@@ -1,9 +1,10 @@
 package servlets;
 
-import dao.UserDAO;
 import model.User;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import services.UserService;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,30 +16,43 @@ import java.io.IOException;
 /**
  * Created by root on 04.11.15.
  */
+@WebServlet(name = "ControllerServlet", urlPatterns = {"/registration",
+                                                        "/login"})
 public class ControllerServlet extends HttpServlet {
+
+    ApplicationContext applicationContext =
+            new ClassPathXmlApplicationContext("transactionalContext.xml");
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        UserService userService = applicationContext.getBean("userService", UserService.class);
         String path = request.getServletPath();
-        HttpSession session = request.getSession();
-        UserDAO userDAO = new UserDAO();
+        String urlServlet = "/";
 
-        String name = request.getParameter("name");
-        String lastname = request.getParameter("lastname");
-        String password = request.getParameter("password");
-        String email = request.getParameter("email");
+        if (path.equals("/registration")) {
+            String name = request.getParameter("name");
+            String lastname = request.getParameter("lastname");
+            String password = request.getParameter("password");
+            String email = request.getParameter("email");
 
+            userService.registerUser(new User(name, password, lastname, email));
 
-        session.setAttribute("name", name);
-        session.setAttribute("lastname", lastname);
-        session.setAttribute("email", email);
-
-        User user = new User(1003, name, password, lastname, email);
-
-        if(userDAO.create(user)) {
-            response.sendRedirect("/index.jsp");
+            urlServlet = "/login";
         }
+
+        else if (path.equals("/login")) {
+            /*HttpSession httpSession = request.getSession();
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            User user = userService.login(email, password);
+            httpSession.setAttribute("user", user);
+
+            urlServlet = "/";*/
+        }
+
+        System.out.println(urlServlet + "WAS VISITED DOPOST");
+
+        response.sendRedirect(urlServlet);
 
     }
 
@@ -46,18 +60,19 @@ public class ControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String path = request.getServletPath();
-        HttpSession session = request.getSession();
+        HttpSession httpSession = request.getSession();
 
         if (path.equals("/registration")) {
             //TODO:
-
-
-            //request.setAttribute("name", name);
         }
-        System.out.println("SERVLET IS WORKING");
+
+        else if (path.equals("/")) {
+            User user = (User) httpSession.getAttribute("user");
+            httpSession.setAttribute("name", "NAME");
+        }
 
         String url = "/WEB-INF/view" + path + ".jsp";
-        System.out.println(url);
+        System.out.println(url + "WAS VISITED DOGET");
 
         request.getRequestDispatcher(url).forward(request, response);
 
