@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava7.kickstarter.config.DataSource;
+import ua.com.goit.gojava7.kickstarter.config.HTML;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
 import ua.com.goit.gojava7.kickstarter.dao.storage.ProjectStorage;
@@ -37,28 +38,30 @@ public class ProjectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("<html><head><title>Categories</title></head><body>");
-	String projectName = request.getParameter("name");
+		stringBuilder.append(HTML.HTML_HEAD_TITLE + " <strong>Categories</strong> "  + HTML.TITLE_HEAD_BODY);
+		stringBuilder.append(HTML.HOME_LINK);
+			String projectName = request.getParameter("name");
 		Project project = projectStorage.getProjectByName(projectName);
-		stringBuilder.append("Project: " + project.getProjectName() + "   |  Category: "
+		stringBuilder.append("<br>Project: " + project.getProjectName() + "   |  Category: "
 				+ project.getCategoryName());
-		stringBuilder.append(project.getProjectEndTime());
-		stringBuilder.append("[ " + project.getProjectDescription() + " ]");
-		stringBuilder.append("History: " + ConsolePrinter.getBlankStringIfNull(project.getProjectHistory()));
-		stringBuilder.append("Demo: " +  ConsolePrinter.getBlankStringIfNull(project.getDemoLink()));
-		stringBuilder.append("Funded: " + project.getFundedPercentage() + " | Pledged: $"
+		stringBuilder.append("<br>ETA: " + project.getProjectEndTime());
+		stringBuilder.append("<br>[ " + project.getProjectDescription() + " ]");
+		stringBuilder.append("<br>History: " + ConsolePrinter.getBlankStringIfNull(project.getProjectHistory()));
+		stringBuilder.append("<br>Demo: " +  ConsolePrinter.getBlankStringIfNull(project.getDemoLink()));
+		stringBuilder.append("<br>Funded: " + project.getFundedPercentage() + " | Pledged: $"
 				+ project.getPledged());
-		stringBuilder.append("Donate bonuses:");
+		stringBuilder.append("<br>Donate bonuses:");
 		project.getPaymentBonus().getBonuses().forEach((money, bonus) -> {
-			stringBuilder.append(money + "$ - " + bonus);
+			stringBuilder.append("<br>" + money + "$ - " + bonus);
 		});
-		stringBuilder.append("Questions and Answers:");
+		stringBuilder.append("<br>Questions and Answers:");
 		project.getQuestionsAndAnswers().forEach((q, a) -> {
-			stringBuilder.append("Q: " + q);
-			stringBuilder.append("A: " + a);
-			stringBuilder.append("-------------------------------------");
+			stringBuilder.append("<br>Q: " + q);
+			stringBuilder.append("<br>A: " + a);
+			stringBuilder.append("<br>-------------------------------------");
 		});
-		stringBuilder.append("</body></html>");
+		
+		stringBuilder.append(HTML.BODY_HTML_CLOSE);
 		response.getWriter().append(stringBuilder);
 
 	}
