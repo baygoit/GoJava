@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+          <groupId>com.google.code.plsqlmaven</groupId>
+          <artifactId>plsql-maven-webapp</artifactId>
+          <version>1.1</version>
+  </parent>
+
+  <groupId>ua.com.goit.gojava7.kickstarter_maven</groupId>
+  <artifactId>kickstarter_maven</artifactId>
+  <version>1.0</version>
+  <packaging>war</packaging>
+
+  <name>Sample PL/SQL webapp</name>
+
+        <dependencies>
+                <dependency>
+                        <groupId>com.google.code.plsqlgateway</groupId>
+                        <artifactId>plsqlgateway-core</artifactId>
+                </dependency>
+
+                <dependency>
+                        <groupId>com.google.code.eforceconfig</groupId>
+                        <artifactId>eforceconfig-core</artifactId>
+                </dependency>
+
+                <dependency>
+                        <groupId>com.google.code.eforceconfig</groupId>
+                        <artifactId>eforceconfig-servlet</artifactId>
+                </dependency>
+
+                <dependency>
+                        <groupId>com.google.code.plsqlmaven</groupId>
+                        <artifactId>plsql-webapp-deployer</artifactId>
+                </dependency>
+				
+				<dependency>
+					<groupId>c3p0</groupId>
+					<artifactId>c3p0</artifactId>
+					<version>0.9.1.2</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>mysql</groupId>
+					<artifactId>mysql-connector-java</artifactId>
+					<version>5.1.37</version>
+				</dependency>
+				
+				<dependency>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-all</artifactId>
+					<version>1.9.5</version>
+				</dependency>
+        </dependencies>
+  <build>
+    <finalName>kickstarter_maven</finalName>
+    <plugins>
+      <plugin>
+        <groupId>com.google.code.plsqlmaven</groupId>
+        <artifactId>plsql-maven-plugin</artifactId>
+        <version>1.1</version>
+        <configuration>
+            <defaultPage>home</defaultPage>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>
