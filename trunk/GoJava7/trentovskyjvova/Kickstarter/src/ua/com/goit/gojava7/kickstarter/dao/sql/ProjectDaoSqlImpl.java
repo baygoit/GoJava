@@ -22,22 +22,26 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 	@Override
 	public List<Project> getProjects(int categoryId) {
 		List<Project> projects = new ArrayList<>();
-		Connection connection = daoProvider.open();
-		
-		try (PreparedStatement ps = connection
-				.prepareStatement("SELECT id, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE categoryId ="
-						+ categoryId);
-				ResultSet rs = ps.executeQuery()) {
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+		try {
+			conn = daoProvider.getConnection();
+			stmt = conn.prepareStatement(
+					"SELECT id, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE categoryId ="
+							+ categoryId);
+			rset = stmt.executeQuery();
 
 			Project project;
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				int daysToGo = rs.getInt("daysToGo");
-				String description = rs.getString("description");
-				int goal = rs.getInt("goal");
-				String owner = rs.getString("owner");
-				String linkVideo = rs.getString("videoUrl");
+			while (rset.next()) {
+				int id = rset.getInt("id");
+				String name = rset.getString("name");
+				int daysToGo = rset.getInt("daysToGo");
+				String description = rset.getString("description");
+				int goal = rset.getInt("goal");
+				String owner = rset.getString("owner");
+				String linkVideo = rset.getString("videoUrl");
 
 				project = new Project(name, id);
 				project.setCategoryId(categoryId);
@@ -50,9 +54,25 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 				projects.add(project);
 			}
 		} catch (SQLException e) {
-			getProjects(categoryId);
-			//throw new IODatabaseException("Problem with database", e);
+			throw new IODatabaseException("Problem with database", e);
+		} finally {
+			try {
+				if (rset != null)
+					rset.close();
+			} catch (Exception e) {
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
 		}
+
 		return projects;
 	}
 
@@ -69,6 +89,61 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 	@Override
 	public int size(int categoryId) {
 		return getProjects(categoryId).size();
+	}
+
+	@Override
+	public Project getProject(int projectId) {
+		Project project = null;
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+		try {
+			conn = daoProvider.getConnection();
+			stmt = conn.prepareStatement(
+					"SELECT categoryId, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE id ="
+							+ projectId);
+			rset = stmt.executeQuery();
+
+			if (rset.next()) {
+				int categoryId = rset.getInt("categoryId");
+				String name = rset.getString("name");
+				int daysToGo = rset.getInt("daysToGo");
+				String description = rset.getString("description");
+				int goal = rset.getInt("goal");
+				String owner = rset.getString("owner");
+				String linkVideo = rset.getString("videoUrl");
+
+				project = new Project(name, projectId);
+				project.setCategoryId(categoryId);
+				project.setDaysToGo(daysToGo);
+				project.setDescription(description);
+				project.setGoal(goal);
+				project.setOwner(owner);
+				project.setLinkVideo(linkVideo);
+
+			}
+		} catch (SQLException e) {
+			throw new IODatabaseException("Problem with database", e);
+		} finally {
+			try {
+				if (rset != null)
+					rset.close();
+			} catch (Exception e) {
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+
+		return project;
 	}
 
 }

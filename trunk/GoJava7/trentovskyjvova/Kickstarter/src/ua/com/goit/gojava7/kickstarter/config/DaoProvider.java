@@ -1,10 +1,20 @@
 package ua.com.goit.gojava7.kickstarter.config;
 
+import javax.sql.DataSource;
+
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.util.Properties;
 import java.util.Random;
+import java.sql.SQLException;
+
+import org.apache.commons.pool2.ObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.apache.commons.dbcp2.ConnectionFactory;
+import org.apache.commons.dbcp2.PoolableConnection;
+import org.apache.commons.dbcp2.PoolingDataSource;
+import org.apache.commons.dbcp2.PoolableConnectionFactory;
+import org.apache.commons.dbcp2.DriverManagerConnectionFactory;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
@@ -30,6 +40,7 @@ import ua.com.goit.gojava7.kickstarter.dao.sql.ProjectDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.dao.sql.QuestionDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.dao.sql.QuoteDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.dao.sql.RewardDaoSqlImpl;
+import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
 public class DaoProvider {
 	private static final File QUOTES_FILE = new File("./quotes.csv");
@@ -39,70 +50,79 @@ public class DaoProvider {
 	private static final File QUESTIONS_FILE = new File("./questions.csv");
 	private static final File PAYMENTS_FILE = new File("./payments.csv");
 
-	private DataSourceTypes dataSource;
+	private DataSourceTypes dataSourceType;
 
-	private Connection connection = null;
-
-	public DaoProvider(DataSourceTypes dataSource) {
+	private DataSource dataSource;
+	
+	public DaoProvider(DataSourceTypes dataSourceType) {
+		this.dataSourceType = dataSourceType;
+	}
+	
+	public Connection getConnection() {
+		try {
+			return dataSource.getConnection();
+		} catch (SQLException e) {
+			throw new IllegalStateException("Cannot open connection. " + e.getMessage(), e);
+		} 
+	}
+	
+	public DataSourceTypes getDataSourceType() {
+		return dataSourceType;
+	}
+	
+	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
-	public DataSourceTypes getDataSource() {
-		return dataSource;
+	public void setDataSourceType(DataSourceTypes dataSourceType) {
+		this.dataSourceType = dataSourceType;
 	}
 
-	public void setDataSource(DataSourceTypes dataSource) {
-		this.dataSource = dataSource;
-	}
+	public void init() {
 
-	public Connection open() {
-		if (dataSource == DataSourceTypes.MYSQL) {
+		if (dataSourceType == DataSourceTypes.MYSQL) {
 			try {
-				if (connection == null || connection.isClosed()) {
-					connection = DriverManager
-							.getConnection("jdbc:mysql://localhost:3306/kickstarter?user=user&password=Qwerty123");
-				}
-			} catch (SQLException e) {
-				throw new IllegalStateException("Cannot open connection. " + e.getMessage(), e);
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException ex) {
+				throw new IODatabaseException("Error loading mysql driver: ", ex);
+
 			}
-		} else if (dataSource == DataSourceTypes.POSTGRES) {
+			setDataSource(setupDataSource("jdbc:mysql://localhost:3306/kickstarter"));
+		} else if (dataSourceType == DataSourceTypes.POSTGRES) {
 			try {
-				if (connection == null || connection.isClosed()) {
-					connection = DriverManager
-							.getConnection("jdbc:postgresql://localhost/kickstarter?user=user&password=Qwerty123&tcpKeepAlive=true");
-				}
-			} catch (SQLException e) {
-				throw new IllegalStateException("Cannot open connection. " + e.getMessage(), e);
+				Class.forName("org.postgresql.Driver");
+			} catch (ClassNotFoundException ex) {
+				throw new IODatabaseException("Error loading Postgres driver: ", ex);
+
 			}
+			setDataSource(setupDataSource("jdbc:postgresql://localhost:5432/kickstarter"));
 		}
-		return connection;
+
 	}
 
 	public void close() {
-		if (dataSource == DataSourceTypes.MYSQL || dataSource == DataSourceTypes.POSTGRES) {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				throw new IllegalStateException("Cannot close connection " + connection + ". " + e.getMessage(), e);
-			}
-		}
+		/*
+		 * if (dataSourceType == DataSourceTypes.MYSQL || dataSourceType ==
+		 * DataSourceTypes.POSTGRES) { try { if (connection != null) {
+		 * connection.close(); } } catch (SQLException e) { throw new
+		 * IllegalStateException("Cannot close connection " + connection + ". "
+		 * + e.getMessage(), e); } }
+		 */
 	}
 
 	public QuoteDao getQuoteReader() {
 		QuoteDao quoteDao;
 
-		if (dataSource == DataSourceTypes.MYSQL) {
+		if (dataSourceType == DataSourceTypes.MYSQL) {
 			quoteDao = new QuoteDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.POSTGRES) {
+		} else if (dataSourceType == DataSourceTypes.POSTGRES) {
 			quoteDao = new QuoteDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.MEMORY) {
+		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			quoteDao = new QuoteDaoMemoryImpl(new Random());
-		} else if (dataSource == DataSourceTypes.FILE) {
+		} else if (dataSourceType == DataSourceTypes.FILE) {
 			quoteDao = new QuoteDaoFileImpl(QUOTES_FILE, new Random());
 		} else {
-			throw new IllegalArgumentException("Unknown data source " + dataSource);
+			throw new IllegalArgumentException("Unknown data source " + dataSourceType);
 		}
 		return quoteDao;
 	}
@@ -110,16 +130,16 @@ public class DaoProvider {
 	public CategoryDao getCategoryReader() {
 		CategoryDao categoryDao;
 
-		if (dataSource == DataSourceTypes.MYSQL) {
+		if (dataSourceType == DataSourceTypes.MYSQL) {
 			categoryDao = new CategoryDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.POSTGRES) {
+		} else if (dataSourceType == DataSourceTypes.POSTGRES) {
 			categoryDao = new CategoryDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.MEMORY) {
+		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			categoryDao = new CategoryDaoMemoryImpl();
-		} else if (dataSource == DataSourceTypes.FILE) {
+		} else if (dataSourceType == DataSourceTypes.FILE) {
 			categoryDao = new CategoryDaoFileImpl(CATEGORIES_FILE);
 		} else {
-			throw new IllegalArgumentException("Unknown data source " + dataSource);
+			throw new IllegalArgumentException("Unknown data source " + dataSourceType);
 		}
 		return categoryDao;
 	}
@@ -127,16 +147,16 @@ public class DaoProvider {
 	public ProjectDao getProjectReader() {
 		ProjectDao projectDao;
 
-		if (dataSource == DataSourceTypes.MYSQL) {
+		if (dataSourceType == DataSourceTypes.MYSQL) {
 			projectDao = new ProjectDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.POSTGRES) {
+		} else if (dataSourceType == DataSourceTypes.POSTGRES) {
 			projectDao = new ProjectDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.MEMORY) {
+		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			projectDao = new ProjectDaoMemoryImpl();
-		} else if (dataSource == DataSourceTypes.FILE) {
+		} else if (dataSourceType == DataSourceTypes.FILE) {
 			projectDao = new ProjectDaoFileImpl(PROJECTS_FILE);
 		} else {
-			throw new IllegalArgumentException("Unknown data source " + dataSource);
+			throw new IllegalArgumentException("Unknown data source " + dataSourceType);
 		}
 		return projectDao;
 	}
@@ -144,16 +164,16 @@ public class DaoProvider {
 	public RewardDao getRewardsReader() {
 		RewardDao rewardDao;
 
-		if (dataSource == DataSourceTypes.MYSQL) {
+		if (dataSourceType == DataSourceTypes.MYSQL) {
 			rewardDao = new RewardDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.POSTGRES) {
+		} else if (dataSourceType == DataSourceTypes.POSTGRES) {
 			rewardDao = new RewardDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.MEMORY) {
+		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			rewardDao = new RewardDaoMemoryImpl();
-		} else if (dataSource == DataSourceTypes.FILE) {
+		} else if (dataSourceType == DataSourceTypes.FILE) {
 			rewardDao = new RewardDaoFileImpl(REWARDS_FILE);
 		} else {
-			throw new IllegalArgumentException("Unknown data source " + dataSource);
+			throw new IllegalArgumentException("Unknown data source " + dataSourceType);
 		}
 		return rewardDao;
 	}
@@ -161,16 +181,16 @@ public class DaoProvider {
 	public QuestionDao getQuestionReader() {
 		QuestionDao questionDao;
 
-		if (dataSource == DataSourceTypes.MYSQL) {
+		if (dataSourceType == DataSourceTypes.MYSQL) {
 			questionDao = new QuestionDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.POSTGRES) {
+		} else if (dataSourceType == DataSourceTypes.POSTGRES) {
 			questionDao = new QuestionDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.MEMORY) {
+		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			questionDao = new QuestionDaoMemoryImpl();
-		} else if (dataSource == DataSourceTypes.FILE) {
+		} else if (dataSourceType == DataSourceTypes.FILE) {
 			questionDao = new QuestionDaoFileImpl(QUESTIONS_FILE);
 		} else {
-			throw new IllegalArgumentException("Unknown data source " + dataSource);
+			throw new IllegalArgumentException("Unknown data source " + dataSourceType);
 		}
 		return questionDao;
 	}
@@ -178,18 +198,38 @@ public class DaoProvider {
 	public PaymentDao getPaymentReader() {
 		PaymentDao paymentDao;
 
-		if (dataSource == DataSourceTypes.MYSQL) {
+		if (dataSourceType == DataSourceTypes.MYSQL) {
 			paymentDao = new PaymentDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.POSTGRES) {
+		} else if (dataSourceType == DataSourceTypes.POSTGRES) {
 			paymentDao = new PaymentDaoSqlImpl(this);
-		} else if (dataSource == DataSourceTypes.MEMORY) {
+		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			paymentDao = new PaymentDaoMemoryImpl();
-		} else if (dataSource == DataSourceTypes.FILE) {
+		} else if (dataSourceType == DataSourceTypes.FILE) {
 			paymentDao = new PaymentDaoFileImpl(PAYMENTS_FILE);
 		} else {
-			throw new IllegalArgumentException("Unknown data source " + dataSource);
+			throw new IllegalArgumentException("Unknown data source " + dataSourceType);
 		}
 		return paymentDao;
+	}
+
+	public DataSource setupDataSource(String connectURI) {
+
+		Properties props = new Properties();
+		props.setProperty("user", "user");
+		props.setProperty("password", "Qwerty123");
+		props.setProperty("initialSize", "10");
+		
+		ConnectionFactory connectionFactory = new DriverManagerConnectionFactory(connectURI, props);
+
+		PoolableConnectionFactory poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory, null);
+
+		ObjectPool<PoolableConnection> connectionPool = new GenericObjectPool<>(poolableConnectionFactory);
+
+		poolableConnectionFactory.setPool(connectionPool);
+
+		PoolingDataSource<PoolableConnection> dataSource = new PoolingDataSource<>(connectionPool);
+
+		return dataSource;
 	}
 
 }

@@ -60,4 +60,11 @@ public class PaymentDaoFileImplTest {
 		assertThat(payments.get(0).getCardNumber(), is("2342 3434 2342 3424"));
  
 	}
+	
+	@Test
+	public void testGetPledged(){
+		testPaymentsFile = new File("./resources/payments.csv");
+		paymentDaoFileImpl = new PaymentDaoFileImpl(testPaymentsFile);
+		assertThat(paymentDaoFileImpl.getPledged(12), is(30));
+	}
 }

@@ -48,5 +48,12 @@ public class RewardDaoFileImplTest {
 		rewardDaoFileImpl = new RewardDaoFileImpl(testRewardsFile);
 		assertThat(rewardDaoFileImpl.size(1), is(3));
 	}
-
+	
+	@Test
+	public void testGetRewardById() {
+		testRewardsFile = new File("./resources/rewards.csv");
+		rewardDaoFileImpl = new RewardDaoFileImpl(testRewardsFile);
+		assertThat(rewardDaoFileImpl.getReward(2).getId(),
+				is(2));
+	}
 }

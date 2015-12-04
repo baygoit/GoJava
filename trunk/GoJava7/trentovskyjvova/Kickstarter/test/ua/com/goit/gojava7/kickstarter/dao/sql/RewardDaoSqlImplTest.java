@@ -34,7 +34,7 @@ public class RewardDaoSqlImplTest {
 	public void testGetReward() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.open()).thenReturn(connection);
+		when(daoProvider.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -49,7 +49,7 @@ public class RewardDaoSqlImplTest {
 	public void testGetRewards() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.open()).thenReturn(connection);
+		when(daoProvider.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -64,7 +64,7 @@ public class RewardDaoSqlImplTest {
 	public void testSize() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.open()).thenReturn(connection);
+		when(daoProvider.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -74,4 +74,20 @@ public class RewardDaoSqlImplTest {
 
 		assertThat(size, is(1));
 	}
+	
+	@Test
+	public void testGetRewardById() throws SQLException {
+		PreparedStatement ps = mock(PreparedStatement.class);
+		ResultSet rs = mock(ResultSet.class);
+		when(daoProvider.getConnection()).thenReturn(connection);
+		when(connection.prepareStatement(anyString())).thenReturn(ps);
+		when(ps.executeQuery()).thenReturn(rs);
+		when(rs.next()).thenReturn(true, false);
+		when(rs.getString("benefit")).thenReturn("some reward benefit");
+		
+		Reward reward = rewardDaoMySqlImpl.getReward(12);
+
+		assertThat(reward.getId(), is(12));
+	}
+	
 }

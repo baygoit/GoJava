@@ -12,11 +12,11 @@ public class MemoryProjectDaoImpl implements ProjectDaoInterface {
 
 	ProjectDB pdb = new ProjectDB();
 
-	public List<Project> getAll(Category category) {
+	public List<Project> getAll(String categoryTitle) {
 		List<Project> allProjects = ProjectDB.allProjectsList;
 		List<Project> categoryProjects = new ArrayList<>();
 		for (Project p : allProjects) {
-			if (p.getCategoryName().equals(category.getTitle())) {
+			if (p.getCategoryName().equals(categoryTitle)) {
 				categoryProjects.add(p);
 			}
 		}

@@ -18,28 +18,35 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 	public CategoryDaoSqlImpl(DaoProvider daoProvider) {
 		this.daoProvider = daoProvider;
 	}
-	
+
 	@Override
 	public List<Category> getCategories() {
 		List<Category> categories = new ArrayList<>();
-		Connection connection = daoProvider.open();
 		
-		try (PreparedStatement ps = connection
-				.prepareStatement("SELECT id, name FROM category");
-				ResultSet rs = ps.executeQuery()) {
-			
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+
+		try {
+			conn = daoProvider.getConnection();
+			stmt = conn.prepareStatement("SELECT id, name FROM category");
+			rset = stmt.executeQuery();
+
 			Category category;
-			while (rs.next()) {			
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
+			while (rset.next()) {
+				int id = rset.getInt("id");
+				String name = rset.getString("name");
 				category = new Category();
 				category.setId(id);
 				category.setName(name);
 				categories.add(category);
 			}
 		} catch (SQLException e) {
-			getCategories();
-			//throw new IODatabaseException("Problem with database", e);
+			throw new IODatabaseException("Problem with database", e);
+		} finally {
+            try { if (rset != null) rset.close(); } catch(Exception e) { }
+            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
+            try { if (conn != null) conn.close(); } catch(Exception e) { }
 		}
 		return categories;
 	}
@@ -47,24 +54,30 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 	@Override
 	public Category getCategory(int id) {
 		Category category = null;
-		Connection connection = daoProvider.open();
 		
-		try (PreparedStatement ps = connection
-				.prepareStatement("SELECT name FROM category WHERE id = " + id);
-				ResultSet rs = ps.executeQuery()) {
-			
-			
-			while (rs.next()) {			
-				
-				String name = rs.getString("name");
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
+
+		try {
+			conn = daoProvider.getConnection();
+			stmt = conn.prepareStatement("SELECT name FROM category WHERE id = " + id);
+			rset = stmt.executeQuery();
+
+			while (rset.next()) {
+
+				String name = rset.getString("name");
 				category = new Category();
 				category.setId(id);
 				category.setName(name);
-				
+
 			}
 		} catch (SQLException e) {
-			getCategory(id);
-			//throw new IODatabaseException("Problem with database", e);
+			throw new IODatabaseException("Problem with database", e);
+		} finally {
+			try { if (rset != null) rset.close(); } catch(Exception e) { }
+			try { if (stmt != null) stmt.close(); } catch(Exception e) { }
+			try { if (conn != null) conn.close(); } catch(Exception e) { }
 		}
 		return category;
 	}
@@ -72,22 +85,27 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 	@Override
 	public int size() {
 		int size = 0;
-		Connection connection = daoProvider.open();
 		
-		try (PreparedStatement ps = connection
-				.prepareStatement("SELECT COUNT(*) size FROM category");
-				ResultSet rs = ps.executeQuery()) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rset = null;
 
-			while (rs.next()) {
-				
-				size = rs.getInt("size");
-				
-			}
+		try {
+			conn = daoProvider.getConnection();
+			stmt = conn.prepareStatement("SELECT COUNT(*) size FROM category");
+			rset = stmt.executeQuery();
+
+			while (rset.next()) {
+				size = rset.getInt("size");
+			}	
 		} catch (SQLException e) {
-			size();
-			//throw new IODatabaseException("Problem with database", e);
+			throw new IODatabaseException("Problem with database", e);
+		} finally {
+			try { if (rset != null) rset.close(); } catch(Exception e) { }
+			try { if (stmt != null) stmt.close(); } catch(Exception e) { }
+			try { if (conn != null) conn.close(); } catch(Exception e) { }
 		}
-		
+
 		return size;
 	}
 
