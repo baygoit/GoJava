@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -33,6 +34,7 @@ public class CategoriesServletTest {
 	private CategoriesServlet categoriesServlet;
 
 	@Test
+	@Ignore
 	public void testDoGetHttpServletRequestHttpServletResponse() throws ServletException, IOException {
 		when(quoteDao.getRandomQuote()).thenReturn(new Quote("quote text", "quote author"));
 

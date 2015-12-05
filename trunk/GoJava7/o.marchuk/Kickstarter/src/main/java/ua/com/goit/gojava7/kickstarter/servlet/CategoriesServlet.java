@@ -33,7 +33,7 @@ public class CategoriesServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Quote quote = quoteDao.getRandomQuote();
-		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Categoriese</title></head><body>");
+		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Categories</title></head><body>");
 		stringBuilder.append(quote.getText() + "  (c) " + quote.getAuthor());
 		stringBuilder.append("</br>");
 
@@ -43,7 +43,10 @@ public class CategoriesServlet extends HttpServlet {
 		}
 
 		stringBuilder.append("</body></html>");
-		resp.getWriter().append(stringBuilder.toString());
+		
+		req.setAttribute("quote", quote);
+		req.getRequestDispatcher("/jsp/categories.jsp").forward(req, resp);
+		//resp.getWriter().append(stringBuilder.toString());
 	}
 
 	@Override
