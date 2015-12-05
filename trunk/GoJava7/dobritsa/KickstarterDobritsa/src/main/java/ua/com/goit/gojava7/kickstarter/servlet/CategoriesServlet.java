@@ -2,6 +2,7 @@ package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,9 +33,13 @@ public class CategoriesServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+	
+		response.setContentType("text/html");
+
 		Quote quote = quoteDao.get(1);
 
-		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Categories</title></head><body>");
+		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Categories</title></head><body bgcolor=\"#fdf5e6\">");
 		stringBuilder.append(quote.getText() + "  (c) " + quote.getAuthor() + "</br></br>");
 
 		for (Category category : categoryDao.getAll()) {
@@ -44,6 +49,6 @@ public class CategoriesServlet extends HttpServlet {
 
 		stringBuilder.append("</body></html>");
 		response.getWriter().append(stringBuilder.toString());
-	}
+	} 
 
 }
