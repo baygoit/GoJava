@@ -13,8 +13,7 @@ public class Validator {
     public boolean isValidData(User user) {
         return validateUserData(user.getName()) &&
                 validateUserData(user.getSurname()) &&
-                validateEmail(user.getEmail()) &&
-                validateUserData(user.getCity());
+                validateEmail(user.getEmail());
     }
     private boolean isAlpha(String name) {
         char[] chars = name.toCharArray();
