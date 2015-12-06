@@ -15,13 +15,16 @@ public class ContextInitializer implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		ServletContext ctx = sce.getServletContext();
+		
+		if (sce.getServletContext().getAttribute(STORAGE_FACTORY) == null) {
+			ServletContext ctx = sce.getServletContext();
 
-		StorageFactory factory = new StorageFactory(DataType.POSTGRE,
-				getClass().getClassLoader().getResourceAsStream("config.properties"));
+			StorageFactory factory = new StorageFactory(DataType.POSTGRE,
+					getClass().getClassLoader().getResourceAsStream("config.properties"));
 
-		ctx.setAttribute(STORAGE_FACTORY, factory);
-		System.out.println("StorageFactory initialized successfully.");
+			ctx.setAttribute(STORAGE_FACTORY, factory);
+			System.out.println("StorageFactory initialized successfully.");
+		}
 
 	}
 

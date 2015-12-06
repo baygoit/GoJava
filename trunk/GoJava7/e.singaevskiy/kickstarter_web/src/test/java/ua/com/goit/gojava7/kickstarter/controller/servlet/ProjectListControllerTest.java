@@ -1,8 +1,8 @@
 package ua.com.goit.gojava7.kickstarter.controller.servlet;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,7 +33,7 @@ public class ProjectListControllerTest {
     private CategoryDAO categoryDAO;
     
     @Mock
-    private PrintWriter writer;   
+    private RequestDispatcher dispatcher;  
     
     @Mock
     private HttpServletRequest req;
@@ -43,13 +43,16 @@ public class ProjectListControllerTest {
     
     @InjectMocks
     private ProjectListController servlet;
+
+	private Category cathegory;
     
     @Before
     public void setUp() throws Exception {
-        Mockito.when(resp.getWriter()).thenReturn(writer);
+    	Mockito.when(req.getRequestDispatcher(Mockito.anyString())).thenReturn(dispatcher);
         Mockito.when(req.getParameter("id")).thenReturn("1");
         Mockito.when(paymentDAO.getSum(Mockito.anyInt())).thenReturn(42L);
-        Mockito.when(categoryDAO.get(Mockito.anyInt())).thenReturn(new Category(1, "cat1"));     
+        cathegory = new Category(1, "cat1");
+		Mockito.when(categoryDAO.get(Mockito.anyInt())).thenReturn(cathegory);     
     }
 
     @Test
@@ -61,8 +64,11 @@ public class ProjectListControllerTest {
         Mockito.when(projectDAO.getByCategory(Mockito.anyInt())).thenReturn(pList);
         
         servlet.doGet(req, resp);
-        for (Project project : pList) {
-            Mockito.verify(writer).print(Mockito.contains(project.getName()));
-        }       
+        
+        Mockito.verify(req).setAttribute("category", cathegory);
+        Mockito.verify(req).setAttribute("projects", pList);
+        Mockito.verify(req).getRequestDispatcher("view/ProjectList.jsp");
+        Mockito.verify(dispatcher).forward(req, resp);
+     
     }
 }

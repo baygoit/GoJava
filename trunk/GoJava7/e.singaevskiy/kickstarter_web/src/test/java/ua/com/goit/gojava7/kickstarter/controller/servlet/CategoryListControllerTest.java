@@ -1,8 +1,8 @@
 package ua.com.goit.gojava7.kickstarter.controller.servlet;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,26 +23,26 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 public class CategoryListControllerTest {
 
     @Mock
-    QuoteDAO quoteDAO;
+    private QuoteDAO quoteDAO;
     
     @Mock
-    CategoryDAO categoryDAO;
+    private CategoryDAO categoryDAO;
     
     @Mock
-    PrintWriter writer;   
+    private RequestDispatcher dispatcher;  
     
     @Mock
-    HttpServletRequest req;
+    private HttpServletRequest req;
     
     @Mock
-    HttpServletResponse resp;
+    private HttpServletResponse resp;
     
     @InjectMocks
-    CategoryListController servlet;
+    private CategoryListController servlet;
     
     @Before
     public void setUp() throws Exception {
-        Mockito.when(resp.getWriter()).thenReturn(writer);
+    	Mockito.when(req.getRequestDispatcher(Mockito.anyString())).thenReturn(dispatcher);
     }
 
     @Test
@@ -58,9 +58,9 @@ public class CategoryListControllerTest {
         Mockito.when(categoryDAO.getAll()).thenReturn(cList);
         
         servlet.doGet(req, resp);
-        Mockito.verify(writer).print(Mockito.contains(quote.getText()));
-        for (Category category : cList) {
-            Mockito.verify(writer).print(Mockito.contains(category.getName()));
-        }       
+        Mockito.verify(req).getRequestDispatcher("view/Categories.jsp");
+        Mockito.verify(req).setAttribute("quote", quote);
+        Mockito.verify(req).setAttribute("categories", cList);
+        Mockito.verify(dispatcher).forward(req, resp);       
     }
 }
