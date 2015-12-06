@@ -16,24 +16,20 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDAO;
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProjectListControllerTest {
+public class RewardSelectionControllerTest {
 
     @Mock
-    private PaymentDAO paymentDAO;
+    private RewardDAO rewardDAO;
     
     @Mock
     private ProjectDAO projectDAO;
-    
-    @Mock
-    private CategoryDAO categoryDAO;
     
     @Mock
     private RequestDispatcher dispatcher;  
@@ -48,34 +44,43 @@ public class ProjectListControllerTest {
     private ServletConfig config;
     
     @InjectMocks
-    private ProjectListController servlet;
+    private RewardSelectionController servlet;
 
-	private Category cathegory;
+	private String projectId;
     
     @Before
     public void setUp() throws Exception {
+    	projectId = "1";
+		Mockito.when(req.getParameter("id")).thenReturn(projectId);
     	Mockito.when(req.getRequestDispatcher(Mockito.anyString())).thenReturn(dispatcher);
-        Mockito.when(req.getParameter("id")).thenReturn("1");
-        Mockito.when(paymentDAO.getSum(Mockito.anyInt())).thenReturn(42L);
-        cathegory = new Category(1, "cat1");
-		Mockito.when(categoryDAO.get(Mockito.anyInt())).thenReturn(cathegory);     
     }
 
     @Test
-    public void testDoGetHttpServletRequestHttpServletResponse() throws Exception {          
+    public void testDoGetHttpServletRequestHttpServletResponse() throws Exception {   
+        ArrayList<Reward> rList = new ArrayList<>();
+        rList.add(new Reward(1, 1, "q1", 11L));
+        rList.add(new Reward(2, 1, "q1", 22L));
+        Mockito.when(rewardDAO.getByProject(Mockito.anyInt())).thenReturn(rList);
         
-        ArrayList<Project> pList = new ArrayList<>();
-        pList.add(new Project(1, "p1", "a1", 1));
-        pList.add(new Project(2, "p2", "a2", 1));
-        Mockito.when(projectDAO.getByCategory(Mockito.anyInt())).thenReturn(pList);
+        Project project = new Project();
+		Mockito.when(projectDAO.get(Mockito.anyInt())).thenReturn(project);
         
         servlet.doGet(req, resp);
+        Mockito.verify(req).getRequestDispatcher("view/Rewards.jsp");
+        Mockito.verify(req).setAttribute("project", project);
+        Mockito.verify(req).setAttribute("rewards", rList);
+        Mockito.verify(dispatcher).forward(req, resp);       
+    }
+    
+    @Test
+    public void testDoGetNoRewards() throws Exception {   
+        Mockito.when(rewardDAO.getByProject(Mockito.anyInt())).thenReturn(new ArrayList<>());
+
+		Mockito.when(projectDAO.get(Mockito.anyInt())).thenReturn(new Project());
         
-        Mockito.verify(req).setAttribute("category", cathegory);
-        Mockito.verify(req).setAttribute("projects", pList);
-        Mockito.verify(req).getRequestDispatcher("view/ProjectList.jsp");
-        Mockito.verify(dispatcher).forward(req, resp);
-     
+        servlet.doGet(req, resp);
+        Mockito.verify(req).getRequestDispatcher("view/Payment.jsp?project=" + projectId);
+        Mockito.verify(dispatcher).forward(req, resp);       
     }
     
     @Test
@@ -87,7 +92,6 @@ public class ProjectListControllerTest {
     	
 		servlet.init();      	
     	Mockito.verify(storageFactory).getProjectDAO(); 
-    	Mockito.verify(storageFactory).getPaymentDAO(); 
-    	Mockito.verify(storageFactory).getCategoryDAO(); 
+    	Mockito.verify(storageFactory).getRewardDAO(); 
     }
 }
