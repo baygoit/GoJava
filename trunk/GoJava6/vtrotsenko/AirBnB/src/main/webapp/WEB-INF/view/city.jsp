@@ -7,9 +7,7 @@
     <body>
     <div class="login">
     	<h1>City</h1>
-        <form action="/city" method="get">
-
-        </form>
+    	SOME TEEXT CITY!
     </div>
     </body>
 </html>

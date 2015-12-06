@@ -6,7 +6,7 @@
 
     <!--<servlet>
         <servlet-name>ControllerServlet</servlet-name>
-        <servlet-class>servlets.ControllerServlet</servlet-class>
+        <servlet-class>com.controllerer.ControllerServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -29,6 +29,30 @@
         <param-name>password</param-name>
         <param-value>admin</param-value>
     </context-param>-->
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext*.xml</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value></param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <session-config>
         <session-timeout>
