@@ -24,7 +24,7 @@ public class RewardPostgreDAOTest {
 
     @Before
     public void setUp() throws Exception {
-        Properties properties = Utils.readProperties("./kicks-files/config.properties");
+        Properties properties = Utils.readProperties("./src/test/resources/storages/db/config.properties");
         JdbcDispatcher dispatcher = new JdbcDispatcher(
                 properties.getProperty("driver"),
                 properties.getProperty("url"),
@@ -32,8 +32,8 @@ public class RewardPostgreDAOTest {
                 properties.getProperty("password"));
         
         list = new ArrayList<>();
-        list.add(new Reward(1, 2, "r1", 113));
-        list.add(new Reward(2, 2, "r2", 44));
+        list.add(new Reward(1, 0, "r1", 113));
+        list.add(new Reward(2, 0, "r2", 44));
         
         dao = new RewardPostgreDAO(dispatcher);         
     }

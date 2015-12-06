@@ -1,29 +1,71 @@
 package model;
 
 import enums.ApartmentType;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
  * Created by root on 04.11.15.
  */
-public class Apartment extends Entity{
-    private LocalDate firstDayAvailable;
-    private LocalDate lastDayAvailable;
-    private ApartmentType apartmentType;
+@Entity
+@Table(name = "Apartment")
+public class Apartment extends AbstractEntity {
+
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name="id", nullable = false, unique = true)
+    private int id;
+
+    @Column(name="cityName")
+    private String cityName;
+
+    @Column(name = "apartmentType")
     private String sApartmentType;
+
+    @Column(name = "begin")
+    private LocalDate firstDayAvailable;
+
+    @Column(name = "end")
+    private LocalDate lastDayAvailable;
+
+    @Transient
+    private ApartmentType apartmentType;
+
+    @Column(name = "isAvailable")
     private boolean isAvailable;
+
+    @Column(name = "hostId")
     private int hostId;
 
-    public Apartment(int id, ApartmentType apartmentType,
-                     LocalDate firstDayAvailable, LocalDate lastDayAvailable, int hostId) {
-        super(id);
+    public Apartment(ApartmentType apartmentType,
+                     LocalDate firstDayAvailable, LocalDate lastDayAvailable) {
+
         this.isAvailable = true;
         this.apartmentType = apartmentType;
         this.sApartmentType = getsApartmentType();
         this.firstDayAvailable = firstDayAvailable;
         this.lastDayAvailable = lastDayAvailable;
-        this.hostId = hostId;
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public boolean isAvailable() {
@@ -96,5 +138,12 @@ public class Apartment extends Entity{
             isAvailable = true;
             firstDayAvailable = end;
         }
+    }
+
+    @Override
+    public String toString() {
+        return ("Apartment [id=" + this.getId() + ", city= " + this.getCityName() +
+                ", apartmentType=" + this.getsApartmentType() + ", begin=" + this.getFirstDayAvailable() +
+                ", end=" + this.getLastDayAvailable() + ", HostId= " + this.getHostId() +"]");
     }
 }

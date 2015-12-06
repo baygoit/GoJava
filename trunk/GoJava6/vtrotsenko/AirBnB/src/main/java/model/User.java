@@ -1,36 +1,70 @@
 package model;
 
 import enums.UserType;
-import observer.Observer;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by root on 04.11.15.
  */
-public class User extends Entity implements Observer {
+@Entity
+@Table(name = "User")
+public class User extends AbstractEntity {
 
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @Column(name="id", nullable = false, unique = true)
+    private int id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "lastname")
     private String lastname;
+
+    @Column(name = "email")
     private String email;
+
+    @Transient
     private String city;
+
+    @Column(name = "password")
     private String password;
+
+    @Transient
     private UserType userType;
+    @Transient
     private boolean isRegisteredAsClient;
+
+    @Column(name = "isHost")
     private boolean isRegisteredAsHost;
 
+    //TODO: Implement logic
+    @Transient
     private Set<Apartment> listOfApartments = new HashSet<Apartment>();
 
     //  constructor for CLIENT
     public User() {}
-    public User(Integer id, String name, String password, String lastname, String email) {
-        super(id);
+    public User(String name, String password, String lastname, String email) {
         this.name = name;
         this.password = password;
         this.lastname = lastname;
         this.email = email;
         this.isRegisteredAsHost = false;
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean isRegisteredAsHost() {
@@ -111,10 +145,6 @@ public class User extends Entity implements Observer {
 
     public void removeApartment(Integer idApartment) {
         listOfApartments.remove(idApartment);
-    }
-
-    public void update(String s) {
-        java.lang.System.out.println(s);
     }
 
     public Apartment getApartment(Integer idApartment) {

@@ -4,32 +4,51 @@ public class Payment {
 	private String cardOwner;
 	private long cardNumber;
 	private int rechargeAmount;
+	private int idPayment;
+	private int idParentProject;
 
 	public Payment() {
-		//default constructor
+		// default constructor
 	}
-	public Payment(String cardOwner, long cardNumber, int rechargeAmount) {
-		this.cardOwner = cardOwner;
-		this.cardNumber = cardNumber;
-		this.rechargeAmount = rechargeAmount;
-	}
-	public int getRechargeAmount(){
+
+	public int getRechargeAmount() {
 		return this.rechargeAmount;
 	}
-	public long getCardNumber(){
+
+	public long getCardNumber() {
 		return this.cardNumber;
 	}
-	public String getCardOwner(){
+
+	public String getCardOwner() {
 		return this.cardOwner;
 	}
+
+	public int getIdPayment() {
+		return this.idPayment;
+	}
+
+	public int getIdParentProject() {
+		return idParentProject;
+	}
+
 	public void setCardOwner(String cardOwner) {
 		this.cardOwner = cardOwner;
 	}
+
 	public void setCardNumber(long cardNumber) {
 		this.cardNumber = cardNumber;
 	}
+
 	public void setRechargeAmount(int rechargeAmount) {
 		this.rechargeAmount = rechargeAmount;
+	}
+
+	public void setIdPayment(int idPayment) {
+		this.idPayment = idPayment;
+	}
+
+	public void setIdParentProject(int idParentProject) {
+		this.idParentProject = idParentProject;
 	}
 
 }
