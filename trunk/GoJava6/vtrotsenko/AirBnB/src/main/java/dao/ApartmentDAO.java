@@ -1,25 +1,23 @@
 package dao;
 
-import jdbc.ConnectorDB;
 import model.Apartment;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Set;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by root on 04.11.15.
  */
 public class ApartmentDAO implements AbstractDAO<Integer, Apartment> {
-    public static final String SQL_SELECT_ALL_APARTMENTS = "SELECT * FROM Apartment";
-    public static final String SQL_INSERT = "INSERT INTO Apartment VALUES(?,?,?,?,?,?)";
 
-    private ConnectorDB connectorDB = new ConnectorDB();
-    private Connection connection = connectorDB.getConnection();
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public Set<Apartment> findAll() {
+    public List<Apartment> findAll() {
         return null;
     }
 
@@ -35,35 +33,10 @@ public class ApartmentDAO implements AbstractDAO<Integer, Apartment> {
         return false;
     }
 
-    public boolean create(Apartment entity) {
-        boolean flag = false;
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(SQL_INSERT);
-            preparedStatement.setInt(1, entity.getId());
-            preparedStatement.setString(2, entity.getsApartmentType());
-            preparedStatement.setDate(3, Date.valueOf(entity.getFirstDayAvailable()));
-            preparedStatement.setDate(4, Date.valueOf(entity.getLastDayAvailable()));
-            preparedStatement.setBoolean(5, entity.isAvailable());
-            preparedStatement.setInt(6, entity.getHostId());
-            preparedStatement.executeUpdate();
-
-            flag = true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                    connectorDB.closeConnection();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return flag;
+    @Transactional
+    public Apartment create(Apartment entity) {
+        entityManager.persist(entity);
+        return entity;
     }
 
     public Apartment update(Apartment entity) {

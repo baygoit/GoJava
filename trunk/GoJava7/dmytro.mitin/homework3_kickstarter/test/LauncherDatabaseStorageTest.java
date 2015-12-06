@@ -3,12 +3,14 @@ import org.junit.Before;
 import org.junit.Test;
 import ua.com.goit.gojava7.kickstarter.Launcher;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertThat;
-import static util.ConsoleMock.*;
+import static util.ConsoleMock.ConfigurableInputStream;
 
 public class LauncherDatabaseStorageTest {
     private PrintStream oldOut;

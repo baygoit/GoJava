@@ -25,5 +25,9 @@ public class Quote {
 	public String toString() {
 		return "Quote: " + text + "; Author: " + author;
 	}
-	
+
+	public boolean isEmpty() {
+		return text == null;
+	}
+
 }

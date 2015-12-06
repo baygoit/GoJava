@@ -11,14 +11,6 @@ import java.time.LocalDate;
  */
 public class Validation {
 
-    // TODO: upgrade validation of id
-    public static boolean isValidId(int id) {
-        if (id > 0) {
-            return true;
-        }
-        return false;
-    }
-
     public static boolean isValidUserType(UserType userType) {
 
         UserType[] userTypes = UserType.values();
