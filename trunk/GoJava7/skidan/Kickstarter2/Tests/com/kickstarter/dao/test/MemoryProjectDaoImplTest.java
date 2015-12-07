@@ -2,14 +2,14 @@ package com.kickstarter.dao.test;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
+
 
 import org.junit.Test;
 
 import com.kickstarter.dao.impl.MemoryProjectDaoImpl;
 import com.kickstarter.memory.storage.ProjectDB;
-import com.kickstarter.model.Category;
-import com.kickstarter.model.Project;
+
+
 
 public class MemoryProjectDaoImplTest {
 	
@@ -18,7 +18,7 @@ public class MemoryProjectDaoImplTest {
 	@Test
 	public void getAllTest() {
 		mpd = new MemoryProjectDaoImpl();
-		assertEquals(mpd.getAll(new Category("it",1)).get(0).getCategoryName(), ("it"));
+		assertEquals(mpd.getAll("it").get(0).getCategoryName(), ("it"));
 	}
 	
 	@Test
@@ -32,4 +32,21 @@ public class MemoryProjectDaoImplTest {
 		mpd = new MemoryProjectDaoImpl();
 		assertEquals(mpd.getAllList(),ProjectDB.allProjectsList);
 	}
+	
+//	@Test
+//	public void updateTest() {
+//		mpd = new MemoryProjectDaoImpl();
+//		List<Project> allProjects = ProjectDB.allProjectsList;
+//		int i = 0;
+//		for (Project project : allProjects) {
+//			if (project.getCategoryName().equals(p.getCategoryName())) {
+//				allProjects.remove(i);
+//				allProjects.add(i, p);
+//				break;
+//			} else {
+//				i++;
+//				continue;
+//			}
+//	
+	
 }

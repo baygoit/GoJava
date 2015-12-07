@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,6 +128,11 @@ public class RewardPostgreDAO implements RewardDAO {
         statement.setInt(++i, element.getId());
         statement.setString(++i, element.getDescription());
         statement.setLong(++i, element.getPledgeSum());
-        statement.setInt(++i, element.getProjectId());
+        if (element.getProjectId() == 0) {
+        	statement.setNull(++i, Types.INTEGER);
+		} else {
+			statement.setInt(++i, element.getProjectId());
+		}
+        
     }
 }

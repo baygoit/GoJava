@@ -2,6 +2,8 @@ package com.airbnb.services;
 
 import com.airbnb.dao.IUserDao;
 import com.airbnb.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -9,18 +11,24 @@ import java.util.List;
 /**
  * Created by Игорь on 11.10.2015.
  */
+@Component
 public class UserService {
+    @Autowired
     private IUserDao iUserDao;
+
     private Validator validator = new Validator();
+
+
+    public UserService() {}
 
     public UserService(IUserDao iUserDao) {
         this.iUserDao = iUserDao;
     }
 
-    public void registerUser(User user) {
+    public void registerUser(User user) throws NullPointerException {
         if (validator.isValidData(user)) {
             iUserDao.addToDb(user);
-        } else System.out.println("Data isn't valid");
+        } else throw new NullPointerException();
     }
 
     public void updateName(int id, String newName) {
@@ -41,6 +49,16 @@ public class UserService {
 
     public void becomeHost(int id){
         iUserDao.updateUserType(id);
+    }
+
+    public boolean isRegisterUser(String email, String password) {
+        List<User> users = getAllUsers();
+        for (User user : users) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void printUsers(){

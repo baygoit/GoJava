@@ -3,15 +3,9 @@ package ua.com.goit.gojava7.kickstarter.model;
 public class Quote {
 	private String text;
 	private String author;
-
-	public Quote() {
-		//default constructor
-	}
-
-	public Quote(String text, String author) {
-		this.text = text;
-		this.author = author;
-	}
+	private int idQuote;
+	
+	public Quote() {}
 
 	public String getText() {
 		return text;
@@ -19,6 +13,14 @@ public class Quote {
 
 	public String getAuthor() {
 		return author;
+	}
+	
+	public int getIdQuote() {
+		return idQuote;
+	}
+
+	public void setIdQuote(int idQuote) {
+		this.idQuote = idQuote;
 	}
 
 	public void setAuthor(String author) {
