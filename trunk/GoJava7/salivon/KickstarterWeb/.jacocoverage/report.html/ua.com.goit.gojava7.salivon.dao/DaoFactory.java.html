@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DaoFactory.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;KickstarterWeb&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">ua.com.goit.gojava7.salivon.dao</a> &gt; <span class="el_source">DaoFactory.java</span></div><h1>DaoFactory.java</h1><pre class="source lang-java linenums">package ua.com.goit.gojava7.salivon.dao;
+
+import ua.com.goit.gojava7.salivon.dao.memory.FaqDaoMemoryImp;
+import ua.com.goit.gojava7.salivon.dao.memory.CategoryDaoMemoryImp;
+import ua.com.goit.gojava7.salivon.dao.memory.QuoteDaoMemoryImp;
+import ua.com.goit.gojava7.salivon.dao.memory.PaymentDaoMemoryImp;
+import ua.com.goit.gojava7.salivon.dao.memory.ProjectDaoMemoryImp;
+import ua.com.goit.gojava7.salivon.dao.file.CategoryDaoFileImp;
+import ua.com.goit.gojava7.salivon.dao.file.FaqDaoFileImp;
+import ua.com.goit.gojava7.salivon.dao.file.QuoteDaoFileImp;
+import ua.com.goit.gojava7.salivon.dao.file.PaymentDaoFileImp;
+import ua.com.goit.gojava7.salivon.dao.file.ProjectDaoFileImp;
+import ua.com.goit.gojava7.salivon.dao.db.PaymentDaoDbImp;
+import ua.com.goit.gojava7.salivon.dao.db.ProjectDaoDbImp;
+import ua.com.goit.gojava7.salivon.dao.db.CategoryDaoDbImp;
+import ua.com.goit.gojava7.salivon.dao.db.FaqDaoDbImp;
+import ua.com.goit.gojava7.salivon.dao.db.QuoteDaoDbImp;
+
+<span class="nc" id="L19">public class DaoFactory {</span>
+
+    public static QuoteDao getQuoteDao(DataType currentDataType) {
+<span class="fc" id="L22">        QuoteDao tyoeDao = null;</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        if (currentDataType == DataType.FILE) {</span>
+<span class="fc" id="L24">            tyoeDao = new QuoteDaoFileImp();</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        } else if (currentDataType == DataType.MEMORY) {</span>
+<span class="fc" id="L26">            tyoeDao = new QuoteDaoMemoryImp();</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        } else if (currentDataType == DataType.DB) {</span>
+<span class="fc" id="L28">            tyoeDao = new QuoteDaoDbImp();</span>
+        }
+<span class="fc" id="L30">        return tyoeDao;</span>
+    }
+
+    public static CategoryDao getCategoryDao(DataType currentDataType) {
+<span class="fc" id="L34">        CategoryDao typeDao = null;</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (currentDataType == DataType.FILE) {</span>
+<span class="fc" id="L36">            typeDao = new CategoryDaoFileImp();</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        } else if (currentDataType == DataType.MEMORY) {</span>
+<span class="fc" id="L38">            typeDao = new CategoryDaoMemoryImp();</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        } else if (currentDataType == DataType.DB) {</span>
+<span class="fc" id="L40">            typeDao = new CategoryDaoDbImp();</span>
+        }
+<span class="fc" id="L42">        return typeDao;</span>
+    }
+
+    public static ProjectDao getProjectDao(DataType currentDataType) {
+<span class="fc" id="L46">        ProjectDao typeDao = null;</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (currentDataType == DataType.FILE) {</span>
+<span class="fc" id="L48">            typeDao = new ProjectDaoFileImp();</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        } else if (currentDataType == DataType.MEMORY) {</span>
+<span class="fc" id="L50">            typeDao = new ProjectDaoMemoryImp();</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        } else if (currentDataType == DataType.DB) {</span>
+<span class="fc" id="L52">            typeDao = new ProjectDaoDbImp();</span>
+        }
+<span class="fc" id="L54">        return typeDao;</span>
+    }
+
+    public static FaqDao getFaqDao(DataType currentDataType) {
+<span class="fc" id="L58">        FaqDao typeDao = null;</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (currentDataType == DataType.FILE) {</span>
+<span class="fc" id="L60">            typeDao = new FaqDaoFileImp();</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        } else if (currentDataType == DataType.MEMORY) {</span>
+<span class="fc" id="L62">            typeDao = new FaqDaoMemoryImp();</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        } else if (currentDataType == DataType.DB) {</span>
+<span class="fc" id="L64">            typeDao = new FaqDaoDbImp();</span>
+        }
+<span class="fc" id="L66">        return typeDao;</span>
+    }
+
+    public static PaymentDao getPaymentDao(DataType currentDataType) {
+<span class="fc" id="L70">        PaymentDao typeDao = null;</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (currentDataType == DataType.FILE) {</span>
+<span class="fc" id="L72">            typeDao = new PaymentDaoFileImp();</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        } else if (currentDataType == DataType.MEMORY) {</span>
+<span class="fc" id="L74">            typeDao = new PaymentDaoMemoryImp();</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        } else if (currentDataType == DataType.DB) {</span>
+<span class="fc" id="L76">            typeDao = new PaymentDaoDbImp();</span>
+        }
+<span class="fc" id="L78">        return typeDao;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

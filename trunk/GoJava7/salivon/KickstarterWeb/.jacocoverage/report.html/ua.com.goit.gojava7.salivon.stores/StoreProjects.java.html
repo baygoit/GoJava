@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>StoreProjects.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;KickstarterWeb&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">ua.com.goit.gojava7.salivon.stores</a> &gt; <span class="el_source">StoreProjects.java</span></div><h1>StoreProjects.java</h1><pre class="source lang-java linenums">package ua.com.goit.gojava7.salivon.stores;
+
+import java.util.ArrayList;
+import java.util.List;
+import ua.com.goit.gojava7.salivon.beans.Project;
+
+<span class="nc" id="L7">public class StoreProjects {</span>
+
+<span class="fc" id="L9">    private static List&lt;Project&gt; projects = new ArrayList&lt;&gt;();</span>
+
+    static {
+<span class="fc" id="L12">        projects.add(new Project(&quot;Circle&quot;, 10, 1, 1));</span>
+<span class="fc" id="L13">        projects.add(new Project(&quot;Elips&quot;, 17, 1, 2));</span>
+<span class="fc" id="L14">        projects.add(new Project(&quot;Line&quot;, 4, 1, 3));</span>
+<span class="fc" id="L15">        projects.add(new Project(&quot;The Man with Ten Thousand Eyes&quot;, 241, 2, 4));</span>
+<span class="fc" id="L16">        projects.add(new Project(&quot;SkyHeart Book I: The Star Seed&quot;, 258, 2, 5));</span>
+<span class="fc" id="L17">        projects.add(new Project(&quot;Deeds Not Words&quot;, 541, 2, 6));</span>
+<span class="fc" id="L18">        projects.add(new Project(&quot;Failsafe&quot;, 1025, 3, 7));</span>
+<span class="fc" id="L19">        projects.add(new Project(&quot;Centauri Saga&quot;, 3527, 3, 8));</span>
+
+<span class="fc" id="L21">    }</span>
+
+    public static List&lt;Project&gt; getProjects() {
+<span class="fc" id="L24">        return projects;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
