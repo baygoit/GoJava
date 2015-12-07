@@ -11,7 +11,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class QuoteDatabaseDao extends DatabaseDao<Quote> implements QuoteStorage{
 
-	private static String	TABLE	= "quote";
+	private static String	TABLE	= "quotes";
 	private static String	FIELDS	= "text, author";
 
 	public QuoteDatabaseDao(Connection connection) {
@@ -20,7 +20,7 @@ public class QuoteDatabaseDao extends DatabaseDao<Quote> implements QuoteStorage
 
 	@Override
 	public Quote getRandomQuote() {
-		String query = "SELECT text, author FROM quote order by rand() limit 1 ";
+		String query = "SELECT " + FIELDS + " FROM "+ TABLE + " order by rand() limit 1 ";
 		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				return readElement(resultSet);

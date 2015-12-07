@@ -12,7 +12,7 @@ import ua.com.goit.gojava7.kickstarter.dao.storage.QuoteStorage;
 public class KickstarterRunner{
 
 	public static void main(String[] args) throws FileNotFoundException {
-		DataSource dataSource = DataSource.MEMORY;
+		DataSource dataSource = DataSource.getDataSource();
 		if (args.length != 0 && args[0] != null) {
 			try {
 				dataSource = DataSource.getByStartupKey(args[0].toLowerCase());
