@@ -1,7 +1,7 @@
 package com.airbnb.dao;
 
 import com.airbnb.model.User;
-import com.airbnb.observer.Observer;
+import com.airbnb.model.Observer;
 
 import java.util.List;
 

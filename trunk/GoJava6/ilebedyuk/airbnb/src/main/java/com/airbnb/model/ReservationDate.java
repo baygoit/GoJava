@@ -1,44 +1,58 @@
 package com.airbnb.model;
 
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
+import java.sql.Date;
 
 /**
  * Created by Игорь on 27.09.2015.
  */
+@Entity
+@Table(name="reservationdates")
+//@NamedQuery(query = "select distinct r from ReservationDate r, IN (r.apartament) a WHERE a.apartamentId = :id", name ="find reservation dates by apartament id")
 public class ReservationDate {
+    @Column(name = "startReservation")
+    private Date dateBegin;
 
-    private long dateBegin;
-    private long dateEnd;
+    @Column(name = "endReservation")
+    private Date dateEnd;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idreservationdates")
     private int reservationDateId;
+    @Column(name = "apartamentId")
     private int apartamentId;
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
+//    @Embedded
+//    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     public ReservationDate(){}
 
-    public ReservationDate(long dateBegin, long dateEnd, int apartamentId) {
+    public ReservationDate(Date dateBegin, Date dateEnd, int apartamentId) {
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
         this.apartamentId = apartamentId;
     }
 
-    public long getDateBegin() {
+    public Date getDateBegin() {
         return dateBegin;
     }
 
-    public void setDateBegin(long dateBegin) {
+    public void setDateBegin(Date dateBegin) {
         this.dateBegin = dateBegin;
     }
 
-    public long getDateEnd() {
+    public Date getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(long dateEnd) {
+    public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
     }
 
-    public int getReservationDateId(int idreservationdates) {
+    public int getReservationDateId() {
         return reservationDateId;
     }
 
@@ -54,15 +68,13 @@ public class ReservationDate {
         this.apartamentId = apartamentId;
     }
 
-    public void getPeriod(){
-        System.out.println("Period is begin " + dateBegin + " and end " + dateEnd);
-    }
-
     @Override
     public String toString() {
-        return "Id: '" + this.reservationDateId +
-                "', date of start: '" + sdf.format(this.dateBegin) +
-                "', date of end: '" + sdf.format(this.dateEnd) +
-                "', apartamentId: '" + this.apartamentId + "'";
+        return "ReservationDate{" +
+                "dateBegin=" + dateBegin +
+                ", dateEnd=" + dateEnd +
+                ", reservationDateId=" + reservationDateId +
+                ", apartamentId=" + apartamentId +
+                '}';
     }
 }

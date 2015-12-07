@@ -2,14 +2,28 @@ package com.airbnb.model;
 
 import org.apache.log4j.Logger;
 
+import javax.persistence.*;
+
 /**
  * Created by Игорь on 26.09.2015.
  */
+@Entity
+@Table(name="apartament")
 public class Apartment {
+
+    @Column(name = "type")
     private String apartmentType;
+    @Column
     private String city;
+
+    @Column(name = "iduser")
     private int ownerId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "idaparnaments")
     private int idAparnament;
+
     private static final Logger log = Logger.getLogger(Apartment.class);
 
     public Apartment(){}
