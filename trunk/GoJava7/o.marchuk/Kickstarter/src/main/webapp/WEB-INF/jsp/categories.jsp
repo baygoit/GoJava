@@ -1,5 +1,16 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <jsp:include page="header.jsp" />
-
-	Categories:
+	<p>
+	${quote.text}
+	<br />
+	<i>${quote.author}</i>
+	</p>
+	<h1>Categories:</h1>
+	<ul>
+		<c:forEach var="category" items="${categories}" >
+			<li>
+				<a href="category?id=${category.id}">${category.name}</a>
+			</li>
+		</c:forEach>
+	</ul>
 <jsp:include page="footer.jsp" />
