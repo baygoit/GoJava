@@ -2,9 +2,11 @@ package ua.com.goit.gojava7.kickstarter.config;
 
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
@@ -17,10 +19,13 @@ import ua.com.goit.gojava7.kickstarter.dao.memory.QuoteDaoMemoryImpl;
 import ua.com.goit.gojava7.kickstarter.dao.mysql.CategoryDaoMySqlImpl;
 import ua.com.goit.gojava7.kickstarter.dao.mysql.QuoteDaoMySqlImpl;
 
-public class DaoProvider {
+public class DaoProvider extends SpringBeanAutowiringSupport {
 
 	private static final File QUOTES_FILE = new File("./quotes.txt");
 
+	@Autowired
+	private javax.sql.DataSource mysqlDataSource;
+	
 	private DataSource dataSource;
 
 	private Connection connection = null;
@@ -32,12 +37,9 @@ public class DaoProvider {
 	public void open() {
 		if (dataSource == DataSource.MYSQL) {
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				connection = DriverManager.getConnection("jdbc:mysql://db4free.net:3306/gojava4omarchuk?user=gojava4omarchuk&password=somepassword");
+				connection = mysqlDataSource.getConnection();
 			} catch (SQLException e) {
 				throw new IllegalStateException("Cannot open connection. " + e.getMessage(), e);
-			} catch (ClassNotFoundException e) {
-				throw new IllegalStateException("Cannot open load mysql driver. " + e.getMessage(), e);
 			}
 		}
 	}
