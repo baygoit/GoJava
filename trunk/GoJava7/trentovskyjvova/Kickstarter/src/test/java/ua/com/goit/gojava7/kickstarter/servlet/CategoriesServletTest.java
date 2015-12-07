@@ -10,10 +10,12 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -36,7 +38,9 @@ public class CategoriesServletTest {
 
 	@Test
 	public void testDoGetHttpServletRequestHttpServletResponse() throws ServletException, IOException {
-		when(quoteDao.getRandomQuote()).thenReturn(new Quote("quote text", "quote author"));
+		
+		Quote quote = new Quote("quote text", "quote author");
+		when(quoteDao.getRandomQuote()).thenReturn(quote);
 		
 		List<Category> categories = new ArrayList<>();
 		Category category = new Category();
@@ -46,14 +50,16 @@ public class CategoriesServletTest {
 				
 		HttpServletRequest req = mock(HttpServletRequest.class);
 		HttpServletResponse resp = mock(HttpServletResponse.class);
-
-		PrintWriter writer = mock(PrintWriter.class);
-		when(resp.getWriter()).thenReturn(writer);
-
+		RequestDispatcher rd = mock(RequestDispatcher.class);
+		
+		when(req.getRequestDispatcher(contains("categories"))).thenReturn(rd);
+		
 		categoriesServlet.doGet(req, resp);
+		
+		verify(req).setAttribute("quote", quote);
+		verify(req).setAttribute("categories", categories);
+		verify(rd).forward(req, resp);
 
-		verify(writer).append(contains("quote text"));
-		verify(writer).append(contains("categ name"));
 	}
 
 }

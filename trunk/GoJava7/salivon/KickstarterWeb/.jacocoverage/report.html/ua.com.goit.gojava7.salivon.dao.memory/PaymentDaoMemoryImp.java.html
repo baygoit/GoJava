@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PaymentDaoMemoryImp.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;KickstarterWeb&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">ua.com.goit.gojava7.salivon.dao.memory</a> &gt; <span class="el_source">PaymentDaoMemoryImp.java</span></div><h1>PaymentDaoMemoryImp.java</h1><pre class="source lang-java linenums">package ua.com.goit.gojava7.salivon.dao.memory;
+
+import java.util.List;
+import ua.com.goit.gojava7.salivon.beans.Payment;
+import ua.com.goit.gojava7.salivon.beans.Project;
+import ua.com.goit.gojava7.salivon.dao.PaymentDao;
+import ua.com.goit.gojava7.salivon.stores.StoreProjects;
+
+<span class="fc" id="L9">public class PaymentDaoMemoryImp implements PaymentDao {</span>
+
+    @Override
+    public void savePayment(Payment payment) {
+<span class="fc" id="L13">        int id = payment.getIdProject();</span>
+<span class="fc" id="L14">        int total = payment.getTotal();</span>
+<span class="fc" id="L15">        List&lt;Project&gt; projects = StoreProjects.getProjects();</span>
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        for (Project project : projects) {</span>
+<span class="pc bpc" id="L17" title="1 of 2 branches missed.">            if (id == project.getId()) {</span>
+<span class="nc" id="L18">                project.setCollectedAmount(total);</span>
+<span class="nc" id="L19">                break;</span>
+            }
+<span class="fc" id="L21">        }</span>
+<span class="fc" id="L22">    }</span>
+
+    @Override
+    public int getTotal(int idProject) {
+<span class="nc" id="L26">        return 0;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
