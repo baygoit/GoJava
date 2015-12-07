@@ -60,6 +60,8 @@ public class ProjectServlet extends HttpServlet {
 			stringBuilder.append("<br>A: " + a);
 			stringBuilder.append("<br>-------------------------------------");
 		});
+		// <form action="action_page.php" method="post">
+		stringBuilder.append(HTML.FORM);
 		
 		stringBuilder.append(HTML.BODY_HTML_CLOSE);
 		response.getWriter().append(stringBuilder);

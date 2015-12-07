@@ -42,7 +42,41 @@
                     $(span[0]).animate({opacity: 0.7});
                     $(span[1]).animate({color: '#444'});
                 }
+
+                $("#addForm").submit(function(event) {
+                    // Prevent the form from submitting via the browser.
+                    event.preventDefault();
+                    addViaAjax();
+                });
             });
+
+            function addViaAjax() {
+                var data = {
+                    "productId": 1,
+                    "quantity": 1
+                }
+
+                $.ajax({
+                    type : "POST",
+                    accept: 'application/json',
+                    contentType : "application/json",
+                    url : "${home}/ajax",
+                    data : JSON.stringify(data),
+                    dataType : 'json',
+                    timeout : 100000,
+                    success : function(data) {
+                        console.log("SUCCESS: ", data);
+                        display(data);
+                    },
+                    error : function(e) {
+                        console.log("ERROR: ", e);
+                        //display(e);
+                    },
+                    done : function(e) {
+                        console.log("DONE");
+                    }
+                });
+            }
         </script>
 
         <title>The Affable Bean Green Grocer</title>
@@ -154,4 +188,7 @@
                 </a>
 
                 <img src="img/logoText.png" id="logoText" alt="the affable bean">
+                <form action="/ajax" id="addForm" >
+                    <input type="submit" value="ajax"/>
+                </form>
             </div>
