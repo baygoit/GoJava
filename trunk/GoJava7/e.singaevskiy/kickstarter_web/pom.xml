@@ -13,7 +13,7 @@
 
 	<build>
 		<finalName>kickstarter</finalName>
-	
+
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -39,8 +39,8 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	
+
+
 
 	<dependencies>
 
@@ -82,6 +82,12 @@
 			<artifactId>bean-matchers</artifactId>
 			<version>0.9</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
 		</dependency>
 
 	</dependencies>

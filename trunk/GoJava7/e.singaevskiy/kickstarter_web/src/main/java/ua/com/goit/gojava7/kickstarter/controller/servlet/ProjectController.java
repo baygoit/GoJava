@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.com.goit.gojava7.kickstarter.controller.servlet.util.HtmlPageWriter;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionsDAO;
@@ -31,36 +30,9 @@ public class ProjectController extends HttpServlet {
 	    Project project = projectDAO.get(projectId);
 	    project.setQuestions(questionsDAO.getByProject(projectId));
 	    project.setBalanceSum(paymentDAO.getSum(projectId)); 
-	    
-        StringBuilder body = new StringBuilder();
-        body.append("<b>" + project.getName() + "</b>");
-        body.append("\n<i>Author: " + project.getAuthor() + "</i>");
-        body.append("\n\n" + project.getDescription());
-        body.append("\nGoal: " + project.getGoalSum());
-        body.append(" / Balance: " + project.getBalanceSum());
-        body.append("\nStarted:" + project.getEndDate());
-        body.append("\nDays left: " + project.daysLeft());
         
-        body.append("\n\n<iframe width=\"420\" height=\"315\""
-                + "src=\"http://www.youtube.com/embed/" 
-                + project.getVideoUrl().substring(project.getVideoUrl().lastIndexOf("=")+1)
-                +"?autoplay=0\">"
-                + "</iframe>\n");
-        
-        if (!project.getQuestions().isEmpty()) {
-            body.append("\nFAQ:");
-            project.getQuestions().stream().map(faq -> "\n" + faq.getQuestion() + " : " + faq.getAnswer())
-                    .forEach(body::append);
-        }
-
-        body.append("\n1. <a href=message?id=" + project.getId() + ">Send message</a>");
-        body.append("\n2. <a href=pay?id=" + project.getId() + ">Pay</a>");
-
-        HtmlPageWriter htmlPageWriter = new HtmlPageWriter();
-        htmlPageWriter.setTitle(project.getName());
-        htmlPageWriter.setBody(body.toString());
-
-        response.getWriter().print(htmlPageWriter.prepare());
+        request.setAttribute("project", project);
+        request.getRequestDispatcher("view/ProjectDetails.jsp").forward(request, response);
 	}
 	
 	@Override

@@ -2,19 +2,26 @@ package com.airbnb.services;
 
 import com.airbnb.dao.IReservationDao;
 import com.airbnb.model.ReservationDate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
  * Created by Игорь on 17.10.2015.
  */
+@Component
 public class ReservationDatesService {
+    @Autowired
     private IReservationDao iReservationDao;
+
+
 
     public IReservationDao getiReservationDao() {
         return iReservationDao;
     }
-
+    public ReservationDatesService() {}
     public ReservationDatesService(IReservationDao iReservationDao) {
         this.iReservationDao = iReservationDao;
     }
@@ -39,7 +46,7 @@ public class ReservationDatesService {
         iReservationDao.delete(id);
     }
 
-    public boolean isAvailableApartment(int idApartament, long dateStart, long dateFinish){
+    public boolean isAvailableApartment(int idApartament, Date dateStart, Date dateFinish){
         List<ReservationDate> reservationDates = iReservationDao.getReservationDateListByIdApartament(idApartament);
         for (ReservationDate reservationDate : reservationDates) {
             if (reservationDate.getDateBegin() == dateStart || reservationDate.getDateEnd() == dateFinish){

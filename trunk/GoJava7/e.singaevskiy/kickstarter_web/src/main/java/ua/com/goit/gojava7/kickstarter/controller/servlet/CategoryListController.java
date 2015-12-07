@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.com.goit.gojava7.kickstarter.controller.servlet.util.HtmlPageWriter;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @WebServlet("/categories")
@@ -28,27 +26,11 @@ public class CategoryListController extends HttpServlet {
             throws ServletException, IOException {
         
         Random rnd = new Random();       
-        List<Quote> quotes = quoteDAO.getAll();
-        Quote quote = quotes.get(rnd.nextInt(quotes.size()));
+        List<Quote> quotes = quoteDAO.getAll();     
         
-        List<Category> categories = categoryDAO.getAll();
-        
-        StringBuilder body = new StringBuilder();
-        body.append("\"" + quote.getText() + "\" - " + quote.getAuthor() + "\n");       
-        body.append("\nCategories: | ");
-        for (int i = 1; i <= categories.size(); i++) {
-            Category category = categories.get(i - 1);
-            body.append(String.format("<a href=./category?id=%s>%s</a>", 
-                    category.getId(),
-                    i + ". " + category.getName()) + " | " );
-        }
-        body.append("\n");
-        
-        HtmlPageWriter htmlPageWriter = new HtmlPageWriter();
-        htmlPageWriter.setTitle("Categories");
-        htmlPageWriter.setBody(body.toString());
-
-        response.getWriter().print(htmlPageWriter.prepare());
+        request.setAttribute("quote", quotes.get(rnd.nextInt(quotes.size())));        
+        request.setAttribute("categories", categoryDAO.getAll());
+        request.getRequestDispatcher("view/Categories.jsp").forward(request, response);
     }
 
     @Override
@@ -56,7 +38,6 @@ public class CategoryListController extends HttpServlet {
     	StorageFactory factory = (StorageFactory) getServletContext().getAttribute(ContextInitializer.STORAGE_FACTORY);   
         quoteDAO = factory.getQuoteDAO();
         categoryDAO = factory.getCategoryDAO();
-
     }
 
 }
