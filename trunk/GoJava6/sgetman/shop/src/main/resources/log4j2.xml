@@ -11,11 +11,11 @@
         </File>
     </Appenders>
     <Loggers>
-        <!--<Root level="error">
-            <AppenderRef ref="Logfile"/>
-        </Root>-->
-        <Logger name="com.gojava6" level="error">
-            <AppenderRef ref="Logfile"/>
+        <Root level="debug">
+            <AppenderRef ref="Console"/>
+        </Root>
+        <Logger name="com.gojava6" level="debug">
+            <AppenderRef ref="Console"/>
         </Logger>
     </Loggers>
 
