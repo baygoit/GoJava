@@ -20,5 +20,12 @@
 		<property name="username" value="gojava4omarchuk" />
 		<property name="password" value="somepassword" />
 	</bean>
+	
+	<bean id="daoProvider" class="ua.com.goit.gojava7.kickstarter.config.DaoProvider">
+		<constructor-arg>
+			<value type="ua.com.goit.gojava7.kickstarter.config.DataSource">MYSQL</value>
+		</constructor-arg>
+		<property name="mysqlDataSource" ref="dataSource" />
+	</bean>
 
 </beans>
