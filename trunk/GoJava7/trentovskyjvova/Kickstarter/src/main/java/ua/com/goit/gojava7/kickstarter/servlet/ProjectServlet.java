@@ -42,32 +42,12 @@ public class ProjectServlet extends HttpServlet {
 		Project selectedProject = projectDao.getProject(projectId);
 		
 		int pledged = paymentDao.getPledged(selectedProject.getId());
-		
-		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Project</title></head><body>");
-
-		stringBuilder.append("name: ").append(selectedProject.getName()).append("</br>");
-		stringBuilder.append("funded: ").append(selectedProject.getFunded(pledged)).append("</br>");
-		stringBuilder.append("daysToGo: ").append(selectedProject.getDaysToGo()).append("</br>");
-		stringBuilder.append("pledged: ").append(pledged).append("</br>");
-		stringBuilder.append("description: ").append(selectedProject.getDescription()).append("</br>");
-		stringBuilder.append("owner: ").append(selectedProject.getOwner()).append("</br>");
-		stringBuilder.append("goal: ").append(selectedProject.getGoal()).append("</br>");
-		stringBuilder.append("linkVideo: ").append(selectedProject.getLinkVideo()).append("</br>");
-
 		List<Question> questions = questionDao.getQuestions(projectId);
-		for (Question question : questions) {
-			stringBuilder.append("Question: '")
-					.append(question.getQuestionText()).append("'</br>");
-		}
-		stringBuilder.append("<a href=\"payments?projectId=").append(projectId).append("\">")
-		.append("to invest in the project").append("</a><br/>");
-		stringBuilder.append("<a href=\"question?projectId=").append(projectId).append("\">")
-		.append("to ask a question").append("</a><br/>");	
-				
-		stringBuilder.append("</body></html>");
-
-		response.getWriter().append(stringBuilder.toString());
-
+		
+		request.setAttribute("selectedProject", selectedProject);
+		request.setAttribute("pledged", pledged);
+		request.setAttribute("questions", questions);
+		request.getRequestDispatcher("/WEB-INF/jsp/project.jsp").forward(request, response);	
 	}
 
 }

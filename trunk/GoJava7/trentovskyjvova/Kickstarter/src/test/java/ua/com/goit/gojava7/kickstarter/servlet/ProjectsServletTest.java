@@ -6,10 +6,12 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
@@ -32,7 +35,23 @@ public class ProjectsServletTest {
 	private PaymentDao paymentDao;
 	@InjectMocks
 	private ProjectsServlet projectsServlet;
+	
+	@Test
+	public void testInit() throws ServletException, IOException {
+		
+		DaoProvider daoProvider = mock(DaoProvider.class);
+		ServletConfig config = mock(ServletConfig.class);
+		ServletContext context = mock(ServletContext.class);
+		
+		when(config.getServletContext()).thenReturn(context);
+		when(context.getAttribute(ContextListener.STORAGE_FACTORY)).thenReturn(daoProvider);
 
+		projectsServlet.init(config);
+
+		verify(daoProvider).getProjectReader();
+		verify(daoProvider).getPaymentReader();
+	}
+	
 	@Test
 	public void testDoGetHttpServletRequestHttpServletResponse() throws ServletException, IOException {
 
@@ -42,17 +61,20 @@ public class ProjectsServletTest {
 		projects.add(project);
 		when(projectDao.getProjects(12)).thenReturn(projects);
 		when(paymentDao.getPledged(1)).thenReturn(0);
+		
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse resp = mock(HttpServletResponse.class);
-
+		RequestDispatcher rd = mock(RequestDispatcher.class);
+		
+		when(request.getRequestDispatcher(contains("projects"))).thenReturn(rd);
+		
 		when(request.getParameter("id")).thenReturn("12");
-
-		PrintWriter writer = mock(PrintWriter.class);
-		when(resp.getWriter()).thenReturn(writer);
 
 		projectsServlet.doGet(request, resp);
 
-		verify(writer).append(contains("Project name"));
+		verify(request).setAttribute("projects", projects);
+		verify(request).setAttribute("paymentDao", paymentDao);
+		verify(rd).forward(request, resp);
 	}
 
 }

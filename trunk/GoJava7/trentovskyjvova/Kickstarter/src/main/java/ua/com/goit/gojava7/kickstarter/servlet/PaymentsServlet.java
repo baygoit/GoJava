@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -29,22 +30,11 @@ public class PaymentsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
-
-		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Payments</title></head><body>");
-
-		for (Reward reward : rewardDao.getRewards(projectId)) {
-			stringBuilder.append("<a href=\"pledge?rewardId=").append(reward.getId());
-			stringBuilder.append("&projectId=").append(projectId).append("\">");
-
-			stringBuilder.append("Pledge $").append(reward.getPledge()).append(" - get ").append(reward.getBenefit())
-					.append("</a><br/>");
-
-		}
-		stringBuilder.append("<a href=\"pledge?rewardId=0").append("&projectId=").append(projectId);
-		stringBuilder.append("\">").append("own amount\n").append("</a><br/>");
-		stringBuilder.append("</body></html>");
-
-		response.getWriter().append(stringBuilder.toString());
+		List<Reward> rewards = rewardDao.getRewards(projectId);
+		
+		request.setAttribute("rewards", rewards);
+		request.setAttribute("projectId", projectId);
+		request.getRequestDispatcher("/WEB-INF/jsp/payments.jsp").forward(request, response);
 	}
 
 }

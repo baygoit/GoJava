@@ -30,16 +30,9 @@ public class QuestionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
-
-		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Question</title></head><body>");
-		stringBuilder.append("<form action=\"question?projectId=").append(projectId).append("\" method=\"post\">");
-
-		stringBuilder.append("<input type=\"text\" name=\"questionText\" placeholder=\"question text\">").append("</br>");
-		stringBuilder.append("<input type=\"submit\" value=\"Ask\">");
-		stringBuilder.append("</form>");
-		stringBuilder.append("</body></html>");
-
-		response.getWriter().append(stringBuilder.toString());
+		
+		request.setAttribute("projectId", projectId);
+		request.getRequestDispatcher("/WEB-INF/jsp/question.jsp").forward(request, response);
 	}
 
 	@Override
