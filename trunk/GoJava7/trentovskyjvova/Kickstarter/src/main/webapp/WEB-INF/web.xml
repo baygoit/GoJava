@@ -15,7 +15,7 @@
 
 	<context-param>
 		<param-name>DataSourceType</param-name>
-		<param-value>postgres1</param-value>
+		<param-value>postgres</param-value>
 	</context-param>
 
 </web-app>

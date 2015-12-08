@@ -6,22 +6,23 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
@@ -35,7 +36,23 @@ public class CategoriesServletTest {
 	private CategoryDao categoryDao;
 	@InjectMocks
 	private CategoriesServlet categoriesServlet;
+	
+	@Test
+	public void testInit() throws ServletException, IOException {
+		
+		DaoProvider daoProvider = mock(DaoProvider.class);
+		ServletConfig config = mock(ServletConfig.class);
+		ServletContext context = mock(ServletContext.class);
+		
+		when(config.getServletContext()).thenReturn(context);
+		when(context.getAttribute(ContextListener.STORAGE_FACTORY)).thenReturn(daoProvider);
 
+		categoriesServlet.init(config);
+
+		verify(daoProvider).getQuoteReader();
+		verify(daoProvider).getCategoryReader();
+	}
+	
 	@Test
 	public void testDoGetHttpServletRequestHttpServletResponse() throws ServletException, IOException {
 		

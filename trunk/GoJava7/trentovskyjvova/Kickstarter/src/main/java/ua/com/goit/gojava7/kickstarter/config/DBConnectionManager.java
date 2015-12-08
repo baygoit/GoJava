@@ -26,7 +26,7 @@ public class DBConnectionManager {
 
 	public Connection getConnection() throws SQLException {
 		Connection connection = datasource.getConnection();
-		connection.setAutoCommit(false);
+		//connection.setAutoCommit(false);
 		return connection;
 	}
 

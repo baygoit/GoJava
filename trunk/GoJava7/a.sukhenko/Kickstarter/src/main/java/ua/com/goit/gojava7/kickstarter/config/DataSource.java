@@ -20,4 +20,23 @@ public enum DataSource {
 		}
 		return MEMORY;
 	}
+	public static DataSource getDataSource(){
+		String param =  System.getenv("SOURCE");
+		System.out.println(System.getenv("source"));
+		if(param != null){
+		switch (param) {
+			case "m" :
+				return DataSource.MEMORY;
+			case "db":
+				return DataSource.MYSQL;
+			case "f":
+				return DataSource.FILE;
+			default :
+				return DataSource.MEMORY;
+		}
+	}
+		return DataSource.MEMORY;
+	}
+	
+	
 }

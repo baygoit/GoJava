@@ -22,7 +22,7 @@ public class Body{
 	}
 
 	public void generateBody(ProjectStorage projectStorage, CategoryStorage categoryStorage) {
-		generateProjectInfo(projectStorage.getByNumber(0), categoryStorage);
+		generateProjectInfo(projectStorage.getByNumber(projectStorage.getAll().size()-1), categoryStorage);
 	}
 
 	public void generateQuoteBlock(QuoteStorage quoteStorage) {
@@ -50,8 +50,9 @@ public class Body{
 	}
 
 	public void generateProjectInfo(Project project, CategoryStorage categoryStorage) {
-
 		ConsolePrinter.printHorizontalLine();
+		System.out.println(project.getProjectName());
+		System.out.println("Size:" + categoryStorage.size());
 		ConsolePrinter.print("Project: " + project.getProjectName() + "   |  Category: "
 				+ categoryStorage.getCategoryById(project.getProjectCategoryId()).getCategoryName());
 		ConsolePrinter.print(project.getProjectEndTime());
