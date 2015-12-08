@@ -7,16 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.config.DBConnectionManager;
 import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
 public class QuestionDaoSqlImpl implements QuestionDao {
-	private DaoProvider daoProvider;
+	private DBConnectionManager connectionManager;
 
-	public QuestionDaoSqlImpl(DaoProvider daoProvider) {
-		this.daoProvider = daoProvider;
+	public QuestionDaoSqlImpl(DBConnectionManager connectionManager) {
+		this.connectionManager = connectionManager;
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class QuestionDaoSqlImpl implements QuestionDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = daoProvider.getConnection();
+			conn = connectionManager.getConnection();
 			stmt = conn.prepareStatement("SELECT id, questionText FROM question WHERE projectId =" + projectId);
 			rset = stmt.executeQuery();
 
@@ -59,7 +60,7 @@ public class QuestionDaoSqlImpl implements QuestionDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
-			conn = daoProvider.getConnection();
+			conn = connectionManager.getConnection();
 			stmt = conn.prepareStatement("INSERT INTO question (projectId, questionText) VALUES ('"
 					+ question.getProjectId() + "', '" + question.getQuestionText() + "');");
 			stmt.executeUpdate();

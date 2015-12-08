@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <session-config>
+        <session-timeout>
+            10
+        </session-timeout>
+    </session-config>
+
+    <welcome-file-list>
+        <welcome-file>/airbnb/</welcome-file>
+    </welcome-file-list>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value></param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/airbnb/*</url-pattern>
+    </servlet-mapping>
+
+
+    <jsp-config>
+        <jsp-property-group>
+            <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
+            <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
+            <url-pattern>/index.jsp</url-pattern>
+            <url-pattern>/WEB-INF/view/*</url-pattern>
+        </jsp-property-group>
+    </jsp-config>
+
+    <filter>
+        <filter-name>SessionTimeoutFilter</filter-name> <!-- mandatory -->
+        <filter-class>com.airbnb.listeners.SessionTimeoutFilter</filter-class> <!-- mandatory -->
+    </filter>
+
+    <filter-mapping>
+        <filter-name>SessionTimeoutFilter</filter-name> <!-- mandatory -->
+        <url-pattern>airbnb/user</url-pattern> <!-- either url-pattern or servlet-name is mandatory -->
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AdminFilter</filter-name> <!-- mandatory -->
+        <filter-class>com.airbnb.listeners.AdminFilter</filter-class> <!-- mandatory -->
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name> <!-- mandatory -->
+        <url-pattern>airbnb/admin</url-pattern> <!-- either url-pattern or servlet-name is mandatory -->
+    </filter-mapping>
+
+    <context-param>
+        <description>The relative path to password images</description>
+        <param-name>cityImagePath</param-name>
+        <param-value>/img/city/</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <!--<description>ServletContextListener</description>-->
+    <!--<listener>-->
+        <!--<listener-class>com.airbnb.listeners.PersistenceAppListener</listener-class>-->
+    <!--</listener>-->
+
+</web-app>

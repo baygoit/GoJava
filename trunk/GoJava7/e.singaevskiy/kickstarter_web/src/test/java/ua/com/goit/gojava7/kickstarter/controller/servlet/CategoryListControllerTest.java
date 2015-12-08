@@ -1,8 +1,10 @@
 package ua.com.goit.gojava7.kickstarter.controller.servlet;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
+import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
@@ -23,26 +26,29 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 public class CategoryListControllerTest {
 
     @Mock
-    QuoteDAO quoteDAO;
+    private QuoteDAO quoteDAO;
     
     @Mock
-    CategoryDAO categoryDAO;
+    private CategoryDAO categoryDAO;
     
     @Mock
-    PrintWriter writer;   
+    private RequestDispatcher dispatcher;  
     
     @Mock
-    HttpServletRequest req;
+    private HttpServletRequest req;
     
     @Mock
-    HttpServletResponse resp;
+    private HttpServletResponse resp;
+    
+    @Mock
+    private ServletConfig config;
     
     @InjectMocks
-    CategoryListController servlet;
+    private CategoryListController servlet;
     
     @Before
     public void setUp() throws Exception {
-        Mockito.when(resp.getWriter()).thenReturn(writer);
+    	Mockito.when(req.getRequestDispatcher(Mockito.anyString())).thenReturn(dispatcher);
     }
 
     @Test
@@ -58,9 +64,21 @@ public class CategoryListControllerTest {
         Mockito.when(categoryDAO.getAll()).thenReturn(cList);
         
         servlet.doGet(req, resp);
-        Mockito.verify(writer).print(Mockito.contains(quote.getText()));
-        for (Category category : cList) {
-            Mockito.verify(writer).print(Mockito.contains(category.getName()));
-        }       
+        Mockito.verify(req).getRequestDispatcher("view/Categories.jsp");
+        Mockito.verify(req).setAttribute("quote", quote);
+        Mockito.verify(req).setAttribute("categories", cList);
+        Mockito.verify(dispatcher).forward(req, resp);       
+    }
+    
+    @Test
+    public void testInit() throws Exception { 
+    	ServletContext context = Mockito.mock(ServletContext.class);
+		Mockito.when(config.getServletContext()).thenReturn(context);
+    	StorageFactory storageFactory = Mockito.mock(StorageFactory.class);
+		Mockito.when(context.getAttribute(ContextInitializer.STORAGE_FACTORY)).thenReturn(storageFactory);
+    	
+		servlet.init();      	
+    	Mockito.verify(storageFactory).getQuoteDAO(); 
+    	Mockito.verify(storageFactory).getCategoryDAO(); 
     }
 }

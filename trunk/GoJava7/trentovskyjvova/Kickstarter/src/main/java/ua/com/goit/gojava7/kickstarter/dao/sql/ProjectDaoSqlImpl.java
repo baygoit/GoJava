@@ -7,16 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.config.DBConnectionManager;
 import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
 public class ProjectDaoSqlImpl implements ProjectDao {
-	private DaoProvider daoProvider;
+	private DBConnectionManager connectionManager;
 
-	public ProjectDaoSqlImpl(DaoProvider daoProvider) {
-		this.daoProvider = daoProvider;
+	public ProjectDaoSqlImpl(DBConnectionManager connectionManager) {
+		this.connectionManager = connectionManager;
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = daoProvider.getConnection();
+			conn = connectionManager.getConnection();
 			stmt = conn.prepareStatement(
 					"SELECT id, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE categoryId ="
 							+ categoryId);
@@ -99,7 +100,7 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = daoProvider.getConnection();
+			conn = connectionManager.getConnection();
 			stmt = conn.prepareStatement(
 					"SELECT categoryId, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE id ="
 							+ projectId);

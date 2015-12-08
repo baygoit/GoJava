@@ -8,6 +8,7 @@ import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
 public class KickstarterRunner {
 	
 	public static void main(String[] args) {
+		
 		DataSourceTypes daoType = DataSourceTypes.MEMORY;
 		if (args.length != 0) {
 			if(args[0].equals("file")){
@@ -23,14 +24,12 @@ public class KickstarterRunner {
 		ConsoleScanner consoleReader = new ConsoleScanner();
 		
 		DaoProvider daoProvider = new DaoProvider(daoType);
-		daoProvider.init();
 		
 		Kickstarter kickstarter = new Kickstarter(consolePrinter,
 				consoleReader, daoProvider);
 		kickstarter.runKickstarter();
 		kickstarter.shutdown();
 		
-		//daoProvider.close();
 	}
 
 	

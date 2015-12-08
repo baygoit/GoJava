@@ -7,16 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ua.com.goit.gojava7.kickstarter.config.DBConnectionManager;
 import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
 public class RewardDaoSqlImpl implements RewardDao {
-	private DaoProvider daoProvider;
+	private DBConnectionManager connectionManager;
 
-	public RewardDaoSqlImpl(DaoProvider daoProvider) {
-		this.daoProvider = daoProvider;
+	public RewardDaoSqlImpl(DBConnectionManager connectionManager) {
+		this.connectionManager = connectionManager;
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class RewardDaoSqlImpl implements RewardDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = daoProvider.getConnection();
+			conn = connectionManager.getConnection();
 			stmt = conn.prepareStatement("SELECT id, pledge, benefit FROM reward WHERE projectId =" + projectId);
 			rset = stmt.executeQuery();
 
@@ -77,7 +78,7 @@ public class RewardDaoSqlImpl implements RewardDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = daoProvider.getConnection();
+			conn = connectionManager.getConnection();
 			stmt = conn.prepareStatement("SELECT projectId, pledge, benefit FROM reward WHERE id =" + rewardId);
 			rset = stmt.executeQuery();
 
