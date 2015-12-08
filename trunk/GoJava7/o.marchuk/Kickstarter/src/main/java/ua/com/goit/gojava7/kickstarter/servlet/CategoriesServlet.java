@@ -37,7 +37,7 @@ public class CategoriesServlet extends HttpServlet {
 		ServletContext servletContext = config.getServletContext();
 		applicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
-		daoProvider = (DaoProvider) applicationContext.getBean("daoProvider");
+		daoProvider = applicationContext.getBean(DaoProvider.class);
 		daoProvider.open();
 		super.init(config);
 	}
