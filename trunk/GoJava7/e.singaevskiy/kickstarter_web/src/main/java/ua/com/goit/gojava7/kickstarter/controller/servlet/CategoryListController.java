@@ -10,21 +10,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
-import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.CategoryPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuotePostgreDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @WebServlet("/categories")
 public class CategoryListController extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    
     private QuoteDAO quoteDAO;
+    
     private CategoryDAO categoryDAO; 
 
-    @Override
+	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+		
         Random rnd = new Random();       
         List<Quote> quotes = quoteDAO.getAll();     
         
@@ -35,9 +41,9 @@ public class CategoryListController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-    	StorageFactory factory = (StorageFactory) getServletContext().getAttribute(ContextInitializer.STORAGE_FACTORY);   
-        quoteDAO = factory.getQuoteDAO();
-        categoryDAO = factory.getCategoryDAO();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+        quoteDAO = context.getBean(QuotePostgreDAO.class);
+        categoryDAO = context.getBean(CategoryPostgreDAO.class);
     }
 
 }
