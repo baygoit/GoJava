@@ -23,26 +23,23 @@ public class CategoriesServlet extends HttpServlet {
 	private DaoFactory daoFactory;
 	private QuoteDao quoteDao;
 	private CategoryDao categoryDao;
-
-	private String dbName = "";
-	private String dbPassword = "";
+	private String mode = "";
+	MyDataSource dataType;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+		
 		super.init(config);
-
 		ServletContext context = getServletContext();
-
-		dbName = context.getInitParameter("name");
-		dbPassword = context.getInitParameter("password");
+		mode = context.getInitParameter("mode");
+		dataType = MyDataSource.getByStartupKey(mode.toLowerCase());
 
 		System.out.println("-----------------------------");
-		System.out.println("Versionservlet started   ");
-		System.out.println("name: " + dbName);
-		System.out.println("password: " + dbPassword);
+		System.out.println("CategoriesServlet started   ");
+		System.out.println("Kickstarter runs in  " + dataType + " mode (" + mode + ")");
 		System.out.println("-----------------------------");
 
-		daoFactory = new DaoFactory(MyDataSource.DB);
+		daoFactory = new DaoFactory(dataType);
 		quoteDao = daoFactory.getQuoteDAO();
 		categoryDao = daoFactory.getCategoryDAO();
 	}
@@ -57,9 +54,7 @@ public class CategoriesServlet extends HttpServlet {
 
 		StringBuilder stringBuilder = new StringBuilder(
 				"<html><head><title>Categories</title></head><body bgcolor=\"#fdf5e6\">");
-
-		stringBuilder.append("</b>Database username is  <b>" + dbName);
-		stringBuilder.append("</b><br>Database password is  <b>" + dbPassword + "</b></b>");
+		stringBuilder.append("Kickstarter runs in  " + dataType + " mode (" + mode + ")</br></br>");
 		stringBuilder.append(quote.getText() + "  (c) " + quote.getAuthor() + "</br></br>");
 
 		for (Category category : categoryDao.getAll()) {

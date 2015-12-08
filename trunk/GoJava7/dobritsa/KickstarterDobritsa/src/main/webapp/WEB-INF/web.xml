@@ -3,14 +3,9 @@
   <display-name>Kickstarter</display-name>
   
    <context-param>
-    <param-name>name</param-name>
-    <param-value>John</param-value>
-  </context-param>
-  <context-param>
-    <param-name>password</param-name>
-    <param-value>password</param-value>
-  </context-param>
-  
+    <param-name>mode</param-name>
+    <param-value>d</param-value>
+  </context-param>     
   
 <servlet>
 <servlet-name>ua.com.goit.gojava7.kickstarter.servlet.CategoriesServlet</servlet-name>
