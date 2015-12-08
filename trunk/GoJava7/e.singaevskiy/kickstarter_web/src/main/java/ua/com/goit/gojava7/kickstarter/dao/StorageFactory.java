@@ -23,9 +23,21 @@ public class StorageFactory {
 	private Properties properties;
 	private JdbcDispatcher dispatcher;
 
+	public StorageFactory() {
+		
+	}
+	
 	public StorageFactory(DataType dataType, Properties properties) {
 		this.dataType = dataType;
 		this.properties = properties;
+	}
+
+	public void setDataType(DataType dataType) {
+		this.dataType = dataType;
+	}
+
+	public void setDispatcher(JdbcDispatcher dispatcher) {
+		this.dispatcher = dispatcher;
 	}
 
 	public StorageFactory(DataType dataType) {

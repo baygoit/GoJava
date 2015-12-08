@@ -5,7 +5,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import ua.com.goit.gojava7.kickstarter.dao.DataType;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
 
 @WebListener
@@ -15,12 +16,13 @@ public class ContextInitializer implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		
+
 		if (sce.getServletContext().getAttribute(STORAGE_FACTORY) == null) {
 			ServletContext ctx = sce.getServletContext();
 
-			StorageFactory factory = new StorageFactory(DataType.POSTGRE,
-					getClass().getClassLoader().getResourceAsStream("config.properties"));
+			@SuppressWarnings("resource")
+			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+			StorageFactory factory = context.getBean(StorageFactory.class);
 
 			ctx.setAttribute(STORAGE_FACTORY, factory);
 			System.out.println("StorageFactory initialized successfully.");
@@ -34,7 +36,7 @@ public class ContextInitializer implements ServletContextListener {
 		if (factory != null) {
 			factory.close();
 			System.out.println("StorageFactory closed.");
-		}		
+		}
 	}
 
 }
