@@ -29,13 +29,11 @@ public class CategoriesServlet extends HttpServlet {
 		ServletContext context = getServletContext();
 		String 	mode = context.getInitParameter("mode");		
 		
-		MyDataSource dataType = MyDataSource.getByStartupKey(mode.toLowerCase());
-		context.setAttribute("mode", mode);
+		MyDataSource dataType = MyDataSource.getByKey(mode.toUpperCase());
+		context.setAttribute("mode", dataType);
 
 		System.out.println("-----------------------------");
-		System.out.println("CategoriesServlet started   ");
-		System.out.println("Kickstarter runs in  " + dataType + " mode (" + mode + ")");
-		System.out.println("set attribute: " + context.getAttribute("mode"));
+		System.out.println("CategoriesServlet started in  " + dataType + " mode (" + mode + ")");
 		System.out.println("-----------------------------");
 
 		daoFactory = new DaoFactory(dataType);

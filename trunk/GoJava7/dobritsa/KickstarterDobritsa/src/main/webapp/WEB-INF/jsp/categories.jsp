@@ -9,7 +9,7 @@
 
 	<ul>
 		<c:forEach var="category" items="${requestScope.categories}">
-			<li><a href="category?id=${category.id}">${category.name}</a></li>
+			<li><a href="projects?id=${category.id}">${category.name}</a></li>
 		</c:forEach>
 	</ul>
 

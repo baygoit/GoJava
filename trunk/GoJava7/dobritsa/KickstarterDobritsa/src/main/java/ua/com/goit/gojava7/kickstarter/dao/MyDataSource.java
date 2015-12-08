@@ -25,7 +25,7 @@ public enum MyDataSource {
 	
 	public static MyDataSource getByKey(String key) {
 		for (MyDataSource element : MyDataSource.values()) {
-			if (element.equals(key)) {
+			if (element.toString().equals(key)) {
 				return element;
 			}
 		}
