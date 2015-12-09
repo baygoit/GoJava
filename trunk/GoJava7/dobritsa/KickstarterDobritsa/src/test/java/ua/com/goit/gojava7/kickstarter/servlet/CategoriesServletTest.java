@@ -1,8 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
 import static org.mockito.Mockito.when;
-import static org.mockito.Matchers.contains;
-import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 import java.io.PrintWriter;

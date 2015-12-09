@@ -70,8 +70,7 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 
 	@Override
 	protected Project readElement(ResultSet resultSet) throws SQLException {
-		Project project;
-		project = new Project();
+		Project project = new Project();
 		project.setId(resultSet.getInt("id"));
 		project.setName(resultSet.getString("name"));
 		project.setDescription(resultSet.getString("description"));

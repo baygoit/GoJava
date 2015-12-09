@@ -55,34 +55,20 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionDao {
 
 	@Override
 	protected Question readElement(ResultSet resultSet) throws SQLException {
-		Question question;
-		question = new Question();
+		Question question = new Question();
 		question.setTime(resultSet.getString("time"));
 		question.setQuestion(resultSet.getString("question"));
 		question.setAnswer(resultSet.getString("answer"));
 		return question;
 	}
 
-	private void writeElement(Question question, PreparedStatement statement) throws SQLException {
+	protected void writeElement(Question question, PreparedStatement statement) throws SQLException {
 		statement.setString(1, question.getTime());
 		statement.setString(2, question.getQuestion());
 		statement.setString(3, question.getAnswer());
 		statement.setInt(4, question.getProjectId());
 	}
 
-	private int findProjectId(String projectName) {
-		int id;
-		String query = "SELECT id FROM " + TABLE + " WHERE name = '" + prepareStringForDb(projectName) + "'";
-		try (Connection connection = basicDataSource.getConnection(); PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-			while (resultSet.next()) {
-				id = resultSet.getInt("id");
-				return id;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
 
 	@Override
 	public List<Question> getByProject(int projectId) {

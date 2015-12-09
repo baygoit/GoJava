@@ -2,7 +2,6 @@ package ua.com.goit.gojava7.kickstarter;
 
 import org.junit.Before;
 import org.junit.Ignore;
-//import org.junit.Ignore;
 //import org.junit.After;
 //import org.junit.Before;
 import org.junit.Test;
@@ -89,15 +88,7 @@ public class KickstarterTest {
 		project1.setLink("LinkTest1");
 		project1.setCategoryName("Category1ForTest");
 
-		project2 = new Project();
-		project2.setName("Project2ForTest");
-		project2.setDescription("DescriptionTest2");
-		project2.setGoal(100000);
-		project2.setPledged(100);
-		project2.setDaysToGo(10);
-		project2.setHistory("HistoryTest2");
-		project2.setLink("LinkTest2");
-		project2.setCategoryName("Category1ForTest");
+		project2 = new Project();		
 
 		projects.add(project1);
 		projects.add(project2);
@@ -121,17 +112,20 @@ public class KickstarterTest {
 	@Test
 	@Ignore
 	public void testRunEntered1Has1Category() {
-		// when(categoryStorage.size()).thenReturn(1);
-		when(consoleScanner.getInt(anyInt(), anyInt())).thenReturn(1, 1, 0);
-		when(categoryDao.get(0)).thenReturn(category1);
+		//when(quoteDao.get(1)).thenReturn(new Quote());	
+		
+		when(consoleScanner.getInt(anyInt(), anyInt())).thenReturn(1);
+		//when(consoleScanner.getInt(0, projects.size())).thenReturn(0);
+		//when(consoleScanner.getInt(0, categoryDao.size())).thenReturn(0);
+		//when(categoryDao.get(0)).thenReturn(category1);
 		
 		kickstarter.run();
 		verify(printer).print(contains("List of categories:"));
 		verify(printer).print(contains("Choose a category by number ('0' for exit):"));
 		//assertNull(kickstarter.chooseCategory(categoryDao));
-		//verify(printer).print(contains("Current category:"));
+		verify(printer).print(contains("Current category:"));
 		// verify(printer).print(contains("List of projects:"));
-		verify(printer).print(contains("See you soon!"));
+		//verify(printer).print(contains("See you soon!"));
 	}
 
 	@Test
@@ -152,6 +146,7 @@ public class KickstarterTest {
 
 	
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testChooseCategory() {
 		
@@ -178,7 +173,7 @@ public class KickstarterTest {
 
 	@Test
 	public void testChooseProject() {
-		when(projectDao.getByCategory(anyString())).thenReturn(projects);
+	when(projectDao.getByCategory(anyString())).thenReturn(projects);
 
 		kickstarter.chooseProject(category1, projectDao);
 		verify(printer).print(contains("Current category: Category1ForTest"));

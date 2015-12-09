@@ -52,7 +52,5 @@ public class QuoteDbDao extends DbDao<Quote> implements QuoteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }

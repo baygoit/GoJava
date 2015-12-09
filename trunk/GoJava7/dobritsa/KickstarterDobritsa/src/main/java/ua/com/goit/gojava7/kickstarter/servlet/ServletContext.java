@@ -3,7 +3,7 @@ package ua.com.goit.gojava7.kickstarter.servlet;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 @WebListener
 //@WebServlet("/ServletContext")
 public class ServletContext implements ServletContextListener {

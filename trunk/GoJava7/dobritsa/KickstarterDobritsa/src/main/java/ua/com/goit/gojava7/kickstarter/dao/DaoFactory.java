@@ -132,7 +132,6 @@ public class DaoFactory {
 	}
 
 	private void initDbStorage() {
-		//open();
 		quoteDAO = new QuoteDbDao(setupDataSource("com.mysql.jdbc.Driver",
 				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
 		categoryDAO = new CategoryDbDao(setupDataSource("com.mysql.jdbc.Driver",
