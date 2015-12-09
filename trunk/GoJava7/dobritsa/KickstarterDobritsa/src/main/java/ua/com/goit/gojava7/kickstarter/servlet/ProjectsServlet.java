@@ -29,9 +29,9 @@ public class ProjectsServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException {		
+		int categoryId = Integer.parseInt(request.getParameter("id"));	
 		
-		int categoryId = Integer.parseInt(request.getParameter("id"));		
 		request.setAttribute("categoryName", categoryDao.get(categoryId));
 		request.setAttribute("projects", projectDao.getByCategory(categoryId));
 		request.getRequestDispatcher("/WEB-INF/jsp/projects.jsp").forward(request, response);			

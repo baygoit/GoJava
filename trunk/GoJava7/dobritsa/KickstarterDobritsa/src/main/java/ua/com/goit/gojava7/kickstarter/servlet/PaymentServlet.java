@@ -12,8 +12,6 @@ import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
 import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 @WebServlet("/payment")
 public class PaymentServlet extends HttpServlet {
@@ -23,7 +21,7 @@ public class PaymentServlet extends HttpServlet {
 	RewardDao rewardDao;
 
 	@Override
-	public void init() {		
+	public void init() {
 		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
 		daoFactory = new DaoFactory(dataType);
 		projectDao = daoFactory.getProjectDAO();
@@ -32,26 +30,26 @@ public class PaymentServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		int rewardId = Integer.parseInt(request.getParameter("id"));
 		int amount;
-		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Payment</title></head><body>");
+		int projectId;	
 
 		if (rewardId != 0) {
-			Reward reward = rewardDao.get(rewardId);
-			amount = reward.getAmount();
-			//Project project = projectDao.get(reward.getProjectId());			
-			
+			projectId = rewardDao.get(rewardId).getProjectId();
+			amount = rewardDao.get(rewardId).getAmount();
 		} else {
+			projectId = Integer.parseInt(request.getParameter("projectId"));
 			amount = Integer.parseInt(request.getParameter("amount"));
-			
 		}
-		stringBuilder.append("Amount of your donation is $" + amount);
-		response.getWriter().append(stringBuilder);
+		
+		request.setAttribute("project", projectDao.get(projectId));
+		request.setAttribute("amount", amount);
+		request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {		
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

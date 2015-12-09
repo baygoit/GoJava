@@ -23,8 +23,7 @@ public class CategoriesServlet extends HttpServlet {
 	private CategoryDao categoryDao;	
 
 	@Override
-	public void init(ServletConfig config) throws ServletException {
-		
+	public void init(ServletConfig config) throws ServletException {		
 		super.init(config);
 		ServletContext context = getServletContext();
 		String 	mode = context.getInitParameter("mode");		
@@ -38,18 +37,15 @@ public class CategoriesServlet extends HttpServlet {
 
 		daoFactory = new DaoFactory(dataType);
 		quoteDao = daoFactory.getQuoteDAO();
-		categoryDao = daoFactory.getCategoryDAO();
-		
+		categoryDao = daoFactory.getCategoryDAO();		
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
+			throws ServletException, IOException {		
 		request.setAttribute("quote", quoteDao.get(1));
 		request.setAttribute("categories", categoryDao.getAll());
-		request.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);		
-		
+		request.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);			
 	}
 
 }

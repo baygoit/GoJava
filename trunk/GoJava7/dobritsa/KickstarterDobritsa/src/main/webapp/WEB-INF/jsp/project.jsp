@@ -3,6 +3,8 @@
 	<jsp:param name="title" value="Project" />
 </jsp:include>
 
+<h3><a href="categories">Kickstarter</a></h3>
+
 <h1>${project.name}</h1>
 <h3>${project.description} </h3>
 <cite>
@@ -37,9 +39,6 @@
 	<br> <input type="hidden" name="projectId" value="${project.id}" />
 	<input type="submit" value="Submit" />
 </form>
-
-
-
 
 <h3><a href="rewards?projectId=${project.id}">See rewards</a></h3>
 
