@@ -32,7 +32,16 @@
 
 <c:if test="${empty questions}"><h3>There are no questions</h3></c:if>
 
+<form action="question" method="post">
+	<br>Ask your question:
+	<br><textarea name="question" rows="5" cols="60"></textarea>
+	<br> <input type="hidden" name="projectId" value="${project.id}" />
+	<input type="submit" value="Submit" />
+</form>
 
-<a href="rewards?projectId=${project.id}"><h3>See rewards</h3></a>
+
+
+
+<h3><a href="rewards?projectId=${project.id}">See rewards</a></h3>
 
 <jsp:include page="footer.jsp" />
