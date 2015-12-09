@@ -2,6 +2,8 @@ package com.airbnb;
 
 import com.airbnb.model.Apartment;
 import com.airbnb.services.ReservationDatesService;
+
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
  * Created by Игорь on 05.10.2015.
  */
 public class Search {
-    List<Apartment> newListOfApartments = new ArrayList<Apartment>();
+    List<Apartment> newListOfApartments = new ArrayList<>();
 
     public List<Apartment> searchByOwner(List<Apartment> apartments, int userId) {
         for (Apartment apartment : apartments) {
@@ -26,10 +28,13 @@ public class Search {
                 newListOfApartments.add(apartment);
             }
         }
+        if (newListOfApartments.isEmpty()){
+            throw new IllegalStateException();
+        }
         return newListOfApartments;
     }
 
-    public List<Apartment> searchByDate(List<Apartment> apartments, ReservationDatesService reservationDatesService, long dateStart, long dateFinish) {
+    public List<Apartment> searchByDate(List<Apartment> apartments, ReservationDatesService reservationDatesService, Date dateStart, Date dateFinish) {
         for (Apartment apartment : apartments) {
             if (reservationDatesService.isAvailableApartment(apartment.getIdAparnament(), dateStart, dateFinish) == true){
                 newListOfApartments.add(apartment);

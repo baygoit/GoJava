@@ -1,11 +1,8 @@
 package ua.com.goit.gojava7.kickstarter.view;
 
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 
 public class ConsoleScanner {
 	private static final String PROBLEM_ENTERED_FORBIDDEN_SYMBOL = "You entered forbidden symbol. Please try again";

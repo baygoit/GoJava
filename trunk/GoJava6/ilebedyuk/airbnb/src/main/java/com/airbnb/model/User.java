@@ -2,26 +2,59 @@ package com.airbnb.model;
 
 import org.apache.log4j.Logger;
 
+import javax.persistence.*;
+
 /**
  * Created by Игорь on 20.09.2015.
  */
+@Entity
+@Table(name="user")
 public class User implements com.airbnb.observer.Observer {
-    private String Name;
-    private String Surname;
-    private String Email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "iduser")
     private int userId;
+    @Column
+    private String name;
+    @Column
+    private String surname;
+    @Column
+    private String email;
+    @Column(name = "usertype", insertable = false)
     private String userType;
-    private String city;
+    @Column
+    private String password;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", userId=" + userId +
+                ", userType='" + userType + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+
     private static final Logger log = Logger.getLogger(User.class);
 
     public User() {}
 
-    public User(String name, String surname, String email, String city, String userType) {
-        this.Name = name;
-        this.Surname = surname;
-        this.Email = email;
+    public User(String name, String surname, String email, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String name, String surname, String email, String password, String userType) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
         this.userType = userType;
-        this.city = city;
     }
 
     public int getUserId() {
@@ -33,31 +66,31 @@ public class User implements com.airbnb.observer.Observer {
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public void setSurname(String surname){
-        Surname = surname;
+        this.surname = surname;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getUserType() {
         return userType;
     }
 
-    public String getCity() {
-        return city;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setUserType(String userType) {
@@ -65,26 +98,16 @@ public class User implements com.airbnb.observer.Observer {
     }
 
     public String getSurname() {
-        return Surname;
+        return surname;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     @Override
     public void update(String news) {
-        System.out.println("Hello! " + Name + ", today next news: " + news);
-    }
-
-    @Override
-    public String toString() {
-        return "Id: '" + this.userId +
-                "', Name: '" + this.Name +
-                "', Surname: '" + this.Surname +
-                "', Email: '" + this.Email +
-                "', City: '" + this.city +
-                "', UserType: '" + this.userType + "'";
+        System.out.println("Hello! " + name + ", today next news: " + news);
     }
 
 }

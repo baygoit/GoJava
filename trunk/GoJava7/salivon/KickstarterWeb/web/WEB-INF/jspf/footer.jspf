@@ -1,0 +1,7 @@
+<%@ page pageEncoding="UTF-8" %>
+<footer>
+    <p class="copyright">&copy; Copyright ${currentYear} 
+        Salivon Ivan &amp; Associates, Inc. All rights reserved.</p>
+</footer>
+</body>
+</html>

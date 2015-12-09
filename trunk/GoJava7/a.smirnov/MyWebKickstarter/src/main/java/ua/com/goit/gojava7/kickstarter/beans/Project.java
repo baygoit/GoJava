@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class Project {
+	
 	private int uniqueID;
 	private int categoryID;
 	private String title;

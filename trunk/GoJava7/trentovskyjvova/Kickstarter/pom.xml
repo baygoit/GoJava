@@ -14,6 +14,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.4-1206-jdbc42</version>
@@ -61,7 +66,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 

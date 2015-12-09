@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
+import ua.com.goit.gojava7.kickstarter.config.DBConnectionManager;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.dao.sql.RewardDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
@@ -26,15 +26,15 @@ public class RewardDaoSqlImplTest {
 	@Mock
 	private Connection connection = mock(Connection.class);
 	@Mock
-	DaoProvider daoProvider = mock(DaoProvider.class);
+	DBConnectionManager connectionManager = mock(DBConnectionManager.class);
 	@InjectMocks
-	private RewardDao rewardDaoMySqlImpl = new RewardDaoSqlImpl(daoProvider);
+	private RewardDao rewardDaoMySqlImpl = new RewardDaoSqlImpl(connectionManager);
 	
 	@Test
 	public void testGetReward() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.getConnection()).thenReturn(connection);
+		when(connectionManager.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -49,7 +49,7 @@ public class RewardDaoSqlImplTest {
 	public void testGetRewards() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.getConnection()).thenReturn(connection);
+		when(connectionManager.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -64,7 +64,7 @@ public class RewardDaoSqlImplTest {
 	public void testSize() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.getConnection()).thenReturn(connection);
+		when(connectionManager.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -79,7 +79,7 @@ public class RewardDaoSqlImplTest {
 	public void testGetRewardById() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.getConnection()).thenReturn(connection);
+		when(connectionManager.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);

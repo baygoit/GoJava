@@ -12,7 +12,5 @@ public interface FaqDao {
 	
 	public List<Faq> getAll();
 	
-	public int getSize();
-	
 	public List<Faq> getProjectFaqs(int projectId);
 }

@@ -1,8 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-
-
 public class Reward {
+	
 	private int projectID;
 	private int donatingSum;
 	private String description;
