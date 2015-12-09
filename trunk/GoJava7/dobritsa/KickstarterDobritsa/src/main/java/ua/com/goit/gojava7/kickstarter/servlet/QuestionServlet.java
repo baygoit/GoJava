@@ -24,7 +24,8 @@ public class QuestionServlet extends HttpServlet {
 
 	@Override
 	public void init() {
-		daoFactory = new DaoFactory(MyDataSource.DB);
+		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
+		daoFactory = new DaoFactory(dataType);
 		projectDao = daoFactory.getProjectDAO();
 		questionDao = daoFactory.getQuestionDAO();
 	}

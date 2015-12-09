@@ -28,10 +28,8 @@ public class ProjectServlet extends HttpServlet {
 	private RewardDao rewardDao;
 
 	@Override
-	public void init() throws ServletException {
-		
+	public void init() throws ServletException {		
 		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
-
 		daoFactory = new DaoFactory(dataType);
 		questionDao = daoFactory.getQuestionDAO();
 		rewardDao = daoFactory.getRewardDAO();

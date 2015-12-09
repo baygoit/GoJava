@@ -3,6 +3,8 @@
 	<jsp:param name="title" value="Kickstarter" />
 </jsp:include>
 
+<h1>Kickstarter</h1>
+
 	<em>${quote.text}</em> <em>${quote.author}</em>
 
 	<p>Categories:</p>

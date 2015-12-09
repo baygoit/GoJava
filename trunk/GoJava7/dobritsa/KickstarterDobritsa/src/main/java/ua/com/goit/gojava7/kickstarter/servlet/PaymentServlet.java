@@ -23,37 +23,35 @@ public class PaymentServlet extends HttpServlet {
 	RewardDao rewardDao;
 
 	@Override
-	public void init() {
-	
-		
-		daoFactory = new DaoFactory(MyDataSource.DB);
+	public void init() {		
+		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
+		daoFactory = new DaoFactory(dataType);
 		projectDao = daoFactory.getProjectDAO();
 		rewardDao = daoFactory.getRewardDAO();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		int rewardId = Integer.parseInt(request.getParameter("id"));
+		int amount;
 		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Payment</title></head><body>");
 
 		if (rewardId != 0) {
 			Reward reward = rewardDao.get(rewardId);
-			Project project = projectDao.get(reward.getProjectId());		
-			stringBuilder.append("Amount of your donation is $" + reward.getAmount());
-		} else if (rewardId == 0) {
-			stringBuilder.append("Enter pledge amount from $1");
+			amount = reward.getAmount();
+			//Project project = projectDao.get(reward.getProjectId());			
+			
+		} else {
+			amount = Integer.parseInt(request.getParameter("amount"));
+			
 		}
-
+		stringBuilder.append("Amount of your donation is $" + amount);
 		response.getWriter().append(stringBuilder);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+			throws ServletException, IOException {		
 		doGet(request, response);
 	}
 

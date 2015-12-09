@@ -13,6 +13,7 @@
 <h3>About this project</h3>${project.history}
 <br><br><cite>Demo video: ${project.link}</cite>
 
+<c:if test="${empty questions}"><h3>There are no questions</h3></c:if>
 
 <c:if test="${not empty questions}">
 	<h3>Questions:</h3>
@@ -29,8 +30,6 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
-<c:if test="${empty questions}"><h3>There are no questions</h3></c:if>
 
 <form action="question" method="post">
 	<br>Ask your question:
