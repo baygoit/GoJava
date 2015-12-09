@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
 import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
@@ -14,14 +15,16 @@ import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 @WebServlet("/paymentsuccessful")
 public class PaymentSuccessfulServlet extends HttpServlet {
 
-	DaoFactory daoFactory;
-	ProjectDao projectDao;
+	private DaoFactory daoFactory;
+	private ProjectDao projectDao;
+	private CategoryDao categoryDao;
 
 	@Override
 	public void init() {
 		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
 		daoFactory = new DaoFactory(dataType);
 		projectDao = daoFactory.getProjectDAO();
+		categoryDao = daoFactory.getCategoryDAO();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,6 +42,8 @@ public class PaymentSuccessfulServlet extends HttpServlet {
 		
 		projectDao.updatePledged(projectDao.get(projectId), amount);
 		int pledgedNew = projectDao.get(projectId).getPledged();
+		
+		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));	
 		request.setAttribute("pledgedOld", pledgedOld);	
 		request.setAttribute("pledgedNew", pledgedNew);	
 		request.setAttribute("project", projectDao.get(projectId));	

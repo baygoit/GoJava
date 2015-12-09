@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
 import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
@@ -16,9 +17,10 @@ import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 @WebServlet("/payment")
 public class PaymentServlet extends HttpServlet {
 
-	DaoFactory daoFactory;
-	ProjectDao projectDao;
-	RewardDao rewardDao;
+	private DaoFactory daoFactory;
+	private ProjectDao projectDao;
+	private RewardDao rewardDao;
+	private CategoryDao categoryDao;
 
 	@Override
 	public void init() {
@@ -26,6 +28,7 @@ public class PaymentServlet extends HttpServlet {
 		daoFactory = new DaoFactory(dataType);
 		projectDao = daoFactory.getProjectDAO();
 		rewardDao = daoFactory.getRewardDAO();
+		categoryDao = daoFactory.getCategoryDAO();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,6 +46,7 @@ public class PaymentServlet extends HttpServlet {
 			amount = Integer.parseInt(request.getParameter("amount"));
 		}
 		
+		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));	
 		request.setAttribute("project", projectDao.get(projectId));
 		request.setAttribute("amount", amount);
 		request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);		

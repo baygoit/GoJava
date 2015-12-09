@@ -16,7 +16,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 
 	private static final String TABLE = "project";
-	private static final String FIELDS = "id, name, description, goal, pledged, daysToGo, history, link";
+	private static final String FIELDS = "id, name, description, goal, pledged, daysToGo, history, link, category_id";
 
 	public ProjectDbDao(BasicDataSource basicDataSource) {
 		super(basicDataSource, FIELDS, TABLE);
@@ -80,6 +80,7 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 		project.setDaysToGo(resultSet.getInt("daysToGo"));
 		project.setHistory(resultSet.getString("history"));
 		project.setLink(resultSet.getString("link"));
+		project.setCategoryId(resultSet.getInt("category_id"));
 		return project;
 	}
 

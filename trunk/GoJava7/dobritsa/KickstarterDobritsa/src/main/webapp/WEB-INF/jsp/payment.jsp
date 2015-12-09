@@ -4,6 +4,7 @@
 </jsp:include>
 
 <h3><a href="categories">Kickstarter</a></h3>
+<h3><a href="projects?id=${category.id}">${category.name}</a></h3>
 <h1><a href="project?id=${project.id}">${project.name}</a></h1>
 
 <h3>Amount of your donation is $${amount}</h3>
