@@ -3,8 +3,9 @@
 	<jsp:param name="title" value="Project" />
 </jsp:include>
 
-<h3><a href="categories">Kickstarter</a></h3>
-<h3><a href="projects?id=${category.id}">${category.name}</a></h3>
+<h3><a href="categories">Kickstarter</a>
+/
+<a href="projects?id=${category.id}">${category.name}</a></h3>
 
 
 <h1>${project.name}</h1>

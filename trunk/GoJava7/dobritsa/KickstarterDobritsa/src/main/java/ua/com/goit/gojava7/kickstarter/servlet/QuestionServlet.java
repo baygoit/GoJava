@@ -18,9 +18,9 @@ import ua.com.goit.gojava7.kickstarter.domain.Question;
 @WebServlet("/question")
 public class QuestionServlet extends HttpServlet {
 
-	DaoFactory daoFactory;
-	ProjectDao projectDao;
-	QuestionDao questionDao;
+	private DaoFactory daoFactory;
+	private ProjectDao projectDao;
+	private QuestionDao questionDao;
 
 	@Override
 	public void init() {
