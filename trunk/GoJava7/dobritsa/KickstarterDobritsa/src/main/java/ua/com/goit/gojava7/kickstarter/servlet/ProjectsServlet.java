@@ -26,11 +26,7 @@ public class ProjectsServlet extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		
-		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");		
-		
-		System.out.println("-----------------------------");
-		System.out.println("ProjectsServlet started in  " + dataType + " mode (" + getServletContext().getAttribute("mode") + ")");
-		System.out.println("-----------------------------");
+		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");				
 		
 		daoFactory = new DaoFactory(dataType);
 		projectDao = daoFactory.getProjectDAO();
@@ -40,22 +36,9 @@ public class ProjectsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Projects</title></head><body>");		
-		
 		int categoryId = Integer.parseInt(request.getParameter("id"));		
-		stringBuilder.append("<h1>" + categoryDao.get(categoryId).getName() + "</h1>");
-		List<Project> projects = new ArrayList<>();
-		projects = projectDao.getByCategory(categoryId);
 
-		for (int i = 0; i < projects.size(); i++) {
-			stringBuilder.append("<br/><a href=\"project?id=" + projects.get(i).getId() + "\">" + projects.get(i).getName()
-					+ "</a>");
-			stringBuilder.append("</br>Description: \t" + projects.get(i).getDescription());
-			stringBuilder.append("</br>Goal: \t\t" + projects.get(i).getGoal());
-			stringBuilder.append("</br>Pledged: \t" + projects.get(i).getPledged());
-			stringBuilder.append("</br>Days to go: \t" + projects.get(i).getDaysToGo() + "<br/>");	
-		}
-		stringBuilder.append("</body></html>");
-		response.getWriter().append(stringBuilder);
+		request.setAttribute("projects", projectDao.getByCategory(categoryId));
+		request.getRequestDispatcher("/WEB-INF/jsp/projects.jsp").forward(request, response);			
 	}
 }
