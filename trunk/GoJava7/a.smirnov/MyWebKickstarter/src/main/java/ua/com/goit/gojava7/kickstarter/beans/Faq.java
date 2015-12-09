@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
 public class Faq {
+	
 	private int projectID;
 	private String question;
 	private String answer;

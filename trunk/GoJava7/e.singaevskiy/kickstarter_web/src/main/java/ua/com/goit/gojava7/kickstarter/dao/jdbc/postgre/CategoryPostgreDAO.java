@@ -18,6 +18,7 @@ public class CategoryPostgreDAO implements CategoryDAO {
     
     public CategoryPostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
+        System.out.println("CategoryPostgreDAO created");
     }
 
     @Override

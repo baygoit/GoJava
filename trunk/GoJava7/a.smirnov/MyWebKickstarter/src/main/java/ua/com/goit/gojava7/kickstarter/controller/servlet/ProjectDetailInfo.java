@@ -26,43 +26,22 @@ import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
  */
 @WebServlet("/project")
 public class ProjectDetailInfo extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	
 	private DaoProvider daoProvider;
 	private ProjectDao projectDao;
 	private PaymentDao paymentDao;
 	private FaqDao faqDao;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProjectDetailInfo() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
 	public void init(ServletConfig config) throws ServletException {
 		
 		daoProvider = new DaoProvider(DataSource.MYSQL);
-		
 		daoProvider.open();
 		
 		projectDao = daoProvider.getProjectDao();
-		
 		paymentDao = daoProvider.getPaymentDao();
-		
 		faqDao = daoProvider.getFaqDao();
-		
-	}
-
-	/**
-	 * @see Servlet#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 	/**

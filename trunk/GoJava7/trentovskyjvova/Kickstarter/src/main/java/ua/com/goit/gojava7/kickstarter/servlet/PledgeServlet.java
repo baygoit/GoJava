@@ -36,21 +36,9 @@ public class PledgeServlet extends HttpServlet {
 		int rewardId = Integer.parseInt(request.getParameter("rewardId"));
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
 
-		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Pledge</title></head><body>");
-		stringBuilder.append("<form action=\"pledge?rewardId=").append(rewardId).append("&projectId=").append(projectId);
-
-		stringBuilder.append("\" method=\"post\">");
-
-		stringBuilder.append("<input type=\"text\" name=\"name\" placeholder=\"name\">").append("</br>");
-		stringBuilder.append("<input type=\"text\" name=\"cardNumber\" placeholder=\"card number\">").append("</br>");
-		if (rewardId == 0) {
-			stringBuilder.append("<input type=\"text\" name=\"amount\" placeholder=\"amount\">").append("</br>");
-		}
-		stringBuilder.append("<input type=\"submit\" value=\"donate\">");
-		stringBuilder.append("</form>");
-		stringBuilder.append("</body></html>");
-
-		response.getWriter().append(stringBuilder.toString());
+		request.setAttribute("rewardId", rewardId);
+		request.setAttribute("projectId", projectId);
+		request.getRequestDispatcher("/WEB-INF/jsp/pledge.jsp").forward(request, response);
 	}
 	
 	@Override

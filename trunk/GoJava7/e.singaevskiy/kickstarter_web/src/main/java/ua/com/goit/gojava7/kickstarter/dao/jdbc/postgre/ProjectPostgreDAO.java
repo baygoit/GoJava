@@ -29,6 +29,7 @@ public class ProjectPostgreDAO implements ProjectDAO {
 
     public ProjectPostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
+        System.out.println("ProjectPostgreDAO created");
     }
 
     @Override

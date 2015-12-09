@@ -20,32 +20,21 @@ import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
  */
 @WebServlet("/ask")
 public class AskQuestion extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	private int projectId;
+	private String userName;
+	private String question;
 	
 	private FaqDao faqDao;
 	private DaoProvider daoProvider;
-	private int projectId;
-	
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AskQuestion() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
 	public void init(ServletConfig config) throws ServletException {
 		
 		daoProvider = new DaoProvider(DataSource.MYSQL);
-		
 		daoProvider.open();
 		
 		faqDao = daoProvider.getFaqDao();
-		
 	}
 
 	/**
@@ -55,30 +44,54 @@ public class AskQuestion extends HttpServlet {
 		
 		projectId = Integer.parseInt(request.getParameter("id"));
 		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/askQuestion.jsp");
-		
-		view.forward(request, response);
-		
+		request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String userName = request.getParameter("first-name");
 		
-		String question = request.getParameter("question");
+		request.setAttribute("errors", false);
 		
+		validateUserName(request, response);
+		
+		validateQuestion(request, response);
+				
 		Faq faq = new Faq();
-		
 		faq.setQuestion(question);
-		
 		faq.setProjectID(projectId);
 		
 		faqDao.add(faq);
 		
-		response.sendRedirect("/mykickstarter/project?id=" + projectId);
+		if ((Boolean)request.getAttribute("errors")) {
+			
+			request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
+			
+		}
 		
+		response.sendRedirect("/mykickstarter/project?id=" + projectId);	
+	}
+	
+	
+	protected void validateUserName(HttpServletRequest request, HttpServletResponse response) {
+		
+		userName = request.getParameter("first-name");
+		
+		if (userName.isEmpty()) {
+			request.setAttribute("errors", true);
+			request.setAttribute("nameError", true);
+		}
+	}
+	
+	
+	protected void validateQuestion(HttpServletRequest request, HttpServletResponse response) {
+		
+		question = request.getParameter("question");
+		
+		if (question.isEmpty()) {
+			request.setAttribute("errors", true);
+			request.setAttribute("questionError", true);
+		}
 	}
 }

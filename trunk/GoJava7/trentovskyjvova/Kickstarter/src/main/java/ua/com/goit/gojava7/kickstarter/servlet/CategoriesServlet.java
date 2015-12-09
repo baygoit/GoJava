@@ -38,7 +38,7 @@ public class CategoriesServlet extends HttpServlet {
 		
 		req.setAttribute("quote", quote);
 		req.setAttribute("categories", categories);
-		req.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(req, resp);		
+		req.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(req, resp);
 	}
 	
 }
