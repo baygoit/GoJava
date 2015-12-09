@@ -23,23 +23,6 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 	}
 
 	@Override
-	public List<Project> getByCategory(String categoryName) {
-		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE category_id = "
-				+ "(SELECT id FROM category WHERE name = '" + categoryName + "')";
-		List<Project> data = new ArrayList<>();
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query);
-				ResultSet resultSet = ps.executeQuery()) {
-			while (resultSet.next()) {
-				data.add(readElement(resultSet));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return data;
-	}
-
-	@Override
 	public void updatePledged(Project project, int amount) {
 		String query = "UPDATE " + TABLE + " SET pledged = pledged + " + amount + " WHERE name = '"
 				+ prepareStringForDb(project.getName()) + "'";

@@ -83,7 +83,7 @@ public class Kickstarter {
 
 	public Project chooseProject(Category category, ProjectDao projectDao) {
 		List<Project> projectsInCategory = new ArrayList<>();
-		projectsInCategory = projectDao.getByCategory(category.getName());
+		projectsInCategory = projectDao.getByCategory(category.getId());
 		printer.print(BORDER + "\nCurrent category: " + category.getName() + "\nList of projects:");
 		projectPrinter.printProjects(projectsInCategory);
 		printer.print("\nChoose a project by number ('0' to choose another category): ");

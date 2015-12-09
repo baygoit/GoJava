@@ -25,16 +25,9 @@ public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectDao {
 	}
 
 	@Override
-	public List<Project> getByCategory(String categoryName) {
-		return this.getAll().stream().filter(project -> project.getCategoryName().equals(categoryName))
-				.collect(Collectors.toList());
-	}
-
-	@Override
 	public List<Project> getByCategory(int categoryId) {
 		 return this.getAll().stream()
 	                .filter(project -> project.getCategoryId() == categoryId)
 	                .collect(Collectors.toList());
 	}
-
 }

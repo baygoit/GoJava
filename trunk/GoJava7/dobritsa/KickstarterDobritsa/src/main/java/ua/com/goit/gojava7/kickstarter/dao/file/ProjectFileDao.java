@@ -24,13 +24,7 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectDao {
 		// TODO implement writing to file
 		project.updatePledged(amount);
 	}	
-
-	@Override
-	public List<Project> getByCategory(String categoryName) {
-		return this.getAll().stream().filter(project -> project.getCategoryName().equals(categoryName))
-				.collect(Collectors.toList());
-	}
-
+	
 	@Override
 	public List<Project> getByCategory(int categoryId) {
 		 return this.getAll().stream()

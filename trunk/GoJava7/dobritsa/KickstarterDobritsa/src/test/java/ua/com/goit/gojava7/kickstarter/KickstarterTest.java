@@ -169,7 +169,7 @@ public class KickstarterTest {
 
 	@Test
 	public void testChooseProject() {
-		when(projectDao.getByCategory(anyString())).thenReturn(projects);
+		when(projectDao.getByCategory(anyInt())).thenReturn(projects);
 
 		kickstarter.chooseProject(category1, projectDao);
 		verify(printer).print(contains("Current category: Category1ForTest"));
