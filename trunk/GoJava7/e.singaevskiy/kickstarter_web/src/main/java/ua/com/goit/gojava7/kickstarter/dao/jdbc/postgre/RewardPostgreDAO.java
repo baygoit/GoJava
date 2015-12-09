@@ -24,6 +24,7 @@ public class RewardPostgreDAO implements RewardDAO {
 
     public RewardPostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
+        System.out.println("RewardPostgreDAO created");
     }
 
     @Override

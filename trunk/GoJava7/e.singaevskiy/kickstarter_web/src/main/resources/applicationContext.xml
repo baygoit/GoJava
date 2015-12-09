@@ -8,23 +8,23 @@
 	<context:property-placeholder location="classpath:config.properties" />
 
 	<bean class="ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher"
-		id="jdbcDispatcher" destroy-method="close"> <!-- singletone by default -->
+		id="jdbcDispatcher" destroy-method="close" lazy-init="true"> <!-- singletone by default -->
 		<constructor-arg name="driver" value="${jdbc.driver}"></constructor-arg>
 		<constructor-arg name="url" value="${jdbc.url}"></constructor-arg>
 		<constructor-arg name="user" value="${jdbc.user}"></constructor-arg>
 		<constructor-arg name="password" value="${jdbc.password}"></constructor-arg>
 	</bean>
 	
-	<bean id="quoteDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuotePostgreDAO" scope="singleton" autowire="constructor"/>
+	<bean id="quoteDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuotePostgreDAO" scope="singleton" autowire="constructor" lazy-init="true"/>
 
-	<bean id="categoryDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.CategoryPostgreDAO" scope="singleton" autowire="constructor"/>
+	<bean id="categoryDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.CategoryPostgreDAO" scope="singleton" autowire="constructor" lazy-init="true"/>
 
-	<bean id="projectDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.ProjectPostgreDAO" scope="singleton" autowire="constructor"/>
+	<bean id="projectDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.ProjectPostgreDAO" scope="singleton" autowire="constructor" lazy-init="true"/>
 
-	<bean id="questionsDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuestionPostgreDAO" scope="singleton" autowire="constructor"/>
+	<bean id="questionsDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuestionPostgreDAO" scope="singleton" autowire="constructor" lazy-init="true"/>
 
-	<bean id="paymentDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.PaymentPostgreDAO" scope="singleton" autowire="constructor"/>
+	<bean id="paymentDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.PaymentPostgreDAO" scope="singleton" autowire="constructor" lazy-init="true"/>
 	
-	<bean id="rewardDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.RewardPostgreDAO" scope="singleton" autowire="constructor"/>
+	<bean id="rewardDAO" class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.RewardPostgreDAO" scope="singleton" autowire="constructor" lazy-init="true"/>
 
 </beans>

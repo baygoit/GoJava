@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.CategoryPostgreDAO;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuotePostgreDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @WebServlet("/categories")
 public class CategoryListController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
+    @Autowired
     private QuoteDAO quoteDAO;
     
+    @Autowired
     private CategoryDAO categoryDAO; 
 
 	@Override
@@ -41,9 +41,7 @@ public class CategoryListController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-        quoteDAO = context.getBean(QuotePostgreDAO.class);
-        categoryDAO = context.getBean(CategoryPostgreDAO.class);
+    	SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+    		      getServletContext());
     }
-
 }
