@@ -23,13 +23,7 @@ public class ProjectFileDao extends FileDao<Project> implements ProjectDao {
 	public void updatePledged(Project project, int amount) {
 		// TODO implement writing to file
 		project.updatePledged(amount);
-	}
-
-	@Override
-	public int getPledged(String projectName) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	}	
 
 	@Override
 	public List<Project> getByCategory(String categoryName) {

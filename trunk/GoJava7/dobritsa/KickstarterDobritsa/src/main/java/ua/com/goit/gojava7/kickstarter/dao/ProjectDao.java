@@ -9,9 +9,6 @@ public interface ProjectDao extends Dao<Project> {
 	public Project getByNumber(int number);
 
 	public void updatePledged(Project project, int amount);
-
-	public int getPledged(String projectName);
-
 	public List<Project> getByCategory(String categoryName);
 	public List<Project> getByCategory(int categoryId);
 
