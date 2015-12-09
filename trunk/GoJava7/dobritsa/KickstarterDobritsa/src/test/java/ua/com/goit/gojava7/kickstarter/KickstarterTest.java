@@ -194,7 +194,7 @@ public class KickstarterTest {
 	public void testViewProject() {
 		List<Question> questions = new ArrayList<>();
 
-		when(questionDao.getByProject(anyString())).thenReturn(questions);
+		when(questionDao.getByProject(anyInt())).thenReturn(questions);
 		when(consoleScanner.getOption()).thenReturn("0");
 
 		kickstarter.viewProject(project1);

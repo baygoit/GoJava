@@ -41,16 +41,4 @@ public class QuoteDbDao extends DbDao<Quote> implements QuoteDao {
 		quote.setAuthor(resultSet.getString("author"));
 		return quote;
 	}
-
-	public void add(Quote element) {
-		String query = "insert into quote (text, author) values (?, ?)";
-		try (Connection connection = basicDataSource.getConnection(); PreparedStatement ps = connection.prepareStatement(query)) {
-			ps.setString(1, element.getText());
-			ps.setString(2, element.getAuthor());
-			ps.executeUpdate();
-			connection.commit();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 }

@@ -59,8 +59,7 @@ public class Kickstarter {
 			do {
 				currentProject = chooseProject(currentCategory, projectDao);
 				if (currentProject != null) {
-					printer.print(BORDER + "\nCurrent category: " + currentCategory.getName()
-							+ "\nCurrent project: #_____\n");
+					printer.print(BORDER + "\nCurrent category: " + currentCategory.getName() + "\n");
 					viewProject(currentProject);
 				}
 			} while (currentProject != null);
@@ -102,7 +101,7 @@ public class Kickstarter {
 		boolean exit = false;
 		while (!exit) {
 			List<Question> quoestionsInProject = new ArrayList<>();
-			quoestionsInProject = questionDao.getByProject(project.getName());
+			quoestionsInProject = questionDao.getByProject(project.getId());
 			projectPrinter.printFull(project);
 			projectPrinter.printQuestions(quoestionsInProject);
 			exit = chooseOptionOfProject(project);
@@ -139,7 +138,7 @@ public class Kickstarter {
 		projectPrinter.printRewards(rewardsInProject);
 		int numberOfReward = consoleScanner.getInt(0, rewardsInProject.size() + 1);
 		if (numberOfReward == 0) {
-			printer.print(BORDER);
+			//printer.print(BORDER);
 			return;
 		} else if (numberOfReward == (rewardsInProject.size() + 1)) {
 			int minDonation = 1;
@@ -150,22 +149,23 @@ public class Kickstarter {
 			printer.print("It was collected before: $" + project.getPledged());
 			projectDao.updatePledged(project, amount);
 			printer.print("Now collected: $" + project.getPledged());
-			printer.print(BORDER);
+			//printer.print(BORDER);
 		} else {
 			printer.print("\nAmount of your donation is $" + rewardsInProject.get(numberOfReward - 1).getAmount());
 			printer.print("It was collected before: $" + project.getPledged());
 			projectDao.updatePledged(project, rewardsInProject.get(numberOfReward - 1).getAmount());
 			printer.print("Now collected: $" + project.getPledged());
-			printer.print(BORDER);
+			//printer.print(BORDER);
 		}
 	}
 
 	public void addQuestion(Project project) {
-		printer.print("Ask your question about project: ");
+		printer.print("Ask your question about project: ");		
 
 		Question question = new Question();
 		question.setQuestion(consoleScanner.getString());
 		question.setProjectName(project.getName());
+		question.setProjectId(project.getId());
 		questionDao.add(question);
 	}
 
