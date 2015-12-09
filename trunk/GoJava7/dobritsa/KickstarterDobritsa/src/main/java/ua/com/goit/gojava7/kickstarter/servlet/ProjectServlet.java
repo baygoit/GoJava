@@ -46,18 +46,9 @@ public class ProjectServlet extends HttpServlet {
 		
 		request.setAttribute("project", projectDao.get(projectId));
 
-		List<Question> questions = new ArrayList<>();		
+		//List<Question> questions = new ArrayList<>();		
 		
 		request.setAttribute("questions", questionDao.getByProject(projectId));
-
-		//if (!questions.isEmpty())
-		//	stringBuilder.append("<h3>Questions:</h3>");
-		//for (Question question : questions) {
-		//	stringBuilder.append("<cite>" + question.getTime() + "</cite>");
-		//	stringBuilder.append("</br>" + question.getQuestion());
-		//	stringBuilder.append("</br>" + question.getAnswer());
-		//	stringBuilder.append("</br></br>");
-		//}
 
 		//stringBuilder.append("<form action=\"question\"  method=\"post\">");
 		//stringBuilder.append("</br></br>Ask a question:<br>");
@@ -66,21 +57,12 @@ public class ProjectServlet extends HttpServlet {
 		//stringBuilder.append("<input type=\"submit\" value=\"Submit\">");
 		//stringBuilder.append("</form>");
 
-		//stringBuilder
-		//		.append("<br/></br><a href=\"rewards?projectId=" + project.getId() + "\">" + "See rewards" + "</a>");
-
-		//stringBuilder.append("</body></html>");
-		//response.getWriter().append(stringBuilder);
 		request.getRequestDispatcher("/WEB-INF/jsp/project.jsp").forward(request, response);			
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

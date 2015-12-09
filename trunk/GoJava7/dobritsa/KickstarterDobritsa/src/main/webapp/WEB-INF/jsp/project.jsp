@@ -33,4 +33,6 @@
 <c:if test="${empty questions}"><h3>There are no questions</h3></c:if>
 
 
+<a href="rewards?projectId=${project.id}"><h3>See rewards</h3></a>
+
 <jsp:include page="footer.jsp" />

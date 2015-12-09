@@ -3,8 +3,7 @@
 	<jsp:param name="title" value="Projects" />
 </jsp:include>
 
-<p>Projects in category:</p>
-
+<h1>${categoryName} </h1>
 
 <ul>
 	<c:forEach var="project" items="${requestScope.projects}">
