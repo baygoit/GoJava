@@ -8,7 +8,14 @@
 
 <c:if test="${empty rewards}">
 	<h3>There are no rewards</h3>
-	<a href="payment?id=0">I want to help the project.</a>
+	<form action="payment" method="get">
+		<h3>No thanks, I just want to help the project.</h3>
+		<label>I want to help the project.</label>		
+		<input type="text" name="amount" value="1">
+		<input type="hidden" name="projectId" value="${project.id}" />
+		<input type="hidden" name="id" value="0" />
+		<input type="submit" value="Continue" />
+	</form>
 </c:if>
 
 <c:if test="${not empty rewards}">
