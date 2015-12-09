@@ -30,15 +30,18 @@ public class Adapter {
         return null;
     }
 
+    @Override
+    public String toString() {
+
+        return marker.toString();
+    }
+
     public static Comparator<Adapter> comp = new Comparator<Adapter>() {
 
         public int compare(Adapter a1, Adapter a2) {
-
             String str1 = a1.getName();
             String str2 = a2.getName();
-
             return str1.compareTo(str2);
-
         }
     };
 }
