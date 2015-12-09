@@ -23,23 +23,6 @@ public class RewardDbDao extends DbDao<Reward> implements RewardDao {
 	}
 
 	@Override
-	public List<Reward> getByProject(String projectName) {
-		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE project_id = "
-				+ "(SELECT id FROM project WHERE name = '" + prepareStringForDb(projectName) + "')";
-		List<Reward> data = new ArrayList<>();
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query);
-				ResultSet resultSet = ps.executeQuery()) {
-			while (resultSet.next()) {
-				data.add(readElement(resultSet));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return data;
-	}
-
-	@Override
 	protected Reward readElement(ResultSet resultSet) throws SQLException {
 		Reward reward = new Reward();
 		reward.setId(resultSet.getInt("id"));

@@ -30,7 +30,7 @@ public class Kickstarter {
 	private CategoryDao categoryDao;
 	private ProjectDao projectDao;
 	private QuestionDao questionDao;
-	private RewardDao rewardStorage;
+	private RewardDao rewardDao;
 
 	private Project currentProject = null;
 	private Category currentCategory = null;
@@ -43,7 +43,7 @@ public class Kickstarter {
 		this.categoryDao = categoryStorage;
 		this.projectDao = projectStorage;
 		this.questionDao = questionStorage;
-		this.rewardStorage = rewardStorage;
+		this.rewardDao = rewardStorage;
 	}
 
 	public void run() {
@@ -134,7 +134,8 @@ public class Kickstarter {
 	public void chooseReward(Project project) {
 		printer.print("\nLet's choose your reward!\n");
 		List<Reward> rewardsInProject = new ArrayList<>();
-		rewardsInProject = rewardStorage.getByProject(project.getName());
+		rewardsInProject = rewardDao.getByProject(project.getId());
+		
 		projectPrinter.printRewards(rewardsInProject);
 		int numberOfReward = consoleScanner.getInt(0, rewardsInProject.size() + 1);
 		if (numberOfReward == 0) {
