@@ -1,6 +1,8 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,25 +38,44 @@ public class PaymentServlet extends HttpServlet {
 
 		int rewardId = Integer.parseInt(request.getParameter("id"));
 		int amount;
-		int projectId;	
+		int projectId;
 
 		if (rewardId != 0) {
 			projectId = rewardDao.get(rewardId).getProjectId();
 			amount = rewardDao.get(rewardId).getAmount();
+			request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
+			request.setAttribute("project", projectDao.get(projectId));
+			request.setAttribute("amount", amount);
+			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
+
 		} else {
 			projectId = Integer.parseInt(request.getParameter("projectId"));
-			amount = Integer.parseInt(request.getParameter("amount"));
+
+			if (validateAmount(request.getParameter("amount"))) {
+				amount = Integer.parseInt(request.getParameter("amount"));
+				request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
+				request.setAttribute("project", projectDao.get(projectId));
+				request.setAttribute("amount", amount);
+				request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
+			} else {
+				request.setAttribute("message", "-----Wrong amount-----");
+				request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
+				request.setAttribute("project", projectDao.get(projectId));
+				request.setAttribute("rewards", rewardDao.getByProject(projectId));
+				request.getRequestDispatcher("/WEB-INF/jsp/rewards.jsp").forward(request, response);
+			}
 		}
-		
-		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));	
-		request.setAttribute("project", projectDao.get(projectId));
-		request.setAttribute("amount", amount);
-		request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+	}
+
+	private boolean validateAmount(String amount) {
+		Pattern p = Pattern.compile("^[0-9]{1,10}$");
+		Matcher m = p.matcher(amount);
+		return m.matches();
 	}
 
 }

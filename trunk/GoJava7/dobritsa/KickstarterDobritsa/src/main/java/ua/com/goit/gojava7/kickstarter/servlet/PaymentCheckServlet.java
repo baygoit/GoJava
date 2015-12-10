@@ -50,17 +50,19 @@ public class PaymentCheckServlet extends HttpServlet {
 
 			int pledgedOld = projectDao.get(projectId).getPledged();
 			projectDao.updatePledged(projectDao.get(projectId), amount);
-			int pledgedNew = projectDao.get(projectId).getPledged();
-
+			int pledgedNew = projectDao.get(projectId).getPledged();			
+			
 			request.setAttribute("name", name);
 			request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
 			request.setAttribute("pledgedOld", pledgedOld);
 			request.setAttribute("pledgedNew", pledgedNew);
 			request.setAttribute("project", projectDao.get(projectId));
 			request.setAttribute("amount", amount);
-			request.getRequestDispatcher("paymentsuccessful").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/jsp/paymentOk.jsp").forward(request, response);
 
 		} else {
+			
+			request.setAttribute("message", "-----Wrong data-----");
 			request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
 			request.setAttribute("project", projectDao.get(projectId));
 			request.setAttribute("amount", amount);
@@ -72,13 +74,13 @@ public class PaymentCheckServlet extends HttpServlet {
 	}
 
 	public boolean validateCard(String card) {
-		Pattern p = Pattern.compile("^[0-9]{2,16}$");
+		Pattern p = Pattern.compile("^[0-9]{16,16}$");
 		Matcher m = p.matcher(card);
 		return m.matches();
 	}
 
 	public boolean validateName(String name) {
-		Pattern p = Pattern.compile("^[a-zA-Z][a-z]{2,15}$");
+		Pattern p = Pattern.compile("^[a-zA-Z][a-z]{2,20}$");
 		Matcher m = p.matcher(name);
 		return m.matches();
 	}
