@@ -1,0 +1,89 @@
+body {
+    /*    position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;*/
+    background: antiquewhite;
+    border: 2px blue solid;
+    text-align: center;
+    margin-bottom: 10px;
+
+
+}
+#idProject{
+    visibility: hidden;
+}
+h1{
+
+}
+
+header{
+    margin: 10px 10px 0px 10px;
+    background: lightgray;
+    background-image: url(resource/logo.svg),url(resource/logo_name.svg);
+    background-size: 5em,25%;
+    background-repeat: no-repeat;
+    background-position: left center,center;
+    height: 110px;
+
+}
+nav {
+    background-color: #efe5d0;
+    margin: 10px 10px 0px 10px;
+}
+nav ul {
+    margin: 0px;
+    list-style-type: none;
+    padding: 5px 0px 5px 0px;
+}
+nav ul li {
+    display: inline;
+    padding: 5px 10px 5px 10px;
+}
+nav ul li a:link, nav ul li a:visited {
+    color: #954b4b;
+    border-bottom: none;
+    font-weight: bold;
+}
+nav ul li.selected {
+    background-color: #c8b99c;
+}
+footer{
+    margin: 10px 10px 10px 10px;
+    vertical-align:central;
+    text-align: center;
+    background: lightgray;
+    height: 60px;
+    padding: 20px;
+}
+#category ul {
+    margin: 0px;
+    list-style-type: none;
+    padding: 5px 0px 5px 0px;
+
+}
+#category ul li {
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    margin: 0px 10px;
+   
+}
+#category ul li a:link, nav ul li a:visited {
+    color: #954b4b;
+    /*border-bottom: none;*/
+    font-weight: bold;
+}
+#category ul li.selected {
+    background-color: #c8b99c;
+}
+#category ul li a{
+    display: block;
+    height: 40px;
+    width: 100px;
+    padding-top: 15px;
+    text-decoration: none;
+    border: 1px gray solid;
+    font-size: large;
+}
+

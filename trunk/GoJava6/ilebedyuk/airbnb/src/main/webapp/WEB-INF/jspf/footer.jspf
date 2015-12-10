@@ -1,0 +1,14 @@
+<%--
+    Document   : footer
+    Created on : May 20, 2010, 12:20:12 AM
+    Author     : tgiunipero
+--%>
+
+
+            <div id="footer">
+                <p id="footerText">Contact us:</p>
+                <p> 044 987 34 56 </p>
+            </div>
+        </div>
+    </body>
+</html>

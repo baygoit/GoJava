@@ -18,7 +18,7 @@ public class JdbcDispatcher {
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException(e.getMessage());
         }       
-        
+        System.out.println(driver + " - " + url + " - " + user + " - " + password);
         datasource = new BasicDataSource();
         datasource.setDriverClassName(driver);
         datasource.setUrl(url);
@@ -74,5 +74,16 @@ public class JdbcDispatcher {
 
         return false;
     }
+    
+    public void close() {
+    	try {
+    		if (datasource != null && !datasource.isClosed()) {
+    			datasource.close();
+			}			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

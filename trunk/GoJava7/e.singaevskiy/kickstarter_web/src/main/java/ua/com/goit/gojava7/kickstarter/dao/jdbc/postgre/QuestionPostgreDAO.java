@@ -22,6 +22,7 @@ public class QuestionPostgreDAO implements QuestionsDAO {
 
     public QuestionPostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
+        System.out.println("QuestionPostgreDAO created");
     }
 
     @Override

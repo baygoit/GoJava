@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>QuoteAndCategoryServlet.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;KickstarterWeb&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">ua.com.goit.gojava7.salivon</a> &gt; <span class="el_source">QuoteAndCategoryServlet.java</span></div><h1>QuoteAndCategoryServlet.java</h1><pre class="source lang-java linenums">package ua.com.goit.gojava7.salivon;
+
+import java.io.IOException;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import ua.com.goit.gojava7.salivon.beans.Category;
+import ua.com.goit.gojava7.salivon.dao.DaoFactory;
+import ua.com.goit.gojava7.salivon.dao.DataType;
+
+@WebServlet(name = &quot;QuteAndCategoryServlet&quot;, urlPatterns = {&quot;&quot;})
+<span class="fc" id="L17">public class QuoteAndCategoryServlet extends HttpServlet {</span>
+
+    @Override
+    public void init() throws ServletException {
+//        super.init();
+<span class="fc" id="L22">        ServletContext context = getServletContext();</span>
+<span class="fc" id="L23">        String dataType = context.getInitParameter(&quot;mode&quot;);</span>
+<span class="pc bpc" id="L24" title="3 of 14 branches missed.">        switch (dataType) {</span>
+            case &quot;file&quot;:
+<span class="fc" id="L26">                context.setAttribute(&quot;mode&quot;, DataType.FILE);</span>
+<span class="fc" id="L27">                break;</span>
+            case &quot;memory&quot;:
+<span class="fc" id="L29">                context.setAttribute(&quot;mode&quot;, DataType.MEMORY);</span>
+<span class="fc" id="L30">                break;</span>
+            case &quot;db&quot;:
+<span class="fc" id="L32">                context.setAttribute(&quot;mode&quot;, DataType.DB);</span>
+                break;
+        }
+
+<span class="fc" id="L36">    }</span>
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="fc" id="L40">        DataType dType = (DataType)getServletContext().getAttribute(&quot;mode&quot;);</span>
+<span class="fc" id="L41">        List&lt;Category&gt; categories = DaoFactory.getCategoryDao(dType).getAllCategories();</span>
+<span class="fc" id="L42">        request.setAttribute(&quot;categories&quot;, categories);</span>
+<span class="fc" id="L43">        RequestDispatcher dispatcher = request.getRequestDispatcher(&quot;index.jsp&quot;);</span>
+<span class="fc" id="L44">        dispatcher.forward(request, response);</span>
+<span class="fc" id="L45">    }</span>
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+<span class="fc" id="L50">        processRequest(request, response);</span>
+<span class="fc" id="L51">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
