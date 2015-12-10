@@ -6,16 +6,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.kickstarter.model.Category;
 
 public class DbCategoryDaoImpl implements CategoryDaoInterface {
 
-	private DBCon dbCon = new DBCon();
+	
+	private DBCon dbCon;
 
 	public DBCon getDbCon() {
 		return dbCon;
 	}
-
+	@Autowired
 	public void setDbCon(DBCon dbCon) {
 		this.dbCon = dbCon;
 	}
