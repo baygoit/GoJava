@@ -1,6 +1,6 @@
 log4j2
 
-validation date of registration is free
+validation date of registration is free+
 
 table reservebook+
 table reviews
@@ -24,6 +24,13 @@ delete renter and host
 validation compare name and surname
 check regex
 
+rollinddailefile log
+
+
+
+
+//
+where i should catch exception?
 
 
 
