@@ -8,6 +8,9 @@
 <body>
 	<div class="root">
 		<div class="box">
+		
+			<jsp:include page="Error.jsp"/>
+		
 			<div class="boxCaption basecolor">
 				<span>Enter your message</span>
 			</div>

@@ -7,17 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.config.DBConnectionManager;
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
+import javax.sql.DataSource;
+
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
 public class CategoryDaoSqlImpl implements CategoryDao {
-	 private DBConnectionManager connectionManager;
+	private DataSource dataSource;
 
-	public CategoryDaoSqlImpl(DBConnectionManager connectionManager) {
-		this.connectionManager = connectionManager;
+	public CategoryDaoSqlImpl(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 		ResultSet rset = null;
 
 		try {
-			conn = connectionManager.getConnection();
+			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement("SELECT id, name FROM category");
 			rset = stmt.executeQuery();
 
@@ -61,7 +61,7 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 		ResultSet rset = null;
 
 		try {
-			conn = connectionManager.getConnection();
+			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement("SELECT name FROM category WHERE id = " + id);
 			rset = stmt.executeQuery();
 
@@ -92,7 +92,7 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 		ResultSet rset = null;
 
 		try {
-			conn = connectionManager.getConnection();
+			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement("SELECT COUNT(*) size FROM category");
 			rset = stmt.executeQuery();
 

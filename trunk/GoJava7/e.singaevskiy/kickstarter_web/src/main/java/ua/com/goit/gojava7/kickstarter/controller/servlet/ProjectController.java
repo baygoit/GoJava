@@ -2,6 +2,8 @@ package ua.com.goit.gojava7.kickstarter.controller.servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,6 +52,7 @@ public class ProjectController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String operation = request.getParameter("operation");
         if (operation == null) {
             
@@ -63,24 +66,74 @@ public class ProjectController extends HttpServlet {
 
     private void processMessage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int projectId = Integer.parseInt(request.getParameter("projectId"));
-        //String user = request.getParameter("user");
+        String user = request.getParameter("user");
         String message = request.getParameter("message");
         
-        questionsDAO.add(new Question(projectId, message, ""));
+        Map<String, String> validationErrors = validateMessage(user, message);   	
+    	
+    	if (validationErrors.isEmpty()) {       
+    		questionsDAO.add(new Question(projectId, message, ""));
+    		response.sendRedirect("project?id=" + projectId);
+    	} else {
+    		request.getSession(false).setAttribute("errors", validationErrors);
+	    	response.sendRedirect("message?id="+projectId);
+    	}        
         
-        response.sendRedirect("project?id=" + projectId);
     }
 
-    private void processPayment(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int projectId = Integer.parseInt(request.getParameter("projectId"));
-        String user = request.getParameter("user");
-        int rewardId = Integer.parseInt(request.getParameter("rewardId"));
-        long cardId = Long.parseLong(request.getParameter("cardId"));
-        int amount = Integer.parseInt(request.getParameter("amount"));
-        
-        Payment payment = new Payment(projectId, rewardId, user, cardId, amount, new Date(System.currentTimeMillis()));
-        paymentDAO.add(payment);
-        
-        response.sendRedirect("project?id=" + projectId);
-    }   
+    private void processPayment(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    	
+    	String projectId = request.getParameter("projectId");
+    	String user = request.getParameter("user");
+    	String rewardId = request.getParameter("rewardId");
+    	String cardId = request.getParameter("cardId");
+    	String amount = request.getParameter("amount");
+    	
+    	Map<String, String> validationErrors = validatePayment(user, cardId, amount);   	
+    	
+    	if (validationErrors.isEmpty()) {
+    		Payment payment = new Payment(Integer.parseInt(projectId), 
+            		Integer.parseInt(rewardId), 
+            		user, 
+            		Long.parseLong(cardId), 
+            		Integer.parseInt(amount), 
+            		new Date(System.currentTimeMillis()));
+            paymentDAO.add(payment);           
+            response.sendRedirect("project?id=" + projectId);
+		} else {
+	    	request.getSession(false).setAttribute("errors", validationErrors);
+	    	response.sendRedirect("payment?project="+projectId+"&reward="+rewardId+"&amount=" + amount);
+		}
+       
+    }
+
+	private Map<String, String> validatePayment(String user, String cardId, String amount) {
+		Map<String, String> validationErrors = new HashMap<>();
+		int nameLength = 3;
+		if (user.length() < nameLength) {
+			validationErrors.put("user", "User name must have at least " + nameLength + " characters length");
+		}
+		int cardLength = 9;
+		if (!cardId.matches("[0-9]{" + cardLength + "}")) {
+			validationErrors.put("cardId", "Card ID must be positive numeric and have at least " + cardLength + " characters length");
+		}
+		if (!amount.matches("[0-9]+") || Integer.valueOf(amount) <= 0) {
+			validationErrors.put("amount", "Amount must be positive numeric");
+		}
+		return validationErrors;
+	}  
+	
+	private Map<String, String> validateMessage(String user, String message) {
+		Map<String, String> validationErrors = new HashMap<>();
+		int nameLength = 3;
+		if (user.length() < nameLength) {
+			validationErrors.put("user", "User name must have at least " + nameLength + " characters length");
+		}
+		int messageLength = 10;
+		if (message.length() < messageLength) {
+			validationErrors.put("message", "Message text must have at least " + messageLength + " characters length");
+		}
+
+		return validationErrors;
+	} 
 }
