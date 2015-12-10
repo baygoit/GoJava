@@ -18,7 +18,7 @@ public class JdbcDispatcher {
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException(e.getMessage());
         }       
-        
+        System.out.println(driver + " - " + url + " - " + user + " - " + password);
         datasource = new BasicDataSource();
         datasource.setDriverClassName(driver);
         datasource.setUrl(url);

@@ -1,7 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.handlers;
 
-
-
 public class TextModifer {
 	private static final String SEPARATOR = "**********************************************************************";
 	private static final String MOVE_TO_THE_NEXT_LINE = "\n";

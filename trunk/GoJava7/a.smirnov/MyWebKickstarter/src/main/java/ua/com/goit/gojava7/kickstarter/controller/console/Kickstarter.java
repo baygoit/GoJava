@@ -1,18 +1,18 @@
 package ua.com.goit.gojava7.kickstarter.controller.console;
 
-
-
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.beans.Reward;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
 
@@ -31,9 +31,10 @@ public class Kickstarter {
 	QuoteDao quotes;
 	PaymentDao payments;
 	FaqDao faqs;
+	RewardDao rewards;
 	
 	public Kickstarter(ConsolePrinter consolePrinter, ConsoleScanner consoleScanner, 
-			CategoryDao categoryDao, ProjectDao projectDao, QuoteDao quoteDao, PaymentDao paymentDao, FaqDao faqDao) {
+			CategoryDao categoryDao, ProjectDao projectDao, QuoteDao quoteDao, PaymentDao paymentDao, FaqDao faqDao, RewardDao rewards) {
 		this.consolePrinter = consolePrinter;
 		this.consoleScanner = consoleScanner;
 		this.categories = categoryDao;
@@ -41,6 +42,7 @@ public class Kickstarter {
 		this.quotes = quoteDao;
 		this.payments = paymentDao;
 		this.faqs = faqDao;
+		this.rewards = rewards;
 	}
 
 	public void start() {
@@ -177,44 +179,60 @@ public class Kickstarter {
 	
 	protected void providePaymentMethods(Project project, String userName, Long creditCardNumber) {
 		StringBuilder paymentMenu = new StringBuilder();
-		paymentMenu.
-			append("Please select option : ").
-			append(MOVE_TO_THE_NEXT_LINE).
-			append(" 1 - Donate 1$").
-			append(MOVE_TO_THE_NEXT_LINE).
-			append(" 2 - Donate 10$").
-			append(MOVE_TO_THE_NEXT_LINE).
-			append(" 3 - Donate 40$").
-			append(MOVE_TO_THE_NEXT_LINE).append(" 4 - Donate any amount that you want");	
+		
+		int projectId = project.getUniqueID();
+		
+		List<Reward> projectRewards = rewards.getProjectsRewards(projectId);
+		
+		int stepsCoutner = 0;
+		
+		if (projectRewards.isEmpty()) {
+			stepsCoutner ++;
+			paymentMenu.
+				append("Please select option : ").
+				append(MOVE_TO_THE_NEXT_LINE).
+				append(stepsCoutner + ". Donate any amount that you want");
+		} else {
+			paymentMenu.
+				append("Please select option : ");
+			
+			for (Reward reward : projectRewards) {
+				stepsCoutner ++;
+				paymentMenu.
+					append(MOVE_TO_THE_NEXT_LINE).
+					append(stepsCoutner + ". Donate " + reward.getDonatingSum() + "$ : " + reward.getDescription());
+			}
+			
+			stepsCoutner ++;
+			paymentMenu.
+				append(MOVE_TO_THE_NEXT_LINE).
+				append(stepsCoutner + ". Donate any amount that you want");
+		}
+			
 		consolePrinter.print(paymentMenu.toString());
 		
 		int userNumber;
 		do {
 			userNumber = consoleScanner.getInt();
 			
-			if (userNumber == 1) {
-				consolePrinter.print("Thank you. You donated 1$.");
-				consolePrinter.print(SEPARATOR);
-				savePaymentInfo(userName, creditCardNumber, 1, project.getUniqueID(), payments);
+			if (userNumber > 0 && userNumber < stepsCoutner) {
 				
-			} else if (userNumber == 2) {
-				consolePrinter.print("Thank you. You donated 10$.");
+				consolePrinter.print("Thank you. You donated " + projectRewards.get(userNumber - 1).getDonatingSum() + "$.");
 				consolePrinter.print(SEPARATOR);
-				savePaymentInfo(userName, creditCardNumber, 10, project.getUniqueID(), payments);				
+				savePaymentInfo(userName, creditCardNumber, projectRewards.get(userNumber - 1).getDonatingSum(), project.getUniqueID(), payments);
 				
-			} else if (userNumber == 3) {
-				consolePrinter.print("Thank you. You donated 40$.");
-				consolePrinter.print(SEPARATOR);
-				savePaymentInfo(userName, creditCardNumber, 40, project.getUniqueID(), payments);
+			} else if (userNumber == stepsCoutner) {
+				consolePrinter.print("Please enter donating sum : ");
 				
-			} else if (userNumber == 4) {
-				int donatingSum = consoleScanner.parseDonatingAmount();
-				consolePrinter.print("Thank you. You donated " + donatingSum + ".");
+				int donatingSum = consoleScanner.getInt();
+				
+				consolePrinter.print("Thank you. You donated " + donatingSum + "$.");
 				consolePrinter.print(SEPARATOR);
 				savePaymentInfo(userName, creditCardNumber, donatingSum, project.getUniqueID(), payments);
-			
+				
 			} else {
-				System.out.println("Please enter number between 1 and 4");
+				consolePrinter.print("Please select numbers between 1 and " + stepsCoutner);
+				userNumber = 0;
 			}
 		} while (userNumber == 0);
 	}

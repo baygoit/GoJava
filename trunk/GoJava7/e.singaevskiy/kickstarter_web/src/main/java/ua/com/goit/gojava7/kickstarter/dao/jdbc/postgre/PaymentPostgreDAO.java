@@ -22,6 +22,7 @@ public class PaymentPostgreDAO implements PaymentDAO {
 
     public PaymentPostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
+        System.out.println("PaymentPostgreDAO created");
     }
 
     @Override
