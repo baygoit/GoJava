@@ -2,10 +2,10 @@ package com.gojava6.airbnb.dao.apartmentdao;
 
 import com.gojava6.airbnb.Exception.daoexception.MySqlApartmentDaoException;
 import com.gojava6.airbnb.Exception.typeException.CityTypeException;
-import com.gojava6.airbnb.apartment.Apartment;
-import com.gojava6.airbnb.apartment.ApartmentType;
-import com.gojava6.airbnb.apartment.CityType;
+import com.gojava6.airbnb.model.apartment.*;
 import com.gojava6.airbnb.dao.daofactory.MySqlDAOFactory;
+
+import com.gojava6.airbnb.Exception.daoexception.MySqlApartmentDaoException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ import java.util.List;
 public class MySqlApartmentDao implements ApartmentDAO {
 
     @Override
-    public void create(Apartment apartment) throws MySqlApartmentDaoException {
+    public boolean create(Apartment apartment) {
 
         String query = "Insert into airbnb.apartment " +
                 "(hostID, apartmentType, city, address, rooms, accommodates, squareFootage) " +
@@ -33,6 +33,7 @@ public class MySqlApartmentDao implements ApartmentDAO {
             pstm.setInt(6, apartment.getAccommodates());
             pstm.setInt(7, apartment.getSquareFootage());
             pstm.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new MySqlApartmentDaoException("Can`t create apartment in DB.", e);
@@ -59,7 +60,7 @@ public class MySqlApartmentDao implements ApartmentDAO {
             int accommodates = rs.getInt("accommodates");
             int squareFootage = rs.getInt("squareFootage");
 
-            apartment = new Apartment(apartmentType, cityType);
+            apartment = new Apartment(apartmentType, cityType, "some street 4", 2);
             apartment.setApartmentID(apartmentID);
             apartment.setHostID(hostID);
             apartment.setAddress(address);
@@ -140,7 +141,7 @@ public class MySqlApartmentDao implements ApartmentDAO {
     }
 
     @Override
-    public void update(Apartment apartment) throws MySqlApartmentDaoException {
+    public boolean update(Apartment apartment) throws MySqlApartmentDaoException {
         String query = "UPDATE `airbnb`.`apartment` SET `hostID`= ?, `apartmentType`= ?, " +
                 "`city`= ?, `address`= ?, `rooms`= ?, `accommodates`= ?, `squareFootage`= ? " +
                 "WHERE `apartmentID`= ?;";
@@ -156,23 +157,25 @@ public class MySqlApartmentDao implements ApartmentDAO {
             pstm.setInt(7, apartment.getSquareFootage());
             pstm.setInt(8, apartment.getApartmentID());
             pstm.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new MySqlApartmentDaoException("Can`t update apartment.", e);
+            throw new MySqlApartmentDaoException("Can`t update apartment in database.", e);
         }
     }
 
     @Override
-    public void delete(int apartmentID) throws MySqlApartmentDaoException {
+    public boolean delete(int apartmentID) throws MySqlApartmentDaoException {
         String query = "DELETE FROM airbnb.apartment WHERE apartmentID = ?;";
 
         try (Connection connection = getConnection()) {
             PreparedStatement pstm = connection.prepareStatement(query);
             pstm.setInt(1, apartmentID);
             pstm.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new MySqlApartmentDaoException("Can`t delete apartment.", e);
+            throw new MySqlApartmentDaoException("Can`t delete apartment from database.", e);
         }
     }
 
@@ -181,7 +184,7 @@ public class MySqlApartmentDao implements ApartmentDAO {
             return new MySqlDAOFactory().getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("No connection", e);
+            throw new SQLException("No connection with MySQL database.", e);
         }
     }
 }
