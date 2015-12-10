@@ -5,17 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import ua.com.goit.gojava7.kickstarter.config.DBConnectionManager;
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
+import javax.sql.DataSource;
+
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
 public class QuoteDaoSqlImpl implements QuoteDao {
-	private DBConnectionManager connectionManager;
+	private DataSource dataSource;
 
-	public QuoteDaoSqlImpl(DBConnectionManager connectionManager) {
-		this.connectionManager = connectionManager;
+	public QuoteDaoSqlImpl(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class QuoteDaoSqlImpl implements QuoteDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = connectionManager.getConnection();
+			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement("SELECT text, author FROM quote order by random() limit 1 ");
 			rset = stmt.executeQuery();
 
