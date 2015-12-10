@@ -10,13 +10,12 @@
 
 <h3>Amount of your donation is $${amount}</h3>
 
-<form action="paymentsuccessful" method="post">
-Enter your name: <input type="text" name="name" value="name"><br>
+<form action="paymentCheck" method="post">
+Enter your name: <input type="text" name="name" value="" size=15 maxlength=20><br>
 <br>Enter your card's number: <input type="text" name="card" value="card's number"><br>
 <input type="hidden" name="projectId" value="${project.id}"/>
 <input type="hidden" name="amount" value="${amount}"/>
 <br><input type="submit" value="Submit">
 </form>
-
 
 <jsp:include page="footer.jsp" />

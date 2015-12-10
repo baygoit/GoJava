@@ -16,13 +16,12 @@ import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
 import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 
-@WebServlet("/paymentsuccessful")
-public class PaymentSuccessfulServlet extends HttpServlet {
+@WebServlet("/paymentCheck")
+public class PaymentCheckServlet extends HttpServlet {
 
 	private DaoFactory daoFactory;
 	private ProjectDao projectDao;
 	private CategoryDao categoryDao;
-
 
 	@Override
 	public void init() {
@@ -39,26 +38,41 @@ public class PaymentSuccessfulServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String name= request.getParameter("name");		
-		String card = request.getParameter("card");
-		int projectId = Integer.parseInt(request.getParameter("projectId"));
 		int amount = Integer.parseInt(request.getParameter("amount"));
-		int pledgedOld = projectDao.get(projectId).getPledged();
+		int projectId = Integer.parseInt(request.getParameter("projectId"));
 
-		projectDao.updatePledged(projectDao.get(projectId), amount);
-		int pledgedNew = projectDao.get(projectId).getPledged();
+		String name;
+		String card;
 
-		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
-		request.setAttribute("pledgedOld", pledgedOld);
-		request.setAttribute("pledgedNew", pledgedNew);
-		request.setAttribute("project", projectDao.get(projectId));
-		request.setAttribute("amount", amount);
-		request.getRequestDispatcher("/WEB-INF/jsp/paymentsuccessful.jsp").forward(request, response);
+		if (validateName(request.getParameter("name")) & validateCard(request.getParameter("card"))) {
+			name = request.getParameter("name");
+			card = request.getParameter("card");
+
+			int pledgedOld = projectDao.get(projectId).getPledged();
+			projectDao.updatePledged(projectDao.get(projectId), amount);
+			int pledgedNew = projectDao.get(projectId).getPledged();
+
+			request.setAttribute("name", name);
+			request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
+			request.setAttribute("pledgedOld", pledgedOld);
+			request.setAttribute("pledgedNew", pledgedNew);
+			request.setAttribute("project", projectDao.get(projectId));
+			request.setAttribute("amount", amount);
+			request.getRequestDispatcher("paymentsuccessful").forward(request, response);
+
+		} else {
+			request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
+			request.setAttribute("project", projectDao.get(projectId));
+			request.setAttribute("amount", amount);
+			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
+			return;
+		}
+
 		doGet(request, response);
 	}
 
 	public boolean validateCard(String card) {
-		Pattern p = Pattern.compile("^[0-9]{13,16}$");
+		Pattern p = Pattern.compile("^[0-9]{2,16}$");
 		Matcher m = p.matcher(card);
 		return m.matches();
 	}
@@ -69,4 +83,10 @@ public class PaymentSuccessfulServlet extends HttpServlet {
 		return m.matches();
 	}
 
+	public boolean validateAmount(int amount) {
+		if (amount > 0)
+			return true;
+		else
+			return false;
+	}
 }
