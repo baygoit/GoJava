@@ -3,12 +3,16 @@ package ua.com.goit.gojava7.kickstarter.servlet;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
@@ -23,12 +27,22 @@ public class ProjectServlet extends HttpServlet {
 	private ProjectDao projectDao;
 	private PaymentDao paymentDao;
 	private QuestionDao questionDao;
+	
+	private DaoProvider daoProvider;
+	protected WebApplicationContext applicationContext;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		ServletContext servletContext = config.getServletContext();
+		applicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
+		daoProvider = applicationContext.getBean(DaoProvider.class);
+		//daoProvider.open();
+		super.init(config);
+	}
+	
 	@Override
 	public void init() throws ServletException {
-		ServletContext context = getServletContext();
-		DaoProvider daoProvider = (DaoProvider) context.getAttribute(ContextListener.STORAGE_FACTORY);
-		
 		projectDao = daoProvider.getProjectReader();
 		paymentDao = daoProvider.getPaymentReader();
 		questionDao = daoProvider.getQuestionReader();
@@ -42,32 +56,12 @@ public class ProjectServlet extends HttpServlet {
 		Project selectedProject = projectDao.getProject(projectId);
 		
 		int pledged = paymentDao.getPledged(selectedProject.getId());
-		
-		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Project</title></head><body>");
-
-		stringBuilder.append("name: ").append(selectedProject.getName()).append("</br>");
-		stringBuilder.append("funded: ").append(selectedProject.getFunded(pledged)).append("</br>");
-		stringBuilder.append("daysToGo: ").append(selectedProject.getDaysToGo()).append("</br>");
-		stringBuilder.append("pledged: ").append(pledged).append("</br>");
-		stringBuilder.append("description: ").append(selectedProject.getDescription()).append("</br>");
-		stringBuilder.append("owner: ").append(selectedProject.getOwner()).append("</br>");
-		stringBuilder.append("goal: ").append(selectedProject.getGoal()).append("</br>");
-		stringBuilder.append("linkVideo: ").append(selectedProject.getLinkVideo()).append("</br>");
-
 		List<Question> questions = questionDao.getQuestions(projectId);
-		for (Question question : questions) {
-			stringBuilder.append("Question: '")
-					.append(question.getQuestionText()).append("'</br>");
-		}
-		stringBuilder.append("<a href=\"payments?projectId=").append(projectId).append("\">")
-		.append("to invest in the project").append("</a><br/>");
-		stringBuilder.append("<a href=\"question?projectId=").append(projectId).append("\">")
-		.append("to ask a question").append("</a><br/>");	
-				
-		stringBuilder.append("</body></html>");
-
-		response.getWriter().append(stringBuilder.toString());
-
+		
+		request.setAttribute("selectedProject", selectedProject);
+		request.setAttribute("pledged", pledged);
+		request.setAttribute("questions", questions);
+		request.getRequestDispatcher("/WEB-INF/jsp/project.jsp").forward(request, response);	
 	}
 
 }

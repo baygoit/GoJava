@@ -46,18 +46,24 @@
 				</c:if>
 
 				<div class="controls basecolor">
-					<a href=message?id=${project.id} style="text-decoration: none"
-						title="Send a message">
-						<div class="btn-round green">
-							<span>m</span>
-						</div>
-					</a> <a href=pay?id=${project.id} style="text-decoration: none"
-						title="Donate">
-						<div class="btn-round blue">
-							<span>$</span>
-						</div>
-					</a>
-					<jsp:include page="html/Back.html" />
+					<jsp:include page="Button.jsp" >
+						<jsp:param name="link" value="message?id=${project.id}" />
+						<jsp:param name="color" value="green" />
+						<jsp:param name="title" value="Send a message" />
+						<jsp:param name="tag" value="m" />
+					</jsp:include>
+					
+					<jsp:include page="Button.jsp" >
+						<jsp:param name="link" value="pay?id=${project.id}" />
+						<jsp:param name="color" value="blue" />
+						<jsp:param name="title" value="Donate" />
+						<jsp:param name="tag" value="$" />
+					</jsp:include>
+					
+					<jsp:include page="Button.jsp" >
+						<jsp:param name="link" value="back" />
+					</jsp:include>
+				
 				</div>
 			</div>
 		</div>

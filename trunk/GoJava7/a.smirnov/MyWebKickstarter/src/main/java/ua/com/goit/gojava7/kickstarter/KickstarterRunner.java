@@ -10,6 +10,7 @@ import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.view.ConsoleScanner;
 
@@ -23,6 +24,7 @@ public class KickstarterRunner {
 	private QuoteDao quoteDao;
 	private FaqDao faqDao;
 	private PaymentDao paymentDao;
+	private RewardDao rewardDao;
 	private Kickstarter kickstarter;
 
 	public static void main(String[] args) throws IOException {		
@@ -44,9 +46,10 @@ public class KickstarterRunner {
 		quoteDao = daoProvider.getQuoteDao();
 		faqDao = daoProvider.getFaqDao();
 		paymentDao = daoProvider.getPaymentDao();
+		rewardDao = daoProvider.getRewardDao();
 
 		kickstarter = new Kickstarter(consolePrinter, consoleScanner,
-				categoryDao, projectDao, quoteDao, paymentDao, faqDao);
+				categoryDao, projectDao, quoteDao, paymentDao, faqDao, rewardDao);
 		kickstarter.start();
 		kickstarter.stop();
 		daoProvider.close();

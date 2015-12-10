@@ -9,10 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
-import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.CategoryPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.PaymentPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.ProjectPostgreDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 @WebServlet("/category")
@@ -37,10 +42,10 @@ public class ProjectListController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-    	StorageFactory factory = (StorageFactory) getServletContext().getAttribute(ContextInitializer.STORAGE_FACTORY);        
-        projectDAO = factory.getProjectDAO();
-        paymentDAO = factory.getPaymentDAO();
-        categoryDAO = factory.getCategoryDAO();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+        categoryDAO = context.getBean(CategoryPostgreDAO.class);
+        projectDAO = context.getBean(ProjectPostgreDAO.class);
+        paymentDAO = context.getBean(PaymentPostgreDAO.class);
     }
 
 }

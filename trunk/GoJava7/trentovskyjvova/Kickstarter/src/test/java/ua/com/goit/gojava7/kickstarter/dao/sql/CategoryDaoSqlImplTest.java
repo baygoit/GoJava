@@ -12,11 +12,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import ua.com.goit.gojava7.kickstarter.config.DBConnectionManager;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.sql.CategoryDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
@@ -26,15 +27,15 @@ public class CategoryDaoSqlImplTest {
 	@Mock
 	private Connection connection = mock(Connection.class);
 	@Mock
-	DBConnectionManager connectionManager = mock(DBConnectionManager.class);
+	DataSource dataSource = mock(DataSource.class);
 	@InjectMocks
-	private CategoryDao categoryDaoMySqlImpl = new CategoryDaoSqlImpl(connectionManager);
+	private CategoryDao categoryDaoMySqlImpl = new CategoryDaoSqlImpl(dataSource);
 	
 	@Test
 	public void testGetCategory() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(connectionManager.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -49,7 +50,7 @@ public class CategoryDaoSqlImplTest {
 	public void testGetCategories() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(connectionManager.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -64,7 +65,7 @@ public class CategoryDaoSqlImplTest {
 	public void testSize() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(connectionManager.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);

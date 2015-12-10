@@ -34,96 +34,68 @@ public class ProjectDaoMysqlImpl implements ProjectDao {
 	
 	@Override
 	public void add(Project project) {
-		
 		try (PreparedStatement statement = connection.prepareStatement(INSERT_PROJECT)) {
 			
 			statement.setInt(1, project.getCategoryID());
-			
 			statement.setString(2, project.getTitle());
-			
 			statement.setString(3, project.getBriefDescription());
-			
 			statement.setString(4, project.getFullDescription());
-			
 			statement.setString(5, project.getVideoLink());
-			
 			statement.setInt(6, project.getRequiredSum());
-			
 			statement.setInt(7, project.getCollectedSum());
-			
 			statement.setInt(8, project.getDaysLeft());
 			
 			statement.executeUpdate();
 			
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-			
 		}
 	}
 
 	@Override
 	public void remove(Project project) {
-		
 		try (PreparedStatement statement = connection.prepareStatement(DELETE_PROJECT)) {
 			
 			statement.setInt(1, project.getUniqueID());
-			
 			statement.executeUpdate();
 			
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-			
 		}
 	}
 
 	@Override
 	public List<Project> getAll() {
-		
 		List<Project> projects = new ArrayList<>();
 
 		try (Statement statement = connection.createStatement();
-				
+	
 				ResultSet resultSet = statement.executeQuery(SELECT_ALL_PROJECTS)) {
 
 			while (resultSet.next()) {
 				
 				Project project = new Project();
-				
 				project.setUniqueID(resultSet.getInt("id"));
-				
 				project.setCategoryID(resultSet.getInt("category_id"));
-				
 				project.setTitle(resultSet.getString("title"));
-				
 				project.setBriefDescription(resultSet.getString("brief_description"));
-				
 				project.setFullDescription(resultSet.getString("full_description"));
-				
 				project.setVideoLink(resultSet.getString("video_link"));
-				
 				project.setRequiredSum(resultSet.getInt("required_sum"));
-				
 				project.setCollectedSum(resultSet.getInt("collected_sum"));
-				
 				project.setDaysLeft(resultSet.getInt("days_left"));
-				
+			
 				projects.add(project);
-				
 			}
 			
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-			
 		}
 		return projects;
 	}
 
 	@Override
 	public int getSize() {
-		
 		int amountOfProjects = 0;
 		
 		try (Statement statement = connection.createStatement();
@@ -131,15 +103,11 @@ public class ProjectDaoMysqlImpl implements ProjectDao {
 				ResultSet resultSet = statement.executeQuery(COUNT_ALL_PROJECTS)) {
 
 			while (resultSet.next()) {
-				
 				amountOfProjects = resultSet.getInt(1);
-				
 			}
 
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-			
 		}
 		
 		return amountOfProjects;
@@ -147,91 +115,61 @@ public class ProjectDaoMysqlImpl implements ProjectDao {
 
 	@Override
 	public List<Project> getProjectsFromCategory(int categoryID) {
-		
 		List<Project> projectFromCategory = new ArrayList<>();
 		
 		try (PreparedStatement statement = connection.prepareStatement(SELECT_PROJECTS_FROM_CATEGORY)) {
 			
 			statement.setInt(1, categoryID);
-			
 			ResultSet resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
 				
 				Project project = new Project();
-				
 				project.setUniqueID(resultSet.getInt("id"));
-				
 				project.setCategoryID(resultSet.getInt("category_id"));
-				
 				project.setTitle(resultSet.getString("title"));
-				
 				project.setBriefDescription(resultSet.getString("brief_description"));
-				
 				project.setFullDescription(resultSet.getString("full_description"));
-				
 				project.setVideoLink(resultSet.getString("video_link"));
-				
 				project.setRequiredSum(resultSet.getInt("required_sum"));
-				
 				project.setCollectedSum(resultSet.getInt("collected_sum"));
-				
 				project.setDaysLeft(resultSet.getInt("days_left"));
 				
 				projectFromCategory.add(project);
-				
 			}
 			
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-			
 		}
-		
 		return projectFromCategory;
 	}
 	
 	@Override
 	public Project getProjectById(int projectId) {
-		
 		Project project = null;
-		
+
 		try (PreparedStatement statement = connection.prepareStatement(SELECT_PROJECT_BY_ID)) {
 			
 			statement.setInt(1, projectId);
-			
 			ResultSet resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
 				
 				project = new Project();
-				
 				project.setUniqueID(resultSet.getInt("id"));
-				
 				project.setCategoryID(resultSet.getInt("category_id"));
-				
 				project.setTitle(resultSet.getString("title"));
-				
 				project.setBriefDescription(resultSet.getString("brief_description"));
-				
 				project.setFullDescription(resultSet.getString("full_description"));
-				
 				project.setVideoLink(resultSet.getString("video_link"));
-				
 				project.setRequiredSum(resultSet.getInt("required_sum"));
-				
 				project.setCollectedSum(resultSet.getInt("collected_sum"));
-				
 				project.setDaysLeft(resultSet.getInt("days_left"));
-				
 			}
 			
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-			
 		}
-		
 		return project;
 	}
 }

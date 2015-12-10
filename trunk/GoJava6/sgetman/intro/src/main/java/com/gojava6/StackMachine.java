@@ -5,6 +5,8 @@
 package com.gojava6;
 
 import java.util.Stack;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
 
 /**
  * @author Sergii Getman (GESE) / WorldTicket A/S
@@ -14,6 +16,11 @@ public class StackMachine {
     private static char MULTIPLY = '*';
     private static char ADD = '+';
     private Stack<Integer> stack = new Stack<Integer>();
+
+    BinaryOperator<Integer> add = (a, b) -> a + b;
+    BinaryOperator<Integer> multiply = (a, b) -> a * b;
+    ArithmeticalInterface<Integer> arithmeticalOperator
+            =  (a, b, c) -> c.apply(a, b);
 
     public int solution(String S) {
         if (S == null || S.isEmpty()) {
@@ -26,16 +33,21 @@ public class StackMachine {
                 continue;
             }
 
+
+
             if (c == ADD) {
                 if (stack.size() < 2) {
                     return -1;
                 }
-                stack.push(stack.pop() + stack.pop());
+                stack.push(arithmeticalOperator.apply(stack.pop(), stack.pop(), add));
                 continue;
             }
 
             if (c == MULTIPLY) {
-                stack.push(stack.pop() * stack.pop());
+                if (stack.size() < 2) {
+                    return -1;
+                }
+                stack.push(arithmeticalOperator.apply(stack.pop(), stack.pop(), multiply));
                 continue;
             }
         }

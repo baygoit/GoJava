@@ -71,8 +71,7 @@ public class DaoFactory {
 	public static BasicDataSource setupDataSource(String dbDriver, String dbURL, String user, String password) {
 		try {
 			Class.forName("org.apache.commons.dbcp2.BasicDataSource");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (ClassNotFoundException e) {			
 			e.printStackTrace();
 		}
 		BasicDataSource ds = new BasicDataSource();

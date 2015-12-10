@@ -21,48 +21,36 @@ public class QuoteDaoMysqlImpl implements QuoteDao {
 	private Connection connection = null;
 	
 	public QuoteDaoMysqlImpl(Connection connection) {
-		
-		this.connection = connection;
-		
+		this.connection = connection;	
 	}
 	
 	@Override
 	public void add(Quote quote) {
-		
 		try (PreparedStatement statement = connection.prepareStatement(INSERT_QUOTE)) {		
 			
 			statement.setString(1, quote.getQuoteText());
-			
 			statement.setString(2, quote.getAuthor());
-			
 			statement.executeUpdate();
 			
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-			
 		}
 	}
 	
 	@Override
 	public void remove(Quote quote) {
-		
 		try (PreparedStatement statement = connection.prepareStatement(DELETE_QUOTE)){	
 			
 			statement.setString(1, quote.getAuthor());
-			
 			statement.executeUpdate();
 			
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-			
 		}
 	}
 
 	@Override
 	public int getSize() {
-		
 		int amountOfQuotes = 0;
 		
 		try (Statement statement = connection.createStatement();
@@ -70,23 +58,17 @@ public class QuoteDaoMysqlImpl implements QuoteDao {
 				ResultSet resultSet = statement.executeQuery(COUNT_ALL_QUOTES)) {
 			
 			while (resultSet.next()) {
-				
 				amountOfQuotes = resultSet.getInt(1);
-				
 			}
 			
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-			
 		} 
-		
 		return amountOfQuotes;
 	}
 
 	@Override
 	public Quote getRandomQuote() {
-		
 		Quote randomQuote = null;
 		
 		try (Statement statement = connection.createStatement();
@@ -96,19 +78,13 @@ public class QuoteDaoMysqlImpl implements QuoteDao {
 			 while (resultSet.next()) {
 				 
 				 randomQuote = new Quote();
-				 
 				 randomQuote.setQuoteText(resultSet.getString("text"));
-				 
 				 randomQuote.setAuthor(resultSet.getString("author"));
-				
 			 }
 			 
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-			
 		} 
-		
 		return randomQuote;
 	}
 }
