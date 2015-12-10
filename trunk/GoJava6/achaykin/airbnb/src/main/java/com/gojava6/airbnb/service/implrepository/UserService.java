@@ -1,7 +1,8 @@
 package com.gojava6.airbnb.service.implrepository;
 
-import com.gojava6.airbnb.service.UserServiceInterface;
-import com.gojava6.airbnb.user.User;
+import com.gojava6.airbnb.model.apartment.CityType;
+import com.gojava6.airbnb.service.IUserService;
+import com.gojava6.airbnb.model.user.User;
 
 import java.util.List;
 
@@ -9,24 +10,34 @@ import java.util.List;
  * @Autor Andrey Chaykin
  * @Since 22.11.2015
  */
-public class UserService implements UserServiceInterface {
+public class UserService implements IUserService {
     @Override
     public void create(User user) {
 
     }
 
     @Override
-    public User retrieve(int userID) {
+    public User retrieveById(int userID) {
         return null;
     }
 
     @Override
-    public List<User> retrieveAllHost() {
+    public User retrieveByEMail(String eMail) {
         return null;
     }
 
     @Override
-    public List<User> retrieveAllRenters() {
+    public List<User> retrieveAllHostsByCity(CityType city) {
+        return null;
+    }
+
+    @Override
+    public List<User> retrieveAllRentersByCity(CityType city) {
+        return null;
+    }
+
+    @Override
+    public List<User> retrieveAllUsersByCity(CityType city) {
         return null;
     }
 
@@ -36,7 +47,12 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public void delete(int userID) {
+    public void delete(User user) {
+
+    }
+
+    @Override
+    public void becomeHost(User user) {
 
     }
 }
