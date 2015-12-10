@@ -18,38 +18,23 @@ import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 
-/**
- * Servlet implementation class ProjectsSelection
- */
 @WebServlet("/category")
 public class ProjectsSelection extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
 	private DaoProvider daoProvider;
 	private ProjectDao projectDao;
 	private PaymentDao paymentDao;
 	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProjectsSelection() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
+	
 	public void init(ServletConfig config) throws ServletException {
 		
 		daoProvider = new DaoProvider(DataSource.MYSQL);
-		
 		daoProvider.open();
 		
 		projectDao = daoProvider.getProjectDao();
-		
 		paymentDao = daoProvider.getPaymentDao();
-
 	}
 
 	/**
@@ -66,13 +51,8 @@ public class ProjectsSelection extends HttpServlet {
 		}
 		
 		HttpSession session = request.getSession();
-		
 		session.setAttribute("projects", projects);
 		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/projects_selection.jsp");
-		
-		view.forward(request, response);
-		
+		request.getRequestDispatcher("WEB-INF/views/projects_selection.jsp").forward(request, response);
 	}
-
 }

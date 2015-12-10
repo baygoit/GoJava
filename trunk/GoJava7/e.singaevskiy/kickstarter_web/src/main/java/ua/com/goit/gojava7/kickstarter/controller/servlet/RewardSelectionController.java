@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDAO;
-import ua.com.goit.gojava7.kickstarter.dao.StorageFactory;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.ProjectPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.RewardPostgreDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 @WebServlet("/pay")
@@ -38,9 +42,9 @@ public class RewardSelectionController extends HttpServlet {
     
     @Override
     public void init() throws ServletException {
-    	StorageFactory factory = (StorageFactory) getServletContext().getAttribute(ContextInitializer.STORAGE_FACTORY);
-        rewardDAO = factory.getRewardDAO();
-        projectDAO = factory.getProjectDAO();
+    	WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+        rewardDAO = context.getBean(RewardPostgreDAO.class);
+        projectDAO = context.getBean(ProjectPostgreDAO.class);
     }
 
 }

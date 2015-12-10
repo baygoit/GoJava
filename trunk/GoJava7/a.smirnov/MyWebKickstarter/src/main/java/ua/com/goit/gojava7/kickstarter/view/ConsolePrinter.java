@@ -1,7 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.view;
 
-
-
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;

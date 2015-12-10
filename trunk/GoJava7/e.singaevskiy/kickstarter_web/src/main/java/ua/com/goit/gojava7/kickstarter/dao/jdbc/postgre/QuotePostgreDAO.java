@@ -18,6 +18,7 @@ public class QuotePostgreDAO implements QuoteDAO {
     
     public QuotePostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
+        System.out.println("QuotePostgreDAO created");
     }
 
     @Override
