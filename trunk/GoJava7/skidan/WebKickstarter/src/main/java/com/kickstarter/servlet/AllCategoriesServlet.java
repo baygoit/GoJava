@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.ApplicationContext;
+//import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.kickstarter.dao.interfaces.DbCategoryDaoImpl;
 import com.kickstarter.dao.interfaces.DbQuoteImpl;
@@ -21,16 +23,18 @@ import com.kickstarter.model.Quote;
 public class AllCategoriesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
+	@Autowired
 	DbCategoryDaoImpl categoryDao;
 	
-	
+	@Autowired
 	DbQuoteImpl quoteDao;
 
 	public void init() throws ServletException {
-		ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-		quoteDao = (DbQuoteImpl) context.getBean("DbQuoteImpl");
-		categoryDao = (DbCategoryDaoImpl) context.getBean("DbCategoryDaoImpl");
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+			      getServletContext());
+//		ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+//		quoteDao = (DbQuoteImpl) context.getBean("DbQuoteImpl");
+//		categoryDao = (DbCategoryDaoImpl) context.getBean("DbCategoryDaoImpl");
 		
 		//		quoteDao = new DbQuoteImpl();
 //		categoryDao = new DbCategoryDaoImpl();

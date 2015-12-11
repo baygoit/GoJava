@@ -16,27 +16,10 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 
 	private static final String TABLE = "project";
-	private static final String FIELDS = "id, name, description, goal, pledged, daysToGo, history, link";
+	private static final String FIELDS = "id, name, description, goal, pledged, daysToGo, history, link, category_id";
 
 	public ProjectDbDao(BasicDataSource basicDataSource) {
 		super(basicDataSource, FIELDS, TABLE);
-	}
-
-	@Override
-	public List<Project> getByCategory(String categoryName) {
-		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE category_id = "
-				+ "(SELECT id FROM category WHERE name = '" + categoryName + "')";
-		List<Project> data = new ArrayList<>();
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query);
-				ResultSet resultSet = ps.executeQuery()) {
-			while (resultSet.next()) {
-				data.add(readElement(resultSet));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return data;
 	}
 
 	@Override
@@ -53,25 +36,8 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 	}
 
 	@Override
-	public int getPledged(String projectName) {
-		String query = "SELECT pledged FROM " + TABLE + " WHERE name = '" + prepareStringForDb(projectName) + "'";
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query);
-				ResultSet resultSet = ps.executeQuery()) {
-			if (resultSet.next()) {
-				int pledged = resultSet.getInt("pledged");
-				return pledged;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	@Override
 	protected Project readElement(ResultSet resultSet) throws SQLException {
-		Project project;
-		project = new Project();
+		Project project = new Project();
 		project.setId(resultSet.getInt("id"));
 		project.setName(resultSet.getString("name"));
 		project.setDescription(resultSet.getString("description"));
@@ -80,6 +46,7 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 		project.setDaysToGo(resultSet.getInt("daysToGo"));
 		project.setHistory(resultSet.getString("history"));
 		project.setLink(resultSet.getString("link"));
+		project.setCategoryId(resultSet.getInt("category_id"));
 		return project;
 	}
 

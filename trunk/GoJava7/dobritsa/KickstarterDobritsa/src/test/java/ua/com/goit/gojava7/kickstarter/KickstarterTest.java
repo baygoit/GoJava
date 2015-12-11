@@ -2,7 +2,6 @@ package ua.com.goit.gojava7.kickstarter;
 
 import org.junit.Before;
 import org.junit.Ignore;
-//import org.junit.Ignore;
 //import org.junit.After;
 //import org.junit.Before;
 import org.junit.Test;
@@ -90,14 +89,6 @@ public class KickstarterTest {
 		project1.setCategoryName("Category1ForTest");
 
 		project2 = new Project();
-		project2.setName("Project2ForTest");
-		project2.setDescription("DescriptionTest2");
-		project2.setGoal(100000);
-		project2.setPledged(100);
-		project2.setDaysToGo(10);
-		project2.setHistory("HistoryTest2");
-		project2.setLink("LinkTest2");
-		project2.setCategoryName("Category1ForTest");
 
 		projects.add(project1);
 		projects.add(project2);
@@ -106,9 +97,9 @@ public class KickstarterTest {
 		categories.add(category2);
 	}
 
-	@Test	
+	@Test
 	public void testRunEntered0SaysFarewell() {
-		when(quoteDao.get(1)).thenReturn(new Quote());		
+		when(quoteDao.get(1)).thenReturn(new Quote());
 		when(consoleScanner.getInt(anyInt(), anyInt())).thenReturn(0);
 
 		kickstarter.run();
@@ -121,17 +112,20 @@ public class KickstarterTest {
 	@Test
 	@Ignore
 	public void testRunEntered1Has1Category() {
-		// when(categoryStorage.size()).thenReturn(1);
-		when(consoleScanner.getInt(anyInt(), anyInt())).thenReturn(1, 1, 0);
-		when(categoryDao.get(0)).thenReturn(category1);
-		
+		// when(quoteDao.get(1)).thenReturn(new Quote());
+
+		when(consoleScanner.getInt(anyInt(), anyInt())).thenReturn(1);
+		// when(consoleScanner.getInt(0, projects.size())).thenReturn(0);
+		// when(consoleScanner.getInt(0, categoryDao.size())).thenReturn(0);
+		// when(categoryDao.get(0)).thenReturn(category1);
+
 		kickstarter.run();
 		verify(printer).print(contains("List of categories:"));
 		verify(printer).print(contains("Choose a category by number ('0' for exit):"));
-		//assertNull(kickstarter.chooseCategory(categoryDao));
-		//verify(printer).print(contains("Current category:"));
+		// assertNull(kickstarter.chooseCategory(categoryDao));
+		verify(printer).print(contains("Current category:"));
 		// verify(printer).print(contains("List of projects:"));
-		verify(printer).print(contains("See you soon!"));
+		// verify(printer).print(contains("See you soon!"));
 	}
 
 	@Test
@@ -150,35 +144,32 @@ public class KickstarterTest {
 		verify(printer).print(contains("See you soon!"));
 	}
 
-	
-	
 	@Test
 	public void testChooseCategory() {
-		
+
 		kickstarter.chooseCategory(categoryDao);
 		verify(printer).print(contains("List of categories:"));
-		verify(categoryPrinter).printCategories(anyList());
 		verify(printer).print(contains("Choose a category by number ('0' for exit): "));
 	}
-	
+
 	@Test
-	public void testSetCurrentCategoryEntered0() {		
+	public void testSetCurrentCategoryEntered0() {
 		when(consoleScanner.getInt(0, categoryDao.size())).thenReturn(0);
 
 		assertNull(kickstarter.setCurrentCategory(categoryDao));
 	}
 
 	@Test
-	public void testSetCurrentCategoryEntered1() {	
+	public void testSetCurrentCategoryEntered1() {
 		when(consoleScanner.getInt(0, categoryDao.size())).thenReturn(1);
-		
+
 		kickstarter.setCurrentCategory(categoryDao);
 		verify(categoryDao).getByNumber(1);
 	}
 
 	@Test
 	public void testChooseProject() {
-		when(projectDao.getByCategory(anyString())).thenReturn(projects);
+		when(projectDao.getByCategory(anyInt())).thenReturn(projects);
 
 		kickstarter.chooseProject(category1, projectDao);
 		verify(printer).print(contains("Current category: Category1ForTest"));
@@ -203,7 +194,7 @@ public class KickstarterTest {
 	public void testViewProject() {
 		List<Question> questions = new ArrayList<>();
 
-		when(questionDao.getByProject(anyString())).thenReturn(questions);
+		when(questionDao.getByProject(anyInt())).thenReturn(questions);
 		when(consoleScanner.getOption()).thenReturn("0");
 
 		kickstarter.viewProject(project1);
@@ -244,17 +235,31 @@ public class KickstarterTest {
 		verify(printer).print(contains("Enter your name:"));
 		verify(printer).print(contains("Enter your card's number:"));
 		verify(printer).print(contains("Let's choose your reward!"));
-	}
+	}	
 
+	@Test
+	public void testChooseRewardEntered0() {
+		List<Reward> rewards = new ArrayList<>();
+		rewards.add(new Reward());
+
+		when(rewardDao.getByProject(anyInt())).thenReturn(rewards);
+		when(consoleScanner.getInt(0, rewards.size() + 1)).thenReturn(0);
+
+		kickstarter.chooseReward(project1);
+		verify(printer).print(contains("Let's choose your reward!"));
+		verify(printer, never()).print(contains("Amount of your donation is"));
+		verifyNoMoreInteractions(projectDao);
+	}
+	
 	@Test
 	public void testChooseRewardEnteredNumberOfSomeReward() {
 		Reward reward1 = new Reward();
 		reward1.setAmount(10);
-		List<Reward> rewards = new ArrayList<>();
-		rewards.add(reward1);
+		List<Reward> rewardsInProject = new ArrayList<>();
+		rewardsInProject.add(reward1);
 
-		when(rewardDao.getByProject(anyString())).thenReturn(rewards);
-		when(consoleScanner.getInt(0, rewards.size() + 1)).thenReturn(1);
+		when(rewardDao.getByProject(anyInt())).thenReturn(rewardsInProject);
+		when(consoleScanner.getInt(0, rewardsInProject.size() + 1)).thenReturn(1);
 
 		kickstarter.chooseReward(project1);
 		verify(printer).print(contains("Let's choose your reward!"));
@@ -264,25 +269,12 @@ public class KickstarterTest {
 	}
 
 	@Test
-	public void testChooseRewardEntered0() {
-		List<Reward> rewards = new ArrayList<>();
-		rewards.add(new Reward());
-
-		when(rewardDao.getByProject(anyString())).thenReturn(rewards);
-		when(consoleScanner.getInt(0, rewards.size() + 1)).thenReturn(0);
-
-		kickstarter.chooseReward(project1);
-		verify(printer).print(contains("Let's choose your reward!"));
-		verify(projectPrinter).printRewards(rewards);
-	}
-
-	@Test
 	public void testChooseRewardEnteredLastNumber() {
-		List<Reward> rewards = new ArrayList<>();
-		rewards.add(new Reward());
+		List<Reward> rewardsInProject = new ArrayList<>();
+		rewardsInProject.add(new Reward());
 
-		when(rewardDao.getByProject(anyString())).thenReturn(rewards);
-		when(consoleScanner.getInt(0, rewards.size() + 1)).thenReturn(2);
+		when(rewardDao.getByProject(anyInt())).thenReturn(rewardsInProject);		
+		when(consoleScanner.getInt(0, rewardsInProject.size() + 1)).thenReturn(2);
 		when(consoleScanner.getInt(1, 99900)).thenReturn(200);
 
 		kickstarter.chooseReward(project1);
@@ -292,6 +284,7 @@ public class KickstarterTest {
 		verify(printer).print(contains("It was collected before: $100"));
 		verify(projectDao).updatePledged(project1, 200);
 	}
+	
 
 	@Test
 	public void testAddQuestion() {
@@ -309,5 +302,4 @@ public class KickstarterTest {
 		kickstarter.shutdown();
 		verify(consoleScanner).close();
 	}
-
 }
