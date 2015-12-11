@@ -12,11 +12,11 @@
            http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 	<bean id="DbCategoryDaoImpl" class="com.kickstarter.dao.interfaces.DbCategoryDaoImpl">
-		<property name="dbCon" ref="DBCon" />
+		
 	</bean>
 
 <bean id="DbQuoteImpl" class="com.kickstarter.dao.interfaces.DbQuoteImpl">
-		<property name="dbCon" ref="DBCon" />
+		
 	</bean>
 
 
@@ -25,5 +25,6 @@
 		<property name="user" value="root" />
 		<property name="password" value="12345" />
 	</bean>
-
+	
+<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 </beans>

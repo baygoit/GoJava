@@ -66,5 +66,40 @@ public class ConsoleScanner {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	
+	//protected void validateCreditCardNumber(HttpServletRequest request, HttpServletResponse response) {
+		//+		
+		//+		String regex = "\\d{13,16}";
+		///+		Pattern pattern = Pattern.compile(regex);
+		//+		
+		///+		if (request.getParameter("creditCardNumber").isEmpty()) {
+		///+			
+		//+			request.setAttribute("errors", true);
+		//+			request.setAttribute("creditCardError", true);
+	//	+			
+	//	+		} else {
+	//	+			
+	//	+			try {
+	//	+				
+	//	+				creditCardNumber = Long.parseLong(request.getParameter("creditCardNumber"));
+	//	+				
+	//	+			} catch (NumberFormatException e) {
+	//	+				
+	//	+				request.setAttribute("errors", true);
+	//	+				request.setAttribute("creditCardError", true);
+	//	+				
+	//	+			}
+	//	+			
+	//	+			Matcher matcher = pattern.matcher(Long.toString(creditCardNumber));
+	//	+			
+	//	+			if (matcher.matches() == false) {
+	//	+				request.setAttribute("errors", true);
+	//	+				request.setAttribute("creditCardError", true);
+	///	+			}
+	//	+		}
+	//	+	}
 
 }

@@ -12,13 +12,7 @@ public class RewardMemoryDao extends MemoryDao<Reward> implements RewardDao {
 	public RewardMemoryDao(List<Reward> data) {
 		super(data);
 	}
-
-	@Override
-	public List<Reward> getByProject(String projectName) {
-		return this.getAll().stream().filter(reward -> reward.getProjectName().equals(projectName))
-				.collect(Collectors.toList());
-	}
-
+	
 	@Override
 	public List<Reward> getByProject(int projectId) {
 		return this.getAll().stream()

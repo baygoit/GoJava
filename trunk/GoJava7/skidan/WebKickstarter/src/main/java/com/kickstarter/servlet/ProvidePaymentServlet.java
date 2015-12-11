@@ -24,9 +24,17 @@ public class ProvidePaymentServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Integer paymentAmount = Integer.parseInt(request.getParameter("paymentAmount"));
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
 
+		Integer paymentAmount = null;
+		try {
+			paymentAmount = Integer.parseInt(request.getParameter("paymentAmount"));
+		} catch (NumberFormatException e) {
+			
+			response.sendRedirect("http://localhost:8080/WebKickstarter/SingleProjectServlet?projectId=" + projectId);
+               return;
+		}
+		
 		if(paymentAmount < 0){
 			response.sendRedirect("http://localhost:8080/WebKickstarter/SingleProjectServlet?projectId=" + projectId);
 
@@ -38,7 +46,10 @@ public class ProvidePaymentServlet extends HttpServlet {
 		project.setGainedSum(gainedSum + paymentAmount);
 		projectDao.update(project);
 		response.sendRedirect("http://localhost:8080/WebKickstarter/SingleProjectServlet?projectId=" + projectId);
-	}}
+	}
+		
+	
+	}
 
 
 }

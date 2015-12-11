@@ -7,23 +7,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
+@Repository
 public class CategoryDaoMySqlImpl implements CategoryDao {
-	private Connection connection;
 
-	public CategoryDaoMySqlImpl(Connection connection) {
-		this.connection = connection;
-	}
+	@Autowired
+	private DataSource dataSource;
 
 	@Override
 	public List<Category> getAll() {
 		List<Category> categories = new ArrayList<Category>();
 
+		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
+			connection = dataSource.getConnection();
 			ps = connection.prepareStatement("SELECT id, name FROM category order by name");
 			rs = ps.executeQuery();
 
@@ -55,6 +61,14 @@ public class CategoryDaoMySqlImpl implements CategoryDao {
 					e.printStackTrace();
 				}
 			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 
 		return categories;
@@ -64,9 +78,11 @@ public class CategoryDaoMySqlImpl implements CategoryDao {
 	public int count() {
 		int count = 0;
 
+		Connection connection = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
+			connection = dataSource.getConnection();
 			ps = connection.prepareStatement("SELECT count(*) as cnt FROM category");
 			rs = ps.executeQuery();
 
@@ -89,6 +105,14 @@ public class CategoryDaoMySqlImpl implements CategoryDao {
 			if (ps != null) {
 				try {
 					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

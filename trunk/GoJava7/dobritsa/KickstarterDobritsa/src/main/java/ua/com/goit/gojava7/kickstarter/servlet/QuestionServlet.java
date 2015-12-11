@@ -11,21 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
 import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 @WebServlet("/question")
 public class QuestionServlet extends HttpServlet {
 
-	DaoFactory daoFactory;
-	ProjectDao projectDao;
-	QuestionDao questionDao;
+	private DaoFactory daoFactory;
+	private QuestionDao questionDao;
 
 	@Override
 	public void init() {
-		daoFactory = new DaoFactory(MyDataSource.DB);
-		projectDao = daoFactory.getProjectDAO();
+		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
+		daoFactory = new DaoFactory(dataType);
 		questionDao = daoFactory.getQuestionDAO();
 	}
 
