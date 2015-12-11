@@ -64,9 +64,8 @@ public QuoteDatabaseDao(DataSource dataSource) {
 
 
     @Override
-    public Connection getConnection() throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+    public Connection getConnection() throws SQLException{
+        return dataSource.getConnection();
     }
 
 
