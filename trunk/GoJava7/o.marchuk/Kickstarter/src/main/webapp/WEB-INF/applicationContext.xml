@@ -24,7 +24,7 @@
 
 	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter">
 		<!-- <context:exclude-filter type="regex" expression="!(ua\.com\.goit\.gojava7\.kickstarter\.dao\.\${backend}\..*)"/> -->
-		<context:exclude-filter type="aspectj" expression="ua.com.goit.gojava7.kickstarter.dao..* &amp;&amp; !ua.com.goit.gojava7.kickstarter.dao.${backend}..*" />
+		<context:exclude-filter type="aspectj" expression="ua.com.goit.gojava7.kickstarter.dao..* &amp;&amp; !ua.com.goit.gojava7.kickstarter.dao.mysql..*" />
 	</context:component-scan>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
