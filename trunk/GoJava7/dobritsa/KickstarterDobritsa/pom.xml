@@ -5,7 +5,8 @@
 	<groupId>ua.com.goit.gojava7</groupId>
 	<artifactId>Kickstarter</artifactId>
 	<version>1.0</version>
-
+	<packaging>war</packaging>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-version>3.0.2.RELEASE</spring-version>
@@ -88,15 +89,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<warSourceDirectory>WebContent</warSourceDirectory>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-		</plugins>
+			</plugins>
 	</build>
-	<packaging>war</packaging>
+	
 </project>
