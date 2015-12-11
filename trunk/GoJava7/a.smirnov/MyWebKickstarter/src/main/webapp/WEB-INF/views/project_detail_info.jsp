@@ -7,61 +7,58 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Projects from selected category</title>
+<title>Project detail info</title>
 </head>
 <body>
 
 	<div class="container">
-	
-		<div class="title">Project detail information</div>		
 		
-		<fieldset>
+		<fieldset style="width: 600px; font-family: Arial; font-size: 14px">
 		
-			<legend class="legend">Selected project</legend>
+			<legend class="legend" style="text-align: center;">PROJECT DETAIL INFORMATION</legend>
 			
 			<div>
 				
-				<fieldset>
-				
-						<table>
+				<table>
 	   			 
-	       		   			<tr><td>Title : </td><td><c:out value="${project.getTitle()}"/></td></tr>
+	       		   		<tr><td>Title : </td><td><c:out value="${project.title}"/></td></tr>
 	       		   	
-	       		  	 		<tr><td>Brief description : </td><td><c:out value="${project.getBriefDescription()}"/></td></tr>
+	       		  	 	<tr><td>Brief description : </td><td><c:out value="${project.briefDescription}"/></td></tr>
 	       		   	
-	       		  	 		<tr><td>Required amount of $ : </td><td><c:out value="${project.getRequiredSum()}"/></td></tr>
+	       		  	 	<tr><td>Required amount of $ : </td><td><c:out value="${project.requiredSum}"/></td></tr>
 	       		   	
-	       		  	 		<tr><td>Collected amount of $ : </td><td><c:out value="${project.getCollectedSum()}"/></td></tr>
+	       		  	 	<tr><td>Collected amount of $ : </td><td><c:out value="${project.collectedSum}"/></td></tr>
 	       		  	 		
-	       		  	 		<tr><td>Full description : </td><td><c:out value="${project.getFullDescription()}"/></td></tr>
+	       		  	 	<tr><td>Full description : </td><td><c:out value="${project.fullDescription}"/></td></tr>
 	       		  	 		
-	       		  	 		<tr><td>Video : </td><td><c:out value="${project.getVideoLink()}"/></td></tr>
+	       		  	 	<tr><td>Video : </td><td><c:out value="${project.videoLink}"/></td></tr>
 	       		  	 		
-	       		  	 			<tr><td>Questions : </td>
+	       		  	 	<tr><td>Questions : </td>
+	       		  	 	
+	       		  	 	<tr>
 	       		  	 			
-		       		  	 			<td>
+		       		  		<td>
 		       		  	 				
-		       		  	 				<c:forEach items="${questions}" var="question">
+		       		  	 		<c:forEach items="${questions}" var="question">
 												
-											<ul>
-						   			 
-						       		  	 		<li><c:out value="${question.getQuestion()}"/></li>
-						       		   					       		   	
-						       		   		</ul>
-						  			 
-										</c:forEach>
-									</td>
+									<ul>
+						   		 
+						       			<li><c:out value="${question.question}"/></li>
+						       	   					       		   	
+						    		</ul>
+						  		 
+								</c:forEach>
+					
+							</td>
 									
-								</tr>
+						</tr>
 	       		  	 		
-	       		  	 		<tr><td><a href=\mykickstarter\payment?id=${project.getUniqueID()}>Donate money</a></td></tr>
+	       		  	<tr><td><a href=payment?id=${project.getUniqueID()}>Donate money</a></td></tr>
 	       		  	 		
-	       		  	 		<tr><td><a href=\mykickstarter\ask?id=${project.getUniqueID()}>Ask question</a></td></tr>
+	       			<tr><td><a href=ask?id=${project.getUniqueID()}>Ask question</a></td></tr>
     		   	
-	       		   		</table>
-	       		   	
-	       		   	</fieldset>
-			
+	        	</table>
+	        				
 			</div>
 			
 		</fieldset>

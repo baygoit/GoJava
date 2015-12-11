@@ -1,15 +1,16 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
 public class Quote {
-	private String quoteText;
+	
+	private String text;
 	private String author;
 
 	public String getQuoteText() {
-		return quoteText;
+		return text;
 	}
 	
 	public void setQuoteText(String title) {
-		this.quoteText = title;
+		this.text = title;
 	}
 
 	public String getAuthor() {

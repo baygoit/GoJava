@@ -1,8 +1,9 @@
 package com.gojava6.airbnb.dao.apartmentdao;
 
 import com.gojava6.airbnb.Exception.daoexception.MySqlApartmentDaoException;
-import com.gojava6.airbnb.apartment.Apartment;
-import com.gojava6.airbnb.apartment.CityType;
+import com.gojava6.airbnb.model.apartment.Apartment;
+import com.gojava6.airbnb.model.apartment.CityType;
+
 
 import java.util.List;
 
@@ -12,10 +13,10 @@ import java.util.List;
  */
 public interface ApartmentDAO {
 
-    void create(Apartment apartment) throws MySqlApartmentDaoException;
+    boolean create(Apartment apartment) throws MySqlApartmentDaoException;
     Apartment retrieveByID(int id) throws MySqlApartmentDaoException;
     List<Apartment> retrieveAllByCity(CityType city) throws MySqlApartmentDaoException;
     List<Apartment> retrieveAllByHost(int hostID) throws MySqlApartmentDaoException;
-    void update(Apartment apartment) throws MySqlApartmentDaoException;
-    void delete(int apartmentID) throws MySqlApartmentDaoException;
+    boolean update(Apartment apartment) throws MySqlApartmentDaoException;
+    boolean delete(int apartmentID) throws MySqlApartmentDaoException;
 }

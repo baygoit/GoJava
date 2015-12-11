@@ -1,29 +1,63 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
-<Configuration status="WARN">
-    <Properties>
-        <Property firstName="LOG_DIR">${sys:web.root/logs}</Property>
-        <Property firstName="PATTERN">%-5plevel %d{ISO8601} %t %-16c:%M(%L) -%m%n</Property>
-    </Properties>
+<Configuration status ="WARN">
     <Appenders>
-        <Console firstName="STDOUT" target="SYSTEM.OUT">
-            <PatternLayout pattern="${PATTERN}"/>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm} %t %c{3} : %m%n"/>
         </Console>
-        <RollingFile firstName="log_file"
-                     filename="$LOG_DIR/log_file.log"
-                     filePattern="LOG_DIR/archive/log_file.%d{yyyy-MM-dd-hh-mm}.gz">
-            <PatternLayout pattern="${PATTERN}"/>
-            <Policies>
-                <SizeBasedTriggeringPolicy size="10 MB"/>
-            </Policies>
-            <DefaultRolloverStategy max="10"/>
-        </RollingFile>
     </Appenders>
     <Loggers>
-        <Root level="INFO">
-            <AppenderRef ref="log_file"/>
+        <Root level="debug" additivity="true">
+            <AppenderRef ref="console"/>
         </Root>
-        <Logger>
-            <appender-ref ref="STDOUT" level="error"/>
-        </Logger>
     </Loggers>
 </Configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<Configuration status="INFO">-->
+    <!--<Properties>-->
+        <!--<Property name="LOG_DIR">${sys:web.root/logs}</Property>-->
+        <!--<Property name="PATTERN">%-5p level %d{ISO8601} %t %-16c:%M(%L) -%m%n</Property>-->
+    <!--</Properties>-->
+    <!--<Appenders>-->
+        <!--<Console firstName="STDOUT" target="SYSTEM.OUT">-->
+            <!--<PatternLayout pattern="${PATTERN}"/>-->
+        <!--</Console>-->
+        <!--<RollingFile firstName="log_file"-->
+                     <!--filename="$LOG_DIR/log_file.log"-->
+                     <!--filePattern="LOG_DIR/archive/log_file.%d{yyyy-MM-dd-hh-mm}.gz">-->
+            <!--<PatternLayout pattern="${PATTERN}"/>-->
+            <!--<Policies>-->
+                <!--<SizeBasedTriggeringPolicy size="10 MB"/>-->
+            <!--</Policies>-->
+            <!--<DefaultRolloverStategy max="10"/>-->
+        <!--</RollingFile>-->
+    <!--</Appenders>-->
+    <!--<Loggers>-->
+        <!--<Root level="INFO">-->
+            <!--<AppenderRef ref="log_file"/>-->
+        <!--</Root>-->
+        <!--<Logger>-->
+            <!--<appender-ref ref="STDOUT" level="error"/>-->
+        <!--</Logger>-->
+    <!--</Loggers>-->
+<!--</Configuration>-->

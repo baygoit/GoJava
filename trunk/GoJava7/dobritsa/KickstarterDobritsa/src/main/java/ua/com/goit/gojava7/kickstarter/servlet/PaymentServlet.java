@@ -1,6 +1,8 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
+
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +25,8 @@ public class PaymentServlet extends HttpServlet {
 
 	@Override
 	public void init() {
+	
+		
 		daoFactory = new DaoFactory(MyDataSource.DB);
 		projectDao = daoFactory.getProjectDAO();
 		rewardDao = daoFactory.getRewardDAO();

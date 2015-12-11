@@ -7,17 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.config.DBConnectionManager;
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
+import javax.sql.DataSource;
+
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
 public class PaymentDaoSqlImpl implements PaymentDao {
-	private DBConnectionManager connectionManager;
+	private DataSource dataSource;
 
-	public PaymentDaoSqlImpl(DBConnectionManager connectionManager) {
-		this.connectionManager = connectionManager;
+	public PaymentDaoSqlImpl(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class PaymentDaoSqlImpl implements PaymentDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = connectionManager.getConnection();
+			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement(
 					"SELECT id, name, cardNumber, pledge FROM payment WHERE projectId = " + projectId);
 			rset = stmt.executeQuery();
@@ -65,7 +65,7 @@ public class PaymentDaoSqlImpl implements PaymentDao {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
-			conn = connectionManager.getConnection();
+			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement("INSERT INTO payment (projectId, name, cardNumber, pledge) VALUES ('"
 					+ payment.getProjectId() + "', '" + payment.getName() + "', '" + payment.getCardNumber() + "', '"
 					+ payment.getPledge() + "');");
@@ -88,7 +88,7 @@ public class PaymentDaoSqlImpl implements PaymentDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = connectionManager.getConnection();
+			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement("SELECT SUM(pledge) pledged FROM payment WHERE projectId =" + projectId);
 			rset = stmt.executeQuery();
 

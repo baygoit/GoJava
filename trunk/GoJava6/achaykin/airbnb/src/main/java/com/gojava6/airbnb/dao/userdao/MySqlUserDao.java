@@ -2,13 +2,14 @@ package com.gojava6.airbnb.dao.userdao;
 
 import com.gojava6.airbnb.Exception.daoexception.MySqlUserDaoException;
 import com.gojava6.airbnb.Exception.typeException.CityTypeException;
-import com.gojava6.airbnb.apartment.Apartment;
-import com.gojava6.airbnb.apartment.CityType;
+import com.gojava6.airbnb.model.apartment.Apartment;
+import com.gojava6.airbnb.model.apartment.CityType;
 import com.gojava6.airbnb.dao.apartmentdao.MySqlApartmentDao;
 import com.gojava6.airbnb.dao.daofactory.MySqlDAOFactory;
-import com.gojava6.airbnb.user.Host;
-import com.gojava6.airbnb.user.Renter;
-import com.gojava6.airbnb.user.User;
+import com.gojava6.airbnb.model.user.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,41 +20,68 @@ import java.util.List;
 
 public class MySqlUserDao implements UserDAO {
 
+    private Logger LOGGER = LogManager.getLogger(MySqlUserDao.class);
+
     @Override
-    public void create(User user) throws MySqlUserDaoException {
-        if (user instanceof Renter) {
-            createRenter(user);
-        } else {
-            createHost(user);
+    public boolean create(User user) throws MySqlUserDaoException {
+        LOGGER.debug("Trying to create user in DB");
+        String query = "INSERT INTO airbnb.user (first_name, last_name, eMail, city) " +  //todo smth
+                "VALUES (?, ?, ?, ?)";
+
+        try (Connection connection = getConnection()) {
+            PreparedStatement pstm = connection.prepareStatement(query);
+
+            pstm.setString(1, user.getFirstName());
+            pstm.setString(2, user.getLastName());
+            pstm.setString(3, user.getEMail());
+            pstm.setString(4, String.valueOf(user.getCity().toString().toUpperCase()));
+            pstm.executeUpdate();
+            LOGGER.debug("User is created");//todo check if created
+            return true;
+        } catch (SQLException | MySqlUserDaoException e) {
+            e.printStackTrace();
+            LOGGER.error("Cannot create user in DB", e);
+            return false;
+//            throw new MySqlUserDaoException("Can`t create user in MySQL database.", e);
         }
     }
 
     @Override
     public User retrieveById(int userID) throws MySqlUserDaoException {
+        LOGGER.debug("Trying to retrieve user by id in DB");
         String query = "SELECT * FROM airbnb.user WHERE userID = ?;";
+        PreparedStatement pstm;
+        ResultSet rs;
+        User result;
 
         try (Connection connection = getConnection()) {
 
-            PreparedStatement stm = connection.prepareStatement(query);
-            stm.setInt(1, userID);
+            pstm = connection.prepareStatement(query);
+            pstm.setInt(1, userID);
 
-            ResultSet rs = stm.executeQuery();
-            rs.next();
+            rs = pstm.executeQuery();
 
-            String name = rs.getString("first_name");
-            String surname = rs.getString("last_name");
-            String eMail = rs.getString("eMail");
-            CityType city = CityType.fromValue(rs.getString("city"));
-            boolean isHost = rs.getBoolean("is_host");
-
-            if (isHost) {
-                List<Apartment> apartments = new MySqlApartmentDao().retrieveAllByHost(userID);
-                return new Host(userID, name, surname, eMail, city, apartments);
+            if (!rs.next()) {
+                return null;
             } else {
-                return new Renter(userID, name, surname, eMail, city);
+                UserType userType = UserType.valueOf(rs.getString("user_type"));
+                String name = rs.getString("first_name");
+                String surname = rs.getString("last_name");
+                String eMail = rs.getString("eMail");
+                CityType city = CityType.fromValue(rs.getString("city"));
+
+                result = new User(userID, userType, name, surname, eMail, city);
+
+                if (UserType.HOST.equals(userType)) {
+                    result.setApartments(new MySqlApartmentDao().retrieveAllByHost(userID));
+                }
+                LOGGER.debug("User successful retrieved by id.");
+
+                return result;
             }
         } catch (SQLException | CityTypeException e) {
             e.printStackTrace();
+            LOGGER.error("Cannot retrieve user by id from DB", e);
             throw new MySqlUserDaoException("Can`t retrieve user by id.", e);
         }
     }
@@ -63,86 +91,106 @@ public class MySqlUserDao implements UserDAO {
         String query = "SELECT * FROM airbnb.user WHERE eMail = ?;";
         PreparedStatement pstm;
         ResultSet rs;
+        User result;
 
         try (Connection connection = getConnection()) {
             pstm = connection.prepareStatement(query);
             pstm.setString(1, eMail);
             rs = pstm.executeQuery();
-            rs.next();
 
-            int userID = rs.getInt("userID");
-            String firstName = rs.getString("first_name");
-            String lastName = rs.getString("last_name");
-            CityType city = CityType.valueOf(rs.getString("city"));
-            boolean isHost = Boolean.valueOf(rs.getString("is_host"));
-
-            if (isHost) {
-                List<Apartment> apartments = new MySqlApartmentDao().retrieveAllByHost(userID);
-                return new Host(userID, firstName, lastName, eMail, city, apartments);
+            if (!rs.next()) {
+                return null;
             } else {
-                return new Renter(userID, firstName, lastName, eMail, city);
+                int userID = rs.getInt("userID");
+                UserType userType = UserType.valueOf(rs.getString("user_type"));
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                CityType city = CityType.valueOf(rs.getString("city"));
+
+                result = new User(userID, userType, firstName, lastName, eMail, city);
+
+                if (UserType.HOST.equals(userType)) {
+                    result.setApartments(new MySqlApartmentDao().retrieveAllByHost(userID));
+                }
+                LOGGER.debug("Renter successful retrieved by eMail from DB.");
+                return result;
             }
         } catch (SQLException | MySqlUserDaoException e) {
             e.printStackTrace();
+            LOGGER.error("Cannot retrieve user by eMail in DB", e);
             throw new MySqlUserDaoException("Can`t retrieve user by e-Mail.", e);
         }
     }
 
     @Override
-    public List<Host> retrieveAllHostsByCity(CityType city) throws MySqlUserDaoException {
-        List<Host> resultList = new ArrayList<>();
+    public List<User> retrieveAllHostsByCity(CityType city) throws MySqlUserDaoException {
+        List<User> resultList = new ArrayList<>();
+        PreparedStatement pstm;
+        ResultSet rs;
 
         try (Connection connection = getConnection()) {
-            String query = "SELECT * FROM airbnb.user WHERE city = ? AND is_host = 1;";
+            String query = "SELECT * FROM airbnb.user WHERE city = ? AND user_type = 'HOST'";
 
-            PreparedStatement stm = connection.prepareStatement(query);
-            stm.setString(1, String.valueOf(city));
+            pstm = connection.prepareStatement(query);
+            pstm.setString(1, String.valueOf(city));
 
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                int userID = rs.getInt("userID");
-                String name = rs.getString("first_name");
-                String surname = rs.getString("last_name");
-                String eMail = rs.getString("eMail");
+            rs = pstm.executeQuery();
+            if (rs.next()) {
+                do {
+                    int userID = rs.getInt("userID");
+                    UserType userType = UserType.valueOf(rs.getString("user_type"));
+                    String name = rs.getString("first_name");
+                    String surname = rs.getString("last_name");
+                    String eMail = rs.getString("eMail");
 
-                List<Apartment> apartments = new MySqlApartmentDao().retrieveAllByHost(userID);
-                resultList.add(new Host(userID, name, surname, eMail, city, apartments));
+                    List<Apartment> apartments = new MySqlApartmentDao().retrieveAllByHost(userID);
+                    resultList.add(new User(userID, userType, name, surname, eMail, city, apartments));
+                } while (rs.next());
             }
+            LOGGER.debug("All hosts successful retrieved by city from DB.");
             return resultList;
         } catch (SQLException | MySqlUserDaoException e) {
             e.printStackTrace();
+            LOGGER.debug("Cannot retrieve all hosts from DB by city. " + e);
             throw new MySqlUserDaoException("Can`t retrieve hosts by city.", e);
         }
     }
 
     @Override
-    public List<Renter> retrieveAllRentersByCity(CityType city) throws MySqlUserDaoException {
-        List<Renter> resultList = new ArrayList<>();
-
+    public List<User> retrieveAllRentersByCity(CityType city) throws MySqlUserDaoException {
+        String query = "SELECT * FROM airbnb.user WHERE city = ? AND user_type = 'RENTER';";
+        List<User> resultList = null;
+        PreparedStatement pstm;
+        ResultSet rs;
         try (Connection connection = getConnection()) {
-            String query = "SELECT * FROM airbnb.user WHERE city = ? AND is_host = 0;";
 
-            PreparedStatement stm = connection.prepareStatement(query);
-            stm.setString(1, String.valueOf(city));
+            pstm = connection.prepareStatement(query);
+            pstm.setString(1, String.valueOf(city));
 
-            ResultSet rs = stm.executeQuery();
+            rs = pstm.executeQuery();
             while (rs.next()) {
                 int userID = rs.getInt("userID");
+                UserType userType = UserType.valueOf(rs.getString("user_type"));
                 String name = rs.getString("first_name");
                 String surname = rs.getString("last_name");
                 String eMail = rs.getString("eMail");
 
-                resultList.add(new Renter(userID, name, surname, eMail, city));
+                User user = new User(userID, userType, name, surname, eMail);
+                user.setCity(city);
+
+                resultList.add(user);
+                LOGGER.debug("All renters successful retrieved by city from DB.");
             }
+            return resultList;
         } catch (SQLException | MySqlUserDaoException e) {
             e.printStackTrace();
+            LOGGER.debug("Cannot retrieve all renters from DB by city. " + e);
             throw new MySqlUserDaoException("Can`t retrieve renters by city.", e);
         }
-        return resultList;
     }
 
     @Override
-    public List<User> retrieveAllByCity(CityType city) throws MySqlUserDaoException {
+    public List<User> retrieveAllUsersByCity(CityType city) throws MySqlUserDaoException {
         String query = "SELECT * FROM airbnb.user WHERE city = ?;";
         PreparedStatement pstm;
         ResultSet rs;
@@ -155,45 +203,50 @@ public class MySqlUserDao implements UserDAO {
 
             while (rs.next()) {
                 int userID = rs.getInt("userID");
+                UserType userType = UserType.valueOf(rs.getString("user_type"));
                 String firstName = rs.getString("first_name");
                 String lastName = rs.getString("last_name");
                 String eMail = rs.getString("eMail");
-                Boolean isHost = rs.getBoolean("is_host");
 
-                if (isHost) {
-                    List<Apartment> apartments = new MySqlApartmentDao().retrieveAllByHost(userID);
-                    resultList.add(new Host(userID, firstName, lastName, eMail, city, apartments));
+                if (UserType.HOST.equals(userType)) {
+                    List<Apartment> apartments = new MySqlApartmentDao().retrieveAllByHost(userID);  //todo change user
+                    resultList.add(new User(userID, userType, firstName, lastName, eMail, city, apartments));
                 } else {
-                    resultList.add(new Renter(userID, firstName, lastName, eMail, city));
+                    User user = new User(userID, userType, firstName, lastName, eMail);
+                    user.setCity(city);
+                    resultList.add(user);
                 }
             }
+            LOGGER.debug("All users successful retrieved by city from DB.");
+            return resultList;
         } catch (SQLException | MySqlUserDaoException e) {
             e.printStackTrace();
-            throw new MySqlUserDaoException("Can`t retrieve users by city.", e);
+            throw new MySqlUserDaoException("Can`t retrieve all users by city.", e);
         }
-        return resultList;
     }
 
     @Override
-    public void update(User user) throws MySqlUserDaoException {
+    public boolean update(User user) throws MySqlUserDaoException {
         String query = "UPDATE airbnb.user " +
-                "SET first_name = ?, last_name = ?, eMail = ?, city = ? WHERE userID = ?;";
+                "SET user_type = ?, first_name = ?, last_name = ?, eMail = ?, city = ? WHERE userID = ?;";
 
         try (Connection connection = getConnection()) {
             PreparedStatement pstm = connection.prepareStatement(query);
-            pstm.setString(1, user.getFirstName());
-            pstm.setString(2, user.getLastName());
-            pstm.setString(3, user.getEMail());
+            pstm.setString(1, user.getUserType().toString());
+            pstm.setString(2, user.getFirstName());
+            pstm.setString(3, user.getLastName());
             pstm.setString(4, user.getEMail());
-            pstm.setInt(5, user.getUserId());
+            pstm.setString(5, user.getCity().toString());
+            pstm.setInt(6, user.getUserId());
             pstm.executeUpdate();
 
-            if (user instanceof Host) {
-                List<Apartment> apartments = user.getApartments();
-                for (Apartment apartment : apartments) {
+            if (UserType.HOST.equals(user.getUserType())) {
+                for (Apartment apartment : user.getApartments()) {
                     new MySqlApartmentDao().update(apartment);
                 }
             }
+            LOGGER.debug("User successful updated in DB.");
+            return true;
         } catch (SQLException | MySqlUserDaoException e) {
             e.printStackTrace();
             throw new MySqlUserDaoException("Can`t update user.", e);
@@ -201,81 +254,46 @@ public class MySqlUserDao implements UserDAO {
     }
 
     @Override
-    public void delete(User user) throws MySqlUserDaoException {
+    public boolean delete(User user) throws MySqlUserDaoException {
         String query = "DELETE FROM airbnb.user WHERE userID = ?;";
 
         try (Connection connection = getConnection()) {
             PreparedStatement pstm = connection.prepareStatement(query);
             pstm.setInt(1, user.getUserId());
             pstm.executeUpdate();
+            LOGGER.debug("User successful deleted from DB.");
+            return true;
         } catch (SQLException | MySqlUserDaoException e) {
             e.printStackTrace();
-            throw new MySqlUserDaoException("Can`t delete user.", e);
+            LOGGER.error("Cannot delete user from DB", e);
+            throw new MySqlUserDaoException("Can`t delete user from DB.", e);
         }
     }
 
     @Override
-    public void becomeHost(User renter) throws MySqlUserDaoException {
-        String query = "UPDATE airbnb.user SET is_host = ? WHERE userID = ?;"; //todo true hardcode
+    public boolean becomeHost(User renter) throws MySqlUserDaoException {
+        String query = "UPDATE airbnb.user SET user_type = 'HOST' WHERE userID = ?;";
 
         try (Connection connection = getConnection()) {
             PreparedStatement pstm = connection.prepareStatement(query);
-            pstm.setBoolean(1, true);
-            pstm.setInt(2, renter.getUserId());
+            pstm.setInt(1, renter.getUserId());
             pstm.executeUpdate();
+            LOGGER.debug("User has been defined in DB as host.");
+            return true;
         } catch (SQLException | MySqlUserDaoException e) {
             e.printStackTrace();
+            LOGGER.error("Cannot define user as host", e);
             throw new MySqlUserDaoException("Can`t create a host account for renter.", e);
-        }
-    }
-
-    private void createHost(User host) throws MySqlUserDaoException {
-        String query = "INSERT INTO airbnb.user (first_name, last_name, eMail, city, is_host)" +
-                "VALUES (?, ?, ?, ?, ?)";
-
-        try (Connection connection = getConnection()) {
-            PreparedStatement pstm = connection.prepareStatement(query);
-
-            pstm.setString(1, host.getFirstName());
-            pstm.setString(2, host.getLastName());
-            pstm.setString(3, host.getEMail());
-            pstm.setString(4, String.valueOf(host.getCity()));
-            pstm.setBoolean(5, false);
-            pstm.executeUpdate();
-
-            List<Apartment> apartments = host.getApartments();
-            for (Apartment apartment : apartments) {
-                new MySqlApartmentDao().create(apartment); //todo join on?
-            }
-        } catch (SQLException | MySqlUserDaoException e) {
-            e.printStackTrace();
-            throw new MySqlUserDaoException("Can`t create host in MySQL database.", e);
-        }
-    }
-
-    private void createRenter(User renter) throws MySqlUserDaoException {
-        String query = "INSERT INTO airbnb.user (first_name, last_name, eMail, city)" +
-                "VALUES (?, ?, ?, ?)";
-
-        try (Connection connection = getConnection()) {
-            PreparedStatement pstm = connection.prepareStatement(query);
-
-            pstm.setString(1, renter.getFirstName());
-            pstm.setString(2, renter.getLastName());
-            pstm.setString(3, renter.getEMail());
-            pstm.setString(4, String.valueOf(renter.getCity()));
-            pstm.executeUpdate();
-        } catch (SQLException | MySqlUserDaoException e) {
-            e.printStackTrace();
-            throw new MySqlUserDaoException("Can`t create renter in MySQL database.", e);
         }
     }
 
     private Connection getConnection() throws MySqlUserDaoException {
         try {
+            LOGGER.debug("Trying to get connection to DB");
             return new MySqlDAOFactory().getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.error("No connection with database", e);
             throw new MySqlUserDaoException("No connection", e);
         }
     }
