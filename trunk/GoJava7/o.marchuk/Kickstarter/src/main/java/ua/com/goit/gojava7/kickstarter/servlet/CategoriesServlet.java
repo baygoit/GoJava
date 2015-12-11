@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
@@ -27,8 +26,6 @@ public class CategoriesServlet extends HttpServlet {
 	private QuoteDao quoteDao;
 	@Autowired
 	private CategoryDao categoryDao;
-
-	protected WebApplicationContext applicationContext;
 
 	@Override
 	public void init() throws ServletException {
