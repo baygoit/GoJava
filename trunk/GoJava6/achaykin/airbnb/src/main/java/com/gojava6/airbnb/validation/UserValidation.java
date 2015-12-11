@@ -1,7 +1,9 @@
 package com.gojava6.airbnb.validation;
 
 import com.gojava6.airbnb.Exception.UserValidationException;
-import com.gojava6.airbnb.apartment.*;
+import com.gojava6.airbnb.model.apartment.Apartment;
+import com.gojava6.airbnb.model.apartment.ApartmentType;
+import com.gojava6.airbnb.model.apartment.CityType;
 
 import java.util.regex.*;
 
@@ -11,15 +13,15 @@ public class UserValidation {
     private static Matcher MATCHER;
 
     public static boolean validationRenter(String name, String surname, String eMail) throws UserValidationException {
-        if (validationName(name) && validationSurname(surname) && validationEMail(eMail)) {
+        if (validationFullName(name) && validationFullName(surname) && validationEMail(eMail)) {
             return true;
         }
         return false;
     }
 
-    public static boolean validationName(String firstName) throws UserValidationException {
+    public static boolean validationFullName(String firstName) throws UserValidationException {
         if (firstName != null) {
-            PATTERN = Pattern.compile("[A-Za-z]*"); //todo check regex
+            PATTERN = Pattern.compile("[A-Za-z]*");
             MATCHER = PATTERN.matcher(firstName);
             if (!firstName.isEmpty()) {
                 if (MATCHER.matches()) {
@@ -27,30 +29,16 @@ public class UserValidation {
                 }
             }
         }
-        throw new UserValidationException("Incorrect user first name");
-    }
-
-    public static boolean validationSurname(String lastName) throws UserValidationException {
-        if (lastName != null) {
-            PATTERN = Pattern.compile("[A-Za-z]*");
-            MATCHER = PATTERN.matcher(lastName);
-            if (!lastName.isEmpty()) {
-                if (MATCHER.matches()) {
-                    return true;
-                }
-            }
-        }
-        throw new UserValidationException("Incorrect user last name");
+        throw new UserValidationException("Incorrect user name");
     }
 
     public static boolean validationEMail(String eMail) throws UserValidationException {
-        if (eMail != null) {
+        if (eMail != null && !eMail.isEmpty()) {
             PATTERN = Pattern.compile("^[A-z0-9-_\\.]+@([\\w]+\\.)+[A-z]{2,4}$");
             MATCHER = PATTERN.matcher(eMail);
-            if (!eMail.isEmpty()) {
-                if (MATCHER.matches()) {
-                    return true;
-                }
+            if (MATCHER.matches()) {
+                return true;
+
             }
         }
         throw new UserValidationException("Incorrect user e-Mail");

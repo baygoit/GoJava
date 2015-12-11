@@ -2,7 +2,6 @@ package ua.com.goit.gojava7.kickstarter;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Map;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -12,10 +11,7 @@ import ua.com.goit.gojava7.kickstarter.view.ConsolePrinter;
 
 public class App {
 
-    public static void main(String[] args) {       
-        Map<String, String> getenv = System.getenv();
-        getenv.forEach((k,v) -> {System.out.println(k + ":" + v);});
-        
+    public static void main(String[] args) {             
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         StorageFactory factory = context.getBean(StorageFactory.class);
         start(factory);
