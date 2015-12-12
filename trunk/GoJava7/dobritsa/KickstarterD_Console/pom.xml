@@ -75,6 +75,12 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-jar-plugin</artifactId>
+			<version>2.6</version>
+		</dependency>
 
 	</dependencies>
 
@@ -89,15 +95,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>			
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<warSourceDirectory>WebContent</warSourceDirectory>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
+			
 		</plugins>
 	</build>
-	<packaging>war</packaging>
 </project>
