@@ -32,6 +32,37 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: cities; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+--
+
+CREATE TABLE cities (
+    id integer NOT NULL,
+	name character varying(255)
+);
+
+ALTER TABLE cities OWNER TO postgres;
+
+--
+-- Name: Cities_Id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE "Cities_Id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE "Cities_Id_seq" OWNER TO postgres;
+
+--
+-- Name: Cities_Id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE "Cities_Id_seq" OWNED BY cities.id;
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 CREATE TABLE users (
@@ -69,6 +100,7 @@ ALTER SEQUENCE "Users_Id_seq" OWNED BY users.id;
 CREATE TABLE homes (
     id integer NOT NULL,
     host_id integer NOT NULL,
+    city_id integer NOT NULL,
     city character varying(255),
 	hometype character varying(255)
 );
@@ -130,12 +162,14 @@ ALTER SEQUENCE "Reservations_Id_seq" OWNED BY reservations.id;
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('"Users_Id_seq"'::regclass);
 ALTER TABLE ONLY homes ALTER COLUMN id SET DEFAULT nextval('"Homes_Id_seq"'::regclass);
 ALTER TABLE ONLY reservations ALTER COLUMN id SET DEFAULT nextval('"Reservations_Id_seq"'::regclass);
+ALTER TABLE ONLY cities ALTER COLUMN id SET DEFAULT nextval('"Cities_Id_seq"'::regclass);
 
 --Type: PK CONSTRAINT; Schema: public; Owner: postgres
 --
 ALTER TABLE ONLY users ADD CONSTRAINT "PK_Users" PRIMARY KEY (id);
 ALTER TABLE ONLY homes ADD CONSTRAINT "PK_Homes" PRIMARY KEY (id);
 ALTER TABLE ONLY reservations ADD CONSTRAINT "PK_Reservations" PRIMARY KEY (id);
+ALTER TABLE ONLY cities ADD CONSTRAINT "PK_Cities" PRIMARY KEY (id);
 
 -- Name: ; Type: UNIQUE CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
@@ -148,6 +182,7 @@ ALTER TABLE ONLY reservations ADD CONSTRAINT "UQ_Reservations_UserId_HomeId" UNI
 ALTER TABLE ONLY homes ADD CONSTRAINT "FK_Homes_UserId" FOREIGN KEY (host_id) REFERENCES users(id) ON DELETE CASCADE;
 ALTER TABLE ONLY reservations ADD CONSTRAINT "FK_Reservations_UserId" FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
 ALTER TABLE ONLY reservations ADD CONSTRAINT "FK_Reservations_HomeId" FOREIGN KEY (home_id) REFERENCES homes(id) ON DELETE CASCADE;
+ALTER TABLE ONLY homes ADD CONSTRAINT "FK_Homes_CityId" FOREIGN KEY (city_id) REFERENCES cities(id) ON DELETE CASCADE;
 
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --

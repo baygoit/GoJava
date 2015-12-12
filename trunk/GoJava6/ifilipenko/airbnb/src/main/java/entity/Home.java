@@ -1,9 +1,9 @@
-package model;
+package entity;
 
 import common.Observer;
 import common.Subject;
-import model.enums.CityList;
-import model.enums.HomeType;
+import entity.enums.CityList;
+import entity.enums.HomeType;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -36,6 +36,13 @@ public class Home implements Serializable, Subject {
     public Home(){}
 
     public Home(CityList city, HomeType homeType) {
+        this.city = city;
+        this.homeType = homeType;
+    }
+
+    public Home(int id, User user, CityList city, HomeType homeType) {
+        this.id = id;
+        this.host = user;
         this.city = city;
         this.homeType = homeType;
     }

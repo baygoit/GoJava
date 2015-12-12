@@ -1,4 +1,4 @@
-package model.enums;
+package entity.enums;
 
 public enum CountryList {
     USA,

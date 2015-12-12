@@ -1,8 +1,8 @@
-package model;
+package entity;
 
 import common.Observer;
-import model.enums.CityList;
-import model.enums.GenderType;
+import entity.enums.CityList;
+import entity.enums.GenderType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 

@@ -1,10 +1,10 @@
 package controller;
 
-import model.Home;
-import model.User;
-import model.enums.CityList;
-import model.enums.GenderType;
-import model.enums.HomeType;
+import entity.Home;
+import entity.User;
+import entity.enums.CityList;
+import entity.enums.GenderType;
+import entity.enums.HomeType;
 import services.HomeService;
 import services.UserService;
 

@@ -1,31 +1,27 @@
-package model._old;
-
-import model.User;
+package entity._old;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
-@Table(name = "cities", catalog = "model")
-public class City implements Serializable {
+@Table(name = "countries", catalog = "entity")
+public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String code;
     private String name;
-    private Country country;
-    private List<User> users = new ArrayList<>(0);
+    private List<City> city;
 
-    public City() {
+    public Country() {
     }
 
-    public City(String code, String name, Country country) {
+    public Country(String code, String name) {
         this.code = code;
         this.name = name;
-        this.country = country;
     }
 
     //==============getters==============
@@ -47,18 +43,10 @@ public class City implements Serializable {
         return name;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id", referencedColumnName="id")
-    public Country getCountry() {
-        return country;
+    @OneToMany(mappedBy = "country", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    public List<City> getCity() {
+        return city;
     }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
-    public List<User> getUsers() {
-        return users;
-    }
-
-
 
     //==============setters==============
 
@@ -74,13 +62,7 @@ public class City implements Serializable {
         this.name = name;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setCity(List<City> city) {
+        this.city = city;
     }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-
 }
