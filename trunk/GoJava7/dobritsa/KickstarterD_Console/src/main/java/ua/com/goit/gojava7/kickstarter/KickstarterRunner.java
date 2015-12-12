@@ -2,6 +2,8 @@ package ua.com.goit.gojava7.kickstarter;
 
 import java.io.FileNotFoundException;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
 import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
@@ -13,18 +15,18 @@ import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 public class KickstarterRunner {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		MyDataSource dataSource = MyDataSource.MEMORY;
-		if (args.length != 0 && args[0] != null) {
-			try {
-				dataSource = MyDataSource.getByStartupKey(args[0].toLowerCase());
-			} catch (IllegalArgumentException e) {
-				System.err.println("Type of data source " + args[0] + " if not supported. Fall back to memory");
-			}
-		}
-		System.out.println("-------Kickstarter runs in " + dataSource + " mode-------\n");
-
-		DaoFactory daoFactory = new DaoFactory(dataSource);
 		
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("./applicationContext.xml");
+		StringDataType obj = (StringDataType) context.getBean("stringDataType");
+			
+		MyDataSource dataSource = MyDataSource.getByKey(obj.getDataType().toUpperCase());
+		
+		System.out.println("-----------------------------");
+		System.out.println("read from context: " + obj.getDataType());
+		System.out.println("get from enum: " + dataSource);
+		System.out.println("-----------------------------");		
+				
+		DaoFactory daoFactory = new DaoFactory(dataSource);
 		QuoteDao quoteStorage = daoFactory.getQuoteDAO();
 		CategoryDao categoryStorage = daoFactory.getCategoryDAO();
 		ProjectDao projectStorage = daoFactory.getProjectDAO();
@@ -34,6 +36,6 @@ public class KickstarterRunner {
 		Kickstarter kickstarter = new Kickstarter(quoteStorage, categoryStorage, projectStorage, questionsStorage,
 				rewardStorage);
 		kickstarter.run();
-		kickstarter.shutdown();		
+		context.close();
 	}
 }

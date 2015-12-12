@@ -48,8 +48,6 @@ public class DaoFactory {
 	
 	private MyDataSource dataSource;
 
-	//private Connection connection = null;
-
 	public DaoFactory(MyDataSource dataSource) {
 		this.dataSource = dataSource;
 
