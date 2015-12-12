@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CategoryDaoDbImp.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;KickstarterWeb&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">ua.com.goit.gojava7.salivon.dao.db</a> &gt; <span class="el_source">CategoryDaoDbImp.java</span></div><h1>CategoryDaoDbImp.java</h1><pre class="source lang-java linenums">package ua.com.goit.gojava7.salivon.dao.db;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import ua.com.goit.gojava7.salivon.beans.Category;
+import ua.com.goit.gojava7.salivon.dao.CategoryDao;
+
+<span class="fc" id="L12">public class CategoryDaoDbImp implements CategoryDao {</span>
+
+<span class="fc" id="L14">    DBUtil util = new DBUtil();</span>
+
+    @Override
+    public List&lt;Category&gt; getAllCategories() {
+<span class="nc" id="L18">        List&lt;Category&gt; categories = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L19">        ResultSet res = null;</span>
+<span class="nc" id="L20">        String query = &quot;SELECT IdCategory, Name FROM category ORDER BY IdCategory&quot;;</span>
+<span class="nc" id="L21">        util.openConnection();</span>
+<span class="nc" id="L22">        res = util.executeQuery(query);</span>
+        try {
+<span class="nc bnc" id="L24" title="All 2 branches missed.">            while (res.next()) {</span>
+<span class="nc" id="L25">                categories.add(new Category(res.getString(&quot;Name&quot;), res.getInt(&quot;IdCategory&quot;)));</span>
+            }
+<span class="nc" id="L27">        } catch (SQLException ex) {</span>
+<span class="nc" id="L28">            Logger.getLogger(CategoryDaoDbImp.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L29">        }</span>
+<span class="nc" id="L30">        util.closeConnection();</span>
+<span class="nc" id="L31">        return categories;</span>
+    }
+
+    @Override
+    public Category getCategory(int idCategory) {
+<span class="nc" id="L36">        Category requestedCategory = null;</span>
+<span class="nc" id="L37">        ResultSet res = null;</span>
+<span class="nc" id="L38">        String query = &quot;SELECT Name FROM category WHERE IdCategory = &quot; + idCategory;</span>
+<span class="nc" id="L39">        util.openConnection();</span>
+<span class="nc" id="L40">        res = util.executeQuery(query);</span>
+        try {
+<span class="nc" id="L42">            res.next();</span>
+<span class="nc" id="L43">            requestedCategory = new Category(res.getString(&quot;Name&quot;), idCategory);</span>
+<span class="nc" id="L44">        } catch (SQLException ex) {</span>
+<span class="nc" id="L45">            Logger.getLogger(CategoryDaoDbImp.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L46">        }</span>
+<span class="nc" id="L47">        util.closeConnection();</span>
+<span class="nc" id="L48">        return requestedCategory;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

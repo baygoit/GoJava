@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Project.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;KickstarterWeb&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">ua.com.goit.gojava7.salivon.beans</a> &gt; <span class="el_source">Project.java</span></div><h1>Project.java</h1><pre class="source lang-java linenums">package ua.com.goit.gojava7.salivon.beans;
+
+import java.util.Calendar;
+import java.util.Date;
+
+public class Project {
+
+    private int id;
+    private int idCategory;
+    private String title;
+    private String description;
+    private int total;
+    private int collectedAmount;
+    private int numberOfDaysToImplement;
+    private Date dateStart;
+    private String historyProject;
+    private String link;
+    private String faq;
+
+<span class="fc" id="L20">    public Project(String title, int total, int idCategory, int id) {</span>
+<span class="fc" id="L21">        setDateStart();</span>
+<span class="fc" id="L22">        description = &quot;...description...&quot;;</span>
+<span class="fc" id="L23">        collectedAmount = 0;</span>
+<span class="fc" id="L24">        this.title = title;</span>
+<span class="fc" id="L25">        this.total = total;</span>
+<span class="fc" id="L26">        this.idCategory = idCategory;</span>
+<span class="fc" id="L27">        historyProject = &quot;...history...&quot;;</span>
+<span class="fc" id="L28">        link = &quot;...link...&quot;;</span>
+<span class="fc" id="L29">        faq = &quot;...FAQ...&quot;;</span>
+<span class="fc" id="L30">        this.id = id;</span>
+<span class="fc" id="L31">    }</span>
+
+    public Date getDateStart() {
+<span class="fc" id="L34">        return dateStart;</span>
+    }
+
+    private void setDateStart() {
+<span class="fc" id="L38">        dateStart = new Date();</span>
+
+<span class="fc" id="L40">    }</span>
+
+    public int getIdCategory() {
+<span class="fc" id="L43">        return idCategory;</span>
+    }
+
+    public void setIdCategory(int idCategory) {
+<span class="fc" id="L47">        this.idCategory = idCategory;</span>
+<span class="fc" id="L48">    }</span>
+
+    public String getTitle() {
+<span class="fc" id="L51">        return title;</span>
+    }
+
+    public void setTitle(String title) {
+<span class="fc" id="L55">        this.title = title;</span>
+<span class="fc" id="L56">    }</span>
+
+    public String getDescription() {
+<span class="fc" id="L59">        return description;</span>
+    }
+
+    public void setDescription(String description) {
+<span class="fc" id="L63">        this.description = description;</span>
+<span class="fc" id="L64">    }</span>
+
+    public int getTotal() {
+<span class="fc" id="L67">        return total;</span>
+    }
+
+    public void setTotal(int total) {
+<span class="fc" id="L71">        this.total = total;</span>
+<span class="fc" id="L72">    }</span>
+
+    public int getNumberOfDaysToImplement() {
+<span class="fc" id="L75">        return numberOfDaysToImplement;</span>
+    }
+
+    public void setNumberOfDaysToImplement(int numberOfDaysToImplement) {
+<span class="fc" id="L79">        this.numberOfDaysToImplement = numberOfDaysToImplement;</span>
+<span class="fc" id="L80">    }</span>
+
+    public String getHistoryProject() {
+<span class="fc" id="L83">        return historyProject;</span>
+    }
+
+    public void setHistoryProject(String historyProject) {
+<span class="fc" id="L87">        this.historyProject = historyProject;</span>
+<span class="fc" id="L88">    }</span>
+
+    public String getLink() {
+<span class="fc" id="L91">        return link;</span>
+    }
+
+    public void setLink(String link) {
+<span class="fc" id="L95">        this.link = link;</span>
+<span class="fc" id="L96">    }</span>
+
+    public int getCollectedAmount() {
+<span class="fc" id="L99">        return collectedAmount;</span>
+    }
+
+    public void setCollectedAmount(int collectedAmount) {
+<span class="fc" id="L103">        this.collectedAmount += collectedAmount;</span>
+<span class="fc" id="L104">    }</span>
+
+    public String getFaq() {
+<span class="fc" id="L107">        return faq;</span>
+    }
+
+    public void setFaq(String faq) {
+<span class="fc" id="L111">        this.faq += faq + &quot;\n&quot;;</span>
+<span class="fc" id="L112">    }</span>
+
+    public void setId(int id) {
+<span class="fc" id="L115">        this.id = id;</span>
+<span class="fc" id="L116">    }</span>
+
+    public int getId() {
+<span class="fc" id="L119">        return id;</span>
+    }
+
+    public int getNumberOfDaysToEnd() {
+<span class="fc" id="L123">        long milSecondStart = dateStart.getTime();</span>
+<span class="fc" id="L124">        long milSecondEnd = Calendar.getInstance().getTimeInMillis();</span>
+<span class="fc" id="L125">        int numberOfDaysInWork = (int) (milSecondEnd - milSecondStart) / (1000 * 60 * 60 * 24);</span>
+<span class="fc" id="L126">        return numberOfDaysToImplement - numberOfDaysInWork;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

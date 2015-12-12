@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDbDao;
+import ua.com.goit.gojava7.kickstarter.dao.db.PaymentDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuoteDbDao;
@@ -37,12 +38,14 @@ public class DaoFactory {
 	private ProjectDao projectDAO;
 	private QuestionDao questionDAO;
 	private RewardDao rewardDAO;
+	private PaymentDao paymentDAO;
 
 	private static final File QUOTES_FILE = new File("./resources/Quotes.txt");
 	private static final File CATEGORIES_FILE = new File("./resources/Categories.txt");
 	private static final File PROJECTS_FILE = new File("./resources/Projects.txt");
 	private static final File REWARDS_FILE = new File("./resources/Rewards.txt");
 	private static final File QUESTIONS_FILE = new File("./resources/Questions.txt");
+	
 	private MyDataSource dataSource;
 
 	//private Connection connection = null;
@@ -71,8 +74,7 @@ public class DaoFactory {
 	public static BasicDataSource setupDataSource(String dbDriver, String dbURL, String user, String password) {
 		try {
 			Class.forName("org.apache.commons.dbcp2.BasicDataSource");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (ClassNotFoundException e) {			
 			e.printStackTrace();
 		}
 		BasicDataSource ds = new BasicDataSource();
@@ -133,7 +135,6 @@ public class DaoFactory {
 	}
 
 	private void initDbStorage() {
-		//open();
 		quoteDAO = new QuoteDbDao(setupDataSource("com.mysql.jdbc.Driver",
 				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
 		categoryDAO = new CategoryDbDao(setupDataSource("com.mysql.jdbc.Driver",
@@ -143,6 +144,8 @@ public class DaoFactory {
 		questionDAO = new QuestionDbDao(setupDataSource("com.mysql.jdbc.Driver",
 				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
 		rewardDAO = new RewardDbDao(setupDataSource("com.mysql.jdbc.Driver",
+				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
+		paymentDAO = new PaymentDbDao(setupDataSource("com.mysql.jdbc.Driver",
 				"jdbc:mysql://localhost:3306/kickstarter", "root", "temppassword"));
 	}
 	
@@ -164,6 +167,10 @@ public class DaoFactory {
 
 	public RewardDao getRewardDAO() {
 		return rewardDAO;
+	}
+
+	public PaymentDao getPaymentDAO() {
+		return paymentDAO;
 	}
 
 }

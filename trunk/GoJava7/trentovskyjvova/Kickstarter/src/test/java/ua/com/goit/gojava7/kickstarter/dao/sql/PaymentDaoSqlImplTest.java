@@ -13,11 +13,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.sql.PaymentDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
@@ -26,15 +27,15 @@ public class PaymentDaoSqlImplTest {
 	@Mock
 	private Connection connection = mock(Connection.class);
 	@Mock
-	DaoProvider daoProvider = mock(DaoProvider.class);
+	DataSource dataSource = mock(DataSource.class);
 	@InjectMocks
-	private PaymentDao paymentDaoMySqlImpl = new PaymentDaoSqlImpl(daoProvider);
+	private PaymentDao paymentDaoMySqlImpl = new PaymentDaoSqlImpl(dataSource);
 	
 	@Test
 	public void testGetPayments() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -48,7 +49,7 @@ public class PaymentDaoSqlImplTest {
 	@Test
 	public void testAddPayment() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
-		when(daoProvider.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeUpdate()).thenReturn(1);
 		
@@ -62,7 +63,7 @@ public class PaymentDaoSqlImplTest {
 	public void testGetPledged() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);

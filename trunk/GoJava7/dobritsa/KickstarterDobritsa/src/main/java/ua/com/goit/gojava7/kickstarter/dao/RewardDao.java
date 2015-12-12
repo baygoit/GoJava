@@ -6,7 +6,6 @@ import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public interface RewardDao extends Dao<Reward> {
 
-	public List<Reward> getByProject(String projectName);
 	public List<Reward> getByProject(int projectId);
 
 }

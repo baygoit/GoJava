@@ -22,5 +22,14 @@ public enum MyDataSource {
 		}
 		return MEMORY;
 	}
+	
+	public static MyDataSource getByKey(String key) {
+		for (MyDataSource element : MyDataSource.values()) {
+			if (element.toString().equals(key)) {
+				return element;
+			}
+		}
+		return MEMORY;
+	}
 
 }

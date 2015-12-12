@@ -1,15 +1,20 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
-import ua.com.goit.gojava7.kickstarter.config.DataSourceTypes;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
@@ -17,14 +22,25 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @WebServlet(urlPatterns = "/categories")
 public class CategoriesServlet extends HttpServlet {
-	private DaoProvider daoProvider;
+	private static final long serialVersionUID = 1L;
 	private QuoteDao quoteDao;
 	private CategoryDao categoryDao;
+	
+	private DaoProvider daoProvider;
+	protected WebApplicationContext applicationContext;
 
 	@Override
-	public void init() throws ServletException {
-		daoProvider = new DaoProvider(DataSourceTypes.POSTGRES);
-		daoProvider.init();
+	public void init(ServletConfig config) throws ServletException {
+		ServletContext servletContext = config.getServletContext();
+		applicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+
+		daoProvider = applicationContext.getBean(DaoProvider.class);
+		//daoProvider.open();
+		super.init(config);
+	}
+	
+	@Override
+	public void init() throws ServletException {		
 		quoteDao = daoProvider.getQuoteReader();
 		categoryDao = daoProvider.getCategoryReader();
 	}
@@ -32,19 +48,11 @@ public class CategoriesServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Quote quote = quoteDao.getRandomQuote();
-
-		StringBuilder stringBuilder = new StringBuilder("<html><head><title>Categories</title></head><body>");
-		stringBuilder.append(quote.getText()).append("  (c) ").append(quote.getAuthor());
-		stringBuilder.append("</br>");
-
-		for (Category category : categoryDao.getCategories()) {
-			stringBuilder.append("<a href=\"projects?id=").append(category.getId()).append("\">")
-					.append(category.getName()).append("</a><br/>");
-
-		}
-		stringBuilder.append("</body></html>");
+		List<Category> categories = categoryDao.getCategories();
 		
-		resp.getWriter().append(stringBuilder.toString());
+		req.setAttribute("quote", quote);
+		req.setAttribute("categories", categories);
+		req.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(req, resp);
 	}
 	
 }

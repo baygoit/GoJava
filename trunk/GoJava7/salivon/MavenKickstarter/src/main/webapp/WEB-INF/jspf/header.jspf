@@ -1,0 +1,21 @@
+<%@ page pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="<%= application.getContextPath()%>/kickstarter.css" rel="stylesheet" >
+        <title>Kickstarter</title>
+    </head>
+    <body>
+        <header>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="<%= application.getContextPath()%>/">Home</a></li>
+                <li><a href="">Start a project</a></li>
+                <li><a href="">About us</a></li>
+                <li><a href="">Search Projects</a></li>
+                <li><a href="">Sign up</a></li>
+            </ul>
+        </nav>
+

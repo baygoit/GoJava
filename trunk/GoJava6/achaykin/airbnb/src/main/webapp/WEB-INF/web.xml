@@ -1,9 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app>
-<servlet>
-    <servlet-name>index</servlet-name>
-    <servlet-class>com.gojava6.airbnb.servlets.IndexPage</servlet-class>
-</servlet>
-    <servlet-mapping>index</servlet-mapping>
-    <url-pattern>/index</url-pattern>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+    <!--<context-param>-->
+    <!--<param-name>url</param-name>-->
+    <!--<param-value>localhost</param-value>-->
+    <!--</context-param>-->
+    <!--<welcome-file-list>-->
+    <!--<welcome-file>firsthtmlpage.html</welcome-file>-->
+    <!--</welcome-file-list>-->
+
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <!--<welcome-file>index.htm</welcome-file>-->
+        <!--<welcome-file>index.jsp</welcome-file>-->
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>loginServlet</servlet-name>
+        <servlet-class>com.gojava6.airbnb.servlets.LogInServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>loginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>logoutServlet</servlet-name>
+        <servlet-class>com.gojava6.airbnb.servlets.LogOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
 </web-app>

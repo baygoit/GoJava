@@ -1,7 +1,7 @@
 package dao.hibernate;
 
 import dbutils.HibernateUtil;
-import model.Reservation;
+import entity.Reservation;
 import org.hibernate.Session;
 
 public class ReservationDao {

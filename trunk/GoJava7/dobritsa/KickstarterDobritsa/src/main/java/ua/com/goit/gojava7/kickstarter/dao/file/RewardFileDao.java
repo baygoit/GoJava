@@ -14,12 +14,6 @@ public class RewardFileDao extends FileDao<Reward> implements RewardDao {
 	}
 
 	@Override
-	public List<Reward> getByProject(String projectName) {
-		return this.getAll().stream().filter(reward -> reward.getProjectName().equals(projectName))
-				.collect(Collectors.toList());
-	}
-
-	@Override
 	public List<Reward> getByProject(int projectId) {
 		 return this.getAll().stream()
 	                .filter(project -> project.getProjectId() == projectId)

@@ -9,14 +9,15 @@
 <body>
 	<div class="root">
 		<div class="box">
+
+			<jsp:include page="Error.jsp"/>
+
 			<div class="boxCaption basecolor">Enter payment credentials</div>
 			<div class="boxContent">
 
-
 				<form action="project" method="post" id="submitForm">
-					<input type="hidden" name="projectId"
-						value="${param.project}"> <input
-						type="hidden" name="rewardId"
+					<input type="hidden" name="projectId" value="${param.project}">
+					<input type="hidden" name="rewardId"
 						value="<%=request.getParameter("reward") == null ? 0 : request.getParameter("reward")%>">
 					<input type="hidden" name="operation" value="payment">
 					<table>
@@ -30,7 +31,7 @@
 						</tr>
 						<tr>
 							<td>Amount:</td>
-							<td><input type="<%="number"%>" name="amount" min="0"></td>
+							<td><input type="<%="number"%>" name="amount" min="0" value="${param.amount}"></td>
 						</tr>
 					</table>
 

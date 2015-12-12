@@ -12,11 +12,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.sql.ProjectDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
@@ -25,15 +26,15 @@ public class ProjectDaoSqlImplTest {
 	@Mock
 	private Connection connection = mock(Connection.class);
 	@Mock
-	DaoProvider daoProvider = mock(DaoProvider.class);
+	DataSource dataSource = mock(DataSource.class);
 	@InjectMocks
-	private ProjectDao projectDaoMySqlImpl = new ProjectDaoSqlImpl(daoProvider);
+	private ProjectDao projectDaoMySqlImpl = new ProjectDaoSqlImpl(dataSource);
 	
 	@Test
 	public void testGetProject() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -48,7 +49,7 @@ public class ProjectDaoSqlImplTest {
 	public void testGetProjects() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -63,7 +64,7 @@ public class ProjectDaoSqlImplTest {
 	public void testSize() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);
@@ -78,7 +79,7 @@ public class ProjectDaoSqlImplTest {
 	public void testGetProjectById() throws SQLException {
 		PreparedStatement ps = mock(PreparedStatement.class);
 		ResultSet rs = mock(ResultSet.class);
-		when(daoProvider.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 		when(ps.executeQuery()).thenReturn(rs);
 		when(rs.next()).thenReturn(true, false);

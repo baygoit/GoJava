@@ -1,8 +1,8 @@
 package com.gojava6.airbnb.service.implrepository;
 
-import com.gojava6.airbnb.apartment.Apartment;
-import com.gojava6.airbnb.apartment.CityType;
-import com.gojava6.airbnb.service.ApartmentServiceInterface;
+import com.gojava6.airbnb.model.apartment.Apartment;
+import com.gojava6.airbnb.model.apartment.CityType;
+import com.gojava6.airbnb.service.IApartmentService;
 
 import java.util.List;
 
@@ -10,14 +10,14 @@ import java.util.List;
  * @Autor Andrey Chaykin
  * @Since 22.11.2015
  */
-public class ApartmentService implements ApartmentServiceInterface {
+public class ApartmentService implements IApartmentService {
     @Override
     public void create(Apartment apartment) {
 
     }
 
     @Override
-    public Apartment retrieve(int apartmentID) {
+    public Apartment retrieveByID(int apartmentID) {
         return null;
     }
 
@@ -27,12 +27,17 @@ public class ApartmentService implements ApartmentServiceInterface {
     }
 
     @Override
+    public List<Apartment> retrieveAllByHost(int hostID) {
+        return null;
+    }
+
+    @Override
     public void update(Apartment apartment) {
 
     }
 
     @Override
-    public void delete(int Apartment) {
+    public void delete(int apartment) {
 
     }
 }

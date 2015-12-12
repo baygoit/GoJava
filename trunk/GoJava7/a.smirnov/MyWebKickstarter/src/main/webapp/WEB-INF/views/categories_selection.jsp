@@ -13,38 +13,36 @@
 
 	<div class="container">
 
-		<div class="title">Main kickstarter page</div>
+		<fieldset style="width: 600px; font-family: Arial; font-size: 14px"> 
+		
+			<legend style="text-align: center">RANDOM QUOTE</legend>
+			
+			<div style="text-align: center">"${quoteText}"</div>
 
-		<fieldset>
-
-			<legend>Generated random quote</legend>
-
-			<div><%=request.getAttribute("quoteText")%></div>
-
-			<div> (c) <%=request.getAttribute("quoteAuthor")%></div>
-
+			<div style="text-align: right; font-style: italic;"> (c) ${quoteAuthor}</div>
+			
 		</fieldset>
 
-		<fieldset>
+		<fieldset style="width: 600px; font-family: Arial; font-size: 14px">
 
-			<legend>All categories</legend>
-
+			<legend style="text-align: center">ALL CATEGORIES</legend>
+			
 			<div>
-
+			
 				<ol>
-
+				
 					<c:forEach items="${categories}" var="category">
-
-						<li><a href=\mykickstarter\category?id=${category.getUniqueID()}><c:out	value="${category.getName()}"/></a></li>
-
+					
+						<li><a href=category?id=${category.uniqueID}><c:out	value="${category.getName()}"/></a></li>
+						
 					</c:forEach>
-
+					
 				</ol>
-
+				
 			</div>
 
 		</fieldset>
-
+		
 	</div>
 
 </body>
