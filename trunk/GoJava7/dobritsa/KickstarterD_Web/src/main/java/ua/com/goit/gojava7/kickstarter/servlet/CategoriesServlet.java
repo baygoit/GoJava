@@ -2,50 +2,40 @@ package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
-import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
+import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDbDao;
+import ua.com.goit.gojava7.kickstarter.dao.db.QuoteDbDao;
 
 @WebServlet("/")
 public class CategoriesServlet extends HttpServlet {
 
-	private DaoFactory daoFactory;
-	private QuoteDao quoteDao;
-	private CategoryDao categoryDao;	
+	@Autowired
+	private QuoteDbDao quoteDao;
+	
+	@Autowired
+	private CategoryDbDao categoryDao;	
+	
+	protected WebApplicationContext applicationContext;
 
 	@Override
-	public void init(ServletConfig config) throws ServletException {		
-		super.init(config);
-		ServletContext context = getServletContext();
-		String 	mode = context.getInitParameter("mode");		
-		
-		MyDataSource dataType = MyDataSource.getByKey(mode.toUpperCase());
-		context.setAttribute("mode", dataType);
-
-		System.out.println("-----------------------------");
-		System.out.println("CategoriesServlet started in  " + dataType + " mode (" + mode + ")");
-		System.out.println("-----------------------------");
-
-		daoFactory = new DaoFactory(dataType);
-		quoteDao = daoFactory.getQuoteDAO();
-		categoryDao = daoFactory.getCategoryDAO();		
+	public void init() throws ServletException {			
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {		
+			throws ServletException, IOException {				
 		request.setAttribute("quote", quoteDao.get(1));
 		request.setAttribute("categories", categoryDao.getAll());
 		request.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);			
 	}
-
 }

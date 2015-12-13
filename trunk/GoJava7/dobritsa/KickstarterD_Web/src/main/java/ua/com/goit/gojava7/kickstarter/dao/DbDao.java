@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class DbDao<T> implements Dao<T> {
 
@@ -15,13 +16,41 @@ public abstract class DbDao<T> implements Dao<T> {
 	protected String TABLE = null;
 	protected List<T> data;
 	protected Connection connection;
+	
+	@Autowired
 	protected BasicDataSource basicDataSource;
+	
+	protected DbDao(){		
+	}
 
 	protected DbDao(BasicDataSource basicDataSource, String FIELDS, String TABLE) {
 		this.basicDataSource = basicDataSource;
 		this.FIELDS = FIELDS;
 		this.TABLE = TABLE;
+	}	
+	
+	public BasicDataSource getBasicDataSource() {
+		return basicDataSource;
 	}
+
+	public void setBasicDataSource(BasicDataSource basicDataSource) {
+		this.basicDataSource = basicDataSource;
+	}
+	
+	@Override
+	public T get(int index) {
+		String query = "select " + FIELDS + " from " + TABLE + " where id = " + index;
+		try (PreparedStatement ps = basicDataSource.getConnection().prepareStatement(query);
+				ResultSet resultSet = ps.executeQuery()) {
+			if (resultSet.next()) {
+				return readElement(resultSet);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();		
+		}
+		return null;
+	}
+	
 
 	protected abstract T readElement(ResultSet resultSet) throws SQLException;
 
@@ -39,26 +68,10 @@ public abstract class DbDao<T> implements Dao<T> {
 	}
 
 	@Override
-	public T get(int index) {
-		String query = "select " + FIELDS + " from " + TABLE + " where id = " + index;
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query);
-				ResultSet resultSet = ps.executeQuery()) {
-			if (resultSet.next()) {
-				return readElement(resultSet);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
 	public List<T> getAll() {
 		List<T> data = new ArrayList<>();
 		String query = "select " + FIELDS + " from " + TABLE;
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query);
+		try (PreparedStatement ps = basicDataSource.getConnection().prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				data.add(readElement(resultSet));
@@ -72,8 +85,7 @@ public abstract class DbDao<T> implements Dao<T> {
 	@Override
 	public int size() {
 		String query = "select count(*) as cnt from " + TABLE;
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query);
+		try (PreparedStatement ps = basicDataSource.getConnection().prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
 				return resultSet.getInt("cnt");
