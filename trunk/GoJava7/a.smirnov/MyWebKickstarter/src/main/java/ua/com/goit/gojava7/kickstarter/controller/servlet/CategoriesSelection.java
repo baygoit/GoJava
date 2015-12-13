@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
@@ -21,19 +21,17 @@ import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 public class CategoriesSelection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Autowired
 	private QuoteDao quoteDao;
+
+	@Autowired
 	private CategoryDao categoryDao;
 
 	public void init() throws ServletException {
-
-		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
-
-		quoteDao = context.getBean("quoteDao", QuoteDao.class);
-		categoryDao = context.getBean("categoryDao", CategoryDao.class);
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		Quote quote = quoteDao.getRandomQuote();
 
 		List<Category> categories = categoryDao.getAll();
@@ -41,7 +39,6 @@ public class CategoriesSelection extends HttpServlet {
 		request.setAttribute("categories", categories);
 		request.setAttribute("quoteText", quote.getQuoteText());
 		request.setAttribute("quoteAuthor", quote.getAuthor());
-
 		request.getRequestDispatcher("WEB-INF/views/categories_selection.jsp").forward(request, response);
 	}
 }
