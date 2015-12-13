@@ -13,7 +13,6 @@ import ua.com.goit.gojava7.kickstarter.config.ConnectionPoolSource;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 
 public class PaymentDaoMysqlImpl implements PaymentDao {
-
 	private static final String INSERT_PAYMENT = "INSERT INTO payments (project_id, user_name, credit_card_number, donating_sum) VALUES (?, ?, ?, ?)";
 	private static final String DELETE_PAYMENT = "DELETE FROM payments WHERE project_id = ?";
 	private static final String SELECT_ALL_PAYMENTS = "SELECT project_id, user_name, credit_card_number, donating_sum  FROM payments";
@@ -28,7 +27,6 @@ public class PaymentDaoMysqlImpl implements PaymentDao {
 
 	@Override
 	public void add(Payment payment) {
-
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(INSERT_PAYMENT)) {
 
@@ -63,10 +61,9 @@ public class PaymentDaoMysqlImpl implements PaymentDao {
 
 		List<Payment> payments = new ArrayList<>();
 
-		try (Connection connection = dataSource.getConnection();
-				Statement statement = connection.createStatement();
+		try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement();
 
-				ResultSet resultSet = statement.executeQuery(SELECT_ALL_PAYMENTS)) {
+		ResultSet resultSet = statement.executeQuery(SELECT_ALL_PAYMENTS)) {
 
 			while (resultSet.next()) {
 
@@ -90,10 +87,9 @@ public class PaymentDaoMysqlImpl implements PaymentDao {
 
 		int amountOfPayments = 0;
 
-		try (Connection connection = dataSource.getConnection();
-				Statement statement = connection.createStatement();
+		try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement();
 
-				ResultSet resultSet = statement.executeQuery(COUNT_ALL_PAYMENTS)) {
+		ResultSet resultSet = statement.executeQuery(COUNT_ALL_PAYMENTS)) {
 
 			while (resultSet.next()) {
 				amountOfPayments = resultSet.getInt(1);

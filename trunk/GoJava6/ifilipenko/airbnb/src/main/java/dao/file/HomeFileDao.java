@@ -1,8 +1,8 @@
 package dao.file;
 
-import model.enums.CityList;
-import model.Home;
-import model.enums.HomeType;
+import entity.enums.CityList;
+import entity.Home;
+import entity.enums.HomeType;
 
 import java.io.IOException;
 import java.util.ArrayList;

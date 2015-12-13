@@ -1,0 +1,57 @@
+.list li {
+    background: url(images/icon_arrow_right.png) no-repeat 97% 50%;
+    border-bottom: 1px solid #ccc;
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+}
+.inner {
+    display: table-row;
+    overflow: hidden;
+}
+.li-img {
+    display: table-cell;
+    vertical-align: middle;
+    width: 30%;
+    padding-right: 1em;
+}
+.li-img img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.li-text {
+    display: table-cell;
+    vertical-align: middle;
+    width: 70%;
+    padding-right: 1em;
+}
+.li-head {
+    margin: 0;
+}
+.li-summary {
+    display: none;
+    margin: 0;
+}
+.li-action {
+    margin: 0;
+}
+
+@media screen and (min-width: 40em) {
+    .list li {
+        background: none;
+    }
+    .li-summary {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 60em) {
+    .list li {
+        float: left;
+        width: 50%;
+    }
+    .inner {
+        padding-right: 1em;
+    }
+}

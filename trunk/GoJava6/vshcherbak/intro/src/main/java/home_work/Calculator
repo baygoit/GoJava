@@ -1,0 +1,55 @@
+package home_work;
+
+import java.util.*;
+
+public class Calculator {
+    String input;
+    Deque<Integer> data = new ArrayDeque<>();
+
+    Calculator(String input) {
+        this.input = input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+    int calculate() {
+        String[] tokens = input.split(" ");
+
+        for (String str: tokens) {
+            try {
+                Integer num = Integer.parseInt(str);
+                data.push(num);
+            } catch (NumberFormatException e) {
+                int y = data.pop();
+                if (data.isEmpty()) {
+                    return -1;
+                }
+                int x = data.pop();
+
+                if (str.equals("+")) {
+                    x += y;
+                    data.push(x);
+                } else if (str.equals("-")) {
+                    x -= y;
+                    data.push(x);
+                } else if (str.equals("*")) {
+                    x *= y;
+                    data.push(x);
+                } else {
+                    x /= y;
+                    data.push(x);
+                }
+            }
+        }
+
+        return data.pop();
+    }
+
+    public static void main(String[] args) {
+        Calculator calculator = new Calculator("11 42 33 + - 20 +");
+        int result = calculator.calculate();
+        System.out.println(result);
+    }
+}
