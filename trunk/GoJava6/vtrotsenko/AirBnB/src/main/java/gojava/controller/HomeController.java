@@ -1,93 +1,80 @@
 package gojava.controller;
 
+import gojava.model.City;
+import gojava.model.User;
+import gojava.services.CityService;
 import gojava.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.inject.Inject;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
+import java.util.List;
 
 /**
  * Created by root on 04.11.15.
  */
 @Controller
+@SessionAttributes({"name", "lastname", "email", "password", "user", "cities"})
 public class HomeController {
 
-    /*private UserService userService;
+    @Autowired
+    UserService userService;
 
-    @Inject
-    public HomeController(UserService userService) {
-        this.userService = userService;
-    }*/
+    @Autowired
+    CityService cityService;
 
-    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "home", "index"})
     public String index() {
         return "index";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration() {
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String getRegistrationPage() {
         return "registration";
     }
 
-    /*ApplicationContext applicationContext =
-            new ClassPathXmlApplicationContext("applicationContext.xml");
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public ModelAndView registerUser(@RequestParam("name") String name,
+                                     @RequestParam("lastname") String lastname,
+                                     @RequestParam("email") String email,
+                                     @RequestParam("password") String password) {
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserService userService = applicationContext.getBean("userService", UserService.class);
-        String path = request.getServletPath();
-        String urlServlet = "/";
-
-        if (path.equals("/registration")) {
-            String name = request.getParameter("name");
-            String lastname = request.getParameter("lastname");
-            String password = request.getParameter("password");
-            String email = request.getParameter("email");
-
-            userService.registerUser(new User(name, password, lastname, email));
-
-            urlServlet = "/login";
-        }
-
-        else if (path.equals("/login")) {
-            *//*HttpSession httpSession = request.getSession();
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            User user = userService.login(email, password);
-            httpSession.setAttribute("user", user);
-
-            urlServlet = "/";*//*
-        }
-
-        System.out.println(urlServlet + "WAS VISITED DOPOST");
-
-        response.sendRedirect(urlServlet);
+        ModelAndView modelAndView = new ModelAndView();
+        User user = new User(name, password, lastname, email);
+        modelAndView.addObject("name", name);
+        modelAndView.addObject("lastname", lastname);
+        modelAndView.addObject("email", email);
+        modelAndView.addObject("password", password);
+        userService.registerUser(user);
+        modelAndView.setViewName("/login");
+        return modelAndView;
 
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String getLoginPage() {
+        return "login";
+    }
 
-        String path = request.getServletPath();
-        HttpSession httpSession = request.getSession();
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ModelAndView loginUser(@RequestParam("email") String email,
+                                  @RequestParam("password") String password) {
 
-        if (path.equals("/registration")) {
+        ModelAndView modelAndView = new ModelAndView();
+        User user = userService.loginUser(email, password);
+        modelAndView.addObject("user", user);
+        modelAndView.setViewName("/index");
+        return modelAndView;
+    }
 
-        }
+    @RequestMapping(value = "/cities", method = RequestMethod.GET)
+    public ModelAndView getAllCities() {
+        List<City> cities = cityService.getAllCities();
+        return new ModelAndView("/cities", "cities", cities);
+    }
 
-        else if (path.equals("/")) {
-            User user = (User) httpSession.getAttribute("user");
-            httpSession.setAttribute("name", "NAME");
-        }
-
-        String url = "/WEB-INF/view" + path + ".jsp";
-        System.out.println(url + "WAS VISITED DOGET");
-
-        request.getRequestDispatcher(url).forward(request, response);
-
-    }*/
 }

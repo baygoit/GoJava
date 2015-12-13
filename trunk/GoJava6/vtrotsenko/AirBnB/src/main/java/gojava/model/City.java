@@ -24,6 +24,8 @@ public class City extends AbstractEntity{
         this.cityName = cityName;
     }
 
+    public City() {}
+
     public Integer getId() {
         return id;
     }
