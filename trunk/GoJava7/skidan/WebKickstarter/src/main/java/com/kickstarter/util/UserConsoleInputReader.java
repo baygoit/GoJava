@@ -1,6 +1,6 @@
 package com.kickstarter.util;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class UserConsoleInputReader {
 
@@ -8,8 +8,8 @@ public class UserConsoleInputReader {
 
 	public static int readInput() {
 		try {
-			Scanner sc = new Scanner(System.in);
-			input = sc.nextInt();
+//			Scanner sc = new Scanner(System.in);
+//			input = sc.nextInt();
 
 		} catch (Exception e) {
 			System.out.println("Please input didgits, not leters");
@@ -22,8 +22,8 @@ public class UserConsoleInputReader {
 	public static String readStringInput() {
 		String name = "";
 		try {
-			Scanner sc = new Scanner(System.in);
-     		name = sc.nextLine();
+//			Scanner sc = new Scanner(System.in);
+//     		name = sc.nextLine();
 			if (name.getClass().equals(String.class) == false)
 				throw new Exception();
 		} catch (Exception e) {

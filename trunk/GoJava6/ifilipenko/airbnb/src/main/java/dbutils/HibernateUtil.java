@@ -1,8 +1,8 @@
 package dbutils;
 
-import model.Home;
-import model.Reservation;
-import model.User;
+import entity.Home;
+import entity.Reservation;
+import entity.User;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

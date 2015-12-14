@@ -2,7 +2,7 @@ package file;
 
 import dao.file.FileAccess;
 import dao.file.ReservationFileDao;
-import model.Reservation;
+import entity.Reservation;
 import org.junit.Assert;
 import org.junit.Test;
 

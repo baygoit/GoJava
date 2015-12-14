@@ -1,0 +1,16 @@
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\controller\servlet\SelectionProjects.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\dao\database\ProjectDaoDb.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\config\DaoProvider.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\config\MyDataSource.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\domain\Category.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\dao\ProjectDao.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\dao\database\CategoryDaoDb.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\domain\Project.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\dao\database\QuoteDaoDb.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\dao\QuoteDao.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\dao\CategoryDao.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\dao\database\ConfigDaoDb.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\domain\Payment.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\config\MysqlProvider.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\domain\Quote.java
+D:\work\git\WebKikstarter\src\main\java\ua\com\goit\gojava7\kikstarter\controller\servlet\SelectoinCategories.java

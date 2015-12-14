@@ -10,7 +10,6 @@ import java.util.Properties;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class ConnectionPoolSource {
-
 	private String driver;
 	private String host;
 	private String username;
@@ -30,7 +29,7 @@ public class ConnectionPoolSource {
 		cpds.setPassword(password);
 		cpds.setMinPoolSize(5);
 		cpds.setAcquireIncrement(5);
-		cpds.setMaxPoolSize(20);
+		cpds.setMaxPoolSize(50);
 		cpds.setMaxStatements(180);
 	}
 
@@ -54,10 +53,10 @@ public class ConnectionPoolSource {
 		try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("config.properties")) {
 
 			properties.load(inputStream);
-			driver = properties.getProperty("driverMysql");
-			host = properties.getProperty("databaseHostMysql");
-			username = properties.getProperty("usernameMysql");
-			password = properties.getProperty("passwordMysql");
+			driver = properties.getProperty("driverClassName");
+			host = properties.getProperty("dataBaseUrl");
+			username = properties.getProperty("username");
+			password = properties.getProperty("password");
 
 		} catch (IOException e) {
 			e.printStackTrace();

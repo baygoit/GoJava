@@ -2,36 +2,31 @@ package gojava.dao;
 
 import gojava.model.City;
 import org.hibernate.HibernateException;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.sql.SQLException;
 import java.util.List;
 
 /**
  * Created by root on 17.11.15.
  */
-public class CityDAO implements AbstractDAO<Integer, City> {
 
-    private EntityManagerFactory entityManagerFactory =
-            Persistence.createEntityManagerFactory("AirbnbPU");
+/**
+ * CityDao as well as UserDao doesn't implement AbstractDao interface
+ * because if it do, we have some kind of springException
+ */
+@Component
+public class CityDAO {
 
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
-    EntityTransaction entityTransaction = null;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public List<City> findAll() throws SQLException {
-        entityTransaction = entityManager.getTransaction();
-        List <City> cities = null;
-        try {
-            entityTransaction.begin();
-            cities = entityManager.createQuery("FROM City").getResultList();
-            entityTransaction.commit();
-        } catch (HibernateException e) {
-            if (entityTransaction.isActive()) entityTransaction.rollback();
-            e.printStackTrace();
-        }
+    @Transactional
+    public List<City> findAll() {
+        List <City> cities = entityManager.createQuery("Select a from City a", City.class)
+                .getResultList();
         return cities;
     }
 
@@ -47,20 +42,9 @@ public class CityDAO implements AbstractDAO<Integer, City> {
         return false;
     }
 
+    @Transactional
     public City create(City entity) {
-        entityTransaction = entityManager.getTransaction();
-        boolean flag = false;
-        try {
-            entityTransaction.begin();
-            entityManager.persist(entity);
-            entityTransaction.commit();
-            flag = true;
-        } catch (RuntimeException e) {
-            if (entityTransaction.isActive())
-                entityTransaction.rollback();
-            e.printStackTrace();
-        }
-
+        entityManager.persist(entity);
         return entity;
     }
 
