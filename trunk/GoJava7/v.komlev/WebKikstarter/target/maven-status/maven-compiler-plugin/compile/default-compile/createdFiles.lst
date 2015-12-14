@@ -1,0 +1,16 @@
+ua\com\goit\gojava7\kikstarter\dao\ProjectDao.class
+ua\com\goit\gojava7\kikstarter\controller\servlet\SelectoinCategories.class
+ua\com\goit\gojava7\kikstarter\domain\Project.class
+ua\com\goit\gojava7\kikstarter\dao\database\QuoteDaoDb.class
+ua\com\goit\gojava7\kikstarter\dao\database\CategoryDaoDb.class
+ua\com\goit\gojava7\kikstarter\config\MyDataSource.class
+ua\com\goit\gojava7\kikstarter\domain\Category.class
+ua\com\goit\gojava7\kikstarter\dao\database\ProjectDaoDb.class
+ua\com\goit\gojava7\kikstarter\config\DaoProvider.class
+ua\com\goit\gojava7\kikstarter\domain\Payment.class
+ua\com\goit\gojava7\kikstarter\dao\database\ConfigDaoDb.class
+ua\com\goit\gojava7\kikstarter\dao\CategoryDao.class
+ua\com\goit\gojava7\kikstarter\config\MysqlProvider.class
+ua\com\goit\gojava7\kikstarter\domain\Quote.class
+ua\com\goit\gojava7\kikstarter\dao\QuoteDao.class
+ua\com\goit\gojava7\kikstarter\controller\servlet\SelectionProjects.class

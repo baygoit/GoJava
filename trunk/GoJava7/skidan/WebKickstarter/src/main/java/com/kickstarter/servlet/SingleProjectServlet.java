@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import com.kickstarter.dao.interfaces.DbProjectDaoImpl;
 import com.kickstarter.dao.interfaces.DbQuestionDaoImpl;
 import com.kickstarter.model.Project;
@@ -17,12 +20,17 @@ import com.kickstarter.model.Question;
 @WebServlet("/SingleProjectServlet")
 public class SingleProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@Autowired
 	DbQuestionDaoImpl questionDao;
-	DbProjectDaoImpl projectDao;
+	
+	@Autowired
+    DbProjectDaoImpl projectDao;
 
 	public void init() throws ServletException {
-		projectDao = new DbProjectDaoImpl();
-		questionDao = new DbQuestionDaoImpl();
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
+//		projectDao = new DbProjectDaoImpl();
+//		questionDao = new DbQuestionDaoImpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
