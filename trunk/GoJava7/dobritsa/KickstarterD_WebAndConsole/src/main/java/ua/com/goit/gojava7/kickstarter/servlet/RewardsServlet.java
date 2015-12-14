@@ -24,8 +24,9 @@ public class RewardsServlet extends HttpServlet {
 
 	@Override
 	public void init() {
-		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
-		daoFactory = new DaoFactory(dataType);
+		//MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
+		//daoFactory = new DaoFactory(dataType);
+		daoFactory = new DaoFactory(MyDataSource.DB);
 		rewardDao = daoFactory.getRewardDAO();
 		projectDao = daoFactory.getProjectDAO();
 		categoryDao = daoFactory.getCategoryDAO();

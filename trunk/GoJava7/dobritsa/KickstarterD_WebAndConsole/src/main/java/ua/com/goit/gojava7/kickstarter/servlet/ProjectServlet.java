@@ -24,8 +24,9 @@ public class ProjectServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
-		daoFactory = new DaoFactory(dataType);
+		//MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
+		//daoFactory = new DaoFactory(dataType);
+		daoFactory = new DaoFactory(MyDataSource.DB);
 		questionDao = daoFactory.getQuestionDAO();
 		projectDao = daoFactory.getProjectDAO();
 		categoryDao = daoFactory.getCategoryDAO();
