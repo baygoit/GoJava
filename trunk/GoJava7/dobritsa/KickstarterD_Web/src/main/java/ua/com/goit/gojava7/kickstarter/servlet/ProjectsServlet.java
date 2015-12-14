@@ -8,24 +8,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
-import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 
 @WebServlet("/projects")
 public class ProjectsServlet extends HttpServlet {
 
-	private DaoFactory daoFactory;
+	@Autowired
 	private ProjectDao projectDao;
+	@Autowired
 	private CategoryDao categoryDao;
 
 	@Override
 	public void init() throws ServletException {		
-		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");			
-		daoFactory = new DaoFactory(dataType);
-		projectDao = daoFactory.getProjectDAO();
-		categoryDao = daoFactory.getCategoryDAO();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

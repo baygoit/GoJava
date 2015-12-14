@@ -9,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
-import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 @WebServlet("/question")
 public class QuestionServlet extends HttpServlet {
 
-	private DaoFactory daoFactory;
+	@Autowired
 	private QuestionDao questionDao;
 
 	@Override
 	public void init() {
-		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
-		daoFactory = new DaoFactory(dataType);
-		questionDao = daoFactory.getQuestionDAO();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

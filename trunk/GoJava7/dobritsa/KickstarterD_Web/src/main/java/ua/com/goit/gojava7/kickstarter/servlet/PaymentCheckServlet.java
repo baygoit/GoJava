@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
-import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,24 +10,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.DaoFactory;
-import ua.com.goit.gojava7.kickstarter.dao.MyDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 
 @WebServlet("/paymentCheck")
 public class PaymentCheckServlet extends HttpServlet {
 
-	private DaoFactory daoFactory;
+	@Autowired
 	private ProjectDao projectDao;
+	@Autowired
 	private CategoryDao categoryDao;
 
 	@Override
 	public void init() {
-		MyDataSource dataType = (MyDataSource) getServletContext().getAttribute("mode");
-		daoFactory = new DaoFactory(dataType);
-		projectDao = daoFactory.getProjectDAO();
-		categoryDao = daoFactory.getCategoryDAO();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

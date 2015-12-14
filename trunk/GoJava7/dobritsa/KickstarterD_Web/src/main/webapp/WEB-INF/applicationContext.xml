@@ -22,4 +22,6 @@
 		<property name="password" value="temppassword" />
 	</bean>
 	
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+	
 </beans>

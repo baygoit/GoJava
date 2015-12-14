@@ -6,16 +6,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 
+@Component
 public class PaymentDbDao extends DbDao<Payment> implements PaymentDao {
 
 	private static final String TABLE = "payment";
 	private static final String FIELDS = "id, user, card, amount, project_id";
 
+	public PaymentDbDao() {	
+		super.TABLE = TABLE;
+		super.FIELDS = FIELDS;
+	}
+	
 	public PaymentDbDao(BasicDataSource basicDataSource) {
 		super(basicDataSource, FIELDS, TABLE);
 	}

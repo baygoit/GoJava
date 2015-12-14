@@ -1,6 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,16 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
+@Component
 public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 
 	private static final String TABLE = "project";
 	private static final String FIELDS = "id, name, description, goal, pledged, daysToGo, history, link, category_id";
 
+	public ProjectDbDao() {	
+		super.TABLE = TABLE;
+		super.FIELDS = FIELDS;
+	}
+	
 	public ProjectDbDao(BasicDataSource basicDataSource) {
 		super(basicDataSource, FIELDS, TABLE);
 	}
@@ -26,8 +32,7 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 	public void updatePledged(Project project, int amount) {
 		String query = "UPDATE " + TABLE + " SET pledged = pledged + " + amount + " WHERE name = '"
 				+ prepareStringForDb(project.getName()) + "'";
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query);) {
+		try (PreparedStatement ps = basicDataSource.getConnection().prepareStatement(query)) {
 			ps.executeUpdate();
 			project.updatePledged(amount);
 		} catch (SQLException e) {
@@ -51,11 +56,10 @@ public class ProjectDbDao extends DbDao<Project> implements ProjectDao {
 	}
 
 	@Override
-	public List<Project> getByCategory(int categoryId) {
+	public List<Project> getByCategory(int categoryId) {	
 		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE category_id = " + categoryId;
 		List<Project> data = new ArrayList<>();
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query);
+		try (PreparedStatement ps = basicDataSource.getConnection().prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				data.add(readElement(resultSet));

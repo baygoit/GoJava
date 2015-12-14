@@ -39,6 +39,8 @@ public abstract class DbDao<T> implements Dao<T> {
 	
 	@Override
 	public T get(int index) {
+		
+		
 		String query = "select " + FIELDS + " from " + TABLE + " where id = " + index;
 		try (PreparedStatement ps = basicDataSource.getConnection().prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
