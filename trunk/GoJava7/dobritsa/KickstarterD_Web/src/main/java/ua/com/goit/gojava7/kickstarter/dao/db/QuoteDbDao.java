@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,8 +31,8 @@ public class QuoteDbDao extends DbDao<Quote> implements QuoteDao {
 	@Override
 	public Quote getRandomQuote() {
 		String query = "SELECT text, author FROM quote order by rand() limit 1 ";
-		try (PreparedStatement ps = basicDataSource.getConnection().prepareStatement(query);
-				ResultSet resultSet = ps.executeQuery()) {
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				return readElement(resultSet);
 			}

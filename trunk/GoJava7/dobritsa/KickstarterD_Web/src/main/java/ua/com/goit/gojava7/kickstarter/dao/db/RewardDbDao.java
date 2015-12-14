@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,8 +43,8 @@ public class RewardDbDao extends DbDao<Reward> implements RewardDao {
 	public List<Reward> getByProject(int projectId) {
 		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE project_id = " + projectId;
 		List<Reward> data = new ArrayList<>();
-		try (PreparedStatement ps = basicDataSource.getConnection().prepareStatement(query);
-				ResultSet resultSet = ps.executeQuery()) {
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				data.add(readElement(resultSet));
 			}

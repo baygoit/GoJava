@@ -39,10 +39,10 @@ public abstract class DbDao<T> implements Dao<T> {
 	
 	@Override
 	public T get(int index) {
-		ResultSet resultSet = null;		
+		//ResultSet resultSet = null;		
 		String query = "select " + FIELDS + " from " + TABLE + " where id = " + index;
-		try (PreparedStatement ps = basicDataSource.getConnection().prepareStatement(query)) {
-				resultSet = ps.executeQuery();
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
 				return readElement(resultSet);
 			}
@@ -69,11 +69,11 @@ public abstract class DbDao<T> implements Dao<T> {
 
 	@Override
 	public List<T> getAll() {
-		ResultSet resultSet = null;
+		//ResultSet resultSet = null;
 		List<T> data = new ArrayList<>();
 		String query = "select " + FIELDS + " from " + TABLE;
-		try (PreparedStatement ps = basicDataSource.getConnection().prepareStatement(query)) {
-			resultSet = ps.executeQuery();
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				data.add(readElement(resultSet));
 			}
@@ -85,10 +85,10 @@ public abstract class DbDao<T> implements Dao<T> {
 
 	@Override
 	public int size() {
-		ResultSet resultSet = null;
+		//ResultSet resultSet = null;
 		String query = "select count(*) as cnt from " + TABLE;
-		try (PreparedStatement ps = basicDataSource.getConnection().prepareStatement(query)) {
-			resultSet = ps.executeQuery();
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
 				return resultSet.getInt("cnt");
 			}
