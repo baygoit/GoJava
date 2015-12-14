@@ -6,8 +6,7 @@
 	<groupId>ua.com.goit.gojava7</groupId>
 	<artifactId>Kickstarter</artifactId>
 	<version>1.0</version>
-	<packaging>war</packaging>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-version>3.0.2.RELEASE</spring-version>
@@ -89,17 +88,12 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
-<<<<<<< HEAD:trunk/GoJava7/dobritsa/KickstarterDobritsa/pom.xml
-			</plugin>
-			</plugins>
-=======
 			</plugin>			
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.6</version>				
 			</plugin>
 		</plugins>
->>>>>>> 79b190b26d53d5698069c1ef4c594197cad76806:trunk/GoJava7/dobritsa/KickstarterD_WebAndConsole/pom.xml
 	</build>
-	
+	<packaging>war</packaging>
 </project>
