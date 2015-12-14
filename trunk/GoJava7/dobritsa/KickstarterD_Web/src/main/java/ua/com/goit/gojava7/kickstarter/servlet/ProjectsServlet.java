@@ -17,6 +17,8 @@ import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 @WebServlet("/projects")
 public class ProjectsServlet extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Autowired
 	private ProjectDao projectDao;
 	@Autowired
@@ -24,7 +26,7 @@ public class ProjectsServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {		
-		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

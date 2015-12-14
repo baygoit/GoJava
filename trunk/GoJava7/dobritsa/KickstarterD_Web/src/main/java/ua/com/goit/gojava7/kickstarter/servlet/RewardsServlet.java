@@ -18,6 +18,8 @@ import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 @WebServlet("/rewards")
 public class RewardsServlet extends HttpServlet {
 	
+	private static final long serialVersionUID = 1L;
+	
 	@Autowired
 	private RewardDao rewardDao;
 	@Autowired
@@ -27,7 +29,7 @@ public class RewardsServlet extends HttpServlet {
 
 	@Override
 	public void init() {
-		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

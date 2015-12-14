@@ -17,6 +17,8 @@ import ua.com.goit.gojava7.kickstarter.dao.db.QuoteDbDao;
 
 @WebServlet("/")
 public class CategoriesServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private QuoteDbDao quoteDao;
