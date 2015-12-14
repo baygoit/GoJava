@@ -43,6 +43,10 @@
 		<property name="username" value="root"/>
 		<property name="password" value="12345"/>
 	</bean>
+	
+	<bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	<property name="DataSource" ref="dataSource"/>
+	</bean>
 	<bean
 		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
