@@ -8,14 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.servlet.MainServlet;
 @Component
 public class CategoryDatabaseDao extends DatabaseDao<Category>{
-
+    private static final Logger logger = LogManager.getLogger(CategoryDatabaseDao.class); 
     private static String table  = "categories";
     private static String fields = "categoryId,categoryName";
     public CategoryDatabaseDao() {
@@ -45,14 +49,14 @@ public class CategoryDatabaseDao extends DatabaseDao<Category>{
                 return category;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR, e);
         }
         throw new NoSuchElementException();
     }
 
     @Override
     public void add(Category element) {
-
+        logger.info("Empty function use");
     }
     @Override
     public Connection getConnection() throws SQLException{
@@ -67,29 +71,28 @@ public class CategoryDatabaseDao extends DatabaseDao<Category>{
                 data.add(readElement(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR, e);
         }
         return data;
     }
     @Override
     public Category get(int index) {
-        // TODO Auto-generated method stub
+        logger.info("Empty function use");
         return null;
     }
     @Override
     public Category getByNumber(int number) {
-        // TODO Auto-generated method stub
+        logger.info("Empty function use");
         return null;
     }
     @Override
     public void setAll(List<Category> data) {
-        // TODO Auto-generated method stub
+        logger.info("Empty function use");
         
     }
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        return 0;
+        return getAll().size();
     }
     
     

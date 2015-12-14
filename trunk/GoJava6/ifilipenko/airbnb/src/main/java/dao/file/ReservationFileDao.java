@@ -1,11 +1,12 @@
 package dao.file;
 
-import model.Reservation;
+import dao.IReservationDao;
+import entity.Reservation;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class ReservationFileDao {
+public class ReservationFileDao implements IReservationDao {
     private FileAccess fileAccess;
 
     public ReservationFileDao() {

@@ -4,32 +4,6 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    <!--<servlet>
-        <servlet-name>ControllerServlet</servlet-name>
-        <servlet-class>com.controllerer.ControllerServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ControllerServlet</servlet-name>
-        <url-pattern>/registration</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ControllerServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>-->
-
-    <!--<context-param>
-        <description>User login</description>
-        <param-name>username</param-name>
-        <param-value>admin</param-value>
-    </context-param>
-
-    <context-param>
-        <description>User password</description>
-        <param-name>password</param-name>
-        <param-value>admin</param-value>
-    </context-param>-->
-
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/applicationContext*.xml</param-value>
@@ -40,14 +14,13 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value></param-value>
+            <param-value>/WEB-INF/applicationContext*.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <listener>
@@ -59,5 +32,4 @@
             1
         </session-timeout>
     </session-config>
-
 </web-app>

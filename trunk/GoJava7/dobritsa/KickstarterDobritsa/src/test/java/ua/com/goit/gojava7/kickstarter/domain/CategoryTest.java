@@ -51,6 +51,6 @@ public class CategoryTest extends Assert {
 	@Test
 	public void testToString() {
 		System.out.println(category.toString());
-		verify(printSteam).println("Category: CategoryName");
+		verify(printSteam).println("CategoryName");
 	}
 }

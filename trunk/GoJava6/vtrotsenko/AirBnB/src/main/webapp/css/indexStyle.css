@@ -1,11 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
-
 .nav a {
-  font-size: 11px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color:white;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color:white;
 }
 
 .nav {
@@ -13,7 +12,7 @@
 }
 
 .nav li {
-  display: inline;
+    display: inline;
 }
 
 .jumbotron {
@@ -26,32 +25,32 @@
 }
 
 .jumbotron .container {
-  position: relative;
-  top:100px;
+    position: relative;
+    top:100px;
 }
 
 .jumbotron h1 {
-  color: #fff;
-  font-size: 60px;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: bold;
- text-align: center;
+    color: #fff;
+    font-size: 60px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    text-align: center;
 }
 
 .jumbotron p {
- text-align: center;
-  font-size: 30px;
-  color: #fff;
+    text-align: center;
+    font-size: 30px;
+    color: #fff;
 }
 
 .learn-more {
-  background-color: #f7f7f7;
+    background-color: #f7f7f7;
 }
 
 .learn-more h3 {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 18px;
-  font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .neighborhood-guides{
@@ -69,4 +68,12 @@
 
 .jumbotron .nav .containerNav .pull-left li{
     color:black;
+}
+#becomeHost{
+    border-radius: 10px;
+}
+
+.neighborhood-guides .container #listOfCities{
+    text-align: center;
+    text-transform: uppercase;
 }

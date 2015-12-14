@@ -53,9 +53,9 @@
 									
 						</tr>
 	       		  	 		
-	       		  	<tr><td><a href=\mykickstarter\payment?id=${project.getUniqueID()}>Donate money</a></td></tr>
+	       		  	<tr><td><a href=payment?id=${project.getUniqueID()}>Donate money</a></td></tr>
 	       		  	 		
-	       			<tr><td><a href=\mykickstarter\ask?id=${project.getUniqueID()}>Ask question</a></td></tr>
+	       			<tr><td><a href=ask?id=${project.getUniqueID()}>Ask question</a></td></tr>
     		   	
 	        	</table>
 	        				

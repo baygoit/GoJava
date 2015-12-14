@@ -7,6 +7,8 @@ import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public class ProjectPrinter {
+	
+	private String BORDER = "\n________________________________________________________";
 
 	public void printProjects(List<Project> projects) {
 		for (int i = 0; i < projects.size(); i++) {
@@ -24,6 +26,7 @@ public class ProjectPrinter {
 	}
 
 	public void printFull(Project project) {
+		System.out.println(BORDER);
 		printShort(project);
 		System.out.println("History: \t" + project.getHistory());
 		System.out.println("Demo video: \t" + project.getLink());	
