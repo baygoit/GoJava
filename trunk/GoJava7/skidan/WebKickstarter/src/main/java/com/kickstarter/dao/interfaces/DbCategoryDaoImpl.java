@@ -6,20 +6,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.kickstarter.model.Category;
 
+@Component
 public class DbCategoryDaoImpl implements CategoryDaoInterface {
 
-	
-	private DBCon dbCon;
+	@Autowired
+	private BasicDataSource dbCon;
 
-	public DBCon getDbCon() {
+	public BasicDataSource getDbCon() {
 		return dbCon;
 	}
-	@Autowired
-	public void setDbCon(DBCon dbCon) {
+	
+	public void setDbCon(BasicDataSource dbCon) {
 		this.dbCon = dbCon;
 	}
 

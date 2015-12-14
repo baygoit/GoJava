@@ -22,8 +22,8 @@
 		<%=quote.getAuthor()%><br>
 
 		<c:forEach items="${categoryList}" var="category">
-			<a href=http://localhost:8080/WebKickstarter/SelectedCategoryProjectsServlet?categoryTitle=${category.getTitle()}><c:out
-					value="${category.getTitle()}" /></a>
+			<b><a href=http://localhost:8080/WebKickstarter/SelectedCategoryProjectsServlet?categoryTitle=${category.getTitle()}><c:out
+					value="${category.getTitle()}" /></a></b>
 
 		</c:forEach>
 

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import com.kickstarter.dao.interfaces.DbProjectDaoImpl;
 import com.kickstarter.dao.interfaces.DbQuestionDaoImpl;
 
@@ -15,12 +18,13 @@ import com.kickstarter.dao.interfaces.DbQuestionDaoImpl;
 public class QuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Autowired
 	DbQuestionDaoImpl questionDao;
+	@Autowired
 	DbProjectDaoImpl projectDao;
 
 	public void init() throws ServletException {
-		projectDao = new DbProjectDaoImpl();
-		questionDao = new DbQuestionDaoImpl();
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

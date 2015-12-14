@@ -9,18 +9,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kickstarter.dao.ProjectDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
+
+import com.kickstarter.dao.interfaces.DbProjectDaoImpl;
 import com.kickstarter.model.Project;
 
 
 @WebServlet("/SelectedCategoryProjectsServlet")
 public class SelectedCategoryProjectsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ProjectDao projectDao;
+	
+	@Autowired
+	DbProjectDaoImpl projectDao;
   
 	
 	public void init() throws ServletException {
-		projectDao = new ProjectDao();
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
+			      getServletContext());
 	}
 	
 	
