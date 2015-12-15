@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ua.com.goit.gojava7.kickstarter.dao.QuestionsDAO;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
@@ -12,6 +15,8 @@ import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 public class QuestionPostgreDAO implements QuestionsDAO, JdbcDataSource<Question> {
 
+	final static Logger logger = LoggerFactory.getLogger(QuestionPostgreDAO.class);
+	
     private static final String TABLE = "question";
     private static final String FIELDS = "project_id,question,answer";
     private static final String INSERTION = FIELDS.replaceAll("[^,]+", "?");
@@ -20,7 +25,7 @@ public class QuestionPostgreDAO implements QuestionsDAO, JdbcDataSource<Question
 
     public QuestionPostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
-        System.out.println("QuestionPostgreDAO created");
+        logger.info("dao created");
     }
 
     @Override
