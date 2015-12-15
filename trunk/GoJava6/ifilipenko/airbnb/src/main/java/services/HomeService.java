@@ -1,7 +1,7 @@
 package services;
 
 import dao.file.HomeFileDao;
-import model.Home;
+import entity.Home;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,8 +1,9 @@
 package dao.file;
 
-import model.enums.CityList;
-import model.enums.GenderType;
-import model.User;
+import dao.IUserDao;
+import entity.enums.CityList;
+import entity.enums.GenderType;
+import entity.User;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -10,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserFileDao {
+public class UserFileDao implements IUserDao {
     private final FileAccess fileAccess;
 
     public UserFileDao() {

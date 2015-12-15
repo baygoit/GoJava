@@ -1,7 +1,7 @@
 package dao.hibernate;
 
 import dbutils.HibernateUtil;
-import model.User;
+import entity.User;
 import org.hibernate.Session;
 
 public class UserDao {
