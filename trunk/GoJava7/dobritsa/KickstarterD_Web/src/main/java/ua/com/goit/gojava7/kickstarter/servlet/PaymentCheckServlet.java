@@ -1,8 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
