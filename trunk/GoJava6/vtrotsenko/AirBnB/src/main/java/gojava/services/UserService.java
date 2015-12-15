@@ -1,12 +1,11 @@
 package gojava.services;
 
+import gojava.dao.UserDAO;
 import gojava.model.User;
-import gojava.validation.Validation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * Created by root on 04.11.15.
@@ -14,59 +13,21 @@ import javax.persistence.PersistenceContext;
 @Component
 public class UserService {
 
-    /*UserDAO userDAO = new UserDAO();*/
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Autowired
+    UserDAO userDAO;
 
-    @Transactional
     public User registerUser(User user) {
-        if (Validation.isValidName(user.getName()) &&
-                Validation.isValidName(user.getLastname()) &&
-                Validation.isValidEmail(user.getEmail()))
-            entityManager.persist(user);
+        userDAO.create(user);
         return user;
     }
 
-    /*public User login(String email, String password) {
-        List<User> users  = userDAO.findAll();
-        for (Iterator iterator = users.iterator(); iterator.hasNext();) {
-            User user = (User) iterator.next();
-            if (user.getPassword().equals(password) && user.getEmail().equals(email)) {
+    public User loginUser(String email, String password) {
+        List<User> users = userDAO.findAll();
+        for (User user : users) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password))
                 return user;
-            }
         }
         return null;
-    }*/
-
-    /*public void becomeHost(User user, String city, Integer idApartment, ApartmentType apartmentType,
-                           LocalDate start, LocalDate end) {
-
-        if (isRegisteredAsClient() &&
-                isValidName(city) &&
-                isValidApartmentType(apartmentType) &&
-                isValidDate(start, end)) {
-            setUserType(UserType.HOST);
-            setIsRegisteredAsHost(true);
-            setCity(city);
-            Apartment apartment = new Apartment(idApartment, apartmentType, start, end);
-            //addApartment(apartment);
-            //aS.addCity(this);
-            Log.logger.info(" -- " + getName() + " " + getLastname() + " became HOST!");
-        }
-
-        else {
-            Log.logger.info(" -- " + getName() + " " + getLastname() + " FAILED becoming HOST :(");
-        }
-    }*/
-
-
-    /*public void registerApartment(ApartmentDAO apartmentDao, User user, Integer idApartment,
-                                  ApartmentType apartmentType, LocalDate start, LocalDate end) {
-
-        Apartment apartment = new Apartment(idApartment, apartmentType, start, end, user.getId());
-        //addApartment(apartment);4
-        apartmentDao.create(apartment);
-
-    }*/
+    }
 
 }

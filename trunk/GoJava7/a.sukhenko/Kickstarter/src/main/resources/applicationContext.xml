@@ -16,7 +16,6 @@
            <context:component-scan base-package="ua.com.goit.gojava7.kickstarter"/>
            <context:annotation-config/>
       <context:property-placeholder location="classpath:db-${my.env}.properties"/>
-            
            <bean id="propertyPlaceholderConfigurer"
 class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
             <property name="ignoreUnresolvablePlaceholders" value="true"/>
@@ -30,10 +29,11 @@ class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
    <property name="url" value="${url}" />
    <property name="username" value="${db.username}" />
    <property name="password" value="${db.password}" />
-    <property name="initialSize" value="5" />
-    <property name="maxActive" value="10" />
-    <property name="maxIdle" value="5" />
-    <property name="minIdle" value="2" />
+    <property name="initialSize" value="10" />
+    <property name="maxActive" value="100" />
+    <property name="maxIdle" value="50" />
+    <property name="minIdle" value="10" />
+    <property name="validationQuery" value="SELECT 1"></property>
  </bean>
 
            

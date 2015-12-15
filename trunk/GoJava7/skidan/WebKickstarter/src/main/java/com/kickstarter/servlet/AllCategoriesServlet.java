@@ -25,23 +25,24 @@ public class AllCategoriesServlet extends HttpServlet {
 
 	@Autowired
 	DbCategoryDaoImpl categoryDao;
-	
+
 	@Autowired
 	DbQuoteImpl quoteDao;
 
 	public void init() throws ServletException {
-		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
-			      getServletContext());
-//		ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-//		quoteDao = (DbQuoteImpl) context.getBean("DbQuoteImpl");
-//		categoryDao = (DbCategoryDaoImpl) context.getBean("DbCategoryDaoImpl");
-		
-		//		quoteDao = new DbQuoteImpl();
-//		categoryDao = new DbCategoryDaoImpl();
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
+		// ApplicationContext context = new
+		// ClassPathXmlApplicationContext("ApplicationContext.xml");
+		// quoteDao = (DbQuoteImpl) context.getBean("DbQuoteImpl");
+		// categoryDao = (DbCategoryDaoImpl)
+		// context.getBean("DbCategoryDaoImpl");
+
+		// quoteDao = new DbQuoteImpl();
+		// categoryDao = new DbCategoryDaoImpl();
 
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Quote quote = quoteDao.get();
 		List<Category> categoryList = categoryDao.getAll();

@@ -86,9 +86,8 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
     }
 
     @Override
-    public Connection getConnection() throws SQLException {
-        // TODO Auto-generated method stub
-        return null;
+    public Connection getConnection() throws SQLException{
+        return dataSource.getConnection();
     }
 
     @Override

@@ -1,8 +1,8 @@
 package services;
 
 import dao.file.UserFileDao;
-import model.Home;
-import model.User;
+import entity.Home;
+import entity.User;
 
 import java.io.IOException;
 import java.util.List;

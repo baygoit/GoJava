@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
@@ -24,41 +24,36 @@ public class AskQuestion extends HttpServlet {
 	private int projectId;
 	private String userName;
 	private String question;
+
+	@Autowired
 	private FaqDao faqDao;
 
 	public void init() throws ServletException {
-
-		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
-
-		faqDao = context.getBean("faqDao", FaqDao.class);
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		projectId = Integer.parseInt(request.getParameter("id"));
 
 		request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		request.setAttribute("errors", false);
 
 		validateUserName(request, response);
-
 		validateQuestion(request, response);
 
 		if ((Boolean) request.getAttribute("errors")) {
 			request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
+		} else {
+			saveCreatedFaq();
+
+			response.sendRedirect("/kickstarter/project?id=" + projectId);
 		}
-
-		saveCreatedFaq();
-
-		response.sendRedirect("/kickstarter/project?id=" + projectId);
 	}
 
 	protected void validateUserName(HttpServletRequest request, HttpServletResponse response) {
-
 		userName = request.getParameter("first-name");
 
 		if (userName.isEmpty()) {
@@ -68,7 +63,6 @@ public class AskQuestion extends HttpServlet {
 	}
 
 	protected void validateQuestion(HttpServletRequest request, HttpServletResponse response) {
-
 		question = request.getParameter("question");
 
 		if (question.isEmpty()) {
@@ -79,10 +73,8 @@ public class AskQuestion extends HttpServlet {
 
 	protected void saveCreatedFaq() {
 		Faq faq = new Faq();
-
 		faq.setQuestion(question);
 		faq.setProjectID(projectId);
-
 		faqDao.add(faq);
 	}
 }
