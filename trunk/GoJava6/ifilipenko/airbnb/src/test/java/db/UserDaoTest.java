@@ -2,9 +2,9 @@ package db;
 
 import dao.hibernate.UserDao;
 import dbutils.HibernateUtil;
-import model.User;
-import model.enums.CityList;
-import model.enums.GenderType;
+import entity.User;
+import entity.enums.CityList;
+import entity.enums.GenderType;
 import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class UserDaoTest {
 
 
     @Test
-    public void readByEmail_Success(){
+    public void readById_Success(){
         //------------arrange------------
         User user = null;
         try {

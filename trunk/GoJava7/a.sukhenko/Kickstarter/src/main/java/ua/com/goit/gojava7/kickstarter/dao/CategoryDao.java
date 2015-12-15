@@ -5,7 +5,7 @@ import java.util.List;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public interface CategoryDao{
-	List<Category> getAll();
+    List<Category> getAll();
 
-	int count();
+    int count();
 }

@@ -11,19 +11,44 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	<bean id="DbCategoryDaoImpl" class="com.kickstarter.dao.interfaces.DbCategoryDaoImpl">
-		<property name="dbCon" ref="DBCon" />
+
+
+    <!--    <bean id="DbQuestionDaoImpl" class="com.kickstarter.dao.interfaces.DbQuestionDaoImpl">
+
+	</bean> 
+
+	 <bean id="DbCategoryDaoImpl" class="com.kickstarter.dao.interfaces.DbCategoryDaoImpl">
+
+	</bean> 
+	
+	<bean id="DbQuoteImpl" class="com.kickstarter.dao.interfaces.DbQuoteImpl">
+
 	</bean>
 
-<bean id="DbQuoteImpl" class="com.kickstarter.dao.interfaces.DbQuoteImpl">
-		<property name="dbCon" ref="DBCon" />
-	</bean>
+	<bean id="DbProjectDaoImpl" class="com.kickstarter.dao.interfaces.DbProjectDaoImpl">
 
-
-	<bean id="DBCon" class="com.kickstarter.dao.interfaces.DBCon">
+	</bean> 
+<bean id="dbCon" class="com.kickstarter.dao.interfaces.DBCon">
 		<property name="url" value="jdbc:mysql://localhost:3306/kickstarter" />
 		<property name="user" value="root" />
 		<property name="password" value="12345" />
 	</bean>
+    
+	
+	-->
 
+<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/kickstarter"/>
+		<property name="username" value="root"/>
+		<property name="password" value="12345"/>
+	</bean>
+	
+	<bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	<property name="DataSource" ref="dataSource"/>
+	</bean>
+	<bean
+		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
+<context:component-scan base-package="com.kickstarter.dao.interfaces"/>
 </beans>
