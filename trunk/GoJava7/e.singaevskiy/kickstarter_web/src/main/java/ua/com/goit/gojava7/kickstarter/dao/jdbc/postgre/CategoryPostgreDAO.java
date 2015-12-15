@@ -32,13 +32,13 @@ public class CategoryPostgreDAO implements CategoryDAO {
     @Override    
     public void add(Category element) {
         String sql = "insert into category (id, name) values (?, ?)";
-        jdbcTemplate.update(sql, new StatementSetter(element));
+        jdbcTemplate.batchUpdate(sql, new StatementSetter(element));
     }
 
     @Override
     public void addAll(List<Category> elements) {
         String sql = "insert into category (id, name) values (?, ?)";
-		jdbcTemplate.update(sql, new StatementSetter(elements));
+		jdbcTemplate.batchUpdate(sql, new StatementSetter(elements));
     }
 
     @Override
@@ -69,8 +69,8 @@ public class CategoryPostgreDAO implements CategoryDAO {
 		@Override
 		public void setValues(PreparedStatement statement, int i) throws SQLException {
 			Category element = list.get(i);
-			statement.setInt(1, element.getId());
-			statement.setString(2, element.getName());
+			statement.setObject(1, element.getId());
+			statement.setObject(2, element.getName());
 		}
 
 		@Override
@@ -80,7 +80,7 @@ public class CategoryPostgreDAO implements CategoryDAO {
 	}
 
 
-	public class ElementMapper implements RowMapper<Category> {
+	private final class ElementMapper implements RowMapper<Category> {
 
 		public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Category category = new Category();
