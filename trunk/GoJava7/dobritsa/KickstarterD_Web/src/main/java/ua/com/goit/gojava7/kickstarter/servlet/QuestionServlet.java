@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
-import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @WebServlet("/question")
 public class QuestionServlet extends HttpServlet {
@@ -25,9 +25,9 @@ public class QuestionServlet extends HttpServlet {
 
 	@Override
 	public void init() {
-		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
 	}
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
@@ -48,5 +48,5 @@ public class QuestionServlet extends HttpServlet {
 
 		doGet(request, response);
 	}
-
+	
 }

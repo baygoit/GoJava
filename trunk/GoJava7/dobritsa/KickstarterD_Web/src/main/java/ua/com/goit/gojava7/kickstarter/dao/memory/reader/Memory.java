@@ -3,11 +3,11 @@ package ua.com.goit.gojava7.kickstarter.dao.memory.reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.domain.Question;
-import ua.com.goit.gojava7.kickstarter.domain.Quote;
-import ua.com.goit.gojava7.kickstarter.domain.Reward;
+import ua.com.goit.gojava7.kickstarter.models.Category;
+import ua.com.goit.gojava7.kickstarter.models.Project;
+import ua.com.goit.gojava7.kickstarter.models.Question;
+import ua.com.goit.gojava7.kickstarter.models.Quote;
+import ua.com.goit.gojava7.kickstarter.models.Reward;
 
 public class Memory {
 

@@ -21,12 +21,13 @@ public class ProjectsServlet extends HttpServlet {
 	
 	@Autowired
 	private ProjectDao projectDao;
+	
 	@Autowired
 	private CategoryDao categoryDao;
 
 	@Override
 	public void init() throws ServletException {		
-		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

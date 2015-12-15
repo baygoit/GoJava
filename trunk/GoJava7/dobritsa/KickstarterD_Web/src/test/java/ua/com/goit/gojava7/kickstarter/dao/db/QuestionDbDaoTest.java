@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @RunWith(MockitoJUnitRunner.class)
 public class QuestionDbDaoTest {

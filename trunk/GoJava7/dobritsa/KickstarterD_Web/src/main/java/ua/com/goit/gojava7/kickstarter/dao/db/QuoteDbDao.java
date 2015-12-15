@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kickstarter.domain.Quote;
+import ua.com.goit.gojava7.kickstarter.models.Quote;
 
 @Component
 public class QuoteDbDao extends DbDao<Quote> implements QuoteDao {

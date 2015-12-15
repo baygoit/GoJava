@@ -2,7 +2,7 @@ package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.models.Question;
 
 public interface QuestionDao extends Dao<Question> {
 

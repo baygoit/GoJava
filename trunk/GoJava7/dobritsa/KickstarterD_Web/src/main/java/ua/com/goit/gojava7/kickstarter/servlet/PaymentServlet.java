@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import ua.com.goit.gojava7.kickstarter.config.Validator;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
@@ -24,14 +25,16 @@ public class PaymentServlet extends HttpServlet {
 	
 	@Autowired
 	private ProjectDao projectDao;
+	
 	@Autowired
 	private RewardDao rewardDao;
+	
 	@Autowired
 	private CategoryDao categoryDao;
 
 	@Override
 	public void init() {
-		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -52,7 +55,8 @@ public class PaymentServlet extends HttpServlet {
 		} else {
 			projectId = Integer.parseInt(request.getParameter("projectId"));
 
-			if (validateAmount(request.getParameter("amount"))) {
+			//if (validateAmount(request.getParameter("amount"))) {
+			if (Validator.validateAmountOfPledge(request.getParameter("amount"))) {	
 				amount = Integer.parseInt(request.getParameter("amount"));
 				request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
 				request.setAttribute("project", projectDao.get(projectId));
@@ -68,15 +72,9 @@ public class PaymentServlet extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
-
-	private boolean validateAmount(String amount) {
-		Pattern p = Pattern.compile("^[0-9]{1,10}$");
-		Matcher m = p.matcher(amount);
-		return m.matches();
-	}
-
+	//private boolean validateAmount(String amount) {
+	//	Pattern p = Pattern.compile("^[0-9]{1,10}$");
+	//	Matcher m = p.matcher(amount);
+	//	return m.matches();
+	//}
 }

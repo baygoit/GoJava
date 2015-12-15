@@ -15,6 +15,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ua.com.goit.gojava7.kickstarter.models.Payment;
+
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentTest {
 
