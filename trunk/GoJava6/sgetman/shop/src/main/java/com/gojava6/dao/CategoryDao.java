@@ -33,4 +33,14 @@ public class CategoryDao <T, S>{
     public Category find(Short id) {
         return entityManager.find(Category.class, id);
     }
+
+    public Category create(Category category) {
+        return entityManager.merge(category);
+    }
+
+    public Category update(short categoryId, Category category) {
+        Category savedCategory = entityManager.find(Category.class, categoryId);
+        savedCategory.setName(category.getName());
+        return savedCategory;
+    }
 }

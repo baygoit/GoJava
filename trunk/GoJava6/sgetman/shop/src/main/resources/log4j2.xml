@@ -11,10 +11,13 @@
         </File>
     </Appenders>
     <Loggers>
-        <Root level="debug">
+        <Root level="error">
             <AppenderRef ref="Console"/>
         </Root>
-        <Logger name="com.gojava6" level="debug">
+        <Logger name="com.gojava6" level="error">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="org.springframework" level="error">
             <AppenderRef ref="Console"/>
         </Logger>
     </Loggers>
