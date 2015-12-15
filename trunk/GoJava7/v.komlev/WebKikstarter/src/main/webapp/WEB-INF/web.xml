@@ -3,25 +3,14 @@
 
 <web-app>
 
-	<servlet>
-		<servlet-name>selectionCategories</servlet-name>
-		<servlet-class>ua.com.goit.gojava7.kikstarter.controller.servlet.SelectoinCategories</servlet-class>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>selectionProjects</servlet-name>
-		<servlet-class>ua.com.goit.gojava7.kikstarter.controller.servlet.SelectionProjects</servlet-class>
-	</servlet>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
 
-	<servlet-mapping>
-		<servlet-name>selectionCategories</servlet-name>
-		<url-pattern>/categories</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>selectionProjects</servlet-name>
-		<url-pattern>/category</url-pattern>
-	</servlet-mapping>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
