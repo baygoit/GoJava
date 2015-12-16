@@ -21,7 +21,7 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 
     <servlet>
         <servlet-name>loginServlet</servlet-name>
-        <servlet-class>com.gojava6.airbnb.servlets.LogInServlet</servlet-class>
+        <servlet-class>com.gojava6.airbnb.servlet.LogInServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
@@ -29,11 +29,37 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     </servlet-mapping>
     <servlet>
         <servlet-name>logoutServlet</servlet-name>
-        <servlet-class>com.gojava6.airbnb.servlets.LogOutServlet</servlet-class>
+        <servlet-class>com.gojava6.airbnb.servlet.LogOutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>logoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+
+
+    <filter>
+        <filter-name>requestFilter</filter-name>
+        <filter-class>com.gojava6.airbnb.servlet.filter.RequestLogFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>requestFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>authenticationFilter</filter-name>
+        <filter-class>com.gojava6.airbnb.servlet.filter.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>logginFilter</filter-name>
+        <filter-class>com.gojava6.airbnb.servlet.filter.LogInFilterServlet</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>logginFilter</filter-name>
+        <servlet-name>loginServlet</servlet-name>
+    </filter-mapping>
 
 </web-app>

@@ -1,4 +1,5 @@
-<%--
+<%@ page import="org.apache.logging.log4j.Logger" %>
+<%@ page import="org.apache.logging.log4j.LogManager" %><%--
   Created by IntelliJ IDEA.
   User: Andrey
   Date: 09.12.2015
@@ -13,10 +14,10 @@
 <body>
 <%
 String user = null;
-    if(session.getAttribute("user") == null) {
-        response.sendRedirect("index.html");
+    if(session.getAttribute("admin") == null) {
+//        response.sendRedirect("index.html");
     } else {
-        user = (String)session.getAttribute("user");
+        user = (String)session.getAttribute("admin");
     }
 
     String userName = null;
@@ -25,9 +26,9 @@ String user = null;
 
     if(cookies != null) {
         for (Cookie cookie : cookies) {
-            if(cookie.equals("user")) {
+            if(cookie.getName().equals("admin")) {
                 userName = cookie.getValue();
-            } else if (cookie.equals("JSESSIONID")) {
+            } else if (cookie.getName().equals("JSESSIONID")) {
                 sessionID = cookie.getValue();
             }
         }

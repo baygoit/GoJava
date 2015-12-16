@@ -3,69 +3,91 @@ package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDataSource;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-public class CategoryPostgreDAO implements CategoryDAO, JdbcDataSource<Category> {
-
-    private JdbcDispatcher dispatcher;
+public class CategoryPostgreDAO implements CategoryDAO {
     
-    public CategoryPostgreDAO(JdbcDispatcher dispatcher) {
-        this.dispatcher = dispatcher;
-        System.out.println("CategoryPostgreDAO created");
-    }
+    private JdbcTemplate jdbcTemplate;
 
     @Override 
     public void clear() {
         String sql = "delete from category";
-        dispatcher.clear(sql);       
+        jdbcTemplate.execute(sql);   
     }
 
     @Override 
     public Category get(int index) {
         String sql = "select id, name from category where id = " + index;
-        List<Category> result = dispatcher.get(sql, this);
-        Category category = null;
-		if (!result.isEmpty()) {
-        	category = result.get(0);
-		}
-        return category;
+		return jdbcTemplate.queryForObject(sql, new ElementMapper());
     }
 
     @Override    
     public void add(Category element) {
         String sql = "insert into category (id, name) values (?, ?)";
-        dispatcher.add(sql, element, this);
+        jdbcTemplate.update(sql, new StatementSetter(element));
     }
 
     @Override
-    public void addAll(List<Category> elemens) {
+    public void addAll(List<Category> elements) {
         String sql = "insert into category (id, name) values (?, ?)";
-        dispatcher.add(sql, elemens, this);        
+		jdbcTemplate.update(sql, new StatementSetter(elements));
     }
 
     @Override
     public List<Category> getAll() {
         String sql = "select id, name from category";
-        List<Category> result = dispatcher.get(sql, this);               
-        return result;
+        return jdbcTemplate.query(sql, new ElementMapper());
     }
 
-	@Override
-	public Category read(ResultSet resultSet) throws SQLException {
-		Category category = new Category(
-                resultSet.getInt("id"), 
-                resultSet.getString("name"));
-		return category;
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+		System.out.println("CategoryPostgreDAO created");
 	}
 
-	@Override
-	public void prepare(Category element, PreparedStatement statement) throws SQLException {
-		statement.setInt(1, element.getId());
-		statement.setString(2, element.getName());
+
+	private final class StatementSetter implements BatchPreparedStatementSetter {
+		
+		List<Category> list;
+		
+		StatementSetter(List<Category> list){
+			this.list = list;
+		}
+		
+		StatementSetter(Category element){
+			list = new ArrayList<>();
+			list.add(element);
+		}
+		
+		@Override
+		public void setValues(PreparedStatement statement, int i) throws SQLException {
+			Category element = list.get(i);
+			statement.setInt(1, element.getId());
+			statement.setString(2, element.getName());
+		}
+
+		@Override
+		public int getBatchSize() {
+			return list.size();
+		}
+	}
+
+
+	public class ElementMapper implements RowMapper<Category> {
+
+		public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Category category = new Category();
+			category.setId(rs.getInt("id"));
+			category.setName(rs.getString("name"));
+			return category;
+		}
+
 	}
 }
