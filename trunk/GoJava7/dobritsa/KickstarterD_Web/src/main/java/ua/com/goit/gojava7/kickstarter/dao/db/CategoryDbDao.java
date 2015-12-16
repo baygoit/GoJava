@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.models.Category;
 
 @Component
 public class CategoryDbDao extends DbDao<Category> implements CategoryDao {

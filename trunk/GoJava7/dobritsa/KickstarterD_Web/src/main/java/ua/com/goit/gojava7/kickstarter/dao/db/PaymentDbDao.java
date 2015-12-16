@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
-import ua.com.goit.gojava7.kickstarter.domain.Payment;
+import ua.com.goit.gojava7.kickstarter.models.Payment;
 
 @Component
 public class PaymentDbDao extends DbDao<Payment> implements PaymentDao {

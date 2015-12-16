@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
-import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @Component
 public class QuestionDbDao extends DbDao<Question> implements QuestionDao {
@@ -34,12 +34,12 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionDao {
 	public void add(Question element) {
 		String query = "INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + INSERTION + ")";
 		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+				PreparedStatement ps = connection.prepareStatement(query)) {
+			writeElement(element, ps);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			System.err.println("Error! INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + element.getTime() + ", "
 					+ element.getQuestion() + "," + element.getAnswer() + ", " + element.getProjectId() + ")");
-
 			e.printStackTrace();
 		}
 	}
@@ -65,7 +65,8 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionDao {
 		String query = "SELECT " + FIELDS + " FROM " + TABLE + " WHERE project_id = " + projectId;
 		List<Question> data = new ArrayList<>();
 		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
+				PreparedStatement ps = connection.prepareStatement(query);
+				ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
 				data.add(readElement(resultSet));
 			}
@@ -74,5 +75,5 @@ public class QuestionDbDao extends DbDao<Question> implements QuestionDao {
 		}
 		return data;
 	}
-
+	
 }
