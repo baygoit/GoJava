@@ -35,6 +35,9 @@ class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="minIdle" value="10" />
     <property name="validationQuery" value="SELECT 1"></property>
  </bean>
+ <bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
            
 	

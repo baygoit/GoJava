@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
@@ -14,6 +17,8 @@ import ua.com.goit.gojava7.kickstarter.domain.Payment;
 
 public class PaymentPostgreDAO implements PaymentDAO, JdbcDataSource<Payment> {
 
+	final static Logger logger = LoggerFactory.getLogger(PaymentPostgreDAO.class);
+	
     private static final String TABLE = "payment";
     private static final String FIELDS = "cardid,date,username,sum,project_id,reward_id";
     private static final String INSERTION = FIELDS.replaceAll("[^,]+", "?");
@@ -22,7 +27,7 @@ public class PaymentPostgreDAO implements PaymentDAO, JdbcDataSource<Payment> {
 
     public PaymentPostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
-        System.out.println("PaymentPostgreDAO created");
+        logger.info("dao created");
     }
 
     @Override

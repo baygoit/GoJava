@@ -16,6 +16,7 @@ public class QuestionDbStorage extends AbstractQuestionStorage {
 
 	private final String INSERT_QUESTION = "INSERT INTO questions (id_project, question) VALUES (?, ?)";
 	private final String SELECT_ALL_QUESTIONS = "SELECT id, id_project, question FROM questions";
+	private final String SELECT_QUESTIONS_FROM_PROJECT = "SELECT id, id_project, question FROM questions WHERE id_project = ";
 
 	private JdbcDispatcher dispatcher;
 
@@ -29,6 +30,24 @@ public class QuestionDbStorage extends AbstractQuestionStorage {
 		try (Connection connection = dispatcher.getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(SELECT_ALL_QUESTIONS);) {
+			while (resultSet.next()) {
+				Question question = new Question();
+				question.setIdQuestion(resultSet.getInt("id"));
+				question.setIdParentProject(resultSet.getInt("id_project"));
+				question.setQuestion(resultSet.getString("question"));
+				questions.add(question);
+			}
+		} catch (SQLException e) {
+			System.err.println("DB reading problem");
+		}
+		return questions;
+	}
+	
+	public List<Question> getQuestionsFromSelectedCategory(int ProjectId) {
+		List<Question> questions = new ArrayList<>();
+		try (Connection connection = dispatcher.getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery(SELECT_QUESTIONS_FROM_PROJECT + ProjectId);) {
 			while (resultSet.next()) {
 				Question question = new Question();
 				question.setIdQuestion(resultSet.getInt("id"));

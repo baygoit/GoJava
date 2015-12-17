@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
@@ -12,11 +15,13 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class QuotePostgreDAO implements QuoteDAO, JdbcDataSource<Quote>  {
     
+	final static Logger logger = LoggerFactory.getLogger(QuotePostgreDAO.class);
+	
     private JdbcDispatcher dispatcher;
     
     public QuotePostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
-        System.out.println("QuotePostgreDAO created");
+        logger.info("dao created");
     }
 
     @Override
