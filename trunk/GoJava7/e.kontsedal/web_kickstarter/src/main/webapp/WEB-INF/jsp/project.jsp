@@ -34,7 +34,7 @@
 			  </ul>
 			  <div class="tab-content" style="margin-top:15px">
 			    <div role="tabpanel" class="tab-pane active" id="payment">
-				    <form method="post" class="form-horizontal">
+				    <form method="post" class="form-horizontal" action="./payment">
 					  <div class="form-group col-sm-7">
 					      <input required type="text" class="form-control" id="inputName" name="inputName" placeholder="Name">
 					  </div>
@@ -54,14 +54,33 @@
 							<label class="radio-inline">
 							  <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="0"> <input type="text" name="amount" pattern="[0-9]{1,11}"></input>$
 							</label>  
+							<input id ="projectId" type="hidden" name="projectId" value="${project.getIdProject()}" />
 					  </div>
 					  <div class="form-group col-sm-7">
 					      <button type="submit" class="btn btn-default">Make payment</button>
 					  </div>
 					</form>
 				</div>
-			    <div role="tabpanel" class="tab-pane" id="faq">faq faq</div>
-			    <div role="tabpanel" class="tab-pane" id="questions">questions questions</div>
+			    <div role="tabpanel" class="tab-pane" id="faq">
+			    	-Where is my question?<br/>
+			    	-here!
+			    </div>
+			    <div role="tabpanel" class="tab-pane" id="questions">
+				    <c:forEach items="${questions}" var="question">
+						<blockquote><p>${question.getQuestion()}</p></blockquote>
+					</c:forEach>
+			    	<a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Leave question</a>
+					<div style="margin-top:15px" class="collapse" id="collapseExample">
+					    <form method="post" class="form-horizontal" action="./question">
+						    <div class="form-group col-sm-7">
+						      <input required type="text" class="form-control" id="inputQuestion" name="inputQuestion" pattern="{10}" placeholder="Enter your question">
+						  	</div>
+							<div class="form-group col-sm-7">
+							    <button type="submit" class="btn btn-default">Ask!</button>
+							</div>
+					    </form>
+					</div>
+			    </div>
 			  </div>
 				<script type="text/javascript">
 					$('.nav-tabs a').click(function (e) {

@@ -22,14 +22,16 @@ public class ProjectServlet extends HttpServlet {
 	
 	@Autowired
 	private ProjectDao projectDao;
+	
 	@Autowired
 	private QuestionDao questionDao;
+	
 	@Autowired
 	private CategoryDao categoryDao;
 
 	@Override
 	public void init() throws ServletException {
-		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,11 +42,5 @@ public class ProjectServlet extends HttpServlet {
 		request.setAttribute("project", projectDao.get(projectId));
 		request.setAttribute("questions", questionDao.getByProject(projectId));
 		request.getRequestDispatcher("/WEB-INF/jsp/project.jsp").forward(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
-
+	}	
 }

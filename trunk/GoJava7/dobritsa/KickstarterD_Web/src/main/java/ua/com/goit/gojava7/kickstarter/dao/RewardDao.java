@@ -2,7 +2,7 @@ package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.domain.Reward;
+import ua.com.goit.gojava7.kickstarter.models.Reward;
 
 public interface RewardDao extends Dao<Reward> {
 

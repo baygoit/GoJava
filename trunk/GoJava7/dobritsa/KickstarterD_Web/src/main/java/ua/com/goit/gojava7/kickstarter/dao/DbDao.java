@@ -38,8 +38,7 @@ public abstract class DbDao<T> implements Dao<T> {
 	}
 	
 	@Override
-	public T get(int index) {
-		//ResultSet resultSet = null;		
+	public T get(int index) {		
 		String query = "select " + FIELDS + " from " + TABLE + " where id = " + index;
 		try (Connection connection = basicDataSource.getConnection();
 				PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
@@ -68,8 +67,7 @@ public abstract class DbDao<T> implements Dao<T> {
 	}
 
 	@Override
-	public List<T> getAll() {
-		//ResultSet resultSet = null;
+	public List<T> getAll() {		
 		List<T> data = new ArrayList<>();
 		String query = "select " + FIELDS + " from " + TABLE;
 		try (Connection connection = basicDataSource.getConnection();
@@ -84,8 +82,7 @@ public abstract class DbDao<T> implements Dao<T> {
 	}
 
 	@Override
-	public int size() {
-		//ResultSet resultSet = null;
+	public int size() {	
 		String query = "select count(*) as cnt from " + TABLE;
 		try (Connection connection = basicDataSource.getConnection();
 				PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {

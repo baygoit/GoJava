@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import ua.com.goit.gojava7.kickstarter.dao.MemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
-import ua.com.goit.gojava7.kickstarter.domain.Reward;
+import ua.com.goit.gojava7.kickstarter.models.Reward;
 
 public class RewardMemoryDao extends MemoryDao<Reward> implements RewardDao {
 

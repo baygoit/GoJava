@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import ua.com.goit.gojava7.kickstarter.dao.MemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.models.Project;
 
 public class ProjectMemoryDao extends MemoryDao<Project> implements ProjectDao {
 

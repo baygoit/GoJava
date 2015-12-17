@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.models.Category;
 
 public class CategoryFileReader extends FileReader<Category>{
 
