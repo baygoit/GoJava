@@ -15,7 +15,7 @@
 	<div id=3>
 
 		<c:forEach items="${projectList}" var="project">
-			<a href=http://localhost:8080/WebKickstarter/SingleProjectServlet?projectId=${project.getId()}><c:out
+			<a href=SingleProjectServlet?projectId=${project.getId()}><c:out
 					value="${project.getTitle()}" /></a><br>
 				Project description:<c:out value="${project.getDiscription()}" /><br>
 					   Required Sum:<c:out value="${project.getRequiredSum()}" /><br>
