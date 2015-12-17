@@ -7,11 +7,14 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 public abstract class DatabaseDao<T>{
     protected List<T>    data;
     @Autowired
     protected DataSource dataSource;
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
 
     public DataSource getDataSource() {
         return dataSource;
