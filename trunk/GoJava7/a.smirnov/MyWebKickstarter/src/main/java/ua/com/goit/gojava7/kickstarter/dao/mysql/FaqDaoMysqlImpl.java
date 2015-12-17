@@ -28,7 +28,6 @@ public class FaqDaoMysqlImpl extends AbstractDao implements FaqDao {
 	}
 
 	public class FaqRowMapper implements RowMapper<Faq> {
-
 		@Override
 		public Faq mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Faq faq = new Faq();

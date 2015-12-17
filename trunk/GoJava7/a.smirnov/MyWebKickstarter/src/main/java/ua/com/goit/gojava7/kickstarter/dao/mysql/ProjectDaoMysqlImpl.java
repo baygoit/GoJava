@@ -27,16 +27,9 @@ public class ProjectDaoMysqlImpl extends AbstractDao implements ProjectDao {
 	}
 
 	public List<Project> getProjectsFromCategory(int categoryID) {
-		System.out.println("Start");
 		String sql = "SELECT id, category_id, title, brief_description, full_description, "
 				+ "video_link, required_sum, collected_sum, days_left FROM projects WHERE category_id = ?";
-		List<Project> projects = jdbcTemplate.query(sql, new Object[] { categoryID }, new ProjectRowMapper());
-		
-		if (projects.isEmpty()) {
-			System.out.println("LIST IS EMPTY");
-		}
-		return projects;
-		
+		return jdbcTemplate.query(sql, new Object[] { categoryID }, new ProjectRowMapper());
 	}
 
 	public Project getProjectById(int projectId) {
@@ -46,7 +39,6 @@ public class ProjectDaoMysqlImpl extends AbstractDao implements ProjectDao {
 	}
 
 	public class ProjectRowMapper implements RowMapper<Project> {
-
 		@Override
 		public Project mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Project project = new Project();

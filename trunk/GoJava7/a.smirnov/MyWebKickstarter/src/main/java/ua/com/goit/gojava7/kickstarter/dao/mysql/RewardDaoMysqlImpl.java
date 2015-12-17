@@ -28,7 +28,6 @@ public class RewardDaoMysqlImpl extends AbstractDao implements RewardDao {
 	}
 
 	public class RewardRowMapper implements RowMapper<Reward> {
-
 		@Override
 		public Reward mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Reward reward = new Reward();

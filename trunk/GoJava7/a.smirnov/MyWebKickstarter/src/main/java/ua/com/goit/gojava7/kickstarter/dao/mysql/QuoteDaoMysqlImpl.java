@@ -27,7 +27,6 @@ public class QuoteDaoMysqlImpl extends AbstractDao implements QuoteDao {
 	}
 
 	public class QuoteRowMapper implements RowMapper<Quote> {
-
 		@Override
 		public Quote mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Quote quote = new Quote();
