@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
@@ -12,6 +15,8 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectPostgreDAO implements ProjectDAO, JdbcDataSource<Project> {
 
+	final static Logger logger = LoggerFactory.getLogger(ProjectPostgreDAO.class);
+	
 	private static final String TABLE = "project";
 	private static final String FIELDS = "id,name,goalSum,startDate,endDate,category_id,description,videoUrl,author";
 	private static final String INSERTION = FIELDS.replaceAll("[^,]+", "?");
@@ -25,7 +30,7 @@ public class ProjectPostgreDAO implements ProjectDAO, JdbcDataSource<Project> {
 
 	public ProjectPostgreDAO(JdbcDispatcher dispatcher) {
 		this.dispatcher = dispatcher;
-		System.out.println("ProjectPostgreDAO created");
+		logger.info("dao created");
 	}
 
 	@Override

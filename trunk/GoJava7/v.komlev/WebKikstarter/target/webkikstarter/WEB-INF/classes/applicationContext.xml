@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+		
+		<bean id="connectionPool" class="ua.com.goit.gojava7.kikstarter.config.ConnectionPoolSource" />
+		
+		<bean id="quoteDAO" class="ua.com.goit.gojava7.kikstarter.dao.database.QuoteDaoDbImpl" scope="singleton" autowire="constructor" />
+		
+		<bean id="categoryDAO" class="ua.com.goit.gojava7.kikstarter.dao.database.CategoryDaoDbImpl" scope="singleton" autowire="constructor" />
+		
+		<bean id="projectDAO" class="ua.com.goit.gojava7.kikstarter.dao.database.ProjectDaoDbImpl" scope="singleton" autowire="constructor" />
+		
+</beans>
