@@ -1,6 +1,7 @@
 package gojava.dao;
 
 import gojava.model.User;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
@@ -9,7 +10,8 @@ import java.util.List;
 /**
  * Created by root on 04.11.15.
  */
-public class UserDAO implements AbstractDAO<Integer, User> {
+@Component
+public class UserDAO {
 
     /** JPA **/
     /*private EntityManagerFactory entityManagerFactory =
@@ -21,23 +23,17 @@ public class UserDAO implements AbstractDAO<Integer, User> {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     public List<User> findAll() {
-
-        //TODO: using persistenceContext add logic
-        /*List <User> users = null;
-        try {
-            entityTransaction.begin();
-            users = entityManager.createQuery("FROM User").getResultList();
-            entityTransaction.commit();
-        } catch (RuntimeException e) {
-            if (entityTransaction.isActive()) entityTransaction.rollback();
-            e.printStackTrace();
-        }
-        return users;*/
-        return null;
+        List <User> users = entityManager.createQuery("Select a from User a", User.class)
+                .getResultList();
+        return users;
     }
+
+    @Transactional
     public User findEntityById(Integer id) {
-        return null;
+        User user = entityManager.find(User.class, id);
+        return user;
     }
 
     public boolean delete(Integer id) {

@@ -2,12 +2,12 @@ package db;
 
 import dao.hibernate.ReservationDao;
 import dbutils.HibernateUtil;
-import model.Home;
-import model.Reservation;
-import model.User;
-import model.enums.CityList;
-import model.enums.GenderType;
-import model.enums.HomeType;
+import entity.Home;
+import entity.Reservation;
+import entity.User;
+import entity.enums.CityList;
+import entity.enums.GenderType;
+import entity.enums.HomeType;
 import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;

@@ -17,7 +17,7 @@
     String user = null;
 
     if(session.getAttribute("user") == null) {
-        response.sendRedirect("index.html");
+//        response.sendRedirect("index.html");
     } else {
         user = (String)session.getAttribute("user");
     }

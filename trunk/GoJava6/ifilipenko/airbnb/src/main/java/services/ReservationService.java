@@ -1,7 +1,7 @@
 package services;
 
 import dao.file.ReservationFileDao;
-import model.Reservation;
+import entity.Reservation;
 
 public class ReservationService  {
     private ReservationFileDao rDao = new ReservationFileDao();

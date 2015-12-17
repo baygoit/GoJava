@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import com.kickstarter.dao.interfaces.DbProjectDaoImpl;
 import com.kickstarter.model.Project;
 
@@ -15,10 +18,11 @@ import com.kickstarter.model.Project;
 public class ProvidePaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Autowired
 	DbProjectDaoImpl projectDao;
 
 	public void init() throws ServletException {
-		projectDao = new DbProjectDaoImpl();
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
 
 	}
 
@@ -30,26 +34,24 @@ public class ProvidePaymentServlet extends HttpServlet {
 		try {
 			paymentAmount = Integer.parseInt(request.getParameter("paymentAmount"));
 		} catch (NumberFormatException e) {
-			
+
 			response.sendRedirect("http://localhost:8080/WebKickstarter/SingleProjectServlet?projectId=" + projectId);
-               return;
+			return;
 		}
-		
-		if(paymentAmount < 0){
+
+		if (paymentAmount < 0) {
 			response.sendRedirect("http://localhost:8080/WebKickstarter/SingleProjectServlet?projectId=" + projectId);
 
-		} else if(paymentAmount.equals(null)){
+		} else if (paymentAmount.equals(null)) {
 			response.sendRedirect("http://localhost:8080/WebKickstarter/SingleProjectServlet?projectId=" + projectId);
-		}else{
-		Project project = projectDao.getOne(projectId);
-		int gainedSum = project.getGainedSum();
-		project.setGainedSum(gainedSum + paymentAmount);
-		projectDao.update(project);
-		response.sendRedirect("http://localhost:8080/WebKickstarter/SingleProjectServlet?projectId=" + projectId);
-	}
-		
-	
-	}
+		} else {
+			Project project = projectDao.getOne(projectId);
+			int gainedSum = project.getGainedSum();
+			project.setGainedSum(gainedSum + paymentAmount);
+			projectDao.update(project);
+			response.sendRedirect("http://localhost:8080/WebKickstarter/SingleProjectServlet?projectId=" + projectId);
+		}
 
+	}
 
 }

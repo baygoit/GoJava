@@ -6,17 +6,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.kickstarter.model.Project;
 
-public class DbProjectDaoImpl extends DBCon implements ProjectDaoInterface {
+@Repository
+public class DbProjectDaoImpl implements ProjectDaoInterface {
+
+	@Autowired
+	private BasicDataSource dbCon;
+
+	public BasicDataSource getDbCon() {
+		return dbCon;
+	}
+
+	public void setDbCon(BasicDataSource dbCon) {
+		this.dbCon = dbCon;
+	}
 
 	public List<Project> getAll(String categoryTitle) {
 		ResultSet rs = null;
 		List<Project> list = new ArrayList<>();
 
-		try (PreparedStatement pStatement = getConnection()
-				.prepareStatement("select * from projects where categoryTitle = ? ")) {
+		try (PreparedStatement pStatement = dbCon.getConnection().prepareStatement(
+				"select projectId,title,discription,daysLeft,requiredSum,gainedSum,projectHistory,videoLink,categoryTitle from projects where categoryTitle = ? ")) {
 			pStatement.setString(1, categoryTitle);
 			rs = pStatement.executeQuery();
 			while (rs.next()) {
@@ -34,8 +49,8 @@ public class DbProjectDaoImpl extends DBCon implements ProjectDaoInterface {
 		ResultSet rs = null;
 		Project project = new Project();
 
-		try (PreparedStatement pStatement = getConnection()
-				.prepareStatement("select * from projects where projectId =  ? ")) {
+		try (PreparedStatement pStatement = dbCon.getConnection().prepareStatement(
+				"select projectId,title,discription,daysLeft,requiredSum,gainedSum,projectHistory,videoLink,categoryTitle from projects where projectId =  ? ")) {
 			pStatement.setInt(1, projectNumber);
 			rs = pStatement.executeQuery();
 			while (rs.next()) {
@@ -49,7 +64,7 @@ public class DbProjectDaoImpl extends DBCon implements ProjectDaoInterface {
 
 	public void update(Project p) {
 
-		try (PreparedStatement pStatement = getConnection().prepareStatement(
+		try (PreparedStatement pStatement = dbCon.getConnection().prepareStatement(
 				"update projects set discription = ? , daysLeft = ?, requiredSum = ?, gainedSum = ?, projectHistory = ?, videoLink = ? where projectId = ? ")) {
 			pStatement.setString(1, p.getDiscription());
 			pStatement.setInt(2, p.getDaysLeft());
@@ -70,7 +85,8 @@ public class DbProjectDaoImpl extends DBCon implements ProjectDaoInterface {
 		ResultSet rs = null;
 		List<Project> list = new ArrayList<>();
 
-		try (PreparedStatement pStatement = getConnection().prepareStatement("select * from projects")) {
+		try (PreparedStatement pStatement = dbCon.getConnection().prepareStatement(
+				"select projectId,title,discription,daysLeft,requiredSum,gainedSum,projectHistory,videoLink,categoryTitle from projects")) {
 
 			rs = pStatement.executeQuery();
 
