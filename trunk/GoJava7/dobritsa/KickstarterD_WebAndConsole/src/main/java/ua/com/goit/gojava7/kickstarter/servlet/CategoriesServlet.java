@@ -23,21 +23,21 @@ public class CategoriesServlet extends HttpServlet {
 	private CategoryDao categoryDao;	
 
 	@Override
-	public void init(ServletConfig config){		
-		try {
-			super.init(config);
-		} catch (ServletException e) {			
-			e.printStackTrace();
-		}
-		ServletContext context = getServletContext();
-		String 	mode = context.getInitParameter("mode");		
-		
+	public void init(){		
+	//public void init(ServletConfig config){		
+		//try {
+		//	super.init(config);
+		//} catch (ServletException e) {			
+		//	e.printStackTrace();
+		//}
+		//ServletContext context = getServletContext();
+		//String 	mode = context.getInitParameter("mode");				
 		//MyDataSource dataType = MyDataSource.getByKey(mode.toUpperCase());
 		//context.setAttribute("mode", dataType);
-
-		System.out.println("-----------------------------");
+		//System.out.println("-----------------------------");
 		//System.out.println("CategoriesServlet started in  " + dataType + " mode (" + mode + ")");
-		System.out.println("-----------------------------");
+		//System.out.println("-----------------------------");
+		//daoFactory = new DaoFactory(dataType);
 
 		daoFactory = new DaoFactory(MyDataSource.DB);
 		quoteDao = daoFactory.getQuoteDAO();

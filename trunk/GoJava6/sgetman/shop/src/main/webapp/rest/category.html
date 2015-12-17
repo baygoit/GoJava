@@ -1,0 +1,76 @@
+<!doctype html>
+<html class="no-js" data-ng-app="affablebean">
+<head>
+    <meta charset="utf-8">
+    <title>Affablebean</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body ng-app="myApp" class="ng-cloak">
+<div class="generic-container" ng-controller="CategoryController as ctrl">
+    <div class="panel panel-default">
+        <div class="panel-heading"><span class="lead">Category Registration Form </span></div>
+        <div class="formcontainer">
+            <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                <input type="hidden" ng-model="ctrl.Category.id" />
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="col-md-2 control-lable" for="file">Name</label>
+                        <div class="col-md-7">
+                            <input type="text" ng-model="ctrl.Category.name" name="cname" class="form-control input-sm" placeholder="Enter your name" required ng-minlength="3"/>
+                            <div class="has-error" ng-show="myForm.$dirty">
+                                <span ng-show="myForm.cname.$error.required">This is a required field</span>
+                                <span ng-show="myForm.cname.$error.minlength">Minimum length required is 3</span>
+                                <span ng-show="myForm.cname.$invalid">This field is invalid </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="form-actions floatRight col-md-4">
+                        <input type="submit"  value="{{!ctrl.Category.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                        <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><span class="lead">List of Categories </span></div>
+        <div class="tablecontainer">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID.</th>
+                    <th>Name</th>
+                    <th width="20%"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="u in ctrl.Categories">
+                    <td><span ng-bind="u.id"></span></td>
+                    <td><span ng-bind="u.name"></span></td>
+                    <td>
+                        <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-resource.min.js"></script>
+<script src="/rest/app.js"></script>
+<script src="/rest/categoryService.js"></script>
+<script src="/rest/categoryController.js"></script>
+</body>
+</html>
+

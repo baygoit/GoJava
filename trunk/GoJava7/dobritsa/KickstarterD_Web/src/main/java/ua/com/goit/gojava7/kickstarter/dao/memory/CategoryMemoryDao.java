@@ -4,7 +4,7 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.MemoryDao;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.models.Category;
 
 public class CategoryMemoryDao extends MemoryDao<Category> implements CategoryDao {
 

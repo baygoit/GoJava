@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.dao.DbDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
-import ua.com.goit.gojava7.kickstarter.domain.Reward;
+import ua.com.goit.gojava7.kickstarter.models.Reward;
 
 @Component
 public class RewardDbDao extends DbDao<Reward> implements RewardDao {

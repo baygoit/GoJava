@@ -22,14 +22,16 @@ public class RewardsServlet extends HttpServlet {
 	
 	@Autowired
 	private RewardDao rewardDao;
+	
 	@Autowired
 	private ProjectDao projectDao;
+	
 	@Autowired
 	private CategoryDao categoryDao;
 
 	@Override
 	public void init() {
-		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,11 +43,4 @@ public class RewardsServlet extends HttpServlet {
 		request.setAttribute("rewards", rewardDao.getByProject(projectId));
 		request.getRequestDispatcher("/WEB-INF/jsp/rewards.jsp").forward(request, response);
 	}
-
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {	
-		doGet(request, response);
-	}
-
 }

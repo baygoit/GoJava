@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ua.com.goit.gojava7.kickstarter.dao.RewardDAO;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDataSource;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
@@ -13,6 +16,8 @@ import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public class RewardPostgreDAO implements RewardDAO, JdbcDataSource<Reward> {
 
+	final static Logger logger = LoggerFactory.getLogger(RewardPostgreDAO.class);
+	
     private static final String TABLE = "reward";
     private static final String FIELDS = "id,description,pledgeSum,project_id";
     private static final String INSERTION = FIELDS.replaceAll("[^,]+", "?");
@@ -22,7 +27,7 @@ public class RewardPostgreDAO implements RewardDAO, JdbcDataSource<Reward> {
 
     public RewardPostgreDAO(JdbcDispatcher dispatcher) {
         this.dispatcher = dispatcher;
-        System.out.println("RewardPostgreDAO created");
+        logger.info("dao created");
     }
 
     @Override
