@@ -34,7 +34,6 @@ public class ProjectTest extends Assert {
 		project.setHistory("TestHistory");
 		project.setLink("TestLink");
 		project.setCategoryId(44);
-		project.setCategoryName("TestCategory");
 		System.setOut(printSteam);
 	}
 
@@ -53,8 +52,7 @@ public class ProjectTest extends Assert {
 		assertThat(project.getDaysToGo(), is(3));
 		assertThat(project.getHistory(), is("TestHistory"));
 		assertThat(project.getLink(), is("TestLink"));
-		assertThat(project.getCategoryId(), is(44));
-		assertThat(project.getCategoryName(), is("TestCategory"));
+		assertThat(project.getCategoryId(), is(44));	
 	}
 
 	@Test

@@ -23,7 +23,7 @@ public class Quote {
 
 	@Override
 	public String toString() {
-		return "Quote: " + text + "; Author: " + author;
+		return text + "- Author: " + author;
 	}
 
 	public boolean isEmpty() {

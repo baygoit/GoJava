@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import static org.mockito.Matchers.contains;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.models.Category;
@@ -53,6 +54,6 @@ public class CategoryTest extends Assert {
 	@Test
 	public void testToString() {
 		System.out.println(category.toString());
-		verify(printSteam).println("CategoryName");
+		verify(printSteam).println(contains("CategoryName"));
 	}
 }

@@ -33,7 +33,6 @@ public class QuestionTest extends Assert {
 		question.setQuestion("TestQuestion");
 		question.setAnswer("TestAnswer");
 		question.setProjectId(44);
-		question.setProjectName("TestProject");
 		System.setOut(printSteam);
 	}
 
@@ -49,7 +48,6 @@ public class QuestionTest extends Assert {
 		assertThat(question.getQuestion(), is("TestQuestion"));
 		assertThat(question.getAnswer(), is("TestAnswer"));
 		assertThat(question.getProjectId(), is(44));
-		assertThat(question.getProjectName(), is("TestProject"));
 	}
 	
 	@Test

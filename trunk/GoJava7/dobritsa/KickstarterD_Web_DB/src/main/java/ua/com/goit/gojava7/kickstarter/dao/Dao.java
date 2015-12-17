@@ -5,8 +5,6 @@ import java.util.List;
 public interface Dao<T> {
 		
 	List<T> getAll();
-	
-	void setAll(List<T> list);
 
 	T get(int index);
 
