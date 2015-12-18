@@ -7,23 +7,18 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 public class JdbcDispatcher {
 	
-	private static final String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
-	private static final String DB_URL = "jdbc:mysql://localhost:3306/kickstarter";
-	private static final String DB_USER = "admin";
-	private static final String DB_PASSWORD = "admin";
-	private static final int CONN_POOL_SIZE = 5;
-
+	
 	private BasicDataSource bds;
 
-	public JdbcDispatcher() {
+	public JdbcDispatcher(String driver, String url, String user, String password, int size) {
 		try {
-			Class.forName(DRIVER_CLASS_NAME);
+			Class.forName(driver);
 			bds = new BasicDataSource();
-			bds.setDriverClassName(DRIVER_CLASS_NAME);
-			bds.setUrl(DB_URL);
-			bds.setUsername(DB_USER);
-			bds.setPassword(DB_PASSWORD);
-			bds.setInitialSize(CONN_POOL_SIZE);
+			bds.setDriverClassName(driver);
+			bds.setUrl(url);
+			bds.setUsername(user);
+			bds.setPassword(password);
+			bds.setInitialSize(size);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -36,15 +31,15 @@ public class JdbcDispatcher {
         return connection;
     }
 
-	public void close() {
-    	try {
-    		if (bds != null && !bds.isClosed()) {
-    			bds.close();
-			}			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+//	public void close() {
+//    	try {
+//    		if (bds != null && !bds.isClosed()) {
+//    			bds.close();
+//			}			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 }
 

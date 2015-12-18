@@ -25,7 +25,7 @@ public class ExecutePayment extends HttpServlet {
 
 	private int projectId;
 	private long creditCardNumber;
-	private String userName;
+	private String userName = "Anton";
 	private int donatingSum;
 
 	@Autowired

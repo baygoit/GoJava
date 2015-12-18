@@ -9,16 +9,17 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
+@Repository
 public class QuestionDaoSqlImpl implements QuestionDao {
+	@Autowired
 	private DataSource dataSource;
-
-	public QuestionDaoSqlImpl(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
 
 	@Override
 	public List<Question> getQuestions(int projectId) {
@@ -29,7 +30,8 @@ public class QuestionDaoSqlImpl implements QuestionDao {
 		ResultSet rset = null;
 		try {
 			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("SELECT id, questionText FROM question WHERE projectId =" + projectId);
+			stmt = conn.prepareStatement("SELECT id, questionText FROM question WHERE projectId = ?");
+			stmt.setInt(1, projectId);
 			rset = stmt.executeQuery();
 
 			Question question;
@@ -47,29 +49,50 @@ public class QuestionDaoSqlImpl implements QuestionDao {
 		} catch (SQLException e) {
 			throw new IODatabaseException("Problem with database", e);
 		} finally {
-            try { if (rset != null) rset.close(); } catch(Exception e) { }
-            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-            try { if (conn != null) conn.close(); } catch(Exception e) { }
+			try {
+				if (rset != null)
+					rset.close();
+			} catch (Exception e) {
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
 		}
 		return questions;
 	}
 
 	@Override
 	public void addQuestion(Question question) {
-			
+
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
 			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("INSERT INTO question (projectId, questionText) VALUES ('"
-					+ question.getProjectId() + "', '" + question.getQuestionText() + "');");
+			stmt = conn.prepareStatement("INSERT INTO question (projectId, questionText) VALUES (?, ?)");
+			stmt.setInt(1, question.getProjectId());
+			stmt.setString(2, question.getQuestionText());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
 			throw new IODatabaseException("Problem with database", e);
 		} finally {
-            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-            try { if (conn != null) conn.close(); } catch(Exception e) { }
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
 		}
 	}
 

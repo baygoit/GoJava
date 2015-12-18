@@ -9,16 +9,18 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
+@Repository
 public class CategoryDaoSqlImpl implements CategoryDao {
+	
+	@Autowired
 	private DataSource dataSource;
-
-	public CategoryDaoSqlImpl(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
 
 	@Override
 	public List<Category> getCategories() {
@@ -62,7 +64,8 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 
 		try {
 			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("SELECT name FROM category WHERE id = " + id);
+			stmt = conn.prepareStatement("SELECT name FROM category WHERE id = ?");
+			stmt.setInt(1, id);
 			rset = stmt.executeQuery();
 
 			while (rset.next()) {
