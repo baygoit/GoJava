@@ -6,10 +6,13 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public abstract class DatabaseDao<T>{
+    private static final Logger logger = LogManager.getLogger(DatabaseDao.class);
     protected List<T>    data;
     @Autowired
     protected DataSource dataSource;
@@ -21,6 +24,7 @@ public abstract class DatabaseDao<T>{
     }
 
     public void setDataSource(DataSource dataSource) {
+        logger.info("Setting dataSource");
         this.dataSource = dataSource;
     }
 

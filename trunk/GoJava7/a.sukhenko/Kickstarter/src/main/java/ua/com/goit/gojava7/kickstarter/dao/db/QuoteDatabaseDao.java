@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +19,7 @@ public class QuoteDatabaseDao extends DatabaseDao<Quote> {
 
     private static String table  = "quotes";
     private static String fields = "text, author";
-
+    private static final Logger logger = LogManager.getLogger(QuoteDatabaseDao.class);
 public QuoteDatabaseDao(DataSource dataSource) {
     this.dataSource = dataSource;
 }public QuoteDatabaseDao() {
@@ -26,11 +28,6 @@ public QuoteDatabaseDao(DataSource dataSource) {
 
     public Quote getRandomQuote() {
         String query = "SELECT " + fields + " FROM " + table + " order by rand() limit 1 ";
-        if(dataSource != null){
-            System.out.println("Not null"); 
-        }else{
-            System.out.println("Fucking null");
-        }
         try (PreparedStatement ps = getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
             while (resultSet.next()) {
                 return readElement(resultSet);
