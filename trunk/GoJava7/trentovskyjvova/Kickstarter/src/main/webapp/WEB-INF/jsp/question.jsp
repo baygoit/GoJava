@@ -3,9 +3,13 @@
 
 <h3>Question:</h3>
 
+<c:if test="${errors}">
+	<p style="color:red">errors</p>
+</c:if>
+
 <form action="question?projectId=${projectId}" method="post">
 	<p>
-		<input type="text" name="questionText" placeholder="question text">
+		<input type="text" name="questionText" required placeholder="question text">
 	</p>
 	<p>
 		<input type="submit" value="Ask">

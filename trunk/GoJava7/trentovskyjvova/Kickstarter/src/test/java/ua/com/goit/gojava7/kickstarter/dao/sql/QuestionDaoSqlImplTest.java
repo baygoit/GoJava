@@ -16,20 +16,23 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.dao.sql.QuestionDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
+@RunWith(MockitoJUnitRunner.class)
 public class QuestionDaoSqlImplTest {
 	@Mock
 	private Connection connection = mock(Connection.class);
 	@Mock
 	DataSource dataSource = mock(DataSource.class);
 	@InjectMocks
-	private QuestionDao questionDaoMySqlImpl = new QuestionDaoSqlImpl(dataSource);
+	private QuestionDao questionDaoMySqlImpl = new QuestionDaoSqlImpl();
 	
 	@Test
 	public void testGetQuestions() throws SQLException {

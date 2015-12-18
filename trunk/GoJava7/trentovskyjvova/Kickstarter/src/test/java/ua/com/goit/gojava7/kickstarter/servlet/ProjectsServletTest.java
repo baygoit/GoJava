@@ -10,20 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
@@ -36,23 +32,6 @@ public class ProjectsServletTest {
 	private PaymentDao paymentDao;
 	@InjectMocks
 	private ProjectsServlet projectsServlet;
-	
-	@Test
-	@Ignore
-	public void testInit() throws ServletException, IOException {
-		
-		DaoProvider daoProvider = mock(DaoProvider.class);
-		ServletConfig config = mock(ServletConfig.class);
-		ServletContext context = mock(ServletContext.class);
-		
-		when(config.getServletContext()).thenReturn(context);
-		//when(context.getAttribute(ContextListener.STORAGE_FACTORY)).thenReturn(daoProvider);
-
-		projectsServlet.init(config);
-
-		verify(daoProvider).getProjectReader();
-		verify(daoProvider).getPaymentReader();
-	}
 	
 	@Test
 	public void testDoGetHttpServletRequestHttpServletResponse() throws ServletException, IOException {

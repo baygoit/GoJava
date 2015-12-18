@@ -3,18 +3,17 @@ package ua.com.goit.gojava7.kickstarter.servlet;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
@@ -22,36 +21,33 @@ import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 @WebServlet("/projects")
 public class ProjectsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = LoggerFactory.getLogger(ProjectsServlet.class);
+	
+	@Autowired
 	private ProjectDao projectDao;
+	@Autowired
 	private PaymentDao paymentDao;
-	private DaoProvider daoProvider;
-	protected WebApplicationContext applicationContext;
 	
 	@Override
-	public void init(ServletConfig config) throws ServletException {
-		ServletContext servletContext = config.getServletContext();
-		applicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
-
-		daoProvider = applicationContext.getBean(DaoProvider.class);
-		//daoProvider.open();
-		super.init(config);
-	}
-	
-	@Override
-	public void init() throws ServletException {		
-		projectDao = daoProvider.getProjectReader();
-		paymentDao = daoProvider.getPaymentReader();
+	public void init() throws ServletException {
+		log.info("Starting Spring autowiring...");
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+		log.info("Ended Spring autowiring...");
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		log.info("doGet");
 		int categoryId = Integer.parseInt(request.getParameter("id"));
+		log.debug("categoryId: " + categoryId);
 		List<Project> projects = projectDao.getProjects(categoryId);
+		log.debug("Projects: " + projects);
 		
 		request.setAttribute("projects", projects);
 		request.setAttribute("paymentDao", paymentDao);
 		request.getRequestDispatcher("/WEB-INF/jsp/projects.jsp").forward(request, response);	
+		log.info("Ended doGet");
 	}
 
 
