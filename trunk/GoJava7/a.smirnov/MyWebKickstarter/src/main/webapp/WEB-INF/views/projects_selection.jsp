@@ -25,7 +25,7 @@
 				
 						<table>
 	   			 
-	       		   			<tr><td>Title : </td><td><a href=\mykickstarter\project?id=${project.uniqueID}><c:out value="${project.title}"/></a></td></tr>
+	       		   			<tr><td>Title : </td><td><a href=project?id=${project.uniqueID}><c:out value="${project.title}"/></a></td></tr>
 	       		   	
 	       		  	 		<tr><td>Brief description : </td><td><c:out value="${project.briefDescription}"/></td></tr>
 	       		   	

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+  		
+  	 <context:property-placeholder location="classpath:config.properties" />
+  	
+	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.driverClassName}" />
+        <property name="jdbcUrl" value="${jdbc.dataBaseUrl}" />
+        <property name="user" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+   		<property name="maxPoolSize" value="50" />
+        <property name="minPoolSize" value="10" />
+        <property name="maxStatements" value="100" />
+        <property name="testConnectionOnCheckout" value="true" />
+    </bean>	
+		
+		
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	
+	<bean id="quoteDAO" class="ua.com.goit.gojava7.kickstarter.dao.mysql.QuoteDaoMysqlImpl" scope="singleton" autowire="constructor">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean id="categoryDAO" class="ua.com.goit.gojava7.kickstarter.dao.mysql.CategoryDaoMysqlImpl" scope="singleton" autowire="constructor">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	
+	<bean id="projectDao" class="ua.com.goit.gojava7.kickstarter.dao.mysql.ProjectDaoMysqlImpl" scope="singleton" autowire="constructor">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	
+	<bean id="rewardDao" class="ua.com.goit.gojava7.kickstarter.dao.mysql.RewardDaoMysqlImpl" scope="singleton" autowire="constructor">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	
+	<bean id="paymentDao" class="ua.com.goit.gojava7.kickstarter.dao.mysql.PaymentDaoMysqlImpl" scope="singleton" autowire="constructor">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	
+	<bean id="faqDao" class="ua.com.goit.gojava7.kickstarter.dao.mysql.FaqDaoMysqlImpl" scope="singleton" autowire="constructor">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+	
+</beans>

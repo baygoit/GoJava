@@ -5,6 +5,9 @@
 
 package com.gojava6.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -13,6 +16,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -57,10 +61,11 @@ public class Product implements Serializable {
     private Date lastUpdate;
 
     /*@JoinColumn(name = "category_id", referencedColumnName = "id")*/
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
+    @JsonBackReference
     private Category category;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "product")
     private Collection<OrderedProduct> orderedProductCollection;
 
     public Product() {

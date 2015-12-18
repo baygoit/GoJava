@@ -1,80 +1,52 @@
 package ua.com.goit.gojava7.kickstarter.dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import javax.sql.DataSource;
 
-import ua.com.goit.gojava7.kickstarter.dao.storage.Storage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
-public abstract class DatabaseDao<T> implements Storage<T>{
+public abstract class DatabaseDao<T>{
+    protected List<T>    data;
+    @Autowired
+    protected DataSource dataSource;
+    @Autowired
+    protected JdbcTemplate jdbcTemplate;
 
-	protected String		FIELDS	= null;
-	protected String		TABLE	= null;
-	protected List<T>		data;
-	protected Connection	connection;
+    public DataSource getDataSource() {
+        return dataSource;
+    }
 
-	protected DatabaseDao(Connection connection, String FIELDS, String TABLE) {
-		this.connection = connection;
-		this.FIELDS = FIELDS;
-		this.TABLE = TABLE;
-	}
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
-	protected abstract T readElement(ResultSet resultSet) throws SQLException;
+    public abstract Connection getConnection() throws SQLException;
 
-	public T getByNumber(int number) {
-		return get(number);
-	}
+    protected abstract T readElement(ResultSet resultSet) throws SQLException;
 
-	@Override
-	public void setAll(List<T> data) {
-		this.data = data;
-	}
+    public abstract T getByNumber(int number);
 
-	public String prepareStringForDb(String original) {
-		return original.replace("'", "\\'");
-	}
 
-	@Override
-	public T get(int index) {
-		String query = "select " + FIELDS + " from " + TABLE + " where id = " + index;
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-			if (resultSet.next()) {
-				return readElement(resultSet);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+    public abstract void setAll(List<T> data);
 
-	@Override
-	public List<T> getAll() {
-		List<T> data = new ArrayList<>();
-		String query = "select " + FIELDS + " from " + TABLE;
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-			while (resultSet.next()) {
-				data.add(readElement(resultSet));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return data;
-	}
+    public String prepareStringForDb(String original) {
+        return original.replace("'", "\\'");
+    }
 
-	@Override
-	public int size() {
-		String query = "select count(*) as cnt from " + TABLE;
-		try (PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-			if (resultSet.next()) {
-				return resultSet.getInt("cnt");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
+
+
+    public abstract List<T> getAll();
+
+
+    public abstract T get(int index);
+
+
+    public abstract void add(T element);
+
+    public abstract int size();
 
 }

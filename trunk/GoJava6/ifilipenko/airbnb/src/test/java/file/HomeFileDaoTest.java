@@ -2,9 +2,9 @@ package file;
 
 import dao.file.FileAccess;
 import dao.file.HomeFileDao;
-import model.enums.CityList;
-import model.Home;
-import model.enums.HomeType;
+import entity.enums.CityList;
+import entity.Home;
+import entity.enums.HomeType;
 import org.junit.Assert;
 import org.junit.Test;
 

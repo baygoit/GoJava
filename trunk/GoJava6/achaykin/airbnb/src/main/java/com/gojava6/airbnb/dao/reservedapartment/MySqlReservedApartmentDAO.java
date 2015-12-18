@@ -1,7 +1,7 @@
 package com.gojava6.airbnb.dao.reservedapartment;
 
 import com.gojava6.airbnb.Exception.daoexception.MySqlReservedApartmentDAOException;
-import com.gojava6.airbnb.apartment.ReservedApartment;
+import com.gojava6.airbnb.model.apartment.ReserveApartment;
 import com.gojava6.airbnb.dao.daofactory.MySqlDAOFactory;
 
 import java.sql.Connection;
@@ -17,36 +17,32 @@ public class MySqlReservedApartmentDAO implements ReservedApartmentDAO {
 
     //todo in this method created two connections. Or should i put in arguments of isReserved() connection?
     @Override
-    public void create(int apartmentID, int hostID, int renterID, Date checkIN, Date checkOUT) throws MySqlReservedApartmentDAOException {
+    public boolean create(int apartmentID, int hostID, int renterID, Date checkIN, Date checkOUT)
+            throws MySqlReservedApartmentDAOException {
 
+        String query = "INSERT INTO airbnb.reservebook (apartmentID, hostID, renterID, checkIN, checkOUT)" +
+                " VALUES (?, ?, ?, ?, ?);";
 
-        if (!isReserved(apartmentID, checkIN, checkOUT)) {
-            String query = "INSERT INTO airbnb.reservebook (apartmentID, hostID, renterID, checkIN, checkOUT)" +
-                    " VALUES (?, ?, ?, ?, ?);";
-
-            try (Connection connection = getConnection()) {
-                PreparedStatement pstm = connection.prepareStatement(query);
-                pstm.setInt(1, apartmentID);
-                pstm.setInt(2, hostID);
-                pstm.setInt(3, renterID);
-                pstm.setDate(4, convertToSqlDate(checkIN));
-                pstm.setDate(5, convertToSqlDate(checkOUT));
-                pstm.executeUpdate();
-                System.out.println("Reservation successful complete!");
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new MySqlReservedApartmentDAOException("Cannot create reserveBook.", e);
-            }
-        } else {
-            System.out.println("Sorry, apartment is already reserved on this date!");
+        try (Connection connection = getConnection()) {
+            PreparedStatement pstm = connection.prepareStatement(query);
+            pstm.setInt(1, apartmentID);
+            pstm.setInt(2, hostID);
+            pstm.setInt(3, renterID);
+            pstm.setDate(4, convertToSqlDate(checkIN));
+            pstm.setDate(5, convertToSqlDate(checkOUT));
+            pstm.executeUpdate();
+            System.out.println("Reservation successful complete!");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new MySqlReservedApartmentDAOException("Cannot create reserveBook.", e);
         }
     }
 
     @Override
-    public ReservedApartment retrieveApartmentByID(int apartmentID) throws MySqlReservedApartmentDAOException {  //todo listom
+    public List<ReserveApartment> retrieveApartmentByID(int apartmentID) throws MySqlReservedApartmentDAOException {
         String query = "SELECT * FROM airbnb.reservebook WHERE apartmentID = ?;";
-        ReservedApartment reservedApartment = null;
-
+        List<ReserveApartment> resultList = new ArrayList<>();
         try (Connection connection = getConnection()) {
             PreparedStatement pstm = connection.prepareStatement(query);
             pstm.setInt(1, apartmentID);
@@ -57,12 +53,12 @@ public class MySqlReservedApartmentDAO implements ReservedApartmentDAO {
                 int apartment_ID = rs.getInt("apartmentID");
                 int hostID = rs.getInt("hostID");
                 int renterID = rs.getInt("renterID");
+                int reserveID = rs.getInt("reserveID");
                 Date checkIN = convertToJavaDate(rs.getDate("checkIN"));
                 Date checkOUT = convertToJavaDate(rs.getDate("checkOUT"));
-
-                return new ReservedApartment(apartment_ID, hostID, renterID, checkIN, checkOUT);
+                resultList.add(new ReserveApartment(reserveID, apartment_ID, hostID, renterID, checkIN, checkOUT));
             }
-            return reservedApartment;
+            return resultList;
         } catch (SQLException | MySqlReservedApartmentDAOException e) {
             e.printStackTrace();
             throw new MySqlReservedApartmentDAOException("Cannot retrieve list of reserveBook.", e);
@@ -70,9 +66,9 @@ public class MySqlReservedApartmentDAO implements ReservedApartmentDAO {
     }
 
     @Override
-    public List<ReservedApartment> retrieveAoartmentsByHostID(int hostID) throws MySqlReservedApartmentDAOException {
+    public List<ReserveApartment> retrieveAoartmentsByHostID(int hostID) throws MySqlReservedApartmentDAOException {
         String query = "SELECT * FROM airbnb.reservebook WHERE hostID = ?;";
-        List<ReservedApartment> resultList = new ArrayList<>();
+        List<ReserveApartment> resultList = new ArrayList<>();
 
         try (Connection connection = getConnection()) {
             PreparedStatement pstm = connection.prepareStatement(query);
@@ -86,7 +82,7 @@ public class MySqlReservedApartmentDAO implements ReservedApartmentDAO {
                 Date checkIN = convertToJavaDate(rs.getDate("checkIN"));
                 Date checkOUT = convertToJavaDate(rs.getDate("checkOUT"));
 
-                resultList.add(new ReservedApartment(aparmentID, host_ID, renterID, checkIN, checkOUT));
+                resultList.add(new ReserveApartment(aparmentID, host_ID, renterID, checkIN, checkOUT));
             }
             return resultList;
         } catch (SQLException | MySqlReservedApartmentDAOException e) {
@@ -96,8 +92,8 @@ public class MySqlReservedApartmentDAO implements ReservedApartmentDAO {
     }
 
     @Override
-    public void update(int apartmentID, int hostID, int renterID,
-                       Date oldCheckIN, Date oldCheckOUT, Date newCheckIN, Date newCheckOUT) {
+    public boolean update(int apartmentID, int hostID, int renterID,
+                          Date oldCheckIN, Date oldCheckOUT, Date newCheckIN, Date newCheckOUT) throws MySqlReservedApartmentDAOException{
         String query = "UPDATE airbnb.reservebook " +
                 "SET hostID = ?, renterID = ?, checkIN = ?, checkOUT = ? " +
                 "WHERE apartmentID = ? AND (checkIN = ? AND checkOUT = ?);";
@@ -112,6 +108,7 @@ public class MySqlReservedApartmentDAO implements ReservedApartmentDAO {
             pstm.setDate(6, convertToSqlDate(oldCheckIN));
             pstm.setDate(7, convertToSqlDate(oldCheckOUT));
             pstm.executeUpdate();
+            return true;
         } catch (SQLException | MySqlReservedApartmentDAOException e) {
             e.printStackTrace();
             throw new MySqlReservedApartmentDAOException("Cannot update reserve apartment.", e);
@@ -119,7 +116,7 @@ public class MySqlReservedApartmentDAO implements ReservedApartmentDAO {
     }
 
     @Override
-    public void delete(int apartmentID, int hostID, int renterID, Date checkIN, Date checkOUT) throws MySqlReservedApartmentDAOException {
+    public boolean delete(int apartmentID, int hostID, int renterID, Date checkIN, Date checkOUT) throws MySqlReservedApartmentDAOException {
         String query = "DELETE FROM airbnb.reservebook " +
                 "WHERE (apartmentID = ? AND hostID = ?) AND (checkIN = ? AND checkOUT = ?);"; //todo also check renter?
         try (Connection connection = getConnection()) {
@@ -129,6 +126,7 @@ public class MySqlReservedApartmentDAO implements ReservedApartmentDAO {
             pstm.setDate(3, convertToSqlDate(checkIN));
             pstm.setDate(4, convertToSqlDate(checkOUT));
             pstm.executeUpdate();
+            return true;
         } catch (SQLException | MySqlReservedApartmentDAOException e) {
             e.printStackTrace();
             throw new MySqlReservedApartmentDAOException("Cannot delete reserve from database.", e);
@@ -163,6 +161,30 @@ public class MySqlReservedApartmentDAO implements ReservedApartmentDAO {
             throw new MySqlReservedApartmentDAOException("Cannot check if apartment is reserved.", e);
         }
         return false;
+    }
+
+    public boolean isReserveExist(int apartmentID, int hostID, int renterID, Date checkIN, Date checkOUT) throws MySqlReservedApartmentDAOException {
+        String query = "SELECT is_reserved FROM airbnb.reservebook " +
+                "WHERE (apartmentID = ? AND hostID = ? AND renterID = ?) AND (checkIN = ? AND checkOUT = ?);";
+        boolean result = false;
+        try (Connection connection = getConnection()) {
+            PreparedStatement pstm = connection.prepareStatement(query);
+            pstm.setInt(1, apartmentID);
+            pstm.setInt(2, hostID);
+            pstm.setInt(3, renterID);
+            pstm.setDate(4, convertToSqlDate(checkIN));
+            pstm.setDate(5, convertToSqlDate(checkOUT));
+
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()) {
+                result = rs.getBoolean("is_reserved");
+            }
+            System.out.println("result " + result);
+        }catch (SQLException | MySqlReservedApartmentDAOException e) {
+            e.printStackTrace();
+            throw new MySqlReservedApartmentDAOException("Cannot delete reserve from database.", e);
+        }
+        return result;
     }
 
     private Connection getConnection() throws MySqlReservedApartmentDAOException {
