@@ -24,7 +24,7 @@ public class PaymentController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		if (request.getParameter("rewardId") != null) {
+		if (request.getParameter("rewardId") != null && !request.getParameter("rewardId").equals("0")) {
 			Reward reward = rewardDAO.get(Integer.valueOf(request.getParameter("rewardId")));
 			request.setAttribute("amount", reward.getPledgeSum());
 		}
