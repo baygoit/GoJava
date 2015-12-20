@@ -22,7 +22,7 @@ public class ProjectDbDao {
 	}
 
 	public void updatePledged(Project project, int amount) {
-		log.info("updatePledged({}, {})...", project, amount);		
+		log.info("<void> updatePledged({}, {})...", project, amount);		
 		String query = "update project set pledged = pledged + " + amount + " WHERE name = '"
 				+ prepareStringForDb(project.getName()) + "'";		
 		dbManager.updatePledged(project, query);
@@ -41,12 +41,6 @@ public class ProjectDbDao {
 		return dbManager.getProject(query);
 	}	
 
-	public int size() {			
-		log.info("<int> size()...");
-		String query = "select count(*) as cnt from project";
-		return dbManager.size(query);
-	}
-	
 	private String prepareStringForDb(String original) {
 		log.info("prepareStringForDb({original})...");	
 		return original.replace("'", "\\'");

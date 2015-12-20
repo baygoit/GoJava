@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import ua.com.goit.gojava7.kickstarter.models.Category;
 
 @Component
-public class CategoryDbDao{
-	
+public class CategoryDbDao {
+
 	@Autowired
 	private DbManager dbManager;
 
@@ -20,25 +20,18 @@ public class CategoryDbDao{
 	private static final String FIELDS = "id, name";
 
 	public CategoryDbDao() {
-		log.info("Constructor CategoryDbDao()...");	
+		log.info("Constructor CategoryDbDao()...");
 	}
-	
-	public List<Category> getAll() {		
-		log.info("<Category> getAll()...");	
-		String query = "select id, name from category";			
+
+	public List<Category> getAll() {
+		log.info("<Category> getAll()...");
+		String query = "select id, name from category";
 		return dbManager.getCategories(query);
 	}
-	
-	public Category get(int index) {				
+
+	public Category get(int index) {
 		log.info("<Category> get({})...", index);
 		String query = "select " + FIELDS + " from " + TABLE + " where id = " + index;
 		return dbManager.getCategory(query);
-	}	
-
-	public int size() {			
-		log.info("<int> size()...");
-		String query = "select count(*) as cnt from category";
-		return dbManager.size(query);
 	}
-	
 }

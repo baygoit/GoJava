@@ -1,7 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.aspect;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -10,13 +14,19 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @Component
 @Aspect
 @Order(value = 200)
 public class LoggingAspect {
+	
+	@Autowired
+	protected BasicDataSource basicDataSource;
 
 	private static final Logger log = LoggerFactory.getLogger(LoggingAspect.class);
 
@@ -103,5 +113,28 @@ public class LoggingAspect {
 				System.out.println("------------------" + query);		
 			}
 		}
+	}
+	
+	public void addQuery(String text) {
+		/*String query = "select * from query";		
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query);
+				ResultSet resultSet = ps.executeQuery()) {
+			if (resultSet.next()) {
+				String texteee = resultSet.getString("text");
+				System.out.println("---------------" + texteee);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	*/
+		
+		//String query = "insert into query (text) VALUES (" + text + ");";		
+		//log.info("<void> addQuery({})...", query);
+		//try (Connection connection = basicDataSource.getConnection();
+		//		PreparedStatement ps = connection.prepareStatement(query)) {		
+		//	ps.executeUpdate();
+		//} catch (SQLException e) {
+		//	e.printStackTrace();
+		//}
 	}
 }

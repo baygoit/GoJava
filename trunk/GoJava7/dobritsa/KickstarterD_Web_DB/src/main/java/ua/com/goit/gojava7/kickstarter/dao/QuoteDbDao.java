@@ -26,7 +26,7 @@ public class QuoteDbDao {
 	}
 
 	public Quote getByNumber(int number) {
-		log.info("<Quote> getByNumber()...");
+		log.info("<Quote> getByNumber({})...", number);
 		return get(number);
 	}
 
@@ -34,11 +34,5 @@ public class QuoteDbDao {
 		log.info("<Quote> get({})...", index);
 		String query = "select text, author from quote where id = " + index;
 		return dbManager.getQuote(query);
-	}
-
-	public int size() {
-		log.info("<int> size()...");
-		String query = "select count(*) as cnt from quote";
-		return dbManager.size(query);
 	}
 }
