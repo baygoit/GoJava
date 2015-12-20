@@ -11,15 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionsDAO;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.PaymentPostgreDAO;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.ProjectPostgreDAO;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuestionPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
@@ -27,9 +25,15 @@ import ua.com.goit.gojava7.kickstarter.domain.Question;
 @WebServlet("/project")
 public class ProjectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@Autowired
     private QuestionsDAO questionsDAO;
+	@Autowired
     private PaymentDAO paymentDAO;
+	@Autowired
     private ProjectDAO projectDAO;
+	@Autowired
+    private RewardDAO rewardDAO;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,15 +43,13 @@ public class ProjectController extends HttpServlet {
 	    project.setBalanceSum(paymentDAO.getSum(projectId)); 
         
         request.setAttribute("project", project);
+        request.setAttribute("rewards", rewardDAO.getByProject(projectId));
         request.getRequestDispatcher("view/ProjectDetails.jsp").forward(request, response);
 	}
 	
 	@Override
     public void init() throws ServletException {
-		WebApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		questionsDAO = context.getBean(QuestionPostgreDAO.class);
-        projectDAO = context.getBean(ProjectPostgreDAO.class);
-        paymentDAO = context.getBean(PaymentPostgreDAO.class);
+    	SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
 
     @Override

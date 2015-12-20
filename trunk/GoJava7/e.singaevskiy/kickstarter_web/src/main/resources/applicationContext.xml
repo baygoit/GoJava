@@ -49,5 +49,7 @@
 	<bean id="rewardDAO"
 		class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.RewardPostgreDAO"
 		scope="singleton" autowire="constructor" lazy-init="true" />
+		
+	<import resource="loggerAspect.xml"/>
 
 </beans>
