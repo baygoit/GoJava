@@ -41,7 +41,6 @@ public class CategoryListController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-    	SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
-    		      getServletContext());
+    	SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
 }
