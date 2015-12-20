@@ -102,9 +102,9 @@ public class DaoProvider {
 		}
 
 		if (dataSourceType == DataSourceTypes.POSTGRES) {
-			quoteDao = new QuoteDaoSqlImpl(dataSource);
+			quoteDao = new QuoteDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MYSQL) {
-			quoteDao = new QuoteDaoSqlImpl(dataSource);
+			quoteDao = new QuoteDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			quoteDao = new QuoteDaoMemoryImpl(new Random());
 		} else if (dataSourceType == DataSourceTypes.FILE) {
@@ -121,9 +121,9 @@ public class DaoProvider {
 		}
 
 		if (dataSourceType == DataSourceTypes.POSTGRES) {
-			categoryDao = new CategoryDaoSqlImpl(dataSource);
+			categoryDao = new CategoryDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MYSQL) {
-			categoryDao = new CategoryDaoSqlImpl(dataSource);
+			categoryDao = new CategoryDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			categoryDao = new CategoryDaoMemoryImpl();
 		} else if (dataSourceType == DataSourceTypes.FILE) {
@@ -140,9 +140,9 @@ public class DaoProvider {
 		}
 
 		if (dataSourceType == DataSourceTypes.POSTGRES) {
-			projectDao = new ProjectDaoSqlImpl(dataSource);
+			projectDao = new ProjectDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MYSQL) {
-			projectDao = new ProjectDaoSqlImpl(dataSource);
+			projectDao = new ProjectDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			projectDao = new ProjectDaoMemoryImpl();
 		} else if (dataSourceType == DataSourceTypes.FILE) {
@@ -159,9 +159,9 @@ public class DaoProvider {
 		}
 
 		if (dataSourceType == DataSourceTypes.POSTGRES) {
-			rewardDao = new RewardDaoSqlImpl(dataSource);
+			rewardDao = new RewardDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MYSQL) {
-			rewardDao = new RewardDaoSqlImpl(dataSource);
+			rewardDao = new RewardDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			rewardDao = new RewardDaoMemoryImpl();
 		} else if (dataSourceType == DataSourceTypes.FILE) {
@@ -178,9 +178,9 @@ public class DaoProvider {
 		}
 
 		if (dataSourceType == DataSourceTypes.POSTGRES) {
-			questionDao = new QuestionDaoSqlImpl(dataSource);
+			questionDao = new QuestionDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MYSQL) {
-			questionDao = new QuestionDaoSqlImpl(dataSource);
+			questionDao = new QuestionDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			questionDao = new QuestionDaoMemoryImpl();
 		} else if (dataSourceType == DataSourceTypes.FILE) {
@@ -197,9 +197,9 @@ public class DaoProvider {
 		}
 
 		if (dataSourceType == DataSourceTypes.POSTGRES) {
-			paymentDao = new PaymentDaoSqlImpl(dataSource);
+			paymentDao = new PaymentDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MYSQL) {
-			paymentDao = new PaymentDaoSqlImpl(dataSource);
+			paymentDao = new PaymentDaoSqlImpl();
 		} else if (dataSourceType == DataSourceTypes.MEMORY) {
 			paymentDao = new PaymentDaoMemoryImpl();
 		} else if (dataSourceType == DataSourceTypes.FILE) {

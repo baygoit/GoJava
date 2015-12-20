@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +21,7 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
     private static String       TABLE     = "question";
     private static String       FIELDS    = "time, question, answer, project_id";
     private static final String INSERTION = "?, ?, ?, ?";
+    private static final Logger logger = LogManager.getLogger(QuestionDatabaseDao.class);
 
   public QuestionDatabaseDao(DataSource dataSource) {
       this.dataSource = dataSource;
@@ -33,10 +37,9 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
-            System.err.println("Error! INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + element.getTime() + ", "
-                    + element.getTime() + "," + element.getTime() + ", " + element.getTime() + ")");
+           logger.error("Error! INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + element.getTime() + ", "
+                    + element.getTime() + "," + element.getTime() + ", " + element.getTime() + ")",e);
 
-            e.printStackTrace();
         }
     }
 
@@ -49,8 +52,7 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
                 data.add(readElement(resultSet));
             }
         } catch (SQLException e) {
-
-            e.printStackTrace();
+            logger.log(Level.ERROR,"Error in getByProject() ", e);
         }
         return data;
     }
@@ -80,7 +82,7 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
                 return id;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("problem with findProjectId() ",e);
         }
         return 0;
     }
@@ -92,31 +94,31 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
 
     @Override
     public Question getByNumber(int number) {
-        // TODO Auto-generated method stub
+        logger.log(Level.WARN, "Method not done");
         return null;
     }
 
     @Override
     public void setAll(List<Question> data) {
-        // TODO Auto-generated method stub
+        logger.log(Level.WARN, "Method not done");
         
     }
 
     @Override
     public List<Question> getAll() {
-        // TODO Auto-generated method stub
+        logger.log(Level.WARN, "Method not done");
         return null;
     }
 
     @Override
     public Question get(int index) {
-        // TODO Auto-generated method stub
+        logger.log(Level.WARN, "Method not done");
         return null;
     }
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
+        logger.log(Level.WARN, "Method not done");
         return 0;
     }
 

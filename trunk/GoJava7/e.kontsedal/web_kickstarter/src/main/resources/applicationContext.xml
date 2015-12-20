@@ -1,29 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
-	<bean class="ua.com.goit.gojava7.kickstarter.DAO.dbStorage.util.JdbcDispatcher" id="jdbcDispatcher" destroy-method="close" />
-	
-	<bean class="ua.com.goit.gojava7.kickstarter.DAO.dbStorage.mysql.QuoteDbStorage" id="quoteDbStorage">
-		<constructor-arg name="dispatcher" ref="jdbcDispatcher"/>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<context:property-placeholder location="classpath:jdbcConfig.properties" />
+	<context:annotation-config />
+
+	<bean id="basicDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${db_driver}"></property>
+		<property name="url" value="${db_url}"></property>
+		<property name="username" value="${db_user}"></property>
+		<property name="password" value="${db_password}"></property>
+		<property name="defaultAutoCommit" value="false"></property>
 	</bean>
 	
-	<bean class="ua.com.goit.gojava7.kickstarter.DAO.dbStorage.mysql.ProjectDbStorage" id="projectDbStorage">
-		<constructor-arg name="dispatcher" ref="jdbcDispatcher"/>
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="basicDataSource"></property>
 	</bean>
-	
-	<bean class="ua.com.goit.gojava7.kickstarter.DAO.dbStorage.mysql.CategoryDbStorage" id="categoryDbStorage">
-		<constructor-arg name="dispatcher" ref="jdbcDispatcher"/>
+
+	<bean
+		class="ua.com.goit.gojava7.kickstarter.DAO.dbStorage.mysql.QuoteDbStorage"
+		id="quoteDbStorage">
 	</bean>
-	
-	<bean class="ua.com.goit.gojava7.kickstarter.DAO.dbStorage.mysql.PaymentDbStorage" id="paymentDbStorage">
-		<constructor-arg name="dispatcher" ref="jdbcDispatcher"/>
+
+	<bean
+		class="ua.com.goit.gojava7.kickstarter.DAO.dbStorage.mysql.ProjectDbStorage"
+		id="projectDbStorage">
 	</bean>
-	
-	<bean class="ua.com.goit.gojava7.kickstarter.DAO.dbStorage.mysql.QuestionDbStorage" id="questionDbStorage">
-		<constructor-arg name="dispatcher" ref="jdbcDispatcher"/>
+
+	<bean
+		class="ua.com.goit.gojava7.kickstarter.DAO.dbStorage.mysql.CategoryDbStorage"
+		id="categoryDbStorage">
 	</bean>
-	
+
+	<bean
+		class="ua.com.goit.gojava7.kickstarter.DAO.dbStorage.mysql.PaymentDbStorage"
+		id="paymentDbStorage">
+	</bean>
+
+	<bean
+		class="ua.com.goit.gojava7.kickstarter.DAO.dbStorage.mysql.QuestionDbStorage"
+		id="questionDbStorage">
+	</bean>
+
 </beans>

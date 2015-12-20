@@ -15,13 +15,16 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.dao.sql.RewardDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
+@RunWith(MockitoJUnitRunner.class)
 public class RewardDaoSqlImplTest {
 	
 	@Mock
@@ -29,7 +32,7 @@ public class RewardDaoSqlImplTest {
 	@Mock
 	DataSource dataSource = mock(DataSource.class);
 	@InjectMocks
-	private RewardDao rewardDaoMySqlImpl = new RewardDaoSqlImpl(dataSource);
+	private RewardDao rewardDaoMySqlImpl = new RewardDaoSqlImpl();
 	
 	@Test
 	public void testGetReward() throws SQLException {

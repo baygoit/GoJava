@@ -16,14 +16,13 @@ import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.servlet.MainServlet;
 @Component
 public class CategoryDatabaseDao extends DatabaseDao<Category>{
     private static final Logger logger = LogManager.getLogger(CategoryDatabaseDao.class); 
     private static String table  = "categories";
     private static String fields = "categoryId,categoryName";
     public CategoryDatabaseDao() {
-        // TODO Auto-generated constructor stub
+        
     }
     
     public CategoryDatabaseDao(DataSource dataSource) {
