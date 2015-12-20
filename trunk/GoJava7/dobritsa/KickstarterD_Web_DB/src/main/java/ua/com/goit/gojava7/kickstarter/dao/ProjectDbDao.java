@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import ua.com.goit.gojava7.kickstarter.DbDao;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @Component
@@ -47,7 +48,7 @@ public class ProjectDbDao extends DbDao<Project> {
 	}
 
 	@Override
-	protected Project readElement(ResultSet resultSet) throws SQLException {
+	public Project readElement(ResultSet resultSet) throws SQLException {
 		log.info("readElement()...");			
 		Project project = new Project();
 		project.setId(resultSet.getInt("id"));

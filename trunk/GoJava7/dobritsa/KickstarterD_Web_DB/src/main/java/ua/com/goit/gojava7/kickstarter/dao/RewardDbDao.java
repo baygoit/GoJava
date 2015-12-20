@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import ua.com.goit.gojava7.kickstarter.DbDao;
 import ua.com.goit.gojava7.kickstarter.models.Reward;
 
 @Component
@@ -33,7 +34,7 @@ public class RewardDbDao extends DbDao<Reward> {
 	}
 
 	@Override
-	protected Reward readElement(ResultSet resultSet) throws SQLException {
+	public Reward readElement(ResultSet resultSet) throws SQLException {
 		log.info("readElement()...");			
 		Reward reward = new Reward();
 		reward.setId(resultSet.getInt("id"));

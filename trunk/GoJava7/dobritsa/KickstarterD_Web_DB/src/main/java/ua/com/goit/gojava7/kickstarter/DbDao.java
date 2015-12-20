@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao;
+package ua.com.goit.gojava7.kickstarter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +41,9 @@ public abstract class DbDao<T> implements Dao<T>{
 		this.basicDataSource = basicDataSource;
 	}	
 
-	protected abstract T readElement(ResultSet resultSet) throws SQLException;
+	public T readElement(ResultSet resultSet) throws SQLException {
+		return null;		
+	}
 
 	public T getByNumber(int number) {
 		log.info("<{}> getByNumber()...");

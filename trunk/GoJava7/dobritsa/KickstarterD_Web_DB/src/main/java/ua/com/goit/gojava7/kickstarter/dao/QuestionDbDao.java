@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import ua.com.goit.gojava7.kickstarter.DbDao;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @Component
@@ -48,8 +49,8 @@ public class QuestionDbDao extends DbDao<Question>{
 	}
 
 	@Override
-	protected Question readElement(ResultSet resultSet) throws SQLException {
-		log.info("readElement()...");			
+	public Question readElement(ResultSet resultSet) throws SQLException {
+		log.info("readElement()...");	
 		Question question = new Question();question.setTime(resultSet.getString("time"));
 		question.setQuestion(resultSet.getString("question"));
 		question.setAnswer(resultSet.getString("answer"));

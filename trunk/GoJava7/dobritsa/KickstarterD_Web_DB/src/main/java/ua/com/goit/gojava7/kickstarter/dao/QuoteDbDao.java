@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import ua.com.goit.gojava7.kickstarter.DbDao;
 import ua.com.goit.gojava7.kickstarter.models.Quote;
 
 @Component
@@ -47,8 +48,20 @@ public class QuoteDbDao extends DbDao<Quote> {
 	}
 
 	@Override
-	protected Quote readElement(ResultSet resultSet) throws SQLException {
+	public Quote readElement(ResultSet resultSet) throws SQLException {
 		log.info("readElement()...");			
+		
+		/*
+		System.out.println(resultSet.getStatement());		
+		
+		int index = 0;
+		index = resultSet.getStatement().toString().indexOf(": ");			
+		System.out.println(index);
+		
+		String query = "query";
+		query = resultSet.getStatement().toString().substring(index+2);
+		System.out.println(query);*/
+		
 		Quote quote = new Quote();
 		quote.setText(resultSet.getString("text"));
 		quote.setAuthor(resultSet.getString("author"));

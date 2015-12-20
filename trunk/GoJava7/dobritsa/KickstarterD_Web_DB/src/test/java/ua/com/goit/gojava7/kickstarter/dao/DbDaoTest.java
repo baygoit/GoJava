@@ -18,6 +18,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ua.com.goit.gojava7.kickstarter.DbDao;
+
 @RunWith(MockitoJUnitRunner.class)
 public class DbDaoTest {
 

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import ua.com.goit.gojava7.kickstarter.DbDao;
 import ua.com.goit.gojava7.kickstarter.models.Category;
 
 @Component
@@ -28,7 +29,7 @@ public class CategoryDbDao extends DbDao<Category> {
 	}
 
 	@Override
-	protected Category readElement(ResultSet resultSet) throws SQLException {
+	public Category readElement(ResultSet resultSet) throws SQLException {
 		log.info("readElement()...");
 		Category category = new Category();
 		category.setId(resultSet.getInt("id"));

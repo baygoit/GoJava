@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Component;
 
+import ua.com.goit.gojava7.kickstarter.DbDao;
 import ua.com.goit.gojava7.kickstarter.models.Payment;
 
 @Component
@@ -24,7 +25,7 @@ public class PaymentDbDao extends DbDao<Payment> {
 	}
 
 	@Override
-	protected Payment readElement(ResultSet resultSet) throws SQLException {
+	public Payment readElement(ResultSet resultSet) throws SQLException {
 		return null;
 	}
 
