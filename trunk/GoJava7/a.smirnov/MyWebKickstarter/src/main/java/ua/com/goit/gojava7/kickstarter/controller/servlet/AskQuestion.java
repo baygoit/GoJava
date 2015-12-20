@@ -14,19 +14,13 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
 
-/**
- * Servlet implementation class AskQuestion
- */
 @WebServlet("/ask")
 public class AskQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	private int projectId;
-	private String userName;
-	private String question;
 
 	@Autowired
-	private FaqDao faqDao;
+	FaqDao faqDao;
 
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
@@ -34,47 +28,46 @@ public class AskQuestion extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		projectId = Integer.parseInt(request.getParameter("id"));
-
 		request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("errors", false);
 
-		validateUserName(request, response);
-		validateQuestion(request, response);
+		// add field name database
+		validateUserName(request);
+		String question = validateQuestion(request);
 
 		if ((Boolean) request.getAttribute("errors")) {
 			request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
 		} else {
-			saveCreatedFaq();
-
+			saveCreatedFaq(question);
 			response.sendRedirect("/kickstarter/project?id=" + projectId);
 		}
 	}
 
-	protected void validateUserName(HttpServletRequest request, HttpServletResponse response) {
-		userName = request.getParameter("first-name");
-
+	String validateUserName(HttpServletRequest request) {
+		String userName = request.getParameter("first-name");
 		if (userName.isEmpty()) {
 			request.setAttribute("errors", true);
 			request.setAttribute("nameError", true);
 		}
+		return userName;
 	}
 
-	protected void validateQuestion(HttpServletRequest request, HttpServletResponse response) {
-		question = request.getParameter("question");
-
+	String validateQuestion(HttpServletRequest request) {
+		String question = request.getParameter("question");
 		if (question.isEmpty()) {
 			request.setAttribute("errors", true);
 			request.setAttribute("questionError", true);
 		}
+		return question;
 	}
 
-	protected void saveCreatedFaq() {
+	void saveCreatedFaq(String question) {
 		Faq faq = new Faq();
-		faq.setQuestion(question);
 		faq.setProjectID(projectId);
+		faq.setQuestion(question);
 		faqDao.add(faq);
 	}
 }

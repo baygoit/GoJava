@@ -5,37 +5,41 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.AbstractDao;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractJdbcTemplate;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 
-public class ProjectDaoMysqlImpl extends AbstractDao implements ProjectDao {
+@Repository
+public class ProjectDaoMysqlImpl extends AbstractJdbcTemplate implements ProjectDao {
 
 	public void add(Project project) {
 		String sql = "INSERT INTO projects (category_id, title, brief_description, full_description, "
 				+ "video_link, required_sum, collected_sum, days_left) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-		jdbcTemplate.update(sql, new Object[] { project.getCategoryID(), project.getTitle(), project.getBriefDescription(),
-				project.getFullDescription(), project.getVideoLink(), project.getRequiredSum(), project.getCollectedSum(),
-				project.getDaysLeft() });
+		getJdbcTemplate().update(
+				sql,
+				new Object[] { project.getCategoryID(), project.getTitle(), project.getBriefDescription(),
+						project.getFullDescription(), project.getVideoLink(), project.getRequiredSum(),
+						project.getCollectedSum(), project.getDaysLeft() });
 	}
 
 	public void remove(Project project) {
 		String sql = "DELETE FROM projects WHERE id = ?";
-		jdbcTemplate.update(sql, new Object[] { project.getUniqueID() });
+		getJdbcTemplate().update(sql, new Object[] { project.getUniqueID() });
 	}
 
 	public List<Project> getProjectsFromCategory(int categoryID) {
 		String sql = "SELECT id, category_id, title, brief_description, full_description, "
 				+ "video_link, required_sum, collected_sum, days_left FROM projects WHERE category_id = ?";
-		return jdbcTemplate.query(sql, new Object[] { categoryID }, new ProjectRowMapper());
+		return getJdbcTemplate().query(sql, new Object[] { categoryID }, new ProjectRowMapper());
 	}
 
 	public Project getProjectById(int projectId) {
 		String sql = "SELECT id, category_id, title, brief_description, full_description, "
 				+ "video_link, required_sum, collected_sum, days_left FROM projects WHERE id = ?";
-		return jdbcTemplate.queryForObject(sql, new Object[] { projectId }, new ProjectRowMapper());
+		return getJdbcTemplate().queryForObject(sql, new Object[] { projectId }, new ProjectRowMapper());
 	}
 
 	public class ProjectRowMapper implements RowMapper<Project> {
