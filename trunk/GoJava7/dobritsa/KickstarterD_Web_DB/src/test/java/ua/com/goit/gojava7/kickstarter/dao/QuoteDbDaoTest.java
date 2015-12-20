@@ -26,9 +26,10 @@ public class QuoteDbDaoTest {
 	@InjectMocks
 	QuoteDbDao quoteDao;
 
+	/*
 	@Test
 	public void testReadElement() throws SQLException {
 		when(resultSet.getString("text")).thenReturn("TestQuote");
 		assertThat(quoteDao.readElement(resultSet).getText(), is("TestQuote"));
-	}
+	}*/
 }

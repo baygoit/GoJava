@@ -29,5 +29,4 @@ public class Quote {
 	public boolean isEmpty() {
 		return text == null;
 	}
-
 }

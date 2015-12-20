@@ -1,40 +1,44 @@
 package ua.com.goit.gojava7.kickstarter.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import ua.com.goit.gojava7.kickstarter.DbDao;
 import ua.com.goit.gojava7.kickstarter.models.Category;
 
 @Component
-public class CategoryDbDao extends DbDao<Category> {
+public class CategoryDbDao{
+	
+	@Autowired
+	private DbManager dbManager;
 
 	private static final Logger log = LoggerFactory.getLogger(CategoryDbDao.class);
 	private static final String TABLE = "category";
 	private static final String FIELDS = "id, name";
 
 	public CategoryDbDao() {
-		log.info("Constructor CategoryDbDao()...");
-		super.TABLE = TABLE;
-		super.FIELDS = FIELDS;
+		log.info("Constructor CategoryDbDao()...");	
 	}
+	
+	public List<Category> getAll() {		
+		log.info("<Category> getAll()...");	
+		String query = "select id, name from category";			
+		return dbManager.getCategories(query);
+	}
+	
+	public Category get(int index) {				
+		log.info("<Category> get({})...", index);
+		String query = "select " + FIELDS + " from " + TABLE + " where id = " + index;
+		return dbManager.getCategory(query);
+	}	
 
-	public CategoryDbDao(BasicDataSource basicDataSource) {
-		super(basicDataSource, FIELDS, TABLE);
+	public int size() {			
+		log.info("<int> size()...");
+		String query = "select count(*) as cnt from category";
+		return dbManager.size(query);
 	}
-
-	@Override
-	public Category readElement(ResultSet resultSet) throws SQLException {
-		log.info("readElement()...");
-		Category category = new Category();
-		category.setId(resultSet.getInt("id"));
-		category.setName(resultSet.getString("name"));
-		log.debug("readElement() returned category: {}", category);
-		return category;
-	}
+	
 }

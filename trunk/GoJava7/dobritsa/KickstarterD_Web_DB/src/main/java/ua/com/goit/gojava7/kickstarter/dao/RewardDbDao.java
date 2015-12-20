@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import ua.com.goit.gojava7.kickstarter.DbDao;
 import ua.com.goit.gojava7.kickstarter.models.Reward;
 
 @Component

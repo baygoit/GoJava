@@ -1,71 +1,44 @@
 package ua.com.goit.gojava7.kickstarter.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import ua.com.goit.gojava7.kickstarter.DbDao;
 import ua.com.goit.gojava7.kickstarter.models.Quote;
 
 @Component
-public class QuoteDbDao extends DbDao<Quote> {
-	
-	private static final Logger log = LoggerFactory.getLogger(QuoteDbDao.class);	 
+public class QuoteDbDao {
 
-	private static final String TABLE = "quote";
-	private static final String FIELDS = "text, author";
+	@Autowired
+	private DbManager dbManager;
 
-	public QuoteDbDao() {	
-		log.info("Constructor QuoteDbDao()...");		
-		super.TABLE = TABLE;
-		super.FIELDS = FIELDS;
-	}
-	
-	public QuoteDbDao(BasicDataSource basicDataSource) {
-		super(basicDataSource, FIELDS, TABLE);
+	private static final Logger log = LoggerFactory.getLogger(QuoteDbDao.class);
+
+	public QuoteDbDao() {
+		log.info("Constructor QuoteDbDao()...");
 	}
 
 	public Quote getRandomQuote() {
-		log.info("getRandomQuote()...");	
+		log.info("<Quote> getRandomQuote()...");
 		String query = "SELECT text, author FROM quote order by rand() limit 1 ";
-		log.debug("getRandomQuote() built query: {}", query);
-		
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-			while (resultSet.next()) {
-				return readElement(resultSet);
-			}
-		} catch (SQLException e) {			
-			e.printStackTrace();
-		}
-		return null;
+		return dbManager.getQuote(query);
 	}
 
-	@Override
-	public Quote readElement(ResultSet resultSet) throws SQLException {
-		log.info("readElement()...");			
-		
-		/*
-		System.out.println(resultSet.getStatement());		
-		
-		int index = 0;
-		index = resultSet.getStatement().toString().indexOf(": ");			
-		System.out.println(index);
-		
-		String query = "query";
-		query = resultSet.getStatement().toString().substring(index+2);
-		System.out.println(query);*/
-		
-		Quote quote = new Quote();
-		quote.setText(resultSet.getString("text"));
-		quote.setAuthor(resultSet.getString("author"));
-		log.debug("readElement() returned quote: {}", quote);
-		return quote;
+	public Quote getByNumber(int number) {
+		log.info("<Quote> getByNumber()...");
+		return get(number);
+	}
+
+	public Quote get(int index) {
+		log.info("<Quote> get({})...", index);
+		String query = "select text, author from quote where id = " + index;
+		return dbManager.getQuote(query);
+	}
+
+	public int size() {
+		log.info("<int> size()...");
+		String query = "select count(*) as cnt from quote";
+		return dbManager.size(query);
 	}
 }
