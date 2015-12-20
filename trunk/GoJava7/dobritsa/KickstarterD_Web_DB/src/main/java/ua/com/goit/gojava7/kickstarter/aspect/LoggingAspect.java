@@ -1,60 +1,26 @@
 package ua.com.goit.gojava7.kickstarter.aspect;
 
-import java.util.Arrays;
-
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Aspect
 public class LoggingAspect {
 
-	private static final Logger log = LoggerFactory.getLogger(LoggingAspect.class);	 
-	
-	@Pointcut("execution(* ua.com.goit.gojava7.kickstarter.dao.*.*(..))")
-   public void doSomething() {
-    }
-	
-	//@Pointcut("within( ua.com.goit.gojava7.kickstarter.dao..*)")
-    //public void time() {
-    //}
-	
- 
-   //@Before(value = "doSomething()", argNames = "joinPoint")
-   // public void beforeCall(JoinPoint joinPoint) {
-	//   log.trace("Method Name :" + joinPoint.getSignature().toShortString() + "| Args => " + Arrays.asList(joinPoint.getArgs()));
-   // }
-	
-   @Before(value = "doSomething()", argNames = "joinPoint")
-   public void beforeCall(JoinPoint joinPoint) {
-   	
-	   log.trace("Method Name :" + joinPoint.getSignature().toShortString() + "| Args => " + Arrays.asList(joinPoint.getArgs()));
-   }
-	
-	
-	//@Before("within( ua.com.goit.gojava7.kickstarter.dao..*)")
-	// public void logAround(JoinPoint joinPoint) {
-
-	//		System.out.println("logAround() is running!");
-			//System.out.println("Around before is running!");
-			//System.out.println("Around after is running!");
-	//	}
-	
-	
+	private static final Logger log = LoggerFactory.getLogger(LoggingAspect.class);	
 	
 	@Around("within( ua.com.goit.gojava7.kickstarter.dao..*)")
-	public Object time(ProceedingJoinPoint pjp) throws Throwable {
-		long start = System.currentTimeMillis();
-		log.trace("Going to call the method.");	
+	public Object time(ProceedingJoinPoint pjp) throws Throwable {	
+		String methodName = pjp.getSignature().getName();
+		String className = pjp.getSignature().getDeclaringType().getSimpleName();
+		long start = System.currentTimeMillis();	
+		log.trace("{}.{}() is going to be called", className, methodName);	
 		Object output = pjp.proceed();
-		log.trace("Method execution completed.");
+		log.trace("{}.{}() execution completed", className, methodName);
 		long elapsedTime = System.currentTimeMillis() - start;
-		log.trace("Method execution time: {} milliseconds.", elapsedTime);
+		log.trace("{}.{}() execution time: {} milliseconds", className, methodName, elapsedTime);
 		return output;		
-	}
+	}	
 }
