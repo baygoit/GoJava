@@ -15,9 +15,9 @@
            http://www.springframework.org/schema/context/spring-context.xsd
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util.xsd">
-          
-    <import resource="applicationContextDb.xml"/> 
-    
-	<import resource="applicationContextAop.xml"/>
-	
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+		
+	<bean id="loggingAspect"    class="ua.com.goit.gojava7.kickstarter.aspect.LoggingAspect" />
+		
 </beans>

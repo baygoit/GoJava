@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +17,6 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDbDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDbDao;
-import ua.com.goit.gojava7.kickstarter.models.Category;
-import ua.com.goit.gojava7.kickstarter.models.Quote;
 
 @WebServlet("/")
 public class CategoriesServlet extends HttpServlet {

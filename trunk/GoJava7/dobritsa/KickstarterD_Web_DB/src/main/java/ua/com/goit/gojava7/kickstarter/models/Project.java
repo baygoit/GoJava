@@ -87,7 +87,8 @@ public class Project {
 		this.pledged += amount;
 	}
 	
+	@Override
 	public String toString(){
-		return "id: " + id + ", name: '" + name.substring(0, 10) + "...', categoryId: " + categoryId;		
+		return "id: " + id + ", name: " + name + ", categoryId: " + categoryId;		
 	}
 }

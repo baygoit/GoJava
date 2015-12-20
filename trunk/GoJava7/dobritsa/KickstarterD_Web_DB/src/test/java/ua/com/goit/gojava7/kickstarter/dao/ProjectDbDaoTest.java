@@ -19,7 +19,8 @@ import ua.com.goit.gojava7.kickstarter.dao.ProjectDbDao;
 public class ProjectDbDaoTest {
 
 	@Mock
-	private ResultSet resultSet;	
+	private ResultSet resultSet;
+	
 	@InjectMocks
 	ProjectDbDao projectDao;
 	
