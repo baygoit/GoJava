@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,9 +14,7 @@ import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public class CategoryPostgreDAO implements CategoryDAO {
-	
-	final static Logger logger = LoggerFactory.getLogger(CategoryPostgreDAO.class);
-	
+
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
@@ -53,7 +49,6 @@ public class CategoryPostgreDAO implements CategoryDAO {
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
-		logger.info("dao created");
 	}
 
 	private final class StatementSetter implements BatchPreparedStatementSetter {
