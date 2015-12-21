@@ -18,14 +18,16 @@ public class Logger {
 		this.jdbcTemplateLogger = jdbcTemplateLogger;
 	}
 
-	private void logIntoDB(String query) {
+	private void logQueryIntoDB(String query) {
 		int count = jdbcTemplateLogger.queryForObject("select count(query) from log_queries where query = ?", new Object[] { query }, Integer.class);
 		if (count == 0) {
 			jdbcTemplateLogger.update("INSERT into log_queries (query) VALUES (?)", new Object[] { query });
 		}
 	}
 
-	public Object logMethod(ProceedingJoinPoint jointPoint, String query) throws Throwable {
+	@Around("execution	(public * org.springframework.jdbc.core.JdbcTemplate.*(..)) " 
+			+ "and args(query,..)")
+	public Object logJdbcTemplate(ProceedingJoinPoint jointPoint, String query) throws Throwable {
 		if (query.contains("log_queries")) {
 			return jointPoint.proceed();
 		} else {
@@ -36,7 +38,7 @@ public class Logger {
 				output = jointPoint.proceed();
 				long elapsedTime = System.currentTimeMillis() - start;
 				log.info("Method : {}\n\tQuery : {}\n\tExecution time : {} ms", methodName, query, elapsedTime);
-				logIntoDB(query);
+				logQueryIntoDB(query);
 			} catch (Exception e) {
 				log.error("Method : {}\n\tQuery : {}", methodName, query);
 				throw e;
@@ -45,12 +47,8 @@ public class Logger {
 		}
 	}
 
-	@Around("execution	(public * org.springframework.jdbc.core.JdbcTemplate.*(..)) " + "and args(querry,..)")
-	public Object logAll(ProceedingJoinPoint jointPoint, String querry) throws Throwable {
-		return logMethod(jointPoint, querry.trim());
-	}
-
-	@Around("execution (public * *.*(..)) " + "and !within(ua.com.goit.gojava7.kickstarter.util..*) "
+	@Around("execution (public * *.*(..)) " 
+			+ "and !within(ua.com.goit.gojava7.kickstarter.util..*) "
 			+ "and !within(org.springframework.jdbc.core..*) ")
 	public Object logSpringBeans(ProceedingJoinPoint jointPoint) throws Throwable {
 		String methodName = jointPoint.getSignature().toShortString();
