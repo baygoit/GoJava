@@ -31,17 +31,11 @@ public class QuestionServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("projectId"));
 		String question = request.getParameter("question");
-		if (question.length() < 1) {
-			response.sendRedirect("http://localhost:8080/WebKickstarter/SingleProjectServlet?projectId=" + id);
-
-		} else {
-
+//		if (question.length() >= 1) {
 			String projectTitle = projectDao.getOne(id).getTitle();
 			questionDao.add(question, projectTitle);
-
-			response.sendRedirect("http://localhost:8080/WebKickstarter/SingleProjectServlet?projectId=" + id);
-
-		}
+//		}
+		response.sendRedirect("SingleProjectServlet?projectId=" + id);
 
 	}
 }

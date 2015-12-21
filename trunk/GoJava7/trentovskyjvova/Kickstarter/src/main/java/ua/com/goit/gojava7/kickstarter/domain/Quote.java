@@ -4,7 +4,11 @@ public class Quote {
 
 	private String text;
 	private String author;
+	
+	public Quote() {
 
+	}
+	
 	public Quote(String text, String author) {
 		setText(text);
 		setAuthor(author);

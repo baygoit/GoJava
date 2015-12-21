@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.models.Quote;
-
+import static org.mockito.Matchers.contains;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -45,7 +45,8 @@ public class QuoteTest extends Assert {
 	@Test
 	public void testToString() {
 		System.out.println(quote.toString());
-		verify(printSteam).println("Quote: TestQuote; Author: TestAuthor");
+		verify(printSteam).println(contains("TestQuote"));
+		verify(printSteam).println(contains("TestAuthor"));
 	}
 
 	@Test

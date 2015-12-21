@@ -8,7 +8,6 @@ public class Question {
 	private String time = "";
 	private String question = "";
 	private String answer = "";
-	private String projectName = "";
 	private int projectId;
 
 	public Question() {
@@ -46,15 +45,7 @@ public class Question {
 	public void setAnswer(String answear) {
 		this.answer = answear;
 	}
-
-	public String getProjectName() {
-		return projectName;
-	}
-
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-
+	
 	public int getProjectId() {
 		return projectId;
 	}
@@ -65,7 +56,7 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Time: " + time + "; Question: " + question + "; Answer: " + answer + "; Project: " + projectName;
+		return "Time: " + time + "; Question: " + question + "; Answer: " + answer + "; projectId: " + projectId;
 	}
 
 }

@@ -51,20 +51,7 @@ public class AllCategoriesServlet extends HttpServlet {
 		request.setAttribute("categoryList", categoryList);
 		request.getRequestDispatcher("/WEB-INF/AllCategories.jsp").forward(request, response);
 
-		// StringBuilder stringBuilder = new
-		// StringBuilder("<html><head><title>Categories</title></head><body>");
-		// stringBuilder.append("<b>" + quote.getQuoteText() + " (c) " +
-		// quote.getAuthor()+ "</b>" + "<br>");
-		//
-		// for (Category category : categoryList) {
-		// stringBuilder.append("<a href=
-		// \"SelectedCategoryProjectsServlet?categoryTitle=" +
-		// category.getTitle() + "\">" + category.getTitle() + "</a><br/>");
-		//// http://localhost:8080/KickstarterWeb/
-		//// <a href="http://www.w3schools.com">This is a link</a>
-		// }
-		// stringBuilder.append("</body> </html>");
-		// response.getWriter().append(stringBuilder);
+		
 	}
 
 }

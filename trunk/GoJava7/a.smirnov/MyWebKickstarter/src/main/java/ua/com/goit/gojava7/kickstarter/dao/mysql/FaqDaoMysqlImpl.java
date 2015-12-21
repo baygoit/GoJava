@@ -1,112 +1,41 @@
 package ua.com.goit.gojava7.kickstarter.dao.mysql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
-import ua.com.goit.gojava7.kickstarter.config.ConnectionPoolSource;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractJdbcTemplate;
 import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
 
-public class FaqDaoMysqlImpl implements FaqDao {
+@Repository
+public class FaqDaoMysqlImpl extends AbstractJdbcTemplate implements FaqDao {
 
-	private static final String INSERT_FAQ = "INSERT INTO faqs (project_id, question) VALUES (?, ?)";
-	private static final String DELETE_FAQ = "DELETE FROM faqs WHERE project_id = ?";
-	private static final String SELECT_ALL_FAQS = "SELECT project_id, question, answer FROM faqs";
-	private static final String SELECT_PROJECT_FAQS = "SELECT question, answer FROM faqs WHERE project_id = ?";
-
-	private ConnectionPoolSource dataSource;
-
-	public FaqDaoMysqlImpl(ConnectionPoolSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
-	@Override
 	public void add(Faq faq) {
-
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection.prepareStatement(INSERT_FAQ)) {
-
-			statement.setInt(1, faq.getProjectID());
-			statement.setString(2, faq.getQuestion());
-			statement.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		String sql = "INSERT INTO faqs (project_id, question) VALUES (?, ?)";
+		getJdbcTemplate().update(sql, new Object[] { faq.getProjectID(), faq.getQuestion() });
 	}
 
-	@Override
 	public void remove(Faq faq) {
-
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection.prepareStatement(DELETE_FAQ)) {
-
-			statement.setInt(1, faq.getProjectID());
-			statement.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		String sql = "DELETE FROM faqs WHERE project_id = ?";
+		getJdbcTemplate().update(sql, new Object[] { faq.getProjectID() });
 	}
 
-	@Override
-	public List<Faq> getAll() {
-
-		List<Faq> faqs = new ArrayList<>();
-
-		try (Connection connection = dataSource.getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery(SELECT_ALL_FAQS)) {
-
-			while (resultSet.next()) {
-
-				Faq faq = new Faq();
-				faq.setProjectID(resultSet.getInt("project_id"));
-				faq.setQuestion(resultSet.getString("question"));
-				faq.setAnswer(resultSet.getString("answer"));
-
-				faqs.add(faq);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return faqs;
-	}
-
-	@Override
 	public List<Faq> getProjectFaqs(int projectId) {
+		String sql = "SELECT project_id, question FROM faqs WHERE project_id = ?";
+		return getJdbcTemplate().query(sql, new Object[] { projectId }, new FaqRowMapper());
+	}
 
-		List<Faq> faqs = new ArrayList<>();
-
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection.prepareStatement(SELECT_PROJECT_FAQS)) {
-
-			statement.setInt(1, projectId);
-			ResultSet resultSet = statement.executeQuery();
-
-			while (resultSet.next()) {
-
-				Faq faq = new Faq();
-				faq.setQuestion(resultSet.getString("question"));
-
-				String answer = resultSet.getString("answer");
-
-				if (answer == null || answer.isEmpty()) {
-					faq.setAnswer("There is no answer yet");
-				} else {
-					faq.setAnswer(answer);
-				}
-				faqs.add(faq);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public class FaqRowMapper implements RowMapper<Faq> {
+		@Override
+		public Faq mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Faq faq = new Faq();
+			faq.setProjectID(rs.getInt("project_id"));
+			faq.setQuestion(rs.getString("question"));
+			return faq;
 		}
-		return faqs;
 	}
 }

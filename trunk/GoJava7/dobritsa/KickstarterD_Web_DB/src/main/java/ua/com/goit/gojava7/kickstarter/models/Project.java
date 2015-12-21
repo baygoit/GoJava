@@ -10,8 +10,7 @@ public class Project {
 	private String history;
 	private String link;
 	private int categoryId;
-	private String categoryName;
-
+	
 	public int getId() {
 		return id;
 	}
@@ -84,15 +83,11 @@ public class Project {
 		this.categoryId = categoryId;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-
 	public void updatePledged(int amount) {
 		this.pledged += amount;
+	}
+	
+	public String toString(){
+		return "id: " + id + ", name: '" + name.substring(0, 10) + "...', categoryId: " + categoryId;		
 	}
 }

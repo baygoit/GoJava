@@ -88,19 +88,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 			<version>${spring-version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.8.7</version>
-		</dependency>
-		
-		<dependency>
-			<artifactId>log4j</artifactId>
-			<groupId>log4j</groupId>
-			<version>1.2.17</version>
-		</dependency>
+		</dependency>	
 		
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -111,9 +99,10 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j.version}</version>
+			<version>${org.slf4j.version}</version>			
 		</dependency>
 		
+
 
 	</dependencies>
 
