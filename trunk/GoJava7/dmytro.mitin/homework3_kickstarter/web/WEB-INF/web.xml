@@ -15,6 +15,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>start1</servlet-name>
+        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.StartServlet1</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>start1</servlet-name>
+        <url-pattern>/start1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>category</servlet-name>
         <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.CategoryServlet</servlet-class>
     </servlet>
