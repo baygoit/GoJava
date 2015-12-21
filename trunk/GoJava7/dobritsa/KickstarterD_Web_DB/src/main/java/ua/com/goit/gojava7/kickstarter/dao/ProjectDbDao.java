@@ -13,7 +13,7 @@ import ua.com.goit.gojava7.kickstarter.models.Project;
 public class ProjectDbDao {
 	
 	@Autowired
-	private DbManager dbManager;
+	private DbDao dbManager;
 	
 	private static final Logger log = LoggerFactory.getLogger(ProjectDbDao.class);	 
 

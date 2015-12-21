@@ -11,7 +11,7 @@ import ua.com.goit.gojava7.kickstarter.models.Quote;
 public class QuoteDbDao {
 
 	@Autowired
-	private DbManager dbManager;
+	private DbDao dbManager;
 
 	private static final Logger log = LoggerFactory.getLogger(QuoteDbDao.class);
 

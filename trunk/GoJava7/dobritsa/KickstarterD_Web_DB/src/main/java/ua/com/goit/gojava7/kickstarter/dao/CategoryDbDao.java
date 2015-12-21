@@ -13,7 +13,7 @@ import ua.com.goit.gojava7.kickstarter.models.Category;
 public class CategoryDbDao {
 
 	@Autowired
-	private DbManager dbManager;
+	private DbDao dbManager;
 
 	private static final Logger log = LoggerFactory.getLogger(CategoryDbDao.class);
 	private static final String TABLE = "category";

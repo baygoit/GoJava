@@ -20,14 +20,16 @@ import ua.com.goit.gojava7.kickstarter.models.Quote;
 import ua.com.goit.gojava7.kickstarter.models.Reward;
 
 @Component
-public class DbManager {
+public class DbDao {
 
-	private static final Logger log = LoggerFactory.getLogger(DbManager.class);
+	private static final Logger log = LoggerFactory.getLogger(DbDao.class);
 
 	@Autowired
-	protected BasicDataSource basicDataSource;
+	private BasicDataSource basicDataSource;
+	@Autowired
+	private DbAgent dbAgent;
 
-	public DbManager() {
+	public DbDao() {
 		log.info("Constructor DbManager()...");
 	}
 
@@ -36,22 +38,13 @@ public class DbManager {
 		try (Connection connection = basicDataSource.getConnection();
 				PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
-			if (resultSet.next()) {
-				return readQuote(resultSet);
+			if (resultSet.next()) {				
+				return dbAgent.readQuote(resultSet);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	private Quote readQuote(ResultSet resultSet) throws SQLException {
-		log.info("<Quote> readQuote()...");
-		Quote quote = new Quote();
-		quote.setText(resultSet.getString("text"));
-		quote.setAuthor(resultSet.getString("author"));
-		log.debug("readQuote() returned quote: {}", quote);
-		return quote;
 	}
 
 	public List<Category> getCategories(String query) {
@@ -61,7 +54,7 @@ public class DbManager {
 				PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
-				data.add(readCategory(resultSet));
+				data.add(dbAgent.readCategory(resultSet));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,21 +69,12 @@ public class DbManager {
 				PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
-				return readCategory(resultSet);
+				return dbAgent.readCategory(resultSet);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	private Category readCategory(ResultSet resultSet) throws SQLException {
-		log.info("<Category> readCategory()...");
-		Category category = new Category();
-		category.setId(resultSet.getInt("id"));
-		category.setName(resultSet.getString("name"));
-		log.debug("readCategory() returned category: {}", category);
-		return category;
 	}
 
 	public List<Project> getProjects(String query) {
@@ -100,7 +84,7 @@ public class DbManager {
 				PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
-				data.add(readProject(resultSet));
+				data.add(dbAgent.readProject(resultSet));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -115,7 +99,7 @@ public class DbManager {
 				PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
-				return readProject(resultSet);
+				return dbAgent.readProject(resultSet);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -133,22 +117,6 @@ public class DbManager {
 		}
 	}
 
-	private Project readProject(ResultSet resultSet) throws SQLException {
-		log.info("<Project> readProject()...");
-		Project project = new Project();
-		project.setId(resultSet.getInt("id"));
-		project.setName(resultSet.getString("name"));
-		project.setDescription(resultSet.getString("description"));
-		project.setGoal(resultSet.getInt("goal"));
-		project.setPledged(resultSet.getInt("pledged"));
-		project.setDaysToGo(resultSet.getInt("daysToGo"));
-		project.setHistory(resultSet.getString("history"));
-		project.setLink(resultSet.getString("link"));
-		project.setCategoryId(resultSet.getInt("category_id"));
-		log.debug("readProject() returned project: {}", project);
-		return project;
-	}
-
 	public List<Reward> getRewardsByProject(String query) {
 		log.info("<rewards> getRewardsByProject({})...", query);
 		List<Reward> data = new ArrayList<>();
@@ -156,7 +124,7 @@ public class DbManager {
 				PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
-				data.add(readReward(resultSet));
+				data.add(dbAgent.readReward(resultSet));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -171,43 +139,24 @@ public class DbManager {
 				PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
 			if (resultSet.next()) {
-				return readReward(resultSet);
+				return dbAgent.readReward(resultSet);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	private Reward readReward(ResultSet resultSet) throws SQLException {
-		log.info("<Reward> readReward()...");
-		Reward reward = new Reward();
-		reward.setId(resultSet.getInt("id"));
-		reward.setAmount(resultSet.getInt("amount"));
-		reward.setReward(resultSet.getString("reward"));
-		reward.setProjectId(resultSet.getInt("project_id"));
-		log.debug("readReward() returned reward: {}", reward);
-		return reward;
-	}
+	}	
 
 	public void addQuestion(Question element, String query) {
 		log.info("<void> addQuestion({}, {})...", element, query);
 		try (Connection connection = basicDataSource.getConnection();
 				PreparedStatement ps = connection.prepareStatement(query)) {
-			writeElement(element, ps);
+			dbAgent.writeElement(element, ps);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void writeElement(Question question, PreparedStatement statement) throws SQLException {
-		log.info("<void> writeElement({})...", question);
-		statement.setString(1, question.getTime());
-		statement.setString(2, question.getQuestion());
-		statement.setString(3, question.getAnswer());
-		statement.setInt(4, question.getProjectId());
-	}
+	}	
 
 	public List<Question> getQuestionsByProject(String query) {
 		log.info("<questions> getQuestionsByProject({})...", query);
@@ -216,7 +165,7 @@ public class DbManager {
 				PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
 			while (resultSet.next()) {
-				data.add(readQuestion(resultSet));
+				data.add(dbAgent.readQuestion(resultSet));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -225,13 +174,5 @@ public class DbManager {
 		return data;
 	}
 
-	private Question readQuestion(ResultSet resultSet) throws SQLException {
-		log.info("<Question> readQuestion()...");
-		Question question = new Question();
-		question.setTime(resultSet.getString("time"));
-		question.setQuestion(resultSet.getString("question"));
-		question.setAnswer(resultSet.getString("answer"));
-		log.debug("readQuestion() returned question: {}", question);
-		return question;
-	}
+	
 }
