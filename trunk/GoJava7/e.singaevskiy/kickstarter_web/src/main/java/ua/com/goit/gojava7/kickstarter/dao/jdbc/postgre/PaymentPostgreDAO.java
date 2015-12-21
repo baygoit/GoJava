@@ -28,8 +28,8 @@ public class PaymentPostgreDAO implements PaymentDAO {
 
 	@Override
 	public Payment get(int index) {
-		String sql = "select " + FIELDS + " from " + TABLE + " limit 1 offset " + index;
-		return jdbcTemplate.queryForObject(sql, getRowMapper());
+		String sql = "select " + FIELDS + " from " + TABLE + " limit 1 offset ?";
+		return jdbcTemplate.queryForObject(sql, new Object[]{index}, getRowMapper());
 	}
 
 	@Override
@@ -52,14 +52,14 @@ public class PaymentPostgreDAO implements PaymentDAO {
 
 	@Override
 	public List<Payment> getByProject(int projectId) {
-		String sql = "select " + FIELDS + " from " + TABLE + " where project_id = " + projectId;
-		return jdbcTemplate.query(sql, getRowMapper());
+		String sql = "select " + FIELDS + " from " + TABLE + " where project_id = ?";
+		return jdbcTemplate.query(sql, new Object[]{projectId}, getRowMapper());
 	}
 
 	@Override
 	public long getSum(int projectId) {
-		String sql = "select SUM(sum) from " + TABLE + " where project_id = " + projectId;
-		return jdbcTemplate.queryForObject(sql, Long.class);
+		String sql = "select SUM(sum) from " + TABLE + " where project_id = ?";
+		return jdbcTemplate.queryForObject(sql, new Object[]{projectId}, Long.class);
 	}
 	
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {

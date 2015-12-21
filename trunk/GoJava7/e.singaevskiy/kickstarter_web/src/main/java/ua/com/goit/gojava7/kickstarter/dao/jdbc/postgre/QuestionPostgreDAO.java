@@ -32,8 +32,8 @@ public class QuestionPostgreDAO implements QuestionsDAO{
 
     @Override
     public Question get(int index) {
-        String sql = "select " + FIELDS + " from " + TABLE + " limit 1 offset  " + index;
-        return jdbcTemplate.queryForObject(sql, getRowMapper());
+        String sql = "select " + FIELDS + " from " + TABLE + " limit 1 offset ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{index}, getRowMapper());
     }
 
     @Override
@@ -56,8 +56,8 @@ public class QuestionPostgreDAO implements QuestionsDAO{
 
     @Override
     public List<Question> getByProject(int projectId) {
-        String sql = "select " + FIELDS + " from " + TABLE + " where project_id = " + projectId;
-        return jdbcTemplate.query(sql, getRowMapper());
+        String sql = "select " + FIELDS + " from " + TABLE + " where project_id = ?";
+        return jdbcTemplate.query(sql, new Object[]{projectId}, getRowMapper());
     }
 
 	public StatementSetter<Question> getStatementSetter(Object argument) {

@@ -28,8 +28,8 @@ public class QuotePostgreDAO implements QuoteDAO {
 
     @Override
     public Quote get(int index) {
-        String sql = "select text, author from quote limit 1 offset " + index;
-		return jdbcTemplate.queryForObject(sql, getRowMapper());
+        String sql = "select text, author from quote limit 1 offset ?";
+		return jdbcTemplate.queryForObject(sql, new Object[]{index}, getRowMapper());
     }
 
     @Override

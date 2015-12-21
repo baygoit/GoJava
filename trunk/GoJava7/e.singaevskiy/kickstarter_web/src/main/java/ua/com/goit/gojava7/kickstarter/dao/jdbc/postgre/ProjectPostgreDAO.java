@@ -19,10 +19,6 @@ public class ProjectPostgreDAO implements ProjectDAO {
 	private static final String INSERTION = FIELDS.replaceAll("[^,]+", "?");
 	private static final String KEY = "id";
 
-	private static final String SELECTION = "   SELECT project.id, project.name, project.goalsum, project.balancesum, project.startdate, project.enddate, "
-			+ " project.description, project.videourl, project.author, category.id as category_id, category.name as category_name "
-			+ " FROM project left join category " + " ON project.category_id = category.id ";
-
 	private JdbcTemplate jdbcTemplate;
 	
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -37,8 +33,8 @@ public class ProjectPostgreDAO implements ProjectDAO {
 
 	@Override
 	public Project get(int index) {
-		String sql = SELECTION + " where " + TABLE + "." + KEY + " = " + index;
-		return jdbcTemplate.queryForObject(sql, getRowMapper());
+		String sql = "select " + FIELDS + " from " + TABLE + " where " + TABLE + "." + KEY + " = ?";
+		return jdbcTemplate.queryForObject(sql, new Object[]{index}, getRowMapper());
 	}
 
 	@Override
@@ -55,13 +51,13 @@ public class ProjectPostgreDAO implements ProjectDAO {
 
 	@Override
 	public List<Project> getAll() {
-		return jdbcTemplate.query(SELECTION, getRowMapper());
+		return jdbcTemplate.query("select " + FIELDS + " from " + TABLE, getRowMapper());
 	}
 
 	@Override
 	public List<Project> getByCategory(int categoryId) {
-		String sql = SELECTION + " where project.category_id = " + categoryId;
-		return jdbcTemplate.query(sql, getRowMapper());
+		String sql = "select " + FIELDS + " from " + TABLE + " where project.category_id = ?";
+		return jdbcTemplate.query(sql, new Object[]{categoryId}, getRowMapper());
 	}
 
 	public StatementSetter<Project> getStatementSetter(Object argument) {

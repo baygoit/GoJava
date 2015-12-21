@@ -25,8 +25,8 @@ public class CategoryPostgreDAO implements CategoryDAO {
 
 	@Override
 	public Category get(int index) {
-		String sql = "select id, name from category where id = " + index;
-		return jdbcTemplate.queryForObject(sql, new ElementMapper());
+		String sql = "select id, name from category where id = ?";
+		return jdbcTemplate.queryForObject(sql, new Object[]{index}, new ElementMapper());
 	}
 
 	@Override

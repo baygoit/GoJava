@@ -33,8 +33,8 @@ public class RewardPostgreDAO implements RewardDAO {
 
     @Override
     public Reward get(int index) {
-        String sql = "select " + FIELDS + " from " + TABLE + " where " + KEY + " = " + index;
-		return jdbcTemplate.queryForObject(sql, getRowMapper());
+        String sql = "select " + FIELDS + " from " + TABLE + " where " + KEY + " = ?";
+		return jdbcTemplate.queryForObject(sql, new Object[]{index}, getRowMapper());
     }
 
     @Override
@@ -57,8 +57,8 @@ public class RewardPostgreDAO implements RewardDAO {
 
     @Override
     public List<Reward> getByProject(int projectId) {
-        String sql = "select " + FIELDS + " from " + TABLE + " where project_id = " + projectId;
-        return jdbcTemplate.query(sql, getRowMapper());
+        String sql = "select " + FIELDS + " from " + TABLE + " where project_id = ?";
+        return jdbcTemplate.query(sql, new Object[]{projectId},getRowMapper());
     }
 
 	public StatementSetter<Reward> getStatementSetter(Object argument) {
