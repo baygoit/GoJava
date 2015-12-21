@@ -18,8 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import ua.com.goit.gojava7.kickstarter.models.Question;
-
 @Component
 @Aspect
 @Order(value = 200)
@@ -30,6 +28,30 @@ public class LoggingAspect {
 
 	private static final Logger log = LoggerFactory.getLogger(LoggingAspect.class);
 
+	@Before("within( ua.com.goit.gojava7.kickstarter.dao.DbManager)")
+	public void toDbQuery(JoinPoint joinPoint) {
+		Object[] signatureArgs = joinPoint.getArgs();
+		log.trace("<void> toDbQuery({})...");
+
+		for (Object signatureArg : signatureArgs) {			
+			if (signatureArg instanceof String) {
+				String query = signatureArg.toString().toLowerCase();
+				addQuery(query);
+			}
+		}
+	}
+	
+	public void addQuery(String text) {		
+		String query = "insert into query (text) VALUES (\"" + text + "\") on dublicate key update text=\"" + text + "\";";		
+		log.trace("<void> addQuery({})...", query);
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query)) {		
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/*
 	 * @Pointcut("execution(public * *(..))") private void timePoint5() {}
 	 * 
@@ -101,40 +123,5 @@ public class LoggingAspect {
 		return output;
 	}*/
 
-	@Before("within( ua.com.goit.gojava7.kickstarter.dao.DbManager)")
-	public void toDbQuery(JoinPoint joinPoint) {
-		Object[] signatureArgs = joinPoint.getArgs();
-		System.out.println("------------------toDbQuery");
 
-		for (Object signatureArg : signatureArgs) {
-			
-			if (signatureArg instanceof String) {
-				String query = signatureArg.toString().toLowerCase();
-				System.out.println("------------------" + query);		
-			}
-		}
-	}
-	
-	public void addQuery(String text) {
-		/*String query = "select * from query";		
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query);
-				ResultSet resultSet = ps.executeQuery()) {
-			if (resultSet.next()) {
-				String texteee = resultSet.getString("text");
-				System.out.println("---------------" + texteee);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}	*/
-		
-		//String query = "insert into query (text) VALUES (" + text + ");";		
-		//log.info("<void> addQuery({})...", query);
-		//try (Connection connection = basicDataSource.getConnection();
-		//		PreparedStatement ps = connection.prepareStatement(query)) {		
-		//	ps.executeUpdate();
-		//} catch (SQLException e) {
-		//	e.printStackTrace();
-		//}
-	}
 }

@@ -78,7 +78,10 @@ CREATE TABLE IF NOT EXISTS `kickstarter`.`query` (
   
 `text` VARCHAR(500) NOT NULL,
   
-RIMARY KEY (`id`))
+primary key (`id`),
+
+UNIQUE (text))
+
 
 ENGINE = InnoDB
 
