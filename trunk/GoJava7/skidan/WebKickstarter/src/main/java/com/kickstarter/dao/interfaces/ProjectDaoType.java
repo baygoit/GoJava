@@ -29,9 +29,9 @@ public abstract class ProjectDaoType {
 
 	}
 
-	public List<Project> getAllList() {
-		return projectDaoInterface.getAllList();
-	}
+//	public List<Project> getAllList() {
+//		return projectDaoInterface.getAllList();
+//	}
 
 	public void setType(ProjectDaoInterface projectDao) {
 		this.projectDaoInterface = projectDao;

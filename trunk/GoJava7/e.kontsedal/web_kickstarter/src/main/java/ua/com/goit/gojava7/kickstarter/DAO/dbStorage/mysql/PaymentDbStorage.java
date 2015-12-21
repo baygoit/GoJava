@@ -8,8 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import ua.com.goit.gojava7.kickstarter.DAO.AbstractPaymentStorage;
-import ua.com.goit.gojava7.kickstarter.DAO.dbStorage.util.JdbcDispatcher;
 import ua.com.goit.gojava7.kickstarter.model.Payment;
 
 public class PaymentDbStorage extends AbstractPaymentStorage {
@@ -18,17 +20,14 @@ public class PaymentDbStorage extends AbstractPaymentStorage {
 	private final String SELECT_ALL_PAYMENTS = "SELECT id, name FROM payments";
 	private final String SELECT_PAYMENTS_FROM_PROJECT = "SELECT amount FROM payments WHERE id_project = ";
 
-	private JdbcDispatcher dispatcher;
-
-	public PaymentDbStorage(JdbcDispatcher dispatcher) {
-		this.dispatcher = dispatcher;
-	}
+	@Autowired
+	private BasicDataSource basicDataSource;
 
 	@Override
 	public List<Payment> getAll() {
 		List<Payment> payments = new ArrayList<>();
 
-		try (Connection connection = dispatcher.getConnection();
+		try (Connection connection = basicDataSource.getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(SELECT_ALL_PAYMENTS);) {
 			while (resultSet.next()) {
@@ -48,7 +47,7 @@ public class PaymentDbStorage extends AbstractPaymentStorage {
 
 	@Override
 	public void add(Payment payment) {
-		try (Connection connection = dispatcher.getConnection();
+		try (Connection connection = basicDataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(INSERT_PAYMENT);) {
 			statement.setInt(1, payment.getIdParentProject());
 			statement.setString(2, payment.getCardOwner());
@@ -57,14 +56,14 @@ public class PaymentDbStorage extends AbstractPaymentStorage {
 			statement.executeUpdate();
 			connection.commit();
 		} catch (SQLException e) {
-			System.err.println("DB writing problem");
+			System.err.println("DB writing problem... wtf?");
 		}
 	}
 
 	@Override
 	public int getSummaryProjectCostsCollected(int idProject) {
 		int sum = 0;
-		try (Connection connection = dispatcher.getConnection();
+		try (Connection connection = basicDataSource.getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(SELECT_PAYMENTS_FROM_PROJECT + idProject);) {
 			while (resultSet.next()) {
@@ -74,6 +73,10 @@ public class PaymentDbStorage extends AbstractPaymentStorage {
 			System.err.println("DB reading problem");
 		}
 		return sum;
+	}
+
+	public void setBasicDataSource(BasicDataSource basicDataSource) {
+		this.basicDataSource = basicDataSource;
 	}
 
 }

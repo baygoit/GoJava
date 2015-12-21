@@ -9,16 +9,17 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
+@Repository
 public class ProjectDaoSqlImpl implements ProjectDao {
+	@Autowired
 	private DataSource dataSource;
-
-	public ProjectDaoSqlImpl(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
 
 	@Override
 	public List<Project> getProjects(int categoryId) {
@@ -30,8 +31,8 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 		try {
 			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement(
-					"SELECT id, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE categoryId ="
-							+ categoryId);
+					"SELECT id, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE categoryId = ?");
+			stmt.setInt(1, categoryId);
 			rset = stmt.executeQuery();
 
 			Project project;
@@ -102,8 +103,8 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 		try {
 			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement(
-					"SELECT categoryId, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE id ="
-							+ projectId);
+					"SELECT categoryId, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE id = ?");
+			stmt.setInt(1, projectId);
 			rset = stmt.executeQuery();
 
 			if (rset.next()) {

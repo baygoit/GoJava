@@ -7,7 +7,7 @@ import com.kickstarter.model.Project;
 
 public interface ProjectDaoInterface {
 
-	public List<Project> getAllList();
+//	public List<Project> getAllList();
 	
 	public List<Project> getAll(String categoryTitle);
 

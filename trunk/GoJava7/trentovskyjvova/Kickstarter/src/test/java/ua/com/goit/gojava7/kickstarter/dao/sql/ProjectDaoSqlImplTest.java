@@ -14,21 +14,25 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.sql.ProjectDaoSqlImpl;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
+@RunWith(MockitoJUnitRunner.class)
 public class ProjectDaoSqlImplTest {
 	@Mock
 	private Connection connection = mock(Connection.class);
 	@Mock
 	DataSource dataSource = mock(DataSource.class);
 	@InjectMocks
-	private ProjectDao projectDaoMySqlImpl = new ProjectDaoSqlImpl(dataSource);
+	private ProjectDao projectDaoMySqlImpl = new ProjectDaoSqlImpl();
 	
 	@Test
 	public void testGetProject() throws SQLException {

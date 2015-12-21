@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import ua.com.goit.gojava7.kickstarter.Level.CategoryLevel;
 import ua.com.goit.gojava7.kickstarter.Level.Level;
 import ua.com.goit.gojava7.kickstarter.Level.MenuLevel;
@@ -14,6 +17,7 @@ import ua.com.goit.gojava7.kickstarter.Level.ProjectLevel;
 import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
 import ua.com.goit.gojava7.kickstarter.console.ConsoleScanner;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
@@ -26,23 +30,37 @@ public class Kickstarter {
 	private ConsolePrinter consolePrinter;
 	private ConsoleScanner consoleScanner;
 
-	private DaoProvider daoProvider;
-
+	//private DaoProvider daoProvider;
+	@Autowired
+	private QuoteDao quoteDao;
+	@Autowired
+	private CategoryDao categoryDao;
+	@Autowired
+	private RewardDao rewardDao;
+	@Autowired
+	private QuestionDao questionDao;
+	@Autowired
+	private PaymentDao paymentDao;
+	@Autowired
+	private ProjectDao projectDao;
+	
 	private List<Level> levels;
 
 	public Kickstarter(ConsolePrinter consolePrinter,
-			ConsoleScanner consoleScanner, DaoProvider daoProvider) {	
+			ConsoleScanner consoleScanner) {	
 		this.consolePrinter = consolePrinter;
 		this.consoleScanner = consoleScanner;	
 
-		this.daoProvider = daoProvider;
-		ProjectDao projectDao = daoProvider.getProjectReader();
-		RewardDao rewardDao = daoProvider.getRewardsReader();
-		QuestionDao questionDao = daoProvider.getQuestionReader();
-		PaymentDao paymentDao = daoProvider.getPaymentReader();
+		//this.daoProvider = daoProvider;
+		//ProjectDao projectDao = daoProvider.getProjectReader();
+		//RewardDao rewardDao = daoProvider.getRewardsReader();
+		//QuestionDao questionDao = daoProvider.getQuestionReader();
+		//PaymentDao paymentDao = daoProvider.getPaymentReader();
+		
+		//ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 		
 		levels = new LinkedList<>(Arrays.asList(
-				new MenuLevel(daoProvider.getCategoryReader()),
+				new MenuLevel(categoryDao),
 				new CategoryLevel(projectDao, paymentDao),
 				new ProjectLevel(paymentDao, questionDao),
 				new PaymentLevel(questionDao, rewardDao),
@@ -50,7 +68,8 @@ public class Kickstarter {
 	}
 
 	public void runKickstarter() {
-		QuoteDao quoteDao = daoProvider.getQuoteReader();
+
+		//QuoteDao quoteDao = daoProvider.getQuoteReader();
 		consolePrinter.print(quoteDao.getRandomQuote());
 
 		ListIterator<Level> levelsIterator = levels.listIterator();

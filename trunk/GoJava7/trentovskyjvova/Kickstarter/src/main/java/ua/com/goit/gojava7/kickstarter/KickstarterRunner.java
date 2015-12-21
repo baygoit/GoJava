@@ -26,19 +26,19 @@ public class KickstarterRunner {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 		ConsoleScanner consoleReader = new ConsoleScanner();
 		
-		ApplicationContext context = 
-	    		new ClassPathXmlApplicationContext("Spring-Module.xml");
+		//ApplicationContext context = 
+	    //		new ClassPathXmlApplicationContext("Spring-Module.xml");
 	    	 
-		DaoProvider daoProvider = (DaoProvider) context.getBean("daoProvider");
+		//DaoProvider daoProvider = (DaoProvider) context.getBean("daoProvider");
 		//DaoProvider daoProvider = new DaoProvider(daoType);
-		daoProvider.open();
+		//daoProvider.open();
 		
 		Kickstarter kickstarter = new Kickstarter(consolePrinter,
-				consoleReader, daoProvider);
+				consoleReader);
 		kickstarter.runKickstarter();
 		kickstarter.shutdown();
 		
-		daoProvider.close();
+		//daoProvider.close();
 	}
 
 	
