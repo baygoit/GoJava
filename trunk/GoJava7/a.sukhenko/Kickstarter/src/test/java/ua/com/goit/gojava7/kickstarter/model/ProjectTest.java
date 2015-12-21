@@ -1,19 +1,18 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.PaymentBonus;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.domain.User;
 
 public class ProjectTest{
 	Project project = new Project();
@@ -46,7 +45,7 @@ public class ProjectTest{
 		assertThat(project.getProjectName(), is(projectName));
 		assertThat(project.getProjectDescription(), is("2"));
 		assertThat(project.getProjectCategoryId(), is(projectCategory.getCategoryId()));
-		assertThat(project.getEndDate(), is(now));
+		assertThat(project.getEnddate(), is(now));
 	}
 
 	@Test
@@ -95,8 +94,8 @@ public class ProjectTest{
 
 	@Test
 	public void testGetMoneyPledged() {
-		project.addBacker(new User(), 50000.0);
-		project.addBacker(new User(), 48000.0);
+		project.addBacker(50000.0);
+		project.addBacker(48000.0);
 		assertThat(project.getPledged(), is(98000.0));
 	}
 
@@ -111,7 +110,7 @@ public class ProjectTest{
 	public void testGetEndDate() {
 		LocalDateTime loc = LocalDateTime.now();
 		project.setEnddate(loc);
-		assertThat(project.getEndDate(), is(loc));
+		assertThat(project.getEnddate(), is(loc));
 	}
 
 	@Test

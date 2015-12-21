@@ -7,18 +7,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.config.DBConnectionManager;
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
+@Repository
 public class ProjectDaoSqlImpl implements ProjectDao {
-	private DBConnectionManager connectionManager;
-
-	public ProjectDaoSqlImpl(DBConnectionManager connectionManager) {
-		this.connectionManager = connectionManager;
-	}
+	@Autowired
+	private DataSource dataSource;
 
 	@Override
 	public List<Project> getProjects(int categoryId) {
@@ -28,10 +29,10 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = connectionManager.getConnection();
+			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement(
-					"SELECT id, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE categoryId ="
-							+ categoryId);
+					"SELECT id, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE categoryId = ?");
+			stmt.setInt(1, categoryId);
 			rset = stmt.executeQuery();
 
 			Project project;
@@ -100,10 +101,10 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = connectionManager.getConnection();
+			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement(
-					"SELECT categoryId, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE id ="
-							+ projectId);
+					"SELECT categoryId, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE id = ?");
+			stmt.setInt(1, projectId);
 			rset = stmt.executeQuery();
 
 			if (rset.next()) {

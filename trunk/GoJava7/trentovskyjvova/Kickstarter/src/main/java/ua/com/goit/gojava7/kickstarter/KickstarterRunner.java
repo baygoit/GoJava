@@ -1,5 +1,8 @@
 package ua.com.goit.gojava7.kickstarter;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
 import ua.com.goit.gojava7.kickstarter.config.DataSourceTypes;
 import ua.com.goit.gojava7.kickstarter.console.ConsolePrinter;
@@ -23,13 +26,19 @@ public class KickstarterRunner {
 		ConsolePrinter consolePrinter = new ConsolePrinter();
 		ConsoleScanner consoleReader = new ConsoleScanner();
 		
-		DaoProvider daoProvider = new DaoProvider(daoType);
+		//ApplicationContext context = 
+	    //		new ClassPathXmlApplicationContext("Spring-Module.xml");
+	    	 
+		//DaoProvider daoProvider = (DaoProvider) context.getBean("daoProvider");
+		//DaoProvider daoProvider = new DaoProvider(daoType);
+		//daoProvider.open();
 		
 		Kickstarter kickstarter = new Kickstarter(consolePrinter,
-				consoleReader, daoProvider);
+				consoleReader);
 		kickstarter.runKickstarter();
 		kickstarter.shutdown();
 		
+		//daoProvider.close();
 	}
 
 	

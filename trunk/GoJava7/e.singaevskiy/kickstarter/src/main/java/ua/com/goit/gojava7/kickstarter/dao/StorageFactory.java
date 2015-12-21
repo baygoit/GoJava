@@ -37,6 +37,7 @@ public class StorageFactory {
     
     public StorageFactory(DataType dataType) {
         this.dataType = dataType;
+        System.out.println("Running in " + dataType + " mode");
         
         switch (dataType) {
         case MEMORY:

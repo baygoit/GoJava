@@ -6,10 +6,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,30 +41,27 @@ public class ProjectServletTest {
 	public void testDoGetHttpServletRequestHttpServletResponse() throws ServletException, IOException {
 		int projectId = 12;
 		
-		Project project = new Project("Project name", projectId);
-		project.setCategoryId(1);
-		when(projectDao.getProject(projectId)).thenReturn(project);
-		when(paymentDao.getPledged(projectId)).thenReturn(100);
+		Project selectedProject = new Project("Project name", projectId);
+		selectedProject.setCategoryId(1);
+		when(projectDao.getProject(projectId)).thenReturn(selectedProject);
+		int pledged = 100;
+		when(paymentDao.getPledged(projectId)).thenReturn(pledged);
 		
 		List<Question> questions = new ArrayList<>();
-		Question question = new Question();
-		question.setProjectId(projectId);
-		question.setQuestionText("question Text");
-		questions.add(question);
 		when(questionDao.getQuestions(projectId)).thenReturn(questions);
 		
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse resp = mock(HttpServletResponse.class);
+		RequestDispatcher rd = mock(RequestDispatcher.class);
 		
+		when(request.getRequestDispatcher(contains("project"))).thenReturn(rd);
 		when(request.getParameter("projectId")).thenReturn(Integer.toString(projectId));
-		
-		PrintWriter writer = mock(PrintWriter.class);
-		when(resp.getWriter()).thenReturn(writer);
 
 		projectServlet.doGet(request, resp);
 
-		verify(writer).append(contains("Project name"));
-		verify(writer).append(contains("pledged: 100"));
-		verify(writer).append(contains("question Text"));
+		verify(request).setAttribute("selectedProject", selectedProject);
+		verify(request).setAttribute("pledged", pledged);
+		verify(request).setAttribute("questions", questions);
+		verify(rd).forward(request, resp);
 	}
 }

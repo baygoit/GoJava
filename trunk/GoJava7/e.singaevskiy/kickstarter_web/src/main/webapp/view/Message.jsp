@@ -1,37 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Message</title>
-<%@ include file="html/style.html"%>
-</head>
-<body>
-	<div class="root">
-		<div class="box">
-			<div class="boxCaption basecolor">
-				<span>Enter your message</span>
-			</div>
-			<div class="boxContent">
-				<form action="project" method="post" id="submitForm">
-					<input type="hidden" name="projectId" value=${param['projectId']}>
-					<input type="hidden" name="operation" value="message">
-					<table>
-						<tr>
-							<td>Username:</td>
-							<td><input type="text" name="user" value="User"></td>
-						</tr>
-						<tr>
-							<td>Message:</td>
-							<td><textarea rows="5" name="message">Text</textarea></td>
-						</tr>
-					</table>
-				</form>
-				<div class="controls basecolor">
-					<jsp:include page="html/Submit.html" />
-					<jsp:include page="html/Back.html" />
-				</div>
-			</div>
+<jsp:include page="components/Top.jsp"><jsp:param name="title"
+		value="${project.name}" /></jsp:include>
+
+<jsp:include page="components/Menu.jsp" />
+
+<jsp:include page="components/Error.jsp" />
+
+<form class="form-horizontal" method="post" action="project">
+	<input type="hidden" name="projectId" value="${param.id}">
+	<input type="hidden" name="operation" value="message">
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Username</label>
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="user"
+				placeholder="Your name here">
 		</div>
 	</div>
-</body>
-</html>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Message</label>
+		<div class="col-sm-6">
+			<textarea class="form-control" rows="5"
+				placeholder="Your question here" name="message"></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-6">
+			<button type="submit" class="btn btn-primary">Send</button>
+		</div>
+	</div>
+</form>
+
+<jsp:include page="components/Bottom" />

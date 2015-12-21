@@ -10,7 +10,5 @@ public interface RewardDao {
 
 	public void remove(Reward reward);
 	
-	public int getSize();
-	
-	public List<Reward> getAll();
+	public List<Reward> getProjectsRewards(int projectId);
 }

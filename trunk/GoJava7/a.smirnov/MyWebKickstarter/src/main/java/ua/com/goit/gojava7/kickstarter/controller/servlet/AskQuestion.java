@@ -2,83 +2,72 @@ package ua.com.goit.gojava7.kickstarter.controller.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
-import ua.com.goit.gojava7.kickstarter.config.DataSource;
 import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
 
-/**
- * Servlet implementation class AskQuestion
- */
 @WebServlet("/ask")
 public class AskQuestion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private FaqDao faqDao;
-	private DaoProvider daoProvider;
 	private int projectId;
-	
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AskQuestion() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
-	public void init(ServletConfig config) throws ServletException {
-		
-		daoProvider = new DaoProvider(DataSource.MYSQL);
-		
-		daoProvider.open();
-		
-		faqDao = daoProvider.getFaqDao();
-		
+	@Autowired
+	FaqDao faqDao;
+
+	public void init() throws ServletException {
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		projectId = Integer.parseInt(request.getParameter("id"));
-		
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/askQuestion.jsp");
-		
-		view.forward(request, response);
-		
+		request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("errors", false);
 
+		// add field name database
+		validateUserName(request);
+		String question = validateQuestion(request);
+
+		if ((Boolean) request.getAttribute("errors")) {
+			request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
+		} else {
+			saveCreatedFaq(question);
+			response.sendRedirect("/kickstarter/project?id=" + projectId);
+		}
+	}
+
+	String validateUserName(HttpServletRequest request) {
 		String userName = request.getParameter("first-name");
-		
+		if (userName.isEmpty()) {
+			request.setAttribute("errors", true);
+			request.setAttribute("nameError", true);
+		}
+		return userName;
+	}
+
+	String validateQuestion(HttpServletRequest request) {
 		String question = request.getParameter("question");
-		
+		if (question.isEmpty()) {
+			request.setAttribute("errors", true);
+			request.setAttribute("questionError", true);
+		}
+		return question;
+	}
+
+	void saveCreatedFaq(String question) {
 		Faq faq = new Faq();
-		
-		faq.setQuestion(question);
-		
 		faq.setProjectID(projectId);
-		
+		faq.setQuestion(question);
 		faqDao.add(faq);
-		
-		response.sendRedirect("/mykickstarter/project?id=" + projectId);
-		
 	}
 }

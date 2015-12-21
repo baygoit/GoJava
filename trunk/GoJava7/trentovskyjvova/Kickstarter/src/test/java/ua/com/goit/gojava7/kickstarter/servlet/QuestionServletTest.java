@@ -7,8 +7,8 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Matchers.any;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,23 +26,25 @@ import ua.com.goit.gojava7.kickstarter.domain.Question;
 public class QuestionServletTest {
 	@Mock
 	private QuestionDao questionDao;
+	@Mock
+	RequestValidation requestValidation;
 	@InjectMocks
 	private QuestionServlet questionServlet;
-
+	
 	@Test
 	public void testDoGetHttpServletRequestHttpServletResponse() throws ServletException, IOException {
 
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse resp = mock(HttpServletResponse.class);
+		RequestDispatcher rd = mock(RequestDispatcher.class);
 		
+		when(request.getRequestDispatcher(contains("question"))).thenReturn(rd);
 		when(request.getParameter("projectId")).thenReturn("12");
 		
-		PrintWriter writer = mock(PrintWriter.class);
-		when(resp.getWriter()).thenReturn(writer);
-
 		questionServlet.doGet(request, resp);
 
-		verify(writer).append(contains("input"));
+		verify(request).setAttribute("projectId", 12);
+		verify(rd).forward(request, resp);
 	}
 
 	@Test
@@ -53,7 +55,8 @@ public class QuestionServletTest {
 
 		when(request.getParameter("projectId")).thenReturn("12");
 		when(request.getParameter("questionText")).thenReturn("que text");
-
+		when(request.getAttribute("errors")).thenReturn(false);
+		
 		questionServlet.doPost(request, response);
 
 		verify(questionDao).addQuestion(any(Question.class));

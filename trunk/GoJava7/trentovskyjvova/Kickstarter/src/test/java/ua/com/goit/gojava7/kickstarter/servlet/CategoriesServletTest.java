@@ -6,7 +6,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -35,7 +33,7 @@ public class CategoriesServletTest {
 	private CategoryDao categoryDao;
 	@InjectMocks
 	private CategoriesServlet categoriesServlet;
-
+	
 	@Test
 	public void testDoGetHttpServletRequestHttpServletResponse() throws ServletException, IOException {
 		

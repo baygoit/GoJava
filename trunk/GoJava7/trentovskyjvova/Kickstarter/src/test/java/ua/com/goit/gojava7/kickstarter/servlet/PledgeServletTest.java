@@ -7,8 +7,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,24 +30,27 @@ public class PledgeServletTest {
 	private PaymentDao paymentDao;
 	@Mock
 	private RewardDao rewardDao;
+	@Mock
+	RequestValidation requestValidation;
 	@InjectMocks
 	private PledgeServlet pledgeServlet;
-
+	
 	@Test
 	public void testDoGetHttpServletRequestHttpServletResponse() throws ServletException, IOException {
 
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse resp = mock(HttpServletResponse.class);
-
+		RequestDispatcher rd = mock(RequestDispatcher.class);
+		
+		when(request.getRequestDispatcher(contains("pledge"))).thenReturn(rd);
 		when(request.getParameter("projectId")).thenReturn("12");
 		when(request.getParameter("rewardId")).thenReturn("1");
 
-		PrintWriter writer = mock(PrintWriter.class);
-		when(resp.getWriter()).thenReturn(writer);
-
 		pledgeServlet.doGet(request, resp);
 
-		verify(writer).append(contains("input"));
+		verify(request).setAttribute("rewardId", 1);
+		verify(request).setAttribute("projectId", 12);
+		verify(rd).forward(request, resp);
 	}
 
 	@Test
@@ -55,7 +58,7 @@ public class PledgeServletTest {
 
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
-
+		
 		when(request.getParameter("projectId")).thenReturn("12");
 		when(request.getParameter("rewardId")).thenReturn("1");
 		when(request.getParameter("amount")).thenReturn("100");
@@ -63,9 +66,9 @@ public class PledgeServletTest {
 		Reward reward = mock(Reward.class);
 		when(rewardDao.getReward(1)).thenReturn(reward);
 		when(reward.getPledge()).thenReturn(200);
-
+							
 		pledgeServlet.doPost(request, response);
-
+		
 		verify(paymentDao).addPayment(any(Payment.class));
 		verify(response).sendRedirect(contains("12"));
 	}

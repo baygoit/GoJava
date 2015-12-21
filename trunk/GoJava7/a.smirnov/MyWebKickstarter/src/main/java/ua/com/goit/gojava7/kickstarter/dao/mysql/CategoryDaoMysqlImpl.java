@@ -1,142 +1,46 @@
 package ua.com.goit.gojava7.kickstarter.dao.mysql;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
+import ua.com.goit.gojava7.kickstarter.dao.AbstractJdbcTemplate;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 
-public class CategoryDaoMysqlImpl implements CategoryDao {
-	
-	private static final String INSERT_CATEGORY = "INSERT INTO categories (name) VALUES (?)";
-	private static final String DELETE_CATEGORY = "DELETE FROM categories WHERE id = ?";
-	private static final String SELECT_ALL_CATEGORIES = "SELECT id, name FROM categories";
-	private static final String COUNT_ALL_CATEGORIES = "SELECT count(*) FROM categories";
-	private static final String SELECT_CATEGORY_BY_ID = "SELECT id, name FROM categories WHERE id = ?";
-	
-	private Connection connection;
-	private Category searchedCategory;
-	
-	public CategoryDaoMysqlImpl(Connection connection) {
-		
-		this.connection = connection;
-		
-	}	
-	
-	@Override
+@Repository
+public class CategoryDaoMysqlImpl extends AbstractJdbcTemplate implements CategoryDao {
+
 	public void add(Category category) {
-		
-		try (PreparedStatement statement = connection.prepareStatement(INSERT_CATEGORY)) {	
-			
-			statement.setString(1, category.getName());
-			
-			statement.executeUpdate();
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
-		}
+		String sql = "INSERT INTO categories (name) VALUES (?)";
+		getJdbcTemplate().update(sql, new Object[] { category.getName() });
 	}
-	
-	@Override
+
 	public void remove(Category category) {
-		
-		try (PreparedStatement statement = connection.prepareStatement(DELETE_CATEGORY)){		
-			
-			statement.setInt(1, category.getUniqueID());
-			
-			statement.executeUpdate();
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
-		}
+		String sql = "DELETE FROM categories WHERE id = ?";
+		getJdbcTemplate().update(sql, new Object[] { category.getUniqueID() });
 	}
 
-	@Override
 	public List<Category> getAll() {
-		
-		List<Category> categories = new ArrayList<>();
-		
-		try (Statement statement = connection.createStatement();
-				
-				ResultSet resultSet = statement.executeQuery(SELECT_ALL_CATEGORIES)) {
-				
-			while (resultSet.next()) {
-				Category category = new Category();
-				
-				category.setUniqueID(resultSet.getInt("id"));
-				
-				category.setName(resultSet.getString("name"));
-				
-			    categories.add(category);
-			 }
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
-		} 
-		
-		return categories;
+		String sql = "SELECT id, name FROM categories";
+		return getJdbcTemplate().query(sql, new CategoryRowMapper());
 	}
 
-	@Override
-	public int getSize() {
-		
-		int amountOfCatrgories = 0;
-		
-		try (Statement statement = connection.createStatement();
-				
-				ResultSet resultSet = statement.executeQuery(COUNT_ALL_CATEGORIES)) {
-
-			while (resultSet.next()) {
-				
-				amountOfCatrgories = resultSet.getInt(1);
-			}
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
-		} 
-		
-		return amountOfCatrgories;
-		
-	}
-	
-	@Override
 	public Category getCategoryById(int id) {
-		
-		searchedCategory = null;
-		
-		try (PreparedStatement statement = connection.prepareStatement(SELECT_CATEGORY_BY_ID)) {	
-			
-			statement.setInt(1, id);
-			
-			ResultSet resultSet = statement.executeQuery();
-		
-			while (resultSet.next()) {
-				
-				searchedCategory.setUniqueID(resultSet.getInt("id"));
-				
-				searchedCategory.setName(resultSet.getString("name"));
-				
-			 }
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			
+		String sql = "SELECT id, name FROM categories WHERE id = ?";
+		return getJdbcTemplate().queryForObject(sql, new Object[] { id }, new CategoryRowMapper());
+	}
+
+	public class CategoryRowMapper implements RowMapper<Category> {
+		@Override
+		public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Category category = new Category();
+			category.setUniqueID(rs.getInt("id"));
+			category.setName(rs.getString("name"));
+			return category;
 		}
-		
-		return searchedCategory;
-		
 	}
 }

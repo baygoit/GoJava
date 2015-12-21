@@ -6,10 +6,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +32,7 @@ public class ProjectsServletTest {
 	private PaymentDao paymentDao;
 	@InjectMocks
 	private ProjectsServlet projectsServlet;
-
+	
 	@Test
 	public void testDoGetHttpServletRequestHttpServletResponse() throws ServletException, IOException {
 
@@ -42,17 +42,20 @@ public class ProjectsServletTest {
 		projects.add(project);
 		when(projectDao.getProjects(12)).thenReturn(projects);
 		when(paymentDao.getPledged(1)).thenReturn(0);
+		
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse resp = mock(HttpServletResponse.class);
-
+		RequestDispatcher rd = mock(RequestDispatcher.class);
+		
+		when(request.getRequestDispatcher(contains("projects"))).thenReturn(rd);
+		
 		when(request.getParameter("id")).thenReturn("12");
-
-		PrintWriter writer = mock(PrintWriter.class);
-		when(resp.getWriter()).thenReturn(writer);
 
 		projectsServlet.doGet(request, resp);
 
-		verify(writer).append(contains("Project name"));
+		verify(request).setAttribute("projects", projects);
+		verify(request).setAttribute("paymentDao", paymentDao);
+		verify(rd).forward(request, resp);
 	}
 
 }

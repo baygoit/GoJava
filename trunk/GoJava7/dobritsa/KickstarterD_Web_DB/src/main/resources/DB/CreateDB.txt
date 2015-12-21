@@ -1,0 +1,89 @@
+CREATE DATABASE `kickstarterDobritsa`
+
+CREATE TABLE IF NOT EXISTS `kickstarter`.`quote` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `text` VARCHAR(500) NOT NULL,
+  `author` VARCHAR(200) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+
+CREATE TABLE IF NOT EXISTS `kickstarter`.`category` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+
+CREATE TABLE IF NOT EXISTS `kickstarter`.`project` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `description` VARCHAR(500) NOT NULL,
+  `goal` INT NOT NULL,
+  `pledged` INT NOT NULL,
+  `daysToGo` INT NOT NULL,
+  `history` VARCHAR(1000) NOT NULL,
+  `link` VARCHAR(100) NULL,
+  `category_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_project_Category_idx` (`category_id` ASC),
+  CONSTRAINT `fk_project_Category`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `kickstarter`.`category` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+
+
+CREATE TABLE IF NOT EXISTS `kickstarter`.`question` (
+  `id` INT NOT NULL,
+  `question` VARCHAR(200) NOT NULL,
+  `answer` VARCHAR(200) NULL,
+  `time` DATE NOT NULL,
+  `project_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_question_project1_idx` (`project_id` ASC),
+  CONSTRAINT `fk_question_project1`
+    FOREIGN KEY (`project_id`)
+    REFERENCES `kickstarter`.`project` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+
+
+CREATE TABLE IF NOT EXISTS `kickstarter`.`reward` (
+  `id` INT NOT NULL,
+  `amount` INT NOT NULL,
+  `reward` VARCHAR(200) NOT NULL,
+  `project_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_reward_project1_idx` (`project_id` ASC),
+  CONSTRAINT `fk_reward_project1`
+    FOREIGN KEY (`project_id`)
+    REFERENCES `kickstarter`.`project` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+
+
+
+CREATE TABLE IF NOT EXISTS `kickstarter`.`quote` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `text` VARCHAR(500) NOT NULL,
+  `author` VARCHAR(200) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+
+CREATE TABLE IF NOT EXISTS `kickstarter`.`query` (
+  
+`id` INT NOT NULL AUTO_INCREMENT,
+  
+`text` VARCHAR(500) NOT NULL,
+  
+primary key (`id`),
+
+UNIQUE (text))
+
+
+ENGINE = InnoDB
+
+INSERT INTO `mydb`.`table1` (`) VALUES ();
+

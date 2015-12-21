@@ -7,18 +7,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.config.DBConnectionManager;
-import ua.com.goit.gojava7.kickstarter.config.DaoProvider;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
+@Repository
 public class RewardDaoSqlImpl implements RewardDao {
-	private DBConnectionManager connectionManager;
-
-	public RewardDaoSqlImpl(DBConnectionManager connectionManager) {
-		this.connectionManager = connectionManager;
-	}
+	@Autowired
+	private DataSource dataSource;
 
 	@Override
 	public List<Reward> getRewards(int projectId) {
@@ -28,8 +29,9 @@ public class RewardDaoSqlImpl implements RewardDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = connectionManager.getConnection();
-			stmt = conn.prepareStatement("SELECT id, pledge, benefit FROM reward WHERE projectId =" + projectId);
+			conn = dataSource.getConnection();
+			stmt = conn.prepareStatement("SELECT id, pledge, benefit FROM reward WHERE projectId = ?");
+			stmt.setInt(1, projectId);
 			rset = stmt.executeQuery();
 
 			Reward reward;
@@ -78,8 +80,9 @@ public class RewardDaoSqlImpl implements RewardDao {
 		PreparedStatement stmt = null;
 		ResultSet rset = null;
 		try {
-			conn = connectionManager.getConnection();
-			stmt = conn.prepareStatement("SELECT projectId, pledge, benefit FROM reward WHERE id =" + rewardId);
+			conn = dataSource.getConnection();
+			stmt = conn.prepareStatement("SELECT projectId, pledge, benefit FROM reward WHERE id = ?");
+			stmt.setInt(1, rewardId);
 			rset = stmt.executeQuery();
 
 			if (rset.next()) {
