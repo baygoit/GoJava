@@ -8,8 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import ua.com.goit.gojava7.kickstarter.DAO.AbstractProjectStorage;
-import ua.com.goit.gojava7.kickstarter.DAO.dbStorage.util.JdbcDispatcher;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 
 public class ProjectDbStorage extends AbstractProjectStorage {
@@ -19,16 +21,13 @@ public class ProjectDbStorage extends AbstractProjectStorage {
 	private final String SELECT_PROJECT = "SELECT category_id, name, short_description, description, video, cost_need, deadline FROM projects WHERE id = ";
 	private final String SELECT_PROJECTS_FROM_CATEGORY = "SELECT id, name, short_description, description, video, cost_need, deadline FROM projects WHERE category_id = ";
 
-	private JdbcDispatcher dispatcher;
-
-	public ProjectDbStorage(JdbcDispatcher dispatcher) {
-		this.dispatcher = dispatcher;
-	}
+	@Autowired
+	private BasicDataSource basicDataSource;
 
 	@Override
 	public List<Project> getAll() {
 		List<Project> projects = new ArrayList<>();
-		try (Connection connection = dispatcher.getConnection();
+		try (Connection connection = basicDataSource.getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(SELECT_ALL_PROJECTS);) {
 			while (resultSet.next()) {
@@ -51,7 +50,7 @@ public class ProjectDbStorage extends AbstractProjectStorage {
 
 	@Override
 	public void add(Project project) {
-		try (Connection connection = dispatcher.getConnection();
+		try (Connection connection = basicDataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(INSERT_PROJECT);) {
 			statement.setInt(1, project.getIdParentCategory());
 			statement.setString(2, project.getProjectName());
@@ -76,7 +75,7 @@ public class ProjectDbStorage extends AbstractProjectStorage {
 	@Override
 	public Project getProjectById(int projectId) {
 		Project project = null;
-		try (Connection connection = dispatcher.getConnection();
+		try (Connection connection = basicDataSource.getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(SELECT_PROJECT + projectId);) {
 			project = new Project();
@@ -99,7 +98,7 @@ public class ProjectDbStorage extends AbstractProjectStorage {
 	@Override
 	public List<Project> getProjectsFromSelectedCategory(int idCategory) {
 		List<Project> projects = new ArrayList<>();
-		try (Connection connection = dispatcher.getConnection();
+		try (Connection connection = basicDataSource.getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(SELECT_PROJECTS_FROM_CATEGORY + idCategory);) {
 			Project project = new Project();
@@ -118,6 +117,10 @@ public class ProjectDbStorage extends AbstractProjectStorage {
 			System.err.println("DB reading problem 111");
 		}
 		return projects;
+	}
+
+	public void setBasicDataSource(BasicDataSource basicDataSource) {
+		this.basicDataSource = basicDataSource;
 	}
 
 }

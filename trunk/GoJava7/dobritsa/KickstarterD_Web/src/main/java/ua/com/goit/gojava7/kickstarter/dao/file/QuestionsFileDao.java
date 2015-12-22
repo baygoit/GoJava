@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import ua.com.goit.gojava7.kickstarter.dao.FileDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
-import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.models.Question;
 
 public class QuestionsFileDao extends FileDao<Question> implements QuestionDao {
 

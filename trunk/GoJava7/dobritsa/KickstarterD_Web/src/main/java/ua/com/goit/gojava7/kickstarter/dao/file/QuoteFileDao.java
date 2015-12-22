@@ -4,7 +4,7 @@ import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.FileDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kickstarter.domain.Quote;
+import ua.com.goit.gojava7.kickstarter.models.Quote;
 
 public class QuoteFileDao extends FileDao<Quote> implements QuoteDao {
 

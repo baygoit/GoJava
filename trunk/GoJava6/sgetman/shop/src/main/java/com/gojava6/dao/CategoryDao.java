@@ -43,4 +43,9 @@ public class CategoryDao <T, S>{
         savedCategory.setName(category.getName());
         return savedCategory;
     }
+
+    public void delete(T t) {
+        entityManager.remove(t);
+    }
+
 }

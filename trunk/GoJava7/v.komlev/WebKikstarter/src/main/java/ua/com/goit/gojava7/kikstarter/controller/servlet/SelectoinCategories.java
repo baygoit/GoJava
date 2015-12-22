@@ -7,31 +7,33 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.annotation.WebServlet;
 
-import ua.com.goit.gojava7.kikstarter.config.DaoProvider;
-import ua.com.goit.gojava7.kikstarter.config.MyDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import ua.com.goit.gojava7.kikstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kikstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kikstarter.domain.Category;
 import ua.com.goit.gojava7.kikstarter.domain.Quote;
 
+@WebServlet("/categories")
 public class SelectoinCategories extends HttpServlet {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	@Autowired
 	private QuoteDao quoteDao;
+
+	@Autowired
 	private CategoryDao categoryDao;
-	private DaoProvider daoProvider;
 
 	public void init() throws ServletException {
 
-		daoProvider = new DaoProvider(MyDataSource.ORACLE);
-		daoProvider.open();
-
-		quoteDao = daoProvider.getQuoteDao();
-		categoryDao = daoProvider.getCategoryDao();
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
 
 	}
 

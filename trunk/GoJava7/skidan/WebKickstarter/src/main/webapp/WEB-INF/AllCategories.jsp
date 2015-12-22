@@ -19,10 +19,10 @@
 
 	<div id=3>
 		<%=quote.getQuoteText()%><br>
-		<%=quote.getAuthor()%><br>
+		<%=quote.getAuthor()%><br><br><br>
 
 		<c:forEach items="${categoryList}" var="category">
-			<b><a href=http://localhost:8080/WebKickstarter/SelectedCategoryProjectsServlet?categoryTitle=${category.getTitle()}><c:out
+			<b><a href=SelectedCategoryProjectsServlet?categoryTitle=${category.getTitle()}><c:out
 					value="${category.getTitle()}" /></a></b>
 
 		</c:forEach>

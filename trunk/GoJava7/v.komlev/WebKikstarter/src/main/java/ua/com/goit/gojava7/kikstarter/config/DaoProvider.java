@@ -8,14 +8,15 @@ import java.sql.SQLException;
 import ua.com.goit.gojava7.kikstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kikstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kikstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kikstarter.dao.database.CategoryDaoDb;
-import ua.com.goit.gojava7.kikstarter.dao.database.ProjectDaoDb;
-import ua.com.goit.gojava7.kikstarter.dao.database.QuoteDaoDb;
+import ua.com.goit.gojava7.kikstarter.dao.database.CategoryDaoDbImpl;
+import ua.com.goit.gojava7.kikstarter.dao.database.ProjectDaoDbImpl;
+import ua.com.goit.gojava7.kikstarter.dao.database.QuoteDaoDbImpl;
 
 public class DaoProvider {
 
 	private MyDataSource myDataSource;
-	private Connection connection = null;
+	private Connection connection;
+	private ConnectionPoolSource connectionPoolSource;
 
 	public DaoProvider(MyDataSource myDataSource) {
 		this.myDataSource = myDataSource;
@@ -26,7 +27,7 @@ public class DaoProvider {
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 
-				connection = MysqlProvider.getInstance().getConnection();
+				connection = ConnectionPoolSource.getInstance().getConnection();
 			} catch (SQLException e) {
 				throw new IllegalStateException("Cannot open connection. " + e.getMessage(), e);
 			} catch (ClassNotFoundException e) {
@@ -56,8 +57,8 @@ public class DaoProvider {
 	public QuoteDao getQuoteDao() {
 		QuoteDao quoteDao;
 		if (myDataSource == MyDataSource.ORACLE) {
-			QuoteDaoDb quoteDaoDb = new QuoteDaoDb(connection);
-			quoteDao = quoteDaoDb;
+			QuoteDaoDbImpl quoteDaoDbImpl = new QuoteDaoDbImpl(connectionPoolSource);
+			quoteDao = quoteDaoDbImpl;
 		} else {
 			throw new IllegalArgumentException("Unknown data source " + myDataSource);
 		}
@@ -68,8 +69,8 @@ public class DaoProvider {
 	public CategoryDao getCategoryDao() {
 		CategoryDao categoryDao;
 		if (myDataSource == MyDataSource.ORACLE) {
-			CategoryDaoDb categoryDaoDb = new CategoryDaoDb(connection);
-			categoryDao = categoryDaoDb;
+			CategoryDaoDbImpl categoryDaoDbImpl = new CategoryDaoDbImpl(connectionPoolSource);
+			categoryDao = categoryDaoDbImpl;
 		} else {
 			throw new IllegalArgumentException("Unknown data source " + myDataSource);
 		}
@@ -80,8 +81,8 @@ public class DaoProvider {
 	public ProjectDao getProjectDao() {
 		ProjectDao projectDao;
 		if (myDataSource == MyDataSource.ORACLE) {
-			ProjectDaoDb projectDaoDb = new ProjectDaoDb(connection);
-			projectDao = projectDaoDb;
+			ProjectDaoDbImpl projectDaoDbImpl = new ProjectDaoDbImpl(connectionPoolSource);
+			projectDao = projectDaoDbImpl;
 		} else {
 			throw new IllegalArgumentException("Unknown data source " + myDataSource);
 		}

@@ -1,13 +1,14 @@
 package com.kickstarter.dao.interfaces;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.dbcp2.BasicDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.kickstarter.model.Project;
@@ -15,106 +16,56 @@ import com.kickstarter.model.Project;
 @Repository
 public class DbProjectDaoImpl implements ProjectDaoInterface {
 
+	private static final Logger log = LoggerFactory.getLogger(DbProjectDaoImpl.class);
+
 	@Autowired
-	private BasicDataSource dbCon;
+	private JdbcTemplate jdbcTemplate;
 
-	public BasicDataSource getDbCon() {
-		return dbCon;
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
 	}
 
-	public void setDbCon(BasicDataSource dbCon) {
-		this.dbCon = dbCon;
-	}
-
-	public List<Project> getAll(String categoryTitle) {
-		ResultSet rs = null;
-		List<Project> list = new ArrayList<>();
-
-		try (PreparedStatement pStatement = dbCon.getConnection().prepareStatement(
-				"select projectId,title,discription,daysLeft,requiredSum,gainedSum,projectHistory,videoLink,categoryTitle from projects where categoryTitle = ? ")) {
-			pStatement.setString(1, categoryTitle);
-			rs = pStatement.executeQuery();
-			while (rs.next()) {
-				Project project = fill(rs);
-				list.add(project);
-			}
-		} catch (SQLException e) {
-
-			System.out.println("Project getAll MySql connection problem");
-		}
-		return list;
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	public Project getOne(int projectNumber) {
-		ResultSet rs = null;
-		Project project = new Project();
-
-		try (PreparedStatement pStatement = dbCon.getConnection().prepareStatement(
-				"select projectId,title,discription,daysLeft,requiredSum,gainedSum,projectHistory,videoLink,categoryTitle from projects where projectId =  ? ")) {
-			pStatement.setInt(1, projectNumber);
-			rs = pStatement.executeQuery();
-			while (rs.next()) {
-				project = fill(rs);
-			}
-		} catch (SQLException e) {
-			System.out.println(" Project getOne MySql connection problem");
-		}
-		return project;
+		log.info("Project getOne started with arg :" + projectNumber);
+		String sql = "select projectId,title,discription,daysLeft,requiredSum,gainedSum,projectHistory,videoLink,categoryTitle from projects where projectId =  ?";
+		return jdbcTemplate.queryForObject(sql, new Object[] { projectNumber }, new ProjectMapper());
 	}
 
 	public void update(Project p) {
-
-		try (PreparedStatement pStatement = dbCon.getConnection().prepareStatement(
-				"update projects set discription = ? , daysLeft = ?, requiredSum = ?, gainedSum = ?, projectHistory = ?, videoLink = ? where projectId = ? ")) {
-			pStatement.setString(1, p.getDiscription());
-			pStatement.setInt(2, p.getDaysLeft());
-			pStatement.setInt(3, p.getRequiredSum());
-			pStatement.setInt(4, p.getGainedSum());
-			pStatement.setString(5, p.getProjectHistory());
-			pStatement.setString(6, p.getVideoLink());
-			pStatement.setInt(7, p.getId());
-
-			pStatement.executeUpdate();
-
-		} catch (SQLException e) {
-			System.out.println(" Project update MySql connection problem");
-		}
+		log.info("Project UPDATE started with project :" + p.getTitle());
+		String sql = "update projects set discription = ? , daysLeft = ?, requiredSum = ?, gainedSum = ?,"
+				+ " projectHistory = ?, videoLink = ? where projectId = ? ";
+		jdbcTemplate.update(sql, new Object[] { p.getDiscription(), p.getDaysLeft(), p.getRequiredSum(),
+				p.getGainedSum(), p.getProjectHistory(), p.getVideoLink(), p.getId() });
 	}
 
-	public List<Project> getAllList() {
-		ResultSet rs = null;
-		List<Project> list = new ArrayList<>();
-
-		try (PreparedStatement pStatement = dbCon.getConnection().prepareStatement(
-				"select projectId,title,discription,daysLeft,requiredSum,gainedSum,projectHistory,videoLink,categoryTitle from projects")) {
-
-			rs = pStatement.executeQuery();
-
-			while (rs.next()) {
-				Project project = fill(rs);
-				list.add(project);
-			}
-		} catch (SQLException e) {
-			System.out.println("Project getAllList MySql connection problem");
-		}
-		return list;
+	public List<Project> getAll(String categoryTitle) {
+		log.info("Project getAll started with arg :" + categoryTitle);
+		String sql = "select projectId,title,discription,daysLeft,requiredSum,gainedSum,projectHistory,videoLink,"
+				+ "categoryTitle from projects where categoryTitle = ?";
+		return jdbcTemplate.query(sql, new Object[] { categoryTitle }, new ProjectMapper());
 	}
 
-	public Project fill(ResultSet rs) throws SQLException {
+	public final class ProjectMapper implements RowMapper<Project> {
 
-		Project project = new Project();
+		public Project mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Project project = new Project();
+			project.setId(rs.getInt("projectId"));
+			project.setTitle(rs.getString("title"));
+			project.setDiscription(rs.getString("discription"));
+			project.setDaysLeft(rs.getInt("daysLeft"));
+			project.setRequiredSum(rs.getInt("requiredSum"));
+			project.setGainedSum(rs.getInt("gainedSum"));
+			project.setProjectHistory(rs.getString("projectHistory"));
+			project.setVideoLink(rs.getString("videoLink"));
+			project.setCategoryName(rs.getString("categoryTitle"));
+			return project;
 
-		project.setId(rs.getInt("projectId"));
-		project.setTitle(rs.getString("title"));
-		project.setDiscription(rs.getString("discription"));
-		project.setDaysLeft(rs.getInt("daysLeft"));
-		project.setRequiredSum(rs.getInt("requiredSum"));
-		project.setGainedSum(rs.getInt("gainedSum"));
-		project.setProjectHistory(rs.getString("projectHistory"));
-		project.setVideoLink(rs.getString("videoLink"));
-		project.setCategoryName(rs.getString("categoryTitle"));
-
-		return project;
+		}
 
 	}
 

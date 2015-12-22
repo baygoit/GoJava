@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import java.util.List;
 
-import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.models.Project;
 
 public class ProjectFileReader extends FileReader<Project> {
 

@@ -5,7 +5,7 @@ import java.util.Random;
 
 import ua.com.goit.gojava7.kickstarter.dao.MemoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kickstarter.domain.Quote;
+import ua.com.goit.gojava7.kickstarter.models.Quote;
 
 public class QuoteMemoryDao extends MemoryDao<Quote> implements QuoteDao {
 	private Random random;

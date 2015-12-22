@@ -6,22 +6,62 @@
 
     <servlet>
         <servlet-name>start</servlet-name>
-        <servlet-class>ua.com.goit.gojava7.kickstarter.StartServlet</servlet-class>
+        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.StartServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>start</servlet-name>
-        <url-pattern>/kickstarter</url-pattern>
+        <url-pattern>/start</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>start1</servlet-name>
+        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.StartServlet1</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>start1</servlet-name>
+        <url-pattern>/start1</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>category</servlet-name>
-        <servlet-class>ua.com.goit.gojava7.kickstarter.CategoryServlet</servlet-class>
+        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.CategoryServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>category</servlet-name>
         <url-pattern>/category</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>project</servlet-name>
+        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.ProjectServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>project</servlet-name>
+        <url-pattern>/project</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>donate</servlet-name>
+        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.DonateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>donate</servlet-name>
+        <url-pattern>/donate</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>question</servlet-name>
+        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.QuestionServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>question</servlet-name>
+        <url-pattern>/question</url-pattern>
     </servlet-mapping>
 
 </web-app>

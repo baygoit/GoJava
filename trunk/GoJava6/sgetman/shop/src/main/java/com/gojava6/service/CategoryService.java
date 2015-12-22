@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.sql.SQLDataException;
 import java.util.List;
 
 /**
@@ -42,5 +43,15 @@ public class CategoryService {
     @Transactional
     public Category update(short categoryId, Category category) {
         return categoryDao.update(categoryId, category);
+    }
+
+    @Transactional
+    public void delete(short categoryId) throws SQLDataException {
+        Category category = categoryDao.find(categoryId);
+        if (category == null) {
+            throw new SQLDataException();
+        } else {
+            categoryDao.delete(category);
+        }
     }
 }

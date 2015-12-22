@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.dao;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
