@@ -10,18 +10,18 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.powermock.modules.junit4.PowerMockRunner;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDbDao;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDbDao;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(SpringBeanAutowiringSupport.class)
 public class CategoriesServletTest {
 
 	@Mock
-	private QuoteDbDao quoteDao;
+	private QuoteDao quoteDao;
 	
 	@Mock
-	private CategoryDbDao categoryDao;
+	private CategoryDao categoryDao;
 	
 	@InjectMocks
 	private CategoriesServlet categoriesServlet;

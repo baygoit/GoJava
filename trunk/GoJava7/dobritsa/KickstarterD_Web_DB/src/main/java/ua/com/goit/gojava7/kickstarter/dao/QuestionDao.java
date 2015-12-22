@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @Component
-public class QuestionDbDao {
+public class QuestionDao {
 
 	@Autowired
 	private DbDao dbDao;
 
-	private static final Logger log = LoggerFactory.getLogger(QuestionDbDao.class);
+	private static final Logger log = LoggerFactory.getLogger(QuestionDao.class);
 
-	public QuestionDbDao() {
-		log.info("Constructor QuestionDbDao()...");
+	public QuestionDao() {
+		log.info("Constructor QuestionDao()...");
 	}
 
 	public void add(Question element) {

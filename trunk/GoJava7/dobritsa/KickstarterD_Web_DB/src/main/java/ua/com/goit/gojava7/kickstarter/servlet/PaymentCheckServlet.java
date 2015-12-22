@@ -13,9 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import ua.com.goit.gojava7.kickstarter.config.Validator;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDbDao;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDbDao;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.models.Payment;
 
 @WebServlet("/paymentCheck")
 public class PaymentCheckServlet extends HttpServlet {
@@ -24,10 +25,13 @@ public class PaymentCheckServlet extends HttpServlet {
 	private static final Logger log = LoggerFactory.getLogger(PaymentCheckServlet.class);	 
 	
 	@Autowired
-	private ProjectDbDao projectDao;
+	private ProjectDao projectDao;
 	
 	@Autowired
-	private CategoryDbDao categoryDao;
+	private CategoryDao categoryDao;
+	
+	@Autowired
+	private PaymentDao paymentDao;	
 
 	@Override
 	public void init() {
@@ -47,17 +51,23 @@ public class PaymentCheckServlet extends HttpServlet {
 		request.setAttribute("project", projectDao.get(projectId));
 		request.setAttribute("amount", amount);
 		
-		if (Validator.validateName(request.getParameter("name")) & Validator.validateCard(request.getParameter("card"))) {
-			String name = request.getParameter("name");
-			String card = request.getParameter("card");
-
-			int pledgedOld = projectDao.get(projectId).getPledged();
-			projectDao.updatePledged(projectDao.get(projectId), amount);
-			int pledgedNew = projectDao.get(projectId).getPledged();			
+		if (true) {
+				//Validator.validateName(request.getParameter("name")) & Validator.validateCard(request.getParameter("card"))) {
 			
-			request.setAttribute("name", name);		
-			request.setAttribute("pledgedOld", pledgedOld);
-			request.setAttribute("pledgedNew", pledgedNew);	
+			Payment payment = new Payment();
+			payment.setUser(request.getParameter("name"));
+			payment.setCard(request.getParameter("card"));
+			payment.setAmount(amount);
+			payment.setProjectId(projectId);
+			paymentDao.add(payment);
+			
+		//	String name = request.getParameter("name");
+		//	String card = request.getParameter("card");
+
+		//	int pledgedOld = projectDao.get(projectId).getPledged();
+		//	projectDao.updatePledged(projectDao.get(projectId), amount);
+		//	int pledgedNew = projectDao.get(projectId).getPledged();			
+						
 			request.getRequestDispatcher("/WEB-INF/jsp/paymentOk.jsp").forward(request, response);
 
 		} else {			
@@ -65,6 +75,4 @@ public class PaymentCheckServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);		
 		}		
 	}
-	
-	//TODO check, controler, annotations, string in init
 }

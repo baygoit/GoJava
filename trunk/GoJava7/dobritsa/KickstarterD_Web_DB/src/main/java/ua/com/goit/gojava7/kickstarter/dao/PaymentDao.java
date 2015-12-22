@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 import ua.com.goit.gojava7.kickstarter.models.Payment;
 
 @Component
-public class PaymentDbDao {
+public class PaymentDao {
 
 	@Autowired
 	private DbDao dbDao;
 
-	private static final Logger log = LoggerFactory.getLogger(QuestionDbDao.class);
+	private static final Logger log = LoggerFactory.getLogger(PaymentDao.class);
 
-	public PaymentDbDao() {
+	public PaymentDao() {
 	}
 
 	public void add(Payment element) {

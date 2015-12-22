@@ -8,15 +8,15 @@ import org.springframework.stereotype.Component;
 import ua.com.goit.gojava7.kickstarter.models.Quote;
 
 @Component
-public class QuoteDbDao {
+public class QuoteDao {
 
 	@Autowired
 	private DbDao dbDao;
 
-	private static final Logger log = LoggerFactory.getLogger(QuoteDbDao.class);
+	private static final Logger log = LoggerFactory.getLogger(QuoteDao.class);
 
-	public QuoteDbDao() {
-		log.info("Constructor QuoteDbDao()...");
+	public QuoteDao() {
+		log.info("Constructor QuoteDao()...");
 	}
 
 	public Quote getRandomQuote() {

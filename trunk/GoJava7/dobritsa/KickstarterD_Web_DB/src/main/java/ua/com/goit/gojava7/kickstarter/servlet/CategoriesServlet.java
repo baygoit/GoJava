@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDbDao;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDbDao;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 
 @WebServlet("/")
 public class CategoriesServlet extends HttpServlet {
@@ -25,11 +25,11 @@ public class CategoriesServlet extends HttpServlet {
 	private static final Logger log = LoggerFactory.getLogger(CategoriesServlet.class);	 
 	
 	@Autowired
-	private QuoteDbDao quoteDao;
+	private QuoteDao quoteDao;
 	
 	@Autowired
-	private CategoryDbDao categoryDao;	
-	
+	private CategoryDao categoryDao;	
+		
 	protected WebApplicationContext applicationContext;
 
 	@Override

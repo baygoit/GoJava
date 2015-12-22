@@ -10,35 +10,35 @@ import org.springframework.stereotype.Component;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @Component
-public class ProjectDbDao {
+public class ProjectDao {
 	
 	@Autowired
-	private DbDao dbManager;
+	private DbDao dbDao;
 	
-	private static final Logger log = LoggerFactory.getLogger(ProjectDbDao.class);	 
+	private static final Logger log = LoggerFactory.getLogger(ProjectDao.class);	 
 
-	public ProjectDbDao() {	
-		log.info("Constructor ProjectDbDao()...");			
+	public ProjectDao() {	
+		log.info("Constructor ProjectDao()...");			
 	}
 
 	public void updatePledged(Project project, int amount) {
 		log.info("<void> updatePledged({}, {})...", project, amount);		
 		String query = "update project set pledged = pledged + " + amount + " WHERE name = '"
 				+ prepareStringForDb(project.getName()) + "'";		
-		dbManager.updatePledged(project, query);
+		dbDao.updatePledged(project, query);
 		project.updatePledged(amount);
 	}
 
 	public List<Project> getByCategory(int categoryId) {			
 		log.info("<Project> getByCategory({})...", categoryId);	
 		String query = "select  id, name, description, goal, pledged, daysToGo, history, link, category_id from project where category_id = " + categoryId;
-		return dbManager.getProjects(query);
+		return dbDao.getProjects(query);
 	}	
 	
 	public Project get(int index) {				
 		log.info("<Project> get({})...", index);
 		String query = "select id, name, description, goal, pledged, daysToGo, history, link, category_id from project where id = " + index;
-		return dbManager.getProject(query);
+		return dbDao.getProject(query);
 	}	
 
 	private String prepareStringForDb(String original) {
