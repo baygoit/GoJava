@@ -27,40 +27,26 @@ public class LoggingAspect {
 	@Before("within( ua.com.goit.gojava7.kickstarter.dao.DbAgent)")
 	public void findQueryFromDbAgentClass(JoinPoint joinPoint) throws SQLException {
 		Object[] signatureArgs = joinPoint.getArgs();
-		log.trace("-----findQueryFromDbAgentClass()...");
+		log.trace("findQueryFromDbAgentClass()...");
 
 		for (Object signatureArg : signatureArgs) {
 			if (signatureArg instanceof DelegatingResultSet) {
 				String queryRaw = ((DelegatingResultSet) signatureArg).getStatement().toString();
 				String queryReady = queryRaw.substring(queryRaw.lastIndexOf(": ") + 2).toLowerCase();
-				log.trace("-----findQueryFromDbAgentClass found query:" + queryReady);
+				log.trace("findQueryFromDbAgentClass found query:" + queryReady);
 				writeQueryToDb(queryReady);
 
 			} else if (signatureArg instanceof PreparedStatement) {
 				String queryRaw = ((PreparedStatement) signatureArg).toString();
 				String queryReady = queryRaw.substring(queryRaw.lastIndexOf(": ") + 2).toLowerCase();
-				log.trace("-----findQueryFromDbAgentClass found query:" + queryReady);
+				log.trace("findQueryFromDbAgentClass found query:" + queryReady);
 				writeQueryToDb(queryReady);
-				
+
 			} else {
 				log.warn("-----findQueryFromDbAgentClass found Unknown data from :" + signatureArg.getClass());
 			}
 		}
-	}
-
-	@Before("within( ua.com.goit.gojava7.kickstarter.dao.DbDao)")
-	public void findQueryFromDbDaClass(JoinPoint joinPoint) {
-		Object[] signatureArgs = joinPoint.getArgs();
-		log.trace("-----findQueryFromDbDaClass()...");
-
-		for (Object signatureArg : signatureArgs) {
-			if (signatureArg instanceof String) {
-				String query = signatureArg.toString().toLowerCase();
-				log.trace("-----findQueryFromDbDaClass found query:" + query);
-				writeQueryToDb(query);
-			}
-		}
-	}
+	}	
 
 	public void writeQueryToDb(String text) {
 		String query = "insert ignore into query (text) VALUES (\"" + text + "\")";
@@ -74,22 +60,36 @@ public class LoggingAspect {
 	}
 
 	@Pointcut("within( ua.com.goit.gojava7.kickstarter.dao..*)")
-	private void timePoint0() {
+	private void forCalculateTime() {
 	}
 
-	@Around("timePoint0()")
-	public Object time0(ProceedingJoinPoint pjp) throws Throwable {
+	@Around("forCalculateTime()")
+	public Object calculateTime(ProceedingJoinPoint pjp) throws Throwable {
 		String methodName = pjp.getSignature().getName();
 		String className = pjp.getSignature().getDeclaringType().getSimpleName();
 		long start = System.currentTimeMillis();
 		log.trace("-----{}.{}() is going to be called-----", className, methodName);
 
 		Object output = pjp.proceed();
-		log.trace("{}.{}() execution completed", className, methodName);
+		log.trace("-----{}.{}() execution completed-----", className, methodName);
 
 		long elapsedTime = System.currentTimeMillis() - start;
 		log.trace("{}.{}() execution time: {} milliseconds", className, methodName, elapsedTime);
 		return output;
 	}
 
+	/*@Before("within( ua.com.goit.gojava7.kickstarter.dao.DbDao)")
+	public void findQueryFromDbDaClass(JoinPoint joinPoint) {
+		Object[] signatureArgs = joinPoint.getArgs();
+		log.trace("-----findQueryFromDbDaClass()...");
+
+		for (Object signatureArg : signatureArgs) {
+			if (signatureArg instanceof String) {
+				String query = signatureArg.toString().toLowerCase();
+				log.trace("-----findQueryFromDbDaClass found query:" + query);
+				writeQueryToDb(query);
+			}
+		}
+	}*/
+	
 }

@@ -11,7 +11,7 @@ import ua.com.goit.gojava7.kickstarter.models.Quote;
 public class QuoteDbDao {
 
 	@Autowired
-	private DbDao dbManager;
+	private DbDao dbDao;
 
 	private static final Logger log = LoggerFactory.getLogger(QuoteDbDao.class);
 
@@ -22,17 +22,12 @@ public class QuoteDbDao {
 	public Quote getRandomQuote() {
 		log.info("<Quote> getRandomQuote()...");
 		String query = "SELECT text, author FROM quote order by rand() limit 1 ";
-		return dbManager.getQuote(query);
-	}
-
-	public Quote getByNumber(int number) {
-		log.info("<Quote> getByNumber({})...", number);
-		return get(number);
-	}
+		return dbDao.getQuote(query);
+	}	
 
 	public Quote get(int index) {
 		log.info("<Quote> get({})...", index);
 		String query = "select text, author from quote where id = " + index;
-		return dbManager.getQuote(query);
+		return dbDao.getQuote(query);
 	}
 }
