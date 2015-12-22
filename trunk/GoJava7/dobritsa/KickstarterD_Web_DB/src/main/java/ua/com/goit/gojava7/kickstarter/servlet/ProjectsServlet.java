@@ -48,7 +48,7 @@ public class ProjectsServlet extends HttpServlet {
 
 		List<Project> projects = projectDao.getByCategory(categoryId);
 		for (Project project : projects) {
-			project.setPledged(paymentDao.getSumPaymentsByProject(project.getId()));
+			project.setPledged(paymentDao.calculatePledgedForProject(project.getId()));
 		}
 
 		request.setAttribute("categoryName", categoryDao.get(categoryId).getName());

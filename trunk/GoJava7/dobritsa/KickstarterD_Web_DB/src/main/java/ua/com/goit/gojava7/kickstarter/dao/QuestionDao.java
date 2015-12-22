@@ -43,12 +43,12 @@ public class QuestionDao {
 
 	public final class QuestionMapper implements RowMapper<Question> {
 		public Question mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-			log.info("<Question> readQuestion()...");
+			log.info("QuestionMapper()...");
 			Question question = new Question();
 			question.setTime(resultSet.getString("time"));
 			question.setQuestion(resultSet.getString("question"));
 			question.setAnswer(resultSet.getString("answer"));
-			log.debug("readQuestion() returned question: {}", question);
+			log.debug("QuestionMapper() returned question: {}", question);
 			return question;
 		}
 	}

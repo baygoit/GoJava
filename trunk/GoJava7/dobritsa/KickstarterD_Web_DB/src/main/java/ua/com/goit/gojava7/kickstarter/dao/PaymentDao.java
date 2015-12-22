@@ -37,24 +37,25 @@ public class PaymentDao {
 
 	public List<Payment> getByProject(int projectId) {
 		log.info("<Payment> getByProject({})...", projectId);
-		String query = "select user, card, amount, project_id from payment where project_id = " + projectId;
+		String query = "select user, card, amount, project_id from payment where project_id = ?";
 		return jdbcTemplate.query(query, new Object[] { projectId }, new PaymentMapper());
 	}	
 
-	public Integer getSumPaymentsByProject(int projectId) {
-		log.info("<int> getSumPaymentsByProject({})...", projectId);
+	public Integer calculatePledgedForProject(int projectId) {
+		log.info("<int> calculatePledgedForProject({})...", projectId);
 		String query = "select sum(amount) as sum from payment where project_id = ?";
 		return jdbcTemplate.queryForObject(query, new Object[] { projectId },  Integer.class);
 	}
 
 	public final class PaymentMapper implements RowMapper<Payment> {
 		public Payment mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-			log.info("<Payment> readQuestion()...");
+			log.info("PaymentMapper()...");
 			Payment payment = new Payment();
 			payment.setUser(resultSet.getString("user"));
 			payment.setCard(resultSet.getString("card"));
 			payment.setAmount(resultSet.getInt("amount"));
-			log.debug("readPayment() returned payment: {}", payment);
+			payment.setProjectId(resultSet.getInt("project_id"));
+			log.debug("PaymentMapper() returned payment: {}", payment);
 			return payment;
 		}
 	}
