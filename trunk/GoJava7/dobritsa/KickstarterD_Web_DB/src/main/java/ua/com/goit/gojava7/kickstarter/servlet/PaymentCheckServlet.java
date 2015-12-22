@@ -16,6 +16,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.dao.Validator;
 import ua.com.goit.gojava7.kickstarter.models.Payment;
 
 @WebServlet("/paymentCheck")
@@ -32,6 +33,9 @@ public class PaymentCheckServlet extends HttpServlet {
 	
 	@Autowired
 	private PaymentDao paymentDao;	
+	
+	@Autowired
+	private Validator validator;
 
 	@Override
 	public void init() {
@@ -51,23 +55,13 @@ public class PaymentCheckServlet extends HttpServlet {
 		request.setAttribute("project", projectDao.get(projectId));
 		request.setAttribute("amount", amount);
 		
-		if (true) {
-				//Validator.validateName(request.getParameter("name")) & Validator.validateCard(request.getParameter("card"))) {
-			
+		if (validator.validatePayment(request.getParameter("name"), request.getParameter("card"))) {			
 			Payment payment = new Payment();
 			payment.setUser(request.getParameter("name"));
 			payment.setCard(request.getParameter("card"));
 			payment.setAmount(amount);
 			payment.setProjectId(projectId);
-			paymentDao.add(payment);
-			
-		//	String name = request.getParameter("name");
-		//	String card = request.getParameter("card");
-
-		//	int pledgedOld = projectDao.get(projectId).getPledged();
-		//	projectDao.updatePledged(projectDao.get(projectId), amount);
-		//	int pledgedNew = projectDao.get(projectId).getPledged();			
-						
+			paymentDao.add(payment);	
 			request.getRequestDispatcher("/WEB-INF/jsp/paymentOk.jsp").forward(request, response);
 
 		} else {			
