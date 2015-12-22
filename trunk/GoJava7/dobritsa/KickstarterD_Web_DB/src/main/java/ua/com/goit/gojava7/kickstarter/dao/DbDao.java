@@ -152,7 +152,7 @@ public class DbDao {
 		log.info("<void> addQuestion({}, {})...", element, query);
 		try (Connection connection = basicDataSource.getConnection();
 				PreparedStatement ps = connection.prepareStatement(query)) {
-			dbAgent.writeElement(element, ps);
+			dbAgent.writeQuestion(element, ps);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -179,7 +179,7 @@ public class DbDao {
 		log.info("<void> addPayment({}, {})...", element, query);
 		try (Connection connection = basicDataSource.getConnection();
 				PreparedStatement ps = connection.prepareStatement(query)) {
-			dbAgent.writeElement(element, ps);
+			dbAgent.writePayment(element, ps);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -200,6 +200,20 @@ public class DbDao {
 		}
 		log.debug("getPaymentsByProject() returned payments: {}", data);
 		return data;
+	}
+
+	public int getSumPaymentsByProject(String query) {
+		log.info("<int> getSumPaymentsByProject({})...", query);		
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query);
+				ResultSet resultSet = ps.executeQuery()) {
+			if (resultSet.next()) {
+				return dbAgent.readSumPaymentsByProject(resultSet);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;	
 	}
 
 	

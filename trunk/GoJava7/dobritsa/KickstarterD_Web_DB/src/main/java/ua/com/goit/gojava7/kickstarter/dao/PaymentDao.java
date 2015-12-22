@@ -31,4 +31,11 @@ public class PaymentDao {
 		String query = "select user, card, amount, project_id from payment where project_id = " + projectId;
 		return dbDao.getPaymentsByProject(query);
 	}
+	
+	public int getSumPaymentsByProject(int projectId) {
+		log.info("<int> getSumPaymentsByProject({})...", projectId);
+		String query = "select sum(amount) as sum from payment where project_id = " + projectId;
+		return dbDao.getSumPaymentsByProject(query);
+	}
+	
 }

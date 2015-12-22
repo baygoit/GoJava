@@ -20,18 +20,11 @@ public class ProjectDao {
 	public ProjectDao() {	
 		log.info("Constructor ProjectDao()...");			
 	}
-
-	public void updatePledged(Project project, int amount) {
-		log.info("<void> updatePledged({}, {})...", project, amount);		
-		String query = "update project set pledged = pledged + " + amount + " WHERE name = '"
-				+ prepareStringForDb(project.getName()) + "'";		
-		dbDao.updatePledged(project, query);
-		project.updatePledged(amount);
-	}
-
+	
 	public List<Project> getByCategory(int categoryId) {			
 		log.info("<Project> getByCategory({})...", categoryId);	
 		String query = "select  id, name, description, goal, pledged, daysToGo, history, link, category_id from project where category_id = " + categoryId;
+		
 		return dbDao.getProjects(query);
 	}	
 	

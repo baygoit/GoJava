@@ -49,7 +49,6 @@ public class DbAgent {
 		project.setName(resultSet.getString("name"));
 		project.setDescription(resultSet.getString("description"));
 		project.setGoal(resultSet.getInt("goal"));
-		project.setPledged(resultSet.getInt("pledged"));
 		project.setDaysToGo(resultSet.getInt("daysToGo"));
 		project.setHistory(resultSet.getString("history"));
 		project.setLink(resultSet.getString("link"));
@@ -79,7 +78,7 @@ public class DbAgent {
 		return question;
 	}
 	
-	public void writeElement(Question question, PreparedStatement statement) throws SQLException {
+	public void writeQuestion(Question question, PreparedStatement statement) throws SQLException {
 		log.info("<void> writeElement({})...", question);
 		statement.setString(1, question.getTime());
 		statement.setString(2, question.getQuestion());
@@ -97,11 +96,16 @@ public class DbAgent {
 		return payment;
 	}
 
-	public void writeElement(Payment payment, PreparedStatement statement) throws SQLException {
+	public void writePayment(Payment payment, PreparedStatement statement) throws SQLException {
 		log.info("<void> writeElement({})...", payment);
 		statement.setString(1, payment.getUser());
 		statement.setString(2, payment.getCard());
 		statement.setInt(3, payment.getAmount());
 		statement.setInt(4, payment.getProjectId());		
+	}
+
+	public int readSumPaymentsByProject(ResultSet resultSet) throws SQLException {
+		log.info("<int> readSumPaymentsByProject({})...");
+		return resultSet.getInt("sum");
 	}
 }
