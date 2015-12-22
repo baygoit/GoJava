@@ -13,7 +13,7 @@ import ua.com.goit.gojava7.kickstarter.models.Question;
 public class QuestionDbDao {
 
 	@Autowired
-	private DbDao dbManager;
+	private DbDao dbDao;
 
 	private static final Logger log = LoggerFactory.getLogger(QuestionDbDao.class);
 
@@ -24,12 +24,12 @@ public class QuestionDbDao {
 	public void add(Question element) {
 		log.info("<void> add({})...", element);
 		String query = "insert into question (time, question, answer, project_id) values (?, ?, ?, ?)";		
-		dbManager.addQuestion(element, query);
+		dbDao.addQuestion(element, query);
 	}
 
 	public List<Question> getByProject(int projectId) {
 		log.info("<Question> getByProject({})...", projectId);
 		String query = "select time, question, answer, project_id from question where project_id = " + projectId;		
-		return dbManager.getQuestionsByProject(query);
+		return dbDao.getQuestionsByProject(query);
 	}
 }

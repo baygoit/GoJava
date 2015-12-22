@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.models.Category;
+import ua.com.goit.gojava7.kickstarter.models.Payment;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 import ua.com.goit.gojava7.kickstarter.models.Quote;
@@ -85,5 +86,22 @@ public class DbAgent {
 		statement.setString(3, question.getAnswer());
 		statement.setInt(4, question.getProjectId());
 	}
+	
+	public Payment readPayment(ResultSet resultSet) throws SQLException {
+		log.info("<Payment> readQuestion()...");
+		Payment payment = new Payment();
+		payment.setUser(resultSet.getString("user"));
+		payment.setCard(resultSet.getString("card"));
+		payment.setAmount(resultSet.getInt("amount"));
+		log.debug("readPayment() returned payment: {}", payment);
+		return payment;
+	}
 
+	public void writeElement(Payment payment, PreparedStatement statement) throws SQLException {
+		log.info("<void> writeElement({})...", payment);
+		statement.setString(1, payment.getUser());
+		statement.setString(2, payment.getCard());
+		statement.setInt(3, payment.getAmount());
+		statement.setInt(4, payment.getProjectId());		
+	}
 }

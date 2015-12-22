@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.models.Category;
+import ua.com.goit.gojava7.kickstarter.models.Payment;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 import ua.com.goit.gojava7.kickstarter.models.Quote;
@@ -171,6 +172,33 @@ public class DbDao {
 			e.printStackTrace();
 		}
 		log.debug("getQuestionsByProject() returned questions: {}", data);
+		return data;
+	}
+
+	public void addPayment(Payment element, String query) {
+		log.info("<void> addPayment({}, {})...", element, query);
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query)) {
+			dbAgent.writeElement(element, ps);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Payment> getPaymentsByProject(String query) {
+		log.info("<payments> getPaymentsByProject({})...", query);
+		List<Payment> data = new ArrayList<>();
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query);
+				ResultSet resultSet = ps.executeQuery()) {
+			while (resultSet.next()) {
+				data.add(dbAgent.readPayment(resultSet));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		log.debug("getPaymentsByProject() returned payments: {}", data);
 		return data;
 	}
 
