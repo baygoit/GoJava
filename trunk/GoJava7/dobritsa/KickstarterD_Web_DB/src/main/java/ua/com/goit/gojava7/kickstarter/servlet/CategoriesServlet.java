@@ -49,7 +49,9 @@ public class CategoriesServlet extends HttpServlet {
 		
 		request.setAttribute("quote", quoteDao.get(1));		
 		request.setAttribute("categories", categoryDao.getAll());
-		request.setAttribute("projects", projectDao.getTop5ProjectsByPledged());
+		
+		//TODO fix projectDao.get(1) to top5
+	//	request.setAttribute("projects", projectDao.get(1));
 		request.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);			
 	}
 }
