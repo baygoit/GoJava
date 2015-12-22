@@ -1,15 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.apache.logging.log4j.Level;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
