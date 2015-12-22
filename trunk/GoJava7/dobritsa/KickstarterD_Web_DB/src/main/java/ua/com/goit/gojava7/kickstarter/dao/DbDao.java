@@ -39,7 +39,7 @@ public class DbDao {
 		try (Connection connection = basicDataSource.getConnection();
 				PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
-			if (resultSet.next()) {				
+			if (resultSet.next()) {
 				return dbAgent.readQuote(resultSet);
 			}
 		} catch (SQLException e) {
@@ -108,6 +108,20 @@ public class DbDao {
 		return null;
 	}
 
+	public String getProjectName(String query) {
+		log.info("<String> getProjectName({})...", query);
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query);
+				ResultSet resultSet = ps.executeQuery()) {
+			if (resultSet.next()) {
+				return resultSet.getString("name");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public void updatePledged(Project project, String query) {
 		log.info("<void> updatePledged({}, {})...", project, query);
 		try (Connection connection = basicDataSource.getConnection();
@@ -146,7 +160,7 @@ public class DbDao {
 			e.printStackTrace();
 		}
 		return null;
-	}	
+	}
 
 	public void addQuestion(Question element, String query) {
 		log.info("<void> addQuestion({}, {})...", element, query);
@@ -157,7 +171,7 @@ public class DbDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}	
+	}
 
 	public List<Question> getQuestionsByProject(String query) {
 		log.info("<questions> getQuestionsByProject({})...", query);
@@ -203,7 +217,7 @@ public class DbDao {
 	}
 
 	public int getSumPaymentsByProject(String query) {
-		log.info("<int> getSumPaymentsByProject({})...", query);		
+		log.info("<int> getSumPaymentsByProject({})...", query);
 		try (Connection connection = basicDataSource.getConnection();
 				PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet resultSet = ps.executeQuery()) {
@@ -213,8 +227,26 @@ public class DbDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return 0;	
+		return 0;
 	}
 
-	
+	public List<Project> getTop5ProjectsByPledged(String query) {
+		log.info("<payments> getTop5ProjectsByPledged({})...", query);
+		List<Project> data = new ArrayList<>();
+		try (Connection connection = basicDataSource.getConnection();
+				PreparedStatement ps = connection.prepareStatement(query);
+				ResultSet resultSet = ps.executeQuery()) {
+			while (resultSet.next()) {
+				Project project = new Project();
+				project.setId(resultSet.getInt("projectId"));
+				project.setPledged(resultSet.getInt("sum"));
+				log.debug("readProject() returned project: {}", project);
+				data.add(project);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		log.debug("getTop5ProjectsByPledged() returned payments: {}", data);
+		return data;
+	}
 }

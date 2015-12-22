@@ -16,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 
 @WebServlet("/")
@@ -27,6 +28,8 @@ public class CategoriesServlet extends HttpServlet {
 	@Autowired
 	private QuoteDao quoteDao;
 	
+	@Autowired
+	private ProjectDao projectDao;	
 	@Autowired
 	private CategoryDao categoryDao;	
 		
@@ -43,8 +46,10 @@ public class CategoriesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {		
 		log.info("doGet()...");		
+		
 		request.setAttribute("quote", quoteDao.get(1));		
 		request.setAttribute("categories", categoryDao.getAll());
+		request.setAttribute("projects", projectDao.getTop5ProjectsByPledged());
 		request.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);			
 	}
 }

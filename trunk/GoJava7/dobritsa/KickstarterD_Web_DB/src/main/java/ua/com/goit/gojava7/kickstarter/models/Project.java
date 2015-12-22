@@ -85,6 +85,6 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "id: " + id + ", name: " + name + ", categoryId: " + categoryId;
+		return "id: " + id + ", name: " + name + ", pledged: " + pledged + ", categoryId: " + categoryId;
 	}
 }

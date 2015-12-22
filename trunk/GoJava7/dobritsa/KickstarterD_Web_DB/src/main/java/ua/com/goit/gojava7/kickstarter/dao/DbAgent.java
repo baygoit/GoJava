@@ -17,13 +17,13 @@ import ua.com.goit.gojava7.kickstarter.models.Reward;
 
 @Component
 public class DbAgent {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(DbAgent.class);
-	
+
 	public DbAgent() {
 		log.info("Constructor DbAgent()...");
 	}
-	
+
 	public Quote readQuote(ResultSet resultSet) throws SQLException {
 		log.info("<Quote> readQuote()...");
 		Quote quote = new Quote();
@@ -32,7 +32,7 @@ public class DbAgent {
 		log.debug("readQuote() returned quote: {}", quote);
 		return quote;
 	}
-	
+
 	public Category readCategory(ResultSet resultSet) throws SQLException {
 		log.info("<Category> readCategory()...");
 		Category category = new Category();
@@ -41,7 +41,7 @@ public class DbAgent {
 		log.debug("readCategory() returned category: {}", category);
 		return category;
 	}
-	
+
 	public Project readProject(ResultSet resultSet) throws SQLException {
 		log.info("<Project> readProject()...");
 		Project project = new Project();
@@ -56,7 +56,7 @@ public class DbAgent {
 		log.debug("readProject() returned project: {}", project);
 		return project;
 	}
-	
+
 	public Reward readReward(ResultSet resultSet) throws SQLException {
 		log.info("<Reward> readReward()...");
 		Reward reward = new Reward();
@@ -67,7 +67,7 @@ public class DbAgent {
 		log.debug("readReward() returned reward: {}", reward);
 		return reward;
 	}
-	
+
 	public Question readQuestion(ResultSet resultSet) throws SQLException {
 		log.info("<Question> readQuestion()...");
 		Question question = new Question();
@@ -77,7 +77,7 @@ public class DbAgent {
 		log.debug("readQuestion() returned question: {}", question);
 		return question;
 	}
-	
+
 	public void writeQuestion(Question question, PreparedStatement statement) throws SQLException {
 		log.info("<void> writeElement({})...", question);
 		statement.setString(1, question.getTime());
@@ -85,7 +85,7 @@ public class DbAgent {
 		statement.setString(3, question.getAnswer());
 		statement.setInt(4, question.getProjectId());
 	}
-	
+
 	public Payment readPayment(ResultSet resultSet) throws SQLException {
 		log.info("<Payment> readQuestion()...");
 		Payment payment = new Payment();
@@ -101,7 +101,7 @@ public class DbAgent {
 		statement.setString(1, payment.getUser());
 		statement.setString(2, payment.getCard());
 		statement.setInt(3, payment.getAmount());
-		statement.setInt(4, payment.getProjectId());		
+		statement.setInt(4, payment.getProjectId());
 	}
 
 	public int readSumPaymentsByProject(ResultSet resultSet) throws SQLException {
