@@ -31,10 +31,10 @@ public class PaymentController extends HttpServlet {
 		Long cardNumber = Long.parseLong(request.getParameter("inputCardNumber"));
 		int amount = Integer.parseInt(request.getParameter("inlineRadioOptions"));
 		
-		if (name != null && !name.isEmpty() && cardNumber != null && amount == 0) {
-			amount = Integer.parseInt(request.getParameter("amount"));
-		}
-		if (name != null && !name.isEmpty() && cardNumber != null && amount > 0) {
+//		if (name != null && !name.isEmpty() && cardNumber != null && amount == 0) {
+//			amount = Integer.parseInt(request.getParameter("amount"));
+//		}
+//		if (name != null && !name.isEmpty() && cardNumber != null && amount > 0) {
 			Payment payment = new Payment();
 			payment.setIdParentProject(projectId);
 			payment.setCardOwner(name);
@@ -43,7 +43,7 @@ public class PaymentController extends HttpServlet {
 			paymentStorage.add(payment);
 			response.sendRedirect("./project?id=" + projectId);
 			
-		}
+//		}
 		System.out.println(name);
 		System.out.println(cardNumber);
 		System.out.println(amount);	}

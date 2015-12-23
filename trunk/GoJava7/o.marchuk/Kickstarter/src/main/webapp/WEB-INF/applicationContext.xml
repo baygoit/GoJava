@@ -16,6 +16,8 @@
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util.xsd">
 
+	<import resource="applicationContext-aspects.xml"/>
+
 	<context:property-placeholder />
 	
 	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter">

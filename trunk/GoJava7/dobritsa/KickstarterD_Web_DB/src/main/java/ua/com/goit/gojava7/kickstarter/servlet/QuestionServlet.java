@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import ua.com.goit.gojava7.kickstarter.dao.QuestionDbDao;
+import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @WebServlet("/question")
@@ -24,8 +24,8 @@ public class QuestionServlet extends HttpServlet {
 	private static final Logger log = LoggerFactory.getLogger(QuestionServlet.class);	 
 	
 	@Autowired
-	private QuestionDbDao questionDao;
-
+	private QuestionDao questionDao;
+	
 	@Override
 	public void init() {
 		log.info("Starting spring autowiring...");

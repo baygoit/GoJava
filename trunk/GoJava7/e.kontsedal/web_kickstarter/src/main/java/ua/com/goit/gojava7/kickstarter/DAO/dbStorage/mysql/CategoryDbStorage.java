@@ -24,80 +24,31 @@ public class CategoryDbStorage extends AbstractCategoryStorage {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-//	@Autowired
-//	private BasicDataSource basicDataSource;
-	
 	@Override
 	public List<Category> getAll() {
 		return jdbcTemplate.query(SELECT_ALL_CATEGORIES, new Mapper());
-		
-//		jdbcTemplate.query(SELECT_ALL_CATEGORIES, (ResultSet arg0, int arg1)->{
-//			return null;
-//		});
-
-//		List<Category> categories = new ArrayList<>();
-//		try (Connection connection = basicDataSource.getConnection();
-//				Statement statement = connection.createStatement();
-//				ResultSet resultSet = statement.executeQuery(SELECT_ALL_CATEGORIES);) {
-//
-//			while (resultSet.next()) {
-//				Category category = new Category();
-//				category.setIdCategory(resultSet.getInt("id"));
-//				category.setCategoryName(resultSet.getString("name"));
-//				categories.add(category);
-//			}
-//		} catch (SQLException e) {
-//			System.err.println("DB reading problem");
-//		}
-//		return categories;
 	}
 
 	@Override
 	public void add(Category category) {
 		jdbcTemplate.batchUpdate(INSERT_CATEGORY, new StatementSetter(category));
-		
-//		try (Connection connection = basicDataSource.getConnection();
-//				PreparedStatement statement = connection.prepareStatement(INSERT_CATEGORY);) {
-//			statement.setString(1, category.getCategoryName());
-//			statement.executeUpdate();
-//			connection.commit();
-//		} catch (SQLException e) {
-//			System.err.println("DB writing problem");
-//		}
 	}
-//
-//	@Override
-//	public int getIdOfCategory(int numberOfCategory) {
-//		return getAll().get(numberOfCategory).getIdCategory();
-//	}
 
 	@Override
 	public Category getCategoryById(int idOfCategory) {
 		return jdbcTemplate.queryForObject(SELECT_CATEGORY + idOfCategory, new Mapper());
-//		Category category = null;
-//		try (Connection connection = basicDataSource.getConnection();
-//				Statement statement = connection.createStatement();
-//				ResultSet resultSet = statement.executeQuery(SELECT_CATEGORY + idOfCategory);) {
-//			category = new Category();
-//			while (resultSet.next()) {
-//				category.setIdCategory(resultSet.getString("id"));
-//				category.setCategoryName(resultSet.getString("name"));
-//			}
-//		} catch (SQLException e) {
-//			System.err.println("DB reading problem");
-//		}
-//		return category;
 	}
 	
 	public class Mapper implements RowMapper<Category> {
+		
 		@Override
 		public Category mapRow(ResultSet resultSet, int index) throws SQLException {
+			
 			Category category = new Category();
 			category.setIdCategory(resultSet.getInt("id"));
 			category.setCategoryName(resultSet.getString("name"));
 			return category;
 		}
-
 	}
 	
 	public class StatementSetter implements BatchPreparedStatementSetter {
