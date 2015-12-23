@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public class Validator {
 	
 	private static final Logger log = LoggerFactory.getLogger(Validator.class);	 

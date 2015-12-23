@@ -9,11 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.models.Reward;
 
-@Component
+@Repository
 public class RewardDao {
 
 	@Autowired
@@ -41,7 +41,7 @@ public class RewardDao {
 		return jdbcTemplate.queryForObject(query, new Object[] { index }, new RewardMapper());
 	}
 
-	public final class RewardMapper implements RowMapper<Reward> {
+	private final class RewardMapper implements RowMapper<Reward> {
 		public Reward mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 			log.info("RewardMapper()...");
 			Reward reward = new Reward();

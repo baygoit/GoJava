@@ -9,11 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.models.Question;
 
-@Component
+@Repository
 public class QuestionDao {
 
 	@Autowired
@@ -41,7 +41,7 @@ public class QuestionDao {
 		return jdbcTemplate.query(query, new Object[] { projectId }, new QuestionMapper());
 	}
 
-	public final class QuestionMapper implements RowMapper<Question> {
+	private final class QuestionMapper implements RowMapper<Question> {
 		public Question mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 			log.info("QuestionMapper()...");
 			Question question = new Question();

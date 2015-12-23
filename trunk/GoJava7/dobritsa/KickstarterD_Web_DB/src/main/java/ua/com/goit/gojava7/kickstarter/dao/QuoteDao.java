@@ -8,11 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.models.Quote;
 
-@Component
+@Repository
 public class QuoteDao {
 
 	@Autowired
@@ -40,7 +40,7 @@ public class QuoteDao {
 		return jdbcTemplate.queryForObject(query, new Object[] { index }, new QuoteMapper());
 	}
 
-	public final class QuoteMapper implements RowMapper<Quote> {
+	private final class QuoteMapper implements RowMapper<Quote> {
 		public Quote mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 			log.info("QuoteMapper()...");
 			Quote quote = new Quote();

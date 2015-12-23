@@ -9,11 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.models.Project;
 
-@Component
+@Repository
 public class ProjectDao {
 	
 	@Autowired
@@ -41,23 +41,7 @@ public class ProjectDao {
 		return jdbcTemplate.queryForObject(query, new Object[] { index }, new ProjectMapper());
 	}		
 	
-	//public List<Project> getTop5ProjectsByPledged() {				
-	//	log.info("<projects> getTop5ByPledged()...");		
-	//	String query = "select sum(amount) as sum, project_id as projectId from payment group by project_id order by sum desc limit 5";
-	//	List<Project> projects = dbDao.getTop5ProjectsByPledged(query);
-	//	
-	//	for(Project project : projects) {
-	//		project.setName(getName(project.getId()));			
-	//	}
-	//	return projects;				
-	//}		
-
-	//private String prepareStringForDb(String original) {
-	//	log.info("prepareStringForDb({original})...");	
-	//	return original.replace("'", "\\'");
-	//}		
-	
-	public final class ProjectMapper implements RowMapper<Project> {
+	private final class ProjectMapper implements RowMapper<Project> {
 		public Project mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 			log.info("ProjectMapper()...");
 			Project project = new Project();

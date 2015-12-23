@@ -1,40 +1,36 @@
 package ua.com.goit.gojava7.kickstarter.aspect;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-import org.apache.commons.dbcp2.BasicDataSource;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Aspect
 public class LoggingAspect {
 
 	@Autowired
-	protected BasicDataSource basicDataSource;
+	private JdbcTemplate jdbcTemplate;
 
 	private static final Logger log = LoggerFactory.getLogger(LoggingAspect.class);
 
-	public void writeQueryToDb(String text) {
-		String query = "insert ignore into query (text) VALUES (\"" + text + "\")";
-		log.trace("<void> writeQueryToDb({})...", query);
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(query)) {
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	@Pointcut("within( ua.com.goit.gojava7.kickstarter.dao..*)")
-	private void forCalculateTime() {
-	}
+	@Before("execution	(public * org.springframework.jdbc.core.JdbcTemplate.*(..)) and args(query,..)")
+	public void logUniqueQueriesToDb(JoinPoint jp, String query) throws Throwable {
+		if (!query.contains("insert ignore into query")) {
+			if(writeQueryToDb(query) == 1) {
+				log.trace("-----logUniqueQueriesToDb() created new record in DB: {}-----", query.toLowerCase());
+			}
+		}
+	}		
 
 	@Around("forCalculateTime()")
 	public Object calculateTime(ProceedingJoinPoint pjp) throws Throwable {
@@ -49,5 +45,14 @@ public class LoggingAspect {
 		long elapsedTime = System.currentTimeMillis() - start;
 		log.trace("{}.{}() execution time: {} milliseconds", className, methodName, elapsedTime);
 		return output;
+	}
+	
+	@Pointcut("@within(org.springframework.stereotype.Repository)")
+	private void forCalculateTime() {
+	}
+	
+	private int writeQueryToDb(String text) {
+		String query = "insert ignore into query (text) VALUES (?)";	
+		return jdbcTemplate.update(query, new Object[] { text });
 	}
 }

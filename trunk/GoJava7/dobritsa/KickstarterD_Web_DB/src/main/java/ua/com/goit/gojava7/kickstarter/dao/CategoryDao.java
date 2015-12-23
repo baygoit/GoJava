@@ -9,11 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.models.Category;
 
-@Component
+@Repository
 public class CategoryDao {
 
 	@Autowired
@@ -41,7 +41,7 @@ public class CategoryDao {
 		return jdbcTemplate.queryForObject(query, new Object[] { index }, new CategoryMapper());
 	}
 
-	public final class CategoryMapper implements RowMapper<Category> {
+	private final class CategoryMapper implements RowMapper<Category> {
 		public Category mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 			log.info("CategoryMapper()...");
 			Category category = new Category();

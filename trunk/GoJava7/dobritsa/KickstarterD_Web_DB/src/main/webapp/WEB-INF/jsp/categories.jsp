@@ -17,12 +17,10 @@
 	
 	<p>Top 5 projects by pledged:</p>
 
-<%--
 	<ul>
 		<c:forEach var="project" items="${requestScope.projects}">
 			<li>$${project.pledged} - <a href="project?id=${project.id}">${project.name}</a></li>			
 		</c:forEach>
 	</ul>	
---%>
 
 <jsp:include page="footer.jsp" />
