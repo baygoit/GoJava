@@ -41,7 +41,7 @@ public class PaymentDao {
 		return jdbcTemplate.query(query, new Object[] { projectId }, new PaymentMapper());
 	}
 
-	public Integer calculatePledgedForProject(int projectId) {
+	public Integer calculatePledgedForProject(Long projectId) {
 		log.info("<int> calculatePledgedForProject({})...", projectId);
 		String query = "select sum(amount) as sum from payment where project_id = ?";
 		return jdbcTemplate.queryForObject(query, new Object[] { projectId }, Integer.class);
@@ -60,7 +60,7 @@ public class PaymentDao {
 			payment.setUser(resultSet.getString("user"));
 			payment.setCard(resultSet.getString("card"));
 			payment.setAmount(resultSet.getInt("amount"));
-			payment.setProjectId(resultSet.getInt("project_id"));
+			payment.setProjectId((long) resultSet.getLong("project_id"));
 			log.debug("PaymentMapper() returned payment: {}", payment);
 			return payment;
 		}
@@ -71,7 +71,7 @@ public class PaymentDao {
 			log.info("PaymentMapper()...");
 			Payment payment = new Payment();
 			payment.setAmount(resultSet.getInt("amount"));
-			payment.setProjectId(resultSet.getInt("project_id"));
+			payment.setProjectId(resultSet.getLong("project_id"));
 			log.debug("PaymentMapper() returned payment: {}", payment);
 			return payment;
 		}

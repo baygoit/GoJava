@@ -1,7 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
 public class Project {
-	private int id;
+	private Long id;
 	private String name;
 	private String description;
 	private Integer goal;
@@ -9,13 +9,13 @@ public class Project {
 	private Integer daysToGo;
 	private String history;
 	private String link;
-	private int categoryId;
+	private Long categoryId;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -41,7 +41,7 @@ public class Project {
 
 	public void setGoal(Integer goal) {
 		this.goal = goal;
-	}	
+	}
 
 	public Integer getPledged() {
 		return pledged;
@@ -75,16 +75,17 @@ public class Project {
 		this.link = link;
 	}
 
-	public int getCategoryId() {
+	public Long getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(int categoryId) {
+	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
 	}
 
 	@Override
 	public String toString() {
-		return "id: " + id + ", name: " + name + ", pledged: " + pledged + ", categoryId: " + categoryId;
+		return "id: " + id + ", name: " + name + ", description: " + description + ", goal: " + goal + ", pledged: "
+				+ pledged + ", daysToGo: " + daysToGo + ", history: " + history + ", link: " + link + ", categoryId: " + categoryId;
 	}
 }

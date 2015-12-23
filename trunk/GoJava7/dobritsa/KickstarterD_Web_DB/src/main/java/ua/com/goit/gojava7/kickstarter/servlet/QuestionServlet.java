@@ -37,7 +37,7 @@ public class QuestionServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		log.info("doPost()...");		
-		int projectId = Integer.parseInt(request.getParameter("projectId"));
+		Long projectId = Long.parseLong(request.getParameter("projectId"));
 		String textQuestin = request.getParameter("question");
 
 		if (!request.getParameter("question").isEmpty()) {

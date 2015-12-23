@@ -35,17 +35,17 @@ public class CategoryDao {
 		return jdbcTemplate.query(query, new CategoryMapper());
 	}
 
-	public Category get(int index) {
-		log.info("<Category> get({})...", index);
+	public Category get(Long categoryId) {
+		log.info("<Category> get({})...", categoryId);
 		String query = "select id, name from category where id = ?";
-		return jdbcTemplate.queryForObject(query, new Object[] { index }, new CategoryMapper());
+		return jdbcTemplate.queryForObject(query, new Object[] { categoryId }, new CategoryMapper());
 	}
 
 	private final class CategoryMapper implements RowMapper<Category> {
 		public Category mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 			log.info("CategoryMapper()...");
 			Category category = new Category();
-			category.setId(resultSet.getInt("id"));
+			category.setId((long) resultSet.getInt("id"));
 			category.setName(resultSet.getString("name"));
 			log.debug("CategoryMapper() returned category: {}", category);
 			return category;

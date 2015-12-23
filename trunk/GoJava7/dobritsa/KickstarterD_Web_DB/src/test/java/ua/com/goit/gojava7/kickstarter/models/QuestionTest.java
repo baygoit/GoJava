@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.domain;
+package ua.com.goit.gojava7.kickstarter.models;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -28,11 +28,11 @@ public class QuestionTest extends Assert {
 	@Before
 	public void setUp() {
 		question = new Question();
-		question.setId(11);
+		question.setId(11l);
 		question.setTime("TestTime");
 		question.setQuestion("TestQuestion");
 		question.setAnswer("TestAnswer");
-		question.setProjectId(44);
+		question.setProjectId(44l);
 		System.setOut(printSteam);
 	}
 
@@ -43,11 +43,11 @@ public class QuestionTest extends Assert {
 
 	@Test
 	public void testGet() {
-		assertThat(question.getId(), is(11));
+		assertThat(question.getId(), is(11l));
 		assertThat(question.getTime(), is("TestTime"));
 		assertThat(question.getQuestion(), is("TestQuestion"));
 		assertThat(question.getAnswer(), is("TestAnswer"));
-		assertThat(question.getProjectId(), is(44));
+		assertThat(question.getProjectId(), is(44l));
 	}
 	
 	@Test

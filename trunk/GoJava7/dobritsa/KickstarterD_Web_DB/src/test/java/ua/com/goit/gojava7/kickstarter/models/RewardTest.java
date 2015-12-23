@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.domain;
+package ua.com.goit.gojava7.kickstarter.models;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.contains;
@@ -28,11 +28,10 @@ public class RewardTest {
 
 	@Before
 	public void setUp() {
-		reward.setId(11);
+		reward.setId(11l);
 		reward.setAmount(10);
 		reward.setReward("TestReward");
-		reward.setProjectId(44);
-		reward.setProjectName("TestProject");
+		reward.setProjectId(44l);	
 		System.setOut(printSteam);
 	}
 
@@ -43,11 +42,10 @@ public class RewardTest {
 
 	@Test
 	public void testGet() {
-		assertThat(reward.getId(), is(11));
+		assertThat(reward.getId(), is(11l));
 		assertThat(reward.getAmount(), is(10));
 		assertThat(reward.getReward(), is("TestReward"));
-		assertThat(reward.getProjectName(), is("TestProject"));
-		assertThat(reward.getProjectId(), is(44));
+		assertThat(reward.getProjectId(), is(44l));
 	}
 
 	@Test

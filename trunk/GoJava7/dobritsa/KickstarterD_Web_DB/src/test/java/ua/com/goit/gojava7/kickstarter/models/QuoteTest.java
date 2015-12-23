@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.domain;
+package ua.com.goit.gojava7.kickstarter.models;
 
 import org.junit.After;
 import org.junit.Assert;

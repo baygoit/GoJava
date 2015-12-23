@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.domain;
+package ua.com.goit.gojava7.kickstarter.models;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -27,11 +27,11 @@ public class PaymentTest {
 	
 	@Before
 	public void testSetUp() {
-		payment.setId(1);
+		payment.setId(1l);
 		payment.setUser("Nike");
 		payment.setCard("1111222233334444");
 		payment.setAmount(200);
-		payment.setProjectId(33);
+		payment.setProjectId(33l);
 		System.setOut(printSteam);
 	}
 	
@@ -42,11 +42,11 @@ public class PaymentTest {
 	
 	@Test
 	public void testGet() {
-		assertThat(payment.getId(), is(1));
+		assertThat(payment.getId(), is(1l));
 		assertThat(payment.getUser(), is("Nike"));
 		assertThat(payment.getCard(), is("1111222233334444"));
 		assertThat(payment.getAmount(), is(200));		
-		assertThat(payment.getProjectId(), is(33));
+		assertThat(payment.getProjectId(), is(33l));
 	}
 	
 	@Test

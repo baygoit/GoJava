@@ -13,10 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import ua.com.goit.gojava7.kickstarter.config.Validator;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
-import ua.com.goit.gojava7.kickstarter.dao.Validator;
 
 @WebServlet("/payment")
 public class PaymentServlet extends HttpServlet {
@@ -49,7 +49,7 @@ public class PaymentServlet extends HttpServlet {
 		log.info("doGet()...");		
 		int rewardId = Integer.parseInt(request.getParameter("id"));
 		int amount;
-		int projectId;
+		Long projectId;
 
 		if (rewardId != 0) {
 			projectId = rewardDao.get(rewardId).getProjectId();
@@ -60,7 +60,7 @@ public class PaymentServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 
 		} else {
-			projectId = Integer.parseInt(request.getParameter("projectId"));
+			projectId = Long.parseLong(request.getParameter("projectId"));
 			
 			if (validator.validateAmountOfPledge(request.getParameter("amount"))) {	
 				amount = Integer.parseInt(request.getParameter("amount"));

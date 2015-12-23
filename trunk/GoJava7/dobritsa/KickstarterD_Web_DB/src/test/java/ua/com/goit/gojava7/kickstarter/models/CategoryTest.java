@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.domain;
+package ua.com.goit.gojava7.kickstarter.models;
 
 import static org.mockito.Mockito.verify;
 
@@ -32,7 +32,7 @@ public class CategoryTest extends Assert {
 	public void setUp() {
 		category = new Category();
 		category.setName("CategoryName");
-		category.setId(10);
+		category.setId(10l);
 		System.setOut(printSteam);		
 	}
 
@@ -48,7 +48,7 @@ public class CategoryTest extends Assert {
 	
 	@Test
 	public void testGet() {
-		assertThat(category.getId(), is(10));
+		assertThat(category.getId(), is(10l));
 	}
 
 	@Test

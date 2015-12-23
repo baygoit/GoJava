@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao;
+package ua.com.goit.gojava7.kickstarter.config;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
