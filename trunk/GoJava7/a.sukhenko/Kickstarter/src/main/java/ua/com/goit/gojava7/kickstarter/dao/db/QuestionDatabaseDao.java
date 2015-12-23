@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -26,7 +27,6 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
   public QuestionDatabaseDao(DataSource dataSource) {
       this.dataSource = dataSource;
 }public QuestionDatabaseDao() {
-    // TODO Auto-generated constructor stub
 }
 
     @Override
@@ -74,17 +74,11 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
     }
 
     private int findProjectId(String projectName) {
-        int id;
+        int id = 0;
         String query = "select id from project where name = '" + prepareStringForDb(projectName) + "'";
-        try (PreparedStatement ps = dataSource.getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-            while (resultSet.next()) {
-                id = resultSet.getInt("id");
-                return id;
-            }
-        } catch (SQLException e) {
-            logger.error("problem with findProjectId() ",e);
-        }
-        return 0;
+        logger.error("Method not done");
+        return id;
+ 
     }
 
     @Override

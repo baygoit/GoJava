@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -12,6 +11,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
@@ -61,18 +61,25 @@ public class CategoryDatabaseDao extends DatabaseDao<Category>{
     public Connection getConnection() throws SQLException{
         return dataSource.getConnection();
     }
+    
+    public void delete(int categoryId) {
+        String sql = "DELETE FROM " + table + "  WHERE id=?";
+        jdbcTemplate.update(sql, categoryId);
+    }
     @Override
-    public List<Category> getAll() {
-        List<Category> data = new ArrayList<>();
+    public List<Category> getAll(){
         String query = "select " + fields + " from " + table;
-        try (PreparedStatement ps = getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-            while (resultSet.next()) {
-                data.add(readElement(resultSet));
-            }
-        } catch (SQLException e) {
-            logger.log(Level.ERROR, e);
-        }
-        return data;
+        List<Category> results = jdbcTemplate.query(query, new RowMapper<Category>() {
+
+            @Override
+            public Category mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+                Category category = new Category();
+                category.setCategoryId(resultSet.getInt("categoryId"));
+                category.setCategoryName(resultSet.getString("categoryName"));
+                return category;
+            }});
+        
+        return results;
     }
     @Override
     public Category get(int index) {

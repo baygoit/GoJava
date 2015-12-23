@@ -13,9 +13,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public abstract class DatabaseDao<T>{
     private static final Logger logger = LogManager.getLogger(DatabaseDao.class);
+    
     protected List<T>    data;
     @Autowired
     protected DataSource dataSource;
+    //http://www.codejava.net/frameworks/spring/spring-mvc-with-jdbctemplate-example
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 

@@ -1,20 +1,20 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
-import java.security.InvalidParameterException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-
 import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 @Component
@@ -27,49 +27,64 @@ public ProjectDatabaseDao(DataSource dataSource) {
     this.dataSource = dataSource;
 }
 public ProjectDatabaseDao() {
-    // TODO Auto-generated constructor stub
+    LOGGER.log(Level.DEBUG, "Emty Constructor ProjectDatabaseDao");
 }
+    
+@Override
+public Project get(int index) {
+    String query = "select " + fields + " from " + table + " where id="+index;
+    return jdbcTemplate.query(query, new ResultSetExtractor<Project>(){
+
+        @Override
+        public Project extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+            if (resultSet.next()) {
+                return readElement(resultSet);
+            }
+            throw new NoSuchElementException();
+        }
+        
+    });
+}
+
 
     public List<Project> getByCategory(String categoryName) {
         String query = "SELECT " + fields + " FROM " + table + " WHERE projectCategoryId = "
                 + "(SELECT categoryId FROM categories WHERE categoryName = '" + categoryName + "')";
-        List<Project> data = new ArrayList<>();
-        try (PreparedStatement ps = getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-            while (resultSet.next()) {
-                data.add(readElement(resultSet));
-            }
-        } catch (SQLException e) {
-            LOGGER.error("Fail of getByCategory()",e);
-        }
-        return data;
-    }
+        return jdbcTemplate.query(query, new RowMapper<Project>() {
 
-    public void updatePledged(Project project, double amount) {
-        if(amount > 0.0){
-            String query = "UPDATE " + table + " SET pledged = pledged + " + amount + " WHERE name = '"
-                    + prepareStringForDb(project.getProjectName()) + "'";
-            try (PreparedStatement ps = getConnection().prepareStatement(query);) {
-                ps.executeUpdate();
-                project.updatePledged(amount);
-            } catch (SQLException e) {
-                LOGGER.error("Fail of updatePledged()",e);
+            @Override
+            public Project mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+                return readElement(resultSet);
             }
-            }else{
-                throw new InvalidParameterException("amount cannot be negative");
-            }
-        
+            });
+
     }
+    public void updatePledged(Project project,double amount) {
+            String query = "UPDATE " + table + " SET pledged = pledged + " + amount + " WHERE name = '";
+            jdbcTemplate.update(query);
+        }
+     
+
 
     public double getPledged(String projectName) {
+        LOGGER.debug("using getPledged for project: " + projectName);
         String query = "SELECT pledged FROM " + table + " WHERE name = '" + prepareStringForDb(projectName) + "'";
-        try (PreparedStatement ps = dataSource.getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-            if (resultSet.next()) {
-                return resultSet.getInt(PROJECT_PLEDGED);
+        
+        return jdbcTemplate.query(query, new ResultSetExtractor<Double>() {
+            
+            @Override
+            public Double extractData(ResultSet rs) throws SQLException,
+                    DataAccessException {
+                if (rs.next()) {
+                   return  rs.getDouble("pledged");
+                    
+                }
+     
+                throw new NoSuchElementException("Haven't found project " + projectName);
             }
-        } catch (SQLException e) {
-            LOGGER.error("Fail of getPledged()",e);
-        }
-        throw new NoSuchElementException("Haven't found project " + projectName);
+     
+        });
+        
     }
 
     @Override
@@ -93,43 +108,36 @@ public ProjectDatabaseDao() {
         LOGGER.info("Function not done");
 
     }
+    
 
+    
     @Override
     public void add(Project element) {
-        data.add(element);
+        LOGGER.info("Not done add()");
 
     }
 
     public void userContributeToProject(Double valueOf, String projectName) {
         String query = "UPDATE " + table + " SET pledged= pledged + " + valueOf + " where projectName='" + projectName + "'";
-        try (PreparedStatement ps = dataSource.getConnection().prepareStatement(query);) {
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            LOGGER.error("Fail of userContributeToProject()",e);
-        }
+        jdbcTemplate.update(query);
 
     }
-
+    
     public Project getProjectByName(String projectName) {
         String query = "SELECT " + fields + " FROM " + table + " WHERE projectName = '" + prepareStringForDb(projectName) + "'";
-        try (PreparedStatement ps = getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-            if (resultSet.next()) {
-                Project project = new Project();
-                project.setProjectName(resultSet.getString("projectName"));
-                project.setProjectDescription(resultSet.getString("projectDescription"));
-                project.setMoneyNeeded(resultSet.getDouble("moneyNeeded"));
-                project.setPledged(resultSet.getInt(PROJECT_PLEDGED));
-                project.setProjectHistory(resultSet.getString("projectHistory"));
-                project.setDemoLink(resultSet.getString("demoLink"));
-                project.setProjectCategoryId(resultSet.getInt("projectCategoryId"));
-                project.setCategoryName(resultSet.getString("categoryName"));
-                project.setEnddate(LocalDateTime.now().plusDays(5));
-                return project;
+        return jdbcTemplate.query(query, new ResultSetExtractor<Project>() {
+            
+            @Override
+            public Project extractData(ResultSet rs) throws SQLException,
+                    DataAccessException {
+                if (rs.next()) {
+                    return readElement(rs);
+                }
+     
+                throw new NoSuchElementException();
             }
-        } catch (SQLException e) {
-            LOGGER.error("Fail of getProjectByName()",e);
-        }
-        throw new NoSuchElementException();
+     
+        });
     }
 
     @Override
@@ -148,26 +156,18 @@ public ProjectDatabaseDao() {
         LOGGER.info("Function not done");
         
     }
+    public List<Project> getAll(){
+        String query = "select " + fields + " from " + table;
+        List<Project> results = jdbcTemplate.query(query, new RowMapper<Project>() {
 
-    @Override
-    public List<Project> getAll() {
-        String query = "SELECT " + fields + " FROM " + table;
-        List<Project> data = new ArrayList<>();
-        try (PreparedStatement ps = getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-            while (resultSet.next()) {
-                data.add(readElement(resultSet));
-            }
-        } catch (SQLException e) {
-            LOGGER.error("Error in getAll()",e);
-        }
-        return data;
+            @Override
+            public Project mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+                return readElement(resultSet);
+            }});
+        
+        return results;
     }
-
-    @Override
-    public Project get(int index) {
-        LOGGER.info("Function not done");
-        return null;
-    }
+    
 
     @Override
     public int size() {
