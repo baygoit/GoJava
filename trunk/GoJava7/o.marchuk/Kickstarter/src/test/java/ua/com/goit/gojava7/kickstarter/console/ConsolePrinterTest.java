@@ -53,7 +53,11 @@ public class ConsolePrinterTest {
 
 	@Test
 	public void testPrintQuote() {
-		consolePrinter.print(new Quote("text1", "author"));
+		Quote quote = new Quote();
+		quote.setText("text1");
+		quote.setAuthor("author");
+
+		consolePrinter.print(quote);
 
 		verify(printSteam).println(contains("text"));
 		verify(printSteam).println(contains("author"));

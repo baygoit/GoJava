@@ -2,9 +2,9 @@ package file;
 
 import dao.file.FileAccess;
 import dao.file.UserFileDao;
-import model.enums.CityList;
-import model.enums.GenderType;
-import model.User;
+import entity.enums.CityList;
+import entity.enums.GenderType;
+import entity.User;
 import org.junit.Assert;
 import org.junit.Test;
 

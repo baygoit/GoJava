@@ -22,19 +22,6 @@ public class UtilsTest {
 		assertThat(calendar.get(Calendar.MONTH), is(Calendar.NOVEMBER));
 		assertThat(calendar.get(Calendar.YEAR), is(2012));
 	}
-	
-	@Test
-	public void testDateFromStringStringError() {
-		Date dateFromString = Utils.dateFromString("2012");
-		Calendar calendar1 = Calendar.getInstance();
-		calendar1.setTime(dateFromString);
-		
-		Calendar calendar2 = Calendar.getInstance();
-		
-		assertThat(calendar1.get(Calendar.DAY_OF_MONTH), is(calendar2.get(Calendar.DAY_OF_MONTH)));
-		assertThat(calendar1.get(Calendar.MONTH), is(calendar2.get(Calendar.MONTH)));
-		assertThat(calendar1.get(Calendar.YEAR), is(calendar2.get(Calendar.YEAR)));
-	}
 
 	@Test
 	public void testDateFromStringStringString() {

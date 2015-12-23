@@ -1,0 +1,79 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+.nav a {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color:white;
+}
+
+.nav {
+    margin-top: -30px;
+}
+
+.nav li {
+    display: inline;
+}
+
+.jumbotron {
+    background: url('http://www.dreamhomestyle.com/wp-content/uploads/2014/10/architecture-Roof-apartment1.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 600px;
+}
+
+.jumbotron .container {
+    position: relative;
+    top:100px;
+}
+
+.jumbotron h1 {
+    color: #fff;
+    font-size: 60px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+.jumbotron p {
+    text-align: center;
+    font-size: 30px;
+    color: #fff;
+}
+
+.learn-more {
+    background-color: #f7f7f7;
+}
+
+.learn-more h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.neighborhood-guides{
+    background-color:#efefef;
+    border-bottom:1px solid #dbdbdb;
+}
+.neighborhood-guides h2{
+    color:#393c3d;
+    font-size:24px;
+}
+.neighborhood-guides p{
+    font-size:15px;
+    margin-bottom:13px;
+}
+
+.jumbotron .nav .containerNav .pull-left li{
+    color:black;
+}
+#becomeHost{
+    border-radius: 10px;
+}
+
+.neighborhood-guides .container #listOfCities{
+    text-align: center;
+    text-transform: uppercase;
+}
