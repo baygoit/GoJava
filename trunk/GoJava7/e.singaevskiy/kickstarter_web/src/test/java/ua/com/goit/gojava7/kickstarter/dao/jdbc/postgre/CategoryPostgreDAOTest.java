@@ -5,23 +5,17 @@ import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.util.Utils;
 
 @RunWith(value=MockitoJUnitRunner.class)
 public class CategoryPostgreDAOTest {
-
-	private JdbcTemplate jdbcTemplate;
 	
     CategoryPostgreDAO dao;
     
@@ -29,18 +23,9 @@ public class CategoryPostgreDAOTest {
 
     @Before
     public void setUp() throws Exception {
-        Properties properties = Utils.readProperties("./src/test/resources/storages/db/config.properties");
-     
+  
         dao = new CategoryPostgreDAO();
-        jdbcTemplate = new JdbcTemplate();
-        BasicDataSource datasource = new BasicDataSource();
-		datasource.setDriverClassName(properties.getProperty("driver"));
-		datasource.setUrl(properties.getProperty("url"));
-		datasource.setUsername(properties.getProperty("user"));
-		datasource.setPassword(properties.getProperty("password"));
-
-		jdbcTemplate.setDataSource(datasource);
-		dao.setJdbcTemplate(jdbcTemplate);
+		dao.setJdbcTemplate(TestDaoFactory.setupJdbcTemplate());
         
         list = new ArrayList<>();
         list.add(new Category(1, "c1"));

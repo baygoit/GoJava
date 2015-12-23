@@ -1,14 +1,15 @@
 package ua.com.goit.gojava7.kickstarter.DAO.dbStorage.mysql;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import ua.com.goit.gojava7.kickstarter.DAO.AbstractQuoteStorage;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
@@ -17,52 +18,58 @@ import ua.com.goit.gojava7.kickstarter.model.Quote;
 public class QuoteDbStorage extends AbstractQuoteStorage {
 
 	private final String INSERT_QUOTES = "INSERT INTO qoutes (text, author) VALUES (?, ?)";
-	private final String SELECT_RAND_QUOTES = "SELECT text, author FROM quotes ORDER BY RAND() LIMIT 1";
+	private final String SELECT_RAND_QUOTE = "SELECT text, author FROM quotes ORDER BY RAND() LIMIT 1";
 	
 	@Autowired
-	private BasicDataSource basicDataSource;
+	private JdbcTemplate jdbcTemplate;
 
 	public void add(Quote quote) {
-		try (Connection connection = basicDataSource.getConnection();
-				PreparedStatement ps = connection.prepareStatement(INSERT_QUOTES);) {
-			ps.setString(1, quote.getText());
-			ps.setString(2, quote.getAuthor());
-			ps.executeUpdate();
-			connection.commit();
-
-		} catch (SQLException e) {
-			System.err.println("DB writing problem");
-		}
-
+		jdbcTemplate.batchUpdate(INSERT_QUOTES, new StatementSetter(quote));
 	}
 
 	@Override
 	public Quote getRandomQuote() {
-		Quote randomQuote = null;
-		try (Connection connection = basicDataSource.getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery(SELECT_RAND_QUOTES);) {
-			while (resultSet.next()) {
-				randomQuote = new Quote();
-				randomQuote.setText(resultSet.getString("text"));
-				randomQuote.setAuthor(resultSet.getString("author"));
-			}
-
-		} catch (SQLException e) {
-			// System.err.println("DB writing problem");
-			e.printStackTrace();
-		}
-		return randomQuote;
-	}
-
-	public void setBasicDataSource(BasicDataSource basicDataSource) {
-		this.basicDataSource = basicDataSource;
+		return jdbcTemplate.queryForObject(SELECT_RAND_QUOTE, new Mapper());
 	}
 
 	@Override
 	public List<Quote> getAll() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public class Mapper implements RowMapper<Quote> {
+
+		@Override
+		public Quote mapRow(ResultSet resultSet, int index) throws SQLException {
+			Quote quote = new Quote();
+			quote.setText(resultSet.getString("text"));
+			quote.setAuthor(resultSet.getString("author"));
+			return quote;
+		}
+
+	}
+	
+	public class StatementSetter implements BatchPreparedStatementSetter {
+		
+		List<Quote> quotes;
+		
+		public StatementSetter(Quote quote) {
+			quotes = new ArrayList<>();
+			quotes.add(quote);
+		}
+		
+		@Override
+		public int getBatchSize() {
+			return quotes.size();
+		}
+
+		@Override
+		public void setValues(PreparedStatement statement, int index) throws SQLException {
+			Quote quote = quotes.get(index);
+			statement.setString(1, quote.getText());
+			statement.setString(2, quote.getAuthor());
+		}
+
 	}
 
 }

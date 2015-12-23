@@ -1,48 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Payment</title>
-<%@ include file="html/style.html"%>
-</head>
-<body>
-	<div class="root">
-		<div class="box">
+<jsp:include page="components/Top.jsp"><jsp:param name="title" value="${project.name}" /></jsp:include>
+<jsp:include page="components/Menu.jsp" />
+<jsp:include page="components/Error.jsp" />
+<form action="project" method="post" id="submitForm"
+	class="form-horizontal">
+	<input type="hidden" name="projectId" value="${param.projectId}">
+	<input type="hidden" name="rewardId"
+		value="<%=request.getParameter("rewardId") == null ? 0 : request.getParameter("rewardId")%>">
+	<input type="hidden" name="operation" value="payment">
 
-			<jsp:include page="Error.jsp"/>
-
-			<div class="boxCaption basecolor">Enter payment credentials</div>
-			<div class="boxContent">
-
-				<form action="project" method="post" id="submitForm">
-					<input type="hidden" name="projectId" value="${param.project}">
-					<input type="hidden" name="rewardId"
-						value="<%=request.getParameter("reward") == null ? 0 : request.getParameter("reward")%>">
-					<input type="hidden" name="operation" value="payment">
-					<table>
-						<tr>
-							<td>User:</td>
-							<td><input type="text" name="user"></td>
-						</tr>
-						<tr>
-							<td>Card ID:</td>
-							<td><input type="<%="number"%>" name="cardId" min="0"></td>
-						</tr>
-						<tr>
-							<td>Amount:</td>
-							<td><input type="<%="number"%>" name="amount" min="0" value="${param.amount}"></td>
-						</tr>
-					</table>
-
-				</form>
-
-				<div class="controls basecolor">
-					<jsp:include page="html/Submit.html" />
-					<jsp:include page="html/Back.html" />
-				</div>
-			</div>
+	<div class="form-group">
+		<label class="col-sm-3 control-label">User</label>
+		<div class="col-sm-6">
+			<input class="form-control" type="text" name="user"
+				placeholder="Your name here">
 		</div>
 	</div>
-</body>
-</html>
+	
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Card ID</label>
+		<div class="col-sm-6">
+			<input class="form-control" type="number" name="cardId" min="0"
+				placeholder="123456789">
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="col-sm-3 control-label">Amount</label>
+		<div class="col-sm-6">
+			<input class="form-control" type="number" name="amount" min="0"
+				placeholder="0" value="${amount}">
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-6">
+			<button type="submit" class="btn btn-primary">Send</button>
+		</div>
+	</div>
+
+</form>
+
+<jsp:include page="components/Bottom" />

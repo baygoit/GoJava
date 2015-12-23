@@ -41,7 +41,10 @@ public class FileQuoteReader implements QuoteReader {
 					throw new IllegalStateException("Wrong quotes.txt format. Cannot find empty line");
 				}
 				
-				quotes.add(new Quote(quoteText, author));
+				Quote quote = new Quote();
+				quote.setText(quoteText);
+				quote.setAuthor(author);
+				quotes.add(quote);
 			}
 		} catch (IOException e) {
 			throw new IllegalStateException("File not found or read error", e);
