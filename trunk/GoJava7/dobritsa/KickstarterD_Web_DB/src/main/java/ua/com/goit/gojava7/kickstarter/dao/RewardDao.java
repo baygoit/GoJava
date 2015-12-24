@@ -29,7 +29,7 @@ public class RewardDao {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	public List<Reward> getByProject(int projectId) {
+	public List<Reward> getByProject(Long projectId) {
 		log.info("<rewards> getByProject({})...", projectId);
 		String query = "SELECT id, amount, reward, project_id FROM reward WHERE project_id = ?";
 		return jdbcTemplate.query(query, new Object[] { projectId }, new RewardMapper());
@@ -45,10 +45,10 @@ public class RewardDao {
 		public Reward mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 			log.info("RewardMapper()...");
 			Reward reward = new Reward();
-			reward.setId(resultSet.getInt("id"));
+			reward.setId(resultSet.getLong("id"));
 			reward.setAmount(resultSet.getInt("amount"));
 			reward.setReward(resultSet.getString("reward"));
-			reward.setProjectId(resultSet.getInt("project_id"));
+			reward.setProjectId(resultSet.getLong("project_id"));
 			log.debug("RewardMapper() returned reward: {}", reward);
 			return reward;
 		}

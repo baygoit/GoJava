@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
@@ -26,6 +27,9 @@ public class CategoryListController extends HttpServlet {
     
     @Autowired
     private CategoryDAO categoryDAO; 
+    
+    @Autowired
+    private ProjectDAO projectDAO;
 
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,6 +40,7 @@ public class CategoryListController extends HttpServlet {
         
         request.setAttribute("quote", quotes.get(rnd.nextInt(quotes.size())));        
         request.setAttribute("categories", categoryDAO.getAll());
+        request.setAttribute("topProjects", projectDAO.getTopDonated(3));
         request.getRequestDispatcher("view/Categories.jsp").forward(request, response);
     }
 

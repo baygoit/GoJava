@@ -1,15 +1,15 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
 public class Category {
-
+	
+	private Long id;
 	private String name;
-	private int id;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
