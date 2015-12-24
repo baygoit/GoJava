@@ -13,10 +13,11 @@ import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-@Component
+@Repository
 public class CategoryDatabaseDao extends DatabaseDao<Category>{
     private static final Logger logger = LogManager.getLogger(CategoryDatabaseDao.class); 
     private static String table  = "categories";
@@ -66,21 +67,27 @@ public class CategoryDatabaseDao extends DatabaseDao<Category>{
         String sql = "DELETE FROM " + table + "  WHERE id=?";
         jdbcTemplate.update(sql, categoryId);
     }
+    
     @Override
     public List<Category> getAll(){
         String query = "select " + fields + " from " + table;
-        List<Category> results = jdbcTemplate.query(query, new RowMapper<Category>() {
-
-            @Override
-            public Category mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-                Category category = new Category();
-                category.setCategoryId(resultSet.getInt("categoryId"));
-                category.setCategoryName(resultSet.getString("categoryName"));
-                return category;
-            }});
+        List<Category> results = jdbcTemplate.query(query, new CategoryMapper());
         
         return results;
     }
+    
+    private final class CategoryMapper implements RowMapper<Category>{
+
+        @Override
+        public Category mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+            Category category = new Category();
+            category.setCategoryId(resultSet.getInt("categoryId"));
+            category.setCategoryName(resultSet.getString("categoryName"));
+            return category;
+        }
+    }
+    
+    
     @Override
     public Category get(int index) {
         logger.info("Empty function use");
