@@ -59,6 +59,25 @@ public class ProjectPostgreDAO implements ProjectDAO {
 		String sql = "select " + FIELDS + " from " + TABLE + " where project.category_id = ?";
 		return jdbcTemplate.query(sql, new Object[]{categoryId}, getRowMapper());
 	}
+	
+	@Override
+	public List<Project> getTopDonated(int limit) {
+		String sql = "" +
+		"SELECT " +
+		"  coalesce(projectPayments.balance,0) as balance, " +
+		"  project.* " +
+		"FROM  " +
+		"  project left join  " +
+		"	(select payment.project_id,  " +
+		"	sum(payment.sum)  " +
+		"		as balance from payment " +
+		"	group by project_id) projectPayments " +
+		"  on project.id = projectPayments.project_id " +
+		"  order by balance desc " +
+		"limit ? ";
+		
+		return jdbcTemplate.query(sql, new Object[]{limit}, getRowMapper());
+	}
 
 	public StatementSetter<Project> getStatementSetter(Object argument) {
 		return new StatementSetter<Project>(argument) {
@@ -96,6 +115,11 @@ public class ProjectPostgreDAO implements ProjectDAO {
 				project.setEndDate(resultSet.getDate("endDate"));
 				project.setGoalSum(resultSet.getLong("goalSum"));
 				project.setCategoryId(resultSet.getInt("category_id"));
+				try {
+					project.setBalanceSum(resultSet.getLong("balance"));
+				} catch (Exception e) {
+					// TODO: handle exception
+				}				
 				return project;
 			}
 		};

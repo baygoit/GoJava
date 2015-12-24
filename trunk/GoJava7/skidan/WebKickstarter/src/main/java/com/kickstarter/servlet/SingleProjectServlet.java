@@ -14,6 +14,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.kickstarter.dao.interfaces.DbProjectDaoImpl;
 import com.kickstarter.dao.interfaces.DbQuestionDaoImpl;
+import com.kickstarter.dao.interfaces.PaymentDaoImpl;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.Question;
 
@@ -27,6 +28,9 @@ public class SingleProjectServlet extends HttpServlet {
 	@Autowired
 	DbProjectDaoImpl projectDao;
 
+	@Autowired
+	PaymentDaoImpl paymentDao;
+
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
 
@@ -37,6 +41,7 @@ public class SingleProjectServlet extends HttpServlet {
 
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
 		Project project = projectDao.getOne(projectId);
+		project.setGainedSum(paymentDao.getAll(projectId));
 		List<Question> list = questionDao.getProjectQuestions(project.getTitle());
 
 		request.setAttribute("questions", list);

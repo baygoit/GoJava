@@ -31,10 +31,10 @@ public class QuestionServlet extends HttpServlet {
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("projectId"));
 		String question = request.getParameter("question");
-//		if (question.length() >= 1) {
+		if (question.length() >= 1) {
 			String projectTitle = projectDao.getOne(id).getTitle();
 			questionDao.add(question, projectTitle);
-//		}
+		}
 		response.sendRedirect("SingleProjectServlet?projectId=" + id);
 
 	}
