@@ -10,7 +10,7 @@ public class Project {
 	private String history;
 	private String link;
 	private int categoryId;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -41,7 +41,7 @@ public class Project {
 
 	public void setGoal(Integer goal) {
 		this.goal = goal;
-	}
+	}	
 
 	public Integer getPledged() {
 		return pledged;
@@ -83,11 +83,8 @@ public class Project {
 		this.categoryId = categoryId;
 	}
 
-	public void updatePledged(int amount) {
-		this.pledged += amount;
-	}
-	
-	public String toString(){
-		return "id: " + id + ", name: '" + name.substring(0, 10) + "...', categoryId: " + categoryId;		
+	@Override
+	public String toString() {
+		return "id: " + id + ", name: " + name + ", pledged: " + pledged + ", categoryId: " + categoryId;
 	}
 }

@@ -34,7 +34,7 @@ ENGINE = InnoDB
 
 
 CREATE TABLE IF NOT EXISTS `kickstarter`.`question` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `question` VARCHAR(200) NOT NULL,
   `answer` VARCHAR(200) NULL,
   `time` DATE NOT NULL,
@@ -50,7 +50,7 @@ ENGINE = InnoDB
 
 
 CREATE TABLE IF NOT EXISTS `kickstarter`.`reward` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `amount` INT NOT NULL,
   `reward` VARCHAR(200) NOT NULL,
   `project_id` INT NOT NULL,
@@ -63,13 +63,45 @@ CREATE TABLE IF NOT EXISTS `kickstarter`.`reward` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 
+CREATE TABLE IF NOT EXISTS `kickstarter`.`payment` (
 
-
-CREATE TABLE IF NOT EXISTS `kickstarter`.`quote` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(500) NOT NULL,
-  `author` VARCHAR(200) NULL,
-  PRIMARY KEY (`id`))
+
+  `user` VARCHAR(200) NOT NULL,
+
+  `card` VARCHAR(200) NOT NULL,
+
+  `amount` INT NOT NULL,
+
+  `project_id` INT NOT NULL,
+
+  PRIMARY KEY (`id`),
+
+  INDEX `fk_payment_project1_idx` (`project_id` ASC),
+
+  CONSTRAINT `fk_payment_project1`
+
+    FOREIGN KEY (`project_id`)
+
+    REFERENCES `kickstarter`.`project` (`id`)
+
+    ON DELETE NO ACTION
+
+    ON UPDATE NO ACTION)
+
+ENGINE = InnoDB
+
+CREATE TABLE IF NOT EXISTS `kickstarter`.`query` (
+  
+`id` INT NOT NULL AUTO_INCREMENT,
+  
+`text` VARCHAR(500) NOT NULL,
+  
+primary key (`id`),
+
+UNIQUE (text))
+
+
 ENGINE = InnoDB
 
 INSERT INTO `mydb`.`table1` (`) VALUES ();
