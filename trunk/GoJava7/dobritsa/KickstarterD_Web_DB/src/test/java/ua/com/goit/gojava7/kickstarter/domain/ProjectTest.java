@@ -28,8 +28,7 @@ public class ProjectTest extends Assert {
 		project.setId(11);
 		project.setName("TestName");
 		project.setDescription("TestDescription");
-		project.setGoal(100);
-		project.setPledged(10);
+		project.setGoal(100);	
 		project.setDaysToGo(3);
 		project.setHistory("TestHistory");
 		project.setLink("TestLink");
@@ -47,19 +46,11 @@ public class ProjectTest extends Assert {
 		assertThat(project.getId(), is(11));
 		assertThat(project.getName(), is("TestName"));
 		assertThat(project.getDescription(), is("TestDescription"));
-		assertThat(project.getGoal(), is(100));
-		assertThat(project.getPledged(), is(10));
+		assertThat(project.getGoal(), is(100));	
 		assertThat(project.getDaysToGo(), is(3));
 		assertThat(project.getHistory(), is("TestHistory"));
 		assertThat(project.getLink(), is("TestLink"));
 		assertThat(project.getCategoryId(), is(44));	
-	}
-
-	@Test
-	public void testUpdatePledged() {
-		assertThat(project.getPledged(), is(10));
-		project.updatePledged(2);
-		assertThat(project.getPledged(), is(12));
 	}
 
 }

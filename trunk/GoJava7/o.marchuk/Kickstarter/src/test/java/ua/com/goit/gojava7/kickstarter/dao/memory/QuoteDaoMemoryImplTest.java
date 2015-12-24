@@ -42,7 +42,10 @@ public class QuoteDaoMemoryImplTest {
 
 	@Test
 	public void testSetQuotes() {
-		Quote quote = new Quote("text", "author");
+		Quote quote = new Quote();
+		quote.setText("text");
+		quote.setAuthor("author");
+
 		List<Quote> quotes = new ArrayList<Quote>();
 		quotes.add(quote);
 
@@ -53,8 +56,15 @@ public class QuoteDaoMemoryImplTest {
 	@Test
 	public void testGetRandomQuote() {
 		List<Quote> quotes = new ArrayList<Quote>();
-		quotes.add(new Quote("text 1", "author 1"));
-		quotes.add(new Quote("text 2", "author 2"));
+		Quote quote1 = new Quote();
+		quote1.setText("text 1");
+		quote1.setAuthor("author 1");
+		quotes.add(quote1);
+
+		Quote quote2 = new Quote();
+		quote2.setText("text 2");
+		quote2.setAuthor("author 2");
+		quotes.add(quote2);
 
 		quoteStorage.setQuotes(quotes);
 		assertThat(quoteStorage.getRandomQuote().getText(), is("text 1"));

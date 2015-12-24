@@ -6,7 +6,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import java.io.PrintStream;
 
 import static org.hamcrest.CoreMatchers.is;
-
+import static org.mockito.Matchers.contains;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -53,7 +53,8 @@ public class QuestionTest extends Assert {
 	@Test
 	public void testToString() {
 		System.out.println(question.toString());
-		verify(printSteam).println("Time: TestTime; Question: TestQuestion; Answer: TestAnswer; Project: TestProject");
+		verify(printSteam).println(contains("TestTime"));
+		verify(printSteam).println(contains("44"));
 	}
 
 }

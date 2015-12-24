@@ -53,7 +53,9 @@ public class CategoriesServletTest {
 
 	@Test
 	public void testDoGetHttpServletRequestHttpServletResponse() throws ServletException, IOException {
-		Quote quote = new Quote("quote text", "quote author");
+		Quote quote = new Quote();
+		quote.setText("quote text");
+		quote.setAuthor("quote author");
 		when(quoteDao.getRandomQuote()).thenReturn(quote);
 
 		HttpServletRequest req = mock(HttpServletRequest.class);
