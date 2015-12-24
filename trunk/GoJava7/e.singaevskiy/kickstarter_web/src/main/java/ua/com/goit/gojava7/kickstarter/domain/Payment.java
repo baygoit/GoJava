@@ -3,6 +3,7 @@ package ua.com.goit.gojava7.kickstarter.domain;
 import java.sql.Date;
 
 public class Payment {
+	private long id;
     private String user;
     private long cardId;
     private long sum;
@@ -123,5 +124,13 @@ public class Payment {
         return "Payment [user=" + user + ", cardId=" + cardId + ", sum=" + sum + ", projectId=" + projectId
                 + ", rewardId=" + rewardId + ", date=" + date + "]";
     }
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 }
