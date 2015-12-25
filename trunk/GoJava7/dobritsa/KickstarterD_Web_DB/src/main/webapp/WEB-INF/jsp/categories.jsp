@@ -11,7 +11,7 @@
 
 	<ul>
 		<c:forEach var="category" items="${requestScope.categories}">
-			<li><a href="projects?id=${category.id}">${category.name}</a></li>
+			<li><a href="projects?id=${category.categoryId}">${category.name}</a></li>
 		</c:forEach>
 	</ul>
 	
@@ -19,7 +19,7 @@
 
 	<ul>
 		<c:forEach var="project" items="${requestScope.projects}">
-			<li>$${project.pledged} - <a href="project?id=${project.id}">${project.name}</a></li>			
+			<li>$${project.pledged} - <a href="project?id=${project.projectId}">${project.name}</a></li>			
 		</c:forEach>
 	</ul>	
 

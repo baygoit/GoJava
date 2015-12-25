@@ -45,7 +45,7 @@ public class CategoryDao {
 		public Category mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 			log.info("CategoryMapper()...");
 			Category category = new Category();
-			category.setId((long) resultSet.getInt("id"));
+			category.setCategoryId((long) resultSet.getInt("id"));
 			category.setName(resultSet.getString("name"));
 			log.debug("CategoryMapper() returned category: {}", category);
 			return category;

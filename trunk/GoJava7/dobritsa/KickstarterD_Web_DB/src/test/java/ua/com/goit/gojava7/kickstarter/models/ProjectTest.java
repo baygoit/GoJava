@@ -25,14 +25,14 @@ public class ProjectTest extends Assert {
 
 	@Before
 	public void testSetUp() {
-		project.setId(11l);
+		project.setProjectId(11l);
 		project.setName("TestName");
 		project.setDescription("TestDescription");
 		project.setGoal(100);	
 		project.setDaysToGo(3);
 		project.setHistory("TestHistory");
 		project.setLink("TestLink");
-		project.setCategoryId(44l);
+		//project.setCategoryId(44l);
 		System.setOut(printSteam);
 	}
 
@@ -43,14 +43,14 @@ public class ProjectTest extends Assert {
 
 	@Test
 	public void testGet() {
-		assertThat(project.getId(), is(11l));
+		assertThat(project.getProjectId(), is(11l));
 		assertThat(project.getName(), is("TestName"));
 		assertThat(project.getDescription(), is("TestDescription"));
 		assertThat(project.getGoal(), is(100));	
 		assertThat(project.getDaysToGo(), is(3));
 		assertThat(project.getHistory(), is("TestHistory"));
 		assertThat(project.getLink(), is("TestLink"));
-		assertThat(project.getCategoryId(), is(44l));	
+	//	assertThat(project.getCategoryId(), is(44l));	
 	}
 
 }

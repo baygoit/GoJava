@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import ua.com.goit.gojava7.kickstarter.models.Category;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @Repository
@@ -44,15 +45,19 @@ public class ProjectDao {
 	private final class ProjectMapper implements RowMapper<Project> {
 		public Project mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 			log.info("ProjectMapper()...");
+			
+			Category category = new Category();			
+			
 			Project project = new Project();
-			project.setId(resultSet.getLong("id"));
+			project.setProjectId(resultSet.getLong("id"));
 			project.setName(resultSet.getString("name"));
 			project.setDescription(resultSet.getString("description"));
 			project.setGoal(resultSet.getInt("goal"));		
 			project.setDaysToGo(resultSet.getInt("daysToGo"));
 			project.setHistory(resultSet.getString("history"));
-			project.setLink(resultSet.getString("link"));
-			project.setCategoryId(resultSet.getLong("category_id"));
+			project.setLink(resultSet.getString("link"));			
+			category.setCategoryId(resultSet.getLong("category_id"));			
+			project.setCategory(category);
 			log.debug("ProjectMapper() returned project: {}", project);
 			return project;
 		}

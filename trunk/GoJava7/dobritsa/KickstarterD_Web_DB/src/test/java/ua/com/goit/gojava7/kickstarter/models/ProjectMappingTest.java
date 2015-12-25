@@ -39,6 +39,10 @@ public class ProjectMappingTest {
 	public void testBasicUsage() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+		
+		Category category1 = new Category();
+		category1.setCategoryId(11l);
+		category1.setName("TestCategory 1");
 
 		Project project1 = new Project();
 		project1.setName("TestName1");
@@ -47,7 +51,7 @@ public class ProjectMappingTest {
 		project1.setDaysToGo(1);
 		project1.setHistory("TestHistory1");
 		project1.setLink("TestLink1");
-		project1.setCategoryId(11l);
+		project1.setCategory(category1);
 
 		Project project2 = new Project();
 		project2.setName("TestName2");
@@ -56,7 +60,7 @@ public class ProjectMappingTest {
 		project2.setDaysToGo(2);
 		project2.setHistory("TestHistory2");
 		project2.setLink("TestLink2");
-		project2.setCategoryId(22l);
+		project2.setCategory(category1);
 
 		session.save(project1);
 		session.save(project2);

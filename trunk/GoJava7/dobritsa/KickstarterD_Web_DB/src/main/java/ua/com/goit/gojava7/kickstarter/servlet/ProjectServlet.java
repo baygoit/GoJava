@@ -51,9 +51,9 @@ public class ProjectServlet extends HttpServlet {
 		Long projectId = Long.parseLong(request.getParameter("id"));
 		
 		Project project = projectDao.get(projectId);
-		project.setPledged(paymentDao.calculatePledgedForProject(project.getId()));
+		project.setPledged(paymentDao.calculatePledgedForProject(project.getProjectId()));
 			
-		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));	
+		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategory().getCategoryId()));	
 		request.setAttribute("project", project);		
 		request.setAttribute("questions", questionDao.getByProject(projectId));
 		request.getRequestDispatcher("/WEB-INF/jsp/project.jsp").forward(request, response);

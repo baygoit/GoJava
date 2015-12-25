@@ -11,8 +11,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CategoryMappingTest {
-
+public class CPM {
+	
 	private SessionFactory sessionFactory;
 
 	@Before
@@ -39,17 +39,34 @@ public class CategoryMappingTest {
 	public void testBasicUsage() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-
-		Category category1 = new Category();
-		category1.setCategoryId(11l);
+		
+		Category category1 = new Category();		
 		category1.setName("TestCategory 1");
-
-		Category category2 = new Category();
-		category2.setCategoryId(22l);
+		
+		Category category2 = new Category();		
 		category2.setName("TestCategory 2");
 
+		Project project1 = new Project();
+		project1.setName("TestName1");
+		project1.setDescription("TestDescription1");
+		project1.setGoal(100);
+		project1.setDaysToGo(1);
+		project1.setHistory("TestHistory1");
+		project1.setLink("TestLink1");
+		project1.setCategory(category1);
+
+		Project project2 = new Project();
+		project2.setName("TestName2");
+		project2.setDescription("TestDescription2");
+		project2.setGoal(200);
+		project2.setDaysToGo(2);
+		project2.setHistory("TestHistory2");
+		project2.setLink("TestLink2");
+		project2.setCategory(category2);
+		
 		session.save(category1);
-		session.save(category2);
+		session.save(project1);
+		session.save(project2);
 		session.getTransaction().commit();
 		session.close();
 
@@ -57,16 +74,19 @@ public class CategoryMappingTest {
 		session.beginTransaction();
 		System.out.println("\n-----Get by id = 1-----");
 		Category category = session.get(Category.class, 1l);
+		Project project = session.get(Project.class, 1l);
 		System.out.println(category);
+		System.out.println(project);
 		session.close();
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		System.out.println("\n-----Get list of quotes-----");
-		List<Category> categories = (List<Category>) session.createQuery("from Category q").list();
-		for (Category resultCategory : categories) {
-			System.out.println(resultCategory);
+		System.out.println("\n-----Get list of projects-----");
+		List<Project> projects = (List<Project>) session.createQuery("from Project q").list();
+		for (Project resultProject : projects) {
+			System.out.println(resultProject);
 		}
 		session.close();
 	}
+
 }
