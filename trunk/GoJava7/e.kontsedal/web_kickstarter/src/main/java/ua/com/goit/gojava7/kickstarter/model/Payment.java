@@ -50,5 +50,12 @@ public class Payment {
 	public void setIdParentProject(int idParentProject) {
 		this.idParentProject = idParentProject;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Project ID: " + idParentProject + "; "
+				+ "Owner: " + cardOwner + "; "
+				+ "Card number: " + cardNumber + "; "
+				+ "Amount: " + rechargeAmount + "; ";
+	}
 }
