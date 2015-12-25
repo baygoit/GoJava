@@ -32,12 +32,7 @@ public abstract class DatabaseDao<T>{
 
     public abstract Connection getConnection() throws SQLException;
 
-    protected abstract T readElement(ResultSet resultSet) throws SQLException;
-
-    public abstract T getByNumber(int number);
-
-
-    public abstract void setAll(List<T> data);
+    
 
     public String prepareStringForDb(String original) {
         return original.replace("'", "\\'");

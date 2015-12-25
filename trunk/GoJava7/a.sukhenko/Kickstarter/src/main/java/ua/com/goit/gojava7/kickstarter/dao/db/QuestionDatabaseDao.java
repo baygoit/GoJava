@@ -13,10 +13,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
-@Component
+@Repository
 public class QuestionDatabaseDao extends DatabaseDao<Question>{
 
     private static String       TABLE     = "question";
@@ -57,7 +58,6 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
         return data;
     }
 
-    @Override
     protected Question readElement(ResultSet resultSet) throws SQLException {
         Question question;
         question = new Question();
@@ -86,17 +86,6 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
         return dataSource.getConnection();
     }
 
-    @Override
-    public Question getByNumber(int number) {
-        logger.log(Level.WARN, "Method not done");
-        return null;
-    }
-
-    @Override
-    public void setAll(List<Question> data) {
-        logger.log(Level.WARN, "Method not done");
-        
-    }
 
     @Override
     public List<Question> getAll() {

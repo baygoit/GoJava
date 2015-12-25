@@ -15,9 +15,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-@Component
+@Repository
 public class ProjectDatabaseDao extends DatabaseDao<Project>{
     private static final String PROJECT_PLEDGED = "pledged";
     private static final Logger LOGGER = LogManager.getLogger(ProjectDatabaseDao.class);
@@ -87,7 +89,6 @@ public Project get(int index) {
         
     }
 
-    @Override
     protected Project readElement(ResultSet resultSet) throws SQLException {
         Project project;
         project = new Project();
@@ -145,17 +146,6 @@ public Project get(int index) {
         return dataSource.getConnection();
     }
 
-    @Override
-    public Project getByNumber(int number) {
-                LOGGER.info("Function not done");
-        return null;
-    }
-
-    @Override
-    public void setAll(List<Project> data) {
-        LOGGER.info("Function not done");
-        
-    }
     public List<Project> getAll(){
         String query = "select " + fields + " from " + table;
         List<Project> results = jdbcTemplate.query(query, new RowMapper<Project>() {

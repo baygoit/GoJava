@@ -31,7 +31,6 @@ public class CategoryDatabaseDao extends DatabaseDao<Category>{
     }
     
     
-    @Override
     protected Category readElement(ResultSet resultSet) throws SQLException {
         Category category = new Category();
         category.setCategoryId(resultSet.getInt("categoryId"));
@@ -43,10 +42,7 @@ public class CategoryDatabaseDao extends DatabaseDao<Category>{
         String query = "SELECT " + fields + " FROM " + table + " WHERE categoryId = " + projectCategoryId;
         try (PreparedStatement ps = dataSource.getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
             if (resultSet.next()) {
-                Category category = new Category();
-                category.setCategoryId(resultSet.getInt("categoryId"));
-                category.setCategoryName(resultSet.getString("categoryName"));
-                return category;
+                return readElement(resultSet);
             }
         } catch (SQLException e) {
             logger.log(Level.ERROR, e);
@@ -93,16 +89,7 @@ public class CategoryDatabaseDao extends DatabaseDao<Category>{
         logger.info("Empty function use");
         return null;
     }
-    @Override
-    public Category getByNumber(int number) {
-        logger.info("Empty function use");
-        return null;
-    }
-    @Override
-    public void setAll(List<Category> data) {
-        logger.info("Empty function use");
-        
-    }
+
     @Override
     public int size() {
         return getAll().size();
