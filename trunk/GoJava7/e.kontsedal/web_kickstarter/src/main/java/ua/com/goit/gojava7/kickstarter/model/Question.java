@@ -1,14 +1,13 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
 public class Question {
-	private String questionText;
 	private int idQuestion;
 	private int idParentProject;
+	private String questionText;
 
-	public Question() {
-	}
+	public Question() {}
 
-	public String getQuestion() {
+	public String getQuestionText() {
 		return questionText;
 	}
 
@@ -20,15 +19,20 @@ public class Question {
 		return idParentProject;
 	}
 
-	public void setQuestion(String question) {
-		this.questionText = question;
-	}
-
-	public void setIdParentProject(int idParentProject) {
-		this.idParentProject = idParentProject;
+	public void setQuestionText(String questionText) {
+		this.questionText = questionText;
 	}
 
 	public void setIdQuestion(int idQuestion) {
 		this.idQuestion = idQuestion;
+	}
+	
+	public void setIdParentProject(int idParentProject) {
+		this.idParentProject = idParentProject;
+	}
+	@Override
+	public String toString() {
+		return "Project ID: " + idParentProject + "; "
+				+ "Question: " + questionText + "; ";
 	}
 }
