@@ -14,7 +14,7 @@
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao.mysql" />
+	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao.db" />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />

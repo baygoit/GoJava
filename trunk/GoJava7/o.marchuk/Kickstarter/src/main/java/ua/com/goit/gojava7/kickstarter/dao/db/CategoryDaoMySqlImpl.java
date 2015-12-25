@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.mysql;
+package ua.com.goit.gojava7.kickstarter.dao.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

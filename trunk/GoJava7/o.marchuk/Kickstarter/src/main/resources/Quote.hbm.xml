@@ -9,7 +9,7 @@
 
 <hibernate-mapping package="ua.com.goit.gojava7.kickstarter.domain">
 
-	<class name="Quote" table="Quote">
+	<class name="Quote" table="quote">
 		<id name="id">
 			<generator class="increment" />
 		</id>
