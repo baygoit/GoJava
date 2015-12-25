@@ -2,7 +2,9 @@ package ua.com.goit.gojava7.kickstarter.dao.db;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
@@ -16,7 +18,11 @@ public class QuoteDaoImpl implements QuoteDao {
 	public Quote getRandomQuote() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
-		List<Quote> quotes = (List<Quote>) session.createQuery("from Quote q order by rand()").setMaxResults(1).list();
+		Criteria criteria = session.createCriteria(Quote.class);
+		criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+		criteria.setMaxResults(1);
+
+		List<Quote> quotes = criteria.list();
 		if (quotes.isEmpty()) {
 			return null;
 		}
