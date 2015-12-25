@@ -44,7 +44,7 @@ public class ProjectsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		log.info("doGet()...");
-		int categoryId = Integer.parseInt(request.getParameter("id"));
+		Long categoryId = Long.parseLong(request.getParameter("id"));
 
 		List<Project> projects = projectDao.getByCategory(categoryId);
 		for (Project project : projects) {

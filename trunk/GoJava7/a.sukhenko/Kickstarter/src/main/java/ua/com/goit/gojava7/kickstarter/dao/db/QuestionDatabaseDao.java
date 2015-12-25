@@ -6,16 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
-@Component
+@Repository
 public class QuestionDatabaseDao extends DatabaseDao<Question>{
 
     private static String       TABLE     = "question";
@@ -26,7 +28,6 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
   public QuestionDatabaseDao(DataSource dataSource) {
       this.dataSource = dataSource;
 }public QuestionDatabaseDao() {
-    // TODO Auto-generated constructor stub
 }
 
     @Override
@@ -57,7 +58,6 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
         return data;
     }
 
-    @Override
     protected Question readElement(ResultSet resultSet) throws SQLException {
         Question question;
         question = new Question();
@@ -74,17 +74,11 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
     }
 
     private int findProjectId(String projectName) {
-        int id;
+        int id = 0;
         String query = "select id from project where name = '" + prepareStringForDb(projectName) + "'";
-        try (PreparedStatement ps = dataSource.getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-            while (resultSet.next()) {
-                id = resultSet.getInt("id");
-                return id;
-            }
-        } catch (SQLException e) {
-            logger.error("problem with findProjectId() ",e);
-        }
-        return 0;
+        logger.error("Method not done");
+        return id;
+ 
     }
 
     @Override
@@ -92,17 +86,6 @@ public class QuestionDatabaseDao extends DatabaseDao<Question>{
         return dataSource.getConnection();
     }
 
-    @Override
-    public Question getByNumber(int number) {
-        logger.log(Level.WARN, "Method not done");
-        return null;
-    }
-
-    @Override
-    public void setAll(List<Question> data) {
-        logger.log(Level.WARN, "Method not done");
-        
-    }
 
     @Override
     public List<Question> getAll() {

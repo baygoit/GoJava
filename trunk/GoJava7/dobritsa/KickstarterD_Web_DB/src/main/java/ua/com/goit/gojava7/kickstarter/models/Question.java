@@ -4,21 +4,21 @@ import java.util.Date;
 
 public class Question {
 
-	private int id;
+	private Long id;
 	private String time = "";
 	private String question = "";
 	private String answer = "";
-	private int projectId;
+	private Long projectId;
 
 	public Question() {
 		this.time = new Date().toString();
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -46,11 +46,11 @@ public class Question {
 		this.answer = answear;
 	}
 	
-	public int getProjectId() {
+	public Long getProjectId() {
 		return projectId;
 	}
 
-	public void setProjectId(int projectId) {
+	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
 

@@ -21,11 +21,20 @@
 		<%=quote.getQuoteText()%><br>
 		<%=quote.getAuthor()%><br><br><br>
 
+       <h2>Categories</h2>
 		<c:forEach items="${categoryList}" var="category">
 			<b><a href=SelectedCategoryProjectsServlet?categoryTitle=${category.getTitle()}><c:out
 					value="${category.getTitle()}" /></a></b>
+		</c:forEach><br><br>
+		
+		<h3>Top rated projects</h3>
+       <c:forEach items="${projectList}" var="project">
+      <b><a href=SingleProjectServlet?projectId=${project.getId()}> 
+      <c:out value="${project.getTitle()}"/></a></b><br><br>
+      Sum already gained : <c:out value="${project.getGainedSum()}"/><br><br>
+       Required Sum :<c:out value="${project.getRequiredSum()}"/><br><br>
+       </c:forEach>
 
-		</c:forEach>
 
 	</div>
 </body>

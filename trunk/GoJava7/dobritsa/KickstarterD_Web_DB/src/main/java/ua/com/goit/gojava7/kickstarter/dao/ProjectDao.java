@@ -29,13 +29,13 @@ public class ProjectDao {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public List<Project> getByCategory(int categoryId) {			
+	public List<Project> getByCategory(Long categoryId) {			
 		log.info("<Project> getByCategory({})...", categoryId);	
 		String query = "select  id, name, description, goal, daysToGo, history, link, category_id from project where category_id = ?";
 		return jdbcTemplate.query(query, new Object[] { categoryId }, new ProjectMapper());
 	}	
 	
-	public Project get(int index) {				
+	public Project get(Long index) {				
 		log.info("<Project> get({})...", index);
 		String query = "select id, name, description, goal, daysToGo, history, link, category_id from project where id = ?";
 		return jdbcTemplate.queryForObject(query, new Object[] { index }, new ProjectMapper());
@@ -45,14 +45,14 @@ public class ProjectDao {
 		public Project mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 			log.info("ProjectMapper()...");
 			Project project = new Project();
-			project.setId(resultSet.getInt("id"));
+			project.setId(resultSet.getLong("id"));
 			project.setName(resultSet.getString("name"));
 			project.setDescription(resultSet.getString("description"));
 			project.setGoal(resultSet.getInt("goal"));		
 			project.setDaysToGo(resultSet.getInt("daysToGo"));
 			project.setHistory(resultSet.getString("history"));
 			project.setLink(resultSet.getString("link"));
-			project.setCategoryId(resultSet.getInt("category_id"));
+			project.setCategoryId(resultSet.getLong("category_id"));
 			log.debug("ProjectMapper() returned project: {}", project);
 			return project;
 		}

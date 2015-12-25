@@ -1,6 +1,7 @@
 package com.kickstarter.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,8 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.kickstarter.dao.interfaces.DbCategoryDaoImpl;
+import com.kickstarter.dao.interfaces.DbProjectDaoImpl;
 import com.kickstarter.dao.interfaces.DbQuoteImpl;
+import com.kickstarter.dao.interfaces.PaymentDaoImpl;
 import com.kickstarter.model.Category;
+import com.kickstarter.model.Project;
 import com.kickstarter.model.Quote;
 
 @WebServlet("/AllCategoriesServlet")
@@ -29,29 +33,33 @@ public class AllCategoriesServlet extends HttpServlet {
 	@Autowired
 	DbQuoteImpl quoteDao;
 
+	@Autowired
+	PaymentDaoImpl paymentDao;
+
+	@Autowired
+	DbProjectDaoImpl projectDao;
+
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
-		// ApplicationContext context = new
-		// ClassPathXmlApplicationContext("ApplicationContext.xml");
-		// quoteDao = (DbQuoteImpl) context.getBean("DbQuoteImpl");
-		// categoryDao = (DbCategoryDaoImpl)
-		// context.getBean("DbCategoryDaoImpl");
-
-		// quoteDao = new DbQuoteImpl();
-		// categoryDao = new DbCategoryDaoImpl();
 
 	}
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Quote quote = quoteDao.get();
 		List<Category> categoryList = categoryDao.getAll();
-
+		List<Integer> topProjectsId = paymentDao.getTopProjects();
+		List<Project> projectList = new ArrayList<>();
+		for (int i = 0; i < 3; i++) {
+			Project project = new Project();
+			project = projectDao.getOne(topProjectsId.get(i));
+			project.setGainedSum(paymentDao.getAll(topProjectsId.get(i)));
+			projectList.add(project);
+		}
+		request.setAttribute("projectList", projectList);
 		request.setAttribute("quote", quote);
 		request.setAttribute("categoryList", categoryList);
 		request.getRequestDispatcher("/WEB-INF/AllCategories.jsp").forward(request, response);
 
-		
 	}
 
 }
