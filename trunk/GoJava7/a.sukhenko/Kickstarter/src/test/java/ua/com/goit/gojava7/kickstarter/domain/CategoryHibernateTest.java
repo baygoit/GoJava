@@ -57,10 +57,25 @@ public class CategoryHibernateTest{
       
       session = sessionFactory.openSession();
       session.beginTransaction();
-      List<Category> categories = (List<Category>)session.createQuery("from Category").list();
+      List<Category> categories = (List<Category>) session.createQuery("from Category").list();
       for (Category tempCategory : categories) {
         System.out.println(tempCategory);
     }
+      session.close();
+      
+      session = sessionFactory.openSession();
+      session.beginTransaction();
+      System.out.println("Getting category by Id");
+      category = session.get(Category.class, 1);
+      System.out.println(category);
+      category.setCategoryName("Other Category Name");
+      session.getTransaction().commit();
+      session.close();
+      
+      session  = sessionFactory.openSession();
+      session.beginTransaction();
+      category = session.get(Category.class, 1);
+      System.out.println(category);
       session.close();
       
       
