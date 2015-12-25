@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ProjectMappingTest {
-
+	
 	private SessionFactory sessionFactory;
 
 	@Before
@@ -41,8 +41,10 @@ public class ProjectMappingTest {
 		session.beginTransaction();
 		
 		Category category1 = new Category();
-		category1.setCategoryId(11l);
 		category1.setName("TestCategory 1");
+		
+		Category category2 = new Category();		
+		category2.setName("TestCategory 2");
 
 		Project project1 = new Project();
 		project1.setName("TestName1");
@@ -60,8 +62,9 @@ public class ProjectMappingTest {
 		project2.setDaysToGo(2);
 		project2.setHistory("TestHistory2");
 		project2.setLink("TestLink2");
-		project2.setCategory(category1);
-
+		project2.setCategory(category2);
+		
+		session.save(category1);
 		session.save(project1);
 		session.save(project2);
 		session.getTransaction().commit();
@@ -70,7 +73,9 @@ public class ProjectMappingTest {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		System.out.println("\n-----Get by id = 1-----");
+		Category category = session.get(Category.class, 1l);
 		Project project = session.get(Project.class, 1l);
+		System.out.println(category);
 		System.out.println(project);
 		session.close();
 
@@ -83,4 +88,5 @@ public class ProjectMappingTest {
 		}
 		session.close();
 	}
+
 }
