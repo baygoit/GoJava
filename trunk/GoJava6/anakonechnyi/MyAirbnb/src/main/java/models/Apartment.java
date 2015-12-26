@@ -7,6 +7,8 @@ import java.util.List;
 import observerFr.Observer;
 import observerFr.Subject;
 
+import javax.persistence.*;
+
 @Entity
 @Table (name = "apartments")
 public class Apartment implements Subject {

@@ -1,5 +1,6 @@
 package models;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table (name = "reservations")
+@Table(name = "reservations")
 public class Reservation {
     @Id
     @Column (name = "reserv_id")

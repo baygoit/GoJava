@@ -5,11 +5,11 @@
 
 package dao;
 
-import dao.AbstractDAO;
+import models.City;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import models.City;
 
 public class CitiesDAO extends AbstractDAO {
     public CitiesDAO() {
