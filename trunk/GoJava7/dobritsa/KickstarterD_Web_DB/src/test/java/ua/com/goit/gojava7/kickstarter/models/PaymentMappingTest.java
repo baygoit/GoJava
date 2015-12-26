@@ -39,18 +39,30 @@ public class PaymentMappingTest {
 	public void testBasicUsage() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+		
+		Category category1 = new Category();
+		category1.setName("TestCategory 1");
+
+		Project project1 = new Project();
+		project1.setName("TestName1");
+		project1.setDescription("TestDescription1");
+		project1.setGoal(100);
+		project1.setDaysToGo(1);
+		project1.setHistory("TestHistory1");
+		project1.setLink("TestLink1");
+		project1.setCategory(category1);
 
 		Payment payment1 = new Payment();
 		payment1.setUser("Nike1");
 		payment1.setCard("1111222233334444");
 		payment1.setAmount(100);
-		payment1.setProjectId(11l);
+		payment1.setProject(project1);
 
 		Payment payment2 = new Payment();
 		payment2.setUser("Nike2");
 		payment2.setCard("1111222233332222");
 		payment2.setAmount(200);
-		payment2.setProjectId(22l);
+		payment2.setProject(project1);
 
 		session.save(payment1);
 		session.save(payment2);

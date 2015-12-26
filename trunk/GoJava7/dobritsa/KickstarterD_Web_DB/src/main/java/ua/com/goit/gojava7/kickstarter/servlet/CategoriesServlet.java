@@ -31,8 +31,7 @@ public class CategoriesServlet extends HttpServlet {
 	private static final Logger log = LoggerFactory.getLogger(CategoriesServlet.class);	 
 	
 	@Autowired
-	private QuoteDao quoteDao;
-	
+	private QuoteDao quoteDao;	
 	@Autowired
 	private ProjectDao projectDao;	
 	@Autowired

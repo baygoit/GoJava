@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ProjectMappingTest {
-	
+
 	private SessionFactory sessionFactory;
 
 	@Before
@@ -39,14 +39,18 @@ public class ProjectMappingTest {
 	public void testBasicUsage() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		
+
 		Category category1 = new Category();
+		// TODO category1.setCategoryId(22l); does not work!
+		category1.setCategoryId(22l);
 		category1.setName("TestCategory 1");
-		
-		Category category2 = new Category();		
+
+		Category category2 = new Category();
 		category2.setName("TestCategory 2");
 
 		Project project1 = new Project();
+		// TODO project1.setProjectId(22l); does not work!
+		project1.setProjectId(22l);
 		project1.setName("TestName1");
 		project1.setDescription("TestDescription1");
 		project1.setGoal(100);
@@ -63,7 +67,7 @@ public class ProjectMappingTest {
 		project2.setHistory("TestHistory2");
 		project2.setLink("TestLink2");
 		project2.setCategory(category2);
-		
+
 		session.save(category1);
 		session.save(project1);
 		session.save(project2);
@@ -72,11 +76,9 @@ public class ProjectMappingTest {
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		System.out.println("\n-----Get by id = 1-----");
-		Category category = session.get(Category.class, 1l);
-		Project project = session.get(Project.class, 1l);
-		System.out.println(category);
-		System.out.println(project);
+		System.out.println("\n-----Get by id = 1-----");	
+		Project project = session.get(Project.class, 1l);	
+		System.out.println("Project: " + project);
 		session.close();
 
 		session = sessionFactory.openSession();
@@ -84,9 +86,8 @@ public class ProjectMappingTest {
 		System.out.println("\n-----Get list of projects-----");
 		List<Project> projects = (List<Project>) session.createQuery("from Project q").list();
 		for (Project resultProject : projects) {
-			System.out.println(resultProject);
+			System.out.println("Project: " + resultProject);
 		}
 		session.close();
 	}
-
 }

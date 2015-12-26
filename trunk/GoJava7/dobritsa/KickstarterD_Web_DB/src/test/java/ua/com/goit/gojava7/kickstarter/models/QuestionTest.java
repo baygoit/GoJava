@@ -28,7 +28,7 @@ public class QuestionTest extends Assert {
 	@Before
 	public void setUp() {
 		question = new Question();
-		question.setId(11l);
+		question.setQuestionId(11l);
 		question.setTime("TestTime");
 		question.setQuestion("TestQuestion");
 		question.setAnswer("TestAnswer");
@@ -43,7 +43,7 @@ public class QuestionTest extends Assert {
 
 	@Test
 	public void testGet() {
-		assertThat(question.getId(), is(11l));
+		assertThat(question.getQuestionId(), is(11l));
 		assertThat(question.getTime(), is("TestTime"));
 		assertThat(question.getQuestion(), is("TestQuestion"));
 		assertThat(question.getAnswer(), is("TestAnswer"));

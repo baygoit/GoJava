@@ -51,7 +51,7 @@ public class PaymentCheckServlet extends HttpServlet {
 		int amount = Integer.parseInt(request.getParameter("amount"));
 		Long projectId = Long.parseLong(request.getParameter("projectId"));
 		
-		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategory().getCategoryId()));
+		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
 		request.setAttribute("project", projectDao.get(projectId));
 		request.setAttribute("amount", amount);
 		

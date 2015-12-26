@@ -45,7 +45,7 @@ public class RewardDao {
 		public Reward mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 			log.info("RewardMapper()...");
 			Reward reward = new Reward();
-			reward.setId(resultSet.getLong("id"));
+			reward.setRewardId(resultSet.getLong("id"));
 			reward.setAmount(resultSet.getInt("amount"));
 			reward.setReward(resultSet.getString("reward"));
 			reward.setProjectId(resultSet.getLong("project_id"));

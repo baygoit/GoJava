@@ -2,17 +2,17 @@ package ua.com.goit.gojava7.kickstarter.models;
 
 public class Reward {
 
-	private Long id;
+	private Long rewardId;
 	private int amount;
 	private String reward;	
-	private Long projectId;
+	private Project project = new Project();	
 
-	public Long getId() {
-		return id;
+	public Long getRewardId() {
+		return rewardId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setRewardId(Long rewardId) {
+		this.rewardId = rewardId;
 	}
 
 	public int getAmount() {
@@ -31,16 +31,24 @@ public class Reward {
 		this.reward = reward;
 	}
 
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
 	public Long getProjectId() {
-		return projectId;
+		return project.getProjectId();
 	}
 
 	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
+		project.setProjectId(projectId);
 	}
 
 	@Override
 	public String toString() {
-		return "id: " + id + "; Amount: " + amount + "; Reward: " + reward + "; projectId: " + projectId;
+		return "rewardId: " + rewardId + "; Amount: " + amount + "; Reward: " + reward + "; projectId: " + getProjectId();
 	}
 }

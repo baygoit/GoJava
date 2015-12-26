@@ -9,7 +9,7 @@ public class Project {
 	private Integer daysToGo;
 	private String history;
 	private String link;
-	private Category category;	
+	private Category category = new Category();	
 
 	public Long getProjectId() {
 		return projectId;
@@ -83,9 +83,17 @@ public class Project {
 		this.category = category;
 	}
 	
+	public Long getCategoryId() {
+		return category.getCategoryId();
+	}
+	
+	public void setCategoryId(Long categoryId) {
+		category.setCategoryId(categoryId);;
+	}
+	
 	@Override
 	public String toString() {
-		return "id: " + projectId + ", name: " + name + ", description: " + description + ", goal: " + goal + ", pledged: "
-				+ pledged + ", daysToGo: " + daysToGo + ", history: " + history + ", link: " + link + ", categoryId: " + category.getCategoryId();
+		return "id: " + projectId + "; name: " + name + "; description: " + description + "; goal: " + goal + "; pledged: "
+				+ pledged + "; daysToGo: " + daysToGo + "; history: " + history + "; link: " + link + "; categoryId: " + getCategoryId();
 	}
 }
