@@ -20,5 +20,7 @@
 			<li>$${categoryIn10.money} - <a href="projects?id=${categoryIn10.categoryId}">${categoryIn10.name}</a></li>			
 		</c:forEach>
 	</ul>	
-
+	
+	<p>Category with the most rich project is <a href="projects?id=${categoryWithTopProject.categoryId}">${categoryWithTopProject.name}</a></p>
+	
 <jsp:include page="footer.jsp" />
