@@ -41,9 +41,11 @@ public class CategoryMappingTest {
 		session.beginTransaction();
 
 		Category category1 = new Category();
+		category1.setCategoryId(11l);
 		category1.setName("TestCategory 1");
 
 		Category category2 = new Category();
+		category2.setCategoryId(22l);
 		category2.setName("TestCategory 2");
 
 		session.save(category1);

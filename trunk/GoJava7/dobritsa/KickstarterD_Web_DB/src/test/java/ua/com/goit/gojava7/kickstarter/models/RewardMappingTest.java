@@ -40,15 +40,27 @@ public class RewardMappingTest {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
+		Category category1 = new Category();
+		category1.setName("TestCategory 1");
+
+		Project project1 = new Project();
+		project1.setName("TestName1");
+		project1.setDescription("TestDescription1");
+		project1.setGoal(100);
+		project1.setDaysToGo(1);
+		project1.setHistory("TestHistory1");
+		project1.setLink("TestLink1");
+		project1.setCategory(category1);		
+		
 		Reward reward1 = new Reward();
 		reward1.setAmount(10);
 		reward1.setReward("TestReward1");
-		reward1.setProjectId(11l);
+		reward1.setProject(project1);
 
 		Reward reward2 = new Reward();
 		reward2.setAmount(2);
 		reward2.setReward("TestReward2");
-		reward2.setProjectId(22l);
+		reward2.setProject(project1);
 
 		session.save(reward1);
 		session.save(reward2);

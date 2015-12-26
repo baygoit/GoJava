@@ -6,10 +6,11 @@
 <hibernate-mapping package="ua.com.goit.gojava7.kickstarter.models">
 
 	<class name="Category" table="Category">
-		<id name="id">
-			<generator class="increment" />
-		</id>
+		<id name="categoryId">
+			<generator class="native" />
+		</id>		
 		<property name="name" />	
+			
 	</class>
 
 </hibernate-mapping>

@@ -6,13 +6,17 @@
 <hibernate-mapping package="ua.com.goit.gojava7.kickstarter.models">
 
 	<class name="Payment" table="Payment">
-		<id name="id">
-			<generator class="increment" />
+		<id name="paymentId">
+			<generator class="native" />
 		</id>
 		<property name="user" />
 		<property name="card" />
 		<property name="amount" />
-		<property name="projectId" />
+		
+		<many-to-one name="Project" class="ua.com.goit.gojava7.kickstarter.models.Project"
+            column="projectId" not-null="true"
+            cascade="all" />	
+            
 	</class>
 
 </hibernate-mapping>

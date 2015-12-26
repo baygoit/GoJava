@@ -1,7 +1,7 @@
 package filter;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+/*import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;*/
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class LogingFilter implements Filter{
 
-    private static final Logger logger = LogManager.getLogger(LogingFilter.class);
+    //private static final Logger logger = LogManager.getLogger(LogingFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -29,7 +29,8 @@ public class LogingFilter implements Filter{
         if (req.getSession() == null
                 || !isCredsValid(req)) {
             try {
-                req.getRequestDispatcher("/login.jsp").forward(request, response);
+                System.out.println("to login.jsp");
+                req.getRequestDispatcher("/Login.jsp").forward(request, response);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -40,20 +41,16 @@ public class LogingFilter implements Filter{
 
     private boolean isCredsValid(HttpServletRequest request) {
         HttpSession session = request.getSession();
-
-
         String user = (String) session.getAttribute("user");
         String pass = (String) session.getAttribute("pass");
-
         ServletContext servletContext =
                 request.getServletContext();
-
         if(user == null || pass == null) {
             //logger.info("you are not logged in");
             return false;
         }
         else if (!user.equals(servletContext.getInitParameter("user"))
-                || !user.equals(servletContext.getInitParameter("pass"))) {
+                || !pass.equals(servletContext.getInitParameter("pass"))) {
             //logger.error("invalid user or password, user: " + user + " , pass: " + pass);
             return false;
         }

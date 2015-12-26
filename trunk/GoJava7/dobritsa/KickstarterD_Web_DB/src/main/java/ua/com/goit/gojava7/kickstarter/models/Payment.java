@@ -2,18 +2,18 @@ package ua.com.goit.gojava7.kickstarter.models;
 
 public class Payment {
 
-	private Long id;
+	private Long paymentId;
 	private String user;
 	private String card;
 	private Integer amount;
-	private Long projectId;
+	private Project project = new Project();
 
-	public Long getId() {
-		return id;
+	public Long getPaymentId() {
+		return paymentId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setPaymentId(Long paymentId) {
+		this.paymentId = paymentId;
 	}
 
 	public String getUser() {
@@ -38,19 +38,26 @@ public class Payment {
 
 	public void setAmount(Integer amount) {
 		this.amount = amount;
+	}	
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public Long getProjectId() {
-		return projectId;
+		return project.getProjectId();
 	}
 
 	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
+		project.setProjectId(projectId);;
 	}
 
 	@Override
 	public String toString() {
-		return id + "; " + user + "; " + card + "; " + amount + "; " + projectId + "; ";
+		return "paymentId: " + paymentId + "; user: " + user + "; card: " + card + "; amount: " + amount + "; projectId: " + getProjectId() + ";";
 	}
-
 }

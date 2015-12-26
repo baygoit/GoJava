@@ -6,8 +6,8 @@
 <hibernate-mapping package="ua.com.goit.gojava7.kickstarter.models">
 
 	<class name="Quote" table="Quote">
-		<id name="id">
-			<generator class="increment" />
+		<id name="quoteId">
+			<generator class="native" />
 		</id>
 		<property name="text" />
 		<property name="author" />

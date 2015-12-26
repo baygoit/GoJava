@@ -32,7 +32,7 @@ public class CategoryTest extends Assert {
 	public void setUp() {
 		category = new Category();
 		category.setName("CategoryName");
-		category.setId(10l);
+		category.setCategoryId(10l);
 		System.setOut(printSteam);		
 	}
 
@@ -48,7 +48,7 @@ public class CategoryTest extends Assert {
 	
 	@Test
 	public void testGet() {
-		assertThat(category.getId(), is(10l));
+		assertThat(category.getCategoryId(), is(10l));
 	}
 
 	@Test

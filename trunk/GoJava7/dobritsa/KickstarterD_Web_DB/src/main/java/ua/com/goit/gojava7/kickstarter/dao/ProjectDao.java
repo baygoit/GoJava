@@ -43,16 +43,18 @@ public class ProjectDao {
 	
 	private final class ProjectMapper implements RowMapper<Project> {
 		public Project mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-			log.info("ProjectMapper()...");
+			log.info("ProjectMapper()...");	
+			
 			Project project = new Project();
-			project.setId(resultSet.getLong("id"));
+			project.setProjectId(resultSet.getLong("id"));
 			project.setName(resultSet.getString("name"));
 			project.setDescription(resultSet.getString("description"));
 			project.setGoal(resultSet.getInt("goal"));		
 			project.setDaysToGo(resultSet.getInt("daysToGo"));
 			project.setHistory(resultSet.getString("history"));
-			project.setLink(resultSet.getString("link"));
-			project.setCategoryId(resultSet.getLong("category_id"));
+			project.setLink(resultSet.getString("link"));			
+			project.setCategoryId(resultSet.getLong("category_id"));			
+		
 			log.debug("ProjectMapper() returned project: {}", project);
 			return project;
 		}

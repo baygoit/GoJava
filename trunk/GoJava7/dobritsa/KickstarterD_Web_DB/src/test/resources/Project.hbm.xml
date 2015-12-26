@@ -6,8 +6,8 @@
 <hibernate-mapping package="ua.com.goit.gojava7.kickstarter.models">
 
 	<class name="Project" table="Project">
-		<id name="id">
-			<generator class="increment" />
+		<id name="projectId">
+			<generator class="native" />
 		</id>
 		<property name="name" />
 		<property name="description" />
@@ -16,7 +16,11 @@
 		<property name="daysToGo" />
 		<property name="history" />
 		<property name="link" />
-		<property name="categoryId" />					
+
+		  <many-to-one name="Category" class="ua.com.goit.gojava7.kickstarter.models.Category"
+            column="categoryId" not-null="true"
+            cascade="all" />	    
+			
 	</class>
 
 </hibernate-mapping>
