@@ -37,20 +37,37 @@ public class RewardMappingTest {
 	@Test
 	public void testBasicUsage() {
 		Session session = getSession();
+		Category category1 = new Category(1, "Cat1");
+		Category category2 = new Category(2, "Cat2");
+		
+		Project project1 = new Project();
+		project1.setName("Proj 1");
+		project1.setAuthor("Aut 1");
+		project1.setCategory(category1);
+		
+		Project project2 = new Project();
+		project2.setName("Proj 2");
+		project2.setAuthor("Aut 2");
+		project2.setCategory(category2);
+		
+		session.save(category1);
+		session.save(category2);
+		session.save(project1);
+		session.save(project2);
 
 		Reward element1 = new Reward();
 		element1.setDescription("R 1");
 		element1.setPledgeSum(42);
-		element1.setProjectId(1);
+		element1.setProject(project1);
 
 		Reward element2 = new Reward();
 		element2.setDescription("R 2");
-		element2.setProjectId(1);
+		element2.setProject(project1);
 		
 		Reward element3 = new Reward();
 		element3.setDescription("R 3");
 		element3.setPledgeSum(13);
-		element3.setProjectId(3);
+		element3.setProject(project2);
 
 		session.save(element1);
 		session.save(element2);

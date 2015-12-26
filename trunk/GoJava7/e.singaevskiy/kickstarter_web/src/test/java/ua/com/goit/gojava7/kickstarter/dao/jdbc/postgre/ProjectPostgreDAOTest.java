@@ -10,6 +10,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectPostgreDAOTest {
@@ -19,13 +21,13 @@ public class ProjectPostgreDAOTest {
 
     @Before
     public void setUp() throws Exception {
-        dao = new ProjectPostgreDAO();
-		dao.setJdbcTemplate(TestDaoFactory.setupJdbcTemplate()); 
+    	HibernateUtil.configure("hibernate.cfg.xml");
+    	dao = new ProjectPostgreDAO();
 
         list = new ArrayList<>();
-        list.add(new Project(1, "p1", "a1", 0));
-        list.add(new Project(2, "p2", "a2", 0));
-        list.add(new Project(3, "p3", "a3", 0));
+        list.add(new Project(1, "p1", "a1", new Category(1, "cat1")));
+        list.add(new Project(2, "p2", "a2", new Category(1, "cat1")));
+        list.add(new Project(3, "p3", "a3", null));
     }
 
     @After
@@ -50,7 +52,7 @@ public class ProjectPostgreDAOTest {
     public void testGetByCategory() {
         dao.addAll(list);
         int catId = 1;
-        dao.getByCategory(1).forEach(p -> assertThat(p.getCategoryId(), is(catId)));
+        dao.getByCategory(1).forEach(p -> assertThat(p.getCategory().getId(), is(catId)));
     }
 
 }

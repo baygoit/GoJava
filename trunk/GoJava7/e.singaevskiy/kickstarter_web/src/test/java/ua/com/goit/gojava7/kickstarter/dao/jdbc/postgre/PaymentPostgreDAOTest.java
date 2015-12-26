@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 
 public class PaymentPostgreDAOTest {
@@ -19,12 +20,12 @@ public class PaymentPostgreDAOTest {
 
     @Before
     public void setUp() throws Exception {
+    	HibernateUtil.configure("hibernate.cfg.xml");
         dao = new PaymentPostgreDAO();
-		dao.setJdbcTemplate(TestDaoFactory.setupJdbcTemplate()); 
         
         list = new ArrayList<>();
-        list.add(new Payment(0, "u1", 21312312, 10, null));
-        list.add(new Payment(0, "u2", 21312312, 20, null));       
+        list.add(new Payment(null, "u1", 21312312, 10, null));
+        list.add(new Payment(null, "u2", 21312312, 20, null));       
        
     }
     

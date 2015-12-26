@@ -8,7 +8,7 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		HibernateUtil.getSessionFactory();
+		HibernateUtil.configure("hibernate.cfg.xml");
 	}
 
 	@Override

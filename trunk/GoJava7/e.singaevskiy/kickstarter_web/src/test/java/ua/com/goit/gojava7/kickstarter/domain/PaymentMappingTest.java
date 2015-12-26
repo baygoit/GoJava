@@ -38,19 +38,48 @@ public class PaymentMappingTest {
 	public void testBasicUsage() {
 		Session session = getSession();
 
+		Category category1 = new Category(1, "Cat1");
+		Category category2 = new Category(2, "Cat2");
+		
+		Project project1 = new Project();
+		project1.setName("Proj 1");
+		project1.setAuthor("Aut 1");
+		project1.setCategory(category1);
+		
+		Project project2 = new Project();
+		project2.setName("Proj 2");
+		project2.setAuthor("Aut 2");
+		project2.setCategory(category2);
+		
+		Reward reward1 = new Reward();
+		reward1.setDescription("R 1");
+		reward1.setPledgeSum(42);
+		reward1.setProject(project1);
+
+		Reward reward2 = new Reward();
+		reward2.setDescription("R 2");
+		reward2.setProject(project1);
+		
+		session.save(category1);
+		session.save(category2);
+		session.save(project1);
+		session.save(project2);		
+		session.save(reward1);
+		session.save(reward2);
+		
 		Payment element1 = new Payment();
-		element1.setRewardId(2);
+		element1.setReward(reward1);
 		element1.setSum(22);
-		element1.setProjectId(1);
+		element1.setProject(project1);
 
 		Payment element2 = new Payment();
 		element2.setUser("U 2");
-		element2.setProjectId(1);
+		element2.setProject(project1);
 		
 		Payment element3 = new Payment();
 		element3.setUser("R 3");
 		element3.setSum(13);
-		element3.setProjectId(3);
+		element3.setProject(project2);
 
 		session.save(element1);
 		session.save(element2);

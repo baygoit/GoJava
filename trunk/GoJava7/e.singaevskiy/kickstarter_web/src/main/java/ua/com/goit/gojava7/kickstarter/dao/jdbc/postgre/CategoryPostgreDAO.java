@@ -1,90 +1,52 @@
 package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 public class CategoryPostgreDAO implements CategoryDAO {
 
-	private JdbcTemplate jdbcTemplate;
-
 	@Override
 	public void clear() {
-		String sql = "delete from category";
-		jdbcTemplate.execute(sql);
+		HibernateUtil.executeUpdate("delete Category");
 	}
 
 	@Override
 	public Category get(int index) {
-		String sql = "select id, name from category where id = ?";
-		return jdbcTemplate.queryForObject(sql, new Object[]{index}, new ElementMapper());
+		return HibernateUtil.get("from Category where id = ?", index);
 	}
 
 	@Override
 	public void add(Category element) {
-		String sql = "insert into category (id, name) values (?, ?)";
-		jdbcTemplate.batchUpdate(sql, new StatementSetter(element));
+		HibernateUtil.save(element);
 	}
 
 	@Override
 	public void addAll(List<Category> elements) {
-		String sql = "insert into category (id, name) values (?, ?)";
-		jdbcTemplate.batchUpdate(sql, new StatementSetter(elements));
+		HibernateUtil.save(elements);
 	}
 
 	@Override
 	public List<Category> getAll() {
-		String sql = "select id, name from category";
-		return jdbcTemplate.query(sql, new ElementMapper());
+		return HibernateUtil.getList("from Category");
+	}
+	
+	@Override
+	public List<Category> getTopDonated(int limit) {
+		return HibernateUtil.getList("select category \n"+
+			"from Category category \n"+
+			"join Project project on category.id = project.category_id \n"+
+			"join Payment payment on project.id = payment.project_id \n"+
+			"group by category.id, category.name \n"+
+			"order by sum(payment.sum) desc \n"
+			//+"limit 10"
+			);
+	}
+	
+	public void name() {
+		HibernateUtil.getList("from Category join Project ");
 	}
 
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
-
-	private final class StatementSetter implements BatchPreparedStatementSetter {
-
-		List<Category> list;
-
-		StatementSetter(List<Category> list) {
-			this.list = list;
-		}
-
-		StatementSetter(Category element) {
-			list = new ArrayList<>();
-			list.add(element);
-		}
-
-		@Override
-		public void setValues(PreparedStatement statement, int i) throws SQLException {
-			Category element = list.get(i);
-			statement.setObject(1, element.getId());
-			statement.setObject(2, element.getName());
-		}
-
-		@Override
-		public int getBatchSize() {
-			return list.size();
-		}
-	}
-
-	private final class ElementMapper implements RowMapper<Category> {
-
-		public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Category category = new Category();
-			category.setId(rs.getInt("id"));
-			category.setName(rs.getString("name"));
-			return category;
-		}
-
-	}
 }
