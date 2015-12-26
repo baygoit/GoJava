@@ -1,7 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
-import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -22,12 +20,7 @@ public class QuoteDaoImpl implements QuoteDao {
 		criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
 		criteria.setMaxResults(1);
 
-		List<Quote> quotes = criteria.list();
-		if (quotes.isEmpty()) {
-			return null;
-		}
-
-		Quote quote = quotes.get(0);
+		Quote quote = (Quote) criteria.uniqueResult();
 
 		session.close();
 
