@@ -37,13 +37,13 @@ public class Application {
             User client = new User("Bony", "Client1", "gooble@boom");
             //host.registerObserver(client); to change
         } catch (InputMismatchException err) {
-            System.out.println("Illegal name / sername / email");
+            System.out.println("Illegal name / surname / email");
         }*/
         //System.out.println(ApartmentType.PLACE);
         EntityManagerFactory factory = null;
         EntityManager manager = null;
         try {
-            factory = Persistence.createEntityManagerFactory("my-persistence-unit");
+            factory = Persistence.createEntityManagerFactory("jpa");
             manager = factory.createEntityManager();
             manager.getTransaction().begin();
             manager.persist( new User("Blo", "Thisost", "bt@mail", false) );
