@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2cbbc71-3b49-4997-966e-9c9d35b66d26" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\repack\GoJava\trunk\GoJava6\anakonechnyi\MyAirbnb\src\main\java\DAO\AbstractDAO.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\repack\GoJava\trunk\GoJava6\anakonechnyi\MyAirbnb\src\main\java\DAO\ApartmentDAO.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\repack\GoJava\trunk\GoJava6\anakonechnyi\MyAirbnb\src\main\java\DAO\CitiesDAO.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\repack\GoJava\trunk\GoJava6\anakonechnyi\MyAirbnb\src\main\java\DAO\ReservationDAO.java" afterPath="" />
-      <change type="DELETED" beforePath="D:\repack\GoJava\trunk\GoJava6\anakonechnyi\MyAirbnb\src\main\java\DAO\UserDAO.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/airbnb.iml" afterPath="$PROJECT_DIR$/airbnb.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MyAirbnb.iws" />
@@ -3235,7 +3231,7 @@
       <workItem from="1449347599870" duration="81000" />
       <workItem from="1449347878778" duration="52000" />
       <workItem from="1450632725731" duration="2172000" />
-      <workItem from="1451116844930" duration="1610000" />
+      <workItem from="1451116844930" duration="2574000" />
     </task>
     <task id="LOCAL-00001" summary="2nd home work">
       <created>1442953125355</created>
@@ -3291,11 +3287,17 @@
       <option name="project" value="LOCAL" />
       <updated>1451119339931</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="reorganize packages">
+      <created>1451119586672</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1451119586672</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="252838000" />
+    <option name="totallyTimeSpent" value="253802000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -3307,7 +3309,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
