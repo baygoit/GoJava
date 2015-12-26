@@ -1,4 +1,4 @@
-package models;
+package models1;
 
 /**
  * @autor A_Nakonechnyi
@@ -10,7 +10,7 @@ public enum ApartmentType {
     APARTMENT(3);
 
     private int id;
-    private ApartmentType (int id) {
+    ApartmentType(int id) {
         this.id=id;
     }
     public static ApartmentType getType(Integer id) {

@@ -1,4 +1,4 @@
-package models;
+package models1;
 
 
 
@@ -29,11 +29,12 @@ public class User implements Observer {
     private String email;
     @Column (name = "is_host")
     private Boolean isHost;
-    @OneToMany (mappedBy = "host_id")
+    @OneToMany /*(mappedBy = "host_id")*/
+    @JoinColumn (name = "host_id")
     public List<Apartment> apartments;
     //private String city;
 
-
+    public User(){}
 
     public User (/*int clientId,*/ String name, String surname, String email , boolean isHost){
         if (this.setName(name)&&this.setSurname(surname)&&this.setEmail(email)) {

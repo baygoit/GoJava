@@ -1,12 +1,9 @@
-package models;
+package models1;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import models.ApartmentType;
-import models.Reservation;
 import observerFr.Observer;
 import observerFr.Subject;
 
@@ -16,7 +13,7 @@ import javax.persistence.*;
 @Table (name = "apartments")
 public class Apartment implements Subject {
     @Id
-    @Column(name = "idapartments", nullable = false, unique = true)
+    @Column(name = "idapartments"/*, nullable = false, unique = true*/)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int apartmentId;
     @Column (name = "type")
@@ -24,8 +21,9 @@ public class Apartment implements Subject {
     private ApartmentType apartmentType;
     @Column (name = "address")
     private String address;
-    @OneToMany (mappedBy = "idapartment")
-    private LinkedList<Reservation> reservationList;
+    @OneToMany /*(mappedBy = "idapartment")*/
+    @JoinColumn (name = "idapartment")
+    private List<Reservation> reservationList;
     @ManyToOne (fetch=FetchType.LAZY)
     @JoinColumn(name="city_id")
     private City city;

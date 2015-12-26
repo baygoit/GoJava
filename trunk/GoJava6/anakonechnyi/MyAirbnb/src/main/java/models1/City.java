@@ -1,7 +1,6 @@
-package models;
+package models1;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,10 +14,11 @@ public class City {
     @Column (name =  "city_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column (name = "name")
+    @Column (name = "city_name")
     private String name;
-    @OneToMany(mappedBy = "city_id")
-    private ArrayList<Apartment> apartmentList;
+    @OneToMany/*(mappedBy = "city_id")*/
+    @JoinColumn (name = "city_id")
+    private List<Apartment> apartmentList;
 
     public City(int id, String name) {
         this.id = id;
