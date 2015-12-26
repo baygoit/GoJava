@@ -29,10 +29,16 @@ public class CategoryDao {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	public List<Category> getAll() {
-		log.info("<Category> getAll()...");
-		String query = "select id, name from category";
-		return jdbcTemplate.query(query, new CategoryMapper());
+	public List<Category> getTop10() {
+		log.info("<Category> getTop10()...");
+		String query = "select category.name, category.id, sum(payment.amount) as cnt from category join project on category.id = project.category_id join payment on project.id = payment.project_id group by category_id having sum(payment.amount) > 5 order by cnt desc limit 10";
+		return jdbcTemplate.query(query, new CategoryTopMapper());
+	}
+	
+	public List<Category> getCategoryWithTopProject() {
+		log.info("<Category> getTop2()...");
+		String query = "select category.name as categoryName, category.id as categoryId, project.name as projectName, sum(payment.amount) as cnt from category join project on category.id = project.category_id join payment on project.id = payment.project_id  group by payment.project_id order by cnt desc limit 2";
+		return jdbcTemplate.query(query, new CategoryTopMapper());
 	}
 
 	public Category get(Long categoryId) {
@@ -40,6 +46,12 @@ public class CategoryDao {
 		String query = "select id, name from category where id = ?";
 		return jdbcTemplate.queryForObject(query, new Object[] { categoryId }, new CategoryMapper());
 	}
+	
+	public List<Category> getAll() {
+		log.info("<Category> getAll()...");
+		String query = "select id, name from category";
+		return jdbcTemplate.query(query, new CategoryMapper());
+	}	
 
 	private final class CategoryMapper implements RowMapper<Category> {
 		public Category mapRow(ResultSet resultSet, int rowNum) throws SQLException {
@@ -47,6 +59,19 @@ public class CategoryDao {
 			Category category = new Category();
 			category.setCategoryId((long) resultSet.getInt("id"));
 			category.setName(resultSet.getString("name"));
+			log.debug("CategoryMapper() returned category: {}", category);
+			return category;
+		}
+	}
+	
+	//TODO is it norm to have extra mapper?
+	private final class CategoryTopMapper implements RowMapper<Category> {
+		public Category mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+			log.info("CategoryMapper()...");
+			Category category = new Category();
+			category.setCategoryId((long) resultSet.getInt("id"));
+			category.setName(resultSet.getString("name"));
+			category.setMoney(resultSet.getInt("cnt"));
 			log.debug("CategoryMapper() returned category: {}", category);
 			return category;
 		}

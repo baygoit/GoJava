@@ -4,6 +4,7 @@ public class Category {
 
 	private Long categoryId;
 	private String name;		
+	private int money;
 	
 	public Long getCategoryId() {
 		return categoryId;
@@ -19,6 +20,14 @@ public class Category {
 
 	public void setName(String name) {
 		this.name = name;
+	}	
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
 	}
 
 	@Override

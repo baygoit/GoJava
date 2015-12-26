@@ -8,18 +8,16 @@
 	<em>${quote.text}</em> <em>${quote.author}</em>
 
 	<p>Categories:</p>
-
 	<ul>
 		<c:forEach var="category" items="${requestScope.categories}">
 			<li><a href="projects?id=${category.categoryId}">${category.name}</a></li>
 		</c:forEach>
-	</ul>
+	</ul>		
 	
-	<p>Top 5 projects by pledged:</p>
-
+	<p>Top categories by pledged:</p>
 	<ul>
-		<c:forEach var="project" items="${requestScope.projects}">
-			<li>$${project.pledged} - <a href="project?id=${project.projectId}">${project.name}</a></li>			
+		<c:forEach var="categoryIn10" items="${requestScope.top10Categories}">
+			<li>$${categoryIn10.money} - <a href="projects?id=${categoryIn10.categoryId}">${categoryIn10.name}</a></li>			
 		</c:forEach>
 	</ul>	
 
