@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Question {
+	private long id;
     private int projectId;
     private String question;
     private String answer;
@@ -77,4 +78,12 @@ public class Question {
             return false;
         return true;
     }
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }

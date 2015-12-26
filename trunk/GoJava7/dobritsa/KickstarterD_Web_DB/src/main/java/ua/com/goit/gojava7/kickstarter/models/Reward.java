@@ -2,17 +2,16 @@ package ua.com.goit.gojava7.kickstarter.models;
 
 public class Reward {
 
-	private int id;
+	private Long id;
 	private int amount;
-	private String reward;
-	private String projectName;
-	private int projectId;
+	private String reward;	
+	private Long projectId;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -32,19 +31,11 @@ public class Reward {
 		this.reward = reward;
 	}
 
-	public String getProjectName() {
-		return projectName;
-	}
-
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-
-	public int getProjectId() {
+	public Long getProjectId() {
 		return projectId;
 	}
 
-	public void setProjectId(int projectId) {
+	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
 

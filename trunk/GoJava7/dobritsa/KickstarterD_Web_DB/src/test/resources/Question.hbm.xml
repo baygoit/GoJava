@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ua.com.goit.gojava7.kickstarter.models">
+
+	<class name="Question" table="Question">
+		<id name="id">
+			<generator class="increment" />
+		</id>
+		<property name="time" />
+		<property name="question" />
+		<property name="answer" />
+		<property name="projectId" />
+	</class>
+
+</hibernate-mapping>

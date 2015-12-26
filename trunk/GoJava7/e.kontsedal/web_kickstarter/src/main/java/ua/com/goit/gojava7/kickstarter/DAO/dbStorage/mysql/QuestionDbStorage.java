@@ -33,7 +33,7 @@ public class QuestionDbStorage extends AbstractQuestionStorage {
 				Question question = new Question();
 				question.setIdQuestion(resultSet.getInt("id"));
 				question.setIdParentProject(resultSet.getInt("id_project"));
-				question.setQuestion(resultSet.getString("question"));
+				question.setQuestionText(resultSet.getString("question"));
 				questions.add(question);
 			}
 		} catch (SQLException e) {
@@ -51,7 +51,7 @@ public class QuestionDbStorage extends AbstractQuestionStorage {
 				Question question = new Question();
 				question.setIdQuestion(resultSet.getInt("id"));
 				question.setIdParentProject(resultSet.getInt("id_project"));
-				question.setQuestion(resultSet.getString("question"));
+				question.setQuestionText(resultSet.getString("question"));
 				questions.add(question);
 			}
 		} catch (SQLException e) {
@@ -65,7 +65,7 @@ public class QuestionDbStorage extends AbstractQuestionStorage {
 		try (Connection connection = basicDataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(INSERT_QUESTION);) {
 			statement.setInt(1, question.getIdParentProject());
-			statement.setString(2, question.getQuestion());
+			statement.setString(2, question.getQuestionText());
 			statement.executeUpdate();
 			connection.commit();
 		} catch (SQLException e) {

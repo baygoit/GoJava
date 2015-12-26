@@ -1,0 +1,63 @@
+2015-12-24 16:41:23 INFO  Version:37 - HHH000412: Hibernate Core {5.0.6.Final}
+2015-12-24 16:41:23 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2015-12-24 16:41:23 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2015-12-24 16:41:26 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2015-12-24 16:41:30 WARN  connections:71 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2015-12-24 16:41:30 INFO  connections:127 - HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2015-12-24 16:41:30 INFO  connections:136 - HHH10001001: Connection properties: {user=sa, password=****}
+2015-12-24 16:41:30 INFO  connections:141 - HHH10001003: Autocommit mode: false
+2015-12-24 16:41:30 INFO  DriverManagerConnectionProviderImpl:39 - HHH000115: Hibernate connection pool size: 1 (min=1)
+2015-12-24 16:41:31 INFO  Dialect:154 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2015-12-24 16:41:34 INFO  connections:235 - HHH10001008: Cleaning up connection pool [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2015-12-24 16:43:11 INFO  Version:37 - HHH000412: Hibernate Core {5.0.6.Final}
+2015-12-24 16:43:11 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2015-12-24 16:43:11 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2015-12-24 16:43:12 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2015-12-24 16:43:16 WARN  connections:71 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2015-12-24 16:43:16 INFO  connections:127 - HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2015-12-24 16:43:16 INFO  connections:136 - HHH10001001: Connection properties: {user=sa, password=****}
+2015-12-24 16:43:16 INFO  connections:141 - HHH10001003: Autocommit mode: false
+2015-12-24 16:43:16 INFO  DriverManagerConnectionProviderImpl:39 - HHH000115: Hibernate connection pool size: 1 (min=1)
+2015-12-24 16:43:17 INFO  Dialect:154 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2015-12-24 16:43:17 INFO  connections:235 - HHH10001008: Cleaning up connection pool [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2015-12-24 16:44:30 INFO  Version:37 - HHH000412: Hibernate Core {5.0.6.Final}
+2015-12-24 16:44:30 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2015-12-24 16:44:30 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2015-12-24 16:44:31 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2015-12-24 16:44:35 WARN  connections:71 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2015-12-24 16:44:35 INFO  connections:127 - HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2015-12-24 16:44:35 INFO  connections:136 - HHH10001001: Connection properties: {user=sa, password=****}
+2015-12-24 16:44:35 INFO  connections:141 - HHH10001003: Autocommit mode: false
+2015-12-24 16:44:35 INFO  DriverManagerConnectionProviderImpl:39 - HHH000115: Hibernate connection pool size: 1 (min=1)
+2015-12-24 16:44:36 INFO  Dialect:154 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2015-12-24 16:44:38 INFO  SchemaExport:400 - HHH000227: Running hbm2ddl schema export
+2015-12-24 16:44:38 INFO  SchemaExport:463 - HHH000230: Schema export complete
+2015-12-24 16:44:38 INFO  connections:235 - HHH10001008: Cleaning up connection pool [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2015-12-24 16:47:21 INFO  Version:37 - HHH000412: Hibernate Core {5.0.6.Final}
+2015-12-24 16:47:21 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2015-12-24 16:47:21 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2015-12-24 16:47:21 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2015-12-24 16:47:25 WARN  connections:71 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2015-12-24 16:47:25 INFO  connections:127 - HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2015-12-24 16:47:25 INFO  connections:136 - HHH10001001: Connection properties: {user=sa, password=****}
+2015-12-24 16:47:25 INFO  connections:141 - HHH10001003: Autocommit mode: false
+2015-12-24 16:47:25 INFO  DriverManagerConnectionProviderImpl:39 - HHH000115: Hibernate connection pool size: 1 (min=1)
+2015-12-24 16:47:26 INFO  Dialect:154 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2015-12-24 16:47:27 INFO  SchemaExport:400 - HHH000227: Running hbm2ddl schema export
+2015-12-24 16:47:27 INFO  SchemaExport:463 - HHH000230: Schema export complete
+2015-12-24 16:47:28 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2015-12-24 16:47:28 INFO  connections:235 - HHH10001008: Cleaning up connection pool [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2015-12-24 16:48:30 INFO  Version:37 - HHH000412: Hibernate Core {5.0.6.Final}
+2015-12-24 16:48:30 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2015-12-24 16:48:30 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2015-12-24 16:48:30 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2015-12-24 16:48:34 WARN  connections:71 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2015-12-24 16:48:34 INFO  connections:127 - HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2015-12-24 16:48:34 INFO  connections:136 - HHH10001001: Connection properties: {user=sa, password=****}
+2015-12-24 16:48:34 INFO  connections:141 - HHH10001003: Autocommit mode: false
+2015-12-24 16:48:34 INFO  DriverManagerConnectionProviderImpl:39 - HHH000115: Hibernate connection pool size: 1 (min=1)
+2015-12-24 16:48:35 INFO  Dialect:154 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2015-12-24 16:48:36 INFO  SchemaExport:400 - HHH000227: Running hbm2ddl schema export
+2015-12-24 16:48:36 INFO  SchemaExport:463 - HHH000230: Schema export complete
+2015-12-24 16:48:37 INFO  QueryTranslatorFactoryInitiator:47 - HHH000397: Using ASTQueryTranslatorFactory
+2015-12-24 16:48:37 INFO  connections:235 - HHH10001008: Cleaning up connection pool [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]

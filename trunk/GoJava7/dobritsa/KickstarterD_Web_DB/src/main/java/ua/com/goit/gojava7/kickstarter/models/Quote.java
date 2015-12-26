@@ -2,8 +2,17 @@ package ua.com.goit.gojava7.kickstarter.models;
 
 public class Quote {
 
+	private Long id;
 	private String text;
-	private String author;
+	private String author;	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getText() {
 		return text;
@@ -23,7 +32,7 @@ public class Quote {
 
 	@Override
 	public String toString() {
-		return text + "- Author: " + author;
+		return "Quote: " + text + "; Author: " + author;
 	}
 
 	public boolean isEmpty() {

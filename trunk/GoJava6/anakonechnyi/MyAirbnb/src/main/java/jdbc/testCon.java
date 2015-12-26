@@ -1,4 +1,4 @@
-package main.java.jdbc;
+package jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +12,7 @@ public class testCon {
         System.out.println("-------- MySQL JDBC Connection Testing ------------");
 
         try {
-            Class.forName("com.mysql.main.Java.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("Where is your MySQL JDBC Driver?");
             e.printStackTrace();
@@ -24,7 +24,7 @@ public class testCon {
 
         try {
             connection = DriverManager
-                    .getConnection("main.Java.jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
+                    .getConnection("jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
 
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");

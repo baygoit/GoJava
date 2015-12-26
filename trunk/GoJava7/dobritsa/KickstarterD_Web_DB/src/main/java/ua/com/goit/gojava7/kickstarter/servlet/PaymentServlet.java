@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.config.Validator;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDbDao;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDbDao;
-import ua.com.goit.gojava7.kickstarter.dao.RewardDbDao;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 
 @WebServlet("/payment")
 public class PaymentServlet extends HttpServlet {
@@ -25,13 +25,16 @@ public class PaymentServlet extends HttpServlet {
 	private static final Logger log = LoggerFactory.getLogger(PaymentServlet.class);	 
 	
 	@Autowired
-	private ProjectDbDao projectDao;
+	private ProjectDao projectDao;
 	
 	@Autowired
-	private RewardDbDao rewardDao;
+	private RewardDao rewardDao;
 	
 	@Autowired
-	private CategoryDbDao categoryDao;
+	private CategoryDao categoryDao;
+	
+	@Autowired
+	private Validator validator;
 
 	@Override
 	public void init() {
@@ -46,7 +49,7 @@ public class PaymentServlet extends HttpServlet {
 		log.info("doGet()...");		
 		int rewardId = Integer.parseInt(request.getParameter("id"));
 		int amount;
-		int projectId;
+		Long projectId;
 
 		if (rewardId != 0) {
 			projectId = rewardDao.get(rewardId).getProjectId();
@@ -57,9 +60,9 @@ public class PaymentServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 
 		} else {
-			projectId = Integer.parseInt(request.getParameter("projectId"));
+			projectId = Long.parseLong(request.getParameter("projectId"));
 			
-			if (Validator.validateAmountOfPledge(request.getParameter("amount"))) {	
+			if (validator.validateAmountOfPledge(request.getParameter("amount"))) {	
 				amount = Integer.parseInt(request.getParameter("amount"));
 				request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
 				request.setAttribute("project", projectDao.get(projectId));
