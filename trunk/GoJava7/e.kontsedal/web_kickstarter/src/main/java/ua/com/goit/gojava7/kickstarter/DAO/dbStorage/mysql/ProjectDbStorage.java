@@ -60,7 +60,7 @@ public class ProjectDbStorage extends AbstractProjectStorage {
 			project.setProjectDescription(resultSet.getString("description"));
 			project.setVideoUrl(resultSet.getString("video"));
 			project.setProjectCostNeed(resultSet.getInt("cost_need"));
-			project.setDeadline(resultSet.getInt("deadline"));
+			project.setDeadline(resultSet.getDate("deadline"));
 			return project;
 		}
 	}
@@ -89,7 +89,7 @@ public class ProjectDbStorage extends AbstractProjectStorage {
 			statement.setString(4, project.getProjectDescription());
 			statement.setString(5, project.getVideoUrl());
 			statement.setInt(6, project.getProjectCostNeed());
-			statement.setInt(7, project.getProjectDaysLeft());
+			statement.setDate(7, project.getDeadline());
 		}
 	}
 	

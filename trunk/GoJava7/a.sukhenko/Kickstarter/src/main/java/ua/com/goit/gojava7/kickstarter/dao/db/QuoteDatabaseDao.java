@@ -11,10 +11,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
-@Component
+@Repository
 public class QuoteDatabaseDao extends DatabaseDao<Quote> {
 
     private static String table  = "quotes";
@@ -39,7 +40,7 @@ public QuoteDatabaseDao(DataSource dataSource) {
     }
     
     
-    @Override
+
     protected Quote readElement(ResultSet resultSet) throws SQLException {
         Quote quote = new Quote();
         quote.setText(resultSet.getString("text"));
@@ -66,26 +67,6 @@ public QuoteDatabaseDao(DataSource dataSource) {
     }
 
 
-    @Override
-    public Quote getByNumber(int number) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
-    @Override
-    public void setAll(List<Quote> data) {
-        // TODO Auto-generated method stub
-        
-    }
-
-
-    @Override
-    public List<Quote> getAll() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 
     @Override
     public Quote get(int index) {
@@ -98,6 +79,11 @@ public QuoteDatabaseDao(DataSource dataSource) {
     public int size() {
         // TODO Auto-generated method stub
         return 0;
+    }
+    @Override
+    public List<Quote> getAll() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

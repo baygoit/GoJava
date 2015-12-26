@@ -30,5 +30,9 @@ public class Quote {
 	public void setText(String text) {
 		this.text = text;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Quote: " + getText() + "; " + "Author: " + getAuthor();
+	}
 }

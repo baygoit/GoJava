@@ -1,4 +1,5 @@
 observerFr\Observer.class
+jdbc\testCon.class
 main\java\jdbc\testSttmnt.class
 models\User.class
 dao\ReservationDAO.class
@@ -14,5 +15,4 @@ observerFr\Subject.class
 models\Reservation.class
 services\Searches.class
 servlets\TestServlet.class
-main\java\jdbc\testCon.class
 models\Apartment.class
