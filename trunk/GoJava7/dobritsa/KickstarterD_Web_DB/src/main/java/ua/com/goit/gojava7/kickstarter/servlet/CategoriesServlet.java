@@ -37,7 +37,7 @@ public class CategoriesServlet extends HttpServlet {
 			throws ServletException, IOException {
 		log.info("doGet()...");
 
-		request.setAttribute("quote", quoteDao.get(1));
+		request.setAttribute("quote", quoteDao.getRandomQuote());
 		request.setAttribute("categories", categoryDao.getAll());
 		request.setAttribute("top10Categories", categoryDao.getTop10());
 		request.setAttribute("categoryWithTopProject", categoryDao.getCategoryWithTopProject());

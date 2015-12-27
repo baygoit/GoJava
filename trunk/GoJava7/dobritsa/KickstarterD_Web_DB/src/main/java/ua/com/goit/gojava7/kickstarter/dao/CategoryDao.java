@@ -65,10 +65,10 @@ public class CategoryDao {
 	
 	private final class CategoryWithMoneyMapper extends CategoryMapper {
 		public Category mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-			log.info("CategoryMapper()...");			 
+			log.info("CategoryWithMoneyMapper()...");			 
 			Category category = super.mapRow(resultSet, rowNum);	
 			category.setMoney(resultSet.getInt("cnt"));
-			log.debug("CategoryMapper() returned category: {}", category);
+			log.debug("CategoryWithMoneyMapper() returned category: {}", category);
 			return category;
 		}
 	}

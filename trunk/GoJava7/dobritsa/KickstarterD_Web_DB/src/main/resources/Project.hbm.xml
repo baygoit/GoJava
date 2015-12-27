@@ -7,6 +7,7 @@
 
 	<class name="Project" table="Project">
 		<id name="projectId">
+		 <column name="id" />
 			<generator class="native" />
 		</id>
 		<property name="name" />
@@ -17,8 +18,8 @@
 		<property name="history" />
 		<property name="link" />
 
-		  <many-to-one name="Category" class="ua.com.goit.gojava7.kickstarter.models.Category"
-            column="categoryId" not-null="true"
+		  <many-to-one name="category" class="ua.com.goit.gojava7.kickstarter.models.Category"
+            column="category_id" not-null="true"
             cascade="all" />	    
 			
 	</class>

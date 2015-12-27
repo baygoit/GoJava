@@ -7,8 +7,10 @@
 
 	<class name="Quote" table="Quote">
 		<id name="quoteId">
+		<column name="id" />
 			<generator class="native" />
 		</id>
+		
 		<property name="text" />
 		<property name="author" />
 	</class>
