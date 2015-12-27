@@ -1,6 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.dao;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -19,11 +18,10 @@ public class QuoteDao {
 		log.info("<Quote> getRandomQuote()...");
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
-		Criteria criteria = session.createCriteria(Quote.class);
-		criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
-		criteria.setMaxResults(1);
-
-		Quote quote = (Quote) criteria.uniqueResult();
+		Quote quote = (Quote) session.createCriteria(Quote.class)
+				.add(Restrictions.sqlRestriction("1=1 order by rand()"))
+				.setMaxResults(1)
+				.uniqueResult();
 
 		session.close();
 		log.debug("getRandomQuote() returned quote: {}", quote);
