@@ -9,7 +9,8 @@ public class Project {
 	private String owner;
 	private int goal;
 	private String linkVideo;
-
+	private int amountPledge;
+	
 	public Project() {
 		
 	}
@@ -89,8 +90,16 @@ public class Project {
 		this.categoryId = categoryId;
 	}
 
-	public int getFunded(int pledged) {
+	public int getFunded() {
 		int goal = getGoal();
-		return goal == 0 ? 0 : pledged * 100 / goal;
+		return goal == 0 ? 0 : getAmountPledge() * 100 / goal;
+	}
+
+	public int getAmountPledge() {
+		return amountPledge;
+	}
+
+	public void setAmountPledge(int amountPledge) {
+		this.amountPledge = amountPledge;
 	}
 }

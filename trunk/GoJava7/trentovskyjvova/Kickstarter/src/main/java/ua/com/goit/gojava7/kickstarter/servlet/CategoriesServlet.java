@@ -40,10 +40,14 @@ public class CategoriesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		log.info("doGet");
 		Quote quote = quoteDao.getRandomQuote();
-		log.debug("Random quote: " + quote);
+		log.debug("Random quote: {}", quote);
 		
 		List<Category> categories = categoryDao.getCategories();
-		log.debug("Categories: " + categories);
+		log.debug("Categories: {}", categories);
+		
+		Category bestCategory = categoryDao.getBestCategory();
+		log.debug("bestCategory: {}", bestCategory);
+		categories.add(bestCategory);
 		
 		req.setAttribute("quote", quote);
 		req.setAttribute("categories", categories);

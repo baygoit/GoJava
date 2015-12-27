@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -29,12 +30,19 @@ public class PaymentDaoSqlImpl implements PaymentDao {
 		jdbcTemplate.update(sql, payment.getProjectId(), payment.getName(), payment.getCardNumber(),
 				payment.getPledge());
 	}
-
+	
 	@Override
 	public int getPledged(int projectId) {
 
-		String sql = "SELECT SUM(pledge) pledged FROM payment WHERE projectId = ?";
+		String sql = "SELECT SUM(pledge) pledged FROM payment WHERE projectId IN ?";
 		return jdbcTemplate.queryForObject(sql, new Integer[] { projectId }, Integer.class);
+	}
+	
+	@Override
+	public List<Map<String, Object>> getPledged(Integer[] projectsId) {
+		
+		String sql = "SELECT projectId, SUM(pledge) pledged FROM payment WHERE projectId IN (?) GROUP BY projectId";		
+		return jdbcTemplate.queryForList(sql, projectsId);
 	}
 
 }

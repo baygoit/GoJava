@@ -18,7 +18,12 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 	@Override
 	public List<Project> getProjects(int categoryId) {
 
-		String sql = "SELECT id, categoryId, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE categoryId = ?";
+		String sql = "SELECT p.id, p.categoryId, p.name, p.daysToGo, p.description, "
+				+ "p.goal, p.owner, p.videoUrl, SUM(CASE WHEN pledge IS NULL THEN 0 ELSE pledge END) amountPledge "
+				+ "FROM project p "
+				+ "LEFT JOIN payment ON p.id = payment.projectId "
+				+ "WHERE categoryId = ? "
+				+ "GROUP BY p.id, p.categoryId, p.name, p.daysToGo, p.description, p.goal, p.owner, p.videoUrl";			
 		return jdbcTemplate.query(sql, new Integer[] { categoryId }, new BeanPropertyRowMapper<Project>(Project.class));
 	}
 
@@ -42,7 +47,12 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 	@Override
 	public Project getProject(int projectId) {
 
-		String sql = "SELECT id, categoryId, name, daysToGo, description, goal, owner, videoUrl FROM project WHERE id = ?";
+		String sql = "SELECT p.id, p.categoryId, p.name, p.daysToGo, p.description, "
+				+ "p.goal, p.owner, p.videoUrl, SUM(CASE WHEN pledge IS NULL THEN 0 ELSE pledge END) amountPledge "
+				+ "FROM project p "
+				+ "LEFT JOIN payment ON p.id = payment.projectId "
+				+ "WHERE p.id = ? "
+				+ "GROUP BY p.id, p.categoryId, p.name, p.daysToGo, p.description, p.goal, p.owner, p.videoUrl";
 		return jdbcTemplate.queryForObject(sql, new Integer[] { projectId },
 				new BeanPropertyRowMapper<Project>(Project.class));
 	}

@@ -34,7 +34,7 @@ public class ProjectDaoSqlImplTest {
 	public void testGetProjects() {
 
 		projectDaoMySqlImpl.getProjects(1);
-		verify(jdbcTemplate).query(contains("project WHERE categoryId = ?"), any(Integer[].class),
+		verify(jdbcTemplate).query(contains("WHERE categoryId = ?"), any(Integer[].class),
 				any(BeanPropertyRowMapper.class));
 	}
 
@@ -45,7 +45,7 @@ public class ProjectDaoSqlImplTest {
 		List<Project> projects = new ArrayList<>();
 		projects.add(project);
 
-		when(jdbcTemplate.query(contains("project WHERE categoryId = ?"), any(Integer[].class),
+		when(jdbcTemplate.query(contains("WHERE categoryId = ?"), any(Integer[].class),
 				any(BeanPropertyRowMapper.class))).thenReturn(projects);
 
 		assertThat(projectDaoMySqlImpl.getProject(1, 1), is(project));
@@ -64,7 +64,7 @@ public class ProjectDaoSqlImplTest {
 	public void testGetProjectById() {
 
 		projectDaoMySqlImpl.getProject(12);
-		verify(jdbcTemplate).queryForObject(contains("project WHERE id = ?"), any(Integer[].class),
+		verify(jdbcTemplate).queryForObject(contains("id = ?"), any(Integer[].class),
 				any(BeanPropertyRowMapper.class));
 	}
 }

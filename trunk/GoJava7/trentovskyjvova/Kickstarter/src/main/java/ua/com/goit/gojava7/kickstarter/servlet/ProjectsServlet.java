@@ -16,7 +16,6 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 
 @WebServlet("/projects")
 public class ProjectsServlet extends HttpServlet {
@@ -25,8 +24,6 @@ public class ProjectsServlet extends HttpServlet {
 	
 	@Autowired
 	private ProjectDao projectDao;
-	@Autowired
-	private PaymentDao paymentDao;
 	
 	@Override
 	public void init() throws ServletException {
@@ -40,12 +37,11 @@ public class ProjectsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		log.info("doGet");
 		int categoryId = Integer.parseInt(request.getParameter("id"));
-		log.debug("categoryId: " + categoryId);
+		log.debug("categoryId: {}", categoryId);
 		List<Project> projects = projectDao.getProjects(categoryId);
-		log.debug("Projects: " + projects);
+		log.debug("Projects: {}", projects);
 		
 		request.setAttribute("projects", projects);
-		request.setAttribute("paymentDao", paymentDao);
 		request.getRequestDispatcher("/WEB-INF/jsp/projects.jsp").forward(request, response);	
 		log.info("Ended doGet");
 	}
