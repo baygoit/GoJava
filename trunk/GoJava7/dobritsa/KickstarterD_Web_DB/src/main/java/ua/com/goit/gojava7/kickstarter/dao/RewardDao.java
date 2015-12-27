@@ -5,7 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,14 +43,17 @@ public class RewardDao {
 	
 	public Reward get(int index) {
 		log.info("<Reward> get({})...", index);
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Reward> rewards = (List<Reward>) session.createQuery("from Reward r order by rand()").setMaxResults(1).list();
-        if (rewards.isEmpty()) {
-			return null;
-		}
-        Reward reward = rewards.get(0);
-        session.close();
-        return reward;
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Criteria criteria = session.createCriteria(Reward.class);
+		criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+		criteria.setMaxResults(1);
+
+		Reward reward = (Reward) criteria.uniqueResult();
+
+		session.close();
+		log.debug("get() returned reward: {}", reward);
+		return reward;		
     }  
 	
 	private final class RewardMapper implements RowMapper<Reward> {
