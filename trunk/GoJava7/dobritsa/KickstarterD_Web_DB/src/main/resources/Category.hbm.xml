@@ -7,6 +7,7 @@
 
 	<class name="Category" table="Category">
 		<id name="categoryId">
+		<column name="id" />
 			<generator class="native" />
 		</id>		
 		<property name="name" />	

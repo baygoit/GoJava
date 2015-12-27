@@ -16,6 +16,19 @@ public class RewardDao {
 
 	private static final Logger log = LoggerFactory.getLogger(RewardDao.class);
 
+	public Reward get(Long rewardId) {
+		log.info("<Reward> get({})...", rewardId);
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		Reward reward = (Reward) session.createCriteria(Reward.class)
+				.add(Restrictions.eq("rewardId", rewardId))
+				.uniqueResult();
+
+		session.close();
+		log.debug("<Reward> get({}) returned reward: {}", rewardId, reward);
+		return reward;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Reward> getByProject(Long projectId) {
 		log.info("<rewards> getByProject({})...", projectId);
@@ -28,20 +41,7 @@ public class RewardDao {
 				.list();
 
 		session.close();
-		log.debug("getByProject({})...", projectId, rewards);
+		log.debug("<rewards> getByProject({}) returned rewards: {}", projectId, rewards);
 		return rewards;
-	}
-
-	public Reward get(Long index) {
-		log.info("<Reward> get({})...", index);
-		Session session = HibernateUtil.getSessionFactory().openSession();
-
-		Reward reward = (Reward) session.createCriteria(Reward.class)
-				.add(Restrictions.eq("rewardId", index))
-				.uniqueResult();
-
-		session.close();
-		log.debug("get() returned reward: {}", reward);
-		return reward;
-	}
+	}	
 }

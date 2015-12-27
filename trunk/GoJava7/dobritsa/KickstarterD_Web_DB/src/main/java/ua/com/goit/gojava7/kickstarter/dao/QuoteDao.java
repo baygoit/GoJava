@@ -24,7 +24,7 @@ public class QuoteDao {
 				.uniqueResult();
 
 		session.close();
-		log.debug("getRandomQuote() returned quote: {}", quote);
+		log.debug("<Quote> getRandomQuote() returned quote: {}", quote);
 		return quote;
 	}
 }

@@ -18,7 +18,7 @@
 		<property name="history" />
 		<property name="link" />
 
-		  <many-to-one name="category" class="ua.com.goit.gojava7.kickstarter.models.Category"
+		  <many-to-one name="Category" class="ua.com.goit.gojava7.kickstarter.models.Category"
             column="category_id" not-null="true"
             cascade="all" />	    
 			
