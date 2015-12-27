@@ -4,6 +4,10 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+<welcome-file-list>
+    <welcome-file>mainPage</welcome-file>
+</welcome-file-list>
+
     <context-param>
         <description>User login</description>
         <param-name>user</param-name>
@@ -33,6 +37,7 @@
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>-->
         </jsp-property-group>
     </jsp-config>
+<!--
 
     <filter>
         <filter-name>Loging Filter</filter-name>
@@ -43,5 +48,6 @@
         <filter-name>Loging Filter</filter-name>
         <servlet-name>mainPage</servlet-name>
     </filter-mapping>
+-->
 
 </web-app>

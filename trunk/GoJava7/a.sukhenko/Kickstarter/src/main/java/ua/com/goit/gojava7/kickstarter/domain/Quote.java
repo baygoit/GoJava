@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Quote{
+	private int id;
     private String text;
     private String author;
 
@@ -29,5 +30,13 @@ public class Quote{
     public void setAuthor(String author) {
         this.author = author;
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 }

@@ -10,10 +10,10 @@
 	<c:forEach var="project" items="${requestScope.projects}">
 		<li>
 			<p>
-				<a href="project?id=${project.id}">${project.name}</a>
+				<a href="project?id=${project.projectId}">${project.name}</a>
 				<br>Description: ${project.description} 
-				<br>Goal: ${project.goal}
-				<br>Pledged: ${project.pledged} 
+				<br>Goal: ${project.goal}			
+				<br>Pedged: ${project.pledged}					
 				<br>Days: ${project.daysToGo}
 			</p>
 		</li>

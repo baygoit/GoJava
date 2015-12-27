@@ -22,11 +22,7 @@ import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 @WebServlet("/payment")
 public class ExecutePayment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	private int projectId;
-	private long creditCardNumber;
-	private String userName = "Anton";
-	private int donatingSum;
 
 	@Autowired
 	private PaymentDao paymentDao;
@@ -50,83 +46,78 @@ public class ExecutePayment extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("errors", false);
 
-		validateUserName(request, response);
-		validateCreditCardNumber(request, response);
-		validateDonatingSum(request, response);
+		String userName = validateUserName(request, response);
+		long creditCardNumber = validateCreditCardNumber(request, response);
+		int pledge = validateDonatingSum(request, response);
 
 		if ((Boolean) request.getAttribute("errors")) {
 			request.getRequestDispatcher("WEB-INF/views/execute_payment.jsp").forward(request, response);
 		} else {
-			saveCreatedPayment();
-
+			saveCreatedPayment(userName, creditCardNumber, pledge);
 			response.sendRedirect("/kickstarter/project?id=" + projectId);
 		}
 	}
 
-	protected void validateUserName(HttpServletRequest request, HttpServletResponse response) {
+	String validateUserName(HttpServletRequest request, HttpServletResponse response) {
 		String userName = request.getParameter("first-name");
 
 		if (userName.isEmpty()) {
 			request.setAttribute("errors", true);
 			request.setAttribute("nameError", true);
 		}
+		return userName;
 	}
 
-	protected void validateCreditCardNumber(HttpServletRequest request, HttpServletResponse response) {
-		String regex = "\\d{13,16}";
-		Pattern pattern = Pattern.compile(regex);
+	long validateCreditCardNumber(HttpServletRequest request, HttpServletResponse response) {
+		String userCreditCard = request.getParameter("creditCardNumber");
+		long creditCardNumber = 0;
 
-		if (request.getParameter("creditCardNumber").isEmpty()) {
-
+		if (userCreditCard.isEmpty()) {
 			request.setAttribute("errors", true);
 			request.setAttribute("creditCardError", true);
-
 		} else {
-
 			try {
-
-				creditCardNumber = Long.parseLong(request.getParameter("creditCardNumber"));
-
+				creditCardNumber = Long.parseLong(userCreditCard);
 			} catch (NumberFormatException e) {
-
 				request.setAttribute("errors", true);
 				request.setAttribute("creditCardError", true);
 			}
 
-			Matcher matcher = pattern.matcher(Long.toString(creditCardNumber));
+			String regex = "\\d{13,16}";
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher(userCreditCard);
 			if (matcher.matches() == false) {
 				request.setAttribute("errors", true);
 				request.setAttribute("creditCardError", true);
 			}
 		}
+		return creditCardNumber;
 	}
 
-	protected void validateDonatingSum(HttpServletRequest request, HttpServletResponse response) {
-		if (request.getParameter("donatingSum").isEmpty()) {
+	int validateDonatingSum(HttpServletRequest request, HttpServletResponse response) {
+		String pledge = request.getParameter("donatingSum");
+		int donatingSum = 0;
 
+		if (pledge.isEmpty()) {
 			request.setAttribute("errors", true);
 			request.setAttribute("donatingSumError", true);
-
 		} else {
-
 			try {
-
-				donatingSum = Integer.parseInt(request.getParameter("donatingSum"));
-
+				donatingSum = Integer.parseInt(pledge);
 			} catch (NumberFormatException e) {
-
 				request.setAttribute("errors", true);
 				request.setAttribute("donatingSumError", true);
 			}
 		}
+		return donatingSum;
 	}
 
-	protected void saveCreatedPayment() {
+	void saveCreatedPayment(String userName, long creditCardNumber, int pledge) {
 		Payment payment = new Payment();
 		payment.setProjectID(projectId);
 		payment.setUserName(userName);
 		payment.setCreditCardNumber(creditCardNumber);
-		payment.setDonatingSum(donatingSum);
+		payment.setDonatingSum(pledge);
 		paymentDao.add(payment);
 	}
 }

@@ -1,0 +1,58 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
+            <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
+        </jsp-property-group>
+    </jsp-config>
+
+    <servlet>
+        <servlet-name>ServletController</servlet-name>
+        <servlet-class>com.gojava6.ServletController</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletController</servlet-name>
+        <url-pattern>/RegistrationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletController</servlet-name>
+        <url-pattern>/CitiesController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletController</servlet-name>
+        <url-pattern>/CreateHostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletController</servlet-name>
+        <url-pattern>/BecomeHostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletController</servlet-name>
+        <url-pattern>/MakeReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletController</servlet-name>
+        <url-pattern>/AvailableAptsController</url-pattern>
+    </servlet-mapping>
+
+
+    <!--<servlet>
+        <servlet-name>ServletDemo</servlet-name>
+        <servlet-class>com.gojava6.ServletDemo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletDemo</servlet-name>
+        <url-pattern>/ServletDemo</url-pattern>
+    </servlet-mapping>-->
+
+</web-app>

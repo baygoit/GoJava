@@ -1,20 +1,21 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.NoSuchElementException;
 
-import org.apache.logging.log4j.Level;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 
-@Component
+@Repository
 public class PaymentDatabaseDao extends DatabaseDao<Payment>{
 	private static final org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger(PaymentDatabaseDao.class);
 	
@@ -25,7 +26,6 @@ public class PaymentDatabaseDao extends DatabaseDao<Payment>{
 		return super.dataSource.getConnection();
 	}
 
-	@Override
 	protected Payment readElement(ResultSet resultSet) throws SQLException {
 		Payment payment = new Payment();
 		payment.setAmount(resultSet.getLong("amount"));
@@ -36,70 +36,70 @@ public class PaymentDatabaseDao extends DatabaseDao<Payment>{
 		return payment;
 	}
 
-	@Override
-	public Payment getByNumber(int number) {
-		logger.warn("method not done");
-		return null;
-	}
 
-	@Override
-	public void setAll(List<Payment> data) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public List<Payment> getAll() {
-		List<Payment> data = new ArrayList<>();
-        String query = "select " + fields + " from " + table;
-        try (PreparedStatement ps = getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-            while (resultSet.next()) {
-                data.add(readElement(resultSet));
-            }
-        } catch (SQLException e) {
-            logger.log(Level.ERROR, e);
 
-        }
-        return data;
-	}
+
+
 	
 	
-	/*
-	public List<Payment> getAllJdbcTemplate() {
-		List<Payment> data = new ArrayList<>();
+	public List<Payment> getAll(){
         String query = "select " + fields + " from " + table;
-        List<Map<String,Object>> paymentsRows = jdbcTemplate.queryForList(query);
-        jdbc
-        for(Map<String,Object> paymentRow : paymentsRows){
-        	Payment payment = new Payment();
-        	payment.setId(Integer.parseInt(String.valueOf(paymentRow.get("id"))));
-        	payment.setAmount(Integer.parseInt(String.valueOf(paymentRow.get("amount"))));
-        	payment.setCardNumber();
-        	payment.setCardOwner(Integer.parseInt(String.valueOf(paymentRow.get("cardNumber"))));
-        	//
-        	payment.setAmount(resultSet.getLong("amount"));
-    		payment.setCardNumber(resultSet.getLong("cardNumber"));
-    		payment.setCardOwner(resultSet.getString("cardOwner"));
-    		payment.setProjectId(resultSet.getInt("projectId"));
-    		payment.setId(resultSet.getInt("id"));
-    		//
-            emp.setName(String.valueOf(empRow.get("name")));
-            emp.setRole(String.valueOf(empRow.get("role")));
-            empList.add(emp);
-        }
-        return data;
+        List<Payment> results = jdbcTemplate.query(query, new RowMapper<Payment>() {
+
+            @Override
+            public Payment mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+                Payment payment = new Payment();
+                payment.setAmount(resultSet.getLong("amount"));
+                payment.setCardNumber(resultSet.getLong("cardNumber"));
+                payment.setCardOwner(resultSet.getString("cardOwner"));
+                payment.setProjectId(resultSet.getInt("projectId"));
+                payment.setId(resultSet.getInt("id"));
+                return payment;
+            }});
+        
+        return results;
 	}
-	*/
+	
 	@Override
 	public Payment get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+	    String query = "select " + fields + " from " + table + " where id="+index;
+	    return jdbcTemplate.query(query, new ResultSetExtractor<Payment>(){
+
+            @Override
+            public Payment extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                if (resultSet.next()) {
+                    Payment payment = new Payment();
+                    payment.setAmount(resultSet.getLong("amount"));
+                    payment.setCardNumber(resultSet.getLong("cardNumber"));
+                    payment.setCardOwner(resultSet.getString("cardOwner"));
+                    payment.setProjectId(resultSet.getInt("projectId"));
+                    payment.setId(resultSet.getInt("id"));
+                    return payment;
+                }
+                throw new NoSuchElementException();
+            }
+	        
+	    });
 	}
 
 	@Override
-	public void add(Payment element) {
-		logger.warn("Function not working yet");
-		String query  = "INSERT INTO " + table + " values";
+	public void add(Payment payment) {
+		if (payment.getId() > 0) {
+	        // update
+	        String sql = "UPDATE payments SET cardOwner=?, cardNumber=?, projectId=?, "
+	                    + "amount=? WHERE id=?";
+	        jdbcTemplate.update(sql, payment.getCardOwner(), payment.getCardNumber(),
+	                payment.getProjectId(), payment.getAmount(), payment.getId());
+	    } else {
+	        // insert
+	        String sql = "INSERT INTO payments (cardOwner, cardNumber, projectId, amount)"
+	                    + " VALUES (?, ?, ?, ?)";
+	        jdbcTemplate.update(sql, payment.getCardOwner(), payment.getCardNumber(),
+	                payment.getProjectId(), payment.getAmount());
+	    }
+		logger.debug("Adding/updating payment: " + payment.toString());
+
 		
 	}
 

@@ -50,6 +50,5 @@
 <input type ="radio" value ="4" name ="paymentType"/>Donate random amount $
 <input id="subm" type = "submit" value = "payment type"/></form><br>
 
-
 </body>
 </html>

@@ -1,14 +1,16 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Payment{
-	public Payment() {
-		// TODO Auto-generated constructor stub
-	}
 	private int id;
 	private long cardNumber;
 	private String cardOwner;
 	private int projectId;
 	private long amount;
+	
+	   public Payment() {
+
+	    }
+	   
 	public String getCardOwner() {
 		return cardOwner;
 	}
@@ -38,5 +40,11 @@ public class Payment{
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	@Override
+	public String toString() {
+	    return "Payment: CardOwner= " + getCardOwner() + " cardNumber= " + getCardNumber() + " projectId="+getProjectId() + " amount="+getAmount() + " id="+id;
+	   
 	}
 }

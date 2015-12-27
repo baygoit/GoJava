@@ -5,90 +5,88 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuestionsDAO;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDataSource;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.JdbcDispatcher;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.StatementSetter;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
-public class QuestionPostgreDAO implements QuestionsDAO, JdbcDataSource<Question> {
+public class QuestionPostgreDAO implements QuestionsDAO{
 
-	final static Logger logger = LoggerFactory.getLogger(QuestionPostgreDAO.class);
-	
     private static final String TABLE = "question";
     private static final String FIELDS = "project_id,question,answer";
     private static final String INSERTION = FIELDS.replaceAll("[^,]+", "?");
    
-    private JdbcDispatcher dispatcher;
+    private JdbcTemplate jdbcTemplate;
 
-    public QuestionPostgreDAO(JdbcDispatcher dispatcher) {
-        this.dispatcher = dispatcher;
-        logger.info("dao created");
-    }
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
     @Override
     public void clear() {
         String sql = "delete from " + TABLE;
-        dispatcher.clear(sql);
+        jdbcTemplate.execute(sql);
     }
 
     @Override
     public Question get(int index) {
-        String sql = "select " + FIELDS + " from " + TABLE + " limit 1 offset  " + index;
-        Question element = null;
-        List<Question> list = dispatcher.get(sql, this);
-		if (!list.isEmpty()) {
-			element = list.get(0);
-		}
-        return element;
+        String sql = "select " + FIELDS + " from " + TABLE + " limit 1 offset ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{index}, getRowMapper());
     }
 
     @Override
     public void add(Question element) {
         String sql = "insert into " + TABLE + " (" + FIELDS + ") values (" + INSERTION + ")";
-        dispatcher.add(sql, element, this);
+        jdbcTemplate.batchUpdate(sql, getStatementSetter(element));
     }
 
     @Override
     public void addAll(List<Question> elements) {
         String sql = "insert into " + TABLE + " (" + FIELDS + ") values (" + INSERTION + ")";
-        dispatcher.add(sql, elements, this);
+        jdbcTemplate.batchUpdate(sql, getStatementSetter(elements));
     }
 
     @Override
     public List<Question> getAll() {
         String sql = "select " + FIELDS + " from " + TABLE;
-        List<Question> result = dispatcher.get(sql, this);
-        return result;
+        return jdbcTemplate.query(sql, getRowMapper());
     }
 
     @Override
     public List<Question> getByProject(int projectId) {
-        String sql = "select " + FIELDS + " from " + TABLE + " where project_id = " + projectId;
-        List<Question> result = dispatcher.get(sql, this);      
-        return result;
+        String sql = "select " + FIELDS + " from " + TABLE + " where project_id = ?";
+        return jdbcTemplate.query(sql, new Object[]{projectId}, getRowMapper());
     }
 
-	@Override
-	public Question read(ResultSet resultSet) throws SQLException {
-		Question element = new Question();
-        element.setQuestion(resultSet.getString("question"));
-        element.setAnswer(resultSet.getString("answer"));
-        element.setProjectId(resultSet.getInt("project_id"));
-        return element;
+	public StatementSetter<Question> getStatementSetter(Object argument) {
+		return new StatementSetter<Question>(argument) {
+			@Override
+			public void setupStatement(PreparedStatement statement, Question element) throws SQLException  {
+				int i = 0;
+		        if (element.getProjectId() == 0) {
+		            statement.setNull(++i, java.sql.Types.INTEGER);   
+		        } else {
+		            statement.setInt(++i, element.getProjectId());             
+		        }
+		        statement.setString(++i, element.getQuestion());
+		        statement.setString(++i, element.getAnswer());
+			}
+		};
+	}
+		
+	public RowMapper<Question> getRowMapper() {
+		return new RowMapper<Question>() {
+			@Override
+			public Question mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+				Question element = new Question();
+		        element.setQuestion(resultSet.getString("question"));
+		        element.setAnswer(resultSet.getString("answer"));
+		        element.setProjectId(resultSet.getInt("project_id"));
+		        return element;
+			}
+		};
 	}
 
-	@Override
-	public void prepare(Question element, PreparedStatement statement) throws SQLException {
-		int i = 0;
-        if (element.getProjectId() == 0) {
-            statement.setNull(++i, java.sql.Types.INTEGER);   
-        } else {
-            statement.setInt(++i, element.getProjectId());             
-        }
-        statement.setString(++i, element.getQuestion());
-        statement.setString(++i, element.getAnswer());
-	}
 }

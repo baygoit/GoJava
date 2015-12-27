@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ua.com.goit.gojava7.kickstarter.models">
+
+	<class name="Project" table="Project">
+		<id name="projectId">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+		<property name="description" />
+		<property name="goal" />
+		<property name="pledged" />
+		<property name="daysToGo" />
+		<property name="history" />
+		<property name="link" />
+
+		  <many-to-one name="Category" class="ua.com.goit.gojava7.kickstarter.models.Category"
+            column="categoryId" not-null="true"
+            cascade="all" />	    
+			
+	</class>
+
+</hibernate-mapping>

@@ -1,1 +1,1 @@
-teacher directory : )
+Someday this project will resemble airbnb.com.

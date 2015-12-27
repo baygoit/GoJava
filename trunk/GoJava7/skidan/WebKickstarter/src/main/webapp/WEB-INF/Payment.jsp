@@ -15,8 +15,5 @@
 <input name ="cardNumber" value = "Card Number"/><br><br>
 <input type = "submit" value = "approve payment"/></form><br>
 
-
-
-
 </body>
 </html>

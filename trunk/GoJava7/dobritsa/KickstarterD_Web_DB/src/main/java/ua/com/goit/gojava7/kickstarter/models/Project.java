@@ -1,7 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
 public class Project {
-	private int id;
+	private Long projectId;
 	private String name;
 	private String description;
 	private Integer goal;
@@ -9,15 +9,15 @@ public class Project {
 	private Integer daysToGo;
 	private String history;
 	private String link;
-	private int categoryId;
-	
-	public int getId() {
-		return id;
+	private Category category = new Category();	
+
+	public Long getProjectId() {
+		return projectId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}	
 
 	public String getName() {
 		return name;
@@ -75,19 +75,25 @@ public class Project {
 		this.link = link;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public void updatePledged(int amount) {
-		this.pledged += amount;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
-	public String toString(){
-		return "id: " + id + ", name: '" + name.substring(0, 10) + "...', categoryId: " + categoryId;		
+	public Long getCategoryId() {
+		return category.getCategoryId();
+	}
+	
+	public void setCategoryId(Long categoryId) {
+		category.setCategoryId(categoryId);;
+	}
+	
+	@Override
+	public String toString() {
+		return "id: " + projectId + "; name: " + name + "; description: " + description + "; goal: " + goal + "; pledged: "
+				+ pledged + "; daysToGo: " + daysToGo + "; history: " + history + "; link: " + link + "; categoryId: " + getCategoryId();
 	}
 }

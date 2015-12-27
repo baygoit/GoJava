@@ -1,6 +1,5 @@
 package com.kickstarter.dao.interfaces;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -19,24 +18,9 @@ public class DbQuestionDaoImpl implements QuestionDaoInterface {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
-	public JdbcTemplate getJdbcTemplate() {
-		return jdbcTemplate;
-	}
-
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-
-//	@Autowired
-//	private BasicDataSource dbCon;
-//
-//	public BasicDataSource getDbCon() {
-//		return dbCon;
-//	}
-//
-//	public void setDbCon(BasicDataSource dbCon) {
-//		this.dbCon = dbCon;
-//	}
 
 	public void add(String newQuestion, String projectTitle) {
 		String sql = "INSERT INTO questions (projectTitle, question) VALUES (?, ?)";
@@ -61,6 +45,17 @@ public class DbQuestionDaoImpl implements QuestionDaoInterface {
 
 	}
 }
+
+// @Autowired
+// private BasicDataSource dbCon;
+//
+// public BasicDataSource getDbCon() {
+// return dbCon;
+// }
+//
+// public void setDbCon(BasicDataSource dbCon) {
+// this.dbCon = dbCon;
+// }
 // public List<Question> getProjectQuestions(String projectTitle) {
 // ResultSet rs = null;
 // List<Question> list = new ArrayList<>();
@@ -95,3 +90,10 @@ public class DbQuestionDaoImpl implements QuestionDaoInterface {
 // }
 // }
 // }
+
+// <aop:config>
+// <aop:aspect id ="SomeSpringBean"/>
+// <aop:pointcut id = "pointcut1" expression="Execution(*com.dfvd.fad.*(..))" />
+// <aop:before>
+// pointcut-ref = "pointcut1"
+// method="some method in SomeSpringesn(aspect declared)"

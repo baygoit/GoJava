@@ -21,7 +21,7 @@ public class testSttmnt {
 
         try {
             connection = DriverManager
-                    .getConnection("main.Java.jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
+                    .getConnection("jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
 
             stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -47,7 +47,7 @@ public class testSttmnt {
 
         try {
             connection = DriverManager
-                    .getConnection("main.Java.jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
+                    .getConnection("jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
 
             stmt = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
@@ -74,7 +74,7 @@ public class testSttmnt {
 
         try {
             connection = DriverManager
-                    .getConnection("main.Java.jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
+                    .getConnection("jdbc:mysql://localhost:3306/airbnb", "root", "polipoli");
 
             stmt = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);

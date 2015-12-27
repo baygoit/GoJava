@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 25.12.2015 20:21:43 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ua.com.goit.gojava7.kickstarter.domain.Project" table="projects">
+        <id name="projectCategoryId" type="int">
+            <column name="PROJECTCATEGORYID" />
+            <generator class="assigned" />
+        </id>
+        <property name="projectName" type="java.lang.String">
+            <column name="PROJECTNAME" />
+        </property>
+        <property name="projectDescription" type="java.lang.String">
+            <column name="PROJECTDESCRIPTION" />
+        </property>
+        <property name="moneyNeeded" type="double">
+            <column name="MONEYNEEDED" />
+        </property>
+        <property name="projectHistory" type="java.lang.String">
+            <column name="PROJECTHISTORY" />
+        </property>
+        <property name="demoLink" type="java.lang.String">
+            <column name="DEMOLINK" />
+        </property>
+        <map name="questionsAndAnswers" table="PROJECT" lazy="true">
+            <key>
+                <column name="PROJECTCATEGORYID" />
+            </key>
+            <map-key type="java.lang.String"></map-key>
+            <element type="java.lang.String">
+                <column name="QUESTIONSANDANSWERS" />
+            </element>
+        </map>
+        <property name="categoryName" type="java.lang.String">
+            <column name="CATEGORYNAME" />
+        </property>
+        <property name="pledged" type="double">
+            <column name="PLEDGED" />
+        </property>
+        <property name="enddate" type="java.time.LocalDateTime">
+            <column name="ENDDATE" />
+        </property>
+        <many-to-one name="paymentBonus" class="ua.com.goit.gojava7.kickstarter.domain.PaymentBonus" fetch="join">
+            <column name="PAYMENTBONUS" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
