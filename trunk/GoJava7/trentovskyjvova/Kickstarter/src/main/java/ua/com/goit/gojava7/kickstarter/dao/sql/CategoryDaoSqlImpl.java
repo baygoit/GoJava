@@ -1,116 +1,59 @@
 package ua.com.goit.gojava7.kickstarter.dao.sql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
 @Repository
 public class CategoryDaoSqlImpl implements CategoryDao {
-	
+
 	@Autowired
-	private DataSource dataSource;
+	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public List<Category> getCategories() {
-		List<Category> categories = new ArrayList<>();
-		
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rset = null;
 
-		try {
-			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("SELECT id, name FROM category");
-			rset = stmt.executeQuery();
-
-			Category category;
-			while (rset.next()) {
-				int id = rset.getInt("id");
-				String name = rset.getString("name");
-				category = new Category();
-				category.setId(id);
-				category.setName(name);
-				categories.add(category);
-			}
-		} catch (SQLException e) {
-			throw new IODatabaseException("Problem with database", e);
-		} finally {
-            try { if (rset != null) rset.close(); } catch(Exception e) { }
-            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-            try { if (conn != null) conn.close(); } catch(Exception e) { }
-		}
-		return categories;
+		String sql = "SELECT c.id, c.name "
+				+ "FROM category c "				
+				+ "LEFT JOIN project ON c.id = project.categoryId "
+				+ "LEFT JOIN payment ON project.id = payment.projectId " 
+				+ "GROUP BY c.id, c.name "
+				+ "ORDER BY SUM(CASE WHEN payment.pledge IS NULL THEN 0 ELSE payment.pledge END) DESC limit 10";
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Category>(Category.class));
 	}
 
 	@Override
 	public Category getCategory(int id) {
-		Category category = null;
-		
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rset = null;
 
-		try {
-			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("SELECT name FROM category WHERE id = ?");
-			stmt.setInt(1, id);
-			rset = stmt.executeQuery();
-
-			while (rset.next()) {
-
-				String name = rset.getString("name");
-				category = new Category();
-				category.setId(id);
-				category.setName(name);
-
-			}
-		} catch (SQLException e) {
-			throw new IODatabaseException("Problem with database", e);
-		} finally {
-			try { if (rset != null) rset.close(); } catch(Exception e) { }
-			try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-			try { if (conn != null) conn.close(); } catch(Exception e) { }
-		}
-		return category;
+		String sql = "SELECT id, name FROM category WHERE id = ?";
+		return jdbcTemplate.queryForObject(sql, new Integer[] { id },
+				new BeanPropertyRowMapper<Category>(Category.class));
 	}
 
 	@Override
 	public int size() {
-		int size = 0;
+
+		String sql = "SELECT COUNT(*) size FROM category";
+		return jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+
+	@Override
+	public Category getBestCategory() {
 		
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rset = null;
-
-		try {
-			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("SELECT COUNT(*) size FROM category");
-			rset = stmt.executeQuery();
-
-			while (rset.next()) {
-				size = rset.getInt("size");
-			}	
-		} catch (SQLException e) {
-			throw new IODatabaseException("Problem with database", e);
-		} finally {
-			try { if (rset != null) rset.close(); } catch(Exception e) { }
-			try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-			try { if (conn != null) conn.close(); } catch(Exception e) { }
-		}
-
-		return size;
+		String sql = "SELECT c.id, c.name FROM category c "
+				+ "WHERE c.id = ("
+				+ "SELECT p.categoryId FROM project p "
+				+ "JOIN payment ON p.id = payment.projectId "
+				+ "GROUP BY p.categoryId, p.id, p.name "
+				+ "HAVING SUM(payment.pledge) = ( SELECT MAX(t.pledge) "
+				+ "FROM (SELECT projectId, SUM(pledge) pledge FROM payment GROUP BY projectId) t))";
+		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Category>(Category.class));
 	}
 
 }

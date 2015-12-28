@@ -19,7 +19,7 @@ public class CategoryHibernateTest{
     public void setUp() throws Exception {
         // A SessionFactory is set up once for an application!
         // configures settings from hibernate.cfg.xml
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate_h2.cfg.xml").build();
         try {
             sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         } catch (Exception e) {

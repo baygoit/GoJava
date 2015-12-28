@@ -90,4 +90,10 @@ public class CategoryDaoFileImpl implements CategoryDao {
 		return result;
 	}
 
+	@Override
+	public Category getBestCategory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

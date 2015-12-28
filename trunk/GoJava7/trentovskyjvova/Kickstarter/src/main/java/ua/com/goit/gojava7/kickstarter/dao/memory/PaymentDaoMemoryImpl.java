@@ -2,6 +2,7 @@ package ua.com.goit.gojava7.kickstarter.dao.memory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
@@ -49,6 +50,12 @@ public class PaymentDaoMemoryImpl implements PaymentDao {
 		return pledged;
 	}
 	
+	@Override
+	public List<Map<String, Object>> getPledged(Integer[] projectsId) {
+		// TODO Auto-generated method stub
+		return new ArrayList<>();
+	}
+	
 	private int generateIdOfNewElement() {
 		cachePayments(0);
 		
@@ -66,4 +73,5 @@ public class PaymentDaoMemoryImpl implements PaymentDao {
 			getPayments(projectId);
 		}
 	}
+
 }

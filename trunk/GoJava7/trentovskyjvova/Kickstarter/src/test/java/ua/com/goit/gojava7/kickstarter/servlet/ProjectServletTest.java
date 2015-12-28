@@ -60,7 +60,7 @@ public class ProjectServletTest {
 		projectServlet.doGet(request, resp);
 
 		verify(request).setAttribute("selectedProject", selectedProject);
-		verify(request).setAttribute("pledged", pledged);
+		//verify(request).setAttribute("pledged", pledged);
 		verify(request).setAttribute("questions", questions);
 		verify(rd).forward(request, resp);
 	}
