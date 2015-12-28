@@ -23,6 +23,7 @@
 		<property name="show_sql">false</property>
 
 		<mapping resource="Quote.hbm.xml" />
+		<mapping resource="Category.hbm.xml" />
 
 	</session-factory>
 

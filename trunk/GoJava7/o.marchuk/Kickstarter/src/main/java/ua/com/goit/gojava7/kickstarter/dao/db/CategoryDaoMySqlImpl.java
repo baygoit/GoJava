@@ -35,7 +35,7 @@ public class CategoryDaoMySqlImpl implements CategoryDao {
 
 			while (rs.next()) {
 				Category category = new Category();
-				category.setId(rs.getInt("id"));
+				category.setId(rs.getLong("id"));
 				category.setName(rs.getString("name"));
 
 				categories.add(category);
