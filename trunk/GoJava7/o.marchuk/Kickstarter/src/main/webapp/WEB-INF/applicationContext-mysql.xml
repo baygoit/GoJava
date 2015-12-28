@@ -42,9 +42,14 @@
 			</props>
 		</property>
 
+		<property name="annotatedClasses">
+			<list>
+				<value>ua.com.goit.gojava7.kickstarter.domain.Quote</value>
+			</list>
+		</property>
+
 		<property name="mappingResources">
 			<list>
-				<value>Quote.hbm.xml</value>
 				<value>Category.hbm.xml</value>
 			</list>
 		</property>

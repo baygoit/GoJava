@@ -31,7 +31,7 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">create</property>
 
-		<mapping resource="Quote.hbm.xml" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.domain.Quote" />
 		<mapping resource="Category.hbm.xml" />
 
 	</session-factory>
