@@ -28,4 +28,27 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+			</props>
+		</property>
+
+		<property name="mappingResources">
+			<list>
+				<value>Quote.hbm.xml</value>
+				<value>Category.hbm.xml</value>
+			</list>
+		</property>
+
+	</bean>
+
 </beans>
