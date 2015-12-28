@@ -5,32 +5,32 @@
 
 <jsp:include page="components/Menu.jsp" />
 
-<div class="col-sm-4">
-<div class="panel panel-default ">
-	<!-- Default panel contents -->
-	<div class="panel-heading">
-		<b>Top donated categories</b>
-	</div>
-	<div class="panel-body">
-		<table class="table">
-			<thead>
-				<tr>
-					<th class="col-sm-1">id</th>
-					<th>name</th>
-					<th class="col-sm-2">donated</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="map" items="${topCategories}">
+<div class="col-sm-12">
+	<div class="panel panel-default ">
+		<!-- Default panel contents -->
+		<div class="panel-heading">
+			<b>Top donated categories</b>
+		</div>
+		<div class="panel-body">
+			<table class="table">
+				<thead>
 					<tr>
-						<td>${map['id']}</td>
-						<td>${map['name']}</td>
-						<td>$${map['sum']}</td>
+						<th class="col-sm-1">id</th>
+						<th>name</th>
+						<th class="col-sm-2">donated</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach var="map" items="${topCategories}">
+						<tr>
+							<td>${map['id']}</td>
+							<td>${map['name']}</td>
+							<td>$${map['sum']}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
 </div>
 <jsp:include page="components/Bottom"></jsp:include>
