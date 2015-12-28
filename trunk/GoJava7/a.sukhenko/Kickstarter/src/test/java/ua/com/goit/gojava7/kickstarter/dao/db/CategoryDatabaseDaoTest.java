@@ -19,16 +19,7 @@ public class CategoryDatabaseDaoTest{
     @Autowired
     private CategoryDatabaseDao categoryDao;
     
-    @Test
-    @Ignore
-    public void testGetConnection() {
-       try {
-        assertThat(categoryDao.getConnection() != null, is(true));
-    } catch (SQLException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-    }
+
 
     @Test
     @Ignore
