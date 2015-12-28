@@ -2,6 +2,7 @@ package ua.com.goit.gojava7.kickstarter.dao.memory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
@@ -66,4 +67,5 @@ public class PaymentDaoMemoryImpl implements PaymentDao {
 			getPayments(projectId);
 		}
 	}
+
 }

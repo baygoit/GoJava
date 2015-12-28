@@ -2,24 +2,21 @@ package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.sql.DataSource;
-
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.sql.PaymentDaoSqlImpl;
@@ -28,52 +25,34 @@ import ua.com.goit.gojava7.kickstarter.domain.Payment;
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentDaoSqlImplTest {
 	@Mock
-	private Connection connection = mock(Connection.class);
-	@Mock
-	DataSource dataSource = mock(DataSource.class);
+	private JdbcTemplate jdbcTemplate;
 	@InjectMocks
 	private PaymentDao paymentDaoMySqlImpl = new PaymentDaoSqlImpl();
-	
+
 	@Test
-	public void testGetPayments() throws SQLException {
-		PreparedStatement ps = mock(PreparedStatement.class);
-		ResultSet rs = mock(ResultSet.class);
-		when(dataSource.getConnection()).thenReturn(connection);
-		when(connection.prepareStatement(anyString())).thenReturn(ps);
-		when(ps.executeQuery()).thenReturn(rs);
-		when(rs.next()).thenReturn(true, false);
-		when(rs.getString("cardNumber")).thenReturn("2341 2344 4334 3222");
+	@Ignore
+	public void testGetPayments() {
 
-		List<Payment> payments = paymentDaoMySqlImpl.getPayments(1);
-
-		assertThat(payments.get(0).getCardNumber(), is("2341 2344 4334 3222"));
+		paymentDaoMySqlImpl.getPayments(1);
+		verify(jdbcTemplate).query(contains("payment WHERE projectId = ?"), any(Integer[].class),
+				any(BeanPropertyRowMapper.class));
 	}
-	
+
 	@Test
-	public void testAddPayment() throws SQLException {
-		PreparedStatement ps = mock(PreparedStatement.class);
-		when(dataSource.getConnection()).thenReturn(connection);
-		when(connection.prepareStatement(anyString())).thenReturn(ps);
-		when(ps.executeUpdate()).thenReturn(1);
-		
+	@Ignore
+	public void testAddPayment() {
+
 		paymentDaoMySqlImpl.addPayment(new Payment());
-		
-		verify(ps).executeUpdate();
-
+		verify(jdbcTemplate).update(contains("INSERT INTO payment"), any(Integer.class), anyString(), anyString(),
+				any(Integer.class));
 	}
-	
+
 	@Test
-	public void testGetPledged() throws SQLException {
-		PreparedStatement ps = mock(PreparedStatement.class);
-		ResultSet rs = mock(ResultSet.class);
-		when(dataSource.getConnection()).thenReturn(connection);
-		when(connection.prepareStatement(anyString())).thenReturn(ps);
-		when(ps.executeQuery()).thenReturn(rs);
-		when(rs.next()).thenReturn(true, false);
-		when(rs.getInt("pledged")).thenReturn(100);
+	@Ignore
+	public void testGetPledged() {
 
-		int pledged = paymentDaoMySqlImpl.getPledged(1);
-
-		assertThat(pledged, is(100));
+		when(jdbcTemplate.queryForObject(anyString(), any(Integer[].class), eq(Integer.class))).thenReturn(2);
+		int i = paymentDaoMySqlImpl.getPledged(1);
+		assertThat(i, is(2));
 	}
 }

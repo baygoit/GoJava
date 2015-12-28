@@ -17,7 +17,7 @@ public class ProjectMappingTest {
 
 	@Before
 	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernateTest.cfg.xml").build();
 		try {
 			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		} catch (Exception e) {
@@ -40,14 +40,24 @@ public class ProjectMappingTest {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
+		Category category1 = new Category();
+		// TODO category1.setCategoryId(22l); does not work!
+		category1.setCategoryId(22l);
+		category1.setName("TestCategory 1");
+
+		Category category2 = new Category();
+		category2.setName("TestCategory 2");
+
 		Project project1 = new Project();
+		// TODO project1.setProjectId(22l); does not work!
+		project1.setProjectId(22l);
 		project1.setName("TestName1");
 		project1.setDescription("TestDescription1");
 		project1.setGoal(100);
 		project1.setDaysToGo(1);
 		project1.setHistory("TestHistory1");
 		project1.setLink("TestLink1");
-		project1.setCategoryId(11l);
+		project1.setCategory(category1);
 
 		Project project2 = new Project();
 		project2.setName("TestName2");
@@ -56,8 +66,9 @@ public class ProjectMappingTest {
 		project2.setDaysToGo(2);
 		project2.setHistory("TestHistory2");
 		project2.setLink("TestLink2");
-		project2.setCategoryId(22l);
+		project2.setCategory(category2);
 
+		session.save(category1);
 		session.save(project1);
 		session.save(project2);
 		session.getTransaction().commit();
@@ -65,9 +76,9 @@ public class ProjectMappingTest {
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		System.out.println("\n-----Get by id = 1-----");
-		Project project = session.get(Project.class, 1l);
-		System.out.println(project);
+		System.out.println("\n-----Get by id = 1-----");	
+		Project project = session.get(Project.class, 1l);	
+		System.out.println("Project: " + project);
 		session.close();
 
 		session = sessionFactory.openSession();
@@ -75,7 +86,7 @@ public class ProjectMappingTest {
 		System.out.println("\n-----Get list of projects-----");
 		List<Project> projects = (List<Project>) session.createQuery("from Project q").list();
 		for (Project resultProject : projects) {
-			System.out.println(resultProject);
+			System.out.println("Project: " + resultProject);
 		}
 		session.close();
 	}

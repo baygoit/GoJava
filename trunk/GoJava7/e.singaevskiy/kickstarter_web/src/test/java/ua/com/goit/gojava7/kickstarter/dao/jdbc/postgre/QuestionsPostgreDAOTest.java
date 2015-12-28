@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -27,12 +28,12 @@ public class QuestionsPostgreDAOTest {
 
     @Before
     public void setUp() throws Exception {
+    	HibernateUtil.configure("hibernate.cfg.xml");
         dao = new QuestionPostgreDAO();
-		dao.setJdbcTemplate(TestDaoFactory.setupJdbcTemplate()); 
         
         list = new ArrayList<>();
-        list.add(new Question(0, "a1", "t1"));
-        list.add(new Question(0, "a2", "t2"));
+        list.add(new Question(null, "a1", "t1"));
+        list.add(new Question(null, "a2", "t2"));
     }
     
     

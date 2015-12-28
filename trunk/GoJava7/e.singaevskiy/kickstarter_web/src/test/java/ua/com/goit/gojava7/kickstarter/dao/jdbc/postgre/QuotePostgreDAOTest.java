@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class QuotePostgreDAOTest {
@@ -19,14 +20,12 @@ public class QuotePostgreDAOTest {
 
     @Before
     public void setUp() throws Exception {
-
+    	HibernateUtil.configure("hibernate.cfg.xml");
         dao = new QuotePostgreDAO();
-		dao.setJdbcTemplate(TestDaoFactory.setupJdbcTemplate()); 
         
         list = new ArrayList<>();
         list.add(new Quote("a1", "t1"));
-        list.add(new Quote("a2", "t2"));
-
+		list.add(new Quote("a", "t"));
     }
     
     @After
@@ -42,11 +41,11 @@ public class QuotePostgreDAOTest {
 
     @Test
     public void testAddGet() {
-        Quote element = new Quote("a3", "t3");
         dao.add(new Quote("a0", "t0"));
-        dao.add(element);
+        dao.add(new Quote("a1", "t1"));
         dao.add(new Quote("a2", "t2"));
-        assertThat(dao.get(1), is(element));
+        Quote quote = dao.getAll().get(0);
+        assertThat(dao.get(quote.getId()), is(quote));
     }
 
 }

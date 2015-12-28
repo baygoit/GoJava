@@ -37,20 +37,38 @@ public class QuestionsMappingTest {
 	@Test
 	public void testBasicUsage() {
 		Session session = getSession();
+		
+		Category category1 = new Category(1, "Cat1");
+		Category category2 = new Category(2, "Cat2");
+		
+		Project project1 = new Project();
+		project1.setName("Proj 1");
+		project1.setAuthor("Aut 1");
+		project1.setCategory(category1);
+		
+		Project project2 = new Project();
+		project2.setName("Proj 2");
+		project2.setAuthor("Aut 2");
+		project2.setCategory(category2);
+		
+		session.save(category1);
+		session.save(category2);
+		session.save(project1);
+		session.save(project2);
 
 		Question element1 = new Question();
 		element1.setQuestion("Q 1");
 		element1.setAnswer("A 1");
-		element1.setProjectId(1);
+		element1.setProject(project1);
 
 		Question element2 = new Question();
 		element2.setQuestion("Q 2");
-		element2.setProjectId(1);
+		element2.setProject(project2);
 		
 		Question element3 = new Question();
 		element3.setQuestion("Q 3");
 		element3.setAnswer("A 3");
-		element3.setProjectId(3);
+		element3.setProject(project1);
 
 		session.save(element1);
 		session.save(element2);

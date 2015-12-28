@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ua.com.goit.gojava7.kickstarter.models">
+
+	<class name="Payment" table="Payment">
+		<id name="paymentId">
+		<column name="id" />
+			<generator class="native" />
+		</id>
+		<property name="user" />
+		<property name="card" />
+		<property name="amount" />
+		
+		<many-to-one name="Project" class="ua.com.goit.gojava7.kickstarter.models.Project"
+            column="project_id" not-null="true"
+            cascade="all" />	
+            
+	</class>
+
+</hibernate-mapping>

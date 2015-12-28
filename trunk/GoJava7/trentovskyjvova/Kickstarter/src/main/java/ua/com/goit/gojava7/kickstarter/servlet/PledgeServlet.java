@@ -46,9 +46,9 @@ public class PledgeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		log.info("doGet");
 		int rewardId = Integer.parseInt(request.getParameter("rewardId"));
-		log.debug("rewardId: " + rewardId);
+		log.debug("rewardId: {}", rewardId);
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
-		log.debug("projectId: " + projectId);
+		log.debug("projectId: {}", projectId);
 
 		request.setAttribute("rewardId", rewardId);
 		request.setAttribute("projectId", projectId);
@@ -59,11 +59,11 @@ public class PledgeServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		log.info("doPost (PledgeServlet) ");
+		log.info("doPost");
 		int rewardId = Integer.parseInt(request.getParameter("rewardId"));
-		log.debug("rewardId: " + rewardId);
+		log.debug("rewardId: {}", rewardId);
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
-		log.debug("projectId: " + projectId);
+		log.debug("projectId: {}", projectId);
 		int donate = 0;
 
 		request.setAttribute("errors", false);
@@ -83,12 +83,12 @@ public class PledgeServlet extends HttpServlet {
 				Reward reward = rewardDao.getReward(rewardId);
 				donate = reward.getPledge();
 			}
-			log.debug("PledgeServlet.doPost() donate: " + donate);
+			log.debug("doPost() donate: {}", donate);
 			
 			String name = request.getParameter("name");
-			log.debug("PledgeServlet.doPost() name: " + name);
+			log.debug("doPost() name: {}", name);
 			String cardNumber = request.getParameter("cardNumber");
-			log.debug("PledgeServlet.doPost() cardNumber: " + cardNumber);
+			log.debug("doPost() cardNumber: {}", cardNumber);
 			
 			Payment payment = new Payment();
 
@@ -96,13 +96,13 @@ public class PledgeServlet extends HttpServlet {
 			payment.setName(name);
 			payment.setCardNumber(cardNumber);
 			payment.setPledge(donate);
-			log.info("new Payment " + payment);
+			log.info("new Payment {}", payment);
 			
 			paymentDao.addPayment(payment);
 
 			response.sendRedirect("project?projectId=" + projectId);
 		}
-		log.info("Ended doPost (PledgeServlet)");
+		log.info("Ended doPost");
 	}
 
 }

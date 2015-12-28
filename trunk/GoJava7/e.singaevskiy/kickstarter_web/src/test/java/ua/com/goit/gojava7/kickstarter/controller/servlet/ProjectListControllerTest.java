@@ -63,8 +63,8 @@ public class ProjectListControllerTest {
     public void testDoGetHttpServletRequestHttpServletResponse() throws Exception {          
         
         ArrayList<Project> pList = new ArrayList<>();
-        pList.add(new Project(1, "p1", "a1", 1));
-        pList.add(new Project(2, "p2", "a2", 1));
+        pList.add(new Project(1, "p1", "a1", null));
+        pList.add(new Project(2, "p2", "a2", null));
         Mockito.when(projectDAO.getByCategory(Mockito.anyInt())).thenReturn(pList);
         
         servlet.doGet(req, resp);

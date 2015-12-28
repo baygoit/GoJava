@@ -7,25 +7,25 @@ public class Payment {
     private String user;
     private long cardId;
     private long sum;
-    private int projectId;
-    private int rewardId;
+    private Project project;
+    private Reward reward;
     private Date date;
 
     public Payment() {
         // default bean constructor
     }
     
-    public Payment(int projectId, String user, long cardId, long sum, Date date) {
-        this.projectId = projectId;
+    public Payment(Project project, String user, long cardId, long sum, Date date) {
+        this.setProject(project);
         this.user = user;
         this.cardId = cardId;
         this.sum = sum;
         this.date = date;
     }
     
-    public Payment(int projectId, int rewardId, String user, long cardId, long sum, Date date) {
-        this(projectId, user, cardId, sum, date);
-        this.rewardId = rewardId;
+    public Payment(Project project, Reward reward, String user, long cardId, long sum, Date date) {
+        this(project, user, cardId, sum, date);
+        this.setReward(reward);
     }
 
     public long getCardId() {
@@ -60,70 +60,33 @@ public class Payment {
         return date;
     }
 
-    public int getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
-    }
-
-    public int getRewardId() {
-        return rewardId;
-    }
-
-    public void setRewardId(int rewardId) {
-        this.rewardId = rewardId;
-    }
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (cardId ^ (cardId >>> 32));
-        result = prime * result + ((date == null) ? 0 : date.hashCode());
-        result = prime * result + projectId;
-        result = prime * result + rewardId;
-        result = prime * result + (int) (sum ^ (sum >>> 32));
-        result = prime * result + ((user == null) ? 0 : user.hashCode());
-        return result;
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Payment other = (Payment) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Payment other = (Payment) obj;
-        if (cardId != other.cardId)
-            return false;
-        if (date == null) {
-            if (other.date != null)
-                return false;
-        } else if (!date.equals(other.date))
-            return false;
-        if (projectId != other.projectId)
-            return false;
-        if (rewardId != other.rewardId)
-            return false;
-        if (sum != other.sum)
-            return false;
-        if (user == null) {
-            if (other.user != null)
-                return false;
-        } else if (!user.equals(other.user))
-            return false;
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Payment [user=" + user + ", cardId=" + cardId + ", sum=" + sum + ", projectId=" + projectId
-                + ", rewardId=" + rewardId + ", date=" + date + "]";
-    }
+	public String toString() {
+		return "Payment [id=" + id + ", user=" + user + ", cardId=" + cardId + ", sum=" + sum + ", project=" + project + ", reward=" + reward
+				+ ", date=" + date + "]";
+	}
 
 	public long getId() {
 		return id;
@@ -131,6 +94,22 @@ public class Payment {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public Reward getReward() {
+		return reward;
+	}
+
+	public void setReward(Reward reward) {
+		this.reward = reward;
 	}
 
 }

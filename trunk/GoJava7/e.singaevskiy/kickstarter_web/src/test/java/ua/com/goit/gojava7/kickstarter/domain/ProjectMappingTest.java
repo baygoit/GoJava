@@ -37,25 +37,25 @@ public class ProjectMappingTest {
 	@Test
 	public void testBasicUsage() {
 		Session session = getSession();
-		session.save(new Category(1, "Cat1"));
-		session.save(new Category(2, "Cat2"));
-		session.save(new Category(3, "Cat3"));
-		closeSession(session);
+		Category category = new Category(1, "Cat1");
+		Category category2 = new Category(2, "Cat2");
+		
+		session.save(category);
+		session.save(category2);
 
-		session = getSession();
 		Project element1 = new Project();
 		element1.setName("Proj 1");
 		element1.setAuthor("Aut 1");
-		element1.setCategoryId(1);
+		element1.setCategory(category);
 
 		Project element2 = new Project();
 		element2.setName("Proj 2");
-		element2.setCategoryId(1);
+		element2.setCategory(category);
 		
 		Project element3 = new Project();
 		element3.setName("Proj 3");
 		element3.setAuthor("Aut 3");
-		element3.setCategoryId(3);
+		element3.setCategory(category2);
 
 		session.save(element1);
 		session.save(element2);

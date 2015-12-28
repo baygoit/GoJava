@@ -27,7 +27,7 @@ public class PaymentTest {
 	
 	@Before
 	public void testSetUp() {
-		payment.setId(1l);
+		payment.setPaymentId(1l);
 		payment.setUser("Nike");
 		payment.setCard("1111222233334444");
 		payment.setAmount(200);
@@ -42,7 +42,7 @@ public class PaymentTest {
 	
 	@Test
 	public void testGet() {
-		assertThat(payment.getId(), is(1l));
+		assertThat(payment.getPaymentId(), is(1l));
 		assertThat(payment.getUser(), is("Nike"));
 		assertThat(payment.getCard(), is("1111222233334444"));
 		assertThat(payment.getAmount(), is(200));		

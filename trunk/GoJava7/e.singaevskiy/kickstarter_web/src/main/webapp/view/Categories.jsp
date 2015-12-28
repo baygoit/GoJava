@@ -5,33 +5,32 @@
 
 <jsp:include page="components/Menu.jsp" />
 
-<div class="panel panel-default">
+<div class="col-sm-4">
+<div class="panel panel-default ">
 	<!-- Default panel contents -->
 	<div class="panel-heading">
-		<b>Top donated projects</b>
+		<b>Top donated categories</b>
 	</div>
 	<div class="panel-body">
 		<table class="table">
 			<thead>
 				<tr>
-					<th>id</th>
+					<th class="col-sm-1">id</th>
 					<th>name</th>
-					<th>author</th>
-					<th>balance</th>
+					<th class="col-sm-2">donated</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="project" items="${topProjects}">
+				<c:forEach var="map" items="${topCategories}">
 					<tr>
-						<td>${project.id}</td>
-						<td>${project.name}</td>
-						<td>${project.author}</td>
-						<td>${project.balanceSum}</td>
+						<td>${map['id']}</td>
+						<td>${map['name']}</td>
+						<td>$${map['sum']}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
 </div>
-
+</div>
 <jsp:include page="components/Bottom"></jsp:include>

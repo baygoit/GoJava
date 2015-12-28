@@ -47,6 +47,5 @@ public class QuestionServlet extends HttpServlet {
 			questionDao.add(question);
 		}
 		response.sendRedirect("project?id=" + projectId);
-	}
-	
+	}	
 }

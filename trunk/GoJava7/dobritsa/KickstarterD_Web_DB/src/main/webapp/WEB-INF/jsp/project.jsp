@@ -5,7 +5,7 @@
 
 <h3><a href="categories">Kickstarter</a>
 /
-<a href="projects?id=${category.id}">${category.name}</a></h3>
+<a href="projects?id=${category.categoryId}">${category.name}</a></h3>
 
 
 <h1>${project.name}</h1>
@@ -39,10 +39,10 @@
 <form action="question" method="post">
 	<br>Ask your question:
 	<br><textarea name="question" rows="5" cols="60"></textarea>
-	<br> <input type="hidden" name="projectId" value="${project.id}" />
+	<br> <input type="hidden" name="projectId" value="${project.projectId}" />
 	<input type="submit" value="Submit" />
 </form>
 
-<h3><a href="rewards?projectId=${project.id}">See rewards</a></h3>
+<h3><a href="rewards?projectId=${project.projectId}">See rewards</a></h3>
 
 <jsp:include page="footer.jsp" />

@@ -4,22 +4,22 @@ import java.util.Date;
 
 public class Question {
 
-	private Long id;
+	private Long questionId;
 	private String time = "";
 	private String question = "";
-	private String answer = "";
-	private Long projectId;
+	private String answer = "";	
+	private Project project = new Project();
 
 	public Question() {
 		this.time = new Date().toString();
 	}
-
-	public Long getId() {
-		return id;
+	
+	public Long getQuestionId() {
+		return questionId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setQuestionId(Long questionId) {
+		this.questionId = questionId;
 	}
 
 	public String getTime() {
@@ -45,18 +45,25 @@ public class Question {
 	public void setAnswer(String answear) {
 		this.answer = answear;
 	}
-	
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
 	public Long getProjectId() {
-		return projectId;
+		return project.getProjectId();
 	}
 
 	public void setProjectId(Long projectId) {
-		this.projectId = projectId;
+		project.setProjectId(projectId);
 	}
 
 	@Override
 	public String toString() {
-		return "Time: " + time + "; Question: " + question + "; Answer: " + answer + "; projectId: " + projectId;
+		return "questionId: " + questionId + "; time: " + time + "; question: " + question + "; answer: " + answer + "; projectId: " + getProjectId();
 	}
-
 }

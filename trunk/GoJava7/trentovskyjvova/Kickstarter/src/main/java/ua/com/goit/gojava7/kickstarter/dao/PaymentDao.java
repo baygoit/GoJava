@@ -10,5 +10,4 @@ public interface PaymentDao extends Dao{
 	void addPayment(Payment payment);
 
 	int getPledged(int projectId);
-
 }
