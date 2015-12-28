@@ -3,8 +3,6 @@ package ua.com.goit.gojava7.kickstarter.domain;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -14,9 +12,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class QuoteMappingTest {
+public class PaymentMappingTest {
 	private SessionFactory sessionFactory;
-
+	
 	@Before
 	public void setUp() throws Exception {
 		// A SessionFactory is set up once for an application!
@@ -39,61 +37,29 @@ public class QuoteMappingTest {
 			sessionFactory.close();
 		}
 	}
-
+	
 	@Test
 	public void testBasicUsage() {
 		// create a couple of events...
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		Quote quote1 = new Quote();
-		quote1.setText("Quote 1");
-		quote1.setAuthor("Author 1");
+		Payment payment1 = new Payment();
+		payment1.setName("Payment 1");
 
-		Quote quote2 = new Quote();
-		quote2.setText("Quote 2");
-		quote2.setAuthor("Author 2");
-		
-		session.save(quote1);
-		session.save(quote2);
+		Payment payment2 = new Payment();
+		payment2.setName("Payment 2");
+
+		session.save(payment1);
+		session.save(payment2);
 		session.getTransaction().commit();
 		session.close();
 
 		// now lets pull events from the database and list them
 		session = sessionFactory.openSession();
-		//System.out.println("Get by id");
-		Quote quoteAnswer = session.get(Quote.class, 1);
-		//System.out.println(quoteAnswer);	
+		Payment payment = session.get(Payment.class, 1);
 		session.close();
 		
-		assertThat(quoteAnswer.getText(), is(quote1.getText()));
-		
-		session = sessionFactory.openSession();
-		//session.beginTransaction();
-		List<Quote> result1 = (List<Quote>) session.createQuery("from Quote q").list();
-		for (Quote aQuote : result1) {
-			System.out.println(aQuote);
-		}
-		session.close();
-	
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		//System.out.println("Get by id");
-		Quote quote = session.get(Quote.class, 1);
-		//System.out.println(quote);
-		quote.setText("Changed");
-		session.getTransaction().commit();
-		session.close();
-		
-		session = sessionFactory.openSession();
-		//session.beginTransaction();
-		//System.out.println("Get by id");
-		quote = session.get(Quote.class, 1);
-		//System.out.println(quote);
-		//session.getTransaction().commit();
-		session.close();
-		
-		assertThat(quote.getText(), is("Changed"));
+		assertThat(payment.getName(), is(payment.getName()));
 	}
-
 }

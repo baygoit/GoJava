@@ -39,6 +39,7 @@ public class CategoryMappingTest {
 		Session session = getSession();
 
 		Category element1 = new Category();
+		element1.setId(3);
 		element1.setName("Cat 1");
 
 		Category element2 = new Category();

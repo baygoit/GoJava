@@ -136,12 +136,6 @@ public class PaymentDaoFileImpl implements PaymentDao {
 		}
 		return pledged;
 	}
-	
-	@Override
-	public List<Map<String, Object>> getPledged(Integer[] projectsId) {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
-	}
 
 	private int generateIdOfNewElement() {
 		int maxId = 0;

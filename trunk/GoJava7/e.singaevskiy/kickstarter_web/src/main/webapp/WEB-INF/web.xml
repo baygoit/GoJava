@@ -27,6 +27,11 @@
 	        org.springframework.web.context.ContextLoaderListener
 	   </listener-class>
 	</listener>
+	<listener>
+	   <listener-class>
+	        ua.com.goit.gojava7.kickstarter.controller.servlet.ServletContextListener
+	   </listener-class>
+	</listener>
 
 
 </web-app>
