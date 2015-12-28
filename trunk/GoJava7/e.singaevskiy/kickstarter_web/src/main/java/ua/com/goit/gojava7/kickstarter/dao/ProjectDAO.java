@@ -8,6 +8,4 @@ public interface ProjectDAO extends DataSource<Project> {
     
     List<Project> getByCategory(int categoryId);
     
-    List<Project> getTopDonated(int limit);
-    
 }

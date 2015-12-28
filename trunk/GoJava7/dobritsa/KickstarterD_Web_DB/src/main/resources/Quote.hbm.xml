@@ -5,12 +5,14 @@
 
 <hibernate-mapping package="ua.com.goit.gojava7.kickstarter.models">
 
-	<class name="Category" table="Category">
-		<id name="categoryId">
+	<class name="Quote" table="Quote">
+		<id name="quoteId">
+		<column name="id" />
 			<generator class="native" />
-		</id>		
-		<property name="name" />	
-			
+		</id>
+		
+		<property name="text" />
+		<property name="author" />
 	</class>
 
 </hibernate-mapping>

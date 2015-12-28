@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 @RunWith(value=MockitoJUnitRunner.class)
@@ -23,9 +24,8 @@ public class CategoryPostgreDAOTest {
 
     @Before
     public void setUp() throws Exception {
-  
+    	HibernateUtil.configure("hibernate.cfg.xml");
         dao = new CategoryPostgreDAO();
-		dao.setJdbcTemplate(TestDaoFactory.setupJdbcTemplate());
         
         list = new ArrayList<>();
         list.add(new Category(1, "c1"));
@@ -45,11 +45,11 @@ public class CategoryPostgreDAOTest {
     
     @Test
     public void testAddGet() {
-        Category element = new Category(1, "t1");
         dao.add(new Category(2, "t0"));
-        dao.add(element);
+        dao.add(new Category(1, "t1"));
         dao.add(new Category(3, "t2"));
-        assertThat(dao.get(1), is(element));
+        Category category = dao.getAll().get(1);
+        assertThat(dao.get(category.getId()), is(category));
     }
 
 }

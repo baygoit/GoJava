@@ -5,12 +5,18 @@
 
 <hibernate-mapping package="ua.com.goit.gojava7.kickstarter.models">
 
-	<class name="Quote" table="Quote">
-		<id name="quoteId">
+	<class name="Reward" table="Reward">
+		<id name="rewardId">
+		<column name="id" />
 			<generator class="native" />
 		</id>
-		<property name="text" />
-		<property name="author" />
+		<property name="amount" />
+		<property name="reward" />
+	
+		<many-to-one name="Project" class="ua.com.goit.gojava7.kickstarter.models.Project"
+            column="project_id" not-null="true"
+            cascade="all" />	
+
 	</class>
 
 </hibernate-mapping>

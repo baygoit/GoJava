@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public class RewardPostgreDAOTest {
@@ -19,12 +20,12 @@ public class RewardPostgreDAOTest {
 
     @Before
     public void setUp() throws Exception {
+    	HibernateUtil.configure("hibernate.cfg.xml");
         dao = new RewardPostgreDAO();
-		dao.setJdbcTemplate(TestDaoFactory.setupJdbcTemplate()); 
         
         list = new ArrayList<>();
-        list.add(new Reward(1, 0, "r1", 113));
-        list.add(new Reward(2, 0, "r2", 44));       
+        list.add(new Reward(1, null, "r1", 113));
+        list.add(new Reward(2, null, "r2", 44));       
     }
     
     @After

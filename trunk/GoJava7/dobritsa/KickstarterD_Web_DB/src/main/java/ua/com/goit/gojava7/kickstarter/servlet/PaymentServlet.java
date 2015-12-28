@@ -47,7 +47,7 @@ public class PaymentServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		log.info("doGet()...");		
-		int rewardId = Integer.parseInt(request.getParameter("id"));
+		Long rewardId = Long.parseLong(request.getParameter("id"));
 		int amount;
 		Long projectId;
 

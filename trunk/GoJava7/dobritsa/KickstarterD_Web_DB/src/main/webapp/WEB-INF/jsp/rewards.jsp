@@ -38,7 +38,7 @@
 		<c:forEach var="reward" items="${requestScope.rewards}">
 			<li>
 				<p>
-					<a href="payment?id=${reward.id}">$${reward.amount}</a> 					
+					<a href="payment?id=${reward.rewardId}">$${reward.amount}</a> 					
 					<br>${reward.reward}
 				</p>
 			</li>
