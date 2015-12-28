@@ -10,11 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.DAO.AbstractQuoteStorage;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 
-
+@Repository
 public class QuoteDbStorage extends AbstractQuoteStorage {
 
 	private final String INSERT_QUOTES = "INSERT INTO qoutes (text, author) VALUES (?, ?)";

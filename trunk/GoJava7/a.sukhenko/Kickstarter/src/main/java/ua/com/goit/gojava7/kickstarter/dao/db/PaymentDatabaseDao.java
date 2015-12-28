@@ -1,24 +1,21 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.apache.logging.log4j.Level;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 
-@Component
+@Repository
 public class PaymentDatabaseDao extends DatabaseDao<Payment>{
 	private static final org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger(PaymentDatabaseDao.class);
 	
@@ -29,7 +26,6 @@ public class PaymentDatabaseDao extends DatabaseDao<Payment>{
 		return super.dataSource.getConnection();
 	}
 
-	@Override
 	protected Payment readElement(ResultSet resultSet) throws SQLException {
 		Payment payment = new Payment();
 		payment.setAmount(resultSet.getLong("amount"));
@@ -40,16 +36,9 @@ public class PaymentDatabaseDao extends DatabaseDao<Payment>{
 		return payment;
 	}
 
-	@Override
-	public Payment getByNumber(int number) {
-		return get(number);
-	}
 
-	@Override
-	public void setAll(List<Payment> data) {
-	    logger.warn("method not done");
-		
-	}
+
+
 
 
 	

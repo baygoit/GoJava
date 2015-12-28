@@ -36,10 +36,10 @@ public class PaymentsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		log.info("doGet");
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
-		log.debug("projectId: " + projectId);
+		log.debug("projectId: {}", projectId);
 		
 		List<Reward> rewards = rewardDao.getRewards(projectId);
-		log.debug("Rewards: " + rewards);
+		log.debug("Rewards: {}", rewards);
 		
 		request.setAttribute("rewards", rewards);
 		request.setAttribute("projectId", projectId);

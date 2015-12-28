@@ -41,17 +41,11 @@ public class PaymentDao {
 		return jdbcTemplate.query(query, new Object[] { projectId }, new PaymentMapper());
 	}
 
-	public Integer calculatePledgedForProject(int projectId) {
+	public Integer calculatePledgedForProject(Long projectId) {
 		log.info("<int> calculatePledgedForProject({})...", projectId);
 		String query = "select sum(amount) as sum from payment where project_id = ?";
 		return jdbcTemplate.queryForObject(query, new Object[] { projectId }, Integer.class);
-	}
-
-	public List<Payment> findTop5Project() {
-		log.info("<payments> findTop5Project({})...");
-		String query = "select sum(amount) as amount, project_id from payment group by project_id order by amount desc limit 5";
-		return jdbcTemplate.query(query, new TopPaymentMapper());
-	}
+	}	
 
 	private final class PaymentMapper implements RowMapper<Payment> {
 		public Payment mapRow(ResultSet resultSet, int rowNum) throws SQLException {
@@ -60,18 +54,7 @@ public class PaymentDao {
 			payment.setUser(resultSet.getString("user"));
 			payment.setCard(resultSet.getString("card"));
 			payment.setAmount(resultSet.getInt("amount"));
-			payment.setProjectId(resultSet.getInt("project_id"));
-			log.debug("PaymentMapper() returned payment: {}", payment);
-			return payment;
-		}
-	}
-
-	private final class TopPaymentMapper implements RowMapper<Payment> {
-		public Payment mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-			log.info("PaymentMapper()...");
-			Payment payment = new Payment();
-			payment.setAmount(resultSet.getInt("amount"));
-			payment.setProjectId(resultSet.getInt("project_id"));
+			payment.setProjectId((long) resultSet.getLong("project_id"));
 			log.debug("PaymentMapper() returned payment: {}", payment);
 			return payment;
 		}

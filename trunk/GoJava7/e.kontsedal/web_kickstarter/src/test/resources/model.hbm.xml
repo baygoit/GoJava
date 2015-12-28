@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="ua.com.goit.gojava7.kickstarter.model">
+	
+	<class name="Quote" table="quotes">
+		<id name="idQuote"><generator class="increment"></generator></id>
+		<property name="author" />
+		<property name="text" />
+	</class>
+	
+	 <class name="Category">
+		<id name="idCategory"><generator class="increment"></generator></id>
+		<property name="categoryName" />
+	</class>
+
+	<class name="Project">
+		<id name="idProject"><generator class="increment"></generator></id>
+		<property name="idParentCategory" />
+		<property name="projectName" />
+		<property name="projectShortDescription" />
+		<property name="projectDescription" />
+		<property name="videoUrl" />
+		<property name="projectCostNeed" />
+		<property name="deadline" />
+	</class>
+
+	<class name="Payment">
+		<id name="idPayment"><generator class="increment"></generator></id>
+		<property name="idParentProject" />
+		<property name="cardOwner" />
+		<property name="cardNumber" />
+		<property name="rechargeAmount" />
+	</class>
+
+	<class name="Question">
+		<id name="idQuestion"><generator class="increment"></generator></id>
+		<property name="idParentProject" />
+		<property name="questionText" />
+	</class>
+ 
+</hibernate-mapping>

@@ -21,5 +21,10 @@ public class Category {
 	public void setIdCategory(int idCategory) {
 		this.idCategory = idCategory;
 	}
+	
+	@Override
+	public String toString() {
+		return "Category: " + getCategoryName();
+	}
 
 }

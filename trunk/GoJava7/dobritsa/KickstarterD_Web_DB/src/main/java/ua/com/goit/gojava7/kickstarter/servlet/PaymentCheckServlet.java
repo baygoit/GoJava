@@ -13,10 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import ua.com.goit.gojava7.kickstarter.config.Validator;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
-import ua.com.goit.gojava7.kickstarter.dao.Validator;
 import ua.com.goit.gojava7.kickstarter.models.Payment;
 
 @WebServlet("/paymentCheck")
@@ -49,7 +49,7 @@ public class PaymentCheckServlet extends HttpServlet {
 
 		log.info("doPost()...");		
 		int amount = Integer.parseInt(request.getParameter("amount"));
-		int projectId = Integer.parseInt(request.getParameter("projectId"));
+		Long projectId = Long.parseLong(request.getParameter("projectId"));
 		
 		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
 		request.setAttribute("project", projectDao.get(projectId));

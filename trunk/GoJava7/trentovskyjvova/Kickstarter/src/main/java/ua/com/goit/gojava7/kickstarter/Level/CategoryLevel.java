@@ -48,7 +48,7 @@ public class CategoryLevel implements Level {
 			int pledged = paymentDao.getPledged(project.getId());
 			
 			stringBuilder.append(String.format(format, index++,
-					project.getName(), project.getFunded(pledged),
+					project.getName(), project.getFunded(),
 					project.getDaysToGo(), pledged));
 		}
 		

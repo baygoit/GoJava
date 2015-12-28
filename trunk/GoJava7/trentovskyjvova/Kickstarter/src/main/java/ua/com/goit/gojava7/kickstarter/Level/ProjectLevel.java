@@ -45,7 +45,7 @@ public class ProjectLevel implements Level {
 		int pledged = paymentDao.getPledged(selectedProject.getId());
 		
 		stringBuilder.append("name: ").append(selectedProject.getName()).append("\n");
-		stringBuilder.append("funded: ").append(selectedProject.getFunded(pledged)).append("\n");
+		stringBuilder.append("funded: ").append(selectedProject.getFunded()).append("\n");
 		stringBuilder.append("daysToGo: ").append(selectedProject.getDaysToGo()).append("\n");
 		stringBuilder.append("pledged: ").append(pledged).append("\n");
 		stringBuilder.append("description: ").append(selectedProject.getDescription()).append("\n");

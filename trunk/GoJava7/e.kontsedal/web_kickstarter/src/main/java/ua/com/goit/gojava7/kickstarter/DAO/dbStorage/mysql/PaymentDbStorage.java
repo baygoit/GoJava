@@ -27,12 +27,10 @@ public class PaymentDbStorage extends AbstractPaymentStorage {
 	public List<Payment> getAll() {
 		return jdbcTemplate.query(SELECT_ALL_PAYMENTS, new Mapper());
 	}
-
+	
 	@Override
 	public void add(Payment payment) {
-//		jdbcTemplate.batchUpdate(INSERT_PAYMENT, new StatementSetter(payment));
-		System.out.println(payment);
-		jdbcTemplate.update(INSERT_PAYMENT, new Object[] {payment.getIdParentProject(), payment.getCardOwner(), payment.getCardNumber(), payment.getRechargeAmount()});
+		jdbcTemplate.batchUpdate(INSERT_PAYMENT, new StatementSetter(payment));
 	}
 
 	@Override

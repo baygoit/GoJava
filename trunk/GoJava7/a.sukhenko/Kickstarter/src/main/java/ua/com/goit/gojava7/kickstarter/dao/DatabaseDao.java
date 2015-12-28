@@ -13,9 +13,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public abstract class DatabaseDao<T>{
     private static final Logger logger = LogManager.getLogger(DatabaseDao.class);
+    
     protected List<T>    data;
     @Autowired
     protected DataSource dataSource;
+    //http://www.codejava.net/frameworks/spring/spring-mvc-with-jdbctemplate-example
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
@@ -30,12 +32,7 @@ public abstract class DatabaseDao<T>{
 
     public abstract Connection getConnection() throws SQLException;
 
-    protected abstract T readElement(ResultSet resultSet) throws SQLException;
-
-    public abstract T getByNumber(int number);
-
-
-    public abstract void setAll(List<T> data);
+    
 
     public String prepareStringForDb(String original) {
         return original.replace("'", "\\'");

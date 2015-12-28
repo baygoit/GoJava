@@ -1,60 +1,25 @@
 package ua.com.goit.gojava7.kickstarter.dao.sql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
-import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
 @Repository
 public class RewardDaoSqlImpl implements RewardDao {
 	@Autowired
-	private DataSource dataSource;
+	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public List<Reward> getRewards(int projectId) {
-		List<Reward> rewards = new ArrayList<>();
-		
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rset = null;
-		try {
-			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("SELECT id, pledge, benefit FROM reward WHERE projectId = ?");
-			stmt.setInt(1, projectId);
-			rset = stmt.executeQuery();
 
-			Reward reward;
-			while (rset.next()) {
-				int id = rset.getInt("id");
-				int pledge = rset.getInt("pledge");
-				String benefit = rset.getString("benefit");
-
-				reward = new Reward(id, projectId);
-				reward.setPledge(pledge);
-				reward.setBenefit(benefit);
-
-				rewards.add(reward);
-			}
-		} catch (SQLException e) {
-			throw new IODatabaseException("Problem with database", e);
-		}finally {
-            try { if (rset != null) rset.close(); } catch(Exception e) { }
-            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-            try { if (conn != null) conn.close(); } catch(Exception e) { }
-		}
-		
-		return rewards;
+		String sql = "SELECT id, projectId, pledge, benefit FROM reward WHERE projectId = ?";
+		return jdbcTemplate.query(sql, new Integer[] { projectId }, new BeanPropertyRowMapper<Reward>(Reward.class));
 	}
 
 	@Override
@@ -69,41 +34,17 @@ public class RewardDaoSqlImpl implements RewardDao {
 
 	@Override
 	public int size(int projectId) {
-		return getRewards(projectId).size();
+
+		String sql = "SELECT COUNT(*) size FROM reward WHERE projectId = ?";
+		return jdbcTemplate.queryForObject(sql, new Integer[] { projectId }, Integer.class);
 	}
 
 	@Override
 	public Reward getReward(int rewardId) {
-		Reward reward = null;
-		
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rset = null;
-		try {
-			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("SELECT projectId, pledge, benefit FROM reward WHERE id = ?");
-			stmt.setInt(1, rewardId);
-			rset = stmt.executeQuery();
 
-			if (rset.next()) {
-				int projectId = rset.getInt("projectId");
-				int pledge = rset.getInt("pledge");
-				String benefit = rset.getString("benefit");
-
-				reward = new Reward(rewardId, projectId);
-				reward.setPledge(pledge);
-				reward.setBenefit(benefit);
-				
-			}
-		} catch (SQLException e) {
-			throw new IODatabaseException("Problem with database", e);
-		}finally {
-            try { if (rset != null) rset.close(); } catch(Exception e) { }
-            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-            try { if (conn != null) conn.close(); } catch(Exception e) { }
-		}
-		
-		return reward;
+		String sql = "SELECT id, projectId, pledge, benefit FROM reward WHERE id = ?";
+		return jdbcTemplate.queryForObject(sql, new Integer[] { rewardId },
+				new BeanPropertyRowMapper<Reward>(Reward.class));
 	}
 
 }

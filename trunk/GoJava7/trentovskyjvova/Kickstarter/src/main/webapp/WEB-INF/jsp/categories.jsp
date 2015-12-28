@@ -8,9 +8,11 @@
 <h3>Categories:</h3>
 
 <c:forEach var="category" items="${categories}">
-	<p>
-		<a href="projects?id=${category.getId()}">${category.getName()}</a>
-	</p>
+	<div class="category">
+		<!-- <p> -->
+			<a href="projects?id=${category.getId()}">${category.getName()}</a>
+		<!-- </p> -->
+	</div>
 </c:forEach>
 
 <jsp:include page="footer.jsp" />

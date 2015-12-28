@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.sql.Date;
 
 public class Project {
 	private String projectName;
@@ -9,18 +8,11 @@ public class Project {
 	private String projectDescription;
 	private String videoUrl;
 	private int projectCostNeed;
-	private Calendar deadline;
+	private Date deadline;
 	private int idProject;
 	private int idParentCategory;
 
-	public Project() {
-		this.projectName = "";
-		this.projectShortDescription = "";
-		this.projectDescription = "";
-		this.videoUrl = "";
-		this.projectCostNeed = 0;
-		this.deadline = new GregorianCalendar();
-	} 
+	public Project() {} 
 	
 	public String getProjectName() {
 		return this.projectName;
@@ -31,15 +23,23 @@ public class Project {
 	}
 
 	public int getProjectDaysLeft() {
-		Calendar today = new GregorianCalendar();
-		return (int) ((deadline.getTimeInMillis() - today.getTimeInMillis()) / 1000 / 60 / 60 / 24);// OLEG
+//		Calendar today = new GregorianCalendar();
+//		return (int) ((deadline.getTimeInMillis() - today.getTimeInMillis()) / 1000 / 60 / 60 / 24);// OLEG
+		long ms = 0;
+        if (getDeadline() != null) {
+            ms = getDeadline().getTime() - System.currentTimeMillis(); 
+        }
+        if (ms < 0) {
+            return 0;
+        }
+        return (int) ms / (1000 * 60 * 60 * 24);
 	}
 
 	public int getProjectCostNeed() {
 		return this.projectCostNeed;
 	}
 
-	public Calendar getDeadline() {
+	public Date getDeadline() {
 		return this.deadline;
 	}
 
@@ -71,9 +71,9 @@ public class Project {
 		this.projectDescription = description;
 	}
 
-	public void setDeadline(int projectDaysNeed) {
-		this.deadline.add(Calendar.DAY_OF_YEAR, projectDaysNeed);
-	}
+//	public void setDeadline(Date deadline) {
+//		this.deadline.add(Calendar.DAY_OF_YEAR, projectDaysNeed);
+//	}
 
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
@@ -89,5 +89,19 @@ public class Project {
 
 	public void setIdParentCategory(int idParentCategory) {
 		this.idParentCategory = idParentCategory;
+	}
+	
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
+	@Override
+	public String toString() {
+		return "Project name: " + projectName + "; " 
+				+ "Project description: " + projectDescription + "; "
+				+ "Project short description: " + projectShortDescription + "; "
+				+ "Pideo url: " + videoUrl + "; "
+				+ "Project cost need: " + projectCostNeed + "; "
+				+ "Project deadline: " + deadline + "; "
+				+ "ID parent category: " + idParentCategory + "; ";
 	}
 }
