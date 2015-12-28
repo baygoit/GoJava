@@ -1,9 +1,12 @@
 package ua.com.goit.gojava7.kickstarter.dao.jdbc.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -44,6 +47,17 @@ public class HibernateUtil {
 			result = list.get(0);
 		}
     	return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<HashMap<String,Object>> getForSQL(String queryText, Object...args) {
+		Session session = getSessionFactory().openSession();
+		SQLQuery query = session.createSQLQuery(queryText);
+		appendParametersToQuery(query, args);
+		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		List<HashMap<String,Object>> list = query.list();
+    	session.close();
+    	return list;
 	}
 	
 	public static void executeUpdate(String queryText, Object...args) {

@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
+import java.util.HashMap;
 import java.util.List;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
@@ -34,19 +35,16 @@ public class CategoryPostgreDAO implements CategoryDAO {
 	}
 	
 	@Override
-	public List<Category> getTopDonated(int limit) {
-		return HibernateUtil.getList("select category \n"+
-			"from Category category \n"+
-			"join Project project on category.id = project.category_id \n"+
-			"join Payment payment on project.id = payment.project_id \n"+
-			"group by category.id, category.name \n"+
-			"order by sum(payment.sum) desc \n"
-			//+"limit 10"
-			);
+	public List<HashMap<String,Object>> getTopDonated(int limit) {
+		String query = "select category.id, category.name, " +
+			"sum(coalesce(payment.sum,0)) as sum " +
+			"from category " +
+			"left join project on category.id = project.category_id " +
+			"left join payment on project.id = payment.project_id " +
+			"group by category.id, category.name " +
+			"order by sum desc, category.name " +
+			"limit ?";
+		return HibernateUtil.getForSQL(query, limit);
 	}
 	
-	public void name() {
-		HibernateUtil.getList("from Category join Project ");
-	}
-
 }

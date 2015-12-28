@@ -36,7 +36,7 @@ public class CategoryListController extends HttpServlet {
         
         request.setAttribute("quote", quotes.get(rnd.nextInt(quotes.size())));        
         request.setAttribute("categories", categoryDAO.getAll());
-        //request.setAttribute("topProjects", categoryDAO.getTopDonated(3));
+        request.setAttribute("topCategories", categoryDAO.getTopDonated(5));
         request.getRequestDispatcher("view/Categories.jsp").forward(request, response);
     }
 
