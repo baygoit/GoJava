@@ -1,9 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
-import java.util.List;
+import static org.junit.Assert.*;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,9 +12,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class QuoteMappingTest {
+public class ProjectMappingTest {
+	//private Project progect;
 	private SessionFactory sessionFactory;
-
+	
 	@Before
 	public void setUp() throws Exception {
 		// A SessionFactory is set up once for an application!
@@ -39,61 +38,39 @@ public class QuoteMappingTest {
 			sessionFactory.close();
 		}
 	}
-
+	
+	/*@Before 
+	public void setUp(){
+		progect = new Project("Super project", 1);
+	}
+	
+	@Test
+	public void testGetName() {
+		assertThat(progect.getName(), is("Super project"));
+	}*/
+	
 	@Test
 	public void testBasicUsage() {
 		// create a couple of events...
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		Quote quote1 = new Quote();
-		quote1.setText("Quote 1");
-		quote1.setAuthor("Author 1");
+		Project project1 = new Project();
+		project1.setName("Project 1");
 
-		Quote quote2 = new Quote();
-		quote2.setText("Quote 2");
-		quote2.setAuthor("Author 2");
-		
-		session.save(quote1);
-		session.save(quote2);
+		Project project2 = new Project();
+		project2.setName("Project 2");
+
+		session.save(project1);
+		session.save(project2);
 		session.getTransaction().commit();
 		session.close();
 
 		// now lets pull events from the database and list them
 		session = sessionFactory.openSession();
-		//System.out.println("Get by id");
-		Quote quoteAnswer = session.get(Quote.class, 1);
-		//System.out.println(quoteAnswer);	
+		Project project = session.get(Project.class, 1);
 		session.close();
 		
-		assertThat(quoteAnswer.getText(), is(quote1.getText()));
-		
-		session = sessionFactory.openSession();
-		//session.beginTransaction();
-		List<Quote> result1 = (List<Quote>) session.createQuery("from Quote q").list();
-		for (Quote aQuote : result1) {
-			System.out.println(aQuote);
-		}
-		session.close();
-	
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		//System.out.println("Get by id");
-		Quote quote = session.get(Quote.class, 1);
-		//System.out.println(quote);
-		quote.setText("Changed");
-		session.getTransaction().commit();
-		session.close();
-		
-		session = sessionFactory.openSession();
-		//session.beginTransaction();
-		//System.out.println("Get by id");
-		quote = session.get(Quote.class, 1);
-		//System.out.println(quote);
-		//session.getTransaction().commit();
-		session.close();
-		
-		assertThat(quote.getText(), is("Changed"));
+		assertThat(project.getName(), is(project.getName()));
 	}
-
 }

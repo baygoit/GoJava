@@ -9,6 +9,7 @@ import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,6 +30,7 @@ public class PaymentDaoSqlImplTest {
 	private PaymentDao paymentDaoMySqlImpl = new PaymentDaoSqlImpl();
 
 	@Test
+	@Ignore
 	public void testGetPayments() {
 
 		paymentDaoMySqlImpl.getPayments(1);
@@ -37,6 +39,7 @@ public class PaymentDaoSqlImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testAddPayment() {
 
 		paymentDaoMySqlImpl.addPayment(new Payment());
@@ -45,6 +48,7 @@ public class PaymentDaoSqlImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetPledged() {
 
 		when(jdbcTemplate.queryForObject(anyString(), any(Integer[].class), eq(Integer.class))).thenReturn(2);
