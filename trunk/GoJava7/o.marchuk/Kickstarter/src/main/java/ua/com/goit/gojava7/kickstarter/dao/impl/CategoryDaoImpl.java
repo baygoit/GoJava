@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.db;
+package ua.com.goit.gojava7.kickstarter.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 @Repository
-public class CategoryDaoMySqlImpl implements CategoryDao {
+public class CategoryDaoImpl implements CategoryDao {
 
 	@Autowired
 	private DataSource dataSource;

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.db;
+package ua.com.goit.gojava7.kickstarter.dao.impl;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
