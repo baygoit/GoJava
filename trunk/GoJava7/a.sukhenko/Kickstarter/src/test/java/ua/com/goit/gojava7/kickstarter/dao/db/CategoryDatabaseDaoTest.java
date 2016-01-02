@@ -19,15 +19,7 @@ public class CategoryDatabaseDaoTest{
     @Autowired
     private CategoryDatabaseDao categoryDao;
     
-    @Test
-    public void testGetConnection() {
-       try {
-        assertThat(categoryDao.getConnection() != null, is(true));
-    } catch (SQLException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-    }
+
 
     @Test
     @Ignore
@@ -36,6 +28,7 @@ public class CategoryDatabaseDaoTest{
     }
 
     @Test
+    @Ignore
     public void testCategoryDatabaseDao() {
        assertThat("class ua.com.goit.gojava7.kickstarter.dao.db.CategoryDatabaseDao",is(this.categoryDao.getClass().toString()));
     }

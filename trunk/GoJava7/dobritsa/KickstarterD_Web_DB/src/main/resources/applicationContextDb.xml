@@ -16,8 +16,6 @@
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao" />
-
 	<bean id="basicDataSource" class="org.apache.commons.dbcp2.BasicDataSource"	destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/kickstarter" />

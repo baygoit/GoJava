@@ -43,7 +43,7 @@ public class RewardsServlet extends HttpServlet {
 			throws ServletException, IOException {	
 		
 		log.info("doGet()...");		
-		int projectId = Integer.parseInt(request.getParameter("projectId"));
+		Long projectId = Long.parseLong(request.getParameter("projectId"));
 		
 		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));	
 		request.setAttribute("project", projectDao.get(projectId));

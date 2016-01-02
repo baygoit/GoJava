@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
@@ -135,7 +136,7 @@ public class PaymentDaoFileImpl implements PaymentDao {
 		}
 		return pledged;
 	}
-	
+
 	private int generateIdOfNewElement() {
 		int maxId = 0;
 		for (Payment payment : getPayments(0)) {

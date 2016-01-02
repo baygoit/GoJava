@@ -1,53 +1,30 @@
 package ua.com.goit.gojava7.kickstarter.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import ua.com.goit.gojava7.kickstarter.hibernate.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.models.Quote;
 
 @Repository
 public class QuoteDao {
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
 	private static final Logger log = LoggerFactory.getLogger(QuoteDao.class);
-	
-	public QuoteDao() {
-		log.info("Constructor QuoteDao()...");
-	}
-
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}	
 
 	public Quote getRandomQuote() {
 		log.info("<Quote> getRandomQuote()...");
-		String query = "SELECT text, author FROM quote order by rand() limit 1 ";
-		return jdbcTemplate.queryForObject(query, new QuoteMapper());
-	}
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-	public Quote get(int index) {
-		log.info("<Quote> get({})...", index);
-		String query = "select text, author from quote where id = ?";
-		return jdbcTemplate.queryForObject(query, new Object[] { index }, new QuoteMapper());
-	}
+		Quote quote = (Quote) session.createCriteria(Quote.class)
+				.add(Restrictions.sqlRestriction("1=1 order by rand()"))
+				.setMaxResults(1)
+				.uniqueResult();
 
-	private final class QuoteMapper implements RowMapper<Quote> {
-		public Quote mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-			log.info("QuoteMapper()...");
-			Quote quote = new Quote();
-			quote.setText(resultSet.getString("text"));
-			quote.setAuthor(resultSet.getString("author"));
-			log.debug("QuoteMapper() returned quote: {}", quote);
-			return quote;
-		}
+		session.close();
+		log.debug("<Quote> getRandomQuote() returned quote: {}", quote);
+		return quote;
 	}
 }

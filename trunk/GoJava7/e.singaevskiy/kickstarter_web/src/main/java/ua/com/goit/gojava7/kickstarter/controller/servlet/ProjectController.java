@@ -74,7 +74,7 @@ public class ProjectController extends HttpServlet {
         Map<String, String> validationErrors = validateMessage(user, message);   	
     	
     	if (validationErrors.isEmpty()) {       
-    		questionsDAO.add(new Question(projectId, message, ""));
+    		questionsDAO.add(new Question(projectDAO.get(projectId), message, ""));
     		response.sendRedirect("project?id=" + projectId);
     	} else {
     		request.getSession(false).setAttribute("errors", validationErrors);
@@ -91,11 +91,14 @@ public class ProjectController extends HttpServlet {
     	String cardId = request.getParameter("cardId");
     	String amount = request.getParameter("amount");
     	
+    	System.out.println(projectId);
+    	System.out.println(rewardId);
+    	
     	Map<String, String> validationErrors = validatePayment(user, cardId, amount);   	
     	
     	if (validationErrors.isEmpty()) {
-    		Payment payment = new Payment(Integer.parseInt(projectId), 
-            		Integer.parseInt(rewardId), 
+    		Payment payment = new Payment(projectDAO.get(Integer.parseInt(projectId)), 
+            		rewardDAO.get(Integer.parseInt(rewardId)), 
             		user, 
             		Long.parseLong(cardId), 
             		Integer.parseInt(amount), 
@@ -104,7 +107,7 @@ public class ProjectController extends HttpServlet {
             response.sendRedirect("project?id=" + projectId);
 		} else {
 	    	request.getSession(false).setAttribute("errors", validationErrors);
-	    	response.sendRedirect("payment?project="+projectId+"&reward="+rewardId+"&amount=" + amount);
+	    	response.sendRedirect("payment?projectId="+projectId+"&rewardId="+rewardId+"&amount=" + amount);
 		}
        
     }

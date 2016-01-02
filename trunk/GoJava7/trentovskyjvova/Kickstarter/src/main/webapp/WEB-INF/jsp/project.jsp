@@ -4,9 +4,9 @@
 <h3>Project:</h3>
 
 <p>name: ${selectedProject.getName()}</p>
-<p>funded: ${selectedProject.getFunded(pledged)}</p>
+<p>funded: ${selectedProject.getFunded()}</p>
 <p>daysToGo: ${selectedProject.getDaysToGo()}</p>
-<p>pledged: ${pledged}</p>
+<p>pledged: ${selectedProject.getAmountPledge()}</p>
 <p>description: ${selectedProject.getDescription()}</p>
 <p>owner: ${selectedProject.getOwner()}</p>
 <p>goal: ${selectedProject.getGoal()}</p>

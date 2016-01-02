@@ -35,7 +35,7 @@ public class QuestionDao {
 		jdbcTemplate.update(query, new Object[] {question.getTime(), question.getQuestion(), question.getProjectId()});
 	}
 
-	public List<Question> getByProject(int projectId) {
+	public List<Question> getByProject(Long projectId) {
 		log.info("<Question> getByProject({})...", projectId);
 		String query = "select time, question, answer, project_id from question where project_id = ?";
 		return jdbcTemplate.query(query, new Object[] { projectId }, new QuestionMapper());

@@ -36,4 +36,6 @@
 	<bean id="requestValidation" class="ua.com.goit.gojava7.kickstarter.servlet.RequestValidation">
 	</bean>
 	
+	<!-- <import resource="loggerAspect.xml"/> -->
+	
 </beans>

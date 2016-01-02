@@ -48,10 +48,10 @@ public class ProjectServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		log.info("doGet()...");		
-		int projectId = Integer.parseInt(request.getParameter("id"));
+		Long projectId = Long.parseLong(request.getParameter("id"));
 		
 		Project project = projectDao.get(projectId);
-		project.setPledged(paymentDao.calculatePledgedForProject(project.getId()));
+		project.setPledged(paymentDao.calculatePledgedForProject(project.getProjectId()));
 			
 		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));	
 		request.setAttribute("project", project);		

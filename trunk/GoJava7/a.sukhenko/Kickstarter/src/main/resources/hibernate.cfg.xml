@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- ~ Hibernate, Relational Persistence for Idiomatic Java ~ ~ License: 
+	GNU Lesser General Public License (LGPL), version 2.1 or later. ~ See the 
+	lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>. -->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+   <session-factory>
+   <property name="hibernate.dialect">
+      org.hibernate.dialect.MySQLDialect
+   </property>
+   <property name="hibernate.connection.driver_class">
+      com.mysql.jdbc.Driver
+   </property>
+
+   <!-- Assume test is the database name -->
+   <property name="hibernate.connection.url">
+      jdbc:mysql://localhost/kickstarter
+   </property>
+   <property name="hibernate.connection.username">
+      kickadmin
+   </property>
+   <property name="hibernate.connection.password">
+      kickpass
+   </property>
+
+   <!-- List of XML mapping files -->
+   <mapping resource="Quote.hbm.xml"/>
+ <mapping resource="Category.hbm.xml"/>
+  <mapping resource="Project.hbm.xml"/>
+  <mapping resource="PaymentBonus.hbm.xml"/>
+</session-factory>
+</hibernate-configuration>

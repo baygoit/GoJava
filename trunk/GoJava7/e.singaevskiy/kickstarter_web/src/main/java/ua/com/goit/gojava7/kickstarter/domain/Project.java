@@ -12,7 +12,7 @@ public class Project {
     private long balanceSum;
     private Date startDate;
     private Date endDate;
-    private int categoryId;
+    private Category category;
     private String description;
     private String videoUrl;
     private String author;
@@ -22,14 +22,14 @@ public class Project {
         // default bean constructor
     }
     
-    public Project(int id, String name, String author, int categoryId) {
-        this(name, author, categoryId);
+    public Project(int id, String name, String author, Category category) {
+        this(name, author, category);
         this.id = id;
     }
 
-    public Project(String name, String author, int categoryId) {
+    public Project(String name, String author, Category category) {
         this.name = name;
-        this.categoryId = categoryId;
+        this.setCategory(category);
         this.author = author;
     }
 
@@ -109,26 +109,26 @@ public class Project {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + id;
-        return result;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Project other = (Project) obj;
-        if (id != other.id)
-            return false;
-        return true;
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Project other = (Project) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 
     @Override
     public String toString() {
@@ -143,14 +143,6 @@ public class Project {
         this.id = id;
     }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public List<Question> getQuestions() {
         return questions;
     }
@@ -158,5 +150,13 @@ public class Project {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 }

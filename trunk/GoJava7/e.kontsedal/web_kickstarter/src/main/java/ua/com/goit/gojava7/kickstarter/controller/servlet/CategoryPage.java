@@ -31,11 +31,6 @@ public class CategoryPage extends HttpServlet {
        
     @Override
     public void init() throws ServletException {
-//    	Initializator initializator = (Initializator) this.getServletContext().getAttribute(ContextListener.INITIALIZATOR);
-//    	projectStorage = initializator.getProjectStorage();
-//    	paymentStorage = initializator.getPaymentStorage();
-//    	categoryStorage = initializator.getCategoryStorage();
-    	
 //    	WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 //    	projectStorage = webApplicationContext.getBean("projectDbStorage", ProjectDbStorage.class);
 //    	paymentStorage = webApplicationContext.getBean("paymentDbStorage", PaymentDbStorage.class);

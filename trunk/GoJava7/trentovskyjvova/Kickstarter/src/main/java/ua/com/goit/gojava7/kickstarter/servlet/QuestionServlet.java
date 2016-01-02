@@ -42,7 +42,7 @@ public class QuestionServlet extends HttpServlet {
 			throws ServletException, IOException {
 		log.info("doGet");
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
-		log.debug("projectId: " + projectId);
+		log.debug("projectId: {}", projectId);
 		
 		request.setAttribute("projectId", projectId);
 		request.getRequestDispatcher(PATH_QUESTION_JSP).forward(request, response);
@@ -54,7 +54,7 @@ public class QuestionServlet extends HttpServlet {
 			throws ServletException, IOException {
 		log.info("doPost");
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
-		log.debug("projectId: " + projectId);
+		log.debug("projectId: {}", projectId);
 		
 		request.setAttribute("errors", false);
 		List<String> emptyCheckParameters = new ArrayList<>(Arrays.asList("questionText"));
@@ -63,13 +63,13 @@ public class QuestionServlet extends HttpServlet {
 		} else {
 
 			String questionText = request.getParameter("questionText");
-			log.debug("questionText: " + questionText);
+			log.debug("questionText: {}", questionText);
 			
 			Question question = new Question();
 			question.setProjectId(projectId);
 			question.setQuestionText(questionText);
 			questionDao.addQuestion(question);
-			log.info("new Question " + question);
+			log.info("new Question {}", question);
 			
 			response.sendRedirect("project?projectId=" + projectId);
 		}

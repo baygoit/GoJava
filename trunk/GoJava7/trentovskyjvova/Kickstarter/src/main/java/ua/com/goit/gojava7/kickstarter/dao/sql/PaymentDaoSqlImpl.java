@@ -1,73 +1,35 @@
 package ua.com.goit.gojava7.kickstarter.dao.sql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
-import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
+import ua.com.goit.gojava7.kickstarter.hibernate.HibernateUtil;
 
 @Repository
 public class PaymentDaoSqlImpl implements PaymentDao {
-	@Autowired
-	private DataSource dataSource;
+	/*@Autowired
+	private JdbcTemplate jdbcTemplate;*/
 
 	@Override
 	public List<Payment> getPayments(int projectId) {
-		List<Payment> payments = new ArrayList<>();
 
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rset = null;
-		try {
-			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("SELECT id, name, cardNumber, pledge FROM payment WHERE projectId = ?");
-			stmt.setInt(1, projectId);
-			rset = stmt.executeQuery();
+		/*String sql = "SELECT id, projectId, name, cardNumber, pledge FROM payment WHERE projectId = ?";
+		return jdbcTemplate.query(sql, new Integer[] { projectId }, new BeanPropertyRowMapper<Payment>(Payment.class));*/
 
-			Payment payment;
-			while (rset.next()) {
-				int id = rset.getInt("id");
-				String name = rset.getString("name");
-				String cardNumber = rset.getString("cardNumber");
-				int pledge = rset.getInt("pledge");
-
-				payment = new Payment();
-				payment.setId(id);
-				payment.setProjectId(projectId);
-				payment.setName(name);
-				payment.setCardNumber(cardNumber);
-				payment.setPledge(pledge);
-				payments.add(payment);
-			}
-		} catch (SQLException e) {
-			throw new IODatabaseException("Problem with database", e);
-		} finally {
-			try {
-				if (rset != null)
-					rset.close();
-			} catch (Exception e) {
-			}
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (Exception e) {
-			}
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-			}
-		}
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		Criteria criteria = session.createCriteria(Payment.class);	
+		criteria.add(Restrictions.eq("projectId", projectId));
+		List<Payment> payments = criteria.list();
+		
+		session.close();
 
 		return payments;
 	}
@@ -75,70 +37,36 @@ public class PaymentDaoSqlImpl implements PaymentDao {
 	@Override
 	public void addPayment(Payment payment) {
 
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		try {
-			conn = dataSource.getConnection();
-			stmt = conn
-					.prepareStatement("INSERT INTO payment (projectId, name, cardNumber, pledge) VALUES (?, ?, ?, ?)");
-			stmt.setInt(1, payment.getProjectId());
-			stmt.setString(2, payment.getName());
-			stmt.setString(3, payment.getCardNumber());
-			stmt.setInt(4, payment.getPledge());
-			stmt.executeUpdate();
+		/*String sql = "INSERT INTO payment (projectId, name, cardNumber, pledge) VALUES (?, ?, ?, ?)";
+		jdbcTemplate.update(sql, payment.getProjectId(), payment.getName(), payment.getCardNumber(),
+				payment.getPledge());*/
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-		} catch (SQLException e) {
-			throw new IODatabaseException("Problem with database", e);
-		} finally {
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (Exception e) {
-			}
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-			}
-		}
+		session.beginTransaction();
+		session.save(payment);
+		session.getTransaction().commit();
+
+		session.close();
 
 	}
-
+	
 	@Override
 	public int getPledged(int projectId) {
-		int pledged = 0;
 
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rset = null;
-		try {
-			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("SELECT SUM(pledge) pledged FROM payment WHERE projectId = ?");
-			stmt.setInt(1, projectId);
-			rset = stmt.executeQuery();
+		/*String sql = "SELECT SUM(pledge) pledged FROM payment WHERE projectId IN ?";
+		return jdbcTemplate.queryForObject(sql, new Integer[] { projectId }, Integer.class);*/	
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		Criteria criteria = session.createCriteria(Payment.class);
+		criteria.add(Restrictions.eq("projectId", projectId));
+		criteria.setProjection(Projections.sum("pledge"));
 
-			while (rset.next()) {
-				pledged = rset.getInt("pledged");
-			}
-		} catch (SQLException e) {
-			throw new IODatabaseException("Problem with database", e);
-		} finally {
-			try {
-				if (rset != null)
-					rset.close();
-			} catch (Exception e) {
-			}
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (Exception e) {
-			}
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-			}
-		}
+		int pledged = (int) criteria.uniqueResult();
+		
+		session.close();
+
 		return pledged;
 	}
 

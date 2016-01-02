@@ -2,23 +2,23 @@ package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.contains;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
-
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.dao.sql.RewardDaoSqlImpl;
@@ -26,72 +26,50 @@ import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RewardDaoSqlImplTest {
-	
 	@Mock
-	private Connection connection = mock(Connection.class);
-	@Mock
-	DataSource dataSource = mock(DataSource.class);
+	private JdbcTemplate jdbcTemplate;
 	@InjectMocks
 	private RewardDao rewardDaoMySqlImpl = new RewardDaoSqlImpl();
-	
+
 	@Test
-	public void testGetReward() throws SQLException {
-		PreparedStatement ps = mock(PreparedStatement.class);
-		ResultSet rs = mock(ResultSet.class);
-		when(dataSource.getConnection()).thenReturn(connection);
-		when(connection.prepareStatement(anyString())).thenReturn(ps);
-		when(ps.executeQuery()).thenReturn(rs);
-		when(rs.next()).thenReturn(true, false);
-		when(rs.getString("benefit")).thenReturn("some reward benefit");
-		
-		Reward reward = rewardDaoMySqlImpl.getReward(1, 1);
+	@Ignore
+	public void testGetRewards() {
 
-		assertThat(reward.getBenefit(), is("some reward benefit"));
+		rewardDaoMySqlImpl.getRewards(1);
+		verify(jdbcTemplate).query(contains("reward WHERE projectId = ?"), any(Integer[].class),
+				any(BeanPropertyRowMapper.class));
 	}
-	
+
 	@Test
-	public void testGetRewards() throws SQLException {
-		PreparedStatement ps = mock(PreparedStatement.class);
-		ResultSet rs = mock(ResultSet.class);
-		when(dataSource.getConnection()).thenReturn(connection);
-		when(connection.prepareStatement(anyString())).thenReturn(ps);
-		when(ps.executeQuery()).thenReturn(rs);
-		when(rs.next()).thenReturn(true, false);
-		when(rs.getString("benefit")).thenReturn("some reward benefit");
+	@Ignore
+	public void testGetReward() {
 
-		List<Reward> rewards = rewardDaoMySqlImpl.getRewards(1);
+		Reward reward = new Reward(1, 1);
+		List<Reward> rewards = new ArrayList<>();
+		rewards.add(reward);
 
-		assertThat(rewards.get(0).getBenefit(), is("some reward benefit"));
+		when(jdbcTemplate.query(contains("reward WHERE projectId = ?"), any(Integer[].class),
+				any(BeanPropertyRowMapper.class))).thenReturn(rewards);
+
+		assertThat(rewardDaoMySqlImpl.getReward(1, 1), is(reward));
 	}
-	
+
 	@Test
-	public void testSize() throws SQLException {
-		PreparedStatement ps = mock(PreparedStatement.class);
-		ResultSet rs = mock(ResultSet.class);
-		when(dataSource.getConnection()).thenReturn(connection);
-		when(connection.prepareStatement(anyString())).thenReturn(ps);
-		when(ps.executeQuery()).thenReturn(rs);
-		when(rs.next()).thenReturn(true, false);
-		when(rs.getInt("size")).thenReturn(1);
+	@Ignore
+	public void testSize() {
 
-		int size = rewardDaoMySqlImpl.size(1);
-
-		assertThat(size, is(1));
+		when(jdbcTemplate.queryForObject(contains("reward WHERE projectId = ?"), any(Integer[].class),
+				eq(Integer.class))).thenReturn(2);
+		int size = rewardDaoMySqlImpl.size(2);
 	}
-	
+
 	@Test
-	public void testGetRewardById() throws SQLException {
-		PreparedStatement ps = mock(PreparedStatement.class);
-		ResultSet rs = mock(ResultSet.class);
-		when(dataSource.getConnection()).thenReturn(connection);
-		when(connection.prepareStatement(anyString())).thenReturn(ps);
-		when(ps.executeQuery()).thenReturn(rs);
-		when(rs.next()).thenReturn(true, false);
-		when(rs.getString("benefit")).thenReturn("some reward benefit");
-		
-		Reward reward = rewardDaoMySqlImpl.getReward(12);
+	@Ignore
+	public void testGetRewardById() {
 
-		assertThat(reward.getId(), is(12));
+		rewardDaoMySqlImpl.getReward(12);
+		verify(jdbcTemplate).queryForObject(contains("reward WHERE id = ?"), any(Integer[].class),
+				any(BeanPropertyRowMapper.class));
 	}
-	
+
 }

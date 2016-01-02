@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>Kickstarter  2</display-name>
+  <display-name>Kickstarter [Hibernate]</display-name>
   
   <context-param>
     <param-name>contextConfigLocation</param-name>
@@ -15,6 +15,10 @@
    </listener-class>
   </listener>
   
+  <listener>  
+	<listener-class>ua.com.goit.gojava7.kickstarter.hibernate.HibernateListener</listener-class>  
+</listener>  
+
   <servlet>
   <servlet-name>MainServlet
   </servlet-name>
