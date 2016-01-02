@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.kickstarter.model.Project;
 
-public interface ProjectDaoInterface {
+public interface ProjectDao {
 
 //	public List<Project> getAllList();
 	
-	public List<Project> getAll(String categoryTitle);
+	public List<Project> getAll(int categoryId);
 
 	public Project getOne(int projectNumber);
 

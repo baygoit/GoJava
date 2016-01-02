@@ -1,6 +1,6 @@
 package modelTest;
 
-import static org.junit.Assert.*;
+
 
 import java.util.List;
 
@@ -48,11 +48,11 @@ public class QuoteMappingTest {
 		session.beginTransaction();
 
 		Quote quote1 = new Quote();
-		quote1.setQuoteText("Quote 1");
+		quote1.setQuote("Quote 1");
 		quote1.setAuthor("Author 1");
 
 		Quote quote2 = new Quote();
-		quote2.setQuoteText("Quote 2");
+		quote2.setQuote("Quote 2");
 		quote2.setAuthor("Author 2");
 
 		session.save(quote1);
@@ -85,7 +85,7 @@ public class QuoteMappingTest {
 		quote = session.get(Quote.class, 1);
 		System.out.println(quote);
 
-		quote.setQuoteText("Changed");
+		quote.setQuote("Changed");
 
 		session.getTransaction().commit();
 		session.close();

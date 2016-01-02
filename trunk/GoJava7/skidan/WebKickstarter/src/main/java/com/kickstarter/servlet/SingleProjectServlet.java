@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.kickstarter.dao.interfaces.DbProjectDaoImpl;
-import com.kickstarter.dao.interfaces.DbQuestionDaoImpl;
+import com.kickstarter.dao.interfaces.ProjectDaoImpl;
+import com.kickstarter.dao.interfaces.QuestionDaoImpl;
 import com.kickstarter.dao.interfaces.PaymentDaoImpl;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.Question;
@@ -23,10 +23,10 @@ public class SingleProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	DbQuestionDaoImpl questionDao;
+	QuestionDaoImpl questionDao;
 
 	@Autowired
-	DbProjectDaoImpl projectDao;
+	ProjectDaoImpl projectDao;
 
 	@Autowired
 	PaymentDaoImpl paymentDao;
@@ -42,7 +42,7 @@ public class SingleProjectServlet extends HttpServlet {
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
 		Project project = projectDao.getOne(projectId);
 		project.setGainedSum(paymentDao.getAll(projectId));
-		List<Question> list = questionDao.getProjectQuestions(project.getTitle());
+		List<Question> list = questionDao.getProjectQuestions(projectId);
 
 		request.setAttribute("questions", list);
 		request.setAttribute("project", project);

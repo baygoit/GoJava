@@ -8,14 +8,13 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 
-	<hibernate-mapping package="com.kickstarter.model">
+<hibernate-mapping package="com.kickstarter.model">
 
-	<class name="Quote" table="quotes">
-		<id name="id" type="int" column="id">
-         <generator class="native"/>
-      </id>
-		<property name="quoteText" />
-		<property name="author" />
+	<class name="Category" table="categories">
+		<id name="id" type="int" column="categoryId">
+			<generator class="native" />
+		</id>
+		<property name="title" column="categoryTitle"/>
 	</class>
 
 </hibernate-mapping>

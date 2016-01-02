@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kickstarter.model.Category;
 
-public interface CategoryDaoInterface {
+public interface CategoryDao {
 
 	public List<Category> getAll();
 	

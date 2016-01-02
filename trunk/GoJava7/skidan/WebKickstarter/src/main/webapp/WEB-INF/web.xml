@@ -16,7 +16,9 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:ApplicationContext.xml</param-value>
 	</context-param>
-
+<listener>  
+	<listener-class>com.kickstarter.hibernate.HibernateListener</listener-class>  
+ </listener>  
 	<listener>
 	   <listener-class>
 	        org.springframework.web.context.ContextLoaderListener
