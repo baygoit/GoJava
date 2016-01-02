@@ -14,13 +14,11 @@ import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 public class QuoteDatabaseDao{
     private static final Logger logger = LogManager.getLogger(QuoteDatabaseDao.class);
 
-
-
-    @SuppressWarnings("unchecked")
     public Quote getRandomQuote() {
         logger.debug("Getting random Quote");
         Session session = HibernateUtil.getSessionFactory().openSession();
-        List<Quote> quotes = (List<Quote>) session.createQuery("from Quote q order by rand()").setMaxResults(1).list();
+        org.hibernate.Query query = session.createQuery("from Quote q order by rand()");
+        List<Quote> quotes = HibernateUtil.listAndCast(query.setMaxResults(1));
         if(quotes.isEmpty()){
         	throw new NoSuchElementException();
         }

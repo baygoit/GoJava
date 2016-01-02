@@ -1,9 +1,19 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "questions")
 public class Question{
+	@Column
     private String time;
+	@Column
     private String question;
+	@Column
     private String answer;
+	@Column
     private String projectName;
 
     public String getAnswer() {

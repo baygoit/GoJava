@@ -1,6 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 

@@ -1,7 +1,15 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="categories")
 public class Category{
+	@Column
     private String categoryName;
+	@Column
     private int    categoryId;
 
     public Category() {

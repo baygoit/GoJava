@@ -5,23 +5,42 @@ import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-
+@Entity
+@Table(name="projects")
 public class Project{
     private static final String MINUTES_LEFT        = " minutes left";
     private static final String HOURS_LEFT          = " hours left";
     private static final String DAYS_LEFT           = " days left";
     private static final String SECONDS_LEFT        = " seconds left";
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column
     private String              projectName;
+    @Column
     private String              projectDescription;
+    @Column
     private double              moneyNeeded;
+    @Column
     private String              projectHistory;
+    @Column
     private String              demoLink;
     private Map<String, String> questionsAndAnswers = new HashMap<>();
+    // <many-to-one name="category" cascade="all" column="projectCategoryId"  class="ua.com.goit.gojava7.kickstarter.domain.Category" fetch="join">
+    @ManyToOne(targetEntity=Category.class)
     private Category category;
+    @Column
     private double              pledged             = 0;
+    @Column
     private LocalDateTime       enddate;
     private PaymentBonus        paymentBonus        = new PaymentBonus();
 
