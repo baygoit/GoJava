@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.kickstarter.dao.interfaces.DbProjectDaoImpl;
+import com.kickstarter.dao.interfaces.ProjectDaoImpl;
 import com.kickstarter.dao.interfaces.PaymentDaoImpl;
 import com.kickstarter.model.Project;
 
@@ -21,7 +21,7 @@ public class SelectedCategoryProjectsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	DbProjectDaoImpl projectDao;
+	ProjectDaoImpl projectDao;
 
 	@Autowired
 	PaymentDaoImpl paymentDao;
@@ -32,8 +32,8 @@ public class SelectedCategoryProjectsServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String categoryTitlet = request.getParameter("categoryTitle");
-		List<Project> projectList = projectDao.getAll(categoryTitlet);
+		int categoryId =Integer.valueOf(request.getParameter("categoryId"));
+		List<Project> projectList = projectDao.getAll(categoryId);
 		for (Project p : projectList) {
 			p.setGainedSum(paymentDao.getAll(p.getId()));
 		}

@@ -1,6 +1,4 @@
-package modelTest;
-
-
+package ua.com.goit.gojava7.kickstarter.domain;
 
 import java.util.List;
 
@@ -13,9 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kickstarter.model.Quote;
-
-public class QuoteMappingTest {
+public class CategoryMappingTest {
 	private SessionFactory sessionFactory;
 
 	@Before
@@ -47,16 +43,14 @@ public class QuoteMappingTest {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		Quote quote1 = new Quote();
-		quote1.setQuote("Quote 1");
-		quote1.setAuthor("Author 1");
+		Category category1 = new Category();
+		category1.setName("Category 1");
 
-		Quote quote2 = new Quote();
-		quote2.setQuote("Quote 2");
-		quote2.setAuthor("Author 2");
+		Category category2 = new Category();
+		category2.setName("Category 2");
 
-		session.save(quote1);
-		session.save(quote2);
+		session.save(category1);
+		session.save(category2);
 		session.getTransaction().commit();
 		session.close();
 
@@ -65,16 +59,16 @@ public class QuoteMappingTest {
 		session.beginTransaction();
 
 		System.out.println("Get by id");
-		Quote quote = session.get(Quote.class, 1);
-		System.out.println(quote);
+		Category category = session.get(Category.class, 1l);
+		System.out.println(category);
 
 		session.close();
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 
-		List<Quote> result1 = (List<Quote>) session.createQuery("from Quote q").list();
-		for (Quote aQuote : result1) {
-			System.out.println(aQuote);
+		List<Category> result1 = (List<Category>) session.createQuery("from Category q").list();
+		for (Category aCategory : result1) {
+			System.out.println(aCategory);
 		}
 
 		session.close();
@@ -82,10 +76,10 @@ public class QuoteMappingTest {
 		session.beginTransaction();
 
 		System.out.println("Get by id");
-		quote = session.get(Quote.class, 1);
-		System.out.println(quote);
+		category = session.get(Category.class, 1l);
+		System.out.println(category);
 
-		quote.setQuote("Changed");
+		category.setName("Changed");
 
 		session.getTransaction().commit();
 		session.close();
@@ -93,11 +87,10 @@ public class QuoteMappingTest {
 		session.beginTransaction();
 
 		System.out.println("Get by id");
-		quote = session.get(Quote.class, 1);
-		System.out.println(quote);
+		category = session.get(Category.class, 1l);
+		System.out.println(category);
 
 		session.getTransaction().commit();
 		session.close();
 	}
 }
-

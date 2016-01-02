@@ -9,14 +9,15 @@ public class Project {
 	private int gainedSum;
 	private String projectHistory;
 	private String videoLink;
-	private String categoryTitle;
+	private Category category;
+
 	
-	public Project(){
-		
+
+	public Project() {
 	}
 
 	public Project(int id, String title, String discription, int daysLeft, int requiredSum, int gainedSum,
-			String projectHistory, String videoLink, String categoryTitle) {
+			String projectHistory, String videoLink, Category category) {
 		this.id = id;
 		this.title = title;
 		this.discription = discription;
@@ -25,7 +26,14 @@ public class Project {
 		this.gainedSum = gainedSum;
 		this.projectHistory = projectHistory;
 		this.videoLink = videoLink;
-		this.categoryTitle = categoryTitle;
+		this.category = category;
+	}
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public String getTitle() {
@@ -83,7 +91,7 @@ public class Project {
 	public void setVideoLink(String videoLink) {
 		this.videoLink = videoLink;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -92,13 +100,13 @@ public class Project {
 		this.id = id;
 	}
 
-	public String getCategoryName() {
-		return categoryTitle;
+/*	public Integer getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryTitle = categoryName;
-	}
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}*/
 
 	@Override
 	public String toString() {

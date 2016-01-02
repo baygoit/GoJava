@@ -23,12 +23,18 @@
 	<bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 	<property name="DataSource" ref="dataSource"/>
 	</bean>
+	
 	<aop:aspectj-autoproxy proxy-target-class="true" />
+	
 	<bean id="loggerAspect" class="com.kickstarter.aspect.LoggerAspect"></bean>
+	
+	
+	<context:component-scan base-package="com.kickstarter.dao.interfaces"/>
+	
+	
 <!--	<bean
 		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />-->
 		
-<context:component-scan base-package="com.kickstarter.dao.interfaces"/>
 
  <!--    <bean id="DbQuestionDaoImpl" class="com.kickstarter.dao.interfaces.DbQuestionDaoImpl">
 
