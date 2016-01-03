@@ -30,10 +30,9 @@ public class RewardDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Reward> getByProject(Long projectId) {
-		log.info("<rewards> getByProject({})...", projectId);
-		Project project = new Project();
-		project.setProjectId(projectId);
+	public List<Reward> getByProject(Project project) {
+		log.info("<rewards> getByProject({})...", project);
+	
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		List<Reward> rewards = session.createCriteria(Reward.class)
@@ -41,7 +40,7 @@ public class RewardDao {
 				.list();
 
 		session.close();
-		log.debug("<rewards> getByProject({}) returned rewards: {}", projectId, rewards);
+		log.debug("<rewards> getByProject({}) returned rewards: {}", project, rewards);
 		return rewards;
 	}	
 }

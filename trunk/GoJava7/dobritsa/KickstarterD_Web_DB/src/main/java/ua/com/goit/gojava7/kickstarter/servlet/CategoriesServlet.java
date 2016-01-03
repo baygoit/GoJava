@@ -35,6 +35,7 @@ public class CategoriesServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		log.info("doGet()...");
 
 		request.setAttribute("quote", quoteDao.getRandomQuote());

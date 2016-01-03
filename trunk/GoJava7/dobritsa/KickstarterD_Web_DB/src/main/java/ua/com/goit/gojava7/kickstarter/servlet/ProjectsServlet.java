@@ -17,6 +17,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.models.Category;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @WebServlet("/projects")
@@ -43,15 +44,19 @@ public class ProjectsServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		log.info("doGet()...");
+		
 		Long categoryId = Long.parseLong(request.getParameter("id"));
+		
+		Category category = categoryDao.get(categoryId);		
 
-		List<Project> projects = projectDao.getByCategory(categoryId);
+		List<Project> projects = projectDao.getByCategory(category);
 		for (Project project : projects) {
 			project.setPledged(paymentDao.calculatePledgedForProject(project.getProjectId()));
 		}
 
-		request.setAttribute("categoryName", categoryDao.get(categoryId).getName());
+		request.setAttribute("categoryName", category.getName());
 		request.setAttribute("projects", projects);
 		request.getRequestDispatcher("/WEB-INF/jsp/projects.jsp").forward(request, response);
 	}

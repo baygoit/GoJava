@@ -31,11 +31,9 @@ public class ProjectDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Project> getByCategory(Long categoryId) {
-		log.info("<projects> getByCategory({})...", categoryId);
-
-		Category category = new Category();
-		category.setCategoryId(categoryId);
+	public List<Project> getByCategory(Category category) {
+		log.info("<projects> getByCategory({})...", category);
+		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		List<Project> projects = session.createCriteria(Project.class)
@@ -43,7 +41,7 @@ public class ProjectDao {
 				.list();
 
 		session.close();
-		log.debug("<projects> getByCategory({}) returned projects: {}", categoryId, projects);
+		log.debug("<projects> getByCategory({}) returned projects: {}", category, projects);
 		return projects;
 	}
 }

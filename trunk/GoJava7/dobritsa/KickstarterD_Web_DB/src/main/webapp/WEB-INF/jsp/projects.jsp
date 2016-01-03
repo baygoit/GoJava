@@ -4,7 +4,7 @@
 </jsp:include>
 
 <h3><a href="categories">Kickstarter</a></h3>
-<h1>${categoryName} </h1>
+<h1>${categoryName}</h1>
 
 <ul>
 	<c:forEach var="project" items="${requestScope.projects}">

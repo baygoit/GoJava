@@ -45,17 +45,18 @@ public class ProjectServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException {	
 		
 		log.info("doGet()...");		
-		Long projectId = Long.parseLong(request.getParameter("id"));
 		
-		Project project = projectDao.get(projectId);
+		Long projectId = Long.parseLong(request.getParameter("id"));	
+		
+		Project project = projectDao.get(projectId);		
 		project.setPledged(paymentDao.calculatePledgedForProject(project.getProjectId()));
 			
-		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));	
+		request.setAttribute("category", categoryDao.get(project.getCategoryId()));	
 		request.setAttribute("project", project);		
-		request.setAttribute("questions", questionDao.getByProject(projectId));
+		request.setAttribute("questions", questionDao.getByProject(project));
 		request.getRequestDispatcher("/WEB-INF/jsp/project.jsp").forward(request, response);
 	}	
 }

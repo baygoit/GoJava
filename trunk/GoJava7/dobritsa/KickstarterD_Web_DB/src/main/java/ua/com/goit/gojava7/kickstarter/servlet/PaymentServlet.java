@@ -22,32 +22,34 @@ import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 public class PaymentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = LoggerFactory.getLogger(PaymentServlet.class);	 
-	
+	private static final Logger log = LoggerFactory.getLogger(PaymentServlet.class);
+
 	@Autowired
 	private ProjectDao projectDao;
-	
+
 	@Autowired
 	private RewardDao rewardDao;
-	
+
 	@Autowired
 	private CategoryDao categoryDao;
-	
+
 	@Autowired
 	private Validator validator;
 
 	@Override
 	public void init() {
 		log.info("Starting spring autowiring...");
-		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);	
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 		log.info("Ended spring autowiring...");
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		log.info("doGet()...");
 		
-		log.info("doGet()...");		
 		Long rewardId = Long.parseLong(request.getParameter("id"));
+		
 		int amount;
 		Long projectId;
 
@@ -61,8 +63,8 @@ public class PaymentServlet extends HttpServlet {
 
 		} else {
 			projectId = Long.parseLong(request.getParameter("projectId"));
-			
-			if (validator.validateAmountOfPledge(request.getParameter("amount"))) {	
+
+			if (validator.validateAmountOfPledge(request.getParameter("amount"))) {
 				amount = Integer.parseInt(request.getParameter("amount"));
 				request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
 				request.setAttribute("project", projectDao.get(projectId));
@@ -72,7 +74,7 @@ public class PaymentServlet extends HttpServlet {
 				request.setAttribute("message", "-----Wrong amount-----");
 				request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
 				request.setAttribute("project", projectDao.get(projectId));
-				request.setAttribute("rewards", rewardDao.getByProject(projectId));
+				request.setAttribute("rewards", rewardDao.getByProject(projectDao.get(projectId)));
 				request.getRequestDispatcher("/WEB-INF/jsp/rewards.jsp").forward(request, response);
 			}
 		}
