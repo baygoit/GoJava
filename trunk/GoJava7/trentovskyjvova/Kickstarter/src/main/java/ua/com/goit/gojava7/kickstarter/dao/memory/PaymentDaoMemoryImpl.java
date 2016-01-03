@@ -6,6 +6,7 @@ import java.util.Map;
 
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class PaymentDaoMemoryImpl implements PaymentDao {
 	private List<Payment> payments;
@@ -19,7 +20,7 @@ public class PaymentDaoMemoryImpl implements PaymentDao {
 		
 		Payment payment1 = new Payment();
 		payment1.setId(1);
-		payment1.setProjectId(1);
+		payment1.setProject(new Project("Name", projectId));
 		payment1.setName("Julio");
 		payment1.setPledge(30);
 		payments.add(payment1);
@@ -43,7 +44,7 @@ public class PaymentDaoMemoryImpl implements PaymentDao {
 		
 		int pledged = 0;
 		for (Payment payment : payments) {
-			if (payment.getProjectId() == projectId) {
+			if (payment.getProject().getId() == projectId) {
 				pledged += payment.getPledge();
 			}
 		}

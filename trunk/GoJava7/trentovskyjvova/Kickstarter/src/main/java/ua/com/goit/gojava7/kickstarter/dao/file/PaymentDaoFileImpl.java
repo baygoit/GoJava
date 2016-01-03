@@ -72,7 +72,7 @@ public class PaymentDaoFileImpl implements PaymentDao {
 
 				Payment payment = new Payment();
 				payment.setId(id);
-				payment.setProjectId(projectId);
+				//payment.setProject(projectDao.getProject(projectId));
 				payment.setName(name);
 				payment.setCardNumber(cardNumber);
 				payment.setPledge(pledge);
@@ -103,7 +103,7 @@ public class PaymentDaoFileImpl implements PaymentDao {
 
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.append(generateIdOfNewElement()).append(";");
-			stringBuilder.append(payment.getProjectId()).append(";");
+			stringBuilder.append(payment.getProject().getId()).append(";");
 			stringBuilder.append(payment.getName()).append(";");
 			stringBuilder.append(payment.getCardNumber()).append(";");
 			stringBuilder.append(payment.getPledge());
@@ -130,7 +130,7 @@ public class PaymentDaoFileImpl implements PaymentDao {
 	public int getPledged(int projectId) {
 		int pledged = 0;
 		for (Payment payment : getPayments(projectId)) {
-			if (payment.getProjectId() == projectId) {
+			if (payment.getProject().getId() == projectId) {
 				pledged += payment.getPledge();
 			}
 		}

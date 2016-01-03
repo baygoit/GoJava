@@ -19,7 +19,7 @@ public class ProjectDaoMemoryImpl implements ProjectDao {
 		progect1.setGoal(100);
 		progect1.setOwner("owner");
 		progect1.setDescription("descr");
-		progect1.setLinkVideo("link");
+		progect1.setVideoUrl("link");
 		
 		if (progect1.getCategoryId() == categoryId){
 			projects.add(progect1);

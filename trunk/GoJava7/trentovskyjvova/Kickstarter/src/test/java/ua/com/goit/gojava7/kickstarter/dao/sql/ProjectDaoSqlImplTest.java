@@ -32,6 +32,7 @@ public class ProjectDaoSqlImplTest {
 	private ProjectDao projectDaoMySqlImpl = new ProjectDaoSqlImpl();
 
 	@Test
+	@Ignore
 	public void testGetProjects() {
 
 		projectDaoMySqlImpl.getProjects(1);
@@ -40,6 +41,7 @@ public class ProjectDaoSqlImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetProject() {
 
 		Project project = new Project("Project1", 1);
@@ -54,6 +56,7 @@ public class ProjectDaoSqlImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testSize() {
 
 		when(jdbcTemplate.queryForObject(contains("project WHERE categoryId = ?"), any(Integer[].class), eq(Integer.class))).thenReturn(2);

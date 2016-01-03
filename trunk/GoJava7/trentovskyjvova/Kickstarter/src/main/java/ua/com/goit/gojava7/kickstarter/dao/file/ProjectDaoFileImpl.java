@@ -64,7 +64,7 @@ public class ProjectDaoFileImpl implements ProjectDao {
 				project.setDescription(loadedProject[4]);
 				project.setOwner(loadedProject[5]);
 				project.setGoal(Integer.parseInt(loadedProject[6]));
-				project.setLinkVideo(loadedProject[7]);
+				project.setVideoUrl(loadedProject[7]);
 				
 				projects.add(project);
 			}

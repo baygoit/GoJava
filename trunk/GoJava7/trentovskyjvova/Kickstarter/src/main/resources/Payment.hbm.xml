@@ -13,10 +13,11 @@
 		<id name="id">
 			<generator class="increment" />
 		</id>
-		<property name="projectId" />
 		<property name="name" />
 		<property name="cardNumber" />
 		<property name="pledge" />
+		<many-to-one name="project" class="Project" column="projectid"
+			foreign-key="project_fk2" />
 	</class>
 
 </hibernate-mapping>

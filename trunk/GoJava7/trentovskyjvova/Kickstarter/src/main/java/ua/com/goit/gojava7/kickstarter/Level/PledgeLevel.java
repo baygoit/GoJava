@@ -79,7 +79,7 @@ public class PledgeLevel implements Level {
 		String cardNumber = consoleScanner.scanLine();
 
 		Payment payment = new Payment();
-		payment.setProjectId(project.getId());
+		payment.setProject(project);
 		payment.setName(name);
 		payment.setCardNumber(cardNumber);
 		payment.setPledge(donate);

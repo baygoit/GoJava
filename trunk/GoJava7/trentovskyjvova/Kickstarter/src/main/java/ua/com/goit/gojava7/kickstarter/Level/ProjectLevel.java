@@ -51,7 +51,7 @@ public class ProjectLevel implements Level {
 		stringBuilder.append("description: ").append(selectedProject.getDescription()).append("\n");
 		stringBuilder.append("owner: ").append(selectedProject.getOwner()).append("\n");
 		stringBuilder.append("goal: ").append(selectedProject.getGoal()).append("\n");
-		stringBuilder.append("linkVideo: ").append(selectedProject.getLinkVideo()).append("\n");
+		stringBuilder.append("linkVideo: ").append(selectedProject.getVideoUrl()).append("\n");
 
 		List<Question> questions = questionDao.getQuestions(selectedProject
 				.getId());

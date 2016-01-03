@@ -10,7 +10,7 @@
 <p>description: ${selectedProject.getDescription()}</p>
 <p>owner: ${selectedProject.getOwner()}</p>
 <p>goal: ${selectedProject.getGoal()}</p>
-<p>linkVideo: ${selectedProject.getLinkVideo()}</p>
+<p>videoUrl: ${selectedProject.getVideoUrl()}</p>
 
 <c:forEach var="question" items="${questions}">
 
