@@ -41,33 +41,8 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 		criteria.createAlias("Payment", "pay", JoinType.LEFT_OUTER_JOIN); 
 		criteria.setProjection(Projections.sum("pay.pledge").as("amountPledge"));
 		criteria.add(Restrictions.eq("categoryId", categoryId));*/
-		List<Project> projects = query.list();
 		
-		return projects;
-	}
-
-	@Override
-	public Project getProject(int userChoise, int categoryId) {
-		if (userChoise == 0) {
-			return null;
-		} else {
-			List<Project> projects = getProjects(categoryId);
-			return projects.get(userChoise - 1);
-		}
-	}
-
-	@Override
-	public int size(int categoryId) {
-		
-		Session session = sessionFactory.getCurrentSession();
-
-		Criteria criteria = session.createCriteria(Project.class);
-		criteria.add(Restrictions.eq("categoryId", categoryId));
-		criteria.setProjection(Projections.rowCount());
-
-		int size = (int) criteria.uniqueResult();
-		
-		return size;
+		return query.list();
 	}
 
 	@Override
@@ -86,9 +61,7 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 		query.addEntity(Project.class);
 		query.setParameter("projectId", projectId);
 		
-		Project project = (Project) query.uniqueResult();
-		
-		return project;
+		return (Project) query.uniqueResult();
 		
 	}
 

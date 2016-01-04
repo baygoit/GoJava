@@ -45,7 +45,7 @@ public class ProjectServletTest {
 		selectedProject.setCategoryId(1);
 		when(projectDao.getProject(projectId)).thenReturn(selectedProject);
 		int pledged = 100;
-		when(paymentDao.getPledged(projectId)).thenReturn(pledged);
+		//when(paymentDao.getPledged(projectId)).thenReturn(pledged);
 		
 		List<Question> questions = new ArrayList<>();
 		when(questionDao.getQuestions(projectId)).thenReturn(questions);

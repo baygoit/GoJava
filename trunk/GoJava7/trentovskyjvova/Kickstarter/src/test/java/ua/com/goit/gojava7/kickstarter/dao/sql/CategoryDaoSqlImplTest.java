@@ -45,12 +45,4 @@ public class CategoryDaoSqlImplTest {
 		verify(jdbcTemplate).query(contains("category"), any(BeanPropertyRowMapper.class));
 	}
 
-	@Test
-	@Ignore
-	public void testSize() {
-
-		when(jdbcTemplate.queryForObject(contains("category"), eq(Integer.class))).thenReturn(2);
-		int i = categoryDaoMySqlImpl.size();
-		assertThat(i, is(2));
-	}
 }

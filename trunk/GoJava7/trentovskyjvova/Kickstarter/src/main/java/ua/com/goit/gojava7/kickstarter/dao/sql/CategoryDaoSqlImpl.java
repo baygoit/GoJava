@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,32 +33,16 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 		Session session = sessionFactory.getCurrentSession();
 
 		Criteria criteria = session.createCriteria(Category.class);
-		List<Category> categories = criteria.list();
 		
-		return categories;
+		return criteria.list();
 	}
 
 	@Override
 	public Category getCategory(int id) {
 
 		Session session = sessionFactory.getCurrentSession();
-
-		Category category = session.get(Category.class, id);
 		
-		return category;
-	}
-
-	@Override
-	public int size() {
-
-		Session session = sessionFactory.getCurrentSession();
-
-		Criteria criteria = session.createCriteria(Category.class);
-		criteria.setProjection(Projections.rowCount());
-
-		int size = (int) criteria.uniqueResult();
-		
-		return size;
+		return session.get(Category.class, id);
 	}
 
 	@Override
@@ -76,10 +59,8 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 		*/
 		
 		Session session = sessionFactory.getCurrentSession();
-
-		Category category = session.get(Category.class, 1);
 		
-		return category;
+		return session.get(Category.class, 1);
 		
 	}
 

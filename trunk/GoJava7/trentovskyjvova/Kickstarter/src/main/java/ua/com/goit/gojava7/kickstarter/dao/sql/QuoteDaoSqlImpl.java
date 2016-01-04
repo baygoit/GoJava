@@ -25,10 +25,8 @@ public class QuoteDaoSqlImpl implements QuoteDao {
 		Criteria criteria = session.createCriteria(Quote.class);
 		criteria.add(Restrictions.sqlRestriction("1=1 order by random()"));
 		criteria.setMaxResults(1);
-
-		Quote quote = (Quote) criteria.uniqueResult();
 		
-		return quote;
+		return (Quote) criteria.uniqueResult();
 	}
 
 }

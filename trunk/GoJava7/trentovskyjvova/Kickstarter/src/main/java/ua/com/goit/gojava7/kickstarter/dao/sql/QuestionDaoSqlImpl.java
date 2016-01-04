@@ -26,9 +26,8 @@ public class QuestionDaoSqlImpl implements QuestionDao {
 		
 		Criteria criteria = session.createCriteria(Question.class);	
 		criteria.add(Restrictions.eq("projectId", projectId));
-		List<Question> questions = criteria.list();
 		
-		return questions;
+		return criteria.list();
 	}
 
 	@Override

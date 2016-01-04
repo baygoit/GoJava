@@ -67,7 +67,6 @@ public class PledgeServlet extends HttpServlet {
 		log.debug("rewardId: {}", rewardId);
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
 		log.debug("projectId: {}", projectId);
-		int donate = 0;
 
 		request.setAttribute("errors", false);
 		List<String> emptyCheckParameters = new ArrayList<>(Arrays.asList("name", "cardNumber"));
@@ -79,7 +78,7 @@ public class PledgeServlet extends HttpServlet {
 				|| requestValidation.isNatural(request, naturalCheckParameters)) {
 			doGet(request, response);
 		} else {
-
+			int donate = 0;
 			if (rewardId == 0) {
 				donate = Integer.parseInt(request.getParameter("amount"));
 			} else {
