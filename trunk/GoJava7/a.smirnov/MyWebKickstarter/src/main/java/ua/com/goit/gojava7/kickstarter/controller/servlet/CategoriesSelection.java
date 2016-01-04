@@ -54,6 +54,6 @@ public class CategoriesSelection extends HttpServlet {
 		request.setAttribute("top10Categories", top10Categories);
 		request.setAttribute("quoteText", quote.getText());
 		request.setAttribute("quoteAuthor", quote.getAuthor());
-		request.getRequestDispatcher("WEB-INF/views/categories_selection.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/categories.jsp").forward(request, response);
 	}
 }

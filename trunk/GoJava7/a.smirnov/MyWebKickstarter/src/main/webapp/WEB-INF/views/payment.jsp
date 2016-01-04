@@ -1,48 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Payment</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="header.jsp">
+	<jsp:param value="Payment" name="title" />
+</jsp:include>
 
 	<div class="container">
 	
-	<% 
-		if (request.getAttribute("errors") != null) {
-		
-	%>
-		<fieldset style="width: 600px; font-family: Arial; font-size: 14px">
-			<legend>Errors</legend>
-			
-			<ul>
-			
-				<% if (request.getAttribute("nameError") != null) {%>
-					<li class="error"> Name error.</li>
-				<% } %>
-				
-				<% if (request.getAttribute("creditCardError") != null) {%>
-					<li class="error"> Credit card number invalid.</li>
-				<% } %>
-				
-				<% if (request.getAttribute("donatingSumError") != null) {%>
-					<li class="error"> Donating sum invalid.</li>
-				<% } %>
-			
-			</ul>
-		
-		</fieldset>
+		<c:if test = "${errors != null}">
 	
+			<fieldset style="width: 600px; font-family: Arial; font-size: 14px">
+				<legend>Errors</legend>
+					<ul>
+					
+						<c:if test = "${nameError != null}">
+							<li class="error"> Name error.</li>
+						</c:if>
+						
+						<c:if test = "${creditCardError != null}">
+							<li class="error"> Credit card number invalid.</li>
+						</c:if>
+						
+						<c:if test = "${donatingSumError != null}">
+							<li class="error"> Pledge invalid.</li>
+						</c:if>
+						
+					</ul>
+			</fieldset>
+		</c:if>
 	
-	<%
-	
-		}
-		
-	 %>
 
 		<fieldset style="width: 600px; font-family: Arial; font-size: 14px">
 
@@ -68,7 +53,7 @@
 					<table>
 						<c:forEach items="${projectRewards}" var="reward">
 							<tr>
-								<td colspan="2">If you donate ${reward.getDonatingSum()} USD : ${reward.getDescription()}</td>
+								<td colspan="2">If you donate ${reward.getPledge()} USD : ${reward.getDescription()}</td>
 							</tr>
 						</c:forEach>
 
@@ -91,5 +76,4 @@
 		</fieldset>
 		
 	</div>
-</body>
-</html>
+<jsp:include page="footer.jsp" />

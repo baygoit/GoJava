@@ -40,6 +40,6 @@ public class ProjectsSelection extends HttpServlet {
 		// }
 
 		request.setAttribute("projects", projects);
-		request.getRequestDispatcher("WEB-INF/views/projects_selection.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/projects.jsp").forward(request, response);
 	}
 }

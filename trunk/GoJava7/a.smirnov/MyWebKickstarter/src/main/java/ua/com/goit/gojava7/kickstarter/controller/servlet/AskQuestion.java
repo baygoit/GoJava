@@ -33,7 +33,7 @@ public class AskQuestion extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		projectId = Integer.parseInt(request.getParameter("id"));
-		request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/question.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,7 +44,7 @@ public class AskQuestion extends HttpServlet {
 		String question = validateQuestion(request);
 
 		if ((Boolean) request.getAttribute("errors")) {
-			request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/views/question.jsp").forward(request, response);
 		} else {
 			saveCreatedFaq(question);
 			response.sendRedirect("/kickstarter/project?id=" + projectId);

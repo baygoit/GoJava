@@ -45,7 +45,7 @@ public class ExecutePayment extends HttpServlet {
 		List<Reward> projectRewards = rewardDao.getProjectsRewards(projectId);
 
 		request.setAttribute("projectRewards", projectRewards);
-		request.getRequestDispatcher("WEB-INF/views/execute_payment.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/payment.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,7 +56,7 @@ public class ExecutePayment extends HttpServlet {
 		int pledge = validateDonatingSum(request, response);
 
 		if ((Boolean) request.getAttribute("errors")) {
-			request.getRequestDispatcher("WEB-INF/views/execute_payment.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/views/payment.jsp").forward(request, response);
 		} else {
 			saveCreatedPayment(userName, creditCardNumber, pledge);
 			response.sendRedirect("/kickstarter/project?id=" + projectId);
