@@ -40,7 +40,7 @@ public class ProjectMappingTest {
 		project.setName("Inter Milano");
 		project.setShortDescription("---");
 		project.setFullDescription("---");
-		project.setVideoLink("---");
+		project.setLinkOnVideo("---");
 		project.setRequiredSum(1000);
 		project.setCollectedSum(20);
 		project.setDaysLeft(20);

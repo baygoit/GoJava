@@ -1,36 +1,37 @@
 package ua.com.goit.gojava7.kickstarter.dao.impl;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
-import ua.com.goit.gojava7.kickstarter.dao.hibernate.HibernateUtil;
 
 @Repository
-public class PaymentDaoMysqlImpl implements PaymentDao {
+public class PaymentDaoImpl implements PaymentDao {
 
-	@Override
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	@Transactional
 	public void add(Payment payment) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 		session.save(payment);
-		transaction.commit();
-		session.close();
 	}
 
-	@Override
+	@Transactional
 	public long getSumProjectPayments(int projectId) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = sessionFactory.getCurrentSession();
 
 		Criteria criteria = session.createCriteria(Payment.class);
 		criteria.setProjection(Projections.sum("pledge"));
 		Long result = (Long) criteria.uniqueResult();
 
-		session.close();
 		if (result == null) {
 			return 0;
 		} else {
@@ -38,7 +39,6 @@ public class PaymentDaoMysqlImpl implements PaymentDao {
 		}
 	}
 
-	@Override
 	public void remove(Payment payment) {
 		// TODO
 	}

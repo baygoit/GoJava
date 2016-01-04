@@ -37,13 +37,11 @@ public class PaymentMappingTest {
 		session.beginTransaction();
 
 		Payment payment1 = new Payment();
-		payment1.setProjectId(1);
 		payment1.setOwnerName("Anton");
 		payment1.setCreditCardNumber(123456789);
 		payment1.setPledge(100);
 
 		Payment payment2 = new Payment();
-		payment2.setProjectId(2);
 		payment2.setOwnerName("Anna");
 		payment2.setCreditCardNumber(1111111111);
 		payment2.setPledge(200);

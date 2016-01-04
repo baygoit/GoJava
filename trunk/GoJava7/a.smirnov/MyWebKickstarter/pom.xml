@@ -11,7 +11,7 @@
     
   <properties>
 	 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	  	<spring-version>4.2.3.RELEASE</spring-version>
+	  	<spring-version>4.2.4.RELEASE</spring-version>
 	  	<slf4j-version>1.7.12</slf4j-version>
 	  	<hibernate-version>4.3.8.Final</hibernate-version>
   </properties>
@@ -39,21 +39,34 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
-			<scope>test</scope>
-		</dependency>	
-		
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<version>1.10.19</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
+			<version>0.9.5.2</version>
+		</dependency>
+		
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
 			<version>0.9.2.1</version>
 		</dependency>	
+		
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+		
 		
 		<dependency>
 			<groupId>mysql</groupId>
@@ -72,6 +85,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
 		
@@ -146,7 +165,7 @@
 			<artifactId>asm</artifactId>
 			<version>3.3.1</version>
 		</dependency>
-		
+			
 		<!-- HIBERNATE DEPENCIES -->
 			
 		<dependency>
@@ -173,9 +192,15 @@
 			<version>1.1</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		
   	</dependencies>
   	
-  	<build>
+	<build>
   		<plugins>
   			<plugin>
   				<groupId>org.apache.maven.plugins</groupId>
@@ -187,6 +212,8 @@
        			</configuration>
     		</plugin>
   		</plugins>
-  </build>
+  	</build>
+  	
+
   
 </project>

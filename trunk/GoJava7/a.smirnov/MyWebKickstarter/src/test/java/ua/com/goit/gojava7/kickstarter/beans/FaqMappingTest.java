@@ -37,14 +37,10 @@ public class FaqMappingTest {
 		session.beginTransaction();
 
 		Faq faq1 = new Faq();
-		faq1.setProjectId(1);
 		faq1.setQuestion("Hello1");
-		faq1.setAnswer("Good bye1");
 
 		Faq faq2 = new Faq();
-		faq2.setProjectId(2);
 		faq2.setQuestion("Hello2");
-		faq2.setAnswer("Good bye2");
 
 		session.save(faq1);
 		session.save(faq2);

@@ -30,12 +30,10 @@ public class QuoteDaoImpl implements QuoteDao {
 		return quote;
 	}
 
-	@Override
 	public void add(Quote quote) {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
 	public void remove(Quote quote) {
 		// TODO Auto-generated method stub
 	}

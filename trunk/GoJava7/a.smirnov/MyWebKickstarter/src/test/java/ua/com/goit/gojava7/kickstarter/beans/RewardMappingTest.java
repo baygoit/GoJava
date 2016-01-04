@@ -36,12 +36,10 @@ public class RewardMappingTest {
 		session.beginTransaction();
 
 		Reward reward1 = new Reward();
-		reward1.setProjectId(1);
 		reward1.setPledge(1000);
 		reward1.setDescription("AAA");
 
 		Reward reward2 = new Reward();
-		reward2.setProjectId(2);
 		reward2.setPledge(2000);
 		reward2.setDescription("BBB");
 

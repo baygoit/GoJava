@@ -18,7 +18,6 @@ public class HibernateUtil {
 			// builds a session factory from the service registry
 			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		}
-
 		return sessionFactory;
 	}
 }
