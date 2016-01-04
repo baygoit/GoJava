@@ -18,7 +18,7 @@ public class ProjectDao {
 	private static final Logger log = LoggerFactory.getLogger(ProjectDao.class);
 	
 	public Project get(Long projectId) {
-		log.info("<Project> get({})...", projectId);
+		log.info("<Project> get({})...", projectId);		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		Project project = (Project) session.createCriteria(Project.class)
@@ -32,8 +32,7 @@ public class ProjectDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Project> getByCategory(Category category) {
-		log.info("<projects> getByCategory({})...", category);
-		
+		log.info("<projects> getByCategory({})...", category);		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		List<Project> projects = session.createCriteria(Project.class)

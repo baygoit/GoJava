@@ -14,7 +14,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
+import ua.com.goit.gojava7.kickstarter.models.Project;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @WebServlet("/question")
@@ -25,6 +27,8 @@ public class QuestionServlet extends HttpServlet {
 
 	@Autowired
 	private QuestionDao questionDao;
+	@Autowired
+	private ProjectDao projectDao;
 
 	@Override
 	public void init() {
@@ -50,7 +54,8 @@ public class QuestionServlet extends HttpServlet {
 	private void addQuestion(String textQuestion, Long projectId) {
 		Question question = new Question();
 		question.setQuestion(textQuestion);
-		question.setProjectId(projectId);
+		Project project = projectDao.get(projectId);
+		question.setProject(project);
 		questionDao.add(question);
 	}
 

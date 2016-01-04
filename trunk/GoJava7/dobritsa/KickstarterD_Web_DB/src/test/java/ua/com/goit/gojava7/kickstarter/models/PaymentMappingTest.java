@@ -46,8 +46,8 @@ public class PaymentMappingTest {
 		Project project1 = new Project();
 		project1.setName("TestName1");
 		project1.setDescription("TestDescription1");
-		project1.setGoal(100);
-		project1.setDaysToGo(1);
+		project1.setGoal(100l);
+		project1.setDaysToGo(1l);
 		project1.setHistory("TestHistory1");
 		project1.setLink("TestLink1");
 		project1.setCategory(category1);

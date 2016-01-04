@@ -31,8 +31,7 @@ public class RewardDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Reward> getByProject(Project project) {
-		log.info("<rewards> getByProject({})...", project);
-	
+		log.info("<rewards> getByProject({})...", project);	
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		List<Reward> rewards = session.createCriteria(Reward.class)

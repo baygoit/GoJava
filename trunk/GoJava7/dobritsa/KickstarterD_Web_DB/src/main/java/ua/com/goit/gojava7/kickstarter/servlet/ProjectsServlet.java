@@ -53,7 +53,7 @@ public class ProjectsServlet extends HttpServlet {
 
 		List<Project> projects = projectDao.getByCategory(category);
 		for (Project project : projects) {
-			project.setPledged(paymentDao.calculatePledgedForProject(project.getProjectId()));
+			project.setPledged(paymentDao.calculatePledgedForProject(project));
 		}
 
 		request.setAttribute("categoryName", category.getName());

@@ -4,9 +4,9 @@ public class Project {
 	private Long projectId;
 	private String name;
 	private String description;
-	private Integer goal;
-	private Integer pledged;
-	private Integer daysToGo;
+	private Long goal;
+	private Long pledged;
+	private Long daysToGo;
 	private String history;
 	private String link;
 	private Category category = new Category();	
@@ -35,27 +35,27 @@ public class Project {
 		this.description = description;
 	}
 
-	public Integer getGoal() {
+	public Long getGoal() {
 		return goal;
 	}
 
-	public void setGoal(Integer goal) {
+	public void setGoal(Long goal) {
 		this.goal = goal;
 	}
 
-	public Integer getPledged() {
+	public Long getPledged() {
 		return pledged;
 	}
 
-	public void setPledged(Integer pledged) {
+	public void setPledged(Long pledged) {
 		this.pledged = pledged;
 	}
 
-	public Integer getDaysToGo() {
+	public Long getDaysToGo() {
 		return daysToGo;
 	}
 
-	public void setDaysToGo(Integer daysToGo) {
+	public void setDaysToGo(Long daysToGo) {
 		this.daysToGo = daysToGo;
 	}
 

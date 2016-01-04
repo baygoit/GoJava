@@ -20,6 +20,7 @@
 		<property name="show_sql">false</property>
 
 		<mapping resource="Quote.hbm.xml" />
+		<!-- <mapping class="ua.com.goit.gojava7.kickstarter.models.Quote" /> -->
 		<mapping resource="Category.hbm.xml" />
 		<mapping resource="Project.hbm.xml" />
 		<mapping resource="Reward.hbm.xml" />

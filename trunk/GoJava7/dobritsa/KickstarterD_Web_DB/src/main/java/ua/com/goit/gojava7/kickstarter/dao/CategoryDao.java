@@ -16,10 +16,6 @@ public class CategoryDao {
 
 	private static final Logger log = LoggerFactory.getLogger(CategoryDao.class);
 
-	public CategoryDao() {
-		log.info("Constructor CategoryDao()...");
-	}
-
 	public Category get(Long categoryId) {
 		log.info("<Category> get({})...", categoryId);
 		Session session = HibernateUtil.getSessionFactory().openSession();

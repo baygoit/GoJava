@@ -23,8 +23,4 @@
 		<property name="password" value="temppassword" />
 	</bean>	
 	
-	<bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-	<property name="DataSource" ref="basicDataSource"/>
-	</bean>
-
 </beans>
