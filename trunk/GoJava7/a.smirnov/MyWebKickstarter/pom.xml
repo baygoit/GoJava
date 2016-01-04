@@ -17,13 +17,22 @@
   </properties>
     
   <dependencies>
+  
+  		<!-- DEPENDENCIES FOR TESTING -->
 	    <dependency>
 	      <groupId>junit</groupId>
 	      <artifactId>junit</artifactId>
 	      <version>3.8.1</version>
 	      <scope>test</scope>
 	    </dependency> 
+	    
+	    <dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.10.19</version>
+		</dependency>
 	     
+	    <!-- SERVLET DEPENDENCIES -->
 	    <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -37,10 +46,12 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.10.19</version>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
 		</dependency>
+		
+		<!-- CONNECTION POOL DEPENDENCIES -->
 		
 		<dependency>
 			<groupId>com.mchange</groupId>
@@ -48,25 +59,11 @@
 			<version>0.9.5.2</version>
 		</dependency>
 		
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.mchange</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.2.1</version>
-		</dependency>	
-		
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.2</version>
 		</dependency>
-		
 		
 		<dependency>
 			<groupId>mysql</groupId>
