@@ -7,12 +7,13 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="com.kickstarter.model">
 
-	<class name="Quote" table="Quote">
-		<id name="id">
-			<generator class="increment" />
-		</id>
+	<hibernate-mapping package="com.kickstarter.model">
+
+	<class name="Quote" table="quotes">
+		<id name="id" type="int" column="id">
+         <generator class="native"/>
+      </id>
 		<property name="quoteText" />
 		<property name="author" />
 	</class>

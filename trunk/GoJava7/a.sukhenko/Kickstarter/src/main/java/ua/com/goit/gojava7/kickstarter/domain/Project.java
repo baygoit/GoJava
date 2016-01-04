@@ -13,14 +13,14 @@ public class Project{
     private static final String HOURS_LEFT          = " hours left";
     private static final String DAYS_LEFT           = " days left";
     private static final String SECONDS_LEFT        = " seconds left";
+    private int id;
     private String              projectName;
     private String              projectDescription;
     private double              moneyNeeded;
     private String              projectHistory;
     private String              demoLink;
     private Map<String, String> questionsAndAnswers = new HashMap<>();
-    private int                 projectCategoryId;
-    private String              categoryName;
+    private Category category;
     private double              pledged             = 0;
     private LocalDateTime       enddate;
     private PaymentBonus        paymentBonus        = new PaymentBonus();
@@ -33,13 +33,6 @@ public class Project{
 
     }
 
-    public Project(String projectName, String projectDescription, int projectCategoryId, LocalDateTime enddate) {
-        super();
-        this.projectName = projectName;
-        this.projectDescription = projectDescription;
-        this.setProjectCategoryId(projectCategoryId);
-        this.enddate = enddate;
-    }
 
     public double getMoneyNeeded() {
         return moneyNeeded;
@@ -124,14 +117,7 @@ public class Project{
         this.paymentBonus = paymentBonus;
     }
 
-    public int getProjectCategoryId() {
-        return projectCategoryId;
-    }
-
-    public void setProjectCategoryId(int projectCategoryId) {
-        this.projectCategoryId = projectCategoryId;
-    }
-
+   
     public double getPledged() {
         return pledged;
     }
@@ -144,16 +130,25 @@ public class Project{
         this.pledged += amount;
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
 
     public void addBacker(double d) {
         pledged += d;
 
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

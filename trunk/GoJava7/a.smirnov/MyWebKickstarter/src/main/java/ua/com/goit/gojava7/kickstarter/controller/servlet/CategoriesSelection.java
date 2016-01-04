@@ -42,16 +42,18 @@ public class CategoriesSelection extends HttpServlet {
 		log.info("doGet");
 
 		Quote quote = quoteDao.getRandomQuote();
-
 		log.info("Random quote : " + quote);
 
 		List<Category> categories = categoryDao.getAll();
-
 		log.info("All categories : " + categories);
 
+		List<Object[]> top10Categories = categoryDao.getTop10Categories();
+		log.info("Top 10 categories : " + top10Categories);
+
 		request.setAttribute("categories", categories);
-		request.setAttribute("quoteText", quote.getQuoteText());
+		request.setAttribute("top10Categories", top10Categories);
+		request.setAttribute("quoteText", quote.getText());
 		request.setAttribute("quoteAuthor", quote.getAuthor());
-		request.getRequestDispatcher("WEB-INF/views/categories_selection.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/categories.jsp").forward(request, response);
 	}
 }

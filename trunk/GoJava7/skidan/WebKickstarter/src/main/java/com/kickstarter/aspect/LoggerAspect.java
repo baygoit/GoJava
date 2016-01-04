@@ -40,11 +40,11 @@ public class LoggerAspect {
 		return object;
 	}
 
-	@Before("execution(* org.springframework.jdbc.core.JdbcTemplate.*(..))")
-	public void dbQueryAdd(JoinPoint joinPoint) throws Throwable {
-		Object[] objArr = joinPoint.getArgs();
-		String sql = (String)objArr[0];
-		System.out.println("I am an sql...........................:    " + sql);
+//	@Before("execution(* org.springframework.jdbc.core.JdbcTemplate.*(..))")
+//	public void dbQueryAdd(JoinPoint joinPoint) throws Throwable {
+//		Object[] objArr = joinPoint.getArgs();
+//		String sql = (String)objArr[0];
+//		System.out.println("I am an sql...........................:    " + sql);
 //		int queriesOfType = jdbcTemplate.queryForObject("select count(query) from queries",
 //			 Integer.class);
 //		System.out.println("I am the count..............: " + queriesOfType);
@@ -56,7 +56,7 @@ public class LoggerAspect {
 //			return joinPoint.proceed();
 //		}
 		
-	}
+//	}
 
 	@Pointcut("within(@(@org.springframework.stereotype.Component *) *)")
 	public void cutOfPoints() {

@@ -1,43 +1,86 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "project")
 public class Project {
-	
-	private int uniqueID;
-	private int categoryID;
-	private String title;
-	private String briefDescription;
-	private String fullDescription;
-	private String videoLink;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private int id;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "short_description")
+	private String shortDescription;
+
+	@Column(name = "required_sum")
 	private int requiredSum;
-	private int collectedSum;
+
+	@Column(name = "full_description")
+	private String fullDescription;
+
+	@Column(name = "link_on_video")
+	private String linkOnVideo;
+
+	@Column(name = "collected_sum")
+	private long collectedSum;
+
+	@Column(name = "days_left")
 	private int daysLeft;
 
-	public String getTitle() {
-		return title;
-	}
-	
-	public void setTitle(String title) {
-		this.title = title;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+
+	public int getId() {
+		return id;
 	}
 
-	public String getBriefDescription() {
-		return briefDescription;
+	public void setId(int id) {
+		this.id = id;
 	}
-	
-	public void setBriefDescription(String briefDescription) {
-		this.briefDescription = briefDescription;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
 	}
 
 	public String getFullDescription() {
 		return fullDescription;
 	}
-	
+
 	public void setFullDescription(String fullDescription) {
 		this.fullDescription = fullDescription;
+	}
+
+	public String getLinkOnVideo() {
+		return linkOnVideo;
+	}
+
+	public void setLinkOnVideo(String linkOnVideo) {
+		this.linkOnVideo = linkOnVideo;
 	}
 
 	public int getRequiredSum() {
@@ -48,66 +91,60 @@ public class Project {
 		this.requiredSum = requiredSum;
 	}
 
-	public int getCollectedSum() {
+	public long getCollectedSum() {
 		return collectedSum;
 	}
-	
-	public void setCollectedSum(int someMoney) {
-		this.collectedSum += someMoney;
+
+	public void setCollectedSum(long collectedSum) {
+		this.collectedSum = collectedSum;
 	}
-	
-	public String getVideoLink() {
-		return videoLink;
-	}
-	
-	public void setVideoLink(String videoLink) {
-		this.videoLink = videoLink;
-	}
-	
-	public void setDeadline(int day, int month, int year) {
-		daysLeft = getDaysLeft(day, month, year);
-	}
-	
+
 	public int getDaysLeft() {
 		return daysLeft;
 	}
-	
+
 	public void setDaysLeft(int daysLeft) {
 		this.daysLeft = daysLeft;
 	}
-	
-	public int getCategoryID() {
-		return categoryID;
-	}
-	
-	public void setCategoryID(int categoryID) {
-		this.categoryID = categoryID;
-	}
-	
-	public int getUniqueID() {
-		return uniqueID;
-	}
-	
-	public void setUniqueID(int uniqueID) {
-		this.uniqueID = uniqueID;
-	}
-	
-	protected int getDaysLeft(int day, int month, int year) {
-		TimeZone timeZone = TimeZone.getTimeZone("Europe/Kiev");
-		Calendar currentCalendar = Calendar.getInstance();
-		Date date = new Date();
-		
-		currentCalendar.setTimeZone(timeZone);
-		currentCalendar.setTime(date);
 
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.DAY_OF_MONTH, day);
-		calendar.set(Calendar.YEAR, year);
-		calendar.set(Calendar.MONTH, Math.abs(month - 1));
+	public Category getCategory() {
+		return category;
+	}
 
-		long difference = calendar.getTimeInMillis() - currentCalendar.getTimeInMillis();
-		long days = difference / (1000 * 60 * 60 * 24);
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
-		return (int) days;
+	@Override
+	public String toString() {
+		return "Project : [name=" + name + ", shortDescription=" + shortDescription + ", fullDescription=" + fullDescription
+				+ ", requiredSum=" + requiredSum + ", collectedSum=" + collectedSum + ", daysLeft=" + daysLeft + "]";
+	}
+
+	@Override
+	public boolean equals(Object that) {
+		if (that == null) {
+			return false;
+		}
+		if (!this.getClass().equals(that.getClass())) {
+			return false;
+		}
+
+		Project project = (Project) that;
+		if (this.id == project.getId() && this.name.equals(project.getName())
+				&& this.shortDescription.equals(project.getShortDescription()) && this.requiredSum == project.getRequiredSum()
+				&& this.fullDescription.equals(project.getFullDescription()) && this.linkOnVideo.equals(project.getLinkOnVideo())
+				&& this.collectedSum == project.getCollectedSum() && this.daysLeft == project.getDaysLeft()) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		int quoteHashCode = 0;
+		quoteHashCode = (id + name + shortDescription + requiredSum + fullDescription + linkOnVideo + collectedSum + daysLeft)
+				.hashCode();
+		return quoteHashCode;
 	}
 }

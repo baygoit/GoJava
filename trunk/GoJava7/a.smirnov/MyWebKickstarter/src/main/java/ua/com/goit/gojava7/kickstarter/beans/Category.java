@@ -1,20 +1,30 @@
 package ua.com.goit.gojava7.kickstarter.beans;
 
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class Category implements Serializable {
+@Entity
+@Table(name = "category")
+public class Category {
 
-	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private int id;
 
-	private int uniqueID;
+	@Column(name = "name")
 	private String name;
 
-	public int getUniqueID() {
-		return uniqueID;
+	public int getId() {
+		return id;
 	}
 
-	public void setUniqueID(int uniqueID) {
-		this.uniqueID = uniqueID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -23,5 +33,33 @@ public class Category implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Category : [name=" + name + "]";
+	}
+
+	@Override
+	public boolean equals(Object that) {
+		if (that == null) {
+			return false;
+		}
+		if (!this.getClass().equals(that.getClass())) {
+			return false;
+		}
+
+		Category category = (Category) that;
+		if (this.id == category.getId() && this.name.equals(category.getName())) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		int categoryHashCode = 0;
+		categoryHashCode = (id + name).hashCode();
+		return categoryHashCode;
 	}
 }
