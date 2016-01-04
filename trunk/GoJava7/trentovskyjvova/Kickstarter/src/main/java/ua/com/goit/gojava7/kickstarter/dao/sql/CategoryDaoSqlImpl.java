@@ -15,12 +15,12 @@ import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
 @Repository
+@Transactional
 public class CategoryDaoSqlImpl implements CategoryDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
 	public List<Category> getCategories() {
 
 /*		String sql = "SELECT c.id, c.name "
@@ -35,23 +35,21 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 
 		Criteria criteria = session.createCriteria(Category.class);
 		List<Category> categories = criteria.list();
-
+		
 		return categories;
 	}
 
 	@Override
-	@Transactional
 	public Category getCategory(int id) {
 
 		Session session = sessionFactory.getCurrentSession();
 
 		Category category = session.get(Category.class, id);
-
+		
 		return category;
 	}
 
 	@Override
-	@Transactional
 	public int size() {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -60,12 +58,11 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 		criteria.setProjection(Projections.rowCount());
 
 		int size = (int) criteria.uniqueResult();
-
+		
 		return size;
 	}
 
 	@Override
-	@Transactional
 	public Category getBestCategory() {
 /*		
 		String sql = "SELECT c.id, c.name FROM category c "
@@ -81,7 +78,7 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 		Session session = sessionFactory.getCurrentSession();
 
 		Category category = session.get(Category.class, 1);
-
+		
 		return category;
 		
 	}

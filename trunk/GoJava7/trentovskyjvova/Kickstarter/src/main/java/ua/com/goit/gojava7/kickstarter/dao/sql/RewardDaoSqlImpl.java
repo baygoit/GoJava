@@ -15,12 +15,12 @@ import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 @Repository
+@Transactional
 public class RewardDaoSqlImpl implements RewardDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
 	public List<Reward> getRewards(int projectId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -28,12 +28,11 @@ public class RewardDaoSqlImpl implements RewardDao {
 		Criteria criteria = session.createCriteria(Reward.class);
 		criteria.add(Restrictions.eq("projectId", projectId));
 		List<Reward> rewards = criteria.list();
-
+		
 		return rewards;
 	}
 
 	@Override
-	@Transactional
 	public Reward getReward(int userChoise, int projectId) {
 		if (userChoise == 0) {
 			return null;
@@ -44,7 +43,6 @@ public class RewardDaoSqlImpl implements RewardDao {
 	}
 
 	@Override
-	@Transactional
 	public int size(int projectId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -54,18 +52,17 @@ public class RewardDaoSqlImpl implements RewardDao {
 		criteria.setProjection(Projections.rowCount());
 
 		int size = (int) criteria.uniqueResult();
-
+		
 		return size;
 	}
 
 	@Override
-	@Transactional
 	public Reward getReward(int rewardId) {
 
 		Session session = sessionFactory.getCurrentSession();
 
 		Reward reward = session.get(Reward.class, rewardId);
-
+		
 		return reward;
 	}
 

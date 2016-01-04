@@ -14,12 +14,12 @@ import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 @Repository
+@Transactional
 public class QuestionDaoSqlImpl implements QuestionDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
 	public List<Question> getQuestions(int projectId) {
 		
 		Session session = sessionFactory.getCurrentSession();
@@ -27,16 +27,15 @@ public class QuestionDaoSqlImpl implements QuestionDao {
 		Criteria criteria = session.createCriteria(Question.class);	
 		criteria.add(Restrictions.eq("projectId", projectId));
 		List<Question> questions = criteria.list();
-
+		
 		return questions;
 	}
 
 	@Override
-	@Transactional
 	public void addQuestion(Question question) {
 		
 		Session session = sessionFactory.getCurrentSession();
-
+		
 		session.save(question);
 		
 	}

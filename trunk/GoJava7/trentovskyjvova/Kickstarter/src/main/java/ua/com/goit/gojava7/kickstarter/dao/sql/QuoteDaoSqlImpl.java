@@ -27,7 +27,7 @@ public class QuoteDaoSqlImpl implements QuoteDao {
 		criteria.setMaxResults(1);
 
 		Quote quote = (Quote) criteria.uniqueResult();
-
+		
 		return quote;
 	}
 

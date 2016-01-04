@@ -16,12 +16,12 @@ import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 @Repository
+@Transactional
 public class ProjectDaoSqlImpl implements ProjectDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Override
-	@Transactional
+	@Override	
 	public List<Project> getProjects(int categoryId) {
 
 		String sql = "SELECT p.id, p.categoryId, p.name, p.daysToGo, p.description, "
@@ -42,12 +42,11 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 		criteria.setProjection(Projections.sum("pay.pledge").as("amountPledge"));
 		criteria.add(Restrictions.eq("categoryId", categoryId));*/
 		List<Project> projects = query.list();
-
+		
 		return projects;
 	}
 
 	@Override
-	@Transactional
 	public Project getProject(int userChoise, int categoryId) {
 		if (userChoise == 0) {
 			return null;
@@ -58,7 +57,6 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 	}
 
 	@Override
-	@Transactional
 	public int size(int categoryId) {
 		
 		Session session = sessionFactory.getCurrentSession();
@@ -68,12 +66,11 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 		criteria.setProjection(Projections.rowCount());
 
 		int size = (int) criteria.uniqueResult();
-
+		
 		return size;
 	}
 
 	@Override
-	@Transactional
 	public Project getProject(int projectId) {
 
 		String sql = "SELECT p.id, p.categoryId, p.name, p.daysToGo, p.description, "
@@ -90,7 +87,7 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 		query.setParameter("projectId", projectId);
 		
 		Project project = (Project) query.uniqueResult();
-
+		
 		return project;
 		
 	}

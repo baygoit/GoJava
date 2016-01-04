@@ -15,12 +15,12 @@ import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 
 @Repository
+@Transactional
 public class PaymentDaoSqlImpl implements PaymentDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
 	public List<Payment> getPayments(int projectId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -28,22 +28,20 @@ public class PaymentDaoSqlImpl implements PaymentDao {
 		Criteria criteria = session.createCriteria(Payment.class);
 		criteria.add(Restrictions.eq("projectId", projectId));
 		List<Payment> payments = criteria.list();
-
+		
 		return payments;
 	}
 
 	@Override
-	@Transactional
 	public void addPayment(Payment payment) {
 
 		Session session = sessionFactory.getCurrentSession();
-
+		
 		session.save(payment);
 
 	}
 
 	@Override
-	@Transactional
 	public int getPledged(int projectId) {
 
 		Session session = sessionFactory.getCurrentSession();
@@ -53,7 +51,7 @@ public class PaymentDaoSqlImpl implements PaymentDao {
 		criteria.setProjection(Projections.sum("pledge"));
 
 		int pledged = (int) criteria.uniqueResult();
-
+		
 		return pledged;
 	}
 
