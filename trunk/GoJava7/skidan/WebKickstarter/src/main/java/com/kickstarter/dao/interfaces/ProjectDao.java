@@ -7,12 +7,11 @@ import com.kickstarter.model.Project;
 
 public interface ProjectDao {
 
-//	public List<Project> getAllList();
 	
-	public List<Project> getAll(int categoryId);
+	public List<Project> getAllProjectsForCategory(int categoryId);
 
-	public Project getOne(int projectNumber);
+	public Project getOneProject(int projectNumber);
 
-	public void update(Project p);
+	public void updateProject(Project p);
 
 }

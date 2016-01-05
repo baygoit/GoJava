@@ -4,26 +4,51 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
+<style>
+#quote
+{
+font-family: fantasy;
+font-weight: bold;	
+border :2px ;
+color:black;
+font-size:30px;
+}
+#b{
+background-image: url("http://oboi.tululu.org/o/30/76866/prew.jpg");
+}
+#ref
+{
+font-family: fantasy;
+font-weight: bold;	
+color:black;
+font-size:30px;
+margin:4px;
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>AllCategories</title>
 </head>
-<h1>Kickstarter Category Selection</h1>
+
+
+
+<h1 id="header">Kickstarter Category Selection</h1>
 <br>
 <br>
-<body>
+<body id ="b">
 
 	<%
 		Quote quote = (Quote) request.getAttribute("quote");
 	%>
 
-	<div id=3>
+	<div id="quote">
 		<%=quote.getQuote()%><br>
-		<%=quote.getAuthor()%><br><br><br>
-
+		<%=quote.getAuthor()%><br>
+    </div>
         <h2>Categories</h2>
 		<c:forEach items="${categoryList}" var="category">
-			<b><a href=SelectedCategoryProjectsServlet?categoryId=${category.getId()}><c:out
+			<b><a id ="ref"  href=SelectedCategoryProjectsServlet?categoryId=${category.getId()}><c:out
 					value="${category.getTitle()}" /></a></b>
 		</c:forEach><br><br> 
 		
@@ -36,6 +61,6 @@
        </c:forEach> -->
 
 
-	</div>
+	
 </body>
 </html>

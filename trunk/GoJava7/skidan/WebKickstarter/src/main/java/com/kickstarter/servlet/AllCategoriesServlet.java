@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-import com.kickstarter.dao.interfaces.CategoryDaoImpl;
-import com.kickstarter.dao.interfaces.ProjectDaoImpl;
-import com.kickstarter.dao.interfaces.QuoteDaoImpl;
-import com.kickstarter.dao.interfaces.PaymentDaoImpl;
+
+import com.kickstarter.dao.Impl.CategoryDaoImpl;
+import com.kickstarter.dao.Impl.PaymentDaoImpl;
+import com.kickstarter.dao.Impl.ProjectDaoImpl;
+import com.kickstarter.dao.Impl.QuoteDaoImpl;
 import com.kickstarter.model.Category;
 import com.kickstarter.model.Quote;
 

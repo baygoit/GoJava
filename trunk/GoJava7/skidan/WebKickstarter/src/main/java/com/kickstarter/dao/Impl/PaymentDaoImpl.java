@@ -1,13 +1,14 @@
-package com.kickstarter.dao.interfaces;
+package com.kickstarter.dao.Impl;
 
-import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.kickstarter.hibernate.HibernateUtil;
+import com.kickstarter.dao.interfaces.PaymentDao;
 import com.kickstarter.model.Payment;
 import com.kickstarter.model.Project;
 
@@ -15,33 +16,26 @@ import com.kickstarter.model.Project;
 public class PaymentDaoImpl implements PaymentDao {
 
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
-
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
-
+	private SessionFactory sessionFactory;
+	
+	@Transactional
 	public void addPayment(Project project, int amount) {
 		Payment payment = new Payment();
 		payment.setAmount(amount);
 		payment.setProject(project);
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(payment);
 		session.getTransaction().commit();
 		session.close();
 	}
 	
-	public List<Integer> getTopProjects() {
-		String sql = "select projectId from payments group by projectId order by sum(amount) desc";
-		return jdbcTemplate.queryForList(sql, Integer.class);
-
-	}
-
+	@Transactional
 	public Integer getAll(int projectId) {
-		final String sql = "select SUM(amount)from Payment where projectId =" + projectId;
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Long g = (Long)session.createQuery(sql).uniqueResult();
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("select SUM(amount)from Payment where projectId = :projectId");
+        query.setInteger("projectId", projectId);
+		Long g = (Long)query.uniqueResult();
 		int sum = g.intValue();
 		session.close();
 		return sum;
@@ -57,6 +51,20 @@ public class PaymentDaoImpl implements PaymentDao {
 
 
 
+/*public List<Integer> getTopProjects() {
+String sql = "select projectId from payments group by projectId order by sum(amount) desc";
+return jdbcTemplate.queryForList(sql, Integer.class);
+
+}
+*/
+
+
+/*@Autowired
+private JdbcTemplate jdbcTemplate;
+
+public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+	this.jdbcTemplate = jdbcTemplate;
+}*/
 
 
 

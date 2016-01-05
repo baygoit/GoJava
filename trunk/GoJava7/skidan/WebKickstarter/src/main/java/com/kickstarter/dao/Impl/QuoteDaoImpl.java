@@ -1,38 +1,31 @@
-package com.kickstarter.dao.interfaces;
+package com.kickstarter.dao.Impl;
 
-import java.sql.Connection;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.dbcp2.BasicDataSource;
+//import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.kickstarter.hibernate.HibernateUtil;
+import com.kickstarter.dao.interfaces.QuoteDao;
+//import com.kickstarter.hibernate.HibernateUtil;
 import com.kickstarter.model.Quote;
 
 @Repository
 public class QuoteDaoImpl implements QuoteDao {
 
+
 	@Autowired
-	private BasicDataSource dbCon;
+	private SessionFactory sessionFactory;
 
-	public BasicDataSource getDbCon() {
-		return dbCon;
-	}
-
-	public void setDbCon(BasicDataSource dbCon) {
-		this.dbCon = dbCon;
-	}
-
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public Quote get() {
 
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 
 		List<Quote> quotes = (List<Quote>) session.createQuery("from Quote q order by rand()").setMaxResults(1).list();
 		if (quotes.isEmpty()) {
@@ -48,6 +41,28 @@ public class QuoteDaoImpl implements QuoteDao {
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+/*	@Autowired
+private BasicDataSource dbCon;
+
+public BasicDataSource getDbCon() {
+	return dbCon;
+}
+
+public void setDbCon(BasicDataSource dbCon) {
+	this.dbCon = dbCon;
+}*/
 // public Quote get() {
 // ResultSet rs = null;
 // PreparedStatement pStatement = null;

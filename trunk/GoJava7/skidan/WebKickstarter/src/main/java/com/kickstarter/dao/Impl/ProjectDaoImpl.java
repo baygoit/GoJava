@@ -1,19 +1,30 @@
-package com.kickstarter.dao.interfaces;
+package com.kickstarter.dao.Impl;
 
 import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.kickstarter.hibernate.HibernateUtil;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.kickstarter.dao.interfaces.ProjectDao;
 import com.kickstarter.model.Project;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
 
+	@Autowired
+	private SessionFactory sessionFactory;
+
 	@SuppressWarnings("unchecked")
-	public List<Project> getAll(int categoryId) {
-		final String sql = "from Project  where categoryId=" + categoryId;
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		List<Project> projectList = session.createQuery(sql).list();
+	@Transactional
+	public List<Project> getAllProjectsForCategory(int categoryId) {
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("from Project where categoryId= :categoryId");
+		query.setInteger("categoryId", categoryId);
+		List<Project> projectList = query.list();
 		if (projectList.isEmpty()) {
 			return null;
 		}
@@ -21,40 +32,24 @@ public class ProjectDaoImpl implements ProjectDao {
 		return projectList;
 	}
 
-	public Project getOne(int projectNumber) {
+	@Transactional
+	public Project getOneProject(int projectNumber) {
 		// final String sql = "from Project where projectId=" + projectNumber;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 		Project project = (Project) session.get(Project.class, projectNumber);
 		// Project project = (Project) session.createQuery(sql).uniqueResult();
 		session.close();
 		return project;
 	}
 
-	public void update(Project project) {
-		
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		session.beginTransaction();
+	@Transactional
+	public void updateProject(Project project) {
+		Session session = sessionFactory.openSession();
 		session.update(project);
-		session.getTransaction().commit();
 		session.close();
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
  * @Autowired private JdbcTemplate jdbcTemplate;

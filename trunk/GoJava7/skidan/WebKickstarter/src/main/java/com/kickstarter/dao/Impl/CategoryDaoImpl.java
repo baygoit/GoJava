@@ -1,19 +1,27 @@
-package com.kickstarter.dao.interfaces;
+package com.kickstarter.dao.Impl;
 
 
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 //import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.stereotype.Repository;
-import com.kickstarter.hibernate.HibernateUtil;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.kickstarter.dao.interfaces.CategoryDao;
 import com.kickstarter.model.Category;
 
 @Repository
 public class CategoryDaoImpl implements CategoryDao {
+	
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Category> getAll() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 		List<Category> categoryList = session.createQuery("from Category c").list();
 		if (categoryList.isEmpty()) {
 			return null;
@@ -23,7 +31,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	public Category getByNumber(int categoryNumber) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = sessionFactory.openSession();
 		Category category = session.get(Category.class, categoryNumber);
 		session.close();
 		return category;

@@ -1,56 +1,58 @@
-package com.kickstarter.dao.interfaces;
-
+package com.kickstarter.dao.Impl;
 
 import java.util.List;
-
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-//import org.apache.commons.dbcp2.BasicDataSource;
-//import org.apache.commons.dbcp2.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-//import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.kickstarter.hibernate.HibernateUtil;
+import com.kickstarter.dao.interfaces.QuestionDao;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.Question;
 
 @Repository
 public class QuestionDaoImpl implements QuestionDao {
+	
+	@Autowired
+	private SessionFactory sessionFactory;
 
-//	@Autowired
-//	private JdbcTemplate jdbcTemplate;
-
-	// public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-	// this.jdbcTemplate = jdbcTemplate;
-	// }
-
+	@Transactional
 	public void add(String newQuestion, Project project) {
-		 Question question = new Question();
-		 question.setProject(project);
-		 question.setQuestion(newQuestion);
-		 Session session = HibernateUtil.getSessionFactory().openSession();
-		 session.beginTransaction();
-		 session.save(question); 
-		 session.getTransaction().commit();
-		 session.close();
+		Question question = new Question();
+		question.setProject(project);
+		question.setQuestion(newQuestion);
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(question);
+		session.getTransaction().commit();
+		session.close();
 
-//		String sql = "INSERT INTO questions (projectId, question) VALUES (?, ?)";
-//		jdbcTemplate.update(sql, new Object[] { projectId, newQuestion });
 	}
 
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Question> getProjectQuestions(int projectId) {
-		final String sql = "from Question where projectId=" + projectId;
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		List<Question> questionList = session.createQuery(sql).list();
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("from Question where projectId= :projectId");
+		query.setInteger("projectId", projectId);
+		List<Question> questionList = query.list();
 		if (questionList.isEmpty()) {
 			return null;
 		}
 		session.close();
 		return questionList;
 	}
+
+	// String sql = "INSERT INTO questions (projectId, question) VALUES (?, ?)";
+	// jdbcTemplate.update(sql, new Object[] { projectId, newQuestion });
+	// @Autowired
+	// private JdbcTemplate jdbcTemplate;
+
+	// public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+	// this.jdbcTemplate = jdbcTemplate;
+	// }
 
 	/*
 	 * public List<Question> getProjectQuestions(int projectId) { String sql =

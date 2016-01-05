@@ -1,14 +1,38 @@
 package com.kickstarter.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="projects")
 public class Project {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name ="projectId")
 	private int id;
+	@Column(name ="title")
 	private String title;
+	@Column(name ="discription")
 	private String discription;
+	@Column(name ="daysLeft")
 	private int daysLeft;
+	@Column(name ="requiredSum")
 	private int requiredSum;
+	@Column(name ="gainedSum")
 	private int gainedSum;
+	@Column(name ="projectHistory")
 	private String projectHistory;
+	@Column(name ="videoLink")
 	private String videoLink;
+	@ManyToOne
+	@JoinColumn(name = "categoryId")
 	private Category category;
 
 	

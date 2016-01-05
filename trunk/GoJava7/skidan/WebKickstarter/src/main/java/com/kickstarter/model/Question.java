@@ -1,9 +1,23 @@
 package com.kickstarter.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="questions")
 public class Question {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String question;
+	@ManyToOne
+	@JoinColumn(name = "projectId")
 	private Project project;
 
 	public Question() {
@@ -30,14 +44,6 @@ public class Question {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	// public int getProjectId() {
-	// return projectId;
-	// }
-	//
-	// public void setProjectId(int projectId) {
-	// this.projectId = projectId;
-	// }
 
 	public String getQuestion() {
 		return question;
