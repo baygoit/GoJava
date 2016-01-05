@@ -1,14 +1,39 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "project")
 public class Project {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long projectId;
+	@Column
 	private String name;
+	@Column
 	private String description;
-	private Integer goal;
-	private Integer pledged;
-	private Integer daysToGo;
+	@Column
+	private Long goal;
+	@Column
+	private Long pledged;
+	@Column
+	private Long daysToGo;
+	@Column
 	private String history;
+	@Column
 	private String link;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "category_id")
 	private Category category = new Category();	
 
 	public Long getProjectId() {
@@ -35,27 +60,27 @@ public class Project {
 		this.description = description;
 	}
 
-	public Integer getGoal() {
+	public Long getGoal() {
 		return goal;
 	}
 
-	public void setGoal(Integer goal) {
+	public void setGoal(Long goal) {
 		this.goal = goal;
 	}
 
-	public Integer getPledged() {
+	public Long getPledged() {
 		return pledged;
 	}
 
-	public void setPledged(Integer pledged) {
+	public void setPledged(Long pledged) {
 		this.pledged = pledged;
 	}
 
-	public Integer getDaysToGo() {
+	public Long getDaysToGo() {
 		return daysToGo;
 	}
 
-	public void setDaysToGo(Integer daysToGo) {
+	public void setDaysToGo(Long daysToGo) {
 		this.daysToGo = daysToGo;
 	}
 
@@ -81,19 +106,11 @@ public class Project {
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-	
-	public Long getCategoryId() {
-		return category.getCategoryId();
-	}
-	
-	public void setCategoryId(Long categoryId) {
-		category.setCategoryId(categoryId);;
-	}
+	}	
 	
 	@Override
 	public String toString() {
 		return "id: " + projectId + "; name: " + name + "; description: " + description + "; goal: " + goal + "; pledged: "
-				+ pledged + "; daysToGo: " + daysToGo + "; history: " + history + "; link: " + link + "; categoryId: " + getCategoryId();
+				+ pledged + "; daysToGo: " + daysToGo + "; history: " + history + "; link: " + link + "; categoryId: " + category.getCategoryId();
 	}
 }

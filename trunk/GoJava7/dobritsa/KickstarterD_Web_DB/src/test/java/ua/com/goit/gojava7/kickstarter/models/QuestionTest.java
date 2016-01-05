@@ -32,7 +32,6 @@ public class QuestionTest extends Assert {
 		question.setTime("TestTime");
 		question.setQuestion("TestQuestion");
 		question.setAnswer("TestAnswer");
-		question.setProjectId(44l);
 		System.setOut(printSteam);
 	}
 
@@ -47,14 +46,12 @@ public class QuestionTest extends Assert {
 		assertThat(question.getTime(), is("TestTime"));
 		assertThat(question.getQuestion(), is("TestQuestion"));
 		assertThat(question.getAnswer(), is("TestAnswer"));
-		assertThat(question.getProjectId(), is(44l));
 	}
 	
 	@Test
 	public void testToString() {
 		System.out.println(question.toString());
-		verify(printSteam).println(contains("TestTime"));
-		verify(printSteam).println(contains("44"));
+		verify(printSteam).println(contains("TestTime"));	
 	}
 
 }

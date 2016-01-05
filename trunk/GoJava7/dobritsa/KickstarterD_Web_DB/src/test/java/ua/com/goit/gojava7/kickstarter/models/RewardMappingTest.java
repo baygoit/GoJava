@@ -17,7 +17,8 @@ public class RewardMappingTest {
 
 	@Before
 	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernateTest.cfg.xml").build();
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernateTest.cfg.xml")
+				.build();
 		try {
 			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		} catch (Exception e) {
@@ -46,12 +47,12 @@ public class RewardMappingTest {
 		Project project1 = new Project();
 		project1.setName("TestName1");
 		project1.setDescription("TestDescription1");
-		project1.setGoal(100);
-		project1.setDaysToGo(1);
+		project1.setGoal(100l);
+		project1.setDaysToGo(1l);
 		project1.setHistory("TestHistory1");
 		project1.setLink("TestLink1");
-		project1.setCategory(category1);		
-		
+		project1.setCategory(category1);
+
 		Reward reward1 = new Reward();
 		reward1.setAmount(10);
 		reward1.setReward("TestReward1");

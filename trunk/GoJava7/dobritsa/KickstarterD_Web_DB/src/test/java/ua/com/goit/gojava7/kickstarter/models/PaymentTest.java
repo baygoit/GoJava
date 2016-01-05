@@ -31,7 +31,6 @@ public class PaymentTest {
 		payment.setUser("Nike");
 		payment.setCard("1111222233334444");
 		payment.setAmount(200);
-		payment.setProjectId(33l);
 		System.setOut(printSteam);
 	}
 	
@@ -46,7 +45,6 @@ public class PaymentTest {
 		assertThat(payment.getUser(), is("Nike"));
 		assertThat(payment.getCard(), is("1111222233334444"));
 		assertThat(payment.getAmount(), is(200));		
-		assertThat(payment.getProjectId(), is(33l));
 	}
 	
 	@Test

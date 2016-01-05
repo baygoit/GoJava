@@ -4,21 +4,15 @@
   
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
+		<param-value>/WEB-INF/applicationContext*.xml</param-value>
 	</context-param>
   
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
-	</listener>
-  
-	<listener>  
-		<listener-class>
-			ua.com.goit.gojava7.kickstarter.hibernate.HibernateListener
-		</listener-class>  
 	</listener>  
-  
+
   <servlet>
     <servlet-name>ua.com.goit.gojava7.kickstarter.servlet.CategoriesServlet</servlet-name>
     <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.CategoriesServlet</servlet-class>

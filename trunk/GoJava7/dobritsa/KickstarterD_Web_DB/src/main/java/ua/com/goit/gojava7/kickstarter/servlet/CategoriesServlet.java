@@ -35,12 +35,11 @@ public class CategoriesServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		log.info("doGet()...");
 
 		request.setAttribute("quote", quoteDao.getRandomQuote());
-		request.setAttribute("categories", categoryDao.getAll());
-		request.setAttribute("top10Categories", categoryDao.getTop10());
-		request.setAttribute("categoryWithTopProject", categoryDao.getCategoryWithTopProject());
+		request.setAttribute("categories", categoryDao.getAll());	
 		request.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);
 	}
 }
