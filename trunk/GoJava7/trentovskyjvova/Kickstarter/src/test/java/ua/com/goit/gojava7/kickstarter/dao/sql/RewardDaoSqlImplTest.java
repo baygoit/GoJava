@@ -42,29 +42,6 @@ public class RewardDaoSqlImplTest {
 
 	@Test
 	@Ignore
-	public void testGetReward() {
-
-		Reward reward = new Reward(1, 1);
-		List<Reward> rewards = new ArrayList<>();
-		rewards.add(reward);
-
-		when(jdbcTemplate.query(contains("reward WHERE projectId = ?"), any(Integer[].class),
-				any(BeanPropertyRowMapper.class))).thenReturn(rewards);
-
-		assertThat(rewardDaoMySqlImpl.getReward(1, 1), is(reward));
-	}
-
-	@Test
-	@Ignore
-	public void testSize() {
-
-		when(jdbcTemplate.queryForObject(contains("reward WHERE projectId = ?"), any(Integer[].class),
-				eq(Integer.class))).thenReturn(2);
-		int size = rewardDaoMySqlImpl.size(2);
-	}
-
-	@Test
-	@Ignore
 	public void testGetRewardById() {
 
 		rewardDaoMySqlImpl.getReward(12);

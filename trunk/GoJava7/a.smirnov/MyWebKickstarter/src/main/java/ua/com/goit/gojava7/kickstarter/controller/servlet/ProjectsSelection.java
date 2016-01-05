@@ -10,14 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 
-@ComponentScan
 @WebServlet("/category")
 public class ProjectsSelection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,11 +35,11 @@ public class ProjectsSelection extends HttpServlet {
 
 		List<Project> projects = projectDao.getProjectsFromCategory(selectedCategoryId);
 
-		for (Project project : projects) {
-			project.setCollectedSum(paymentDao.getSumProjectPayments(project.getUniqueID()));
-		}
+		// for (Project project : projects) {
+		// project.setCollectedSum(paymentDao.getSumProjectPayments(project.getId()));
+		// }
 
 		request.setAttribute("projects", projects);
-		request.getRequestDispatcher("WEB-INF/views/projects_selection.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/projects.jsp").forward(request, response);
 	}
 }

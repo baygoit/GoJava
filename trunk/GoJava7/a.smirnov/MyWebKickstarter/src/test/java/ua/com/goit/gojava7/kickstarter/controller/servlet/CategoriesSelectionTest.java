@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -30,11 +31,11 @@ public class CategoriesSelectionTest extends Mockito {
 
 	}
 
+	@Test
 	public void testDoGetHttpServletRequestHttpServletResponse() throws IOException, ServletException {
-
 		Quote quote = new Quote();
 		quote.setAuthor("TestA");
-		quote.setQuoteText("testB");
+		quote.setText("testB");
 
 		when(quoteDao.getRandomQuote()).thenReturn(quote);
 
@@ -42,15 +43,10 @@ public class CategoriesSelectionTest extends Mockito {
 		HttpServletResponse response = mock(HttpServletResponse.class);
 
 		PrintWriter writer = mock(PrintWriter.class);
-
 		when(response.getWriter()).thenReturn(writer);
-
 		categoriesSelection.doGet(request, response);
 
 		verify(writer).append(contains("TestA"));
-
 		verify(writer).append(contains("TestB"));
-
 	}
-
 }

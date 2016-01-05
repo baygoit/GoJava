@@ -15,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Reward;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 
 @WebServlet("/payment")
@@ -30,6 +32,9 @@ public class ExecutePayment extends HttpServlet {
 	@Autowired
 	private RewardDao rewardDao;
 
+	@Autowired
+	private ProjectDao projectDao;
+
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
 	}
@@ -40,7 +45,7 @@ public class ExecutePayment extends HttpServlet {
 		List<Reward> projectRewards = rewardDao.getProjectsRewards(projectId);
 
 		request.setAttribute("projectRewards", projectRewards);
-		request.getRequestDispatcher("WEB-INF/views/execute_payment.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/payment.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,7 +56,7 @@ public class ExecutePayment extends HttpServlet {
 		int pledge = validateDonatingSum(request, response);
 
 		if ((Boolean) request.getAttribute("errors")) {
-			request.getRequestDispatcher("WEB-INF/views/execute_payment.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/views/payment.jsp").forward(request, response);
 		} else {
 			saveCreatedPayment(userName, creditCardNumber, pledge);
 			response.sendRedirect("/kickstarter/project?id=" + projectId);
@@ -114,10 +119,11 @@ public class ExecutePayment extends HttpServlet {
 
 	void saveCreatedPayment(String userName, long creditCardNumber, int pledge) {
 		Payment payment = new Payment();
-		payment.setProjectID(projectId);
-		payment.setUserName(userName);
+		Project project = projectDao.getProjectById(projectId);
+		payment.setProject(project);
+		payment.setOwnerName(userName);
 		payment.setCreditCardNumber(creditCardNumber);
-		payment.setDonatingSum(pledge);
+		payment.setPledge(pledge);
 		paymentDao.add(payment);
 	}
 }

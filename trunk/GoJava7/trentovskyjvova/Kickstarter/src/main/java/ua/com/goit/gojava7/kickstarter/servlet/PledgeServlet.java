@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
@@ -31,6 +32,8 @@ public class PledgeServlet extends HttpServlet {
 	private PaymentDao paymentDao;
 	@Autowired
 	private RewardDao rewardDao;
+	@Autowired
+	private ProjectDao projectDao;
 	@Autowired
 	protected RequestValidation requestValidation;
 
@@ -64,7 +67,6 @@ public class PledgeServlet extends HttpServlet {
 		log.debug("rewardId: {}", rewardId);
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
 		log.debug("projectId: {}", projectId);
-		int donate = 0;
 
 		request.setAttribute("errors", false);
 		List<String> emptyCheckParameters = new ArrayList<>(Arrays.asList("name", "cardNumber"));
@@ -76,7 +78,7 @@ public class PledgeServlet extends HttpServlet {
 				|| requestValidation.isNatural(request, naturalCheckParameters)) {
 			doGet(request, response);
 		} else {
-
+			int donate = 0;
 			if (rewardId == 0) {
 				donate = Integer.parseInt(request.getParameter("amount"));
 			} else {
@@ -92,7 +94,7 @@ public class PledgeServlet extends HttpServlet {
 			
 			Payment payment = new Payment();
 
-			payment.setProjectId(projectId);
+			payment.setProject(projectDao.getProject(projectId));
 			payment.setName(name);
 			payment.setCardNumber(cardNumber);
 			payment.setPledge(donate);

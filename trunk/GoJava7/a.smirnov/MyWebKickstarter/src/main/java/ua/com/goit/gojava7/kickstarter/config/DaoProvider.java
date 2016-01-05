@@ -6,12 +6,12 @@ import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
-import ua.com.goit.gojava7.kickstarter.dao.mysql.CategoryDaoMysqlImpl;
-import ua.com.goit.gojava7.kickstarter.dao.mysql.FaqDaoMysqlImpl;
-import ua.com.goit.gojava7.kickstarter.dao.mysql.PaymentDaoMysqlImpl;
-import ua.com.goit.gojava7.kickstarter.dao.mysql.ProjectDaoMysqlImpl;
-import ua.com.goit.gojava7.kickstarter.dao.mysql.QuoteDaoMysqlImpl;
-import ua.com.goit.gojava7.kickstarter.dao.mysql.RewardDaoMysqlImpl;
+import ua.com.goit.gojava7.kickstarter.dao.impl.CategoryDaoImpl;
+import ua.com.goit.gojava7.kickstarter.dao.impl.FaqDaoImpl;
+import ua.com.goit.gojava7.kickstarter.dao.impl.PaymentDaoImpl;
+import ua.com.goit.gojava7.kickstarter.dao.impl.ProjectDaoImpl;
+import ua.com.goit.gojava7.kickstarter.dao.impl.QuoteDaoImpl;
+import ua.com.goit.gojava7.kickstarter.dao.impl.RewardDaoImpl;
 
 public class DaoProvider {
 	private InternalDataSource dataSource;
@@ -23,7 +23,7 @@ public class DaoProvider {
 	public QuoteDao getQuoteDao() {
 		QuoteDao quoteDao;
 		if (dataSource == InternalDataSource.MYSQL) {
-			QuoteDaoMysqlImpl quoteDaoMySqlImpl = new QuoteDaoMysqlImpl();
+			QuoteDaoImpl quoteDaoMySqlImpl = new QuoteDaoImpl();
 			quoteDao = quoteDaoMySqlImpl;
 		} else {
 			throw new IllegalArgumentException("Unknown data source " + dataSource);
@@ -34,7 +34,7 @@ public class DaoProvider {
 	public CategoryDao getCategoryDao() {
 		CategoryDao categoryDao;
 		if (dataSource == InternalDataSource.MYSQL) {
-			CategoryDaoMysqlImpl categoryDaoMysqlImpl = new CategoryDaoMysqlImpl();
+			CategoryDaoImpl categoryDaoMysqlImpl = new CategoryDaoImpl();
 			categoryDao = categoryDaoMysqlImpl;
 		} else {
 			throw new IllegalArgumentException("Unknown data source " + dataSource);
@@ -45,7 +45,7 @@ public class DaoProvider {
 	public FaqDao getFaqDao() {
 		FaqDao faqDao;
 		if (dataSource == InternalDataSource.MYSQL) {
-			FaqDaoMysqlImpl faqDaoMysqlImpl = new FaqDaoMysqlImpl();
+			FaqDaoImpl faqDaoMysqlImpl = new FaqDaoImpl();
 			faqDao = faqDaoMysqlImpl;
 		} else {
 			throw new IllegalArgumentException("Unknown data source " + dataSource);
@@ -56,7 +56,7 @@ public class DaoProvider {
 	public PaymentDao getPaymentDao() {
 		PaymentDao paymentDao;
 		if (dataSource == InternalDataSource.MYSQL) {
-			PaymentDaoMysqlImpl paymentDaoMysqlImpl = new PaymentDaoMysqlImpl();
+			PaymentDaoImpl paymentDaoMysqlImpl = new PaymentDaoImpl();
 			paymentDao = paymentDaoMysqlImpl;
 		} else {
 			throw new IllegalArgumentException("Unknown data source " + dataSource);
@@ -67,7 +67,7 @@ public class DaoProvider {
 	public ProjectDao getProjectDao() {
 		ProjectDao projectDao;
 		if (dataSource == InternalDataSource.MYSQL) {
-			ProjectDaoMysqlImpl projectDaoMysqlImpl = new ProjectDaoMysqlImpl();
+			ProjectDaoImpl projectDaoMysqlImpl = new ProjectDaoImpl();
 			projectDao = projectDaoMysqlImpl;
 		} else {
 			throw new IllegalArgumentException("Unknown data source " + dataSource);
@@ -78,7 +78,7 @@ public class DaoProvider {
 	public RewardDao getRewardDao() {
 		RewardDao rewardDao;
 		if (dataSource == InternalDataSource.MYSQL) {
-			RewardDaoMysqlImpl rewardDaoMysqlImpl = new RewardDaoMysqlImpl();
+			RewardDaoImpl rewardDaoMysqlImpl = new RewardDaoImpl();
 			rewardDao = rewardDaoMysqlImpl;
 		} else {
 			throw new IllegalArgumentException("Unknown data source " + dataSource);

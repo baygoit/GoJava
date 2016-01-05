@@ -8,7 +8,7 @@ public class Project {
 	private String description;
 	private String owner;
 	private int goal;
-	private String linkVideo;
+	private String videoUrl;
 	private int amountPledge;
 	
 	public Project() {
@@ -23,7 +23,7 @@ public class Project {
 		setDescription("");
 		setOwner("");
 		setGoal(0);
-		setLinkVideo("");
+		setVideoUrl("");
 	}
 	
 	public int getId() {
@@ -66,12 +66,12 @@ public class Project {
 		this.goal = goal;
 	}
 
-	public String getLinkVideo() {
-		return linkVideo;
+	public String getVideoUrl() {
+		return videoUrl;
 	}
 
-	public void setLinkVideo(String linkVideo) {
-		this.linkVideo = linkVideo;
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
 	}
 
 	public String getOwner() {
@@ -91,7 +91,6 @@ public class Project {
 	}
 
 	public int getFunded() {
-		int goal = getGoal();
 		return goal == 0 ? 0 : getAmountPledge() * 100 / goal;
 	}
 

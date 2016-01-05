@@ -45,6 +45,6 @@ public class ProjectDetailInfo extends HttpServlet {
 
 		request.setAttribute("project", project);
 		request.setAttribute("questions", questions);
-		request.getRequestDispatcher("WEB-INF/views/project_detail_info.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/project.jsp").forward(request, response);
 	}
 }
