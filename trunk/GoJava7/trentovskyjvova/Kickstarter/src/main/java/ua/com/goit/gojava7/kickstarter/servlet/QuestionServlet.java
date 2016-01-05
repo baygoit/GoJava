@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
@@ -27,6 +28,8 @@ public class QuestionServlet extends HttpServlet {
 	
 	@Autowired
 	private QuestionDao questionDao;
+	@Autowired
+	private ProjectDao projectDao;
 	@Autowired
 	protected RequestValidation requestValidation;
 	

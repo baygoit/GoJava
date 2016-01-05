@@ -19,13 +19,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 @RunWith(MockitoJUnitRunner.class)
 public class QuestionServletTest {
 	@Mock
 	private QuestionDao questionDao;
+	@Mock
+	private ProjectDao projectDao;
 	@Mock
 	RequestValidation requestValidation;
 	@InjectMocks
@@ -52,11 +56,12 @@ public class QuestionServletTest {
 
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
-
+		
+		when(projectDao.getProject(12)).thenReturn(new Project("Proj", 12));	
 		when(request.getParameter("projectId")).thenReturn("12");
 		when(request.getParameter("questionText")).thenReturn("que text");
-		when(request.getAttribute("errors")).thenReturn(false);
-		
+		when(request.getAttribute("errors")).thenReturn(false);		
+				
 		questionServlet.doPost(request, response);
 
 		verify(questionDao).addQuestion(any(Question.class));

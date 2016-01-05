@@ -42,7 +42,7 @@ public class ProjectServletTest {
 		int projectId = 12;
 		
 		Project selectedProject = new Project("Project name", projectId);
-		selectedProject.setCategoryId(1);
+
 		when(projectDao.getProject(projectId)).thenReturn(selectedProject);
 		int pledged = 100;
 		//when(paymentDao.getPledged(projectId)).thenReturn(pledged);

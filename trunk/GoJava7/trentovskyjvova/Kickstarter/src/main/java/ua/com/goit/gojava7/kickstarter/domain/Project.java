@@ -1,14 +1,37 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "project")
 public class Project {
+	@Column
 	private String name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private int categoryId;
+
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	private Category category;
+	@Column
 	private int daysToGo;
+	@Column
 	private String description;
+	@Column
 	private String owner;
+	@Column
 	private int goal;
+	@Column
 	private String videoUrl;
+	@Column
 	private int amountPledge;
 	
 	public Project() {
@@ -16,14 +39,14 @@ public class Project {
 	}
 	
 	public Project(String name, int id) {
-		setName(name);
+		this.name = name;
 		this.id = id;
-		setCategoryId(0);
-		setDaysToGo(40);
-		setDescription("");
-		setOwner("");
-		setGoal(0);
-		setVideoUrl("");
+
+		this.daysToGo = 40;
+		this.description = "";
+		this.owner = "";
+		this.goal = 0;
+		this.videoUrl = "";
 	}
 	
 	public int getId() {
@@ -82,12 +105,12 @@ public class Project {
 		this.owner = owner;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public int getFunded() {
