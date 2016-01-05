@@ -13,4 +13,6 @@ public interface CategoryDao {
 	public List<Category> getAll();
 
 	public Category getCategoryById(int id);
+
+	public List<Object[]> getTop10Categories();
 }

@@ -16,14 +16,53 @@
 
 	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao.sql" />
 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://localhost:5432/kickstarter" />
 		<property name="username" value="user" />
 		<property name="password" value="Qwerty123" />
 	</bean>
 
-	<bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="dataSource" />
+	<!-- <bean id="template" class="org.springframework.jdbc.core.JdbcTemplate"> 
+		<property name="dataSource" ref="dataSource" /> </bean> -->
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+			</props>
+		</property>
+
+		<property name="annotatedClasses">
+			<list>
+				<value>ua.com.goit.gojava7.kickstarter.domain.Quote</value>
+				<value>ua.com.goit.gojava7.kickstarter.domain.Category</value>
+			</list>
+		</property>
+
+		<property name="mappingResources">
+			<list>
+				<value>Payment.hbm.xml</value>
+				<value>Project.hbm.xml</value>
+				<value>Question.hbm.xml</value>
+				<value>Reward.hbm.xml</value>
+			</list>
+		</property>
+
+	</bean>
+
 </beans>

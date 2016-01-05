@@ -8,8 +8,6 @@ public interface CategoryDao extends Dao {
 	List<Category> getCategories();
 	
 	Category getCategory(int id);
-	
-	int size();
 
 	Category getBestCategory();
 }

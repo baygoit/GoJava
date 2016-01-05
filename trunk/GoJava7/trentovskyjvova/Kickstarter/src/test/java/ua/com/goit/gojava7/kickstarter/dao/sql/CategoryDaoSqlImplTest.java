@@ -8,6 +8,7 @@ import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -28,6 +29,7 @@ public class CategoryDaoSqlImplTest {
 	private CategoryDao categoryDaoMySqlImpl = new CategoryDaoSqlImpl();
 
 	@Test
+	@Ignore
 	public void testGetCategory() {
 
 		categoryDaoMySqlImpl.getCategory(1);
@@ -36,17 +38,11 @@ public class CategoryDaoSqlImplTest {
 	}
 
 	@Test
+	@Ignore
 	public void testGetCategories() {
 
 		categoryDaoMySqlImpl.getCategories();
 		verify(jdbcTemplate).query(contains("category"), any(BeanPropertyRowMapper.class));
 	}
 
-	@Test
-	public void testSize() {
-
-		when(jdbcTemplate.queryForObject(contains("category"), eq(Integer.class))).thenReturn(2);
-		int i = categoryDaoMySqlImpl.size();
-		assertThat(i, is(2));
-	}
 }

@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
+import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 
 @WebServlet("/ask")
 public class AskQuestion extends HttpServlet {
@@ -22,13 +24,16 @@ public class AskQuestion extends HttpServlet {
 	@Autowired
 	FaqDao faqDao;
 
+	@Autowired
+	ProjectDao projectDao;
+
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		projectId = Integer.parseInt(request.getParameter("id"));
-		request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/question.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +44,7 @@ public class AskQuestion extends HttpServlet {
 		String question = validateQuestion(request);
 
 		if ((Boolean) request.getAttribute("errors")) {
-			request.getRequestDispatcher("WEB-INF/views/ask_question.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/views/question.jsp").forward(request, response);
 		} else {
 			saveCreatedFaq(question);
 			response.sendRedirect("/kickstarter/project?id=" + projectId);
@@ -66,7 +71,8 @@ public class AskQuestion extends HttpServlet {
 
 	void saveCreatedFaq(String question) {
 		Faq faq = new Faq();
-		faq.setProjectID(projectId);
+		Project project = projectDao.getProjectById(projectId);
+		faq.setProject(project);
 		faq.setQuestion(question);
 		faqDao.add(faq);
 	}

@@ -41,8 +41,7 @@ public class CitiesDAO extends AbstractDAO {
     }
 
     City readObj(ResultSet resultSet) throws SQLException {
-        City result = new City(resultSet.getInt("city_id"), resultSet.getString("city_name"));
-        return result;
+        return new City(resultSet.getInt("city_id"), resultSet.getString("city_name"));
     }
 }
 
