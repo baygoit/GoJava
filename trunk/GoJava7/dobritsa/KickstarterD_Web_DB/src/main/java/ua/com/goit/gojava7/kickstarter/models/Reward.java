@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,13 +16,13 @@ public class Reward {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id", unique = true, nullable = false)
 	private Long rewardId;
 	@Column
 	private int amount;
 	@Column
 	private String reward;	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "project_id")
 	private Project project = new Project();	
 
@@ -57,16 +58,8 @@ public class Reward {
 		this.project = project;
 	}
 
-	public Long getProjectId() {
-		return project.getProjectId();
-	}
-
-	public void setProjectId(Long projectId) {
-		project.setProjectId(projectId);
-	}
-
 	@Override
 	public String toString() {
-		return "rewardId: " + rewardId + "; Amount: " + amount + "; Reward: " + reward + "; projectId: " + getProjectId();
+		return "rewardId: " + rewardId + "; Amount: " + amount + "; Reward: " + reward + "; projectId: " + project.getProjectId();
 	}
 }

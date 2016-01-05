@@ -41,16 +41,12 @@ public class ProjectMappingTest {
 		session.beginTransaction();
 
 		Category category1 = new Category();
-		// TODO category1.setCategoryId(22l); does not work!
-		category1.setCategoryId(22l);
 		category1.setName("TestCategory 1");
 
 		Category category2 = new Category();
 		category2.setName("TestCategory 2");
 
 		Project project1 = new Project();
-		// TODO project1.setProjectId(22l); does not work!
-		project1.setProjectId(22l);
 		project1.setName("TestName1");
 		project1.setDescription("TestDescription1");
 		project1.setGoal(100l);
@@ -69,6 +65,11 @@ public class ProjectMappingTest {
 		project2.setCategory(category2);
 
 		session.save(category1);
+		session.getTransaction().commit();
+		session.close();
+		
+		session = sessionFactory.openSession();
+		session.beginTransaction();
 		session.save(project1);
 		session.save(project2);
 		session.getTransaction().commit();

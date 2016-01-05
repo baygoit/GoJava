@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ public class Project {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id", unique = true, nullable = false)
 	private Long projectId;
 	@Column
 	private String name;
@@ -31,7 +32,7 @@ public class Project {
 	private String history;
 	@Column
 	private String link;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "category_id")
 	private Category category = new Category();	
 
@@ -105,19 +106,11 @@ public class Project {
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-	
-	public Long getCategoryId() {
-		return category.getCategoryId();
-	}
-	
-	public void setCategoryId(Long categoryId) {
-		category.setCategoryId(categoryId);;
-	}
+	}	
 	
 	@Override
 	public String toString() {
 		return "id: " + projectId + "; name: " + name + "; description: " + description + "; goal: " + goal + "; pledged: "
-				+ pledged + "; daysToGo: " + daysToGo + "; history: " + history + "; link: " + link + "; categoryId: " + getCategoryId();
+				+ pledged + "; daysToGo: " + daysToGo + "; history: " + history + "; link: " + link + "; categoryId: " + category.getCategoryId();
 	}
 }

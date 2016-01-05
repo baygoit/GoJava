@@ -3,7 +3,6 @@ package ua.com.goit.gojava7.kickstarter.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,6 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
-import ua.com.goit.gojava7.kickstarter.models.Project;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @WebServlet("/question")
@@ -45,18 +43,11 @@ public class QuestionServlet extends HttpServlet {
 		Long projectId = Long.parseLong(request.getParameter("projectId"));
 		String textQuestion = request.getParameter("question");
 
-		if (!request.getParameter("question").isEmpty())
-			addQuestion(textQuestion, projectId);
-
+		if (!request.getParameter("question").isEmpty()) {
+			Question question = new Question(textQuestion, projectDao.get(projectId));
+			questionDao.add(question);
+		}
+		
 		response.sendRedirect("project?id=" + projectId);
 	}
-
-	private void addQuestion(String textQuestion, Long projectId) {
-		Question question = new Question();
-		question.setQuestion(textQuestion);
-		Project project = projectDao.get(projectId);
-		question.setProject(project);
-		questionDao.add(question);
-	}
-
 }

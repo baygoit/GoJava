@@ -52,26 +52,31 @@ public class PaymentServlet extends HttpServlet {
 		
 		int amount;
 		Long projectId;
+		Long categoryId;
 
 		if (rewardId != 0) {
-			projectId = rewardDao.get(rewardId).getProjectId();
+			projectId = rewardDao.get(rewardId).getProject().getProjectId();
+			categoryId = projectDao.get(projectId).getCategory().getCategoryId();
 			amount = rewardDao.get(rewardId).getAmount();
-			request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
+			
+			request.setAttribute("category", categoryDao.get(categoryId));
 			request.setAttribute("project", projectDao.get(projectId));
 			request.setAttribute("amount", amount);
 			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 
 		} else {
 			projectId = Long.parseLong(request.getParameter("projectId"));
+			categoryId = projectDao.get(projectId).getCategory().getCategoryId();
 
 			if (validator.validateAmountOfPledge(request.getParameter("amount"))) {
 				amount = Integer.parseInt(request.getParameter("amount"));
-				request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
+				
+				request.setAttribute("category", categoryDao.get(categoryId));
 				request.setAttribute("project", projectDao.get(projectId));
 				request.setAttribute("amount", amount);
 				request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			} else {
-				request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
+				request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategory().getCategoryId()));
 				request.setAttribute("project", projectDao.get(projectId));
 				request.setAttribute("message", "-----Wrong amount-----");
 				request.setAttribute("rewards", rewardDao.getByProject(projectId));

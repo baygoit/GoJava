@@ -30,8 +30,7 @@ public class RewardTest {
 	public void setUp() {
 		reward.setRewardId(11l);
 		reward.setAmount(10);
-		reward.setReward("TestReward");
-		reward.setProjectId(44l);	
+		reward.setReward("TestReward");	
 		System.setOut(printSteam);
 	}
 
@@ -44,8 +43,7 @@ public class RewardTest {
 	public void testGet() {
 		assertThat(reward.getRewardId(), is(11l));
 		assertThat(reward.getAmount(), is(10));
-		assertThat(reward.getReward(), is("TestReward"));
-		assertThat(reward.getProjectId(), is(44l));
+		assertThat(reward.getReward(), is("TestReward"));		
 	}
 
 	@Test

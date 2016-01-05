@@ -13,7 +13,7 @@ public class Quote {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id", unique = true, nullable = false)
 	private Long quoteId;
 	@Column
 	private String text;

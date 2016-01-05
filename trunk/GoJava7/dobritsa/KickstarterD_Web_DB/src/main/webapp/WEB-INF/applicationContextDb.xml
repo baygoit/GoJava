@@ -55,17 +55,7 @@
 				
 			</list>
 		</property>
-
-		<property name="mappingResources">
-			<list>			
-				<!-- <value>Category.hbm.xml</value>
-				<value>Project.hbm.xml</value>
-				<value>Reward.hbm.xml</value>
-				<value>Question.hbm.xml</value>
-				<value>Payment.hbm.xml</value> -->
-			</list>
-		</property>
-
-	</bean>	
+		
+	</bean>		
 	
 </beans>
