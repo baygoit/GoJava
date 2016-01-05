@@ -16,9 +16,7 @@
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util.xsd">
            
-    <context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao" />
-	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.config" />
-	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.hibernate" />
+    <context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />	
           
     <import resource="applicationContextDb.xml"/> 
     

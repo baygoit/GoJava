@@ -71,9 +71,9 @@ public class PaymentServlet extends HttpServlet {
 				request.setAttribute("amount", amount);
 				request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 			} else {
-				request.setAttribute("message", "-----Wrong amount-----");
 				request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));
 				request.setAttribute("project", projectDao.get(projectId));
+				request.setAttribute("message", "-----Wrong amount-----");
 				request.setAttribute("rewards", rewardDao.getByProject(projectDao.get(projectId)));
 				request.getRequestDispatcher("/WEB-INF/jsp/rewards.jsp").forward(request, response);
 			}

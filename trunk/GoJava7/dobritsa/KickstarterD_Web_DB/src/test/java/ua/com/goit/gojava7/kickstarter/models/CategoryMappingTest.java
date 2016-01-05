@@ -38,7 +38,6 @@ public class CategoryMappingTest {
 	@Test
 	public void testBasicUsage() {
 		Session session = sessionFactory.openSession();
-		session.beginTransaction();
 
 		Category category1 = new Category();
 		category1.setCategoryId(11l);
@@ -48,6 +47,7 @@ public class CategoryMappingTest {
 		category2.setCategoryId(22l);
 		category2.setName("TestCategory 2");
 
+		session.beginTransaction();
 		session.save(category1);
 		session.save(category2);
 		session.getTransaction().commit();

@@ -15,12 +15,46 @@
            http://www.springframework.org/schema/context/spring-context.xsd
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util.xsd">
-
+           
+	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao" />
+	   
 	<bean id="basicDataSource" class="org.apache.commons.dbcp2.BasicDataSource"	destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/kickstarter" />
 		<property name="username" value="root" />
 		<property name="password" value="temppassword" />
+	</bean>	
+	           
+	<tx:annotation-driven />
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+
+		<property name="dataSource">
+			<ref bean="basicDataSource" />
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+			</props>
+		</property>		
+
+		<property name="mappingResources">
+			<list>
+				<value>Quote.hbm.xml</value>
+				<value>Category.hbm.xml</value>
+				<value>Project.hbm.xml</value>
+				<value>Reward.hbm.xml</value>
+				<value>Question.hbm.xml</value>
+				<value>Payment.hbm.xml</value>
+			</list>
+		</property>
+
 	</bean>	
 	
 </beans>
