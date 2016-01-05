@@ -24,9 +24,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		payment.setAmount(amount);
 		payment.setProject(project);
 		Session session = sessionFactory.openSession();
-		session.beginTransaction();
 		session.save(payment);
-		session.getTransaction().commit();
 		session.close();
 	}
 	

@@ -24,9 +24,7 @@ public class QuestionDaoImpl implements QuestionDao {
 		question.setProject(project);
 		question.setQuestion(newQuestion);
 		Session session = sessionFactory.openSession();
-		session.beginTransaction();
 		session.save(question);
-		session.getTransaction().commit();
 		session.close();
 
 	}
