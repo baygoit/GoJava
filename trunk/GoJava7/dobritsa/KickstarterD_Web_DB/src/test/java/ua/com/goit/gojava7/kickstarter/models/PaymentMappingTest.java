@@ -71,14 +71,24 @@ public class PaymentMappingTest {
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		System.out.println("\n-----Get by id = 1-----");
+		
+		System.out.println("\n-----Get Payment by id = 1-----");
 		Payment payment = session.get(Payment.class, 1l);
 		System.out.println(payment);
+		
+		System.out.println("\n-----Get Project by id = 1-----");
+		Project project = session.get(Project.class, 1l);
+		System.out.println("Project: " + project);
+		
+		System.out.println("\n-----Get Category by id = 1-----");
+		Category category = session.get(Category.class, 1l);
+		System.out.println("Category: " + category);		
+		
 		session.close();
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		System.out.println("\n-----Get list of quotes-----");
+		System.out.println("\n-----Get list of payments-----");
 		List<Payment> payments = (List<Payment>) session.createQuery("from Payment q").list();
 		for (Payment resultPayment : payments) {
 			System.out.println(resultPayment);

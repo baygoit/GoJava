@@ -5,10 +5,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "category")
@@ -19,8 +24,10 @@ public class Category {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long categoryId;
 	@Column
-	private String name;	
-	//private List<Project> projects = new ArrayList<>();
+	private String name;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+	@Cascade({CascadeType.SAVE_UPDATE})
+	private List<Project> projects = new ArrayList<>();
 	
 	public Long getCategoryId() {
 		return categoryId;
@@ -36,8 +43,16 @@ public class Category {
 
 	public void setName(String name) {
 		this.name = name;
-	}	
+	}		
 	
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
 	@Override
 	public String toString() {
 		return "categoryId: " + categoryId + ", name: " + name;

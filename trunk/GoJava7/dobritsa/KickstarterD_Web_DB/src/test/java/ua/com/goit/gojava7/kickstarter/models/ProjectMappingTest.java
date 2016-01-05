@@ -64,12 +64,7 @@ public class ProjectMappingTest {
 		project2.setLink("TestLink2");
 		project2.setCategory(category2);
 
-		session.save(category1);
-		session.getTransaction().commit();
-		session.close();
-		
-		session = sessionFactory.openSession();
-		session.beginTransaction();
+		//session.save(category1);		
 		session.save(project1);
 		session.save(project2);
 		session.getTransaction().commit();
@@ -77,13 +72,15 @@ public class ProjectMappingTest {
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		System.out.println("\n-----Get by id = 1-----");	
+		
+		System.out.println("\n-----Get Project by id = 1-----");	
 		Project project = session.get(Project.class, 1l);	
 		System.out.println("Project: " + project);
-		session.close();
-
-		session = sessionFactory.openSession();
-		session.beginTransaction();
+		
+		System.out.println("\n-----Get Category by id = 1-----");	
+		Category category = session.get(Category.class, 1l);	
+		System.out.println("Category: " + category);
+	
 		System.out.println("\n-----Get list of projects-----");
 		List<Project> projects = (List<Project>) session.createQuery("from Project q").list();
 		for (Project resultProject : projects) {

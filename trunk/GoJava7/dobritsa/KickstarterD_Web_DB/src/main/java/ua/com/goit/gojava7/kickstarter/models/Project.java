@@ -1,14 +1,21 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "project")
@@ -32,9 +39,19 @@ public class Project {
 	private String history;
 	@Column
 	private String link;
-	@ManyToOne(cascade = CascadeType.ALL)
+	
+	@ManyToOne//(cascade = CascadeType.ALL)
+	@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "category_id")
 	private Category category = new Category();	
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+	private List<Question> questions = new ArrayList<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+	private List<Reward> rewards = new ArrayList<>();	
 
 	public Long getProjectId() {
 		return projectId;

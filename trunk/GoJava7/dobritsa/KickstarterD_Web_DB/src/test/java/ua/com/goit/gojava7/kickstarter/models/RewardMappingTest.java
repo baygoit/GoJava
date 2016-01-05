@@ -70,14 +70,24 @@ public class RewardMappingTest {
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
+		
 		System.out.println("\n-----Get by id = 1-----");
 		Reward reward = session.get(Reward.class, 1l);
-		System.out.println(reward);
+		System.out.println(reward);	
+		
+		System.out.println("\n-----Get Project by id = 1-----");
+		Project project = session.get(Project.class, 1l);
+		System.out.println("Project: " + project);
+		
+		System.out.println("\n-----Get Category by id = 1-----");
+		Category category = session.get(Category.class, 1l);
+		System.out.println("Category: " + category);
+		
 		session.close();
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		System.out.println("\n-----Get list of quotes-----");
+		System.out.println("\n-----Get list of rewards-----");
 		List<Reward> rewards = (List<Reward>) session.createQuery("from Reward q").list();
 		for (Reward resultReward : rewards) {
 			System.out.println(resultReward);

@@ -71,18 +71,20 @@ public class QuestionMappingTest {
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		System.out.println("\n-----Get by id = 1-----");
-		Category category = session.get(Category.class, 1l);
-		Project project = session.get(Project.class, 1l);
-		Question question = session.get(Question.class, 1l);
-		System.out.println("Category: " + category);
-		System.out.println("Project: " + project);
+		
+		System.out.println("\n-----Get Question by id = 1-----");
+		Question question = session.get(Question.class, 1l);		
 		System.out.println("Question: " + question);
-		session.close();
-
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		System.out.println("\n-----Get list of quotes-----");
+		
+		System.out.println("\n-----Get Project by id = 1-----");
+		Project project = session.get(Project.class, 1l);
+		System.out.println("Project: " + project);
+		
+		System.out.println("\n-----Get Category by id = 1-----");
+		Category category = session.get(Category.class, 1l);
+		System.out.println("Category: " + category);		
+		
+		System.out.println("\n-----Get list of questions-----");
 		List<Question> questions = (List<Question>) session.createQuery("from Question q").list();
 		for (Question resultQuestion : questions) {
 			System.out.println(resultQuestion);
