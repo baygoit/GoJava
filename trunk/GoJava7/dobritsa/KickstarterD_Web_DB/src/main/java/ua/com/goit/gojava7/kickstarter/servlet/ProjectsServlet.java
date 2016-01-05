@@ -47,13 +47,12 @@ public class ProjectsServlet extends HttpServlet {
 		
 		log.info("doGet()...");
 		
-		Long categoryId = Long.parseLong(request.getParameter("id"));
-		
+		Long categoryId = Long.parseLong(request.getParameter("id"));	
 		Category category = categoryDao.get(categoryId);		
 
-		List<Project> projects = projectDao.getByCategory(category);
+		List<Project> projects = projectDao.getByCategory(categoryId);
 		for (Project project : projects) {
-			project.setPledged(paymentDao.calculatePledgedForProject(project));
+			project.setPledged(paymentDao.calculatePledgedForProject(project.getProjectId()));
 		}
 
 		request.setAttribute("categoryName", category.getName());

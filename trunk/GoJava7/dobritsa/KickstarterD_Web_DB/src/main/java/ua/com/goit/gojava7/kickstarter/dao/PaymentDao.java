@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.models.Payment;
-import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @Repository
 public class PaymentDao {
@@ -34,15 +33,15 @@ public class PaymentDao {
 		session.close();
 	}
 
-	public Long calculatePledgedForProject(Project project) {
-		log.info("<Integer> calculatePledgedForProject({})...", project);
+	public Long calculatePledgedForProject(Long projectId) {
+		log.info("<Integer> calculatePledgedForProject({})...", projectId);
 		Session session = sessionFactory.openSession();
 	
-		Long sumAmount = (Long) session.createCriteria(Payment.class).add(Restrictions.eq("Project", project))
+		Long sumAmount = (Long) session.createCriteria(Payment.class).add(Restrictions.eq("project.id", projectId))
 				.setProjection(Projections.sum("amount")).uniqueResult();
 	
 		session.close();
-		log.debug("<Integer> calculatePledgedForProject({}) returned questions: {}", project, ".......");
+		log.debug("<Integer> calculatePledgedForProject({}) returned questions: {}", projectId, ".......");
 		return sumAmount;
 	}
 }

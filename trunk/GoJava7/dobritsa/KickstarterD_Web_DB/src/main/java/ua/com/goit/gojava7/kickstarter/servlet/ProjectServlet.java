@@ -52,11 +52,11 @@ public class ProjectServlet extends HttpServlet {
 		Long projectId = Long.parseLong(request.getParameter("id"));	
 		
 		Project project = projectDao.get(projectId);		
-		project.setPledged(paymentDao.calculatePledgedForProject(project));
+		project.setPledged(paymentDao.calculatePledgedForProject(projectId));
 			
 		request.setAttribute("category", categoryDao.get(project.getCategoryId()));	
 		request.setAttribute("project", project);		
-		request.setAttribute("questions", questionDao.getByProject(project));
+		request.setAttribute("questions", questionDao.getByProject(projectId));
 		request.getRequestDispatcher("/WEB-INF/jsp/project.jsp").forward(request, response);
 	}	
 }

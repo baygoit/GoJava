@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ua.com.goit.gojava7.kickstarter.models.Project;
 import ua.com.goit.gojava7.kickstarter.models.Reward;
 
 @Repository
@@ -35,16 +34,16 @@ public class RewardDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Reward> getByProject(Project project) {
-		log.info("<rewards> getByProject({})...", project);	
+	public List<Reward> getByProject(Long projectId) {
+		log.info("<rewards> getByProject({})...", projectId);	
 		Session session = sessionFactory.openSession();
 
 		List<Reward> rewards = session.createCriteria(Reward.class)
-				.add(Restrictions.eq("Project", project))
+				.add(Restrictions.eq("project.id", projectId))
 				.list();
 
 		session.close();
-		log.debug("<rewards> getByProject({}) returned rewards: {}", project, rewards);
+		log.debug("<rewards> getByProject({}) returned rewards: {}", projectId, rewards);
 		return rewards;
 	}	
 }

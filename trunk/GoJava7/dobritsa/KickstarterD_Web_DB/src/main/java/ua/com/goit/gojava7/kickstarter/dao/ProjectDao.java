@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ua.com.goit.gojava7.kickstarter.models.Category;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @Repository
@@ -35,16 +34,16 @@ public class ProjectDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Project> getByCategory(Category category) {
-		log.info("<projects> getByCategory({})...", category);		
+	public List<Project> getByCategory(Long categoryId) {
+		log.info("<projects> getByCategory({})...", categoryId);		
 		Session session = sessionFactory.openSession();
 
 		List<Project> projects = session.createCriteria(Project.class)
-				.add(Restrictions.eq("Category", category))
+				.add(Restrictions.eq("category.id", categoryId))
 				.list();
 
 		session.close();
-		log.debug("<projects> getByCategory({}) returned projects: {}", category, projects);
+		log.debug("<projects> getByCategory({}) returned projects: {}", categoryId, projects);
 		return projects;
 	}
 }

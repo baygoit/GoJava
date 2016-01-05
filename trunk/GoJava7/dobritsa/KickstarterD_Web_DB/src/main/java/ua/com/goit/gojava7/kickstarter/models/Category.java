@@ -1,10 +1,22 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "category")
 public class Category {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long categoryId;
+	@Column
 	private String name;		
-	private int money;
 	
 	public Long getCategoryId() {
 		return categoryId;
@@ -21,15 +33,7 @@ public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}	
-
-	public int getMoney() {
-		return money;
-	}
-
-	public void setMoney(int money) {
-		this.money = money;
-	}
-
+	
 	@Override
 	public String toString() {
 		return "categoryId: " + categoryId + ", name: " + name;

@@ -1,14 +1,38 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "project")
 public class Project {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long projectId;
+	@Column
 	private String name;
+	@Column
 	private String description;
+	@Column
 	private Long goal;
+	@Column
 	private Long pledged;
+	@Column
 	private Long daysToGo;
+	@Column
 	private String history;
+	@Column
 	private String link;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
 	private Category category = new Category();	
 
 	public Long getProjectId() {

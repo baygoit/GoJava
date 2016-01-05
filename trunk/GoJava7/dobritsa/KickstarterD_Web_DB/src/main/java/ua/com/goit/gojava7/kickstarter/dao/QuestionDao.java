@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ua.com.goit.gojava7.kickstarter.models.Project;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @Repository
@@ -33,16 +32,16 @@ public class QuestionDao {
 	}
 //TODO check null
 	@SuppressWarnings("unchecked")
-	public List<Question> getByProject(Project project) {
-		log.info("<questions> getByProject({})...", project);
+	public List<Question> getByProject(Long projectId) {
+		log.info("<questions> getByProject({})...", projectId);
 		Session session = sessionFactory.openSession();
 
 		List<Question> questions = session.createCriteria(Question.class)
-				.add(Restrictions.eq("Project", project))
+				.add(Restrictions.eq("project.id", projectId))
 				.list();
 
 		session.close();
-		log.debug("<questions> getByProject({}) returned questions: {}", project, questions);
+		log.debug("<questions> getByProject({}) returned questions: {}", projectId, questions);
 		return questions;
 	}
 }

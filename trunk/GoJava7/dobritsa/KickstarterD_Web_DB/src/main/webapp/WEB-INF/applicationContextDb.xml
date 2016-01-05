@@ -43,15 +43,26 @@
 				<prop key="hibernate.show_sql">false</prop>
 			</props>
 		</property>		
+		
+		<property name="annotatedClasses">
+			<list>
+				<value>ua.com.goit.gojava7.kickstarter.models.Quote</value>
+				<value>ua.com.goit.gojava7.kickstarter.models.Category</value>
+				<value>ua.com.goit.gojava7.kickstarter.models.Project</value>
+				<value>ua.com.goit.gojava7.kickstarter.models.Reward</value>
+				<value>ua.com.goit.gojava7.kickstarter.models.Question</value>
+				<value>ua.com.goit.gojava7.kickstarter.models.Payment</value>
+				
+			</list>
+		</property>
 
 		<property name="mappingResources">
-			<list>
-				<value>Quote.hbm.xml</value>
-				<value>Category.hbm.xml</value>
+			<list>			
+				<!-- <value>Category.hbm.xml</value>
 				<value>Project.hbm.xml</value>
 				<value>Reward.hbm.xml</value>
 				<value>Question.hbm.xml</value>
-				<value>Payment.hbm.xml</value>
+				<value>Payment.hbm.xml</value> -->
 			</list>
 		</property>
 

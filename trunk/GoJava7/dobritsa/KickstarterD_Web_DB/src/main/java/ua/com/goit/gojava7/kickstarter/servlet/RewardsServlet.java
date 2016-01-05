@@ -48,7 +48,7 @@ public class RewardsServlet extends HttpServlet {
 		
 		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));	
 		request.setAttribute("project", projectDao.get(projectId));
-		request.setAttribute("rewards", rewardDao.getByProject(projectDao.get(projectId)));
+		request.setAttribute("rewards", rewardDao.getByProject(projectId));
 		request.getRequestDispatcher("/WEB-INF/jsp/rewards.jsp").forward(request, response);
 	}
 }

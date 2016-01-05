@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Quote {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long quoteId;
 	@Column
