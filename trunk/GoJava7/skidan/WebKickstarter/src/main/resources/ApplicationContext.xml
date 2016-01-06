@@ -9,8 +9,9 @@
            http://www.springframework.org/schema/tx    
 		   http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
            http://www.springframework.org/schema/context
-           http://www.springframework.org/schema/context/spring-context-3.1.xsd">
-
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springmodules.org/schema/ehcache
+           http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd">
 
 	<context:component-scan base-package="com.kickstarter.dao.interfaces" />
 	<context:component-scan base-package="com.kickstarter.dao.Impl" />
@@ -23,13 +24,12 @@
 		<property name="password" value="12345" />
 	</bean>
 
-
-
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<bean id="loggerAspect" class="com.kickstarter.aspect.LoggerAspect"></bean>
 
 	<tx:annotation-driven />
+	
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -49,6 +49,7 @@
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
+		
 		<property name="packagesToScan">
 			<list>
 				<value>com.kickstarter.model</value>
@@ -56,7 +57,7 @@
 		</property>
 	</bean>
 
-<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
 </beans>
 
@@ -64,21 +65,10 @@
 
 
 
-<!--	 <property name="annotatedClasses">
-			<list>
-				<value>com.kickstarter.model.Quote</value>
-				<value>com.kickstarter.model.Category</value>
-				<value>com.kickstarter.model.Project</value>
-				<value>com.kickstarter.model.Payment</value>
-				<value>com.kickstarter.model.Question</value>
-			</list>
-		</property>
-
-		<property name="mappingResources">
-			<list>
-
-			</list>
-		</property>-->
+<!-- <property name="annotatedClasses"> <list> <value>com.kickstarter.model.Quote</value> 
+	<value>com.kickstarter.model.Category</value> <value>com.kickstarter.model.Project</value> 
+	<value>com.kickstarter.model.Payment</value> <value>com.kickstarter.model.Question</value> 
+	</list> </property> <property name="mappingResources"> <list> </list> </property> -->
 
 <!-- <bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"> 
 	<property name="DataSource" ref="dataSource"/> </bean> -->
