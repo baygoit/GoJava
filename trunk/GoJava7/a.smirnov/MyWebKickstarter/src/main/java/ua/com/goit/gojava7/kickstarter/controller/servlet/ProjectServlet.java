@@ -14,12 +14,14 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
+import ua.com.goit.gojava7.kickstarter.beans.Reward;
 import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 
 @WebServlet("/project")
-public class ProjectDetailInfo extends HttpServlet {
+public class ProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -30,6 +32,9 @@ public class ProjectDetailInfo extends HttpServlet {
 
 	@Autowired
 	private FaqDao faqDao;
+
+	@Autowired
+	private RewardDao rewardDao;
 
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
@@ -42,9 +47,11 @@ public class ProjectDetailInfo extends HttpServlet {
 		project.setCollectedSum(paymentDao.getSumProjectPayments(selectedProjectId));
 
 		List<Faq> questions = faqDao.getProjectFaqs(selectedProjectId);
+		List<Reward> rewards = rewardDao.getProjectsRewards(selectedProjectId);
 
 		request.setAttribute("project", project);
 		request.setAttribute("questions", questions);
-		request.getRequestDispatcher("WEB-INF/views/project.jsp").forward(request, response);
+		request.setAttribute("rewards", rewards);
+		request.getRequestDispatcher("views/project_info.jsp").forward(request, response);
 	}
 }

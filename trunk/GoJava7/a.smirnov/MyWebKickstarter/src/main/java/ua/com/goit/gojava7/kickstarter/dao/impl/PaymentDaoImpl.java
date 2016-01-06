@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +30,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		Session session = sessionFactory.getCurrentSession();
 
 		Criteria criteria = session.createCriteria(Payment.class);
+		criteria.add(Restrictions.eq("project.id", projectId));
 		criteria.setProjection(Projections.sum("pledge"));
 		Long result = (Long) criteria.uniqueResult();
 
