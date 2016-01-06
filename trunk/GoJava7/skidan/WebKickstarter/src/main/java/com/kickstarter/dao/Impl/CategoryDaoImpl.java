@@ -19,7 +19,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	private SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
-	@Transactional
+	@Transactional (readOnly = true)
 	public List<Category> getAll() {
 		Session session = sessionFactory.openSession();
 		List<Category> categoryList = session.createQuery("from Category c").list();
@@ -29,7 +29,7 @@ public class CategoryDaoImpl implements CategoryDao {
 		session.close();
 		return categoryList;
 	}
-
+	@Transactional (readOnly = true)
 	public Category getByNumber(int categoryNumber) {
 		Session session = sessionFactory.openSession();
 		Category category = session.get(Category.class, categoryNumber);

@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kickstarter.dao.interfaces.ProjectDao;
@@ -19,7 +21,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	private SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<Project> getAllProjectsForCategory(int categoryId) {
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("from Project where categoryId= :categoryId");
@@ -32,7 +34,7 @@ public class ProjectDaoImpl implements ProjectDao {
 		return projectList;
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public Project getOneProject(int projectNumber) {
 		// final String sql = "from Project where projectId=" + projectNumber;
 		Session session = sessionFactory.openSession();
@@ -42,7 +44,7 @@ public class ProjectDaoImpl implements ProjectDao {
 		return project;
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE, readOnly = false)
 	public void updateProject(Project project) {
 		Session session = sessionFactory.openSession();
 		session.update(project);
@@ -50,6 +52,9 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 }
+
+
+
 
 /*
  * @Autowired private JdbcTemplate jdbcTemplate;
