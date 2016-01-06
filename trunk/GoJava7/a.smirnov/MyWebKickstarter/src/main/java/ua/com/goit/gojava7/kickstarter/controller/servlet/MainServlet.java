@@ -20,9 +20,9 @@ import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 
 @WebServlet("/")
-public class CategoriesSelection extends HttpServlet {
+public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = LoggerFactory.getLogger(CategoriesSelection.class);
+	private static final Logger log = LoggerFactory.getLogger(MainServlet.class);
 
 	@Autowired
 	private QuoteDao quoteDao;
@@ -54,6 +54,6 @@ public class CategoriesSelection extends HttpServlet {
 		request.setAttribute("top10Categories", top10Categories);
 		request.setAttribute("quoteText", quote.getText());
 		request.setAttribute("quoteAuthor", quote.getAuthor());
-		request.getRequestDispatcher("WEB-INF/views/categories.jsp").forward(request, response);
+		request.getRequestDispatcher("views/index.jsp").forward(request, response);
 	}
 }

@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,9 +23,7 @@ public class FaqDaoImpl implements FaqDao {
 	@Transactional
 	public void add(Faq faq) {
 		Session session = sessionFactory.getCurrentSession();
-		Transaction transaction = session.beginTransaction();
 		session.save(faq);
-		transaction.commit();
 	}
 
 	public void remove(Faq faq) {

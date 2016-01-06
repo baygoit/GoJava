@@ -17,7 +17,7 @@ import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 
 @WebServlet("/category")
-public class ProjectsSelection extends HttpServlet {
+public class CategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -35,11 +35,11 @@ public class ProjectsSelection extends HttpServlet {
 
 		List<Project> projects = projectDao.getProjectsFromCategory(selectedCategoryId);
 
-		// for (Project project : projects) {
-		// project.setCollectedSum(paymentDao.getSumProjectPayments(project.getId()));
-		// }
+		for (Project project : projects) {
+			project.setCollectedSum(paymentDao.getSumProjectPayments(project.getId()));
+		}
 
 		request.setAttribute("projects", projects);
-		request.getRequestDispatcher("WEB-INF/views/projects.jsp").forward(request, response);
+		request.getRequestDispatcher("views/projects.jsp").forward(request, response);
 	}
 }
