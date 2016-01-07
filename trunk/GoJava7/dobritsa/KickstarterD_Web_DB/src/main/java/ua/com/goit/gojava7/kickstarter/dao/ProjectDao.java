@@ -17,6 +17,9 @@ public class ProjectDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private PaymentDao paymentDao;
 
 	private static final Logger log = LoggerFactory.getLogger(ProjectDao.class);
 	
@@ -32,7 +35,7 @@ public class ProjectDao {
 		log.debug("<Project> get({}) returned project: {}", projectId, project);
 		return project;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Project> getByCategory(Long categoryId) {
 		log.info("<projects> getByCategory({})...", categoryId);		
@@ -45,5 +48,9 @@ public class ProjectDao {
 		session.close();
 		log.debug("<projects> getByCategory({}) returned projects: {}", categoryId, projects);
 		return projects;
+	}
+	
+	public void setPledged(Project project){
+		project.setPledged(paymentDao.calculatePledgedForProject(project.getProjectId()));
 	}
 }

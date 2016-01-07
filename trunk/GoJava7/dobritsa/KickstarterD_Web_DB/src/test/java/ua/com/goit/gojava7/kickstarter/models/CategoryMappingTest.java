@@ -10,6 +10,13 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+
+import static org.junit.Assert.assertNotNull;
 
 public class CategoryMappingTest {
 

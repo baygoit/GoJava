@@ -34,14 +34,18 @@ public class PaymentDao {
 	}
 
 	public Long calculatePledgedForProject(Long projectId) {
-		log.info("<Integer> calculatePledgedForProject({})...", projectId);
+		log.info("<Long> calculatePledgedForProject({})...", projectId);
 		Session session = sessionFactory.openSession();
 	
 		Long sumAmount = (Long) session.createCriteria(Payment.class).add(Restrictions.eq("project.id", projectId))
 				.setProjection(Projections.sum("amount")).uniqueResult();
 	
 		session.close();
-		log.debug("<Integer> calculatePledgedForProject({}) returned questions: {}", projectId, ".......");
+		log.debug("<Long> calculatePledgedForProject({}) returned questions: {}", projectId, ".......");
+
+		if (sumAmount == null)
+			return 0L;
+
 		return sumAmount;
 	}
 }

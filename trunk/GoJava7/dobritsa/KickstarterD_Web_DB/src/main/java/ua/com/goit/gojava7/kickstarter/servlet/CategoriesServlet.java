@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,7 @@ public class CategoriesServlet extends HttpServlet {
 		log.info("doGet()...");
 
 		request.setAttribute("quote", quoteDao.getRandomQuote());
-		request.setAttribute("categories", categoryDao.getAll());	
+		request.setAttribute("categories", categoryDao.getAll());
 		request.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);
 	}
 }

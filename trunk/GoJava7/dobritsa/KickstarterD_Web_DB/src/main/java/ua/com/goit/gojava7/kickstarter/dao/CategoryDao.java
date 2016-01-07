@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.models.Category;
 
 @Repository
@@ -19,6 +21,7 @@ public class CategoryDao {
 	private SessionFactory sessionFactory;
 	
 	private static final Logger log = LoggerFactory.getLogger(CategoryDao.class);
+
 
 	public Category get(Long categoryId) {
 		log.info("<Category> get({})...", categoryId);
