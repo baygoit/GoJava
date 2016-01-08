@@ -21,6 +21,7 @@ import ua.com.goit.gojava7.kickstarter.models.Question;
 public class QuestionTest extends Assert {
 
 	Question question;
+	Project project = new Project();
 
 	@Mock
 	private PrintStream printSteam;
@@ -32,6 +33,7 @@ public class QuestionTest extends Assert {
 		question.setTime("TestTime");
 		question.setQuestion("TestQuestion");
 		question.setAnswer("TestAnswer");
+		question.setProject(project);
 		System.setOut(printSteam);
 	}
 
@@ -46,12 +48,13 @@ public class QuestionTest extends Assert {
 		assertThat(question.getTime(), is("TestTime"));
 		assertThat(question.getQuestion(), is("TestQuestion"));
 		assertThat(question.getAnswer(), is("TestAnswer"));
+		assertThat(question.getProject(), is(project));
 	}
 	
 	@Test
 	public void testToString() {
+		Question question = new Question("NewQuestion", project);
 		System.out.println(question.toString());
-		verify(printSteam).println(contains("TestTime"));	
+		verify(printSteam).println(contains("NewQuestion"));
 	}
-
 }

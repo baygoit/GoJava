@@ -20,6 +20,10 @@ public class RewardDao {
 
 	private static final Logger log = LoggerFactory.getLogger(RewardDao.class);
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 	public Reward get(Long rewardId) {
 		log.info("<Reward> get({})...", rewardId);
 		Session session = sessionFactory.openSession();
@@ -44,6 +48,10 @@ public class RewardDao {
 
 		session.close();
 		log.debug("<rewards> getByProject({}) returned rewards: {}", projectId, rewards);
+
+		if (rewards.isEmpty())
+			return null;
+
 		return rewards;
 	}	
 }

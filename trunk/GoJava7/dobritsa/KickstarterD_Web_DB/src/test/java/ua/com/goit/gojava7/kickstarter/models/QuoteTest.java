@@ -26,6 +26,7 @@ public class QuoteTest extends Assert {
 
 	@Before
 	public void setUp() {
+		quote.setQuoteId(10L);
 		quote.setText("TestQuote");
 		quote.setAuthor("TestAuthor");
 		System.setOut(printSteam);
@@ -38,6 +39,7 @@ public class QuoteTest extends Assert {
 
 	@Test
 	public void testGet() {
+		assertThat(quote.getQuoteId(), is(10L));
 		assertThat(quote.getText(), is("TestQuote"));
 		assertThat(quote.getAuthor(), is("TestAuthor"));
 	}
@@ -56,8 +58,7 @@ public class QuoteTest extends Assert {
 
 	@Test
 	public void testIsEmpty() {
-		Quote quote = new Quote();
-		assertTrue(quote.isEmpty());
+		Quote quoteEmpty = new Quote();
+		assertTrue(quoteEmpty.isEmpty());
 	}
-
 }

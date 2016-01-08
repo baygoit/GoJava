@@ -22,6 +22,10 @@ public class PaymentDao {
 	public PaymentDao() {
 	}
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 	public void add(Payment payment) {
 		log.info("<void> add({})...", payment);
 		Session session = sessionFactory.openSession();

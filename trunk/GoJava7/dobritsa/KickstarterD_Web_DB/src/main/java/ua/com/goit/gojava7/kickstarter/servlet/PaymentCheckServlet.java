@@ -49,7 +49,7 @@ public class PaymentCheckServlet extends HttpServlet {
 
 		log.info("doPost()...");
 
-		Integer amount = Integer.parseInt(request.getParameter("amount"));
+		Long amount = Long.parseLong(request.getParameter("amount"));
 		Long projectId = Long.parseLong(request.getParameter("projectId"));
 		Long categoryId = projectDao.get(projectId).getCategory().getCategoryId();
 
@@ -62,10 +62,10 @@ public class PaymentCheckServlet extends HttpServlet {
 					projectDao.get(projectId));
 			paymentDao.add(payment);
 			request.getRequestDispatcher("/WEB-INF/jsp/paymentOk.jsp").forward(request, response);
-
-		} else {
-			request.setAttribute("message", "-----Wrong data-----");
-			request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
+			return;
 		}
+
+		request.setAttribute("message", "-----Wrong data-----");
+		request.getRequestDispatcher("/WEB-INF/jsp/payment.jsp").forward(request, response);
 	}
 }

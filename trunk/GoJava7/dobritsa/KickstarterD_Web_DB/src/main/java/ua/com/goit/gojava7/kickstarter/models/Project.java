@@ -139,11 +139,10 @@ public class Project {
 	public void setRewards(List<Reward> rewards) {
 		this.rewards = rewards;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "id: " + projectId + "; name: " + name + "; description: " + description + "; goal: " + goal + "; pledged: "
 				+ pledged + "; daysToGo: " + daysToGo + "; history: " + history + "; link: " + link + "; categoryId: " + category.getCategoryId();
 	}
-
 }

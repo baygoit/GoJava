@@ -19,9 +19,12 @@ public class CategoryDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-	private static final Logger log = LoggerFactory.getLogger(CategoryDao.class);
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	private static final Logger log = LoggerFactory.getLogger(CategoryDao.class);
 
 	public Category get(Long categoryId) {
 		log.info("<Category> get({})...", categoryId);
@@ -45,6 +48,10 @@ public class CategoryDao {
 
 		session.close();
 		log.debug("<categories> getAll() returned categories: {}", categories);
+
+		if (categories.isEmpty())
+			return null;
+
 		return categories;
 	}
 }

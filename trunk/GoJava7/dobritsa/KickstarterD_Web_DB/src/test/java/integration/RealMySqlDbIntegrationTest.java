@@ -14,12 +14,12 @@ import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext*.xml")
-public class IntegrationTest {
+public class RealMySqlDbIntegrationTest {
 
     @Autowired
-    private CategoryDao categoryDao;
-    @Autowired
     private QuoteDao quoteDao;
+    @Autowired
+    private CategoryDao categoryDao;
     @Autowired
     private ProjectDao projectDao;
     @Autowired
@@ -57,12 +57,6 @@ public class IntegrationTest {
     public void testGetProjectByCategory() {
         List<Project> projects = projectDao.getByCategory(1L);
         assertNotNull(projects);
-    }
-
-    @Test
-    public void testGetQuestionByProject() {
-        List<Question> questions = questionDao.getByProject(1L);
-        assertNotNull(questions);
     }
 
     @Test

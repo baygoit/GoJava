@@ -50,7 +50,7 @@ public class PaymentServlet extends HttpServlet {
 		
 		Long rewardId = Long.parseLong(request.getParameter("id"));
 		
-		int amount;
+		Long amount;
 		Long projectId;
 		Long categoryId;
 
@@ -69,7 +69,7 @@ public class PaymentServlet extends HttpServlet {
 			categoryId = projectDao.get(projectId).getCategory().getCategoryId();
 
 			if (validator.validateAmountOfPledge(request.getParameter("amount"))) {
-				amount = Integer.parseInt(request.getParameter("amount"));
+				amount = Long.parseLong(request.getParameter("amount"));
 				
 				request.setAttribute("category", categoryDao.get(categoryId));
 				request.setAttribute("project", projectDao.get(projectId));

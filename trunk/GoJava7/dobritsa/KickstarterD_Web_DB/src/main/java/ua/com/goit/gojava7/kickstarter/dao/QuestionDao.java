@@ -20,6 +20,10 @@ public class QuestionDao {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestionDao.class);
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 	public void add(Question question) {
 		log.info("<void> add({})...", question);
 		Session session = sessionFactory.openSession();
@@ -30,7 +34,7 @@ public class QuestionDao {
 
 		session.close();
 	}
-//TODO check null
+
 	@SuppressWarnings("unchecked")
 	public List<Question> getByProject(Long projectId) {
 		log.info("<questions> getByProject({})...", projectId);
@@ -42,6 +46,10 @@ public class QuestionDao {
 
 		session.close();
 		log.debug("<questions> getByProject({}) returned questions: {}", projectId, questions);
+
+		if (questions.isEmpty())
+			return null;
+
 		return questions;
 	}
 }

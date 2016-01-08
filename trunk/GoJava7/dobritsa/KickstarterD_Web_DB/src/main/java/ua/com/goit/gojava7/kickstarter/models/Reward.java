@@ -19,7 +19,7 @@ public class Reward {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long rewardId;
 	@Column
-	private int amount;
+	private Long amount;
 	@Column
 	private String reward;	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -34,11 +34,11 @@ public class Reward {
 		this.rewardId = rewardId;
 	}
 
-	public int getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
