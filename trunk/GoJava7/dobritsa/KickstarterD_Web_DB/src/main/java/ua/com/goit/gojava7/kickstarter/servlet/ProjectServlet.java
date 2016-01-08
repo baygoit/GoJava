@@ -17,6 +17,7 @@ import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
+import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @WebServlet("/project")
 public class ProjectServlet extends HttpServlet {
@@ -49,9 +50,11 @@ public class ProjectServlet extends HttpServlet {
 		log.info("doGet()...");		
 		
 		Long projectId = Long.parseLong(request.getParameter("id"));	
-		Long categoryId = projectDao.get(projectId).getCategory().getCategoryId();	
+		Long categoryId = projectDao.get(projectId).getCategory().getCategoryId();
+		Project project = projectDao.get(projectId);
 		projectDao.get(projectId).setPledged(paymentDao.calculatePledgedForProject(projectId));
-			
+		//projectDao.setPledged(project);
+
 		request.setAttribute("category", categoryDao.get(categoryId));	
 		request.setAttribute("project", projectDao.get(projectId));		
 		request.setAttribute("questions", questionDao.getByProject(projectId));
