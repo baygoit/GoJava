@@ -11,9 +11,7 @@ public interface CategoryDao {
 	void remove(Category category);
 
 	List<Category> getAll();
-
-	int getSize();
 	
-	Category getCategory(int categoryId);
+	Category getCategory(int id);
 
 }
