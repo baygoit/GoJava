@@ -18,10 +18,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-
-@SqlGroup({
-        @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "classpath:beforeTestRun.sql"),
-        @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "classpath:afterTestRun.sql") })
 public class H2IntegrationTest {
 
     private static SessionFactory sessionFactory;
@@ -180,15 +176,15 @@ public class H2IntegrationTest {
         assertThat(projects.size(), is(1));
     }
 
-    //@Test
-    //public void testGetQuestionsByProject() {
-    ///    questionDao.setSessionFactory(sessionFactory);
-    //    List<Question> questions = questionDao.getByProject(1L);
-    //    assertNotNull(questions);
-    //    assertThat(questions.size(), is(2));
-    //}
+    @Test
+    public void testGetQuestionsByProject() {
+        questionDao.setSessionFactory(sessionFactory);
+        List<Question> questions = questionDao.getByProject(1L);
+        assertNotNull(questions);
+        assertThat(questions.size(), is(2));
+    }
 
-    /*@Test
+   @Test
     public void testAddQuestion() {
         questionDao.setSessionFactory(sessionFactory);
 
@@ -201,7 +197,7 @@ public class H2IntegrationTest {
         questionDao.add(question);
         List<Question> questionsNew = questionDao.getByProject(1L);
         assertThat(questionsNew.size(), is(3));
-    }*/
+    }
 
     @Test
     public void testGetReward() {
