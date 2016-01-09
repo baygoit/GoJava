@@ -29,6 +29,7 @@ public class RewardTest {
 
 	@Before
 	public void setUp() {
+		project.setProjectId(22L);
 		reward.setRewardId(11L);
 		reward.setAmount(10L);
 		reward.setReward("TestReward");
@@ -47,6 +48,7 @@ public class RewardTest {
 		assertThat(reward.getAmount(), is(10L));
 		assertThat(reward.getReward(), is("TestReward"));
 		assertThat(reward.getProject(), is(project));
+		assertThat(reward.getProjectId(), is(22L));
 	}
 
 	@Test

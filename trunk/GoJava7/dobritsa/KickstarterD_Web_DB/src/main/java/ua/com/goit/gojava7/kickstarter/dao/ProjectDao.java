@@ -10,16 +10,25 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ua.com.goit.gojava7.kickstarter.models.Category;
+import ua.com.goit.gojava7.kickstarter.models.Payment;
 import ua.com.goit.gojava7.kickstarter.models.Project;
+import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @Repository
 public class ProjectDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+
+	@Autowired
+	private CategoryDao categoryDao;
 	
 	@Autowired
 	private PaymentDao paymentDao;
+
+	@Autowired
+	private QuestionDao questionDao;
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -36,7 +45,10 @@ public class ProjectDao {
 				.uniqueResult();
 
 		session.close();
-		log.debug("<Project> get({}) returned project: {}", projectId, project);
+
+		if(project!=null)
+			setPledged(project);
+
 		return project;
 	}
 
@@ -50,15 +62,73 @@ public class ProjectDao {
 				.list();
 
 		session.close();
-		log.debug("<projects> getByCategory({}) returned projects: {}", categoryId, projects);
 
 		if (projects.isEmpty())
 			return null;
 
+		return setPledged(projects);
+	}
+
+	public List<Project> setPledged(List<Project> projects){
+		log.info("<projects> setPledged()...");
+
+		for(Project project : projects)
+			setPledged(project);
+
 		return projects;
 	}
-	
-	//public void setPledged(Project project){
-	//	project.setPledged(paymentDao.calculatePledgedForProject(project.getProjectId()));
-	//}
+
+	public Project setPledged(Project project){
+		Long projectId = project.getProjectId();
+		log.info("<void> setPledged({})...", projectId);
+
+		project.setPledged(calculatePledged(projectId));
+		return  project;
+	}
+
+	public Long calculatePledged(Long projectId){
+		log.info("<Long> calculatePledged({})...", projectId);
+
+		List<Payment> payments = getPayments(projectId);
+
+		if(payments == null)
+			return 0L;
+
+		Long pledged = 0L;
+		for(Payment payment : payments) {
+			pledged += payment.getAmount();
+		}
+
+		return pledged;
+	}
+
+	public List<Question> getQuestions(Long projectId) {
+		log.info("<questions> getQuestions({})...", projectId);
+
+		return questionDao.getByProject(projectId);
+	}
+
+	public List<Payment> getPayments(Long projectId) {
+		log.info("<payments> getPayments({})...", projectId);
+		Session session = sessionFactory.openSession();
+
+		List<Payment> payments = session.createCriteria(Payment.class)
+				.add(Restrictions.eq("project.id", projectId))
+				.list();
+
+		session.close();
+
+		if (payments.isEmpty())
+			return null;
+
+		return payments;
+	}
+
+	public Category getCategory(Project project) {
+		log.info("<Category> getCategory({})...", project);
+
+		Long categoryId = project.getCategoryId();
+
+		return categoryDao.get(categoryId);
+	}
 }

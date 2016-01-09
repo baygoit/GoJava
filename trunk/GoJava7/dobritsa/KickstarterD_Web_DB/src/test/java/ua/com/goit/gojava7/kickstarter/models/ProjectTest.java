@@ -29,11 +29,16 @@ public class ProjectTest extends Assert {
 	private Reward reward = new Reward();
 	private List<Reward> rewards = new ArrayList<>();
 
+	private Payment payment = new Payment();
+	private List<Payment> payments = new ArrayList<>();
+
 	@Mock
 	private PrintStream printSteam;
 
 	@Before
 	public void testSetUp() {
+		category.setCategoryId(22L);
+
 		project.setProjectId(11L);
 		project.setName("TestName");
 		project.setDescription("TestDescription");
@@ -49,6 +54,9 @@ public class ProjectTest extends Assert {
 
 		rewards.add(reward);
 		project.setRewards(rewards);
+
+		payments.add(payment);
+		project.setPayments(payments);
 
 		System.setOut(printSteam);
 	}
@@ -71,5 +79,7 @@ public class ProjectTest extends Assert {
 		assertThat(project.getCategory(), is(category));
 		assertThat(project.getQuestions(), is(questions));
 		assertThat(project.getRewards(), is(rewards));
+		assertThat(project.getPayments(), is(payments));
+		assertThat(project.getCategoryId(), is(22L));
 	}
 }

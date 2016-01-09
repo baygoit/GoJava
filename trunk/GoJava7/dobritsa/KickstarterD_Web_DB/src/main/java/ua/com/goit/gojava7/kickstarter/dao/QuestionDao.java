@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ua.com.goit.gojava7.kickstarter.config.Validator;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @Repository
@@ -17,6 +18,12 @@ public class QuestionDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+
+	@Autowired
+	private ProjectDao projectDao;
+
+	@Autowired
+	private Validator validator;
 
 	private static final Logger log = LoggerFactory.getLogger(QuestionDao.class);
 
@@ -35,6 +42,7 @@ public class QuestionDao {
 		session.close();
 	}
 
+
 	@SuppressWarnings("unchecked")
 	public List<Question> getByProject(Long projectId) {
 		log.info("<questions> getByProject({})...", projectId);
@@ -45,11 +53,18 @@ public class QuestionDao {
 				.list();
 
 		session.close();
-		log.debug("<questions> getByProject({}) returned questions: {}", projectId, questions);
 
 		if (questions.isEmpty())
 			return null;
 
 		return questions;
+	}
+
+	public void createQuestion(String text, Long projectId) {
+		log.info("<void> createQuestion({}, {})...", text, projectId);
+		if (validator.validateQuestion(text)) {
+			Question question = new Question(text, projectDao.get(projectId));
+			add(question);
+		}
 	}
 }

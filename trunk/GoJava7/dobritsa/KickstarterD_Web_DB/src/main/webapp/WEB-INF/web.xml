@@ -15,7 +15,7 @@
 
   <servlet>
     <servlet-name>ua.com.goit.gojava7.kickstarter.servlet.CategoriesServlet</servlet-name>
-    <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.CategoriesServlet</servlet-class>
+    <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.StartServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
 </web-app>

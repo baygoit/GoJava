@@ -9,13 +9,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ua.com.goit.gojava7.kickstarter.config.Validator;
 import ua.com.goit.gojava7.kickstarter.models.Payment;
+import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @Repository
 public class PaymentDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+
+	@Autowired
+	private Validator validator;
+
+	@Autowired
+	private ProjectDao projectDao;
 	
 	private static final Logger log = LoggerFactory.getLogger(PaymentDao.class);
 
@@ -45,11 +53,20 @@ public class PaymentDao {
 				.setProjection(Projections.sum("amount")).uniqueResult();
 	
 		session.close();
-		log.debug("<Long> calculatePledgedForProject({}) returned questions: {}", projectId, ".......");
 
 		if (sumAmount == null)
 			return 0L;
 
 		return sumAmount;
+	}
+
+	public boolean createPayment(String name, String card, Long amount, Project project) {
+		log.info("<boolean> createPayment({}, {}, {}, {})...", name, card, amount, project);
+		if (validator.validatePayer(name, card)) {
+			Payment payment = new Payment(name, card, amount, project);
+			add(payment);
+			return true;
+		}
+		return false;
 	}
 }

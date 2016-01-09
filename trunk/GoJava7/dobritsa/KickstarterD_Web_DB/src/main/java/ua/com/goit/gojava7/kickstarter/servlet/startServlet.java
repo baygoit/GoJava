@@ -1,7 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/")
-public class CategoriesServlet extends HttpServlet {
+public class StartServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = LoggerFactory.getLogger(CategoriesServlet.class);
+	private static final Logger log = LoggerFactory.getLogger(StartServlet.class);
 
 	@Autowired
 	private QuoteDao quoteDao;

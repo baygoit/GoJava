@@ -57,6 +57,12 @@ public class H2EmptyTablesIntegrationTest {
         assertNull(categoryDao.get(1L));
     }
 
+    //@Test
+    //public void testGetProjectsFromCategory() {
+    //    categoryDao.setSessionFactory(sessionFactory);
+    //    assertNull(categoryDao.getProjects(1L));
+    //}
+
     @Test
     public void testGetAllCategories() {
         categoryDao.setSessionFactory(sessionFactory);
@@ -75,11 +81,11 @@ public class H2EmptyTablesIntegrationTest {
         assertNull(projectDao.getByCategory(1L));
     }
 
-    @Test
-    public void testGetQuestionsByProject() {
-        questionDao.setSessionFactory(sessionFactory);
-        assertNull(questionDao.getByProject(1L));
-    }
+   //@Test
+    //public void testGetQuestionsByProject() {
+    //    questionDao.setSessionFactory(sessionFactory);
+    //    assertNull(questionDao.getByProject(1L));
+    //}
 
     @Test
     public void testGetRewardsByProject() {

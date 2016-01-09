@@ -10,15 +10,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.models.Category;
+import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @Repository
 public class CategoryDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+
+	@Autowired
+	private ProjectDao projectDao;
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -53,5 +55,10 @@ public class CategoryDao {
 			return null;
 
 		return categories;
+	}
+
+	public List<Project> getProjects(Long categoryId) {
+		log.info("<projects> getProjects({})...", categoryId);
+		return projectDao.getByCategory(categoryId);
 	}
 }

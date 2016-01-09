@@ -31,7 +31,7 @@ import java.util.List;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(SpringBeanAutowiringSupport.class)
-public class ProjectsServletTest{
+public class CategoryServletTest {
 
     @Mock
     private ProjectDao projectDao;
@@ -43,13 +43,13 @@ public class ProjectsServletTest{
     private PaymentDao paymentDao;
 
     @InjectMocks
-    private ProjectsServlet projectsServlet;
+    private CategoryServlet categoryServlet;
 
     @Test
     public void testInit() throws Exception {
         PowerMockito.mockStatic(SpringBeanAutowiringSupport.class);
 
-        projectsServlet.init();
+        categoryServlet.init();
 
         PowerMockito.verifyStatic();
         SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(anyObject());
@@ -72,19 +72,15 @@ public class ProjectsServletTest{
 
         List<Project> projects = new ArrayList<>();
         projects.add(project);
-        when(projectDao.getByCategory(anyLong())).thenReturn(projects);
-        when(paymentDao.calculatePledgedForProject(anyLong())).thenReturn(222L);
+        when(categoryDao.getProjects(anyLong())).thenReturn(projects);
 
         HttpServletResponse response = mock(HttpServletResponse.class);
         PrintWriter writer = mock(PrintWriter.class);
         when(response.getWriter()).thenReturn(writer);
 
-        projectsServlet.doGet(request, response);
+        categoryServlet.doGet(request, response);
 
         verify(request).setAttribute("categoryName", "TestName");
         verify(request).setAttribute("projects", projects);
     }
-
-
-
 }

@@ -61,7 +61,5 @@ public class ProjectServletTest {
         HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getRequestDispatcher(anyString())).thenReturn(mock(RequestDispatcher.class));
         when(request.getParameter("id")).thenReturn("1");
-
     }
-
 }

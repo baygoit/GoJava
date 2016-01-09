@@ -159,6 +159,10 @@ public class Project {
 		this.payments = payments;
 	}
 
+	public Long getCategoryId() {
+		return category.getCategoryId();
+	}
+
 	@Override
 	public String toString() {
 		return "id: " + projectId + "; name: " + name + "; description: " + description + "; goal: " + goal + "; pledged: "

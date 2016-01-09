@@ -30,7 +30,7 @@ import java.io.PrintWriter;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(SpringBeanAutowiringSupport.class)
-public class CategoriesServletTest {
+public class startServletTest {
 
 	@Mock
 	private QuoteDao quoteDao;
@@ -39,13 +39,13 @@ public class CategoriesServletTest {
 	private CategoryDao categoryDao;
 	
 	@InjectMocks
-	private CategoriesServlet categoriesServlet;
+	private StartServlet startServlet;
 
 	@Test
 	public void testInit() throws Exception {
 		PowerMockito.mockStatic(SpringBeanAutowiringSupport.class);
 		
-		categoriesServlet.init();
+		startServlet.init();
 
 		PowerMockito.verifyStatic();
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(anyObject());
@@ -65,7 +65,7 @@ public class CategoriesServletTest {
 		PrintWriter writer = mock(PrintWriter.class);
 		when(response.getWriter()).thenReturn(writer);
 
-		categoriesServlet.doGet(request, response);
+		startServlet.doGet(request, response);
 
 		verify(request).setAttribute("quote", quote);
 		verify(request).setAttribute(eq("categories"), anyListOf(Category.class));
