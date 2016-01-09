@@ -1,7 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -10,6 +8,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+
+import java.util.List;
 
 public class CategoryMappingTest {
 
@@ -80,4 +82,8 @@ public class CategoryMappingTest {
 		}
 		session.close();
 	}
+
+
+
+
 }

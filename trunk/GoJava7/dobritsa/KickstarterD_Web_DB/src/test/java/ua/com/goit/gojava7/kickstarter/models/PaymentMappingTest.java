@@ -55,13 +55,13 @@ public class PaymentMappingTest {
 		Payment payment1 = new Payment();
 		payment1.setUser("Nike1");
 		payment1.setCard("1111222233334444");
-		payment1.setAmount(100);
+		payment1.setAmount(100L);
 		payment1.setProject(project1);
 
 		Payment payment2 = new Payment();
 		payment2.setUser("Nike2");
 		payment2.setCard("1111222233332222");
-		payment2.setAmount(200);
+		payment2.setAmount(200L);
 		payment2.setProject(project1);
 
 		session.save(payment1);

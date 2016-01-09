@@ -19,6 +19,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryTest extends Assert {
@@ -26,13 +28,18 @@ public class CategoryTest extends Assert {
 	@Mock
 	private PrintStream printSteam;
 
-	Category category;
+	private Category category;
+	private Project project = new Project();
+	List<Project> projects = new ArrayList<>();
 
 	@Before
 	public void setUp() {
 		category = new Category();
 		category.setName("CategoryName");
 		category.setCategoryId(10l);
+
+		projects.add(project);
+		category.setProjects(projects);
 		System.setOut(printSteam);		
 	}
 
@@ -49,6 +56,7 @@ public class CategoryTest extends Assert {
 	@Test
 	public void testGet() {
 		assertThat(category.getCategoryId(), is(10l));
+		assertThat(category.getProjects(), is(projects));
 	}
 
 	@Test

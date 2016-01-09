@@ -54,12 +54,12 @@ public class RewardMappingTest {
 		project1.setCategory(category1);
 
 		Reward reward1 = new Reward();
-		reward1.setAmount(10);
+		reward1.setAmount(10L);
 		reward1.setReward("TestReward1");
 		reward1.setProject(project1);
 
 		Reward reward2 = new Reward();
-		reward2.setAmount(2);
+		reward2.setAmount(2L);
 		reward2.setReward("TestReward2");
 		reward2.setProject(project1);
 

@@ -25,12 +25,15 @@ public class RewardTest {
 	private PrintStream printSteam;
 
 	Reward reward = new Reward();
+	Project project = new Project();
 
 	@Before
 	public void setUp() {
-		reward.setRewardId(11l);
-		reward.setAmount(10);
-		reward.setReward("TestReward");	
+		project.setProjectId(22L);
+		reward.setRewardId(11L);
+		reward.setAmount(10L);
+		reward.setReward("TestReward");
+		reward.setProject(project);
 		System.setOut(printSteam);
 	}
 
@@ -41,9 +44,11 @@ public class RewardTest {
 
 	@Test
 	public void testGet() {
-		assertThat(reward.getRewardId(), is(11l));
-		assertThat(reward.getAmount(), is(10));
-		assertThat(reward.getReward(), is("TestReward"));		
+		assertThat(reward.getRewardId(), is(11L));
+		assertThat(reward.getAmount(), is(10L));
+		assertThat(reward.getReward(), is("TestReward"));
+		assertThat(reward.getProject(), is(project));
+		assertThat(reward.getProjectId(), is(22L));
 	}
 
 	@Test

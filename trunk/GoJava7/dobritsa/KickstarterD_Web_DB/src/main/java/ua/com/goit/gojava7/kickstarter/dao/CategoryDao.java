@@ -11,13 +11,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.models.Category;
+import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @Repository
 public class CategoryDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
+	@Autowired
+	private ProjectDao projectDao;
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
 	private static final Logger log = LoggerFactory.getLogger(CategoryDao.class);
 
 	public Category get(Long categoryId) {
@@ -42,6 +50,15 @@ public class CategoryDao {
 
 		session.close();
 		log.debug("<categories> getAll() returned categories: {}", categories);
+
+		if (categories.isEmpty())
+			return null;
+
 		return categories;
+	}
+
+	public List<Project> getProjects(Long categoryId) {
+		log.info("<projects> getProjects({})...", categoryId);
+		return projectDao.getByCategory(categoryId);
 	}
 }

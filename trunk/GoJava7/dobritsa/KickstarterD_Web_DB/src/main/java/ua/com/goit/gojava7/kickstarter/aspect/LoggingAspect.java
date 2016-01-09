@@ -19,10 +19,10 @@ public class LoggingAspect {
 		String methodName = pjp.getSignature().getName();
 		String className = pjp.getSignature().getDeclaringType().getSimpleName();
 		long start = System.currentTimeMillis();
-		log.trace("-----{}.{}() is going to be called-----", className, methodName);
+		log.trace("{}.{}() is going to be called", className, methodName);
 
 		Object output = pjp.proceed();
-		log.trace("-----{}.{}() execution completed-----", className, methodName);
+		log.trace("{}.{}() execution completed", className, methodName);
 
 		long elapsedTime = System.currentTimeMillis() - start;
 		log.trace("{}.{}() execution time: {} milliseconds", className, methodName, elapsedTime);

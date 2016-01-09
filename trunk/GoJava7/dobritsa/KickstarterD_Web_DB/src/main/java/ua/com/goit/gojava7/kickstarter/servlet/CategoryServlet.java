@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,25 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.models.Category;
-import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @WebServlet("/projects")
-public class ProjectsServlet extends HttpServlet {
+public class CategoryServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = LoggerFactory.getLogger(ProjectsServlet.class);
-
-	@Autowired
-	private ProjectDao projectDao;
+	private static final Logger log = LoggerFactory.getLogger(CategoryServlet.class);
 
 	@Autowired
 	private CategoryDao categoryDao;
-
-	@Autowired
-	private PaymentDao paymentDao;
 
 	@Override
 	public void init() throws ServletException {
@@ -47,16 +37,12 @@ public class ProjectsServlet extends HttpServlet {
 		
 		log.info("doGet()...");
 		
-		Long categoryId = Long.parseLong(request.getParameter("id"));	
-		Category category = categoryDao.get(categoryId);		
+		Long categoryId = Long.parseLong(request.getParameter("id"));
 
-		List<Project> projects = projectDao.getByCategory(categoryId);
-		for (Project project : projects) {
-			project.setPledged(paymentDao.calculatePledgedForProject(project.getProjectId()));
-		}
+		Category category = categoryDao.get(categoryId);
 
 		request.setAttribute("categoryName", category.getName());
-		request.setAttribute("projects", projects);
+		request.setAttribute("projects", categoryDao.getProjects(categoryId));
 		request.getRequestDispatcher("/WEB-INF/jsp/projects.jsp").forward(request, response);
 	}
 }

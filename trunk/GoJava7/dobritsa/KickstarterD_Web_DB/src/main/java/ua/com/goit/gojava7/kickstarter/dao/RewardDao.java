@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ua.com.goit.gojava7.kickstarter.models.Project;
 import ua.com.goit.gojava7.kickstarter.models.Reward;
 
 @Repository
@@ -18,7 +19,14 @@ public class RewardDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Autowired
+	private ProjectDao projectDao;
+
 	private static final Logger log = LoggerFactory.getLogger(RewardDao.class);
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	public Reward get(Long rewardId) {
 		log.info("<Reward> get({})...", rewardId);
@@ -43,7 +51,10 @@ public class RewardDao {
 				.list();
 
 		session.close();
-		log.debug("<rewards> getByProject({}) returned rewards: {}", projectId, rewards);
+
+		if (rewards.isEmpty())
+			return null;
+
 		return rewards;
-	}	
+	}
 }

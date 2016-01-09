@@ -18,12 +18,16 @@ public class Payment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long paymentId;
+
 	@Column
 	private String user;
+
 	@Column
 	private String card;
+
 	@Column
-	private Integer amount;
+	private Long amount;
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "project_id")
 	private Project project = new Project();
@@ -31,7 +35,7 @@ public class Payment {
 	public Payment() {		
 	}
 
-	public Payment(String user, String card, Integer amount, Project project) {			
+	public Payment(String user, String card, Long amount, Project project) {
 		this.user = user;
 		this.card = card;
 		this.amount = amount;
@@ -62,11 +66,11 @@ public class Payment {
 		this.card = card;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}	
 

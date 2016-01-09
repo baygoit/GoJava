@@ -13,24 +13,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
+import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @WebServlet("/rewards")
-public class RewardsServlet extends HttpServlet {
+public class RewardServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = LoggerFactory.getLogger(RewardsServlet.class);	 
+	private static final Logger log = LoggerFactory.getLogger(RewardServlet.class);
 	
 	@Autowired
 	private RewardDao rewardDao;
-	
+
 	@Autowired
 	private ProjectDao projectDao;
-	
-	@Autowired
-	private CategoryDao categoryDao;
 
 	@Override
 	public void init() {
@@ -45,10 +42,11 @@ public class RewardsServlet extends HttpServlet {
 		log.info("doGet()...");		
 		
 		Long projectId = Long.parseLong(request.getParameter("projectId"));
-		Long categoryId = projectDao.get(projectId).getCategory().getCategoryId();
-		
-		request.setAttribute("category", categoryDao.get(categoryId));	
-		request.setAttribute("project", projectDao.get(projectId));
+
+		Project project = projectDao.get(projectId);
+
+		request.setAttribute("category", project.getCategory());
+		request.setAttribute("project", project);
 		request.setAttribute("rewards", rewardDao.getByProject(projectId));
 		request.getRequestDispatcher("/WEB-INF/jsp/rewards.jsp").forward(request, response);
 	}

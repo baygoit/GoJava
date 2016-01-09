@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/")
-public class CategoriesServlet extends HttpServlet {
+public class StartServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = LoggerFactory.getLogger(CategoriesServlet.class);
+	private static final Logger log = LoggerFactory.getLogger(StartServlet.class);
 
 	@Autowired
 	private QuoteDao quoteDao;
@@ -39,7 +39,7 @@ public class CategoriesServlet extends HttpServlet {
 		log.info("doGet()...");
 
 		request.setAttribute("quote", quoteDao.getRandomQuote());
-		request.setAttribute("categories", categoryDao.getAll());	
+		request.setAttribute("categories", categoryDao.getAll());
 		request.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);
 	}
 }

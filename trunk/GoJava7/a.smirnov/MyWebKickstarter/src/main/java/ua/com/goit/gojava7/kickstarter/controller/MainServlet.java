@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.controller.servlet;
+package ua.com.goit.gojava7.kickstarter.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,11 +31,7 @@ public class MainServlet extends HttpServlet {
 	private CategoryDao categoryDao;
 
 	public void init() throws ServletException {
-		log.info("Starting spring autowiring...");
-
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
-
-		log.info("Ended spring autowiring...");
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,8 +48,7 @@ public class MainServlet extends HttpServlet {
 
 		request.setAttribute("categories", categories);
 		request.setAttribute("top10Categories", top10Categories);
-		request.setAttribute("quoteText", quote.getText());
-		request.setAttribute("quoteAuthor", quote.getAuthor());
-		request.getRequestDispatcher("views/index.jsp").forward(request, response);
+		request.setAttribute("quote", quote);
+		request.getRequestDispatcher("WEB-INF/pages/index.jsp").forward(request, response);
 	}
 }
