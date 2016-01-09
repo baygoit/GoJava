@@ -11,7 +11,6 @@ import java.util.Map;
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.PaymentBonus;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public class ProjectTest{
@@ -28,12 +27,6 @@ public class ProjectTest{
 		assertNotNull(project);
 	}
 
-	@Test
-	public void testPayment() {
-		PaymentBonus paymentBonus = new PaymentBonus();
-		project.setPaymentBonus(paymentBonus);
-		assertThat(project.getPaymentBonus(), is(paymentBonus));
-	}
 
 	@Test
 	public void testProject4() {
@@ -65,12 +58,7 @@ public class ProjectTest{
 		assertThat(project.getProjectEndTime(), is("4 hours left"));
 	}
 
-	@Test
-	public void testGetFundedPercentage() {
-		project.setPledged(project.getPledged() + 50000.0);
-		project.setMoneyNeeded(100000.0);
-		assertThat(project.getFundedPercentage(), is("50.0%"));
-	}
+
 
 	@Test
 	public void testSetGetProjectName() {
@@ -96,12 +84,7 @@ public class ProjectTest{
 		assertNotNull(project.getProjectDescription());
 	}
 
-	@Test
-	public void testGetMoneyPledged() {
-		project.addBacker(50000.0);
-		project.addBacker(48000.0);
-		assertThat(project.getPledged(), is(98000.0));
-	}
+
 
 
 
@@ -119,12 +102,7 @@ public class ProjectTest{
 		assertThat(project.getProjectHistory(), is(projectHistory));
 	}
 
-	@Test
-	public void testGetQuestionsAndAnswers() {
-		Map<String, String> qa = new HashMap<String, String>();
-		project.setQuestionsAndAnswers(qa);
-		assertThat(project.getQuestionsAndAnswers(), is(qa));
-	}
+
 
 	@Test
 	public void testGetDemoLink() {

@@ -1,10 +1,24 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "payments")
 public class Payment{
+    @Id @GeneratedValue
+    @Column
 	private int id;
+    @Column
 	private long cardNumber;
+    @Column
 	private String cardOwner;
+    @Column
 	private int projectId;
+    @Column
 	private long amount;
 	
 	   public Payment() {

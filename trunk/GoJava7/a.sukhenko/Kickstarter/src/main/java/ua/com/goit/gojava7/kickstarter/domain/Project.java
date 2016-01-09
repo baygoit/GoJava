@@ -1,30 +1,66 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import java.security.InvalidAlgorithmParameterException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Type;
+@Entity
+@Table(name = "projects")
 public class Project{
     private static final String MINUTES_LEFT        = " minutes left";
     private static final String HOURS_LEFT          = " hours left";
     private static final String DAYS_LEFT           = " days left";
     private static final String SECONDS_LEFT        = " seconds left";
+    @Id @GeneratedValue
+    @Column(name="id" , unique = true, nullable = false)
     private int id;
+    @Column(unique= true)
     private String              projectName;
+    @Column
     private String              projectDescription;
+    @Column
     private double              moneyNeeded;
+    @Column
     private String              projectHistory;
+    @Column
     private String              demoLink;
-    private Map<String, String> questionsAndAnswers = new HashMap<>();
+    
+    
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name= "projectCategoryId")
     private Category category;
-    private double              pledged             = 0;
+    
+    
+    @Type(type="ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
+    @Column(name = "enddate")
     private LocalDateTime       enddate;
-    private PaymentBonus        paymentBonus        = new PaymentBonus();
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "projects")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private Set<Bonus> bonuses = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "projects")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private Set<Question> questionsAndAnswers = new HashSet<>();
+    
+    
     public LocalDateTime getEnddate() {
         return enddate;
     }
@@ -38,7 +74,7 @@ public class Project{
         return moneyNeeded;
     }
 
-    @XmlElement
+
     public void setMoneyNeeded(double moneyNeeded) {
         this.moneyNeeded = moneyNeeded;
     }
@@ -59,9 +95,7 @@ public class Project{
         return msg;
     }
 
-    public String getFundedPercentage() {
-        return (float) ((pledged * 100) / getMoneyNeeded()) + "%";
-    }
+    
 
     public String getProjectName() {
         return projectName;
@@ -93,13 +127,7 @@ public class Project{
         this.projectHistory = projectHistory;
     }
 
-    public Map<String, String> getQuestionsAndAnswers() {
-        return questionsAndAnswers;
-    }
 
-    public void setQuestionsAndAnswers(Map<String, String> questionsAndAnswers) {
-        this.questionsAndAnswers = questionsAndAnswers;
-    }
 
     public String getDemoLink() {
         return demoLink;
@@ -109,32 +137,10 @@ public class Project{
         this.demoLink = demoLink;
     }
 
-    public PaymentBonus getPaymentBonus() {
-        return paymentBonus;
-    }
-
-    public void setPaymentBonus(PaymentBonus paymentBonus) {
-        this.paymentBonus = paymentBonus;
-    }
-
    
-    public double getPledged() {
-        return pledged;
-    }
-
-    public void setPledged(double d) {
-        this.pledged = d;
-    }
-
-    public void updatePledged(double amount) {
-        this.pledged += amount;
-    }
+  
 
 
-    public void addBacker(double d) {
-        pledged += d;
-
-    }
 
     public Category getCategory() {
         return category;
@@ -150,5 +156,21 @@ public class Project{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Set<Bonus> getBonuses() {
+        return bonuses;
+    }
+
+    public void setBonuses(Set<Bonus> bonuses) {
+        this.bonuses = bonuses;
+    }
+
+    public Set<Question> getQuestionsAndAnswers() {
+        return questionsAndAnswers;
+    }
+
+    public void setQuestionsAndAnswers(Set<Question> questionsAndAnswers) {
+        this.questionsAndAnswers = questionsAndAnswers;
     }
 }

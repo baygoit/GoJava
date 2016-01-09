@@ -1,10 +1,30 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="questions")
 public class Question{
-    private String time;
+    @Id @GeneratedValue
+    @Column(nullable = false,unique = true)
+    private int id;
+
+
+    @Column
     private String question;
+    @Column
     private String answer;
-    private String projectName;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "projectId")
+    private Project project;
 
     public String getAnswer() {
         return answer;
@@ -22,19 +42,21 @@ public class Question{
         this.question = question;
     }
 
-    public String getTime() {
-        return time;
+
+
+    public Project getProject() {
+        return project;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public int getId() {
+        return id;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setId(int id) {
+        this.id = id;
     }
 }
