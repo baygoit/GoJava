@@ -22,7 +22,6 @@ public class PaymentMappingTest {
 			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		} catch (Exception e) {
 			System.err.println("Initial SessionFactory creation failed." + e);
-			// e.printStackTrace();
 			StandardServiceRegistryBuilder.destroy(registry);
 		}
 	}
@@ -46,8 +45,8 @@ public class PaymentMappingTest {
 		Project project1 = new Project();
 		project1.setName("TestName1");
 		project1.setDescription("TestDescription1");
-		project1.setGoal(100l);
-		project1.setDaysToGo(1l);
+		project1.setGoal(100L);
+		project1.setDaysToGo(1L);
 		project1.setHistory("TestHistory1");
 		project1.setLink("TestLink1");
 		project1.setCategory(category1);
@@ -73,15 +72,15 @@ public class PaymentMappingTest {
 		session.beginTransaction();
 		
 		System.out.println("\n-----Get Payment by id = 1-----");
-		Payment payment = session.get(Payment.class, 1l);
+		Payment payment = session.get(Payment.class, 1L);
 		System.out.println(payment);
 		
 		System.out.println("\n-----Get Project by id = 1-----");
-		Project project = session.get(Project.class, 1l);
+		Project project = session.get(Project.class, 1L);
 		System.out.println("Project: " + project);
 		
 		System.out.println("\n-----Get Category by id = 1-----");
-		Category category = session.get(Category.class, 1l);
+		Category category = session.get(Category.class, 1L);
 		System.out.println("Category: " + category);		
 		
 		session.close();

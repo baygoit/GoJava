@@ -1,4 +1,4 @@
-package suiteTests;
+package integration.suiteTests;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;

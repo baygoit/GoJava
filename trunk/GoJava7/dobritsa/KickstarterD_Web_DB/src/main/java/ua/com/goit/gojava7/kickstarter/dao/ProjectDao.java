@@ -23,9 +23,6 @@ public class ProjectDao {
 
 	@Autowired
 	private CategoryDao categoryDao;
-	
-	@Autowired
-	private PaymentDao paymentDao;
 
 	@Autowired
 	private QuestionDao questionDao;
@@ -74,6 +71,7 @@ public class ProjectDao {
 
 		for(Project project : projects)
 			setPledged(project);
+		//projects.forEach(this::setPledged);
 
 		return projects;
 	}

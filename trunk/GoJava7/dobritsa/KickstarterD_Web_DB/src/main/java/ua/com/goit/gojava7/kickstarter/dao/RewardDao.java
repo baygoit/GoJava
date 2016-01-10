@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ua.com.goit.gojava7.kickstarter.models.Project;
 import ua.com.goit.gojava7.kickstarter.models.Reward;
 
 @Repository
@@ -18,9 +17,6 @@ public class RewardDao {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
-
-	@Autowired
-	private ProjectDao projectDao;
 
 	private static final Logger log = LoggerFactory.getLogger(RewardDao.class);
 

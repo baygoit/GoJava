@@ -49,8 +49,8 @@ public class ProjectMappingTest {
 		Project project1 = new Project();
 		project1.setName("TestName1");
 		project1.setDescription("TestDescription1");
-		project1.setGoal(100l);
-		project1.setDaysToGo(1l);
+		project1.setGoal(100L);
+		project1.setDaysToGo(1L);
 		project1.setHistory("TestHistory1");
 		project1.setLink("TestLink1");
 		project1.setCategory(category1);
@@ -58,8 +58,8 @@ public class ProjectMappingTest {
 		Project project2 = new Project();
 		project2.setName("TestName2");
 		project2.setDescription("TestDescription2");
-		project2.setGoal(200l);
-		project2.setDaysToGo(2l);
+		project2.setGoal(200L);
+		project2.setDaysToGo(2L);
 		project2.setHistory("TestHistory2");
 		project2.setLink("TestLink2");
 		project2.setCategory(category2);
@@ -74,11 +74,11 @@ public class ProjectMappingTest {
 		session.beginTransaction();
 		
 		System.out.println("\n-----Get Project by id = 1-----");	
-		Project project = session.get(Project.class, 1l);	
+		Project project = session.get(Project.class, 1L);
 		System.out.println("Project: " + project);
 		
 		System.out.println("\n-----Get Category by id = 1-----");	
-		Category category = session.get(Category.class, 1l);	
+		Category category = session.get(Category.class, 1L);
 		System.out.println("Category: " + category);
 	
 		System.out.println("\n-----Get list of projects-----");

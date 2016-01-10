@@ -1,4 +1,4 @@
-package suiteTests;
+package integration.suiteTests;
 
 import org.hibernate.SessionFactory;
 import org.junit.BeforeClass;
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 
 public class TestFullDb {
 
-    private static final ThreadLocal<SessionFactory> sessionFactory = new ThreadLocal<>();
+    private static SessionFactory sessionFactory;
 
     private CategoryDao categoryDao = new CategoryDao();
     private QuoteDao quoteDao = new QuoteDao();
@@ -25,19 +25,19 @@ public class TestFullDb {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        sessionFactory.set(TestSuite.getSessionFactory());
+        sessionFactory = TestSuite.getSessionFactory();
     }
 
     @Test
     public void testGetRandomQuote() {
-        quoteDao.setSessionFactory(sessionFactory.get());
+        quoteDao.setSessionFactory(sessionFactory);
         Quote quote = quoteDao.getRandomQuote();
         assertNotNull(quote);
     }
 
     @Test
     public void testGetCategory() {
-        categoryDao.setSessionFactory(sessionFactory.get());
+        categoryDao.setSessionFactory(sessionFactory);
         Category category = categoryDao.get(1L);
         assertNotNull(category);
         assertThat(category.getName(), is("TestCategory 1"));
@@ -45,7 +45,7 @@ public class TestFullDb {
 
     @Test
     public void testGetAllCategories() {
-        categoryDao.setSessionFactory(sessionFactory.get());
+        categoryDao.setSessionFactory(sessionFactory);
         List<Category> categories = categoryDao.getAll();
         assertNotNull(categories);
         assertThat(categories.size(), is(2));
@@ -53,7 +53,7 @@ public class TestFullDb {
 
     @Test
     public void testGetProject() {
-        projectDao.setSessionFactory(sessionFactory.get());
+        projectDao.setSessionFactory(sessionFactory);
         Project project = projectDao.get(1L);
         assertNotNull(project);
         assertThat(project.getName(), is("TestName1"));
@@ -61,7 +61,7 @@ public class TestFullDb {
 
     @Test
     public void testGetProjectsByCategory() {
-        projectDao.setSessionFactory(sessionFactory.get());
+        projectDao.setSessionFactory(sessionFactory);
         List<Project> projects = projectDao.getByCategory(1L);
         assertNotNull(projects);
         assertThat(projects.size(), is(1));
@@ -69,7 +69,7 @@ public class TestFullDb {
 
     @Test
     public void testGetQuestionsByProject() {
-        questionDao.setSessionFactory(sessionFactory.get());
+        questionDao.setSessionFactory(sessionFactory);
         List<Question> questions = questionDao.getByProject(1L);
         assertNotNull(questions);
         assertThat(questions.size(), is(2));
@@ -77,12 +77,12 @@ public class TestFullDb {
 
     @Test
     public void testAddQuestion() {
-        questionDao.setSessionFactory(sessionFactory.get());
+        questionDao.setSessionFactory(sessionFactory);
 
         List<Question> questions = questionDao.getByProject(1L);
         assertThat(questions.size(), is(2));
 
-        projectDao.setSessionFactory(sessionFactory.get());
+        projectDao.setSessionFactory(sessionFactory);
         Project project = projectDao.get(1L);
         Question question = new Question("QuestionForTestAddingQuestion", project);
         questionDao.add(question);
@@ -92,7 +92,7 @@ public class TestFullDb {
 
     @Test
     public void testGetReward() {
-        rewardDao.setSessionFactory(sessionFactory.get());
+        rewardDao.setSessionFactory(sessionFactory);
         Reward reward = rewardDao.get(1L);
         assertNotNull(reward);
         assertThat(reward.getReward(), is("TestReward1"));
@@ -100,7 +100,7 @@ public class TestFullDb {
 
     @Test
     public void testGetRewardsByProject() {
-        rewardDao.setSessionFactory(sessionFactory.get());
+        rewardDao.setSessionFactory(sessionFactory);
         List<Reward> rewards = rewardDao.getByProject(1L);
         assertNotNull(rewards);
         assertThat(rewards.size(), is(2));
@@ -108,17 +108,17 @@ public class TestFullDb {
 
     @Test
     public void testCalculatePledgedForProject() {
-        paymentDao.setSessionFactory(sessionFactory.get());
+        paymentDao.setSessionFactory(sessionFactory);
         assertThat(paymentDao.calculatePledgedForProject(1L), is(300L));
     }
 
     @Test
     public void testAddPayment() {
-        paymentDao.setSessionFactory(sessionFactory.get());
+        paymentDao.setSessionFactory(sessionFactory);
 
         assertThat(paymentDao.calculatePledgedForProject(1L), is(300L));
 
-        projectDao.setSessionFactory(sessionFactory.get());
+        projectDao.setSessionFactory(sessionFactory);
         Project project = projectDao.get(1L);
         Payment payment = new Payment("TestUser", "1234123412341234", 1111L, project);
         paymentDao.add(payment);

@@ -22,9 +22,6 @@ public class PaymentDao {
 	@Autowired
 	private Validator validator;
 
-	@Autowired
-	private ProjectDao projectDao;
-	
 	private static final Logger log = LoggerFactory.getLogger(PaymentDao.class);
 
 	public PaymentDao() {

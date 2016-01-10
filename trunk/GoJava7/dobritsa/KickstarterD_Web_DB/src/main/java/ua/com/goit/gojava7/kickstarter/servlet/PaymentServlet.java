@@ -60,8 +60,10 @@ public class PaymentServlet extends HttpServlet {
 		this.request = request;
 		this.response = response;
 
-		if (rewardExists())
+		if (rewardExists()) {
 			payWithReward();
+			return;
+		}
 
 		payWithoutReward();
 	}
@@ -97,6 +99,7 @@ public class PaymentServlet extends HttpServlet {
 		if (amountIsValid()) {
 			amount = Long.parseLong(request.getParameter("amount"));
 			forwardRequestWithCorrectAmount();
+			return;
 		}
 
 		rewards = rewardDao.getByProject(projectId);

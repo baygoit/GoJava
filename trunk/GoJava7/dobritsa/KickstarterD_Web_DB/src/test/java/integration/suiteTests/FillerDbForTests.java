@@ -1,12 +1,10 @@
-package suiteTests;
+package integration.suiteTests;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import ua.com.goit.gojava7.kickstarter.models.*;
-
-import static org.junit.Assert.assertTrue;
 
 public class FillerDbForTests {
 

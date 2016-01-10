@@ -21,8 +21,9 @@ public class Validator {
 	
 	public boolean validatePayer(String name, String card) {
 		log.info("validatePayer({}, {})...", name, card);
-		if (validateName(name) & validateCard(card)) return true;
-		else return false;
+		//if (validateName(name) & validateCard(card)) return true;
+		//else return false;
+		return validateName(name) & validateCard(card);
 	}
 
 	public boolean validateName(String name) {
@@ -34,7 +35,7 @@ public class Validator {
 	
 	public boolean validateCard(String card) {
 		log.info("validateCard({})...", card);
-		Pattern p = Pattern.compile("^[0-9]{16,16}$");
+		Pattern p = Pattern.compile("^[0-9]{16}$");
 		Matcher m = p.matcher(card);
 		return m.matches();
 	}

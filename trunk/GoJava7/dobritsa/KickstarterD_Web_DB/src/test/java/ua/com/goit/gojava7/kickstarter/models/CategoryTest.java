@@ -2,8 +2,6 @@ package ua.com.goit.gojava7.kickstarter.models;
 
 import static org.mockito.Mockito.verify;
 
-
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,8 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import static org.mockito.Matchers.contains;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import ua.com.goit.gojava7.kickstarter.models.Category;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -36,7 +32,7 @@ public class CategoryTest extends Assert {
 	public void setUp() {
 		category = new Category();
 		category.setName("CategoryName");
-		category.setCategoryId(10l);
+		category.setCategoryId(10L);
 
 		projects.add(project);
 		category.setProjects(projects);
@@ -55,7 +51,7 @@ public class CategoryTest extends Assert {
 	
 	@Test
 	public void testGet() {
-		assertThat(category.getCategoryId(), is(10l));
+		assertThat(category.getCategoryId(), is(10L));
 		assertThat(category.getProjects(), is(projects));
 	}
 
