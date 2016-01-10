@@ -10,20 +10,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="questions")
+@Table(name = "questions")
 public class Question{
-    @Id @GeneratedValue
-    @Column(nullable = false,unique = true)
-    private int id;
-
+    @Id
+    @GeneratedValue
+    @Column(nullable = false, unique = true)
+    private int     id;
 
     @Column
-    private String question;
+    private String  question;
     @Column
-    private String answer;
-    
+    private String  answer;
+
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "projectId")
     private Project project;
 
     public String getAnswer() {
@@ -41,8 +40,6 @@ public class Question{
     public void setQuestion(String question) {
         this.question = question;
     }
-
-
 
     public Project getProject() {
         return project;

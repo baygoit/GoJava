@@ -15,13 +15,13 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class LocalDateTimeUserType implements EnhancedUserType, Serializable {
+public class LocalDateTimeUserType implements EnhancedUserType,Serializable{
 
     /**
      * 
      */
-    private static final long serialVersionUID = 7011801502538807540L;
-    private static final int[] SQL_TYPES = new int[]{Types.TIMESTAMP};
+    private static final long  serialVersionUID = 7011801502538807540L;
+    private static final int[] SQL_TYPES        = new int[]{Types.TIMESTAMP};
 
     @Override
     public int[] sqlTypes() {
@@ -51,7 +51,6 @@ public class LocalDateTimeUserType implements EnhancedUserType, Serializable {
     public int hashCode(Object object) throws HibernateException {
         return object.hashCode();
     }
-
 
     @Override
     public Object nullSafeGet(ResultSet resultSet, String[] names, SessionImplementor session, Object owner)

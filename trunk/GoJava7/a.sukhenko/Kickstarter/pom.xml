@@ -4,7 +4,7 @@
 	<name>Kickstarter</name>
 	<groupId>ua.com.goit.gojava7</groupId>
 	<artifactId>kickstarter</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -161,11 +161,6 @@
 
 <!-- Spring AOP + AspectJ -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>${spring-version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.8.7</version>
@@ -187,4 +182,10 @@
 		</plugins>
 	</build>
 
+	<url>http://localhost:8080/kickstarter-1.2-SNAPSHOT/</url>
+	<organization>
+		<name>GoIT</name>
+		<url>http://goit.ua/</url>
+	</organization>
+	<description>Using Spring, Hibernate.</description>
 </project>

@@ -15,20 +15,19 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 public class QuoteDatabaseDao{
     private static final Logger logger = LogManager.getLogger(QuoteDatabaseDao.class);
     @Autowired
-    private SessionFactory sessionFactory;
-
+    private SessionFactory      sessionFactory;
 
     @SuppressWarnings("unchecked")
     public Quote getRandomQuote() {
         logger.debug("Getting random Quote");
         Session session = sessionFactory.openSession();
         List<Quote> quotes = (List<Quote>) session.createQuery("from Quote q order by rand()").setMaxResults(1).list();
-        if(quotes.isEmpty()){
-        	throw new NoSuchElementException();
+        if (quotes.isEmpty()) {
+            throw new NoSuchElementException();
         }
         Quote q = quotes.get(0);
         session.close();
         return q;
-    }  
+    }
 
 }

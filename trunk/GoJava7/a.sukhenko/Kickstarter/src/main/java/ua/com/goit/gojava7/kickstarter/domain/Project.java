@@ -1,6 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-import java.security.InvalidAlgorithmParameterException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.HashSet;
@@ -23,14 +22,15 @@ import org.hibernate.annotations.Type;
 @Entity
 @Table(name = "projects")
 public class Project{
-    private static final String MINUTES_LEFT        = " minutes left";
-    private static final String HOURS_LEFT          = " hours left";
-    private static final String DAYS_LEFT           = " days left";
-    private static final String SECONDS_LEFT        = " seconds left";
-    @Id @GeneratedValue
-    @Column(name="id" , unique = true, nullable = false)
-    private int id;
-    @Column(unique= true)
+    private static final String MINUTES_LEFT        = " minutes to go";
+    private static final String HOURS_LEFT          = " hours to go";
+    private static final String DAYS_LEFT           = " days to go";
+    private static final String SECONDS_LEFT        = " seconds to go";
+    @Id
+    @GeneratedValue
+    @Column(name = "id", unique = true, nullable = false)
+    private int                 id;
+    @Column(unique = true)
     private String              projectName;
     @Column
     private String              projectDescription;
@@ -40,27 +40,36 @@ public class Project{
     private String              projectHistory;
     @Column
     private String              demoLink;
-    
-    
+
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @JoinColumn(name= "projectCategoryId")
-    private Category category;
-    
-    
-    @Type(type="ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
+    @JoinColumn(name = "projectCategoryId")
+    private Category            category;
+
+    @Type(type = "ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
     @Column(name = "enddate")
     private LocalDateTime       enddate;
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "projects")
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private Set<Bonus> bonuses = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "projects")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project", targetEntity=Bonus.class)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private Set<Question> questionsAndAnswers = new HashSet<>();
-    
-    
+    private Set<Bonus>          bonuses             = new HashSet<Bonus>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private Set<Question>       questionsAndAnswers = new HashSet<Question>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    private Set<Payment>        payments            = new HashSet<Payment>();
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
+
     public LocalDateTime getEnddate() {
         return enddate;
     }
@@ -69,11 +78,9 @@ public class Project{
 
     }
 
-
     public double getMoneyNeeded() {
         return moneyNeeded;
     }
-
 
     public void setMoneyNeeded(double moneyNeeded) {
         this.moneyNeeded = moneyNeeded;
@@ -94,8 +101,6 @@ public class Project{
         }
         return msg;
     }
-
-    
 
     public String getProjectName() {
         return projectName;
@@ -127,8 +132,6 @@ public class Project{
         this.projectHistory = projectHistory;
     }
 
-
-
     public String getDemoLink() {
         return demoLink;
     }
@@ -136,11 +139,6 @@ public class Project{
     public void setDemoLink(String demoLink) {
         this.demoLink = demoLink;
     }
-
-   
-  
-
-
 
     public Category getCategory() {
         return category;

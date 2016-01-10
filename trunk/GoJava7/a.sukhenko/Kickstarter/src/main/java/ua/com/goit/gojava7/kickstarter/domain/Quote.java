@@ -7,11 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="quotes")
+@Table(name = "quotes")
 public class Quote{
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column
-	private int id;
+    private int    id;
     @Column
     private String text;
     @Column
@@ -43,12 +44,12 @@ public class Quote{
         this.author = author;
     }
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
 }

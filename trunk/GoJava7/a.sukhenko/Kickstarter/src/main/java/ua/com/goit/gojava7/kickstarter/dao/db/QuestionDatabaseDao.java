@@ -8,10 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class QuestionDatabaseDao{
 
-    
     private static final Logger logger = LogManager.getLogger(QuestionDatabaseDao.class);
     @Autowired
-    private SessionFactory sessionFactory;
-    
+    private SessionFactory      sessionFactory;
 
 }

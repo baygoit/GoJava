@@ -5,28 +5,28 @@ import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 
 public class QuoteTest{
-    private final String text = "test";
+    private final String text   = "test";
     private final String author = "author";
-    Quote quote;
+    Quote                quote;
     @Test
     public void testQuote() {
         quote = new Quote();
-        assertThat((quote != null),is(true));
+        assertThat((quote != null), is(true));
     }
 
     @Test
     public void testQuoteStringString() {
-   
-    quote = new Quote(text, author);
-    assertThat(quote.getAuthor(), is(author));
-    assertThat(quote.getText(),is(text));
+
+        quote = new Quote(text, author);
+        assertThat(quote.getAuthor(), is(author));
+        assertThat(quote.getText(), is(text));
     }
 
     @Test
     public void testSetText() {
-       quote = new Quote();
-       quote.setText(text);
-       assertThat(quote.getText(), is(text));
+        quote = new Quote();
+        quote.setText(text);
+        assertThat(quote.getText(), is(text));
     }
 
     @Test
@@ -36,4 +36,10 @@ public class QuoteTest{
         assertThat(quote.getAuthor(), is(author));
     }
 
+    @Test
+    public void testId(){
+        quote = new Quote();
+        quote.setId(123);
+        assertThat(quote.getId(),is(123));
+    }
 }

@@ -43,7 +43,8 @@ http://www.springframework.org/schema/util
                 <value>ua.com.goit.gojava7.kickstarter.domain.Payment</value>
                 <value>ua.com.goit.gojava7.kickstarter.domain.Project</value>
                 <value>ua.com.goit.gojava7.kickstarter.domain.Question</value>
-                <value>ua.com.goit.gojava7.kickstarter.domain.PaymentBonus</value>
+                <value>ua.com.goit.gojava7.kickstarter.domain.Payment</value>
+                <value>ua.com.goit.gojava7.kickstarter.domain.Bonus</value>
             </list>
         </property>
         <property name="mappingResources">

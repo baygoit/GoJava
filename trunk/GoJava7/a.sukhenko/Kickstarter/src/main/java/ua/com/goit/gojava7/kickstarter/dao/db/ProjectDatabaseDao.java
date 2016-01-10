@@ -18,15 +18,15 @@ import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 public class ProjectDatabaseDao{
     private static final Logger LOGGER = LogManager.getLogger(ProjectDatabaseDao.class);
     @Autowired
-    private SessionFactory sessionFactory;
-    
+    private SessionFactory      sessionFactory;
+
     public List<Project> getAll() {
         LOGGER.debug("getting all projects from db.");
         String hql = "FROM Employee E";
         Session session = sessionFactory.openSession();
         Query query = session.createQuery(hql);
         List<Project> results = HibernateUtil.listAndCast(query);
-        if(results.isEmpty()){
+        if (results.isEmpty()) {
             throw new NoSuchElementException("hibernate returned 0 categories: list is empty.");
         }
         return results;
@@ -37,9 +37,9 @@ public class ProjectDatabaseDao{
         Session session = sessionFactory.openSession();
         String hql = "FROM Project P WHERE P.projectName = :projectName";
         Query query = session.createQuery(hql);
-        query.setParameter("projectName",projectName);
+        query.setParameter("projectName", projectName);
         List<Project> results = HibernateUtil.listAndCast(query);
-        if(results.isEmpty()){
+        if (results.isEmpty()) {
             throw new NoSuchElementException();
         }
         return results.get(0);
@@ -50,19 +50,17 @@ public class ProjectDatabaseDao{
         Session session = sessionFactory.openSession();
         String hql = "FROM Project P WHERE P.category.categoryId = :categoryId";
         Query query = session.createQuery(hql);
-        query.setParameter("categoryId",categoryId);
+        query.setParameter("categoryId", categoryId);
         List<Project> results = HibernateUtil.listAndCast(query);
         return results;
     }
-    
+
     public String getFundedPercentage(Project project) throws InvalidAlgorithmParameterException {
         return (float) ((getPledged(project) * 100) / project.getMoneyNeeded()) + "%";
     }
 
     private int getPledged(Project project) {
-        // TODO Auto-generated method stub
-        return 0;
+        return 100500;
     }
-    
- 
+
 }

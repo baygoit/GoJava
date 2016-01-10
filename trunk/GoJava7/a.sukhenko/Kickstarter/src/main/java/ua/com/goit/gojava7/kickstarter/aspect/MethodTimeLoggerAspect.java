@@ -16,10 +16,10 @@ public class MethodTimeLoggerAspect{
         Object output = pjp.proceed();
 
         long elapsedTime = System.currentTimeMillis() - start;
-        log2.info("Execution time:"+ elapsedTime + " methodName: " + methodName);
+        log2.info("Execution time:" + elapsedTime + " methodName: " + methodName);
         return output;
     }
-    
+
     @Pointcut("@within(org.springframework.stereotype.Repository)")
     private void calculateTime() {
     }
