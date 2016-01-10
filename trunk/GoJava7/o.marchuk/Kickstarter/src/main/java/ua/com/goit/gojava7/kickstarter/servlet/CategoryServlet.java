@@ -1,7 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,22 +14,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-@WebServlet(urlPatterns = "/categories")
-public class CategoriesServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/category")
+public class CategoryServlet extends HttpServlet {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger log = LoggerFactory.getLogger(CategoriesServlet.class);
+	private static final Logger log = LoggerFactory.getLogger(CategoryServlet.class);
 
-	@Autowired
-	private QuoteDao quoteDao;
 	@Autowired
 	private CategoryDao categoryDao;
 
@@ -43,14 +38,19 @@ public class CategoriesServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Quote randomQuote = quoteDao.getRandomQuote();
-		log.debug("Random quote: {}", randomQuote);
+		Long categoryId = null;
 
-		List<Category> categories = categoryDao.getAll();
-		log.debug("Categories: {}", categories);
+		try {
+			categoryId = Long.valueOf(request.getParameter("id"));
+		} catch (NumberFormatException e) {
+			log.error("Cannot parse category id {}", request.getParameter("id"));
+		}
 
-		request.setAttribute("quote", randomQuote);
-		request.setAttribute("categories", categories);
-		request.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);
+		Category category = categoryDao.get(categoryId);
+		log.debug("Category: {}", category);
+		log.debug("Category projects: {}", category.getProjects());
+
+		request.setAttribute("category", category);
+		request.getRequestDispatcher("/WEB-INF/jsp/category.jsp").forward(request, response);
 	}
 }

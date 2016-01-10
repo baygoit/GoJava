@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class Project {
 
 	private String name;
@@ -54,6 +56,18 @@ public class Project {
 		this.questionsAndAnswers = questionsAndAnswers;
 	}
 
+	public long getGatheredAmount() {
+		return gatheredAmount;
+	}
+
+	public void setGatheredAmount(long gatheredAmount) {
+		this.gatheredAmount = gatheredAmount;
+	}
+
+	public int getDaysLeft() {
+		return daysLeft;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -84,15 +98,10 @@ public class Project {
 		return true;
 	}
 
-	public long getGatheredAmount() {
-		return gatheredAmount;
-	}
-
-	public void setGatheredAmount(long gatheredAmount) {
-		this.gatheredAmount = gatheredAmount;
-	}
-
-	public int getDaysLeft() {
-		return daysLeft;
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("name", name).append("shortDescription", shortDescription)
+				.append("requiredAmount", requiredAmount).append("gatheredAmount", gatheredAmount).append("daysLeft", daysLeft)
+				.toString();
 	}
 }

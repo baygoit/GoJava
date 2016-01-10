@@ -3,6 +3,8 @@ package ua.com.goit.gojava7.kickstarter.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class Category {
 
 	private Long id;
@@ -34,5 +36,10 @@ public class Category {
 
 	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("id", id).append("name", name).toString();
 	}
 }
