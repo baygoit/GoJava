@@ -23,8 +23,6 @@ public class RealMySqlDbIntegrationTest {
     @Autowired
     private ProjectDao projectDao;
     @Autowired
-    private QuestionDao questionDao;
-    @Autowired
     private PaymentDao paymentDao;
     @Autowired
     private RewardDao rewardDao;

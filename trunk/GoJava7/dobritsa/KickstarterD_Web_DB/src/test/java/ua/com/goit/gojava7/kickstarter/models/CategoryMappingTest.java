@@ -8,8 +8,6 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 
 import java.util.List;
 
@@ -42,18 +40,18 @@ public class CategoryMappingTest {
 		Session session = sessionFactory.openSession();
 
 		Category category1 = new Category();
-		category1.setCategoryId(11l);
+		category1.setCategoryId(11L);
 		category1.setName("TestCategory 1");
 
 		Category category2 = new Category();
-		category2.setCategoryId(22l);
+		category2.setCategoryId(22L);
 		category2.setName("TestCategory 2");
 		
 		Project project1 = new Project();
 		project1.setName("TestName1");
 		project1.setDescription("TestDescription1");
-		project1.setGoal(100l);
-		project1.setDaysToGo(1l);
+		project1.setGoal(100L);
+		project1.setDaysToGo(1L);
 		project1.setHistory("TestHistory1");
 		project1.setLink("TestLink1");
 		project1.setCategory(category1);		
@@ -69,7 +67,7 @@ public class CategoryMappingTest {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		System.out.println("\n-----Get by id = 1-----");
-		Category category = session.get(Category.class, 1l);
+		Category category = session.get(Category.class, 1L);
 		System.out.println(category);
 		session.close();
 
@@ -82,8 +80,4 @@ public class CategoryMappingTest {
 		}
 		session.close();
 	}
-
-
-
-
 }

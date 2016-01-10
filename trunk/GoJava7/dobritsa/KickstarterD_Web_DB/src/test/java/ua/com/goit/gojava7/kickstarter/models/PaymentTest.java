@@ -15,8 +15,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.models.Payment;
-
 @RunWith(MockitoJUnitRunner.class)
 public class PaymentTest {
 
@@ -28,7 +26,7 @@ public class PaymentTest {
 	
 	@Before
 	public void testSetUp() {
-		payment.setPaymentId(1l);
+		payment.setPaymentId(1L);
 		payment.setUser("Nike");
 		payment.setCard("1111222233334444");
 		payment.setAmount(200L);
@@ -43,7 +41,7 @@ public class PaymentTest {
 	
 	@Test
 	public void testGet() {
-		assertThat(payment.getPaymentId(), is(1l));
+		assertThat(payment.getPaymentId(), is(1L));
 		assertThat(payment.getUser(), is("Nike"));
 		assertThat(payment.getCard(), is("1111222233334444"));
 		assertThat(payment.getAmount(), is(200L));
