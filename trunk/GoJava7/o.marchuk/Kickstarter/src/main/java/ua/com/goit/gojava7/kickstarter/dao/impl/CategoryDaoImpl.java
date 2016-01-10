@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,17 +27,6 @@ public class CategoryDaoImpl implements CategoryDao {
 		List<Category> categories = (List<Category>) criteria.list();
 
 		return categories;
-	}
-
-	@Override
-	public long count() {
-		Session session = sessionFactory.getCurrentSession();
-
-		Criteria criteria = session.createCriteria(Category.class);
-		criteria.setProjection(Projections.rowCount()).uniqueResult();
-		Long count = (Long) criteria.uniqueResult();
-
-		return count;
 	}
 
 	@Override

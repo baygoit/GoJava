@@ -8,7 +8,5 @@ public interface CategoryDao {
 
 	List<Category> getAll();
 
-	long count();
-
 	Category get(Long categoryId);
 }
