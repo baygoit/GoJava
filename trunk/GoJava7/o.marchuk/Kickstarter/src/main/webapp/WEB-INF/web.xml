@@ -28,8 +28,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>webmvc-servlet</servlet-name>
-        <url-pattern>/categories.jsp</url-pattern>
-        <url-pattern>/categories.html</url-pattern>
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
