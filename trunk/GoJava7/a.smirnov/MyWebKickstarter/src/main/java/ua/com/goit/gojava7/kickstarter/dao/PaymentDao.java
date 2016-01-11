@@ -8,5 +8,5 @@ public interface PaymentDao {
 
 	public void remove(Payment element);
 
-	public int getSumProjectPayments(int projectId);
+	public long getSumProjectPayments(int projectId);
 }

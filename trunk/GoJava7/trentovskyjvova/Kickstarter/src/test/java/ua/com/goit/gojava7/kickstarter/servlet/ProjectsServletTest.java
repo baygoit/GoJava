@@ -41,7 +41,7 @@ public class ProjectsServletTest {
 		project.setCategoryId(12);
 		projects.add(project);
 		when(projectDao.getProjects(12)).thenReturn(projects);
-		when(paymentDao.getPledged(1)).thenReturn(0);
+		//when(paymentDao.getPledged(1)).thenReturn(0);
 		
 		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse resp = mock(HttpServletResponse.class);

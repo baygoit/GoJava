@@ -27,14 +27,14 @@
 
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">create</property>
-
-		<mapping resource="Quote.hbm.xml" />
-		<mapping resource="Category.hbm.xml" />
-		<mapping resource="Project.hbm.xml" />
-		<mapping resource="Reward.hbm.xml" />
-		<mapping resource="Question.hbm.xml" />
-		<mapping resource="Payment.hbm.xml" />
-
+		
+		<mapping class="ua.com.goit.gojava7.kickstarter.models.Quote" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.models.Category" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.models.Project" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.models.Reward" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.models.Question" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.models.Payment" />
+		
 	</session-factory>
 
 </hibernate-configuration>

@@ -1,7 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
 public class Question {
-	private long id;
+	private int id;
     private Project project;
     private String question;
     private String answer;
@@ -41,7 +41,7 @@ public class Question {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + id;
 		return result;
 	}
 
@@ -59,11 +59,11 @@ public class Question {
 		return true;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

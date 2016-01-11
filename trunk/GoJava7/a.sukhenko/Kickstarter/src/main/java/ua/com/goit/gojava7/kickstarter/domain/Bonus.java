@@ -1,0 +1,60 @@
+package ua.com.goit.gojava7.kickstarter.domain;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "bonuses")
+public class Bonus{
+    @Id
+    @GeneratedValue
+    @Column
+    private int     id;
+    @Column
+    private int     projectId;
+    @Column
+    private double  amount;
+    @Column
+    private String  bonus;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Project project = new Project();
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public int getProjectId() {
+        return projectId;
+    }
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+    public double getAmount() {
+        return amount;
+    }
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+    public String getBonus() {
+        return bonus;
+    }
+    public void setBonus(String bonus) {
+        this.bonus = bonus;
+    }
+    public Project getProject() {
+        return project;
+    }
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+}

@@ -33,12 +33,11 @@ public class MainServletTest{
     @Mock
     CategoryDatabaseDao categoryDao;
     @Mock
-    ProjectDatabaseDao projectDao;
+    ProjectDatabaseDao  projectDao;
     @Mock
-    QuoteDatabaseDao quoteDao;
+    QuoteDatabaseDao    quoteDao;
     @InjectMocks
     private MainServlet mainServlet;
-    
 
     @Test
     @Ignore
@@ -58,6 +57,5 @@ public class MainServletTest{
         verify(req).setAttribute("quote", quote);
         verify(req).setAttribute(eq("categories"), anyListOf(Category.class));
     }
-
 
 }

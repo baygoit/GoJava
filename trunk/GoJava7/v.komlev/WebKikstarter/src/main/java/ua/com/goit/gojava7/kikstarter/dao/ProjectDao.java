@@ -8,11 +8,9 @@ public interface ProjectDao {
 	
 	void add(Project project);
 	
-	List<Project> getAll();
-	
 	List<Project> getProjectsFromCategory(int categoryId);
 	
-	int getSize();
+	Project getProjectById(int projectId);
 	
 	void remove(Project project);
 

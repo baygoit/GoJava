@@ -1,9 +1,23 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "quote")
 public class Quote {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long quoteId;
+	@Column
 	private String text;
+	@Column
 	private String author;		
 
 	public Long getQuoteId() {

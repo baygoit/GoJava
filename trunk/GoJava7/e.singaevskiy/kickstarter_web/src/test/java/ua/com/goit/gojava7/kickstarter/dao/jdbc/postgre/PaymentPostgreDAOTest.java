@@ -6,46 +6,60 @@ import static org.junit.Assert.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:applicationContext*.xml")
 public class PaymentPostgreDAOTest {
 
     List<Payment> list;
-    PaymentPostgreDAO dao;
+    
+    @Autowired
+    ProjectPostgreDAO projectPostgreDAO; 
+    
+    @Autowired
+    PaymentPostgreDAO paymentPostgreDAO;
+
+	private List<Project> projects;
 
     @Before
     public void setUp() throws Exception {
-    	HibernateUtil.configure("hibernate.cfg.xml");
-        dao = new PaymentPostgreDAO();
-        
+    	projects = projectPostgreDAO.getAll();
+    	
+    	paymentPostgreDAO.clear();
         list = new ArrayList<>();
-        list.add(new Payment(null, "u1", 21312312, 10, null));
-        list.add(new Payment(null, "u2", 21312312, 20, null));       
-       
+        list.add(new Payment(projects.get(0), "u1", 21312312, 10, null));
+        list.add(new Payment(projects.get(0), "u2", 21312312, 20, null));
+        list.add(new Payment(projects.get(1), "u2", 21312312, 20, null));
+        paymentPostgreDAO.addAll(list);
     }
-    
-    @After
-    public void tearDown() throws Exception {
-        dao.clear();
-    }
+
 
     @Test
     public void testAddGetAll() {
-        dao.addAll(list);
-        assertThat(dao.getAll(), is(list));
+        assertThat(paymentPostgreDAO.getAll(), is(list));
     }
     
     @Test
     public void testAddGet() {
-        int index = 1;
-        Payment payment = list.get(index);
-        list.forEach(dao::add);
-        assertThat(dao.get(index), is(payment));
+    	paymentPostgreDAO.clear();
+        list.forEach(paymentPostgreDAO::add);
+        Payment payment = list.get(1);
+        assertThat(paymentPostgreDAO.get(payment.getId()), is(payment));
+    }
+    
+    @Test
+    public void testGetByProject() {
+        int id = projects.get(0).getId();
+        paymentPostgreDAO.getByProject(id).forEach(p -> assertThat(p.getProject().getId(), is(id)));
     }
 
 }

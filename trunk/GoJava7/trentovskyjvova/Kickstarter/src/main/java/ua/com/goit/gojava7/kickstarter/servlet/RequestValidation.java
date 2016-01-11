@@ -5,17 +5,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 public class RequestValidation {
-
+	private static final String ATTRIBUTE_ERRORS = "errors";
+	
 	public boolean isEmpty(HttpServletRequest request, List<String> parameters) {
 		String recvestParam;
 		for (String parameter : parameters) {
 			recvestParam = request.getParameter(parameter);
 			if (recvestParam == null) {
-				request.setAttribute("errors", true);
+				request.setAttribute(ATTRIBUTE_ERRORS, true);
 				return true;
 			}
 			if (recvestParam.isEmpty()) {
-				request.setAttribute("errors", true);
+				request.setAttribute(ATTRIBUTE_ERRORS, true);
 				return true;
 			}
 		}
@@ -27,17 +28,17 @@ public class RequestValidation {
 		for (String parameter : parameters) {
 			recvestParam = request.getParameter(parameter);
 			if (recvestParam == null) {
-				request.setAttribute("errors", true);
+				request.setAttribute(ATTRIBUTE_ERRORS, true);
 				return true;
 			}
 			try {
 				int i = Integer.parseInt(recvestParam);
 				if (i <= 0) {
-					request.setAttribute("errors", true);
+					request.setAttribute(ATTRIBUTE_ERRORS, true);
 					return true;
 				}
 			} catch (NumberFormatException nfe) {
-				request.setAttribute("errors", true);
+				request.setAttribute(ATTRIBUTE_ERRORS, true);
 				return true;
 			}
 		}

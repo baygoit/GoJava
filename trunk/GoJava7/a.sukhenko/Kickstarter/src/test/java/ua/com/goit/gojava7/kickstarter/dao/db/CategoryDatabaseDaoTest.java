@@ -18,8 +18,6 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 public class CategoryDatabaseDaoTest{
     @Autowired
     private CategoryDatabaseDao categoryDao;
-    
-
 
     @Test
     @Ignore
@@ -30,7 +28,7 @@ public class CategoryDatabaseDaoTest{
     @Test
     @Ignore
     public void testCategoryDatabaseDao() {
-       assertThat("class ua.com.goit.gojava7.kickstarter.dao.db.CategoryDatabaseDao",is(this.categoryDao.getClass().toString()));
+        assertThat("class ua.com.goit.gojava7.kickstarter.dao.db.CategoryDatabaseDao", is(this.categoryDao.getClass().toString()));
     }
 
     @Test

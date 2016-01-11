@@ -1,39 +1,80 @@
 package ua.com.goit.gojava7.kikstarter.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "payments")
 public class Payment {
 
-	private String paymentUserName;
-	private long paymentNumberCard;
-	private int paymentEntered;
+	@Id
+	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "seq_id", allocationSize = 10)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
+	private int id;
 
-	public Payment(String paymentUserName, long paymentNumberCard, int paymentEntered) {
-		this.paymentUserName = paymentUserName;
-		this.paymentNumberCard = paymentNumberCard;
-		this.paymentEntered = paymentEntered;
+	@Column(name = "user_name")
+	private String userName;
+
+	@Column(name = "number_card")
+	private long numberCard;
+
+	@Column(name = "amount_donation")
+	private int amountDonation;
+
+	@ManyToOne
+	@JoinColumn(name = "project_id")
+	private int projectId;
+
+	public int getId() {
+		return id;
 	}
 
-	public String getPaymentUserName() {
-		return paymentUserName;
+	public int getProjectId() {
+		return projectId;
 	}
 
-	public long getPaymentNumberCard() {
-		return paymentNumberCard;
+	public String getUserName() {
+		return userName;
 	}
 
-	public int getPaymentEntered() {
-		return paymentEntered;
+	public long getNumberCard() {
+		return numberCard;
 	}
 
-	public void setPaymentUserName(String paymentUserName) {
-		this.paymentUserName = paymentUserName;
+	public int getAmountDonation() {
+		return amountDonation;
 	}
 
-	public void setPaymentNumberCard(long paymentNumberCard) {
-		this.paymentNumberCard = paymentNumberCard;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public void setPaymentEntered(int paymentEntered) {
-		this.paymentEntered = paymentEntered;
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
+
+	public void setUserName(String paymentUserName) {
+		this.userName = paymentUserName;
+	}
+
+	public void setNumberCard(long paymentNumberCard) {
+		this.numberCard = paymentNumberCard;
+	}
+
+	public void setAmountDonation(int amountDonation) {
+		this.amountDonation = amountDonation;
+	}
+
+	@Override
+	public String toString() {
+		return "User name: " + userName + "; number card: " + numberCard + "; donation: " + amountDonation;
 	}
 
 }

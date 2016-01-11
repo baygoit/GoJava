@@ -19,7 +19,7 @@
 		<property name="description" />
 		<property name="owner" />
 		<property name="goal" />
-		<property name="linkVideo" />
+		<property name="videoUrl" />
 		<property name="amountPledge" />
 	</class>
 

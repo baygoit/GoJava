@@ -2,7 +2,7 @@ package com.kickstarter.hibernate;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
+/*
 public class HibernateListener implements ServletContextListener {
 
 	public void contextInitialized(ServletContextEvent event) {
@@ -13,4 +13,4 @@ public class HibernateListener implements ServletContextListener {
 	public void contextDestroyed(ServletContextEvent event) {
 		HibernateUtil.getSessionFactory().close(); // Free all resources
 	}
-}
+}*/
