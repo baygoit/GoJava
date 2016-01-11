@@ -6,45 +6,60 @@ import static org.junit.Assert.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:applicationContext*.xml")
 public class RewardPostgreDAOTest {
 
     List<Reward> list;
-    RewardPostgreDAO dao;
+    
+    @Autowired
+    RewardPostgreDAO rewardPostgreDAO;
+    
+    @Autowired
+    ProjectPostgreDAO projectPostgreDAO;
+
+	private List<Project> projects;
 
     @Before
     public void setUp() throws Exception {
-    	HibernateUtil.configure("hibernate.cfg.xml");
-        dao = new RewardPostgreDAO();
-        
+    	projects = projectPostgreDAO.getAll();
+    	
+    	rewardPostgreDAO.clear();
         list = new ArrayList<>();
-        list.add(new Reward(1, null, "r1", 113));
-        list.add(new Reward(2, null, "r2", 44));       
-    }
-    
-    @After
-    public void tearDown() throws Exception {
-        dao.clear();
+        list.add(new Reward(1, projects.get(0), "r1", 113));
+        list.add(new Reward(2, projects.get(0), "r2", 44));
+        list.add(new Reward(3, projects.get(1), "r3", 33));
+        rewardPostgreDAO.addAll(list);
     }
 
     @Test
     public void testAddGetAll() {
-        dao.addAll(list);
-        assertThat(dao.getAll(), is(list));
+        assertThat(rewardPostgreDAO.getAll(), is(list));
     }
     
     @Test
     public void testAddGet() {
-        list.forEach(dao::add);
+    	rewardPostgreDAO.clear();
+        list.forEach(rewardPostgreDAO::add);
         Reward reward = list.get(1);
         int index = reward.getId();
-        assertThat(dao.get(index), is(reward));
+        assertThat(rewardPostgreDAO.get(index), is(reward));
+    }
+    
+    @Test
+    public void testGetByProject() {
+        int id = projects.get(0).getId();
+        rewardPostgreDAO.getByProject(id).forEach(p -> assertThat(p.getProject().getId(), is(id)));
     }
 
 }

@@ -6,50 +6,44 @@ import static org.junit.Assert.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 
-@RunWith(value=MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:applicationContext*.xml")
 public class CategoryPostgreDAOTest {
 	
-    CategoryPostgreDAO dao;
+	@Autowired
+    CategoryPostgreDAO categoryPostgreDAO;
     
     List<Category> list;
 
     @Before
     public void setUp() throws Exception {
-    	HibernateUtil.configure("hibernate.cfg.xml");
-        dao = new CategoryPostgreDAO();
-        
+    	categoryPostgreDAO.clear();
         list = new ArrayList<>();
         list.add(new Category(1, "c1"));
-        list.add(new Category(2, "c2"));      
-    }
-    
-    @After
-    public void tearDown() throws Exception {
-        dao.clear();
+        list.add(new Category(2, "c2"));
+        categoryPostgreDAO.addAll(list);
     }
 
     @Test
-    public void testAddGetAll() {   
-        dao.addAll(list);
-        assertThat(dao.getAll(), is(list));
+    public void testAddGetAll() { 
+        assertThat(categoryPostgreDAO.getAll(), is(list));
     }
     
     @Test
     public void testAddGet() {
-        dao.add(new Category(2, "t0"));
-        dao.add(new Category(1, "t1"));
-        dao.add(new Category(3, "t2"));
-        Category category = dao.getAll().get(1);
-        assertThat(dao.get(category.getId()), is(category));
+    	categoryPostgreDAO.clear();
+        list.forEach(categoryPostgreDAO::add);
+        Category category = list.get(0);
+        assertThat(categoryPostgreDAO.get(category.getId()), is(category));
     }
 
 }
