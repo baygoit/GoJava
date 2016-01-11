@@ -6,46 +6,44 @@ import static org.junit.Assert.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:applicationContext*.xml")
 public class QuotePostgreDAOTest {
 
-    QuotePostgreDAO dao;
+	@Autowired
+    QuotePostgreDAO quotePostgreDAO;
     List<Quote> list;
 
     @Before
     public void setUp() throws Exception {
-    	HibernateUtil.configure("hibernate.cfg.xml");
-        dao = new QuotePostgreDAO();
-        
+    	quotePostgreDAO.clear();
         list = new ArrayList<>();
         list.add(new Quote("a1", "t1"));
 		list.add(new Quote("a", "t"));
-    }
-    
-    @After
-    public void tearDown() throws Exception {
-        dao.clear();
+		quotePostgreDAO.addAll(list);
     }
 
     @Test
-    public void testAddGetAll() {   
-        dao.addAll(list);
-        assertThat(dao.getAll(), is(list));
+    public void testAddGetAll() {
+        assertThat(quotePostgreDAO.getAll(), is(list));
     }
 
     @Test
     public void testAddGet() {
-        dao.add(new Quote("a0", "t0"));
-        dao.add(new Quote("a1", "t1"));
-        dao.add(new Quote("a2", "t2"));
-        Quote quote = dao.getAll().get(0);
-        assertThat(dao.get(quote.getId()), is(quote));
+        quotePostgreDAO.add(new Quote("a0", "t0"));
+        quotePostgreDAO.add(new Quote("a1", "t1"));
+        quotePostgreDAO.add(new Quote("a2", "t2"));
+        Quote quote = quotePostgreDAO.getAll().get(0);
+        assertThat(quotePostgreDAO.get(quote.getId()), is(quote));
     }
 
 }

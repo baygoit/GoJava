@@ -6,7 +6,7 @@
 
 	default-lazy-init="true" default-autowire="byName">
 
-	<context:property-placeholder location="classpath:config.properties" />
+	<context:property-placeholder location="classpath:/storages/db/config.properties" />
 	
 	<context:annotation-config/>
 	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao"/>
@@ -26,35 +26,13 @@
 				<value>Domain.hbm.xml</value>
 			</list>
 		</property>
-		<property name="hibernateProperties">
+ 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
-		</property>		
+		</property>	
 	</bean>
-	
-<!-- 	 <bean id="hiberUtil"
-		class="ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil"  lazy-init="false"/> -->
-
-<!-- 	<bean id="quoteDAO"
-		class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuotePostgreDAO" />
-
-	<bean id="categoryDAO"
-		class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.CategoryPostgreDAO" /> 
-
-	<bean id="projectDAO"
-		class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.ProjectPostgreDAO" />
-
-	<bean id="questionsDAO"
-		class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuestionPostgreDAO" />
-
-	<bean id="paymentDAO"
-		class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.PaymentPostgreDAO" />
-
-	<bean id="rewardDAO"
-		class="ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.RewardPostgreDAO" /> -->
-
-	<!-- <import resource="loggerAspect.xml" /> -->
 
 </beans>
