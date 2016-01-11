@@ -20,6 +20,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
@@ -30,6 +31,8 @@ public class PledgeServletTest {
 	private PaymentDao paymentDao;
 	@Mock
 	private RewardDao rewardDao;
+	@Mock
+	private ProjectDao projectDao;
 	@Mock
 	RequestValidation requestValidation;
 	@InjectMocks
@@ -66,7 +69,7 @@ public class PledgeServletTest {
 		Reward reward = mock(Reward.class);
 		when(rewardDao.getReward(1)).thenReturn(reward);
 		when(reward.getPledge()).thenReturn(200);
-							
+		
 		pledgeServlet.doPost(request, response);
 		
 		verify(paymentDao).addPayment(any(Payment.class));

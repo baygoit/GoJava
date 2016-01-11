@@ -14,11 +14,11 @@ public class CategoryTest {
 
 		String name = "name";
 
-		Category category = new Category(1, name);
+		Category category = new Category();
 		category.setName(name);
-		category.setUniqueID(1);
+		category.setId(1);
 		assertThat(category.getName(), is(name));
-		assertThat(category.getUniqueID(), is(1));
+		assertThat(category.getId(), is(1));
 		assertThat(category.toString(), is("ID: " + 1 + ", Name: " + name));
 	}
 }

@@ -1,22 +1,47 @@
 package com.kickstarter.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="projects")
 public class Project {
-	private int id;
-	private String title;
-	private String discription;
-	private int daysLeft;
-	private int requiredSum;
-	private int gainedSum;
-	private String projectHistory;
-	private String videoLink;
-	private String categoryTitle;
 	
-	public Project(){
-		
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name ="projectId")
+	private int id;
+	@Column(name ="title")
+	private String title;
+	@Column(name ="discription")
+	private String discription;
+	@Column(name ="daysLeft")
+	private int daysLeft;
+	@Column(name ="requiredSum")
+	private int requiredSum;
+	@Column(name ="gainedSum")
+	private int gainedSum;
+	@Column(name ="projectHistory")
+	private String projectHistory;
+	@Column(name ="videoLink")
+	private String videoLink;
+	@ManyToOne
+	@JoinColumn(name = "categoryId")
+	private Category category;
+
+	
+
+	public Project() {
 	}
 
 	public Project(int id, String title, String discription, int daysLeft, int requiredSum, int gainedSum,
-			String projectHistory, String videoLink, String categoryTitle) {
+			String projectHistory, String videoLink, Category category) {
 		this.id = id;
 		this.title = title;
 		this.discription = discription;
@@ -25,7 +50,14 @@ public class Project {
 		this.gainedSum = gainedSum;
 		this.projectHistory = projectHistory;
 		this.videoLink = videoLink;
-		this.categoryTitle = categoryTitle;
+		this.category = category;
+	}
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public String getTitle() {
@@ -83,7 +115,7 @@ public class Project {
 	public void setVideoLink(String videoLink) {
 		this.videoLink = videoLink;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -92,13 +124,13 @@ public class Project {
 		this.id = id;
 	}
 
-	public String getCategoryName() {
-		return categoryTitle;
+/*	public Integer getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryTitle = categoryName;
-	}
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}*/
 
 	@Override
 	public String toString() {

@@ -16,7 +16,9 @@ public class QuoteDatabaseDao{
 
 
 
+    @SuppressWarnings("unchecked")
     public Quote getRandomQuote() {
+        logger.debug("Getting random Quote");
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Quote> quotes = (List<Quote>) session.createQuery("from Quote q order by rand()").setMaxResults(1).list();
         if(quotes.isEmpty()){

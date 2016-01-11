@@ -1,16 +1,25 @@
 package com.kickstarter.model;
 
-public class Quote {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "quotes")
+public class Quote {
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String quoteText;
+	private String quote;
 	private String author;
 
 	public Quote() {
 	}
 
-	public Quote(String quoteText, String author) {
-		this.quoteText = quoteText;
+	public Quote(String quote, String author) {
+		this.quote = quote;
 		this.author = author;
 	}
 
@@ -22,12 +31,12 @@ public class Quote {
 		this.id = id;
 	}
 
-	public String getQuoteText() {
-		return quoteText;
+	public String getQuote() {
+		return quote;
 	}
 
-	public void setQuoteText(String quoteText) {
-		this.quoteText = quoteText;
+	public void setQuote(String quote) {
+		this.quote = quote;
 	}
 
 	public String getAuthor() {

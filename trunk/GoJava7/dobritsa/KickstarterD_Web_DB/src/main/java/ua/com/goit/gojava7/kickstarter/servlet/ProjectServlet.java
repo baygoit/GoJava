@@ -13,10 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
-import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @WebServlet("/project")
@@ -27,15 +24,6 @@ public class ProjectServlet extends HttpServlet {
 	
 	@Autowired
 	private ProjectDao projectDao;
-	
-	@Autowired
-	private QuestionDao questionDao;
-	
-	@Autowired
-	private CategoryDao categoryDao;
-	
-	@Autowired
-	private PaymentDao paymentDao;
 
 	@Override
 	public void init() throws ServletException {
@@ -45,17 +33,17 @@ public class ProjectServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException {	
 		
 		log.info("doGet()...");		
-		Long projectId = Long.parseLong(request.getParameter("id"));
 		
+		Long projectId = Long.parseLong(request.getParameter("id"));
+
 		Project project = projectDao.get(projectId);
-		project.setPledged(paymentDao.calculatePledgedForProject(project.getProjectId()));
-			
-		request.setAttribute("category", categoryDao.get(projectDao.get(projectId).getCategoryId()));	
-		request.setAttribute("project", project);		
-		request.setAttribute("questions", questionDao.getByProject(projectId));
+
+		request.setAttribute("category", projectDao.getCategory(project));
+		request.setAttribute("project", project);
+		request.setAttribute("questions", projectDao.getQuestions(projectId));
 		request.getRequestDispatcher("/WEB-INF/jsp/project.jsp").forward(request, response);
-	}	
+	}
 }

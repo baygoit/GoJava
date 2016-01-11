@@ -31,7 +31,12 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">create</property>
 
-		<mapping resource="Quote.hbm.xml" />
+		<mapping resource="Category.hbm.xml" />
+		<mapping resource="Payment.hbm.xml" />
+		<mapping resource="Project.hbm.xml" />
+		<mapping resource="Question.hbm.xml" />
+		<mapping resource="Quote.hbm.xml" />	
+		<mapping resource="Reward.hbm.xml" />
 
 	</session-factory>
 

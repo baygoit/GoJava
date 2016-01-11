@@ -14,15 +14,16 @@ public class Validator {
 
 	public boolean validateAmountOfPledge(String amount) {
 		log.info("validateAmountOfPledge({})...", amount);
-		Pattern p = Pattern.compile("^[0-9]{1,10}$");
+		Pattern p = Pattern.compile("^[1-9]{1,10}$");
 		Matcher m = p.matcher(amount);
 		return m.matches();
 	}
 	
-	public boolean validatePayment(String name, String card) {
-		log.info("validatePayment({}, {})...", name, card);
-		if (validateName(name) & validateCard(card)) return true;
-		else return false;
+	public boolean validatePayer(String name, String card) {
+		log.info("validatePayer({}, {})...", name, card);
+		//if (validateName(name) & validateCard(card)) return true;
+		//else return false;
+		return validateName(name) & validateCard(card);
 	}
 
 	public boolean validateName(String name) {
@@ -34,8 +35,16 @@ public class Validator {
 	
 	public boolean validateCard(String card) {
 		log.info("validateCard({})...", card);
-		Pattern p = Pattern.compile("^[0-9]{16,16}$");
+		Pattern p = Pattern.compile("^[0-9]{16}$");
 		Matcher m = p.matcher(card);
+		return m.matches();
+	}
+
+
+	public boolean validateQuestion(String question) {
+		log.info("validateQuestion({})...", question);
+		Pattern p = Pattern.compile("^[a-zA-Z0-9]{2,500}$");
+		Matcher m = p.matcher(question);
 		return m.matches();
 	}
 }

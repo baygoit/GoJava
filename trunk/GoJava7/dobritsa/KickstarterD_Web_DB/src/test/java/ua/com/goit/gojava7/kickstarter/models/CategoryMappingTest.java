@@ -1,7 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.models;
 
-import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -10,6 +8,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 public class CategoryMappingTest {
 
@@ -38,16 +38,27 @@ public class CategoryMappingTest {
 	@Test
 	public void testBasicUsage() {
 		Session session = sessionFactory.openSession();
-		session.beginTransaction();
 
 		Category category1 = new Category();
-		category1.setCategoryId(11l);
+		category1.setCategoryId(11L);
 		category1.setName("TestCategory 1");
 
 		Category category2 = new Category();
-		category2.setCategoryId(22l);
+		category2.setCategoryId(22L);
 		category2.setName("TestCategory 2");
+		
+		Project project1 = new Project();
+		project1.setName("TestName1");
+		project1.setDescription("TestDescription1");
+		project1.setGoal(100L);
+		project1.setDaysToGo(1L);
+		project1.setHistory("TestHistory1");
+		project1.setLink("TestLink1");
+		project1.setCategory(category1);		
+		
+		category1.getProjects().add(project1);
 
+		session.beginTransaction();
 		session.save(category1);
 		session.save(category2);
 		session.getTransaction().commit();
@@ -56,13 +67,13 @@ public class CategoryMappingTest {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		System.out.println("\n-----Get by id = 1-----");
-		Category category = session.get(Category.class, 1l);
+		Category category = session.get(Category.class, 1L);
 		System.out.println(category);
 		session.close();
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		System.out.println("\n-----Get list of quotes-----");
+		System.out.println("\n-----Get list of categories-----");
 		List<Category> categories = (List<Category>) session.createQuery("from Category q").list();
 		for (Category resultCategory : categories) {
 			System.out.println(resultCategory);

@@ -3,8 +3,6 @@ package ua.com.goit.gojava7.kickstarter.servlet;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -58,7 +56,7 @@ public class MainServlet extends HttpServlet {
 		}else if(action.startsWith("/category")){ // All projects in specific category
 		    logger.log(Level.DEBUG,"action: category");
             int categoryId = Integer.parseInt(request.getParameter("id"));
-            List<Project> projects = projectStorage.getAll().stream().filter( p -> p.getProjectCategoryId() == categoryId).collect(Collectors.toList());
+            List<Project> projects = projectStorage.getProjectsByCategoryId(categoryId);
             request.setAttribute("projects", projects);
             request.setAttribute("categoryName", categoryStorage.getCategoryById(categoryId).getCategoryName());
             request.getRequestDispatcher("/WEB-INF/jsp/projects.jsp").forward(request, response);

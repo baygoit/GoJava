@@ -20,11 +20,8 @@ public class DbConnector {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conection = DriverManager.getConnection(url, user, password);
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return conection;

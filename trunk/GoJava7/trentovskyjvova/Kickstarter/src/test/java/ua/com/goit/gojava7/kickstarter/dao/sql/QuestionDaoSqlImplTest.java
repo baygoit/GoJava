@@ -5,6 +5,7 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.verify;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -25,6 +26,7 @@ public class QuestionDaoSqlImplTest {
 	private QuestionDao questionDaoMySqlImpl = new QuestionDaoSqlImpl();
 	
 	@Test
+	@Ignore
 	public void testGetQuestions(){
 
 		questionDaoMySqlImpl.getQuestions(1);
@@ -33,6 +35,7 @@ public class QuestionDaoSqlImplTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testAddQuestion(){
 
 		questionDaoMySqlImpl.addQuestion(new Question());

@@ -41,17 +41,21 @@ public class ProjectTest{
 		projectCategory.setCategoryId(5);
 		LocalDateTime now = LocalDateTime.now();
 		String projectName = "project";
-		project = new Project(projectName, "2", 5, now);
+		project = new Project();
+		project.setProjectName(projectName);
+		final String desc = "2";
+        project.setProjectDescription(desc);
+		project.setEnddate(now);
 		assertThat(project.getProjectName(), is(projectName));
-		assertThat(project.getProjectDescription(), is("2"));
-		assertThat(project.getProjectCategoryId(), is(projectCategory.getCategoryId()));
+		assertThat(project.getProjectDescription(), is(desc));
 		assertThat(project.getEnddate(), is(now));
 	}
 
 	@Test
 	public void testGetProjectEndTime() {
 		LocalDateTime now = LocalDateTime.now().plusDays(14).minusHours(1);
-		project = new Project("1", "2", 5, now);
+		project = new Project();
+		project.setEnddate(now);
 		assertThat(project.getProjectEndTime(), is("13 days left"));
 
 		project.setEnddate(LocalDateTime.now().plusHours(4).minusMinutes(1));
@@ -99,12 +103,7 @@ public class ProjectTest{
 		assertThat(project.getPledged(), is(98000.0));
 	}
 
-	@Test
-	public void testGetProjectCategory() {
-		Category cat = new Category("NameCategory", 1);
-		project.setProjectCategoryId(1);
-		assertThat(project.getProjectCategoryId(), is(cat.getCategoryId()));
-	}
+
 
 	@Test
 	public void testGetEndDate() {

@@ -11,17 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.kickstarter.dao.interfaces.DbProjectDaoImpl;
-import com.kickstarter.dao.interfaces.DbQuestionDaoImpl;
+import com.kickstarter.dao.Impl.ProjectDaoImpl;
+import com.kickstarter.dao.Impl.QuestionDaoImpl;
+import com.kickstarter.model.Project;
 
 @WebServlet("/QuestionServlet")
 public class QuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	DbQuestionDaoImpl questionDao;
+	QuestionDaoImpl questionDao;
 	@Autowired
-	DbProjectDaoImpl projectDao;
+	ProjectDaoImpl projectDao;
 
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
@@ -29,13 +30,13 @@ public class QuestionServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("projectId"));
+		int projectId = Integer.parseInt(request.getParameter("projectId"));
 		String question = request.getParameter("question");
 		if (question.length() >= 1) {
-			String projectTitle = projectDao.getOne(id).getTitle();
-			questionDao.add(question, projectTitle);
+			Project project = projectDao.getOneProject(projectId);
+			questionDao.add(question, project);
 		}
-		response.sendRedirect("SingleProjectServlet?projectId=" + id);
+		response.sendRedirect("SingleProjectServlet?projectId=" + projectId);
 
 	}
 }

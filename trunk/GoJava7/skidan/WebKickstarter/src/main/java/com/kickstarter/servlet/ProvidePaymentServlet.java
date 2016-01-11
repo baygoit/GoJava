@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import com.kickstarter.dao.interfaces.PaymentDaoImpl;
+import com.kickstarter.dao.Impl.PaymentDaoImpl;
+import com.kickstarter.dao.Impl.ProjectDaoImpl;
+import com.kickstarter.model.Project;
 
 @WebServlet("/ProvidePaymentServlet")
 public class ProvidePaymentServlet extends HttpServlet {
@@ -19,6 +21,8 @@ public class ProvidePaymentServlet extends HttpServlet {
 
 	@Autowired
 	PaymentDaoImpl paymentDao;
+	@Autowired
+	ProjectDaoImpl projectDao;
 
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
@@ -30,19 +34,15 @@ public class ProvidePaymentServlet extends HttpServlet {
 		Integer paymentAmount = null;
 		try {
 			paymentAmount = Integer.parseInt(request.getParameter("paymentAmount"));
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			response.sendRedirect("SingleProjectServlet?projectId=" + projectId);
 			return;
 		}
-		if (paymentAmount < 0) {
-			response.sendRedirect("SingleProjectServlet?projectId=" + projectId);
-		} else if (paymentAmount.equals(null)) {
-			response.sendRedirect("SingleProjectServlet?projectId=" + projectId);
-		} else {
-			paymentDao.addPayment(projectId, paymentAmount);
-			response.sendRedirect("SingleProjectServlet?projectId=" + projectId);
+		if (paymentAmount > 0) {
+			Project project = projectDao.getOneProject(projectId);
+			paymentDao.addPayment(project, paymentAmount);
 		}
-
+		response.sendRedirect("SingleProjectServlet?projectId=" + projectId);
 	}
 
 }

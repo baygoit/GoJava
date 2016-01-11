@@ -14,6 +14,11 @@ public class QuoteTest {
 	@Test
 	public void testDomain(){
 		assertThat(Quote.class, allOf(hasValidBeanConstructor(), hasValidGettersAndSetters()));
+		
+		String content="content";
+		String author="author";
+		@SuppressWarnings("unused")
+		Quote quote=new Quote(content, author);
 	}
 	
 }

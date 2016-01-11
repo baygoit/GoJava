@@ -2,32 +2,41 @@ package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 @Repository
+@Transactional
 public class QuestionDaoSqlImpl implements QuestionDao {
 	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	private SessionFactory sessionFactory;
 
 	@Override
 	public List<Question> getQuestions(int projectId) {
 		
-		String sql = "SELECT id, projectId, questionText FROM question WHERE projectId = ?";
-		return jdbcTemplate.query(sql, new Integer[] { projectId },
-				new BeanPropertyRowMapper<Question>(Question.class));
+		Session session = sessionFactory.getCurrentSession();
+		
+		Criteria criteria = session.createCriteria(Question.class);	
+		criteria.add(Restrictions.eq("projectId", projectId));
+		
+		return criteria.list();
 	}
 
 	@Override
 	public void addQuestion(Question question) {
-
-		String sql = "INSERT INTO question (projectId, questionText) VALUES (?, ?)";
-		jdbcTemplate.update(sql, question.getProjectId(), question.getQuestionText());
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		session.save(question);
+		
 	}
 
 }
