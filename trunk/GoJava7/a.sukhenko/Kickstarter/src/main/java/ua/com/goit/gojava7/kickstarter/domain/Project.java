@@ -2,7 +2,9 @@ package ua.com.goit.gojava7.kickstarter.domain;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,6 +21,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Type;
 @Entity
 @Table(name = "projects")
@@ -50,23 +54,24 @@ public class Project{
     @Column(name = "enddate")
     private LocalDateTime       enddate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project", targetEntity=Bonus.class)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private Set<Bonus>          bonuses             = new HashSet<Bonus>();
+    @OneToMany
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    @JoinColumn(name="projectId") 
+    private List<Bonus>          bonuses             = new ArrayList<Bonus>();
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    private List<Question>       questionsAndAnswers;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private Set<Question>       questionsAndAnswers = new HashSet<Question>();
+    @Cascade({CascadeType.SAVE_UPDATE})
+    private List<Payment>        payments            = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    private Set<Payment>        payments            = new HashSet<Payment>();
-
-    public Set<Payment> getPayments() {
+    public List<Payment> getPayments() {
         return payments;
     }
 
-    public void setPayments(Set<Payment> payments) {
+    public void setPayments(List<Payment> payments) {
         this.payments = payments;
     }
 
@@ -106,7 +111,7 @@ public class Project{
         return projectName;
     }
 
-    @XmlAttribute
+   
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
@@ -115,7 +120,6 @@ public class Project{
         return projectDescription;
     }
 
-    @XmlElement
     public void setProjectDescription(String projectDescription) {
         this.projectDescription = projectDescription;
     }
@@ -155,20 +159,20 @@ public class Project{
     public void setId(int id) {
         this.id = id;
     }
-
-    public Set<Bonus> getBonuses() {
+   
+    public List<Bonus> getBonuses() {
         return bonuses;
     }
 
-    public void setBonuses(Set<Bonus> bonuses) {
+    public void setBonuses(List<Bonus> bonuses) {
         this.bonuses = bonuses;
     }
 
-    public Set<Question> getQuestionsAndAnswers() {
+    public List<Question> getQuestionsAndAnswers() {
         return questionsAndAnswers;
     }
 
-    public void setQuestionsAndAnswers(Set<Question> questionsAndAnswers) {
+    public void setQuestionsAndAnswers(List<Question> questionsAndAnswers) {
         this.questionsAndAnswers = questionsAndAnswers;
     }
 }

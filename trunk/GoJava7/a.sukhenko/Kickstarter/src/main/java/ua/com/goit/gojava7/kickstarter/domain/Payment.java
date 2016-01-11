@@ -1,34 +1,48 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
-@Table(name = "payments")
+@Table(name = "payments")//country
 public class Payment{
     @Id
-    @GeneratedValue
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int    id;
-    @Column
-    private long   cardNumber;
+    @Column(name = "cardNumber")
+    private String   cardNumber;
     @Column
     private String cardOwner;
-    @Column
+    @Column(name = "projectId",insertable = false, updatable= false)
     private int    projectId;
-    @Column
+    @Column(name = "amount")
     private long   amount;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name = "projectId")
     private Project project;
     
     
+    public Payment(String cardNumber, String cardOwner, Project project, long amount) {
+        super();
+        this.cardNumber = cardNumber;
+        this.cardOwner = cardOwner;
+        this.project = project;
+        this.amount = amount;
+    }
+
     public Project getProject() {
         return project;
     }
@@ -49,10 +63,10 @@ public class Payment{
     public void setCardOwner(String cardOwner) {
         this.cardOwner = cardOwner;
     }
-    public long getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
-    public void setCardNumber(long cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
     }
     public int getProjectId() {

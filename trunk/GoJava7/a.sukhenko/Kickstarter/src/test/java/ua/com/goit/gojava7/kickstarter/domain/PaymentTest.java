@@ -23,7 +23,7 @@ public class PaymentTest{
 
     @Test
     public void testSetCardNumber() {
-        final long cardNumber = 5000;
+        final String cardNumber = "5000";
         payment.setCardNumber(cardNumber);
         assertThat(payment.getCardNumber(), is(cardNumber));
     }

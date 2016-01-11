@@ -22,7 +22,7 @@ public class ProjectDatabaseDao{
 
     public List<Project> getAll() {
         LOGGER.debug("getting all projects from db.");
-        String hql = "FROM Employee E";
+        String hql = "FROM Project P";
         Session session = sessionFactory.openSession();
         Query query = session.createQuery(hql);
         List<Project> results = HibernateUtil.listAndCast(query);
@@ -41,6 +41,9 @@ public class ProjectDatabaseDao{
         List<Project> results = HibernateUtil.listAndCast(query);
         if (results.isEmpty()) {
             throw new NoSuchElementException();
+        }
+        if(session.isOpen()){
+        session.close();
         }
         return results.get(0);
     }

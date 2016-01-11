@@ -3,6 +3,8 @@ package ua.com.goit.gojava7.kickstarter.servlet;
 import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +19,11 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDatabaseDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDatabaseDao;
+import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDatabaseDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuoteDatabaseDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 /**
@@ -35,6 +39,8 @@ public class MainServlet extends HttpServlet{
     private ProjectDatabaseDao  projectStorage;
     @Autowired
     private QuoteDatabaseDao    quoteStorage;
+    @Autowired
+    private QuestionDatabaseDao questionStorage;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -76,8 +82,10 @@ public class MainServlet extends HttpServlet{
             if (project != null) {
                 request.setAttribute("project", project);
                 request.setAttribute("endtime", project.getProjectEndTime());
+              
                 request.setAttribute("paymentBonuses", project.getBonuses());
-                request.setAttribute("questions", project.getQuestionsAndAnswers());
+                List<Question> questions = questionStorage.getQuestionsByProjectId(project.getId());
+                request.setAttribute("questions", questions);
             } else {
                 request.setAttribute("notfound", true);
             }

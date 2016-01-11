@@ -21,9 +21,20 @@ public class Question{
     private String  question;
     @Column
     private String  answer;
+    
+    @Column
+    private int projectId;
+    
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private Project project;
+    private Project project = new Project();
 
     public String getAnswer() {
         return answer;

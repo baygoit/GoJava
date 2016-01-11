@@ -22,9 +22,9 @@ public class Bonus{
     private double  amount;
     @Column
     private String  bonus;
-    @ManyToOne(cascade = CascadeType.ALL, targetEntity = Project.class)
-    //@JoinColumn(name = "projectId")
-    private Project project;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Project project = new Project();
 
     public int getId() {
         return id;

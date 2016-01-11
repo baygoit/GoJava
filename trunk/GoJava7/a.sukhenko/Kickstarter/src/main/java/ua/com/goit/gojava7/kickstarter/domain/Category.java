@@ -35,6 +35,8 @@ public class Category{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     @Cascade({CascadeType.SAVE_UPDATE})
     private List<Project> projects = new ArrayList<>();
+    
+    
     public Category() {
     }
 

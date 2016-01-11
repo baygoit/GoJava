@@ -20,16 +20,7 @@
 	<p>Time: ${endtime} </p>
 	
         <br />
-        Bonuses:
-        	<ul>
-   	<c:forEach var="bonus" items="${paymentBonuses}" >
-   
-			<li>
-			 ${bonus.amount}  - ${bonus.bonus}
-			</li>
-			
-		</c:forEach>
-     </ul>   
+ <!--  there was stuff here -->
      
    
    	<c:forEach var="question" items="${questions}" >
