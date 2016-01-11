@@ -20,7 +20,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 "classpath:applicationContext.xml"})
 @Transactional
 @TransactionConfiguration(defaultRollback=true)
-public class ProjectDaoTest {
+public class ITProjectDaoTest {
 
     @Autowired
     private ProjectDatabaseDao projectDao;
