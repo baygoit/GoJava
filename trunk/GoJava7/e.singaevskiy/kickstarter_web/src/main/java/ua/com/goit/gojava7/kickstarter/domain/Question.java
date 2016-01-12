@@ -1,7 +1,20 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Question {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@ManyToOne
+	@JoinColumn(name="project_id", foreignKey=@ForeignKey(name="question_project_id_fkey"))
     private Project project;
     private String question;
     private String answer;

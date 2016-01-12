@@ -1,21 +1,39 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-import java.util.ArrayList;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Project {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
+@Entity
+public class Project {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private long goalSum;
+    @Transient
     private long balanceSum;
     private Date startDate;
     private Date endDate;
+    @ManyToOne(cascade={CascadeType.ALL})
+    @JoinColumn(name="category_id", 
+    	foreignKey=@ForeignKey(name="project_category_id_fkey"))
     private Category category;
     private String description;
     private String videoUrl;
     private String author;
+    @OneToMany
     private List<Question> questions = new ArrayList<Question>();
 
     public Project() {

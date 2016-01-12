@@ -2,12 +2,29 @@ package ua.com.goit.gojava7.kickstarter.domain;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Payment {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@Column(name="username")
     private String user;
     private long cardId;
     private long sum;
+    @ManyToOne
+    @JoinColumn(name="project_id", foreignKey=@ForeignKey(name="Payment_Project"))
     private Project project;
+    @ManyToOne
+    @JoinColumn(name="reward_id", foreignKey=@ForeignKey(name="Payment_Reward"))
     private Reward reward;
     private Date date;
 
