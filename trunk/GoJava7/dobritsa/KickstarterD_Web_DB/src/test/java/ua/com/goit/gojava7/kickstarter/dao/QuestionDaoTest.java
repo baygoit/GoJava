@@ -31,16 +31,4 @@ public class QuestionDaoTest {
 
         verify(validator).validateQuestion(anyObject());
     }
-
-    @Test
-    public void testCreateQuestion2() {
-        when(validator.validateQuestion(anyObject())).thenReturn(true);
-
-
-        questionDao.createQuestion("new question", 1L);
-
-        verify(validator).validateQuestion(anyObject());
-        verify(projectDao).get(anyLong());
-
-    }
 }

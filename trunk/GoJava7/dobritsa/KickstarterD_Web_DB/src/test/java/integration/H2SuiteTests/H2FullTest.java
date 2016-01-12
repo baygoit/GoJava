@@ -26,6 +26,7 @@ public class H2FullTest {
     @BeforeClass
     public static void setUp() throws Exception {
         sessionFactory = H2SuiteTest.getSessionFactory();
+        sessionFactory.openSession();
     }
 
     @Test

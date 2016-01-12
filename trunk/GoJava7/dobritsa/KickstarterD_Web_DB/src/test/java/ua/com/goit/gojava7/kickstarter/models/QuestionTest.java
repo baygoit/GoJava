@@ -52,6 +52,6 @@ public class QuestionTest extends Assert {
 	@Test
 	public void testToString() {
 		System.out.println(question.toString());
-		verify(printSteam).println(contains("NewQuestion"));
+		verify(printSteam).println(contains("TestQuestion"));
 	}
 }

@@ -10,10 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.config.Validator;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @Repository
+@Transactional
 public class QuestionDao {
 	
 	@Autowired
@@ -32,28 +34,23 @@ public class QuestionDao {
 	}
 
 	public void add(Question question) {
-		log.info("<void> add({})...", question);
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		log.info("<void> add()...", question);
+		Session session = sessionFactory.getCurrentSession();
+		//session.beginTransaction();
 
 		session.save(question);
-		session.getTransaction().commit();
-
-		session.close();
+		//session.getTransaction().commit();
 	}
 
 
 	@SuppressWarnings("unchecked")
 	public List<Question> getByProject(Long projectId) {
 		log.info("<questions> getByProject({})...", projectId);
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 
-		List<Question> questions = session.createCriteria(Question.class)
+		return session.createCriteria(Question.class)
 				.add(Restrictions.eq("project.id", projectId))
 				.list();
-
-		session.close();
-		return questions;
 	}
 
 	public void createQuestion(String text, Long projectId) {

@@ -80,6 +80,6 @@ public class Question {
 	
 	@Override
 	public String toString() {
-		return "questionId: " + questionId + "; time: " + time + "; question: " + question + "; answer: " + answer + "; projectId: " + project.getProjectId();
+		return "questionId: " + questionId + "; time: " + time + "; question: " + question + "; answer: " + answer + ";";
 	}
 }

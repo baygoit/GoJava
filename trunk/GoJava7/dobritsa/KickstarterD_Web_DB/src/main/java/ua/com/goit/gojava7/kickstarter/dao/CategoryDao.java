@@ -34,26 +34,15 @@ public class CategoryDao {
 		log.info("<Category> get({})...", categoryId);
 		Session session = sessionFactory.getCurrentSession();
 
-		Category category = (Category) session.createCriteria(Category.class)
+		return (Category) session.createCriteria(Category.class)
 				.add(Restrictions.eq("categoryId", categoryId)).uniqueResult();
-
-		//session.close();
-		//log.debug("<Category> get({}) returned category: {}", categoryId, category);
-		return category;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Category> getAll() {
+	public List getAll() {
 		log.info("<categories> getAll()...");
 		Session session = sessionFactory.getCurrentSession();
 
-		List<Category> categories = session.createCriteria(Category.class)
-				.list();
-
-		//session.close();
-		//log.debug("<categories> getAll() returned categories: {}", categories);
-
-		return categories;
+		return session.createCriteria(Category.class).list();
 	}
 
 	public List<Project> getProjects(Long categoryId) {
