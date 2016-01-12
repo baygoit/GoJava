@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+
+import org.hibernate.annotations.Formula;
 
 @Entity
 public class Project {
@@ -22,8 +24,8 @@ public class Project {
     private int id;
     private String name;
     private long goalSum;
-    @Transient
-    private long balanceSum;
+    @Formula("(select SUM(p.sum) from payment p where p.project_id = id)")
+    private Long balanceSum;
     private Date startDate;
     private Date endDate;
     @ManyToOne(cascade={CascadeType.ALL})
@@ -33,7 +35,7 @@ public class Project {
     private String description;
     private String videoUrl;
     private String author;
-    @OneToMany
+    @OneToMany(mappedBy="project", fetch=FetchType.EAGER)
     private List<Question> questions = new ArrayList<Question>();
 
     public Project() {
@@ -67,12 +69,15 @@ public class Project {
         this.goalSum = goalSum;
     }
 
-    public long getBalanceSum() {
+    public Long getBalanceSum() {
+    	if(balanceSum == null) {
+    		return 0L;
+    	}
         return balanceSum;
     }
 
-    public void setBalanceSum(long balanceSum) {
-        this.balanceSum = balanceSum;
+    public void setBalanceSum(Long balanceSum) {
+   		this.balanceSum = balanceSum;    
     }
 
     public Date getStartDate() {
