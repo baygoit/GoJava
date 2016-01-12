@@ -12,13 +12,13 @@ import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @Repository
+@Transactional
 public class QuoteDaoImpl implements QuoteDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
 	public Quote getRandomQuote() {
 		Session session = sessionFactory.getCurrentSession();
 		

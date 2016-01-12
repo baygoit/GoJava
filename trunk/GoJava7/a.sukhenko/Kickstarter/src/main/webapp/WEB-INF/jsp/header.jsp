@@ -2,6 +2,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+/* Effect 15: scale down, reveal */
+.cl-effect-15 a {
+	color: rgba(0,0,0,0.2);
+	font-weight: 700;
+	text-shadow: none;
+}
+
+.cl-effect-15 a::before {
+	color: #fff;
+	content: attr(data-hover);
+	position: absolute;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.cl-effect-15 a:hover::before,
+.cl-effect-15 a:focus::before {
+	transform: scale(0.9);
+	opacity: 0;
+}
+</style>
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 <title>
 	<c:if test="${not empty param.title}">${param.title}</c:if>
 	<c:if test="${empty param.title}">Default title</c:if>

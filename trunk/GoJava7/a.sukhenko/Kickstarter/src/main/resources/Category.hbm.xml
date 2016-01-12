@@ -11,7 +11,7 @@
 
 	<class name="Category" table="categories">
 		<id name="categoryId">
-			<generator class="increment" />
+			<generator class="native" />
 		</id>
 		<property name="categoryName" />
 	</class>
