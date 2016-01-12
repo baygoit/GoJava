@@ -48,9 +48,6 @@ public class RewardDao {
 
 		session.close();
 
-		if (rewards.isEmpty())
-			return null;
-
 		return rewards;
 	}
 }

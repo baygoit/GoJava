@@ -53,17 +53,15 @@ public class QuestionDao {
 				.list();
 
 		session.close();
-
-		if (questions.isEmpty())
-			return null;
-
 		return questions;
 	}
 
 	public void createQuestion(String text, Long projectId) {
 		log.info("<void> createQuestion({}, {})...", text, projectId);
 		if (validator.validateQuestion(text)) {
-			Question question = new Question(text, projectDao.get(projectId));
+			Question question = new Question();
+			question.setQuestion(text);
+			question.setProject(projectDao.get(projectId));
 			add(question);
 		}
 	}

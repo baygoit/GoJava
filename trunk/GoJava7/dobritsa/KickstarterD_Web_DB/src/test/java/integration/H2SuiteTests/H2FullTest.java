@@ -1,4 +1,4 @@
-package integration.suiteTests;
+package integration.H2SuiteTests;
 
 import org.hibernate.SessionFactory;
 import org.junit.BeforeClass;
@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-public class TestFullDb {
+public class H2FullTest {
 
     private static SessionFactory sessionFactory;
 
@@ -25,7 +25,7 @@ public class TestFullDb {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        sessionFactory = TestSuite.getSessionFactory();
+        sessionFactory = H2SuiteTest.getSessionFactory();
     }
 
     @Test
@@ -84,7 +84,9 @@ public class TestFullDb {
 
         projectDao.setSessionFactory(sessionFactory);
         Project project = projectDao.get(1L);
-        Question question = new Question("QuestionForTestAddingQuestion", project);
+        Question question = new Question();
+        question.setQuestion("QuestionForTestAddingQuestion");
+        question.setProject(project);
         questionDao.add(question);
         List<Question> questionsNew = questionDao.getByProject(1L);
         assertThat(questionsNew.size(), is(3));

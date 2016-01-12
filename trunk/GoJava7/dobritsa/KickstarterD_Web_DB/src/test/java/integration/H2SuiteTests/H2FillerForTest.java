@@ -1,4 +1,4 @@
-package integration.suiteTests;
+package integration.H2SuiteTests;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -6,13 +6,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import ua.com.goit.gojava7.kickstarter.models.*;
 
-public class FillerDbForTests {
+public class H2FillerForTest {
 
     private static SessionFactory sessionFactory;
 
     @BeforeClass
     public static void setUp() throws Exception {
-        sessionFactory = TestSuite.getSessionFactory();
+        sessionFactory = H2SuiteTest.getSessionFactory();
     }
 
     @Test

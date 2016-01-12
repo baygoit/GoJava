@@ -1,4 +1,4 @@
-package integration.suiteTests;
+package integration.H2SuiteTests;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -11,17 +11,17 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        TestEmptyDb.class,
-        FillerDbForTests.class,
-        TestFullDb.class
+        H2EmptyTest.class,
+        H2FillerForTest.class,
+        H2FullTest.class
 })
-public class TestSuite {
+public class H2SuiteTest {
 
     private static SessionFactory sessionFactory;
 
     @BeforeClass
     public static void setUp() throws Exception {
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernateTest.cfg.xml").build();
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate/hibernateTest.cfg.xml").build();
         try {
             sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         } catch (Exception e) {

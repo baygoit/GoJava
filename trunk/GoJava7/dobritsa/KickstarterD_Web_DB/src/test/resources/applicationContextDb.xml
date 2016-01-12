@@ -20,7 +20,7 @@
 	   
 	<bean id="basicDataSource" class="org.apache.commons.dbcp2.BasicDataSource"	destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/kickstarter" />
+		<property name="url" value="jdbc:mysql://localhost:3306/kickstarter_test" />
 		<property name="username" value="root" />
 		<property name="password" value="temppassword" />
 	</bean>	
@@ -41,6 +41,7 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 			</props>
 		</property>		
 		

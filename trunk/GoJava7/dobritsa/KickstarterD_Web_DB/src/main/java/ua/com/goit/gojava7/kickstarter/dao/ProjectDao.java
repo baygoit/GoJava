@@ -60,9 +60,6 @@ public class ProjectDao {
 
 		session.close();
 
-		if (projects.isEmpty())
-			return null;
-
 		return setPledged(projects);
 	}
 

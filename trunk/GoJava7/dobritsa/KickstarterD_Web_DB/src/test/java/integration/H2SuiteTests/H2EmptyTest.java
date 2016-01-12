@@ -1,4 +1,4 @@
-package integration.suiteTests;
+package integration.H2SuiteTests;
 
 import org.hibernate.SessionFactory;
 import org.junit.BeforeClass;
@@ -9,7 +9,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
-public class TestEmptyDb {
+public class H2EmptyTest {
     private static SessionFactory sessionFactory;
 
     private CategoryDao categoryDao = new CategoryDao();
@@ -22,7 +22,7 @@ public class TestEmptyDb {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        sessionFactory = TestSuite.getSessionFactory();
+        sessionFactory = H2SuiteTest.getSessionFactory();
     }
 
     @Test
@@ -40,7 +40,7 @@ public class TestEmptyDb {
     @Test
     public void testGetAllCategories() {
         categoryDao.setSessionFactory(sessionFactory);
-        assertNull(categoryDao.getAll());
+        assertThat(categoryDao.getAll().size(), is(0));
     }
 
     @Test
@@ -52,19 +52,19 @@ public class TestEmptyDb {
     @Test
     public void testGetProjectsByCategory() {
         projectDao.setSessionFactory(sessionFactory);
-        assertNull(projectDao.getByCategory(1L));
+        assertThat(projectDao.getByCategory(1L).size(), is(0));
     }
 
     @Test
     public void testGetQuestionsByProject() {
         questionDao.setSessionFactory(sessionFactory);
-        assertNull(questionDao.getByProject(1L));
+        assertThat(questionDao.getByProject(1L).size(), is(0));
     }
 
     @Test
     public void testGetRewardsByProject() {
         rewardDao.setSessionFactory(sessionFactory);
-        assertNull(rewardDao.getByProject(1L));
+        assertThat(rewardDao.getByProject(1L).size(), is(0));
     }
 
     @Test
