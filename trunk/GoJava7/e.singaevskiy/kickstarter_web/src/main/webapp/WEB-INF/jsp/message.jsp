@@ -1,21 +1,23 @@
 
-<jsp:include page="error.jsp"/>
+<%@ taglib prefix="springform" uri="http://www.springframework.org/tags/form"%>
 
-<form class="form-horizontal" method="post" action="project">
-	<input type="hidden" name="projectId" value="${param.id}">
-	<input type="hidden" name="operation" value="message">
+<springform:form class="form-horizontal" method="post" action="submitmessage/${param.id}" commandName="question">
+	<input type="hidden" name="projectId" value="${param.id}"/>
+	<input type="hidden" name="operation" value="message"/>
 	<div class="form-group">
 		<label class="col-sm-3 control-label">Username</label>
 		<div class="col-sm-6">
-			<input type="text" class="form-control" name="user"
-				placeholder="Your name here">
+			<springform:input path="user" type="text" class="form-control" name="user"
+				placeholder="Your name here"/>
+			<springform:errors path="user"/>
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-3 control-label">Message</label>
 		<div class="col-sm-6">
-			<textarea class="form-control" rows="5"
-				placeholder="Your question here" name="message"></textarea>
+			<springform:textarea path="question" class="form-control" rows="5"
+				placeholder="Your question here" name="message"></springform:textarea>
+			<springform:errors path="question"/>
 		</div>
 	</div>
 	<div class="form-group">
@@ -23,4 +25,4 @@
 			<button type="submit" class="btn btn-primary">Send</button>
 		</div>
 	</div>
-</form>
+</springform:form>
