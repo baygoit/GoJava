@@ -26,13 +26,28 @@ public class CategoryController {
     @Autowired
     private ProjectDAO projectDAO;
 	
-	@RequestMapping({"/categories", "/"})
-	public ModelAndView showCategories() {
- 
+	@RequestMapping("/*")
+	public ModelAndView showMenu(ModelAndView model) {
+		System.out.println("showMenu");
+		System.out.println(model.getViewName());
 		Random rnd = new Random();       
         List<Quote> quotes = quoteDAO.getAll();     
 		
+		//ModelAndView modelAndView = new ModelAndView("categories");
+		model.addObject("quote", quotes.get(rnd.nextInt(quotes.size())));
+		model.addObject("categories", categoryDAO.getAll());
+		//model.addAttribute("topCategories", categoryDAO.getTopDonated(5));
+		return model;
+	}
+    
+	@RequestMapping({"/categories", "/"})
+	public ModelAndView showCategories() {
+		System.out.println("showCategories");
+		
 		ModelAndView modelAndView = new ModelAndView("categories");
+		
+		Random rnd = new Random();       
+		List<Quote> quotes = quoteDAO.getAll();
 		modelAndView.addObject("quote", quotes.get(rnd.nextInt(quotes.size())));
 		modelAndView.addObject("categories", categoryDAO.getAll());
 		modelAndView.addObject("topCategories", categoryDAO.getTopDonated(5));
