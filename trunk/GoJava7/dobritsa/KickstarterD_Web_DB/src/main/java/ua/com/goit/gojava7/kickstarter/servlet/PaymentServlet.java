@@ -22,7 +22,7 @@ import ua.com.goit.gojava7.kickstarter.models.Category;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 import ua.com.goit.gojava7.kickstarter.models.Reward;
 
-@WebServlet("/payment")
+@WebServlet("/paymentOld")
 public class PaymentServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

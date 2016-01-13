@@ -21,7 +21,9 @@
 
 	<mvc:annotation-driven />
            
-    <context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />	
+    <context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />
+
+
           
     <import resource="applicationContextDb.xml"/> 
     

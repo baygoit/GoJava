@@ -16,7 +16,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.models.Category;
 
-@WebServlet("/projects")
+@WebServlet("/projectsOld")
 public class CategoryServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
