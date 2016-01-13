@@ -28,7 +28,7 @@ public class RewardDao {
 
 	public Reward get(Long rewardId) {
 		log.info("<Reward> get({})...", rewardId);
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 
 		return (Reward) session.createCriteria(Reward.class)
 				.add(Restrictions.eq("rewardId", rewardId))
@@ -36,15 +36,11 @@ public class RewardDao {
 	}
 
 	public List<Reward> getByProject(Long projectId) {
-		log.info("<rewards> getByProject({})...", projectId);	
-		Session session = sessionFactory.openSession();
+		log.info("<rewards> getByProject({})...", projectId);
+		Session session = sessionFactory.getCurrentSession();
 
-		List<Reward> rewards = session.createCriteria(Reward.class)
+		return session.createCriteria(Reward.class)
 				.add(Restrictions.eq("project.id", projectId))
 				.list();
-
-		session.close();
-
-		return rewards;
 	}
 }

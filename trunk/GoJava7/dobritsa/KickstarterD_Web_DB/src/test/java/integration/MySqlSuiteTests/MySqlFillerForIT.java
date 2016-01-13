@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext*.xml")
-public class MySqlFillerForTest {
+public class MySqlFillerForIT {
 
     @Autowired
     private SessionFactory sessionFactory;

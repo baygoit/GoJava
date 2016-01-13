@@ -11,11 +11,11 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        H2EmptyTest.class,
-        H2FillerForTest.class,
-        H2FullTest.class
+        H2EmptyIT.class,
+        H2FillerForIT.class,
+        H2FullIT.class
 })
-public class H2SuiteTest {
+public class H2SuiteIT {
 
     private static SessionFactory sessionFactory;
 

@@ -6,13 +6,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import ua.com.goit.gojava7.kickstarter.models.*;
 
-public class H2FillerForTest {
+public class H2FillerForIT {
 
     private static SessionFactory sessionFactory;
 
     @BeforeClass
     public static void setUp() throws Exception {
-        sessionFactory = H2SuiteTest.getSessionFactory();
+        sessionFactory = H2SuiteIT.getSessionFactory();
     }
 
     @Test

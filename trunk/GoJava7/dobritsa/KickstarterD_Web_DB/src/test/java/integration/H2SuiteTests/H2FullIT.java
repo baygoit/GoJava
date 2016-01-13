@@ -12,7 +12,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-public class H2FullTest {
+public class H2FullIT {
 
     private static SessionFactory sessionFactory;
 
@@ -25,7 +25,7 @@ public class H2FullTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        sessionFactory = H2SuiteTest.getSessionFactory();
+        sessionFactory = H2SuiteIT.getSessionFactory();
         sessionFactory.openSession();
     }
 

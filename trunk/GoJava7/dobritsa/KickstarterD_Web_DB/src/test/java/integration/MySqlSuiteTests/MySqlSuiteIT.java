@@ -5,9 +5,9 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        MySqlEmptyIntegrationTest.class,
-        MySqlFillerForTest.class,
-        MySqlInsertTest.class
+        MySqlEmptyIT.class,
+        MySqlFillerForIT.class,
+        MySqlInsertIT.class
 })
-public class MySqlSuiteTest {
+public class MySqlSuiteIT {
 }

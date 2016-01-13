@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext*.xml")
-public class MySqlInsertTest {
+public class MySqlInsertIT {
 
     @Autowired
     private CategoryDao categoryDao;
