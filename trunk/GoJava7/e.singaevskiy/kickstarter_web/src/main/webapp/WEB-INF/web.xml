@@ -6,22 +6,9 @@
 	
 	<display-name>kickstarter</display-name>
 	
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
-
-	<security-constraint>
-		<display-name>Restrict direct access to certain folders</display-name>
-		<web-resource-collection>
-			<web-resource-name>Restricted folders</web-resource-name>
-			<url-pattern>/view/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint />
-	</security-constraint>
-
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
+		<param-value>classpath:spring.applicationContext.xml</param-value>
 	</context-param>
 
 	<listener>
@@ -37,7 +24,7 @@
         </servlet-class>
         <init-param>
         	<param-name>ContextConfigLocation</param-name>
-        	<param-value></param-value>
+        	<param-value>WEB-INF/spring.mvc.dispatcher.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
   	</servlet>

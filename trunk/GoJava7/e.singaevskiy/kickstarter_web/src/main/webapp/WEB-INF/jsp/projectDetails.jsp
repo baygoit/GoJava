@@ -1,9 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<jsp:include page="components/Top.jsp"><jsp:param name="title"
-		value="${project.name}" /></jsp:include>
-
-<jsp:include page="components/Menu.jsp" />
 
 <div class="row">
 	<div class="col-md-7">
@@ -93,4 +89,3 @@
 
 </div>
 
-<jsp:include page="components/Bottom" />
