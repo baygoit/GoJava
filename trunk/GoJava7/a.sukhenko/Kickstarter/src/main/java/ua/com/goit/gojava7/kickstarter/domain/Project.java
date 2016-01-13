@@ -2,34 +2,11 @@ package ua.com.goit.gojava7.kickstarter.domain;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-<<<<<<< HEAD
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-@Entity
-@Table(name="projects")
-public class Project{
-    private static final String MINUTES_LEFT        = " minutes left";
-    private static final String HOURS_LEFT          = " hours left";
-    private static final String DAYS_LEFT           = " days left";
-    private static final String SECONDS_LEFT        = " seconds left";
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column
-=======
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -60,7 +37,7 @@ public class Project{
     @Column(name = "id", unique = true, nullable = false)
     private int                 id;
     @Column(unique = true)
->>>>>>> b0014930bf8740a544b0060d43ef290b3bc57753
+
     private String              projectName;
     @Column
     private String              projectDescription;
@@ -70,15 +47,12 @@ public class Project{
     private String              projectHistory;
     @Column
     private String              demoLink;
-<<<<<<< HEAD
-    private Map<String, String> questionsAndAnswers = new HashMap<>();
-    // <many-to-one name="category" cascade="all" column="projectCategoryId"  class="ua.com.goit.gojava7.kickstarter.domain.Category" fetch="join">
-    @ManyToOne(targetEntity=Category.class)
-    private Category category;
+
+
     @Column
     private double              pledged             = 0;
     @Column
-=======
+
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
@@ -87,7 +61,7 @@ public class Project{
 
     @Type(type = "ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
     @Column(name = "enddate")
->>>>>>> b0014930bf8740a544b0060d43ef290b3bc57753
+
     private LocalDateTime       enddate;
 
     @OneToMany

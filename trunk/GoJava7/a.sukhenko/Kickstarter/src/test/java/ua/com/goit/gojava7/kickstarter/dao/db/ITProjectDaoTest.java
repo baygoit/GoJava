@@ -19,7 +19,6 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 @ContextConfiguration(locations={"classpath:applicationContext-db.xml",
 "classpath:applicationContext.xml"})
 @Transactional
-@TransactionConfiguration(defaultRollback=true)
 public class ITProjectDaoTest {
 
     @Autowired
