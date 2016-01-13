@@ -12,6 +12,7 @@
 		<springframework.version>4.2.2.RELEASE</springframework.version>
 		<aspectj.version>1.8.5</aspectj.version>
 		<log.slf4j.version>1.7.13</log.slf4j.version>
+		<apache.tiles.version>3.0.5</apache.tiles.version>
 	</properties>
 
 	<build>
@@ -162,24 +163,36 @@
 			<artifactId>h2</artifactId>
 			<version>1.3.176</version>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${springframework.version}</version>
-        </dependency>
-        
-        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${springframework.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${springframework.version}</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>${apache.tiles.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>${apache.tiles.version}</version>
+		</dependency>
+
 	</dependencies>
 </project>

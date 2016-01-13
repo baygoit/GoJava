@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	default-lazy-init="true"
-	default-autowire="byName"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	default-lazy-init="false" default-autowire="byName"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -12,10 +10,7 @@
 	<context:property-placeholder location="classpath:config.properties" />
 
 	<context:annotation-config />
-	<!-- <context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao" /> -->
-	
-	<mvc:annotation-driven />
-	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />
+	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao" />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driver}" />
@@ -28,11 +23,8 @@
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
 		lazy-init="false">
 		<property name="dataSource" ref="dataSource" />
-		<!-- <property name="mappingResources">
-			<list>
-				<value>Domain.hbm.xml</value>
-			</list>
-		</property> -->
+		<!-- <property name="mappingResources"> <list> <value>Domain.hbm.xml</value> 
+			</list> </property> -->
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>

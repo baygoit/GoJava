@@ -32,7 +32,7 @@ public class CategoryController {
 		Random rnd = new Random();       
         List<Quote> quotes = quoteDAO.getAll();     
 		
-		ModelAndView modelAndView = new ModelAndView("view/Categories.jsp");
+		ModelAndView modelAndView = new ModelAndView("categories");
 		modelAndView.addObject("quote", quotes.get(rnd.nextInt(quotes.size())));
 		modelAndView.addObject("categories", categoryDAO.getAll());
 		modelAndView.addObject("topCategories", categoryDAO.getTopDonated(5));
@@ -41,7 +41,8 @@ public class CategoryController {
 	
 	@RequestMapping("/category")
 	public ModelAndView showProjectsInCategory(@RequestParam(name = "id") Integer categoryId) {
-		ModelAndView modelAndView = new ModelAndView("view/ProjectList.jsp");
+		System.out.println("showProjectsInCategory");
+		ModelAndView modelAndView = new ModelAndView("projectList");
 		modelAndView.addObject("category", categoryDAO.get(categoryId));
 		modelAndView.addObject("projects", projectDAO.getByCategory(categoryId));
 		return modelAndView;

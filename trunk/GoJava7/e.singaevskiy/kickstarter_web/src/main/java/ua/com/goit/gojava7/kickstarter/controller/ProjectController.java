@@ -40,7 +40,7 @@ public class ProjectController {
 	@RequestMapping(value = "/project", method = RequestMethod.GET)
 	public ModelAndView showProject(@RequestParam(name = "id") Integer projectId) {
 
-		ModelAndView modelAndView = new ModelAndView("view/ProjectDetails.jsp");
+		ModelAndView modelAndView = new ModelAndView("projectDetails");
 		modelAndView.addObject("project", projectDAO.get(projectId));
 		modelAndView.addObject("rewards", rewardDAO.getByProject(projectId));
 		return modelAndView;
@@ -48,7 +48,7 @@ public class ProjectController {
 
 	@RequestMapping("/message")
 	public ModelAndView showRequestMessage(@RequestParam(name = "id") Integer projectId) {
-		ModelAndView modelAndView = new ModelAndView("view/Message.jsp");
+		ModelAndView modelAndView = new ModelAndView("message");
 		modelAndView.addObject("projectId", projectId);
 		return modelAndView;
 	}
@@ -56,7 +56,7 @@ public class ProjectController {
 	@RequestMapping("/payment")
 	public ModelAndView showRequestPayment(@RequestParam Integer projectId, @RequestParam Integer rewardId) {
 
-		ModelAndView modelAndView = new ModelAndView("view/Payment.jsp");
+		ModelAndView modelAndView = new ModelAndView("payment");
 		modelAndView.addObject("projectId", projectId);
 
 		Reward reward = rewardDAO.get(rewardId);

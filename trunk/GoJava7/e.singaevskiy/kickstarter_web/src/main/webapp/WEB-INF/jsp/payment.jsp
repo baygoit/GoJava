@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="components/Top.jsp"><jsp:param name="title" value="${project.name}" /></jsp:include>
-<jsp:include page="components/Menu.jsp" />
-<jsp:include page="components/Error.jsp" />
+
+<jsp:include page="error.jsp" />
+
 <form action="project" method="post" id="submitForm"
 	class="form-horizontal">
 	<input type="hidden" name="projectId" value="${param.projectId}">
@@ -42,4 +42,3 @@
 
 </form>
 
-<jsp:include page="components/Bottom" />
