@@ -19,7 +19,7 @@ import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-@WebServlet(urlPatterns = "/categories")
+@WebServlet(urlPatterns = "/categoriess")
 public class CategoriesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = LoggerFactory.getLogger(CategoriesServlet.class);
