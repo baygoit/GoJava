@@ -3,9 +3,9 @@
 	<jsp:param name="title" value="Payment" />
 </jsp:include>
 
-<h3><a href="categories">Kickstarter</a>
+<h3><a href="index">Kickstarter</a>
 /
-<a href="projects?id=${category.categoryId}">${category.name}</a></h3>
+<a href="category?id=${category.categoryId}">${category.name}</a></h3>
 <h1><a href="project?id=${project.projectId}">${project.name}</a></h1>
 
 <h3>Amount of your donation is $${amount}</h3>

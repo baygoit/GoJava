@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.servlet;
+package ua.com.goit.gojava7.kickstarter.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

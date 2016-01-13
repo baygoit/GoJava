@@ -1,3 +1,3 @@
 <jsp:include page="WEB-INF/jsp/header.jsp" />
-<a href="categories">categories</a>
+<jsp:forward page="index.html" />
 <jsp:include page="WEB-INF/jsp/footer.jsp" />

@@ -35,13 +35,9 @@ public class PaymentDao {
 
 	public void add(Payment payment) {
 		log.info("<void> add({})...", payment);
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		Session session = sessionFactory.getCurrentSession();
 
 		session.save(payment);
-		session.getTransaction().commit();
-
-		session.close();
 	}
 
 	public Long calculatePledgedForProject(Long projectId) {

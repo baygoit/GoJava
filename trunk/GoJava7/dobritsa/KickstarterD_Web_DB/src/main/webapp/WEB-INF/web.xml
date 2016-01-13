@@ -19,7 +19,7 @@
 			org.springframework.web.servlet.DispatcherServlet
 		</servlet-class>
 		<init-param>
-			<param-name>ContextConfigLocation</param-name>
+			<param-name>contextConfigLocation</param-name>
 			<param-value></param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -28,6 +28,7 @@
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
+		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 
 </web-app>
