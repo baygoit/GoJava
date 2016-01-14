@@ -2,40 +2,46 @@ package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
+@Repository
 public class ProjectPostgreDAO implements ProjectDAO {
+	@Autowired
+	private HibernateUtil hiberUtil;
 	
 	@Override
 	public void clear() {
-		HibernateUtil.executeUpdate("delete Project");
+		hiberUtil.executeUpdate("delete Project");
 	}
 
 	@Override
 	public Project get(int index) {
-		return HibernateUtil.get("from Project where id = ?", index);
+		return hiberUtil.get("from Project where id = ?", index);
 	}
 
 	@Override
 	public void add(Project element) {
-		HibernateUtil.save(element);
+		hiberUtil.save(element);
 	}
 
 	@Override
 	public void addAll(List<Project> elements) {
-		HibernateUtil.save(elements);
+		hiberUtil.save(elements);
 	}
 
 	@Override
 	public List<Project> getAll() {
-		return HibernateUtil.getList("from Project");
+		return hiberUtil.getList("from Project");
 	}
 
 	@Override
 	public List<Project> getByCategory(int categoryId) {
-		return HibernateUtil.getList("from Project where category.id = ?", categoryId);
+		return hiberUtil.getList("from Project where category.id = ?", categoryId);
 	}
 
 }

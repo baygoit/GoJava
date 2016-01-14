@@ -25,7 +25,7 @@ public class CategoriesSelectionTest extends Mockito {
 	private CategoryDao categoryDao;
 
 	@InjectMocks
-	private CategoriesSelection categoriesSelection;
+	private CategoryServlet categoriesSelection;
 
 	public void testInit() {
 

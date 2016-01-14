@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <jsp:include page="header.jsp">
-	<jsp:param value="My Title" name="title"/>
+	<jsp:param value="Categories" name="title"/>
 </jsp:include>
 	<p>
 	${quote.text}
@@ -11,7 +11,7 @@
 	<ul>
 		<c:forEach var="category" items="${categories}" >
 			<li>
-				<a href="category?id=${category.id}">${category.name}</a>
+				<a href="category.html?id=${category.id}">${category.name}</a>
 			</li>
 		</c:forEach>
 	</ul>

@@ -3,7 +3,6 @@ package ua.com.goit.gojava7.kickstarter.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,18 +24,25 @@ public class Project {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long projectId;
+
 	@Column
 	private String name;
+
 	@Column
 	private String description;
+
 	@Column
 	private Long goal;
+
 	@Column
 	private Long pledged;
+
 	@Column
 	private Long daysToGo;
+
 	@Column
 	private String history;
+
 	@Column
 	private String link;
 	
@@ -51,7 +57,11 @@ public class Project {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
 	@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-	private List<Reward> rewards = new ArrayList<>();	
+	private List<Reward> rewards = new ArrayList<>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+	private List<Payment> payments = new ArrayList<>();
 
 	public Long getProjectId() {
 		return projectId;
@@ -123,8 +133,36 @@ public class Project {
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}	
-	
+	}
+
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+
+	public List<Reward> getRewards() {
+		return rewards;
+	}
+
+	public void setRewards(List<Reward> rewards) {
+		this.rewards = rewards;
+	}
+
+	public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
+	}
+
+	public Long getCategoryId() {
+		return category.getCategoryId();
+	}
+
 	@Override
 	public String toString() {
 		return "id: " + projectId + "; name: " + name + "; description: " + description + "; goal: " + goal + "; pledged: "
