@@ -2,16 +2,46 @@ package ua.com.goit.gojava7.kickstarter.models;
 
 import java.util.Date;
 
-public class Question {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "question")
+public class Question {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Long questionId;
-	private String time = "";
-	private String question = "";
-	private String answer = "";	
+
+	@Column
+	private String time;
+
+	@Column
+	private String question;
+
+	@Column
+	private String answer;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "project_id")
 	private Project project = new Project();
 
 	public Question() {
 		this.time = new Date().toString();
+	}	
+	
+	public Question(String question, Project project) {		
+		this.time = new Date().toString();
+		this.question = question;
+		this.project = project;
 	}
 	
 	public Long getQuestionId() {
@@ -53,17 +83,9 @@ public class Question {
 	public void setProject(Project project) {
 		this.project = project;
 	}
-
-	public Long getProjectId() {
-		return project.getProjectId();
-	}
-
-	public void setProjectId(Long projectId) {
-		project.setProjectId(projectId);
-	}
-
+	
 	@Override
 	public String toString() {
-		return "questionId: " + questionId + "; time: " + time + "; question: " + question + "; answer: " + answer + "; projectId: " + getProjectId();
+		return "questionId: " + questionId + "; time: " + time + "; question: " + question + "; answer: " + answer + "; projectId: " + project.getProjectId();
 	}
 }

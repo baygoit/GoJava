@@ -1,7 +1,16 @@
 package com.kickstarter.model;
 
-public class Quote {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "quotes")
+public class Quote {
+    @Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String quote;
 	private String author;

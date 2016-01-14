@@ -5,19 +5,19 @@
 	GNU Lesser General Public License (LGPL), version 2.1 or later. ~ See the 
 	lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>. -->
 <hibernate-mapping package="ua.com.goit.gojava7.kickstarter.domain">
-	<class name="Quote" table="Quote">
+	 <!-- <class name="Quote" table="Quote">
 		<id name="id">
 			<generator class="identity" />
 		</id>
 		<property name="text" />
 		<property name="author" />
 	</class>
-	<class name="Category">
+ 	<class name="Category">
 		<id name="id">
 			<generator class="identity" />
 		</id>
 		<property name="name" />
-	</class>
+	</class> 
 	<class name="Project">
 		<id name="id">
 			<generator class="identity" />
@@ -33,8 +33,8 @@
 		<many-to-one name="category" class="Category" column="category_id"
 			foreign-key="Project_Category" />
 
-	</class>
-	<class name="Question">
+	</class> -->
+<!-- 	<class name="Question">
 		<id name="id">
 			<generator class="identity" />
 		</id>
@@ -42,8 +42,8 @@
 		<property name="answer" />
 		<many-to-one name="project" class="Project" column="project_id"
 			foreign-key="question_project_id_fkey" />
-	</class>
-	<class name="Reward">
+	</class> -->
+<!-- 	<class name="Reward">
 		<id name="id">
 			<generator class="identity" />
 		</id>
@@ -51,8 +51,8 @@
 		<property name="pledgeSum" />
 		<many-to-one name="project" class="Project" column="project_id"
 			foreign-key="Reward_Project" />
-	</class>
-	<class name="Payment">
+	</class> -->
+	<!-- <class name="Payment">
 		<id name="id">
 			<generator class="identity" />
 		</id>
@@ -64,5 +64,5 @@
 			foreign-key="Payment_Project" />
 		<many-to-one name="reward" class="Reward" column="reward_id"
 			foreign-key="Payment_Reward" />
-	</class>
+	</class> -->
 </hibernate-mapping>

@@ -17,7 +17,8 @@ public class QuoteMappingTest {
 
 	@Before
 	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernateTest.cfg.xml").build();
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernateTest.cfg.xml")
+				.build();
 		try {
 			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		} catch (Exception e) {
@@ -56,7 +57,7 @@ public class QuoteMappingTest {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		System.out.println("\n-----Get by id = 1-----");
-		Quote quote = session.get(Quote.class, 1l);
+		Quote quote = session.get(Quote.class, 1L);
 		System.out.println(quote);
 		session.close();
 
@@ -72,7 +73,7 @@ public class QuoteMappingTest {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		System.out.println("\n-----Get by id = 1, than Set text = Changed-----");
-		quote = session.get(Quote.class, 1l);
+		quote = session.get(Quote.class, 1L);
 		System.out.println(quote);
 		quote.setText("Changed");
 		session.getTransaction().commit();
@@ -81,7 +82,7 @@ public class QuoteMappingTest {
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		System.out.println("\n-----Get by id = 1-----");
-		quote = session.get(Quote.class, 1l);
+		quote = session.get(Quote.class, 1L);
 		System.out.println(quote);
 		session.getTransaction().commit();
 		session.close();

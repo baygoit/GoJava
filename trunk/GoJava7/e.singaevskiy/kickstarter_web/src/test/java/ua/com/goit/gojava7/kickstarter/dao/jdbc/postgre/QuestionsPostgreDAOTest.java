@@ -3,55 +3,64 @@ package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:applicationContext*.xml")
 public class QuestionsPostgreDAOTest {
 
     List<Question> list;
-    QuestionPostgreDAO dao;
     
-    @Mock
-    Connection connection;
+    @Autowired
+    QuestionPostgreDAO questionPostgreDAO;
+    
+    @Autowired
+    ProjectPostgreDAO projectPostgreDAO;
+
+	private List<Project> projects;
 
     @Before
     public void setUp() throws Exception {
-    	HibernateUtil.configure("hibernate.cfg.xml");
-        dao = new QuestionPostgreDAO();
+    	projects = projectPostgreDAO.getAll();
+    	
+        questionPostgreDAO.clear();
         
         list = new ArrayList<>();
-        list.add(new Question(null, "a1", "t1"));
-        list.add(new Question(null, "a2", "t2"));
-    }
-    
-    
-    @After
-    public void tearDown() throws Exception {
-        dao.clear();
+        list.add(new Question(projects.get(0), "a1", "t1"));
+        list.add(new Question(projects.get(0), "a2", "t2"));
+        list.add(new Question(projects.get(1), "a3", "t3"));
+        
+        questionPostgreDAO.addAll(list);
     }
 
     @Test
     public void testAddGetAll() {
-        dao.addAll(list);
-        assertThat(dao.getAll(), is(list));
+        assertThat(questionPostgreDAO.getAll(), is(list));
     }
     
     @Test
     public void testAddGet() {
-        list.forEach(dao::add);
-        int index = 1;
-        assertThat(dao.get(index), is(list.get(index)));
+    	questionPostgreDAO.clear();
+        list.forEach(questionPostgreDAO::add);
+        Question question = questionPostgreDAO.getAll().get(0);
+		int index = question.getId();
+        assertThat(questionPostgreDAO.get(index), is(question));
+    }
+    
+    @Test
+    public void testGetByProject() {
+        int id = projects.get(0).getId();
+        questionPostgreDAO.getByProject(id).forEach(p -> assertThat(p.getProject().getId(), is(id)));
     }
 }

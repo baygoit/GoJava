@@ -36,25 +36,21 @@ public class CategoriesServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		log.info("Starting spring autowiring...");
+		log.debug("Starting spring autowiring...");
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-
-		log.info("Ended spring autowiring...");
+		log.debug("Ended spring autowiring...");
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		log.info("doGet");
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Quote randomQuote = quoteDao.getRandomQuote();
-
-		log.debug("Random quote: " + randomQuote);
+		log.debug("Random quote: {}", randomQuote);
 
 		List<Category> categories = categoryDao.getAll();
-		log.debug("Categories: " + categories);
+		log.debug("Categories: {}", categories);
 
-		req.setAttribute("quote", randomQuote);
-		req.setAttribute("categories", categories);
-		req.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(req, resp);
+		request.setAttribute("quote", randomQuote);
+		request.setAttribute("categories", categories);
+		request.getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);
 	}
 }

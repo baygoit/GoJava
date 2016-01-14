@@ -22,8 +22,8 @@
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
 
-		<mapping resource="Quote.hbm.xml"/>
-		<mapping resource="Category.hbm.xml" />
+	<!--	<mapping resource="Quote.hbm.xml"/>
+		<mapping resource="Category.hbm.xml" />-->
 		<mapping resource="Project.hbm.xml" />
 		<mapping resource="Payment.hbm.xml" />
 		<mapping resource="Question.hbm.xml" />
