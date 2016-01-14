@@ -7,17 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "payment")
 public class Payment {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
-	@SequenceGenerator(name="seq", allocationSize=1)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "projectid")
 	private Project project;
@@ -27,7 +25,7 @@ public class Payment {
 	private String cardNumber;
 	@Column
 	private int pledge;
-	
+
 	public Payment() {
 
 	}
@@ -35,10 +33,11 @@ public class Payment {
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public Project getProject() {
 		return project;
 	}
@@ -70,5 +69,27 @@ public class Payment {
 	public void setPledge(int pledge) {
 		this.pledge = pledge;
 	}
+
+	/*@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Payment other = (Payment) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}*/
 
 }

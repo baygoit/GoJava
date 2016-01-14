@@ -36,9 +36,6 @@
 
 	<import resource="applicationContext-${backend:postgres}.xml" />
 	
-	<bean id="requestValidation" class="ua.com.goit.gojava7.kickstarter.servlet.RequestValidation">
-	</bean>
-	
 	<mvc:annotation-driven />
   	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />
   	

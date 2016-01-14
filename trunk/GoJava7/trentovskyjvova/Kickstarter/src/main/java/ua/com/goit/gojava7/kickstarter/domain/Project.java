@@ -1,5 +1,8 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +37,8 @@ public class Project {
 	private String videoUrl;
 	@Column
 	private int amountPledge;
+	@OneToMany(mappedBy = "project")
+	private Set<Payment> payments = new HashSet<Payment>();
 	
 	public Project() {
 		
@@ -124,4 +130,13 @@ public class Project {
 	public void setAmountPledge(int amountPledge) {
 		this.amountPledge = amountPledge;
 	}
+
+	public Set<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(Set<Payment> payments) {
+		this.payments = payments;
+	}
+
 }
