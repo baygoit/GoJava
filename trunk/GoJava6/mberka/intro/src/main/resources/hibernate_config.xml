@@ -20,7 +20,8 @@
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
 
-        <!-- Disable the second-level cache  -->
+        <!-- Second-level cache  -->
+        <property name="hibernate.cache.use_second_level_cache">false</property>
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 
         <!-- Cache -->
@@ -34,10 +35,13 @@
         <property name="show_sql">true</property>
 
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
+        <!--<property name="hbm2ddl.auto">create</property>-->
 
         <!-- Names the annotated entity class -->
         <mapping class="com.gojava6.modelHibernate.User"/>
+        <mapping class="com.gojava6.modelHibernate.Apartment"/>
+        <mapping class="com.gojava6.modelHibernate.Reservation"/>
 
         <!--<mapping resource="net/viralpatel/hibernate/Employee.hbm.xml"/>
         <mapping resource="mapping/User.hbm.xml"/>

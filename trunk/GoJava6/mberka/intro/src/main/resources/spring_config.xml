@@ -11,32 +11,29 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="org.springbyexample.web.servlet.mvc" />
+    <context:annotation-config/>
+    <context:component-scan base-package="com.gojava6"/>
 
-    <mvc:annotation-driven />
+    <!--<mvc:annotation-driven />
 
-    <mvc:view-controller path="/index.html" />
+    <mvc:view-controller path="/index.html" />-->
 
-    <bean id="tilesConfigurer"
-          class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
-          p:definitions="/WEB-INF/tiles-defs/templates.xml" />
+    <bean id="user" class="com.gojava6.modelSpring.User"/>
+    <bean id="userDAO" class="com.gojava6.daoSpring.UserDAO"/>
 
-    <bean id="tilesViewResolver"
-          class="org.springframework.web.servlet.view.UrlBasedViewResolver"
-          p:viewClass="org.springbyexample.web.servlet.view.tiles2.DynamicTilesView"
-          p:prefix="/WEB-INF/jsp/"
-          p:suffix=".jsp" />
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-          p:basenames="messages" />
+    <!--<bean id="namedParamJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg type="javax.sql.DataSource" ref="dataSource"/>
+    </bean>-->
 
-    <!-- Declare the Interceptor -->
-    <mvc:interceptors>
-        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
-              p:paramName="locale" />
-    </mvc:interceptors>
-
-    <!-- Declare the Resolver -->
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/airbnb"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
 
 </beans>
