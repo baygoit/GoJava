@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -14,9 +15,14 @@ import java.sql.*;
 import java.util.List;
 
 @Component
-public class UserDAO {
+public class UserDAO extends JdbcDaoSupport {
 
-    @Autowired
+    /*Spring DAO Support: (1) extending JdbcDaoSupport
+    (2) adding "this" to getJdbcTemplate(). in methods
+    to refer parent DAO Support class
+    (3) remove dataSource & jdbcTemplate fields and get-/setters*/
+
+    /*@Autowired
     private DataSource dataSource;
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -37,7 +43,7 @@ public class UserDAO {
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
 
-    }
+    }*/
 
     /*NamedParameterJdbcTemplate*/
     /*@Autowired
@@ -61,7 +67,8 @@ public class UserDAO {
 
     public void addNewUser(User user) {
         String sqlQuery = "INSERT INTO airbnb.user (userName, userSurname, email, userCity) values (?, ?, ?, ?)";
-        getJdbcTemplate().update(sqlQuery,
+        /*getJdbcTemplate().update*/
+        this.getJdbcTemplate().update(sqlQuery,
                 new Object[]{user.getUserName(),
                         user.getUserSurname(),
                         user.getEmail(),
@@ -70,32 +77,32 @@ public class UserDAO {
 
     public int findUserIdByEmail(String email) {
         String sqlQuery = "SELECT * FROM airbnb.user WHERE email=?";
-        return getJdbcTemplate().queryForObject(sqlQuery, Integer.class);
+        return this.getJdbcTemplate().queryForObject(sqlQuery, Integer.class);
     }
 
     public String findUserNameById(int idUser) {
         String sqlQuery = "SELECT userName FROM airbnb.user WHERE idUser=?";
-        return getJdbcTemplate().queryForObject(sqlQuery, new Object[]{idUser}, String.class);
+        return this.getJdbcTemplate().queryForObject(sqlQuery, new Object[]{idUser}, String.class);
     }
 
     public User findUserById(int idUser) {
         String sqlQuery = "SELECT * FROM airbnb.user WHERE idUser=?";
-        return getJdbcTemplate().queryForObject(sqlQuery, new Object[]{idUser}, new UserRowMapper());
+        return this.getJdbcTemplate().queryForObject(sqlQuery, new Object[]{idUser}, new UserRowMapper());
     }
 
     public List<User> getAllUsers() {
         String sqlQuery = "SELECT * FROM airbnb.user";
-        return getJdbcTemplate().query(sqlQuery, new UserRowMapper());
+        return this.getJdbcTemplate().query(sqlQuery, new UserRowMapper());
     }
 
     public void deleteUserById(int idUser) {
         String sqlQuery = "DELETE FROM airbnb.user WHERE idUser=?";
-        getJdbcTemplate().update(sqlQuery, new Object[]{idUser});
+        this.getJdbcTemplate().update(sqlQuery, new Object[]{idUser});
     }
 
     public void deleteUserByNameSurname(String userName, String userSurname) {
         String sqlQuery = "DELETE FROM airbnb.user WHERE userName=? and userSurname=?";
-        getJdbcTemplate().update(sqlQuery, new Object[]{userName,userSurname});
+        this.getJdbcTemplate().update(sqlQuery, new Object[]{userName,userSurname});
     }
 
     /*public void updateUserToHost(int idUser) {

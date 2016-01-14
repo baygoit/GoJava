@@ -19,7 +19,9 @@
     <mvc:view-controller path="/index.html" />-->
 
     <bean id="user" class="com.gojava6.modelSpring.User"/>
-    <bean id="userDAO" class="com.gojava6.daoSpring.UserDAO"/>
+    <bean id="userDAO" class="com.gojava6.daoSpring.UserDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"/>
@@ -29,11 +31,15 @@
         <constructor-arg type="javax.sql.DataSource" ref="dataSource"/>
     </bean>-->
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+    <!--Connection pool-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/airbnb"/>
         <property name="username" value="root"/>
         <property name="password" value="root"/>
+        <property name="initialSize" value="3"/>
+        <property name="maxActive" value="10"/>
     </bean>
 
 </beans>
