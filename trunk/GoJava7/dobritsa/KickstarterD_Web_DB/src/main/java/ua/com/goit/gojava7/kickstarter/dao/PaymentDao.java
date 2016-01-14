@@ -26,24 +26,10 @@ public class PaymentDao {
 
 	private static final Logger log = LoggerFactory.getLogger(PaymentDao.class);
 
-	public PaymentDao() {
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
-	public void add(Payment payment) {
-		log.info("<void> add({})...", payment);
-		Session session = sessionFactory.getCurrentSession();
-
-		session.save(payment);
-	}
-
 	public Long calculatePledgedForProject(Long projectId) {
 		log.info("<Long> calculatePledgedForProject({})...", projectId);
 		Session session = sessionFactory.getCurrentSession();
-	
+
 		Long sumAmount = (Long) session.createCriteria(Payment.class).add(Restrictions.eq("project.id", projectId))
 				.setProjection(Projections.sum("amount")).uniqueResult();
 
@@ -61,5 +47,12 @@ public class PaymentDao {
 			return true;
 		}
 		return false;
+	}
+
+	private void add(Payment payment) {
+		log.info("<void> add({})...", payment);
+		Session session = sessionFactory.getCurrentSession();
+
+		session.save(payment);
 	}
 }

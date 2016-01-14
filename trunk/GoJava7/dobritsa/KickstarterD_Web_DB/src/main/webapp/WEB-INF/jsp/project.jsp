@@ -5,7 +5,7 @@
 
 <h3><a href="index">Kickstarter</a>
 /
-<a href="category?id=${category.categoryId}">${category.name}</a></h3>
+<a href="category?categoryId=${category.categoryId}">${category.name}</a></h3>
 
 
 <h1>${project.name}</h1>

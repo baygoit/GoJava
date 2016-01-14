@@ -24,10 +24,6 @@ public class CategoryDao {
 	@Autowired
 	private ProjectDao projectDao;
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
 	private static final Logger log = LoggerFactory.getLogger(CategoryDao.class);
 
 	public Category get(Long categoryId) {

@@ -39,7 +39,7 @@ public class startServletTest {
 	private CategoryDao categoryDao;
 	
 	@InjectMocks
-	private StartController startController;
+	private ProjectController projectController;
 
 	@Ignore
 	@Test

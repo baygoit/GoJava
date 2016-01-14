@@ -22,10 +22,6 @@ public class RewardDao {
 
 	private static final Logger log = LoggerFactory.getLogger(RewardDao.class);
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
 	public Reward get(Long rewardId) {
 		log.info("<Reward> get({})...", rewardId);
 		Session session = sessionFactory.getCurrentSession();

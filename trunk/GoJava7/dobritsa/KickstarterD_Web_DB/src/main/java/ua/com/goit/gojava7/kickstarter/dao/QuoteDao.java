@@ -20,10 +20,6 @@ public class QuoteDao {
 	
 	private static final Logger log = LoggerFactory.getLogger(QuoteDao.class);
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
 	public Quote getRandomQuote() {
 		log.info("<Quote> getRandomQuote()...");
 		Session session = sessionFactory.getCurrentSession();

@@ -36,7 +36,7 @@ public class PaymentCheckServletTest {
     private ProjectDao projectDao;
 
     @InjectMocks
-    private StartController startController;
+    private ProjectController projectController;
 
     @Ignore
     @Test

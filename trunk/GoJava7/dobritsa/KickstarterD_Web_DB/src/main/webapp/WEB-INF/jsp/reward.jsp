@@ -5,8 +5,8 @@
 
 <h3><a href="index">Kickstarter</a>
 /
-<a href="category?id=${category.categoryId}">${category.name}</a></h3>
-<h1><a href="project?id=${project.projectId}">${project.name}</a></h1>
+<a href="category?categoryId=${category.categoryId}">${category.name}</a></h3>
+<h1><a href="project?projectId=${project.projectId}">${project.name}</a></h1>
 
 <c:if test="${empty rewards}">
 	<h3>There are no rewards</h3>
@@ -15,7 +15,7 @@
 		<br><label>I want to help the project.</label>		
 		<input type="text" name="amount" value="1">
 		<input type="hidden" name="projectId" value="${project.projectId}" />
-		<input type="hidden" name="id" value="0" />
+		<input type="hidden" name="rewardId" value="0" />
 		<input type="submit" value="Continue" />
 	</form>
 </c:if>
@@ -29,7 +29,7 @@
 		<label>Pledge amount</label>		
 		<input type="text" name="amount" value="1">
 		<input type="hidden" name="projectId" value="${project.projectId}" />
-		<input type="hidden" name="id" value="0" />
+		<input type="hidden" name="rewardId" value="0" />
 		<input type="submit" value="Continue" />
 	</form>
 
@@ -37,7 +37,7 @@
 		<c:forEach var="reward" items="${requestScope.rewards}">
 			<li>
 				<p>
-					<a href="payment?id=${reward.rewardId}">$${reward.amount}</a>
+					<a href="payment?rewardId=${reward.rewardId}">$${reward.amount}</a>
 					<br>${reward.reward}
 				</p>
 			</li>

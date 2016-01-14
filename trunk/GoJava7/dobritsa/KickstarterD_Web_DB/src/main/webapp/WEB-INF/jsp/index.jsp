@@ -10,7 +10,7 @@
 	<p>Categories:</p>
 	<ul>
 		<c:forEach var="category" items="${requestScope.categories}">
-			<li><a href="category?id=${category.categoryId}">${category.name}</a></li>
+			<li><a href="category?categoryId=${category.categoryId}">${category.name}</a></li>
 		</c:forEach>
 	</ul>	
 	

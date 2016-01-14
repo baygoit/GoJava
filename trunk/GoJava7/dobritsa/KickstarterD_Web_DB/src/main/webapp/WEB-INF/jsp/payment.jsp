@@ -5,8 +5,8 @@
 
 <h3><a href="index">Kickstarter</a>
 /
-<a href="category?id=${category.categoryId}">${category.name}</a></h3>
-<h1><a href="project?id=${project.projectId}">${project.name}</a></h1>
+<a href="category?categoryId=${category.categoryId}">${category.name}</a></h3>
+<h1><a href="project?projectId=${project.projectId}">${project.name}</a></h1>
 
 <h3>Amount of your donation is $${amount}</h3>
 

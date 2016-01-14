@@ -41,7 +41,7 @@ public class PaymentServletTest {
     private Validator validator;
 
     @InjectMocks
-    private StartController startController;
+    private ProjectController projectController;
 
     @Test
     @Ignore

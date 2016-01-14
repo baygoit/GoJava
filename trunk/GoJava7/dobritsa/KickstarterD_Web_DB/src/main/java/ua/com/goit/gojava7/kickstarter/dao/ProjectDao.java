@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.models.Category;
-import ua.com.goit.gojava7.kickstarter.models.Payment;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 
@@ -31,10 +30,6 @@ public class ProjectDao {
 
 	@Autowired
 	private PaymentDao paymentDao;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 
 	private static final Logger log = LoggerFactory.getLogger(ProjectDao.class);
 	
@@ -65,14 +60,14 @@ public class ProjectDao {
 		return projects;
 	}
 
-	public void setPledged(List<Project> projects){
+	private void setPledged(List<Project> projects){
 		log.info("<projects> setPledged()...");
 
 		for(Project project : projects)
 			setPledged(project);
 	}
 
-	public void setPledged(Project project){
+	private void setPledged(Project project){
 		Long projectId = project.getProjectId();
 		log.info("<void> setPledged({})...", projectId);
 

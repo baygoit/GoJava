@@ -40,7 +40,7 @@ public class RewardServletTest {
     private RewardDao rewardDao;
 
     @InjectMocks
-    private StartController startController;
+    private ProjectController projectController;
 
     @Ignore
     @Test

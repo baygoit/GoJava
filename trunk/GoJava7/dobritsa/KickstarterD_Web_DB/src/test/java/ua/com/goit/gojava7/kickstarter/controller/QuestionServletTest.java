@@ -30,7 +30,7 @@ public class QuestionServletTest {
     private QuestionDao questionDao;
 
     @InjectMocks
-    private StartController startController;
+    private ProjectController projectController;
 
     @Ignore
     @Test

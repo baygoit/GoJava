@@ -29,20 +29,6 @@ public class QuestionDao {
 
 	private static final Logger log = LoggerFactory.getLogger(QuestionDao.class);
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
-	public void add(Question question) {
-		log.info("<void> add()...", question);
-		Session session = sessionFactory.getCurrentSession();
-		//session.beginTransaction();
-
-		session.save(question);
-		//session.getTransaction().commit();
-	}
-
-
 	@SuppressWarnings("unchecked")
 	public List<Question> getByProject(Long projectId) {
 		log.info("<questions> getByProject({})...", projectId);
@@ -61,5 +47,12 @@ public class QuestionDao {
 			question.setProject(projectDao.get(projectId));
 			add(question);
 		}
+	}
+
+	private void add(Question question) {
+		log.info("<void> add()...", question);
+		Session session = sessionFactory.getCurrentSession();
+
+		session.save(question);
 	}
 }
