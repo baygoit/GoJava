@@ -6,20 +6,19 @@ import javax.persistence.GeneratedValue;
 
 import javax.persistence.GenerationType;
 
-
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 
-@Table(name="quotes")
+@Table(name = "quotes")
 public class Quote{
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	@Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int    id;
+    @Column
     private String text;
-	@Column
+    @Column
     private String author;
 
     public Quote() {

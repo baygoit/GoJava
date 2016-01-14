@@ -12,7 +12,7 @@
 		<c:forEach var="category" items="${categories}" >
 		<nav class="cl-effect-15">
 			<li>
-				<a href="category?id=${category.categoryId}">${category.categoryName}</a>
+				<a href="category.html?id=${category.categoryId}">${category.categoryName}</a>
 			</li>
 		</c:forEach>
 		</nav>

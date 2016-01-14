@@ -3,35 +3,26 @@ package ua.com.goit.gojava7.kickstarter.domain;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Type;
 @Entity
 @Table(name = "projects")
 public class Project{
-    private static final String MINUTES_LEFT        = " minutes to go";
-    private static final String HOURS_LEFT          = " hours to go";
-    private static final String DAYS_LEFT           = " days to go";
-    private static final String SECONDS_LEFT        = " seconds to go";
+    private static final String MINUTES_LEFT = " minutes to go";
+    private static final String HOURS_LEFT   = " hours to go";
+    private static final String DAYS_LEFT    = " days to go";
+    private static final String SECONDS_LEFT = " seconds to go";
     @Id
     @GeneratedValue
     @Column(name = "id", unique = true, nullable = false)
@@ -48,34 +39,23 @@ public class Project{
     @Column
     private String              demoLink;
 
-
-    @Column
-    private double              pledged             = 0;
-    @Column
-
-
     @ManyToOne
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "projectCategoryId")
     private Category            category;
 
     @Type(type = "ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
     @Column(name = "enddate")
-
     private LocalDateTime       enddate;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
-    @JoinColumn(name="projectId") 
-    private List<Bonus>          bonuses             = new ArrayList<Bonus>();
+    private List<Bonus>         bonuses      = new ArrayList<Bonus>();
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @Cascade({org.hibernate.annotations.CascadeType.ALL})
-    private List<Question>       questionsAndAnswers;
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
+    private List<Question>      questionsAndAnswers;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
-    @Cascade({CascadeType.SAVE_UPDATE})
-    private List<Payment>        payments            = new ArrayList<>();
+    private List<Payment>       payments     = new ArrayList<>();
 
     public List<Payment> getPayments() {
         return payments;
@@ -121,7 +101,6 @@ public class Project{
         return projectName;
     }
 
-   
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
@@ -169,7 +148,7 @@ public class Project{
     public void setId(int id) {
         this.id = id;
     }
-   
+
     public List<Bonus> getBonuses() {
         return bonuses;
     }

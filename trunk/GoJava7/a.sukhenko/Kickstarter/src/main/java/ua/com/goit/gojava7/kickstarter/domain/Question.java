@@ -1,35 +1,42 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "questions")
 public class Question{
 
-	@Column
-    private String time;
-	@Column
-    private String question;
-	@Column
-    private String answer;
-	@Column
-    private String projectName;
 
+    @Column
+    private String question;
+    @Column
+    private String answer;
+  
+    
     @Id
     @GeneratedValue
     @Column(nullable = false, unique = true)
-    private int     id;
+    private int    id;
+
+    @Column(insertable = false, updatable = false)
+    private int    projectId;
+    
+    
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name = "projectId")
+    private Project project;
 
     
-    @Column
-    private int projectId;
     
     public int getProjectId() {
         return projectId;
@@ -39,9 +46,7 @@ public class Question{
         this.projectId = projectId;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Project project = new Project();
-
+  
     public String getAnswer() {
         return answer;
     }

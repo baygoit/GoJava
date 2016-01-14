@@ -17,13 +17,13 @@ import ua.com.goit.gojava7.kickstarter.util.Validator;
 @Repository
 public class PaymentDatabaseDao{
     private static final org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger(PaymentDatabaseDao.class);
-    
+
     @Autowired
-    SessionFactory sessionFactory;
-    
+    SessionFactory                                       sessionFactory;
+
     @Autowired
-    private Validator validator;
-    
+    private Validator                                    validator;
+
     public List<Payment> getAll() {
         logger.debug("getting all payments from db.");
         String hql = "FROM Payment Paymnt";
@@ -33,9 +33,12 @@ public class PaymentDatabaseDao{
         if (results.isEmpty()) {
             throw new NoSuchElementException("hibernate returned 0 payments: list is empty.");
         }
+        if (session.isOpen()) {
+            session.close();
+        }
         return results;
     }
-    
+
     public List<Payment> getPaymentsByProjectId(int projectId) {
         logger.debug("Getting Payments by projectId: " + projectId);
         Session session = sessionFactory.openSession();
@@ -43,19 +46,22 @@ public class PaymentDatabaseDao{
         Query query = session.createQuery(hql);
         query.setParameter("projectId", projectId);
         List<Payment> results = HibernateUtil.listAndCast(query);
+        if (session.isOpen()) {
+            session.close();
+        }
         return results;
     }
     public void add(Payment payment) {
-       logger.info("Adding payment " +payment);
+        logger.info("Adding payment " + payment);
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
         session.save(payment);
         session.getTransaction().commit();
-        
+
         session.close();
     }
-    
+
     public boolean createPayment(String cardNumber, String cardOwner, Long amount, Project project) {
         logger.info("Creating payment: ");
         if (validator.validatePayer(cardOwner, cardNumber)) {

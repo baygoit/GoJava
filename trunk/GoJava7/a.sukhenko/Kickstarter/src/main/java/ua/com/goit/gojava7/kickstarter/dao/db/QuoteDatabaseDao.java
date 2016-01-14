@@ -15,7 +15,6 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 public class QuoteDatabaseDao{
     private static final Logger logger = LogManager.getLogger(QuoteDatabaseDao.class);
 
-
     @Autowired
     private SessionFactory      sessionFactory;
 

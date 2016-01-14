@@ -1,6 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -37,8 +36,7 @@ public class Category{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     @Cascade({CascadeType.SAVE_UPDATE})
     private List<Project> projects = new ArrayList<>();
-    
-    
+
     public Category() {
     }
 

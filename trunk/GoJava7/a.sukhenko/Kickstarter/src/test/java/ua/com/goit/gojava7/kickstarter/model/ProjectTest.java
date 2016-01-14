@@ -5,9 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Test;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
