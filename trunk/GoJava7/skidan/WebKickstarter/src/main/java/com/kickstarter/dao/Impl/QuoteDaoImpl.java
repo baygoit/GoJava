@@ -18,24 +18,24 @@ import com.kickstarter.model.Quote;
 public class QuoteDaoImpl implements QuoteDao {
 
 
-	@Autowired
+	@Autowired(required=false)
 	private SessionFactory sessionFactory;
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public Quote get() {
 
 		Session session = sessionFactory.openSession();
-
 		List<Quote> quotes = (List<Quote>) session.createQuery("from Quote q order by rand()").setMaxResults(1).list();
 		if (quotes.isEmpty()) {
 			return null;
 		}
-
 		Quote quote = quotes.get(0);
-
 		session.close();
-
 		return quote;
 
 	}

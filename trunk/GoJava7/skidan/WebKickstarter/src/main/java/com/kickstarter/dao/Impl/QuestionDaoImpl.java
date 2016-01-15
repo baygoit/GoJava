@@ -17,7 +17,7 @@ import com.kickstarter.model.Question;
 @Repository
 public class QuestionDaoImpl implements QuestionDao {
 	
-	@Autowired
+	@Autowired(required=false)
 	private SessionFactory sessionFactory;
 
 	@Transactional (propagation=Propagation.REQUIRED, isolation =  Isolation.SERIALIZABLE, readOnly=false)
@@ -44,8 +44,18 @@ public class QuestionDaoImpl implements QuestionDao {
 		session.close();
 		return questionList;
 	}
+}
 
-	// String sql = "INSERT INTO questions (projectId, question) VALUES (?, ?)";
+
+
+
+
+
+
+
+
+
+//String sql = "INSERT INTO questions (projectId, question) VALUES (?, ?)";
 	// jdbcTemplate.update(sql, new Object[] { projectId, newQuestion });
 	// @Autowired
 	// private JdbcTemplate jdbcTemplate;
@@ -75,7 +85,6 @@ public class QuestionDaoImpl implements QuestionDao {
 	 * 
 	 * }
 	 */
-}
 
 // @Autowired
 // private BasicDataSource dbCon;
