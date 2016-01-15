@@ -8,7 +8,7 @@
 <title>
 
 <c:if test="${not empty param.title}">${param.title}</c:if>
-<c:if test="${empty param.title}">Default title</c:if>
+<c:if test="${empty param.title}">Kickstarter</c:if>
 
 </title>
 </head>

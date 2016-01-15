@@ -31,7 +31,7 @@ public class Validation {
             if (!userSurname.isEmpty() && userSurname.matches("[a-zA-Z]+")) {
                 return true;
             } else {
-                throw new Exception("NotValidUserNameException");
+                throw new Exception("NotValidUserSurnameException");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +44,7 @@ public class Validation {
             if (!email.isEmpty() && email.contains("@") && email.contains(".")) {
                 return true;
             } else {
-                throw new Exception("NotValidUserNameException");
+                throw new Exception("NotValidUserEmailException");
             }
         } catch (Exception e) {
             e.printStackTrace();

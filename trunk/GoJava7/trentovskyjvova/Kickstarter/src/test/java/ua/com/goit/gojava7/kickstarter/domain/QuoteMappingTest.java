@@ -13,7 +13,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+@Category(IntegrationTest.class)
 public class QuoteMappingTest {
 	private SessionFactory sessionFactory;
 

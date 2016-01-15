@@ -4,27 +4,32 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 @Table(name = "bonuses")
 public class Bonus{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int     id;
-    @Column
+    @Column(name = "projectId", insertable = false, updatable = false)
     private int     projectId;
     @Column
     private double  amount;
     @Column
     private String  bonus;
-    
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Project project = new Project();
+
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name = "projectId")
+    private Project project;
 
     public int getId() {
         return id;

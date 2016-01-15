@@ -1,28 +1,19 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-<<<<<<< HEAD
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-@Entity
-@Table(name="categories")
-public class Category{
-	@Column
-    private String categoryName;
-	@Column
+<<<<<<< HEAD
 =======
+
+>>>>>>> a5205cf5c9abbd4a49bbd42205b128328e9b851b
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -34,7 +25,10 @@ public class Category{
     @Id
     @GeneratedValue
     @Column
->>>>>>> b0014930bf8740a544b0060d43ef290b3bc57753
+<<<<<<< HEAD
+=======
+
+>>>>>>> a5205cf5c9abbd4a49bbd42205b128328e9b851b
     private int    categoryId;
 
     public List<Project> getProjects() {
@@ -48,8 +42,7 @@ public class Category{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     @Cascade({CascadeType.SAVE_UPDATE})
     private List<Project> projects = new ArrayList<>();
-    
-    
+
     public Category() {
     }
 

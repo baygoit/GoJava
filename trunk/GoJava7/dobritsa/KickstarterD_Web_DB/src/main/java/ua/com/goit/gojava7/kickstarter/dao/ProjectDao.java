@@ -10,12 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.models.Category;
-import ua.com.goit.gojava7.kickstarter.models.Payment;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 import ua.com.goit.gojava7.kickstarter.models.Question;
 
 @Repository
+@Transactional
 public class ProjectDao {
 	
 	@Autowired
@@ -27,21 +28,18 @@ public class ProjectDao {
 	@Autowired
 	private QuestionDao questionDao;
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+	@Autowired
+	private PaymentDao paymentDao;
 
 	private static final Logger log = LoggerFactory.getLogger(ProjectDao.class);
 	
 	public Project get(Long projectId) {
-		log.info("<Project> get({})...", projectId);		
-		Session session = sessionFactory.openSession();
+		log.info("<Project> get({})...", projectId);
+		Session session = sessionFactory.getCurrentSession();
 
 		Project project = (Project) session.createCriteria(Project.class)
 				.add(Restrictions.eq("projectId", projectId))
 				.uniqueResult();
-
-		session.close();
 
 		if(project!=null)
 			setPledged(project);
@@ -49,77 +47,37 @@ public class ProjectDao {
 		return project;
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Project> getByCategory(Long categoryId) {
-		log.info("<projects> getByCategory({})...", categoryId);		
-		Session session = sessionFactory.openSession();
+		log.info("<projects> getByCategory({})...", categoryId);
+		Session session = sessionFactory.getCurrentSession();
 
 		List<Project> projects = session.createCriteria(Project.class)
 				.add(Restrictions.eq("category.id", categoryId))
 				.list();
 
-		session.close();
-
-		if (projects.isEmpty())
-			return null;
-
-		return setPledged(projects);
-	}
-
-	public List<Project> setPledged(List<Project> projects){
-		log.info("<projects> setPledged()...");
-
-		for(Project project : projects)
-			setPledged(project);
-		//projects.forEach(this::setPledged);
+		setPledged(projects);
 
 		return projects;
 	}
 
-	public Project setPledged(Project project){
+	private void setPledged(List<Project> projects){
+		log.info("<projects> setPledged()...");
+
+		for(Project project : projects)
+			setPledged(project);
+	}
+
+	private void setPledged(Project project){
 		Long projectId = project.getProjectId();
 		log.info("<void> setPledged({})...", projectId);
 
-		project.setPledged(calculatePledged(projectId));
-		return  project;
-	}
-
-	public Long calculatePledged(Long projectId){
-		log.info("<Long> calculatePledged({})...", projectId);
-
-		List<Payment> payments = getPayments(projectId);
-
-		if(payments == null)
-			return 0L;
-
-		Long pledged = 0L;
-		for(Payment payment : payments) {
-			pledged += payment.getAmount();
-		}
-
-		return pledged;
+		project.setPledged(paymentDao.calculatePledgedForProject(projectId));
 	}
 
 	public List<Question> getQuestions(Long projectId) {
 		log.info("<questions> getQuestions({})...", projectId);
 
 		return questionDao.getByProject(projectId);
-	}
-
-	public List<Payment> getPayments(Long projectId) {
-		log.info("<payments> getPayments({})...", projectId);
-		Session session = sessionFactory.openSession();
-
-		List<Payment> payments = session.createCriteria(Payment.class)
-				.add(Restrictions.eq("project.id", projectId))
-				.list();
-
-		session.close();
-
-		if (payments.isEmpty())
-			return null;
-
-		return payments;
 	}
 
 	public Category getCategory(Project project) {
