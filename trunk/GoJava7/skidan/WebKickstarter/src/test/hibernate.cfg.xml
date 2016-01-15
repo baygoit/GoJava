@@ -35,6 +35,9 @@
         	
 		<mapping class="com.kickstarter.model.Quote" />
 		<mapping class="com.kickstarter.model.Category" />
+		<mapping class="com.kickstarter.model.Project" />
+		<mapping class="com.kickstarter.model.Question" />
+		<mapping class="com.kickstarter.model.Payment" />
 		<!--  <mapping class="com.kickstarter.model.Project" />
 		<mapping class="com.kickstarter.model.Question" />
 		<mapping class="com.kickstarter.model.Payment" />-->

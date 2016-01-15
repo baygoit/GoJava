@@ -14,7 +14,9 @@ import com.kickstarter.model.Project;
 
 @Controller
 @RequestMapping("/payment")
-public class paymentController {
+public class PaymentController {
+
+	private final int EMPTY_PAYMENT = 0;
 
     @Autowired
     QuestionDaoImpl questionDao;
@@ -22,8 +24,8 @@ public class paymentController {
     ProjectDaoImpl projectDao;
     @Autowired
     PaymentDaoImpl paymentDao;
-
-    @RequestMapping("/providePaymentType")// FIXME
+    
+    @RequestMapping("/provide")
     public ModelAndView providePaymentType(@RequestParam Map<String, String> requestParams) {
         String projectId = requestParams.get("projectId");
 
@@ -58,13 +60,13 @@ public class paymentController {
         return modelAndView;
     }
 
-    @RequestMapping("/proceedPayment")// FIXME
+    @RequestMapping("/proceed")
     public String proceedPayment(@RequestParam Map<String, String> requestParams) {
         int projectId = Integer.parseInt(requestParams.get("projectId"));
         Integer paymentAmount;
         try {
             paymentAmount = Integer.parseInt(requestParams.get("paymentAmount"));
-            if (paymentAmount > 0) {// FIXME
+            if (paymentAmount > EMPTY_PAYMENT) {
                 Project project = projectDao.getOneProject(projectId);
                 paymentDao.addPayment(project, paymentAmount);
             }

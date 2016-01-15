@@ -19,18 +19,20 @@
 
 <div id=3>
 
+<ul>
     <c:forEach items="${projectList}" var="project">
-        <a href=project?projectId=${project.getId()}><c:out
-                value="${project.getTitle()}"/></a><br>
-        Project description:<c:out value="${project.getDiscription()}"/><br>
-        Required Sum:<c:out value="${project.getRequiredSum()}"/><br>
-        Gained Sum:<c:out value="${project.getGainedSum()}"/><br>
-        Days Left till end :<c:out value="${project.getDaysLeft()}"/><br>
+      <li> <a href=/WebKickstarter/project?projectId=${project.getId()}><c:out
+                value="${project.getTitle()}"/></a></li>
+      <li>Project description:<c:out value="${project.getDiscription()}"/></li>
+      <li>Required Sum:<c:out value="${project.getRequiredSum()}"/></li>
+      <li>Gained Sum:<c:out value="${project.getGainedSum()}"/></li>
+      <li>Days Left till end :<c:out value="${project.getDaysLeft()}"/></li>
     </c:forEach>
+	</ul>	
 
 </div>
 <br><br>
-<a href=categories>
+<a href=/WebKickstarter>
     <input type="button" value="Return to Category Selection"/>
 </a>
 </body>

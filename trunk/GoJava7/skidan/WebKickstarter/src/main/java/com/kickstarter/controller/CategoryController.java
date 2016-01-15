@@ -9,7 +9,7 @@ import com.kickstarter.dao.Impl.QuoteDaoImpl;
 
 @Controller
 @RequestMapping({"/categories", "/"})
-public class categoryController {
+public class CategoryController {
 
     @Autowired
     private QuoteDaoImpl quoteDao;

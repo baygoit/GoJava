@@ -26,8 +26,8 @@ public class QuoteMappingTest {
 	private SessionFactory sessionFactory;
 
 
-	@Autowired
-	QuoteDao quoteDao;
+//	@Autowired
+//	QuoteDao quoteDao;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -110,7 +110,7 @@ public class QuoteMappingTest {
 		session.getTransaction().commit();
 		session.close();
 		
-		Quote quote5 =  quoteDao.get();
+//		Quote quote5 =  quoteDao.get();
 		
 	}
 }

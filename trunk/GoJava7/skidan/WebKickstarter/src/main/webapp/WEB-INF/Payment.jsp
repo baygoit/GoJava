@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form method ="post" action ="proceedPayment">
+<form method ="post" action ="proceed">
 <input type ="hidden" name = "projectId" value = "${projectId}" />
 <input type ="hidden" name ="paymentAmount" value ="${paymentAmount}"/>
 <input name ="payerName" value ="Card Holder Name"/><br><br>

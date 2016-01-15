@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.kickstarter.dao.Impl.PaymentDaoImpl;
@@ -14,7 +15,8 @@ import com.kickstarter.model.Project;
 import com.kickstarter.model.Question;
 
 @Controller
-public class projectController {
+@RequestMapping("/project")
+public class ProjectController {
 
 	@Autowired
 	QuestionDaoImpl questionDao;
@@ -25,8 +27,8 @@ public class projectController {
 	@Autowired
 	PaymentDaoImpl paymentDao;
 
-	@RequestMapping("/projectsOfCategory")// FIXME /list
-	public ModelAndView getAllProjectsOfCategory(@RequestParam(name = "categoryId") int categoryId) {
+	@RequestMapping("/list")
+	public ModelAndView getAllProjects(@RequestParam(name = "categoryId") int categoryId) {
 		ModelAndView modelAndView = new ModelAndView("SelectedCategoryProjects");
 		List<Project> projectList = projectDao.getAllProjectsForCategory(categoryId);
 		for (Project p : projectList) {
@@ -36,8 +38,8 @@ public class projectController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/project")// FIXME getOne
-	public ModelAndView singleProject(@RequestParam(name = "projectId") int projectId) {
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView getOneProject(@RequestParam(name = "projectId") int projectId) {
 		ModelAndView modelAndView = new ModelAndView("SingleProject");
 
 		Project project = projectDao.getOneProject(projectId);

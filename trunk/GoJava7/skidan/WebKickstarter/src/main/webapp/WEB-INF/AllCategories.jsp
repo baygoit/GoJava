@@ -46,10 +46,25 @@
     <%=quote.getAuthor()%><br>
 </div>
 <h2>Categories</h2>
+<ul>
 <c:forEach items="${categoryList}" var="category">
-    <b><a id="ref" href=projectsOfCategory?categoryId=${category.getId()}>
-        <c:out value="${category.getTitle()}"/></a></b>
-</c:forEach><br><br>
+  <li><b><a id="ref" href=project/list?categoryId=${category.getId()}>
+        <c:out value="${category.getTitle()}"/></a></b></li>
+</c:forEach>
+
+</ul>	
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!--  	<h3>Top rated projects</h3>
        <c:forEach items="${projectList}" var="project">

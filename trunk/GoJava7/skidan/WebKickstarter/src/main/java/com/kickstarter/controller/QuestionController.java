@@ -12,9 +12,11 @@ import com.kickstarter.dao.Impl.QuestionDaoImpl;
 import com.kickstarter.model.Project;
 
 @Controller
-@RequestMapping("/questions") // FIXME question
-public class questionController {
+@RequestMapping("/question") 
+public class QuestionController {
 
+	private final int QUESTION_SHORTAGE = 0;
+	
     @Autowired
     QuestionDaoImpl questionDao;
     @Autowired
@@ -25,7 +27,7 @@ public class questionController {
         int projectId = Integer.parseInt(requestParams.get("projectId"));
         String question = requestParams.get("question");
 
-        if (question.length() >= 1) { // FIXME const
+        if (question.length() >= QUESTION_SHORTAGE) { 
             Project project = projectDao.getOneProject(projectId);
             questionDao.add(question, project);
         }

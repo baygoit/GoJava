@@ -2523,3 +2523,36 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 2016-01-15 00:14:06 INFO  Dialect:154 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
 2016-01-15 00:14:09 INFO  connections:235 - HHH10001008: Cleaning up connection pool [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
 2016-01-15 00:14:09 INFO  GenericApplicationContext:957 - Closing org.springframework.context.support.GenericApplicationContext@52a86356: startup date [Fri Jan 15 00:13:57 EET 2016]; root of context hierarchy
+2016-01-15 11:42:40 INFO  DefaultTestContextBootstrapper:259 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-01-15 11:42:40 INFO  DefaultTestContextBootstrapper:185 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@cb5822, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4b9e13df, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@2b98378d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@475530b9, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1d057a39, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@26be92ad]
+2016-01-15 11:42:41 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [applicationContextForTest.xml]
+2016-01-15 11:42:42 INFO  GenericApplicationContext:577 - Refreshing org.springframework.context.support.GenericApplicationContext@5649fd9b: startup date [Fri Jan 15 11:42:42 EET 2016]; root of context hierarchy
+2016-01-15 11:42:44 INFO  Version:37 - HHH000412: Hibernate Core {5.0.6.Final}
+2016-01-15 11:42:44 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2016-01-15 11:42:44 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2016-01-15 11:42:46 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2016-01-15 11:42:46 WARN  connections:71 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2016-01-15 11:42:46 INFO  connections:127 - HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2016-01-15 11:42:46 INFO  connections:136 - HHH10001001: Connection properties: {user=sa, password=****}
+2016-01-15 11:42:46 INFO  connections:141 - HHH10001003: Autocommit mode: false
+2016-01-15 11:42:46 INFO  DriverManagerConnectionProviderImpl:39 - HHH000115: Hibernate connection pool size: 1 (min=1)
+2016-01-15 11:42:47 INFO  Dialect:154 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2016-01-15 11:42:49 INFO  connections:235 - HHH10001008: Cleaning up connection pool [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2016-01-15 11:42:49 INFO  GenericApplicationContext:957 - Closing org.springframework.context.support.GenericApplicationContext@5649fd9b: startup date [Fri Jan 15 11:42:42 EET 2016]; root of context hierarchy
+2016-01-15 11:52:11 INFO  DefaultTestContextBootstrapper:259 - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2016-01-15 11:52:11 INFO  DefaultTestContextBootstrapper:185 - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@cb5822, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4b9e13df, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@2b98378d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@475530b9, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1d057a39, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@26be92ad]
+2016-01-15 11:52:11 INFO  XmlBeanDefinitionReader:317 - Loading XML bean definitions from class path resource [applicationContextForTest.xml]
+2016-01-15 11:52:12 INFO  GenericApplicationContext:577 - Refreshing org.springframework.context.support.GenericApplicationContext@5649fd9b: startup date [Fri Jan 15 11:52:12 EET 2016]; root of context hierarchy
+2016-01-15 11:52:13 INFO  Version:37 - HHH000412: Hibernate Core {5.0.6.Final}
+2016-01-15 11:52:13 INFO  Environment:213 - HHH000206: hibernate.properties not found
+2016-01-15 11:52:13 INFO  Environment:317 - HHH000021: Bytecode provider name : javassist
+2016-01-15 11:52:14 INFO  Version:66 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2016-01-15 11:52:14 WARN  connections:71 - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2016-01-15 11:52:14 INFO  connections:127 - HHH10001005: using driver [org.h2.Driver] at URL [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2016-01-15 11:52:14 INFO  connections:136 - HHH10001001: Connection properties: {user=sa, password=****}
+2016-01-15 11:52:14 INFO  connections:141 - HHH10001003: Autocommit mode: false
+2016-01-15 11:52:14 INFO  DriverManagerConnectionProviderImpl:39 - HHH000115: Hibernate connection pool size: 1 (min=1)
+2016-01-15 11:52:15 INFO  Dialect:154 - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2016-01-15 11:52:16 INFO  Version:27 - HV000001: Hibernate Validator 5.0.1.Final
+2016-01-15 11:52:17 INFO  connections:235 - HHH10001008: Cleaning up connection pool [jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE]
+2016-01-15 11:52:17 INFO  GenericApplicationContext:957 - Closing org.springframework.context.support.GenericApplicationContext@5649fd9b: startup date [Fri Jan 15 11:52:12 EET 2016]; root of context hierarchy
