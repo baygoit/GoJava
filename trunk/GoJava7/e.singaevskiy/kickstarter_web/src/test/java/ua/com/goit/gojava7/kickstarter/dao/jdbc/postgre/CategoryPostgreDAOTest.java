@@ -14,10 +14,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.dao.IntegrationTest;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.CategoryPostgreDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:applicationContext*.xml")
-public class CategoryPostgreDAOTest {
+@ContextConfiguration(locations="classpath:applicationContext.xml")
+public class CategoryPostgreDAOTest implements IntegrationTest{
 	
 	@Autowired
     CategoryPostgreDAO categoryPostgreDAO;
