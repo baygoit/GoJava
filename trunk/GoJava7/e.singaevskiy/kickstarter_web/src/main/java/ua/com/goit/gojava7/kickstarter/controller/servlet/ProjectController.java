@@ -22,7 +22,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
-@WebServlet("/project")
+@WebServlet("/project1")
 public class ProjectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

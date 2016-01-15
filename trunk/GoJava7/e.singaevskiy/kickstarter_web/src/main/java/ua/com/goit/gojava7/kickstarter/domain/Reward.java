@@ -1,11 +1,23 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Reward {
-    
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
     private long pledgeSum;
     private String description;
+    @ManyToOne
+    @JoinColumn(name="project_id", foreignKey=@ForeignKey(name="Reward_Project"))
     private Project project;
-    private int id;
 
     public Reward() {
         // default bean constructor

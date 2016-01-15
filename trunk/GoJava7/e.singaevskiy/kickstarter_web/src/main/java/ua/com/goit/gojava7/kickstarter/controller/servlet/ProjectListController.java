@@ -17,7 +17,7 @@ import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
-@WebServlet("/category")
+@WebServlet("/category1")
 public class ProjectListController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Autowired

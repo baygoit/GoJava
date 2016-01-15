@@ -7,7 +7,7 @@
 	<p style="color:red">errors</p>
 </c:if>
 	
-<form action="pledge?rewardId=${rewardId}&projectId=${projectId}"
+<form action="pledge.html?rewardId=${rewardId}&projectId=${projectId}&amount=${amount}"
 	method="post">
 	<p>
 		<input type="text" name="name" placeholder="name" required>
@@ -15,11 +15,11 @@
 	<p>
 		<input type="text" name="cardNumber" placeholder="card number" required>
 	</p>
-	<c:if test="${rewardId == 0}">
-		<p>
-			<input type="number" name="amount" placeholder="amount" required>
-		</p>
-	</c:if>
+	
+	<p>
+		<input type="number" name="amount" required value="${amount}" <c:if test="${rewardId != 0}"> disabled</c:if>>
+	</p>
+	
 	<p>
 		<input type="submit" value="Donate">
 	</p>

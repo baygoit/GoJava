@@ -10,12 +10,12 @@
 
 	<hibernate-mapping package="com.kickstarter.model">
 
-	<class name="Quote" table="quotes">
+	<class name="Quote" table="quote">
 		<id name="id" type="int" column="id">
          <generator class="native"/>
       </id>
-		<property name="quoteText" />
-		<property name="author" />
+		<property name="quote" column="quote"/>
+		<property name="author" column="author" />
 	</class>
 
 </hibernate-mapping>

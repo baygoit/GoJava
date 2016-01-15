@@ -23,8 +23,10 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long categoryId;
+
 	@Column
 	private String name;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	@Cascade({CascadeType.SAVE_UPDATE})
 	private List<Project> projects = new ArrayList<>();

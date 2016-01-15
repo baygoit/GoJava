@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @Table(name = "quote")
 public class Quote {
@@ -45,6 +47,6 @@ public class Quote {
 
 	@Override
 	public String toString() {
-		return "Quote [text=" + text + ", author=" + author + "]";
+		return new ToStringBuilder(this).append("id", id).append("text", text).append("author", author).toString();
 	}
 }

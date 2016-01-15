@@ -22,7 +22,17 @@
         <br />
  <!--  there was stuff here -->
      
+         Bonuses:
+        	<ul>
+   	<c:forEach var="pBonus" items="${paymentBonuses}" >
    
+			<li>
+			 ${pBonus.amount}  - ${pBonus.bonus}
+			</li>
+			
+		</c:forEach>
+     </ul>   
+     <hr>
    	<c:forEach var="question" items="${questions}" >
 			 Q: ${question.question} <br>
 			 A: ${question.answer} <br><br>

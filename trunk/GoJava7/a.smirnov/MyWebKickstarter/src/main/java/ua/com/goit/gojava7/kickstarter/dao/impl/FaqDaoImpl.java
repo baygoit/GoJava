@@ -26,10 +26,6 @@ public class FaqDaoImpl implements FaqDao {
 		session.save(faq);
 	}
 
-	public void remove(Faq faq) {
-		// TODO
-	}
-
 	@Transactional
 	@SuppressWarnings("unchecked")
 	public List<Faq> getProjectFaqs(int projectId) {
@@ -40,5 +36,9 @@ public class FaqDaoImpl implements FaqDao {
 		List<Faq> faqs = criteria.list();
 
 		return faqs;
+	}
+
+	public void remove(Faq faq) {
+		// TODO
 	}
 }

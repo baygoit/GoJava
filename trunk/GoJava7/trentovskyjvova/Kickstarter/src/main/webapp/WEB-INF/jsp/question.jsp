@@ -7,7 +7,7 @@
 	<p style="color:red">errors</p>
 </c:if>
 
-<form action="question?projectId=${projectId}" method="post">
+<form action="question.html?projectId=${projectId}" method="post">
 	<p>
 		<input type="text" name="questionText" required placeholder="question text">
 	</p>

@@ -22,13 +22,13 @@
 
 
 <p>
-	<a href="payments?projectId=${selectedProject.getId()}">to invest
+	<a href="payments.html?projectId=${selectedProject.getId()}">to invest
 		in the project</a>
 </p>
 
 
 <p>
-	<a href="question?projectId=${selectedProject.getId()}">to ask a
+	<a href="question.html?projectId=${selectedProject.getId()}">to ask a
 		question</a>
 </p>
 
