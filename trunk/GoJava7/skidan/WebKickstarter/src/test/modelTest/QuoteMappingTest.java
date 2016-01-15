@@ -1,9 +1,8 @@
 package modelTest;
 
 
-
-import java.util.List;
-
+import com.kickstarter.dao.interfaces.QuoteDao;
+import com.kickstarter.model.Quote;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -12,14 +11,27 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.kickstarter.model.Quote;
+import java.util.List;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:applicationContextForTest.xml")
 public class QuoteMappingTest {
+    
+
 	private SessionFactory sessionFactory;
 
+
+//	@Autowired
+//	QuoteDao quoteDao;
+	
 	@Before
 	public void setUp() throws Exception {
+//		quoteDao = new QuoteDaoImpl();
 		// A SessionFactory is set up once for an application!
 		// configures settings from hibernate.cfg.xml
 		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
@@ -41,9 +53,9 @@ public class QuoteMappingTest {
 		}
 	}
 
-//	@Test
+	@Test
 	public void testBasicUsage() {
-		// create a couple of events...
+//       quoteDao.setSessionFactory(sessionFactory);
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
@@ -60,7 +72,7 @@ public class QuoteMappingTest {
 		session.getTransaction().commit();
 		session.close();
 
-		// now lets pull events from the database and list them
+		
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 
@@ -95,9 +107,11 @@ public class QuoteMappingTest {
 		System.out.println("Get by id");
 		quote = session.get(Quote.class, 1);
 		System.out.println(quote);
-
 		session.getTransaction().commit();
 		session.close();
+		
+//		Quote quote5 =  quoteDao.get();
+		
 	}
 }
 

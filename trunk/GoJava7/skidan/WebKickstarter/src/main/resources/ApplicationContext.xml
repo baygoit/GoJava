@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
            http://www.springframework.org/schema/aop
@@ -11,10 +12,27 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.1.xsd
            http://www.springmodules.org/schema/ehcache
-           http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd">
+           http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+
+	
+	<mvc:annotation-driven />
 	<context:component-scan base-package="com.kickstarter.dao.interfaces" />
 	<context:component-scan base-package="com.kickstarter.dao.Impl" />
+    <context:component-scan base-package="com.kickstarter.controller" />
+    
+	
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
@@ -29,7 +47,7 @@
 	<bean id="loggerAspect" class="com.kickstarter.aspect.LoggerAspect"></bean>
 
 	<tx:annotation-driven />
-	
+
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -47,9 +65,15 @@
 				<prop key="hibernate.id.new_generator_mappings">false</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.region.factory_class">
+					org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+				</prop>
+				
 			</props>
 		</property>
-		
+
 		<property name="packagesToScan">
 			<list>
 				<value>com.kickstarter.model</value>
@@ -57,7 +81,8 @@
 		</property>
 	</bean>
 
-	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
 </beans>
 
@@ -65,7 +90,13 @@
 
 
 
-<!-- <property name="annotatedClasses"> <list> <value>com.kickstarter.model.Quote</value> 
+<!-- 
+
+
+
+
+<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop> 
+	<property name="annotatedClasses"> <list> <value>com.kickstarter.model.Quote</value> 
 	<value>com.kickstarter.model.Category</value> <value>com.kickstarter.model.Project</value> 
 	<value>com.kickstarter.model.Payment</value> <value>com.kickstarter.model.Question</value> 
 	</list> </property> <property name="mappingResources"> <list> </list> </property> -->

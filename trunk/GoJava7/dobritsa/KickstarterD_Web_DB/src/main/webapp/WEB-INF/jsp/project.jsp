@@ -3,9 +3,9 @@
 	<jsp:param name="title" value="Project" />
 </jsp:include>
 
-<h3><a href="categories">Kickstarter</a>
+<h3><a href="index">Kickstarter</a>
 /
-<a href="projects?id=${category.categoryId}">${category.name}</a></h3>
+<a href="category?categoryId=${category.categoryId}">${category.name}</a></h3>
 
 
 <h1>${project.name}</h1>
@@ -43,6 +43,6 @@
 	<input type="submit" value="Submit" />
 </form>
 
-<h3><a href="rewards?projectId=${project.projectId}">See rewards</a></h3>
+<h3><a href="reward?projectId=${project.projectId}">See rewards</a></h3>
 
 <jsp:include page="footer.jsp" />

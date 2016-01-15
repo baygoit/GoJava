@@ -9,11 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.config.Validator;
 import ua.com.goit.gojava7.kickstarter.models.Payment;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @Repository
+@Transactional
 public class PaymentDao {
 
 	@Autowired
@@ -24,32 +26,12 @@ public class PaymentDao {
 
 	private static final Logger log = LoggerFactory.getLogger(PaymentDao.class);
 
-	public PaymentDao() {
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
-	public void add(Payment payment) {
-		log.info("<void> add({})...", payment);
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		session.save(payment);
-		session.getTransaction().commit();
-		
-		session.close();
-	}
-
 	public Long calculatePledgedForProject(Long projectId) {
 		log.info("<Long> calculatePledgedForProject({})...", projectId);
-		Session session = sessionFactory.openSession();
-	
+		Session session = sessionFactory.getCurrentSession();
+
 		Long sumAmount = (Long) session.createCriteria(Payment.class).add(Restrictions.eq("project.id", projectId))
 				.setProjection(Projections.sum("amount")).uniqueResult();
-	
-		session.close();
 
 		if (sumAmount == null)
 			return 0L;
@@ -65,5 +47,12 @@ public class PaymentDao {
 			return true;
 		}
 		return false;
+	}
+
+	private void add(Payment payment) {
+		log.info("<void> add({})...", payment);
+		Session session = sessionFactory.getCurrentSession();
+
+		session.save(payment);
 	}
 }

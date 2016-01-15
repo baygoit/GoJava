@@ -47,7 +47,7 @@
 						<div class="tab-pane active" id="payment">			    
 							<form method="post" class="form-horizontal" action="./payment">
 								<div class="form-group col-sm-7">
-									<input required type="text" class="form-control" id="inputName" name="first-name" placeholder="Name">
+									<input required type="text" class="form-control" id="inputName" name="userName" placeholder="Name">
 								</div>
 								<div class="form-group col-sm-7">
 									<input required type="text" class="form-control" id="inputCardNumber" name="creditCardNumber" pattern="[0-9]{13,16}" placeholder="Card number">
@@ -58,8 +58,8 @@
 											<dt>If you donate ${reward.pledge} USD :</dt><dd> ${reward.description}</dd>
 										</c:forEach>
 									</dl>
-									<label for="donatingSum" class="inputLabel">Please enter pledge amount : </label>
-									<input name="donatingSum" type="text" />		    						
+									<label for="pledge" class="inputLabel">Please enter pledge amount : </label>
+									<input name="pledge" type="text" />		    						
 									<input id ="projectId" type="hidden" name="projectId" value="${project.id}" />				
 								</div>			  
 								<div class="form-group col-sm-7">

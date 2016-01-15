@@ -15,12 +15,13 @@
 		<c:if test="${empty param.title}">Default title</c:if>
 	</title>
     
-    <!-- Bootstrap Core CSS -->
-    <link href="  https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B2I6VTKFP4LhYjRFa1Z5SzBybWs" rel="stylesheet">
-       
+    <!-- <!-- Bootstrap Core CSS -->
+    <link href="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B2I6VTKFP4LhYjRFa1Z5SzBybWs" rel="stylesheet">
+    <link href="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B2I6VTKFP4LhYjRFa1Z5SzBybWs" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B2I6VTKFP4LhOU82eWE5T1gzemc" rel="stylesheet">
-   
+  
+  	<link href="${pageContext.servletContext.contextPath}/css/111.css" rel="stylesheet" >
     <!-- Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
@@ -37,6 +38,9 @@
 </head>
 
 <body>
+
+<div id="testing">Hello
+</div>
 
 <div class="brand">My Kickstarter</div>
     <div class="address-bar">Anton Smirnov | Kiev, Ukraine 	02068 | +38(063)109-38-08</div>
@@ -77,7 +81,7 @@
                         <a href="/kickstarter/top10">Top 10 categories</a>
                     </li>
                     <li>
-                        <a href="contact.html">Contact</a>
+                        <a href="/kickstarter/contacts">Contact</a>
                     </li>
                 </ul>
             </div>
