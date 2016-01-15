@@ -1,9 +1,8 @@
-package ua.com.goit.gojava7.kickstarter.controller;
+package ua.com.goit.gojava7.kickstarter.servlets;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +17,7 @@ import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 
-@WebServlet("/ask")
+//@WebServlet("/ask")
 public class QuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = LoggerFactory.getLogger(QuestionServlet.class);
