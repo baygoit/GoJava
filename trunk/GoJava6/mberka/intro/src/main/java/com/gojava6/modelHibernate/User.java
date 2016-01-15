@@ -16,7 +16,7 @@ import java.util.List;
 public class User {
     @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name = "idUser")
-    private int id;
+    private int idUser;
     @Column
     /*NEAR FIELD OR GETTER*/
     private String userName;
@@ -56,12 +56,12 @@ public class User {
         this.hostUser = false;
     }
 
-    public int getId() {
-        return id;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public boolean isHostUser() {
@@ -123,7 +123,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + idUser +
                 ", userName='" + userName + '\'' +
                 ", userSurname='" + userSurname + '\'' +
                 ", email='" + email + '\'' +
