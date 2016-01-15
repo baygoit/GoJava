@@ -23,6 +23,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.error.ResourceNotFoundException;
+import ua.com.goit.gojava7.kickstarter.util.Validator;
 
 @Controller
 @Transactional
@@ -36,7 +37,10 @@ public class WebController{
     private QuoteDatabaseDao    quoteDao;
     @Autowired
     private QuestionDatabaseDao questionDao;
-
+    @Autowired
+    private Validator validator;
+    
+    
     public Quote getQuote(){
         return quoteDao.getRandomQuote();
     }
@@ -86,6 +90,8 @@ public class WebController{
         modelAndView.addObject("questions", questions);
         return modelAndView;
     }
+    
+    
 
 
 }
