@@ -8,7 +8,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.com.goit.gojava7.kickstarter.models.Quote;
 import static org.mockito.Matchers.contains;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.verify;
@@ -26,6 +25,7 @@ public class QuoteTest extends Assert {
 
 	@Before
 	public void setUp() {
+		quote.setQuoteId(10L);
 		quote.setText("TestQuote");
 		quote.setAuthor("TestAuthor");
 		System.setOut(printSteam);
@@ -38,6 +38,7 @@ public class QuoteTest extends Assert {
 
 	@Test
 	public void testGet() {
+		assertThat(quote.getQuoteId(), is(10L));
 		assertThat(quote.getText(), is("TestQuote"));
 		assertThat(quote.getAuthor(), is("TestAuthor"));
 	}
@@ -56,8 +57,7 @@ public class QuoteTest extends Assert {
 
 	@Test
 	public void testIsEmpty() {
-		Quote quote = new Quote();
-		assertTrue(quote.isEmpty());
+		Quote quoteEmpty = new Quote();
+		assertTrue(quoteEmpty.isEmpty());
 	}
-
 }

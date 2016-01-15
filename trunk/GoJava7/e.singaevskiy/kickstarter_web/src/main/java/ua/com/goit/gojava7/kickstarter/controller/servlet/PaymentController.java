@@ -14,7 +14,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
-@WebServlet("/payment")
+@WebServlet("/payment1")
 public class PaymentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

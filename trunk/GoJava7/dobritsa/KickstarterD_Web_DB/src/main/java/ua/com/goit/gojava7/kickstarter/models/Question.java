@@ -20,12 +20,16 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long questionId;
+
 	@Column
-	private String time = "";
+	private String time;
+
 	@Column
-	private String question = "";
+	private String question;
+
 	@Column
-	private String answer = "";	
+	private String answer;
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "project_id")
 	private Project project = new Project();

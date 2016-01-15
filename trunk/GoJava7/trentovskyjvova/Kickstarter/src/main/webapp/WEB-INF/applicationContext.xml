@@ -5,6 +5,7 @@
 	xmlns:aop="http://www.springframework.org/schema/aop" 
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/aop
@@ -14,7 +15,9 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd
            http://www.springframework.org/schema/util
-           http://www.springframework.org/schema/util/spring-util.xsd">
+           http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<!-- 
 	<bean id="daoProvider" class="ua.com.goit.gojava7.kickstarter.config.DaoProvider">
@@ -33,9 +36,17 @@
 
 	<import resource="applicationContext-${backend:postgres}.xml" />
 	
-	<bean id="requestValidation" class="ua.com.goit.gojava7.kickstarter.servlet.RequestValidation">
-	</bean>
-	
+	<mvc:annotation-driven />
+  	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />
+  	
+	<bean id="viewResolver"
+ 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+ 		<property name="viewClass"
+ 			value="org.springframework.web.servlet.view.JstlView" />
+ 		<property name="prefix" value="/WEB-INF/jsp/" />
+ 		<property name="suffix" value=".jsp" />
+ 	</bean>
+ 	
 	<!-- <import resource="loggerAspect.xml"/> -->
 	
 </beans>

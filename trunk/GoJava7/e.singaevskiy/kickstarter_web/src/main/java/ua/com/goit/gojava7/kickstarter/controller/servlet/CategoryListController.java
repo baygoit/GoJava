@@ -17,7 +17,7 @@ import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-@WebServlet("/categories")
+@WebServlet("/categories1")
 public class CategoryListController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     

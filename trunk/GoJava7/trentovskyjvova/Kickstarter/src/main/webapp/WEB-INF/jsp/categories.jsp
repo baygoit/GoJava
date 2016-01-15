@@ -10,7 +10,7 @@
 <c:forEach var="category" items="${categories}">
 	<div class="category">
 		<!-- <p> -->
-			<a href="projects?id=${category.getId()}">${category.getName()}</a>
+			<a href="projects.html?id=${category.getId()}">${category.getName()}</a>
 		<!-- </p> -->
 	</div>
 </c:forEach>

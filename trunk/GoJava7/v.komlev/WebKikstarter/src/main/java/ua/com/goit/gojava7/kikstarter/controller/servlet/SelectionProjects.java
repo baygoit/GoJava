@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.com.goit.gojava7.kikstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kikstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kikstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kikstarter.domain.Project;
 
@@ -28,6 +29,9 @@ public class SelectionProjects extends HttpServlet {
 	private ProjectDao projectDao;
 	
 	@Autowired
+	private PaymentDao paymentDao;
+	
+	@Autowired
 	private CategoryDao categoryDao;
 
 	public void init() throws ServletException {
@@ -41,6 +45,11 @@ public class SelectionProjects extends HttpServlet {
 		int categoryId = Integer.parseInt(request.getParameter("id"));
 		
 		List<Project> selectedProjects = projectDao.getProjectsFromCategory(categoryId);
+		
+		for(Project project: selectedProjects){
+			project.setCollectedSum(paymentDao.getSumOfProject(project.getId()));
+		}
+		
 		
 		request.setAttribute("category", categoryDao.getCategory(categoryId));
 		request.setAttribute("projects", selectedProjects);

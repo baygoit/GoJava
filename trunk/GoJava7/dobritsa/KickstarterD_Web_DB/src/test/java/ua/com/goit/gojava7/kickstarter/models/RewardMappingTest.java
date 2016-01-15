@@ -47,19 +47,19 @@ public class RewardMappingTest {
 		Project project1 = new Project();
 		project1.setName("TestName1");
 		project1.setDescription("TestDescription1");
-		project1.setGoal(100l);
-		project1.setDaysToGo(1l);
+		project1.setGoal(100L);
+		project1.setDaysToGo(1L);
 		project1.setHistory("TestHistory1");
 		project1.setLink("TestLink1");
 		project1.setCategory(category1);
 
 		Reward reward1 = new Reward();
-		reward1.setAmount(10);
+		reward1.setAmount(10L);
 		reward1.setReward("TestReward1");
 		reward1.setProject(project1);
 
 		Reward reward2 = new Reward();
-		reward2.setAmount(2);
+		reward2.setAmount(2L);
 		reward2.setReward("TestReward2");
 		reward2.setProject(project1);
 
@@ -70,14 +70,24 @@ public class RewardMappingTest {
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
+		
 		System.out.println("\n-----Get by id = 1-----");
-		Reward reward = session.get(Reward.class, 1l);
-		System.out.println(reward);
+		Reward reward = session.get(Reward.class, 1L);
+		System.out.println(reward);	
+		
+		System.out.println("\n-----Get Project by id = 1-----");
+		Project project = session.get(Project.class, 1L);
+		System.out.println("Project: " + project);
+		
+		System.out.println("\n-----Get Category by id = 1-----");
+		Category category = session.get(Category.class, 1L);
+		System.out.println("Category: " + category);
+		
 		session.close();
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		System.out.println("\n-----Get list of quotes-----");
+		System.out.println("\n-----Get list of rewards-----");
 		List<Reward> rewards = (List<Reward>) session.createQuery("from Reward q").list();
 		for (Reward resultReward : rewards) {
 			System.out.println(resultReward);

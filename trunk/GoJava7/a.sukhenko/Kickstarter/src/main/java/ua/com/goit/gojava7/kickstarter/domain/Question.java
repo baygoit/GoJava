@@ -1,11 +1,52 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
-public class Question{
-    private String time;
-    private String question;
-    private String answer;
-    private String projectName;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
+@Entity
+@Table(name = "questions")
+public class Question{
+
+
+    @Column
+    private String question;
+    @Column
+    private String answer;
+  
+    
+    @Id
+    @GeneratedValue
+    @Column(nullable = false, unique = true)
+    private int    id;
+
+    @Column(insertable = false, updatable = false)
+    private int    projectId;
+    
+    
+    @ManyToOne
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @JoinColumn(name = "projectId")
+    private Project project;
+
+    
+    
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
+  
     public String getAnswer() {
         return answer;
     }
@@ -22,19 +63,19 @@ public class Question{
         this.question = question;
     }
 
-    public String getTime() {
-        return time;
+    public Project getProject() {
+        return project;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public int getId() {
+        return id;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -18,10 +18,13 @@ public class Reward {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long rewardId;
+
 	@Column
-	private int amount;
+	private Long amount;
+
 	@Column
-	private String reward;	
+	private String reward;
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "project_id")
 	private Project project = new Project();	
@@ -34,11 +37,11 @@ public class Reward {
 		this.rewardId = rewardId;
 	}
 
-	public int getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
@@ -56,6 +59,10 @@ public class Reward {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+
+	public Long getProjectId() {
+		return project.getProjectId();
 	}
 
 	@Override

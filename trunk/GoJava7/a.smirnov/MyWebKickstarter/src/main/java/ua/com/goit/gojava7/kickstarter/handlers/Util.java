@@ -6,11 +6,7 @@ import java.util.TimeZone;
 
 public class Util {
 
-	public void setDeadline(int day, int month, int year) {
-		getDaysLeft(day, month, year);
-	}
-
-	protected int getDaysLeft(int day, int month, int year) {
+	public int getDaysLeft(int day, int month, int year) {
 		TimeZone timeZone = TimeZone.getTimeZone("Europe/Kiev");
 		Calendar currentCalendar = Calendar.getInstance();
 		Date date = new Date();
@@ -28,5 +24,4 @@ public class Util {
 
 		return (int) days;
 	}
-
 }

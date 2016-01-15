@@ -2,28 +2,68 @@ package ua.com.goit.gojava7.kickstarter.domain;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Type;
+@Entity
+@Table(name = "projects")
 public class Project{
-    private static final String MINUTES_LEFT        = " minutes left";
-    private static final String HOURS_LEFT          = " hours left";
-    private static final String DAYS_LEFT           = " days left";
-    private static final String SECONDS_LEFT        = " seconds left";
-    private int id;
+    private static final String MINUTES_LEFT = " minutes to go";
+    private static final String HOURS_LEFT   = " hours to go";
+    private static final String DAYS_LEFT    = " days to go";
+    private static final String SECONDS_LEFT = " seconds to go";
+    @Id
+    @GeneratedValue
+    @Column(name = "id", unique = true, nullable = false)
+    private int                 id;
+    @Column(unique = true)
+
     private String              projectName;
+    @Column
     private String              projectDescription;
+    @Column
     private double              moneyNeeded;
+    @Column
     private String              projectHistory;
+    @Column
     private String              demoLink;
-    private Map<String, String> questionsAndAnswers = new HashMap<>();
-    private Category category;
-    private double              pledged             = 0;
+
+    @ManyToOne
+    @JoinColumn(name = "projectCategoryId")
+    private Category            category;
+
+    @Type(type = "ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
+    @Column(name = "enddate")
     private LocalDateTime       enddate;
-    private PaymentBonus        paymentBonus        = new PaymentBonus();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    private List<Bonus>         bonuses      = new ArrayList<Bonus>();
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
+    private List<Question>      questionsAndAnswers;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+    private List<Payment>       payments     = new ArrayList<>();
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
 
     public LocalDateTime getEnddate() {
         return enddate;
@@ -33,12 +73,10 @@ public class Project{
 
     }
 
-
     public double getMoneyNeeded() {
         return moneyNeeded;
     }
 
-    @XmlElement
     public void setMoneyNeeded(double moneyNeeded) {
         this.moneyNeeded = moneyNeeded;
     }
@@ -59,15 +97,10 @@ public class Project{
         return msg;
     }
 
-    public String getFundedPercentage() {
-        return (float) ((pledged * 100) / getMoneyNeeded()) + "%";
-    }
-
     public String getProjectName() {
         return projectName;
     }
 
-    @XmlAttribute
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
@@ -76,7 +109,6 @@ public class Project{
         return projectDescription;
     }
 
-    @XmlElement
     public void setProjectDescription(String projectDescription) {
         this.projectDescription = projectDescription;
     }
@@ -93,47 +125,12 @@ public class Project{
         this.projectHistory = projectHistory;
     }
 
-    public Map<String, String> getQuestionsAndAnswers() {
-        return questionsAndAnswers;
-    }
-
-    public void setQuestionsAndAnswers(Map<String, String> questionsAndAnswers) {
-        this.questionsAndAnswers = questionsAndAnswers;
-    }
-
     public String getDemoLink() {
         return demoLink;
     }
 
     public void setDemoLink(String demoLink) {
         this.demoLink = demoLink;
-    }
-
-    public PaymentBonus getPaymentBonus() {
-        return paymentBonus;
-    }
-
-    public void setPaymentBonus(PaymentBonus paymentBonus) {
-        this.paymentBonus = paymentBonus;
-    }
-
-   
-    public double getPledged() {
-        return pledged;
-    }
-
-    public void setPledged(double d) {
-        this.pledged = d;
-    }
-
-    public void updatePledged(double amount) {
-        this.pledged += amount;
-    }
-
-
-    public void addBacker(double d) {
-        pledged += d;
-
     }
 
     public Category getCategory() {
@@ -150,5 +147,21 @@ public class Project{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public List<Bonus> getBonuses() {
+        return bonuses;
+    }
+
+    public void setBonuses(List<Bonus> bonuses) {
+        this.bonuses = bonuses;
+    }
+
+    public List<Question> getQuestionsAndAnswers() {
+        return questionsAndAnswers;
+    }
+
+    public void setQuestionsAndAnswers(List<Question> questionsAndAnswers) {
+        this.questionsAndAnswers = questionsAndAnswers;
     }
 }

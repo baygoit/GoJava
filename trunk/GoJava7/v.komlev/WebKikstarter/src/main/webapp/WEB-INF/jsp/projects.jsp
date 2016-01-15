@@ -15,9 +15,9 @@
 	<c:forEach var="project" items="${projects}">
 		<a href="project?id=${project.uniqueID}">${project.name}</a>
 		<br>
-		Necessary amount: <c:out value="${project.getNecessaryAmount()}"/>
+		Necessary amount: <c:out value="${project.getRequiredSum()}"/>
 		<br>
-		Collected amount: <c:out value="${project.getCollectedAmount()}"/>
+		Collected amount: <c:out value="${project.getCollectedSum()}"/>
 		<br>
 		Days left: <c:out value="${project.getEndOfDays()}"/>
 		<br>
