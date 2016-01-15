@@ -1,22 +1,37 @@
 package com.gojava6.modelHibernate;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table (name = "Reservations")
 public class Reservation {
-    private Apartment room;
+    @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column
+    private int idReservation;
+    @ManyToOne
+    private Apartment apartment;
+    @Column
     @Temporal (value = TemporalType.TIMESTAMP)
     private Date moveInDate;
+    @Column
     @Temporal (value = TemporalType.TIMESTAMP)
     private Date moveOutDate;
 
-    public Apartment getRoom() {
-        return room;
+    public int getIdReserve() {
+        return idReservation;
     }
 
-    public void setRoom(Apartment room) {
-        this.room = room;
+    public void setIdReserve(int idReserve) {
+        this.idReservation = idReserve;
+    }
+
+    public Apartment getApartment() {
+        return apartment;
+    }
+
+    public void setApartment(Apartment apartment) {
+        this.apartment = apartment;
     }
 
     public Date getMoveInDate() {

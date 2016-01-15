@@ -2,7 +2,7 @@
 <jsp:include page="header.jsp">
 	<jsp:param value="Projects" name="title"/>
 </jsp:include>
-<a href="category?id=${project.category.categoryId}">${project.category.categoryName}</a> > ${project.projectName}
+<a href="category.html?id=${project.category.categoryId}">${project.category.categoryName}</a> > ${project.projectName}
 <c:choose>
     <c:when test="${notfound == true}">
         Sorry, project not found. 
@@ -22,7 +22,17 @@
         <br />
  <!--  there was stuff here -->
      
+         Bonuses:
+        	<ul>
+   	<c:forEach var="pBonus" items="${paymentBonuses}" >
    
+			<li>
+			 ${pBonus.amount}  - ${pBonus.bonus}
+			</li>
+			
+		</c:forEach>
+     </ul>   
+     <hr>
    	<c:forEach var="question" items="${questions}" >
 			 Q: ${question.question} <br>
 			 A: ${question.answer} <br><br>

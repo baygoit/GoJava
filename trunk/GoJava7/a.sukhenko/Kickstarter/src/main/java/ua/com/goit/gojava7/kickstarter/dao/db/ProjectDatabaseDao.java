@@ -29,6 +29,9 @@ public class ProjectDatabaseDao{
         if (results.isEmpty()) {
             throw new NoSuchElementException("hibernate returned 0 categories: list is empty.");
         }
+        if (session.isOpen()) {
+            session.close();
+        }
         return results;
     }
 
@@ -42,8 +45,8 @@ public class ProjectDatabaseDao{
         if (results.isEmpty()) {
             throw new NoSuchElementException();
         }
-        if(session.isOpen()){
-        session.close();
+        if (session.isOpen()) {
+            session.close();
         }
         return results.get(0);
     }
@@ -55,6 +58,9 @@ public class ProjectDatabaseDao{
         Query query = session.createQuery(hql);
         query.setParameter("categoryId", categoryId);
         List<Project> results = HibernateUtil.listAndCast(query);
+        if (session.isOpen()) {
+            session.close();
+        }
         return results;
     }
 

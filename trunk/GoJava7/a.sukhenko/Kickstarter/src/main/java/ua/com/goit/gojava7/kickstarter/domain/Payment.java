@@ -14,27 +14,26 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 
 @Entity
-@Table(name = "payments")//country
+@Table(name = "payments") // country
 public class Payment{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int    id;
+    private int     id;
     @Column(name = "cardNumber")
-    private String   cardNumber;
+    private String  cardNumber;
     @Column
-    private String cardOwner;
-    @Column(name = "projectId",insertable = false, updatable= false)
-    private int    projectId;
+    private String  cardOwner;
+    @Column(name = "projectId", insertable = false, updatable = false)
+    private int     projectId;
     @Column(name = "amount")
-    private long   amount;
-    
+    private long    amount;
+
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "projectId")
     private Project project;
-    
-    
+
     public Payment(String cardNumber, String cardOwner, Project project, long amount) {
         super();
         this.cardNumber = cardNumber;
@@ -50,8 +49,6 @@ public class Payment{
     public void setProject(Project project) {
         this.project = project;
     }
-
-   
 
     public Payment() {
 

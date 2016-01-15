@@ -17,7 +17,7 @@ import com.kickstarter.model.Project;
 @Repository
 public class PaymentDaoImpl implements PaymentDao {
 
-	@Autowired
+	@Autowired(required=false)
 	private SessionFactory sessionFactory;
 	
 	@Transactional(propagation=Propagation.REQUIRED, isolation =  Isolation.SERIALIZABLE, readOnly=false)

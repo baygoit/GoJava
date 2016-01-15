@@ -51,15 +51,18 @@
 			<list>
 				<value>ua.com.goit.gojava7.kickstarter.domain.Quote</value>
 				<value>ua.com.goit.gojava7.kickstarter.domain.Category</value>
+				<value>ua.com.goit.gojava7.kickstarter.domain.Payment</value>
+				<value>ua.com.goit.gojava7.kickstarter.domain.Project</value>
+				<value>ua.com.goit.gojava7.kickstarter.domain.Question</value>
+				<value>ua.com.goit.gojava7.kickstarter.domain.Reward</value>
 			</list>
 		</property>
 
 		<property name="mappingResources">
 			<list>
-				<value>Payment.hbm.xml</value>
-				<value>Project.hbm.xml</value>
-				<value>Question.hbm.xml</value>
-				<value>Reward.hbm.xml</value>
+
+				<!-- <value>Question.hbm.xml</value>
+				<value>Reward.hbm.xml</value> -->
 			</list>
 		</property>
 

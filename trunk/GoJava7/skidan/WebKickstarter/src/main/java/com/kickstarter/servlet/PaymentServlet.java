@@ -43,20 +43,26 @@ public class PaymentServlet extends HttpServlet {
 			url = "/WEB-INF/FullPayment.jsp";
 			break;
 		}
-//		if (paymentType == 1) {
-//			tempPaymentType = firstPaymentType;
-//
-//		} else if (paymentType == 2) {
-//			tempPaymentType = secondPaymentType;
-//
-//		} else if (paymentType == 3) {
-//			tempPaymentType = thirdPaymentType;
-//
-//		} else {
-//			url = "/WEB-INF/FullPayment.jsp";
 
-//		}
 		request.setAttribute("paymentAmount", tempPaymentType);
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }
+
+
+
+
+
+//if (paymentType == 1) {
+//tempPaymentType = firstPaymentType;
+//
+//} else if (paymentType == 2) {
+//tempPaymentType = secondPaymentType;
+//
+//} else if (paymentType == 3) {
+//tempPaymentType = thirdPaymentType;
+//
+//} else {
+//url = "/WEB-INF/FullPayment.jsp";
+
+//}
