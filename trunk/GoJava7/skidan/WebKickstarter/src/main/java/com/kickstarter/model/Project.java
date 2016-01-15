@@ -1,5 +1,9 @@
 package com.kickstarter.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,40 +11,48 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
-@Table(name="projects")
+@Table(name = "projects")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Project {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name ="projectId")
+	@Column(name = "projectId")
 	private int id;
-	@Column(name ="title")
+	@Column(name = "title")
 	private String title;
-	@Column(name ="discription")
+	@Column(name = "discription")
 	private String discription;
-	@Column(name ="daysLeft")
+	@Column(name = "daysLeft")
 	private int daysLeft;
-	@Column(name ="requiredSum")
+	@Column(name = "requiredSum")
 	private int requiredSum;
-	@Column(name ="gainedSum")
+	@Column(name = "gainedSum")
 	private int gainedSum;
-	@Column(name ="projectHistory")
+	@Column(name = "projectHistory")
 	private String projectHistory;
-	@Column(name ="videoLink")
+	@Column(name = "videoLink")
 	private String videoLink;
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
 	private Category category;
-
-	
+	@OneToMany(mappedBy = "project")
+	private Collection<Question> questions = new ArrayList<>();
+	@OneToMany(mappedBy = "project")
+	private Collection<Payment> payments = new ArrayList<>();
 
 	public Project() {
 	}
 
-	public Project(int id, String title, String discription, int daysLeft, int requiredSum, int gainedSum,
+	public Project(int id, String title, String discription, int daysLeft, int requiredSum, int gainedSum,// FIXME
 			String projectHistory, String videoLink, Category category) {
 		this.id = id;
 		this.title = title;
@@ -52,8 +64,25 @@ public class Project {
 		this.videoLink = videoLink;
 		this.category = category;
 	}
+
 	public Category getCategory() {
 		return category;
+	}
+
+	public Collection<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(Collection<Question> questions) {
+		this.questions = questions;
+	}
+
+	public Collection<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(Collection<Payment> payments) {
+		this.payments = payments;
 	}
 
 	public void setCategory(Category category) {
@@ -124,13 +153,12 @@ public class Project {
 		this.id = id;
 	}
 
-/*	public Integer getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}*/
+	/*
+	 * public Integer getCategoryId() { return categoryId; }
+	 * 
+	 * public void setCategoryId(int categoryId) { this.categoryId = categoryId;
+	 * }
+	 */
 
 	@Override
 	public String toString() {

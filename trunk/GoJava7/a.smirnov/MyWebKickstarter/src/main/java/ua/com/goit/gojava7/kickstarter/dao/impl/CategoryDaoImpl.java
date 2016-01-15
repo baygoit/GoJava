@@ -49,7 +49,7 @@ public class CategoryDaoImpl implements CategoryDao {
 	public List<Object[]> getTop10Categories() {
 		Session session = sessionFactory.getCurrentSession();
 
-		SQLQuery query = session.createSQLQuery("SELECT category.name, SUM(coalesce(payment.pledge,0)) AS money "
+		SQLQuery query = session.createSQLQuery("" + "SELECT category.name, SUM(coalesce(payment.pledge,0)) AS money "
 				+ "FROM category " + "LEFT JOIN project ON category.id = project.category_id "
 				+ "LEFT JOIN payment ON project.id = payment.project_id " + "GROUP BY category.id "
 				+ "ORDER BY money DESC limit 10");

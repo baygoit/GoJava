@@ -31,7 +31,18 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">create</property>
         
-		<mapping resource="Quote.hbm.xml" />
+        
+        	
+		<mapping class="com.kickstarter.model.Quote" />
+		<mapping class="com.kickstarter.model.Category" />
+		<mapping class="com.kickstarter.model.Project" />
+		<mapping class="com.kickstarter.model.Question" />
+		<mapping class="com.kickstarter.model.Payment" />
+		<!--  <mapping class="com.kickstarter.model.Project" />
+		<mapping class="com.kickstarter.model.Question" />
+		<mapping class="com.kickstarter.model.Payment" />-->
+        
+	
 
 	</session-factory>
 

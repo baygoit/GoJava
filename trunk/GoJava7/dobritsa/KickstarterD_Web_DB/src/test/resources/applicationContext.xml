@@ -18,8 +18,6 @@
            
     <context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />	
           
-    <import resource="applicationContextDb.xml"/> 
-    
-	<import resource="applicationContextAop.xml"/>
+    <import resource="applicationContextDb.xml"/>
 	
 </beans>

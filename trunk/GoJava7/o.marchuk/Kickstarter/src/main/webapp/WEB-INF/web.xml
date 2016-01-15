@@ -10,8 +10,8 @@
 <listener>
    <listener-class>
         org.springframework.web.context.ContextLoaderListener
-   </listener-class>
-   
+   </listener-class></listener>
+   <listener>
    <listener-class>ua.com.goit.gojava7.kickstarter.dao.mysql.JdbcCleanupContextShutdownHook</listener-class>
 </listener>
 
