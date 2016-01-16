@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.models;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import java.util.List;
 
@@ -23,7 +23,6 @@ public class QuoteMappingTest {
 			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		} catch (Exception e) {
 			System.err.println("Initial SessionFactory creation failed." + e);
-			// e.printStackTrace();
 			StandardServiceRegistryBuilder.destroy(registry);
 		}
 	}

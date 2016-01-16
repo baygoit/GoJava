@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.goit.gojava7.kickstarter.config.Validator;
+import ua.com.goit.gojava7.kickstarter.validator.MyValidator;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
-import ua.com.goit.gojava7.kickstarter.models.Project;
-import ua.com.goit.gojava7.kickstarter.models.Reward;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Reward;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class PaymentController {
     @Autowired
     private PaymentDao paymentDao;
     @Autowired
-    private Validator validator;
+    private MyValidator myValidator;
 
     private Long rewardId;
     private Long projectId;
@@ -92,7 +92,7 @@ public class PaymentController {
 
     private boolean amountIsValid() {
         log.info("amountIsValid()...");
-        return validator.validateAmountOfPledge(amount);
+        return myValidator.validateAmountOfPledge(amount);
     }
 
     public ModelAndView payWithAmount(){

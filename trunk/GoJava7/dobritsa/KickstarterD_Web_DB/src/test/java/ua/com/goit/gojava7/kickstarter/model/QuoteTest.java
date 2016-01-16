@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.models;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -48,16 +48,5 @@ public class QuoteTest extends Assert {
 		System.out.println(quote.toString());
 		verify(printSteam).println(contains("TestQuote"));
 		verify(printSteam).println(contains("TestAuthor"));
-	}
-
-	@Test
-	public void testIsNotEmpty() {
-		assertFalse(quote.isEmpty());
-	}
-
-	@Test
-	public void testIsEmpty() {
-		Quote quoteEmpty = new Quote();
-		assertTrue(quoteEmpty.isEmpty());
 	}
 }

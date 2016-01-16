@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.models;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,10 +46,37 @@ public class Quote {
 
 	@Override
 	public String toString() {
-		return "quoteId: " + quoteId + "; quote: " + text + "; author: " + author;
+		return "Quote [quoteId=" + quoteId + ", text=" + text + ", author=" + author + "]";
 	}
 
-	public boolean isEmpty() {
-		return text == null;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (quoteId ^ (quoteId >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Quote other = (Quote) obj;
+		if (this.quoteId != null & other.quoteId != null) {
+			if (this.quoteId != other.quoteId) {
+				return false;
+			}
+		}
+
+		if (this.text != null & other.text != null) {
+			if (this.text != other.text) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

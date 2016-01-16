@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.goit.gojava7.kickstarter.config.Validator;
-import ua.com.goit.gojava7.kickstarter.models.Question;
+import ua.com.goit.gojava7.kickstarter.validator.MyValidator;
+import ua.com.goit.gojava7.kickstarter.model.Question;
 
 @Repository
 @Transactional
@@ -25,7 +25,7 @@ public class QuestionDao {
 	private ProjectDao projectDao;
 
 	@Autowired
-	private Validator validator;
+	private MyValidator myValidator;
 
 	private static final Logger log = LoggerFactory.getLogger(QuestionDao.class);
 
@@ -41,7 +41,7 @@ public class QuestionDao {
 
 	public void createQuestion(String text, Long projectId) {
 		log.info("<void> createQuestion({}, {})...", text, projectId);
-		if (validator.validateQuestion(text)) {
+		if (myValidator.validateQuestion(text)) {
 			Question question = new Question();
 			question.setQuestion(text);
 			question.setProject(projectDao.get(projectId));

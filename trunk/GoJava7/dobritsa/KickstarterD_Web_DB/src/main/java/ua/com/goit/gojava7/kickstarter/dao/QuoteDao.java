@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.goit.gojava7.kickstarter.models.Quote;
+import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 @Repository
 @Transactional

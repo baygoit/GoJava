@@ -1,6 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.models;
-
-import java.util.List;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,19 +9,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RewardMappingTest {
+import java.util.List;
+
+public class CategoryMappingTest {
 
 	private SessionFactory sessionFactory;
 
 	@Before
 	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate/hibernateTest.cfg.xml")
-				.build();
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate/hibernateTest.cfg.xml").build();
 		try {
 			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		} catch (Exception e) {
 			System.err.println("Initial SessionFactory creation failed." + e);
-			// e.printStackTrace();
 			StandardServiceRegistryBuilder.destroy(registry);
 		}
 	}
@@ -39,11 +37,15 @@ public class RewardMappingTest {
 	@Test
 	public void testBasicUsage() {
 		Session session = sessionFactory.openSession();
-		session.beginTransaction();
 
 		Category category1 = new Category();
+		category1.setCategoryId(11L);
 		category1.setName("TestCategory 1");
 
+		Category category2 = new Category();
+		category2.setCategoryId(22L);
+		category2.setName("TestCategory 2");
+		
 		Project project1 = new Project();
 		project1.setName("TestName1");
 		project1.setDescription("TestDescription1");
@@ -51,48 +53,30 @@ public class RewardMappingTest {
 		project1.setDaysToGo(1L);
 		project1.setHistory("TestHistory1");
 		project1.setLink("TestLink1");
-		project1.setCategory(category1);
+		project1.setCategory(category1);		
+		
+		category1.getProjects().add(project1);
 
-		Reward reward1 = new Reward();
-		reward1.setAmount(10L);
-		reward1.setReward("TestReward1");
-		reward1.setProject(project1);
-
-		Reward reward2 = new Reward();
-		reward2.setAmount(2L);
-		reward2.setReward("TestReward2");
-		reward2.setProject(project1);
-
-		session.save(reward1);
-		session.save(reward2);
+		session.beginTransaction();
+		session.save(category1);
+		session.save(category2);
 		session.getTransaction().commit();
 		session.close();
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		
 		System.out.println("\n-----Get by id = 1-----");
-		Reward reward = session.get(Reward.class, 1L);
-		System.out.println(reward);	
-		
-		System.out.println("\n-----Get Project by id = 1-----");
-		Project project = session.get(Project.class, 1L);
-		System.out.println("Project: " + project);
-		
-		System.out.println("\n-----Get Category by id = 1-----");
 		Category category = session.get(Category.class, 1L);
-		System.out.println("Category: " + category);
-		
+		System.out.println(category);
 		session.close();
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
-		System.out.println("\n-----Get list of rewards-----");
-		List<Reward> rewards = (List<Reward>) session.createQuery("from Reward q").list();
-		for (Reward resultReward : rewards) {
-			System.out.println(resultReward);
+		System.out.println("\n-----Get list of categories-----");
+		List<Category> categories = (List<Category>) session.createQuery("from Category q").list();
+		for (Category resultCategory : categories) {
+			System.out.println(resultCategory);
 		}
 		session.close();
 	}
-
 }

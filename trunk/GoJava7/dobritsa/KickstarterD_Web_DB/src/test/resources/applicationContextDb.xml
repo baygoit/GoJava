@@ -48,12 +48,12 @@
 		
 		<property name="annotatedClasses">
 			<list>
-				<value>ua.com.goit.gojava7.kickstarter.models.Quote</value>
-				<value>ua.com.goit.gojava7.kickstarter.models.Category</value>
-				<value>ua.com.goit.gojava7.kickstarter.models.Project</value>
-				<value>ua.com.goit.gojava7.kickstarter.models.Reward</value>
-				<value>ua.com.goit.gojava7.kickstarter.models.Question</value>
-				<value>ua.com.goit.gojava7.kickstarter.models.Payment</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Quote</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Category</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Project</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Reward</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Question</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Payment</value>
 			</list>
 		</property>
 		

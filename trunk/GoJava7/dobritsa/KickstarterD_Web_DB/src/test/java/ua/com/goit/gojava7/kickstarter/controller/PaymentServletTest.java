@@ -8,12 +8,12 @@ import org.mockito.Mock;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-import ua.com.goit.gojava7.kickstarter.config.Validator;
+import ua.com.goit.gojava7.kickstarter.validator.MyValidator;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
-import ua.com.goit.gojava7.kickstarter.models.Category;
-import ua.com.goit.gojava7.kickstarter.models.Project;
-import ua.com.goit.gojava7.kickstarter.models.Reward;
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Reward;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,7 +38,7 @@ public class PaymentServletTest {
     @Mock
     private RewardDao rewardDao;
     @Mock
-    private Validator validator;
+    private MyValidator myValidator;
 
     @InjectMocks
     private ProjectController projectController;
@@ -57,7 +57,7 @@ public class PaymentServletTest {
         project.setCategory(category);
 
         when(projectDao.get(anyLong())).thenReturn(project);
-        when(validator.validateAmountOfPledge(anyObject())).thenReturn(true);
+        when(myValidator.validateAmountOfPledge(anyObject())).thenReturn(true);
 
         HttpServletResponse response = mock(HttpServletResponse.class);
         PrintWriter writer = mock(PrintWriter.class);
@@ -87,7 +87,7 @@ public class PaymentServletTest {
 
         when(projectDao.get(anyLong())).thenReturn(project);
         when(rewardDao.getByProject(anyLong())).thenReturn(rewards);
-        when(validator.validateAmountOfPledge(anyObject())).thenReturn(false);
+        when(myValidator.validateAmountOfPledge(anyObject())).thenReturn(false);
 
         HttpServletResponse response = mock(HttpServletResponse.class);
         PrintWriter writer = mock(PrintWriter.class);

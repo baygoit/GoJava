@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.config;
+package ua.com.goit.gojava7.kickstarter.validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class Validator {
+public class MyValidator {
 	
-	private static final Logger log = LoggerFactory.getLogger(Validator.class);	 
+	private static final Logger log = LoggerFactory.getLogger(MyValidator.class);
 
 	public boolean validateAmountOfPledge(String amount) {
 		log.info("validateAmountOfPledge({})...", amount);

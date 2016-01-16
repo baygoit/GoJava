@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.models;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import java.util.Date;
 
@@ -77,9 +77,31 @@ public class Question {
 	public void setProject(Project project) {
 		this.project = project;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "questionId: " + questionId + "; time: " + time + "; question: " + question + "; answer: " + answer + ";";
+		return "Question [questionId=" + questionId + ", time=" + time
+				+ ", question=" + question + ", answer=" + answer +  ", projectId=" + project.getProjectId() + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (questionId ^ (questionId >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Question other = (Question) obj;
+
+		return this.questionId == other.questionId;
 	}
 }

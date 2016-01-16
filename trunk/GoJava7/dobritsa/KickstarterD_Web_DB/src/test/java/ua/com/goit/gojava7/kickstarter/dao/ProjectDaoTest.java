@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import ua.com.goit.gojava7.kickstarter.models.Project;
+import ua.com.goit.gojava7.kickstarter.model.Project;
 
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.verify;

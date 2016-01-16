@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.models;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ProjectMappingTest {
+public class PaymentMappingTest {
 
 	private SessionFactory sessionFactory;
 
@@ -22,7 +22,6 @@ public class ProjectMappingTest {
 			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		} catch (Exception e) {
 			System.err.println("Initial SessionFactory creation failed." + e);
-			// e.printStackTrace();
 			StandardServiceRegistryBuilder.destroy(registry);
 		}
 	}
@@ -39,12 +38,9 @@ public class ProjectMappingTest {
 	public void testBasicUsage() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-
+		
 		Category category1 = new Category();
 		category1.setName("TestCategory 1");
-
-		Category category2 = new Category();
-		category2.setName("TestCategory 2");
 
 		Project project1 = new Project();
 		project1.setName("TestName1");
@@ -55,36 +51,46 @@ public class ProjectMappingTest {
 		project1.setLink("TestLink1");
 		project1.setCategory(category1);
 
-		Project project2 = new Project();
-		project2.setName("TestName2");
-		project2.setDescription("TestDescription2");
-		project2.setGoal(200L);
-		project2.setDaysToGo(2L);
-		project2.setHistory("TestHistory2");
-		project2.setLink("TestLink2");
-		project2.setCategory(category2);
+		Payment payment1 = new Payment();
+		payment1.setUser("Nike1");
+		payment1.setCard("1111222233334444");
+		payment1.setAmount(100L);
+		payment1.setProject(project1);
 
-		//session.save(category1);		
-		session.save(project1);
-		session.save(project2);
+		Payment payment2 = new Payment();
+		payment2.setUser("Nike2");
+		payment2.setCard("1111222233332222");
+		payment2.setAmount(200L);
+		payment2.setProject(project1);
+
+		session.save(payment1);
+		session.save(payment2);
 		session.getTransaction().commit();
 		session.close();
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		System.out.println("\n-----Get Project by id = 1-----");	
+		System.out.println("\n-----Get Payment by id = 1-----");
+		Payment payment = session.get(Payment.class, 1L);
+		System.out.println(payment);
+		
+		System.out.println("\n-----Get Project by id = 1-----");
 		Project project = session.get(Project.class, 1L);
 		System.out.println("Project: " + project);
 		
-		System.out.println("\n-----Get Category by id = 1-----");	
+		System.out.println("\n-----Get Category by id = 1-----");
 		Category category = session.get(Category.class, 1L);
-		System.out.println("Category: " + category);
-	
-		System.out.println("\n-----Get list of projects-----");
-		List<Project> projects = (List<Project>) session.createQuery("from Project q").list();
-		for (Project resultProject : projects) {
-			System.out.println("Project: " + resultProject);
+		System.out.println("Category: " + category);		
+		
+		session.close();
+
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		System.out.println("\n-----Get list of payments-----");
+		List<Payment> payments = (List<Payment>) session.createQuery("from Payment q").list();
+		for (Payment resultPayment : payments) {
+			System.out.println(resultPayment);
 		}
 		session.close();
 	}

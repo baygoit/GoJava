@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kickstarter.models.Category;
+import ua.com.goit.gojava7.kickstarter.model.Category;
 
 @Transactional
 @Controller//("/category")

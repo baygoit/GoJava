@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import ua.com.goit.gojava7.kickstarter.config.Validator;
-import ua.com.goit.gojava7.kickstarter.models.Project;
+import ua.com.goit.gojava7.kickstarter.validator.MyValidator;
+import ua.com.goit.gojava7.kickstarter.model.Project;
 
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.*;
@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
 public class PaymentDaoTest {
 
     @Mock
-    private Validator validator;
+    private MyValidator myValidator;
 
     @InjectMocks
     private PaymentDao paymentDao;
@@ -24,10 +24,10 @@ public class PaymentDaoTest {
     public void testCreateWrongPayment() {
         Project project = new Project();
 
-        when(validator.validatePayer(anyObject(), anyObject())).thenReturn(false);
+        when(myValidator.validatePayer(anyObject(), anyObject())).thenReturn(false);
 
         paymentDao.createPayment("V", "1111", 1L, project);
 
-        verify(validator).validatePayer(any(String.class), any(String.class));
+        verify(myValidator).validatePayer(any(String.class), any(String.class));
     }
 }

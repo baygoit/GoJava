@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.goit.gojava7.kickstarter.dao.*;
-import ua.com.goit.gojava7.kickstarter.models.Project;
+import ua.com.goit.gojava7.kickstarter.model.Project;
 
 @Transactional
 @Controller//(project)

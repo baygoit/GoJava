@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.models;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +57,39 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "categoryId: " + categoryId + ", name: " + name;
+		return "Category [categoryId=" + categoryId + ", name=" + name + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (categoryId ^ (categoryId >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Category other = (Category) obj;
+
+		if (this.categoryId != null & other.categoryId != null) {
+			if (this.categoryId != other.categoryId) {
+				return false;
+			}
+		}
+
+		if (this.name != null & other.name != null) {
+			if (this.name != other.name) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

@@ -10,9 +10,9 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
-import ua.com.goit.gojava7.kickstarter.models.Category;
-import ua.com.goit.gojava7.kickstarter.models.Project;
-import ua.com.goit.gojava7.kickstarter.models.Reward;
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Reward;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

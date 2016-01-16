@@ -5,9 +5,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import ua.com.goit.gojava7.kickstarter.config.Validator;
+import ua.com.goit.gojava7.kickstarter.validator.MyValidator;
 
-import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -16,7 +15,7 @@ import static org.mockito.Mockito.when;
 public class QuestionDaoTest {
 
     @Mock
-    private Validator validator;
+    private MyValidator myValidator;
     @Mock
     private ProjectDao projectDao;
 
@@ -25,10 +24,10 @@ public class QuestionDaoTest {
 
     @Test
     public void testCreateQuestion() {
-        when(validator.validateQuestion(anyObject())).thenReturn(false);
+        when(myValidator.validateQuestion(anyObject())).thenReturn(false);
 
         questionDao.createQuestion("new question", 1L);
 
-        verify(validator).validateQuestion(anyObject());
+        verify(myValidator).validateQuestion(anyObject());
     }
 }

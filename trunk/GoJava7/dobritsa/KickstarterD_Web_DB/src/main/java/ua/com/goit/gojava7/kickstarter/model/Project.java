@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.models;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -165,7 +165,41 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "id: " + projectId + "; name: " + name + "; description: " + description + "; goal: " + goal + "; pledged: "
-				+ pledged + "; daysToGo: " + daysToGo + "; history: " + history + "; link: " + link + "; categoryId: " + category.getCategoryId();
+		return "Project [projectId=" + projectId + ", name=" + name
+				+ ", description=" + description + ", goal=" + goal + "pledged=" + pledged + ", daysToGo=" + daysToGo
+				+ ", history=" + history + ", link=" + link + ", categoryId=" + category.getCategoryId() + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (projectId ^ (projectId >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+
+		Project other = (Project) obj;
+
+		if (this.projectId != null & other.projectId != null) {
+			if (this.projectId != other.projectId) {
+				return false;
+			}
+		}
+
+		if (this.name != null & other.name != null) {
+			if (this.name != other.name) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

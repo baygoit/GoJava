@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.models;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -84,6 +84,27 @@ public class Payment {
 
 	@Override
 	public String toString() {
-		return "paymentId: " + paymentId + "; user: " + user + "; card: " + card + "; amount: " + amount + "; projectId: " + project.getProjectId() + ";";
+		return "Payment [paymentId=" + paymentId + ", user=" + user
+				+ ", card=" + card + ", amount=" + amount +  ", projectId=" + project.getProjectId() + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (paymentId ^ (paymentId >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Payment other = (Payment) obj;
+		return this.paymentId == other.paymentId;
 	}
 }

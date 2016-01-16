@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.models;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import java.util.List;
 
@@ -11,13 +11,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class QuestionMappingTest {
+public class RewardMappingTest {
 
 	private SessionFactory sessionFactory;
 
 	@Before
 	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate/hibernateTest.cfg.xml").build();
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate/hibernateTest.cfg.xml")
+				.build();
 		try {
 			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 		} catch (Exception e) {
@@ -52,29 +53,27 @@ public class QuestionMappingTest {
 		project1.setLink("TestLink1");
 		project1.setCategory(category1);
 
-		Question question1 = new Question();		
-		question1.setTime("TestTime1");
-		question1.setQuestion("TestQuestion1");
-		question1.setAnswer("TestAnswer1");
-		question1.setProject(project1);
+		Reward reward1 = new Reward();
+		reward1.setAmount(10L);
+		reward1.setReward("TestReward1");
+		reward1.setProject(project1);
 
-		Question question2 = new Question();
-		question2.setTime("TestTime2");
-		question2.setQuestion("TestQuestion2");
-		question2.setAnswer("TestAnswer2");
-		question2.setProject(project1);
+		Reward reward2 = new Reward();
+		reward2.setAmount(2L);
+		reward2.setReward("TestReward2");
+		reward2.setProject(project1);
 
-		session.save(question1);
-		session.save(question2);
+		session.save(reward1);
+		session.save(reward2);
 		session.getTransaction().commit();
 		session.close();
 
 		session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		System.out.println("\n-----Get Question by id = 1-----");
-		Question question = session.get(Question.class, 1L);
-		System.out.println("Question: " + question);
+		System.out.println("\n-----Get by id = 1-----");
+		Reward reward = session.get(Reward.class, 1L);
+		System.out.println(reward);	
 		
 		System.out.println("\n-----Get Project by id = 1-----");
 		Project project = session.get(Project.class, 1L);
@@ -82,13 +81,18 @@ public class QuestionMappingTest {
 		
 		System.out.println("\n-----Get Category by id = 1-----");
 		Category category = session.get(Category.class, 1L);
-		System.out.println("Category: " + category);		
+		System.out.println("Category: " + category);
 		
-		System.out.println("\n-----Get list of questions-----");
-		List<Question> questions = (List<Question>) session.createQuery("from Question q").list();
-		for (Question resultQuestion : questions) {
-			System.out.println(resultQuestion);
+		session.close();
+
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		System.out.println("\n-----Get list of rewards-----");
+		List<Reward> rewards = (List<Reward>) session.createQuery("from Reward q").list();
+		for (Reward resultReward : rewards) {
+			System.out.println(resultReward);
 		}
 		session.close();
 	}
+
 }
