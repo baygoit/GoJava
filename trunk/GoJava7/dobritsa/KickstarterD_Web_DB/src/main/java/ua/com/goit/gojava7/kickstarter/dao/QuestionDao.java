@@ -49,7 +49,7 @@ public class QuestionDao {
 		}
 	}
 
-	private void add(Question question) {
+	public void add(Question question) {
 		log.info("<void> add()...", question);
 		Session session = sessionFactory.getCurrentSession();
 

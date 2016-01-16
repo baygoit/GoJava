@@ -49,7 +49,7 @@ public class PaymentDao {
 		return false;
 	}
 
-	private void add(Payment payment) {
+	public void add(Payment payment) {
 		log.info("<void> add({})...", payment);
 		Session session = sessionFactory.getCurrentSession();
 
