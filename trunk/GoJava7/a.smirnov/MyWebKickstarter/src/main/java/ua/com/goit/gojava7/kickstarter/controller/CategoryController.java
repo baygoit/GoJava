@@ -14,22 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.beans.Reward;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
 import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
-import ua.com.goit.gojava7.kickstarter.handlers.FunctionsInsideProject;
-import ua.com.goit.gojava7.kickstarter.servlets.MainServlet;
 
 @Controller
-public class ControllerServlet {
-	private static final Logger log = LoggerFactory.getLogger(MainServlet.class);
+public class CategoryController {
+	private static final Logger log = LoggerFactory.getLogger(CategoryController.class);
 	@Autowired
 	private QuoteDao quoteDao;
 	@Autowired
@@ -38,14 +32,8 @@ public class ControllerServlet {
 	private ProjectDao projectDao;
 	@Autowired
 	private PaymentDao paymentDao;
-	@Autowired
-	private FaqDao faqDao;
-	@Autowired
-	private RewardDao rewardDao;
-	@Autowired
-	private FunctionsInsideProject functionsInsideProject;
 
-	@RequestMapping(value = "/")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView("index");
 
@@ -60,7 +48,7 @@ public class ControllerServlet {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/category")
+	@RequestMapping(value = "/category", method = RequestMethod.GET)
 	@Transactional
 	public ModelAndView category(@RequestParam(name = "id") int categoryId) {
 		ModelAndView modelAndView = new ModelAndView("category");
@@ -79,53 +67,6 @@ public class ControllerServlet {
 		modelAndView.addObject("categories", categories);
 		modelAndView.addObject("projects", projects);
 		return modelAndView;
-	}
-
-	@RequestMapping(value = "/project")
-	@Transactional
-	public ModelAndView project(@RequestParam(name = "id") int projectId) {
-		ModelAndView modelAndView = new ModelAndView("project");
-
-		List<Category> categories = categoryDao.getAll();
-		log.info("All categories: " + categories);
-
-		Project project = projectDao.getProjectById(projectId);
-		log.info("Selected project: " + project);
-
-		project.setCollectedSum(paymentDao.getSumProjectPayments(project.getId()));
-		log.info("Project after added pledges: " + project);
-
-		List<Faq> questions = faqDao.getProjectFaqs(projectId);
-		log.info("All questions: " + questions);
-
-		List<Reward> rewards = rewardDao.getProjectsRewards(projectId);
-		log.info("All rewards: " + rewards);
-
-		modelAndView.addObject("categories", categories);
-		modelAndView.addObject("project", project);
-		modelAndView.addObject("rewards", rewards);
-		modelAndView.addObject("questions", questions);
-		return modelAndView;
-	}
-
-	@RequestMapping(value = "/ask", method = RequestMethod.POST)
-	@Transactional
-	public String addQuestion(@RequestParam(name = "projectId") int projectId, @RequestParam(name = "question") String question) {
-		functionsInsideProject.saveCreatedFaq(projectDao, faqDao, projectId, question);
-		log.info("Added new question");
-
-		return "redirect:./project?id=" + projectId;
-	}
-
-	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	@Transactional
-	public String addPayment(@RequestParam(name = "projectId") int projectId, @RequestParam(name = "userName") String userName,
-			@RequestParam(name = "creditCardNumber") long creditCardNumber, @RequestParam(name = "pledge") int pledge) {
-
-		functionsInsideProject.savePayment(projectDao, paymentDao, projectId, userName, creditCardNumber, pledge);
-		log.info("Added new payment");
-
-		return "redirect:./project?id=" + projectId;
 	}
 
 	@RequestMapping(value = "/top10", method = RequestMethod.GET)

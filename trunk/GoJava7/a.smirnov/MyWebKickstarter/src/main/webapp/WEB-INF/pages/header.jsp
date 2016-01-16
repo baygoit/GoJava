@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <title>
@@ -15,32 +14,22 @@
 		<c:if test="${empty param.title}">Default title</c:if>
 	</title>
     
-    <!-- <!-- Bootstrap Core CSS -->
-    <link href="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B2I6VTKFP4LhYjRFa1Z5SzBybWs" rel="stylesheet">
-    <link href="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B2I6VTKFP4LhYjRFa1Z5SzBybWs" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet" type="text/css" />
     <!-- Custom CSS -->
-    <link href="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B2I6VTKFP4LhOU82eWE5T1gzemc" rel="stylesheet">
-  
-  	<link href="${pageContext.servletContext.contextPath}/css/111.css" rel="stylesheet" >
+    <link href="<c:url value="/resources/css/business-casual.css" />" rel="stylesheet" type="text/css" />
     <!-- Fonts -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
-	
+    <link href="<c:url value="/resources/css/font.open_sans.css" />" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/css/font.josefin_slab.css" />" rel="stylesheet" type="text/css">
 	<!-- jQuery -->
-    <script src="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B2I6VTKFP4LhU1FCcUFQUlU3UWs"></script>
-
+    <script src="<c:url value="/resources/js/jquery.js" />"></script>
     <!-- Bootstrap Core JavaScript -->
-	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="<c:url value="/resources/js/jquery-1.11.3.min.js" />"></script>
+	<script src="<c:url value="/resources/js/jquery-migrate-1.2.1.min.js" />"></script>
+	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 	
-
 </head>
-
 <body>
-
-<div id="testing">Hello
-</div>
 
 <div class="brand">My Kickstarter</div>
     <div class="address-bar">Anton Smirnov | Kiev, Ukraine 	02068 | +38(063)109-38-08</div>
