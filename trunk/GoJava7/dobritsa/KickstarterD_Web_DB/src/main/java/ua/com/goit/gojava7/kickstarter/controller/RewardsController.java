@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
@@ -14,7 +13,7 @@ import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @Transactional
-@Controller
+@Controller//project/rewards
 public class RewardsController {
 
     private static final Logger log = LoggerFactory.getLogger(RewardsController.class);
@@ -24,9 +23,9 @@ public class RewardsController {
     @Autowired
     private ProjectDao projectDao;
 
-    @RequestMapping(value = "/reward", method = RequestMethod.GET)
+    @RequestMapping("/reward")
     public ModelAndView showReward(@RequestParam Long projectId) {
-        log.info("showReward()...");
+        log.info("showReward({})...", projectId);
 
         Project project = projectDao.get(projectId);
 

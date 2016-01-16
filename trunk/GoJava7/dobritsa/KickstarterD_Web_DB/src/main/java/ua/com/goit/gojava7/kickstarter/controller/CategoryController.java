@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
@@ -14,7 +13,7 @@ import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.models.Category;
 
 @Transactional
-@Controller
+@Controller//("/category")
 public class CategoryController {
 
     private static final Logger log = LoggerFactory.getLogger(CategoryController.class);
@@ -24,8 +23,8 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
-    @RequestMapping({"/*", "/index"})
-    public ModelAndView start() {
+    @RequestMapping("/index")//all
+    public ModelAndView start() {//getAll
         log.info("start()...");
 
         ModelAndView modelAndView = new ModelAndView("index");
@@ -34,16 +33,11 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/category", method = RequestMethod.GET)
+    @RequestMapping("/category")//@RequestMapping
     public ModelAndView showCategory(@RequestParam Long categoryId) {
         log.info("showCategory()...");
 
         Category category = categoryDao.get(categoryId);
-
-        // TODO
-        if (category == null) {
-            //404
-        }
 
         ModelAndView modelAndView = new ModelAndView("category");
         modelAndView.addObject("projects", categoryDao.getProjects(categoryId));

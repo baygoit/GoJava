@@ -13,7 +13,7 @@ import ua.com.goit.gojava7.kickstarter.dao.*;
 import ua.com.goit.gojava7.kickstarter.models.Project;
 
 @Transactional
-@Controller
+@Controller//(project)
 public class ProjectController {
 
     private static final Logger log = LoggerFactory.getLogger(ProjectController.class);
@@ -23,7 +23,7 @@ public class ProjectController {
     @Autowired
     private QuestionDao questionDao;
 
-    @RequestMapping(value = "/project", method = RequestMethod.GET)
+    @RequestMapping("/project")//()
     public ModelAndView showProject(@RequestParam Long projectId) {
         log.info("showProject()...");
 

@@ -35,32 +35,38 @@ public class PaymentController {
     @Autowired
     private Validator validator;
 
-    Long rewardId;
-    Long projectId;
-    String amount;
-    ModelAndView modelAndView;
+    private Long rewardId;
+    private Long projectId;
+    private String amount;
+    private ModelAndView modelAndView;
 
-    @RequestMapping(value = "/payment", method = RequestMethod.GET)
+//TODO check 500
+//TODO arg return
+    @RequestMapping("/payment")
     public ModelAndView showPayment(@RequestParam Long rewardId, @RequestParam(required = false) Long projectId,
                                     @RequestParam(required = false) String amount) throws ServletException, IOException {
+
+        //TODO log
         log.info("showPayment()...");
         this.rewardId = rewardId;
         modelAndView = new ModelAndView();
+        this.amount = amount;
+        this.projectId = projectId;
 
         if (rewardExists()) {
             return payWithReward();
         }
 
-        this.amount = amount;
-        this.projectId = projectId;
+        if(amountIsValid()) {
+            return payWithAmount();
+        }
+
         Project project = projectDao.get(projectId);
 
         modelAndView.addObject(project);
         modelAndView.addObject("category", project.getCategory());
 
-        if(amountIsValid()) {
-            return payWithAmount();
-        }
+
 
         return returnWarning();
     }
@@ -96,7 +102,7 @@ public class PaymentController {
         return modelAndView;
     }
 
-    public ModelAndView returnWarning() {
+    private ModelAndView returnWarning() {
         log.info("returnWarning()...");
         List<Reward> rewards = rewardDao.getByProject(projectId);
 
@@ -117,7 +123,7 @@ public class PaymentController {
         modelAndView.addObject("category", projectDao.getCategory(project));
         modelAndView.addObject("project", project);
         modelAndView.addObject("amount", amount);
-
+//TODO move valid to here
         if (paymentDao.createPayment(name, card, amount, project)) {
             modelAndView.setViewName("paymentOk");
             return modelAndView;
