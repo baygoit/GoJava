@@ -17,7 +17,6 @@
 
 	<context:property-placeholder location="classpath:config.properties" />
   	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao.impl" />
-  	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.aspect" />
   	<aop:aspectj-autoproxy />
   	   	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">

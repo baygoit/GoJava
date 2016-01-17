@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
-import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Reward;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
@@ -64,41 +63,5 @@ public class ProjectController {
 		modelAndView.addObject("questions", questions);
 
 		return modelAndView;
-	}
-
-	@RequestMapping(value = "/ask", method = RequestMethod.POST)
-	@Transactional
-	public String addQuestion(@RequestParam(name = "projectId") int projectId, @RequestParam(name = "question") String question) {
-		Project project = projectDao.getProjectById(projectId);
-		log.info("Question will be added to project: {}", project);
-
-		Faq faq = new Faq();
-		faq.setProject(project);
-		faq.setQuestion(question);
-
-		faqDao.add(faq);
-		log.info("Added new question");
-
-		return "redirect:./project?id=" + projectId;
-	}
-
-	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	@Transactional
-	public String addPayment(@RequestParam(name = "projectId") int projectId, @RequestParam(name = "userName") String userName,
-			@RequestParam(name = "creditCardNumber") long creditCardNumber, @RequestParam(name = "pledge") int pledge) {
-
-		Project project = projectDao.getProjectById(projectId);
-		log.info("Payment will be added to project: {}", project);
-
-		Payment payment = new Payment();
-		payment.setProject(project);
-		payment.setOwnerName(userName);
-		payment.setCreditCardNumber(creditCardNumber);
-		payment.setPledge(pledge);
-
-		paymentDao.add(payment);
-		log.info("Added new payment");
-
-		return "redirect:./project?id=" + projectId;
 	}
 }
