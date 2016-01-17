@@ -50,7 +50,7 @@ public class CategoryServletTest {
         when(categoryDao.get(anyLong())).thenReturn(category);
 
         List<Project> projects = new ArrayList<>();
-        when(categoryDao.getProjects(anyLong())).thenReturn(projects);
+        //when(categoryDao.getProjects(anyLong())).thenReturn(projects);
 
         HttpServletResponse response = mock(HttpServletResponse.class);
         PrintWriter writer = mock(PrintWriter.class);

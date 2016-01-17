@@ -85,7 +85,7 @@ public class Payment {
 	@Override
 	public String toString() {
 		return "Payment [paymentId=" + paymentId + ", user=" + user
-				+ ", card=" + card + ", amount=" + amount +  ", projectId=" + project.getProjectId() + "]";
+				+ ", card=" + card + ", amount=" + amount +  ", project=" + project + "]";
 	}
 
 	@Override

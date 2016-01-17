@@ -26,7 +26,7 @@ public class PaymentDaoTest {
 
         when(myValidator.validatePayer(anyObject(), anyObject())).thenReturn(false);
 
-        paymentDao.createPayment("V", "1111", 1L, project);
+       // paymentDao.createPayment("V", "1111", 1L, project);
 
         verify(myValidator).validatePayer(any(String.class), any(String.class));
     }

@@ -10,21 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.goit.gojava7.kickstarter.validator.MyValidator;
 import ua.com.goit.gojava7.kickstarter.model.Payment;
-import ua.com.goit.gojava7.kickstarter.model.Project;
 
 @Repository
 @Transactional
 public class PaymentDao {
 
+	private static final Logger log = LoggerFactory.getLogger(PaymentDao.class);
+
 	@Autowired
 	private SessionFactory sessionFactory;
-
-	@Autowired
-	private MyValidator myValidator;
-
-	private static final Logger log = LoggerFactory.getLogger(PaymentDao.class);
 
 	public Long calculatePledgedForProject(Long projectId) {
 		log.info("<Long> calculatePledgedForProject({})...", projectId);
@@ -37,16 +32,6 @@ public class PaymentDao {
 			return 0L;
 
 		return sumAmount;
-	}
-
-	public boolean createPayment(String name, String card, Long amount, Project project) {
-		log.info("<boolean> createPayment({}, {}, {}, {})...", name, card, amount, project);
-		if (myValidator.validatePayer(name, card)) {
-			Payment payment = new Payment(name, card, amount, project);
-			add(payment);
-			return true;
-		}
-		return false;
 	}
 
 	public void add(Payment payment) {

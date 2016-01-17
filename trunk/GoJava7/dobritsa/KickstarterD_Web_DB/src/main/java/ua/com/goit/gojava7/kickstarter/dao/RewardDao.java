@@ -16,11 +16,11 @@ import ua.com.goit.gojava7.kickstarter.model.Reward;
 @Repository
 @Transactional
 public class RewardDao {
-	
-	@Autowired
-	private SessionFactory sessionFactory;
 
 	private static final Logger log = LoggerFactory.getLogger(RewardDao.class);
+
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	public Reward get(Long rewardId) {
 		log.info("<Reward> get({})...", rewardId);

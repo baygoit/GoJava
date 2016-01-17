@@ -9,12 +9,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class MyValidator {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(MyValidator.class);
 
 	public boolean validateAmountOfPledge(String amount) {
 		log.info("validateAmountOfPledge({})...", amount);
-		Pattern p = Pattern.compile("^[1-9][0-9]{1,10}$");
+		Pattern p = Pattern.compile("^[1-9][0-9]{0,10}$");
 		Matcher m = p.matcher(amount);
 		return m.matches();
 	}

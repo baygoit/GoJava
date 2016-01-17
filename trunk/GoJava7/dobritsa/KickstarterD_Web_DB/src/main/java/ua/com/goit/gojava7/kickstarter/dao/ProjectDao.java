@@ -11,27 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.model.Question;
 
 @Repository
 @Transactional
 public class ProjectDao {
-	
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	@Autowired
-	private CategoryDao categoryDao;
-
-	@Autowired
-	private QuestionDao questionDao;
-
-	@Autowired
-	private PaymentDao paymentDao;
 
 	private static final Logger log = LoggerFactory.getLogger(ProjectDao.class);
+
+	@Autowired
+	private SessionFactory sessionFactory;
 	
 	public Project get(Long projectId) {
 		log.info("<Project> get({})...", projectId);
@@ -40,9 +29,6 @@ public class ProjectDao {
 		Project project = (Project) session.createCriteria(Project.class)
 				.add(Restrictions.eq("projectId", projectId))
 				.uniqueResult();
-
-		if(project!=null)
-			setPledged(project);
 
 		return project;
 	}
@@ -55,36 +41,6 @@ public class ProjectDao {
 				.add(Restrictions.eq("category.id", categoryId))
 				.list();
 
-		setPledged(projects);
-
 		return projects;
-	}
-
-	private void setPledged(List<Project> projects){
-		log.info("<projects> setPledged()...");
-
-		for(Project project : projects)
-			setPledged(project);
-	}
-
-	private void setPledged(Project project){
-		Long projectId = project.getProjectId();
-		log.info("<void> setPledged({})...", projectId);
-
-		project.setPledged(paymentDao.calculatePledgedForProject(projectId));
-	}
-
-	public List<Question> getQuestions(Long projectId) {
-		log.info("<questions> getQuestions({})...", projectId);
-
-		return questionDao.getByProject(projectId);
-	}
-
-	public Category getCategory(Project project) {
-		log.info("<Category> getCategory({})...", project);
-
-		Long categoryId = project.getCategoryId();
-
-		return categoryDao.get(categoryId);
 	}
 }

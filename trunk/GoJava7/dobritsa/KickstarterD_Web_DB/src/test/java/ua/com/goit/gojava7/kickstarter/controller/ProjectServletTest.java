@@ -49,10 +49,10 @@ public class ProjectServletTest {
         when(projectDao.get(anyLong())).thenReturn(project);
 
         Category category = new Category();
-        when(projectDao.getCategory(any(Project.class))).thenReturn(category);
+        //when(projectDao.getCategory(any(Project.class))).thenReturn(category);
 
         List<Question> questions = new ArrayList<>();
-        when(projectDao.getQuestions(anyLong())).thenReturn(questions);
+        //when(projectDao.getQuestions(anyLong())).thenReturn(questions);
 
         HttpServletResponse response = mock(HttpServletResponse.class);
         PrintWriter writer = mock(PrintWriter.class);

@@ -34,8 +34,8 @@ public class Project {
 	@Column
 	private Long goal;
 
-	@Column
-	private Long pledged;
+	//@Column
+	//private Long pledged;
 
 	@Column
 	private Long daysToGo;
@@ -95,13 +95,13 @@ public class Project {
 		this.goal = goal;
 	}
 
-	public Long getPledged() {
-		return pledged;
-	}
+	//public Long getPledged() {
+	//	return pledged;
+	//}
 
-	public void setPledged(Long pledged) {
-		this.pledged = pledged;
-	}
+	//public void setPledged(Long pledged) {
+	//	this.pledged = pledged;
+	//}
 
 	public Long getDaysToGo() {
 		return daysToGo;
@@ -166,7 +166,9 @@ public class Project {
 	@Override
 	public String toString() {
 		return "Project [projectId=" + projectId + ", name=" + name
-				+ ", description=" + description + ", goal=" + goal + "pledged=" + pledged + ", daysToGo=" + daysToGo
+				+ ", description=" + description + ", goal=" + goal +
+				//", pledged=" + pledged +
+				", daysToGo=" + daysToGo
 				+ ", history=" + history + ", link=" + link + ", categoryId=" + category.getCategoryId() + "]";
 	}
 

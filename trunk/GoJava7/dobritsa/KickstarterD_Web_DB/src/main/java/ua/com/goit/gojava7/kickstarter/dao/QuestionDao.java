@@ -11,23 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.goit.gojava7.kickstarter.validator.MyValidator;
 import ua.com.goit.gojava7.kickstarter.model.Question;
 
 @Repository
 @Transactional
 public class QuestionDao {
-	
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	@Autowired
-	private ProjectDao projectDao;
-
-	@Autowired
-	private MyValidator myValidator;
 
 	private static final Logger log = LoggerFactory.getLogger(QuestionDao.class);
+
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
 	public List<Question> getByProject(Long projectId) {
@@ -37,16 +30,6 @@ public class QuestionDao {
 		return session.createCriteria(Question.class)
 				.add(Restrictions.eq("project.id", projectId))
 				.list();
-	}
-
-	public void createQuestion(String text, Long projectId) {
-		log.info("<void> createQuestion({}, {})...", text, projectId);
-		if (myValidator.validateQuestion(text)) {
-			Question question = new Question();
-			question.setQuestion(text);
-			question.setProject(projectDao.get(projectId));
-			add(question);
-		}
 	}
 
 	public void add(Question question) {

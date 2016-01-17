@@ -8,12 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.dto.CategoryDto;
+import ua.com.goit.gojava7.kickstarter.service.CategoryService;
+import ua.com.goit.gojava7.kickstarter.service.ProjectService;
 
 @Transactional
-@Controller//("/category")
+@Controller
 public class CategoryController {
 
     private static final Logger log = LoggerFactory.getLogger(CategoryController.class);
@@ -21,7 +22,9 @@ public class CategoryController {
     @Autowired
     private QuoteDao quoteDao;
     @Autowired
-    private CategoryDao categoryDao;
+    private CategoryService categoryService;
+    @Autowired
+    private ProjectService projectService;
 
     @RequestMapping("/index")//all
     public ModelAndView start() {//getAll
@@ -29,19 +32,21 @@ public class CategoryController {
 
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("quote", quoteDao.getRandomQuote());
-        modelAndView.addObject("categories", categoryDao.getAll());
+        modelAndView.addObject("categories", categoryService.getAll());
         return modelAndView;
     }
 
-    @RequestMapping("/category")//@RequestMapping
+    @RequestMapping("/category")
     public ModelAndView showCategory(@RequestParam Long categoryId) {
-        log.info("showCategory()...");
+        log.info("showCategory(categoryId = {})...", categoryId);
 
-        Category category = categoryDao.get(categoryId);
+        CategoryDto categoryDto = categoryService.get(categoryId);
 
         ModelAndView modelAndView = new ModelAndView("category");
-        modelAndView.addObject("projects", categoryDao.getProjects(categoryId));
-        modelAndView.addObject("categoryName", category.getName());
+        modelAndView.addObject("projects", projectService.getShortProjectsByCategory(categoryId));
+       // modelAndView.addObject("projects", categoryDto.getProjects());
+        modelAndView.addObject("categoryName", categoryDto.getName());
+
         return modelAndView;
     }
 }

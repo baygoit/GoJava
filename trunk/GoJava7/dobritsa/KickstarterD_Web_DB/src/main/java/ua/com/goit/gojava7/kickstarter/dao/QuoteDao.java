@@ -15,10 +15,10 @@ import ua.com.goit.gojava7.kickstarter.model.Quote;
 @Transactional
 public class QuoteDao {
 
+	private static final Logger log = LoggerFactory.getLogger(QuoteDao.class);
+
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-	private static final Logger log = LoggerFactory.getLogger(QuoteDao.class);
 
 	public Quote getRandomQuote() {
 		log.info("<Quote> getRandomQuote()...");

@@ -12,37 +12,28 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.Project;
 
 @Repository
 @Transactional
 public class CategoryDao {
+
+	private static final Logger log = LoggerFactory.getLogger(CategoryDao.class);
 	
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Autowired
-	private ProjectDao projectDao;
-
-	private static final Logger log = LoggerFactory.getLogger(CategoryDao.class);
-
 	public Category get(Long categoryId) {
-		log.info("<Category> get({})...", categoryId);
+		log.info("<Category> get(categoryId = {})...", categoryId);
 		Session session = sessionFactory.getCurrentSession();
 
 		return (Category) session.createCriteria(Category.class)
 				.add(Restrictions.eq("categoryId", categoryId)).uniqueResult();
 	}
 
-	public List getAll() {
+	public List<Category> getAll() {
 		log.info("<categories> getAll()...");
 		Session session = sessionFactory.getCurrentSession();
 
 		return session.createCriteria(Category.class).list();
-	}
-
-	public List<Project> getProjects(Long categoryId) {
-		log.info("<projects> getProjects({})...", categoryId);
-		return projectDao.getByCategory(categoryId);
 	}
 }

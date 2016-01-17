@@ -16,10 +16,4 @@ public class CategoryDaoTest {
 
     @InjectMocks
     private CategoryDao categoryDao;
-
-    @Test
-    public void testGetProjects() {
-        categoryDao.getProjects(1L);
-        verify(projectDao).getByCategory(1L);
-    }
 }

@@ -22,15 +22,4 @@ public class ProjectDaoTest {
     @InjectMocks
     private ProjectDao projectDao;
 
-    @Test
-    public void testGetQuestions() {
-        projectDao.getQuestions(1L);
-        verify(questionDao).getByProject(1L);
-    }
-    @Test
-    public void testGetCategory() {
-        Project project = new Project();
-        projectDao.getCategory(project);
-        verify(categoryDao).get(anyLong());
-    }
 }

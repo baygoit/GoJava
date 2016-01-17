@@ -52,10 +52,10 @@ public class PaymentCheckServletTest {
         when(projectDao.get(anyLong())).thenReturn(project);
 
         Category category = new Category();
-        when(projectDao.getCategory(any(Project.class))).thenReturn(category);
+        //when(projectDao.getCategory(any(Project.class))).thenReturn(category);
 
 
-        when(paymentDao.createPayment(anyObject(), anyObject(), anyLong(), any(Project.class))).thenReturn(true);
+        //when(paymentDao.createPayment(anyObject(), anyObject(), anyLong(), any(Project.class))).thenReturn(true);
 
         HttpServletResponse response = mock(HttpServletResponse.class);
         PrintWriter writer = mock(PrintWriter.class);
@@ -83,10 +83,10 @@ public class PaymentCheckServletTest {
         when(projectDao.get(anyLong())).thenReturn(project);
 
         Category category = new Category();
-        when(projectDao.getCategory(any(Project.class))).thenReturn(category);
+        //when(projectDao.getCategory(any(Project.class))).thenReturn(category);
 
 
-        when(paymentDao.createPayment(anyObject(), anyObject(), anyLong(), any(Project.class))).thenReturn(false);
+        //when(paymentDao.createPayment(anyObject(), anyObject(), anyLong(), any(Project.class))).thenReturn(false);
 
         HttpServletResponse response = mock(HttpServletResponse.class);
         PrintWriter writer = mock(PrintWriter.class);
