@@ -3,10 +3,7 @@ package ua.com.goit.gojava7.kickstarter.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-<<<<<<< HEAD
-=======
 
->>>>>>> a5205cf5c9abbd4a49bbd42205b128328e9b851b
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +22,7 @@ public class Category{
     @Id
     @GeneratedValue
     @Column
-<<<<<<< HEAD
-=======
 
->>>>>>> a5205cf5c9abbd4a49bbd42205b128328e9b851b
     private int    categoryId;
 
     public List<Project> getProjects() {
