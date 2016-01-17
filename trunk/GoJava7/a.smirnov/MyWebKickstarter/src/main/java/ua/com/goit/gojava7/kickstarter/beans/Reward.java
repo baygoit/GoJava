@@ -12,18 +12,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "reward")
 public class Reward {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int id;
-
 	@Column(name = "pledge")
 	private int pledge;
-
 	@Column(name = "description")
 	private String description;
-
 	@ManyToOne
 	@JoinColumn(name = "project_id")
 	private Project project;

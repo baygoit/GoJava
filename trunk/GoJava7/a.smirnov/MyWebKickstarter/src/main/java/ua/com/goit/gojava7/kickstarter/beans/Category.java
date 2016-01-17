@@ -13,15 +13,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "category")
 public class Category {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int id;
-
 	@Column(name = "name")
 	private String name;
-
 	@OneToMany
 	private Set<Project> projects;
 

@@ -23,10 +23,10 @@
     <import resource="applicationContext-aspects.xml" />
 	<import resource="applicationContext-db.xml" />
 	
-  	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.controller" />
+  	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.controller" />	
   	
-  	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven />
+  	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
