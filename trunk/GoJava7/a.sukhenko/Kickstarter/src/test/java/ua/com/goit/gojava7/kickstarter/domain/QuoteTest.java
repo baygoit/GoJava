@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.model.Quote;
+
 public class QuoteTest{
     private final String text   = "test";
     private final String author = "author";

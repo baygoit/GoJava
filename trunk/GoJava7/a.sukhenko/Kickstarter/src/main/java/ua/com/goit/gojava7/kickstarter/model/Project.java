@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.domain;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

@@ -8,13 +8,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
-import ua.com.goit.gojava7.kickstarter.domain.Question;
-import ua.com.goit.gojava7.kickstarter.domain.vo.QuestionVO;
+import ua.com.goit.gojava7.kickstarter.model.Question;
+import ua.com.goit.gojava7.kickstarter.model.vo.QuestionVO;
 @Component
 public class QuestionValidator implements org.springframework.validation.Validator{
     
-    @Autowired
-    private Validator validator;
     
     @Override
     public boolean supports(Class<?> clazz) {
@@ -24,9 +22,17 @@ public class QuestionValidator implements org.springframework.validation.Validat
     @Override
     public void validate(Object target, Errors errors) {
        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "question", "error.question","Question should not be empty.");
+       validateQuestion(target, errors);
       
+       
     }
-    public boolean validateQuestion(String question) {
+    
+    
+    public void validateQuestion(Object target, Errors errors) {
+    	QuestionVO question = null;
+    	 if(target.getClass() == QuestionVO.class){
+      	  question = (QuestionVO) target;
+         }
         Pattern p = Pattern.compile(
                 "# Match a sentence ending in punctuation or EOS.\n" +
                 "[^.!?\\s]    # First char is non-punct, non-ws\n" +
@@ -40,7 +46,9 @@ public class QuestionValidator implements org.springframework.validation.Validat
                 "['\"]?       # Optional closing quote.\n" +
                 "(?=\\s|$)", 
                 Pattern.MULTILINE | Pattern.COMMENTS);
-        Matcher m = p.matcher(question);
-        return m.matches();
+        Matcher m = p.matcher(question.getQuestion());
+       if(!m.matches()){
+    	   errors.rejectValue("question", "error.question"," Question isn't valid");
+       }
     }
 }

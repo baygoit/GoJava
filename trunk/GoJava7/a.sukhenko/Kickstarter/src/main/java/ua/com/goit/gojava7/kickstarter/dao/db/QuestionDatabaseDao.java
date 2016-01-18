@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.model.Question;
 import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.util.Validator;
 @Repository

@@ -16,7 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.goit.gojava7.kickstarter.dao.db.PaymentDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDao;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.util.PaymentValidator;
 import ua.com.goit.gojava7.kickstarter.util.QuestionValidator;
 import ua.com.goit.gojava7.kickstarter.util.Validator;
 
@@ -32,14 +33,15 @@ public class PaymentController {
     private PaymentDao paymentDao;
     @Autowired
     private Validator myValidator;
-  
+    @Autowired
+    private PaymentValidator validator;
 
     @RequestMapping(value = "/payment", method = RequestMethod.GET)
     public ModelAndView showPayment(@RequestParam int rewardId, @RequestParam(required = false) int projectId,
                                     @RequestParam(required = false) String amount) throws ServletException, IOException {
-        log.info("showPayment()...");
-        Project project = projectDao.getProject(projectId);
         
+        Project project = projectDao.getProject(projectId);
+        //validator.validate(payment, errors);
         if(myValidator.validateAmountOfPledge(amount)){
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("payment");
@@ -48,7 +50,6 @@ public class PaymentController {
               return modelAndView;
         }
         else{
-            log.info("returnWarning()...");
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.addObject("paymentBonuses", project.getBonuses());
             modelAndView.setViewName("reward");

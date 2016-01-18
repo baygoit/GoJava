@@ -2,8 +2,6 @@ package ua.com.goit.gojava7.kickstarter.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +19,13 @@ import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDatabaseDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDatabaseDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuoteDatabaseDao;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.domain.Question;
-import ua.com.goit.gojava7.kickstarter.domain.Quote;
-import ua.com.goit.gojava7.kickstarter.domain.vo.QuestionVO;
 import ua.com.goit.gojava7.kickstarter.error.ResourceNotFoundException;
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Question;
+import ua.com.goit.gojava7.kickstarter.model.Quote;
+import ua.com.goit.gojava7.kickstarter.model.vo.QuestionVO;
 import ua.com.goit.gojava7.kickstarter.util.QuestionValidator;
-import ua.com.goit.gojava7.kickstarter.util.Validator;
 
 @Controller
 @Transactional
@@ -42,8 +39,6 @@ public class WebController{
     private QuoteDatabaseDao    quoteDao;
     @Autowired
     private QuestionDatabaseDao questionDao;
-    @Autowired
-    private Validator myValidator;
     @Autowired
     private QuestionValidator validator;
     

@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.domain;
+package ua.com.goit.gojava7.kickstarter.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
