@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "quotes")
 public class Quote{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int    id;
     @Column
     private String text;

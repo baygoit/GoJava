@@ -9,14 +9,15 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 @Repository
-public class ProjectDatabaseDao{
-    private static final Logger LOGGER = LogManager.getLogger(ProjectDatabaseDao.class);
+public class ProjectDao{
+    private static final Logger LOGGER = LogManager.getLogger(ProjectDao.class);
     @Autowired
     private SessionFactory      sessionFactory;
 
@@ -35,6 +36,18 @@ public class ProjectDatabaseDao{
         return results;
     }
 
+    
+    public Project getProject(int projectId) {
+        LOGGER.info("<Project> get({})...", projectId);
+        Session session = sessionFactory.getCurrentSession();
+
+        Project project = (Project) session.createCriteria(Project.class)
+                .add(Restrictions.eq("id", projectId))
+                .uniqueResult();
+
+        return project;
+    }
+    
     public Project getProjectByName(String projectName) {
         LOGGER.debug("Getting project by projectName: " + projectName);
         Session session = sessionFactory.openSession();

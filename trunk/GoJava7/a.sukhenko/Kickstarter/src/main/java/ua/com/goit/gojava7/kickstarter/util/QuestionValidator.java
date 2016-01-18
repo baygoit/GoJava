@@ -3,37 +3,29 @@ package ua.com.goit.gojava7.kickstarter.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 
-@Repository
-public class Validator{
-
-    private static final Logger log = LoggerFactory.getLogger(Validator.class);
-
-    public boolean validateAmountOfPledge(String amount) {
-        Pattern p = Pattern.compile("^[1-9]{1,10}$");
-        Matcher m = p.matcher(amount);
-        return m.matches();
+import ua.com.goit.gojava7.kickstarter.domain.Question;
+import ua.com.goit.gojava7.kickstarter.domain.vo.QuestionVO;
+@Component
+public class QuestionValidator implements org.springframework.validation.Validator{
+    
+    @Autowired
+    private Validator validator;
+    
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return QuestionVO.class.isAssignableFrom(clazz);
     }
 
-    public boolean validatePayer(String name, String card) {
-        return validateName(name) & validateCard(card);
+    @Override
+    public void validate(Object target, Errors errors) {
+       ValidationUtils.rejectIfEmptyOrWhitespace(errors, "question", "error.question","Question should not be empty.");
+      
     }
-
-    public boolean validateName(String name) {
-        Pattern p = Pattern.compile("^[\\p{L} .'-]+$");
-        Matcher m = p.matcher(name);
-        return m.matches();
-    }
-
-    public boolean validateCard(String card) {
-        Pattern p = Pattern.compile("^[0-9]{16}$");
-        Matcher m = p.matcher(card);
-        return m.matches();
-    }
-
     public boolean validateQuestion(String question) {
         Pattern p = Pattern.compile(
                 "# Match a sentence ending in punctuation or EOS.\n" +

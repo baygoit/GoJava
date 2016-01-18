@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.Cascade;
@@ -20,9 +21,8 @@ public class Category{
     @Column
     private String categoryName;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-
     private int    categoryId;
 
     public List<Project> getProjects() {

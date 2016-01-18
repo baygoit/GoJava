@@ -19,7 +19,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 public class ProjectDaoIntegrationTest {
 
     @Autowired
-    private ProjectDatabaseDao projectDao;
+    private ProjectDao projectDao;
 
 
     @Test

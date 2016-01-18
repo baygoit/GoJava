@@ -15,8 +15,8 @@ import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.util.Validator;
 
 @Repository
-public class PaymentDatabaseDao{
-    private static final org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger(PaymentDatabaseDao.class);
+public class PaymentDao{
+    private static final org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger(PaymentDao.class);
 
     @Autowired
     SessionFactory                                       sessionFactory;
