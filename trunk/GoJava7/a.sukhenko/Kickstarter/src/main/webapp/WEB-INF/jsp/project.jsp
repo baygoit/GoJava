@@ -2,7 +2,7 @@
 <jsp:include page="header.jsp">
 	<jsp:param value="Projects" name="title"/>
 </jsp:include>
-<a href="category.html?id=${project.category.categoryId}">${project.category.categoryName}</a> > ${project.projectName}
+<a href="category?id=${project.category.categoryId}">${project.category.categoryName}</a> > ${project.projectName}
 <c:choose>
     <c:when test="${notfound == true}">
         Sorry, project not found. 

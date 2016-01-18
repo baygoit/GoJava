@@ -17,7 +17,7 @@ public class QuoteMappingTest {
 
 	@Before
 	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernateTest.cfg.xml")
+		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate/hibernateTest.cfg.xml")
 				.build();
 		try {
 			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();

@@ -1,7 +1,5 @@
 package com.azuiev.db;
 
-import com.azuiev.dao.DBDao;
-
 import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +11,7 @@ import java.util.List;
 /**
  * Created by Administrator on 09.10.15.
  */
-public class GenerateDB implements DBDao {
+public class GenerateDB {
     private static final String url = "jdbc:mysql://localhost:3306/";
     private static final String dbName = "airbnb";
     private static final String user = "root";
@@ -26,7 +24,6 @@ public class GenerateDB implements DBDao {
         new GenerateDB().recreate();
     }
 
-    @Override
     public Connection getConnection() {
         if (connection == null) {
             try {
@@ -43,7 +40,6 @@ public class GenerateDB implements DBDao {
         return connection;
     }
 
-    @Override
     public void closeConnection() {
 
     }
@@ -75,7 +71,7 @@ public class GenerateDB implements DBDao {
     }
 
     private void execute(String fileName) {
-        DBDao db = new GenerateDB();
+        GenerateDB db = new GenerateDB();
         Connection connection = db.getConnection();
         try {
 

@@ -37,13 +37,7 @@ public class Question {
 	public Question() {
 		this.time = new Date().toString();
 	}	
-	
-	public Question(String question, Project project) {		
-		this.time = new Date().toString();
-		this.question = question;
-		this.project = project;
-	}
-	
+
 	public Long getQuestionId() {
 		return questionId;
 	}
@@ -86,6 +80,6 @@ public class Question {
 	
 	@Override
 	public String toString() {
-		return "questionId: " + questionId + "; time: " + time + "; question: " + question + "; answer: " + answer + "; projectId: " + project.getProjectId();
+		return "questionId: " + questionId + "; time: " + time + "; question: " + question + "; answer: " + answer + ";";
 	}
 }

@@ -20,13 +20,13 @@
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img class="img-responsive img-full" src="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B2I6VTKFP4LhRGNwSVBJM2FMbXc" alt="">
+                                <img class="img-responsive img-full" src="<c:url value="/resources/images/slide-1.jpg" />" alt="">
                             </div>
                             <div class="item">
-                                <img class="img-responsive img-full" src="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B2I6VTKFP4Lhd1U4MWFHTEt1R2M" alt="">
+                                <img class="img-responsive img-full" src="<c:url value="/resources/images/slide-1.jpg" />" alt="">
                             </div>
                             <div class="item">
-                                <img class="img-responsive img-full" src="https://drive.google.com/uc?export=download&confirm=no_antivirus&id=0B2I6VTKFP4LhRkhUWE9Hb1ZHblU" alt="">
+                                <img class="img-responsive img-full" src="<c:url value="/resources/images/slide-3.jpg" />" alt="">
                             </div>
                         </div>
 
@@ -54,19 +54,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /.container -->
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p>Copyright &copy; My Kickstarter Website 2016</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-   
+    </div>  
     <!-- Script to Activate the Carousel -->
     <script>
     $('.carousel').carousel({

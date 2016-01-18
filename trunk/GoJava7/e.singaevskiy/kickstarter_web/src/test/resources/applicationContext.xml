@@ -23,11 +23,6 @@
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
 		lazy-init="false">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mappingResources">
-			<list>
-				<value>Domain.hbm.xml</value>
-			</list>
-		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
@@ -35,15 +30,13 @@
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
 		</property>
-		<property name="packagesToScan" value="ua.com.goit.gojava7.kickstarter.domain"/>
-		<!-- <property name="annotatedClasses">
-			<list>
-				<value>ua.com.goit.gojava7.kickstarter.domain.Quote</value>
-				<value>ua.com.goit.gojava7.kickstarter.domain.Category</value>
-				<value>ua.com.goit.gojava7.kickstarter.domain.Project</value>
-				<value>ua.com.goit.gojava7.kickstarter.domain.Question</value>
-			</list>
-		</property> -->
+		<property name="packagesToScan" value="ua.com.goit.gojava7.kickstarter.domain" />
 	</bean>
+
+	<bean id="template" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"/>
 
 </beans>

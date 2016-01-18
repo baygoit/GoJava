@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="./menu" />
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <blockquote class="blockquote-reverse">
 	<p>${quote.text}</p>

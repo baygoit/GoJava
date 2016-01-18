@@ -13,11 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ua.com.goit.gojava7.kickstarter.dao.IntegrationTest;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuotePostgreDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext*.xml")
-public class QuotePostgreDAOTest {
+public class QuotePostgreDAOTest  implements IntegrationTest{
 
 	@Autowired
     QuotePostgreDAO quotePostgreDAO;
