@@ -19,6 +19,8 @@
 
 	
 	<mvc:annotation-driven />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
 	<context:component-scan base-package="com.kickstarter.dao.interfaces" />
 	<context:component-scan base-package="com.kickstarter.dao.Impl" />
     <context:component-scan base-package="com.kickstarter.controller" />

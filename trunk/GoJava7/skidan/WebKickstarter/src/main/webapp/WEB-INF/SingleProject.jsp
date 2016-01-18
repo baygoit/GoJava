@@ -18,7 +18,7 @@
 
 	<h3 align="center">
 		You are watching now:
-		<c:out value="${project.getTitle()}" />
+		<c:out value="${project.title}" />
 	</h3>
 	
 	<div id="projects">
@@ -44,9 +44,10 @@
 
 	<b>You can add your question here :</b>
 	<br>
-	<form method="post" action="question">
-		<input type="hidden" name="projectId" value="${project.getId()}" /> <input
-			name="question" /><input id="subm" type="submit" value="add question" />
+	<form action="question"> <!-- Changed HERE! -->
+		<input type="hidden" name="projectId" value="${project.getId()}" /> 
+		<!--  <input name="question" /> -->
+		<input id="subm" type="submit" value="add question" />
 	</form>
 	<br>
 
