@@ -8,9 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.models.Quote;
 
 @Repository
+@Transactional
 public class QuoteDao {
 
 	@Autowired
@@ -18,21 +20,13 @@ public class QuoteDao {
 	
 	private static final Logger log = LoggerFactory.getLogger(QuoteDao.class);
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
 	public Quote getRandomQuote() {
 		log.info("<Quote> getRandomQuote()...");
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 
-		Quote quote = (Quote) session.createCriteria(Quote.class)
+		return (Quote) session.createCriteria(Quote.class)
 				.add(Restrictions.sqlRestriction("1=1 order by rand()"))
 				.setMaxResults(1)
 				.uniqueResult();
-
-		session.close();
-		log.debug("<Quote> getRandomQuote() returned quote: {}", quote);
-		return quote;
 	}
 }

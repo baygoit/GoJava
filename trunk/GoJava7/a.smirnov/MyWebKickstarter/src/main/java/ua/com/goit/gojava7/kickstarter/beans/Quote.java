@@ -10,15 +10,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "quote")
 public class Quote {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int id;
-
 	@Column(name = "text")
 	private String text;
-
 	@Column(name = "author")
 	private String author;
 

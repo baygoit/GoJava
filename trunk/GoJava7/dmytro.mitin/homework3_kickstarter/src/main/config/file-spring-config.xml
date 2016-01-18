@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="categoryStorage" class="ua.com.goit.gojava7.kickstarter.model.storage.FileCategoryStorage">
+        <constructor-arg name="categoryPath" value="#{T(ua.com.goit.gojava7.kickstarter.Launcher1).class.getResource(&quot;/categories.txt&quot;).getPath()}"></constructor-arg>
+        <constructor-arg name="projectPath" value="#{T(ua.com.goit.gojava7.kickstarter.Launcher1).class.getResource(&quot;/projects.txt&quot;).getPath()}"></constructor-arg>
+    </bean>
+    <bean id="quoteStorage" class="ua.com.goit.gojava7.kickstarter.model.storage.FileQuoteStorage">
+        <constructor-arg name="path" value="#{T(ua.com.goit.gojava7.kickstarter.Launcher1).class.getResource(&quot;/quotes.txt&quot;).getPath()}"></constructor-arg>
+    </bean>
+    <bean id="kickstarter" class="ua.com.goit.gojava7.kickstarter.model.Kickstarter">
+        <constructor-arg name="categoryStorage" ref="categoryStorage"></constructor-arg>
+        <constructor-arg name="quoteStorage" ref="quoteStorage"></constructor-arg>
+    </bean>
+    <bean id="controller" class="ua.com.goit.gojava7.kickstarter.controller.Controller">
+        <constructor-arg name="kickstarter" ref="kickstarter"></constructor-arg>
+    </bean>
+    <bean id="view" class="ua.com.goit.gojava7.kickstarter.view.ConsoleView">
+        <constructor-arg name="controller" ref="controller"></constructor-arg>
+    </bean>
+</beans>

@@ -15,7 +15,7 @@ import com.kickstarter.model.Category;
 @Repository
 public class CategoryDaoImpl implements CategoryDao {
 	
-	@Autowired
+	@Autowired(required=false)
 	private SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")

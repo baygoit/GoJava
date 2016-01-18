@@ -1,7 +1,6 @@
 package com.kickstarter.dao.Impl;
 
 import java.util.List;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,7 +16,7 @@ import com.kickstarter.model.Project;
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
 
-	@Autowired
+	@Autowired(required=false)
 	private SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
@@ -25,21 +24,17 @@ public class ProjectDaoImpl implements ProjectDao {
 	public List<Project> getAllProjectsForCategory(int categoryId) {
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("from Project where categoryId= :categoryId");
+		query.setCacheable(true);
 		query.setInteger("categoryId", categoryId);
 		List<Project> projectList = query.list();
-		if (projectList.isEmpty()) {
-			return null;
-		}
 		session.close();
 		return projectList;
 	}
 
 	@Transactional(readOnly = true)
 	public Project getOneProject(int projectNumber) {
-		// final String sql = "from Project where projectId=" + projectNumber;
 		Session session = sessionFactory.openSession();
 		Project project = (Project) session.get(Project.class, projectNumber);
-		// Project project = (Project) session.createQuery(sql).uniqueResult();
 		session.close();
 		return project;
 	}
@@ -53,6 +48,10 @@ public class ProjectDaoImpl implements ProjectDao {
 
 }
 
+
+// Project project = (Project) session.createQuery(sql).uniqueResult();
+
+// final String sql = "from Project where projectId=" + projectNumber;
 
 
 

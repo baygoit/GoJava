@@ -2,14 +2,46 @@ package ua.com.goit.gojava7.kickstarter.domain;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Size;
+
+@Entity
 public class Payment {
+	
+	private static final int USERNAME_MIN_SIZE = 3;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name="username")
+	@Size(min=USERNAME_MIN_SIZE, 
+		message="User name must have at least  " + USERNAME_MIN_SIZE + " characters length")
     private String user;
+	
+	@DecimalMin(value="99999999", message="Card ID must be positive numeric and have at least 9 characters length")
     private long cardId;
+    
+	@DecimalMin(value="1", message="Amount must be positive numeric")
     private long sum;
-    private Project project;
-    private Reward reward;
+    
     private Date date;
+    
+    @ManyToOne
+    @JoinColumn(name="project_id", foreignKey=@ForeignKey(name="Payment_Project"))
+    private Project project;
+    
+    @ManyToOne
+    @JoinColumn(name="reward_id", foreignKey=@ForeignKey(name="Payment_Reward"))
+    private Reward reward;
 
     public Payment() {
         // default bean constructor

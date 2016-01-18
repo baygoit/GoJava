@@ -11,7 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 @Repository
 public class CategoryDatabaseDao{
@@ -26,6 +26,9 @@ public class CategoryDatabaseDao{
         if (categoriesList.isEmpty()) {
             throw new NoSuchElementException();
         }
+        if (session.isOpen()) {
+            session.close();
+        }
         return categoriesList;
     }
 
@@ -36,6 +39,9 @@ public class CategoryDatabaseDao{
         List<Category> categoriesList = HibernateUtil.listAndCast(query);
         if (categoriesList.isEmpty()) {
             throw new NoSuchElementException();
+        }
+        if (session.isOpen()) {
+            session.close();
         }
         return categoriesList.get(0);
     }

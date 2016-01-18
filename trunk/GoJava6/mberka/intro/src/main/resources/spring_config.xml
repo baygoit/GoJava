@@ -1,42 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:p="http://www.springframework.org/schema/p"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xmlns:mvc="http://www.springframework.org/schema/mvc"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="org.springbyexample.web.servlet.mvc" />
+    <context:annotation-config/>
+    <context:component-scan base-package="com.gojava6"/>
 
-    <mvc:annotation-driven />
+    <!--<mvc:annotation-driven />
 
-    <mvc:view-controller path="/index.html" />
+    <mvc:view-controller path="/index.html" />-->
 
-    <bean id="tilesConfigurer"
-          class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
-          p:definitions="/WEB-INF/tiles-defs/templates.xml" />
+    <bean id="user" class="com.gojava6.modelSpring.User"/>
+    <bean id="userDAO" class="com.gojava6.daoSpring.UserDAO">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="userDAOHibernateSpring" class="com.gojava6.daoSpring.UserDAOHibernateSpring"/>
 
-    <bean id="tilesViewResolver"
-          class="org.springframework.web.servlet.view.UrlBasedViewResolver"
-          p:viewClass="org.springbyexample.web.servlet.view.tiles2.DynamicTilesView"
-          p:prefix="/WEB-INF/jsp/"
-          p:suffix=".jsp" />
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-          p:basenames="messages" />
+    <!--<bean id="namedParamJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg type="javax.sql.DataSource" ref="dataSource"/>
+    </bean>-->
 
-    <!-- Declare the Interceptor -->
-    <mvc:interceptors>
-        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
-              p:paramName="locale" />
-    </mvc:interceptors>
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+    <!--Connection pool-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/airbnb"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+        <property name="initialSize" value="3"/>
+        <property name="maxActive" value="10"/>
+    </bean>
 
-    <!-- Declare the Resolver -->
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="dialect">org.hibernate.dialect.MySQL57InnoDBDialect</prop>
+                <prop key="cache.use_second_level_cache">false</prop>
+                <prop key="show_sql">true</prop>
+                <prop key="hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+        <property name="packagesToScan" value="com.gojava6"/>
+    </bean>
 
 </beans>

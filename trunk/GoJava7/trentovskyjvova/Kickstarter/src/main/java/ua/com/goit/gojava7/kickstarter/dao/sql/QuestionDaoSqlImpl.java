@@ -3,6 +3,7 @@ package ua.com.goit.gojava7.kickstarter.dao.sql;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -24,7 +25,7 @@ public class QuestionDaoSqlImpl implements QuestionDao {
 		
 		Session session = sessionFactory.getCurrentSession();
 		
-		Criteria criteria = session.createCriteria(Question.class);	
+		Criteria criteria = session.createCriteria(Question.class);
 		criteria.add(Restrictions.eq("projectId", projectId));
 		
 		return criteria.list();

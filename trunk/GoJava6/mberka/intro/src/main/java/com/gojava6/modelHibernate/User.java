@@ -1,22 +1,49 @@
 package com.gojava6.modelHibernate;
 
 import com.gojava6.observer.Validation;
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table (name = "Useruser")
+@Table(name = "User")
 public class User {
-    @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
-    @Column (name = "idUser")
-    private int id;
-    //@Column (name="name")
+    @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column(name = "idUser")
+    private int idUser;
+    @Column
+    /*NEAR FIELD OR GETTER*/
     private String userName;
+    @Column
     private String userSurname;
+    @Column
     private String email;
+    @Column
     private String userCity;
+    @Column
     private boolean hostUser;
+
+    //@Column
+    //VALUE-OBJECT INSIDE ENTITY
+    /*@Column
+    @ElementCollection (fetch = FetchType.EAGER)
+    @JoinTable(name = "User_apartments",
+            joinColumns = @JoinColumn(name = "User_ID"))
+    @GenericGenerator(name = "increment-generator", strategy = "increment")
+    @CollectionId(columns = @Column(name = "apartment_id"),
+            generator = "increment-generator",
+            type = @Type(type = "long"))*/
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<Apartment> apartment = new ArrayList<>();
+    /*@Transient *//*Transient will IGNORE this field*//*
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dayOfRegistration;*/
 
     public User() {
     }
@@ -29,12 +56,12 @@ public class User {
         this.hostUser = false;
     }
 
-    public int getId() {
-        return id;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public boolean isHostUser() {
@@ -85,11 +112,24 @@ public class User {
         }
     }
 
+    public List<Apartment> getApartment() {
+        return apartment;
+    }
+
+    public void setApartment(List<Apartment> apartment) {
+        this.apartment = apartment;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "userName='" + userName + '\'' +
+                "id=" + idUser +
+                ", userName='" + userName + '\'' +
                 ", userSurname='" + userSurname + '\'' +
+                ", email='" + email + '\'' +
+                ", userCity='" + userCity + '\'' +
+                ", hostUser=" + hostUser +
+                ", apartment=" + apartment +
                 '}';
     }
 }

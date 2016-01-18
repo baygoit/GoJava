@@ -9,6 +9,9 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+
 public class CategoryTest{
     private Category category = new Category();
     private List<Project> projects = new ArrayList<>();
