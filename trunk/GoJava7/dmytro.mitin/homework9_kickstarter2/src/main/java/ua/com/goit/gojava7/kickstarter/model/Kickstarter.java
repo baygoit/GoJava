@@ -3,7 +3,7 @@ package ua.com.goit.gojava7.kickstarter.model;
 import ua.com.goit.gojava7.kickstarter.model.storage.CategoryStorage;
 import ua.com.goit.gojava7.kickstarter.model.storage.QuoteStorage;
 
-import java.io.IOException;
+import java.util.List;
 
 public class Kickstarter  {
     private CategoryStorage categoryStorage;
@@ -15,21 +15,20 @@ public class Kickstarter  {
         this.quoteStorage = quoteStorage;
     }
 
-    public CategoryStorage getCategoryStorage() {
-        return categoryStorage;
-    }
-
-    public QuoteStorage getQuoteStorage() {
-        return quoteStorage;
-    }
-
-    public void addDonation(Project project, int money) throws IOException {
+    public void addDonation(Project project, int money) {
         project.addMoneyDonated(money);
     }
 
-    public void addQuestion(Project project, String question) throws IOException {
+    public void addQuestion(Project project, String question) {
         project.addQuestion(question);
     }
 
 
+    public List<Category> getCategories() {
+        return categoryStorage.getCategories();
+    }
+
+    public List<Quote> getQuotes() {
+        return quoteStorage.getQuotes();
+    }
 }

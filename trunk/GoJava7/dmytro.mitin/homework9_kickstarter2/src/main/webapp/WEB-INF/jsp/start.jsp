@@ -9,11 +9,12 @@
     <title>Kickstarter</title>
 </head>
 <body>
-<img src="logo.png" />
+<img src="../img/logo.png" />
 <br />
 <%
     Quote quote = (Quote)(request.getAttribute("quote"));
-    List<Category> categories = (List<Category>) application.getAttribute("categories");
+//    List<Category> categories = (List<Category>) application.getAttribute("categories");
+    List<Category> categories = (List<Category>) session.getAttribute("categories");
 %>
 <i><%= quote.getText() %> (<%= quote.getAuthor() %>)</i>
 <h3>Categories</h3>
@@ -26,8 +27,5 @@
     }
 %>
 </ul>
-<p align="center">
-    <font color="white"><%= System.getProperty("a") %></font>
-</p>
 </body>
 </html>

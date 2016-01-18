@@ -5,53 +5,29 @@
          version="3.1">
 
     <servlet>
-        <servlet-name>start</servlet-name>
-        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.StartServlet</servlet-class>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>WEB-INF/mvc-config.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>start</servlet-name>
-        <url-pattern>/start</url-pattern>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>category</servlet-name>
-        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.CategoryServlet</servlet-class>
-    </servlet>
+    <!-- dbcp -->
 
-    <servlet-mapping>
-        <servlet-name>category</servlet-name>
-        <url-pattern>/category</url-pattern>
-    </servlet-mapping>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
 
-    <servlet>
-        <servlet-name>project</servlet-name>
-        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.ProjectServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>project</servlet-name>
-        <url-pattern>/project</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>donate</servlet-name>
-        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.DonateServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>donate</servlet-name>
-        <url-pattern>/donate</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>question</servlet-name>
-        <servlet-class>ua.com.goit.gojava7.kickstarter.servlet.QuestionServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>question</servlet-name>
-        <url-pattern>/question</url-pattern>
-    </servlet-mapping>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
 </web-app>

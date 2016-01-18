@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Project {
+    protected int id;
+
     private String name;
 
     private Category category;

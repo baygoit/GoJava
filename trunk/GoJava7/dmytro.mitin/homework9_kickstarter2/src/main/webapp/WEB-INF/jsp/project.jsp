@@ -49,6 +49,7 @@ Would you like to ask a question?<br />
     <textarea name="question" placeholder="your question..."></textarea>
     <br />
     <input type="submit" value="Ask"/>
+    <%--<input type="hidden" name="project" value="">--%>
 </form>
 <br />
 Would you like to donate?<br />

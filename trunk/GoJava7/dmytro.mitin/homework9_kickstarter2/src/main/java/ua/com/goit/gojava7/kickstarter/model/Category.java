@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Category {
+    private int id;
+
     private final String name;
 
     private final List<Project> projects;
