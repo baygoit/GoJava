@@ -21,7 +21,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
 	@Override
 	public List<Category> getAll() {
-		Query query = em.createQuery("from Category");
+		Query query = em.createNamedQuery("Category.getAll");
 
 		List<Category> categories = (List<Category>) query.getResultList();
 
