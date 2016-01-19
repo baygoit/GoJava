@@ -2,28 +2,30 @@ package ua.com.goit.gojava7.kickstarter.controller;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDatabaseDao;
-import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDatabaseDao;
+import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDatabaseDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuoteDatabaseDao;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.domain.Question;
-import ua.com.goit.gojava7.kickstarter.domain.Quote;
 import ua.com.goit.gojava7.kickstarter.error.ResourceNotFoundException;
-import ua.com.goit.gojava7.kickstarter.util.Validator;
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Question;
+import ua.com.goit.gojava7.kickstarter.model.Quote;
+import ua.com.goit.gojava7.kickstarter.model.vo.QuestionVO;
+import ua.com.goit.gojava7.kickstarter.util.QuestionValidator;
 
 @Controller
 @Transactional
@@ -32,14 +34,13 @@ public class WebController{
     @Autowired
     private CategoryDatabaseDao categoryDao;
     @Autowired
-    private ProjectDatabaseDao  projectDao;
+    private ProjectDao  projectDao;
     @Autowired
     private QuoteDatabaseDao    quoteDao;
     @Autowired
     private QuestionDatabaseDao questionDao;
     @Autowired
-    private Validator validator;
-    
+    private QuestionValidator validator;
     
     public Quote getQuote(){
         return quoteDao.getRandomQuote();
@@ -73,12 +74,12 @@ public class WebController{
     }
 
     @RequestMapping("project")
-    public ModelAndView project(@RequestParam(name = "name") String projectName) {
+    public ModelAndView project(@RequestParam int id) {
         ModelAndView modelAndView = new ModelAndView("project");
         logger.debug("action: project");
         Project project = null;
         try {
-            project = projectDao.getProjectByName(projectName);
+            project = projectDao.getProject(id);
         } catch (NoSuchElementException e) {
             logger.info("Didn't find project", e);
             throw new ResourceNotFoundException();
@@ -91,7 +92,36 @@ public class WebController{
         return modelAndView;
     }
     
+    @RequestMapping(value = "/question", method = RequestMethod.POST)
+    public String  addQuestion(@RequestParam int id, @RequestParam(name = "question") String textQuestion) {
+        logger.info("question()...");
+
+        questionDao.createQuestion(textQuestion, id);
+        return "redirect:/project?id=" + id;
+    }
+
     
-
-
+    
+    
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public String submitForm(@ModelAttribute("question") QuestionVO questionVO,
+                            BindingResult result, SessionStatus status)
+    {
+         
+        //Validation code
+        validator.validate(questionVO, result);
+         
+        //Check validation errors
+        if (result.hasErrors()) {
+            return "addEmployee";
+        }
+         
+        //Store the employee information in database
+        //questionDao.createQuestion(textQuestion, id);
+         
+        //Mark Session Complete
+        status.setComplete();
+        return "redirect:addNew/success";
+    }
 }

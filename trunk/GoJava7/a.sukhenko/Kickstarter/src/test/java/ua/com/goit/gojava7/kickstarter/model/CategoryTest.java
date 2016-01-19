@@ -5,7 +5,7 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.model.Category;
 
 public class CategoryTest{
     Category category = new Category();
