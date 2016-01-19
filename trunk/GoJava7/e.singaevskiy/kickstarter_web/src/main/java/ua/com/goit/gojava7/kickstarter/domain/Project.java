@@ -13,24 +13,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Formula;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Project.getAll", query="select entity from Project as entity"),
+	@NamedQuery(name="Project.getByCategory", query="select entity from Project as entity where category_id = :category_id"),
+	@NamedQuery(name="Project.removeAll", query="delete from Project")
+	})
 public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private long goalSum;
     @Formula("(select SUM(p.sum) from payment p where p.project_id = id)")
     private Long balanceSum;
     private Date startDate;
     private Date endDate;
-    @ManyToOne(cascade={CascadeType.ALL})
-    @JoinColumn(name="category_id", 
-    	foreignKey=@ForeignKey(name="project_category_id_fkey"))
+    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE, CascadeType.DETACH})
+    @JoinColumn(name="category_id", foreignKey=@ForeignKey(name="project_category_id_fkey"))
     private Category category;
     private String description;
     private String videoUrl;
@@ -40,11 +46,6 @@ public class Project {
 
     public Project() {
         // default bean constructor
-    }
-    
-    public Project(int id, String name, String author, Category category) {
-        this(name, author, category);
-        this.id = id;
     }
 
     public Project(String name, String author, Category category) {
@@ -135,7 +136,7 @@ public class Project {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -148,21 +149,24 @@ public class Project {
 		if (getClass() != obj.getClass())
 			return false;
 		Project other = (Project) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
     @Override
     public String toString() {
-        return "Project \"" + name.substring(0, Math.min(15, name.length())) + "..." + "\" by " + author;
+        return "("+id+") Project \"" + name.substring(0, Math.min(15, name.length())) + "..." + "\" by " + author;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

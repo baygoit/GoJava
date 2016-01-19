@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	default-lazy-init="true" default-autowire="byName"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
-
-	default-lazy-init="true" default-autowire="byName">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<context:property-placeholder
 		location="classpath:/storages/db/config.properties" />
 
+	<tx:annotation-driven proxy-target-class="true"/>
 	<context:annotation-config />
 	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao" />
 
@@ -19,9 +22,9 @@
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-	<bean id="sessionFactory"
+<!-- 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
-		lazy-init="false">
+		lazy-init="true">
 		<property name="dataSource" ref="dataSource" />
 		<property name="hibernateProperties">
 			<props>
@@ -31,12 +34,26 @@
 			</props>
 		</property>
 		<property name="packagesToScan" value="ua.com.goit.gojava7.kickstarter.domain" />
-	</bean>
+	</bean> -->
 
-	<bean id="template" class="org.springframework.orm.hibernate5.HibernateTemplate">
+<!-- 	<bean id="template" class="org.springframework.orm.hibernate5.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+ -->
+<!-- 	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager" /> -->
+
+	<!-- jpa -->
 	
-	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"/>
+	<bean id="entityManager"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitName" value="Kickstarter_test"></property>
+		<!-- <property name="persistenceXmlLocation" value="classpath:/storages/db/persistence.xml" /> -->
+	</bean>
+	
+ 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManager" />
+	</bean>
 
 </beans>

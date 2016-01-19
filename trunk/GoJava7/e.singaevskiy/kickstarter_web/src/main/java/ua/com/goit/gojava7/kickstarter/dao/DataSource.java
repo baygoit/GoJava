@@ -6,7 +6,7 @@ public interface DataSource<T> {
     
     List<T> getAll() ;
 
-    T get(int index);
+    T get(Long index);
 
     void add(T element);
     

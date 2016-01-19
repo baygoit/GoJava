@@ -6,6 +6,6 @@ import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 public interface RewardDAO extends DataSource<Reward>{
     
-     List<Reward> getByProject(int projectId);
+     List<Reward> getByProject(Long projectId);
      
 }
