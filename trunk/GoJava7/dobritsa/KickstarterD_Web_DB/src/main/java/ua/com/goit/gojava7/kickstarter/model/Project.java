@@ -3,21 +3,14 @@ package ua.com.goit.gojava7.kickstarter.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "project")
+@NamedQueries({ @NamedQuery(name = "Project.count", query = "select count(p) as cnt from Project p"),
+		@NamedQuery(name = "Project.findAll", query = "select p from Project p") })
 public class Project {
 	
 	@Id
@@ -33,9 +26,6 @@ public class Project {
 
 	@Column
 	private Long goal;
-
-	//@Column
-	//private Long pledged;
 
 	@Column
 	private Long daysToGo;
@@ -94,14 +84,6 @@ public class Project {
 	public void setGoal(Long goal) {
 		this.goal = goal;
 	}
-
-	//public Long getPledged() {
-	//	return pledged;
-	//}
-
-	//public void setPledged(Long pledged) {
-	//	this.pledged = pledged;
-	//}
 
 	public Long getDaysToGo() {
 		return daysToGo;

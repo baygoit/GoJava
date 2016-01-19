@@ -22,32 +22,85 @@ public class ProjectService {
     @Autowired
     private PaymentDao paymentDao;
 
-    public List<ProjectDto> getShortProjectsByCategory(Long categoryId) {
-        List<ProjectDto> projectsDto = new ArrayList<>();
+    public ProjectDto getProjectIdNameCategoryRewards(Long projectId) {
+        log.info("<ProjectDto> getProjectForReward(projectId = {})...", projectId);
 
-        for(Project project : projectDao.getByCategory(categoryId))
-            projectsDto.add(getShortProject(project));
-
-        return projectsDto;
-    }
-
-    public ProjectDto getShortProject(Project project) {
-        log.info("<ProjectDto> getShortProject(projectId = {})...", project.getProjectId());
+        Project project = projectDao.get(projectId);
         //TODO if(project!=null)
 
-        return constuctShortProjectDto(project);
+        return constuctProjectDtoIdNameCategoryRewards(project);
+    }
+
+    private ProjectDto constuctProjectDtoIdNameCategoryRewards(Project project) {
+        log.info("<ProjectDto> constuctShortProjectDto(projectId = {})...", project.getProjectId());
+
+        ProjectDto projectDto =  constructProjectDtoIdNameCategory(project);
+        projectDto.setRewards(project.getRewards());
+
+        return projectDto;
+    }
+
+    public ProjectDto getProjectIdNameCategory(Long projectId) {
+        log.info("<ProjectDto> getProjectIdNameCategory(projectId = {})...", projectId);
+
+        Project project = projectDao.get(projectId);
+        //TODO if(project!=null)
+
+        return constructProjectDtoIdNameCategory(project);
+    }
+
+    protected ProjectDto constructProjectDtoIdNameCategory(Project project) {
+        log.info("<ProjectDto> constuctShortProjectDto(projectId = {})...", project.getProjectId());
+
+        ProjectDto projectDto = new ProjectDto();
+        projectDto.setProjectId(project.getProjectId());
+        projectDto.setName(project.getName());
+        projectDto.setCategory(project.getCategory());
+
+        return projectDto;
     }
 
     public ProjectDto getFullProject(Long projectId) {
         log.info("<ProjectDto> getFullProject(projectId = {})...", projectId);
 
         Project project = projectDao.get(projectId);
+        log.info("<ProjectDto> getFullProject(projectId = {}) get {}", projectId, project);
 
         return constuctFullProjectDto(project);
     }
 
+    private ProjectDto constuctFullProjectDto(Project project) {
+        log.info("<ProjectDto> constuctFullProjectDto(projectId = {})...", project.getProjectId());
+
+        ProjectDto projectDto = constuctShortProjectDto(project);
+
+        projectDto.setHistory(project.getHistory());
+        projectDto.setLink(project.getLink());
+
+        projectDto.setCategory(project.getCategory());
+        log.info("<ProjectDto> constuctFullProjectDto(projectId = {}) set category = {}", project.getProjectId(),
+                projectDto.getCategory());
+
+        projectDto.setQuestions(project.getQuestions());
+        log.info("<ProjectDto> constuctFullProjectDto(projectId = {}) set {} questions", project.getProjectId(),
+                projectDto.getQuestions().size());
+
+        log.info("<ProjectDto> constuctFullProjectDto(projectId = {}) returned {}", project.getProjectId(),
+                projectDto);
+        return projectDto;
+    }
+
+    protected List<ProjectDto> constuctShortProjectDto(List<Project> projects) {
+        List<ProjectDto> projectsDto = new ArrayList<>();
+
+        for(Project project : projects)
+            projectsDto.add(constuctShortProjectDto(project));
+
+        return projectsDto;
+    }
+
     private ProjectDto constuctShortProjectDto(Project project) {
-        log.info("<ProjectDto> constuctProjectDto({})...", project);
+        log.info("<ProjectDto> constuctShortProjectDto(projectId = {})...", project.getProjectId());
 
         ProjectDto projectDto = new ProjectDto();
         projectDto.setProjectId(project.getProjectId());
@@ -57,32 +110,11 @@ public class ProjectService {
         projectDto.setDaysToGo(project.getDaysToGo());
 
         projectDto.setPledged(paymentDao.calculatePledgedForProject(project.getProjectId()));
-        log.info("<ProjectDto> constuctProjectDto(projectId = {}) set pledged = {}", project.getProjectId(),
+        log.info("<ProjectDto> constuctShortProjectDto(projectId = {}) set pledged = {}", project.getProjectId(),
                 projectDto.getPledged());
 
-        return projectDto;
-    }
-
-    private ProjectDto constuctFullProjectDto(Project project) {
-        log.info("<ProjectDto> constuctProjectDto({})...", project);
-
-        ProjectDto projectDto = constuctShortProjectDto(project);
-
-        projectDto.setHistory(project.getHistory());
-        projectDto.setLink(project.getLink());
-
-        projectDto.setCategory(project.getCategory());
-        log.info("<ProjectDto> constuctProjectDto({projectId = {}}) set category = {}", project.getProjectId(),
-                projectDto.getCategory());
-
-        projectDto.setQuestions(project.getQuestions());
-        log.info("<ProjectDto> constuctProjectDto({projectId = {}}) set question[0].getQuestionId = {}", project.getProjectId(),
-                projectDto.getQuestions().get(0).getQuestionId());
-
-        // projectDto.setPayments(project.getPayments());
-
-        // projectDto.setRewards(project.getRewards());
-
+        log.info("<ProjectDto> constuctShortProjectDto(projectId = {}) returned {}", project.getProjectId(),
+                projectDto);
         return projectDto;
     }
 }

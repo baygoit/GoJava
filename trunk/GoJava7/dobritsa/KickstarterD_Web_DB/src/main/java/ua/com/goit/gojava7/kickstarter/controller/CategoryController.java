@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.dto.CategoryDto;
 import ua.com.goit.gojava7.kickstarter.service.CategoryService;
-import ua.com.goit.gojava7.kickstarter.service.ProjectService;
 
 @Transactional
 @Controller
@@ -23,8 +22,6 @@ public class CategoryController {
     private QuoteDao quoteDao;
     @Autowired
     private CategoryService categoryService;
-    @Autowired
-    private ProjectService projectService;
 
     @RequestMapping("/index")//all
     public ModelAndView start() {//getAll
@@ -33,6 +30,8 @@ public class CategoryController {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("quote", quoteDao.getRandomQuote());
         modelAndView.addObject("categories", categoryService.getAll());
+        log.info("start() returned {}", modelAndView);
+
         return modelAndView;
     }
 
@@ -43,10 +42,10 @@ public class CategoryController {
         CategoryDto categoryDto = categoryService.get(categoryId);
 
         ModelAndView modelAndView = new ModelAndView("category");
-        modelAndView.addObject("projects", projectService.getShortProjectsByCategory(categoryId));
-       // modelAndView.addObject("projects", categoryDto.getProjects());
         modelAndView.addObject("categoryName", categoryDto.getName());
+        modelAndView.addObject("projects", categoryDto.getProjects());
 
+        log.info("showCategory(categoryId = {}) returned {}", categoryId, modelAndView);
         return modelAndView;
     }
 }

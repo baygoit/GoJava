@@ -1,14 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "quote")
+@NamedQueries({ @NamedQuery(name = "Quote.count", query = "select count(q) as cnt from Quote q"),
+		@NamedQuery(name = "Quote.findAll", query = "select q from Quote q") })
 public class Quote {
 
 	@Id

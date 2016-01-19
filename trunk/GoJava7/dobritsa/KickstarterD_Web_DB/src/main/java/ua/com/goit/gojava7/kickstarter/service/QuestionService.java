@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
-import ua.com.goit.gojava7.kickstarter.dto.QuestionDto;
 import ua.com.goit.gojava7.kickstarter.model.Question;
 import ua.com.goit.gojava7.kickstarter.validator.MyValidator;
 
@@ -23,27 +22,15 @@ public class QuestionService {
     private ProjectDao projectDao;
 
     public void createQuestion(String text, Long projectId) {
-        log.info("<void> createQuestion({}, {})...", text, projectId);
+        log.info("<void> createQuestion(text = [{}], projectId = [{}])...", text, projectId);
+
         if (myValidator.validateQuestion(text)) {
             Question question = new Question();
             question.setQuestion(text);
             question.setProject(projectDao.get(projectId));
+
+            log.info("<void> createQuestion(text = [{}], projectId = [{}]) will create {}", text, projectId, question);
             questionDao.add(question);
         }
-    }
-
-    private QuestionDto constuctQuestionDto(Question question) {
-        log.info("<QuestionDto> constuctQuestionDto({})...", question);
-
-        QuestionDto questionDto = new QuestionDto();
-        questionDto.setTime(question.getTime());
-        questionDto.setQuestionId(question.getQuestionId());
-        questionDto.setQuestion(question.getQuestion());
-        questionDto.setAnswer(question.getAnswer());
-
-        questionDto.setProject(question.getProject());
-        log.info("<QuestionDto> constuctQuestionDto({}) set projectId = {}", question, questionDto.getProject().getProjectId());
-
-        return questionDto;
     }
 }

@@ -22,8 +22,6 @@ public class MySqlEmptyIT {
     @Autowired
     private ProjectDao projectDao;
     @Autowired
-    private QuestionDao questionDao;
-    @Autowired
     private PaymentDao paymentDao;
     @Autowired
     private RewardDao rewardDao;
@@ -46,21 +44,6 @@ public class MySqlEmptyIT {
     @Test
     public void testGetNonexistentProjectIsNull() {
         assertNull(projectDao.get(1L));
-    }
-
-    @Test
-    public void testGetProjectsByNonexistentCategoryIsNotNull() {
-        assertThat(projectDao.getByCategory(1L).size(), is(0));
-    }
-
-    @Test
-    public void testGetQuestionsByNonexistentProjectIsNotNull() {
-        assertThat(questionDao.getByProject(1L).size(), is(0));
-    }
-
-    @Test
-    public void testGetRewardsByNonexistentProjectIsNotNull() {
-        assertThat(rewardDao.getByProject(1L).size(), is(0));
     }
 
     @Test

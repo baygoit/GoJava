@@ -46,7 +46,6 @@ public class MySqlInsertIT {
 
         assertThat(categoryDao.get(categoryId).getName(), is("New category for test"));
         assertThat(projectDao.get(projectId).getName(), is("New project for test"));
-        assertThat(questionDao.getByProject(projectId).size(), is(1));
     }
 
     @Test

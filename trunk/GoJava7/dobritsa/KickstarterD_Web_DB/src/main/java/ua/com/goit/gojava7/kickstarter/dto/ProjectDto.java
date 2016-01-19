@@ -123,7 +123,7 @@ public class ProjectDto extends Project{
     @Override
     public String toString() {
         return "ProjectDto [projectId=" + projectId + ", name=" + name
-                + ", description=" + description + ", goal=" + goal + "pledged=" + pledged + ", daysToGo=" + daysToGo
+                + ", description=" + description + ", goal=" + goal + ", pledged=" + pledged + ", daysToGo=" + daysToGo
                 + ", history=" + history + ", link=" + link + ", categoryId=" + category.getCategoryId() + "]";
     }
 }

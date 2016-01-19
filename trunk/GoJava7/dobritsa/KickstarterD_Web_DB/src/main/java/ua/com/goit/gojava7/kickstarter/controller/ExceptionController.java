@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-//@RequestMapping("/error/404.html")
 public class ExceptionController {
 
     @RequestMapping("/error/404.html")

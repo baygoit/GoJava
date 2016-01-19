@@ -1,13 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.dto;
 
-import ua.com.goit.gojava7.kickstarter.model.Project;
-
 public class RewardDto {
 
     private Long rewardId;
     private Long amount;
     private String reward;
-    private Project project = new Project();
+    private ProjectDto projectDto = new ProjectDto();
 
     public Long getRewardId() {
         return rewardId;
@@ -33,21 +31,21 @@ public class RewardDto {
         this.reward = reward;
     }
 
-    public Project getProject() {
-        return project;
+    public ProjectDto getProjectDto() {
+        return projectDto;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectDto(ProjectDto projectDto) {
+        this.projectDto = projectDto;
     }
 
-    public Long getProjectId() {
-        return project.getProjectId();
+    public Long getProjectDtoId() {
+        return projectDto.getProjectId();
     }
 
     @Override
     public String toString() {
         return "RewardDto [rewardId=" + rewardId + ", amount=" + amount
-                + ", reward=" + reward + ", projectId=" + project.getProjectId() + "]";
+                + ", reward=" + reward + ", projectDtoId=" + projectDto.getProjectId() + "]";
     }
 }

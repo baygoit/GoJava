@@ -8,9 +8,6 @@ import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
 import ua.com.goit.gojava7.kickstarter.dto.RewardDto;
 import ua.com.goit.gojava7.kickstarter.model.Reward;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Repository
 public class RewardService {
 
@@ -18,6 +15,8 @@ public class RewardService {
 
     @Autowired
     private RewardDao rewardDao;
+    @Autowired
+    private ProjectService projectService;
 
     public RewardDto get(Long rewardId) {
         log.info("<RewardDto> get(rewardId = {})...", rewardId);
@@ -25,29 +24,18 @@ public class RewardService {
         return constuctRewardDto(rewardDao.get(rewardId));
     }
 
-    public List<RewardDto> getByProject(Long projectId) {
-        log.info("<RewardDto> getByProject({})...", projectId);
-
-        List<RewardDto> rewardsDto = new ArrayList<>();
-
-        for(Reward reward : rewardDao.getByProject(projectId)) {
-            rewardsDto.add(constuctRewardDto(reward));
-        }
-
-        return  rewardsDto;
-    }
-
     private RewardDto constuctRewardDto(Reward reward) {
-        log.info("<RewardDto> constuctRewardDto({})...", reward);
+        log.info("<RewardDto> constuctRewardDto(rewardId = {})...", reward.getRewardId());
 
         RewardDto rewardDto = new RewardDto();
         rewardDto.setRewardId(reward.getRewardId());
         rewardDto.setAmount(reward.getAmount());
         rewardDto.setReward(reward.getReward());
 
-        rewardDto.setProject(reward.getProject());
-        log.info("<RewardDto> constuctRewardDto({}) set projectId = {}", reward, rewardDto.getProject().getProjectId());
+        rewardDto.setProjectDto(projectService.constructProjectDtoIdNameCategory(reward.getProject()));
+        log.info("<RewardDto> constuctRewardDto({}) set projectId = {}", reward, rewardDto.getProjectDtoId());
 
+        log.info("<RewardDto> constuctRewardDto(rewardId = {}) returned ", reward.getRewardId(), rewardDto);
         return rewardDto;
     }
 }

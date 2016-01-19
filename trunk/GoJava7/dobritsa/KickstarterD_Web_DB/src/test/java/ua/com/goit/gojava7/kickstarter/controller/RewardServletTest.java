@@ -55,7 +55,7 @@ public class RewardServletTest {
         when(projectDao.get(anyLong())).thenReturn(project);
 
         List<Reward> rewards = new ArrayList<>();
-        when(rewardDao.getByProject(anyLong())).thenReturn(rewards);
+       //when(rewardDao.getByProject(anyLong())).thenReturn(rewards);
 
         HttpServletResponse response = mock(HttpServletResponse.class);
         PrintWriter writer = mock(PrintWriter.class);

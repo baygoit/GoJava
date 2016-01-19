@@ -15,11 +15,9 @@ import ua.com.goit.gojava7.kickstarter.service.PaymentService;
 import ua.com.goit.gojava7.kickstarter.service.ProjectService;
 import ua.com.goit.gojava7.kickstarter.service.RewardService;
 import ua.com.goit.gojava7.kickstarter.validator.MyValidator;
-import ua.com.goit.gojava7.kickstarter.model.Project;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.List;
 
 @Transactional
 @Controller
@@ -36,14 +34,10 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
-    private ModelAndView modelAndView;
-
     @RequestMapping("/payment")
     public ModelAndView showPayment(@RequestParam Long rewardId, @RequestParam(required = false) Long projectId,
                                     @RequestParam(required = false) String amount) throws ServletException, IOException {
         log.info("showPayment(rewardId = {}, projectId = {}, amount = {})...", rewardId, projectId, amount);
-
-        modelAndView = new ModelAndView();
 
         if (rewardExists(rewardId)) {
             return payWithReward(rewardId);
@@ -53,53 +47,64 @@ public class PaymentController {
             return payWithAmount(amount, projectId);
         }
 
-        ProjectDto projectDto = projectService.getFullProject(projectId);
-        modelAndView.addObject(projectDto);
-        modelAndView.addObject("category", projectDto.getCategory());
-
         return returnWarning(projectId);
     }
 
     private boolean rewardExists(Long rewardId) {
-        log.info("rewardExists()...");
+        log.info("rewardExists(rewardId = {})...", rewardId);
+
         return rewardId != 0;
     }
 
     private ModelAndView payWithReward(Long rewardId) {
-        log.info("payWithReward()...");
+        log.info("payWithReward(rewardId = {})...", rewardId);
 
         RewardDto rewardDto = rewardService.get(rewardId);
-        Long amount = rewardDto.getAmount();
-        Project project = rewardDto.getProject();
+        ProjectDto projectDto = rewardDto.getProjectDto();
 
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("payment");
-        modelAndView.addObject("amount", amount);
-        modelAndView.addObject("project", project);
-        modelAndView.addObject("category", project.getCategory());
+        modelAndView.addObject("amount", rewardDto.getAmount());
+        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("project", projectDto);
+
+        log.info("payWithReward(rewardId = {}) returned {} ", rewardId, modelAndView);
         return modelAndView;
     }
 
     private boolean amountIsValid(String amount) {
-        log.info("amountIsValid()...");
+        log.info("amountIsValid(amount = {})...", amount);
         return myValidator.validateAmountOfPledge(amount);
     }
 
     public ModelAndView payWithAmount(String amount, Long projectId){
-        log.info("payWithAmount()...");
-        ProjectDto projectDto = projectService.getFullProject(projectId);
+        log.info("payWithAmount(amount = {}, projectId = {})...", amount, projectId);
+
+        ProjectDto projectDto = projectService.getProjectIdNameCategory(projectId);
+
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("payment");
-        modelAndView.addObject("project", projectDto);
         modelAndView.addObject("amount", Long.parseLong(amount));
+        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("project", projectDto);
+
+        log.info("payWithAmount(amount = {}, projectId = {}) returned {} ", amount, projectId, modelAndView);
         return modelAndView;
     }
 
-    private ModelAndView returnWarning(Long projectId) {
-        log.info("returnWarning()...");
-        List<RewardDto> rewardsDto = rewardService.getByProject(projectId);
+    public ModelAndView returnWarning(Long projectId) {
+        log.info("returnWarning(projectId = {})...", projectId);
 
+        ProjectDto projectDto = projectService.getProjectIdNameCategoryRewards(projectId);
+
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("reward");
-        modelAndView.addObject(rewardsDto);
+        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("project", projectDto);
+        modelAndView.addObject("rewards", projectDto.getRewards());
         modelAndView.addObject("message", "-----Wrong amount-----");
+
+        log.info("returnWarning(projectId = {}) returned {} ", projectId, modelAndView);
         return modelAndView;
     }
 
@@ -108,20 +113,23 @@ public class PaymentController {
                                      @RequestParam String name, @RequestParam String card) throws ServletException, IOException {
         log.info("checkPayment(projectId = {}, amount = {}, name = {}, card = {})...", projectId, amount, name, card);
 
-        ProjectDto projectDto = projectService.getFullProject(projectId);
+        ProjectDto projectDto = projectService.getProjectIdNameCategory(projectId);
 
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("amount", amount);
         modelAndView.addObject("category", projectDto.getCategory());
         modelAndView.addObject("project", projectDto);
-        modelAndView.addObject("amount", amount);
 
         if (paymentService.createPayment(name, card, amount, projectId)) {
             modelAndView.setViewName("paymentOk");
+            log.info("checkPayment(projectId = {}, amount = {}, name = {}, card = {}) returned {}", projectId, amount, name, card, modelAndView);
             return modelAndView;
         }
 
         modelAndView.setViewName("payment");
         modelAndView.addObject("message", "-----Wrong data-----");
+
+        log.info("checkPayment(projectId = {}, amount = {}, name = {}, card = {}) returned {}", projectId, amount, name, card, modelAndView);
         return modelAndView;
     }
 }

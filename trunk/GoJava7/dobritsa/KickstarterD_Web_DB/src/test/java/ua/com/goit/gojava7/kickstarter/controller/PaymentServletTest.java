@@ -86,7 +86,7 @@ public class PaymentServletTest {
         List<Reward> rewards = new ArrayList<>();
 
         when(projectDao.get(anyLong())).thenReturn(project);
-        when(rewardDao.getByProject(anyLong())).thenReturn(rewards);
+        //when(rewardDao.getByProject(anyLong())).thenReturn(rewards);
         when(myValidator.validateAmountOfPledge(anyObject())).thenReturn(false);
 
         HttpServletResponse response = mock(HttpServletResponse.class);
