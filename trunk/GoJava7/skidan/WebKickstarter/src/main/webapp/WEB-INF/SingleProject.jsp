@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="<c:url value="/resources/css/NewFile.css" />" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>SingleProject</title>
 <style>
@@ -18,7 +19,7 @@
 
 	<h3 align="center">
 		You are watching now:
-		<c:out value="${project.getTitle()}" />
+		<c:out value="${project.title}" />
 	</h3>
 	
 	<div id="projects">
@@ -44,9 +45,10 @@
 
 	<b>You can add your question here :</b>
 	<br>
-	<form method="post" action="question">
-		<input type="hidden" name="projectId" value="${project.getId()}" /> <input
-			name="question" /><input id="subm" type="submit" value="add question" />
+	<form action="question"> <!-- Changed HERE! -->
+		<input type="hidden" name="projectId" value="${project.getId()}" /> 
+		<!--  <input name="question" /> -->
+		<input id="subm" type="submit" value="add question" />
 	</form>
 	<br>
 

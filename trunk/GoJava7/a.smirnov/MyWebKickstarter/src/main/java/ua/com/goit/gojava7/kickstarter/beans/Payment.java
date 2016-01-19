@@ -12,21 +12,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "payment")
 public class Payment {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int id;
-
 	@Column(name = "owner_name")
 	private String ownerName;
-
 	@Column(name = "credit_card_number")
 	private long creditCardNumber;
-
 	@Column(name = "pledge")
 	private int pledge;
-
 	@ManyToOne
 	@JoinColumn(name = "project_id")
 	private Project project;

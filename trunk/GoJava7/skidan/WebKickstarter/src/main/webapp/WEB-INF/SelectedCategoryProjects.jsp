@@ -5,17 +5,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="<c:url value="/resources/css/new.css" />" />
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>SelectedCategoryProjects.jsp</title>
-    <style>
-        #b {
-            background-image: url("http://oboi.tululu.org/o/30/76866/prew.jpg");
-        }
-    </style>
 </head>
 <body id="b">
 
-<h1>Projects Available in this Category </h1>
+<h1 id="header">Projects Available in this Category </h1>
 
 <div id=3>
 
@@ -32,7 +28,7 @@
 
 </div>
 <br><br>
-<a href=/WebKickstarter>
+<a id="subm" href=/WebKickstarter>
     <input type="button" value="Return to Category Selection"/>
 </a>
 </body>

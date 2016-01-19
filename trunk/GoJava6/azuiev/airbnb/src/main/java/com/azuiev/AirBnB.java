@@ -1,6 +1,5 @@
 package com.azuiev;
 
-import com.azuiev.dao.DBDao;
 import com.azuiev.dao.UserDao;
 import com.azuiev.enums.ApartType;
 import com.azuiev.model.Apartment;

@@ -21,6 +21,7 @@
 	<import resource="applicationContext-db.xml" />
 
 	<mvc:annotation-driven />
+	<mvc:resources mapping="/css/**" location="/css/" />
 	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />
 
 	<bean id="viewResolver"

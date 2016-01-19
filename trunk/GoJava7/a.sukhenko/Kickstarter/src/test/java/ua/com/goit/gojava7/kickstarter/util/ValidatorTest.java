@@ -28,9 +28,9 @@ public class ValidatorTest{
         assertThat(validator.validateCard("1234567812345678"),is(true));
     }
 
-   @Ignore
-    void testValidateQuestion() {
-        fail("Not yet implemented");
+    @Test
+    public void testValidateQuestion() {
+       assertThat(validator.validateQuestion("Some random question?"), is(true));
     }
 
 }
