@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Question Input Form</title>
 </head>
-<body>
+<body id="b">
 
 
 <div align="center">
@@ -26,7 +26,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td align="left"><input type="submit" value="Ask your question"/></td>
+                    <td align="left"><input id="subm" type="submit" value="Ask your question"/></td>
                     <td></td>
                 </tr>
         </form:form>

@@ -83,8 +83,13 @@
 		</property>
 	</bean>
 
-	<bean
-		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	   <property name="basename" value="/WEB-INF/validationMessages/messages" />
+    </bean>
+	
+		
 
 </beans>
 

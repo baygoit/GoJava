@@ -3,42 +3,47 @@ package com.kickstarter.beanVO;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class PayerVO {
 	@NotNull
-	@Min(value=0, message = "only positive values !" )
-	@Digits(fraction = 0, integer = 6, message ="Max size is 6 digits")
-	private int paymentAmount;
-	@Size(min = 3, max = 20 )
+	@Min(value=0)
+	@Digits(fraction = 0, integer = 6)
+	@Pattern(regexp = "^[0-9]*$")
+	private String paymentAmount;
+	@Size(min = 3, max = 20)
+	@Pattern(regexp = "^[A-Za-z]*$")
 	@NotNull
-	private String CardHolderName;
+	private String cardHolderName;
+	
 	@NotNull
-	@Min(value=0, message = "only positive values !" )
-	@Digits(fraction = 0, integer = 12, message ="Max size is 12 digits")
-	private int cardNumber;
+	@Min(value=0)
+	@Digits(fraction = 0, integer = 12)
+	@Pattern(regexp = "^[0-9]*$")
+	private String cardNumber;
 
-	public int getPaymentAmount() {
+	public String getPaymentAmount() {
 		return paymentAmount;
 	}
 
-	public void setPaymentAmount(int paymentAmount) {
+	public void setPaymentAmount(String paymentAmount) {
 		this.paymentAmount = paymentAmount;
 	}
 
 	public String getCardHolderName() {
-		return CardHolderName;
+		return cardHolderName;
 	}
 
 	public void setCardHolderName(String cardHolderName) {
-		CardHolderName = cardHolderName;
+		this.cardHolderName = cardHolderName;
 	}
 
-	public int getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
 
-	public void setCardNumber(int cardNumber) {
+	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 

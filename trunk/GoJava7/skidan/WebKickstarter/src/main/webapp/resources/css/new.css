@@ -2,7 +2,7 @@
 {
 	box-shadow:5px 5px 1px black;
 	margain:0 auto;
-	border: 5px solid black;
+	border: 1px solid black;
 	width:600px;
 	background-colour:red;
 }
@@ -14,4 +14,8 @@ width:100px;
 height:30px;
 margin:15px;
 box-shadow:  8px 0px 10px 8px black;
+}
+#b 
+{
+background-image: url("http://oboi.tululu.org/o/30/76866/prew.jpg");
 }

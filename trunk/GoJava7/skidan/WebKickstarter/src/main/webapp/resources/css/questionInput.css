@@ -1,0 +1,26 @@
+#subm
+{
+border-radius:5px;
+background-color:lightgrey;
+width:100px;
+height:30px;
+margin:15px;
+box-shadow:  8px 0px 10px 8px black;
+}
+#subm:hover
+{
+
+transform:rotate(5deg) scale(1.2,1.5);
+background:  white;	
+border:2px solid black;
+box-shadow:  6px 0px 10px 6px black;
+font-family: fantasy;
+border :2px ;
+color:red;
+font-size:20px;
+
+}
+#b{
+background-image: url("http://oboi.tululu.org/o/30/76866/prew.jpg");
+
+}
