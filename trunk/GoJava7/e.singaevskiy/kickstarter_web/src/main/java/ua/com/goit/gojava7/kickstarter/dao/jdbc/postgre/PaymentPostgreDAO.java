@@ -57,7 +57,6 @@ public class PaymentPostgreDAO implements PaymentDAO {
 		TypedQuery<Long> query = entityManager.createNamedQuery("Payment.getSumByProject", Long.class);
 		query.setParameter("project_id", projectId);
 		Long sum = query.getSingleResult();
-		entityManager.createQuery("", Long.class).getSingleResult();
 		if (sum == null) {
 			sum = 0L;
 		}
