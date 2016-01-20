@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
+package ua.com.goit.gojava7.kickstarter.datasource.implementation;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.CategoryDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.QuoteDAO;
 
 public class HeaderInterceptor extends HandlerInterceptorAdapter {
 

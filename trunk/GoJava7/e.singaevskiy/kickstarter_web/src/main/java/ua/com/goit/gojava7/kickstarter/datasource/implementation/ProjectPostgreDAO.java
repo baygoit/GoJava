@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
+package ua.com.goit.gojava7.kickstarter.datasource.implementation;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.ProjectDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 @Repository

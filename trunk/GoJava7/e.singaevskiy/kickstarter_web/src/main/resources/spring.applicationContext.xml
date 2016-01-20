@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<context:annotation-config />
-	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao" />
+	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.datasource" />
 
 	<import resource="spring.database.xml" />
 
