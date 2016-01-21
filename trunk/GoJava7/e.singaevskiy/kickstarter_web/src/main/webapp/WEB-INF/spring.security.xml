@@ -16,10 +16,13 @@
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>
-
-	<http auto-config="true">
-		<intercept-url pattern="/login**" access="hasRole('USER')" />
-		<logout logout-url="/logout" logout-success-url="/"/>
-	</http>
+	
+	<http use-expressions="true">
+      <intercept-url pattern="/login*" access="isAnonymous()" />
+      <intercept-url pattern="/logout*" access="isAuthenticated()" />
+      <form-login/>
+      <logout logout-success-url="/"/>
+      <csrf disabled="true"/>
+   </http>
 
 </beans:beans>

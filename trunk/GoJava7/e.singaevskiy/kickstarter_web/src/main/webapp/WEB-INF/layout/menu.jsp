@@ -32,7 +32,7 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<security:authorize access="! isAuthenticated()">
+				<security:authorize access="isAnonymous()">
 					<li><a href="./signup"><span
 							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 					<li><a href="./login"><span
@@ -45,7 +45,6 @@
 							class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 				</security:authorize>
 			</ul>
-
 
 		</div>
 
