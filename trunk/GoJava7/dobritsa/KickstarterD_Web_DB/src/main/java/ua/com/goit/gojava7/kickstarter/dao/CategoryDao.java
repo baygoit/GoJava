@@ -24,7 +24,6 @@ public class CategoryDao {
 
 	public Category get(Long categoryId) {
 		log.info("<Category> get(categoryId = {})...", categoryId);
-
 		return em.find(Category.class, categoryId);
 	}
 

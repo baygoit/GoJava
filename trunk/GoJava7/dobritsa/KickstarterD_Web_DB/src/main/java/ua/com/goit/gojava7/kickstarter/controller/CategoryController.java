@@ -23,14 +23,14 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("/index")//all
-    public ModelAndView start() {//getAll
-        log.info("start()...");
+    @RequestMapping("/index")
+    public ModelAndView showCategories() {
+        log.info("showCategories()...");
 
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("quote", quoteDao.getRandomQuote());
         modelAndView.addObject("categories", categoryService.getAll());
-        log.info("start() returned {}", modelAndView);
+        log.info("showCategories() returned {}", modelAndView);
 
         return modelAndView;
     }

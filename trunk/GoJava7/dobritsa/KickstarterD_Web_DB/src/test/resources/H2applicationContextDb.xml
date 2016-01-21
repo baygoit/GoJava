@@ -27,37 +27,14 @@
 	</bean>
 
 	<tx:annotation-driven />
-	<bean id="transactionManager"
-		  class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 
-		<property name="dataSource">
-			<ref bean="basicDataSource" />
-		</property>
-
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
-			</props>
-		</property>
-
-		<property name="annotatedClasses">
-			<list>
-				<value>ua.com.goit.gojava7.kickstarter.model.Quote</value>
-				<value>ua.com.goit.gojava7.kickstarter.model.Category</value>
-				<value>ua.com.goit.gojava7.kickstarter.model.Project</value>
-				<value>ua.com.goit.gojava7.kickstarter.model.Reward</value>
-				<value>ua.com.goit.gojava7.kickstarter.model.Question</value>
-				<value>ua.com.goit.gojava7.kickstarter.model.Payment</value>
-			</list>
-		</property>
-
+	<bean id="entityManagerFactory"
+		  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" autowire="byName">
+		<property name="dataSource" ref="basicDataSource" />
+		<property name="persistenceXmlLocation" value="classpath:persistence.xml"></property>
 	</bean>
 
 </beans>
