@@ -196,5 +196,10 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.0.1.Final</version>
 		</dependency>
+		<dependency>
+  			<groupId>org.hibernate</groupId>
+ 			<artifactId>hibernate-entitymanager</artifactId>
+  		<version>5.0.6.Final</version>
+ 		</dependency>
 	</dependencies>
 </project>

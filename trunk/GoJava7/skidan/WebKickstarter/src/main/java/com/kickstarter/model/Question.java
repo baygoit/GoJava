@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Size(min = 5, max = 150, message = "Your question is too short input minimum 5 - 150 characters")
     @NotEmpty(message = "Please enter your question here.")

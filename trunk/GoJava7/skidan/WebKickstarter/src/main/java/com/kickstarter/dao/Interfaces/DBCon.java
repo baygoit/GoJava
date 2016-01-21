@@ -1,4 +1,4 @@
-package com.kickstarter.dao.interfaces;
+package com.kickstarter.dao.Interfaces;
 
 import java.sql.Connection;
 import java.sql.SQLException;
