@@ -2,46 +2,54 @@ package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuestionsDAO;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 
 @Repository
 public class QuestionPostgreDAO implements QuestionsDAO{
-	@Autowired
-	private HibernateUtil hiberUtil;	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
     @Override
+    @Transactional
     public void clear() {
-    	hiberUtil.executeUpdate("delete Question");
+    	entityManager.createNamedQuery("Question.removeAll").executeUpdate();
     }
 
     @Override
-    public Question get(int index) {
-        return hiberUtil.get("from Question where id = ?", index);
+    public Question get(Long index) {
+    	return entityManager.find(Question.class, index);
     }
 
     @Override
+    @Transactional
     public void add(Question element) {
-    	hiberUtil.save(element);
+    	entityManager.persist(element);
     }
 
     @Override
+    @Transactional
     public void addAll(List<Question> elements) {
-    	hiberUtil.save(elements);
+    	elements.forEach(entityManager::persist);
     }
 
     @Override
     public List<Question> getAll() {
-    	return hiberUtil.getList("from Question");
+    	return entityManager.createNamedQuery("Question.getAll", Question.class).getResultList();
     }
 
     @Override
-    public List<Question> getByProject(int projectId) {
-        return hiberUtil.getList("from Question where project.id = ?", projectId);
+    public List<Question> getByProject(Long projectId) {
+    	TypedQuery<Question> query = entityManager.createNamedQuery("Question.getByProject", Question.class);
+		query.setParameter("project_id", projectId);
+		return query.getResultList();
     }
 
 }

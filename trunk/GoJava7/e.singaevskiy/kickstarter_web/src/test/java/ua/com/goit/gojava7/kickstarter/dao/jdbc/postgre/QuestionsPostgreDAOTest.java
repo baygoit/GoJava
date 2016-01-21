@@ -44,26 +44,26 @@ public class QuestionsPostgreDAOTest  implements IntegrationTest{
         list.add(new Question(projects.get(0), "a2", "t2"));
         list.add(new Question(projects.get(1), "a3", "t3"));
         
-        questionPostgreDAO.addAll(list);
     }
 
     @Test
     public void testAddGetAll() {
+    	questionPostgreDAO.addAll(list);
         assertThat(questionPostgreDAO.getAll(), is(list));
     }
     
     @Test
     public void testAddGet() {
-    	questionPostgreDAO.clear();
         list.forEach(questionPostgreDAO::add);
         Question question = questionPostgreDAO.getAll().get(0);
-		int index = question.getId();
+        Long index = question.getId();
         assertThat(questionPostgreDAO.get(index), is(question));
     }
     
     @Test
     public void testGetByProject() {
-        int id = projects.get(0).getId();
+    	questionPostgreDAO.addAll(list);
+    	Long id = projects.get(0).getId();
         questionPostgreDAO.getByProject(id).forEach(p -> assertThat(p.getProject().getId(), is(id)));
     }
 }

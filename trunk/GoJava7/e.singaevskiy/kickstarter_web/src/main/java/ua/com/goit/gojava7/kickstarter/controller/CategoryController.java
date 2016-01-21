@@ -25,7 +25,7 @@ public class CategoryController {
 	}
 	
 	@RequestMapping("/category")
-	public String showProjectsInCategory(Model model, @RequestParam(name = "id") Integer categoryId) {
+	public String showProjectsInCategory(Model model, @RequestParam(name = "id") Long categoryId) {
 		model.addAttribute("category", categoryDAO.get(categoryId));
 		model.addAttribute("projects", projectDAO.getByCategory(categoryId));
 		return "projectList";

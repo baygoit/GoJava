@@ -2,41 +2,46 @@ package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @Repository
 public class QuotePostgreDAO implements QuoteDAO {
-	@Autowired
-	private HibernateUtil hiberUtil;
+	@PersistenceContext
+	private EntityManager entityManager;
 
     @Override
     public List<Quote> getAll() {
-    	return hiberUtil.getList("from Quote");
+    	return entityManager.createNamedQuery("Quote.getAll", Quote.class).getResultList();
     }
 
     @Override
-    public Quote get(int index) {
-		return hiberUtil.get("from Quote where id = ?", index);
+    public Quote get(Long index) {
+		return entityManager.find(Quote.class, index);
     }
 
     @Override
+    @Transactional
     public void add(Quote element) {
-    	hiberUtil.save(element);
+    	entityManager.persist(element);
     }
 
     @Override
-    public void addAll(List<Quote> elements) {    
-    	hiberUtil.save(elements);
+    @Transactional
+    public void addAll(List<Quote> elements) {  
+    	elements.forEach(entityManager::persist);
     }
 
     @Override
+    @Transactional
     public void clear() {
-    	hiberUtil.executeUpdate("delete Quote");
+    	entityManager.createNamedQuery("Quote.removeAll").executeUpdate();
     }
 
 }

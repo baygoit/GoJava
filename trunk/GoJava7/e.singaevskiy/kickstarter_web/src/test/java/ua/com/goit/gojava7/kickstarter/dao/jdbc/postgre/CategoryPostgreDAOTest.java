@@ -30,19 +30,22 @@ public class CategoryPostgreDAOTest implements IntegrationTest{
     public void setUp() throws Exception {
     	categoryPostgreDAO.clear();
         list = new ArrayList<>();
-        list.add(new Category(1, "c1"));
-        list.add(new Category(2, "c2"));
-        categoryPostgreDAO.addAll(list);
+        Category category1 = new Category();
+        category1.setName("c1");
+        Category category2 = new Category();
+        category2.setName("c2");
+		list.add(category1);
+		list.add(category2);
     }
 
     @Test
     public void testAddGetAll() { 
+    	categoryPostgreDAO.addAll(list);
         assertThat(categoryPostgreDAO.getAll(), is(list));
     }
     
     @Test
     public void testAddGet() {
-    	categoryPostgreDAO.clear();
         list.forEach(categoryPostgreDAO::add);
         Category category = list.get(0);
         assertThat(categoryPostgreDAO.get(category.getId()), is(category));

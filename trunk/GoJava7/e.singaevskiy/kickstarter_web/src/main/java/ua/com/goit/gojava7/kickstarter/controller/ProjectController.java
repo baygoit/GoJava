@@ -39,7 +39,7 @@ public class ProjectController {
 	private QuestionsDAO questionsDAO;
 
 	@RequestMapping(value = "/project", method = RequestMethod.GET)
-	public ModelAndView showProject(@RequestParam(name = "id") Integer projectId) {
+	public ModelAndView showProject(@RequestParam(name = "id") Long projectId) {
 
 		ModelAndView modelAndView = new ModelAndView("projectDetails");
 		modelAndView.addObject("project", projectDAO.get(projectId));
@@ -48,7 +48,7 @@ public class ProjectController {
 	}
 
 	@RequestMapping("/message")
-	public String showRequestMessage(@RequestParam(name = "id") Integer projectId, ModelMap model) {
+	public String showRequestMessage(@RequestParam(name = "id") Long projectId, ModelMap model) {
 		model.addAttribute("projectId", projectId);
 		if (!model.containsAttribute("question")) {			
 			model.addAttribute("question", new Question());
@@ -57,7 +57,7 @@ public class ProjectController {
 	}
 
 	@RequestMapping("/payment")
-	public String showRequestPayment(@RequestParam Integer projectId, @RequestParam Integer rewardId, ModelMap model) {
+	public String showRequestPayment(@RequestParam Long projectId, @RequestParam Long rewardId, ModelMap model) {
 
 		model.addAttribute("projectId", projectId);
 
@@ -72,7 +72,7 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/submitmessage/{projectId}", method = RequestMethod.POST)
 	public String submitMessage(@Valid Question question, BindingResult result,
-			RedirectAttributes redirectAttributes, @PathVariable Integer projectId) {
+			RedirectAttributes redirectAttributes, @PathVariable Long projectId) {
 		
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.question", result);
@@ -89,7 +89,7 @@ public class ProjectController {
 	@RequestMapping(value = "/submitpayment/{projectId}/{rewardId}", method = RequestMethod.POST)
 	public String submitPayment(@Valid Payment payment, BindingResult result,
 			RedirectAttributes redirectAttributes,
-			@PathVariable Integer projectId, @PathVariable Integer rewardId) {
+			@PathVariable Long projectId, @PathVariable Long rewardId) {
 		
 		if (result.hasErrors()) {
 			redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.payment", result);
