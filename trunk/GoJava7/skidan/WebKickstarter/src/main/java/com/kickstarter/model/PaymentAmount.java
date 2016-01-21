@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Table(name = "preset_payment_amounts")
 public class PaymentAmount {
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int amount;
 

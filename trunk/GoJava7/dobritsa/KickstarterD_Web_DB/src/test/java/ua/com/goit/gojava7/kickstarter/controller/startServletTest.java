@@ -18,8 +18,8 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.powermock.modules.junit4.PowerMockRunner;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kickstarter.models.Category;
-import ua.com.goit.gojava7.kickstarter.models.Quote;
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Quote;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

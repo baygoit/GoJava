@@ -40,7 +40,7 @@ public class QuestionServletTest {
         when(request.getParameter("projectId")).thenReturn("1");
         when(request.getParameter("question")).thenReturn("NewQuestion");
 
-        doNothing().when(questionDao).createQuestion(anyObject(), anyLong());
+       // doNothing().when(questionDao).createQuestion(anyObject(), anyLong());
 
         HttpServletResponse response = mock(HttpServletResponse.class);
         PrintWriter writer = mock(PrintWriter.class);

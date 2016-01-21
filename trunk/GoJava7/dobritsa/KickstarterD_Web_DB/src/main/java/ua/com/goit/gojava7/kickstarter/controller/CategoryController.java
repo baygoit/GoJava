@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kickstarter.models.Category;
+import ua.com.goit.gojava7.kickstarter.dto.CategoryDto;
+import ua.com.goit.gojava7.kickstarter.service.CategoryService;
 
 @Transactional
 @Controller
@@ -22,32 +21,31 @@ public class CategoryController {
     @Autowired
     private QuoteDao quoteDao;
     @Autowired
-    private CategoryDao categoryDao;
+    private CategoryService categoryService;
 
-    @RequestMapping({"/*", "/index"})
-    public ModelAndView start() {
+    @RequestMapping("/index")//all
+    public ModelAndView start() {//getAll
         log.info("start()...");
 
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("quote", quoteDao.getRandomQuote());
-        modelAndView.addObject("categories", categoryDao.getAll());
+        modelAndView.addObject("categories", categoryService.getAll());
+        log.info("start() returned {}", modelAndView);
+
         return modelAndView;
     }
 
-    @RequestMapping(value = "/category", method = RequestMethod.GET)
+    @RequestMapping("/category")
     public ModelAndView showCategory(@RequestParam Long categoryId) {
-        log.info("showCategory()...");
+        log.info("showCategory(categoryId = {})...", categoryId);
 
-        Category category = categoryDao.get(categoryId);
-
-        // TODO
-        if (category == null) {
-            //404
-        }
+        CategoryDto categoryDto = categoryService.get(categoryId);
 
         ModelAndView modelAndView = new ModelAndView("category");
-        modelAndView.addObject("projects", categoryDao.getProjects(categoryId));
-        modelAndView.addObject("categoryName", category.getName());
+        modelAndView.addObject("categoryName", categoryDto.getName());
+        modelAndView.addObject("projects", categoryDto.getProjects());
+
+        log.info("showCategory(categoryId = {}) returned {}", categoryId, modelAndView);
         return modelAndView;
     }
 }

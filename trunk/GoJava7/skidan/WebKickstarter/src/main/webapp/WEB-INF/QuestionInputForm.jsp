@@ -15,7 +15,7 @@
         <table border="0" width="90%">
         <form:form action="/WebKickstarter/question/add" method = "post" commandName="questionVO">
                 <tr>
-                <td align="left" > Question: </td>
+                    <td align="left" > Question: </td>
                     <td align="left" width="40%"><form:input path="question" size="30"/></td>
                     <td align="left"><form:errors path="question" cssClass="error"/></td>
                 </tr>
