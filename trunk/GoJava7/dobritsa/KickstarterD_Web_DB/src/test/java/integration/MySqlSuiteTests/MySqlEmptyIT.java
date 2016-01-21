@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:applicationContext*.xml")
+@ContextConfiguration(locations="classpath:/MySql/applicationContext*.xml")
 public class MySqlEmptyIT {
 
     @Autowired

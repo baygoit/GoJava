@@ -1,24 +1,27 @@
 package integration.MySqlSuiteTests;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.dao.*;
 import ua.com.goit.gojava7.kickstarter.model.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:applicationContext*.xml")
+@ContextConfiguration(locations="classpath:/MySql/applicationContext*.xml")
+@Transactional
 public class MySqlFillerForIT {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private QuoteDao quoteDao;
@@ -30,12 +33,6 @@ public class MySqlFillerForIT {
     private PaymentDao paymentDao;
     @Autowired
     private RewardDao rewardDao;
-    @Autowired
-    private QuestionDao questionDao;
-
-    Long categoryId1;
-    Long projectId1;
-    Long rewardId1;
 
     @Test
     public void fillDb() {
@@ -90,33 +87,26 @@ public class MySqlFillerForIT {
         Category category2 = new Category();
         category2.setName("Test Category 2");
 
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        em.persist(quote);
+        em.persist(category2);
+        em.persist(project2);
+        em.persist(question1);
+        em.persist(question2);
+        em.persist(reward1);
+        em.persist(reward2);
+        em.persist(payment1);
+        em.persist(payment2);
 
-        session.save(quote);
-        session.save(category2);
-        session.save(project2);
-        session.save(question1);
-        session.save(question2);
-        session.save(reward1);
-        session.save(reward2);
-        session.save(payment1);
-        session.save(payment2);
+        Long quoteId1 = quote.getQuoteId();
+        Long categoryId1 = category1.getCategoryId();
+        Long projectId1 = project1.getProjectId();
+        Long rewardId1 = reward1.getRewardId();
 
-        session.getTransaction().commit();
-        session.close();
-
-        categoryId1 = category1.getCategoryId();
-        projectId1 = project1.getProjectId();
-        rewardId1 = reward1.getRewardId();
-
-        //assertThat(quoteDao.getRandomQuote().getText(), is("Test Quote 1"));
+        assertThat(quoteDao.get(quoteId1).getText(), is("Test Quote 1"));
         assertThat(categoryDao.get(categoryId1).getName(), is("Test Category 1"));
         assertThat(categoryDao.getAll().size(), is(2));
         assertThat(projectDao.get(projectId1).getName(), is("Test Project 1"));
-        //assertThat(projectDao.getByCategory(categoryId1).size(), is(2));
         assertThat(paymentDao.calculatePledgedForProject(projectId1), is(300L));
         assertThat(rewardDao.get(rewardId1).getAmount(), is(10L));
-        //assertThat(rewardDao.getByProject(projectId1).size(), is(2));
     }
 }

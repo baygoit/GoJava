@@ -1,6 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -11,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:H2ApplicationContext*.xml")
+@ContextConfiguration(locations="classpath:/H2/H2ApplicationContext*.xml")
 @Transactional
 public class RewardMappingTest {
 
@@ -19,7 +18,6 @@ public class RewardMappingTest {
 	private EntityManager em;
 
 	@Test
-	@Ignore
 	public void testBasicUsage() {
 		Category category1 = new Category();
 		category1.setName("TestCategory 1");
