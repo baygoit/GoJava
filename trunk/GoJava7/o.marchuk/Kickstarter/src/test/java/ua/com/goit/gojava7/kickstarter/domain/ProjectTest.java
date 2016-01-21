@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class ProjectTest {
 
-	private Project project = new Project("project name", "short description", 123L, 5);
+	private Project project = new Project();
 
 	@Test
 	public void testConstructor() {
@@ -54,8 +54,8 @@ public class ProjectTest {
 
 	@Test
 	public void testEquals() {
-		Project sameNameProject = new Project("project name", "short description", 123L, 5);
-		Project otherProject = new Project("other project name", "short description", 123L, 5);
+		Project sameNameProject = new Project();
+		Project otherProject = new Project();
 
 		assertThat(project.equals(null), is(false));
 		assertThat(project.equals(project), is(true));

@@ -1,46 +1,48 @@
 package com.kickstarter.dao.Impl;
 
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
+//import org.springframework.transaction.annotation.Isolation;
+//import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kickstarter.dao.interfaces.PaymentDao;
+import com.kickstarter.dao.Interfaces.PaymentDao;
 import com.kickstarter.model.Payment;
 import com.kickstarter.model.Project;
 
 @Repository
 public class PaymentDaoImpl implements PaymentDao {
 
-	@Autowired(required=false)
-	private SessionFactory sessionFactory;
+    @PersistenceContext
+	EntityManager entityManager;
 	
-	@Transactional(propagation=Propagation.REQUIRED, isolation =  Isolation.SERIALIZABLE, readOnly=false)
+	@Transactional
 	public void addPayment(Project project, int amount) {
 		Payment payment = new Payment();
+		System.out.println("1");
 		payment.setAmount(amount);
+		System.out.println("2");
 		payment.setProject(project);
-		Session session = sessionFactory.openSession();
-		session.save(payment);
-		session.close();
+		System.out.println("3");
+		entityManager.persist(payment);
+		System.out.println("4");
+
 	}
 	
 	@Transactional(readOnly = true)
-	public Integer getAll(int projectId) {
-		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("select SUM(amount)from Payment where projectId = :projectId");
-        query.setInteger("projectId", projectId);
-		Long g = (Long)query.uniqueResult();
+	public Integer getAll(int projectId) {      
+		Query query = entityManager.
+				createQuery("select SUM(amount)from Payment where projectId = :projectId");
+        query.setParameter("projectId", projectId);
+		Long g = (Long)query.getSingleResult();
 		int sum = g.intValue();
-		session.close();
 		return sum;
 	}
 }
+
 
 
 

@@ -1,59 +1,67 @@
 package com.kickstarter.dao.Impl;
 
 import java.util.List;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kickstarter.dao.interfaces.ProjectDao;
+import com.kickstarter.dao.Interfaces.ProjectDao;
 import com.kickstarter.model.Project;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
 
-	@Autowired(required=false)
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<Project> getAllProjectsForCategory(int categoryId) {
-		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("from Project where categoryId= :categoryId");
-		query.setCacheable(true);
-		query.setInteger("categoryId", categoryId);
-		List<Project> projectList = query.list();
-		session.close();
-		return projectList;
+		Query query = entityManager.createQuery("from Project where categoryId= :categoryId");
+		query.setParameter("categoryId", categoryId);
+		return query.getResultList();
 	}
 
 	@Transactional(readOnly = true)
 	public Project getOneProject(int projectNumber) {
-		Session session = sessionFactory.openSession();
-		Project project = (Project) session.get(Project.class, projectNumber);
-		session.close();
-		return project;
+		return entityManager.find(Project.class, projectNumber);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE, readOnly = false)
 	public void updateProject(Project project) {
-		Session session = sessionFactory.openSession();
-		session.update(project);
-		session.close();
+		entityManager.merge(project);
 	}
 
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Project project = (Project) session.createQuery(sql).uniqueResult();
 
 // final String sql = "from Project where projectId=" + projectNumber;
-
-
 
 /*
  * @Autowired private JdbcTemplate jdbcTemplate;

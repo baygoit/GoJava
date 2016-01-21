@@ -13,11 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ua.com.goit.gojava7.kickstarter.dao.IntegrationTest;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.QuotePostgreDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext*.xml")
-public class QuotePostgreDAOTest {
+public class QuotePostgreDAOTest  implements IntegrationTest{
 
 	@Autowired
     QuotePostgreDAO quotePostgreDAO;
@@ -29,11 +31,12 @@ public class QuotePostgreDAOTest {
         list = new ArrayList<>();
         list.add(new Quote("a1", "t1"));
 		list.add(new Quote("a", "t"));
-		quotePostgreDAO.addAll(list);
+		System.out.println(list);
     }
 
     @Test
     public void testAddGetAll() {
+    	quotePostgreDAO.addAll(list);
         assertThat(quotePostgreDAO.getAll(), is(list));
     }
 

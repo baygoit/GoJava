@@ -13,12 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ua.com.goit.gojava7.kickstarter.dao.IntegrationTest;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.PaymentPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.ProjectPostgreDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext*.xml")
-public class PaymentPostgreDAOTest {
+public class PaymentPostgreDAOTest  implements IntegrationTest{
 
     List<Payment> list;
     
@@ -39,18 +42,17 @@ public class PaymentPostgreDAOTest {
         list.add(new Payment(projects.get(0), "u1", 21312312, 10, null));
         list.add(new Payment(projects.get(0), "u2", 21312312, 20, null));
         list.add(new Payment(projects.get(1), "u2", 21312312, 20, null));
-        paymentPostgreDAO.addAll(list);
     }
 
 
     @Test
     public void testAddGetAll() {
+    	paymentPostgreDAO.addAll(list);
         assertThat(paymentPostgreDAO.getAll(), is(list));
     }
     
     @Test
     public void testAddGet() {
-    	paymentPostgreDAO.clear();
         list.forEach(paymentPostgreDAO::add);
         Payment payment = list.get(1);
         assertThat(paymentPostgreDAO.get(payment.getId()), is(payment));
@@ -58,7 +60,8 @@ public class PaymentPostgreDAOTest {
     
     @Test
     public void testGetByProject() {
-        int id = projects.get(0).getId();
+    	paymentPostgreDAO.addAll(list);
+    	Long id = projects.get(0).getId();
         paymentPostgreDAO.getByProject(id).forEach(p -> assertThat(p.getProject().getId(), is(id)));
     }
 

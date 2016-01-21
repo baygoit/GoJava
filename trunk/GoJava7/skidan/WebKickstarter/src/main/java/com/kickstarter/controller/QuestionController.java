@@ -1,39 +1,64 @@
 package com.kickstarter.controller;
 
 import java.util.Map;
-
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.kickstarter.beanVO.QuestionVO;
 import com.kickstarter.dao.Impl.ProjectDaoImpl;
 import com.kickstarter.dao.Impl.QuestionDaoImpl;
 import com.kickstarter.model.Project;
 
 @Controller
-@RequestMapping("/question") 
+@RequestMapping("/question")
 public class QuestionController {
 
-	private final int QUESTION_SHORTAGE = 0;
+	@Autowired
+	QuestionDaoImpl questionDao;
+	@Autowired
+	ProjectDaoImpl projectDao;
 	
-    @Autowired
-    QuestionDaoImpl questionDao;
-    @Autowired
-    ProjectDaoImpl projectDao;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String addQuestion(@RequestParam Map<String, String> requestParams) {
-        int projectId = Integer.parseInt(requestParams.get("projectId"));
-        String question = requestParams.get("question");
+	@InitBinder
+	public void initBinder(WebDataBinder binder){
+		binder.setDisallowedFields("id");
+		binder.setDisallowedFields("project");	
+	}
+	
+	
+	
+	@RequestMapping(value="/add",method = RequestMethod.POST)
+	public ModelAndView addQuestion(@Valid @ModelAttribute("questionVO") QuestionVO questionVO, BindingResult result,
+			@RequestParam Map<String, String> requestParams) {
+		if (result.hasErrors()) {
+			return new ModelAndView("QuestionInputForm")
+					.addObject("projectId", requestParams.get("projectId"));
+		}else{
+			
+	    int projectId = Integer.parseInt(requestParams.get("projectId"));
+		String question = requestParams.get("question");
+		Project project = projectDao.getOneProject(projectId);
+			questionDao.add(question, project);
+		    return new ModelAndView("redirect:/project?projectId=" +  projectId);
+		}
+	}
+		
 
-        if (question.length() >= QUESTION_SHORTAGE) { 
-            Project project = projectDao.getOneProject(projectId);
-            questionDao.add(question, project);
-        }
-        return "redirect:/project?projectId=" + projectId;
-    }
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView acceptQuestion(@ModelAttribute("questionVO") QuestionVO questionVo, @RequestParam Map<String, String> requestParams) {
+		ModelAndView modelAndView = new ModelAndView("QuestionInputForm");
+		modelAndView.addAllObjects(requestParams);
+		return modelAndView;
 
+	}
 
 }
-

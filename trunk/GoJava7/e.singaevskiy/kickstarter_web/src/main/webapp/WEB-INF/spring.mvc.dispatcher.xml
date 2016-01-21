@@ -40,5 +40,8 @@
 	</bean>
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:interceptors>
+		<bean class="ua.com.goit.gojava7.kickstarter.controller.HeaderInterceptor" />
+	</mvc:interceptors>
 
 </beans>

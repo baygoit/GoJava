@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 public class Project {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "projectId")
 	private int id;
 	@Column(name = "title")
@@ -41,12 +42,15 @@ public class Project {
 	private String projectHistory;
 	@Column(name = "videoLink")
 	private String videoLink;
-	@ManyToOne
+	
+	@ManyToOne(cascade={CascadeType.MERGE})
 	@JoinColumn(name = "categoryId")
 	private Category category;
+	
 	@OneToMany(mappedBy = "project")
 	private Collection<Question> questions = new ArrayList<>();
-	@OneToMany(mappedBy = "project")
+	
+	@OneToMany(mappedBy = "project", cascade={CascadeType.MERGE})
 	private Collection<Payment> payments = new ArrayList<>();
 
 	public Project() {
@@ -164,7 +168,7 @@ public class Project {
 	public String toString() {
 		return ("Project Title : " + title + "\n Project Discription :" + discription + "\n Project History : "
 				+ projectHistory + "\n Video Link : " + videoLink + "\n Required Sum :" + requiredSum
-				+ "\n Gained Sum :" + gainedSum + "\n Days Left :" + daysLeft + "\n");
+				+ "\n Gained Sum :" + gainedSum + "\n Days Left :" + daysLeft + "\n + \n ID :" + id + "\n ");
 	}
 
 }

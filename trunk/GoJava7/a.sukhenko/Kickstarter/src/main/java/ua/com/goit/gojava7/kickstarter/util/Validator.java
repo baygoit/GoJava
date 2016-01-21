@@ -35,7 +35,19 @@ public class Validator{
     }
 
     public boolean validateQuestion(String question) {
-        Pattern p = Pattern.compile("^[a-zA-Z0-9]{2,500}$");
+        Pattern p = Pattern.compile(
+                "# Match a sentence ending in punctuation or EOS.\n" +
+                "[^.!?\\s]    # First char is non-punct, non-ws\n" +
+                "[^.!?]*      # Greedily consume up to punctuation.\n" +
+                "(?:          # Group for unrolling the loop.\n" +
+                "  [.!?]      # (special) inner punctuation ok if\n" +
+                "  (?!['\"]?\\s|$)  # not followed by ws or EOS.\n" +
+                "  [^.!?]*    # Greedily consume up to punctuation.\n" +
+                ")*           # Zero or more (special normal*)\n" +
+                "[.!?]?       # Optional ending punctuation.\n" +
+                "['\"]?       # Optional closing quote.\n" +
+                "(?=\\s|$)", 
+                Pattern.MULTILINE | Pattern.COMMENTS);
         Matcher m = p.matcher(question);
         return m.matches();
     }

@@ -7,8 +7,8 @@ import static org.junit.Assert.assertThat;
 import java.time.LocalDateTime;
 import org.junit.Test;
 
-import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Project;
 
 public class ProjectTest{
     Project project = new Project();

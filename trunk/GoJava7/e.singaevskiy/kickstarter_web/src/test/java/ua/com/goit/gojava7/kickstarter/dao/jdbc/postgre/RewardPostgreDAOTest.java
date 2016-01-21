@@ -13,12 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ua.com.goit.gojava7.kickstarter.dao.IntegrationTest;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.ProjectPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.RewardPostgreDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations="classpath:applicationContext*.xml")
-public class RewardPostgreDAOTest {
+public class RewardPostgreDAOTest  implements IntegrationTest{
 
     List<Reward> list;
     
@@ -36,29 +39,29 @@ public class RewardPostgreDAOTest {
     	
     	rewardPostgreDAO.clear();
         list = new ArrayList<>();
-        list.add(new Reward(1, projects.get(0), "r1", 113));
-        list.add(new Reward(2, projects.get(0), "r2", 44));
-        list.add(new Reward(3, projects.get(1), "r3", 33));
-        rewardPostgreDAO.addAll(list);
+        list.add(new Reward(projects.get(0), "r1", 113));
+        list.add(new Reward(projects.get(0), "r2", 44));
+        list.add(new Reward(projects.get(1), "r3", 33));
     }
 
     @Test
     public void testAddGetAll() {
+    	rewardPostgreDAO.addAll(list);
         assertThat(rewardPostgreDAO.getAll(), is(list));
     }
     
     @Test
     public void testAddGet() {
-    	rewardPostgreDAO.clear();
         list.forEach(rewardPostgreDAO::add);
         Reward reward = list.get(1);
-        int index = reward.getId();
+        Long index = reward.getId();
         assertThat(rewardPostgreDAO.get(index), is(reward));
     }
     
     @Test
     public void testGetByProject() {
-        int id = projects.get(0).getId();
+    	rewardPostgreDAO.addAll(list);
+    	Long id = projects.get(0).getId();
         rewardPostgreDAO.getByProject(id).forEach(p -> assertThat(p.getProject().getId(), is(id)));
     }
 
