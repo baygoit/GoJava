@@ -6,6 +6,6 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public interface ProjectDAO extends DataSource<Project> {
     
-    List<Project> getByCategory(int categoryId);
+    List<Project> getByCategory(Long categoryId);
     
 }

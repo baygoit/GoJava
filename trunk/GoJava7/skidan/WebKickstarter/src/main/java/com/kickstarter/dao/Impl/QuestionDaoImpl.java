@@ -6,11 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.kickstarter.dao.interfaces.QuestionDao;
+import com.kickstarter.dao.Interfaces.QuestionDao;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.Question;
 
@@ -20,7 +17,7 @@ public class QuestionDaoImpl implements QuestionDao {
 	@Autowired(required=false)
 	private SessionFactory sessionFactory;
 
-	@Transactional (propagation=Propagation.REQUIRED, isolation =  Isolation.SERIALIZABLE, readOnly=false)
+	@Transactional 
 	public void add(String newQuestion, Project project) {
 		Question question = new Question();
 		question.setProject(project);

@@ -2,47 +2,54 @@ package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.dao.RewardDAO;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.util.HibernateUtil;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 @Repository
 public class RewardPostgreDAO implements RewardDAO {
-
-	@Autowired
-	private HibernateUtil hiberUtil;
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	@Override
+	@Transactional
 	public void clear() {
-		hiberUtil.executeUpdate("delete Reward");
+		entityManager.createNamedQuery("Reward.removeAll").executeUpdate();
 	}
 
     @Override
-    public Reward get(int index) {
-    	return hiberUtil.get("from Reward where id = ?", index);
+    public Reward get(Long index) {
+    	return entityManager.find(Reward.class, index);
     }
 
     @Override
+    @Transactional
     public void add(Reward element) {
-    	hiberUtil.save(element);
+    	entityManager.persist(element);
     }
 
     @Override
+    @Transactional
     public void addAll(List<Reward> elements) {
-    	hiberUtil.save(elements);
+    	elements.forEach(entityManager::persist);
     }
 
     @Override
     public List<Reward> getAll() {
-    	return hiberUtil.getList("from Reward");
+    	return entityManager.createNamedQuery("Reward.getAll", Reward.class).getResultList();
     }
 
     @Override
-    public List<Reward> getByProject(int projectId) {
-    	return hiberUtil.getList("from Reward where project.id = ?", projectId);
+    public List<Reward> getByProject(Long projectId) {
+    	TypedQuery<Reward> query = entityManager.createNamedQuery("Reward.getByProject", Reward.class);
+		query.setParameter("project_id", projectId);
+		return query.getResultList();
     }
 
 }

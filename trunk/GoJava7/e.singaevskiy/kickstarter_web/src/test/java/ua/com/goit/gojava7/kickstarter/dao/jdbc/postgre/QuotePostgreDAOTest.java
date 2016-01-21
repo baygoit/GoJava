@@ -31,11 +31,12 @@ public class QuotePostgreDAOTest  implements IntegrationTest{
         list = new ArrayList<>();
         list.add(new Quote("a1", "t1"));
 		list.add(new Quote("a", "t"));
-		quotePostgreDAO.addAll(list);
+		System.out.println(list);
     }
 
     @Test
     public void testAddGetAll() {
+    	quotePostgreDAO.addAll(list);
         assertThat(quotePostgreDAO.getAll(), is(list));
     }
 

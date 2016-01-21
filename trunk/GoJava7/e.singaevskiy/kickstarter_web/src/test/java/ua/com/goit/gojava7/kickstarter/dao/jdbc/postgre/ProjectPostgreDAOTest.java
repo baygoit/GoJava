@@ -36,17 +36,19 @@ public class ProjectPostgreDAOTest  implements IntegrationTest{
     @Before
     public void setUp() throws Exception {
     	categories = categoryPostgreDAO.getAll();
+    	System.out.println(categories);
     	
     	projectPostgreDAO.clear();   	
         list = new ArrayList<>();
-        list.add(new Project(1, "p1", "a1", categories.get(0)));
-        list.add(new Project(2, "p2", "a2", categories.get(0)));
-        list.add(new Project(3, "p3", "a3", categories.get(1)));
-        projectPostgreDAO.addAll(list);
+        list.add(new Project("p1", "a1", categories.get(0)));
+        list.add(new Project("p2", "a2", categories.get(0)));
+        list.add(new Project("p3", "a3", categories.get(1)));
+        System.out.println(list);
     }
 
     @Test
     public void testAddGetAll() {
+    	projectPostgreDAO.addAll(list);
         assertThat(projectPostgreDAO.getAll(), is(list));
     }
 
@@ -60,7 +62,7 @@ public class ProjectPostgreDAOTest  implements IntegrationTest{
     @Test
     public void testGetByCategory() {
         projectPostgreDAO.addAll(list);
-        int catId = categories.get(0).getId();
+        Long catId = categories.get(0).getId();
         projectPostgreDAO.getByCategory(catId).forEach(p -> assertThat(p.getCategory().getId(), is(catId)));
     }
 

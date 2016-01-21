@@ -42,18 +42,17 @@ public class PaymentPostgreDAOTest  implements IntegrationTest{
         list.add(new Payment(projects.get(0), "u1", 21312312, 10, null));
         list.add(new Payment(projects.get(0), "u2", 21312312, 20, null));
         list.add(new Payment(projects.get(1), "u2", 21312312, 20, null));
-        paymentPostgreDAO.addAll(list);
     }
 
 
     @Test
     public void testAddGetAll() {
+    	paymentPostgreDAO.addAll(list);
         assertThat(paymentPostgreDAO.getAll(), is(list));
     }
     
     @Test
     public void testAddGet() {
-    	paymentPostgreDAO.clear();
         list.forEach(paymentPostgreDAO::add);
         Payment payment = list.get(1);
         assertThat(paymentPostgreDAO.get(payment.getId()), is(payment));
@@ -61,7 +60,8 @@ public class PaymentPostgreDAOTest  implements IntegrationTest{
     
     @Test
     public void testGetByProject() {
-        int id = projects.get(0).getId();
+    	paymentPostgreDAO.addAll(list);
+    	Long id = projects.get(0).getId();
         paymentPostgreDAO.getByProject(id).forEach(p -> assertThat(p.getProject().getId(), is(id)));
     }
 

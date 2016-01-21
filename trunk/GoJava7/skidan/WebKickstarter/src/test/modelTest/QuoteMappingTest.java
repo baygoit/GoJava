@@ -1,7 +1,7 @@
 package modelTest;
 
 
-import com.kickstarter.dao.interfaces.QuoteDao;
+import com.kickstarter.dao.Interfaces.QuoteDao;
 import com.kickstarter.model.Quote;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
