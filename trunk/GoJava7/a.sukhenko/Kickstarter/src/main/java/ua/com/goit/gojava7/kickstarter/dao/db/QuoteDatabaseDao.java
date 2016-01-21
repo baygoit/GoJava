@@ -9,9 +9,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 @Repository
+@Transactional
 public class QuoteDatabaseDao{
     private static final Logger logger = LogManager.getLogger(QuoteDatabaseDao.class);
 

@@ -18,6 +18,12 @@ http://www.springframework.org/schema/util
         <property name="searchSystemEnvironment" value="true" />
     </bean>
     <tx:annotation-driven />
+    
+    
+    <bean id="questionValidator" class="ua.com.goit.gojava7.kickstarter.validator.QuestionValidator" />
+    <bean id="paymentValidator" class="ua.com.goit.gojava7.kickstarter.validator.PaymentValidator" />
+     
+    
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driver}" />
         <property name="url" value="${jdbc.url}" />
@@ -41,12 +47,12 @@ http://www.springframework.org/schema/util
         </property>
         <property name="annotatedClasses">
             <list>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Quote</value>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Payment</value>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Project</value>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Question</value>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Payment</value>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Bonus</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Quote</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Payment</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Project</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Question</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Payment</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Bonus</value>
             </list>
         </property>
         <property name="mappingResources">

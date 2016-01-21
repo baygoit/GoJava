@@ -1,19 +1,22 @@
-package ua.com.goit.gojava7.kickstarter.util;
+package ua.com.goit.gojava7.kickstarter.validator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
-import ua.com.goit.gojava7.kickstarter.model.vo.PaymentVO;
-@Component
+import ua.com.goit.gojava7.kickstarter.model.Payment;
+@Repository
+@Transactional
 public class PaymentValidator implements org.springframework.validation.Validator{
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		 return PaymentVO.class.isAssignableFrom(clazz);
+		 return Payment.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -26,15 +29,15 @@ public class PaymentValidator implements org.springframework.validation.Validato
 	}
 	
 	public void validatePayment(Object target, Errors errors) {
-		PaymentVO paymentVO = (PaymentVO) target;
-        if(!validateName(paymentVO.getCardOwner())){
-        	errors.rejectValue("cardOwner", "error.cardOwner", "Invalid card owner name.");
+		Payment payment = (Payment) target;
+        if(!validateName(payment.getCardOwner())){
+        	errors.rejectValue("cardOwner", "error.cardOwner_invalid", "Invalid card owner name.");
         }
-        if(!validateCard(paymentVO.getCardNumber())){
-        	errors.rejectValue("cardNumber", "error.cardNumber", "Invalid card number.");
+        if(!validateCard(payment.getCardNumber())){
+        	errors.rejectValue("cardNumber", "error.cardNumber_invalid", "Invalid card number.");
         }
-        if(!validateAmountOfPledge(paymentVO.getAmount())){
-        	errors.rejectValue("amount", "error.amount", "Invalid amount.");
+        if(!validateAmountOfPledge(payment.getAmount())){
+        	errors.rejectValue("amount", "error.amount_invalid", "Invalid amount.");
         }
     }
 

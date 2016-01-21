@@ -16,7 +16,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
     <context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />
     <context:annotation-config />
-  
+	
     <import resource="applicationContext-aspects.xml" />
     <import resource="applicationContext-db.xml" />
       <mvc:annotation-driven />
@@ -29,5 +29,7 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-   
+   <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages" />
+    </bean>
 </beans>

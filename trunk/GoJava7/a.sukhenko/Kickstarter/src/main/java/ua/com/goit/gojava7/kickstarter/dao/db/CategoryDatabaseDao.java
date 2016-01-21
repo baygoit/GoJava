@@ -10,10 +10,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 @Repository
+@Transactional
 public class CategoryDatabaseDao{
     private static final Logger logger = LogManager.getLogger(CategoryDatabaseDao.class);
     @Autowired

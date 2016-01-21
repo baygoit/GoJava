@@ -12,10 +12,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 @Repository
+@Transactional
 public class ProjectDao{
     private static final Logger LOGGER = LogManager.getLogger(ProjectDao.class);
     @Autowired

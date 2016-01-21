@@ -5,7 +5,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC
 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="ua.com.goit.gojava7.kickstarter.domain">
+<hibernate-mapping package="ua.com.goit.gojava7.kickstarter.model">
     <class name="Quote" table="quotes">
         <id name="id">
             <generator class="increment" />

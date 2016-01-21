@@ -37,12 +37,12 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">create</property>
 		
-		<mapping class="ua.com.goit.gojava7.kickstarter.domain.Quote" />
-		<mapping class="ua.com.goit.gojava7.kickstarter.domain.Category" />
-		<mapping class="ua.com.goit.gojava7.kickstarter.domain.Project" />
-		<mapping class="ua.com.goit.gojava7.kickstarter.domain.Bonus" />
-		<mapping class="ua.com.goit.gojava7.kickstarter.domain.Question" />
-		<mapping class="ua.com.goit.gojava7.kickstarter.domain.Payment" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Quote" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Category" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Project" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Bonus" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Question" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Payment" />
 
 	</session-factory>
 

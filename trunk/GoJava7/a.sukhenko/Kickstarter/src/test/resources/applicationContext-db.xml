@@ -41,12 +41,12 @@ http://www.springframework.org/schema/util
         </property>
         <property name="annotatedClasses">
             <list>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Quote</value>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Payment</value>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Project</value>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Question</value>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Payment</value>
-                <value>ua.com.goit.gojava7.kickstarter.domain.Bonus</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Quote</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Payment</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Project</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Question</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Payment</value>
+                <value>ua.com.goit.gojava7.kickstarter.model.Bonus</value>
             </list>
         </property>
         <property name="mappingResources">
