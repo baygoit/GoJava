@@ -12,7 +12,7 @@
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="admin" authorities="USER" password="123" />
+				<user name="admin@q.com" authorities="USER" password="123" />
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>
@@ -20,7 +20,7 @@
 	<http use-expressions="true">
       <intercept-url pattern="/login*" access="isAnonymous()" />
       <intercept-url pattern="/logout*" access="isAuthenticated()" />
-      <form-login/>
+      <form-login login-page="/login" username-parameter="email"/>
       <logout logout-success-url="/"/>
       <csrf disabled="true"/>
    </http>

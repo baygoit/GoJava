@@ -37,4 +37,9 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/signUp.jsp" />
 	</definition>
 	
+		<definition name="login" extends="common">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
+	</definition>
+	
 </tiles-definitions>

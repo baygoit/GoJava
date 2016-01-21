@@ -29,6 +29,11 @@ public class UserController {
 		return "signUp";
 	}
 	
+	@RequestMapping("/login")
+	public String showLoginPage(Model model) {
+		return "login";
+	}
+	
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String signUp(@Valid User user, BindingResult result) {
 		if (result.hasErrors()) {
