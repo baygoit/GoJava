@@ -10,6 +10,8 @@
 	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.datasource" />
 
 	<import resource="spring.database.xml" />
+	
+	<import resource="../spring.security.xml" />
 
 	<!-- <import resource="spring.loggerAspect.xml" /> -->
 

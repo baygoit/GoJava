@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <blockquote class="blockquote-reverse">
 	<p>${quote.text}</p>
 	<footer>
@@ -30,11 +32,21 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="./signup"><span class="glyphicon glyphicon-user"></span>
-						Sign Up</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-						Login</a></li>
+				<security:authorize access="! isAuthenticated()">
+					<li><a href="./signup"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a href="./login"><span
+							class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</security:authorize>
+				<security:authorize access="isAuthenticated()">
+					<li><a href="#"><span
+							class="glyphicon glyphicon-user"></span> <security:authentication property="principal.username" /></a></li>
+					<li><a href="./logout"><span
+							class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+				</security:authorize>
 			</ul>
+
+
 		</div>
 
 	</div>
