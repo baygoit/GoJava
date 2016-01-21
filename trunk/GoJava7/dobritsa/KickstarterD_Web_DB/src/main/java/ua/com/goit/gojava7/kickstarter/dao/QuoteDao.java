@@ -8,8 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.Random;
 
 @Repository
 @Transactional
@@ -20,22 +18,16 @@ public class QuoteDao {
 	@PersistenceContext
 	private EntityManager em;
 
-	//TODO change random
-	public Quote getRandomQuote() {
-		log.info("<Quote> getRandomQuote()...");
-		Query query = em.createNamedQuery("Quote.count");
-		Long count = (Long) query.getSingleResult();
+	public Quote get(Long quoteId) {
+		log.info("<Quote> get(quoteId = {})...", quoteId);
+		return em.find(Quote.class, quoteId);
+	}
 
-		Random random = new Random();
-		int number = random.nextInt(count.intValue());
+	public Long size() {
+		log.info("<Long> size(quoteId = {})...");
+		Long size = em.createNamedQuery("Quote.count", Long.class).getSingleResult();
 
-		Query selectQuery = em.createNamedQuery("Quote.findAll");
-		selectQuery.setFirstResult(number);
-		selectQuery.setMaxResults(1);
-
-		Quote quote = (Quote) selectQuery.getSingleResult();
-
-		log.info("<Quote> getRandomQuote() returned {}", quote);
-		return quote;
+		log.info("<Long> size(quoteId = {}) returned {}", size);
+		return size;
 	}
 }

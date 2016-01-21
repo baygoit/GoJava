@@ -9,11 +9,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.dto.CategoryDto;
 import ua.com.goit.gojava7.kickstarter.dto.ProjectDto;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 import ua.com.goit.gojava7.kickstarter.service.CategoryService;
+import ua.com.goit.gojava7.kickstarter.service.QuoteService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.ModelAndViewAssert.*;
 public class CategoryControllerTest {
 
     @Mock
-    private QuoteDao quoteDao;
+    private QuoteService quoteService;
     @Mock
     private CategoryDao categoryDao;
     @Mock
@@ -39,9 +39,7 @@ public class CategoryControllerTest {
     @Test
     public void testShowCategories() {
         Quote quote = new Quote();
-        when(quoteDao.getRandomQuote()).thenReturn(quote);
-
-
+        when(quoteService.getRandomQuote()).thenReturn(quote);
 
         CategoryDto categoryDto = new CategoryDto();
         List<CategoryDto> categories = new ArrayList<>();

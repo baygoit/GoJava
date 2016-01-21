@@ -19,7 +19,6 @@ public class QuestionDao {
 
 	public void add(Question question) {
 		log.info("<void> add({})...", question);
-
 		em.persist(question);
 	}
 }

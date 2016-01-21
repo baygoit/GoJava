@@ -27,11 +27,6 @@ public class MySqlEmptyIT {
     private RewardDao rewardDao;
 
     @Test
-    public void testGetRandomQuoteFromEmptyTableIsNull() {
-        assertNull(quoteDao.getRandomQuote());
-    }
-
-    @Test
     public void testGetNonexistentCategoryIsNull() {
         assertNull(categoryDao.get(1L));
     }

@@ -8,10 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 @Repository
 @Transactional
@@ -29,18 +25,6 @@ public class CategoryDao {
 
 	public List<Category> getAll() {
 		log.info("<categories> getAll()...");
-
-		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-
-		CriteriaQuery<Category> criteriaQuery = criteriaBuilder.createQuery(Category.class);
-		Root<Category> categoryRoot = criteriaQuery.from(Category.class);
-		criteriaQuery.select(categoryRoot);
-
-		TypedQuery<Category> query = em.createQuery(criteriaQuery);
-		List<Category> categories = query.getResultList();
-
-		log.info("<categories> getAll() returns {} categories", categories.size());
-
-		return categories;
+		return em.createNamedQuery("Category.getAll", Category.class).getResultList();
 	}
 }
