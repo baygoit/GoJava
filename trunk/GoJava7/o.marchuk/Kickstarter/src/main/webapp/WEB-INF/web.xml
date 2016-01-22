@@ -15,6 +15,18 @@
    <listener-class>ua.com.goit.gojava7.kickstarter.dao.mysql.JdbcCleanupContextShutdownHook</listener-class>
 </listener>
 
+	 <!-- Servlet declaration can be omitted in which case
+         it would be automatically added by Jersey -->
+    <servlet>
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>
+    </servlet>
+ 
+    <servlet-mapping>
+        <servlet-name>javax.ws.rs.core.Application</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+
+
 	<servlet>
         <servlet-name>webmvc-servlet</servlet-name>
         <servlet-class>
