@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @Table(name = "category")
 public class Category {
@@ -45,4 +47,10 @@ public class Category {
 	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("id", id).append("name", name).toString();
+	}
+	
 }

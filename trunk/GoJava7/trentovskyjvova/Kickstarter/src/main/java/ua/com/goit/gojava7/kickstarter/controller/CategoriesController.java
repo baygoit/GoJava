@@ -64,6 +64,13 @@ public class CategoriesController {
 		log.debug("categoryId: {}", categoryId);
 
 		List<Project> projects = projectDao.getProjects(categoryId);
+		for (Project project : projects) {
+			int amountPledge = 0;
+			for (Payment payment : project.getPayments()) {
+				amountPledge += payment.getPledge();
+			}
+			project.setAmountPledge(amountPledge);
+		}
 		modelAndView.addObject("projects", projects);
 		log.debug("Projects: {}", projects);
 
@@ -77,6 +84,12 @@ public class CategoriesController {
 		log.debug("projectId: {}", projectId);
 
 		Project selectedProject = projectDao.getProject(projectId);
+		
+		int amountPledge = 0;
+		for (Payment payment : selectedProject.getPayments()) {
+			amountPledge += payment.getPledge();
+		}
+		selectedProject.setAmountPledge(amountPledge);
 		modelAndView.addObject("selectedProject", selectedProject);
 		log.debug("selectedProject: {}", selectedProject);
 
