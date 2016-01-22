@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
-import ua.com.goit.gojava7.kickstarter.dao.QuestionsDAO;
-import ua.com.goit.gojava7.kickstarter.dao.RewardDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.PaymentDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.ProjectDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.QuestionsDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.RewardDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
 import ua.com.goit.gojava7.kickstarter.domain.Reward;

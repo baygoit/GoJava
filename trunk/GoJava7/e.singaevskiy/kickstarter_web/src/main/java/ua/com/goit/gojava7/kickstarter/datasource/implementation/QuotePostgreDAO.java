@@ -1,14 +1,15 @@
-package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
+package ua.com.goit.gojava7.kickstarter.datasource.implementation;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.QuoteDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @Repository
@@ -43,5 +44,12 @@ public class QuotePostgreDAO implements QuoteDAO {
     public void clear() {
     	entityManager.createNamedQuery("Quote.removeAll").executeUpdate();
     }
+
+	@Override
+	public Quote getRandom() {
+		TypedQuery<Quote> createNamedQuery = entityManager.createNamedQuery("Quote.getRandom", Quote.class);
+        createNamedQuery.setMaxResults(1);
+		return createNamedQuery.getSingleResult();
+	}
 
 }

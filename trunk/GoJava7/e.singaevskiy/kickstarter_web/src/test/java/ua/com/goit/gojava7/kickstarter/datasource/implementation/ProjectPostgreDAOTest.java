@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
+package ua.com.goit.gojava7.kickstarter.datasource.implementation;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ua.com.goit.gojava7.kickstarter.dao.IntegrationTest;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.CategoryPostgreDAO;
-import ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre.ProjectPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.IntegrationTest;
+import ua.com.goit.gojava7.kickstarter.datasource.implementation.CategoryPostgreDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.implementation.ProjectPostgreDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
 

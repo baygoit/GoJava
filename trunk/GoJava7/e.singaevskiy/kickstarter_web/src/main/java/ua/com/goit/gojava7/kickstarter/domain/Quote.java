@@ -11,6 +11,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name="Quote.getAll", query="select entity from Quote as entity"),
 	@NamedQuery(name="Quote.removeAll", query="delete from Quote"),
+	@NamedQuery(name="Quote.getRandom", query="select entity from Quote as entity order by random()")
 })
 public class Quote {
 	@Id

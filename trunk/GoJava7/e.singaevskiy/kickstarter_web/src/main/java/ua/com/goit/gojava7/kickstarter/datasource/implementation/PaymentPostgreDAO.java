@@ -1,4 +1,4 @@
-package ua.com.goit.gojava7.kickstarter.dao.jdbc.postgre;
+package ua.com.goit.gojava7.kickstarter.datasource.implementation;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.PaymentDAO;
 import ua.com.goit.gojava7.kickstarter.domain.Payment;
 
 @Repository
@@ -57,7 +57,6 @@ public class PaymentPostgreDAO implements PaymentDAO {
 		TypedQuery<Long> query = entityManager.createNamedQuery("Payment.getSumByProject", Long.class);
 		query.setParameter("project_id", projectId);
 		Long sum = query.getSingleResult();
-		entityManager.createQuery("", Long.class).getSingleResult();
 		if (sum == null) {
 			sum = 0L;
 		}
