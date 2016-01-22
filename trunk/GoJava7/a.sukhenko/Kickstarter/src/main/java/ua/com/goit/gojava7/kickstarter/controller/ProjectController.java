@@ -28,7 +28,7 @@ public class ProjectController{
     @Autowired
     private QuestionDatabaseDao questionDao;
     
-    
+    //Artur Jpa
     @RequestMapping("project")
     public ModelAndView project(@RequestParam int id) {
         ModelAndView modelAndView = new ModelAndView("project");
