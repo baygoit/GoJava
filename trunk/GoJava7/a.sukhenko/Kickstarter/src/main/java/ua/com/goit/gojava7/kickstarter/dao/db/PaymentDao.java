@@ -3,6 +3,10 @@ package ua.com.goit.gojava7.kickstarter.dao.db;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.model.Payment;
 import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Question;
 import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 
 @Repository
@@ -19,46 +24,23 @@ import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 public class PaymentDao{
     private static final org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger(PaymentDao.class);
 
-    @Autowired
-    SessionFactory                                       sessionFactory;
-
+    
+    @PersistenceContext
+    private EntityManager manager;
    
     public List<Payment> getAll() {
-        logger.debug("getting all payments from db.");
-        String hql = "FROM Payment Paymnt";
-        Session session = sessionFactory.openSession();
-        Query query = session.createQuery(hql);
-        List<Payment> results = HibernateUtil.listAndCast(query);
-        if (results.isEmpty()) {
-            throw new NoSuchElementException("hibernate returned 0 payments: list is empty.");
-        }
-        if (session.isOpen()) {
-            session.close();
-        }
-        return results;
+        List<Payment> payments = manager.createQuery("SELECT p FROM Payment p",Payment.class).getResultList();
+        return payments;
     }
 
     public List<Payment> getPaymentsByProjectId(int projectId) {
-        logger.debug("Getting Payments by projectId: " + projectId);
-        Session session = sessionFactory.openSession();
-        String hql = "FROM Payment P WHERE P.project.id = :projectId";
-        Query query = session.createQuery(hql);
+        TypedQuery<Payment> query = manager.createNamedQuery("Payment.getByProjectId",Payment.class);
+        List<Payment> payments = query.setParameter("projectId", projectId).getResultList();
         query.setParameter("projectId", projectId);
-        List<Payment> results = HibernateUtil.listAndCast(query);
-        if (session.isOpen()) {
-            session.close();
-        }
-        return results;
+        return payments;
     }
     public void add(Payment payment) {
-        logger.info("Adding payment " + payment);
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-
-        session.save(payment);
-        session.getTransaction().commit();
-
-        session.close();
+        
     }
 
     public boolean createPayment(String cardNumber, String cardOwner, Long amount, Project project) {

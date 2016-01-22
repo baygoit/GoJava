@@ -1,6 +1,5 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,12 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "questions")
+@NamedQuery(name="Question.findByProjectId",query="SELECT q FROM Question q WHERE q.project.id = :projectId")
 public class Question{
 
 
