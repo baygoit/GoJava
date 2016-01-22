@@ -23,6 +23,7 @@
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="persistenceUnitName" value="Kickstarter"></property>
+		<property name="packagesToScan" value="ua.com.goit.gojava7.kickstarter.domain"/>
 	</bean>
 	
  	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

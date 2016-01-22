@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.CategoryDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.ProjectDAO;
 
 @Controller
 public class CategoryController {

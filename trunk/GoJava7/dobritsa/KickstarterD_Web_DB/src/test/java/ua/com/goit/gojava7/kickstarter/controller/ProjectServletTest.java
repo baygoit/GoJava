@@ -15,9 +15,9 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.powermock.modules.junit4.PowerMockRunner;
 import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
-import ua.com.goit.gojava7.kickstarter.models.Category;
-import ua.com.goit.gojava7.kickstarter.models.Project;
-import ua.com.goit.gojava7.kickstarter.models.Question;
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Question;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -49,10 +49,10 @@ public class ProjectServletTest {
         when(projectDao.get(anyLong())).thenReturn(project);
 
         Category category = new Category();
-        when(projectDao.getCategory(any(Project.class))).thenReturn(category);
+        //when(projectDao.getCategory(any(Project.class))).thenReturn(category);
 
         List<Question> questions = new ArrayList<>();
-        when(projectDao.getQuestions(anyLong())).thenReturn(questions);
+        //when(projectDao.getQuestions(anyLong())).thenReturn(questions);
 
         HttpServletResponse response = mock(HttpServletResponse.class);
         PrintWriter writer = mock(PrintWriter.class);

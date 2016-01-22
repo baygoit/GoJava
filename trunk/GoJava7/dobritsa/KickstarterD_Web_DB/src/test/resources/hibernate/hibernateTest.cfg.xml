@@ -27,12 +27,12 @@
 
 		<property name="hibernate.current_session_context_class">thread</property>
 		
-		<mapping class="ua.com.goit.gojava7.kickstarter.models.Quote" />
-		<mapping class="ua.com.goit.gojava7.kickstarter.models.Category" />
-		<mapping class="ua.com.goit.gojava7.kickstarter.models.Project" />
-		<mapping class="ua.com.goit.gojava7.kickstarter.models.Reward" />
-		<mapping class="ua.com.goit.gojava7.kickstarter.models.Question" />
-		<mapping class="ua.com.goit.gojava7.kickstarter.models.Payment" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Quote" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Category" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Project" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Reward" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Question" />
+		<mapping class="ua.com.goit.gojava7.kickstarter.model.Payment" />
 		
 	</session-factory>
 
