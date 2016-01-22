@@ -9,5 +9,5 @@ public interface CategoryDao extends Dao {
 	
 	Category getCategory(int id);
 
-	Category getBestCategory();
+	//Category getBestCategory();
 }
