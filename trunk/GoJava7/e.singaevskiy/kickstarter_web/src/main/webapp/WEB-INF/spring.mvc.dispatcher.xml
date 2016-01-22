@@ -6,7 +6,9 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven >
+		<mvc:path-matching suffix-pattern="false"/>
+	</mvc:annotation-driven>
 
 	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.controller" />
 
@@ -40,5 +42,8 @@
 	</bean>
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:interceptors>
+		<bean class="ua.com.goit.gojava7.kickstarter.controller.HeaderInterceptor" />
+	</mvc:interceptors>
 
 </beans>

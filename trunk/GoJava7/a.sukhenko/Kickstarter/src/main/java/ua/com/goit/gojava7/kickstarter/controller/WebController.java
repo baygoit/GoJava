@@ -1,28 +1,27 @@
 package ua.com.goit.gojava7.kickstarter.controller;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.logging.Level;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.goit.gojava7.kickstarter.dao.db.CategoryDatabaseDao;
-import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDatabaseDao;
+import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDatabaseDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuoteDatabaseDao;
-import ua.com.goit.gojava7.kickstarter.domain.Category;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.domain.Question;
-import ua.com.goit.gojava7.kickstarter.domain.Quote;
-import ua.com.goit.gojava7.kickstarter.error.ResourceNotFoundException;
+import ua.com.goit.gojava7.kickstarter.model.Category;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Quote;
+import ua.com.goit.gojava7.kickstarter.validator.QuestionValidator;
 
 @Controller
 @Transactional
@@ -31,12 +30,14 @@ public class WebController{
     @Autowired
     private CategoryDatabaseDao categoryDao;
     @Autowired
-    private ProjectDatabaseDao  projectDao;
+    private ProjectDao  projectDao;
     @Autowired
     private QuoteDatabaseDao    quoteDao;
     @Autowired
     private QuestionDatabaseDao questionDao;
-
+    @Autowired
+    private QuestionValidator validator;
+    
     public Quote getQuote(){
         return quoteDao.getRandomQuote();
     }
@@ -68,24 +69,21 @@ public class WebController{
         return modelAndView;
     }
 
-    @RequestMapping("project")
-    public ModelAndView project(@RequestParam(name = "name") String projectName) {
-        ModelAndView modelAndView = new ModelAndView("project");
-        logger.debug("action: project");
-        Project project = null;
-        try {
-            project = projectDao.getProjectByName(projectName);
-        } catch (NoSuchElementException e) {
-            logger.info("Didn't find project", e);
-            throw new ResourceNotFoundException();
-        }
-        modelAndView.addObject("project", project);
-        modelAndView.addObject("endtime", project.getProjectEndTime());
-        modelAndView.addObject("paymentBonuses", project.getBonuses());
-        List<Question> questions = questionDao.getQuestionsByProjectId(project.getId());
-        modelAndView.addObject("questions", questions);
-        return modelAndView;
-    }
+    
 
+    
+    @RequestMapping("reward")
+    public ModelAndView reward(@RequestParam int projectId){
+        ModelAndView modelAndView = new ModelAndView("reward");
+        Project project = projectDao.getProject(projectId);
+        modelAndView.addObject("paymentBonuses", project.getBonuses());
+        modelAndView.addObject(project);
+        modelAndView.addObject(project.getCategory());
+        return modelAndView;
+        
+    }
+    
+    
+    
 
 }

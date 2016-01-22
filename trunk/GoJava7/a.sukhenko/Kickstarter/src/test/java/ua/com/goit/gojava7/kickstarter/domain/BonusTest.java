@@ -5,6 +5,9 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.model.Bonus;
+import ua.com.goit.gojava7.kickstarter.model.Project;
+
 public class BonusTest{
     private Bonus bonus = new Bonus();
 

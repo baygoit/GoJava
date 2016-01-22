@@ -47,7 +47,7 @@
 						<div class="tab-pane active" id="payment">			    
 							<form method="post" class="form-horizontal" action="./payment">
 								<div class="form-group col-sm-7">
-									<input required type="text" class="form-control" id="inputName" name="first-name" placeholder="Name">
+									<input required type="text" class="form-control" id="inputName" name="userName" placeholder="Name">
 								</div>
 								<div class="form-group col-sm-7">
 									<input required type="text" class="form-control" id="inputCardNumber" name="creditCardNumber" pattern="[0-9]{13,16}" placeholder="Card number">
@@ -58,12 +58,12 @@
 											<dt>If you donate ${reward.pledge} USD :</dt><dd> ${reward.description}</dd>
 										</c:forEach>
 									</dl>
-									<label for="donatingSum" class="inputLabel">Please enter pledge amount : </label>
-									<input name="donatingSum" type="text" />		    						
+									<label for="pledge" class="inputLabel">Please enter pledge amount : </label>
+									<input name="pledge" type="text" />		    						
 									<input id ="projectId" type="hidden" name="projectId" value="${project.id}" />				
 								</div>			  
 								<div class="form-group col-sm-7">
-									<button type="submit" class="btn btn-primary">Make payment</button>
+									<button type="submit" class="btn btn-default">Make payment</button>
 								</div>			  
 						</form>
 					</div>
@@ -77,7 +77,7 @@
 					</div>
 	
 					<div class="tab-pane" id="questions">
-						<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample">Leave question</a>
+						<a class="btn btn-default" data-toggle="collapse" href="#collapseExample">Leave question</a>
 							<div style="margin-top:15px" class="collapse" id="collapseExample">
 								<form method="post" class="form-horizontal" action="./ask">
 									<div class="form-group col-sm-7">
@@ -85,7 +85,7 @@
 										<input id ="projectId" type="hidden" name="projectId" value="${project.id}" />	
 									</div>
 									<div class="form-group col-sm-7">
-										<button type="submit" class="btn btn-primary">Ask!</button>
+										<button type="submit" class="btn btn-default">Ask</button>
 									</div>
 								</form>
 							</div>

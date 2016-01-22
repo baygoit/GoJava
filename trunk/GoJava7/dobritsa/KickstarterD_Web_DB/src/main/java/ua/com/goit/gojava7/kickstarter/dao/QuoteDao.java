@@ -1,38 +1,41 @@
 package ua.com.goit.gojava7.kickstarter.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ua.com.goit.gojava7.kickstarter.models.Quote;
+import org.springframework.transaction.annotation.Transactional;
+import ua.com.goit.gojava7.kickstarter.model.Quote;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.Random;
 
 @Repository
+@Transactional
 public class QuoteDao {
 
-	@Autowired
-	private SessionFactory sessionFactory;
-	
 	private static final Logger log = LoggerFactory.getLogger(QuoteDao.class);
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+	@PersistenceContext
+	private EntityManager em;
 
+	//TODO change random
 	public Quote getRandomQuote() {
 		log.info("<Quote> getRandomQuote()...");
-		Session session = sessionFactory.openSession();
+		Query query = em.createNamedQuery("Quote.count");
+		Long count = (Long) query.getSingleResult();
 
-		Quote quote = (Quote) session.createCriteria(Quote.class)
-				.add(Restrictions.sqlRestriction("1=1 order by rand()"))
-				.setMaxResults(1)
-				.uniqueResult();
+		Random random = new Random();
+		int number = random.nextInt(count.intValue());
 
-		session.close();
-		log.debug("<Quote> getRandomQuote() returned quote: {}", quote);
+		Query selectQuery = em.createNamedQuery("Quote.findAll");
+		selectQuery.setFirstResult(number);
+		selectQuery.setMaxResults(1);
+
+		Quote quote = (Quote) selectQuery.getSingleResult();
+
+		log.info("<Quote> getRandomQuote() returned {}", quote);
 		return quote;
 	}
 }

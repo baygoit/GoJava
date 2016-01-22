@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:aop="http://www.springframework.org/schema/aop"
+           xmlns:context="http://www.springframework.org/schema/context"
+           xmlns:tx="http://www.springframework.org/schema/tx"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+    <bean id="categoryStorage" class="ua.com.goit.gojava7.kickstarter.model.storage.InMemoryCategoryStorage"></bean>
+    <bean id="quoteStorage" class="ua.com.goit.gojava7.kickstarter.model.storage.InMemoryQuoteStorage"></bean>
+    <bean id="kickstarter" class="ua.com.goit.gojava7.kickstarter.model.Kickstarter">
+        <constructor-arg name="categoryStorage" ref="categoryStorage"></constructor-arg>
+        <constructor-arg name="quoteStorage" ref="quoteStorage"></constructor-arg>
+    </bean>
+    <bean id="controller" class="ua.com.goit.gojava7.kickstarter.controller.Controller">
+        <constructor-arg name="kickstarter" ref="kickstarter"></constructor-arg>
+    </bean>
+    <bean id="view" class="ua.com.goit.gojava7.kickstarter.view.ConsoleView">
+        <constructor-arg name="controller" ref="controller"></constructor-arg>
+    </bean>
+
+    <!--<bean id="myLogger" class="ua.com.goit.gojava7.kickstarter.LoggingAspect"/>-->
+    <!--<aop:aspectj-autoproxy>-->
+        <!--<aop:include name="myLogger"/>-->
+    <!--</aop:aspectj-autoproxy>-->
+
+    <!--<aop:config proxy-target-class="true" />-->
+
+</beans>

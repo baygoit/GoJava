@@ -15,18 +15,20 @@
            http://www.springframework.org/schema/context/spring-context.xsd
            http://www.springframework.org/schema/util
            http://www.springframework.org/schema/util/spring-util.xsd">
-           
-	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao" />
+
+	<context:annotation-config />
+	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />
 	   
 	<bean id="basicDataSource" class="org.apache.commons.dbcp2.BasicDataSource"	destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/kickstarter" />
+		<property name="url" value="jdbc:mysql://localhost:3306/kickstarter_test" />
 		<property name="username" value="root" />
 		<property name="password" value="temppassword" />
 	</bean>	
 	           
 	<tx:annotation-driven />
-	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+	<bean id="transactionManager"
+		  class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
@@ -41,20 +43,21 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 			</props>
 		</property>		
 		
 		<property name="annotatedClasses">
 			<list>
-				<value>ua.com.goit.gojava7.kickstarter.models.Quote</value>
-				<value>ua.com.goit.gojava7.kickstarter.models.Category</value>
-				<value>ua.com.goit.gojava7.kickstarter.models.Project</value>
-				<value>ua.com.goit.gojava7.kickstarter.models.Reward</value>
-				<value>ua.com.goit.gojava7.kickstarter.models.Question</value>
-				<value>ua.com.goit.gojava7.kickstarter.models.Payment</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Quote</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Category</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Project</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Reward</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Question</value>
+				<value>ua.com.goit.gojava7.kickstarter.model.Payment</value>
 			</list>
 		</property>
 		
-	</bean>		
-	
+	</bean>
+
 </beans>

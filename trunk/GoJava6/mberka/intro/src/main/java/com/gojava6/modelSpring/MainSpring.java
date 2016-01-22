@@ -1,6 +1,7 @@
 package com.gojava6.modelSpring;
 
 import com.gojava6.daoSpring.UserDAO;
+import com.gojava6.daoSpring.UserDAOHibernateSpring;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -24,6 +25,13 @@ public class MainSpring {
         //userDAO.addNewUser(user2);
 
         System.out.println(userDAO.getAllUsers());
+
+        UserDAOHibernateSpring userDAOHibernateSpring =
+                appContext.getBean("userDAOHibernateSpring", UserDAOHibernateSpring.class);
+
+        System.out.println(userDAOHibernateSpring.findUserNameById(3));
+
+        System.out.println(userDAOHibernateSpring.findUserIdByEmail("Lisa@org.usa"));
 
 
 

@@ -1,68 +1,48 @@
 package com.kickstarter.dao.Impl;
 
-
-import java.util.List;
-
-//import org.apache.commons.dbcp2.BasicDataSource;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Random;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kickstarter.dao.interfaces.QuoteDao;
-//import com.kickstarter.hibernate.HibernateUtil;
+import com.kickstarter.dao.Interfaces.QuoteDao;
 import com.kickstarter.model.Quote;
 
 @Repository
 public class QuoteDaoImpl implements QuoteDao {
 
+	@PersistenceContext
+	private EntityManager entityManager;
 
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	@SuppressWarnings("unchecked")
 	@Transactional
 	public Quote get() {
 
-		Session session = sessionFactory.openSession();
+		Query query = entityManager.createQuery("select count(q) as cnt from Quote q");
+		Long count = (Long) query.getSingleResult();
 
-		List<Quote> quotes = (List<Quote>) session.createQuery("from Quote q order by rand()").setMaxResults(1).list();
-		if (quotes.isEmpty()) {
-			return null;
-		}
+		Random random = new Random();
+		int number = random.nextInt(count.intValue());
 
-		Quote quote = quotes.get(0);
+		Query selectQuery = entityManager.createQuery("select q from Quote q");
+		selectQuery.setFirstResult(number);
+		selectQuery.setMaxResults(1);
 
-		session.close();
+		Quote quote = (Quote) selectQuery.getSingleResult();
 
 		return quote;
-
 	}
+
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*	@Autowired
-private BasicDataSource dbCon;
-
-public BasicDataSource getDbCon() {
-	return dbCon;
-}
-
-public void setDbCon(BasicDataSource dbCon) {
-	this.dbCon = dbCon;
-}*/
+/*
+ * @Autowired private BasicDataSource dbCon;
+ * 
+ * public BasicDataSource getDbCon() { return dbCon; }
+ * 
+ * public void setDbCon(BasicDataSource dbCon) { this.dbCon = dbCon; }
+ */
 // public Quote get() {
 // ResultSet rs = null;
 // PreparedStatement pStatement = null;

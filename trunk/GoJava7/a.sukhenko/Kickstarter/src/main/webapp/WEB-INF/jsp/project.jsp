@@ -1,8 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <jsp:include page="header.jsp">
 	<jsp:param value="Projects" name="title"/>
 </jsp:include>
-<a href="category.html?id=${project.category.categoryId}">${project.category.categoryName}</a> > ${project.projectName}
+<a href="category?id=${project.category.categoryId}">${project.category.categoryName}</a> > ${project.projectName}
 <c:choose>
     <c:when test="${notfound == true}">
         Sorry, project not found. 
@@ -22,27 +25,24 @@
         <br />
  <!--  there was stuff here -->
      
-         Bonuses:
-        	<ul>
-   	<c:forEach var="pBonus" items="${paymentBonuses}" >
-   
-			<li>
-			 ${pBonus.amount}  - ${pBonus.bonus}
-			</li>
-			
-		</c:forEach>
-     </ul>   
+ 
      <hr>
    	<c:forEach var="question" items="${questions}" >
 			 Q: ${question.question} <br>
 			 A: ${question.answer} <br><br>
 			
 		</c:forEach>
-      
+      <hr>
      
      
     </c:otherwise>
 </c:choose>
-	
-	
+
+<h3><a href="question/add?projectId=${project.id}">Ask Question</a></h3>	
+
+
+
+<h3><a href="reward?id=${project.id}">Help the project [Donate]</a></h3>	
+
+
 <jsp:include page="footer.jsp" />
