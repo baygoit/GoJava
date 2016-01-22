@@ -65,21 +65,13 @@
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-
-		<property name="dataSource">
-			<ref bean="dataSource" />
-		</property>
+		
+		<property name="dataSource"><ref bean="dataSource" /></property>
 
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.cache.use_second_level_cache">true</prop>
-				<prop key="hibernate.cache.use_query_cache">true</prop>
-				<prop key="hibernate.cache.region.factory_class">
-					org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
-				</prop>
-				
 			</props>
 		</property>
 
@@ -105,6 +97,14 @@
 
 
 <!-- 
+Cache properties from sessionFactory
+<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.region.factory_class">
+					org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+				</prop>
+
+
 was used for GenerationType.AUTO
 <prop key="hibernate.id.new_generator_mappings">false</prop>
 

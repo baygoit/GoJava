@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "quotes")
 @NamedQueries({ @NamedQuery(name = "Quote.count", query = "select count(q) as cnt from Quote q"),
-@NamedQuery(name = "Quote.findAll", query = "select q from Quote q") })
+		@NamedQuery(name = "Quote.findAll", query = "select q from Quote q") })
 public class Quote {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

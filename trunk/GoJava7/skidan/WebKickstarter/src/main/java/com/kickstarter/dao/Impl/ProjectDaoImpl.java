@@ -3,7 +3,6 @@ package com.kickstarter.dao.Impl;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -21,9 +20,9 @@ public class ProjectDaoImpl implements ProjectDao {
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<Project> getAllProjectsForCategory(int categoryId) {
-		Query query = entityManager.createQuery("from Project where categoryId= :categoryId");
-		query.setParameter("categoryId", categoryId);
-		return query.getResultList();
+		return 	entityManager.createQuery("from Project where categoryId= :categoryId")
+				.setParameter("categoryId", categoryId)
+				.getResultList();
 	}
 
 	@Transactional(readOnly = true)

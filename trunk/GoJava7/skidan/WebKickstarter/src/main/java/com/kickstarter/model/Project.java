@@ -2,7 +2,7 @@ package com.kickstarter.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
+import java.util.List;
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,14 +14,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name = "projects")
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Cacheable
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Project {
 
 	@Id
@@ -43,15 +42,15 @@ public class Project {
 	@Column(name = "videoLink")
 	private String videoLink;
 	
-	@ManyToOne(cascade={CascadeType.MERGE})
+	@ManyToOne
 	@JoinColumn(name = "categoryId")
 	private Category category;
 	
-	@OneToMany(mappedBy = "project")
+	@OneToMany(mappedBy = "project", cascade = {CascadeType.ALL})
 	private Collection<Question> questions = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "project", cascade={CascadeType.MERGE})
-	private Collection<Payment> payments = new ArrayList<>();
+	@OneToMany(mappedBy = "project", cascade={CascadeType.ALL})
+	private List<Payment> payments = new ArrayList<Payment>();
 
 	public Project() {
 	}
@@ -81,11 +80,11 @@ public class Project {
 		this.questions = questions;
 	}
 
-	public Collection<Payment> getPayments() {
+	public List<Payment> getPayments() {
 		return payments;
 	}
 
-	public void setPayments(Collection<Payment> payments) {
+	public void setPayments(List<Payment> payments) {
 		this.payments = payments;
 	}
 
@@ -157,18 +156,11 @@ public class Project {
 		this.id = id;
 	}
 
-	/*
-	 * public Integer getCategoryId() { return categoryId; }
-	 * 
-	 * public void setCategoryId(int categoryId) { this.categoryId = categoryId;
-	 * }
-	 */
-
 	@Override
 	public String toString() {
 		return ("Project Title : " + title + "\n Project Discription :" + discription + "\n Project History : "
 				+ projectHistory + "\n Video Link : " + videoLink + "\n Required Sum :" + requiredSum
-				+ "\n Gained Sum :" + gainedSum + "\n Days Left :" + daysLeft + "\n + \n ID :" + id + "\n ");
+				+ "\n Gained Sum :" + gainedSum + "\n Days Left :" + daysLeft + "\n  ProjectId :" + id + "\n ");
 	}
 
 }
