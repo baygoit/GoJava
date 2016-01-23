@@ -26,17 +26,17 @@ public class UserDAOHibernateSpring {
         this.sessionFactory = sessionFactory;
     }
 
-    /*public void addNewUser(User user) {
+    public void addNewUser(User user) {
+        /*HQL supports INSERT INTO clause only where records can be inserted
+        from one object to another object. That means that you must have
+        an old_modelObject table in DB where you keep modelObjects.
+        If you need to insert modelObject into DB, use session.save(modelObject).*/
         Session session = getSessionFactory().openSession();
-        String sqlQuery = "INSERT INTO airbnb.user (userName, userSurname, email, userCity) values (?, ?, ?, ?)";
-        SQLQuery query = session.createSQLQuery(sqlQuery);
-        query.
-                update(sqlQuery,
-                new Object[]{user.getUserName(),
-                        user.getUserSurname(),
-                        user.getEmail(),
-                        user.getUserCity()});
-    }*/
+        session.beginTransaction();
+        session.save(user);
+        session.getTransaction().commit();
+        session.close();
+    }
 
     public List findUserIdByEmail(String email) {
         String hqlQuery = "SELECT idUser FROM User WHERE email = :email";
@@ -57,25 +57,43 @@ public class UserDAOHibernateSpring {
         return result;
     }
 
-    /*public User findUserById(int idUser) {
-        String sqlQuery = "SELECT * FROM airbnb.user WHERE idUser=?";
-        return this.getJdbcTemplate().queryForObject(sqlQuery, new Object[]{idUser}, new UserRowMapper());
+    public User findUserById(int idUser) {
+        String hqlQuery = "FROM User WHERE idUser = :idUser";
+        Query query = getSessionFactory().
+                openSession().
+                createQuery(hqlQuery).
+                setParameter("idUser", idUser);
+        //User result = (User) query.list();
+        User result = (User) query.uniqueResult();
+        return result;
     }
 
     public List<User> getAllUsers() {
-        String sqlQuery = "SELECT * FROM airbnb.user";
-        return this.getJdbcTemplate().query(sqlQuery, new UserRowMapper());
+        String hqlQuery = "FROM User";
+        Query query = getSessionFactory().
+                openSession().
+                createQuery(hqlQuery);
+        return query.list();
     }
 
     public void deleteUserById(int idUser) {
-        String sqlQuery = "DELETE FROM airbnb.user WHERE idUser=?";
-        this.getJdbcTemplate().update(sqlQuery, new Object[]{idUser});
+        String hqlQuery = "DELETE FROM User WHERE idUser = :idUser";
+        Query query = getSessionFactory().
+                openSession().
+                createQuery(hqlQuery).
+                setParameter("idUser", idUser);
+        query.executeUpdate();
     }
 
     public void deleteUserByNameSurname(String userName, String userSurname) {
-        String sqlQuery = "DELETE FROM airbnb.user WHERE userName=? and userSurname=?";
-        this.getJdbcTemplate().update(sqlQuery, new Object[]{userName,userSurname});
-    }*/
+        String hqlQuery = "DELETE FROM User WHERE userName = :userName and userSurname = :userSurname";
+        Query query = getSessionFactory().
+                openSession().
+                createQuery(hqlQuery).
+                setParameter("userName", userName).
+                setParameter("userSurname", userSurname);
+        query.executeUpdate();
+    }
 
     /*public void updateUserToHost(int idUser) {
         String sqlQuery = "UPDATE airbnb.user SET isHost=1 where idUser=?";

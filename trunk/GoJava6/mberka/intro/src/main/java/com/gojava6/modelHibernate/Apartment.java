@@ -18,7 +18,7 @@ public class Apartment {
     @Column
     private int idApartment;
     @Column
-    private String city;
+    private String apartmentCity;
     @Column
     private Enum ApartmentType;
     @Column
@@ -34,9 +34,9 @@ public class Apartment {
     public Apartment() {
     }
 
-    public Apartment(String city, Enum apartmentType,
+    public Apartment(String apartmentCity, Enum apartmentType,
                      String description, Date startDate, Date endDate) {
-        this.city = city;
+        this.apartmentCity = apartmentCity;
         ApartmentType = apartmentType;
         this.description = description;
         this.startDate = startDate;
@@ -52,12 +52,12 @@ public class Apartment {
     }
 
     public String getCity() {
-        return city;
+        return apartmentCity;
     }
 
-    public void setCity(String city) {
-        if (Validation.getValidation().validCityName(city)) {
-            this.city = city;
+    public void setApartmentCity(String apartmentCity) {
+        if (Validation.getValidation().validCityName(apartmentCity)) {
+            this.apartmentCity = apartmentCity;
         }
     }
 
@@ -113,7 +113,7 @@ public class Apartment {
     public String toString() {
         return "Apartment{" +
                 /*"user=" + user +*/
-                ", city='" + city + '\'' +
+                ", ApartmentCity='" + apartmentCity + '\'' +
                 ", ApartmentType=" + ApartmentType +
                 ", description='" + description + '\'' +
                 ", startDate=" + startDate +

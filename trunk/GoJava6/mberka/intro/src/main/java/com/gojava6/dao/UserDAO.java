@@ -6,40 +6,13 @@ import java.sql.*;
 
 public class UserDAO {
 
-
-    public boolean userAlreadyExists(User user) {
-        Connection DBConnection = DatabaseMySQL.getDbInstance().getConnection();
-        PreparedStatement statement = null;
-        String checkQuery = "select case when exists " +
-                "(select * from airbnb.users where email=?)" +
-                "then 1 else 0 end";
-
-        try {
-            statement =
-                    DBConnection.prepareStatement(checkQuery);
-            statement.setString(1, user.getEmail());
-            statement.executeQuery();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                DBConnection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        //TODO
-        return checkQuery.contains("1");
-    }
-
     public void addNewUser(User user) {
         Connection DBConnection = DatabaseMySQL.getDbInstance().getConnection();
         PreparedStatement statement = null;
         String addNewUser = "insert into airbnb.users (name, surname, email, userCity) values (?, ?, ?, ?)";
 
         try {
-            statement =
-                    DBConnection.prepareStatement(addNewUser);
+            statement = DBConnection.prepareStatement(addNewUser);
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getUserSurname());
             statement.setString(3, user.getEmail());
@@ -50,19 +23,6 @@ public class UserDAO {
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-
-            /*if (!userAlreadyExists(user)) {
-                try {
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                try {
-                    throw new Exception("UserAlreadyExistsException");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }*/
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -205,8 +165,7 @@ public class UserDAO {
                     DBConnection.prepareStatement(query);
             statement.setString(1, aptCity);
             statement.setString(2, aptType);
-            statement.setInt(3, 1);
-            statement.setInt(4, idUser);
+            statement.setInt(3, idUser);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

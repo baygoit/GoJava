@@ -4,14 +4,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DatabaseReservePostgreSQL {
-    private static DatabaseReservePostgreSQL dbInstance = new DatabaseReservePostgreSQL();
+public class DatabasePostgreSQL {
+    private static DatabasePostgreSQL dbInstance = new DatabasePostgreSQL();
     private Connection connection;
 
-    private DatabaseReservePostgreSQL() {
+    private DatabasePostgreSQL() {
     }
 
-    public static DatabaseReservePostgreSQL getDbInstance() {
+    public static DatabasePostgreSQL getDbInstance() {
         return dbInstance;
     }
 

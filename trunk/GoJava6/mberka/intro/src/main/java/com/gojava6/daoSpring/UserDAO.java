@@ -17,10 +17,10 @@ import java.util.List;
 @Component
 public class UserDAO extends JdbcDaoSupport {
 
-    /*Spring DAO Support: (1) extending JdbcDaoSupport
+    /*---Spring DAO Support: (1) extending JdbcDaoSupport
     (2) adding "this" to getJdbcTemplate(). in methods
     to refer parent DAO Support class
-    (3) remove dataSource & jdbcTemplate fields and get-/setters*/
+    (3) remove dataSource & jdbcTemplate fields and get-/setters---*/
 
     /*@Autowired
     private DataSource dataSource;
@@ -45,7 +45,7 @@ public class UserDAO extends JdbcDaoSupport {
 
     }*/
 
-    /*NamedParameterJdbcTemplate*/
+    /*---NamedParameterJdbcTemplate---*/
     /*@Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     public NamedParameterJdbcTemplate getNamedParameterJdbcTemplate() {

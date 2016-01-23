@@ -10,11 +10,11 @@ import java.sql.SQLException;
 public class ReservationDAO {
 
     public void makeReservation(Reservation reservation) {
-        Connection connection = DatabaseReservePostgreSQL.getDbInstance().getConnection();
+        Connection connection = DatabasePostgreSQL.getDbInstance().getConnection();
         try {
             PreparedStatement preparedStatement =
-                    connection.prepareStatement("insert insert into airbnb.users values (?, ?, ?)");
-            preparedStatement.setObject(1, reservation.getRoom());
+                    connection.prepareStatement("INSERT INTO airbnb.users VALUES (?, ?, ?)");
+            preparedStatement.setObject(1, reservation.getApartment());
             preparedStatement.setDate(2, (Date) reservation.getMoveInDate());
             preparedStatement.setDate(3, (Date) reservation.getMoveInDate());
             preparedStatement.executeUpdate();

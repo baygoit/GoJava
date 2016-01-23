@@ -4,7 +4,7 @@ import com.gojava6.observer.Validation;
 
 public class User {
 
-    private int id;
+    private int idUser;
     private String userName;
     private String userSurname;
     private String email;
@@ -23,11 +23,11 @@ public class User {
     }
 
     public int getId() {
-        return id;
+        return idUser;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idUser = idUser;
     }
 
     public boolean isHostUser() {

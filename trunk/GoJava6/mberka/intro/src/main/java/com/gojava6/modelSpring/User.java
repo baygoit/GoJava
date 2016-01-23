@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 
-    private int id;
+    private int idUser;
     private String userName;
     private String userSurname;
     private String email;
@@ -25,11 +25,11 @@ public class User {
     }
 
     public int getId() {
-        return id;
+        return idUser;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idUser) {
+        this.idUser = idUser;
     }
 
     public boolean isHostUser() {

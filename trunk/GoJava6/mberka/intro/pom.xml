@@ -111,6 +111,7 @@
         </dependency>
         <!-- /Spring -->
 
+        <!--The simplest connection pool-->
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>

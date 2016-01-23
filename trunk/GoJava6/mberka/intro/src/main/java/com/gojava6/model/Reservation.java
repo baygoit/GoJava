@@ -3,16 +3,16 @@ package com.gojava6.model;
 import java.util.Date;
 
 public class Reservation {
-    private Apartment room;
+    private Apartment apartment;
     private Date moveInDate;
     private Date moveOutDate;
 
-    public Apartment getRoom() {
-        return room;
+    public Apartment getApartment() {
+        return apartment;
     }
 
-    public void setRoom(Apartment room) {
-        this.room = room;
+    public void setApartment(Apartment apartment) {
+        this.apartment = apartment;
     }
 
     public Date getMoveInDate() {

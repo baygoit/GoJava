@@ -7,13 +7,13 @@ import java.util.Date;
 public class Apartment {
     private User user;
     private String city;
-    private Enum ApartmentType;
+    private Enum apartmentType;
     private Date startDate;
     private Date endDate;
 
     public Apartment(String city, Enum apartmentType, Date startDate, Date endDate) {
         this.city = city;
-        ApartmentType = apartmentType;
+        apartmentType = apartmentType;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -29,11 +29,11 @@ public class Apartment {
     }
 
     public Enum getApartmentType() {
-        return ApartmentType;
+        return apartmentType;
     }
 
     public void setApartmentType(Enum apartmentType) {
-        ApartmentType = apartmentType;
+        apartmentType = apartmentType;
     }
 
     public User getUser() {
