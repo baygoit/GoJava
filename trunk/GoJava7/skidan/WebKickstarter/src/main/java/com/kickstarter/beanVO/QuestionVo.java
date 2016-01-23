@@ -5,14 +5,14 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class QuestionVO {
+public class QuestionVo {
 
 	@Size(min = 5, max = 150)
     @NotEmpty
 	@NotNull
 	private String question;
 
-	public QuestionVO() {
+	public QuestionVo() {
 
 	}
 

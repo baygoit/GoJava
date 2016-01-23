@@ -58,9 +58,16 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	
-  
+  <!-- Aspect class identification -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<bean id="loggerAspect" class="com.kickstarter.aspect.LoggerAspect"></bean>
+
+
+   <!-- Validation Error Messages  -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	   <property name="basename" value="/WEB-INF/validationMessages/messages" />
+    </bean>
+
 
 
 	<bean id="sessionFactory"
@@ -84,12 +91,6 @@
 
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 	
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-	   <property name="basename" value="/WEB-INF/validationMessages/messages" />
-    </bean>
-    
-	
-
 </beans>
 
 
