@@ -33,6 +33,7 @@
 	<bean id="entityManagerFactory"
 		  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="basicDataSource" />
+		<property name="persistenceUnitName" value="default"></property>
 	</bean>
 	
 </beans>
