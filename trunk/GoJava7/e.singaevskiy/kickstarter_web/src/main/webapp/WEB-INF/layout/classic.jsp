@@ -23,7 +23,7 @@
 	crossorigin="anonymous"></script>
 
 <!-- Custom css -->	
-<link rel="stylesheet" href="/resources/css/sticky_footer.css" />
+<link rel="stylesheet" href="<c:url value="/resources/css/sticky_footer.css" />" />
 </head>
 <body>
 	<div class="container">

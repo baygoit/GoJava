@@ -34,7 +34,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
     </servlet-mapping>
 
     
-
+<!--  
     <error-page>
         <error-code>500</error-code>
         <location>/error500.jsp</location>
@@ -44,6 +44,6 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
         <location>/error404.jsp</location>
     </error-page>
     
-    
+    -->
 
 </web-app>

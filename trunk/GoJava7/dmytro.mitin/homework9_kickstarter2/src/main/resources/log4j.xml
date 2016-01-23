@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="trace">
+    <Appenders>
+        <File name="File" fileName="output.log" bufferedIO="false" advertiseURI="output.log" advertise="true" />
+    </Appenders>
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>

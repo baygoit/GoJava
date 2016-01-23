@@ -18,12 +18,21 @@
 <h3>About this project</h3>${project.history}
 <br><br><cite>Demo video: ${project.link}</cite>
 
+<h3><a href="reward?projectId=${project.projectId}">See rewards</a></h3>
+
+<form action="question" method="post">
+	<br>Ask your question:
+	<br><textarea name="question" rows="5" cols="60"></textarea>
+	<br> <input type="hidden" name="projectId" value="${project.projectId}" />
+	<input type="submit" value="Submit" />
+</form>
+
 <c:if test="${empty questions}"><h3>There are no questions</h3></c:if>
 
 <c:if test="${not empty questions}">
 	<h3>Questions:</h3>
 	<ul>
-		<c:forEach var="question" items="${requestScope.questions}">
+		<c:forEach var="question" items="${requestScope.questions}">requestScopelkjhjgtvfc dbv
 			<li>
 				<p>
 					<cite>${question.time}				
@@ -35,14 +44,5 @@
 		</c:forEach>
 	</ul>
 </c:if>
-
-<form action="question" method="post">
-	<br>Ask your question:
-	<br><textarea name="question" rows="5" cols="60"></textarea>
-	<br> <input type="hidden" name="projectId" value="${project.projectId}" />
-	<input type="submit" value="Submit" />
-</form>
-
-<h3><a href="reward?projectId=${project.projectId}">See rewards</a></h3>
 
 <jsp:include page="footer.jsp" />

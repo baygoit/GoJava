@@ -34,7 +34,7 @@ public class ProjectController {
 		for (Project p : projectList) {
 			p.setGainedSum(paymentDao.getAll(p.getId()));
 		}
-		modelAndView.addObject("projectList", projectList); // FIXME
+		modelAndView.addObject("projectList", projectList); 
 		return modelAndView;
 	}
 

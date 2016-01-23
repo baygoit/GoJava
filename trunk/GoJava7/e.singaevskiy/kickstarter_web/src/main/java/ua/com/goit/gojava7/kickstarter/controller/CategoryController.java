@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDAO;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.CategoryDAO;
+import ua.com.goit.gojava7.kickstarter.datasource.contract.ProjectDAO;
 
 @Controller
 public class CategoryController {
@@ -25,7 +25,7 @@ public class CategoryController {
 	}
 	
 	@RequestMapping("/category")
-	public String showProjectsInCategory(Model model, @RequestParam(name = "id") Integer categoryId) {
+	public String showProjectsInCategory(Model model, @RequestParam(name = "id") Long categoryId) {
 		model.addAttribute("category", categoryDAO.get(categoryId));
 		model.addAttribute("projects", projectDAO.getByCategory(categoryId));
 		return "projectList";

@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -8,9 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.Size;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Question.getAll", query="select entity from Question as entity"),
+	@NamedQuery(name="Question.getByProject", query="select entity from Question as entity where project_id = :project_id"),
+	@NamedQuery(name="Question.removeAll", query="delete from Question")
+	})
 public class Question {
 	
 	private static final int QUESTION_MIN_SIZE = 10;
@@ -18,9 +26,9 @@ public class Question {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
 	@JoinColumn(name="project_id", foreignKey=@ForeignKey(name="question_project_id_fkey"))
     private Project project;
 	
@@ -69,7 +77,7 @@ public class Question {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -82,16 +90,19 @@ public class Question {
 		if (getClass() != obj.getClass())
 			return false;
 		Question other = (Question) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

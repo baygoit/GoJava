@@ -5,6 +5,9 @@ import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
 
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Question;
+
 public class QuestionTest{
     Question question = new Question();
     Project project = new Project();

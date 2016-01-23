@@ -17,12 +17,22 @@
            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
-	
+	<context:annotation-config />
 	<mvc:annotation-driven />
-	<context:component-scan base-package="com.kickstarter.dao.interfaces" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+
+	<context:component-scan base-package="com.kickstarter.dao.Interfaces" />
 	<context:component-scan base-package="com.kickstarter.dao.Impl" />
     <context:component-scan base-package="com.kickstarter.controller" />
+    <context:component-scan base-package="com.kickstarter.model" />
     
+    
+    <bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitName" value="WebKickstarter"></property>
+	</bean>
 	
 	
 	<bean id="viewResolver"
@@ -42,35 +52,33 @@
 		<property name="password" value="12345" />
 	</bean>
 
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-
-	<bean id="loggerAspect" class="com.kickstarter.aspect.LoggerAspect"></bean>
 
 	<tx:annotation-driven />
-
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
+     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	
+  <!-- Aspect class identification -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<bean id="loggerAspect" class="com.kickstarter.aspect.LoggerAspect"></bean>
+
+
+   <!-- Validation Error Messages  -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	   <property name="basename" value="/WEB-INF/validationMessages/messages" />
+    </bean>
+
+
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-
-		<property name="dataSource">
-			<ref bean="dataSource" />
-		</property>
+		
+		<property name="dataSource"><ref bean="dataSource" /></property>
 
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.id.new_generator_mappings">false</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.cache.use_second_level_cache">true</prop>
-				<prop key="hibernate.cache.use_query_cache">true</prop>
-				<prop key="hibernate.cache.region.factory_class">
-					org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
-				</prop>
-				
 			</props>
 		</property>
 
@@ -81,9 +89,8 @@
 		</property>
 	</bean>
 
-	<bean
-		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	
 </beans>
 
 
@@ -91,9 +98,22 @@
 
 
 <!-- 
+Cache properties from sessionFactory
+<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.region.factory_class">
+					org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+				</prop>
 
 
+was used for GenerationType.AUTO
+<prop key="hibernate.id.new_generator_mappings">false</prop>
 
+<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+		
 
 <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop> 
 	<property name="annotatedClasses"> <list> <value>com.kickstarter.model.Quote</value> 

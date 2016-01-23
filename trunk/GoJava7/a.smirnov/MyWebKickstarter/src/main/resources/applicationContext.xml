@@ -22,17 +22,17 @@
         
     <import resource="applicationContext-aspects.xml" />
 	<import resource="applicationContext-db.xml" />
-  		
-	<mvc:annotation-driven />
-  	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.controller" />
-  	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.handlers" />
 	
+  	<context:component-scan base-package="ua.com.goit.gojava7.kickstarter.controller" />	
+  	
+	<mvc:annotation-driven />
+  	<mvc:resources mapping="/resources/**" location="/resources/" />
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
-		
+	</bean>	
 </beans>

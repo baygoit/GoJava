@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.goit.gojava7.kickstarter.config.Validator;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
-import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
-import ua.com.goit.gojava7.kickstarter.models.Project;
-import ua.com.goit.gojava7.kickstarter.models.Reward;
+import ua.com.goit.gojava7.kickstarter.dto.ProjectDto;
+import ua.com.goit.gojava7.kickstarter.dto.RewardDto;
+import ua.com.goit.gojava7.kickstarter.service.PaymentService;
+import ua.com.goit.gojava7.kickstarter.service.ProjectService;
+import ua.com.goit.gojava7.kickstarter.service.RewardService;
+import ua.com.goit.gojava7.kickstarter.validator.MyValidator;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.List;
 
 @Transactional
 @Controller
@@ -27,104 +26,110 @@ public class PaymentController {
     private static final Logger log = LoggerFactory.getLogger(PaymentController.class);
 
     @Autowired
-    private ProjectDao projectDao;
+    private MyValidator myValidator;
     @Autowired
-    private RewardDao rewardDao;
+    private RewardService rewardService;
     @Autowired
-    private PaymentDao paymentDao;
+    private ProjectService projectService;
     @Autowired
-    private Validator validator;
+    private PaymentService paymentService;
 
-    Long rewardId;
-    Long projectId;
-    String amount;
-    ModelAndView modelAndView;
-
-    @RequestMapping(value = "/payment", method = RequestMethod.GET)
+    @RequestMapping("/payment")
     public ModelAndView showPayment(@RequestParam Long rewardId, @RequestParam(required = false) Long projectId,
                                     @RequestParam(required = false) String amount) throws ServletException, IOException {
-        log.info("showPayment()...");
-        this.rewardId = rewardId;
-        modelAndView = new ModelAndView();
+        log.info("showPayment(rewardId = {}, projectId = {}, amount = {})...", rewardId, projectId, amount);
 
-        if (rewardExists()) {
-            return payWithReward();
+        if (rewardExists(rewardId)) {
+            return payWithReward(rewardId);
         }
 
-        this.amount = amount;
-        this.projectId = projectId;
-        Project project = projectDao.get(projectId);
-
-        modelAndView.addObject(project);
-        modelAndView.addObject("category", project.getCategory());
-
-        if(amountIsValid()) {
-            return payWithAmount();
+        if(amountIsValid(amount)) {
+            return payWithAmount(amount, projectId);
         }
 
-        return returnWarning();
+        return returnWarning(projectId);
     }
 
-    private boolean rewardExists() {
-        log.info("rewardExists()...");
+    private boolean rewardExists(Long rewardId) {
+        log.info("rewardExists(rewardId = {})...", rewardId);
+
         return rewardId != 0;
     }
 
-    private ModelAndView payWithReward() {
-        log.info("payWithReward()...");
+    private ModelAndView payWithReward(Long rewardId) {
+        log.info("payWithReward(rewardId = {})...", rewardId);
 
-        Reward reward = rewardDao.get(rewardId);
-        Long amount = reward.getAmount();
-        Project project = reward.getProject();
+        RewardDto rewardDto = rewardService.get(rewardId);
+        ProjectDto projectDto = rewardDto.getProjectDto();
 
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("payment");
-        modelAndView.addObject("amount", amount);
-        modelAndView.addObject("project", project);
-        modelAndView.addObject("category", project.getCategory());
+        modelAndView.addObject("amount", rewardDto.getAmount());
+        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("project", projectDto);
+
+        log.info("payWithReward(rewardId = {}) returned {} ", rewardId, modelAndView);
         return modelAndView;
     }
 
-    private boolean amountIsValid() {
-        log.info("amountIsValid()...");
-        return validator.validateAmountOfPledge(amount);
+    private boolean amountIsValid(String amount) {
+        log.info("amountIsValid(amount = {})...", amount);
+        return myValidator.validateAmountOfPledge(amount);
     }
 
-    public ModelAndView payWithAmount(){
-        log.info("payWithAmount()...");
+    public ModelAndView payWithAmount(String amount, Long projectId){
+        log.info("payWithAmount(amount = {}, projectId = {})...", amount, projectId);
+
+        ProjectDto projectDto = projectService.getProjectIdNameCategory(projectId);
+
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("payment");
         modelAndView.addObject("amount", Long.parseLong(amount));
+        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("project", projectDto);
+
+        log.info("payWithAmount(amount = {}, projectId = {}) returned {} ", amount, projectId, modelAndView);
         return modelAndView;
     }
 
-    public ModelAndView returnWarning() {
-        log.info("returnWarning()...");
-        List<Reward> rewards = rewardDao.getByProject(projectId);
+    public ModelAndView returnWarning(Long projectId) {
+        log.info("returnWarning(projectId = {})...", projectId);
 
+        ProjectDto projectDto = projectService.getProjectIdNameCategoryRewards(projectId);
+
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("reward");
-        modelAndView.addObject(rewards);
+        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("project", projectDto);
+        modelAndView.addObject("rewards", projectDto.getRewards());
         modelAndView.addObject("message", "-----Wrong amount-----");
+
+        log.info("returnWarning(projectId = {}) returned {} ", projectId, modelAndView);
         return modelAndView;
     }
 
     @RequestMapping(value = "/paymentCheck", method = RequestMethod.POST)
     public ModelAndView checkPayment(@RequestParam Long projectId, @RequestParam Long amount,
                                      @RequestParam String name, @RequestParam String card) throws ServletException, IOException {
-        log.info("checkPayment()...");
+        log.info("checkPayment(projectId = {}, amount = {}, name = {}, card = {})...", projectId, amount, name, card);
 
-        Project project = projectDao.get(projectId);
+        ProjectDto projectDto = projectService.getProjectIdNameCategory(projectId);
 
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("category", projectDao.getCategory(project));
-        modelAndView.addObject("project", project);
         modelAndView.addObject("amount", amount);
+        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("project", projectDto);
 
-        if (paymentDao.createPayment(name, card, amount, project)) {
+        if (paymentService.createPayment(name, card, amount, projectId)) {
             modelAndView.setViewName("paymentOk");
+            log.info("checkPayment(projectId = {}, amount = {}, name = {}, card = {}) returned {}", projectId, amount, name, card, modelAndView);
             return modelAndView;
         }
 
         modelAndView.setViewName("payment");
         modelAndView.addObject("message", "-----Wrong data-----");
+
+        log.info("checkPayment(projectId = {}, amount = {}, name = {}, card = {}) returned {}", projectId, amount, name, card, modelAndView);
         return modelAndView;
     }
 }

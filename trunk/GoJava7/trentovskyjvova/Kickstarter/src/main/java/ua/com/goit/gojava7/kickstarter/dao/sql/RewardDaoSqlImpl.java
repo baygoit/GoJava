@@ -2,40 +2,43 @@ package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
+
 import ua.com.goit.gojava7.kickstarter.domain.Reward;
 
 @Repository
 @Transactional
 public class RewardDaoSqlImpl implements RewardDao {
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
 	public List<Reward> getRewards(int projectId) {
 
-		Session session = sessionFactory.getCurrentSession();
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
-		Criteria criteria = session.createCriteria(Reward.class);
-		criteria.add(Restrictions.eq("projectId", projectId));
-		
-		return criteria.list();
+		CriteriaQuery<Reward> criteriaQuery = criteriaBuilder.createQuery(Reward.class);
+		Root<Reward> entityRoot = criteriaQuery.from(Reward.class);
+		criteriaQuery.select(entityRoot);
+		criteriaQuery.where(criteriaBuilder.equal(entityRoot.get("projectId"), projectId));
+		TypedQuery<Reward> query = em.createQuery(criteriaQuery);
+
+		return query.getResultList();
 	}
 
 	@Override
 	public Reward getReward(int rewardId) {
 
-		Session session = sessionFactory.getCurrentSession();
-		
-		return session.get(Reward.class, rewardId);
+		return em.find(Reward.class, rewardId);
 	}
 
 }
