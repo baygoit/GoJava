@@ -20,17 +20,20 @@
            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<mvc:annotation-driven />
+	<mvc:resources mapping="/pages/**" location="/WEB-INF/pages/" />
     <context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />
           
     <import resource="applicationContextDb.xml"/> 
     
 	<import resource="applicationContextAop.xml"/>
 
+	<import resource="applicationContextSecurity.xml"/>
+
 	<bean id="viewResolver"
 		  class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
 				  value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	

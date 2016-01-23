@@ -1,3 +1,3 @@
-<jsp:include page="WEB-INF/jsp/header.jsp" />
+<jsp:include page="WEB-INF/pages/header.jsp" />
 <jsp:forward page="index.html" />
-<jsp:include page="WEB-INF/jsp/footer.jsp" />
+<jsp:include page="WEB-INF/pages/footer.jsp" />

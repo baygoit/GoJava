@@ -32,7 +32,7 @@
 <c:if test="${not empty questions}">
 	<h3>Questions:</h3>
 	<ul>
-		<c:forEach var="question" items="${requestScope.questions}">requestScopelkjhjgtvfc dbv
+		<c:forEach var="question" items="${requestScope.questions}">
 			<li>
 				<p>
 					<cite>${question.time}				
