@@ -36,32 +36,13 @@ public class QuoteDaoImpl implements QuoteDao {
 
 }
 
-//Query selectQuery = entityManager.createQuery("select q from Quote q");
-//selectQuery.setFirstResult(1);
-//selectQuery.setMaxResults(1);
-//Quote quote = (Quote) selectQuery.getSingleResult();
-//return quote;
-
-
-
-
-
-
-
-
-
-
-
-/*	@Autowired
-private BasicDataSource dbCon;
-
-public BasicDataSource getDbCon() {
-	return dbCon;
-}
-
-public void setDbCon(BasicDataSource dbCon) {
-	this.dbCon = dbCon;
-}*/
+/*
+ * @Autowired private BasicDataSource dbCon;
+ * 
+ * public BasicDataSource getDbCon() { return dbCon; }
+ * 
+ * public void setDbCon(BasicDataSource dbCon) { this.dbCon = dbCon; }
+ */
 // public Quote get() {
 // ResultSet rs = null;
 // PreparedStatement pStatement = null;

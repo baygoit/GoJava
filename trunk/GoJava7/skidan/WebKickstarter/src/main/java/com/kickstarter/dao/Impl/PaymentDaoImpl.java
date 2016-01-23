@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 //import org.springframework.transaction.annotation.Isolation;
 //import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.kickstarter.dao.Interfaces.PaymentDao;
 import com.kickstarter.model.Payment;
 import com.kickstarter.model.Project;
@@ -22,23 +21,18 @@ public class PaymentDaoImpl implements PaymentDao {
 	@Transactional
 	public void addPayment(Project project, int amount) {
 		Payment payment = new Payment();
-		System.out.println("1");
 		payment.setAmount(amount);
-		System.out.println("2");
 		payment.setProject(project);
-		System.out.println("3");
 		entityManager.persist(payment);
-		System.out.println("4");
-
 	}
 	
 	@Transactional(readOnly = true)
 	public Integer getAll(int projectId) {      
-		Query query = entityManager.
-				createQuery("select SUM(amount)from Payment where projectId = :projectId");
-        query.setParameter("projectId", projectId);
-		Long g = (Long)query.getSingleResult();
-		int sum = g.intValue();
+		Long tempSum = (Long) entityManager.
+				createQuery("select SUM(amount)from Payment where projectId = :projectId")
+				.setParameter("projectId", projectId)
+				.getSingleResult();
+		int sum = tempSum.intValue();
 		return sum;
 	}
 }

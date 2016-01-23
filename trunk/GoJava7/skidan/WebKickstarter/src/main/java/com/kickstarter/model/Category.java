@@ -21,7 +21,14 @@ public class Category {
 
     }
 
-    public Category(String title, int id) {
+    public Category(int id, String title, Collection<Project> project) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.project = project;
+	}
+
+	public Category(String title, int id) {
         this.title = title;
         this.id = id;
 

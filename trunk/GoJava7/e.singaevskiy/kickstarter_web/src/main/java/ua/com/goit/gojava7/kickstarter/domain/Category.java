@@ -7,9 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+import org.hibernate.annotations.Formula;
+
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Category.getAll", query="select entity from Category as entity"),
+	@NamedQuery(name="Category.getAll", query="select entity from Category as entity order by name"),
 	@NamedQuery(name="Category.removeAll", query="delete from Category")
 })
 public class Category {
@@ -17,6 +19,8 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Formula("(select count(p.id) from project p where p.category_id = id)")
+    private int totalProjects;
     
     public Category() {
         // default bean constructor
@@ -67,5 +71,13 @@ public class Category {
     public void setId(Long id) {
         this.id = id;
     }
+
+	public int getTotalProjects() {
+		return totalProjects;
+	}
+
+	public void setTotalProjects(int totalProjects) {
+		this.totalProjects = totalProjects;
+	}
 
 }

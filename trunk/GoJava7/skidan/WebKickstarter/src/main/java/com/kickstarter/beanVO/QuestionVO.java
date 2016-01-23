@@ -3,9 +3,12 @@ package com.kickstarter.beanVO;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class QuestionVO {
 
-	@Size(min = 3)
+	@Size(min = 5, max = 150)
+    @NotEmpty
 	@NotNull
 	private String question;
 

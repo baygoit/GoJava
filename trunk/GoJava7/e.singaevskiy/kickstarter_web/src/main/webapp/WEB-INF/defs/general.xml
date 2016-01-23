@@ -20,7 +20,6 @@
 
 	<definition name="projectDetails" extends="common">
 		<put-attribute name="body" value="/WEB-INF/jsp/projectDetails.jsp" />
-		<put-attribute name="footer" value="" />
 	</definition>
 
 	<definition name="message" extends="common">
@@ -32,4 +31,15 @@
 		<put-attribute name="title" value="Support project" />
 		<put-attribute name="body" value="/WEB-INF/jsp/payment.jsp" />
 	</definition>
+	
+	<definition name="signUp" extends="common">
+		<put-attribute name="title" value="Sign-up" />
+		<put-attribute name="body" value="/WEB-INF/jsp/signUp.jsp" />
+	</definition>
+	
+		<definition name="login" extends="common">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
+	</definition>
+	
 </tiles-definitions>

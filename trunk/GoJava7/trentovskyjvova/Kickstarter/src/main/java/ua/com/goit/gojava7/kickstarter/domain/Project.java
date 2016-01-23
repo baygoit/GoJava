@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
 @Table(name = "project")
@@ -35,9 +39,9 @@ public class Project {
 	private int goal;
 	@Column
 	private String videoUrl;
-	@Column
+	@Transient
 	private int amountPledge;
-	@OneToMany(mappedBy = "project")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<Payment> payments = new HashSet<Payment>();
 	
 	public Project() {
@@ -138,5 +142,12 @@ public class Project {
 	public void setPayments(Set<Payment> payments) {
 		this.payments = payments;
 	}
-
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("name", name).append("description", description)
+				.append("daysToGo", daysToGo).append("goal", goal).append("amountPledge", amountPledge)
+				.toString();
+	}
+	
 }

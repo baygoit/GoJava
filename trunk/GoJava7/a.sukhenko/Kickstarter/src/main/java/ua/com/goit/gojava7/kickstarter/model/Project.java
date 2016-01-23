@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -12,14 +13,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+
 import org.hibernate.annotations.Type;
 @Entity
 @Table(name = "projects")
-public class Project{
+@NamedQuery(name="Project.findByCategoryId", query="SELECT pr FROM Project pr WHERE pr.category.categoryId = :categoryId")
+public class Project implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3601009349187745841L;
     private static final String MINUTES_LEFT = " minutes to go";
     private static final String HOURS_LEFT   = " hours to go";
     private static final String DAYS_LEFT    = " days to go";
@@ -40,6 +46,9 @@ public class Project{
     @Column
     private String              demoLink;
 
+    
+    
+
     @ManyToOne
     @JoinColumn(name = "projectCategoryId")
     private Category            category;
@@ -49,7 +58,7 @@ public class Project{
     private LocalDateTime       enddate;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
-    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    //@Cascade({org.hibernate.annotations.CascadeType.ALL})
     private List<Bonus>         bonuses      = new ArrayList<Bonus>();
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")

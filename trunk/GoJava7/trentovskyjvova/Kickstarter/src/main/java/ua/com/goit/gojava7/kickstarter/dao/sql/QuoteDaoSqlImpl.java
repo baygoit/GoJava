@@ -1,10 +1,11 @@
 package ua.com.goit.gojava7.kickstarter.dao.sql;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Random;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,20 +14,24 @@ import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 @Repository
 public class QuoteDaoSqlImpl implements QuoteDao {
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 	
 	@Override
 	@Transactional
 	public Quote getRandomQuote() {
+		
+		Query query = em.createNamedQuery("Quote.count");
+		Long count = (Long) query.getSingleResult();
 
-		Session session = sessionFactory.getCurrentSession();
-		
-		Criteria criteria = session.createCriteria(Quote.class);
-		criteria.add(Restrictions.sqlRestriction("1=1 order by random()"));
-		criteria.setMaxResults(1);
-		
-		return (Quote) criteria.uniqueResult();
+		Random random = new Random();
+		int number = random.nextInt(count.intValue());
+
+		Query selectQuery = em.createNamedQuery("Quote.findAll");
+		selectQuery.setFirstResult(number);
+		selectQuery.setMaxResults(1);
+
+		return (Quote) selectQuery.getSingleResult();
 	}
 
 }

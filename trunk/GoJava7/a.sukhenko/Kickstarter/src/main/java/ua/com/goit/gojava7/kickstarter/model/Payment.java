@@ -8,13 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
 @Entity
-@Table(name = "payments") // country
+@Table(name = "payments")
+@NamedQuery(name="Payment.getByProjectId", query = "SELECT py FROM Payment py WHERE py.project.id = :projectId")
 public class Payment{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

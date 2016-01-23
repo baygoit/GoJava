@@ -1,6 +1,7 @@
 package com.kickstarter.model;
 
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,17 +17,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "questions")
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Cacheable
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Size(min = 5, max = 150, message = "Your question is too short input minimum 5 - 150 characters")
-    @NotEmpty(message = "Please enter your question here.")
     private String question;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE })
     @JoinColumn(name = "projectId")
     private Project project;
 

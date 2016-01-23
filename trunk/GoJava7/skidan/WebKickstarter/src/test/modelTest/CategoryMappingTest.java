@@ -1,101 +1,64 @@
 package modelTest;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.junit.After;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+import com.kickstarter.dao.Interfaces.CategoryDao;
 import com.kickstarter.model.Category;
+import com.kickstarter.model.Project;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:applicationContextForTest.xml")
 public class CategoryMappingTest {
-	
-	
-	private SessionFactory sessionFactory;
+
+	@Autowired
+	CategoryDao categoryDao;
+
+	@PersistenceContext
+	EntityManager entityManager;
 
 	@Before
+	@Transactional
 	public void setUp() throws Exception {
 
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-		} catch (Exception e) {
-			e.printStackTrace();
-			StandardServiceRegistryBuilder.destroy(registry);
-		}
-	}
+		Category category = new Category();
+		category.setTitle("title");
+		List<Project> project = new ArrayList<>();
+		project.add(new Project());
+        category.setProject(project);
+		
+		Category category2 = new Category();
+		category2.setTitle("title2");
+        category2.setProject(project);
 
-	@After
-	public void tearDown() throws Exception {
-		if (sessionFactory != null) {
-			sessionFactory.close();
-		}
+		entityManager.persist(category);
+		entityManager.persist(category2);
+
 	}
-	
-	
 
 	@Test
+	@Transactional
 	public void categoryMappingTest() {
 		
-
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
-
-			Category category = new Category();
-			category.setId(1);
-			category.setTitle("title");
-
-			Category category2 = new Category();
-			category2.setId(2);
-			category2.setTitle("title2");
-
-			session.save(category);
-			session.save(category2);
-			session.getTransaction().commit();
-			session.close();
-
-			
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-
-			System.out.println("Get by id");
-			category = session.get(Category.class, 1);
-			System.out.println(category);
-			session.close();
-			
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			List<Category> result1 = (List<Category>) session.createQuery("from Category c").list();
-			for (Category aCategory : result1) {
-				System.out.println(aCategory);
-			}
-			session.close();
-			
-			
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			System.out.println("Get by id");
-			category = session.get(Category.class, 1);
-			System.out.println(category);
-
-			category.setTitle("NewTitle");
-
-			session.getTransaction().commit();
-			session.close();
-			
-			
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			System.out.println("Get by id");
-			category = session.get(Category.class, 1);
-			assertEquals("NewTitle", category.getTitle());
-			System.out.println(category);
-
-			session.getTransaction().commit();
-			session.close();
+		List<Project> project = new ArrayList<>();
+		project.add(new Project());
+		
+		List<Category> results = categoryDao.getAll();
+		for(Category c: results){
+			System.out.println(c.getTitle() + " id : " + c.getId() + c.getProject().iterator().next().toString());
 		}
+		assertTrue(results.size() == 2);
+		assertTrue(results.get(0).getId() == 1);
+        assertTrue(categoryDao.getByNumber(1).getId() == 1);
 	}
+}
