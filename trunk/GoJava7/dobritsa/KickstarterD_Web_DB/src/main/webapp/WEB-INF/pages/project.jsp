@@ -3,6 +3,15 @@
 	<jsp:param name="title" value="Project" />
 </jsp:include>
 
+<c:if test="${pageContext.request.userPrincipal.name == null}">
+	<h3><a href="login">Login</a></h3>
+</c:if>
+
+<c:if test="${pageContext.request.userPrincipal.name != null}">
+	<h3>Welcome : ${pageContext.request.userPrincipal.name} |
+		<a href="<c:url value="/j_spring_security_logout" />" > Logout</a></h3>
+</c:if>
+
 <h3><a href="index">Kickstarter</a>
 /
 <a href="category?categoryId=${category.categoryId}">${category.name}</a></h3>
@@ -25,6 +34,7 @@
 	<br><textarea name="question" rows="5" cols="60"></textarea>
 	<br> <input type="hidden" name="projectId" value="${project.projectId}" />
 	<input type="submit" value="Submit" />
+	<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
 </form>
 
 <c:if test="${empty questions}"><h3>There are no questions</h3></c:if>

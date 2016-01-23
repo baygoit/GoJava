@@ -3,6 +3,15 @@
 	<jsp:param name="title" value="Kickstarter" />
 </jsp:include>
 
+<c:if test="${pageContext.request.userPrincipal.name == null}">
+	<h3><a href="login">Login</a></h3>
+</c:if>
+
+<c:if test="${pageContext.request.userPrincipal.name != null}">
+	<h3>Welcome : ${pageContext.request.userPrincipal.name} |
+		<a href="<c:url value="/j_spring_security_logout" />" > Logout</a></h3>
+</c:if>
+
 <h1>Kickstarter</h1>
 
 	<em>${quote.text}</em> <em>${quote.author}</em>

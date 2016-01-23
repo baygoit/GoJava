@@ -65,7 +65,7 @@ public class PaymentController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("payment");
         modelAndView.addObject("amount", rewardDto.getAmount());
-        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("category", projectDto.getCategoryDto());
         modelAndView.addObject("project", projectDto);
 
         log.info("payWithReward(rewardId = {}) returned {} ", rewardId, modelAndView);
@@ -85,7 +85,7 @@ public class PaymentController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("payment");
         modelAndView.addObject("amount", Long.parseLong(amount));
-        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("category", projectDto.getCategoryDto());
         modelAndView.addObject("project", projectDto);
 
         log.info("payWithAmount(amount = {}, projectId = {}) returned {} ", amount, projectId, modelAndView);
@@ -99,7 +99,7 @@ public class PaymentController {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("reward");
-        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("category", projectDto.getCategoryDto());
         modelAndView.addObject("project", projectDto);
         modelAndView.addObject("rewards", projectDto.getRewards());
         modelAndView.addObject("message", "-----Wrong amount-----");
@@ -117,7 +117,7 @@ public class PaymentController {
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("amount", amount);
-        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("category", projectDto.getCategoryDto());
         modelAndView.addObject("project", projectDto);
 
         if (paymentService.createPayment(name, card, amount, projectId)) {

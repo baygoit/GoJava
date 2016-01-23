@@ -79,9 +79,9 @@ public class ProjectService {
         projectDto.setHistory(project.getHistory());
         projectDto.setLink(project.getLink());
 
-        projectDto.setCategory(project.getCategory());
+        projectDto.setCategoryDto(categoryService.constuctShortCategoryDto(project.getCategory()));
         log.info("<ProjectDto> constuctFullProjectDto(projectId = {}) set category = {}", project.getProjectId(),
-                projectDto.getCategory());
+                projectDto.getCategoryDto());
 
         projectDto.setQuestions(project.getQuestions());
         log.info("<ProjectDto> constuctFullProjectDto(projectId = {}) set {} questions", project.getProjectId(),

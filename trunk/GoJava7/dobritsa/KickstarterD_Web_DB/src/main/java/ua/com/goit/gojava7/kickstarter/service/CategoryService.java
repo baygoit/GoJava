@@ -25,7 +25,7 @@ public class CategoryService {
         log.info("<categoriesDto> getAll()...");
 
         List<CategoryDto> categoriesDto = new ArrayList<>();
-        for(Category category : categoryDao.getAll()) {
+        for (Category category : categoryDao.getAll()) {
             categoriesDto.add(constuctShortCategoryDto(category));
         }
 
@@ -38,6 +38,7 @@ public class CategoryService {
 
         Category category = categoryDao.get(categoryId);
         log.info("<CategoryDto> get(categoryId = {}) get {}", categoryId, category);
+
 
         return constuctCategoryDto(category);
     }

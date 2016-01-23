@@ -3,6 +3,15 @@
 	<jsp:param name="title" value="Category" />
 </jsp:include>
 
+<c:if test="${pageContext.request.userPrincipal.name == null}">
+	<h3><a href="login">Login</a>
+</c:if>
+
+<c:if test="${pageContext.request.userPrincipal.name != null}">
+	<h3>Welcome : ${pageContext.request.userPrincipal.name} |
+		<a href="<c:url value="/j_spring_security_logout" />" > Logout</a></h3>
+</c:if>
+
 <h3><a href="index">Kickstarter</a></h3>
 <h1>${categoryName}</h1>
 
