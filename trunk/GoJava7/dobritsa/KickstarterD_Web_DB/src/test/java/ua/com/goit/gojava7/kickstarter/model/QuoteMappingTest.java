@@ -1,44 +1,24 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import java.util.List;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:/H2/H2ApplicationContext*.xml")
+@Transactional
 public class QuoteMappingTest {
 
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 
-	@Before
-	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate/hibernateTest.cfg.xml")
-				.build();
-		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-		} catch (Exception e) {
-			System.err.println("Initial SessionFactory creation failed." + e);
-			StandardServiceRegistryBuilder.destroy(registry);
-		}
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		if (sessionFactory != null) {
-			sessionFactory.close();
-		}
-	}
-
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testBasicUsage() {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
 
 		Quote quote1 = new Quote();
 		quote1.setText("TestQuote 1");
@@ -48,42 +28,23 @@ public class QuoteMappingTest {
 		quote2.setText("TestQuote 2");
 		quote2.setAuthor("TestAuthor 2");
 
-		session.save(quote1);
-		session.save(quote2);
-		session.getTransaction().commit();
-		session.close();
+		em.persist(quote1);
+		em.persist(quote2);
+		Long quoteId1 = quote1.getQuoteId();
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
 		System.out.println("\n-----Get by id = 1-----");
-		Quote quote = session.get(Quote.class, 1L);
+		Quote quote = em.find(Quote.class, quoteId1);
 		System.out.println(quote);
-		session.close();
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		System.out.println("\n-----Get list of quotes-----");
-		List<Quote> quotes = (List<Quote>) session.createQuery("from Quote q").list();
-		for (Quote resultQuote : quotes) {
-			System.out.println(resultQuote);
-		}
-		session.close();
+//		System.out.println("\n-----Get list of quotes-----");
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
 		System.out.println("\n-----Get by id = 1, than Set text = Changed-----");
-		quote = session.get(Quote.class, 1L);
+		quote = em.find(Quote.class, quoteId1);
 		System.out.println(quote);
 		quote.setText("Changed");
-		session.getTransaction().commit();
-		session.close();
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
 		System.out.println("\n-----Get by id = 1-----");
-		quote = session.get(Quote.class, 1L);
+		quote = em.find(Quote.class, quoteId1);
 		System.out.println(quote);
-		session.getTransaction().commit();
-		session.close();
 	}
 }

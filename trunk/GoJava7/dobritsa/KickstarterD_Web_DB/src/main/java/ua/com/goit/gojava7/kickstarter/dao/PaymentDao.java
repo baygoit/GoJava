@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.model.Payment;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 @Repository
 @Transactional
@@ -25,9 +24,8 @@ public class PaymentDao {
 	public Long calculatePledgedForProject(Long projectId) {
 		log.info("<Long> calculatePledgedForProject(projectId = {})...", projectId);
 
-		Query query = em.createQuery("SELECT SUM(p.amount) FROM Payment p WHERE p.project = :project");
-		query.setParameter("project", projectDao.get(projectId));
-		Long sumAmount = (Long) query.getSingleResult();
+		Long sumAmount = em.createNamedQuery("Payment.calculatePledgedForProject", Long.class)
+				.setParameter("project", projectDao.get(projectId)).getSingleResult();
 		log.info("<Long> calculatePledgedForProject(projectId = {}) returned {}", projectId, sumAmount);
 
 		if(sumAmount == null)
@@ -38,7 +36,6 @@ public class PaymentDao {
 
 	public void add(Payment payment) {
 		log.info("<void> add({})...", payment);
-
 		em.persist(payment);
 	}
 }

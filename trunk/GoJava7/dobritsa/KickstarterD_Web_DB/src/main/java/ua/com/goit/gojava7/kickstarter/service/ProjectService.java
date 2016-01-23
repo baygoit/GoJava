@@ -21,6 +21,8 @@ public class ProjectService {
     private ProjectDao projectDao;
     @Autowired
     private PaymentDao paymentDao;
+    @Autowired
+    private CategoryService categoryService;
 
     public ProjectDto getProjectIdNameCategoryRewards(Long projectId) {
         log.info("<ProjectDto> getProjectForReward(projectId = {})...", projectId);
@@ -55,7 +57,7 @@ public class ProjectService {
         ProjectDto projectDto = new ProjectDto();
         projectDto.setProjectId(project.getProjectId());
         projectDto.setName(project.getName());
-        projectDto.setCategory(project.getCategory());
+        projectDto.setCategoryDto(categoryService.constuctShortCategoryDto(project.getCategory()));
 
         return projectDto;
     }

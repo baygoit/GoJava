@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.dto.CategoryDto;
 import ua.com.goit.gojava7.kickstarter.service.CategoryService;
+import ua.com.goit.gojava7.kickstarter.service.QuoteService;
 
 @Transactional
 @Controller
@@ -19,18 +19,18 @@ public class CategoryController {
     private static final Logger log = LoggerFactory.getLogger(CategoryController.class);
 
     @Autowired
-    private QuoteDao quoteDao;
+    private QuoteService quoteService;
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("/index")//all
-    public ModelAndView start() {//getAll
-        log.info("start()...");
+    @RequestMapping("/index")
+    public ModelAndView showCategories() {
+        log.info("showCategories()...");
 
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("quote", quoteDao.getRandomQuote());
+        modelAndView.addObject("quote", quoteService.getRandomQuote());
         modelAndView.addObject("categories", categoryService.getAll());
-        log.info("start() returned {}", modelAndView);
+        log.info("showCategories() returned {}", modelAndView);
 
         return modelAndView;
     }

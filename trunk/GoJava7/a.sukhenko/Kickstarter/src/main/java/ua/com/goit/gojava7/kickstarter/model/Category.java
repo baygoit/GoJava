@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +12,18 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "categories")
-public class Category{
+@NamedQueries({ @NamedQuery(name = "Category.getAll", query = "select c from Category c") })
+public class Category implements Serializable{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1332987330114040046L;
     @Column
     private String categoryName;
     @Id
@@ -34,7 +40,6 @@ public class Category{
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-    @Cascade({CascadeType.SAVE_UPDATE})
     private List<Project> projects = new ArrayList<>();
 
     public Category() {
