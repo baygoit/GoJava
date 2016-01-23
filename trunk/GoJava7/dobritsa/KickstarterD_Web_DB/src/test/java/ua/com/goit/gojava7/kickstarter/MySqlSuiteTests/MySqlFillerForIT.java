@@ -1,4 +1,4 @@
-package integration.MySqlSuiteTests;
+package ua.com.goit.gojava7.kickstarter.MySqlSuiteTests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
