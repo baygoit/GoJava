@@ -1,15 +1,12 @@
 package com.gojava6;
 
-import com.gojava6.dao.AptDAO;
-import com.gojava6.dao.UserDAO;
-import com.gojava6.model.User;
+import com.gojava6.airbnb.dao.AptDAO;
+import com.gojava6.airbnb.dao.UserDAO;
+import com.gojava6.airbnb.model.User;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
