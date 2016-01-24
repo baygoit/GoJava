@@ -1,5 +1,6 @@
 package ua.com.goit.gojava7.kickstarter.controller;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -36,14 +37,24 @@ public class CategoryControllerTest {
     @InjectMocks
     private CategoryController categoryController;
 
+    private static Quote quote;
+    private static CategoryDto categoryDto;
+    private static List<CategoryDto> categories;
+    private static List<ProjectDto> projactsDto;
+
+    @BeforeClass
+    public static void setUp() {
+        quote = new Quote();
+        categoryDto = new CategoryDto();
+        categoryDto.setName("TestCategoryDto");
+        categories = new ArrayList<>();
+        projactsDto = new ArrayList<>();
+        categoryDto.setProjects(projactsDto);
+    }
+
     @Test
     public void testShowCategories() {
-        Quote quote = new Quote();
         when(quoteService.getRandomQuote()).thenReturn(quote);
-
-        CategoryDto categoryDto = new CategoryDto();
-        List<CategoryDto> categories = new ArrayList<>();
-        categories.add(categoryDto);
         when(categoryService.getAll()).thenReturn(categories);
 
         ModelAndView modelAndView = categoryController.showCategories();
@@ -55,17 +66,6 @@ public class CategoryControllerTest {
 
     @Test
     public void testShowCategory() {
-
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setCategoryId(11L);
-        categoryDto.setName("TestCategoryDto");
-
-        ProjectDto projectDto = new ProjectDto();
-        List<ProjectDto> projactsDto = new ArrayList<>();
-        projactsDto.add(projectDto);
-
-        categoryDto.setProjects(projactsDto);
-
         when(categoryService.get(anyLong())).thenReturn(categoryDto);
 
         ModelAndView modelAndView = categoryController.showCategory(11L);
