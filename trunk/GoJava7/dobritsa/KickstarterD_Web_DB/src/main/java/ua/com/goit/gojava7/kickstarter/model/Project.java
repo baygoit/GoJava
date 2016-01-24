@@ -36,8 +36,8 @@ public class Project {
 	@Column
 	private String link;
 	
-	@ManyToOne//(cascade = CascadeType.ALL)
-	@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+	@ManyToOne(cascade = CascadeType.ALL)
+	//@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
 	@JoinColumn(name = "category_id")
 	private Category category = new Category();	
 	

@@ -16,7 +16,8 @@ public class QuestionDaoImpl implements QuestionDao {
 	private EntityManager entityManager;
 
 	@Transactional
-	public void add(String newQuestion, Project project) {
+	public void add(String newQuestion, int projectId) {
+		Project project = entityManager.find(Project.class, projectId);
 		Question question = new Question(newQuestion, project);
 		entityManager.persist(question);
 	}

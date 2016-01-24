@@ -1,44 +1,25 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import java.util.List;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:/H2/H2ApplicationContext*.xml")
+@Transactional
 public class PaymentMappingTest {
 
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 
-	@Before
-	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate/hibernateTest.cfg.xml").build();
-		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-		} catch (Exception e) {
-			System.err.println("Initial SessionFactory creation failed." + e);
-			StandardServiceRegistryBuilder.destroy(registry);
-		}
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		if (sessionFactory != null) {
-			sessionFactory.close();
-		}
-	}
-
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testBasicUsage() {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		
+
 		Category category1 = new Category();
 		category1.setName("TestCategory 1");
 
@@ -63,35 +44,29 @@ public class PaymentMappingTest {
 		payment2.setAmount(200L);
 		payment2.setProject(project1);
 
-		session.save(payment1);
-		session.save(payment2);
-		session.getTransaction().commit();
-		session.close();
+		em.persist(payment1);
+		em.persist(payment2);
+		Long paymendId1 = payment1.getPaymentId();
+		Long projectId1 = project1.getProjectId();
+		Long categoryId1 = category1.getCategoryId();
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
 		
 		System.out.println("\n-----Get Payment by id = 1-----");
-		Payment payment = session.get(Payment.class, 1L);
+		Payment payment = em.find(Payment.class, paymendId1);
 		System.out.println(payment);
 		
 		System.out.println("\n-----Get Project by id = 1-----");
-		Project project = session.get(Project.class, 1L);
+		Project project = em.find(Project.class, projectId1);
 		System.out.println("Project: " + project);
 		
 		System.out.println("\n-----Get Category by id = 1-----");
-		Category category = session.get(Category.class, 1L);
+		Category category = em.find(Category.class, categoryId1);
 		System.out.println("Category: " + category);		
-		
-		session.close();
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		System.out.println("\n-----Get list of payments-----");
-		List<Payment> payments = (List<Payment>) session.createQuery("from Payment q").list();
-		for (Payment resultPayment : payments) {
-			System.out.println(resultPayment);
-		}
-		session.close();
+//		System.out.println("\n-----Get list of payments-----");
+//		List<Payment> payments = (List<Payment>) session.createQuery("from Payment q").list();
+//		for (Payment resultPayment : payments) {
+//			System.out.println(resultPayment);
+//		}
 	}
 }

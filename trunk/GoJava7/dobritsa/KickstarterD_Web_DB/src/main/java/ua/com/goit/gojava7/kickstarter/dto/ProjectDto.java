@@ -5,7 +5,7 @@ import ua.com.goit.gojava7.kickstarter.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectDto extends Project{
+public class ProjectDto{
 
     private Long projectId;
     private String name;
@@ -15,7 +15,7 @@ public class ProjectDto extends Project{
     private Long daysToGo;
     private String history;
     private String link;
-    private Category category = new Category();
+    private CategoryDto categoryDto = new CategoryDto();
     private List<Question> questions = new ArrayList<>();
     private List<Reward> rewards = new ArrayList<>();
     private List<Payment> payments = new ArrayList<>();
@@ -84,12 +84,12 @@ public class ProjectDto extends Project{
             this.link = link;
         }
 
-        public Category getCategory() {
-            return category;
+        public CategoryDto getCategoryDto() {
+            return categoryDto;
         }
 
-        public void setCategory(Category category) {
-            this.category = category;
+        public void setCategoryDto(CategoryDto categoryDto) {
+            this.categoryDto = categoryDto;
         }
 
         public List<Question> getQuestions() {
@@ -117,13 +117,13 @@ public class ProjectDto extends Project{
         }
 
         public Long getCategoryId() {
-            return category.getCategoryId();
+            return categoryDto.getCategoryId();
         }
 
     @Override
     public String toString() {
         return "ProjectDto [projectId=" + projectId + ", name=" + name
                 + ", description=" + description + ", goal=" + goal + ", pledged=" + pledged + ", daysToGo=" + daysToGo
-                + ", history=" + history + ", link=" + link + ", categoryId=" + category.getCategoryId() + "]";
+                + ", history=" + history + ", link=" + link + ", categoryDtoId=" + categoryDto.getCategoryId() + "]";
     }
 }

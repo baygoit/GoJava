@@ -16,43 +16,25 @@
     </jsp-config>
 
     <servlet>
-        <servlet-name>ServletController</servlet-name>
-        <servlet-class>com.gojava6.ServletController</servlet-class>
+        <servlet-name>airbnb</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+                /WEB-INF/airbnb-servlet.xml
+            </param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ServletController</servlet-name>
-        <url-pattern>/RegistrationController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletController</servlet-name>
-        <url-pattern>/CitiesController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletController</servlet-name>
-        <url-pattern>/CreateHostController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletController</servlet-name>
-        <url-pattern>/BecomeHostController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletController</servlet-name>
-        <url-pattern>/MakeReservationController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServletController</servlet-name>
-        <url-pattern>/AvailableAptsController</url-pattern>
+        <servlet-name>airbnb</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <!-- Spring ContextLoaderListener -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
-    <!--<servlet>
-        <servlet-name>ServletDemo</servlet-name>
-        <servlet-class>com.gojava6.ServletDemo</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ServletDemo</servlet-name>
-        <url-pattern>/ServletDemo</url-pattern>
-    </servlet-mapping>-->
 
 </web-app>

@@ -33,9 +33,7 @@ public class RewardService {
         rewardDto.setReward(reward.getReward());
 
         rewardDto.setProjectDto(projectService.constructProjectDtoIdNameCategory(reward.getProject()));
-        log.info("<RewardDto> constuctRewardDto({}) set projectId = {}", reward, rewardDto.getProjectDtoId());
 
-        log.info("<RewardDto> constuctRewardDto(rewardId = {}) returned ", reward.getRewardId(), rewardDto);
         return rewardDto;
     }
 }

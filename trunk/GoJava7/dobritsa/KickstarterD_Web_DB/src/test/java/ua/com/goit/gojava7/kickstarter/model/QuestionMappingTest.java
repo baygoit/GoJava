@@ -1,45 +1,23 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
-import java.util.List;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:/H2/H2ApplicationContext*.xml")
+@Transactional
 public class QuestionMappingTest {
 
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 
-	@Before
-	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate/hibernateTest.cfg.xml").build();
-		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-		} catch (Exception e) {
-			System.err.println("Initial SessionFactory creation failed." + e);
-			// e.printStackTrace();
-			StandardServiceRegistryBuilder.destroy(registry);
-		}
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		if (sessionFactory != null) {
-			sessionFactory.close();
-		}
-	}
-
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testBasicUsage() {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-
 		Category category1 = new Category();
 		category1.setName("TestCategory 1");
 
@@ -64,31 +42,30 @@ public class QuestionMappingTest {
 		question2.setAnswer("TestAnswer2");
 		question2.setProject(project1);
 
-		session.save(question1);
-		session.save(question2);
-		session.getTransaction().commit();
-		session.close();
+		em.persist(question1);
+		em.persist(question2);
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		
+		Long questionId1 = question1.getQuestionId();
+		Long projectId1 = project1.getProjectId();
+		Long categoryId1 = category1.getCategoryId();
+
+
 		System.out.println("\n-----Get Question by id = 1-----");
-		Question question = session.get(Question.class, 1L);
+		Question question = em.find(Question.class, questionId1);
 		System.out.println("Question: " + question);
 		
 		System.out.println("\n-----Get Project by id = 1-----");
-		Project project = session.get(Project.class, 1L);
+		Project project = em.find(Project.class, projectId1);
 		System.out.println("Project: " + project);
 		
 		System.out.println("\n-----Get Category by id = 1-----");
-		Category category = session.get(Category.class, 1L);
+		Category category = em.find(Category.class, categoryId1);
 		System.out.println("Category: " + category);		
 		
-		System.out.println("\n-----Get list of questions-----");
-		List<Question> questions = (List<Question>) session.createQuery("from Question q").list();
-		for (Question resultQuestion : questions) {
-			System.out.println(resultQuestion);
-		}
-		session.close();
+//		System.out.println("\n-----Get list of questions-----");
+//		List<Question> questions = (List<Question>) session.createQuery("from Question q").list();
+//		for (Question resultQuestion : questions) {
+//			System.out.println(resultQuestion);
+//		}
 	}
 }

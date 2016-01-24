@@ -3,7 +3,6 @@ package com.kickstarter.dao.Impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 //import org.springframework.transaction.annotation.Isolation;
 //import org.springframework.transaction.annotation.Propagation;
@@ -19,7 +18,8 @@ public class PaymentDaoImpl implements PaymentDao {
 	EntityManager entityManager;
 	
 	@Transactional
-	public void addPayment(Project project, int amount) {
+	public void addPayment(int projectId, int amount) {
+		Project project = entityManager.find(Project.class, projectId);
 		Payment payment = new Payment();
 		payment.setAmount(amount);
 		payment.setProject(project);
@@ -31,9 +31,9 @@ public class PaymentDaoImpl implements PaymentDao {
 		Long tempSum = (Long) entityManager.
 				createQuery("select SUM(amount)from Payment where projectId = :projectId")
 				.setParameter("projectId", projectId)
-				.getSingleResult();
-		int sum = tempSum.intValue();
-		return sum;
+			    .getSingleResult();
+		
+		return tempSum.intValue();
 	}
 }
 

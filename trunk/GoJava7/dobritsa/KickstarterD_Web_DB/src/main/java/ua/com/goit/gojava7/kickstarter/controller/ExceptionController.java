@@ -20,8 +20,8 @@ public class ExceptionController {
     @RequestMapping("/error/500.html")
     public ModelAndView get500(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("500");
-        modelAndView.addObject("status", request.getAttribute("javax.servlet.error.status_code"));
-        modelAndView.addObject("reason", request.getAttribute("javax.servlet.error.message"));
+        modelAndView.addObject("status", request.getAttribute("javax.Servlet.error.status_code"));
+        modelAndView.addObject("reason", request.getAttribute("javax.Servlet.error.message"));
         return modelAndView;
     }
 }
