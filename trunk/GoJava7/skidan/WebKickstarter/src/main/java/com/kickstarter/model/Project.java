@@ -42,7 +42,7 @@ public class Project {
 	@Column(name = "videoLink")
 	private String videoLink;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.DETACH})
 	@JoinColumn(name = "categoryId")
 	private Category category;
 	

@@ -17,5 +17,12 @@ public class PaymentAmountDaoImpl {
 		return entityManager.find(PaymentAmount.class, paymentAmountId);
 
 	}
+	
+	@Transactional(readOnly = true)
+	public int getPresetPaymetnsCount() {
+		Long count = (Long) entityManager.createQuery("select count(p) as cnt from PaymentAmount p")
+				.getSingleResult();
+		return count.intValue();
+	}
 
 }

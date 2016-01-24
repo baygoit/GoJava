@@ -52,6 +52,11 @@
             <artifactId>hibernate-jpa-2.0-api</artifactId>
             <version>1.0.1.Final</version>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.0.2.Final</version>
+        </dependency>
         <!-- / db, hibernate , jpa -->
 
         <!-- Logging -->
@@ -111,6 +116,7 @@
         </dependency>
         <!-- /Spring -->
 
+        <!--The simplest connection pool-->
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>

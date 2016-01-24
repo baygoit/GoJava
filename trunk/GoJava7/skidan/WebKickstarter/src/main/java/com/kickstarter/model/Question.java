@@ -25,7 +25,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String question;
-    @ManyToOne(cascade = {CascadeType.MERGE })
+    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "projectId")
     private Project project;
 

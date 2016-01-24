@@ -12,7 +12,7 @@
 <div align="center">
         <h2>Please fill in forms below</h2>
         <table border="0" width="90%">
-        <form:form action="/WebKickstarter/payment/proceed" method = "post" commandName="payerVO">
+        <form:form action="/WebKickstarter/payment/proceed" method = "post" commandName="payerVo">
         <tr>
                 <td align="left" > Payment Amount: </td>
                     <td align="left" width="40%"><form:input path="paymentAmount" size="30" value="${paymentAmount}"/></td>
