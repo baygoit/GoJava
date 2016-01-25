@@ -1,9 +1,9 @@
 package ua.com.goit.gojava7.kickstarter.controller;
 
-import ua.com.goit.gojava7.kickstarter.model.Category;
-import ua.com.goit.gojava7.kickstarter.model.Kickstarter;
-import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.model.Quote;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Kickstarter;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 import java.util.List;
 import java.util.Random;

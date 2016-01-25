@@ -16,8 +16,6 @@ import static org.junit.Assert.assertThat;
 public class MySqlEmptyIT {
 
     @Autowired
-    private QuoteDao quoteDao;
-    @Autowired
     private CategoryDao categoryDao;
     @Autowired
     private ProjectDao projectDao;

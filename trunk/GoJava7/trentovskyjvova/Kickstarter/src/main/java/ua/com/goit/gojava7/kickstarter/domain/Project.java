@@ -13,9 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.Formula;
 
 @Entity
 @Table(name = "project")
@@ -39,7 +39,9 @@ public class Project {
 	private int goal;
 	@Column
 	private String videoUrl;
-	@Transient
+	
+	//@Transient
+	@Formula("(select coalesce(sum(p.pledge), 0) from payment p where p.projectid = id)")
 	private int amountPledge;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<Payment> payments = new HashSet<Payment>();
