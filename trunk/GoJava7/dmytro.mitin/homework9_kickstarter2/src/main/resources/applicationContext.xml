@@ -2,14 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-    <bean id="categoryStorage" class="ua.com.goit.gojava7.kickstarter.model.storage.DatabaseCategoryStorage">
-        <constructor-arg name="categoryTable" value="categories" />
-        <constructor-arg name="projectTable" value="projects" />
-    </bean>
-    <bean id="quoteStorage" class="ua.com.goit.gojava7.kickstarter.model.storage.DatabaseQuoteStorage" />
-    <bean id="kickstarter" class="ua.com.goit.gojava7.kickstarter.model.Kickstarter">
-        <constructor-arg name="categoryStorage" ref="categoryStorage" />
-        <constructor-arg name="quoteStorage" ref="quoteStorage" />
+    <bean id="categoryDao" class="ua.com.goit.gojava7.kickstarter.dao.CategoryDaoImpl" />
+    <bean id="quoteDao" class="ua.com.goit.gojava7.kickstarter.dao.QuoteDaoImpl" />
+    <bean id="kickstarter" class="ua.com.goit.gojava7.kickstarter.domain.Kickstarter">
+        <constructor-arg name="categoryDao" ref="categoryDao" />
+        <constructor-arg name="quoteDao" ref="quoteDao" />
     </bean>
     <bean id="controller" class="ua.com.goit.gojava7.kickstarter.controller.MainController">
         <constructor-arg name="kickstarter" ref="kickstarter" />

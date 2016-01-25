@@ -39,9 +39,9 @@
         <!--<property name="hbm2ddl.auto">create</property>-->
 
         <!-- Names the annotated entity class -->
-        <mapping class="com.gojava6.modelHibernate.User"/>
-        <mapping class="com.gojava6.modelHibernate.Apartment"/>
-        <mapping class="com.gojava6.modelHibernate.Reservation"/>
+        <mapping class="com.gojava6.airbnb.modelHibernate.User"/>
+        <mapping class="com.gojava6.airbnb.modelHibernate.Apartment"/>
+        <mapping class="com.gojava6.airbnb.modelHibernate.Reservation"/>
 
         <!--<mapping resource="net/viralpatel/hibernate/Employee.hbm.xml"/>
         <mapping resource="mapping/User.hbm.xml"/>

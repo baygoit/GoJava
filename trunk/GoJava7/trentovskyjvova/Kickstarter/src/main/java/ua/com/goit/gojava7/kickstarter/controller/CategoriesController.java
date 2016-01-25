@@ -83,13 +83,7 @@ public class CategoriesController {
 
 		log.debug("projectId: {}", projectId);
 
-		Project selectedProject = projectDao.getProject(projectId);
-		
-		int amountPledge = 0;
-		for (Payment payment : selectedProject.getPayments()) {
-			amountPledge += payment.getPledge();
-		}
-		selectedProject.setAmountPledge(amountPledge);
+		Project selectedProject = projectDao.getProject(projectId);	
 		modelAndView.addObject("selectedProject", selectedProject);
 		log.debug("selectedProject: {}", selectedProject);
 

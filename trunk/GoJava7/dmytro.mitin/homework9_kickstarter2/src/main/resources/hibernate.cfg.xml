@@ -17,10 +17,12 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!-- Use XML-based mapping metadata -->
-        <!--<mapping resource="ua/com/goit/gojava7/kickstarter/model/Quote.hbm.xml"/>-->
+        <!--<mapping resource="ua/com/goit/gojava7/kickstarter/domain/Quote.hbm.xml"/>-->
 
         <!-- Use Annotation-based mapping metadata -->
-        <mapping class="ua.com.goit.gojava7.kickstarter.model.Quote"/>
+        <!--<mapping class="ua.com.goit.gojava7.kickstarter.domainn.Quote" />-->
+        <!--<mapping class="ua.com.goit.gojava7.kickstarter.domainn.Category" />-->
+        <!--<mapping class="ua.com.goit.gojava7.kickstarter.domainn.Project" />-->
 
     </session-factory>
 </hibernate-configuration>

@@ -39,6 +39,7 @@ public class CategoryService {
         Category category = categoryDao.get(categoryId);
         log.info("<CategoryDto> get(categoryId = {}) get {}", categoryId, category);
 
+
         return constuctCategoryDto(category);
     }
 

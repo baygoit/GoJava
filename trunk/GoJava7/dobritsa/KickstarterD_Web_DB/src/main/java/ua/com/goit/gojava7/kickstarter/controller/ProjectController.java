@@ -31,7 +31,7 @@ public class ProjectController {
         ProjectDto projectDto = projectService.getFullProject(projectId);
 
         ModelAndView modelAndView = new ModelAndView("project");
-        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("category", projectDto.getCategoryDto());
         modelAndView.addObject("project", projectDto);
         modelAndView.addObject("questions", projectDto.getQuestions());
 
@@ -59,7 +59,7 @@ public class ProjectController {
         ProjectDto projectDto = projectService.getProjectIdNameCategoryRewards(projectId);
 
         ModelAndView modelAndView = new ModelAndView("reward");
-        modelAndView.addObject("category", projectDto.getCategory());
+        modelAndView.addObject("category", projectDto.getCategoryDto());
         modelAndView.addObject("project", projectDto);
         modelAndView.addObject("rewards", projectDto.getRewards());
 
