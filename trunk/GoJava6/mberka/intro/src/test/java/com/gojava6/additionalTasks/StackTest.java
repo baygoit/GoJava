@@ -1,4 +1,4 @@
-package com.gojava6;
+package com.gojava6.additionalTasks;
 
 import org.junit.Assert;
 import org.junit.Before;

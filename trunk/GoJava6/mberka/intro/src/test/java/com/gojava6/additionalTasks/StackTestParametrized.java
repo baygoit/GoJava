@@ -1,4 +1,4 @@
-package com.gojava6;
+package com.gojava6.additionalTasks;
 
 import com.gojava6.additionalTasks.stack.Stack;
 import org.junit.Assert;

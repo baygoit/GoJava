@@ -1,6 +1,4 @@
-package com.gojava6;
-
-import com.gojava6.additionalTasks.OneSwipeArray;
+package com.gojava6.additionalTasks;
 
 import org.junit.Assert;
 import org.junit.Before;

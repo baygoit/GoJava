@@ -1,6 +1,5 @@
-package com.gojava6;
+package com.gojava6.additionalTasks;
 
-import com.gojava6.additionalTasks.IslandProblemResolving;
 import org.junit.Before;
 import org.junit.Test;
 
