@@ -3,7 +3,9 @@ package ua.com.goit.gojava7.kickstarter.util;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import ua.com.goit.gojava7.kickstarter.model.Quote;
+import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
 public class HibernateUtil {
     private static final SessionFactory sessionFactory = buildSessionFactory();
@@ -13,6 +15,8 @@ public class HibernateUtil {
             // Create the SessionFactory from hibernate.cfg.xml
             Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
             configuration.addAnnotatedClass(Quote.class);
+            configuration.addAnnotatedClass(Category.class);
+            configuration.addAnnotatedClass(Project.class);
             return configuration.buildSessionFactory( new
                     StandardServiceRegistryBuilder().applySettings( configuration.getProperties() ).build() );
         }
