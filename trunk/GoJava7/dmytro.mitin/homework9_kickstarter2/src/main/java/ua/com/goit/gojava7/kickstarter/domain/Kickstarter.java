@@ -17,10 +17,12 @@ public class Kickstarter  {
 
     public void addDonation(Project project, int money) {
         project.addMoneyDonated(money);
+        categoryDao.update(project);
     }
 
     public void addQuestion(Project project, String question) {
         project.addQuestion(question);
+        categoryDao.update(project);
     }
 
 

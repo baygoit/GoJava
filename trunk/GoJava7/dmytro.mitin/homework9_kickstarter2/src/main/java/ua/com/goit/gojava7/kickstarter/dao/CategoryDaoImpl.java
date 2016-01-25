@@ -4,6 +4,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
+import ua.com.goit.gojava7.kickstarter.domain.Project;
 import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 
 import java.util.List;
@@ -28,6 +29,17 @@ public class CategoryDaoImpl implements CategoryDao {
         Transaction transaction = session.beginTransaction();
 
         session.save(category);
+
+        transaction.commit();
+        session.close();
+    }
+
+    @Override
+    public void update(Project project) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+
+        session.update(project);
 
         transaction.commit();
         session.close();

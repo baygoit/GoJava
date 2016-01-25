@@ -29,7 +29,7 @@ public class QuoteDaoImpl implements QuoteDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
-        session.save(quote);
+        session.persist(quote);
 
         transaction.commit();
         session.close();
