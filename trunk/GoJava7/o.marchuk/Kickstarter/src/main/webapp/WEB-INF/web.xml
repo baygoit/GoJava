@@ -2,41 +2,55 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>servlets</display-name>
 
-<context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/applicationContext*.xml</param-value>
-</context-param>
+	<context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <param-value>/WEB-INF/applicationContext*.xml</param-value>
+	</context-param>
+	
+	<listener>
+	   <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<listener>
+	   <listener-class>ua.com.goit.gojava7.kickstarter.dao.mysql.JdbcCleanupContextShutdownHook</listener-class>
+	</listener>
+	
+	<servlet>
+	    <servlet-name>Jersey Web Application</servlet-name>
+	    <servlet-class>
+	         com.sun.jersey.spi.container.servlet.ServletContainer
+	    </servlet-class>
+	    <init-param>
+			<param-name>
+					com.sun.jersey.config.property.packages
+			</param-name>
+			<param-value>
+					ua.com.goit.gojava7.kickstarter.rest
+			</param-value>
+		</init-param>
+		<init-param>
+   	    	<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+        	<param-value>true</param-value>
+    	</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+	     <servlet-name>Jersey Web Application</servlet-name>
+		 <url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
 
-<listener>
-   <listener-class>
-        org.springframework.web.context.ContextLoaderListener
-   </listener-class></listener>
-   <listener>
-   <listener-class>ua.com.goit.gojava7.kickstarter.dao.mysql.JdbcCleanupContextShutdownHook</listener-class>
-</listener>
-
-	 <!-- Servlet declaration can be omitted in which case
-         it would be automatically added by Jersey -->
-    <servlet>
-        <servlet-name>javax.ws.rs.core.Application</servlet-name>
-    </servlet>
- 
-    <servlet-mapping>
-        <servlet-name>javax.ws.rs.core.Application</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
-    </servlet-mapping>
 
 
 	<servlet>
-        <servlet-name>webmvc-servlet</servlet-name>
-        <servlet-class>
-            org.springframework.web.servlet.DispatcherServlet
-        </servlet-class>
-         <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value></param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
+		<servlet-name>webmvc-servlet</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value></param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>webmvc-servlet</servlet-name>
