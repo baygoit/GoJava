@@ -6,14 +6,8 @@
 <html>
 <head>
 <link rel="stylesheet" href="<c:url value="/resources/css/new.css" />" />
-
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>SelectedCategoryProjects.jsp</title>
-   <style>
-        #b {
-            background-image: url("http://oboi.tululu.org/o/30/76866/prew.jpg");
-        }
-    </style>
 </head>
 <body id="b">
 

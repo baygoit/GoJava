@@ -77,16 +77,22 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-  			<groupId>org.springframework</groupId>
- 			<artifactId>spring-webmvc</artifactId>
- 			<version>${spring.version}</version>
- 		</dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
@@ -111,13 +117,8 @@
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
+			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.0.6.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.1-api</artifactId>
-			<version>1.0.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -129,7 +130,12 @@
 			<artifactId>jta</artifactId>
 			<version>1.1</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -147,12 +153,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.19</version>
+				<version>2.19.1</version>
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.surefire</groupId>
 						<artifactId>surefire-junit47</artifactId>
-						<version>2.19</version>
+						<version>2.19.1</version>
 					</dependency>
 				</dependencies>
 				<configuration>
@@ -162,7 +168,25 @@
 					<excludedGroups>ua.com.goit.gojava7.kickstarter.domain.IntegrationTest</excludedGroups>
 				</configuration>
 			</plugin>
+		</plugins>
+	</build>
+	
+	<profiles>
+		<profile>
+			<id>IT</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<excludedGroups>java.io.Serializable</excludedGroups> <!-- An empty element doesn't overwrite, so I'm using an interface here which 
+								no one will ever use -->
+						</configuration>
+					</plugin>
 				</plugins>
 			</build>
-
+		</profile>
+	</profiles>
+	
 </project>

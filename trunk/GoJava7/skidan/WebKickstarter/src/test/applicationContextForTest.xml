@@ -1,72 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-           http://www.springframework.org/schema/aop
-           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
-           http://www.springframework.org/schema/tx    
+           http://www.springframework.org/schema/tx
 		   http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
            http://www.springframework.org/schema/context
-           http://www.springframework.org/schema/context/spring-context-3.1.xsd
-           http://www.springmodules.org/schema/ehcache
-           http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd">
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
 
+    <context:annotation-config/>
+    <context:component-scan base-package="com.kickstarter.dao.*"/>
 
-	     	<context:component-scan base-package="com.kickstarter.dao" />
 
-	                               
-	
-	
-	<!--     
-	                      
-	<context:component-scan base-package="com.kickstarter.dao.Impl" /> 
-	
-	<bean id="QuoteDaoImpl" class="com.kickstarter.dao.Impl.QuoteDaoImpl">
-	 <property name="sessionFactory"><null/></property>
-	</bean>
-	
-	
-	
-	
-		<context:component-scan base-package="com.kickstarter.dao.Impl" /> 
-	
-	
-	<bean id="quoteDaoImpl" class="com.kickstarter.dao.Impl.QuoteDaoImpl">
-	 <property name="sessionFactory"><null/></property>
-	</bean>
-	
-	
-	
-	 <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
-		destroy-method="close">
-		<property name="connection.driver_class">org.h2.Driver</property>
-		<property name="connection.url">jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE</property>
-		<property name="connection.username">sa</property>
-		<property name="connection.password" />
-	</bean>
-	
-	
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-	
-		<property name="hibernateProperties">
-			<props>
-	
-			</props>
-		</property>
-		
-		<property name="packagesToScan">
-			<list>
-				<value>com.kickstarter.model</value>
-			</list>
-		</property>
-	</bean>
+    <bean id="basicDataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
 
--->
-	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+    <tx:annotation-driven/>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="basicDataSource"/>
+        <property name="persistenceUnitName" value="Kickstarter_Test"/>
+    </bean>
+
+
+    <bean
+            class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
 
 </beans>
 

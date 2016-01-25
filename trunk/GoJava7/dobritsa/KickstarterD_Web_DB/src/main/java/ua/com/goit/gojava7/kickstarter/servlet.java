@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebListener;
 /**
  * Created by Mar on 14.01.2016.
  */
-public class servlet {
+public class Servlet {
     @WebListener
 
     public static class ServletContext implements ServletContextListener {
