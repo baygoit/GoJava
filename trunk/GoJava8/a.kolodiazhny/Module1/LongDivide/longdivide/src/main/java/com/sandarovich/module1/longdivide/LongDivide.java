@@ -87,7 +87,12 @@ public class LongDivide {
 	private String formatResult(double result) {
 		String format = "%." + String.valueOf(DIVIDE_DEPTH) + "f";
 		if (remain != 0 && depth == DIVIDE_DEPTH ) {
-			return BRACKET_LEFT + String.format(format, result) + BRACKET_RIGHT;
+		        String out = String.format(format, result);
+		        out = out.substring(0, out.indexOf(".") + 1)
+		                + BRACKET_LEFT 
+		                + out.substring(out.indexOf(".") + 1 , out.length())
+		                + BRACKET_RIGHT;
+			return out;
 		} 
 		return String.format(format, result);
 		
