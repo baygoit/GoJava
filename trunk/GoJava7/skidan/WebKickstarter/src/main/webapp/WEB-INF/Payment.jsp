@@ -7,12 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Payment</title>
 </head>
-<body>
+<body id ="b">
 
 <div align="center">
         <h2>Please fill in forms below</h2>
         <table border="0" width="90%">
-        <form:form action="/WebKickstarter/payment/proceed" method = "post" commandName="payerVO">
+        <form:form action="/WebKickstarter/payment/proceed" method = "post" commandName="payerVo">
         <tr>
                 <td align="left" > Payment Amount: </td>
                     <td align="left" width="40%"><form:input path="paymentAmount" size="30" value="${paymentAmount}"/></td>
@@ -20,8 +20,8 @@
                 </tr>
                 <tr>
                 <td align="left" > Card Holder Name: </td>
-                    <td align="left" width="40%"><form:input path="CardHolderName" size="30"/></td>
-                    <td align="left"><form:errors path="CardHolderName" cssClass="error"/></td>
+                    <td align="left" width="40%"><form:input path="cardHolderName" size="30"/></td>
+                    <td align="left"><form:errors path="cardHolderName" cssClass="error"/></td>
                 </tr>
                 <tr>
                 <td align="left" > Card Number: </td>
@@ -35,7 +35,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td align="left"><input type="submit" value="approve payment"/></td>
+                    <td align="left"><input id = "subm" type="submit" value="approve payment"/></td>
                     <td></td>
                 </tr>
         </form:form>

@@ -2,10 +2,13 @@ package ua.com.goit.gojava7.kickstarter.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,23 +19,26 @@ import ua.com.goit.gojava7.kickstarter.domain.Category;
 @Transactional
 public class CategoryDaoImpl implements CategoryDao {
 
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
 	public List<Category> getAll() {
-		Session session = sessionFactory.getCurrentSession();
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
-		Criteria criteria = session.createCriteria(Category.class);
-		List<Category> categories = (List<Category>) criteria.list();
+		CriteriaQuery<Category> criteriaQuery = criteriaBuilder.createQuery(Category.class);
+		Root<Category> categoryRoot = criteriaQuery.from(Category.class);
+		criteriaQuery.select(categoryRoot);
+
+		TypedQuery<Category> query = em.createQuery(criteriaQuery);
+		List<Category> categories = query.getResultList();
 
 		return categories;
 	}
 
 	@Override
 	public Category get(Long categoryId) {
-		Session session = sessionFactory.getCurrentSession();
-		return session.get(Category.class, categoryId);
+		return em.find(Category.class, categoryId);
 	}
 
 }

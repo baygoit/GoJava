@@ -18,9 +18,9 @@ public class PaymentDaoIntegrationTest {
 
 
     @Autowired
-    private PaymentDatabaseDao paymentDao;
+    private PaymentDao paymentDao;
     @Autowired
-    private ProjectDatabaseDao projectDao;
+    private ProjectDao projectDao;
     @Test
     public void testGetAll(){
        assertThat(paymentDao.getAll().isEmpty(),is(false));

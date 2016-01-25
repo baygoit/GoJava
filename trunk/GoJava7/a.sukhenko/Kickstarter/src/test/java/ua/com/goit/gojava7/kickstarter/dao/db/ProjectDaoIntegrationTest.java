@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import ua.com.goit.gojava7.kickstarter.model.Project;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
-import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext-db.xml",
@@ -19,7 +21,7 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 public class ProjectDaoIntegrationTest {
 
     @Autowired
-    private ProjectDatabaseDao projectDao;
+    private ProjectDao projectDao;
 
 
     @Test

@@ -2,12 +2,13 @@ package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,27 +18,28 @@ import ua.com.goit.gojava7.kickstarter.domain.Question;
 @Repository
 @Transactional
 public class QuestionDaoSqlImpl implements QuestionDao {
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
 	public List<Question> getQuestions(int projectId) {
 		
-		Session session = sessionFactory.getCurrentSession();
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+
+		CriteriaQuery<Question> criteriaQuery = criteriaBuilder.createQuery(Question.class);
+		Root<Question> entityRoot = criteriaQuery.from(Question.class);
+		criteriaQuery.select(entityRoot);
+		criteriaQuery.where(criteriaBuilder.equal(entityRoot.get("projectId") , projectId));
+		TypedQuery<Question> query = em.createQuery(criteriaQuery);
+
+		return query.getResultList();
 		
-		Criteria criteria = session.createCriteria(Question.class);
-		criteria.add(Restrictions.eq("projectId", projectId));
-		
-		return criteria.list();
 	}
 
 	@Override
 	public void addQuestion(Question question) {
 		
-		Session session = sessionFactory.getCurrentSession();
-		
-		session.save(question);
-		
+		em.merge(question);
 	}
 
 }

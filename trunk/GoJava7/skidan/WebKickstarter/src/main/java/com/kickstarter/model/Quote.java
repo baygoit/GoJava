@@ -4,13 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "quotes")
+@NamedQueries({ @NamedQuery(name = "Quote.count", query = "select count(q) as cnt from Quote q"),
+		@NamedQuery(name = "Quote.findAll", query = "select q from Quote q") })
 public class Quote {
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String quote;
 	private String author;

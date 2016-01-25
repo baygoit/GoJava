@@ -26,7 +26,7 @@ public class CategoryTest {
 	@Test
 	public void testSetProjects() {
 		Set<Project> projects = new HashSet<Project>();
-		projects.add(new Project("project name", "short description", 123L, 5));
+		projects.add(new Project());
 
 		category.setProjects(projects);
 		assertThat(category.getProjects().size(), is(1));
