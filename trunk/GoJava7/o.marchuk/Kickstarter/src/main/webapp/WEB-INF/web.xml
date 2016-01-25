@@ -15,31 +15,6 @@
 	   <listener-class>ua.com.goit.gojava7.kickstarter.dao.mysql.JdbcCleanupContextShutdownHook</listener-class>
 	</listener>
 	
-	<servlet>
-	    <servlet-name>Jersey Web Application</servlet-name>
-	    <servlet-class>
-	         com.sun.jersey.spi.container.servlet.ServletContainer
-	    </servlet-class>
-	    <init-param>
-			<param-name>
-					com.sun.jersey.config.property.packages
-			</param-name>
-			<param-value>
-					ua.com.goit.gojava7.kickstarter.rest
-			</param-value>
-		</init-param>
-		<init-param>
-   	    	<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-        	<param-value>true</param-value>
-    	</init-param>
-		<load-on-startup>2</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-	     <servlet-name>Jersey Web Application</servlet-name>
-		 <url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
-
-
 
 	<servlet>
 		<servlet-name>webmvc-servlet</servlet-name>
