@@ -1,38 +1,69 @@
 package com.kickstarter.model;
 
+import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
+@Table(name = "questions")
+//@Cacheable
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Question {
-	private String question;
-	private String projectTitle;
-	
-	
-	public Question() {
-		
-	}
 
-	public Question(String question, String projectTitle) {
-		this.question = question;
-		this.projectTitle = projectTitle;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String question;
+    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.REMOVE})
+    @JoinColumn(name = "projectId")
+    private Project project;
 
-	public String getQuestion() {
-		return question;
-	}
+    public Question() {
 
-	public void setQuestion(String question) {
-		this.question = question;
-	}
+    }
 
-	public String getProjectTitle() {
-		return projectTitle;
-	}
+    public Question(String question, Project project) {
+        this.question = question;
+        this.project = project;
+    }
 
-	public void setProjectTitle(String projectTitle) {
-		this.projectTitle = projectTitle;
-	}
+    public Project getProject() {
+        return project;
+    }
 
-	
-	public String toString() {
-		return question ;
-	}
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String toString() {
+        return question;
+    }
 
 }

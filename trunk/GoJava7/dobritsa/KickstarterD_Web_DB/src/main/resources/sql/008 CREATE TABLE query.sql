@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS `kickstarter`.`query` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `text` VARCHAR(500) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB

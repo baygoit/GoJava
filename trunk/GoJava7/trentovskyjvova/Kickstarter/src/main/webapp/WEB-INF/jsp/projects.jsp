@@ -13,10 +13,10 @@
 
 	<c:forEach var="project" items="${projects}">
 		<tr>
-			<td><a href="project?projectId=${project.getId()}">${project.getName()}</a></td>
-			<td>${project.getFunded(paymentDao.getPledged(project.getId()))}</td>
+			<td><a href="project.html?projectId=${project.getId()}">${project.getName()}</a></td>
+			<td>${project.getFunded()}</td>
 			<td>${project.getDaysToGo()}</td>
-			<td>${paymentDao.getPledged(project.getId())}</td>
+			<td>${project.getAmountPledge()}</td>
 		</tr>
 	</c:forEach>
 

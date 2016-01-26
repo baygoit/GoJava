@@ -3,19 +3,25 @@
 
 <h3>Pledge:</h3>
 
-<form action="pledge?rewardId=${rewardId}&projectId=${projectId}"
+<c:if test="${errors}">
+	<p style="color: red">errors</p>
+</c:if>
+
+<form action="pledge.html?rewardId=${rewardId}&projectId=${projectId}"
 	method="post">
 	<p>
-		<input type="text" name="name" placeholder="name">
+		<input type="text" name="name" placeholder="name" required>
 	</p>
 	<p>
-		<input type="text" name="cardNumber" placeholder="card number">
+		<input type="text" name="cardNumber" placeholder="card number"
+			required>
 	</p>
-	<c:if test="${rewardId == 0}">
-		<p>
-			<input type="text" name="amount" placeholder="amount">
-		</p>
-	</c:if>
+
+	<p>
+		<input type="number" name="amount" required value="${amount}"
+			<c:if test="${rewardId != 0}"> readonly</c:if>>
+	</p>
+
 	<p>
 		<input type="submit" value="Donate">
 	</p>

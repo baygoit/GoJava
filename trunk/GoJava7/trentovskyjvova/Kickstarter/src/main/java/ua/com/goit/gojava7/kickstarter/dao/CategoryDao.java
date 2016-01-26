@@ -9,5 +9,4 @@ public interface CategoryDao extends Dao {
 	
 	Category getCategory(int id);
 	
-	int size();
 }

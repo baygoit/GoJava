@@ -1,32 +1,76 @@
 package ua.com.goit.gojava7.kickstarter.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.Formula;
+
+@Entity
+@Table(name = "project")
 public class Project {
+	@Column
 	private String name;
-	private final int id;
-	private int categoryId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	private Category category;
+	@Column
 	private int daysToGo;
+	@Column
 	private String description;
+	@Column
 	private String owner;
+	@Column
 	private int goal;
-	private String linkVideo;
-
+	@Column
+	private String videoUrl;
+	
+	//@Transient
+	@Formula("(select coalesce(sum(p.pledge), 0) from payment p where p.projectid = id)")
+	private int amountPledge;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+	private Set<Payment> payments = new HashSet<Payment>();
+	
+	public Project() {
+		
+	}
+	
 	public Project(String name, int id) {
-		setName(name);
+		this.name = name;
 		this.id = id;
-		setCategoryId(0);
-		setDaysToGo(40);
-		setDescription("");
-		setOwner("");
-		setGoal(0);
-		setLinkVideo("");
-	}
 
-	public String getName() {
-		return name;
+		this.daysToGo = 40;
+		this.description = "";
+		this.owner = "";
+		this.goal = 0;
+		this.videoUrl = "";
 	}
-
+	
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {
@@ -57,12 +101,12 @@ public class Project {
 		this.goal = goal;
 	}
 
-	public String getLinkVideo() {
-		return linkVideo;
+	public String getVideoUrl() {
+		return videoUrl;
 	}
 
-	public void setLinkVideo(String linkVideo) {
-		this.linkVideo = linkVideo;
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl;
 	}
 
 	public String getOwner() {
@@ -73,16 +117,39 @@ public class Project {
 		this.owner = owner;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
-	public int getFunded(int pledged) {
-		int goal = getGoal();
-		return goal == 0 ? 0 : pledged * 100 / goal;
+	public int getFunded() {
+		return goal == 0 ? 0 : getAmountPledge() * 100 / goal;
 	}
+
+	public int getAmountPledge() {
+		return amountPledge;
+	}
+
+	public void setAmountPledge(int amountPledge) {
+		this.amountPledge = amountPledge;
+	}
+
+	public Set<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(Set<Payment> payments) {
+		this.payments = payments;
+	}
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this).append("name", name).append("description", description)
+				.append("daysToGo", daysToGo).append("goal", goal).append("amountPledge", amountPledge)
+				.toString();
+	}
+	
 }

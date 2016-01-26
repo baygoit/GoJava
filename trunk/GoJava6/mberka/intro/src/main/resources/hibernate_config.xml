@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/airbnb</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
+
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">1</property>
+
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQL57InnoDBDialect</property>
+
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Second-level cache  -->
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+
+        <!-- Cache -->
+        <!--<property name="hibernate.cache.region.factory_class">
+            org.hibernate.cache.ehcache.EhCacheRegionFactory</property>-->
+        <!--<property name="hibernate.cache.use_query_cache">true</property>-->
+        <!--<property name="hibernate.cache.use_second_level_cache">false</property>-->
+        <!--<property name="net.sf.ehcache.configurationResourceName">/myehcache.xml</property>-->
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">update</property>
+        <!--<property name="hbm2ddl.auto">create</property>-->
+
+        <!-- Names the annotated entity class -->
+        <mapping class="com.gojava6.airbnb.modelHibernate.User"/>
+        <mapping class="com.gojava6.airbnb.modelHibernate.Apartment"/>
+        <mapping class="com.gojava6.airbnb.modelHibernate.Reservation"/>
+
+        <!--<mapping resource="net/viralpatel/hibernate/Employee.hbm.xml"/>
+        <mapping resource="mapping/User.hbm.xml"/>
+        <mapping resource="mapping/UserHistory.hbm.xml"/>
+        <mapping resource="mapping/ProteinData.hbm.xml"/>
+        <mapping resource="mapping/GoalAlert.hbm.xml"/>-->
+
+    </session-factory>
+</hibernate-configuration>

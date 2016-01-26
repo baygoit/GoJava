@@ -4,28 +4,32 @@
 <h3>Project:</h3>
 
 <p>name: ${selectedProject.getName()}</p>
-<p>funded: ${selectedProject.getFunded(pledged)}</p>
+<p>funded: ${selectedProject.getFunded()}</p>
 <p>daysToGo: ${selectedProject.getDaysToGo()}</p>
-<p>pledged: ${pledged}</p>
+<p>pledged: ${selectedProject.getAmountPledge()}</p>
 <p>description: ${selectedProject.getDescription()}</p>
 <p>owner: ${selectedProject.getOwner()}</p>
 <p>goal: ${selectedProject.getGoal()}</p>
-<p>linkVideo: ${selectedProject.getLinkVideo()}</p>
+<p>videoUrl: ${selectedProject.getVideoUrl()}</p>
 
 <c:forEach var="question" items="${questions}">
-	
-	Question: '${question.getQuestionText()}'<br>
+
+	<p>
+		Question: <i>${question.getQuestionText()}</i>
+	</p>
 
 </c:forEach>
 
 
-<a href="payments?projectId=${selectedProject.getId()}">to invest in
-	the project</a>
-<br>
+<p>
+	<a href="payments.html?projectId=${selectedProject.getId()}">to invest
+		in the project</a>
+</p>
 
 
-<a href="question?projectId=${selectedProject.getId()}">to ask a
-	question</a>
-<br>
+<p>
+	<a href="question.html?projectId=${selectedProject.getId()}">to ask a
+		question</a>
+</p>
 
 <jsp:include page="footer.jsp" />

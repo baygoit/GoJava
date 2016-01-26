@@ -1,49 +1,37 @@
 package ua.com.goit.gojava7.kickstarter.dao.sql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.Random;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
-import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
+@Repository
 public class QuoteDaoSqlImpl implements QuoteDao {
-	private DataSource dataSource;
-
-	public QuoteDaoSqlImpl(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-
+	@PersistenceContext
+	private EntityManager em;
+	
 	@Override
+	@Transactional
 	public Quote getRandomQuote() {
-		Quote quote = null;
 		
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rset = null;
-		try {
-			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("SELECT text, author FROM quote order by random() limit 1 ");
-			rset = stmt.executeQuery();
+		Query query = em.createNamedQuery("Quote.count");
+		Long count = (Long) query.getSingleResult();
 
-			while (rset.next()) {
-				String text = rset.getString("text");
-				String author = rset.getString("author");
-				quote = new Quote(text, author);
-			}
-		} catch (SQLException e) {
-			throw new IODatabaseException("Problem with database", e);
-		} finally {
-            try { if (rset != null) rset.close(); } catch(Exception e) { }
-            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-            try { if (conn != null) conn.close(); } catch(Exception e) { }
-		}
+		Random random = new Random();
+		int number = random.nextInt(count.intValue());
 
-		return quote;
+		Query selectQuery = em.createNamedQuery("Quote.findAll");
+		selectQuery.setFirstResult(number);
+		selectQuery.setMaxResults(1);
+
+		return (Quote) selectQuery.getSingleResult();
 	}
 
 }

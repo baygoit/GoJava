@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="common" template="/WEB-INF/layout/classic.jsp">
+		<put-attribute name="title" value="Kickstarter" />
+		<put-attribute name="menu" value="/WEB-INF/layout/menu.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+	</definition>
+
+	<definition name="categories" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/categories.jsp" />
+	</definition>
+
+	<definition name="projectList" extends="common">
+		<put-attribute name="title" value="Projects" />
+		<put-attribute name="body" value="/WEB-INF/jsp/projectList.jsp" />
+	</definition>
+
+	<definition name="projectDetails" extends="common">
+		<put-attribute name="body" value="/WEB-INF/jsp/projectDetails.jsp" />
+	</definition>
+
+	<definition name="message" extends="common">
+		<put-attribute name="title" value="Ask whatever you want" />
+		<put-attribute name="body" value="/WEB-INF/jsp/message.jsp" />
+	</definition>
+
+	<definition name="payment" extends="common">
+		<put-attribute name="title" value="Support project" />
+		<put-attribute name="body" value="/WEB-INF/jsp/payment.jsp" />
+	</definition>
+	
+	<definition name="signUp" extends="common">
+		<put-attribute name="title" value="Sign-up" />
+		<put-attribute name="body" value="/WEB-INF/jsp/signUp.jsp" />
+	</definition>
+	
+		<definition name="login" extends="common">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
+	</definition>
+	
+</tiles-definitions>

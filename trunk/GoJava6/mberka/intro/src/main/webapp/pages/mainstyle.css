@@ -1,0 +1,7 @@
+body {
+    color: #1A1A10;
+    background-image: url("../../resources/img/background4.jpg");
+    background-repeat: repeat-x;
+    background-position: bottom top;
+    background-size: cover;
+    background-color: #FFFFA3 }

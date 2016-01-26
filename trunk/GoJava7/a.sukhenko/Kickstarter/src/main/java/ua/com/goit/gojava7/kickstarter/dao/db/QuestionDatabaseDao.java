@@ -1,123 +1,56 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.jdbc.pool.DataSource;
-import org.springframework.stereotype.Component;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
-import ua.com.goit.gojava7.kickstarter.dao.DatabaseDao;
-import ua.com.goit.gojava7.kickstarter.domain.Question;
-@Component
-public class QuestionDatabaseDao extends DatabaseDao<Question>{
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-    private static String       TABLE     = "question";
-    private static String       FIELDS    = "time, question, answer, project_id";
-    private static final String INSERTION = "?, ?, ?, ?";
+import ua.com.goit.gojava7.kickstarter.model.Project;
+import ua.com.goit.gojava7.kickstarter.model.Question;
+import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
+@Repository
+@Transactional
+public class QuestionDatabaseDao{
 
-  public QuestionDatabaseDao(DataSource dataSource) {
-      this.dataSource = dataSource;
-}public QuestionDatabaseDao() {
-    // TODO Auto-generated constructor stub
-}
+    private static final Logger logger = LogManager.getLogger(QuestionDatabaseDao.class);
 
-    @Override
-    public void add(Question element) {
-        String query = "INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + INSERTION + ")";
-        try (PreparedStatement ps = dataSource.getConnection().prepareStatement(query)) {
-            writeElement(element, ps);
-            ps.executeUpdate();
-            ps.close();
-        } catch (SQLException e) {
-            System.err.println("Error! INSERT INTO " + TABLE + " (" + FIELDS + ") VALUES (" + element.getTime() + ", "
-                    + element.getTime() + "," + element.getTime() + ", " + element.getTime() + ")");
 
-            e.printStackTrace();
-        }
+    @PersistenceContext
+    private EntityManager manager;
+    
+    @Autowired
+    private ProjectDao projectDao;
+    
+    public List<Question> getQuestionsByProjectId(int projectId) {
+        TypedQuery<Question> query = manager.createNamedQuery("Question.findByProjectId",Question.class);
+        List<Question> questions = query.setParameter("projectId", projectId).getResultList();
+        return questions;
     }
-
-    public List<Question> getByProject(String projectName) {
-        String query = "SELECT time, question, answer FROM " + TABLE
-                + " WHERE project_id = (SELECT id FROM project WHERE name = '" + prepareStringForDb(projectName) + "')";
-        List<Question> data = new ArrayList<>();
-        try (PreparedStatement ps = dataSource.getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-            while (resultSet.next()) {
-                data.add(readElement(resultSet));
-            }
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-        }
-        return data;
-    }
-
-    @Override
-    protected Question readElement(ResultSet resultSet) throws SQLException {
-        Question question;
-        question = new Question();
-        question.setTime(resultSet.getString("time"));
-        question.setQuestion(resultSet.getString("question"));
-        question.setAnswer(resultSet.getString("answer"));
-        return question;
-    }
-
-    private void writeElement(Question question, PreparedStatement statement) throws SQLException {
-        statement.setString(1, question.getTime());
-        statement.setString(2, question.getQuestion());
-        statement.setString(3, question.getAnswer());
-    }
-
-    private int findProjectId(String projectName) {
-        int id;
-        String query = "select id from project where name = '" + prepareStringForDb(projectName) + "'";
-        try (PreparedStatement ps = dataSource.getConnection().prepareStatement(query); ResultSet resultSet = ps.executeQuery()) {
-            while (resultSet.next()) {
-                id = resultSet.getInt("id");
-                return id;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    @Override
-    public Connection getConnection() throws SQLException{
-        return dataSource.getConnection();
-    }
-
-    @Override
-    public Question getByNumber(int number) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void setAll(List<Question> data) {
-        // TODO Auto-generated method stub
+    
+    public void createQuestion(String text, int projectId) {
+        logger.info("<void> createQuestion({}, {})...", text, projectId);
+        //TODO: Check JPA
+            Question question = new Question();
+            question.setQuestion(text);
+            question.setProject(projectDao.getProject(projectId));
+            add(question);
         
     }
-
-    @Override
-    public List<Question> getAll() {
-        // TODO Auto-generated method stub
-        return null;
+    
+    public void add(Question question) {
+        
+        logger.info("<void> add()...", question);
+        //TODO: JPA
     }
-
-    @Override
-    public Question get(int index) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public int size() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
 }

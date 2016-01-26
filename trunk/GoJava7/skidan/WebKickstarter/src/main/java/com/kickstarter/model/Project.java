@@ -1,22 +1,62 @@
 package com.kickstarter.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+@Entity
+@Table(name = "projects")
+//@Cacheable
+//@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Project {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "projectId")
 	private int id;
+	@Column(name = "title")
 	private String title;
+	@Column(name = "discription")
 	private String discription;
+	@Column(name = "daysLeft")
 	private int daysLeft;
+	@Column(name = "requiredSum")
 	private int requiredSum;
+	@Column(name = "gainedSum")
 	private int gainedSum;
+	@Column(name = "projectHistory")
 	private String projectHistory;
+	@Column(name = "videoLink")
 	private String videoLink;
-	private String categoryTitle;
 	
-	public Project(){
-		
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.DETACH})
+	@JoinColumn(name = "categoryId")
+	private Category category;
+	
+	@OneToMany(mappedBy = "project", cascade = {CascadeType.ALL})
+	private Collection<Question> questions = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "project", cascade={CascadeType.ALL})
+	private List<Payment> payments = new ArrayList<Payment>();
+
+	public Project() {
 	}
 
-	public Project(int id, String title, String discription, int daysLeft, int requiredSum, int gainedSum,
-			String projectHistory, String videoLink, String categoryTitle) {
+	public Project(int id, String title, String discription, int daysLeft, int requiredSum, int gainedSum,// FIXME
+			String projectHistory, String videoLink, Category category) {
 		this.id = id;
 		this.title = title;
 		this.discription = discription;
@@ -25,7 +65,31 @@ public class Project {
 		this.gainedSum = gainedSum;
 		this.projectHistory = projectHistory;
 		this.videoLink = videoLink;
-		this.categoryTitle = categoryTitle;
+		this.category = category;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public Collection<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(Collection<Question> questions) {
+		this.questions = questions;
+	}
+
+	public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public String getTitle() {
@@ -83,7 +147,7 @@ public class Project {
 	public void setVideoLink(String videoLink) {
 		this.videoLink = videoLink;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -92,19 +156,11 @@ public class Project {
 		this.id = id;
 	}
 
-	public String getCategoryName() {
-		return categoryTitle;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryTitle = categoryName;
-	}
-
 	@Override
 	public String toString() {
 		return ("Project Title : " + title + "\n Project Discription :" + discription + "\n Project History : "
 				+ projectHistory + "\n Video Link : " + videoLink + "\n Required Sum :" + requiredSum
-				+ "\n Gained Sum :" + gainedSum + "\n Days Left :" + daysLeft + "\n");
+				+ "\n Gained Sum :" + gainedSum + "\n Days Left :" + daysLeft + "\n  ProjectId :" + id + "\n ");
 	}
 
 }

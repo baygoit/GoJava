@@ -9,60 +9,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kickstarter.dao.interfaces.DbProjectDaoImpl;
-import com.kickstarter.dao.interfaces.DbQuestionDaoImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
+import com.kickstarter.dao.Impl.PaymentDaoImpl;
+import com.kickstarter.dao.Impl.ProjectDaoImpl;
+import com.kickstarter.dao.Impl.QuestionDaoImpl;
 import com.kickstarter.model.Project;
 import com.kickstarter.model.Question;
 
 @WebServlet("/SingleProjectServlet")
 public class SingleProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	DbQuestionDaoImpl questionDao;
-	DbProjectDaoImpl projectDao;
+
+	@Autowired
+	QuestionDaoImpl questionDao;
+
+	@Autowired
+	ProjectDaoImpl projectDao;
+
+	@Autowired
+	PaymentDaoImpl paymentDao;
 
 	public void init() throws ServletException {
-		projectDao = new DbProjectDaoImpl();
-		questionDao = new DbQuestionDaoImpl();
+		SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, getServletContext());
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
-		Project project = projectDao.getOne(projectId);
-		List<Question> list =  questionDao.getProjectQuestions(project.getTitle());
-		
+		Project project = projectDao.getOneProject(projectId);
+		project.setGainedSum(paymentDao.getAll(projectId));
+		List<Question> list = questionDao.getProjectQuestions(projectId);
+
 		request.setAttribute("questions", list);
-		request.setAttribute("project",project);
+		request.setAttribute("project", project);
 		request.getRequestDispatcher("/WEB-INF/SingleProject.jsp").forward(request, response);
-		
-		
-		
-		
-		
-		
-//		StringBuilder sb = new StringBuilder("<html><head><title>SelectedProject</title></head><body>");
-//		sb.append("<h1 style= \"text-align:center\">" + "Welcome to " + project.getTitle() + "</h1>");
-//		sb.append("Project description : " + project.getDiscription() + "<br>");
-//		sb.append("Days left till ending : " + project.getDaysLeft() + "<br>");
-//		sb.append("Total required sum : " + project.getRequiredSum() + "<br>");
-//		sb.append("Sum already gained : " + project.getGainedSum() + "<br>");
-//		sb.append("Link to our project's video : " + project.getVideoLink() + "<br>");
-//		sb.append("History  of our project : " + project.getProjectHistory() + "<br><br>");
-//
-//		for (Question q : questionDao.getProjectQuestions(project.getTitle())) {
-//			sb.append(q.getQuestion() + "<br>");
-//		}
-//
-//		sb.append(
-//				"<br>You can ask your question here<br><html><head><title>QuestionSystem</title></head><body><form method =\"post\" action =\"QuestionServlet\">"
-//						+ "<input type =\"hidden\" name = \"projectId\" value =" + "\"" + projectId
-//						+ "\"/><input name =\"question\"/><input type = \"submit\" value = \"add question\"/></form></body></html><br>");
-//		sb.append("<br><br><html><head><title>PaymentSystem</title></head><body><form action =\"PaymentServlet\">"
-//				+ "<input type =\"hidden\" name = \"projectId\" value =" + "\"" + projectId
-//				+ "\"/><input type =\"radio\" value =\"1\" name =\"paymentType\">Donate 50$</input><input type =\"radio\" value =\"2\" name =\"paymentType\">Donate 100$</input><input type =\"radio\" value =\"3\" name =\"paymentType\">Donate 150$</input><input type =\"radio\" value =\"4\" name =\"paymentType\">Donate random amount $</input><br><input type = \"submit\" value = \"payment type\"/></form></body></html><br>");
-//
-//		response.getWriter().append(sb);
+
 	}
 
 }

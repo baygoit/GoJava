@@ -1,76 +1,45 @@
 package ua.com.goit.gojava7.kickstarter.dao.sql;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.domain.Question;
-import ua.com.goit.gojava7.kickstarter.exception.IODatabaseException;
 
+@Repository
+@Transactional
 public class QuestionDaoSqlImpl implements QuestionDao {
-	private DataSource dataSource;
-
-	public QuestionDaoSqlImpl(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+	@PersistenceContext
+	private EntityManager em;
 
 	@Override
 	public List<Question> getQuestions(int projectId) {
-		List<Question> questions = new ArrayList<>();
+		
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rset = null;
-		try {
-			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("SELECT id, questionText FROM question WHERE projectId =" + projectId);
-			rset = stmt.executeQuery();
+		CriteriaQuery<Question> criteriaQuery = criteriaBuilder.createQuery(Question.class);
+		Root<Question> entityRoot = criteriaQuery.from(Question.class);
+		criteriaQuery.select(entityRoot);
+		criteriaQuery.where(criteriaBuilder.equal(entityRoot.get("projectId") , projectId));
+		TypedQuery<Question> query = em.createQuery(criteriaQuery);
 
-			Question question;
-			while (rset.next()) {
-				int id = rset.getInt("id");
-				String questionText = rset.getString("questionText");
-
-				question = new Question();
-				question.setId(id);
-				question.setProjectId(projectId);
-				question.setQuestionText(questionText);
-
-				questions.add(question);
-			}
-		} catch (SQLException e) {
-			throw new IODatabaseException("Problem with database", e);
-		} finally {
-            try { if (rset != null) rset.close(); } catch(Exception e) { }
-            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-            try { if (conn != null) conn.close(); } catch(Exception e) { }
-		}
-		return questions;
+		return query.getResultList();
+		
 	}
 
 	@Override
 	public void addQuestion(Question question) {
-			
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		try {
-			conn = dataSource.getConnection();
-			stmt = conn.prepareStatement("INSERT INTO question (projectId, questionText) VALUES ('"
-					+ question.getProjectId() + "', '" + question.getQuestionText() + "');");
-			stmt.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new IODatabaseException("Problem with database", e);
-		} finally {
-            try { if (stmt != null) stmt.close(); } catch(Exception e) { }
-            try { if (conn != null) conn.close(); } catch(Exception e) { }
-		}
+		
+		em.merge(question);
 	}
 
 }
