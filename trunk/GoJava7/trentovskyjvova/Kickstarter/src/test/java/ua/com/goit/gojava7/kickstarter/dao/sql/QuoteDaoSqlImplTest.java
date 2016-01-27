@@ -1,34 +1,42 @@
 package ua.com.goit.gojava7.kickstarter.dao.sql;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.contains;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
-import org.junit.Ignore;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
-import ua.com.goit.gojava7.kickstarter.dao.sql.QuoteDaoSqlImpl;
+import ua.com.goit.gojava7.kickstarter.domain.Quote;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:H2/H2ApplicationContext*.xml")
+@Transactional
 public class QuoteDaoSqlImplTest {
 
-	@Mock
-	private JdbcTemplate jdbcTemplate;
-	@InjectMocks
-	private QuoteDao quoteDaoMySqlImpl = new QuoteDaoSqlImpl();
-	
+	@PersistenceContext
+	private EntityManager em;
+
+	@Autowired
+	private QuoteDao quoteDao;
+
 	@Test
-	@Ignore
-	public void testGetRandomQuote(){	
-		quoteDaoMySqlImpl.getRandomQuote();
-		verify(jdbcTemplate).queryForObject(contains("quote"), any(BeanPropertyRowMapper.class));
+	public void testGetRandomQuote() {
+       
+		Quote quote = new Quote();
+        quote.setText("Test Quote 1");
+
+        em.persist(quote);
+        
+		assertThat(quoteDao.getRandomQuote().getText(), is(quote.getText()));
+
 	}
 
 }

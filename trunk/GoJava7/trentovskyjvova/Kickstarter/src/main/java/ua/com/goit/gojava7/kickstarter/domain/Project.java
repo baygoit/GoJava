@@ -24,25 +24,25 @@ public class Project {
 	private String name;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "categoryid")
 	private Category category;
 	@Column
-	private int daysToGo;
+	private Long daysToGo;
 	@Column
 	private String description;
 	@Column
 	private String owner;
 	@Column
-	private int goal;
+	private Long goal;
 	@Column
 	private String videoUrl;
 	
 	//@Transient
 	@Formula("(select coalesce(sum(p.pledge), 0) from payment p where p.projectid = id)")
-	private int amountPledge;
+	private Long amountPledge;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<Payment> payments = new HashSet<Payment>();
 	
@@ -50,22 +50,22 @@ public class Project {
 		
 	}
 	
-	public Project(String name, int id) {
+	public Project(String name, Long id) {
 		this.name = name;
 		this.id = id;
 
-		this.daysToGo = 40;
+		this.daysToGo = 40L;
 		this.description = "";
 		this.owner = "";
-		this.goal = 0;
+		this.goal = 0L;
 		this.videoUrl = "";
 	}
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -77,11 +77,11 @@ public class Project {
 		this.name = name;
 	}
 
-	public int getDaysToGo() {
+	public Long getDaysToGo() {
 		return daysToGo;
 	}
 
-	public void setDaysToGo(int daysToGo) {
+	public void setDaysToGo(Long daysToGo) {
 		this.daysToGo = daysToGo;
 	}
 
@@ -93,11 +93,11 @@ public class Project {
 		this.description = description;
 	}
 
-	public int getGoal() {
+	public Long getGoal() {
 		return goal;
 	}
 
-	public void setGoal(int goal) {
+	public void setGoal(Long goal) {
 		this.goal = goal;
 	}
 
@@ -125,15 +125,15 @@ public class Project {
 		this.category = category;
 	}
 
-	public int getFunded() {
+	public Long getFunded() {
 		return goal == 0 ? 0 : getAmountPledge() * 100 / goal;
 	}
 
-	public int getAmountPledge() {
+	public Long getAmountPledge() {
 		return amountPledge;
 	}
 
-	public void setAmountPledge(int amountPledge) {
+	public void setAmountPledge(Long amountPledge) {
 		this.amountPledge = amountPledge;
 	}
 

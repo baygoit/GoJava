@@ -22,7 +22,7 @@ public class RewardDaoSqlImpl implements RewardDao {
 	private EntityManager em;
 
 	@Override
-	public List<Reward> getRewards(int projectId) {
+	public List<Reward> getRewards(Long projectId) {
 
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
@@ -36,7 +36,7 @@ public class RewardDaoSqlImpl implements RewardDao {
 	}
 
 	@Override
-	public Reward getReward(int rewardId) {
+	public Reward getReward(Long rewardId) {
 
 		return em.find(Reward.class, rewardId);
 	}

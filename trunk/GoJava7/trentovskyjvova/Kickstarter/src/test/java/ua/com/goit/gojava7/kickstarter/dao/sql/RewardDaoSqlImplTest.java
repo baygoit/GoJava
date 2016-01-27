@@ -35,7 +35,7 @@ public class RewardDaoSqlImplTest {
 	@Ignore
 	public void testGetRewards() {
 
-		rewardDaoMySqlImpl.getRewards(1);
+		rewardDaoMySqlImpl.getRewards(1L);
 		verify(jdbcTemplate).query(contains("reward WHERE projectId = ?"), any(Integer[].class),
 				any(BeanPropertyRowMapper.class));
 	}
@@ -44,7 +44,7 @@ public class RewardDaoSqlImplTest {
 	@Ignore
 	public void testGetRewardById() {
 
-		rewardDaoMySqlImpl.getReward(12);
+		rewardDaoMySqlImpl.getReward(12L);
 		verify(jdbcTemplate).queryForObject(contains("reward WHERE id = ?"), any(Integer[].class),
 				any(BeanPropertyRowMapper.class));
 	}
