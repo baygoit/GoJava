@@ -17,7 +17,6 @@ public class QuoteService {
     @Autowired
     private QuoteDao quoteDao;
 
-
     public Quote getRandomQuote() {
         log.info("<Quote> getRandomQuote()...");
 

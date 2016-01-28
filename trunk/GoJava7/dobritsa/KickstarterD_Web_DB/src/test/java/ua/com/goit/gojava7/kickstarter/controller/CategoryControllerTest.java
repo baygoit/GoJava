@@ -10,6 +10,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.dao.DBImpl.CategoryDaoDb;
 import ua.com.goit.gojava7.kickstarter.dto.CategoryDto;
 import ua.com.goit.gojava7.kickstarter.dto.ProjectDto;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
