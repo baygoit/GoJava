@@ -5,67 +5,54 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "projects")
-@NamedQuery(name="Project.findByCategoryId", query="SELECT pr FROM Project pr WHERE pr.category.categoryId = :categoryId")
+@NamedQuery(name = "Project.findByCategoryId", query = "SELECT pr FROM Project pr WHERE pr.category.categoryId = :categoryId")
 public class Project implements Serializable {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = 3601009349187745841L;
     private static final String MINUTES_LEFT = " minutes to go";
-    private static final String HOURS_LEFT   = " hours to go";
-    private static final String DAYS_LEFT    = " days to go";
+    private static final String HOURS_LEFT = " hours to go";
+    private static final String DAYS_LEFT = " days to go";
     private static final String SECONDS_LEFT = " seconds to go";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private int                 id;
+    private int id;
     @Column(unique = true)
 
-    private String              projectName;
+    private String projectName;
     @Column
-    private String              projectDescription;
+    private String projectDescription;
     @Column
-    private double              moneyNeeded;
+    private double moneyNeeded;
     @Column
-    private String              projectHistory;
+    private String projectHistory;
     @Column
-    private String              demoLink;
+    private String demoLink;
 
-    
-    
 
     @ManyToOne
     @JoinColumn(name = "projectCategoryId")
-    private Category            category;
+    private Category category;
 
-    @Type(type = "ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
+    @Temporal(TemporalType.DATE)
+    //@Type(type = "ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
     @Column(name = "enddate")
-    private LocalDateTime       enddate;
+    private LocalDateTime enddate;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
-    //@Cascade({org.hibernate.annotations.CascadeType.ALL})
-    private List<Bonus>         bonuses      = new ArrayList<Bonus>();
+    private List<Bonus> bonuses = new ArrayList<Bonus>();
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
-    private List<Question>      questionsAndAnswers;
+    @OneToMany(mappedBy = "project")
+    private List<Question> questionsAndAnswers;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
-    private List<Payment>       payments     = new ArrayList<>();
+    @OneToMany(mappedBy = "project")
+    private List<Payment> payments = new ArrayList<>();
 
     public List<Payment> getPayments() {
         return payments;
@@ -90,7 +77,7 @@ public class Project implements Serializable {
     public void setMoneyNeeded(double moneyNeeded) {
         this.moneyNeeded = moneyNeeded;
     }
-
+    //TODO: Move to controller
     public String getProjectEndTime() {
         ZoneId zoneId = ZoneId.systemDefault();
         long epoch = getEnddate().atZone(zoneId).toEpochSecond();
