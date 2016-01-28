@@ -7,11 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "category")
+@NamedQueries({ @NamedQuery(name = "Category.findById", query = "SELECT c FROM Category c WHERE c.id = :id"),
+				@NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c") })
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,24 +42,17 @@ public class Category {
 		this.name = name;
 	}
 
-	/**
-	 * @return the projects
-	 */
 	public Set<Project> getProjects() {
 		return projects;
 	}
 
-	/**
-	 * @param projects
-	 *            the projects to set
-	 */
 	public void setProjects(Set<Project> projects) {
 		this.projects = projects;
 	}
 
 	@Override
 	public String toString() {
-		return "Category : [name=" + name + "]";
+		return String.format("Category : [name=%s]", name);
 	}
 
 	@Override

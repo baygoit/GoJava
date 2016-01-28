@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.com.goit.gojava7.kickstarter.beans.Payment;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.ProjectDao;
+
 
 @Controller
 public class PaymentController {
