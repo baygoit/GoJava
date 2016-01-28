@@ -32,8 +32,22 @@
     <servlet-mapping>
         <servlet-name>webmvc-servlet</servlet-name>
         <url-pattern>/</url-pattern>
-    </servlet-mapping>	
-    
+    </servlet-mapping>
+
+	<filter>
+		<filter-name>AuthenticationFilter</filter-name>
+		<filter-class>ua.com.goit.gojava7.kickstarter.filters.AuthenticationFilter</filter-class>
+		<init-param>
+			<param-name>loginActionURI</param-name>
+			<param-value>/login</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>AuthenticationFilter</filter-name>
+		<url-pattern>/aut/*</url-pattern>
+	</filter-mapping>
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>

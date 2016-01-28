@@ -136,7 +136,7 @@ public class CategoriesController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/pledge", method = RequestMethod.GET)
+	@RequestMapping(value = "/aut/pledge", method = RequestMethod.GET)
 	public ModelAndView pledgeGet(@RequestParam(name = "projectId") Long projectId,
 			@RequestParam(name = "rewardId") Long rewardId,
 			@RequestParam(name = "amount") Long amount) {
@@ -158,13 +158,13 @@ public class CategoriesController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/pledge", method = RequestMethod.POST)
+	@RequestMapping(value = "/aut/pledge", method = RequestMethod.POST)
 	public ModelAndView pledgePost(@RequestParam(name = "projectId") Long projectId,
 			@RequestParam(name = "rewardId") Long rewardId,
 			@RequestParam(name = "amount") Long amount,
 			@RequestParam(name = "name") String name,
 			@RequestParam(name = "cardNumber") String cardNumber) {
-		ModelAndView modelAndView = new ModelAndView("redirect:project.html");
+		ModelAndView modelAndView = new ModelAndView("redirect:../project.html");
 
 		modelAndView.addObject("projectId", projectId);
 		log.debug("projectId: {}", projectId);
