@@ -1,5 +1,5 @@
-<%@ page import="ua.com.goit.gojava7.kickstarter.model.Category" %>
-<%@ page import="ua.com.goit.gojava7.kickstarter.model.Project" %>
+<%@ page import="ua.com.goit.gojava7.kickstarter.domain.Category" %>
+<%@ page import="ua.com.goit.gojava7.kickstarter.domain.Project" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -12,11 +12,12 @@
 <%
     Project project = (Project) request.getAttribute("project");
     Category category = (Category) request.getAttribute("category");
-    int categoryId = (Integer) request.getAttribute("categoryId");
+    String id = request.getParameter("id");
+    String categoryId = request.getParameter("categoryId");
     String sum = request.getParameter("sum");
 %>
 <h3>Category: <a href="category?id=<%= categoryId %>"><%= category.getName() %></a><br />
-Project: <%= project.getName() %><br /></h3>
+Project: <a href="project?id=<%= id %>&categoryId=<%= categoryId %>"><%= project.getName() %></a><br /></h3>
 <br />
 <b>Description:</b> <%= project.getDescription() %><br />
 <b>History:</b> <%= project.getHistory() %><br />
@@ -39,17 +40,13 @@ Project: <%= project.getName() %><br /></h3>
 %>
 </font>
 <br />
-<%
-    session.setAttribute("project", project); // TODO
-    session.setAttribute("category", category);
-    session.setAttribute("categoryId", categoryId);
-%>
 Would you like to ask a question?<br />
 <form action="question" method="post">
     <textarea name="question" placeholder="your question..."></textarea>
     <br />
     <input type="submit" value="Ask"/>
-    <%--<input type="hidden" name="project" value="">--%>
+    <input type="hidden" name="id" value="<%= id %>">
+    <input type="hidden" name="categoryId" value="<%= categoryId %>">
 </form>
 <br />
 Would you like to donate?<br />
@@ -62,6 +59,8 @@ Would you like to donate?<br />
     </select>
     <input type="text" name="sum" placeholder="Enter your sum..." />
     <input type="submit" value="Donate"/>
+    <input type="hidden" name="id" value="<%= id %>">
+    <input type="hidden" name="categoryId" value="<%= categoryId %>">
 </form>
 <%
     } else {
@@ -74,6 +73,8 @@ Would you like to donate?<br />
         <option value="other">other</option>
     </select>
     <input type="submit" value="Donate"/>
+    <input type="hidden" name="id" value="<%= id %>">
+    <input type="hidden" name="categoryId" value="<%= categoryId %>">
 </form>
 <%
     }
@@ -81,7 +82,7 @@ Would you like to donate?<br />
 
 
 <p align="center">
-    <a href="start">Main page</a>
+    <a href="/">Main page</a>
 </p>
 </body>
 </html>

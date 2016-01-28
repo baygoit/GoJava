@@ -3,65 +3,49 @@ package ua.com.goit.gojava7.kickstarter.domain;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.junit.After;
-import org.junit.Before;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:H2/H2ApplicationContext*.xml")
 @Category(IntegrationTest.class)
+@Transactional
 public class PaymentMappingTest {
-	private SessionFactory sessionFactory;
-	
-	@Before
-	public void setUp() throws Exception {
-		// A SessionFactory is set up once for an application!
-		// configures settings from hibernate.cfg.xml
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-		} catch (Exception e) {
-			e.printStackTrace();
-			// The registry would be destroyed by the SessionFactory, but we had
-			// trouble building the SessionFactory
-			// so destroy it manually.
-			StandardServiceRegistryBuilder.destroy(registry);
-		}
-	}
+	@PersistenceContext
+	private EntityManager em;
 
-	@After
-	public void tearDown() throws Exception {
-		if (sessionFactory != null) {
-			sessionFactory.close();
-		}
-	}
-	
 	@Test
 	public void testBasicUsage() {
-		// create a couple of events...
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+
+		ua.com.goit.gojava7.kickstarter.domain.Category category1 = new ua.com.goit.gojava7.kickstarter.domain.Category();
+		category1.setName("TestCategory 1");
+
+		Project project1 = new Project();
+		project1.setName("Project 1");
+		project1.setCategory(category1);
 
 		Payment payment1 = new Payment();
 		payment1.setName("Payment 1");
+		payment1.setProject(project1);
 
 		Payment payment2 = new Payment();
 		payment2.setName("Payment 2");
+		payment2.setProject(project1);
 
-		session.save(payment1);
-		session.save(payment2);
-		session.getTransaction().commit();
-		session.close();
+		em.persist(payment1);
+		em.persist(payment2);
 
-		// now lets pull events from the database and list them
-		session = sessionFactory.openSession();
-		Payment payment = session.get(Payment.class, 1);
-		session.close();
-		
-		assertThat(payment.getName(), is(payment.getName()));
+		Payment payment = em.find(Payment.class, payment1.getId());
+
+		assertThat(payment.getName(), is(payment1.getName()));
+		assertThat(payment.getProject(), is(project1));
+		assertThat(payment.getProject().getCategory(), is(category1));
 	}
 }

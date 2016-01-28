@@ -1,5 +1,5 @@
-<%@ page import="ua.com.goit.gojava7.kickstarter.model.Category" %>
-<%@ page import="ua.com.goit.gojava7.kickstarter.model.Quote" %>
+<%@ page import="ua.com.goit.gojava7.kickstarter.domain.Category" %>
+<%@ page import="ua.com.goit.gojava7.kickstarter.domain.Quote" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -13,8 +13,7 @@
 <br />
 <%
     Quote quote = (Quote)(request.getAttribute("quote"));
-//    List<Category> categories = (List<Category>) application.getAttribute("categories");
-    List<Category> categories = (List<Category>) session.getAttribute("categories");
+    List<Category> categories = (List<Category>) request.getAttribute("categories");
 %>
 <i><%= quote.getText() %> (<%= quote.getAuthor() %>)</i>
 <h3>Categories</h3>

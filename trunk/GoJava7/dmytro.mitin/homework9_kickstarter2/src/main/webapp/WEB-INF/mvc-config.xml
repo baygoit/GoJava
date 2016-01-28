@@ -11,6 +11,8 @@
 
     <mvc:resources mapping="/img/**" location="/WEB-INF/img/" />
 
+    <mvc:resources mapping="/index.html" location="/WEB-INF/html/" />
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="order" value="1" />
         <property name="prefix" value="/WEB-INF/jsp/" />
