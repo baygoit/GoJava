@@ -2,18 +2,24 @@ package ua.com.goit.gojava7.kickstarter.dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ua.com.goit.gojava7.kickstarter.domain.Category;
 import ua.com.goit.gojava7.kickstarter.domain.Project;
-import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 
 import java.util.List;
 
 public class CategoryDaoImpl implements CategoryDao {
 
+    private SessionFactory sessionFactory;
+
+    public CategoryDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public List<Category> getCategories() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         List<Category> categories = session.createCriteria(Category.class)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
@@ -25,7 +31,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public void add(Category category) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         session.save(category);
@@ -36,7 +42,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public void update(Project project) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         session.update(project);
