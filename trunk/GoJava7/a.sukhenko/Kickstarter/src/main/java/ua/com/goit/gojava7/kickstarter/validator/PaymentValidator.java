@@ -11,7 +11,6 @@ import org.springframework.validation.ValidationUtils;
 
 import ua.com.goit.gojava7.kickstarter.model.Payment;
 @Repository
-@Transactional
 public class PaymentValidator implements org.springframework.validation.Validator{
 
 	@Override
@@ -22,7 +21,7 @@ public class PaymentValidator implements org.springframework.validation.Validato
 	@Override
 	public void validate(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "amount", "error.amount","Amount cannot be empty.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cardName", "error.cardName","Card name cannot be empty.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cardOwner", "error.cardOwner","Card owner cannot be empty.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cardNumber", "error.cardNumber","Card number cannot be empty.");
 		validatePayment(target, errors);
 		
@@ -47,10 +46,10 @@ public class PaymentValidator implements org.springframework.validation.Validato
         return m.matches();
     }
     
-    public boolean validateAmountOfPledge(long amount) {
-    	String stringAmount = String.valueOf(amount);
+    public boolean validateAmountOfPledge(String amount) {
+    	//String stringAmount = String.valueOf(amount);
         Pattern p = Pattern.compile("^[1-9]{1,10}$");
-        Matcher m = p.matcher(stringAmount);
+        Matcher m = p.matcher(amount);
         return m.matches();
     }
     

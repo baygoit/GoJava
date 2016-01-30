@@ -39,7 +39,7 @@ public class PaymentTest{
 
     @Test
     public void testSetAmount() {
-        final long amount = 4321;
+        final String amount = "4321";
         payment.setAmount(amount);
         assertThat(payment.getAmount(), is(amount));
     }

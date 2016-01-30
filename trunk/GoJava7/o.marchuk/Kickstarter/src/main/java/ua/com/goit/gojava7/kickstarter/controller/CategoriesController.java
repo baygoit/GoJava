@@ -36,16 +36,18 @@ public class CategoriesController {
 	public ModelAndView category(@RequestParam(name = "id") Long categoryId) {
 		ModelAndView modelAndView = new ModelAndView("category");
 		Category category = categoryDao.get(categoryId);
-
-		// TODO
-		if (category == null) {
-			// / 404
+		if(!categoryExists(categoryId)){
+		    return new ModelAndView("categories");
 		}
-		
-		log.debug("Category: {}", category);
-		log.debug("Category projects: {}", category.getProjects());
-		
 		modelAndView.addObject(category);
 		return modelAndView;
+	}
+	
+	
+	private boolean categoryExists(Long categoryId){
+	    if(categoryDao.get(categoryId) != null){
+	        return true;
+	    }
+        return false;
 	}
 }

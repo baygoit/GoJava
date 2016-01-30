@@ -42,7 +42,7 @@
 
 
 
-<h3><a href="reward?id=${project.id}">Help the project [Donate]</a></h3>	
+<h3><a href="reward?projectId=${project.id}">Help the project [Donate]</a></h3>	
 
 
 <jsp:include page="footer.jsp" />

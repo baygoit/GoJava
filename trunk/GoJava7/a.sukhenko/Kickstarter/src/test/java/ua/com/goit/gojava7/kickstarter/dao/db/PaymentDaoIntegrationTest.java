@@ -33,6 +33,6 @@ public class PaymentDaoIntegrationTest {
    
    @Test
    public void testAddPayment(){
-       assertThat(paymentDao.createPayment("1234432112344321", "Name Else", Long.valueOf(12345), projectDao.getProjectByName("Movie 1")),is(true));
+       assertThat(paymentDao.createPayment("1234432112344321", "Name Else", String.valueOf(12345), projectDao.getProjectByName("Movie 1")),is(true));
    }
 }

@@ -35,13 +35,11 @@
 <c:if test="${not empty paymentBonuses}">
 	<h3>Let's choose your reward!</h3>
 	
-	<form action="payment" method="get">
-		<h3>No thanks, I just want to help the project.</h3>
+	<form action="payment/add" method="get">
 		<font color=red><c:if test="${not empty message}">${message}</c:if></font >
 		<label>Pledge amount</label>		
-		<input type="text" name="amount" value="1">
+		<input type="text" name="amount">
 		<input type="hidden" name="projectId" value="${project.id}" />
-		<input type="hidden" name="rewardId" value="0" />
 		<input type="submit" value="Continue" />
 	</form>
 
@@ -49,7 +47,7 @@
 		<c:forEach var="pBonus" items="${paymentBonuses}" >
 			<li>
 				<p>
-					<a href="payment?rewardId=${pBonus.id}">$${pBonus.amount}</a>
+					<a href="payment/add?projectId=${project.id}&amount=${pBonus.amount}">$${pBonus.amount}</a>
 					<br>${reward.reward}
 					 ${pBonus.bonus}
 				</p>

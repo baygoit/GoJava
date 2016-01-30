@@ -43,7 +43,7 @@ public class PaymentDao{
         
     }
 
-    public boolean createPayment(String cardNumber, String cardOwner, Long amount, Project project) {
+    public boolean createPayment(String cardNumber, String cardOwner, String amount, Project project) {
         logger.info("Creating payment: ");
             Payment payment = new Payment(cardNumber, cardOwner, project, amount);
             add(payment);

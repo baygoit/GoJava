@@ -15,10 +15,7 @@ import org.hibernate.annotations.Type;
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 3601009349187745841L;
-    private static final String MINUTES_LEFT = " minutes to go";
-    private static final String HOURS_LEFT = " hours to go";
-    private static final String DAYS_LEFT = " days to go";
-    private static final String SECONDS_LEFT = " seconds to go";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -40,8 +37,9 @@ public class Project implements Serializable {
     @JoinColumn(name = "projectCategoryId")
     private Category category;
 
-    @Temporal(TemporalType.DATE)
-    //@Type(type = "ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
+    //TODO: Try @Temporal
+    // @Temporal(TemporalType.DATE) // Doesn't work yet
+    @Type(type = "ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
     @Column(name = "enddate")
     private LocalDateTime enddate;
 
@@ -77,22 +75,7 @@ public class Project implements Serializable {
     public void setMoneyNeeded(double moneyNeeded) {
         this.moneyNeeded = moneyNeeded;
     }
-    //TODO: Move to controller
-    public String getProjectEndTime() {
-        ZoneId zoneId = ZoneId.systemDefault();
-        long epoch = getEnddate().atZone(zoneId).toEpochSecond();
-        long time = epoch - System.currentTimeMillis() / 1000;
-        String msg = +time + SECONDS_LEFT;
-        if (time >= 86400) {
-            msg = (time / 86400) + DAYS_LEFT;
-        } else if ((time >= 3600) && ((time % 3600) == 0)) {
-            msg = (time / 60 / 60) + HOURS_LEFT;
 
-        } else if (time >= 60) {
-            msg = (time / 60) + MINUTES_LEFT;
-        }
-        return msg;
-    }
 
     public String getProjectName() {
         return projectName;

@@ -26,15 +26,13 @@ public class CategoryDatabaseDao{
     private EntityManager entityManager;
 
 
-    
+
     public List<Category> getAll() {
-       List<Category> categories = entityManager.createQuery("Select c from Category c",Category.class).getResultList();
-        return categories;
+        return entityManager.createQuery("Select c from Category c",Category.class).getResultList();
     }
     
     public Category getCategoryById(Integer categoryId) {
-        Category category = entityManager.find(Category.class, categoryId);
-        return category;
+        return entityManager.find(Category.class, categoryId);
     }
     
 

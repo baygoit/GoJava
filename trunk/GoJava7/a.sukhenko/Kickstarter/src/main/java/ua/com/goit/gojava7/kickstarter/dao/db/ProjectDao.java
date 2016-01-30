@@ -44,14 +44,12 @@ public class ProjectDao{
     public Project getProject(Integer projectId) {
         LOGGER.info("<Project> get({})...", projectId);
         Project project = manager.find(Project.class, projectId);
-
         return project;
     }
     public Project getProjectByName(String projectName) {
         LOGGER.debug("Getting project by projectName: " + projectName);
         //TODO: Check if works
-        Project project = manager.find(Project.class, projectName);
-        return project;
+        return manager.find(Project.class, projectName);
     }
 
 
