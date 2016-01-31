@@ -39,7 +39,7 @@ public class ProjectController{
         Project project = projectDao.getProject(id);
 
         if(!Optional.of(project).isPresent()){
-            return new ModelAndView("projects");
+            return new ModelAndView("categories");
         }
         modelAndView.addObject("project", project);
         modelAndView.addObject("endtime", getProjectEndTime(project));
