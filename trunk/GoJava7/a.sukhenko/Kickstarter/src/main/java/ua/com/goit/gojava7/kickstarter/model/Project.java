@@ -2,7 +2,6 @@ package ua.com.goit.gojava7.kickstarter.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -11,7 +10,12 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "projects")
-@NamedQuery(name = "Project.findByCategoryId", query = "SELECT pr FROM Project pr WHERE pr.category.categoryId = :categoryId")
+@NamedQueries({
+@NamedQuery(name = "Project.findByCategoryId", query = "SELECT pr FROM Project pr WHERE pr.category.categoryId = :categoryId"),
+@NamedQuery(name = "Project.findByProjectName", query = "SELECT pr FROM Project pr WHERE pr.projectName = :projectName")
+})
+
+
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 3601009349187745841L;
@@ -143,5 +147,17 @@ public class Project implements Serializable {
 
     public void setQuestionsAndAnswers(List<Question> questionsAndAnswers) {
         this.questionsAndAnswers = questionsAndAnswers;
+    }
+    
+    @Override
+    public String toString() {
+        return "Project. projectName: " + projectName +
+                "projectDescription: " + projectDescription + 
+                "projectHistory: " + projectHistory + 
+                "moneyNeeded: " + moneyNeeded + 
+                "demoLink: " + demoLink +
+                "id: " + id +
+                "categoryId: " + category.getCategoryId() +
+                "enddate: " + getEnddate();
     }
 }

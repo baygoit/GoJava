@@ -1,31 +1,18 @@
 package ua.com.goit.gojava7.kickstarter.dao.db;
 
 import java.security.InvalidAlgorithmParameterException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
-import ua.com.goit.gojava7.kickstarter.model.Category;
 import ua.com.goit.gojava7.kickstarter.model.Project;
-import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 @Repository
 @Transactional
 public class ProjectDao{
@@ -47,9 +34,9 @@ public class ProjectDao{
         return project;
     }
     public Project getProjectByName(String projectName) {
-        LOGGER.debug("Getting project by projectName: " + projectName);
-        //TODO: Check if works
-        return manager.find(Project.class, projectName);
+       TypedQuery<Project> query = manager.createNamedQuery("Project.findByProjectName",Project.class);
+       List<Project> projects = query.setParameter("projectName", projectName).getResultList();
+       return projects.get(0);
     }
 
 
