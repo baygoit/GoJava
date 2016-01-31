@@ -7,10 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "payment")
+@NamedQuery(name = "Payment.findProjectPayments", query = "SELECT SUM(p.pledge) FROM Payment p WHERE p.project.id = :id")
 public class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

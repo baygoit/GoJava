@@ -16,10 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.QuoteDao;
+
 
 @Controller
 public class CategoryController {

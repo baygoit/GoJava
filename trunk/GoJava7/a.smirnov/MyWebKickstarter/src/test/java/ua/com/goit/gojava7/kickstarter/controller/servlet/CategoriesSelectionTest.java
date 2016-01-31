@@ -4,29 +4,22 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import ua.com.goit.gojava7.kickstarter.beans.Quote;
-import ua.com.goit.gojava7.kickstarter.controller.CategoryServlet;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.QuoteDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.QuoteDao;
+
 
 public class CategoriesSelectionTest extends Mockito {
-
 	@Mock
 	private QuoteDao quoteDao;
-
 	@Mock
 	private CategoryDao categoryDao;
-
-	@InjectMocks
-	private CategoryServlet categoriesSelection;
 
 	public void testInit() {
 
@@ -40,12 +33,12 @@ public class CategoriesSelectionTest extends Mockito {
 
 		when(quoteDao.getRandomQuote()).thenReturn(quote);
 
-		HttpServletRequest request = mock(HttpServletRequest.class);
+//		HttpServletRequest request = mock(HttpServletRequest.class);
 		HttpServletResponse response = mock(HttpServletResponse.class);
 
 		PrintWriter writer = mock(PrintWriter.class);
 		when(response.getWriter()).thenReturn(writer);
-		categoriesSelection.doGet(request, response);
+		
 
 		verify(writer).append(contains("TestA"));
 		verify(writer).append(contains("TestB"));

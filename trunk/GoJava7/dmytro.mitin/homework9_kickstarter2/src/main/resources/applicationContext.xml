@@ -2,14 +2,36 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-    <bean id="categoryDao" class="ua.com.goit.gojava7.kickstarter.dao.CategoryDaoImpl" />
-    <bean id="quoteDao" class="ua.com.goit.gojava7.kickstarter.dao.QuoteDaoImpl" />
+    <bean id="categoryDao" class="ua.com.goit.gojava7.kickstarter.dao.CategoryDaoImpl">
+        <constructor-arg name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="quoteDao" class="ua.com.goit.gojava7.kickstarter.dao.QuoteDaoImpl">
+        <constructor-arg name="sessionFactory" ref="sessionFactory" />
+    </bean>
     <bean id="kickstarter" class="ua.com.goit.gojava7.kickstarter.domain.Kickstarter">
-        <constructor-arg name="categoryDao" ref="categoryDao" />
-        <constructor-arg name="quoteDao" ref="quoteDao" />
+        <constructor-arg name="categoryDao" ref="categoryDao"/>
+        <constructor-arg name="quoteDao" ref="quoteDao"/>
     </bean>
     <bean id="controller" class="ua.com.goit.gojava7.kickstarter.controller.MainController">
-        <constructor-arg name="kickstarter" ref="kickstarter" />
+        <constructor-arg name="kickstarter" ref="kickstarter"/>
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/kickstarter"/>
+        <property name="username" value="postgres"/>
+        <property name="password" value="password"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="ua.com.goit.gojava7.kickstarter"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
     </bean>
 
     <bean id="myLogger" class="ua.com.goit.gojava7.kickstarter.LoggingAspect"/>
@@ -17,5 +39,5 @@
         <aop:include name="myLogger"/>
     </aop:aspectj-autoproxy>
 
-    <aop:config proxy-target-class="true" />
+    <aop:config proxy-target-class="true"/>
 </beans>
