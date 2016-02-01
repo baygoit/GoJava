@@ -10,36 +10,37 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "questions")
-@NamedQuery(name="Question.findByProjectId",query="SELECT q FROM Question q WHERE q.project.id = :projectId")
-public class Question{
+@NamedQuery(name = "Question.findByProjectId", query = "SELECT q FROM Question q WHERE q.project.id = :projectId")
+public class Question {
 
 
     @Column
     private String question;
     @Column
     private String answer;
-  
-    
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
-    private int    id;
+    private int id;
 
     @Column(insertable = false, updatable = false)
-    private int    projectId;
-    
-    
+    private int projectId;
+
+
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "projectId")
     private Project project;
 
-    
-    
+
     public int getProjectId() {
         return projectId;
     }
@@ -48,7 +49,7 @@ public class Question{
         this.projectId = projectId;
     }
 
-  
+
     public String getAnswer() {
         return answer;
     }
@@ -79,5 +80,30 @@ public class Question{
 
     public void setId(int id) {
         this.id = id;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 31).
+                append(id).
+                append(question).
+                append(answer).
+                toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Question))
+            return false;
+        if (obj == this)
+            return true;
+
+        Question question = (Question) obj;
+        return new EqualsBuilder().
+                append(question,question.getQuestion()).
+                append(answer,question.getQuestion()).
+                append(id,question.getId()).
+                isEquals();
     }
 }
