@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%@ taglib uri="http://www.springframework.org/tags/form"
     prefix="springForm"%>
+    <%@page session="true"%>
 <jsp:include page="header.jsp">
 	<jsp:param value="Add Question" name="title"/>
 </jsp:include>
