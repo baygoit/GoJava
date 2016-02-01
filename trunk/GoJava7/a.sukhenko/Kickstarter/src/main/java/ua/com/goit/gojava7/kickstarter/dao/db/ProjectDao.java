@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import ua.com.goit.gojava7.kickstarter.model.Payment;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 @Repository
 @Transactional
@@ -38,7 +39,12 @@ public class ProjectDao{
        List<Project> projects = query.setParameter("projectName", projectName).getResultList();
        return projects.get(0);
     }
-
+    
+    public Long getPledged(Project project){
+        TypedQuery<String> query = manager.createNamedQuery("Payment.getProjectPledged",String.class);
+        List<String> amount = query.setParameter("projectId", project.getId()).getResultList();
+        return Long.parseLong(amount.get(0));
+    }
 
     public List<Project> getProjectsByCategoryId(int categoryId) {
         TypedQuery<Project> query = manager.createNamedQuery("Project.findByCategoryId",Project.class);
@@ -50,8 +56,5 @@ public class ProjectDao{
         return (float) ((getPledged(project) * 100) / project.getMoneyNeeded()) + "%";
     }
 
-    private int getPledged(Project project) {
-        return 100500;
-    }
 
 }

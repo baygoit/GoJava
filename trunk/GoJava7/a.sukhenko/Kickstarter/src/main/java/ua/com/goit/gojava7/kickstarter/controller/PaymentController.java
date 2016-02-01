@@ -20,6 +20,7 @@ import ua.com.goit.gojava7.kickstarter.validator.PaymentValidator;
 
 @Transactional
 @Controller
+@RequestMapping(value = "/payment", method = RequestMethod.GET)
 public class PaymentController {
 
     private static final Logger log = LoggerFactory.getLogger(PaymentController.class);
@@ -36,7 +37,7 @@ public class PaymentController {
         return new Payment();
     }
 
-    @RequestMapping(value = "/payment/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addPayment(@RequestParam Integer projectId) {
         ModelAndView modelAndView = new ModelAndView("paymentAdd");
         modelAndView.addObject("projectId", projectId);
@@ -44,7 +45,7 @@ public class PaymentController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/payment/add.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/add.do", method = RequestMethod.POST)
     public String savePaymentAction(@RequestParam Integer projectId, @RequestParam Long amount, @ModelAttribute("payment") Payment payment, BindingResult bindingResult, Model model) {
         payment.setProject(projectDao.getProject(projectId));
         validator.validate(payment, bindingResult);
@@ -60,10 +61,7 @@ public class PaymentController {
 
 
     private boolean projectExists(Integer projectId){
-        if(projectDao.getProject(projectId) != null){
-            return true;
-        }
-        return false;
+        return (projectDao.getProject(projectId) != null);
     }
 
 }

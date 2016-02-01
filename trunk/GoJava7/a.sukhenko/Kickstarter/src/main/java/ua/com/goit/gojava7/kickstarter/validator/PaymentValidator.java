@@ -47,10 +47,17 @@ public class PaymentValidator implements org.springframework.validation.Validato
     }
     
     public boolean validateAmountOfPledge(String amount) {
-    	//String stringAmount = String.valueOf(amount);
-        Pattern p = Pattern.compile("^[1-9]{1,10}$");
-        Matcher m = p.matcher(amount);
-        return m.matches();
+        try{
+    	Long longAmoung = Long.parseLong(amount);
+    	if(longAmoung < 1){
+    	    return false;
+    	}
+        }
+        catch(NumberFormatException e){
+            return false;
+        }
+        return true;
+    	
     }
     
     public boolean validateCard(String card) {

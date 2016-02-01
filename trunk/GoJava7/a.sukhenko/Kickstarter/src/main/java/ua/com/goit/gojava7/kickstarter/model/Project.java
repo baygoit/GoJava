@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Type;
 
 @Entity

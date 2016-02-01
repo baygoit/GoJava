@@ -4,6 +4,8 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.TypedQuery;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDatabaseDao;
+import ua.com.goit.gojava7.kickstarter.model.Payment;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Question;
 @Controller
@@ -44,13 +47,17 @@ public class ProjectController{
         modelAndView.addObject("project", project);
         modelAndView.addObject("endtime", getProjectEndTime(project));
         modelAndView.addObject("paymentBonuses", project.getBonuses());
+        modelAndView.addObject("pledged",projectDao.getPledged(project));
         List<Question> questions = questionDao.getQuestionsByProjectId(project.getId());
         modelAndView.addObject("questions", questions);
         Question question = new Question();
         modelAndView.addObject("question", question);
         return modelAndView;
     }
-
+    
+   
+    
+    
     public String getProjectEndTime(Project project) {
         ZoneId zoneId = ZoneId.systemDefault();
         long epoch = project.getEnddate().atZone(zoneId).toEpochSecond();

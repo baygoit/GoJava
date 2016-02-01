@@ -19,7 +19,7 @@
 	
 	<p> History: ${project.projectHistory} </p> <hr> <br>
 	<p><a href="${project.demoLink}">${project.demoLink}</a></p>
-	<p> Money needed: ${project.moneyNeeded} </p> 
+	<p> Money needed: ${pledged}/${project.moneyNeeded} </p> 
 	<p>Time: ${endtime} </p>
 	
         <br />
