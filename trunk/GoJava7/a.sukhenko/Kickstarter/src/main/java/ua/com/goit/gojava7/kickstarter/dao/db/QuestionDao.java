@@ -15,9 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.model.Question;
 @Repository
 @Transactional
-public class QuestionDatabaseDao{
+public class QuestionDao{
 
-    private static final Logger logger = LogManager.getLogger(QuestionDatabaseDao.class);
+    private static final Logger logger = LogManager.getLogger(QuestionDao.class);
 
 
     @PersistenceContext

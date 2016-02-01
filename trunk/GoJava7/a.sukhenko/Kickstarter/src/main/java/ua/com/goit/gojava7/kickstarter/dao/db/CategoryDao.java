@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 @Repository
 @Transactional
-public class CategoryDatabaseDao{
-    private static final Logger logger = LogManager.getLogger(CategoryDatabaseDao.class);
+public class CategoryDao{
+    private static final Logger logger = LogManager.getLogger(CategoryDao.class);
     
     @PersistenceContext
     private EntityManager entityManager;

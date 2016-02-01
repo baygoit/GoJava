@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public class Category implements Serializable{
     public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     private List<Project> projects = new ArrayList<>();
 

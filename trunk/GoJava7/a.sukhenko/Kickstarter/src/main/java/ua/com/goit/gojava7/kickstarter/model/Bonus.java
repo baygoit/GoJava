@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +15,9 @@ import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name = "bonuses")
-public class Bonus{
+public class Bonus implements Serializable{
+    
+    private static final long serialVersionUID = -7359359990140227169L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

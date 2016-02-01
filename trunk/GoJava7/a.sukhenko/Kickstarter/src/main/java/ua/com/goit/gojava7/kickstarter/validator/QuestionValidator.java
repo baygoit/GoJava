@@ -30,10 +30,11 @@ public class QuestionValidator implements org.springframework.validation.Validat
     
     public void validateQuestion(Object target, Errors errors) {
     	Question question = null;
+
     	 if(target.getClass() == Question.class){
       	  question = (Question) target;
-         }
-        Pattern p = Pattern.compile(
+      	  
+      	Pattern p = Pattern.compile(
                 "# Match a sentence ending in punctuation or EOS.\n" +
                 "[^.!?\\s]    # First char is non-punct, non-ws\n" +
                 "[^.!?]*      # Greedily consume up to punctuation.\n" +
@@ -48,7 +49,10 @@ public class QuestionValidator implements org.springframework.validation.Validat
                 Pattern.MULTILINE | Pattern.COMMENTS);
         Matcher m = p.matcher(question.getQuestion());
        if(!m.matches()){
-    	   errors.rejectValue("question", "error.question_invalid"," Question isn't valid");
+           errors.rejectValue("question", "error.question_invalid"," Question isn't valid");
        }
+      	  
+         }
+        
     }
 }

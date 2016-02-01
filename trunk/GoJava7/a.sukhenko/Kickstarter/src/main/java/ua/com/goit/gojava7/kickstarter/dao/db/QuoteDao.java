@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.model.Quote;
 @Repository
 @Transactional
-public class QuoteDatabaseDao{
-    private static final Logger logger = LogManager.getLogger(QuoteDatabaseDao.class);
+public class QuoteDao{
+    private static final Logger logger = LogManager.getLogger(QuoteDao.class);
     private Random random = new Random();
     
     @PersistenceContext

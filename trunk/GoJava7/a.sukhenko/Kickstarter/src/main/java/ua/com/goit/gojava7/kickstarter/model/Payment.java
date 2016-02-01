@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +22,10 @@ import org.hibernate.annotations.Cascade;
 @NamedQuery(name="Payment.getProjectPledged", query = "SELECT SUM(p.amount) from Payment p where p.project.id = :projectId"),
 })
 
-public class Payment{
+public class Payment implements Serializable{
+    
+ 
+    private static final long serialVersionUID = 1879167496607047970L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

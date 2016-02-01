@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDao;
-import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDatabaseDao;
+import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.model.Payment;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Question;
@@ -32,7 +32,7 @@ public class ProjectController{
     @Autowired
     private ProjectDao  projectDao;
     @Autowired
-    private QuestionDatabaseDao questionDao;
+    private QuestionDao questionDao;
     
     
     @RequestMapping("project")
@@ -42,7 +42,7 @@ public class ProjectController{
         Project project = projectDao.getProject(id);
 
         if(!Optional.of(project).isPresent()){
-            return new ModelAndView("categories");
+            return new ModelAndView("redirect:/categories");
         }
         modelAndView.addObject("project", project);
         modelAndView.addObject("endtime", getProjectEndTime(project));
@@ -55,7 +55,18 @@ public class ProjectController{
         return modelAndView;
     }
     
-   
+    @RequestMapping("reward")
+    public ModelAndView reward(@RequestParam Integer projectId) {
+        ModelAndView modelAndView = new ModelAndView("reward");
+        if(projectDao.getProject(projectId) == null){
+            return new ModelAndView("redirect:/categories");
+        }
+        Project project = projectDao.getProject(projectId);
+        modelAndView.addObject("paymentBonuses", project.getBonuses());
+        modelAndView.addObject(project);
+        modelAndView.addObject(project.getCategory());
+        return modelAndView;
+    }
     
     
     public String getProjectEndTime(Project project) {

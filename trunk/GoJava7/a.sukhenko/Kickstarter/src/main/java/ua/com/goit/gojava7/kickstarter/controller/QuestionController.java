@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDao;
-import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDatabaseDao;
+import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDao;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Question;
 import ua.com.goit.gojava7.kickstarter.validator.QuestionValidator;
@@ -22,12 +22,13 @@ import java.util.Optional;
 
 @Transactional
 @Controller
+@RequestMapping(value = "/question")
 public class QuestionController {
     private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
     @Autowired
     private QuestionValidator validator;
     @Autowired
-    private QuestionDatabaseDao questionDao;
+    private QuestionDao questionDao;
     @Autowired
     private ProjectDao projectDao;
 
@@ -37,7 +38,7 @@ public class QuestionController {
         return new Question();
     }
 
-    @RequestMapping(value = "/question/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView addQuestion(@RequestParam(name = "projectId") int projectId) {
         ModelAndView modelAndView = new ModelAndView("questionAdd");
         modelAndView.addObject("projectId", projectId);
@@ -45,7 +46,7 @@ public class QuestionController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/question/add.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/add.do", method = RequestMethod.POST)
     public String saveQuestionAction(@RequestParam(name = "projectId") int projectId,
                                      @ModelAttribute("question") Question question,
                                      BindingResult bindingResult, Model model) {

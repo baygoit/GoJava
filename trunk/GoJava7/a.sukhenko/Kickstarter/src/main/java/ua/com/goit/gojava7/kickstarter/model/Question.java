@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,9 +19,8 @@ import org.hibernate.annotations.Cascade;
 @Entity
 @Table(name = "questions")
 @NamedQuery(name = "Question.findByProjectId", query = "SELECT q FROM Question q WHERE q.project.id = :projectId")
-public class Question {
-
-
+public class Question implements Serializable{
+    private static final long serialVersionUID = -7685128608337454365L;
     @Column
     private String question;
     @Column

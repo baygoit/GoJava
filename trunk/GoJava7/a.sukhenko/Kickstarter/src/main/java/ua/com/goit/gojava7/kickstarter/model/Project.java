@@ -9,6 +9,8 @@ import javax.persistence.*;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "projects")
 @NamedQueries({
@@ -47,13 +49,13 @@ public class Project implements Serializable {
     @Type(type = "ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
     @Column(name = "enddate")
     private LocalDateTime enddate;
-
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
     private List<Bonus> bonuses = new ArrayList<Bonus>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "project")
     private List<Question> questionsAndAnswers;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "project")
     private List<Payment> payments = new ArrayList<>();
 
