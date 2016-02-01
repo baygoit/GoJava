@@ -8,36 +8,49 @@ import com.sandarovich.kickstarter.Output;
 
 public abstract class AbstractMenu {
 
-    protected MenuElement[] menuElements;
-    protected String headerLabel;
-    protected int menuId;
-    protected Output output;
-    protected MenuReader menuReader;
- 
-    public void show() {
-        output.print("-----------");
-        output.print("{" + menuId + "}" + headerLabel);
-        output.print("-----------");
-        for (int index = 0; index < menuElements.length; index++) {
-            output.print(menuElements[index].toString());
-        }
-        output.print("---");
-    }
+	public AbstractMenu(Output output, MenuReader menuReader) {
+		this.output = output;
+		this.menuReader = menuReader;
+	}
 
-    public int readUserFeedback() {
-        int result = menuReader.read();
-        return validateMenuElement(result);
-    }
+	protected MenuElement[] menuElements;
+	protected String headerLabel;
+	protected int menuId;
+	protected Output output;
+	protected MenuReader menuReader;
 
-    private int validateMenuElement(int checkedNumber) {
-        int result = checkedNumber;
-        while (result < 0 || result > menuElements.length - 1) {
-            output.print(">> Option is not found. Please try again");
-            result = menuReader.read();
-        }
-        return result;
-    }
+	public void show() {
+		output.print("-----------");
+		output.print("{" + menuId + "} " + headerLabel);
+		output.print("-----------");
+		if (menuElements.length > 1) {
+			for (int index = 0; index < menuElements.length; index++) {
+				output.print(menuElements[index].toString());
+			}
+		} else {
+			output.print("<< Is empty >>");
+		}
+		output.print("---");
+	}
 
-    public abstract void doAction(int choise);
+	public int readUserFeedback() {
+		int result = menuReader.read();
+		if (isvalidMenuElement(result)) {
+			return result;
+		} else {
+			output.print(">> Option is not found. Please try again");
+			return readUserFeedback();
+		}
+	}
+
+	protected boolean isvalidMenuElement(int checkedNumber) {
+		boolean result = true;
+		if (checkedNumber < 0 || checkedNumber > menuElements.length - 1) {
+			return false;
+		}
+		return result;
+	}
+
+	public abstract void doAction(int choise);
 
 }

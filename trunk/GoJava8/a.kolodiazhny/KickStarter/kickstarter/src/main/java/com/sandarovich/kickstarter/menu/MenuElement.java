@@ -20,6 +20,10 @@ public class MenuElement {
     public Actions getAction() {
         return this.action;
     }
+    
+    public String getNameLabel() {
+    	return this.nameLabel;
+    }
 
     @Override
     public String toString() {

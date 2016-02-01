@@ -10,8 +10,7 @@ import com.sandarovich.kickstarter.Output;
 public class MainMenu extends AbstractMenu{
 
     public MainMenu(Output output, MenuReader menuReader) {
-        this.output = output;
-        this.menuReader = menuReader;
+    	super(output,menuReader);
         menuId = 0;
         headerLabel = "Main Menu:";
         menuElements = new MenuElement[2];
