@@ -50,13 +50,13 @@ public class PaymentController {
         return returnWarning(projectId);
     }
 
-    private boolean rewardExists(Long rewardId) {
+    protected boolean rewardExists(Long rewardId) {
         log.info("rewardExists(rewardId = {})...", rewardId);
 
         return rewardId != 0;
     }
 
-    private ModelAndView payWithReward(Long rewardId) {
+    protected ModelAndView payWithReward(Long rewardId) {
         log.info("payWithReward(rewardId = {})...", rewardId);
 
         RewardDto rewardDto = rewardService.get(rewardId);
@@ -72,7 +72,7 @@ public class PaymentController {
         return modelAndView;
     }
 
-    private boolean amountIsValid(String amount) {
+    protected boolean amountIsValid(String amount) {
         log.info("amountIsValid(amount = {})...", amount);
         return myValidator.validateAmountOfPledge(amount);
     }

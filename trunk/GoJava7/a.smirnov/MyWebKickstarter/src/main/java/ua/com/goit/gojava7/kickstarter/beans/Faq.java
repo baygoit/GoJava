@@ -7,10 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "faq")
+@NamedQuery(name = "Faq.findProjectQuestions", query = "SELECT f FROM Faq f WHERE f.project.id = :id") 
 public class Faq {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

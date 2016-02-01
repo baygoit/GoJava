@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.goit.gojava7.kickstarter.beans.Category;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.CategoryDao;
+
 
 @Controller
 public class ContactController {

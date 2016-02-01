@@ -92,6 +92,7 @@ public class UserDAO extends JdbcDaoSupport {
     public void deleteUserById(int idUser) {
         String sqlQuery = "DELETE FROM airbnb.user WHERE idUser=?";
         this.getJdbcTemplate().update(sqlQuery, new Object[]{idUser});
+        //System.out.println("airbnb.spring.daoSpring.UserDAO.deleteUserById()");
     }
 
     public void deleteUserByNameSurname(String userName, String userSurname) {
@@ -99,10 +100,10 @@ public class UserDAO extends JdbcDaoSupport {
         this.getJdbcTemplate().update(sqlQuery, new Object[]{userName,userSurname});
     }
 
-    /*public void updateUserToHost(int idUser) {
-        String sqlQuery = "UPDATE airbnb.user SET isHost=1 where idUser=?";
-        getJdbcTemplate().update(sqlQuery, new Object[]{idUser});
-    }*/
+    public void updateUserToHost(int idUser) {
+        String sqlQuery = "UPDATE airbnb.user SET hostUser=1 where idUser=?";
+        this.getJdbcTemplate().update(sqlQuery, new Object[]{idUser});
+    }
 
     private class UserRowMapper implements RowMapper<User> {
         @Override

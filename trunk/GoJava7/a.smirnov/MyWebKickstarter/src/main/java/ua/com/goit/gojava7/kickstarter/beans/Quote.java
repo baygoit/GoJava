@@ -5,10 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "quote")
+@NamedQueries({ @NamedQuery(name = "Quote.count", query = "SELECT COUNT(q) AS cnt FROM Quote q"),
+				@NamedQuery(name = "Quote.findAll", query = "SELECT q from Quote q"),
+				@NamedQuery(name = "Quote.getRandom", query = "SELECT q FROM Quote AS q ORDER BY RAND()") })
 public class Quote {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,7 +50,7 @@ public class Quote {
 
 	@Override
 	public String toString() {
-		return "Quote : [text=" + text + ", author=" + author + "]";
+		return String.format("Quote : [text=%s, author=%s, ", text, author);
 	}
 
 	@Override
