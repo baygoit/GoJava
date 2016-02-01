@@ -1,6 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.controller;
 
 import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,30 +26,30 @@ import ua.com.goit.gojava7.kickstarter.validator.QuestionValidator;
 
 @Controller
 @Transactional
-public class WebController{
+public class WebController {
     private static final Logger logger = LoggerFactory.getLogger(WebController.class);
     @Autowired
     private CategoryDatabaseDao categoryDao;
     @Autowired
-    private ProjectDao  projectDao;
+    private ProjectDao projectDao;
     @Autowired
-    private QuoteDatabaseDao    quoteDao;
+    private QuoteDatabaseDao quoteDao;
     @Autowired
     private QuestionDatabaseDao questionDao;
     @Autowired
     private QuestionValidator validator;
-    
-    public Quote getQuote(){
+
+    public Quote getQuote() {
         return quoteDao.getRandomQuote();
     }
-    
-    
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+
+
+    @RequestMapping(value = "/")
     public String root() {
         return "index";
     }
-    
-    
+    //TODO: Move logs to the start of methods
+
     @RequestMapping("categories")
     public ModelAndView categories() {
         ModelAndView modelAndView = new ModelAndView("categories");
@@ -58,32 +59,31 @@ public class WebController{
         modelAndView.addObject("quote", quoteDao.getRandomQuote());
         return modelAndView;
     }
-
+    // TODO: move to project controller
+    //TODO: check categoryId
     @RequestMapping("category")
-    public ModelAndView category(@RequestParam(name = "id") int categoryId) {
+    public ModelAndView category(@RequestParam(name = "id") Integer categoryId) {
         ModelAndView modelAndView = new ModelAndView("projects");
         logger.debug("action: category");
         List<Project> projects = projectDao.getProjectsByCategoryId(categoryId);
         modelAndView.addObject("projects", projects);
+        //TODO if categoryId is null
         modelAndView.addObject("categoryName", categoryDao.getCategoryById(categoryId).getCategoryName());
         return modelAndView;
     }
 
-    
-
-    
+    //TODO Move to project
     @RequestMapping("reward")
-    public ModelAndView reward(@RequestParam int projectId){
+    public ModelAndView reward(@RequestParam Integer projectId) {
         ModelAndView modelAndView = new ModelAndView("reward");
+        //TODO: check projectId
         Project project = projectDao.getProject(projectId);
         modelAndView.addObject("paymentBonuses", project.getBonuses());
         modelAndView.addObject(project);
         modelAndView.addObject(project.getCategory());
         return modelAndView;
-        
+
     }
-    
-    
-    
+
 
 }

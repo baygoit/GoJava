@@ -26,11 +26,11 @@ public class RewardMappingTest {
 				
 		Reward reward1 = new Reward();
 		reward1.setBenefit("Reward 1");
-		reward1.setProjectId(1);
+		reward1.setProjectId(1L);
 		
 		Reward reward2 = new Reward();
 		reward2.setBenefit("Reward 2");
-		reward2.setProjectId(1);
+		reward2.setProjectId(1L);
 		
 		em.persist(reward1);
 		em.persist(reward2);

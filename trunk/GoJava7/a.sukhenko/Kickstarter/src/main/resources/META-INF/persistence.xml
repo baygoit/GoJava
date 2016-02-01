@@ -7,4 +7,30 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
         transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
     </persistence-unit>
+    
+     <persistence-unit name="default">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.show_sql" value="false" />
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="Kickstarter_test">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="Kickstarter_h2_test">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+        </properties>
+    </persistence-unit>
 </persistence>

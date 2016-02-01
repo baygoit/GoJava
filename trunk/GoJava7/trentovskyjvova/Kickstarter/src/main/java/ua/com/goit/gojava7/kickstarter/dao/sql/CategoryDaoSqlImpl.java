@@ -37,7 +37,7 @@ public class CategoryDaoSqlImpl implements CategoryDao {
 	}
 
 	@Override
-	public Category getCategory(int id) {
+	public Category getCategory(Long id) {
 
 		return em.find(Category.class, id);
 	}

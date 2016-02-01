@@ -2,70 +2,60 @@ package ua.com.goit.gojava7.kickstarter.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Type;
+
 @Entity
 @Table(name = "projects")
-@NamedQuery(name="Project.findByCategoryId", query="SELECT pr FROM Project pr WHERE pr.category.categoryId = :categoryId")
+@NamedQueries({
+@NamedQuery(name = "Project.findByCategoryId", query = "SELECT pr FROM Project pr WHERE pr.category.categoryId = :categoryId"),
+@NamedQuery(name = "Project.findByProjectName", query = "SELECT pr FROM Project pr WHERE pr.projectName = :projectName")
+})
+
+
 public class Project implements Serializable {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = 3601009349187745841L;
-    private static final String MINUTES_LEFT = " minutes to go";
-    private static final String HOURS_LEFT   = " hours to go";
-    private static final String DAYS_LEFT    = " days to go";
-    private static final String SECONDS_LEFT = " seconds to go";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private int                 id;
+    private int id;
     @Column(unique = true)
 
-    private String              projectName;
+    private String projectName;
     @Column
-    private String              projectDescription;
+    private String projectDescription;
     @Column
-    private double              moneyNeeded;
+    private double moneyNeeded;
     @Column
-    private String              projectHistory;
+    private String projectHistory;
     @Column
-    private String              demoLink;
+    private String demoLink;
 
-    
-    
 
     @ManyToOne
     @JoinColumn(name = "projectCategoryId")
-    private Category            category;
+    private Category category;
 
+    //TODO: Try @Temporal
+    // @Temporal(TemporalType.DATE) // Doesn't work yet
     @Type(type = "ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
     @Column(name = "enddate")
-    private LocalDateTime       enddate;
+    private LocalDateTime enddate;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
-    //@Cascade({org.hibernate.annotations.CascadeType.ALL})
-    private List<Bonus>         bonuses      = new ArrayList<Bonus>();
+    private List<Bonus> bonuses = new ArrayList<Bonus>();
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "project")
-    private List<Question>      questionsAndAnswers;
+    @OneToMany(mappedBy = "project")
+    private List<Question> questionsAndAnswers;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
-    private List<Payment>       payments     = new ArrayList<>();
+    @OneToMany(mappedBy = "project")
+    private List<Payment> payments = new ArrayList<>();
 
     public List<Payment> getPayments() {
         return payments;
@@ -91,21 +81,6 @@ public class Project implements Serializable {
         this.moneyNeeded = moneyNeeded;
     }
 
-    public String getProjectEndTime() {
-        ZoneId zoneId = ZoneId.systemDefault();
-        long epoch = getEnddate().atZone(zoneId).toEpochSecond();
-        long time = epoch - System.currentTimeMillis() / 1000;
-        String msg = +time + SECONDS_LEFT;
-        if (time >= 86400) {
-            msg = (time / 86400) + DAYS_LEFT;
-        } else if ((time >= 3600) && ((time % 3600) == 0)) {
-            msg = (time / 60 / 60) + HOURS_LEFT;
-
-        } else if (time >= 60) {
-            msg = (time / 60) + MINUTES_LEFT;
-        }
-        return msg;
-    }
 
     public String getProjectName() {
         return projectName;
@@ -173,5 +148,17 @@ public class Project implements Serializable {
 
     public void setQuestionsAndAnswers(List<Question> questionsAndAnswers) {
         this.questionsAndAnswers = questionsAndAnswers;
+    }
+    
+    @Override
+    public String toString() {
+        return "Project. projectName: " + projectName +
+                "projectDescription: " + projectDescription + 
+                "projectHistory: " + projectHistory + 
+                "moneyNeeded: " + moneyNeeded + 
+                "demoLink: " + demoLink +
+                "id: " + id +
+                "categoryId: " + category.getCategoryId() +
+                "enddate: " + getEnddate();
     }
 }

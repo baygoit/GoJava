@@ -26,7 +26,7 @@ public class ProjectDaoSqlImplTest {
 	@Ignore
 	public void testGetProjects() {
 
-		projectDaoMySqlImpl.getProjects(1);
+		projectDaoMySqlImpl.getProjects(1L);
 		verify(jdbcTemplate).query(contains("WHERE categoryId = ?"), any(Integer[].class),
 				any(BeanPropertyRowMapper.class));
 	}
@@ -35,7 +35,7 @@ public class ProjectDaoSqlImplTest {
 	@Ignore
 	public void testGetProjectById() {
 
-		projectDaoMySqlImpl.getProject(12);
+		projectDaoMySqlImpl.getProject(12L);
 		verify(jdbcTemplate).queryForObject(contains("id = ?"), any(Integer[].class),
 				any(BeanPropertyRowMapper.class));
 	}
