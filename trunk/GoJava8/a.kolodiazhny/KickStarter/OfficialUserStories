@@ -1,0 +1,54 @@
+/**
+ * @author Olexander Kolodiahzny 2016  
+ *  Module #2. Task #1  
+ *  KickStarter Simulator.
+ *  Official User stories vs Users cases. 
+ */  
+
+ As guest(investor):
+    1. I want to see creative quote to hold on my attention on home page.
+        --> 1.1 Entering Application and see quote.
+     
+ As guest:
+ 
+    2. I want to see categories list in order to focus on topic I'm interested in.
+        --> 2.1 Entering Application. 
+            2.2 See numbered list and request to select a category.
+            2.3 Choose category by number.
+            2.4 See the message that I have chosen.
+            
+    3. I want to research project list to understand what I want to invest in.
+        --> 3.1 Entering Application.
+            3.2 Select any category (example 1 - sport)
+            3.3 See the project list which contains details:
+                Description,
+                ShortDescription,
+                Goal Amount,
+                Collected Amount,
+                Days remain.
+    4. I want to research particular project details to see If I wanted to invest in.
+        --> 4.1 In list of project
+            4.2 See request for project selection.
+            4.3 Select (for instance 12 - development of a new ergonomic ball for football) 
+            4.4 See detailed description of the project, among them:
+                Project History,
+                Video Link with demo,
+                Questions and answers.
+    5. I want to have possibility to explore different project in different categories.
+        Scenario 1. 
+            5.1 In project list.
+            5.2 See request to select project and menu point "0 - exit".
+            5.3 Chose 0.
+            5.4 Entering category menu.
+            5.5 See category list and request to chose another category.
+        Scenario 2.
+            5.1 In Project Description
+            5.2 See menu "0 - exit"
+            5.3 Chose 0.
+            5.4 Entering Project menu.
+            5.3 See project list and request to chose another project.
+            
+    
+                    
+                  
+            

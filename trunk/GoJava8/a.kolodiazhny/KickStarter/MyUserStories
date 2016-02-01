@@ -5,9 +5,6 @@
  *	User stories vs Users cases. 
  */ 
 
-
-1.1 KickStarter Simulator
-
 Actors:
 	- Investor - somebody who will donate project.
 	- Crowdfinder - somebody who want gather money from public.
@@ -16,7 +13,7 @@ Actors:
 As User:
 	1. Public interface and register in program.	
 		1.1 Create public view/landing page.
-			1.1.1 public view with menu enabled for nonauthenticated users;
+			1.1.1 public view with menu enabled for non-authenticated users;
 		1.2 Create Sign in form/view.
 			1.2.1 show user form with UserID and Password.
 			1.2.2 read user input.
