@@ -34,7 +34,7 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-	<filter>
+<!-- 	<filter>
 		<filter-name>AuthenticationFilter</filter-name>
 		<filter-class>ua.com.goit.gojava7.kickstarter.filters.AuthenticationFilter</filter-class>
 		<init-param>
@@ -46,6 +46,14 @@
 	<filter-mapping>
 		<filter-name>AuthenticationFilter</filter-name>
 		<url-pattern>/aut/*</url-pattern>
+	</filter-mapping> -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
 	<welcome-file-list>
