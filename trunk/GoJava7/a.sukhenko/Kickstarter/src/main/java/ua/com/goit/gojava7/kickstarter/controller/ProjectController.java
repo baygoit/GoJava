@@ -4,8 +4,6 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.TypedQuery;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,58 +15,55 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ua.com.goit.gojava7.kickstarter.dao.db.ProjectDao;
 import ua.com.goit.gojava7.kickstarter.dao.db.QuestionDao;
-import ua.com.goit.gojava7.kickstarter.model.Payment;
 import ua.com.goit.gojava7.kickstarter.model.Project;
 import ua.com.goit.gojava7.kickstarter.model.Question;
 @Controller
 @Transactional
 public class ProjectController{
-    private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
+    private static final Logger logger       = LoggerFactory.getLogger(ProjectController.class);
     private static final String MINUTES_LEFT = " minutes to go";
-    private static final String HOURS_LEFT = " hours to go";
-    private static final String DAYS_LEFT = " days to go";
+    private static final String HOURS_LEFT   = " hours to go";
+    private static final String DAYS_LEFT    = " days to go";
     private static final String SECONDS_LEFT = " seconds to go";
 
     @Autowired
-    private ProjectDao  projectDao;
+    private ProjectDao          projectDao;
     @Autowired
-    private QuestionDao questionDao;
-    
-    
+    private QuestionDao         questionDao;
+
     @RequestMapping("project")
     public ModelAndView project(@RequestParam int id) {
         ModelAndView modelAndView = new ModelAndView("project");
         logger.debug("action: project");
         Project project = projectDao.getProject(id);
 
-        if(!Optional.of(project).isPresent()){
+        if (!Optional.of(project).isPresent()) {
             return new ModelAndView("redirect:/categories");
         }
         modelAndView.addObject("project", project);
         modelAndView.addObject("endtime", getProjectEndTime(project));
         modelAndView.addObject("paymentBonuses", project.getBonuses());
-        modelAndView.addObject("pledged",projectDao.getPledged(project));
+        modelAndView.addObject("pledged", projectDao.getPledged(project));
         List<Question> questions = questionDao.getQuestionsByProjectId(project.getId());
         modelAndView.addObject("questions", questions);
         Question question = new Question();
         modelAndView.addObject("question", question);
         return modelAndView;
     }
-    
+
     @RequestMapping("reward")
     public ModelAndView reward(@RequestParam Integer projectId) {
         ModelAndView modelAndView = new ModelAndView("reward");
-        if(projectDao.getProject(projectId) == null){
+        Project project = projectDao.getProject(projectId);
+        if (project == null) {
             return new ModelAndView("redirect:/categories");
         }
-        Project project = projectDao.getProject(projectId);
         modelAndView.addObject("paymentBonuses", project.getBonuses());
         modelAndView.addObject(project);
         modelAndView.addObject(project.getCategory());
         return modelAndView;
     }
-    
-    
+
     public String getProjectEndTime(Project project) {
         ZoneId zoneId = ZoneId.systemDefault();
         long epoch = project.getEnddate().atZone(zoneId).toEpochSecond();
@@ -84,6 +79,5 @@ public class ProjectController{
         }
         return msg;
     }
-    
 
 }

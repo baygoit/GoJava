@@ -13,11 +13,10 @@ public class QuoteRestService{
 
     @Autowired
     private QuoteDao quoteDao;
-    
-    
+
     @RequestMapping("/randomQuote")
-    public Quote getQuote(){
+    public Quote getQuote() {
         return quoteDao.getRandomQuote();
     }
-    
+
 }

@@ -20,18 +20,18 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "categories")
-@NamedQueries({ @NamedQuery(name = "Category.getAll", query = "select c from Category c") })
+@NamedQueries({@NamedQuery(name = "Category.getAll", query = "select c from Category c")})
 public class Category implements Serializable{
     /**
      * 
      */
     private static final long serialVersionUID = -1332987330114040046L;
     @Column
-    private String categoryName;
+    private String            categoryName;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int    categoryId;
+    private int               categoryId;
 
     public List<Project> getProjects() {
         return projects;

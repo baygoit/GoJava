@@ -16,23 +16,23 @@ import org.hibernate.annotations.Cascade;
 @Entity
 @Table(name = "bonuses")
 public class Bonus implements Serializable{
-    
+
     private static final long serialVersionUID = -7359359990140227169L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int     id;
+    private int               id;
     @Column(name = "projectId", insertable = false, updatable = false)
-    private int     projectId;
+    private int               projectId;
     @Column
-    private double  amount;
+    private double            amount;
     @Column
-    private String  bonus;
+    private String            bonus;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "projectId")
-    private Project project;
+    private Project           project;
 
     public int getId() {
         return id;

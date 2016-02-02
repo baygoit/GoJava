@@ -22,19 +22,18 @@ import ua.com.goit.gojava7.kickstarter.validator.QuestionValidator;
 
 @Controller
 @Transactional
-public class CategoryController {
+public class CategoryController{
     private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
     @Autowired
-    private CategoryDao categoryDao;
+    private CategoryDao         categoryDao;
     @Autowired
-    private ProjectDao projectDao;
+    private ProjectDao          projectDao;
     @Autowired
-    private QuoteDao quoteDao;
+    private QuoteDao            quoteDao;
 
     public Quote getQuote() {
         return quoteDao.getRandomQuote();
     }
-
 
     @RequestMapping(value = "/")
     public String root() {
@@ -55,18 +54,17 @@ public class CategoryController {
         logger.debug("action: category");
         ModelAndView modelAndView = new ModelAndView("projects");
 
-        if(categoryId == null || categoryDao.getCategoryById(categoryId) == null){
+        if (categoryId == null || categoryDao.getCategoryById(categoryId) == null) {
             return new ModelAndView("redirect:/categories");
         }
-        
+
         List<Project> projects = projectDao.getProjectsByCategoryId(categoryId);
-        
-        if(projects.isEmpty()){
+
+        if (projects == null || projects.isEmpty()) {
             modelAndView.addObject("noProjectsFound", true);
-        }
-        else{
-        modelAndView.addObject("projects", projects);
-        modelAndView.addObject("categoryName", categoryDao.getCategoryById(categoryId).getCategoryName());
+        } else {
+            modelAndView.addObject("projects", projects);
+            modelAndView.addObject("categoryName", categoryDao.getCategoryById(categoryId).getCategoryName());
         }
         return modelAndView;
     }

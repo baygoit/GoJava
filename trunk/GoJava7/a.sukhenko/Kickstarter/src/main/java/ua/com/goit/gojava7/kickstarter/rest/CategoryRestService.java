@@ -15,9 +15,8 @@ public class CategoryRestService{
     @Autowired
     private CategoryDao categoryDao;
     @RequestMapping("/category/{categoryId}")
-    public Category getCategory(@PathVariable("categoryId") Integer categoryId){
+    public Category getCategory(@PathVariable("categoryId") Integer categoryId) {
         return categoryDao.getCategoryById(categoryId);
     }
-    
-    
+
 }

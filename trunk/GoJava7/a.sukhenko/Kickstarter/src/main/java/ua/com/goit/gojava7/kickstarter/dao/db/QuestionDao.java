@@ -19,32 +19,31 @@ public class QuestionDao{
 
     private static final Logger logger = LogManager.getLogger(QuestionDao.class);
 
-
     @PersistenceContext
-    private EntityManager manager;
-    
+    private EntityManager       manager;
+
     @Autowired
-    private ProjectDao projectDao;
-    
+    private ProjectDao          projectDao;
+
     public List<Question> getQuestionsByProjectId(int projectId) {
-        TypedQuery<Question> query = manager.createNamedQuery("Question.findByProjectId",Question.class);
+        TypedQuery<Question> query = manager.createNamedQuery("Question.findByProjectId", Question.class);
         List<Question> questions = query.setParameter("projectId", projectId).getResultList();
         return questions;
     }
-    
+
     public void createQuestion(String text, int projectId) {
         logger.info("<void> createQuestion({}, {})...", text, projectId);
-        //TODO: Check JPA
-            Question question = new Question();
-            question.setQuestion(text);
-            question.setProject(projectDao.getProject(projectId));
-            add(question);
-        
+        // TODO: Check JPA
+        Question question = new Question();
+        question.setQuestion(text);
+        question.setProject(projectDao.getProject(projectId));
+        add(question);
+
     }
-    
+
     public void add(Question question) {
-          manager.persist(question);
+        manager.persist(question);
         logger.info("<void> add()...", question);
-        //TODO: JPA
+        // TODO: JPA
     }
 }

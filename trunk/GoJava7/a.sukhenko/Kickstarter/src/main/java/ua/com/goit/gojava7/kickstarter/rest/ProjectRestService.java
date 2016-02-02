@@ -15,9 +15,8 @@ public class ProjectRestService{
     @Autowired
     private ProjectDao projectDao;
     @RequestMapping("/project/{projectId}")
-    public Project getProject(@PathVariable("projectId") Integer projectId){
+    public Project getProject(@PathVariable("projectId") Integer projectId) {
         return projectDao.getProject(projectId);
     }
-    
-    
+
 }

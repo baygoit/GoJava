@@ -23,15 +23,14 @@ import java.util.Optional;
 @Transactional
 @Controller
 @RequestMapping(value = "/question")
-public class QuestionController {
+public class QuestionController{
     private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
     @Autowired
-    private QuestionValidator validator;
+    private QuestionValidator   validator;
     @Autowired
-    private QuestionDao questionDao;
+    private QuestionDao         questionDao;
     @Autowired
-    private ProjectDao projectDao;
-
+    private ProjectDao          projectDao;
 
     @ModelAttribute("question")
     public Question createEmployeeModel() {
@@ -48,8 +47,8 @@ public class QuestionController {
 
     @RequestMapping(value = "/add.do", method = RequestMethod.POST)
     public String saveQuestionAction(@RequestParam(name = "projectId") int projectId,
-                                     @ModelAttribute("question") Question question,
-                                     BindingResult bindingResult, Model model) {
+            @ModelAttribute("question") Question question,
+            BindingResult bindingResult, Model model) {
         Project project = projectDao.getProject(projectId);
         Optional<Project> optional = Optional.of(project);
         if (!optional.isPresent()) {
@@ -67,6 +66,5 @@ public class QuestionController {
         questionDao.add(question);
         return "questionAddSuccess";
     }
-
 
 }

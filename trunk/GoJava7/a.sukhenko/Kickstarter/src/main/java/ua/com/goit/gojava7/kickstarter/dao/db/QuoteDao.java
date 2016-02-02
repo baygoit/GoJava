@@ -16,17 +16,15 @@ import ua.com.goit.gojava7.kickstarter.model.Quote;
 @Transactional
 public class QuoteDao{
     private static final Logger logger = LogManager.getLogger(QuoteDao.class);
-    private Random random = new Random();
-    
-    @PersistenceContext
-    private EntityManager manager;
+    private Random              random = new Random();
 
+    @PersistenceContext
+    private EntityManager       manager;
 
     public Quote getRandomQuote() {
         Query query = manager.createNamedQuery("Quote.count");
         Long count = (Long) query.getSingleResult();
 
-        
         int number = random.nextInt(count.intValue());
 
         Query selectQuery = manager.createNamedQuery("Quote.findAll");
