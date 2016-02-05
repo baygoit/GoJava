@@ -22,7 +22,7 @@ public class QuestionDaoSqlImpl implements QuestionDao {
 	private EntityManager em;
 
 	@Override
-	public List<Question> getQuestions(int projectId) {
+	public List<Question> getQuestions(Long projectId) {
 		
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 

@@ -29,7 +29,7 @@ public class QuestionDaoSqlImplTest {
 	@Ignore
 	public void testGetQuestions(){
 
-		questionDaoMySqlImpl.getQuestions(1);
+		questionDaoMySqlImpl.getQuestions(1L);
 		verify(jdbcTemplate).query(contains("question WHERE projectId = ?"), any(Integer[].class),
 				any(BeanPropertyRowMapper.class));
 	}

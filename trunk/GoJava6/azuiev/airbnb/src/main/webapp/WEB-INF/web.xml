@@ -6,27 +6,27 @@
 
     <context-param>
         <param-name>path</param-name>
-        <param-value>/WEB-INF/view</param-value>
+        <param-value>/WEB-INF/jsp</param-value>
     </context-param>
 
-    <servlet>
-        <servlet-name>ControllerServlet</servlet-name>
-        <servlet-class>com.azuiev.servlet.ControllerServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ControllerServlet</servlet-name>
-        <url-pattern>/register</url-pattern>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>ControllerServlet</servlet-name>-->
+        <!--<servlet-class>com.azuiev.servlet.ControllerServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>ControllerServlet</servlet-name>-->
+        <!--<url-pattern>/register</url-pattern>-->
+        <!--<url-pattern>/login</url-pattern>-->
+    <!--</servlet-mapping>-->
 
-    <servlet>
-        <servlet-name>SearchServlet</servlet-name>
-        <servlet-class>com.azuiev.servlet.SearchServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/search</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>SearchServlet</servlet-name>-->
+        <!--<servlet-class>com.azuiev.servlet.SearchServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>SearchServlet</servlet-name>-->
+        <!--<url-pattern>/search</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!--<filter>-->
         <!--<filter-name>LoginFilter</filter-name>-->
@@ -37,10 +37,23 @@
         <!--<url-pattern>/login</url-pattern>-->
     <!--</filter-mapping>-->
 
+    <servlet>
+        <servlet-name>main</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/index</url-pattern>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
 
     <jsp-config>
         <jsp-property-group>
-           <url-pattern>/WEB-INF/view/*</url-pattern>
+           <url-pattern>/WEB-INF/jsp/*</url-pattern>
             <include-prelude>/WEB-INF/include/header.jsp</include-prelude>
             <!--<include-coda>/WEB-INF/jspf/footer.jspf</include-coda>-->
         </jsp-property-group>

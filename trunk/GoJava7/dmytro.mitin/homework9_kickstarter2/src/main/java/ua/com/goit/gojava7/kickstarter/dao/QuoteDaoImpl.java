@@ -2,16 +2,23 @@ package ua.com.goit.gojava7.kickstarter.dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import ua.com.goit.gojava7.kickstarter.domain.Quote;
-import ua.com.goit.gojava7.kickstarter.util.HibernateUtil;
 
 import java.util.List;
 
 public class QuoteDaoImpl implements QuoteDao {
+
+    private SessionFactory sessionFactory;
+
+    public QuoteDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public List<Quote> getQuotes() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
         List<Quote> quotes = session.createCriteria(Quote.class)
@@ -26,10 +33,10 @@ public class QuoteDaoImpl implements QuoteDao {
 
     @Override
     public void add(Quote quote) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        session.persist(quote);
+        session.save(quote);
 
         transaction.commit();
         session.close();

@@ -10,11 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "project")
+@NamedQueries({ @NamedQuery(name = "Project.findProjectsFromCategory", query = "SELECT p FROM Project p WHERE p.category.id=:id"),
+				@NamedQuery(name = "Project.findProject", query = "SELECT p FROM Project p WHERE p.id=:id") })
 public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

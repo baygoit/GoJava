@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
-import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.FaqDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.ProjectDao;
 
 @Controller
 public class QuestionController {
@@ -32,7 +32,7 @@ public class QuestionController {
 		Faq faq = new Faq();
 		faq.setProject(project);
 		faq.setQuestion(question);
-
+		
 		faqDao.add(faq);
 		log.info("Added new question");
 

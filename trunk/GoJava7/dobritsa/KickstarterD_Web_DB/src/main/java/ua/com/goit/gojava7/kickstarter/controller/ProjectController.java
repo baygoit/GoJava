@@ -28,7 +28,7 @@ public class ProjectController {
     public ModelAndView showProject(@RequestParam Long projectId) {
         log.info("showProject(projectId = {})...", projectId);
 
-        ProjectDto projectDto = projectService.getFullProject(projectId);
+        ProjectDto projectDto = projectService.getFullProjectDto(projectId);
 
         ModelAndView modelAndView = new ModelAndView("project");
         modelAndView.addObject("category", projectDto.getCategoryDto());
