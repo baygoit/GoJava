@@ -20,7 +20,7 @@ public class Categories {
         return result;
     }
 
-    public String getName(int categoryIndex) {
-        return categories[categoryIndex].getName();
+    public Category getName(int categoryIndex) {
+        return categories[categoryIndex];
     }
 }
