@@ -27,4 +27,8 @@ public class Projects {
         System.arraycopy(result, 0, result2, 0, found);
         return result2;
     }
+
+    public Project get(int index) {
+        return projects[index];
+    }
 }

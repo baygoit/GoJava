@@ -46,4 +46,16 @@ public class Project {
     public int getExist() {
         return exist;
     }
+
+    public String getHistory() {
+        return "fgdfgdfg";
+    }
+
+    public String getDemoVideo() {
+        return "fdgdghdgh";
+    }
+
+    public String getQuestionAnswers() {
+        return "dfgdfggf";
+    }
 }

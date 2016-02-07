@@ -20,7 +20,7 @@ public class Categories {
         return result;
     }
 
-    public Category getName(int categoryIndex) {
+    public Category get(int categoryIndex) {
         return categories[categoryIndex];
     }
 }
