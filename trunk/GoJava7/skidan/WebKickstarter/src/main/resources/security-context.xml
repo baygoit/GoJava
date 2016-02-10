@@ -11,7 +11,8 @@
 		<security:intercept-url pattern="/**"
 			access="hasRole('ROLE_USER')" />
 		<security:form-login />
-		<!--  <security:logout/> -->
+		
+		<!--  <security:logout logout-url="/logout" logout-success-url="/index/" /> -->
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider>
