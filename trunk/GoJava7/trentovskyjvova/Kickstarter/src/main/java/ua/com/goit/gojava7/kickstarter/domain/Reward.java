@@ -12,12 +12,12 @@ import javax.persistence.Table;
 public class Reward {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	
 	@Column
-	private int projectId;
+	private Long projectId;
 	@Column
-	private int pledge;
+	private Long pledge;
 	@Column
 	private String benefit;
 	
@@ -25,32 +25,32 @@ public class Reward {
 		
 	}
 	
-	public Reward(int id, int projectId) {
+	public Reward(Long id, Long projectId) {
 		this.id = id;
 		this.projectId = projectId;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
-	public int getProjectId() {
+	public Long getProjectId() {
 		return projectId;
 	}
 
-	public void setProjectId(int projectId) {
+	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
 	
-	public int getPledge() {
+	public Long getPledge() {
 		return pledge;
 	}
 
-	public void setPledge(int pledge) {
+	public void setPledge(Long pledge) {
 		this.pledge = pledge;
 	}
 

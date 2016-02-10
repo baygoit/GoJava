@@ -13,14 +13,17 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "category")
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	@Column
 	private String name;
+	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	private Set<Project> projects = new HashSet<Project>();
 
@@ -28,7 +31,7 @@ public class Category {
 		return name;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -36,7 +39,7 @@ public class Category {
 		this.name = name;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	

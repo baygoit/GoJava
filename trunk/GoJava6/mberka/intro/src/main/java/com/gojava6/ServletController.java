@@ -1,15 +1,13 @@
 package com.gojava6;
 
-import com.gojava6.dao.AptDAO;
-import com.gojava6.dao.UserDAO;
-import com.gojava6.model.User;
+import com.gojava6.airbnb.dao.ApartmentDAO;
+import com.gojava6.airbnb.dao.UserDAO;
+import com.gojava6.airbnb.model.ApartmentType;
+import com.gojava6.airbnb.model.User;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -18,7 +16,7 @@ import java.util.*;
 public class ServletController extends HttpServlet {
 
     public void init() throws ServletException {
-        AptDAO aptDAO = new AptDAO();
+        ApartmentDAO aptDAO = new ApartmentDAO();
         List<String> allCities = aptDAO.getAllAptCities();
     }
 
@@ -29,7 +27,7 @@ public class ServletController extends HttpServlet {
         String userPath = request.getServletPath();
 
         if (userPath.equals("/CitiesController")) {
-            AptDAO aptDAO = new AptDAO();
+            ApartmentDAO aptDAO = new ApartmentDAO();
             List<String> allCities = aptDAO.getAllAptCities();
             request.setAttribute("allCities", allCities);
             request.getRequestDispatcher("/cities.jsp").forward(request, response);
@@ -58,10 +56,10 @@ public class ServletController extends HttpServlet {
             java.sql.Date sqlStartDate = new java.sql.Date(startDate.getTime());
             java.sql.Date sqlEndDate = new java.sql.Date(endDate.getTime());
 
-            AptDAO aptDAO = new AptDAO();
-            aptDAO.addNewApartment((int) idUser,
-                    request.getParameter("aptCity"),
-                    request.getParameter("aptType"),
+            ApartmentDAO aptDAO = new ApartmentDAO();
+            aptDAO.addNewApartment(
+                    request.getParameter("apartmentCity"),
+                    ApartmentType.valueOf(request.getParameter("apartmentType")),
                     sqlStartDate, sqlEndDate);
 
             /*UserDAO userDAO = new UserDAO();
@@ -72,13 +70,13 @@ public class ServletController extends HttpServlet {
 
         }
         if (userPath.equals("/ReservationsController")) {
-            AptDAO aptDAO = new AptDAO();
+            ApartmentDAO aptDAO = new ApartmentDAO();
             aptDAO.getAllApartments();
         }
 
         if (userPath.equals("/AvailableAptsController")) {
-            AptDAO aptDAO = new AptDAO();
-            List<List<String>> allApts = aptDAO.getAllApartments();
+            ApartmentDAO aptDAO = new ApartmentDAO();
+            Map<Integer, List<String>> allApts = aptDAO.getAllApartments();
             List<String> allApts1 = new ArrayList<>();
             allApts1.add(allApts.toString());
             request.setAttribute("allApts", allApts1);

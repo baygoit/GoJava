@@ -5,7 +5,7 @@ import ua.com.goit.gojava7.kickstarter.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectDto extends Project{
+public class ProjectDto{
 
     private Long projectId;
     private String name;

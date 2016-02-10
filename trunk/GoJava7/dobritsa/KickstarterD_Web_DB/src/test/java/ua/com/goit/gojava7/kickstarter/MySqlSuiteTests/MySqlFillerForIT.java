@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:/MySql/applicationContext*.xml")
+@ContextConfiguration(locations="classpath:/MySql/applicationContext.xml")
 @Transactional
 public class MySqlFillerForIT {
 

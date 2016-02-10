@@ -57,7 +57,7 @@ public class CategoriesController {
 	}
 
 	@RequestMapping("/projects")
-	public ModelAndView projects(@RequestParam(name = "id") int categoryId) {
+	public ModelAndView projects(@RequestParam(name = "id") Long categoryId) {
 		ModelAndView modelAndView = new ModelAndView("projects");
 
 		modelAndView.addObject("categoryId", categoryId);
@@ -65,7 +65,7 @@ public class CategoriesController {
 
 		List<Project> projects = projectDao.getProjects(categoryId);
 		for (Project project : projects) {
-			int amountPledge = 0;
+			Long amountPledge = 0L;
 			for (Payment payment : project.getPayments()) {
 				amountPledge += payment.getPledge();
 			}
@@ -78,18 +78,12 @@ public class CategoriesController {
 	}
 
 	@RequestMapping("/project")
-	public ModelAndView project(@RequestParam(name = "projectId") int projectId) {
+	public ModelAndView project(@RequestParam(name = "projectId") Long projectId) {
 		ModelAndView modelAndView = new ModelAndView("project");
 
 		log.debug("projectId: {}", projectId);
 
-		Project selectedProject = projectDao.getProject(projectId);
-		
-		int amountPledge = 0;
-		for (Payment payment : selectedProject.getPayments()) {
-			amountPledge += payment.getPledge();
-		}
-		selectedProject.setAmountPledge(amountPledge);
+		Project selectedProject = projectDao.getProject(projectId);	
 		modelAndView.addObject("selectedProject", selectedProject);
 		log.debug("selectedProject: {}", selectedProject);
 
@@ -101,7 +95,7 @@ public class CategoriesController {
 	}
 
 	@RequestMapping("/payments")
-	public ModelAndView payments(@RequestParam(name = "projectId") int projectId) {
+	public ModelAndView payments(@RequestParam(name = "projectId") Long projectId) {
 		ModelAndView modelAndView = new ModelAndView("payments");
 
 		modelAndView.addObject("projectId", projectId);
@@ -115,7 +109,7 @@ public class CategoriesController {
 	}
 
 	@RequestMapping(value = "/question", method = RequestMethod.GET)
-	public ModelAndView questionGet(@RequestParam(name = "projectId") int projectId) {
+	public ModelAndView questionGet(@RequestParam(name = "projectId") Long projectId) {
 		ModelAndView modelAndView = new ModelAndView("question");
 
 		modelAndView.addObject("projectId", projectId);
@@ -125,7 +119,7 @@ public class CategoriesController {
 	}
 	
 	@RequestMapping(value = "/question", method = RequestMethod.POST)
-	public ModelAndView questionPost(@RequestParam(name = "projectId") int projectId,
+	public ModelAndView questionPost(@RequestParam(name = "projectId") Long projectId,
 			@RequestParam(name = "questionText") String questionText) {
 		ModelAndView modelAndView = new ModelAndView("redirect:project.html");
 
@@ -142,10 +136,10 @@ public class CategoriesController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/pledge", method = RequestMethod.GET)
-	public ModelAndView pledgeGet(@RequestParam(name = "projectId") int projectId,
-			@RequestParam(name = "rewardId") int rewardId,
-			@RequestParam(name = "amount") int amount) {
+	@RequestMapping(value = "/aut/pledge", method = RequestMethod.GET)
+	public ModelAndView pledgeGet(@RequestParam(name = "projectId") Long projectId,
+			@RequestParam(name = "rewardId") Long rewardId,
+			@RequestParam(name = "amount") Long amount) {
 		ModelAndView modelAndView = new ModelAndView("pledge");
 
 		modelAndView.addObject("projectId", projectId);
@@ -164,13 +158,13 @@ public class CategoriesController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/pledge", method = RequestMethod.POST)
-	public ModelAndView pledgePost(@RequestParam(name = "projectId") int projectId,
-			@RequestParam(name = "rewardId") int rewardId,
-			@RequestParam(name = "amount") int amount,
+	@RequestMapping(value = "/aut/pledge", method = RequestMethod.POST)
+	public ModelAndView pledgePost(@RequestParam(name = "projectId") Long projectId,
+			@RequestParam(name = "rewardId") Long rewardId,
+			@RequestParam(name = "amount") Long amount,
 			@RequestParam(name = "name") String name,
 			@RequestParam(name = "cardNumber") String cardNumber) {
-		ModelAndView modelAndView = new ModelAndView("redirect:project.html");
+		ModelAndView modelAndView = new ModelAndView("redirect:../project.html");
 
 		modelAndView.addObject("projectId", projectId);
 		log.debug("projectId: {}", projectId);

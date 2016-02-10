@@ -19,7 +19,7 @@
 	
 	<p> History: ${project.projectHistory} </p> <hr> <br>
 	<p><a href="${project.demoLink}">${project.demoLink}</a></p>
-	<p> Money needed: ${project.moneyNeeded} </p> 
+	<p> Money needed: ${pledged}/${project.moneyNeeded} </p> 
 	<p>Time: ${endtime} </p>
 	
         <br />
@@ -42,7 +42,7 @@
 
 
 
-<h3><a href="reward?id=${project.id}">Help the project [Donate]</a></h3>	
+<h3><a href="reward?projectId=${project.id}">Help the project [Donate]</a></h3>	
 
 
 <jsp:include page="footer.jsp" />

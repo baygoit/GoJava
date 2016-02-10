@@ -17,11 +17,12 @@ import ua.com.goit.gojava7.kickstarter.beans.Category;
 import ua.com.goit.gojava7.kickstarter.beans.Faq;
 import ua.com.goit.gojava7.kickstarter.beans.Project;
 import ua.com.goit.gojava7.kickstarter.beans.Reward;
-import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.FaqDao;
-import ua.com.goit.gojava7.kickstarter.dao.PaymentDao;
-import ua.com.goit.gojava7.kickstarter.dao.ProjectDao;
-import ua.com.goit.gojava7.kickstarter.dao.RewardDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.CategoryDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.FaqDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.PaymentDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.ProjectDao;
+import ua.com.goit.gojava7.kickstarter.database.contract.RewardDao;
+
 
 @Controller
 public class ProjectController {

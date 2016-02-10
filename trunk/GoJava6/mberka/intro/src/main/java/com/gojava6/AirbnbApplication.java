@@ -1,15 +1,10 @@
 package com.gojava6;
 
-import com.gojava6.dao.AptDAO;
-import com.gojava6.dao.UserDAO;
-import com.gojava6.model.ApartmentType;
-import com.gojava6.model.User;
+import com.gojava6.airbnb.dao.ApartmentDAO;
+import com.gojava6.airbnb.dao.UserDAO;
+import com.gojava6.airbnb.model.User;
 
-import java.util.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Iterator;
-import java.util.List;
 
 public class AirbnbApplication {
 
@@ -18,7 +13,7 @@ public class AirbnbApplication {
         //System.out.println("User is host: " + user1.isHostUser());
 
         UserDAO userDAO = new UserDAO();
-        AptDAO aptDAO = new AptDAO();
+        ApartmentDAO aptDAO = new ApartmentDAO();
         //userDAO.addNewUser(user1);
 
         SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");

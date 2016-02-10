@@ -13,34 +13,34 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @Entity
 @Table(name = "quote")
-@NamedQueries({ @NamedQuery(name = "Quote.count", query = "select count(q) as cnt from Quote q"),
-	@NamedQuery(name = "Quote.findAll", query = "select q from Quote q") })
+@NamedQueries({ @NamedQuery(name = "Quote.count", query = "select count(q) from Quote q"),
+				@NamedQuery(name = "Quote.findAll", query = "select q from Quote q") })
 public class Quote {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	@Column
 	private String text;
 	@Column
 	private String author;
-	
+
 	public Quote() {
 
 	}
-	
+
 	public Quote(String text, String author) {
 		setText(text);
 		setAuthor(author);
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getText() {
 		return text;
 	}
@@ -56,7 +56,7 @@ public class Quote {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
+
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("id", id).append("text", text).append("author", author).toString();

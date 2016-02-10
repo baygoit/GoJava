@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "category")
 @NamedQueries({ @NamedQuery(name = "Category.getAll", query = "select c from Category c") })
@@ -25,6 +27,7 @@ public class Category {
 	private Long id;
 	@Column
 	private String name;
+	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	private Set<Project> projects = new HashSet<Project>();
 

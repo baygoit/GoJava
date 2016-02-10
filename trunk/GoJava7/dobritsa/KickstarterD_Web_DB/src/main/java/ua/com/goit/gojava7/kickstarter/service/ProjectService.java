@@ -62,11 +62,11 @@ public class ProjectService {
         return projectDto;
     }
 
-    public ProjectDto getFullProject(Long projectId) {
-        log.info("<ProjectDto> getFullProject(projectId = {})...", projectId);
+    public ProjectDto getFullProjectDto(Long projectId) {
+        log.info("<ProjectDto> getFullProjectDto(projectId = {})...", projectId);
 
         Project project = projectDao.get(projectId);
-        log.info("<ProjectDto> getFullProject(projectId = {}) get {}", projectId, project);
+        log.info("<ProjectDto> getFullProjectDto(projectId = {}) get {}", projectId, project);
 
         return constuctFullProjectDto(project);
     }
@@ -79,9 +79,9 @@ public class ProjectService {
         projectDto.setHistory(project.getHistory());
         projectDto.setLink(project.getLink());
 
-        projectDto.setCategory(project.getCategory());
+        projectDto.setCategoryDto(categoryService.constuctShortCategoryDto(project.getCategory()));
         log.info("<ProjectDto> constuctFullProjectDto(projectId = {}) set category = {}", project.getProjectId(),
-                projectDto.getCategory());
+                projectDto.getCategoryDto());
 
         projectDto.setQuestions(project.getQuestions());
         log.info("<ProjectDto> constuctFullProjectDto(projectId = {}) set {} questions", project.getProjectId(),

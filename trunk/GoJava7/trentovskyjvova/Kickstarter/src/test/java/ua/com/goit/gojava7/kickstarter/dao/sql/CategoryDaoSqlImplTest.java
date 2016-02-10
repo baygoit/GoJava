@@ -2,47 +2,64 @@ package ua.com.goit.gojava7.kickstarter.dao.sql;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.contains;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import org.junit.Ignore;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kickstarter.dao.CategoryDao;
-import ua.com.goit.gojava7.kickstarter.dao.sql.CategoryDaoSqlImpl;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:H2/H2ApplicationContext*.xml")
+@Transactional
 public class CategoryDaoSqlImplTest {
+    @PersistenceContext
+    private EntityManager em;
 
-	@Mock
-	private JdbcTemplate jdbcTemplate;
-	@InjectMocks
-	private CategoryDao categoryDaoMySqlImpl = new CategoryDaoSqlImpl();
-
+    @Autowired
+    private CategoryDao categoryDao;
+    
+    @Test
+	public void testGetCategoriesEmpty(){
+    	assertThat(categoryDao.getCategories().isEmpty(), is(true));
+    }
+	
 	@Test
-	@Ignore
 	public void testGetCategory() {
+		
+		ua.com.goit.gojava7.kickstarter.domain.Category category1 = new ua.com.goit.gojava7.kickstarter.domain.Category();
+		category1.setName("Category 1");
 
-		categoryDaoMySqlImpl.getCategory(1);
-		verify(jdbcTemplate).queryForObject(contains("category WHERE id = ?"), any(Integer[].class),
-				any(BeanPropertyRowMapper.class));
+		ua.com.goit.gojava7.kickstarter.domain.Category category2 = new ua.com.goit.gojava7.kickstarter.domain.Category();
+		category2.setName("Category 2");
+		
+		em.persist(category1);
+		em.persist(category2);
+		
+		ua.com.goit.gojava7.kickstarter.domain.Category category = categoryDao.getCategory(category2.getId());
+		
+		assertThat(category.getName(), is("Category 2"));
 	}
 
 	@Test
-	@Ignore
 	public void testGetCategories() {
+		
+		ua.com.goit.gojava7.kickstarter.domain.Category category1 = new ua.com.goit.gojava7.kickstarter.domain.Category();
+		category1.setName("Category 1");
 
-		categoryDaoMySqlImpl.getCategories();
-		verify(jdbcTemplate).query(contains("category"), any(BeanPropertyRowMapper.class));
+		ua.com.goit.gojava7.kickstarter.domain.Category category2 = new ua.com.goit.gojava7.kickstarter.domain.Category();
+		category2.setName("Category 2");
+		
+		em.persist(category1);
+		em.persist(category2);
+
+		assertThat(categoryDao.getCategories().size(), is(2));
 	}
 
 }

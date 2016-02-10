@@ -5,13 +5,13 @@
 
 <c:forEach var="reward" items="${rewards}">
 	<p>
-		<a href="pledge.html?rewardId=${reward.getId()}&projectId=${projectId}&amount=${reward.getPledge()}">Pledge
+		<a href="aut/pledge.html?rewardId=${reward.getId()}&projectId=${projectId}&amount=${reward.getPledge()}">Pledge
 			${reward.getPledge()} - get ${reward.getBenefit()}</a>
 	</p>
 </c:forEach>
 
 <p>
-	<a href="pledge.html?rewardId=0&projectId=${projectId}&amount=0">own amount</a>
+	<a href="aut/pledge.html?rewardId=0&projectId=${projectId}&amount=0">own amount</a>
 </p>
 
 <jsp:include page="footer.jsp" />

@@ -29,7 +29,8 @@
 			<artifactId>mockito-all</artifactId>
 			<version>1.10.19</version>
 		</dependency>
-	    <!-- SERVLET DEPENDENCIES -->
+	   
+	    <!-- JAVA EE -->
 	    <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -45,7 +46,8 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<!-- CONNECTION POOL DEPENDENCIES -->
+		
+		<!-- CONNECTION POOL  -->
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
@@ -66,13 +68,14 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<!-- EMAIL DEPENDECIES -->
+		<!-- EMAIL  -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<!-- SPRING DEPENDENCIES -->
+		
+		<!-- SPRING  -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -118,7 +121,8 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
-		<!-- LOGGER DEPENDECIES -->
+		
+		<!-- LOGGER  -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -159,10 +163,16 @@
 			<artifactId>asm</artifactId>
 			<version>3.3.1</version>
 		</dependency>	
-		<!-- HIBERNATE DEPENCIES -->
+	
+		<!-- HIBERNATE  -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+	  	<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate-version}</version>
 		</dependency>
 		<dependency>
@@ -185,7 +195,13 @@
 			<artifactId>persistence-api</artifactId>
 			<version>1.0.2</version>
 		</dependency>
-  	</dependencies>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+ 	</dependencies>
+  	
   	
 	<build>
   		<plugins>
@@ -199,6 +215,42 @@
        			</configuration>
     		</plugin>
   		</plugins>
-  	</build>
+  		<pluginManagement>
+  			<plugins>
+  				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+  				<plugin>
+  					<groupId>org.eclipse.m2e</groupId>
+  					<artifactId>lifecycle-mapping</artifactId>
+  					<version>1.0.0</version>
+  					<configuration>
+  						<lifecycleMappingMetadata>
+  							<pluginExecutions>
+  								<pluginExecution>
+  									<pluginExecutionFilter>
+  										<groupId>
+  											org.apache.maven.plugins
+  										</groupId>
+  										<artifactId>
+  											maven-compiler-plugin
+  										</artifactId>
+  										<versionRange>
+  											[2.3.2,)
+  										</versionRange>
+  										<goals>
+  											<goal>testCompile</goal>
+  											<goal>compile</goal>
+  										</goals>
+  									</pluginExecutionFilter>
+  									<action>
+  										<ignore></ignore>
+  									</action>
+  								</pluginExecution>
+  							</pluginExecutions>
+  						</lifecycleMappingMetadata>
+  					</configuration>
+  				</plugin>
+  			</plugins>
+  		</pluginManagement>
+	</build>
   
 </project>

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "projectid")
@@ -24,17 +24,17 @@ public class Payment {
 	@Column
 	private String cardNumber;
 	@Column
-	private int pledge;
+	private Long pledge;
 
 	public Payment() {
 
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -62,11 +62,11 @@ public class Payment {
 		this.cardNumber = cardNumber;
 	}
 
-	public int getPledge() {
+	public Long getPledge() {
 		return pledge;
 	}
 
-	public void setPledge(int pledge) {
+	public void setPledge(Long pledge) {
 		this.pledge = pledge;
 	}
 
