@@ -5,7 +5,7 @@ package com.sandarovich.kickstarter;
  *
  */
 
-public enum Categories {
+public enum Category {
     
     SPORT,
     IT,

@@ -211,6 +211,12 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.0.6.Final</version>
 		</dependency>
+  <!-- additional annotations for entities -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.4</version>
+		</dependency>
 		<!-- Validation -->
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -222,5 +228,11 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.0.1.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.3</version>
+		</dependency>
 	</dependencies>
+
 </project>

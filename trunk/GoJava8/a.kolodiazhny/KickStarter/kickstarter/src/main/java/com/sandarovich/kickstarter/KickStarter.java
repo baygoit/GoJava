@@ -13,7 +13,7 @@ import com.sandarovich.kickstarter.menu.MenuReader;
 
 public class KickStarter {
     
-    public static final String APP_VERSION = "0.0.1";
+    public static final String APP_VERSION = "0.0.2";
  
     public static void main(String[] args) {
         new KickStarter().start();
@@ -27,8 +27,13 @@ public class KickStarter {
         MenuReader menuReader = new ConsoleMenuReader();
         AbstractMenu menu = new MainMenu(output, menuReader);
         menu.show();
-        menu.doAction(menu.readUserFeedback());
-        
+        menu.doAction(menu.readUserFeedback());   
+        Project p = new Project.Builder(1, Category.IT)
+        		.description("USB Lighter")
+        		.shortDescription("USB Lighter")
+        		.goalAmount(10000)
+        		.collectedAmount(200)
+                .build();
     }
 
 }

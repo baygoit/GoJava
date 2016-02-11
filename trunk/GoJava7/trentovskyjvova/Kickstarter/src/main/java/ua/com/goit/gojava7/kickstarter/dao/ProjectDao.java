@@ -6,8 +6,8 @@ import ua.com.goit.gojava7.kickstarter.domain.Project;
 
 public interface ProjectDao extends Dao{
 	
-	List<Project> getProjects(int categoryId);
+	List<Project> getProjects(Long categoryId);
 
-	Project getProject(int projectId);
+	Project getProject(Long projectId);
 
 }

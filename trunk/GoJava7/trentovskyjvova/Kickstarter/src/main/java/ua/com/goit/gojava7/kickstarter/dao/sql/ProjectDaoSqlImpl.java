@@ -22,7 +22,7 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 	private EntityManager em;
 	
 	@Override	
-	public List<Project> getProjects(int categoryId) {
+	public List<Project> getProjects(Long categoryId) {
 
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
@@ -36,7 +36,7 @@ public class ProjectDaoSqlImpl implements ProjectDao {
 	}
 
 	@Override
-	public Project getProject(int projectId) {
+	public Project getProject(Long projectId) {
 
 		return em.find(Project.class, projectId);
 	}
