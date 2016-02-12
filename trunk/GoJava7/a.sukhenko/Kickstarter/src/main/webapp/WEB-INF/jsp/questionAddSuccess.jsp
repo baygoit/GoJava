@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@page session="true"%>
 <jsp:include page="header.jsp">
 	<jsp:param value="Question Added" name="title"/>
 </jsp:include>

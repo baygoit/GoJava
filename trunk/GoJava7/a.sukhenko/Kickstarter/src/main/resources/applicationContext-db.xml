@@ -17,7 +17,8 @@ http://www.springframework.org/schema/util
 http://www.springframework.org/schema/util/spring-util.xsd">
            
     <context:property-placeholder location="classpath:db-TEST.properties" />
-    <context:component-scan base-package="ua.com.goit.gojava7.kickstarter" />
+    <context:component-scan base-package="ua.com.goit.gojava7.kickstarter.dao.db" />
+    <context:component-scan base-package="ua.com.goit.gojava7.kickstarter.model" />
     
     <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="true" />
