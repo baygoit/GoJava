@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,29 +19,25 @@ import org.hibernate.annotations.Cascade;
 @Entity
 @Table(name = "questions")
 @NamedQuery(name = "Question.findByProjectId", query = "SELECT q FROM Question q WHERE q.project.id = :projectId")
-public class Question {
-
-
+public class Question implements Serializable{
+    private static final long serialVersionUID = -7685128608337454365L;
     @Column
-    private String question;
+    private String            question;
     @Column
-    private String answer;
-
+    private String            answer;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
-    private int id;
+    private int               id;
 
     @Column(insertable = false, updatable = false)
-    private int projectId;
-
+    private int               projectId;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "projectId")
-    private Project project;
-
+    private Project           project;
 
     public int getProjectId() {
         return projectId;
@@ -48,7 +46,6 @@ public class Question {
     public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
-
 
     public String getAnswer() {
         return answer;
@@ -82,14 +79,9 @@ public class Question {
         this.id = id;
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 31).
-                append(id).
-                append(question).
-                append(answer).
-                toHashCode();
+        return new HashCodeBuilder(17, 31).append(id).append(question).append(answer).toHashCode();
     }
 
     @Override
@@ -100,10 +92,6 @@ public class Question {
             return true;
 
         Question question = (Question) obj;
-        return new EqualsBuilder().
-                append(question,question.getQuestion()).
-                append(answer,question.getQuestion()).
-                append(id,question.getId()).
-                isEquals();
+        return new EqualsBuilder().append(question, question.getQuestion()).append(answer, question.getQuestion()).append(id, question.getId()).isEquals();
     }
 }

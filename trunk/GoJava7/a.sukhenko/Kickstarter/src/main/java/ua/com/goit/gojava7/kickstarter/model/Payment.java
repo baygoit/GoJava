@@ -1,5 +1,7 @@
 package ua.com.goit.gojava7.kickstarter.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,28 +18,30 @@ import org.hibernate.annotations.Cascade;
 @Entity
 @Table(name = "payments")
 @NamedQueries({
-@NamedQuery(name="Payment.getByProjectId", query = "SELECT py FROM Payment py WHERE py.project.id = :projectId"),
-@NamedQuery(name="Payment.getProjectPledged", query = "SELECT SUM(p.amount) from Payment p where p.project.id = :projectId"),
+        @NamedQuery(name = "Payment.getByProjectId", query = "SELECT py FROM Payment py WHERE py.project.id = :projectId"),
+        @NamedQuery(name = "Payment.getProjectPledged", query = "SELECT SUM(p.amount) from Payment p where p.project.id = :projectId"),
 })
 
-public class Payment{
+public class Payment implements Serializable{
+
+    private static final long serialVersionUID = 1879167496607047970L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer     id;
+    private Integer           id;
     @Column(name = "cardNumber")
-    private String  cardNumber;
+    private String            cardNumber;
     @Column
-    private String  cardOwner;
+    private String            cardOwner;
     @Column(name = "projectId", insertable = false, updatable = false)
-    private Integer     projectId;
+    private Integer           projectId;
     @Column(name = "amount")
-    private String    amount;
+    private String            amount;
 
     @ManyToOne
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "projectId")
-    private Project project;
+    private Project           project;
 
     public Payment(String cardNumber, String cardOwner, Project project, String amount) {
         super();

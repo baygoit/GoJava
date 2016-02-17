@@ -17,17 +17,16 @@ import ua.com.goit.gojava7.kickstarter.model.Project;
 public class PaymentDao{
     private static final org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger(PaymentDao.class);
 
-    
     @PersistenceContext
-    private EntityManager manager;
-   
+    private EntityManager                                manager;
+
     public List<Payment> getAll() {
-        List<Payment> payments = manager.createQuery("SELECT p FROM Payment p",Payment.class).getResultList();
+        List<Payment> payments = manager.createQuery("SELECT p FROM Payment p", Payment.class).getResultList();
         return payments;
     }
 
     public List<Payment> getPaymentsByProjectId(int projectId) {
-        TypedQuery<Payment> query = manager.createNamedQuery("Payment.getByProjectId",Payment.class);
+        TypedQuery<Payment> query = manager.createNamedQuery("Payment.getByProjectId", Payment.class);
         List<Payment> payments = query.setParameter("projectId", projectId).getResultList();
         query.setParameter("projectId", projectId);
         return payments;
@@ -38,10 +37,10 @@ public class PaymentDao{
 
     public boolean createPayment(String cardNumber, String cardOwner, String amount, Project project) {
         logger.info("Creating payment: ");
-            Payment payment = new Payment(cardNumber, cardOwner, project, amount);
-            add(payment);
-            return true;
-  
+        Payment payment = new Payment(cardNumber, cardOwner, project, amount);
+        add(payment);
+        return true;
+
     }
 
 }

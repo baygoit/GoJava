@@ -9,53 +9,53 @@ import javax.persistence.*;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "projects")
 @NamedQueries({
-@NamedQuery(name = "Project.findByCategoryId", query = "SELECT pr FROM Project pr WHERE pr.category.categoryId = :categoryId"),
-@NamedQuery(name = "Project.findByProjectName", query = "SELECT pr FROM Project pr WHERE pr.projectName = :projectName")
+        @NamedQuery(name = "Project.findByCategoryId", query = "SELECT pr FROM Project pr WHERE pr.category.categoryId = :categoryId"),
+        @NamedQuery(name = "Project.findByProjectName", query = "SELECT pr FROM Project pr WHERE pr.projectName = :projectName")
 })
 
-
-public class Project implements Serializable {
+public class Project implements Serializable{
 
     private static final long serialVersionUID = 3601009349187745841L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    private int id;
+    private int               id;
     @Column(unique = true)
 
-    private String projectName;
+    private String            projectName;
     @Column
-    private String projectDescription;
+    private String            projectDescription;
     @Column
-    private double moneyNeeded;
+    private double            moneyNeeded;
     @Column
-    private String projectHistory;
+    private String            projectHistory;
     @Column
-    private String demoLink;
-
+    private String            demoLink;
 
     @ManyToOne
     @JoinColumn(name = "projectCategoryId")
-    private Category category;
+    private Category          category;
 
-    //TODO: Try @Temporal
+    // TODO: Try @Temporal
     // @Temporal(TemporalType.DATE) // Doesn't work yet
     @Type(type = "ua.com.goit.gojava7.kickstarter.util.LocalDateTimeUserType")
     @Column(name = "enddate")
-    private LocalDateTime enddate;
-
+    private LocalDateTime     enddate;
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
-    private List<Bonus> bonuses = new ArrayList<Bonus>();
-
+    private List<Bonus>       bonuses          = new ArrayList<Bonus>();
+    @JsonIgnore
     @OneToMany(mappedBy = "project")
-    private List<Question> questionsAndAnswers;
-
+    private List<Question>    questionsAndAnswers;
+    @JsonIgnore
     @OneToMany(mappedBy = "project")
-    private List<Payment> payments = new ArrayList<>();
+    private List<Payment>     payments         = new ArrayList<>();
 
     public List<Payment> getPayments() {
         return payments;
@@ -80,7 +80,6 @@ public class Project implements Serializable {
     public void setMoneyNeeded(double moneyNeeded) {
         this.moneyNeeded = moneyNeeded;
     }
-
 
     public String getProjectName() {
         return projectName;
@@ -149,13 +148,13 @@ public class Project implements Serializable {
     public void setQuestionsAndAnswers(List<Question> questionsAndAnswers) {
         this.questionsAndAnswers = questionsAndAnswers;
     }
-    
+
     @Override
     public String toString() {
         return "Project. projectName: " + projectName +
-                "projectDescription: " + projectDescription + 
-                "projectHistory: " + projectHistory + 
-                "moneyNeeded: " + moneyNeeded + 
+                "projectDescription: " + projectDescription +
+                "projectHistory: " + projectHistory +
+                "moneyNeeded: " + moneyNeeded +
                 "demoLink: " + demoLink +
                 "id: " + id +
                 "categoryId: " + category.getCategoryId() +

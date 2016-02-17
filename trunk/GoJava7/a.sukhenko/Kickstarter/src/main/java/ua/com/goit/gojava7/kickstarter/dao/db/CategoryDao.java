@@ -13,23 +13,20 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.com.goit.gojava7.kickstarter.model.Category;
 @Repository
 @Transactional
-public class CategoryDatabaseDao{
-    private static final Logger logger = LogManager.getLogger(CategoryDatabaseDao.class);
-    
+public class CategoryDao{
+    private static final Logger logger = LogManager.getLogger(CategoryDao.class);
+
     @PersistenceContext
-    private EntityManager entityManager;
-
-
+    private EntityManager       entityManager;
 
     public List<Category> getAll() {
         logger.info("Getting all categories");
-        return entityManager.createQuery("Select c from Category c",Category.class).getResultList();
+        return entityManager.createQuery("Select c from Category c", Category.class).getResultList();
     }
-    
+
     public Category getCategoryById(Integer categoryId) {
         logger.info("getting category by id: " + categoryId);
         return entityManager.find(Category.class, categoryId);
     }
-    
 
 }

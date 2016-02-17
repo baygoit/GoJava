@@ -13,30 +13,30 @@ import ua.com.goit.gojava7.kickstarter.model.Payment;
 @Repository
 public class PaymentValidator implements org.springframework.validation.Validator{
 
-	@Override
-	public boolean supports(Class<?> clazz) {
-		 return Payment.class.isAssignableFrom(clazz);
-	}
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return Payment.class.isAssignableFrom(clazz);
+    }
 
-	@Override
-	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "amount", "error.amount","Amount cannot be empty.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cardOwner", "error.cardOwner","Card owner cannot be empty.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cardNumber", "error.cardNumber","Card number cannot be empty.");
-		validatePayment(target, errors);
-		
-	}
-	
-	public void validatePayment(Object target, Errors errors) {
-		Payment payment = (Payment) target;
-        if(!validateName(payment.getCardOwner())){
-        	errors.rejectValue("cardOwner", "error.cardOwner_invalid", "Invalid card owner name.");
+    @Override
+    public void validate(Object target, Errors errors) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "amount", "error.amount", "Amount cannot be empty.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cardOwner", "error.cardOwner", "Card owner cannot be empty.");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cardNumber", "error.cardNumber", "Card number cannot be empty.");
+        validatePayment(target, errors);
+
+    }
+
+    public void validatePayment(Object target, Errors errors) {
+        Payment payment = (Payment) target;
+        if (!validateName(payment.getCardOwner())) {
+            errors.rejectValue("cardOwner", "error.cardOwner_invalid", "Invalid card owner name.");
         }
-        if(!validateCard(payment.getCardNumber())){
-        	errors.rejectValue("cardNumber", "error.cardNumber_invalid", "Invalid card number.");
+        if (!validateCard(payment.getCardNumber())) {
+            errors.rejectValue("cardNumber", "error.cardNumber_invalid", "Invalid card number.");
         }
-        if(!validateAmountOfPledge(payment.getAmount())){
-        	errors.rejectValue("amount", "error.amount_invalid", "Invalid amount.");
+        if (!validateAmountOfPledge(payment.getAmount())) {
+            errors.rejectValue("amount", "error.amount_invalid", "Invalid amount.");
         }
     }
 
@@ -45,25 +45,24 @@ public class PaymentValidator implements org.springframework.validation.Validato
         Matcher m = p.matcher(name);
         return m.matches();
     }
-    
+
     public boolean validateAmountOfPledge(String amount) {
-        try{
-    	Long longAmoung = Long.parseLong(amount);
-    	if(longAmoung < 1){
-    	    return false;
-    	}
-        }
-        catch(NumberFormatException e){
+        try {
+            Long longAmoung = Long.parseLong(amount);
+            if (longAmoung < 1) {
+                return false;
+            }
+        } catch (NumberFormatException e) {
             return false;
         }
         return true;
-    	
+
     }
-    
+
     public boolean validateCard(String card) {
         Pattern p = Pattern.compile("^[0-9]{16}$");
         Matcher m = p.matcher(card);
         return m.matches();
     }
-	
+
 }
