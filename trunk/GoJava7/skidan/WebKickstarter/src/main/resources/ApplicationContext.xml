@@ -28,6 +28,7 @@
     <context:component-scan base-package="com.kickstarter.controller" />
     <context:component-scan base-package="com.kickstarter.rest" />
     <context:component-scan base-package="com.kickstarter.model" />
+    <context:component-scan base-package="com.kickstarter.service.Impl" />
     
     
     
@@ -71,12 +72,13 @@
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 	   <property name="basename" value="/WEB-INF/validationMessages/messages" />
     </bean>
+    
 
-<!-- Preventing browsers back button to be able to open secured resource after logout -->
+<!-- Preventing browsers back button to be able to open secured resource after logout
    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
     <property name="cacheSeconds" value="0" />
     </bean>
-
+ -->
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">

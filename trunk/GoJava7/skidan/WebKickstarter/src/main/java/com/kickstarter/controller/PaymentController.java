@@ -31,7 +31,7 @@ public class PaymentController {
     PaymentAmountDaoImpl paymentAmountDao;
 
     @RequestMapping("/provide")
-    public ModelAndView providePaymentType(@ModelAttribute("payerVO") PayerVo payerVo,
+    public ModelAndView providePaymentType(@ModelAttribute("payerVo") PayerVo payerVo,
                                            @RequestParam Map<String, String> requestParams) {
         int paymentAmount = EMPTY_PAYMENT;
         String projectId = requestParams.get(PROJECT_ID_KEY);
@@ -52,7 +52,7 @@ public class PaymentController {
     }
 
     @RequestMapping(value = "/proceed", method = RequestMethod.POST)
-    public ModelAndView proceedPayment(@Valid @ModelAttribute("payerVO") PayerVo payerVo, BindingResult result,
+    public ModelAndView proceedPayment(@Valid @ModelAttribute("payerVo") PayerVo payerVo, BindingResult result,
                                        @RequestParam Map<String, String> requestParams) {
         if (result.hasErrors()) {
             return new ModelAndView(PAYMENT_VIEW).addObject(PROJECT_ID_KEY, requestParams.get(PROJECT_ID_KEY));

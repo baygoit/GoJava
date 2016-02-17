@@ -20,7 +20,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
          classpath:ApplicationContext.xml
-         classpath:security-context.xml
+         classpath:ggg.xml
         <!--   classpath:security-context.xml-->
         </param-value>
     </context-param>
@@ -48,7 +48,7 @@
     </servlet-mapping>
     
     <!-- Spring security  -->
-    <filter>     
+  <filter>     
     <filter-name>springSecurityFilterChain</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
   </filter>

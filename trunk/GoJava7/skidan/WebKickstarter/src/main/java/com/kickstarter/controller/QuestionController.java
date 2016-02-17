@@ -22,7 +22,7 @@ public class QuestionController {
 	QuestionDaoImpl questionDao;
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView addQuestion(@Valid @ModelAttribute("questionVO") QuestionVo questionVO, BindingResult result,
+	public ModelAndView addQuestion(@Valid @ModelAttribute("questionVo") QuestionVo questionVO, BindingResult result,
 			@RequestParam Map<String, String> requestParams) {
 		if (result.hasErrors()) {
 			return new ModelAndView("QuestionInputForm").addObject(PROJECT_ID_KEY, requestParams.get(PROJECT_ID_KEY));
@@ -33,7 +33,7 @@ public class QuestionController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView acceptQuestion(@ModelAttribute("questionVO") QuestionVo questionVo,
+	public ModelAndView acceptQuestion(@ModelAttribute("questionVo") QuestionVo questionVo,
 			@RequestParam Map<String, String> requestParams) {
 		ModelAndView modelAndView = new ModelAndView("QuestionInputForm");
 		modelAndView.addAllObjects(requestParams);

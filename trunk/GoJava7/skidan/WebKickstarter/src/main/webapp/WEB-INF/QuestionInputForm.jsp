@@ -13,7 +13,7 @@
 <div align="center">
     <h2>Please input your question in form below</h2>
     <table border="0" width="90%">
-        <form:form action="/WebKickstarter/question/add" method="post" commandName="questionVO">
+        <form:form action="/WebKickstarter/question/add" method="post" commandName="questionVo">
             <tr>
                 <td align="left"> Question:</td>
                 <td align="left" width="40%"><form:input path="question" size="30"/></td>
