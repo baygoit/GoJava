@@ -1,17 +1,17 @@
 package com.sandarovich.kickstarter;
 
+import com.sandarovich.kickstarter.io.IO;
+
 /**
  * @author Olexander Kolodiazhny 2016
  *
  *         Show Application name, author and quote.
  */
 public class Intro  {
-    private Output output;
-    private String appVersion;
+    private final IO console;
 
-    public Intro(Output output, String appVersion) {
-        this.output = output;
-        this.appVersion = appVersion;
+    public Intro(IO output) {
+        this.console = output;
     }
 
     public void show() {
@@ -20,14 +20,14 @@ public class Intro  {
     }
 
     private void showAuthor() {
-        output.print("=======================================");
-        output.print("     Kickstarter emulator v." + appVersion);
-        output.print("     by O.Kolodiazhny 2016      ");
-        output.print("=======================================");
+        console.write("=======================================");
+        console.write("     Kickstarter emulator v." + KickStarter.APPLICATION_VERSION);
+        console.write("     by O.Kolodiazhny 2016      ");
+        console.write("=======================================");
     }
 
     private void showQuote() {
-        output.print("\"Every big journey begins with a small step\"\n");
+        console.write("\"Every big journey begins with a small step\"\n");
     }
 
 }

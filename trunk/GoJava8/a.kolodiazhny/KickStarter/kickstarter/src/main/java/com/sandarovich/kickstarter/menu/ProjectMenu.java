@@ -1,69 +1,62 @@
 package com.sandarovich.kickstarter.menu;
 
-import com.sandarovich.kickstarter.Category;
-import com.sandarovich.kickstarter.Output;
-import com.sandarovich.kickstarter.Project;
-import com.sandarovich.kickstarter.ProjectsDB;
+import com.sandarovich.kickstarter.category.Categories;
+import com.sandarovich.kickstarter.io.IO;
+import com.sandarovich.kickstarter.project.Projects;
 
 /**
  * @author Olexamder Kolodiazhny 2016
- *
  */
 
+
 public class ProjectMenu extends AbstractMenu {
-	
-	private Project[] projects;
 
-	public ProjectMenu(Output output, MenuReader menuReader, Category category) {
-		super(output, menuReader);
-		menuId = 3;
-		headerLabel = "Projects:";
-		projects = new ProjectsDB().getByCategory(category);
-		int projectCount = projects.length;
-		menuElements = new MenuElement[projectCount + 1];
-		
-		if (projectCount != 0) {
-			for (int index = 0; index < projects.length; index++) {
-				menuElements[index] = new MenuElement(projects[index].getShortDescription(), 
-						Actions.SHOW_PROJECT,index);
-			}
-		}
-		
-		menuElements[projectCount ] = new MenuElement("Exit", Actions.EXIT, projectCount );
-		
-	}
-	
-	@Override
-	public void show() {
-		output.print("-----------");
-		output.print("{" + menuId + "} " + headerLabel);
-		output.print("------------------------------------------------------------------------------------");
-		output.print("Project | Description | ShortDescription | Goal Amount| Collected Amount| Days Remain ");
-		output.print("------------------------------------------------------------------------------------");
-		if (menuElements.length > 1) {
-			for (int index = 0; index < projects.length; index++) {
-				output.print( index + "           " +
-						projects[index].getDescription() + "        " +
-						projects[index].getShortDescription() + "        " +
-						projects[index].getGoalAmount() + "        " +
-						projects[index].getcollectedAmount() + "        " +
-						projects[index].getGoalDateDays()			
-				);
-			}
-			
-		} else {
-			output.print("<< Is empty >>");
-		}
-		output.print("---");
-		output.print(menuElements[menuElements.length - 1].toString());
-		output.print("---");
-		
-	}
-	
-	@Override
-	public void doAction(int choise) {
-		//TODO IMPLEMENT IN USERCASE 4
+    private Projects fileredProjects;
 
-	}
+    public ProjectMenu(IO console, Categories categories, Projects projects, Projects filteredProjects) {
+        super(console, categories, projects);
+        this.fileredProjects = filteredProjects;
+        menuId = 3;
+        headerLabel = "Projects:";
+        int projectCount = fileredProjects.count();
+        this.menuElements = new MenuElement[projectCount + 1];
+
+        if (projectCount != 0) {
+            for (int index = 0; index < projectCount; index++) {
+                menuElements[index + MENU_SHIFT] = new MenuElement(fileredProjects.get(index).toString(),
+                        Actions.SHOW_PROJECT,
+                        index + MENU_SHIFT);
+            }
+
+        }
+        menuElements[0] = new MenuElement("Exit", Actions.EXIT, 0);
+    }
+
+    @Override
+    public void show() {
+        showMenuHeader();
+        showProjectsTable(fileredProjects);
+        showMenuElements();
+        showMenuFooter();
+    }
+
+    private void showProjectsTable(Projects projects) {
+        console.writeTable(projects);
+    }
+
+    @Override
+    public void doAction(int choice) {
+        Actions action = getAction(choice);
+
+        if (action != null && action == Actions.EXIT) {
+            showCategoriesMenu();
+        }
+
+        if (action != null && action == Actions.SHOW_PROJECT) {
+            showProjectDetailsMenu(choice);
+        }
+
+    }
+
 
 }

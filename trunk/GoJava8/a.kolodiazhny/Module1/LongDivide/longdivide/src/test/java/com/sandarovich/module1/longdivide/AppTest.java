@@ -1,38 +1,14 @@
 package com.sandarovich.module1.longdivide;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+public class AppTest { 
+    @Test
+    public void testOutput() {
+        //TODO and Ask Sasha Baglay. Question. How to write such kinds of tests according to this task!!!!
+        //There are a lot of private methods. How to test them all too.
+        
+        assertEquals("Hello World!", "Hello World!");
     }
 }
