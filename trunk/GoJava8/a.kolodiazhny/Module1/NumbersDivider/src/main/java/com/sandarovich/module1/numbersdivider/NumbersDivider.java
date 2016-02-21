@@ -13,9 +13,6 @@ public class NumbersDivider {
         this.io = io;
     }
 
-    public void start() {
-
-    }
 
     public void setDividen(int dividen) {
         this.dividen = dividen;
@@ -24,4 +21,6 @@ public class NumbersDivider {
     public void setDivider(int divider) {
         this.divider = divider;
     }
+
+
 }
