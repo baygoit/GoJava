@@ -20,7 +20,11 @@ public class Categories {
         return result;
     }
 
-    public Category get(int categoryIndex) {
-        return categories[categoryIndex];
+    public Category get(int index) {
+        return categories[index];
+    }
+
+    public int size() {
+        return count;
     }
 }

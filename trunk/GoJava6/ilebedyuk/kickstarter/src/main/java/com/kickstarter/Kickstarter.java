@@ -25,15 +25,20 @@ public class Kickstarter {
             askCategory();
             int categoryIndex = selectMenu();
             Category category = chooseCategory(categoryIndex);
+            if (category == null) {
+                continue;
+            }
             Project[] foundProjects = projects.getProjects(category);
             printProjects(foundProjects);
             while (true){
                 askProject();
                 int projectIndex = selectMenu();
+
                 if (projectIndex < 0 || foundProjects.length <= projectIndex) {
                     System.out.println("Неверный индекс меню " + projectIndex);
                     continue;
                 }
+
                 Project project = foundProjects[projectIndex];
                 chooseProject(project);
                 printProjectDetails(project);
@@ -85,6 +90,11 @@ public class Kickstarter {
     }
 
     private Category chooseCategory(int categoryIndex) {
+        if (categoryIndex < 0 || categories.size() <= categoryIndex) {
+            System.out.println("Неверный индекс меню " + categoryIndex);
+            return null;
+        }
+
         Category category = categories.get(categoryIndex);
         System.out.println("Вы выбрали категорию: " + category.getName());
         System.out.println("------------------------------------------");
