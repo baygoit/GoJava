@@ -21,16 +21,16 @@ import ua.com.goit.gojava7.kickstarter.validator.PaymentValidator;
 @Transactional
 @Controller
 @RequestMapping(value = "/payment", method = RequestMethod.GET)
-public class PaymentController {
+public class PaymentController{
 
     private static final Logger log = LoggerFactory.getLogger(PaymentController.class);
 
     @Autowired
-    private ProjectDao projectDao;
+    private ProjectDao          projectDao;
     @Autowired
-    private PaymentDao paymentDao;
+    private PaymentDao          paymentDao;
     @Autowired
-    private PaymentValidator validator;
+    private PaymentValidator    validator;
 
     @ModelAttribute("payment")
     public Payment createPaymentModel() {
@@ -46,10 +46,11 @@ public class PaymentController {
     }
 
     @RequestMapping(value = "/add.do", method = RequestMethod.POST)
-    public String savePaymentAction(@RequestParam Integer projectId, @RequestParam Long amount, @ModelAttribute("payment") Payment payment, BindingResult bindingResult, Model model) {
+    public String savePaymentAction(@RequestParam Integer projectId, @RequestParam Long amount, @ModelAttribute("payment") Payment payment,
+            BindingResult bindingResult, Model model) {
         payment.setProject(projectDao.getProject(projectId));
         validator.validate(payment, bindingResult);
-        if (bindingResult.hasErrors() || !projectExists(projectId)){
+        if (bindingResult.hasErrors() || !projectExists(projectId)) {
             log.info("Returning paymentAdd.jsp page");
             return "paymentAdd";
         }
@@ -59,8 +60,7 @@ public class PaymentController {
         return "paymentAddSuccess";
     }
 
-
-    private boolean projectExists(Integer projectId){
+    private boolean projectExists(Integer projectId) {
         return (projectDao.getProject(projectId) != null);
     }
 

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/tx    
+		   http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springmodules.org/schema/ehcache
+           http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+   	<context:property-placeholder location="classpath:config.properties" />
+    
+    
+	<context:annotation-config />
+	<mvc:annotation-driven />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<context:component-scan base-package="com.kickstarter.dao.Interfaces" />
+	<context:component-scan base-package="com.kickstarter.dao.Impl" />
+    <context:component-scan base-package="com.kickstarter.controller" />
+    <context:component-scan base-package="com.kickstarter.rest" />
+    <context:component-scan base-package="com.kickstarter.model" />
+    <context:component-scan base-package="com.kickstarter.service.Impl" />
+    
+    
+    
+   
+    <bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitName" value="WebKickstarter"></property>
+	</bean>
+	
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}"/>
+	</bean>
+
+
+	<tx:annotation-driven />
+     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+  <!-- Aspect class identification -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<bean id="loggerAspect" class="com.kickstarter.aspect.LoggerAspect"></bean>
+
+
+   <!-- Validation Error Messages  -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	   <property name="basename" value="/WEB-INF/validationMessages/messages" />
+    </bean>
+    
+
+<!-- Preventing browsers back button to be able to open secured resource after logout
+   <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    <property name="cacheSeconds" value="0" />
+    </bean>
+ -->
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		
+		<property name="dataSource"><ref bean="dataSource" /></property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+
+		<property name="packagesToScan">
+			<list>
+				<value>com.kickstarter.model</value>
+			</list>
+		</property>
+	</bean>
+
+    <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	
+</beans>
+
+
+
+
+
+<!-- 
+Cache properties from sessionFactory
+<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.region.factory_class">
+					org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+				</prop>
+
+
+was used for GenerationType.AUTO
+<prop key="hibernate.id.new_generator_mappings">false</prop>
+
+<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+		
+
+<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop> 
+	<property name="annotatedClasses"> <list> <value>com.kickstarter.model.Quote</value> 
+	<value>com.kickstarter.model.Category</value> <value>com.kickstarter.model.Project</value> 
+	<value>com.kickstarter.model.Payment</value> <value>com.kickstarter.model.Question</value> 
+	</list> </property> <property name="mappingResources"> <list> </list> </property> -->
+
+<!-- <bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"> 
+	<property name="DataSource" ref="dataSource"/> </bean> -->
+
+<!-- <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" 
+	/> -->
+
+
+<!-- <bean id="DbQuestionDaoImpl" class="com.kickstarter.dao.interfaces.DbQuestionDaoImpl"> 
+	</bean> <bean id="DbCategoryDaoImpl" class="com.kickstarter.dao.interfaces.DbCategoryDaoImpl"> 
+	</bean> <bean id="DbQuoteImpl" class="com.kickstarter.dao.interfaces.DbQuoteImpl"> 
+	</bean> <bean id="DbProjectDaoImpl" class="com.kickstarter.dao.interfaces.DbProjectDaoImpl"> 
+	</bean> <bean id="dbCon" class="com.kickstarter.dao.interfaces.DBCon"> <property 
+	name="url" value="jdbc:mysql://localhost:3306/kickstarter" /> <property name="user" 
+	value="root" /> <property name="password" value="12345" /> </bean> -->

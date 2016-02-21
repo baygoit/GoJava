@@ -28,8 +28,8 @@ public class PaymentDaoImpl implements PaymentDao {
 	
 	@Transactional(readOnly = true)
 	public Integer getAll(int projectId) {      
-		Long tempSum = (Long) entityManager.
-				createQuery("select SUM(amount)from Payment where projectId = :projectId")
+		Long tempSum = (Long) entityManager
+				.createQuery("select SUM(amount)from Payment where projectId = :projectId")
 				.setParameter("projectId", projectId)
 			    .getSingleResult();
 		

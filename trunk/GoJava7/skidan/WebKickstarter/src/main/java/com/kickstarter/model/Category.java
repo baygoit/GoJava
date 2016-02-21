@@ -1,6 +1,9 @@
 package com.kickstarter.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -14,6 +17,7 @@ public class Category {
     private int id;
     @Column(name = "categoryTitle")
     private String title;
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private Collection<Project> project = new ArrayList<>();
 

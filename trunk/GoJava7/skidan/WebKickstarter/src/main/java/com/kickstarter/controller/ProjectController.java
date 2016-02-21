@@ -29,7 +29,7 @@ public class ProjectController {
 
 	@RequestMapping("/list")
 	public ModelAndView getAllProjects(@RequestParam(name = "categoryId") int categoryId) {
-		ModelAndView modelAndView = new ModelAndView("SelectedCategoryProjects");
+		ModelAndView modelAndView = new ModelAndView("categoryProjects");
 		List<Project> projectList = projectDao.getAllProjectsForCategory(categoryId);
 		for (Project p : projectList) {
 			p.setGainedSum(paymentDao.getAll(p.getId()));
@@ -40,7 +40,7 @@ public class ProjectController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView getOneProject(@RequestParam(name = "projectId") int projectId) {
-		ModelAndView modelAndView = new ModelAndView("SingleProject");
+		ModelAndView modelAndView = new ModelAndView("project");
 
 		Project project = projectDao.getOneProject(projectId);
 		project.setGainedSum(paymentDao.getAll(projectId));

@@ -18,36 +18,35 @@ import ua.com.goit.gojava7.kickstarter.model.Project;
 @Transactional
 public class ProjectDao{
     private static final Logger LOGGER = LogManager.getLogger(ProjectDao.class);
-   
+
     @PersistenceContext
-    private EntityManager manager;
+    private EntityManager       manager;
 
     public List<Project> getAll() {
-        List<Project> projects = manager.createQuery("SELECT p FROM Project p",Project.class).getResultList();
+        List<Project> projects = manager.createQuery("SELECT p FROM Project p", Project.class).getResultList();
         LOGGER.debug("getting all projects from db.");
         return projects;
     }
 
-    
     public Project getProject(Integer projectId) {
         LOGGER.info("<Project> get({})...", projectId);
         Project project = manager.find(Project.class, projectId);
         return project;
     }
     public Project getProjectByName(String projectName) {
-       TypedQuery<Project> query = manager.createNamedQuery("Project.findByProjectName",Project.class);
-       List<Project> projects = query.setParameter("projectName", projectName).getResultList();
-       return projects.get(0);
+        TypedQuery<Project> query = manager.createNamedQuery("Project.findByProjectName", Project.class);
+        List<Project> projects = query.setParameter("projectName", projectName).getResultList();
+        return projects.get(0);
     }
-    
-    public Long getPledged(Project project){
-        TypedQuery<String> query = manager.createNamedQuery("Payment.getProjectPledged",String.class);
+
+    public Long getPledged(Project project) {
+        TypedQuery<String> query = manager.createNamedQuery("Payment.getProjectPledged", String.class);
         List<String> amount = query.setParameter("projectId", project.getId()).getResultList();
         return Long.parseLong(amount.get(0));
     }
 
     public List<Project> getProjectsByCategoryId(int categoryId) {
-        TypedQuery<Project> query = manager.createNamedQuery("Project.findByCategoryId",Project.class);
+        TypedQuery<Project> query = manager.createNamedQuery("Project.findByCategoryId", Project.class);
         List<Project> projects = query.setParameter("categoryId", categoryId).getResultList();
         return projects;
     }
@@ -55,6 +54,5 @@ public class ProjectDao{
     public String getFundedPercentage(Project project) throws InvalidAlgorithmParameterException {
         return (float) ((getPledged(project) * 100) / project.getMoneyNeeded()) + "%";
     }
-
 
 }
