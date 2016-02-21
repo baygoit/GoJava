@@ -42,8 +42,8 @@ public class NumbersDividerTest {
     @Test
     public void testDividenAlgorithmDividenGreatThenDivider() {
         //given
-        numbersDivider.setDividen(512);
-        numbersDivider.setDivider(8);
+        numbersDivider.setDividen(10);
+        numbersDivider.setDivider(5);
         //then
         assertEquals("1", numbersDivider.calculate());
 
