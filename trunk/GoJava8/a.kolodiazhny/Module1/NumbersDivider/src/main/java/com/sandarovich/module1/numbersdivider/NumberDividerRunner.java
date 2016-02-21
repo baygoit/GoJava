@@ -13,6 +13,8 @@ public class NumberDividerRunner {
         NumbersDivider numberDivider = new NumbersDivider(io);
         numberDivider.setDividen(initializeValue("dividen"));
         numberDivider.setDivider(initializeValue("divider"));
+        io.write(numberDivider.calculate());
+
     }
 
     private static int initializeValue(String label) {
