@@ -43,17 +43,5 @@
 
 	<a href=./user/provide><input type="button" class="btn btn-danger btn-lg" value="Register" /></a>
 
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>

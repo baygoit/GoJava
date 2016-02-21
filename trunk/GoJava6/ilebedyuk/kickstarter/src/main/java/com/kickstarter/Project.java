@@ -10,6 +10,21 @@ public class Project {
     private Category category;
     private String description;
     private int exist;
+    private String history;
+    private String demoVideo;
+    private String quetionAnswer;
+
+    public String getQuetionAnswer() {
+        return quetionAnswer;
+    }
+
+    public void setQuetionAnswer(String quetionAnswer) {
+        this.quetionAnswer = quetionAnswer;
+    }
+
+    public void setDemoVideo(String demoVideo) {
+        this.demoVideo = demoVideo;
+    }
 
     public String getName() {
         return name;
@@ -27,12 +42,15 @@ public class Project {
         return description;
     }
 
-    public Project(String name, int amount, int days, String description) {
+    public Project(String name, int amount, int days, String description, String demoVideo) {
         this.name = name;
         this.amount = amount;
         this.days = days;
         this.description = description;
         this.exist = 0;
+        this.demoVideo = demoVideo;
+        this.history = null;
+        this.quetionAnswer = null;
     }
 
     public void setCategory(Category category) {
@@ -48,14 +66,20 @@ public class Project {
     }
 
     public String getHistory() {
-        return "fgdfgdfg";
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
     }
 
     public String getDemoVideo() {
-        return "fdgdghdgh";
+
+        return demoVideo;
     }
 
     public String getQuestionAnswers() {
-        return "dfgdfggf";
+
+        return quetionAnswer;
     }
 }

@@ -15,12 +15,16 @@ public class Categories {
     public String[] getCategories(){
         String[] result = new String[count];
         for (int i = 0; i < count; i++) {
-            result[i] = String.valueOf(i) + " - " + categories[i].getName();
+            result[i] = String.valueOf(i + 1) + " - " + categories[i].getName();
         }
         return result;
     }
 
-    public Category get(int categoryIndex) {
-        return categories[categoryIndex];
+    public Category get(int index) {
+        return categories[index];
+    }
+
+    public int size() {
+        return count;
     }
 }

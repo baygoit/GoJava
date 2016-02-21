@@ -33,7 +33,7 @@
 			      	<label>User</label><input type="radio" class="checkbox" value="2" name="userRoleId"/></td>
                 <tr>
                     <td></td>
-                    <td align="left"><input type="submit" class="btn btn-default" value="Submit"/></td>
+                    <td><input type="submit" class="btn btn-danger btn-lg" value="Submit"/></td>
                     <td></td>
                 </tr>
         </form:form>
@@ -42,31 +42,3 @@
     </div>
 </body>
 </html>
-
-
-
-<!-- <div align="center">
-        <h2>Please fill in forms below</h2>
-        <table border="0" width="90%">
-        <form:form action="/WebKickstarter/user/accept" method = "post" commandName="userVO">
-               <tr>
-                <td align="left" > User name: </td>
-                    <td align="left" width="40%"><form:input path="name" size="30"/></td>
-                    <td align="left"><form:errors path="name" cssClass="error"/></td>
-                </tr>
-                <tr>
-                <td align="left" > Password: </td>
-                    <td align="left" width="40%"><form:input path="password" size="30"/></td>
-                    <td align="left"><form:errors path="password" cssClass="error"/></td>
-                </tr>
-			      <td>User<input type="radio" value="2" name="userRoleId"/></td>
-	              <td> ProjectOwner<input type="radio" value="3" name="userRoleId"/></td>
-                <tr>
-                    <td></td>
-                    <td align="left"><input id = "subm" type="submit" value="Submit"/></td>
-                    <td></td>
-                </tr>
-        </form:form>
-        </table>
-         
-    </div>-->

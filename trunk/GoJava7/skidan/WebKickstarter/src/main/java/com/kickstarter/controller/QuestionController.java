@@ -25,7 +25,7 @@ public class QuestionController {
 	public ModelAndView addQuestion(@Valid @ModelAttribute("questionVo") QuestionVo questionVO, BindingResult result,
 			@RequestParam Map<String, String> requestParams) {
 		if (result.hasErrors()) {
-			return new ModelAndView("QuestionInputForm").addObject(PROJECT_ID_KEY, requestParams.get(PROJECT_ID_KEY));
+			return new ModelAndView("questionForm").addObject(PROJECT_ID_KEY, requestParams.get(PROJECT_ID_KEY));
 		}
 		int projectId = Integer.parseInt(requestParams.get(PROJECT_ID_KEY));
 		questionDao.add(requestParams.get("question"), projectId);
@@ -35,7 +35,7 @@ public class QuestionController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView acceptQuestion(@ModelAttribute("questionVo") QuestionVo questionVo,
 			@RequestParam Map<String, String> requestParams) {
-		ModelAndView modelAndView = new ModelAndView("QuestionInputForm");
+		ModelAndView modelAndView = new ModelAndView("questionForm");
 		modelAndView.addAllObjects(requestParams);
 		return modelAndView;
 
