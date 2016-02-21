@@ -2,6 +2,7 @@ package com.kickstarter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -18,7 +19,7 @@ public class Kickstarter {
 
     public void run() {
 
-        QuoteGenerator generator = new QuoteGenerator();
+        QuoteGenerator generator = new QuoteGenerator(new Random());
         System.out.println(generator.nextQuote());
 
         while (true) {
