@@ -1,10 +1,27 @@
 package com.sandarovich.module1.numbersdivider;
 
 /**
- * Hello world!
+ * Numbers Divider Algorithm
  */
+
 public class NumbersDivider {
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+    private int dividen;
+    private int divider;
+    private IO io;
+
+    public NumbersDivider(IO io) {
+        this.io = io;
+    }
+
+    public void start() {
+
+    }
+
+    public void setDividen(int dividen) {
+        this.dividen = dividen;
+    }
+
+    public void setDivider(int divider) {
+        this.divider = divider;
     }
 }
