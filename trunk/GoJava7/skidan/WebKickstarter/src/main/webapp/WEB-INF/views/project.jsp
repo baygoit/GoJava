@@ -34,11 +34,11 @@
 		<ul>
 			<li><b>Project description:</b><br> </li>
 			<li><c:out value="${project.getDiscription()}" /> </li>
-					<li> Required Sum: <c:out value="${project.getRequiredSum()}" /></li> 
-					<li>  Gained Sum: <c:out value="${project.getGainedSum()}" /> </li>
-					<li>Days Left till end : <c:out value="${project.getDaysLeft()}" /> </li>
-					<li> Link to Video : <c:out value="${project.getVideoLink()}" /></li> 
-				    <li>  History of Project : <c:out value="${project.getProjectHistory()}" /></li>
+			<li> Required Sum: <c:out value="${project.getRequiredSum()}" /></li> 
+			<li>  Gained Sum: <c:out value="${project.getGainedSum()}" /> </li>
+			<li>Days Left till end : <c:out value="${project.getDaysLeft()}" /> </li>
+			<li> Link to Video : <c:out value="${project.getVideoLink()}" /></li> 
+		   <li>  History of Project : <c:out value="${project.getProjectHistory()}" /></li>
 		</ul>
 	</div>
 
@@ -57,7 +57,7 @@
 	<form action="question"> <!-- Changed HERE! -->
 		<input type="hidden" name="projectId" value="${project.getId()}" /> 
 		<!--  <input name="question" /> -->
-		<input id="subm" type="submit" value="add question" />
+		<input id="subm" type="submit" class="btn btn-danger btn-lg" value="Ask question" />
 	</form>
 	<br>
 
@@ -67,9 +67,7 @@
 			type="radio" value="2" name="paymentType" />Donate 100$ <input
 			type="radio" value="3" name="paymentType" />Donate 150$ <input
 			type="radio" value="4" name="paymentType" />Donate random amount $ <input
-			id="subm" type="submit" value="payment type" />
+			id="subm" type="submit" class="btn btn-danger btn-lg" value="Pay" />
 	</form>
 </body>
 </html>
-
-<!--  <link rel="stylesheet" href="<c:url value="/resources/css/NewFile.css" />" /> -->
