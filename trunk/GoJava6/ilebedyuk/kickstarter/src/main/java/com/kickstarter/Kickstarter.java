@@ -1,5 +1,6 @@
 package com.kickstarter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -29,12 +30,17 @@ public class Kickstarter {
             while (true){
                 askProject();
                 int projectIndex = selectMenu();
+                if (projectIndex < 0 || foundProjects.length <= projectIndex) {
+                    System.out.println("Неверный индекс меню " + projectIndex);
+                    continue;
+                }
                 Project project = foundProjects[projectIndex];
                 chooseProject(project);
                 printProjectDetails(project);
             }
         }
     }
+
 
     private void askProject() {
         System.out.println("Выберите проект:");
