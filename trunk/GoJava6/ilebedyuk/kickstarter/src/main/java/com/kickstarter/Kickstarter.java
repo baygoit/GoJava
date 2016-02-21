@@ -61,9 +61,13 @@ public class Kickstarter {
 
 
     private void askProject(Project[] foundProjects) {
-        int from = 1;
-        int to = foundProjects.length;
-        System.out.println("Выберите проект: [" + from + ".." + to + "]");
+        if (foundProjects.length == 0) {
+            System.out.println("Проектов в категории нет!. Нажмите 0 - для выхода");
+        } else {
+            int from = 1;
+            int to = foundProjects.length;
+            System.out.println("Выберите проект: [" + from + ".." + to + "] или 0 для выхода");
+        }
     }
 
     private void printProjectDetails(Project project) {
