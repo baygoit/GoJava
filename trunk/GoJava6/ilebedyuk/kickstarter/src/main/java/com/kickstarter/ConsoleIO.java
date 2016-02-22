@@ -5,7 +5,8 @@ import java.util.Scanner;
 /**
  * Created by Игорь on 22.02.2016.
  */
-public class ConsoleIO {
+public class ConsoleIO implements IO {
+
     public int read() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();

@@ -2,7 +2,6 @@ package com.kickstarter;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * Created by Игорь on 05.02.2016.
@@ -10,12 +9,12 @@ import java.util.Scanner;
 public class Kickstarter {
     private Categories categories;
     private Projects projects;
-    private ConsoleIO io;
+    private IO io;
 
-    public Kickstarter(Categories categories, Projects projects) {
+    public Kickstarter(Categories categories, Projects projects, IO io) {
         this.categories = categories;
         this.projects = projects;
-        this.io = new ConsoleIO();
+        this.io = io;
     }
 
     public void run() {
