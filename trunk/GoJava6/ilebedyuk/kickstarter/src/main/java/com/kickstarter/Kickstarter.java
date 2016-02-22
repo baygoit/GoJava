@@ -10,16 +10,18 @@ public class Kickstarter {
     private Categories categories;
     private Projects projects;
     private IO io;
+    private QuoteGenerator generator;
 
-    public Kickstarter(Categories categories, Projects projects, IO io) {
+    public Kickstarter(Categories categories, Projects projects, IO io, QuoteGenerator quoteGenerator) {
         this.categories = categories;
         this.projects = projects;
         this.io = io;
+        this.generator = quoteGenerator;
     }
 
     public void run() {
 
-        QuoteGenerator generator = new QuoteGenerator(new Random());
+
         println(generator.nextQuote());
 
         while (true) {
@@ -37,6 +39,7 @@ public class Kickstarter {
 
             projectMenu(found);
         }
+        println("Спасибо за использование нашей программы!");
     }
 
     private void projectMenu(Project[] found) {
