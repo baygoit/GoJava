@@ -1,6 +1,8 @@
 package com.kickstarter;
 
 import org.junit.Test;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -140,5 +142,31 @@ public class KickstarterTest {
                 ", [1 - category1]\n" +
                 ", Спасибо за использование нашей программы!\n" +
                 "]", io.getMessages().toString());
+    }
+
+    @Test
+    public void mockTest(){
+        Categories categories = new Categories();
+        categories.add(new Category("category1"));
+        categories.add(new Category("category2"));
+        Projects projects = new Projects();
+
+        //FakeIO io = new FakeIO(1, 0, 0);
+        IO io = mock(IO.class);
+        QuoteGenerator generator = mock(QuoteGenerator.class);
+
+        Kickstarter kickstarter = new Kickstarter(categories, projects, io, generator);
+
+        when(generator.nextQuote()).thenReturn("quote");
+        when(io.read()).thenReturn(1, 0, 0);
+
+        kickstarter.run();
+
+        verify(io).print("quote\n");
+        verify(io, times(2)).print("Выберите категорию (или 0 для выхода):\n");
+        verify(io, times(2)).print("[1 - category1, 2 - category2]\n");
+        verify(io).print("Вы выбрали категорию: category1\n");
+        verify(io).print("Проектов в категории нет!. Нажмите 0 - для выхода\n");
+        verify(io).print("Спасибо за использование нашей программы!\n");
     }
 }
