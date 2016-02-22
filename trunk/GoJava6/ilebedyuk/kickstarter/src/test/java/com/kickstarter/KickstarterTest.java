@@ -23,9 +23,7 @@ public class KickstarterTest {
                 return 0;
             }
 
-            public void print(String message) {
-
-            }
+            public void print(String message) {}
         };
 
         Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator());
@@ -74,7 +72,6 @@ public class KickstarterTest {
 
         FakeIO io = new FakeIO(1, 0, 0);
 
-
         Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator());
         kickstarter.run();
         assertEquals("[quote\n" +
@@ -85,6 +82,62 @@ public class KickstarterTest {
                 ", Проектов в категории нет!. Нажмите 0 - для выхода\n" +
                 ", Выберите категорию (или 0 для выхода):\n" +
                 ", [1 - category1, 2 - category2]\n" +
+                ", Спасибо за использование нашей программы!\n" +
+                "]", io.getMessages().toString());
+    }
+
+    @Test
+    public void shouldMenuWithProject(){
+        Categories categories = new Categories();
+        Category category = new Category("category1");
+        categories.add(category);
+        Projects projects = new Projects();
+
+        Project project1 = new Project("project1", 100, 1000, "video1", "link1");
+        projects.add(project1);
+        project1.setCategory(category);
+
+        Project project2 = new Project("project2", 200, 2000, "video2", "link2");
+        projects.add(project2);
+
+        project2.setHistory("history");
+        project2.setQuetionAnswer("QA");
+        project2.setCategory(category);
+
+        FakeIO io = new FakeIO(1, 2, 0, 0, 0);
+
+        Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator());
+        kickstarter.run();
+        assertEquals("[quote\n" +
+                ", Выберите категорию (или 0 для выхода):\n" +
+                ", [1 - category1]\n" +
+                ", Вы выбрали категорию: category1\n" +
+                ", ------------------------------------------\n" +
+                ", 1 - , project1\n" +
+                ", video1\n" +
+                ", Нужно собрать 100 грн за 1000 дней\n" +
+                ", Уже собрали: 0 грн\n" +
+                ", ------------------------------------------\n" +
+                ", 2 - , project2\n" +
+                ", video2\n" +
+                ", Нужно собрать 200 грн за 2000 дней\n" +
+                ", Уже собрали: 0 грн\n" +
+                ", ------------------------------------------\n" +
+                ", Выберите проект: [1..2] или 0 для выхода\n" +
+                ", Вы выбрали проект: project2\n" +
+                ", ------------------------------------------\n" +
+                ", project2\n" +
+                ", video2\n" +
+                ", Нужно собрать 200 грн за 2000 дней\n" +
+                ", Уже собрали: 0 грн\n" +
+                ", ------------------------------------------\n" +
+                ", history\n" +
+                ", link2\n" +
+                ", QA\n" +
+                ", ------------------------------------------\n" +
+                ", Выберите проект: [1..2] или 0 для выхода\n" +
+                ", Выберите категорию (или 0 для выхода):\n" +
+                ", [1 - category1]\n" +
                 ", Спасибо за использование нашей программы!\n" +
                 "]", io.getMessages().toString());
     }

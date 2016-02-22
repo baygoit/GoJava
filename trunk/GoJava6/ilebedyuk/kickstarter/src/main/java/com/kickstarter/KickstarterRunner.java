@@ -29,7 +29,7 @@ public class KickstarterRunner {
         projects.add(project2);
 
         Kickstarter application = new Kickstarter(categories, projects,
-                null,
+                new ConsoleIO(),
                 new QuoteGenerator(new Random()));
 
         project1.setHistory("История этого проекта корнями уходит..");
