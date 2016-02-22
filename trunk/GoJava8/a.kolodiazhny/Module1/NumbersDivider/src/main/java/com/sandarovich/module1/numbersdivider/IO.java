@@ -7,5 +7,7 @@ package com.sandarovich.module1.numbersdivider;
 public interface IO {
     void write(String message);
 
-    int[] read();
+    String read();
+
+    int parse(String value);
 }
