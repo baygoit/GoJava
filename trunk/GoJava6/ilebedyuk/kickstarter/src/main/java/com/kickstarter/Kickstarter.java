@@ -25,6 +25,9 @@ public class Kickstarter {
         while (true) {
             askCategory();
             int menu = io.read();
+            if (menu == 0) {
+                break;
+            }
             Category category = chooseCategory(menu);
             if (category == null) {
                 continue;
@@ -111,7 +114,7 @@ public class Kickstarter {
     }
 
     private void askCategory() {
-        println("Выберите категорию:");
+        println("Выберите категорию (или 0 для выхода):");
         println(Arrays.toString(categories.getCategories()));
     }
 

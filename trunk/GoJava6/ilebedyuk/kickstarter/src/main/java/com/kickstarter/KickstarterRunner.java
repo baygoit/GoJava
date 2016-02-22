@@ -26,7 +26,7 @@ public class KickstarterRunner {
         projects.add(project1);
         projects.add(project2);
 
-        Kickstarter application = new Kickstarter(categories, projects, new ConsoleIO());
+        Kickstarter application = new Kickstarter(categories, projects, null);
 
         project1.setHistory("История этого проекта корнями уходит..");
         project2.setHistory("Мы только начали, по этому нечего рассказывать. \n" +
