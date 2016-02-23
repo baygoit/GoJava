@@ -1,5 +1,7 @@
 package com.kickstarter;
 
+import java.util.Random;
+
 /**
  * Created by Игорь on 07.02.2016.
  */
@@ -26,7 +28,9 @@ public class KickstarterRunner {
         projects.add(project1);
         projects.add(project2);
 
-        Kickstarter application = new Kickstarter(categories, projects);
+        Kickstarter application = new Kickstarter(categories, projects,
+                new ConsoleIO(),
+                new QuoteGenerator(new Random()));
 
         project1.setHistory("История этого проекта корнями уходит..");
         project2.setHistory("Мы только начали, по этому нечего рассказывать. \n" +
