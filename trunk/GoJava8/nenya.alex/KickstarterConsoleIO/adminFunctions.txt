@@ -1,0 +1,3 @@
+add category
+show all categories
+show users
