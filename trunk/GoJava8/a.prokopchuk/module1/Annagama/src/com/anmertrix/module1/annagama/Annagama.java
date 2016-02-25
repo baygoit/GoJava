@@ -17,12 +17,18 @@ public class Annagama {
 			reader.close();
 		}
 		String[] wordsList = line.split(" ");
-		printReverseWords(wordsList);
+		reverseWords(wordsList);
+		printWords(wordsList);
 	}
 	
-	private static void printReverseWords(String[] words) {
+	private static void reverseWords(String[] words) {
 		for (int i = 0; i < words.length; i++){
 			words[i] = new StringBuffer(words[i]).reverse().toString();
+		}
+	}
+	
+	private static void printWords(String[] words) {
+		for (int i = 0; i < words.length; i++){
 			if (i != words.length - 1) {
 				System.out.print(words[i] + " ");
 			} else {
