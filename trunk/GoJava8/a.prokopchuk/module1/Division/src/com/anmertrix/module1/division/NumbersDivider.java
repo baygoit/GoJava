@@ -14,7 +14,7 @@ public class NumbersDivider {
 	public NumbersDivider(int divident, int divider) {
 		this.divident = divident;
 		this.divider = divider;
-	} 
+	}
 	
 	public void printDivision() {
 
