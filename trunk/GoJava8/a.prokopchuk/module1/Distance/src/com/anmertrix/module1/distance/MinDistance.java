@@ -1,6 +1,8 @@
 package com.anmertrix.module1.distance;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MinDistance {
 	
@@ -22,31 +24,19 @@ public class MinDistance {
 		return numbersLine;
 	}
 	
-	protected int[] getTwoMinNumbers(ArrayList<Integer> numbersList) {
-		int minNumber1 = 0;
-		int minNumber2 = 0;
-		try{
-			minNumber1 = numbersList.get(0);
-			minNumber2 = numbersList.get(0);
-		} catch(IndexOutOfBoundsException e){
-			// TODO Auto-generated catch block
-			System.out.println("You have not entered a number.");
-		}
-		for (int i = 0; i < numbersList.size(); i++) {
-			if (numbersList.get(i) <= minNumber1) {
-				minNumber2 = minNumber1;
-				minNumber1 = numbersList.get(i);
-			}
-			else if (numbersList.get(i) <= minNumber2) {
-				minNumber2 = numbersList.get(i);
-			}
-		}
+	protected int[] getTwoMinNumbers(List<Integer> numbersList) {
+		
+		List<Integer> sortList = new ArrayList<Integer>(numbersList);
+		Collections.sort(sortList);
+		
+		int minNumber1 = sortList.get(0);
+		int minNumber2 = sortList.get(1);
 		int[] result = {minNumber1, minNumber2};
 		
 		return result;
 	}
 	
-	protected ArrayList<Integer> getDistanceList(ArrayList<Integer> numbersList, int[] twoMinNumbers) {
+	protected ArrayList<Integer> getDistanceList(List<Integer> numbersList, int[] twoMinNumbers) {
 
 		int minNumber1 = twoMinNumbers[0];
 		int minNumber2 = twoMinNumbers[1];
