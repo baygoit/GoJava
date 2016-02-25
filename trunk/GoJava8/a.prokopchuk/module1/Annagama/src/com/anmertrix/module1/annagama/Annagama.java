@@ -7,18 +7,25 @@ public class Annagama {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader reader  = new BufferedReader(new InputStreamReader(System.in));
-		String line = reader.readLine();
-		reader.close();
+		String line = null;
+		
+		try {
+			line = reader.readLine();
+		} catch (IOException e) {
+			line = "-1";
+		} finally {
+			reader.close();
+		}
 		String[] wordsList = line.split(" ");
 		printReverseWords(wordsList);
 	}
 	
-	private static void printReverseWords(String[] words){
-		for(int i=0;i < words.length;i++){
+	private static void printReverseWords(String[] words) {
+		for (int i = 0; i < words.length; i++){
 			words[i] = new StringBuffer(words[i]).reverse().toString();
-			if(i != words.length - 1){
+			if (i != words.length - 1) {
 				System.out.print(words[i] + " ");
-			}else{
+			} else {
 				System.out.print(words[i]);
 			}
 		}
