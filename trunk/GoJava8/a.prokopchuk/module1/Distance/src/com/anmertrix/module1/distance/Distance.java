@@ -9,12 +9,12 @@ public class Distance {
 		String[] piecesList = reader.readUserNumbersLine().split(" ");
 		ArrayList<Integer> numbersList = null;
 		MinDistance minDistance = new MinDistance();
-		
+
 		numbersList = minDistance.parseUserNumbersLine(piecesList);
-	
+
 		int[] twoMinNumbers = minDistance.getTwoMinNumbers(numbersList);
 		ArrayList<Integer> distanceList = minDistance.getDistanceList(numbersList, twoMinNumbers);
 		minDistance.printDistanseList(distanceList);
 	}
-	
+
 }
