@@ -25,36 +25,21 @@ public class NumbersDivider {
 		StringBuilder fractionNumber = new StringBuilder();
 		List<Integer> remains = new LinkedList<Integer>();
 		StringBuilder processDivision = new StringBuilder();
-
-		if (divident > 0) {
-			wholeProcessDivision.append("  " + divident + " "
-					+ VERTICAL_SEPARATOR + divider + "\n");
-		} else {
-			wholeProcessDivision.append(" " + divident + " "
-					+ VERTICAL_SEPARATOR + divider + "\n");
-		}
-
-		if (divident < 0 || divider < 0) {
-			divident = Math.abs(divident);
-			divider = Math.abs(divider);
-			wholeNumber.append("-");
-		}
-
+		
+		appendWholeProcessDivision(wholeProcessDivision);
+		setAbsoluteValue(wholeNumber);
+				
 		for (int i = 0; i <= RESULT_ACCURACY; i++) {
 			int result = divident / divider;
 			int remainder = divident % divider;
 			int currentMinus = divider * result;
 			if (i == 0) {
 				firstCurrentMinus.append("  -").append(currentMinus);
-				processDivision.append(indent).append(" ")
-						.append(HORIZONTAL_SEPARATOR).append("\n");
+				processDivision.append(indent).append(" ").append(HORIZONTAL_SEPARATOR).append("\n");
 			} else {
-				processDivision.append(indent).append(" ").append(divident)
-						.append("\n");
-				processDivision.append(indent).append("-").append(currentMinus)
-						.append("\n");
-				processDivision.append(indent).append(" ")
-						.append(HORIZONTAL_SEPARATOR).append("\n");
+				processDivision.append(indent).append(" ").append(divident).append("\n");
+				processDivision.append(indent).append("-").append(currentMinus).append("\n");
+				processDivision.append(indent).append(" ").append(HORIZONTAL_SEPARATOR).append("\n");
 			}
 			indent.append(" ");
 
@@ -69,8 +54,7 @@ public class NumbersDivider {
 			} else if (remains.contains(remainder)) {
 				fractionNumber.insert(remains.indexOf(remainder), "(");
 				fractionNumber.append(")");
-				processDivision.append(indent).append(" ").append(remainder)
-						.append("\n");
+				processDivision.append(indent).append(" ").append(remainder).append("\n");
 				break;
 			}
 
@@ -83,9 +67,30 @@ public class NumbersDivider {
 		}
 
 		wholeProcessDivision.append(firstCurrentMinus).append("|")
-				.append(wholeNumber).append(fractionNumber).append("\n")
-				.append(processDivision);
+				.append(wholeNumber).append(fractionNumber).append("\n").append(processDivision);
 		System.out.println(wholeProcessDivision);
 
+	}
+	
+	private void setAbsoluteValue(StringBuilder wholeNumber) {
+		if (divident < 0 ^ divider < 0) {
+			wholeNumber.append("-");
+		}
+		if (divident < 0 || divider < 0) {
+			divident = Math.abs(divident);
+			divider = Math.abs(divider);
+		}
+		
+	}
+	
+	private void appendWholeProcessDivision(StringBuilder wholeProcessDivision){
+		if (divident > 0) {
+			wholeProcessDivision.append("  " + divident + " "
+					+ VERTICAL_SEPARATOR + divider + "\n");
+		} else {
+			wholeProcessDivision.append(" " + divident + " "
+					+ VERTICAL_SEPARATOR + divider + "\n");
+		}
+		
 	}
 }
