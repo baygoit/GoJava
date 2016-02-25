@@ -6,15 +6,15 @@ public class Distance {
 
 	public static void main(String[] args)  {
 		Reader reader = new Reader();
-		String[] piecesList = reader.readUserNumbersLine().split(" ");
-		List<Integer> numbersList = null;
+		String[] pieces = reader.readUserNumbersLine().split(" ");
+		List<Integer> numbers = null;
 		MinDistance minDistance = new MinDistance();
 
-		numbersList = minDistance.parseUserNumbersLine(piecesList);
+		numbers = minDistance.parseUserNumbersLine(pieces);
 
-		List<Integer> twoMinNumbers = minDistance.getTwoMinNumbers(numbersList);
-		List<Integer> distanceList = minDistance.getDistanceList(numbersList, twoMinNumbers);
-		minDistance.printDistanseList(distanceList);
+		List<Integer> twoMinNumbers = minDistance.getTwoMinNumbers(numbers);
+		List<Integer> distances = minDistance.getDistances(numbers, twoMinNumbers);
+		minDistance.printDistanseList(distances);
 	}
 
 }
