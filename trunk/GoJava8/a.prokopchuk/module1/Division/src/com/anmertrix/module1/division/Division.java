@@ -1,12 +1,8 @@
 package com.anmertrix.module1.division;
 
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-
 public class Division {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		Reader reader = new Reader();
 		String line = reader.readUserNumbers();
 		
