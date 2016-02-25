@@ -8,22 +8,16 @@ import java.io.InputStreamReader;
 
 public class Reader {
 	
-	protected String readUserNumbersLine() {
+	protected String readUserNumbersLine() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		String numbersLine = "";
+		String numbersLine = null;
 		
 		try {
 			numbersLine = reader.readLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
+			numbersLine = "-1";
+		} finally {
 			reader.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 		return numbersLine;
