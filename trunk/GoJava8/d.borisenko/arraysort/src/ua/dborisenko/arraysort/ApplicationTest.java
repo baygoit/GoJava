@@ -1,7 +1,6 @@
 package ua.dborisenko.arraysort;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -80,7 +79,6 @@ public class ApplicationTest {
         Application mockApplication = spy(Application.class);
         when(mockApplication.getRandomArray(anyInt())).thenReturn(testArray);
         mockApplication.start();
-        assertTrue(outContent.toString().equals(
-                "Given array:\r\n[4, 1, 13, 2, 5, 4, 6, 8, 10, 8]\r\nSorted array:\r\n[1, 2, 4, 4, 5, 6, 8, 8, 10, 13]\r\n"));
+        assertEquals(outContent.toString(), "Given array:\r\n[4, 1, 13, 2, 5, 4, 6, 8, 10, 8]\r\nSorted array:\r\n[1, 2, 4, 4, 5, 6, 8, 8, 10, 13]\r\n");
     }
 }
