@@ -1,8 +1,12 @@
-package com.shcherbak.processing;
-
+package com.shcherbak.processing.old;
+/*
 import com.shcherbak.accounting.ReservationDates;
 import com.shcherbak.common.Processor;
-import com.shcherbak.model.*;
+import com.shcherbak.model.old.Apartment;
+import com.shcherbak.model.old.User;
+import com.shcherbak.model.old.Adress;
+import com.shcherbak.model.old.RentType;
+import com.shcherbak.model.old.UserType;
 
 import java.sql.*;
 import java.text.ParseException;
@@ -72,7 +76,7 @@ public class SQLProcessor implements Processor {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        //delivery.addToNotify(user);
+
     }
     public void removeUser(int user_id) {
         String removeUserQuery = "DELETE FROM users WHERE user_id = ? ;";
@@ -176,7 +180,7 @@ public class SQLProcessor implements Processor {
                 String surname = rs.getString("surname");
                 Boolean notify = rs.getBoolean("notify");
                 Date ts = rs.getTimestamp("ts");
-                System.out.println(user_id + " " + type + ' ' + name + " " + surname + ' ' + notify + ' ' + ts);
+
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -192,8 +196,7 @@ public class SQLProcessor implements Processor {
 
             while (rs.next()) {
                 addApartmentToList(apartments);
-                /*System.out.println(apartment_id + " " + owner + ' ' + city + " " + street + ' ' + house
-                        + ' ' + room + ' ' + rent + ' ' + ts + ' ' + comments);*/
+
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -248,12 +251,12 @@ public class SQLProcessor implements Processor {
     }
 
     public List<Apartment> search( String city, RentType rent, Date startString, Date endString ) throws ParseException {
-        List<Apartment> apartments;// = new ArrayList<>();
-        List<ReservationDates> reservationDates;// = new ArrayList<>();
+        List<Apartment> apartments;
+        List<ReservationDates> reservationDates;
         apartments = getApartments(city, rent);
-        //System.out.println(apartments);
+
         reservationDates = getReservations(startString, endString);
-        //System.out.println(reservationDates);
+
         ListIterator<Apartment> aIt = apartments.listIterator();
         while (aIt.hasNext()) {
             Apartment apartment = aIt.next();
@@ -275,8 +278,7 @@ public class SQLProcessor implements Processor {
 
             while (rs.next()) {
                 addReservationToList(reservationDates);
-               /* System.out.println(reservation_id + " " + apartment_id + " " + client_id + ' ' + start + " " + end + ' ' + ts
-                      + ' ' + comments);*/
+
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -293,7 +295,7 @@ public class SQLProcessor implements Processor {
             pstmt = connection.prepareStatement(getReservationQuery);
             pstmt.setDate(1, endDate);
             pstmt.setDate(2, startDate);
-            rs = pstmt.executeQuery(); /// make inside
+            rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 addReservationToList(reservationDates);
@@ -337,7 +339,7 @@ public class SQLProcessor implements Processor {
         }
     }
 
-    public List<String> getNotifyEmails(String kind) { // kind = All, notify, client, host
+    public List<String> getNotifyEmails(String kind) {
         List<String> emails = new ArrayList<>();
         if (kind.equals("All")) {
             query = "SELECT email FROM users;";
@@ -354,6 +356,7 @@ public class SQLProcessor implements Processor {
         }
         return emails;
     }
+
     private void getEmail (List<String> emails, String getEmailQuery) {
         try {
             stmt = connection.createStatement();
@@ -366,4 +369,6 @@ public class SQLProcessor implements Processor {
             System.out.println(e);
         }
     }
+
 }
+*/
