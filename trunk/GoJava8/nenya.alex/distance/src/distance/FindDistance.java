@@ -93,8 +93,6 @@ public class FindDistance {
 		} catch (NumberFormatException e) {
 			System.out.println("Wrong entering! Try again!");
 		}
-
 		return b;
-
 	}
 }
