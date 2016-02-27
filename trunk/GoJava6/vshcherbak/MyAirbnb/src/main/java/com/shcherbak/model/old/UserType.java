@@ -1,5 +1,7 @@
-package com.shcherbak.model;
+package com.shcherbak.model.old;
+
 
 public enum UserType {
     HOST, CLIENT
 }
+

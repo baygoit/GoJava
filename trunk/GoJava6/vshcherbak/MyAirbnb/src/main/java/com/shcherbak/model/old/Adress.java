@@ -1,8 +1,6 @@
-package com.shcherbak.model;
+package com.shcherbak.model.old;
 
-/**
- * Created by slavik on 08.10.15.
- */
+
 public class Adress {
     private String city;
     private String street;

@@ -1,4 +1,4 @@
-package com.shcherbak.model;
+package com.shcherbak.model.old;
 /*
 import java.util.HashSet;
 import java.util.Iterator;
