@@ -1,4 +1,4 @@
-package com.shcherbak.accounting;
+package com.shcherbak.accounting.old;
 /*  died during refactoring
 
 import airbnb.RentType;

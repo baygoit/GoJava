@@ -1,4 +1,4 @@
-package com.shcherbak.accounting;/*
+package com.shcherbak.accounting.old;/*
 package airbnb.accounting;
 
 import airbnb.Apartment;
