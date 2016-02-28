@@ -1,38 +1,31 @@
 package com.anmertrix.module1.annagama;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Annagama {
+	
+	private ConsoleIO io;
+	
+	public Annagama() {
+		this.io = new ConsoleIO();
+	}
 
-	public static void main(String[] args) throws IOException {
-		BufferedReader reader  = new BufferedReader(new InputStreamReader(System.in));
-		String line = null;
-		
-		try {
-			line = reader.readLine();
-		} catch (IOException e) {
-			line = "-1";
-		} finally {
-			reader.close();
-		}
-		String[] wordsList = line.split(" ");
+	public void run() {
+		String[] wordsList = io.readConsole().split(" ");
 		reverseWords(wordsList);
 		printWords(wordsList);
 	}
 	
-	private static void reverseWords(String[] words) {
+	private void reverseWords(String[] words) {
 		for (int i = 0; i < words.length; i++){
 			words[i] = new StringBuffer(words[i]).reverse().toString();
 		}
 	}
 	
-	private static void printWords(String[] words) {
+	private void printWords(String[] words) {
 		for (int i = 0; i < words.length; i++){
 			if (i != words.length - 1) {
-				System.out.print(words[i] + " ");
+				io.print(words[i] + " ");
 			} else {
-				System.out.print(words[i]);
+				io.print(words[i]);
 			}
 		}
 	}
