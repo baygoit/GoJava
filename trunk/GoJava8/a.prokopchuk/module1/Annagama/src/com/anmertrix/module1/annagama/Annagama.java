@@ -2,10 +2,10 @@ package com.anmertrix.module1.annagama;
 
 public class Annagama {
 	
-	private ConsoleIO io;
+	private IO io;
 	
-	public Annagama() {
-		this.io = new ConsoleIO();
+	public Annagama(IO io) {
+		this.io = io;
 	}
 
 	public void run() {
@@ -21,12 +21,12 @@ public class Annagama {
 	}
 	
 	private void printWords(String[] words) {
-		for (int i = 0; i < words.length; i++){
-			if (i != words.length - 1) {
-				io.print(words[i] + " ");
-			} else {
-				io.print(words[i]);
-			}
+		StringBuilder line = new StringBuilder();
+		
+		for (String word : words) {
+			line.append(word).append(" ");
 		}
+		
+		io.print(line.toString().trim());
 	}
 }
