@@ -1,0 +1,207 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="css/airbnb.css">
+    <title>AirBnb</title>
+</head>
+<body ng-app="myApp">
+<div id="main" ng-controller="MainController as mn">
+    <div id="header">
+        <div id="widgetBar">
+
+            <div class="headerWidget">
+                <a href="/airbnb/admin?show=users" class = "whit">
+                    Admin
+                </a>
+            </div>
+
+            <div class="headerWidget">
+                <a href="/airbnb/addApartaments" class = "whit">
+                    Become host
+                </a>
+            </div>
+
+            <div class="headerWidget">
+                <a href="/airbnb/${login}" class = "whit">
+                    <c:out value="${sign}"/>
+                </a>
+            </div>
+
+        </div>
+
+        <a href="/airbnb/">
+            <img src="img/Airbnb_Logo.png" id="logo" alt="AirBnb logo">
+        </a>
+
+    </div>
+
+    <form action="/airbnb/room?city=${cities}" method="GET">
+        <p><input type="search" name="city" placeholder=" WHERE YOU WANT TO GO?" id = "searchCity" required/>
+        <p><input name="start"  placeholder=" Check In" id="searchForm" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" required />
+        <p><input name="end"  placeholder=" Check Out" id="searchForm" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" required/>
+        <p><select name="guest" id="searchGuests">
+            <option selected>1 Guest
+            <option>2 Guests
+            <option>3 Guests
+            <option>4 Guests
+            <option>5 Guests
+            <option>more than 5 Guests
+        </select>
+            <input type="submit" value="Search" id = "searchButton"></p>
+    </form>
+
+<div class="adminButton">
+    <a href="/airbnb/admin?show=reservation_dates" class = "whit">
+        <span>Show all reservation dates</span>
+    </a>
+</div>
+<div class="adminButton">
+    <a href="/airbnb/admin?show=apartaments" class = "whit">
+        <span>Show all apartaments</span>
+    </a>
+</div>
+<!-- <a href="/airbnb/admin?show=users" class="categoryButton"> -->
+<div class="adminButton">
+    <!-- <a href="/airbnb/admin?show=users" class="whit"> -->
+        <span class="whit">Show all users</span>
+<!--     </a> -->
+</div>
+
+
+<table border="1" id="userTable">
+    <tr ng-repeat="title in titles">
+        
+        <th><span ng-bind="title.id"></span></th>
+        <th><span ng-bind="title.firstname"></span></th>
+        <th><span ng-bind="title.lastname"></span></th>
+        <th><span ng-bind="title.email"></span></th>
+        <th><span ng-bind="title.password"></span></th>
+        <th><span ng-bind="title.type"></span></th>
+    </tr>
+        <tr ng-repeat="user in mn.Users">
+            <td>
+                <span ng-bind="user.userId"></span>
+            </td>
+            <td>
+                <span ng-bind="user.name"></span>
+            </td>
+            <td>
+               <span ng-bind="user.surname"></span>
+            </td>
+            <td>
+                <span ng-bind="user.email"></span>
+            </td>
+            <td>
+                <span ng-bind="user.userType"></span>
+            </td>
+            <td>
+                <span ng-bind="user.password"></span>
+            </td>
+        </tr>
+</table>
+
+
+<table border="1" id="apartamentsTable">
+    <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Cost</th>
+        <th>Capacity</th>
+        <th>City</th>
+        <th>OwnerId</th>
+    </tr>
+        <tr ng-repeat="apartament in mn.Apartaments">
+            <td>
+                <!-- <c:out value="${apartament.getIdAparnament()}"/> -->
+                <span ng-bind="apartament.idAparnament"></span>
+            </td>
+            <td>
+                <!-- <c:out value="${apartament.getApartmentType()}"/> -->
+                <span ng-bind="apartament.apartmentType"></span>
+            </td>
+            <td>
+                <!-- <c:out value="${apartament.getCost()}"/> -->
+                <span ng-bind="apartament.cost"></span>
+            </td>
+            <td>
+                <!-- <c:out value="${apartament.getCapacity()}"/> -->
+                <span ng-bind="apartament.capacity"></span>
+            </td>
+            <td>
+                <!-- <c:out value="${apartament.getCity()}"/> -->
+                <span ng-bind="apartament.city"></span>
+            </td>
+            <td>
+                <!-- <c:out value="${apartament.getOwnerId()}"/> -->
+                <span ng-bind="apartament.ownerId"></span>
+            </td>
+        </tr>
+   <!--  </c:forEach> -->
+</table>
+
+
+<table border="1" id="reservationTable">
+    <tr>
+        <th>ID</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>ApartamentId</th>
+    </tr>
+    <!-- <c:forEach var="reservation" items="${reservation_dates}"> -->
+        <tr ng-repeat="reservation in mn.Reservation">
+            <td>
+                <!-- <c:out value="${reservation.getReservationDateId()}"/> -->
+                <span ng-bind="reservation.reservationDateId"></span>
+            </td>
+            <td>
+                <!-- <c:out value="${reservation.getDateBegin()}"/> -->
+                <span ng-bind="reservation.dateBegin"></span>
+            </td>
+            <td>
+                <!-- <c:out value="${reservation.getDateEnd()}"/> -->
+                <span ng-bind="reservation.dateEnd"></span>
+            </td>
+            <td>
+                <!-- <c:out value="${reservation.getApartamentId()}"/> -->
+                <span ng-bind="reservation.apartamentId"></span>
+            </td>
+        </tr>
+    <!-- </c:forEach> -->
+</table>
+</div>
+
+<!--<script>-->
+      <!--window.onload = function(){-->
+      <!--var myParam = location.search.split('show=')[1];-->
+      <!--if(myParam === "apartaments") {-->
+            <!--document.getElementById("reservationTable").style.display = "none";-->
+            <!--document.getElementById("userTable").style.display = "none";-->
+      <!--} else if (myParam === "reservation_dates") {-->
+            <!--document.getElementById("apartamentsTable").style.display = "none";-->
+            <!--document.getElementById("userTable").style.display = "none";-->
+      <!--} else {-->
+            <!--document.getElementById("reservationTable").style.display = "none";-->
+            <!--document.getElementById("apartamentsTable").style.display = "none";-->
+      <!--}-->
+    <!--}-->
+ <!--</script>-->
+
+
+<div id="footer">
+    <p id="footerText">Contact us:</p>
+    <p> 044 987 34 56 </p>
+</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-resource.min.js"></script>
+
+<!-- Modules -->
+    <script src="js/app.js"></script>
+
+    <!-- Controllers -->
+    <script src="js/MainController.js"></script>
+    // <script src="js/MyService.js"></script>
+</body>
+</html>

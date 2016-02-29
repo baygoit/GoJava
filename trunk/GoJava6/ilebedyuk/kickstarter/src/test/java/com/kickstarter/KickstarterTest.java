@@ -1,7 +1,6 @@
 package com.kickstarter;
 
 import org.junit.Test;
-import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
@@ -106,7 +105,7 @@ public class KickstarterTest {
         project2.setQuetionAnswer("QA");
         project2.setCategory(category);
 
-        FakeIO io = new FakeIO(1, 2, 0, 0, 0);
+        FakeIO io = new FakeIO(1, 2, 0, 0, 0, 0);
 
         Kickstarter kickstarter = new Kickstarter(categories, projects, io, new StubQuoteGenerator());
         kickstarter.run();
@@ -137,6 +136,8 @@ public class KickstarterTest {
                 ", link2\n" +
                 ", QA\n" +
                 ", ------------------------------------------\n" +
+                ", Выберите, что хотите сделать с проектом: \n" +
+                "[0 - выйти к списку проектов, 1 - инвестировать в проект]\n" +
                 ", Выберите проект: [1..2] или 0 для выхода\n" +
                 ", Выберите категорию (или 0 для выхода):\n" +
                 ", [1 - category1]\n" +
@@ -168,5 +169,30 @@ public class KickstarterTest {
         verify(io).print("Вы выбрали категорию: category1\n");
         verify(io).print("Проектов в категории нет!. Нажмите 0 - для выхода\n");
         verify(io).print("Спасибо за использование нашей программы!\n");
+    }
+
+    @Test
+    public void shouldPrintProjectMenu_whenSelectIt(){
+        Categories categories = new Categories();
+        Category category = new Category("category1");
+        categories.add(category);
+
+        Projects projects = new Projects();
+        Project project = new Project("project1", 100, 1000, "video1", "link1");
+        projects.add(project);
+        project.setCategory(category);
+
+        IO io = mock(IO.class);
+        QuoteGenerator generator = mock(QuoteGenerator.class);
+
+        Kickstarter kickstarter = new Kickstarter(categories, projects, io, generator);
+
+        when(io.read()).thenReturn(1, 1, 1, 0, 0, 0);
+
+        kickstarter.run();
+
+        verify(io, times(2)).print("Выберите, что хотите сделать с проектом: \n" +
+                "[0 - выйти к списку проектов, 1 - инвестировать в проект]\n");
+        verify(io).print("Спасибо, что хотите помочь проекту!\n");
     }
 }
