@@ -1,25 +1,27 @@
 package mergesort;
 
-import java.util.Arrays;
+import mergesort.EmptyArrayException;
 
-public class Mergesort {
+public class MergeSort {
 
 	private int[] numbers;
 	private int[] helpArray;
 	private int size;
 
-	public static void main(String[] args) {
-		int[] array = { 23, 56, -45, 1, 0, 125, 56, 55, -32 };
-		System.out.println("Before:	" + Arrays.toString(array));
-		new Mergesort().sort(array);
-		System.out.println("After:	" + Arrays.toString(array));
-	}
-
-	public void sort(int[] array) {
-		this.numbers = array;
-		size = array.length;
-		this.helpArray = new int[size];
-		mergesort(0, size - 1);
+	public int[] sort(int[] array) throws EmptyArrayException {
+		if (array != null) {
+			if (array.length != 0) {
+				this.numbers = array;
+				size = array.length;
+				this.helpArray = new int[size];
+				mergesort(0, size - 1);
+			} else {
+				throw new EmptyArrayException();
+			}
+		} else {
+			throw new NullPointerException();
+		}
+		return array;
 	}
 
 	private void mergesort(int low, int high) {
