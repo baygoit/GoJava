@@ -13,21 +13,9 @@ import org.junit.Test;
 
 public class TestFindLonlyNumber {
 	private FindLonlyNumber find = new FindLonlyNumber();
-
-	@Test
-	public void testFindLonlyArrayFull1() {
-		int[] mas = {-12, 10, 7, 8, 10, 7, 8, 5, 5, 12, 78, 12, 78};
-		assertEquals(-12, find.findLonly(mas ));
-	}
 	
 	@Test
-	public void testFindLonlyArrayFull2(){
-		int[] mas = {-12, 10, -12, 7, 8, 10, 7, 8, 5, 5, 12, 78, 12};
-		assertEquals(78, find.findLonly(mas ));
-	}
-	
-	@Test
-	public void testFindLonlyArrayFull3(){
+	public void testFindLonlyArrayFull(){
 		int[] mas = {-12, 10, -12, 7, 8, 10, 7, 4, 8, 5, 5, 12, 78, 12, 78};
 		assertEquals(4, find.findLonly(mas ));
 	}
