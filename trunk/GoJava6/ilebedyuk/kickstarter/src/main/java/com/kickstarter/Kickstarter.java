@@ -1,7 +1,6 @@
 package com.kickstarter;
 
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * Created by Игорь on 05.02.2016.
@@ -20,42 +19,82 @@ public class Kickstarter {
     }
 
     public void run() {
-
-
         println(generator.nextQuote());
-
-        while (true) {
-            askCategory();
-            int menu = io.read();
-            if (menu == 0) {
-                break;
-            }
-            Category category = chooseCategory(menu);
-            if (category == null) {
-                continue;
-            }
-            Project[] found = projects.getProjects(category);
-            printProjects(found);
-
-            projectMenu(found);
-        }
+        categoryMenu().run();
         println("Спасибо за использование нашей программы!");
     }
 
-    private void projectMenu(Project[] found) {
-        while (true){
-            askProject(found);
-            int menu = io.read();
-            if (menu == 0) {
-                break;
+    private Menu categoryMenu() {
+        return new Menu(io) {
+            @Override
+            Menu nextMenu(Object selected) {
+                Category category = (Category) selected;
+                Project[] found = projects.getProjects(category);
+                printProjects(found);
+                return projectsMenu(found);
             }
-            Project project = chooseProject(menu, found);
-            if (project == null) {
-                continue;
+
+            @Override
+            Object choose(int menu) {
+                return chooseCategory(menu);
             }
-            chooseProject(project);
-            printProjectDetails(project);
-        }
+
+            @Override
+            void ask() {
+                askCategory();
+            }
+        };
+    }
+
+    private Menu projectsMenu(final Project[] found) {
+        return new Menu(io) {
+            @Override
+            Menu nextMenu(Object selected) {
+                Project project = (Project) selected;
+                chooseProject(project);
+                printProjectDetails(project);
+                return projectMenu(project);
+            }
+
+            @Override
+            Object choose(int menu) {
+                return chooseProject(menu, found);
+            }
+
+            @Override
+            void ask() {
+                askProjects(found);
+            }
+        };
+    }
+
+    private Menu projectMenu(final Project project) {
+        return new Menu(io) {
+            @Override
+            Menu nextMenu(Object selected) {
+                Integer menu = (Integer) selected;
+
+                if (menu == 1) {
+                    println("Спасибо, что хотите помочь проекту!");
+                }
+                return null;
+            }
+
+            @Override
+            Object choose(int menu) {
+                return menu;
+            }
+
+            @Override
+            void ask() {
+                askProject(project);
+            }
+        };
+    }
+
+    private void askProject(Project project) {
+        println("Выберите, что хотите сделать с проектом: \n" +
+                "[0 - выйти к списку проектов, 1 - инвестировать в проект]");
     }
 
     private Project chooseProject(int menu, Project[] found) {
@@ -70,7 +109,7 @@ public class Kickstarter {
         io.print(message + "\n");
     }
 
-    private void askProject(Project[] found) {
+    private void askProjects(Project[] found) {
         if (found.length == 0) {
             println("Проектов в категории нет!. Нажмите 0 - для выхода");
         } else {

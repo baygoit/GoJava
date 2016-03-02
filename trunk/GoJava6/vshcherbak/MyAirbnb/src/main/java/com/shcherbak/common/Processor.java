@@ -1,7 +1,7 @@
 package com.shcherbak.common;
 
 import com.shcherbak.model.Apartment;
-import com.shcherbak.model.RentType;
+import com.shcherbak.model.old.RentType;
 import com.shcherbak.model.User;
 
 import java.text.ParseException;
