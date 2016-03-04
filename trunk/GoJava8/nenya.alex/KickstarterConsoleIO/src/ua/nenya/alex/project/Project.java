@@ -110,10 +110,13 @@ public class Project implements GetNameInterface {
 		int result = 1;
 		result = prime * result + allAmount;
 		result = prime * result + availableAmount;
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + daysRemain;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((history == null) ? 0 : history.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((projectsList == null) ? 0 : projectsList.hashCode());
+		result = prime * result + ((questionAnswer == null) ? 0 : questionAnswer.hashCode());
 		result = prime * result + ((video == null) ? 0 : video.hashCode());
 		return result;
 	}
@@ -130,6 +133,11 @@ public class Project implements GetNameInterface {
 		if (allAmount != other.allAmount)
 			return false;
 		if (availableAmount != other.availableAmount)
+			return false;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
 			return false;
 		if (daysRemain != other.daysRemain)
 			return false;
@@ -148,6 +156,16 @@ public class Project implements GetNameInterface {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (projectsList == null) {
+			if (other.projectsList != null)
+				return false;
+		} else if (!projectsList.equals(other.projectsList))
+			return false;
+		if (questionAnswer == null) {
+			if (other.questionAnswer != null)
+				return false;
+		} else if (!questionAnswer.equals(other.questionAnswer))
+			return false;
 		if (video == null) {
 			if (other.video != null)
 				return false;
@@ -157,5 +175,4 @@ public class Project implements GetNameInterface {
 	}
 
 	
-
 }

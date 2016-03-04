@@ -9,11 +9,7 @@ public class Main {
 		int[] array = { 23, 56, -45, 1, 0, 125, 56, 55, -32 };
 		System.out.println("Before:	" + Arrays.toString(array));
 		int[] result = null;
-		try {
-			result = mergSort.sort(array);
-		} catch (EmptyArrayException e) {
-			e.printStackTrace();
-		}
+		result = mergSort.sort(array);
 		System.out.println("After:	" + Arrays.toString(result));
 	}
 }

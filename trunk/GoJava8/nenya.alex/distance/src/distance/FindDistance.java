@@ -1,6 +1,5 @@
 package distance;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,31 +12,31 @@ public class FindDistance {
 
 		if (list == null) {
 			throw new NullPointerException();
+		}
+		if (list.size() == 0 || list.size() == 1) {
+			distancesList.add(0);
+			return distancesList;
 		} else {
-			if (list.size() != 0) {
 
-				MinElement minElement = findMinElement(list);
+			MinElement minElement = findMinElement(list);
 
-				if (isElementAlone(minElement, list)) {
-					MinElement nextMinElement = findNextMinElement(minElement,
-							list);
-					distancesList.add(Math.abs(minElement.getIndex()
-							- nextMinElement.getIndex()));
-				} else {
+			if (isElementAlone(minElement, list)) {
+				MinElement nextMinElement = findNextMinElement(minElement, list);
+				distancesList.add(Math.abs(minElement.getIndex() - nextMinElement.getIndex()));
+			} else {
 
-					for (int i = 0; i < list.size(); i++) {
-						if (list.get(i) == minElement.getItem()) {
-							listOfIndexes.add(i);
-						}
+				for (int i = 0; i < list.size(); i++) {
+					if (list.get(i) == minElement.getItem()) {
+						listOfIndexes.add(i);
 					}
-					for (int i = 0; i < listOfIndexes.size() - 1; i++) {
-						for (int j = i + 1; j < listOfIndexes.size(); j++) {
-							distancesList.add(Math.abs(listOfIndexes.get(i)
-									- listOfIndexes.get(j)));
-						}
+				}
+				for (int i = 0; i < listOfIndexes.size() - 1; i++) {
+					for (int j = i + 1; j < listOfIndexes.size(); j++) {
+						distancesList.add(Math.abs(listOfIndexes.get(i) - listOfIndexes.get(j)));
 					}
 				}
 			}
+
 		}
 		return distancesList;
 	}
@@ -77,5 +76,4 @@ public class FindDistance {
 		return new MinElement(index, min);
 	}
 
-	
 }

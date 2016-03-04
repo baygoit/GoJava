@@ -2,800 +2,754 @@ package ua.nenya.alex.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertSame;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 
-import ua.nenya.alex.builders.UserBuilder;
+
+import ua.nenya.alex.enums.CategoriesEnum;
 import ua.nenya.alex.main.Kickstarter;
+import ua.nenya.alex.pages.AskQuestionPage;
 import ua.nenya.alex.pages.CreateProjectPage;
+import ua.nenya.alex.pages.EnteringPage;
+import ua.nenya.alex.pages.InvestProjectPage;
 import ua.nenya.alex.pages.ProjectPage;
 import ua.nenya.alex.pages.RegistrationPage;
 import ua.nenya.alex.project.Category;
 import ua.nenya.alex.project.Project;
-import ua.nenya.alex.users.RegisteredUser;
 import ua.nenya.alex.users.User;
+import ua.nenya.alex.util.ConsoleIOImpl;
 import ua.nenya.alex.util.IO;
 import ua.nenya.alex.util.ListUtilits;
 
 public class IntegratedTest {
 	
-	private IO io;
-	private User user;
-	private Kickstarter kickstarter;
+	private IO mockIo;
+	private User mockUser;
+	private Kickstarter mockKickstarter;
 	private Category mockCategory;
 	private Project mockProject;
-	private Category category1;
+	private Category musicCategory;
 	private Project project;
 	private Category category;
+	private User user;
+	private Project newSongProject;
 	private List<Category> list = new ArrayList<>();
+	private RegistrationPage registrationPage = new RegistrationPage();
 	
 	@Before
 	public void init() {
-		io = mock(IO.class);
-		user = mock(User.class);
+		mockIo = mock(IO.class);
+		mockUser = mock(User.class);
 		mockCategory = mock(Category.class);
 		mockProject = mock(Project.class);
-		kickstarter = new Kickstarter(mockCategory, mockProject, io, user);
+		mockKickstarter = new Kickstarter(mockCategory, mockProject, mockIo, mockUser);
 		
+		user = new User();
+		User userAlex = new User("alex", "111", "a@a.ua");
+		User userBob = new User("bob", "222", "b@b.ua");
+		user.getUsersList().add(userAlex);
+		user.getUsersList().add(userBob);
+
 		project = new Project();
-		Project project1 = new Project("Name1", "description1", 100, 10, 100);
-		project1.setHistory("some hystory");
-		project1.setVideo("video");
-		project1.setQuestionAnswer("question");
-		Project project11 = new Project("Name11", "description11", 1100, 110, 1100);
-		Project project2 = new Project("Name2", "description2", 200, 20, 200);
+		newSongProject = new Project("New Song", "description of new song", 100, 10, 100);
+		newSongProject.setHistory("hystory of new song");
+		newSongProject.setVideo("video about new song");
+		newSongProject.setQuestionAnswer("question about new song");
+		Project oldSongProject = new Project("Old song", "description of old song", 1100, 110, 1100);
+		Project filmProject = new Project("Film", "description of film", 200, 20, 200);
 		
 		category = new Category();
-		category1 = new Category("category1");
-		Category category2 = new Category("category2");
-		list.add(category1);
-		list.add(category2);
+		musicCategory = new Category("Music");
+		Category filmsCategory = new Category("Films");
+		Category createProjectCategory = new Category("Create a project");
+		list.add(musicCategory);
+		list.add(filmsCategory);
 		
-		project1.setCategory(category1);
-		project11.setCategory(category1);
-		project2.setCategory(category2);
+		newSongProject.setCategory(musicCategory);
+		oldSongProject.setCategory(musicCategory);
+		filmProject.setCategory(filmsCategory);
 		
-		project.getProjectsList().add(project1);
-		project.getProjectsList().add(project11);
-		project.getProjectsList().add(project2);
+		project.getProjectsList().add(newSongProject);
+		project.getProjectsList().add(oldSongProject);
+		project.getProjectsList().add(filmProject);
 		
-		category.getCategoriesList().add(category1);
-		category.getCategoriesList().add(category2);
+		category.getCategoriesList().add(musicCategory);
+		category.getCategoriesList().add(filmsCategory);
+		category.getCategoriesList().add(createProjectCategory);
 	}
 
 	@Test
-	public void runTest0() {
-		when(io.readConsole()).thenReturn("0");
+	public void kikstarterTestEnter0() {
+		when(mockIo.readConsole()).thenReturn("0");
 		
-		kickstarter.run();
+		new Kickstarter(category, project, mockIo, mockUser).run();
 		
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(io, times(6)).writeln(captor.capture());
+        verify(mockIo, times(6)).writeln(captor.capture());
         assertEquals(
                 "[Healthy curiosity is a great key in innovation., "
                 + "Choose one of the items bellow, "
-                + "or 0 for coming back to previous menu, "
-                + "1	-	Guest, "
-                + "2	-	Registered user, "
-                + "3	-	Registration]", captor.getAllValues().toString());
+                + "0	-	Exit, "
+                + "1	-	Music, "
+                + "2	-	Films, "
+                + "3	-	Create a project]", captor.getAllValues().toString());
 	}
 	
+
 	@Test
-	public void runTest1() {
-		when(io.readConsole()).thenReturn("1").thenReturn("0");
+	public void kikstarterTestEnter10() {
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("0");
 		
-		kickstarter.run();
-		
-		InOrder order = inOrder(io, user);
-      order.verify(io).writeln("Healthy curiosity is a great key in innovation.");
-      order.verify(io).writeln("Choose one of the items bellow");
-      order.verify(io).writeln("or 0 for coming back to previous menu");
-      order.verify(io).writeln("1	-	Guest");
-      order.verify(io).writeln("2	-	Registered user");
-      order.verify(io).writeln("3	-	Registration");
-	}
-	
-	@Test
-	public void runTest2() {
-		when(io.readConsole()).thenReturn("2").thenReturn("0");
-		
-		kickstarter.run();
-		
-		InOrder order = inOrder(io);
-      order.verify(io).writeln("Healthy curiosity is a great key in innovation.");
-      order.verify(io, times(2)).writeln("Choose one of the items bellow");
-      order.verify(io).writeln("or 0 for coming back to previous menu");
-      order.verify(io).writeln("1	-	Guest");
-      order.verify(io).writeln("2	-	Registered user");
-      order.verify(io).writeln("3	-	Registration");
-	}
-	
-	@Test
-	public void runTest3() {
-		when(io.readConsole()).thenReturn("3").thenReturn("").thenReturn("0");
-		
-		kickstarter.run();
-		
-		InOrder order = inOrder(io);
-      order.verify(io).writeln("Healthy curiosity is a great key in innovation.");
-      order.verify(io, times(2)).writeln("Choose one of the items bellow");
-      order.verify(io).writeln("or 0 for coming back to previous menu");
-      order.verify(io).writeln("1	-	Guest");
-      order.verify(io).writeln("2	-	Registered user");
-      order.verify(io).writeln("3	-	Registration");
-	}
-	
-	@Test
-	public void runTest4() {
-		when(io.readConsole()).thenReturn("as").thenReturn("0");
-		
-		kickstarter.run();
-		
-		InOrder order = inOrder(io);
-      order.verify(io).writeln("Healthy curiosity is a great key in innovation.");
-      order.verify(io).writeln("Choose one of the items bellow");
-      order.verify(io).writeln("or 0 for coming back to previous menu");
-      order.verify(io).writeln("1	-	Guest");
-      order.verify(io).writeln("2	-	Registered user");
-      order.verify(io).writeln("3	-	Registration");
-	}
-	
-	@Test
-	public void runTest5() {
-		when(io.readConsole()).thenReturn("3").thenReturn("alex").thenReturn("1")
-		.thenReturn("1").thenReturn("a@a.ua").thenReturn("0");
-		
-		kickstarter.run();
-		
-		
-		InOrder order = inOrder(io);
-	      order.verify(io).writeln("Healthy curiosity is a great key in innovation.");
-	      order.verify(io, times(2)).writeln("Choose one of the items bellow");
-	      order.verify(io).writeln("or 0 for coming back to previous menu");
-	      order.verify(io).writeln("1	-	Guest");
-	      order.verify(io).writeln("2	-	Registered user");
-	      order.verify(io).writeln("3	-	Registration");
-	}
-	
-	@Test
-	public void runTest6() {
-		when(io.readConsole()).thenReturn("-12").thenReturn("0");
-		
-		kickstarter.run();
+		new Kickstarter(category, project, mockIo, mockUser).run();
 		
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(io, times(6)).writeln(captor.capture());
+        verify(mockIo, times(28)).writeln(captor.capture());
         assertEquals(
                 "[Healthy curiosity is a great key in innovation., "
                 + "Choose one of the items bellow, "
-                + "or 0 for coming back to previous menu, "
-                + "1	-	Guest, "
-                + "2	-	Registered user, "
-                + "3	-	Registration]", captor.getAllValues().toString());
+                + "0	-	Exit, "
+                + "1	-	Music, "
+                + "2	-	Films, "
+                + "3	-	Create a project, "
+                + "You've chosen Music, "
+                + "Progect name:		New Song, "
+                + "Description:		description of new song, "
+                + "Needed amount:		100, "
+                + "Available amount:	10, "
+                + "Remaining days:		100, "
+                + "------------------------------------------, "
+                + "Progect name:		Old song, "
+                + "Description:		description of old song, "
+                + "Needed amount:		1100, "
+                + "Available amount:	110, "
+                + "Remaining days:		1100, "
+                + "------------------------------------------, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	New Song, "
+                + "2	-	Old song, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Music, "
+                + "2	-	Films, "
+                + "3	-	Create a project]", captor.getAllValues().toString());
+		
 	}
 	
 	@Test
-	public void registrationTest0() {
-		when(io.readConsole()).thenReturn("alex").thenReturn("111").thenReturn("111").thenReturn("a@a.ua");
-		UserBuilder userBuilder = new UserBuilder();
-		userBuilder.createAll("Login_Password.txt");
-		User newUser = userBuilder.getUser();
+	public void kikstarterTestEnter30() {
+		when(mockIo.readConsole()).thenReturn("3").thenReturn("0");
 		
-		new RegistrationPage().registration(newUser, io);
+		new Kickstarter(category, project, mockIo, mockUser).run();
 		
-		InOrder order = inOrder(io);
-	      order.verify(io).writeln("Registration");
-	      order.verify(io).write("Enter login: ");
-	      order.verify(io).write("Enter password: ");
-	      order.verify(io).write("Confirm password: ");
-	      order.verify(io).write("Enter email: ");
-	      order.verify(io).writeln("You are registered");
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(16)).writeln(captor.capture());
+        assertEquals(
+                "[Healthy curiosity is a great key in innovation., "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Music, "
+                + "2	-	Films, "
+                + "3	-	Create a project, "
+                + "You've chosen Create a project, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter, "
+                + "2	-	Registration, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Music, "
+                + "2	-	Films, "
+                + "3	-	Create a project]", captor.getAllValues().toString());
 	}
 	
 	@Test
-	public void registrationTest1() {
-		when(io.readConsole()).thenReturn("");
-		
-		new RegistrationPage().registration(user, io);
-		
-		InOrder order = inOrder(io);
-	      order.verify(io).writeln("Registration");
-	      order.verify(io).write("Enter login: ");
+	public void listUtilitsTest0() {
+		when(mockIo.readConsole()).thenReturn("-12").thenReturn("0");
+		new ListUtilits().choseIndexFromList(list, mockIo);
+		InOrder order = inOrder(mockIo);
+		order.verify(mockIo).writeln("Number is out of range! Try again!");
 	}
-	
-	@Test
-	public void registrationTest2() {
-		when(io.readConsole()).thenReturn("alex").thenReturn("111").thenReturn("222");
-		
-		new RegistrationPage().registration(user, io);
-		
-		InOrder order = inOrder(io);
-	      order.verify(io).writeln("Registration");
-	      order.verify(io).write("Enter login: ");
-	      order.verify(io).write("Enter password: ");
-	      order.verify(io).write("Confirm password: ");
-	}
-	
-	@Test
-	public void registrationTest3() {
-		when(io.readConsole()).thenReturn("alex").thenReturn("a").thenReturn("a").thenReturn("a@.ua");
-		
-		new RegistrationPage().registration(user, io);
-		
-		InOrder order = inOrder(io);
-	      order.verify(io).writeln("Registration");
-	      order.verify(io).write("Enter login: ");
-	      order.verify(io).write("Enter password: ");
-	      order.verify(io).write("Confirm password: ");
-	      order.verify(io).write("Enter email: ");
-	      order.verify(io).writeln("Email is invalid!");
-	}
-	
-	@Test
-	public void registrationTest4() {
-		when(io.readConsole()).thenReturn("a");
-		UserBuilder userBuilder = new UserBuilder();
-		userBuilder.createAll("Login_Password.txt");
-		User newUser = userBuilder.getUser();
-		
-		new RegistrationPage().registration(newUser, io);
-		
-		InOrder order = inOrder(io);
-	      order.verify(io).writeln("Registration");
-	      order.verify(io).write("Enter login: ");
-	      order.verify(io).writeln("User with login a alredy exists!");
-	      order.verify(io).writeEmpty();
-	}
-	
-	
-	@Test
-	public void projectPageTest0() {
-		when(io.readConsole()).thenReturn("1").thenReturn("0");
 
-		
-		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	}
-	
 	@Test
-	public void projectPageTest1() {
-		when(io.readConsole()).thenReturn("1").thenReturn("2").thenReturn("y").thenReturn("Ask smth").thenReturn("0");
+	public void listUtilitsTest1() {
+		when(mockIo.readConsole()).thenReturn("12").thenReturn("0");
+		new ListUtilits().choseIndexFromList(list, mockIo);
+		InOrder order = inOrder(mockIo);
+		order.verify(mockIo).writeln("Number is out of range! Try again!");
+	}
 
-		
-		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Do you want to ask a question? (y/n): ");
-	    order.verify(io).write("Enter your question: ");
-	    
+	@Test
+	public void listUtilitsTest2() {
+		when(mockIo.readConsole()).thenReturn("zxc").thenReturn("0");
+		new ListUtilits().choseIndexFromList(list, mockIo);
+		InOrder order = inOrder(mockIo);
+		order.verify(mockIo).writeln("Wrong entering!!! Try again!");
 	}
 	
 	@Test
-	public void projectPageTest2() {
-		when(io.readConsole()).thenReturn("1").thenReturn("2").thenReturn("n").thenReturn("0");
+	public void registrationPageTestUserExists() {
+		
+		when(mockIo.readConsole()).thenReturn("alex");
+		
+		registrationPage.registration(user, mockIo);
+		
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo).writeln(captor.capture());
+        assertEquals(
+                "[User with login alex alredy exists!]"
+               , captor.getAllValues().toString());
+	}
+	
+	@Test
+	public void registrationPageTestInvalidLogin() {
+		when(mockIo.readConsole()).thenReturn("");
+		
+		registrationPage.registration(user, mockIo);
+		
+		InOrder order = inOrder(mockIo);
+	      order.verify(mockIo).writeln("Login is invalid!");
+	}
+	
+	@Test
+	public void registrationPageTestNotConfirmedPassword() {
+		when(mockIo.readConsole()).thenReturn("a").thenReturn("111").thenReturn("222");
+		
+		registrationPage.registration(user, mockIo);
+		
+		InOrder order = inOrder(mockIo);
+	      order.verify(mockIo).writeln("Password is invalid!");
+	}
+	
+	@Test
+	public void registrationPageTestInvalidEmail() {
+		when(mockIo.readConsole()).thenReturn("a").thenReturn("a").thenReturn("a").thenReturn("a@.ua");
+		
+		registrationPage.registration(user, mockIo);
+		
+		InOrder order = inOrder(mockIo);
+	      order.verify(mockIo).writeln("Email is invalid!");
+	}
+	
+	@Test
+	public void registrationPageTestRegistrationFine() {
+		when(mockIo.readConsole()).thenReturn("a").thenReturn("a").thenReturn("a").thenReturn("a@a.ua");
+		
+		registrationPage.registration(user, mockIo);
+		
+		InOrder order = inOrder(mockIo);
+	      order.verify(mockIo).writeln("You are registered");
+	      order.verify(mockIo).writeEmpty();
+	}
+	
 
+	@Test
+	public void projectPageTestShowMusic() {
 		
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("0");
 		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Do you want to ask a question? (y/n): ");
-	    
+		new ProjectPage().showTotalProject(project, mockIo, musicCategory, new ListUtilits());
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(34)).writeln(captor.capture());
+        assertEquals(
+                "[Progect name:		New Song, "
+                + "Description:		description of new song, "
+                + "Needed amount:		100, "
+                + "Available amount:	10, "
+                + "Remaining days:		100, "
+                + "------------------------------------------, "
+                + "Progect name:		Old song, "
+                + "Description:		description of old song, "
+                + "Needed amount:		1100, "
+                + "Available amount:	110, "
+                + "Remaining days:		1100, "
+                + "------------------------------------------, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	New Song, "
+                + "2	-	Old song, "
+                + "You've chosen New Song, "
+                + "Progect name:		New Song, "
+                + "Description:		description of new song, "
+                + "Needed amount:		100, "
+                + "Available amount:	10, "
+                + "Remaining days:		100, "
+                + "History:		hystory of new song, "
+                + "Video:		video about new song, "
+                + "Q&A:		question about new song, "
+                + "------------------------------------------, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Invest in project, "
+                + "2	-	Ask a question, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	New Song, "
+                + "2	-	Old song]"
+                , captor.getAllValues().toString());
 	}
 	
 	@Test
-	public void projectPageTest3() {
-		when(io.readConsole()).thenReturn("1").thenReturn("1").thenReturn("name").thenReturn("card")
-		.thenReturn("1").thenReturn("y").thenReturn("0");
+	public void projectPageTestInvest() {
 		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("1").thenReturn("0");
 		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Enter your name: ");
-	    order.verify(io).write("Enter a number of card: ");
-	    order.verify(io).write("Are you sure? (y/n): ");
-	    order.verify(io).writeln("Your investition has added!");
+		new ProjectPage().showTotalProject(project, mockIo, musicCategory, new ListUtilits());
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(44)).writeln(captor.capture());
+        assertEquals(
+                "[Progect name:		New Song, "
+                + "Description:		description of new song, "
+                + "Needed amount:		100, "
+                + "Available amount:	10, "
+                + "Remaining days:		100, "
+                + "------------------------------------------, "
+                + "Progect name:		Old song, "
+                + "Description:		description of old song, "
+                + "Needed amount:		1100, "
+                + "Available amount:	110, "
+                + "Remaining days:		1100, "
+                + "------------------------------------------, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	New Song, "
+                + "2	-	Old song, "
+                + "You've chosen New Song, "
+                + "Progect name:		New Song, "
+                + "Description:		description of new song, "
+                + "Needed amount:		100, "
+                + "Available amount:	10, "
+                + "Remaining days:		100, "
+                + "History:		hystory of new song, "
+                + "Video:		video about new song, "
+                + "Q&A:		question about new song, "
+                + "------------------------------------------, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Invest in project, "
+                + "2	-	Ask a question, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	ONE, "
+                + "2	-	TWO, "
+                + "3	-	FIVE, "
+                + "4	-	ANY_AMOUNT, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Invest in project, "
+                + "2	-	Ask a question, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	New Song, "
+                + "2	-	Old song]"
+                , captor.getAllValues().toString());
 	}
 	
 	@Test
-	public void projectPageTest4() {
-		when(io.readConsole()).thenReturn("1").thenReturn("1").thenReturn("name").thenReturn("card")
-		.thenReturn("1").thenReturn("n").thenReturn("0");
+	public void projectPageTestAskQuestion() {
 		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("2").thenReturn("0");
 		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Enter your name: ");
-	    order.verify(io).write("Enter a number of card: ");
-	    order.verify(io).write("Are you sure? (y/n): ");
+		new ProjectPage().showTotalProject(project, mockIo, musicCategory, new ListUtilits());
+		
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(38)).writeln(captor.capture());
+        assertEquals(
+                "[Progect name:		New Song, "
+                + "Description:		description of new song, "
+                + "Needed amount:		100, "
+                + "Available amount:	10, "
+                + "Remaining days:		100, "
+                + "------------------------------------------, "
+                + "Progect name:		Old song, "
+                + "Description:		description of old song, "
+                + "Needed amount:		1100, "
+                + "Available amount:	110, "
+                + "Remaining days:		1100, "
+                + "------------------------------------------, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	New Song, "
+                + "2	-	Old song, "
+                + "You've chosen New Song, "
+                + "Progect name:		New Song, "
+                + "Description:		description of new song, "
+                + "Needed amount:		100, "
+                + "Available amount:	10, "
+                + "Remaining days:		100, "
+                + "History:		hystory of new song, "
+                + "Video:		video about new song, "
+                + "Q&A:		question about new song, "
+                + "------------------------------------------, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Invest in project, "
+                + "2	-	Ask a question, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Invest in project, "
+                + "2	-	Ask a question, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	New Song, "
+                + "2	-	Old song]"
+                , captor.getAllValues().toString());
 	}
 	
 	@Test
-	public void projectPageTest5() {
-		when(io.readConsole()).thenReturn("1").thenReturn("1").thenReturn("name").thenReturn("card")
-		.thenReturn("2").thenReturn("y").thenReturn("0");
+	public void createProjectPageTestEquals() {
 		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Enter your name: ");
-	    order.verify(io).write("Enter a number of card: ");
-	    order.verify(io).write("Are you sure? (y/n): ");
-	    order.verify(io).writeln("Your investition has added!");
-	}
-	
-	@Test
-	public void projectPageTest6() {
-		when(io.readConsole()).thenReturn("1").thenReturn("1").thenReturn("name").thenReturn("card")
-		.thenReturn("2").thenReturn("n").thenReturn("0");
-		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Enter your name: ");
-	    order.verify(io).write("Enter a number of card: ");
-	    order.verify(io).write("Are you sure? (y/n): ");
-	}
-	
-	@Test
-	public void projectPageTest7() {
-		when(io.readConsole()).thenReturn("1").thenReturn("1").thenReturn("name").thenReturn("card")
-		.thenReturn("3").thenReturn("y").thenReturn("0");
-		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Enter your name: ");
-	    order.verify(io).write("Enter a number of card: ");
-	    order.verify(io).write("Are you sure? (y/n): ");
-	    order.verify(io).writeln("Your investition has added!");
-	}
-	
-	@Test
-	public void projectPageTest8() {
-		when(io.readConsole()).thenReturn("1").thenReturn("1").thenReturn("name").thenReturn("card")
-		.thenReturn("3").thenReturn("n").thenReturn("0");
-		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Enter your name: ");
-	    order.verify(io).write("Enter a number of card: ");
-	    order.verify(io).write("Are you sure? (y/n): ");
-	}@Test
-	public void projectPageTest9() {
-		when(io.readConsole()).thenReturn("1").thenReturn("1").thenReturn("name").thenReturn("card")
-		.thenReturn("4").thenReturn("y").thenReturn("0");
-		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Enter your name: ");
-	    order.verify(io).write("Enter a number of card: ");
-	    order.verify(io).write("Are you sure? (y/n): ");
-	    order.verify(io).writeln("Your investition has added!");
-	}
-	
-	@Test
-	public void projectPageTest10() {
-		when(io.readConsole()).thenReturn("1").thenReturn("1").thenReturn("name").thenReturn("card")
-		.thenReturn("4").thenReturn("n").thenReturn("0");
-		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Enter your name: ");
-	    order.verify(io).write("Enter a number of card: ");
-	    order.verify(io).write("Are you sure? (y/n): ");
-	}
-	
-	@Test
-	public void projectPageTest11() {
-		when(io.readConsole()).thenReturn("1").thenReturn("1").thenReturn("name").thenReturn("card")
-		.thenReturn("5").thenReturn("100").thenReturn("y").thenReturn("0");
-		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Enter your name: ");
-	    order.verify(io).write("Enter a number of card: ");
-	    order.verify(io).write("Enter the amount of investition: ");
-	    order.verify(io).write("Are you sure? (y/n): ");
-	    order.verify(io).writeln("Your investition has added!");
-	}
-	
-	@Test
-	public void projectPageTest110() {
-		when(io.readConsole()).thenReturn("1").thenReturn("1").thenReturn("name").thenReturn("card")
-		.thenReturn("5").thenReturn("vhygy").thenReturn("y").thenReturn("0");
-		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Enter your name: ");
-	    order.verify(io).write("Enter a number of card: ");
-	    order.verify(io).write("Enter the amount of investition: ");
-	    order.verify(io).writeln("Wrong entering!");
-	}
-	
-	@Test
-	public void projectPageTest12() {
-		when(io.readConsole()).thenReturn("1").thenReturn("1").thenReturn("name").thenReturn("card")
-		.thenReturn("5").thenReturn("100").thenReturn("n").thenReturn("0");
-		
-		new ProjectPage().showTotalProject(project, io, category1, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("Progect's name:		"+"Name1");
-	    order.verify(io).writeln("Description:		" + "description1");
-	    order.verify(io).writeln("Needed amount:		" + 100);
-	    order.verify(io).writeln("Available amount:	" + 10);
-	    order.verify(io).writeln("Remaining days:		" + 100);
-	    order.verify(io).writeln("History		" + "some hystory");
-	    order.verify(io).writeln("Video		" + "video");
-	    order.verify(io).writeln("Question:		" + "question");
-	    order.verify(io).writeln("------------------------------------------");
-	    order.verify(io).write("Enter your name: ");
-	    order.verify(io).write("Enter a number of card: ");
-	    order.verify(io).write("Enter the amount of investition: ");
-	    order.verify(io).write("Are you sure? (y/n): ");
-	}
-	
-	@Test
-	public void createProjectPageTest0() {
-		when(io.readConsole()).thenReturn("0");
-		
-		new CreateProjectPage().createProject(io, list, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("1	-	Enter name");
-	    order.verify(io).writeln("2	-	Enter description");
-	    order.verify(io).writeln("3	-	Enter amoun of money");
-	    order.verify(io).writeln("4	-	Enter amount of days");
-	    order.verify(io).writeln("5	-	Enter category");
-	}
-	
-	@Test
-	public void createProjectPageTest2() {
-		when(io.readConsole()).thenReturn("1").thenReturn("NewName").thenReturn("2")
-		.thenReturn("newDescription").thenReturn("3").thenReturn("100")
-		.thenReturn("4").thenReturn("10").thenReturn("5").thenReturn("1").thenReturn("0");
-		
-		new CreateProjectPage().createProject(io, list, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("1	-	Enter name");
-	    order.verify(io).writeln("2	-	Enter description");
-	    order.verify(io).writeln("3	-	Enter amoun of money");
-	    order.verify(io).writeln("4	-	Enter amount of days");
-	    order.verify(io).writeln("5	-	Enter category");
-	    order.verify(io).write("Enter project's name: ");
-	    order.verify(io).write("Enter project's description: ");
-	    order.verify(io).writeEmpty();
-	    order.verify(io).write("Enter amount of monye needed: ");
-	    order.verify(io).write("Enter amount of days needed: ");
-	    order.verify(io).write("Choose one of categories: ");
-	}
-	@Test
-	public void createProjectPageTest3() {
-		when(io.readConsole()).thenReturn("3").thenReturn("-100").thenReturn("3")
-		.thenReturn("asd").thenReturn("4").thenReturn("-100")
-		.thenReturn("4").thenReturn("asd").thenReturn("4").thenReturn("10").thenReturn("0");
-		
-		new CreateProjectPage().createProject(io, list, new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("Choose one of the items bellow");
-	    order.verify(io).writeln("or 0 for coming back to previous menu");
-	    order.verify(io).writeln("1	-	Enter name");
-	    order.verify(io).writeln("2	-	Enter description");
-	    order.verify(io).writeln("3	-	Enter amoun of money");
-	    order.verify(io).writeln("4	-	Enter amount of days");
-	    order.verify(io).writeln("5	-	Enter category");
-	    order.verify(io).write("Enter amount of monye needed: ");
-	    order.verify(io).write("Enter amount of days needed: ");
-	}
-	
-	@Test
-	public void createProjectPageTest4() {
 		Project projectNew = new Project("Name", "Description", 100, 0 , 25);
 		projectNew.setCategory(category.getCategoriesList().get(1));
-		when(io.readConsole()).thenReturn("1").thenReturn("Name")
+		
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("Name")
 		.thenReturn("2").thenReturn("Description")
 		.thenReturn("3").thenReturn("100")
 		.thenReturn("4").thenReturn("25")
-		.thenReturn("5").thenReturn("1").thenReturn("0");
-		assertEquals(projectNew, new CreateProjectPage().createProject(io, category.getCategoriesList(), new ListUtilits()));
+		.thenReturn("5").thenReturn("2").thenReturn("0");
+		
+		assertEquals(projectNew, new CreateProjectPage().createProject(mockIo, category, new ListUtilits()));
 	}
 	
 	@Test
-	public void registeredUserTest0() {
+	public void createProjectPageTestNotEquals() {
 		
-		when(io.readConsole()).thenReturn("admin").thenReturn("admin").thenReturn("0");
+		Project projectNew = new Project("Name", "Description", 100, 0 , 25);
+		projectNew.setCategory(category.getCategoriesList().get(1));
 		
-		new RegisteredUser().enter(io, user, category, mockProject, new ListUtilits());
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("Name")
+		.thenReturn("2").thenReturn("Description")
+		.thenReturn("3").thenReturn("100")
+		.thenReturn("4").thenReturn("25")
+		.thenReturn("5").thenReturn("").thenReturn("0");
 		
-		InOrder order = inOrder(io);
-		order.verify(io).write("Enter login: ");
-	    order.verify(io).write("Enter password: ");
+		assertNotEquals(projectNew, new CreateProjectPage().createProject(mockIo, category, new ListUtilits()));
 	}
 	
 	@Test
-	public void registeredUserTest1() {
+	public void createProjectPageTestWrongAmountMoney() {
 		
-		when(io.readConsole()).thenReturn("b").thenReturn("b").thenReturn("0");
-		User someUser = new User("b", "b", "b@b.ua");
-		someUser.getUsersList().add(someUser);
+		Project projectNew = new Project("Name", "Description", 100, 0 , 25);
+		projectNew.setCategory(category.getCategoriesList().get(1));
 		
-		new RegisteredUser().enter(io, someUser, category, mockProject, new ListUtilits());
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("Name")
+		.thenReturn("2").thenReturn("Description")
+		.thenReturn("3").thenReturn("-1").thenReturn("0");
 		
-		InOrder order = inOrder(io);
-		order.verify(io).write("Enter login: ");
-	    order.verify(io).write("Enter password: ");
+		new CreateProjectPage().createProject(mockIo, category, new ListUtilits());
+		
+		InOrder order = inOrder(mockIo);
+	    order.verify(mockIo).writeln("Wrong entering!");
 	}
 	
 	@Test
-	public void registeredUserTest2() {
+	public void createProjectPageTestWrongAmountDays() {
 		
-		when(io.readConsole()).thenReturn("").thenReturn("b").thenReturn("0");
-		User someUser = new User("b", "b", "b@b.ua");
-		someUser.getUsersList().add(someUser);
+		Project projectNew = new Project("Name", "Description", 100, 0 , 25);
+		projectNew.setCategory(category.getCategoriesList().get(1));
 		
-		new RegisteredUser().enter(io, someUser, category, mockProject, new ListUtilits());
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("Name")
+		.thenReturn("2").thenReturn("Description")
+		.thenReturn("3").thenReturn("10")
+		.thenReturn("4").thenReturn("-12").thenReturn("0");
 		
-		InOrder order = inOrder(io);
-		order.verify(io).write("Enter login: ");
-	    order.verify(io).write("Enter password: ");
+		new CreateProjectPage().createProject(mockIo, category, new ListUtilits());
+		
+		InOrder order = inOrder(mockIo);
+	    order.verify(mockIo).writeln("Wrong entering!");
 	}
-
+	
+	@Ignore
+	@Test(expected = NumberFormatException.class)
+	public void createProjectPageTestException() {
+		
+		Project projectNew = new Project("Name", "Description", 100, 0 , 25);
+		projectNew.setCategory(category.getCategoriesList().get(1));
+		
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("Name")
+		.thenReturn("2").thenReturn("Description")
+		.thenReturn("3").thenReturn("10")
+		.thenReturn("4").thenReturn("non").thenReturn("0");
+		
+		new CreateProjectPage().createProject(mockIo, category, new ListUtilits());
+	}
+	
+	
 	@Test
-	public void userTest0() {
+	public void askQuestionPageTestNo() {
 		
-		when(io.readConsole()).thenReturn("1").thenReturn("0");
-		User someUser = new User("b", "b", "b@b.ua");
-		someUser.getUsersList().add(someUser);
+		when(mockIo.readConsole()).thenReturn("n").thenReturn("0");
 		
-		new User().enter(someUser, category, mockProject, io, "b", "b", new ListUtilits());
+		new AskQuestionPage().askQuestion(project, mockIo);
 		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("1	-	category1");
-	    order.verify(io).writeln("2	-	category2");
+		InOrder order = inOrder(mockIo);
+	    order.verify(mockIo).write("Do you want to ask a question? (y/n): ");
+	    order.verify(mockIo).writeEmpty();
 	}
 	
 	@Test
-	public void userTest1() {
+	public void askQuestionPageTestYes() {
 		
-		when(io.readConsole()).thenReturn("1").thenReturn("y")
-		.thenReturn("q").thenReturn("q").thenReturn("q").thenReturn("q@q.ua")
-		.thenReturn("0");
-		User someUser = new User("b", "b", "b@b.ua");
-		someUser.getUsersList().add(someUser);
+		when(mockIo.readConsole()).thenReturn("y").thenReturn("Question???").thenReturn("0");
 		
-		new User().enter(someUser, category, mockProject, io, "b", "b", new ListUtilits());
+		new AskQuestionPage().askQuestion(project, mockIo);
 		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("1	-	category1");
-	    order.verify(io).writeln("2	-	category2");
-	    order.verify(io).write("Are you ready to register? (y/n): ");
-	}
-	
-	@Test
-	public void userTest2() {
-		
-		when(io.readConsole()).thenReturn("2").thenReturn("0");
-		
-		new User().enter(user, category, mockProject, io, "b", "b", new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("1	-	category1");
-	    order.verify(io).writeln("2	-	category2");
+		InOrder order = inOrder(mockIo);
+	    order.verify(mockIo).write("Do you want to ask a question? (y/n): ");
+	    order.verify(mockIo).writeEmpty();
+	    order.verify(mockIo).write("Enter your question: ");
 	    
 	}
 	
 	@Test
-	public void userTest3() {
+	public void categoriesEnumTest() {
 		
-		when(io.readConsole()).thenReturn("1").thenReturn("y").thenReturn("0");
-		User someUser = new User("b", "b", "b@b.ua");
-		User someUser2 = new User();
-		someUser2.getUsersList().add(someUser);
-		
-		someUser2.enter(someUser, category, project, io, "b", "b", new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("1	-	category1");
-	    order.verify(io).writeln("2	-	category2");
-	    order.verify(io).write("Do you want to create a project? (y/n): ");
+		CategoriesEnum[] array = CategoriesEnum.values();
+		assertEquals("Music", array[0].getName());
+	    
 	}
 	
 	@Test
-	public void userTest4() {
+	public void enteringPageTestEnterRegistered() {
 		
-		when(io.readConsole()).thenReturn("1").thenReturn("y")
-		.thenReturn("").thenReturn("0");
-		User someUser = new User("b", "b", "b@b.ua");
-		someUser.getUsersList().add(someUser);
-		
-		new User().enter(someUser, category, mockProject, io, "b", "b", new ListUtilits());
-		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("1	-	category1");
-	    order.verify(io).writeln("2	-	category2");
-	    order.verify(io).write("Are you ready to register? (y/n): ");
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("alex").thenReturn("111").thenReturn("0");
+		new EnteringPage().enterDemo(user, category, project, mockIo, new ListUtilits());
+	    
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(16)).writeln(captor.capture());
+        assertEquals(
+                "[Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter, "
+                + "2	-	Registration, "
+                + "You've chosen Enter, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter name, "
+                + "2	-	Enter description, "
+                + "3	-	Enter amoun of money, "
+                + "4	-	Enter amount of days, "
+                + "5	-	Enter category, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter, "
+                + "2	-	Registration]"
+                , captor.getAllValues().toString());
 	}
 	
 	@Test
-	public void userTest5() {
+	public void enteringPageTestEnterNotRegistered1() {
 		
-		when(io.readConsole()).thenReturn("1").thenReturn("n").thenReturn("0");
-		User someUser = new User("b", "b", "b@b.ua");
-		User someUser2 = new User();
-		someUser2.getUsersList().add(someUser);
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("").thenReturn("111").thenReturn("0");
+		new EnteringPage().enterDemo(user, category, project, mockIo, new ListUtilits());
+	    
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(10)).writeln(captor.capture());
+        assertEquals(
+                "[Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter, "
+                + "2	-	Registration, "
+                + "You've chosen Enter, "
+                + "You are not registered!, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter, "
+                + "2	-	Registration]"
+                , captor.getAllValues().toString());
+	}
+	
+	@Test
+	public void enteringPageTestEnterNotRegistered2() {
 		
-		someUser2.enter(someUser, category, project, io, "b", "b", new ListUtilits());
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("alex").thenReturn("222").thenReturn("0");
+		new EnteringPage().enterDemo(user, category, project, mockIo, new ListUtilits());
+	    
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(10)).writeln(captor.capture());
+        assertEquals(
+                "[Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter, "
+                + "2	-	Registration, "
+                + "You've chosen Enter, "
+                + "You are not registered!, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter, "
+                + "2	-	Registration]"
+                , captor.getAllValues().toString());
+	}
+	
+	@Test
+	public void enteringPageTestRegistretionNull() {
 		
-		InOrder order = inOrder(io);
-		order.verify(io).writeln("1	-	category1");
-	    order.verify(io).writeln("2	-	category2");
-	    order.verify(io).write("Do you want to create a project? (y/n): ");
+		when(mockIo.readConsole()).thenReturn("2").thenReturn("0");
+		new EnteringPage().enterDemo(user, category, project, mockIo, new ListUtilits());
+	    
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(6)).writeln(captor.capture());
+        assertEquals(
+                "[Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter, "
+                + "2	-	Registration, "
+                + "You've chosen Registration, "
+                + "Email is invalid!]"
+                , captor.getAllValues().toString());
+	}
+	
+	@Test
+	public void enteringPageTestRegistretionNotNull() {
+		
+		when(mockIo.readConsole()).thenReturn("2").thenReturn("q").thenReturn("q").thenReturn("q").thenReturn("q@q.ua").thenReturn("0");
+		new EnteringPage().enterDemo(user, category, project, mockIo, new ListUtilits());
+	    
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(17)).writeln(captor.capture());
+        assertEquals(
+                "[Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter, "
+                + "2	-	Registration, "
+                + "You've chosen Registration, "
+                + "You are registered, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter name, "
+                + "2	-	Enter description, "
+                + "3	-	Enter amoun of money, "
+                + "4	-	Enter amount of days, "
+                + "5	-	Enter category, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	Enter, "
+                + "2	-	Registration]"
+                , captor.getAllValues().toString());
+	}
+	
+	@Test
+	public void investProjectPageTestOneYes() {
+		
+		when(mockIo.readConsole()).thenReturn("alex").thenReturn("111 000")
+		.thenReturn("1").thenReturn("y").thenReturn("0");
+		new InvestProjectPage().investInProject(newSongProject, mockIo, new ListUtilits());
+	    
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(14)).writeln(captor.capture());
+        assertEquals(
+                "[Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	ONE, "
+                + "2	-	TWO, "
+                + "3	-	FIVE, "
+                + "4	-	ANY_AMOUNT, "
+                + "One hundreds of dollars, "
+                + "Your investition has added!, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, 1	-	ONE, 2	-	TWO, 3	-	FIVE, 4	-	ANY_AMOUNT]"
+                , captor.getAllValues().toString());
+	}
+	
+	@Test
+	public void investProjectPageTestTwoYes() {
+		
+		when(mockIo.readConsole()).thenReturn("alex").thenReturn("111 000")
+		.thenReturn("2").thenReturn("y").thenReturn("0");
+		new InvestProjectPage().investInProject(newSongProject, mockIo, new ListUtilits());
+	    
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(13)).writeln(captor.capture());
+        assertEquals(
+                "[Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	ONE, "
+                + "2	-	TWO, "
+                + "3	-	FIVE, "
+                + "4	-	ANY_AMOUNT, "
+                + "Your investition has added!, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, 1	-	ONE, 2	-	TWO, 3	-	FIVE, 4	-	ANY_AMOUNT]"
+                , captor.getAllValues().toString());
+	}
+	
+	@Test
+	public void investProjectPageTestFiveYes() {
+		
+		when(mockIo.readConsole()).thenReturn("alex").thenReturn("111 000")
+		.thenReturn("3").thenReturn("y").thenReturn("0");
+		new InvestProjectPage().investInProject(newSongProject, mockIo, new ListUtilits());
+	    
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(13)).writeln(captor.capture());
+        assertEquals(
+                "[Choose one of the items bellow, "
+                + "0	-	Exit, "
+                + "1	-	ONE, "
+                + "2	-	TWO, "
+                + "3	-	FIVE, "
+                + "4	-	ANY_AMOUNT, "
+                + "Your investition has added!, "
+                + "Choose one of the items bellow, "
+                + "0	-	Exit, 1	-	ONE, 2	-	TWO, 3	-	FIVE, 4	-	ANY_AMOUNT]"
+                , captor.getAllValues().toString());
+	}
+	
+	@Test
+	public void investProjectPageTestAnyAmountWrongEntering() {
+		
+		when(mockIo.readConsole()).thenReturn("alex").thenReturn("111 000")
+		.thenReturn("4").thenReturn("one").thenReturn("0");
+		new InvestProjectPage().investInProject(newSongProject, mockIo, new ListUtilits());
+	    
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(13)).writeln(captor.capture());
+        assertEquals(
+                "[Choose one of the items bellow, 0	-	Exit, 1	-	ONE, 2	-	TWO, 3	-	FIVE, "
+                + "4	-	ANY_AMOUNT, Wrong entering!, Choose one of the items bellow, 0	-	Exit, "
+                + "1	-	ONE, 2	-	TWO, 3	-	FIVE, 4	-	ANY_AMOUNT]"
+                , captor.getAllValues().toString());
+	}
+	
+	@Test
+	public void investProjectPageTestAnyAmountYes() {
+		
+		when(mockIo.readConsole()).thenReturn("alex").thenReturn("111 000")
+		.thenReturn("4").thenReturn("123").thenReturn("y").thenReturn("0");
+		new InvestProjectPage().investInProject(newSongProject, mockIo, new ListUtilits());
+	    
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(13)).writeln(captor.capture());
+        assertEquals(
+                "[Choose one of the items bellow, 0	-	Exit, 1	-	ONE, 2	-	TWO, 3	-	FIVE, "
+                + "4	-	ANY_AMOUNT, Your investition has added!, Choose one of the items bellow, "
+                + "0	-	Exit, 1	-	ONE, 2	-	TWO, 3	-	FIVE, 4	-	ANY_AMOUNT]"
+                , captor.getAllValues().toString());
+	}
+	
+	@Test
+	public void consoleIOImplTest() {
+		InputStream in = new ByteArrayInputStream("testString".getBytes());
+		System.setIn(in);
+
+		assertEquals("testString", new ConsoleIOImpl().readConsole());
+		
+	}
+	
+	@Test
+	public void projectTest() {
+		assertEquals(-416755642, newSongProject.hashCode());
 	}
 }

@@ -2,7 +2,7 @@ package ua.nenya.alex.builders;
 
 import java.util.List;
 
-
+import ua.nenya.alex.enums.CategoriesEnum;
 import ua.nenya.alex.project.Category;
 
 public class CategoryBuilder {
@@ -16,9 +16,9 @@ public class CategoryBuilder {
 		this.category = new Category();
 	}
 
-	public void createAll(List<String> list) {
-		for (String name : list) {
-			category.getCategoriesList().add(new Category(name));
+	public void createAll(List<CategoriesEnum> list) {
+		for (CategoriesEnum name : list) {
+			category.getCategoriesList().add(new Category(name.getName()));
 		}
 	}
 

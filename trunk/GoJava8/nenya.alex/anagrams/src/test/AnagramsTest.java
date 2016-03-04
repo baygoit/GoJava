@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.mockito.*;
 
 import anagrams.Anagrams;
-import anagrams.EmptyStringException;
 import anagrams.IO;
 import anagrams.IOImpl;
 import anagrams.ReverseWords;
@@ -22,6 +21,7 @@ public class AnagramsTest {
 
 	private IOImpl reader = new IOImpl();
 	private static InputStream realIn;
+	private ReverseWords rw = new ReverseWords();
 
 	@Test
 	public void testReadConsole() throws IOException {
@@ -46,23 +46,20 @@ public class AnagramsTest {
 
 	}
 
-	@Test(expected = EmptyStringException.class)
-	public void testReverseWordsEmpty() throws EmptyStringException {
-		ReverseWords rw = new ReverseWords();
+	@Test
+	public void testReverseWordsEmpty() {
 		String str = "";
-		rw.reverseWords(str);
+		assertEquals("", rw.reverseWords(str));
 	}
 	
 	@Test
-	public void testReverseWordsNotEmpty() throws EmptyStringException {
-		ReverseWords rw = new ReverseWords();
+	public void testReverseWordsNotEmpty() {
 		String str = "abc sdf";
 		assertEquals("cba fds", rw.reverseWords(str));
 	}
 	
 	@Test(expected = NullPointerException.class)
-	public void testReverseWordsNull() throws EmptyStringException {
-		ReverseWords rw = new ReverseWords();
+	public void testReverseWordsNull() {
 		String str = null;
 		rw.reverseWords(str);
 	}

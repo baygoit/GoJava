@@ -3,6 +3,7 @@ package ua.nenya.alex.pages;
 import java.util.Arrays;
 import java.util.List;
 
+import ua.nenya.alex.enums.PaymentSaleEnum;
 import ua.nenya.alex.project.Project;
 import ua.nenya.alex.util.IO;
 import ua.nenya.alex.util.ListUtilits;
@@ -29,10 +30,6 @@ public class InvestProjectPage {
 				investTwoHundreds(io, project);
 				b = true;
 			}
-			if (item == PaymentSaleEnum.THREE) {
-				investThreeHundreds(io, project);
-				b = true;
-			}
 			if (item == PaymentSaleEnum.FIVE) {
 				investFiveHundreds(io, project);
 				b = true;
@@ -50,16 +47,6 @@ public class InvestProjectPage {
 		io.write("Are you sure? (y/n): ");
 		if (io.readConsole().equals("y")) {
 			project.addInvestition(PaymentSaleEnum.FIVE.getAmount());
-			io.writeln("Your investition has added!");
-			io.writeEmpty();
-		}
-
-	}
-
-	private void investThreeHundreds(IO io, Project project) {
-		io.write("Are you sure? (y/n): ");
-		if (io.readConsole().equals("y")) {
-			project.addInvestition(PaymentSaleEnum.THREE.getAmount());
 			io.writeln("Your investition has added!");
 			io.writeEmpty();
 		}

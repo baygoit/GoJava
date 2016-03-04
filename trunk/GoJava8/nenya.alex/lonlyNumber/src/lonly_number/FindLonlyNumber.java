@@ -1,33 +1,31 @@
 package lonly_number;
 
-import java.util.Arrays;
 
 public class FindLonlyNumber {
 
-	public int findLonly(int[] mas) throws EmptyArrayException {
-		if (mas != null) {
-			if (mas.length != 0) {
-				Arrays.sort(mas);
-
-				if (mas[0] != mas[1]) {
-					return mas[0];
-				}
-				if (mas[mas.length - 2] != mas[mas.length - 1]) {
-					return mas[mas.length - 1];
-				}
-				for (int i = 1; i < mas.length - 1; i++) {
-					if (mas[i] != mas[i - 1] && mas[i] != mas[i + 1]) {
-						return mas[i];
+	public int findLonly(int[] mas){
+		int item = 0;
+		int count = 0;
+		if (mas == null || mas.length == 0) {
+			throw new NullPointerException();
+		}else{
+			for (int i = 0; i < mas.length; i++) {
+				item = mas[i];
+				for (int j = 0; j < mas.length; j++) {
+					if (item == mas[j] && i != j) {
+						break;
+					}
+					if(j ==  mas.length -1){
+						count = j;
 					}
 				}
-
-			}else{
-				throw new EmptyArrayException();
+				if(count ==  mas.length -1){
+					break;
+				}
 			}
-		} else {
-			throw new NullPointerException();
 		}
-		return 0;
+			
+		return item;
 
 		
 	}

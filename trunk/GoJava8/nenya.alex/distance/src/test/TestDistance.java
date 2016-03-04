@@ -10,13 +10,13 @@ import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import distance.FindDistance;
+import distance.Main;
 import distance.ReadConsole;
 import distance.ReadList;
-import static org.mockito.Mockito.*;
+
 
 public class TestDistance {
 	private ReadConsole reader = new ReadConsole();
@@ -30,8 +30,7 @@ public class TestDistance {
 		assertEquals("testString", reader.read());
 	}
 
-	//not working in a proper way
-	@Ignore
+	
 	@Test
 	public void testReadList() throws IOException {
 		List<Integer> listOut = new ArrayList<>();
@@ -41,19 +40,9 @@ public class TestDistance {
 		listOut.add(3);
 
 		
-		InputStream in = new ByteArrayInputStream("hjj".getBytes());
+		InputStream in = new ByteArrayInputStream("hj".getBytes());
 		System.setIn(in);
-		
-		
-		//reader.read();
 		List<Integer> listIn = new ReadList().readList(); 
-		
-//		when(readConsole.read()).thenReturn("0").thenReturn("1")
-//				.thenReturn("2").thenReturn("3").thenReturn("");
-
-//		List<Integer> listIn = new ReadList().readList();
-//		System.out.println("listIn " + listIn);
-		//assertEquals(listOut, listIn);
 	}
 
 	@Test(expected = IOException.class)
@@ -75,6 +64,7 @@ public class TestDistance {
 		List<Integer> listIn = new ArrayList<>();
 		
 		List<Integer> returnList = new ArrayList<>();
+		returnList.add(0);
 		assertEquals(returnList, new FindDistance().findDistances(listIn));
 		
 	}
@@ -117,6 +107,17 @@ public class TestDistance {
 	}
 	
 	@Test
+	public void testFindDistanceAlone() {
+		List<Integer> listIn = new ArrayList<>();
+		listIn.add(2);
+		
+		List<Integer> returnList = new ArrayList<>();
+		returnList.add(0);
+		assertEquals(returnList, new FindDistance().findDistances(listIn));
+		
+	}
+	
+	@Test
 	public void testFindDistanceMany() {
 		List<Integer> listIn = new ArrayList<>();
 		listIn.add(1);
@@ -140,7 +141,14 @@ public class TestDistance {
 		
 	}
 	
-
+		@Test
+		public void testMain() throws IOException{
+			String[] arr = {"A"};
+			InputStream in = new ByteArrayInputStream("1 2 3 -4".getBytes());
+			System.setIn(in);
+			new Main().main(arr);
+		}
+		
 	@BeforeClass
 	public static void saveRealIn() {
 		realIn = System.in;

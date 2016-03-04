@@ -1,6 +1,5 @@
 package mergesort;
 
-import mergesort.EmptyArrayException;
 
 public class MergeSort {
 
@@ -8,19 +7,18 @@ public class MergeSort {
 	private int[] helpArray;
 	private int size;
 
-	public int[] sort(int[] array) throws EmptyArrayException {
-		if (array != null) {
-			if (array.length != 0) {
-				this.numbers = array;
-				size = array.length;
-				this.helpArray = new int[size];
-				mergesort(0, size - 1);
-			} else {
-				throw new EmptyArrayException();
-			}
-		} else {
+	public int[] sort(int[] array) {
+		if (array == null) {
 			throw new NullPointerException();
 		}
+		if (array.length == 0) {
+			return array;
+		}
+		this.numbers = array;
+		size = array.length;
+		this.helpArray = new int[size];
+		mergesort(0, size - 1);
+
 		return array;
 	}
 

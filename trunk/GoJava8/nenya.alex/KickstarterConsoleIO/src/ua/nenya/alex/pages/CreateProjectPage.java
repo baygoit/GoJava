@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import ua.nenya.alex.enums.CreateProjectMenuEnum;
 import ua.nenya.alex.project.Category;
 import ua.nenya.alex.project.Project;
 import ua.nenya.alex.util.IO;
@@ -11,7 +12,7 @@ import ua.nenya.alex.util.ListUtilits;
 
 public class CreateProjectPage {
 	
-	public Project createProject(IO io, List<Category> list, ListUtilits listUtil) {
+	public Project createProject(IO io, Category category, ListUtilits listUtil) {
 		
 		List<CreateProjectMenuEnum> listOfProjectMenu = Arrays.asList(CreateProjectMenuEnum.values());
 
@@ -20,7 +21,7 @@ public class CreateProjectPage {
 		String description = "";
 		int money = 0;
 		int days = 0;
-		Category category = new Category("New Category");
+		Category newCategory = new Category("New Category");
 		while ((index = listUtil.choseIndexFromList(listOfProjectMenu, io)) != 0) {
 			CreateProjectMenuEnum item = listOfProjectMenu.get(index-1);
 			if (item == CreateProjectMenuEnum.ENTER_NAME) {
@@ -40,23 +41,30 @@ public class CreateProjectPage {
 				io.writeEmpty();
 			}
 			if (item == CreateProjectMenuEnum.ENTER_CATEGORY) {
-				category = enterCategory(io, list, listUtil);
+				newCategory = enterCategory(io, category, listUtil);
+				if(newCategory == null){
+					index = 0;
+				}
 				io.writeEmpty();
 			}
 		}
 		Project newProject = new Project(name, description, money, 0, days);
-		newProject.setCategory(category);
+		newProject.setCategory(newCategory);
 		return newProject;
 	}
 
-	private Category enterCategory(IO io, List<Category> list, ListUtilits listUtil) {
+	private Category enterCategory(IO io, Category category, ListUtilits listUtil) {
+		List<Category> categories = category.getCategoriesList();
 		io.write("Choose one of categories: ");
 		List<Category> newListOfCategories = new ArrayList<Category>();
-		for (int i = 1; i < list.size(); i++) {
-			newListOfCategories.add(list.get(i));
+		for (int i = 0; i < categories.size()-1; i++) {
+			newListOfCategories.add(categories.get(i));
 		}
 
 		int newIndex = listUtil.choseIndexFromList(newListOfCategories, io);
+		if(newIndex == 0 ){
+			return null;
+		}
 		Category newCategory = newListOfCategories.get(newIndex -1);
 
 		return newCategory;
