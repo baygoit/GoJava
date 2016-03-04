@@ -1,6 +1,6 @@
 package ua.dborisenko.kickstarter;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +13,12 @@ public class DataSourceDailyPhraseTest {
     }
     
     @Test
-    public void getRandomOneTest() {
+    public void getRandomOneTestIsSomething() {
+        assertFalse(DataSourceDailyPhrase.getRandomOne().equals(""));
+    }
+    
+    @Test
+    public void getRandomOneTestIsRandom() {
         String firstPhrase = DataSourceDailyPhrase.getRandomOne();
         boolean isRandom = false;
         for (int i = 0; i < 1000; i++) {
