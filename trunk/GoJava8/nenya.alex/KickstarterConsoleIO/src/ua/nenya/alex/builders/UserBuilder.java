@@ -3,7 +3,6 @@ package ua.nenya.alex.builders;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import ua.nenya.alex.users.User;
@@ -25,9 +24,9 @@ public class UserBuilder {
 		List<User> usersList = new ArrayList<>();
 		try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(fileName));) {
 			usersList = (List<User>) input.readObject();
-			User user0 = new User("a","a","a@a.ua");
+			User userZero = new User("a","a","a@a.ua");
 			if(usersList.isEmpty()){
-				usersList.add(user0);
+				usersList.add(userZero);
 			}
 			for (User it : usersList) {
 				user.getUsersList().add(it);

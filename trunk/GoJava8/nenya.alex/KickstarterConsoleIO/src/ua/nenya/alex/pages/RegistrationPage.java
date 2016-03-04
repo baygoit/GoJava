@@ -10,10 +10,9 @@ import ua.nenya.alex.users.User;
 import ua.nenya.alex.util.IO;
 
 public class RegistrationPage {
-	private static final String LP_FILE_NAME = "Login_Password.txt";
+	private static final String LP_FILE_NAME = "users.txt";
 
 	public User registration(User user, IO io) {
-		io.writeln("Registration");
 		io.write("Enter login: ");
 		String login = io.readConsole();
 		if (!isLoginValid(user, io, login)) {

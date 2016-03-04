@@ -5,7 +5,6 @@ import java.util.List;
 public interface IO {
 	void writeln(String str);
 
-	void writeln(List<?> list);
 
 	void write(String str);
 
