@@ -52,7 +52,7 @@ public class Project {
 	}
 
 	public void printProjets(Category category) {
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < category.getProjectList().size(); i++) {
 			Project project = projectList.get(i);
 			System.out.print(i + 1 + " - ");
 			printProject(project);
