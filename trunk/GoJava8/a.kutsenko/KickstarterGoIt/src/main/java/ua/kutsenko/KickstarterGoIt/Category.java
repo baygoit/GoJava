@@ -8,14 +8,21 @@ public class Category {
 
 	private String name;
 	private List<Category> categoriesList = new ArrayList<Category>();
-	private List<Project> projectList = new ArrayList<Project>();
-	private Project project;
-	private int selector ;
-	private Category category;
+	private List<Project> projectList= new ArrayList<Project>();
+	private Project project = new Project();
+	public int getSelector() {
+		return selector;
+	}
 
-	public Category(String name, List<Project> projectList ) {
+
+
+	private int selector;
+	private Category category;
+	//private List <Project> projects = new ArrayList<Project>();;
+
+	public Category(String name, List<Project> projectList) {
 		this.name = name;
-		this.projectList = projectList;		
+		this.projectList = projectList;
 	}
 
 	public Category() {
@@ -30,51 +37,83 @@ public class Category {
 		this.name = name;
 	}
 
-	public List<Category> getCategoriesList() {
+	public List<Project> getProjectList() {
 
-		return categoriesList;
+		return this.projectList;
 	}
 
 	public void showCategory() {
-		
-		initCategory();
+
+		//initCategory();
 		for (int i = 0; i < categoriesList.size(); i++) {
-			System.out.println(i+1 +" "+categoriesList.get(i).name);
+			System.out.println(i + 1 + "-" + categoriesList.get(i).name);
 		}
 	}
 
 	public void initCategory() {
-		categoriesList.add(new Category("It" , project.getItProjectList()));
-		categoriesList.add(new Category("Films" , project.getFilmsProjectList()));
-		categoriesList.add(new Category("Music" , project.getMusicProjectList()));
+		categoriesList.add(new Category("It", project.getItProjectList()));
+		categoriesList.add(new Category("Films", project.getFilmsProjectList()));
+		categoriesList.add(new Category("Music", project.getMusicProjectList()));
 	}
 
-	public void selectCategory() {
+
+	private void printString(String toPrint) {
+		System.out.print(toPrint);
+	}
+
+	
+
+	public void showProjects(Category selectedCategory) {
+		for (int i = 0; i < selectedCategory.projectList.size(); i++) {			
+			Project project = selectedCategory.projectList.get(i);
+			System.out.print(i + 1 + " - ");
+			printProject(project);
+		}
+		
+	}
+	
+	
+	
+	private void printProject(Project project) {
+		System.out.println("Name project - " + project.getName());
+		System.out.println("Description project - " + project.getDecription());
+		System.out.println("Required budget - " + project.getRequiredBudget() + "$");
+		System.out.println("Gathered budget - " + project.getGatheredBudget() + "$");
+		System.out.println("days to go project - " + project.getDaysLeft());
+		System.out.println("--------------------");
+
+	}
+	public void printProjectInfo(Project project){
+		System.out.println("History project - " + project.getHistoryProject());
+		System.out.println("url to video - " + project.getUrlToVideo());
+		System.out.println("Question and answer - " + project.getqA());
+		
+	}
+
+	public Project selectProject(Category selectedCategory) {
+		System.out.println("Select project: ");
+		Scanner sc = new Scanner(System.in);
+		selector = sc.nextInt();
+		Project selectProject = selectedCategory.projectList.get(selector-1);
+		printProject(selectProject);
+		printProjectInfo(selectProject);
+		return selectProject;
+	}
+	
+
+
+	// project.printProjets(category);
+
+	public Category selectCategory() {
 		//initCategory();
 		printString("Select category:");
 		Scanner sc = new Scanner(System.in);
 		selector = sc.nextInt() - 1;
 		
-		System.out.println("You selelect: " +categoriesList.get(selector).getName());
+		System.out.println("You selelect: " + categoriesList.get(selector).getName());
+		category = categoriesList.get(selector);
+		return category;
 		
 	}
-	
-	private void printString(String toPrint){
-		System.out.print(toPrint);
-	}
-
-	public void showProject() {
-		categoriesList.get(selector).project.showInfo();
-		
-	}
-	public void test(){
-		System.out.println(project.getItProjectList().toString());
-	}
-//	private String projectInfo(){
-		
-	//}
-	
-	
-	
 
 }
