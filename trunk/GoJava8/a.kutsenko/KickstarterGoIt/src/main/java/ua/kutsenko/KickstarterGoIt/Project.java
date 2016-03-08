@@ -26,6 +26,14 @@ public class Project {
 		this.qA = qA;
 	}
 
+	public void setqA(String qA) {
+		this.qA = qA;
+	}
+
+	public void setGatheredBudget(int gatheredBudget , int plus) {
+		this.gatheredBudget = gatheredBudget + plus;
+	}
+
 	public Project() {
 
 	}
