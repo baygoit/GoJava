@@ -28,9 +28,16 @@ public class Kickstarter {
 	    	int numberCategory = 0;
 	    	numberCategory = getParseInputNumber(io.readConsole());
 	    	if (numberCategory == -1) {
-    			return;
+	    		break;
     		} else {
-    			io.println(categorySource.getNameSelectedCategory(numberCategory));
+    			try {
+    				io.print("You select: ");
+    				io.println(categorySource.getNameSelectedCategory(numberCategory));
+				} catch (Exception e) {
+					System.out.println("There is no such category!");
+					continue;
+				}
+    			
     		}
 	    	
 	    	while(true){
@@ -39,10 +46,17 @@ public class Kickstarter {
 	    		int numberProject = 0;
 	    		numberProject = getParseInputNumber(io.readConsole());
 	    		if (numberProject == -1) {
-	    			return;
+	    			break;
 	    		} else {
+	    			io.print("You select: ");
 	    			io.println(projectSource.getNameSelectedProject(numberCategory, numberProject));
 	    		}
+	    		
+	    		io.println("Enter 0 to see all projects.");
+				int number = getParseInputNumber(io.readConsole());
+				if (number == 0) {
+					continue;
+				}
 	    	}
     	}
     }
@@ -52,7 +66,6 @@ public class Kickstarter {
     	
     	try {
     		result = (Integer.parseInt(text));
-    		io.print("You select: ");
     		
 		} catch (NumberFormatException e) {
 			io.println("You can enter only numbers. \"" + text + "\" is not a number.\n ");

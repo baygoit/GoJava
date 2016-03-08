@@ -24,7 +24,7 @@ public class ProjectSource {
 	
 	public String getProjectsMenu(int idCategory) {
 		StringBuffer result = new StringBuffer();
-		result.append("Please, select project: \n");
+		result.append("Please, select project or enter 0 - to exit: \n");
 		Category category = categorySource.getCategory(idCategory);
 		List<Project> projects = category.getProjects();
 		

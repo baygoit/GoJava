@@ -27,7 +27,7 @@ public class CategorySource {
 	
 	public String getCategoriesMenu() {
 		StringBuffer result = new StringBuffer();
-		result.append("Please, select category: \n");
+		result.append("Please, select category or enter 0 - to exit: \n");
 		for(int i = 0; i < categories.size(); i++) {
 			result.append(i + 1).append(" - ").append(categories.get(i).getName()).append("    ");
 		}
