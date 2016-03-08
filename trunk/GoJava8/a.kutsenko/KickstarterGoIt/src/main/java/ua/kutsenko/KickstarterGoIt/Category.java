@@ -78,16 +78,27 @@ public class Category {
 		System.out.println("History project - " + project.getHistoryProject());
 		System.out.println("url to video - " + project.getUrlToVideo());
 		System.out.println("Question and answer - " + project.getqA());
+		System.out.println();
 
 	}
 
 	public void selectProject(Category selectedCategory) {
-		System.out.println("Select project, 0 to exit ");
+		System.out.println("Select project, 0 to exit, 9 back to category ");
 		Scanner sc = new Scanner(System.in);
 		selector = sc.nextInt();
+		
 		if(selector == 0){
 			endApp(selector);
+		}if(selector == 9){
+			Kickstarter kick = new Kickstarter();
+			kick.run();
+		}if(selector  < 0 || selectedCategory.getProjectList().size() < selector) {
+			System.out.println("Неверный индекс меню - " + selector);
+			System.out.println();
+			Kickstarter kick = new Kickstarter();
+			kick.run();
 		}
+		
 		Project selectProject = selectedCategory.projectList.get(selector - 1);
 		printProject(selectProject);
 		printProjectInfo(selectProject);
@@ -98,14 +109,34 @@ public class Category {
 	public Category selectCategory() {
 		printString("Select category, 0 to exit :");
 		Scanner sc = new Scanner(System.in);
-		selector = sc.nextInt() - 1;
+	//	category = categoriesList.get(selector);
+		selector = sc.nextInt() -1 ;		
 		if(selector == -1){
 			endApp(selector);
+		}if(selector == 8){
+			category.showCategory();
+			Category cat = new Category();
+			cat = category.selectCategory();
+			category.showProjects(cat);
+			category.selectProject(cat);
+		}if(selector  < 0 || categoriesList.size() < selector+1) {
+			System.out.println("Неверный индекс меню ");
+			System.out.println();
+			Kickstarter kick = new Kickstarter();
+			kick.run();
 		}
-		System.out.println("You selelect: " + categoriesList.get(selector).getName());
+		
 		category = categoriesList.get(selector);
+		
+		System.out.println("You selelect: " + categoriesList.get(selector));
+		
 		return category;
 
+	}
+
+	private List<Category> getCategoryList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	private void endApp(int selector2) {
