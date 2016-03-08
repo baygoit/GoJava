@@ -21,6 +21,10 @@ public class CategorySource {
 		return categories;
 	}
 	
+	public Category getCategory(int i) {
+		return categories.get(i);
+	}
+	
 	public String getCategoriesMenu() {
 		StringBuffer result = new StringBuffer();
 		result.append("Please, select category: \n");
@@ -34,4 +38,5 @@ public class CategorySource {
 	public String getNameSelectedCategory(int n) {
 		return categories.get(n).getName();
 	}
+	
 }

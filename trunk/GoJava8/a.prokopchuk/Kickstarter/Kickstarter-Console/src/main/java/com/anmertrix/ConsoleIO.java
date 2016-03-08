@@ -12,15 +12,10 @@ public class ConsoleIO implements IO {
 		
 		try {
 			result = reader.readLine();
+			
 		} catch (IOException e) {
 			result = "-1";
-		} finally {
-			try {
-				reader.close();
-			} catch (IOException e) {
-				System.out.println("Couldn't close the reader");
-			}
-		}
+		} 
 		return result;
 	}
 
