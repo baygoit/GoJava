@@ -5,11 +5,11 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import ua.dborisenko.kickstarter.dao.memory.QuoteDaoImpl;
+import ua.dborisenko.kickstarter.dao.memory.QuoteDaoMemoryImpl;
 
-public class QuoteDaoImplTest {
+public class QuoteDaoMemoryImplTest {
 
-	private QuoteDaoImpl quoteDao = new QuoteDaoImpl();
+	private QuoteDaoMemoryImpl quoteDao = new QuoteDaoMemoryImpl();
 
 	@Test
 	public void testGetRandomQuote() {

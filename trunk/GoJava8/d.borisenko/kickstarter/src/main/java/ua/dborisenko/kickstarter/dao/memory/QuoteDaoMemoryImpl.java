@@ -7,11 +7,15 @@ import java.util.Random;
 import ua.dborisenko.kickstarter.Quote;
 import ua.dborisenko.kickstarter.dao.QuoteDao;
 
-public class QuoteDaoImpl implements QuoteDao {
+public class QuoteDaoMemoryImpl implements QuoteDao {
 
 	private List<Quote> quotes = new ArrayList<Quote>();
 
-    @Override
+	protected List<Quote> getQuotes() {
+		return quotes;
+	}
+
+	@Override
 	public Quote getRandomQuote() {
         Random random = new Random();
 		int quoteId = random.nextInt(quotes.size());

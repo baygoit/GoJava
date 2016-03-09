@@ -1,7 +1,7 @@
 package ua.dborisenko.kickstarter;
 
 import ua.dborisenko.kickstarter.dao.memory.CategoryDaoImpl;
-import ua.dborisenko.kickstarter.dao.memory.QuoteDaoImpl;
+import ua.dborisenko.kickstarter.dao.memory.QuoteDaoMemoryImpl;
 
 public class Kickstarter {
     private static enum MenuPosition {CATEGORIES, CATEGORY, PROJECT, EXIT};
@@ -9,7 +9,7 @@ public class Kickstarter {
     private Category currentCategory;
     private Project currentProject;
     private CategoryDaoImpl categoryDao = new CategoryDaoImpl();
-    private QuoteDaoImpl quoteDao = new QuoteDaoImpl();
+    private QuoteDaoMemoryImpl quoteDao = new QuoteDaoMemoryImpl();
     private View currentView;
     
     public void start() {
