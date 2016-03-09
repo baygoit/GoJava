@@ -1,5 +1,0 @@
-Enter name of project
-Enter description of project
-Enter amount of money needed for project
-Enter amount of days needed for gathering money
-Enter a category of project

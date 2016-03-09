@@ -2,7 +2,7 @@ package ua.nenya.alex.util;
 
 import java.util.List;
 
-import ua.nenya.alex.project.GetNameInterface;
+import ua.nenya.alex.project.GetingNameInterface;
 
 public class ListUtilits {
 	
@@ -13,8 +13,11 @@ public class ListUtilits {
 			try {
 				String str = io.readConsole();
 				index = Integer.parseInt(str);
+				if(index < 0 || index > list.size()){
+					io.writeln("Number is out of range! Try again!");
+				}
 			} catch (NumberFormatException e) {
-				io.writeln("Wrong entering!!!");
+				io.writeln("Wrong entering!!! Try again!");
 				index = list.size()+1;
 			}
 		} while (index < 0 || index > list.size());
@@ -23,16 +26,11 @@ public class ListUtilits {
 
 	private void showList(List<?> list, IO io) {
 		io.writeln("Choose one of the items bellow");
-		io.writeln("or 0 for coming back to previous menu");
-		io.writeEmpty();
+		io.writeln("");
+		io.writeln("0	-	Exit");
 		for (int i = 1; i <= list.size(); i++) {
-			if (list.get(i - 1) instanceof String) {
-				String it = (String) list.get(i - 1);
-				io.writeln(i + "	-	" + it);
-			} else {
-				GetNameInterface it = (GetNameInterface) list.get(i - 1);
+				GetingNameInterface it = (GetingNameInterface) list.get(i-1);
 				io.writeln(i + "	-	" + it.getName());
-			}
 		}
 	}
 }

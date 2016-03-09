@@ -62,15 +62,4 @@ public class ConsoleIOImpl implements IO {
 
 	}
 
-
-	@Override
-	public void writeln(List<?> list) {
-		System.out.println(list);
-	}
-
-	@Override
-	public void writeEmpty() {
-		System.out.println();
-	}
-
 }

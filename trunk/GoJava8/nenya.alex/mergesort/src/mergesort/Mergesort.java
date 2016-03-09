@@ -1,25 +1,25 @@
 package mergesort;
 
-import java.util.Arrays;
 
-public class Mergesort {
+public class MergeSort {
 
 	private int[] numbers;
 	private int[] helpArray;
 	private int size;
 
-	public static void main(String[] args) {
-		int[] array = { 23, 56, -45, 1, 0, 125, 56, 55, -32 };
-		System.out.println("Before:	" + Arrays.toString(array));
-		new Mergesort().sort(array);
-		System.out.println("After:	" + Arrays.toString(array));
-	}
-
-	public void sort(int[] array) {
+	public int[] sort(int[] array) {
+		if (array == null) {
+			throw new NullPointerException();
+		}
+		if (array.length == 0) {
+			return array;
+		}
 		this.numbers = array;
 		size = array.length;
 		this.helpArray = new int[size];
 		mergesort(0, size - 1);
+
+		return array;
 	}
 
 	private void mergesort(int low, int high) {

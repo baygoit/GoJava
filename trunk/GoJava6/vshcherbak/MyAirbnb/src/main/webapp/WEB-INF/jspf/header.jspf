@@ -1,0 +1,48 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="/css/airbnb.css">
+        <title>AirBnb</title>
+    </head>
+    <body>
+        <div id="main">
+            <div id="header">
+                <div id="widgetBar">
+
+                    <div class="headerWidget">
+                        <a href="/airbnb/admin?show=users" class = "whit">
+                            Admin
+                        </a>
+                    </div>
+
+                    <div class="headerWidget">
+                         <a href="#" class = "whit">
+                            Become host
+                        </a>
+                    </div>
+
+                    <div class="headerWidget">
+                         <a href="/airbnb/${login}" class = "whit">
+                            <c:out value="${sign}"/>
+                        </a>
+                    </div>
+
+                </div>
+
+                <a href="/airbnb/">
+                    <img src="/img/Airbnb_Logo.png" id="logo" alt="AirBnb logo">
+                </a>
+
+            </div>
+
+            <form action="/airbnb/room?city=${cities}" method="GET">
+               <p><input type="search" name="city" placeholder=" WHERE YOU WANT TO GO?" id = "searchForm">
+               <input type="submit" value="Search" id = "searchButton"></p>
+            </form>
