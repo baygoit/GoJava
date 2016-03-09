@@ -14,7 +14,7 @@ public class Project {
     private final Category category;
     private final String name;
     private final String shortDesription;
-    private final double goalAmount;
+    private final double requiredBudget;
     private final double collectedAmount;
     private final Calendar goalDate;
     private final String videoLink;
@@ -22,13 +22,13 @@ public class Project {
     private final String questionsAnswers;
 
     public Project(int id, Category category, String name, String shortDesription,
-                   double goalAmount, double collectedAmount, Calendar goalDate, String videoLink,
+                   double requiredBudget, double collectedAmount, Calendar goalDate, String videoLink,
                    String history, String questionsAnswers) {
         this.id = id;
         this.category = category;
         this.name = name;
         this.shortDesription = shortDesription;
-        this.goalAmount = goalAmount;
+        this.requiredBudget = requiredBudget;
         this.collectedAmount = collectedAmount;
         this.goalDate = goalDate;
         this.videoLink = videoLink;
@@ -52,8 +52,8 @@ public class Project {
         return name;
     }
 
-    public double getGoalAmount() {
-        return goalAmount;
+    public double getRequiredBudget() {
+        return requiredBudget;
     }
 
     public double getCollectedAmount() {

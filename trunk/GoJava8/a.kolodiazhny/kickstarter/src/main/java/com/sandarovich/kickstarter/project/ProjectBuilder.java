@@ -11,9 +11,8 @@ import java.util.GregorianCalendar;
 
 public class ProjectBuilder {
 
+    private final ProjectSource projects;
     private Project project;
-    private final Projects projects;
-
     // Required fields
     private int id;
     private Category category;
@@ -30,7 +29,7 @@ public class ProjectBuilder {
 
 
     public ProjectBuilder() {
-        this.projects = new Projects();
+        this.projects = new ProjectSource();
     }
 
 
@@ -68,7 +67,7 @@ public class ProjectBuilder {
     }
 
 
-    public Projects getProjects() {
+    public ProjectSource getProjects() {
         return this.projects;
     }
 

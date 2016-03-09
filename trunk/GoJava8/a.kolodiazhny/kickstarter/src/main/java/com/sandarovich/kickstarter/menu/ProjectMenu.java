@@ -1,9 +1,9 @@
 package com.sandarovich.kickstarter.menu;
 
-import com.sandarovich.kickstarter.category.Categories;
+import com.sandarovich.kickstarter.category.CategorySource;
 import com.sandarovich.kickstarter.io.IO;
 import com.sandarovich.kickstarter.project.Project;
-import com.sandarovich.kickstarter.project.Projects;
+import com.sandarovich.kickstarter.project.ProjectSource;
 
 /**
  * @author Olexamder Kolodiazhny 2016
@@ -12,13 +12,13 @@ import com.sandarovich.kickstarter.project.Projects;
 
 public class ProjectMenu extends AbstractMenu {
 
-    private Projects fileredProjects;
+    private ProjectSource fileredProjects;
 
-    public ProjectMenu(IO console, Categories categories, Projects projects, Projects filteredProjects) {
+    public ProjectMenu(IO console, CategorySource categories, ProjectSource projects, ProjectSource filteredProjects) {
         super(console, categories, projects);
         this.fileredProjects = filteredProjects;
         menuId = 3;
-        headerLabel = "Projects:";
+        headerLabel = "ProjectSource:";
         int projectCount = fileredProjects.count();
         this.menuElements = new MenuElement[projectCount + 1];
 
@@ -42,7 +42,7 @@ public class ProjectMenu extends AbstractMenu {
         showMenuFooter();
     }
 
-    private void showProjectsTable(Projects projects) {
+    private void showProjectsTable(ProjectSource projects) {
         console.writeTable(projects);
     }
 
