@@ -4,8 +4,6 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.util.ArrayList;
-import java.util.List;
 
 
 
@@ -13,12 +11,6 @@ public class User implements Externalizable {
 	private String login;
 	private String password;
 	private String email;
-	private List<User> usersList = new ArrayList<>();
-
-
-	public List<User> getUsersList() {
-		return usersList;
-	}
 
 	public User(String login, String password, String email) {
 		this.login = login;

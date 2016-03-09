@@ -1,8 +1,8 @@
 package ua.nenya.alex.enums;
 
-import ua.nenya.alex.project.GetNameInterface;
+import ua.nenya.alex.project.GetingNameInterface;
 
-public enum CreateProjectMenuEnum implements GetNameInterface{
+public enum CreatingProjectMenuEnum implements GetingNameInterface{
 	ENTER_NAME("Enter name"),
 	ENTER_DESCRIPTION("Enter description"),
 	ENTER_AMOUNT_OF_MONEY("Enter amoun of money"),
@@ -11,7 +11,7 @@ public enum CreateProjectMenuEnum implements GetNameInterface{
 
 	private String name;
 
-	CreateProjectMenuEnum(String name){
+	CreatingProjectMenuEnum(String name){
 		this.name=name;
 	}
 	

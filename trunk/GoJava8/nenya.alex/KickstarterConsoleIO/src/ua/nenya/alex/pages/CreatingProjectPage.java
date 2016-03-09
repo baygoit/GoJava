@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import ua.nenya.alex.enums.CreateProjectMenuEnum;
+import ua.nenya.alex.enums.CreatingProjectMenuEnum;
 import ua.nenya.alex.project.Category;
 import ua.nenya.alex.project.Project;
 import ua.nenya.alex.util.IO;
 import ua.nenya.alex.util.ListUtilits;
 
-public class CreateProjectPage {
+public class CreatingProjectPage {
 	
-	public Project createProject(IO io, Category category, ListUtilits listUtil) {
+	public Project createProject(IO io, List<Category> categories, ListUtilits listUtil) {
 		
-		List<CreateProjectMenuEnum> listOfProjectMenu = Arrays.asList(CreateProjectMenuEnum.values());
+		List<CreatingProjectMenuEnum> listOfProjectMenu = Arrays.asList(CreatingProjectMenuEnum.values());
 
 		int index;
 		String name = "";
@@ -23,29 +23,29 @@ public class CreateProjectPage {
 		int days = 0;
 		Category newCategory = new Category("New Category");
 		while ((index = listUtil.choseIndexFromList(listOfProjectMenu, io)) != 0) {
-			CreateProjectMenuEnum item = listOfProjectMenu.get(index-1);
-			if (item == CreateProjectMenuEnum.ENTER_NAME) {
+			CreatingProjectMenuEnum item = listOfProjectMenu.get(index-1);
+			if (item == CreatingProjectMenuEnum.ENTER_NAME) {
 				name = enterName(io);
-				io.writeEmpty();
+				io.writeln("");
 			}
-			if (item == CreateProjectMenuEnum.ENTER_DESCRIPTION) {
+			if (item == CreatingProjectMenuEnum.ENTER_DESCRIPTION) {
 				description = enterDescription(io);
-				io.writeEmpty();
+				io.writeln("");
 			}
-			if (item == CreateProjectMenuEnum.ENTER_AMOUNT_OF_MONEY) {
+			if (item == CreatingProjectMenuEnum.ENTER_AMOUNT_OF_MONEY) {
 				money = enterAmountMoney(io);
-				io.writeEmpty();
+				io.writeln("");
 			}
-			if (item == CreateProjectMenuEnum.ENTER_AMOUNT_OF_DAYS) {
+			if (item == CreatingProjectMenuEnum.ENTER_AMOUNT_OF_DAYS) {
 				days = enterDaysNeeded(io);
-				io.writeEmpty();
+				io.writeln("");
 			}
-			if (item == CreateProjectMenuEnum.ENTER_CATEGORY) {
-				newCategory = enterCategory(io, category, listUtil);
+			if (item == CreatingProjectMenuEnum.ENTER_CATEGORY) {
+				newCategory = enterCategory(io, categories, listUtil);
 				if(newCategory == null){
 					index = 0;
 				}
-				io.writeEmpty();
+				io.writeln("");
 			}
 		}
 		Project newProject = new Project(name, description, money, 0, days);
@@ -53,8 +53,8 @@ public class CreateProjectPage {
 		return newProject;
 	}
 
-	private Category enterCategory(IO io, Category category, ListUtilits listUtil) {
-		List<Category> categories = category.getCategoriesList();
+	private Category enterCategory(IO io, List<Category> categories, ListUtilits listUtil) {
+		
 		io.write("Choose one of categories: ");
 		List<Category> newListOfCategories = new ArrayList<Category>();
 		for (int i = 0; i < categories.size()-1; i++) {
@@ -109,7 +109,7 @@ public class CreateProjectPage {
 		}
 		if (i < 0) {
 			io.writeln("Wrong entering!");
-			io.writeEmpty();
+			io.writeln("");
 			return false;
 		} else {
 			return true;

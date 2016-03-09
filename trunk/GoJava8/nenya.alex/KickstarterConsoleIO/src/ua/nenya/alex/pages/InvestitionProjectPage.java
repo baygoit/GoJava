@@ -8,7 +8,7 @@ import ua.nenya.alex.project.Project;
 import ua.nenya.alex.util.IO;
 import ua.nenya.alex.util.ListUtilits;
 
-public class InvestProjectPage {
+public class InvestitionProjectPage {
 	
 	public boolean investInProject(Project project, IO io, ListUtilits listUtil) {
 		boolean b = false;
@@ -46,9 +46,9 @@ public class InvestProjectPage {
 	private void investFiveHundreds(IO io, Project project) {
 		io.write("Are you sure? (y/n): ");
 		if (io.readConsole().equals("y")) {
-			project.addInvestition(PaymentSaleEnum.FIVE.getAmount());
+			addInvestition(PaymentSaleEnum.FIVE.getAmount(), project);
 			io.writeln("Your investition has added!");
-			io.writeEmpty();
+			io.writeln("");
 		}
 
 	}
@@ -56,18 +56,18 @@ public class InvestProjectPage {
 	private void investTwoHundreds(IO io, Project project) {
 		io.write("Are you sure? (y/n): ");
 		if (io.readConsole().equals("y")) {
-			project.addInvestition(PaymentSaleEnum.TWO.getAmount());
+			addInvestition(PaymentSaleEnum.TWO.getAmount(), project);
 			io.writeln("Your investition has added!");
-			io.writeEmpty();
+			io.writeln("");
 		}
 	}
 
 	private void investOneHundred(IO io, Project project) {
 		io.write("Are you sure? (y/n): ");
 		if (io.readConsole().equals("y")) {
-			project.addInvestition(PaymentSaleEnum.ONE.getAmount());
+			addInvestition(PaymentSaleEnum.ONE.getAmount(), project);
 			io.writeln("Your investition has added!");
-			io.writeEmpty();
+			io.writeln("");
 		}
 	}
 
@@ -77,9 +77,9 @@ public class InvestProjectPage {
 		if (isAmountValid(amount, io)) {
 			io.write("Are you sure? (y/n): ");
 			if (io.readConsole().equals("y")) {
-				project.addInvestition(Integer.parseInt(amount));
+				addInvestition(Integer.parseInt(amount), project);
 				io.writeln("Your investition has added!");
-				io.writeEmpty();
+				io.writeln("");
 			}
 		}
 	}
@@ -92,10 +92,14 @@ public class InvestProjectPage {
 		}
 		if (i < 0) {
 			io.writeln("Wrong entering!");
-			io.writeEmpty();
+			io.writeln("");
 			return false;
 		} else {
 			return true;
 		}
+	}
+	
+	private void addInvestition(int i, Project project) {
+		project.setAvailableAmount(project.getAvailableAmount()+i);
 	}
 }

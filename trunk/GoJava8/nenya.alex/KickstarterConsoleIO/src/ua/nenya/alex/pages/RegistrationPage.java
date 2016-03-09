@@ -12,10 +12,10 @@ import ua.nenya.alex.util.IO;
 public class RegistrationPage {
 	private static final String LP_FILE_NAME = "users.txt";
 
-	public User registration(User user, IO io) {
+	public User registration(List<User> users, IO io) {
 		io.write("Enter login: ");
 		String login = io.readConsole();
-		if (!isLoginValid(user, io, login)) {
+		if (!isLoginValid(users, io, login)) {
 			return null;
 		}
 		io.write("Enter password: ");
@@ -31,20 +31,20 @@ public class RegistrationPage {
 		String email = io.readConsole();
 		if (!isEmailValid(email)) {
 			io.writeln("Email is invalid!");
-			io.writeEmpty();
+			io.writeln("");
 			return null;
 		}
 
 		User newUser = new User(login, password, email);
-		user.getUsersList().add(newUser);
+		users.add(newUser);
 		try {
 			ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(LP_FILE_NAME, false));
-			output.writeObject(user.getUsersList());
+			output.writeObject(users);
 			output.close();
 		} catch (Exception e) {
 		}
 		io.writeln("You are registered");
-		io.writeEmpty();
+		io.writeln("");
 		return newUser;
 
 	}
@@ -52,25 +52,24 @@ public class RegistrationPage {
 	private boolean isPasswordValid(String password, String confirmPassword, IO io) {
 		if (!password.equals(confirmPassword)) {
 			io.writeln("Password is invalid!");
-			io.writeEmpty();
+			io.writeln("");
 			return false;
 		}
 
 		return true;
 	}
 
-	private boolean isLoginValid(User user, IO io, String login) {
-		List<User> usersList = user.getUsersList();
+	private boolean isLoginValid(List<User> users, IO io, String login) {
 		if (login.isEmpty()) {
 			io.writeln("Login is invalid!");
-			io.writeEmpty();
+			io.writeln("");
 			return false;
 		}
 
-		for (User it : usersList) {
+		for (User it : users) {
 			if (login.equals(it.getLogin())) {
 				io.writeln("User with login " + login + " alredy exists!");
-				io.writeEmpty();
+				io.writeln("");
 				return false;
 			}
 		}

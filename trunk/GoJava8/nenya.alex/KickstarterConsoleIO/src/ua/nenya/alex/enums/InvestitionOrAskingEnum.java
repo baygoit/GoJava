@@ -1,14 +1,14 @@
 package ua.nenya.alex.enums;
 
-import ua.nenya.alex.project.GetNameInterface;
+import ua.nenya.alex.project.GetingNameInterface;
 
-public enum InvestAndAskEnum implements GetNameInterface{
+public enum InvestitionOrAskingEnum implements GetingNameInterface{
 	INVEST_IN_PROJECT("Invest in project"),
 	ASK_A_QUESTION("Ask a question");
 	
 	private String name;
 
-	InvestAndAskEnum(String name){
+	InvestitionOrAskingEnum(String name){
 		this.name=name;
 	}
 	

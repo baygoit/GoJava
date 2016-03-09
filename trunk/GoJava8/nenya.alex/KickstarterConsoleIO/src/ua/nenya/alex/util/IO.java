@@ -8,8 +8,6 @@ public interface IO {
 
 	void write(String str);
 
-	void writeEmpty();
-
 	String readConsole();
 
 	List<String> read(String fileName);
