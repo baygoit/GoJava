@@ -1,8 +1,8 @@
 package ua.nenya.alex.enums;
 
-import ua.nenya.alex.project.GetNameInterface;
+import ua.nenya.alex.project.GetingNameInterface;
 
-public enum PaymentSaleEnum implements GetNameInterface{
+public enum PaymentSaleEnum implements GetingNameInterface{
 	ONE(100, "One hundreds of dollars"), 
 	TWO(200), 
 	FIVE(500), 

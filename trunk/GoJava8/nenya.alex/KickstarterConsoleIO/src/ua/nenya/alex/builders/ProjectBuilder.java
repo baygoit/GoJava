@@ -2,17 +2,18 @@ package ua.nenya.alex.builders;
 
 import ua.nenya.alex.project.Category;
 import ua.nenya.alex.project.Project;
+import ua.nenya.alex.project.Projects;
 
 public class ProjectBuilder {
 
-	private Project project;
+	private Projects projects;
 
-	public Project getProject() {
-		return project;
+	public Projects getProject() {
+		return projects;
 	}
 
 	public ProjectBuilder() {
-		project = new Project();
+		projects = new Projects();
 	}
 
 	
@@ -20,7 +21,7 @@ public class ProjectBuilder {
 			int availableAmount, int daysRemain, Category category) {
 		Project newProject = new Project(name, description, allAmount, availableAmount,
 				daysRemain);
-		project.getProjectsList().add(newProject);
+		projects.getProjects().add(newProject);
 		newProject.setCategory(category);
 		return this;
 	}
