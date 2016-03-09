@@ -1,5 +1,7 @@
 package ua.dborisenko.kickstarter;
 
+import ua.dborisenko.kickstarter.dao.QuoteDao;
+import ua.dborisenko.kickstarter.dao.file.QuoteDaoFileImpl;
 import ua.dborisenko.kickstarter.dao.memory.CategoryDaoImpl;
 import ua.dborisenko.kickstarter.dao.memory.QuoteDaoMemoryImpl;
 
@@ -9,15 +11,33 @@ public class Kickstarter {
     private Category currentCategory;
     private Project currentProject;
     private CategoryDaoImpl categoryDao = new CategoryDaoImpl();
-    private QuoteDaoMemoryImpl quoteDao = new QuoteDaoMemoryImpl();
+	private QuoteDao quoteDao;
     private View currentView;
     
     public void start() {
         categoryDao.fillHardcodedCategories();
-        quoteDao.fillAllQuotes();
+
+		initQuoteDao();
         currentView = new ViewCategories(categoryDao.getAll(), quoteDao.getRandomQuote());
         showMainMenu();
     }
+
+	private void initQuoteDao() {
+		try {
+			QuoteDaoFileImpl quoteDaoFileImpl = new QuoteDaoFileImpl();
+			quoteDaoFileImpl.fillAllQuotes();
+			quoteDao = quoteDaoFileImpl;
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		}
+
+		// failover
+		if (quoteDao == null) {
+			QuoteDaoMemoryImpl quoteDaoMemoryImpl = new QuoteDaoMemoryImpl();
+			quoteDaoMemoryImpl.fillAllQuotes();
+			quoteDao = quoteDaoMemoryImpl;
+		}
+	}
     
     private void showError(int errorCode, String errorName, String errorDescription) {
         Error error = new Error(errorCode, errorName, errorDescription);
