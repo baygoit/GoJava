@@ -10,6 +10,5 @@ import com.sandarovich.kickstarter.project.ProjectSerializable;
 public interface IO {
     void write(String message);
     String read();
-
     void writeTable(ProjectSerializable object);
 }

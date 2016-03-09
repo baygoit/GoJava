@@ -1,13 +1,14 @@
 package ua.dborisenko.kickstarter;
 
 public class Kickstarter {
-    private boolean exitFlag;
+    private static enum MenuPosition {CATEGORIES, CATEGORY, PROJECT, EXIT};
+    private MenuPosition menuPosition = MenuPosition.CATEGORIES;
     private Category currentCategory;
     private Project currentProject;
     private CategoryDao categoryDao = new CategoryDao();
     private QuoteDao quoteDao = new QuoteDao();
     private View currentView;
-
+    
     public void start() {
         categoryDao.fillHardcodedCategories();
         quoteDao.fillAllQuotes();
@@ -23,14 +24,14 @@ public class Kickstarter {
     }
 
     public void showMainMenu() {
-        while (!exitFlag) {
+        while (menuPosition != MenuPosition.EXIT) {
             currentView.generate();
             String inputData = this.currentView.getInput();
-            if (currentView.getClass() == ViewCategories.class) {
+            if (MenuPosition.CATEGORIES == menuPosition) {
                 handleViewCategoriesResult(inputData);
-            } else if (currentView.getClass() == ViewCategory.class) {
+            } else if (MenuPosition.CATEGORY == menuPosition) {
                 handleViewCategoryResult(inputData);
-            } else if (currentView.getClass() == ViewProject.class) {
+            } else if (MenuPosition.PROJECT == menuPosition) {
                 handleViewProjectResult(inputData);
             } else {
                 showError(501, "Not Implemented", "Unknown view type.");
@@ -43,6 +44,7 @@ public class Kickstarter {
         if (inputData.equals("0")) {
             currentProject = null;
             currentView = new ViewCategory(currentCategory);
+            menuPosition = MenuPosition.CATEGORY;
         }
     }
 
@@ -50,11 +52,13 @@ public class Kickstarter {
         if (inputData.equals("0")) {
             currentCategory = null;
             currentView = new ViewCategories(categoryDao.getAll(), quoteDao.getRandomQuote());
+            menuPosition = MenuPosition.CATEGORIES;
         } else {
             try {
                 int projectNumber = Integer.valueOf(inputData) - 1;
                 currentProject = currentCategory.getProjectByListNumber(projectNumber);
                 currentView = new ViewProject(currentProject, currentCategory.getName());
+                menuPosition = MenuPosition.PROJECT;
             } catch (IndexOutOfBoundsException e) {
                 showError(404, "Not Found", "The requested element isn`t found.");
             } catch (NumberFormatException e) {
@@ -65,12 +69,13 @@ public class Kickstarter {
 
     private void handleViewCategoriesResult(String inputData) {
         if (inputData.equals("0")) {
-            exitFlag = true;
+            menuPosition = MenuPosition.EXIT;
         } else {
             try {
                 int categoryNumber = Integer.valueOf(inputData) - 1;
                 currentCategory = categoryDao.getByListNumber(categoryNumber);
                 currentView = new ViewCategory(currentCategory);
+                menuPosition = MenuPosition.CATEGORY;
             } catch (IndexOutOfBoundsException e) {
                 showError(404, "Not Found", "The requested element isn`t found.");
             } catch (NumberFormatException e) {
