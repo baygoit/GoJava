@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Random;
 
 import ua.dborisenko.kickstarter.Quote;
+import ua.dborisenko.kickstarter.dao.QuoteDao;
 
-public class QuoteDaoImpl {
+public class QuoteDaoImpl implements QuoteDao {
 
 	private List<Quote> quotes = new ArrayList<Quote>();
 
-    public Quote getRandomQuote() {
+    @Override
+	public Quote getRandomQuote() {
         Random random = new Random();
 		int quoteId = random.nextInt(quotes.size());
 		return quotes.get(quoteId);
