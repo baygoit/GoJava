@@ -2,7 +2,6 @@ package ua.dborisenko.kickstarter;
 
 public class Project {
     private int id;
-    private ProjectCategory category;
     private String name;
     private String description;
     private String history;
@@ -18,22 +17,6 @@ public class Project {
 
     public int getId() {
         return this.id;
-    }
-
-    public void setCategory(ProjectCategory category) {
-        this.category = category;
-    }
-
-    public ProjectCategory getCategory() {
-        return this.category;
-    }
-
-    public int getCategoryId() {
-        return this.category.getId();
-    }
-
-    public String getCategoryName() {
-        return this.category.getName();
     }
 
     public void setName(String name) {
