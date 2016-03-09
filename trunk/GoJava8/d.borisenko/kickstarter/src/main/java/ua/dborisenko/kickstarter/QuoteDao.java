@@ -6,29 +6,25 @@ import java.util.Random;
 
 public class QuoteDao {
 
-    public static List<Quote> allQuotes = new ArrayList<Quote>();
+	private List<Quote> quotes = new ArrayList<Quote>();
 
     public Quote getRandomQuote() {
         Random random = new Random();
-        int quoteId = random.nextInt(allQuotes.size());
-        return allQuotes.get(quoteId);
-    }
-
-    private void addQuote(Quote quote) {
-        allQuotes.add(quote);
+		int quoteId = random.nextInt(quotes.size());
+		return quotes.get(quoteId);
     }
 
     public void fillAllQuotes() {
-        addQuote(new Quote("The best preparation for tomorrow is doing your best today.", "H. Jackson Brown"));
-        addQuote(new Quote("Nothing is impossible, the word itself says 'I'm possible'!", "Audrey Hepburn"));
-        addQuote(new Quote("If opportunity doesn't knock, build a door.", "Milton Berle"));
-        addQuote(
+		quotes.add(new Quote("The best preparation for tomorrow is doing your best today.", "H. Jackson Brown"));
+		quotes.add(new Quote("Nothing is impossible, the word itself says 'I'm possible'!", "Audrey Hepburn"));
+		quotes.add(new Quote("If opportunity doesn't knock, build a door.", "Milton Berle"));
+		quotes.add(
                 new Quote("Put your heart, mind, and soul into even your smallest acts. This is the secret of success.",
                         "Swami Sivananda"));
-        addQuote(new Quote("We do what we must because we can. For the good of all of us.", "GLadOS"));
-        addQuote(
+		quotes.add(new Quote("We do what we must because we can. For the good of all of us.", "GLadOS"));
+		quotes.add(
                 new Quote("Success is simple. Do what's right, the right way, at the right time.", "Arnold H. Glasow"));
-        addQuote(new Quote("Victory has a thousand fathers, but defeat is an orphan.", "Galeazzo Ciano"));
-        addQuote(new Quote("In order to attain the impossible, one must attempt the absurd.", "Miguel de Cervantes"));
+		quotes.add(new Quote("Victory has a thousand fathers, but defeat is an orphan.", "Galeazzo Ciano"));
+		quotes.add(new Quote("In order to attain the impossible, one must attempt the absurd.", "Miguel de Cervantes"));
     }
 }
