@@ -1,5 +1,8 @@
 package ua.dborisenko.kickstarter;
 
+import ua.dborisenko.kickstarter.dao.CategoryDao;
+import ua.dborisenko.kickstarter.dao.QuoteDao;
+
 public class Kickstarter {
     private static enum MenuPosition {CATEGORIES, CATEGORY, PROJECT, EXIT};
     private MenuPosition menuPosition = MenuPosition.CATEGORIES;

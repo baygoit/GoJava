@@ -1,8 +1,10 @@
-package ua.dborisenko.kickstarter;
+package ua.dborisenko.kickstarter.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import ua.dborisenko.kickstarter.Quote;
 
 public class QuoteDao {
 

@@ -1,7 +1,10 @@
-package ua.dborisenko.kickstarter;
+package ua.dborisenko.kickstarter.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ua.dborisenko.kickstarter.Category;
+import ua.dborisenko.kickstarter.Project;
 
 public class CategoryDao {
 
