@@ -1,15 +1,15 @@
-package ua.dborisenko.kickstarter.dao;
+package ua.dborisenko.kickstarter.dao.memory;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import ua.dborisenko.kickstarter.dao.QuoteDao;
+import ua.dborisenko.kickstarter.dao.memory.QuoteDaoImpl;
 
-public class QuoteDaoTest {
+public class QuoteDaoImplTest {
 
-	private QuoteDao quoteDao = new QuoteDao();
+	private QuoteDaoImpl quoteDao = new QuoteDaoImpl();
 
 	@Test
 	public void testGetRandomQuote() {

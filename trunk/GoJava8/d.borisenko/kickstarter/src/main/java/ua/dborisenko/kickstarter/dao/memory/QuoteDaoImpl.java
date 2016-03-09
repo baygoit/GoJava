@@ -1,4 +1,4 @@
-package ua.dborisenko.kickstarter.dao;
+package ua.dborisenko.kickstarter.dao.memory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Random;
 
 import ua.dborisenko.kickstarter.Quote;
 
-public class QuoteDao {
+public class QuoteDaoImpl {
 
 	private List<Quote> quotes = new ArrayList<Quote>();
 

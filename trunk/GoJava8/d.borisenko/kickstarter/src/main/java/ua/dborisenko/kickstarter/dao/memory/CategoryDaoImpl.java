@@ -1,4 +1,4 @@
-package ua.dborisenko.kickstarter.dao;
+package ua.dborisenko.kickstarter.dao.memory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import ua.dborisenko.kickstarter.Category;
 import ua.dborisenko.kickstarter.Project;
 
-public class CategoryDao {
+public class CategoryDaoImpl {
 
     public static List<Category> hardCodedCategories = new ArrayList<Category>();
     private static int idProjectGenerator = 1;
