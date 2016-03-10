@@ -9,14 +9,14 @@ public class ProjectCategoryTest {
 	
 	@Test
 	public void setGetIdTest() {
-	  	ProjectCategory category = new ProjectCategory();
+	  	Category category = new Category();
 	   	category.setId(-1);
 	   	assertTrue(-1 == category.getId());
 	}
 	
 	@Test
 	public void setGetNameTest() {
-	  	ProjectCategory category = new ProjectCategory();
+	  	Category category = new Category();
 	  	category.setName("testname");
 	   	assertTrue("testname" == category.getName());
 	}

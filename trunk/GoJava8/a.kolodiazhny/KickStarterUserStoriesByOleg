@@ -1,0 +1,75 @@
+User stories
+
+US 1 Quote
+As a Guest (Investor)
+I want to see a nice quote on a main screen
+So my attention will be interested
+Use case 1
+When I go to the application the first time 
+Then I see a quote
+
+US 1.1 Random Quotes
+As a Guest
+I want to see one of predefined quotes when I go to the site
+So I am motivated and not bored
+Use case 1
+Given I visited an application and saw some quote
+When I go to the application the next time
+Then I can see another quote
+
+US2 Categories list
+As a Guest
+I want to see a list of all categories
+So I can focus on interesting theme
+Use case 1
+I go to the application
+I see the numbered list of categories
+And request for select one
+I select one category
+I see a message about what category I selected
+
+US 3 Category details
+As a Gust
+I want to investigate a list of projects in the category
+So I can understand what project I would invest
+Use case 1
+I go to the application
+I select any category (example, 1 - Sport)
+I see the list of projects
+And each project consists with:
+project name
+short description
+required budget
+gathered budget
+days left
+
+US4 4 Project details
+As a Guest
+I want to investigate the project
+So I can understand if I want to invest it
+Use case 1
+I see a list of project
+I see a request to select a project
+I select the project (example, 12 - New soccer ball)
+I see detailed description of the project, including:
+All from US3 UC1
+History of the project
+URL to video about the project
+Questions and answers
+
+US5 Navigation
+As a Guest
+I want to be able to investigate different projects in different categories
+So I can choose the project to invest
+Use case 1
+I see a list of projects
+I see a request to select menu item and menu item “0 - exit”
+I select “0 - exit” menu item
+I see a list of categories
+And I am able to select another category
+Use case 2
+I see a project details
+I see a request to select menu item and menu item “0 - exit”
+I select “0 - exit” menu item
+I see a list of projects
+And I am able to select another project in the category 

@@ -8,14 +8,14 @@ public class ViewError extends View {
     }
 
     @Override
-    public String generate() {
-        drawHeaderBlock();
-        System.out.println("ERROR: " + error.getCode());
-        System.out.println(error.getName());
-        drawDivider();
-        System.out.println(error.getDescription());
-        drawDivider();
-        System.out.println("Press Enter to return.");
-        return readInput();
+    public void generate() {
+        addContentString(headerBlock);
+        addContentString("ERROR: " + error.getCode());
+        addContentString(error.getName());
+        addContentString(solidLine);
+        addContentString(error.getDescription());
+        addContentString(solidLine);
+        addContentString("Press Enter to return.");
+        ioHandler.write(content.toString());
     }
 }

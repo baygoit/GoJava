@@ -1,9 +1,9 @@
 package com.sandarovich.kickstarter.menu;
 
-import com.sandarovich.kickstarter.category.Categories;
+import com.sandarovich.kickstarter.category.CategorySource;
 import com.sandarovich.kickstarter.io.IO;
 import com.sandarovich.kickstarter.project.Project;
-import com.sandarovich.kickstarter.project.Projects;
+import com.sandarovich.kickstarter.project.ProjectSource;
 
 /**
  * Created Olexander Kolodiazhny 2016
@@ -13,14 +13,14 @@ public class ProjectDetailsMenu extends AbstractMenu {
 
     private final Project project;
 
-    public ProjectDetailsMenu(IO console, Categories categories, Projects projects, Project project) {
+    public ProjectDetailsMenu(IO console, CategorySource categories, ProjectSource projects, Project project) {
         super(console, categories, projects);
         this.project = project;
         menuId = 4;
         headerLabel = "Project Details:";
         menuElements = new MenuElement[2];
-        menuElements[0] = new MenuElement("Categories", Actions.SHOW_ALL_CATEGORIES, 0);
-        menuElements[1] = new MenuElement("Projects ", Actions.SHOW_CATEGORY, 1);
+        menuElements[0] = new MenuElement("CategorySource", Actions.SHOW_ALL_CATEGORIES, 0);
+        menuElements[1] = new MenuElement("ProjectSource ", Actions.SHOW_CATEGORY, 1);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ProjectDetailsMenu extends AbstractMenu {
         console.write("Id: " + project.getId());
         console.write("Name: " + project.getName());
         console.write("Short Description: " + project.getShortDescription());
-        console.write("Goal Amount: " + project.getGoalAmount());
+        console.write("Goal Amount: " + project.getRequiredBudget());
         console.write("Collected Amount: " + project.getCollectedAmount());
         console.write("Days remain: " + project.getGoalDateDays());
         console.write("Video Link: " + project.getVideoLink());

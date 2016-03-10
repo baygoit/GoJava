@@ -1,33 +1,23 @@
 package ua.dborisenko.kickstarter;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+public abstract class View {
 
-public class View {
-
-    protected String readInput() {
-        String input = "";
-        try {
-            BufferedReader inputStream = new BufferedReader(new InputStreamReader(System.in));
-            input = inputStream.readLine();
-        } catch (IOException e) {
-            return "";
-        }
-        return input;
+    protected StringBuilder content = new StringBuilder(); 
+    protected IoHandler ioHandler = new IoHandler();;
+    protected String solidLine = "─────────────────────────────────────────";
+    protected String headerBlock = 
+            "╔═══════════════════════════════════════╗\n" + 
+            "║              Kickstarter              ║\n" + 
+            "╚═══════════════════════════════════════╝"; 
+    protected void addContentString(String inputString) {
+        this.content.append(inputString + System.getProperty("line.separator"));
     }
-
-    protected void drawHeaderBlock() {
-        System.out.println("╔═══════════════════════════════════════╗");
-        System.out.println("║           Kickstarter demo            ║");
-        System.out.println("╚═══════════════════════════════════════╝");
+    
+    public String getInput() {
+        return ioHandler.read();
     }
-
-    protected void drawDivider() {
-        System.out.println("─────────────────────────────────────────");
-    }
-
-    public String generate() {
-        return "";
+    
+    public void generate() {
     }
 }
+

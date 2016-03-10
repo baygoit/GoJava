@@ -2,7 +2,7 @@ package ua.nenya.alex.util;
 
 import java.util.List;
 
-import ua.nenya.alex.project.GetNameInterface;
+import ua.nenya.alex.project.GetingNameInterface;
 
 public class ListUtilits {
 	
@@ -26,10 +26,10 @@ public class ListUtilits {
 
 	private void showList(List<?> list, IO io) {
 		io.writeln("Choose one of the items bellow");
-		io.writeEmpty();
+		io.writeln("");
 		io.writeln("0	-	Exit");
 		for (int i = 1; i <= list.size(); i++) {
-				GetNameInterface it = (GetNameInterface) list.get(i-1);
+				GetingNameInterface it = (GetingNameInterface) list.get(i-1);
 				io.writeln(i + "	-	" + it.getName());
 		}
 	}

@@ -1,10 +1,10 @@
 package com.sandarovich.kickstarter.menu;
 
-import com.sandarovich.kickstarter.category.Categories;
 import com.sandarovich.kickstarter.category.Category;
+import com.sandarovich.kickstarter.category.CategorySource;
 import com.sandarovich.kickstarter.io.IO;
 import com.sandarovich.kickstarter.project.Project;
-import com.sandarovich.kickstarter.project.Projects;
+import com.sandarovich.kickstarter.project.ProjectSource;
 
 /**
  *  Describes common functionality for all menu existed in Project
@@ -14,13 +14,13 @@ public abstract class AbstractMenu {
     static final int MENU_SHIFT = 1;
 
     protected final IO console;
-    protected final Projects projects;
-    protected final Categories categories;
+    protected final ProjectSource projects;
+    protected final CategorySource categories;
     protected MenuElement[] menuElements;
     protected String headerLabel;
     protected int menuId;
 
-    public AbstractMenu(IO console, Categories categories, Projects projects) {
+    public AbstractMenu(IO console, CategorySource categories, ProjectSource projects) {
         this.console = console;
         this.projects = projects;
         this.categories = categories;
@@ -102,7 +102,7 @@ public abstract class AbstractMenu {
 
     protected void showProjectsMenu(int choice) {
         showUserInputed(menuElements[getMenuIndex(choice)]);
-        Category category = categories.search(menuElements[getMenuIndex(choice)].getId() - MENU_SHIFT);
+        Category category = categories.getCategoryById(menuElements[getMenuIndex(choice)].getId() - MENU_SHIFT);
         buildProjectMenu(category);
     }
 
