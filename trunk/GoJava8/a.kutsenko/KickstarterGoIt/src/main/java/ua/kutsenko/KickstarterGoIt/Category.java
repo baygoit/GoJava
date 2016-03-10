@@ -12,8 +12,8 @@ public class Category implements Writer {
 	private Project project = new Project();
 	private int selector;
 	private Category category;
-	private Kickstarter kick;
-	private Category categoryR;
+	
+	
 
 	public Category(String name, List<Project> projectList) {
 		this.name = name;
@@ -107,8 +107,8 @@ public class Category implements Writer {
 		}
 		if (selector == 9) {
 			showCategory();
-			categoryR = selectCategory();
-			category.showProjects(categoryR);		
+			selectedCategory = selectCategory();
+			category.showProjects(selectedCategory);		
 		
 			}
 		if (selector < 0 || selectedCategory.getProjectList().size() < selector) {
@@ -120,7 +120,7 @@ public class Category implements Writer {
 		printProject(selectProject);
 		printProjectInfo(selectProject);
 		selectProjects = selectProject; 
-		return selectProject;//}
+		return selectProject;
 	
 		
 		
@@ -135,8 +135,7 @@ public class Category implements Writer {
 			invest(selectProject, selectedCategory);
 		}
 		if (selector == 9) {
-			// write("press any key");
-			// category = selectCategory();
+			
 		}
 		if (selector == 7) {
 			askQuestion(selectProject, selectedCategory);
@@ -167,6 +166,7 @@ public class Category implements Writer {
 		int pay = sc.nextInt();
 		if (pay == 2) {
 			write("Enter you inputting card holder");
+			String skip = sc.nextLine();
 			String cardHolder = sc.nextLine();
 			write("Enter you name card");
 			String nameCard = sc.nextLine();
@@ -178,7 +178,7 @@ public class Category implements Writer {
 			printProjectInfo(selectProject);
 		}
 		if (pay == 1) {
-			write("1 - 100$, 2 - 200$, 3 - 50$");
+			write("1 - 100$, 2 - 200$, 3 - 500$");
 			int hotSum = sc.nextInt();
 			if (hotSum == 1) {
 				projectIn.setGatheredBudget(projectIn.getGatheredBudget(), 100);
