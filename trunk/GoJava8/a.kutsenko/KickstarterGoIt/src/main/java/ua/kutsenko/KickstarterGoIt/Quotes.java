@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Quotes implements Writer {
 	
 	private List <String> allQuotes = new ArrayList<String>();
-	private String quotesFileName = "E:\\quotes.txt";
+	private String quotesFileName = "./resources/quotes.txt";
 	
 	public void printQuote() {
 		write("Select data: 1 memory , 2 file");
