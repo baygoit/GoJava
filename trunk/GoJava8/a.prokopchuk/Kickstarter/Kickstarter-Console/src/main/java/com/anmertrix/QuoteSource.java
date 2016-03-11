@@ -24,4 +24,8 @@ public class QuoteSource {
 		return quote;
 	}
 	
+	public void setQuote(Quote quote) {
+		quotes.add(quote);
+	}
+	
 }

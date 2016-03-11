@@ -21,5 +21,15 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+ 		<groupId>mockito</groupId>
+ 		<artifactId>mockito</artifactId>
+ 		<version>1.10.19</version>
+ 		<scope>system</scope>
+ 		<systemPath>${basedir}/libs/mockito-all-1.10.19.jar</systemPath>
+	</dependency>
+	
   </dependencies>
+  
 </project>
