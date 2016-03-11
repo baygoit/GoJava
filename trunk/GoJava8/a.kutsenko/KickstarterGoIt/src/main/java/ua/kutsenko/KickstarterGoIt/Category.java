@@ -127,7 +127,7 @@ public class Category implements Writer {
 		  }
 		
 
-	public Project actionProject(Project selectProject, Category selectedCategory) {
+	public void actionProject(Project selectProject, Category selectedCategory) {
 		write("8 invest project , 9 back to category ," + " 7 Ask question");
 		Scanner sc = new Scanner(System.in);
 		selector = sc.nextInt();
@@ -140,7 +140,7 @@ public class Category implements Writer {
 		if (selector == 7) {
 			askQuestion(selectProject, selectedCategory);
 		}
-		return selectProject;
+		
 	}
 
 	private void askQuestion(Project projectIn, Category selectedCategory) {
