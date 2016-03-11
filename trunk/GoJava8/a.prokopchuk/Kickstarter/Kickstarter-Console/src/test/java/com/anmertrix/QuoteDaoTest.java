@@ -4,12 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class QuoteSourceTest {
+public class QuoteDaoTest {
 	
 	@Test
 	public void setQuote() {
-		QuoteSource quoteSource = new QuoteSource();
-		Quote quote = new Quote("test");
+		QuoteDao quoteSource = new QuoteDaoFile();
+		Quote quote = new Quote("author", "test");
 		quoteSource.setQuote(quote);
 		assertEquals("test", quoteSource.getRandomQuote());
 	}
