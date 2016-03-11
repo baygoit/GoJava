@@ -5,7 +5,7 @@ import ua.dborisenko.kickstarter.IoHandler;
 public abstract class View {
 
     protected StringBuilder content = new StringBuilder(); 
-    protected IoHandler ioHandler = new IoHandler();;
+    protected IoHandler ioHandler = new IoHandler();
     protected static final String SOLID_LINE = "─────────────────────────────────────────";
     protected static final String HEADER_BLOCK = 
             "╔═══════════════════════════════════════╗\n" + 
