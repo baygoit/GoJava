@@ -1,2 +1,1 @@
-Quote
-Author
+1#Author#Quote

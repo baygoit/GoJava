@@ -1,4 +1,4 @@
-package ua.dborisenko.kickstarter;
+package ua.dborisenko.kickstarter.domain;
 
 public class Project {
     private int id;

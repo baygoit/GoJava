@@ -2,6 +2,8 @@ package ua.dborisenko.kickstarter;
 
 import org.junit.Test;
 
+import ua.dborisenko.kickstarter.domain.Project;
+
 import static org.junit.Assert.*;
 
 public class ProjectTest {

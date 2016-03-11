@@ -1,2 +1,8 @@
-Quote
-Author
+1#David Allen#(file) You can do anything, but not everything.
+2#Wayne Gretzky#(file) You miss 100 percent of the shots you never take.
+3#Abraham Maslow#(file) To the man who only has a hammer, everything he encounters begins to look like a nail.
+4#Oscar Levant#(file) What the world needs is more geniuses with humility, there are so few of us left.
+5#Lily Tomlin#(file) Sometimes I worry about being a success in a mediocre world.
+6#André Gide#(file) Believe those who are seeking the truth. Doubt those who find it.
+7#Charles F. Kettering#(file) An inventor is simply a fellow who doesn’t take his education too seriously.
+8#House M.D.#(file) Everybody lies.

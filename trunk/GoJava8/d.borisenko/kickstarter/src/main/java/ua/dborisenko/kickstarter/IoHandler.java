@@ -12,11 +12,12 @@ public class IoHandler {
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(System.in));
             input = inputStream.readLine();
         } catch (IOException e) {
+            e.printStackTrace();
             return "";
         }
         return input;
     }
-    
+
     public void write(String outputString) {
         System.out.print(outputString);
     }
