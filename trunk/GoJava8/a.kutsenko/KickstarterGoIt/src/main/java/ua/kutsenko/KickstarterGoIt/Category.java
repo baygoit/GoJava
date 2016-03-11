@@ -12,8 +12,6 @@ public class Category implements Writer {
 	private Project project = new Project();
 	private int selector;
 	private Category category;
-	
-	
 
 	public Category(String name, List<Project> projectList) {
 		this.name = name;
@@ -96,21 +94,19 @@ public class Category implements Writer {
 		return category;
 	}
 
-
 	public Project selectProject(Category selectedCategory) {
 		write("Select project, 0 to exit, 9 back to category  ");
 		Scanner sc = new Scanner(System.in);
 		selector = sc.nextInt();
-		Project selectProjects = null;
+
 		if (selector == 0) {
 			endApp(selector);
 		}
 		if (selector == 9) {
 			showCategory();
 			selectedCategory = selectCategory();
-			category.showProjects(selectedCategory);		
-		
-			}
+
+		}
 		if (selector < 0 || selectedCategory.getProjectList().size() < selector) {
 			write("Неверный индекс меню - " + selector);
 			Project selectProject = selectProject(selectedCategory);
@@ -119,28 +115,27 @@ public class Category implements Writer {
 		Project selectProject = selectedCategory.projectList.get(selector - 1);
 		printProject(selectProject);
 		printProjectInfo(selectProject);
-		selectProjects = selectProject; 
 		return selectProject;
-	
-		
-		
-		  }
-		
+
+	}
 
 	public void actionProject(Project selectProject, Category selectedCategory) {
-		write("8 invest project , 9 back to category ," + " 7 Ask question");
+		write("8 invest project, 9 back to category, 7 Ask question, 0 to exit");
 		Scanner sc = new Scanner(System.in);
 		selector = sc.nextInt();
+		if (selector == 0) {
+			endApp(selector);
+		}
 		if (selector == 8) {
 			invest(selectProject, selectedCategory);
 		}
 		if (selector == 9) {
-			
+
 		}
 		if (selector == 7) {
 			askQuestion(selectProject, selectedCategory);
 		}
-		
+
 	}
 
 	private void askQuestion(Project projectIn, Category selectedCategory) {
@@ -198,7 +193,7 @@ public class Category implements Writer {
 				printProject(selectProject);
 				printProjectInfo(selectProject);
 			}
-		
+
 		}
 	}
 

@@ -4,23 +4,20 @@ public class Kickstarter {
 	Quotes quotes = new Quotes();
 	Category category = new Category();
 	Category selectedCategory = new Category();
-    Project selectedProject = new Project();
-   
-	
+	Project selectedProject = new Project();
+
 	public void run() {
-		
+
 		quotes.printQuote();
 		category.initCategory();
-		while(true){
+		while (true) {
 			category.showCategory();
 			selectedCategory = category.selectCategory();
-			category.showProjects(selectedCategory);		
+			category.showProjects(selectedCategory);
 			selectedProject = category.selectProject(selectedCategory);
 			category.actionProject(selectedProject, selectedCategory);
-		
-		     
+
 		}
 	}
 
 }
-
