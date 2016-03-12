@@ -19,6 +19,10 @@ public abstract class View {
         return ioHandler.read();
     }
     
+    public void showHint(String hint) {
+        ioHandler.write(hint + "\n");
+    }
+    
     public void show() {
         ioHandler.write(content.toString());
     }

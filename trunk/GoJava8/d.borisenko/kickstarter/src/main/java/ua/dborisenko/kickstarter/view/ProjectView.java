@@ -1,6 +1,7 @@
 package ua.dborisenko.kickstarter.view;
 
 import ua.dborisenko.kickstarter.domain.Project;
+import ua.dborisenko.kickstarter.domain.Question;
 
 public class ProjectView extends View {
 
@@ -14,8 +15,18 @@ public class ProjectView extends View {
         addContentString("Collected sum:   " + project.getCollectedSum());
         addContentString("History:         " + project.getHistory());
         addContentString("Video link:      " + project.getVideoUrl());
-        addContentString("Discussion link: " + project.getDiscussionUrl());
+        addContentString("Questions and answers:");
         addContentString(SOLID_LINE);
-        addContentString("Enter \"0\" to return:");
+        for (Question question : project.getQuestions()) {
+            addContentString("Q: " + question.getRequest());
+            if (question.getReply() != null) {
+                addContentString("A: " + question.getReply());  
+            }
+        }
+        addContentString(SOLID_LINE);
+        addContentString("Please select action:");
+        addContentString("1: Invest into the project");
+        addContentString("2: Ask a question");
+        addContentString("0: Return");
     }
 }

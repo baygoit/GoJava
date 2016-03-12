@@ -4,25 +4,30 @@ import ua.dborisenko.kickstarter.dao.CategoryDao;
 import ua.dborisenko.kickstarter.dao.QuoteDao;
 import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Error;
-import ua.dborisenko.kickstarter.view.View;
+import ua.dborisenko.kickstarter.domain.Investment;
+import ua.dborisenko.kickstarter.domain.Project;
+import ua.dborisenko.kickstarter.domain.Question;
 import ua.dborisenko.kickstarter.view.CategoriesView;
 import ua.dborisenko.kickstarter.view.CategoryView;
 import ua.dborisenko.kickstarter.view.ErrorView;
+import ua.dborisenko.kickstarter.view.InvestmentView;
 import ua.dborisenko.kickstarter.view.ProjectView;
+import ua.dborisenko.kickstarter.view.View;
 
 public class Kickstarter {
 
     private static enum MenuPosition {
-        CATEGORIES, CATEGORY, PROJECT, EXIT
+        CATEGORIES, CATEGORY, PROJECT, INVESTMENT, EXIT
     }
 
     private MenuPosition menuPosition = MenuPosition.CATEGORIES;
     private Category currentCategory;
+    private Project currentProject;
     private CategoryDao categoryDao;
     private QuoteDao quoteDao;
     private View currentView;
 
-    public Kickstarter(String[] args) {
+    public void run(String[] args) {
         DaoInitializer daoInitializer = new DaoInitializer();
         quoteDao = daoInitializer.initQuoteDao(args);
         categoryDao = daoInitializer.initCategoryDao(args);
@@ -47,6 +52,8 @@ public class Kickstarter {
                 handleViewCategoryResult(inputData);
             } else if (MenuPosition.PROJECT == menuPosition) {
                 handleViewProjectResult(inputData);
+            } else if (MenuPosition.INVESTMENT == menuPosition) {
+                handleViewInvestmentResult(inputData);
             } else {
                 showError(501, "Not Implemented", "Unknown view type.");
             }
@@ -54,10 +61,35 @@ public class Kickstarter {
         System.out.println("Have a nice day!");
     }
 
+    private void handleViewInvestmentResult(String inputData) {
+        Investment investment = new Investment();
+        investment.setCardHolderName(inputData);
+        currentView.showHint("Enter your card number: ");
+        investment.setCardNumber(currentView.getInput());
+        currentView.showHint("Enter your investment amount: ");
+        try {
+            investment.setAmount(Integer.valueOf(currentView.getInput()));
+        } catch (NumberFormatException e) {
+            showError(400, "Bad Request", "Wrong input data.");
+        }
+        currentProject.addInvestment(investment);
+        currentView = new ProjectView(currentProject, currentCategory.getName());
+        menuPosition = MenuPosition.PROJECT;
+    }
+
     void handleViewProjectResult(String inputData) {
         if (inputData.equals("0")) {
             currentView = new CategoryView(currentCategory);
             menuPosition = MenuPosition.CATEGORY;
+        } else if (inputData.equals("1")) {
+            currentView = new InvestmentView(currentProject);
+            menuPosition = MenuPosition.INVESTMENT;
+        } else if (inputData.equals("2")) {
+            currentView.showHint("Enter your question");
+            Question question = new Question();
+            question.setRequest(currentView.getInput());
+            currentProject.addQuestion(question);
+            currentView = new ProjectView(currentProject, currentCategory.getName());
         }
     }
 
@@ -69,8 +101,8 @@ public class Kickstarter {
         } else {
             try {
                 int projectNumber = Integer.valueOf(inputData) - 1;
-                currentView = new ProjectView(currentCategory.getProjectByListNumber(projectNumber),
-                        currentCategory.getName());
+                currentProject = currentCategory.getProjectByListNumber(projectNumber);
+                currentView = new ProjectView(currentProject, currentCategory.getName());
                 menuPosition = MenuPosition.PROJECT;
             } catch (IndexOutOfBoundsException e) {
                 showError(404, "Not Found", "The requested element isn`t found.");

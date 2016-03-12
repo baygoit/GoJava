@@ -1,22 +1,25 @@
 package ua.dborisenko.kickstarter.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Project {
     private int id;
     private String name;
     private String description;
     private String history;
     private int requiredSum;
-    private int collectedSum;
     private int daysLeft;
     private String videoUrl;
-    private String discussionUrl;
-
+    private String rewardInfo;
+    private List<Investment> investments = new ArrayList<Investment>();
+    private List<Question> questions = new ArrayList<Question>();
     public void setId(int id) {
         this.id = id;
     }
 
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public void setName(String name) {
@@ -24,7 +27,7 @@ public class Project {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setDescription(String description) {
@@ -32,7 +35,7 @@ public class Project {
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setHistory(String history) {
@@ -40,7 +43,7 @@ public class Project {
     }
 
     public String getHistory() {
-        return this.history;
+        return history;
     }
 
     public void setRequiredSum(int requiredSum) {
@@ -48,15 +51,15 @@ public class Project {
     }
 
     public int getRequiredSum() {
-        return this.requiredSum;
-    }
-
-    public void setCollectedSum(int collectedSum) {
-        this.collectedSum = collectedSum;
+        return requiredSum;
     }
 
     public int getCollectedSum() {
-        return this.collectedSum;
+        int collectedSum = 0;
+        for (Investment investment : investments) {
+            collectedSum += investment.getAmount();
+        }
+        return collectedSum;
     }
 
     public void setDaysLeft(int daysLeft) {
@@ -64,7 +67,7 @@ public class Project {
     }
 
     public int getDaysLeft() {
-        return this.daysLeft;
+        return daysLeft;
     }
 
     public void setVideoUrl(String videoURL) {
@@ -72,14 +75,30 @@ public class Project {
     }
 
     public String getVideoUrl() {
-        return this.videoUrl;
+        return videoUrl;
     }
 
-    public void setDiscussionUrl(String discussionURL) {
-        this.discussionUrl = discussionURL;
+    public String getRewardInfo() {
+        return rewardInfo;
     }
 
-    public String getDiscussionUrl() {
-        return this.discussionUrl;
+    public void setRewardInfo(String rewardInfo) {
+        this.rewardInfo = rewardInfo;
+    }
+    
+    public List<Question> getQuestions() {
+        return questions;
+    }
+    
+    public void addQuestion(Question question) {
+        questions.add(question);
+    }
+    
+    public List<Investment> getInvestments() {
+        return investments;
+    }
+    
+    public void addInvestment(Investment investment) {
+        investments.add(investment);
     }
 }

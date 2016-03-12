@@ -8,17 +8,20 @@ public class Category {
     private String name;
     private List<Project> projects = new ArrayList<Project>();
 
-    public Category(int id, String name) {
+    public void setId(int id) {
         this.id = id;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
-
-    public int getId() {
-        return this.id;
-    }
-
+    
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public List<Project> getProjects() {
