@@ -18,7 +18,7 @@ public class QuotsFile {
         String thisLine = null;
         ArrayList<String> quotesWhisFile = new ArrayList<String>();
         try {
-            
+
 
             reader = new BufferedReader(new FileReader("src/com/sourses/quotes.txt"));
             while ((thisLine = reader.readLine()) != null) {
