@@ -3,11 +3,11 @@ package com.anmertrix;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategorySource {
+public class CategoryDao {
 
 	List<Category> categories = new ArrayList<Category>();
 
-	public CategorySource() {
+	public CategoryDao() {
 		categories.add(new Category("Sport"));
 		categories.add(new Category("IT"));
 		categories.add(new Category("Medicine"));
