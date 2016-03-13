@@ -1,10 +1,12 @@
 package site;
 
-import categories.Book;
+
+import categories.Category;
+import categories.MemoryCard;
 
 public class ProfilePage extends Page {
 
-	ProfilePage(int id, Book kickstarter) {
+	ProfilePage(int id, Category kickstarter) {
 		super(kickstarter);
 		this.id=id;
 	}
@@ -40,6 +42,7 @@ int id;
 		String comment = console.read();
 		kickstarter.addComment(id,author, comment);
 		console.write("Thank You for Your comment!");
+		new MemoryCard().saveBase(kickstarter);
 	}
 
 	private void invest() {
@@ -57,6 +60,7 @@ int id;
 				if(checkSuccess(card)){
 					kickstarter.sendCash(id, cash);
 					console.write("The transaction was successful.");
+					new MemoryCard().saveBase(kickstarter);
 					openPage();
 				}
 			}		

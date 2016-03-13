@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class BookTests {
 
-	Book puppet = new Book();
+	Category puppet = new Category();
 
 	@Test
 	public void openCatalogTest() {
@@ -83,11 +83,11 @@ public class BookTests {
 	}
 
 	public void loadFakeBase() {
-		puppet.book.add(new Question(1, "Name_1", "short_information_1",
+		puppet.category.add(new Project(1, "Name_1", "short_information_1",
 				"TYPE_A", 100, Calendar.getInstance(), "Story_1", "URL_1"));
-		puppet.book.add(new Question(2, "Name_2", "short_information_2",
+		puppet.category.add(new Project(2, "Name_2", "short_information_2",
 				"TYPE_A", 100, Calendar.getInstance(), "Story_2", "URL_2"));
-		puppet.book.add(new Question(3, "Name_3", "short_information_3",
+		puppet.category.add(new Project(3, "Name_3", "short_information_3",
 				"TYPE_B", 100, Calendar.getInstance(), "Story_3", "URL_3"));
 	}
 }

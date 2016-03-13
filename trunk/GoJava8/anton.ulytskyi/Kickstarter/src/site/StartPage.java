@@ -1,12 +1,17 @@
 package site;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
-import categories.Book;
+import categories.Category;
+import categories.MemoryCard;
 
 public class StartPage extends Page{
 	
-	public StartPage(Book kickstarter) {
+	public StartPage(Category kickstarter) {
 		super(kickstarter);
 	}
 	@Override
@@ -41,16 +46,29 @@ public class StartPage extends Page{
 		console.write(DECORATION);
 }
 	private String chooseQuote() {
-
-		String quotes[]={"Great minds are always feared by lesser minds.",
-				"I cannot teach anybody anything. I can only make them think",
-				"Write what you know. That should leave you with a lot of free time.",
-				"Last night I lost the world, and gained the universe.",
-				"People don't care how much you know until they know how much you care"};
 		
+		ArrayList <String> quotes = new ArrayList<String>();
+		MemoryCard mc = new MemoryCard();
+		if(mc.switcher == true){
+		try (BufferedReader br = new BufferedReader(new FileReader("source/MemoryCardOfQuotes.txt"))) {
+			String quote = "";
+			for (; (quote = br.readLine()) != null;) {
+				quotes.add(quote);
+			}
+		} catch (IOException e) {
+		
+			return "";
+		}	
+		}else{	
+		quotes.add("Great minds are always feared by lesser minds.");
+		quotes.add("I cannot teach anybody anything. I can only make them think");
+		quotes.add("Write what you know. That should leave you with a lot of free time.");
+		quotes.add("Last night I lost the world, and gained the universe.");
+		quotes.add("People don't care how much you know until they know how much you care");
+		}
 		Random randomGenerator = new Random();
-		int choice = randomGenerator.nextInt(quotes.length);
+		int choice = randomGenerator.nextInt(quotes.size());
 
-		return quotes[choice];
+		return quotes.get(choice);
 	}
 }

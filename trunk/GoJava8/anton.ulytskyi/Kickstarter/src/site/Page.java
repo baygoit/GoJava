@@ -1,10 +1,10 @@
 package site;
 
-import categories.Book;
+import categories.Category;
 import usermanager.ConsoleManager;
 
 public abstract class Page {
-	Page(Book kickstarter){
+	Page(Category kickstarter){
 		this.kickstarter = kickstarter;
 	}
 	
@@ -20,7 +20,7 @@ public abstract class Page {
 
 	public ConsoleManager console = new ConsoleManager();
 	public Page direction;
-	public Book kickstarter;
+	public Category kickstarter;
 
 	public abstract void openPage();
 
