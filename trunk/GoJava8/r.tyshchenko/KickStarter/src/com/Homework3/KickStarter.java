@@ -1,11 +1,16 @@
 package com.Homework3;
 
+
+import com.Homework3.File.QuotsFile;
+
 import java.util.*;
 
 public class KickStarter {
 
     private Categories categories;
     private Progects progects;
+   // private static String fileName1 = "/home/roman/ROMA/Java/a.txt";
+
 
 
     public KickStarter(Categories categories, Progects progects) {
@@ -13,8 +18,12 @@ public class KickStarter {
         this.progects = progects;
     }
     public void run() {
-        GetQuotes generator = new GetQuotes();
-        generator.getRandomQuotes();
+
+//        GetQuotes generator = new GetQuotes();
+//        generator.getRandomQuotes();
+        QuotsFile quotsFile = new QuotsFile();
+        quotsFile.quotesWhisFile();
+       // generator.quotesWhisFile();
         System.out.println();
         askKategory();
         int menuIndex = selectMenu();

@@ -19,8 +19,8 @@ public class Kickstarter {
 	private void start() {
 		QuoteDao quoteDao = new QuoteDaoFile();
 		quoteDao.fillQuotes();
-		CategorySource categorySource = new CategorySource();
-		ProjectSource projectSource = new ProjectSource(categorySource);
+		CategoryDao categorySource = new CategoryDao();
+		ProjectDao projectSource = new ProjectDao(categorySource);
 
 		io.println(quoteDao.getRandomQuote());
 

@@ -19,7 +19,7 @@ public class QuoteDaoFile extends QuoteDao {
 			String line;
 			while ((line = is.readLine()) != null) {
 				String[] quoteParts = line.split(" ");
-				Quote quote = new Quote(quoteParts[1], quoteParts[2]);
+				Quote quote = new Quote(quoteParts[0], quoteParts[1]);
 				quotes.add(quote);
 			}
 		} catch (Exception e) {

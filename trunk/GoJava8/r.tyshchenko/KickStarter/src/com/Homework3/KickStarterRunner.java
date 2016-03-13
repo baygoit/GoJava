@@ -1,10 +1,17 @@
 package com.Homework3;
 
+import java.io.FileNotFoundException;
+
 /**
  * Created by roman on 07.03.16.
  */
 public class KickStarterRunner {
-    public static void main(String[] args) {
+
+
+
+    public static void main(String[] args) throws FileNotFoundException {
+
+
         while (true) {
         Category category1 = new Category("IT");
         Category category2 = new Category("Cars");

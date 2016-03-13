@@ -2,11 +2,11 @@ package com.anmertrix;
 
 import java.util.List;
 
-public class ProjectSource {
+public class ProjectDao {
 
-	CategorySource categorySource;
+	CategoryDao categorySource;
 
-	public ProjectSource(CategorySource categorySource) {
+	public ProjectDao(CategoryDao categorySource) {
 		this.categorySource = categorySource;
 
 		Project project1 = new Project();
