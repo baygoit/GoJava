@@ -13,19 +13,22 @@ class DaoInitializer {
         MEMORY, FILES
     }
 
-    private DaoMode getDaoMode(String[] args) {
-        DaoMode daoMode = DaoMode.MEMORY;
-        if (args.length > 0) {
-            String arg1 = args[0].toUpperCase().trim();
-            if (arg1.equals(DaoMode.FILES.toString())) {
-                daoMode = DaoMode.FILES;
-            }
+    private DaoMode getDaoMode() {
+        String envVariable = System.getenv("KICKSTARTER_DAO_MODE"); 
+        if (null == envVariable) {
+            return DaoMode.MEMORY;
+        }
+        DaoMode daoMode;
+        if (envVariable.equals(DaoMode.FILES.toString())) {
+            daoMode = DaoMode.FILES;
+        } else {
+            daoMode = DaoMode.MEMORY;
         }
         return daoMode;
     }
 
-    QuoteDao initQuoteDao(String[] args) {
-        DaoMode daoMode = getDaoMode(args);
+    QuoteDao initQuoteDao() {
+        DaoMode daoMode = getDaoMode();
         QuoteDao quoteDao = null;
         if (DaoMode.FILES == daoMode) {
             try {
@@ -43,8 +46,8 @@ class DaoInitializer {
         return quoteDao;
     }
 
-    CategoryDao initCategoryDao(String[] args) {
-        DaoMode daoMode = getDaoMode(args);
+    CategoryDao initCategoryDao() {
+        DaoMode daoMode = getDaoMode();
         CategoryDao categoryDao = null;
         if (DaoMode.FILES == daoMode) {
             try {

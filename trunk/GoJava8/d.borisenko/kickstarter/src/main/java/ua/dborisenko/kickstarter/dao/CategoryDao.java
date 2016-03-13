@@ -37,7 +37,7 @@ public abstract class CategoryDao {
         return categories.get(number);
     }
 
-    public List<Category> getAll() {
+    public List<Category> getAllCategories() {
         return categories;
     }
 }

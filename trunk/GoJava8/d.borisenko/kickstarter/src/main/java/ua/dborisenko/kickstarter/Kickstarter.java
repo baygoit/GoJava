@@ -27,11 +27,11 @@ public class Kickstarter {
     private QuoteDao quoteDao;
     private View currentView;
 
-    public void run(String[] args) {
+    public void run() {
         DaoInitializer daoInitializer = new DaoInitializer();
-        quoteDao = daoInitializer.initQuoteDao(args);
-        categoryDao = daoInitializer.initCategoryDao(args);
-        currentView = new CategoriesView(categoryDao.getAll(), quoteDao.getRandomQuote());
+        quoteDao = daoInitializer.initQuoteDao();
+        categoryDao = daoInitializer.initCategoryDao();
+        currentView = new CategoriesView(categoryDao.getAllCategories(), quoteDao.getRandomQuote());
         showMainMenu();
     }
 
@@ -58,7 +58,7 @@ public class Kickstarter {
                 showError(501, "Not Implemented", "Unknown view type.");
             }
         }
-        System.out.println("Have a nice day!");
+        currentView.showHint("Goodbye! Thanks for all the fish.");
     }
 
     private void handleViewInvestmentResult(String inputData) {
@@ -96,7 +96,7 @@ public class Kickstarter {
     void handleViewCategoryResult(String inputData) {
         if (inputData.equals("0")) {
             currentCategory = null;
-            currentView = new CategoriesView(categoryDao.getAll(), quoteDao.getRandomQuote());
+            currentView = new CategoriesView(categoryDao.getAllCategories(), quoteDao.getRandomQuote());
             menuPosition = MenuPosition.CATEGORIES;
         } else {
             try {
