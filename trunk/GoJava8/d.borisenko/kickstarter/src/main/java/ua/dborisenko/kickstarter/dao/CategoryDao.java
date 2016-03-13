@@ -6,7 +6,6 @@ import java.util.List;
 import ua.dborisenko.kickstarter.domain.Category;
 
 public abstract class CategoryDao {
-
     protected List<Category> categories = new ArrayList<Category>();
 
     public abstract void fillCategories();

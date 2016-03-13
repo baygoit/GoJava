@@ -8,13 +8,12 @@ import ua.dborisenko.kickstarter.dao.QuoteDaoFile;
 import ua.dborisenko.kickstarter.dao.QuoteDaoMemory;
 
 class DaoInitializer {
-
     static enum DaoMode {
         MEMORY, FILES
     }
 
     private DaoMode getDaoMode() {
-        String envVariable = System.getenv("KICKSTARTER_DAO_MODE"); 
+        String envVariable = System.getenv("KICKSTARTER_DAO_MODE");
         if (null == envVariable) {
             return DaoMode.MEMORY;
         }

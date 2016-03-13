@@ -15,7 +15,6 @@ import ua.dborisenko.kickstarter.view.ProjectView;
 import ua.dborisenko.kickstarter.view.View;
 
 public class Kickstarter {
-
     private static enum MenuPosition {
         CATEGORIES, CATEGORY, PROJECT, INVESTMENT, EXIT
     }

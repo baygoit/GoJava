@@ -10,7 +10,6 @@ import ua.dborisenko.kickstarter.domain.Project;
 import ua.dborisenko.kickstarter.domain.Question;
 
 public class CategoryDaoFile extends CategoryDao {
-
     private static final String ENTITY_SEPARATOR = "#";
     private String categoriesFileName = "./src/main/resources/categories.txt";
     private String projectsFileName = "./src/main/resources/projects.txt";
@@ -24,11 +23,11 @@ public class CategoryDaoFile extends CategoryDao {
     public void setProjectsFileName(String fileName) {
         this.projectsFileName = fileName;
     }
-    
+
     public void setQuestionsFileName(String fileName) {
         this.questionsFileName = fileName;
     }
-    
+
     public void setInvestmentsFileName(String fileName) {
         this.investmentsFileName = fileName;
     }
@@ -55,7 +54,7 @@ public class CategoryDaoFile extends CategoryDao {
             throw new IllegalStateException("Cannot read questions from file");
         }
     }
-    
+
     void addInvestments() {
         try (BufferedReader is = new BufferedReader(new FileReader(investmentsFileName))) {
             String line;
@@ -79,7 +78,7 @@ public class CategoryDaoFile extends CategoryDao {
             throw new IllegalStateException("Cannot read questions from file");
         }
     }
-    
+
     void addProjects() {
         try (BufferedReader is = new BufferedReader(new FileReader(projectsFileName))) {
             String line;

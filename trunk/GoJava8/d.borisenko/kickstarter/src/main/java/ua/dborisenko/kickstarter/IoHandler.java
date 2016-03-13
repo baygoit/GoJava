@@ -18,7 +18,7 @@ public class IoHandler {
         return input;
     }
 
-    public void write(String outputString) {
-        System.out.print(outputString);
+    public void write(String outputData) {
+        System.out.print(outputData);
     }
 }

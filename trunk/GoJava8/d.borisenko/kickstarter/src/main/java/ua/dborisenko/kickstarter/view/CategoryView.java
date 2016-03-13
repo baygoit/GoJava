@@ -4,7 +4,7 @@ import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Project;
 
 public class CategoryView extends View {
-    
+
     public CategoryView(Category category) {
         addContentString(HEADER_BLOCK);
         addContentString("Category: " + category.getName());
