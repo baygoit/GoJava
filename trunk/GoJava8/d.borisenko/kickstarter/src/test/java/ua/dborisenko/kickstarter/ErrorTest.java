@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ua.dborisenko.kickstarter.domain.Error;
+
 public class ErrorTest {
 
     private static Error error = new Error(418, "I'm a teapot", "Test error description.");

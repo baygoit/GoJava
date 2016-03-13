@@ -1,8 +1,8 @@
 package com.sandarovich.kickstarter.menu;
 
-import com.sandarovich.kickstarter.category.Categories;
+import com.sandarovich.kickstarter.category.CategorySource;
 import com.sandarovich.kickstarter.io.IO;
-import com.sandarovich.kickstarter.project.Projects;
+import com.sandarovich.kickstarter.project.ProjectSource;
 
 /**
  * @author Olexander Kolodiazhny 2016
@@ -10,7 +10,7 @@ import com.sandarovich.kickstarter.project.Projects;
 
 public class MainMenu extends AbstractMenu {
 
-    public MainMenu(IO console, Categories categories, Projects projects) {
+    public MainMenu(IO console, CategorySource categories, ProjectSource projects) {
         super(console, categories, projects);
         menuId = 0;
         headerLabel = "Main Menu:";

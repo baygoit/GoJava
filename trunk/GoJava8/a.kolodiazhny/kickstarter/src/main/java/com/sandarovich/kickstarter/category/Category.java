@@ -1,5 +1,9 @@
 package com.sandarovich.kickstarter.category;
 
+import com.sandarovich.kickstarter.project.Project;
+
+import java.util.List;
+
 /**
  * @author Olexander Kolodiazhny
  */
@@ -8,6 +12,7 @@ public class Category {
 
     private final int id;
     private final String name;
+    private List<Project> projects;
 
     public Category(int id, String name) {
         this.id = id;
@@ -19,6 +24,6 @@ public class Category {
     }
     @Override
     public String toString() {
-        return name;
+        return id + " -> " + name;
     }
 }

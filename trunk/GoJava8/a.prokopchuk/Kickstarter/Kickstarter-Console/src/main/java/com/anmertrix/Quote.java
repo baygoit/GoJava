@@ -1,15 +1,20 @@
 package com.anmertrix;
 
 public class Quote {
-	
-	public String quoteText;
-	
-	
-	public Quote(String quoteText) {
+
+	private String author;
+	private String quoteText;
+
+	public Quote(String author, String quoteText) {
+		this.author = author;
 		this.quoteText = quoteText;
 	}
 
 	public String getQuoteText() {
 		return quoteText;
+	}
+
+	public String getAuthor() {
+		return author;
 	}
 }

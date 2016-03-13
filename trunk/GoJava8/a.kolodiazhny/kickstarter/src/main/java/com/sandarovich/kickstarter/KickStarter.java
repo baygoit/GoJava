@@ -1,12 +1,12 @@
 package com.sandarovich.kickstarter;
 
-import com.sandarovich.kickstarter.category.Categories;
-import com.sandarovich.kickstarter.category.CategoriesBuilder;
+import com.sandarovich.kickstarter.category.CategorySource;
+import com.sandarovich.kickstarter.category.CategorySourceBuilder;
 import com.sandarovich.kickstarter.io.IO;
 import com.sandarovich.kickstarter.menu.AbstractMenu;
 import com.sandarovich.kickstarter.menu.MainMenu;
 import com.sandarovich.kickstarter.project.ProjectBuilder;
-import com.sandarovich.kickstarter.project.Projects;
+import com.sandarovich.kickstarter.project.ProjectSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,17 +27,16 @@ public class KickStarter {
     }
 
     public void start() {
-        Intro intro = new Intro(console);
-        intro.showApplicationAuthor();
-        intro.showQuote();
-        Categories categories = setupAllCategories();
-        Projects projects = setupAllProjects(categories);
+        showApplicationAuthor();
+        showQuote();
+        CategorySource categories = setupAllCategories();
+        ProjectSource projects = setupAllProjects(categories);
         AbstractMenu menu = new MainMenu(console, categories, projects);
         menu.show();
         menu.performAction(menu.getUserChoice());
     }
 
-    private Projects setupAllProjects(Categories categories) {
+    private ProjectSource setupAllProjects(CategorySource categories) {
         ProjectBuilder builder = new ProjectBuilder();
         builder.forId(101)
                 .andCategory(categories.get(0))
@@ -72,13 +71,26 @@ public class KickStarter {
         return builder.getProjects();
     }
 
-    private Categories setupAllCategories() {
+    private CategorySource setupAllCategories() {
         List<String> categories = new ArrayList<String>();
         categories.add("IT");
         categories.add("Tourism");
         categories.add("Garden");
-        CategoriesBuilder builder = new CategoriesBuilder();
+        CategorySourceBuilder builder = new CategorySourceBuilder();
         builder.createAll(categories);
         return builder.get();
+    }
+
+    public void showApplicationAuthor() {
+        console.write("=======================================");
+        console.write("     Kickstarter emulator v." + KickStarter.APPLICATION_VERSION);
+        console.write("     by O.Kolodiazhny 2016      ");
+        console.write("=======================================");
+    }
+
+    public void showQuote() {
+        QuotaSource quotaSource = new QuotaSource();
+        quotaSource.init();
+        console.write(quotaSource.getRandomQuota());
     }
 }
