@@ -3,17 +3,12 @@ package com.anmertrix;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryDao {
+public abstract class CategoryDao {
 
 	List<Category> categories = new ArrayList<Category>();
 
 	public CategoryDao() {
-		categories.add(new Category("Sport"));
-		categories.add(new Category("IT"));
-		categories.add(new Category("Medicine"));
-		categories.add(new Category("Photo"));
-		categories.add(new Category("Music"));
-		categories.add(new Category("Video"));
+		
 	}
 
 	public List<Category> getCategories() {
@@ -38,5 +33,9 @@ public class CategoryDao {
 	public String getNameSelectedCategory(int n) {
 		return categories.get(n).getName();
 	}
+
+	public abstract void fillCategory();
+	 
+	
 
 }

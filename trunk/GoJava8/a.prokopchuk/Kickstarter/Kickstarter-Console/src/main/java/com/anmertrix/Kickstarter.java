@@ -1,5 +1,6 @@
 package com.anmertrix;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Kickstarter {
@@ -10,22 +11,37 @@ public class Kickstarter {
 		this.io = io;
 	}
 
-	public static void main(String[] args) {
-		Kickstarter run = new Kickstarter(new ConsoleIO());
-		run.start();
+	public static void main(String[] args) throws IOException {
+		new Kickstarter(new ConsoleIO()).run();
 
 	}
 
-	private void start() {
-		QuoteDao quoteDao = new QuoteDaoFile();
+	private void run() throws IOException {
+		String read_env = System.getenv("READ_OBJECT_KICKSTARTER");
+		QuoteDao quoteDao;
+		CategoryDao categoryDao;
+		if (read_env.equals("file")) {
+			quoteDao = new QuoteDaoFile();
+			categoryDao = new CategoryDaoFile();
+		} else if (read_env.equals("memory")) {
+			quoteDao = new QuoteDaoMemory();
+			categoryDao = new CategoryDaoMemory();
+		} else {
+			System.out.println("Add environment variable READ_OBJECT_KICKSTARTER.");
+			return;
+		}
 		quoteDao.fillQuotes();
-		CategoryDao categorySource = new CategoryDao();
-		ProjectDao projectSource = new ProjectDao(categorySource);
+		categoryDao.fillCategory();
+		
+		ProjectDao projectSource = new ProjectDaoMemory(categoryDao);
+		if (read_env.equals("memory")) {
+			projectSource.fillCategory();;
+		}
 
 		io.println(quoteDao.getRandomQuote());
 
 		while (true) {
-			io.println(categorySource.getCategoriesMenu());
+			io.println(categoryDao.getCategoriesMenu());
 
 			int numberCategory = 0;
 			numberCategory = getParseInputNumber(io.readConsole());
@@ -34,7 +50,7 @@ public class Kickstarter {
 			} else {
 				try {
 					io.print("You select: ");
-					io.println(categorySource
+					io.println(categoryDao
 							.getNameSelectedCategory(numberCategory));
 				} catch (Exception e) {
 					System.out.println("There is no such category!");
@@ -58,7 +74,7 @@ public class Kickstarter {
 					int numberMenuItem = 0;
 					numberMenuItem = getParseInputNumber(io.readConsole());
 
-					Category category = categorySource
+					Category category = categoryDao
 							.getCategory(numberCategory);
 					List<Project> projects = category.getProjects();
 					Project project = projects.get(numberProject);

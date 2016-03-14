@@ -11,6 +11,6 @@ public class QuoteDaoTest {
 		QuoteDao quoteSource = new QuoteDaoFile();
 		Quote quote = new Quote("author", "test");
 		quoteSource.setQuote(quote);
-		assertEquals("test", quoteSource.getRandomQuote());
+		assertEquals("test(author)", quoteSource.getRandomQuote());
 	}
 }

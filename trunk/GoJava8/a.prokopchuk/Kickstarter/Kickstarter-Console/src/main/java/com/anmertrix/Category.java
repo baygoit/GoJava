@@ -3,9 +3,17 @@ package com.anmertrix;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+ 
+@JsonAutoDetect
 public class Category {
+	
+	public Category() {
+		
+	}
 
 	private String name;
+	
 	private List<Project> projects = new ArrayList<Project>();
 
 	public Category(String name) {
@@ -14,6 +22,10 @@ public class Category {
 
 	public String getName() {
 		return name;
+	}
+	
+	public void getName(String name) {
+		this.name = name;
 	}
 
 	public void setProject(Project project) {
