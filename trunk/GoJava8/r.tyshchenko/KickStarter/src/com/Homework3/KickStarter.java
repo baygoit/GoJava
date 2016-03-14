@@ -19,11 +19,11 @@ public class KickStarter {
     }
     public void run() {
 
-//        GetQuotes generator = new GetQuotes();
-//        generator.getRandomQuotes();
-        QuotsFile quotsFile = new QuotsFile();
-        quotsFile.quotesWhisFile();
-       // generator.quotesWhisFile();
+        GetQuotes generator = new GetQuotes();
+        generator.getRandomQuotes();
+//        QuotsFile quotsFile = new QuotsFile();
+//        quotsFile.quotesWhisFile();
+
         System.out.println();
         askKategory();
         int menuIndex = selectMenu();
