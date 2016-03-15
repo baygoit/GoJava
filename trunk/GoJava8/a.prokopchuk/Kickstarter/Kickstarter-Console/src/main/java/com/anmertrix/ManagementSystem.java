@@ -11,31 +11,24 @@ import java.util.List;
 import com.anmertrix.dao.CategoryDao;
 
 public class ManagementSystem {
+	
 	private static Connection connection;
-
-    // Для шаблона Singletone статическая переменная
-    private static ManagementSystem instance;
-
-    // закрытый конструктор
-    private ManagementSystem() throws Exception {
+    
+    protected ManagementSystem() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://s14.thehost.com.ua/kickstarter";
             connection = DriverManager.getConnection(url, "kickstarter", "kickstarter");
         } catch (ClassNotFoundException e) {
-            throw new Exception(e);
+           // no
         } catch (SQLException e) {
-            throw new Exception(e);
+        	// no
         }
+        
     }
 
-    // метод getInstance - проверяет, инициализирована ли статическая
-    // переменная (в случае надобности делает это) и возвращает ее
-    public static synchronized ManagementSystem getInstance() throws Exception {
-        if (instance == null) {
-            instance = new ManagementSystem();
-        }
-        return instance;
+    public synchronized ManagementSystem getInstance() throws Exception {
+        return this;
     }
     
     public String getRandomQuote() {

@@ -1,6 +1,6 @@
 package com.anmertrix.dao.sql;
 
-import com.anmertrix.ManagementSystem;
+import com.anmertrix.Kickstarter;
 import com.anmertrix.dao.QuoteDao;
 
 public class QuoteDaoSql extends QuoteDao {
@@ -13,7 +13,7 @@ public class QuoteDaoSql extends QuoteDao {
 	@Override
 	public String getRandomQuote() {
 		try {
-			return ManagementSystem.getInstance().getRandomQuote();
+			return Kickstarter.ms.getInstance().getRandomQuote();
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
