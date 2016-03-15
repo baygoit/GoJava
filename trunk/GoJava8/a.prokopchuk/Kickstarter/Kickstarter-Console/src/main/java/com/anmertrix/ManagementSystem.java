@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.anmertrix.dao.CategoryDao;
+
 public class ManagementSystem {
 	private static Connection connection;
 
@@ -65,5 +67,37 @@ public class ManagementSystem {
 		}
 		
 		return categories;
+	}
+    
+    public List<Project> getProjects(CategoryDao categoryDao) {
+    	
+    	List<Project> projects = new ArrayList<Project>();
+    	
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT category_id, name, description, required_budget, gathered_budget, days_left, history, url FROM project");
+			while(rs.next()) {
+				int category_id = rs.getInt("category_id");
+				String name = rs.getString("name");
+				String description = rs.getString("description");
+				int required_budget = rs.getInt("required_budget");
+				int gathered_budget = rs.getInt("gathered_budget");
+				int days_left = rs.getInt("days_left");
+				String history = rs.getString("history");
+				String url = rs.getString("url");
+				
+				Project project = new Project();
+				project.setProjectData(name, description, required_budget, gathered_budget, days_left, history);
+				project.setURL(url);
+				
+				
+				categoryDao.getCategories().get(category_id - 1).setProject(project);
+				
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+		
+		return projects;
 	}
 }

@@ -12,6 +12,7 @@ import com.anmertrix.dao.memory.CategoryDaoMemory;
 import com.anmertrix.dao.memory.ProjectDaoMemory;
 import com.anmertrix.dao.memory.QuoteDaoMemory;
 import com.anmertrix.dao.sql.CategoryDaoSql;
+import com.anmertrix.dao.sql.ProjectDaoSql;
 import com.anmertrix.dao.sql.QuoteDaoSql;
 
 public class Kickstarter {
@@ -30,7 +31,7 @@ public class Kickstarter {
 	private void run() throws IOException {
 		String read_env = System.getenv("READ_OBJECT_KICKSTARTER");
 		QuoteDao quoteDao;
-		System.out.println(read_env);
+		System.out.println("Read data: " + read_env);
 		CategoryDao categoryDao;
 		if (read_env.equals("file")) {
 			quoteDao = new QuoteDaoFile();
@@ -50,6 +51,10 @@ public class Kickstarter {
 		
 		ProjectDao projectSource = new ProjectDaoMemory(categoryDao);
 		if (read_env.equals("memory")) {
+			projectSource = new ProjectDaoMemory(categoryDao);
+			projectSource.fillCategory();
+		} else if (read_env.equals("sql")) {
+			projectSource = new ProjectDaoSql(categoryDao);
 			projectSource.fillCategory();
 		}
 
