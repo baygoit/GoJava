@@ -4,7 +4,7 @@ import com.anmertrix.Quote;
 import com.anmertrix.dao.QuoteDao;
 
 public class QuoteDaoMemory extends QuoteDao {
-
+	
 	public void fillQuotes() {
 		quotes.add(new Quote("author1(Memory)", "Quote1"));
 		quotes.add(new Quote("author2(Memory)", "Quote2"));

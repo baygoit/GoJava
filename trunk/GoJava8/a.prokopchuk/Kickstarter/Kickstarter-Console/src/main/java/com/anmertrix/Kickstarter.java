@@ -11,6 +11,8 @@ import com.anmertrix.dao.file.QuoteDaoFile;
 import com.anmertrix.dao.memory.CategoryDaoMemory;
 import com.anmertrix.dao.memory.ProjectDaoMemory;
 import com.anmertrix.dao.memory.QuoteDaoMemory;
+import com.anmertrix.dao.sql.CategoryDaoSql;
+import com.anmertrix.dao.sql.QuoteDaoSql;
 
 public class Kickstarter {
 
@@ -36,6 +38,9 @@ public class Kickstarter {
 		} else if (read_env.equals("memory")) {
 			quoteDao = new QuoteDaoMemory();
 			categoryDao = new CategoryDaoMemory();
+		} else if (read_env.equals("sql")) {
+			quoteDao = new QuoteDaoSql();
+			categoryDao = new CategoryDaoSql();
 		} else {
 			System.out.println("Add environment variable READ_OBJECT_KICKSTARTER.");
 			return;
