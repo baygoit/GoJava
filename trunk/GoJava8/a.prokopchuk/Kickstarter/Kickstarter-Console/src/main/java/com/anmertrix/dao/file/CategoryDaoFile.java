@@ -1,9 +1,11 @@
-package com.anmertrix;
+package com.anmertrix.dao.file;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import com.anmertrix.Category;
+import com.anmertrix.dao.CategoryDao;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;

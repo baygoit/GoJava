@@ -1,6 +1,7 @@
-package com.anmertrix;
+package com.anmertrix.dao.memory;
 
 import com.anmertrix.Quote;
+import com.anmertrix.dao.QuoteDao;
 
 public class QuoteDaoMemory extends QuoteDao {
 

@@ -3,6 +3,15 @@ package com.anmertrix;
 import java.io.IOException;
 import java.util.List;
 
+import com.anmertrix.dao.CategoryDao;
+import com.anmertrix.dao.ProjectDao;
+import com.anmertrix.dao.QuoteDao;
+import com.anmertrix.dao.file.CategoryDaoFile;
+import com.anmertrix.dao.file.QuoteDaoFile;
+import com.anmertrix.dao.memory.CategoryDaoMemory;
+import com.anmertrix.dao.memory.ProjectDaoMemory;
+import com.anmertrix.dao.memory.QuoteDaoMemory;
+
 public class Kickstarter {
 
 	private IO io;
@@ -19,6 +28,7 @@ public class Kickstarter {
 	private void run() throws IOException {
 		String read_env = System.getenv("READ_OBJECT_KICKSTARTER");
 		QuoteDao quoteDao;
+		System.out.println(read_env);
 		CategoryDao categoryDao;
 		if (read_env.equals("file")) {
 			quoteDao = new QuoteDaoFile();
@@ -35,7 +45,7 @@ public class Kickstarter {
 		
 		ProjectDao projectSource = new ProjectDaoMemory(categoryDao);
 		if (read_env.equals("memory")) {
-			projectSource.fillCategory();;
+			projectSource.fillCategory();
 		}
 
 		io.println(quoteDao.getRandomQuote());
@@ -46,6 +56,7 @@ public class Kickstarter {
 			int numberCategory = 0;
 			numberCategory = getParseInputNumber(io.readConsole());
 			if (numberCategory == -1) {
+				io.print("Bye..!");
 				break;
 			} else {
 				try {
@@ -60,7 +71,7 @@ public class Kickstarter {
 
 			while (true) {
 				io.println(projectSource.getProjectList(numberCategory));
-
+				io.println("______________________________");
 				int numberProject = 0;
 				numberProject = getParseInputNumber(io.readConsole());
 				if (numberProject == -1) {
@@ -84,11 +95,25 @@ public class Kickstarter {
 						io.print("Enter your guestion: ");
 						String guestion = io.readConsole();
 						project.setQuestion(guestion);
+						io.println("______________________________");
 						continue;
 
 					} else if (numberMenuItem == 1) {
+						io.println("Enter your amount of money to invest:  ");
+						int amountNumber = 0;
+						amountNumber = getParseInputNumber(io.readConsole());
+						if (amountNumber == -1) {
+							break;
+						} 
+						project.setGatheredBudget(amountNumber);
+						io.println("______________________________");
+						continue;
+
+					} else if (numberMenuItem == 2) {
 						io.println("Select one or enter 0 - to exit:  ");
-						io.println("1 - 1$     2 - 10$     3 - 40$ ");
+						io.println("1 - 1$ - BIG THANK!");
+						io.println("2 - 20$ - Solo supporter!");
+						io.println("3 - 40$ - Calm supporter!");
 						int numberCount = 0;
 						numberCount = getParseInputNumber(io.readConsole());
 						if (numberCount == -1) {
@@ -100,6 +125,7 @@ public class Kickstarter {
 						} else if (numberCount == 2) {
 							project.setGatheredBudget(40);
 						}
+						io.println("______________________________");
 						continue;
 
 					} else if (numberMenuItem == 2) {

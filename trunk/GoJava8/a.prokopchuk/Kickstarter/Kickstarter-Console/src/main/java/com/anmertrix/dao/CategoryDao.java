@@ -1,11 +1,13 @@
-package com.anmertrix;
+package com.anmertrix.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.anmertrix.Category;
+
 public abstract class CategoryDao {
 
-	List<Category> categories = new ArrayList<Category>();
+	protected List<Category> categories = new ArrayList<Category>();
 
 	public CategoryDao() {
 		
@@ -35,7 +37,5 @@ public abstract class CategoryDao {
 	}
 
 	public abstract void fillCategory();
-	 
 	
-
 }

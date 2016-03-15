@@ -1,4 +1,8 @@
-package com.anmertrix;
+package com.anmertrix.dao.memory;
+
+import com.anmertrix.Project;
+import com.anmertrix.dao.CategoryDao;
+import com.anmertrix.dao.ProjectDao;
 
 public class ProjectDaoMemory extends ProjectDao {
 	

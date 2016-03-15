@@ -1,10 +1,13 @@
-package com.anmertrix;
+package com.anmertrix.dao;
 
 import java.util.List;
 
+import com.anmertrix.Category;
+import com.anmertrix.Project;
+
 public abstract class ProjectDao {
 
-	CategoryDao categoryDao;
+	protected CategoryDao categoryDao;
 
 	public ProjectDao(CategoryDao categoryDao) {
 		this.categoryDao = categoryDao;
@@ -58,10 +61,12 @@ public abstract class ProjectDao {
 		result.append("Please, select menu item or enter 0 - to exit: \n")
 				.append("1 - Ask a question").append("    ")
 				.append("2 - Invest project").append("    ")
-				.append("3 - Return to project list");
+				.append("3 - Rewards").append("    ")
+				.append("4 - Return to project list");
 
 		return result.toString().trim();
 	}
 	
 	public abstract void fillCategory();
+	
 }

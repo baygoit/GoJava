@@ -1,8 +1,12 @@
-package com.anmertrix;
+package com.anmertrix.dao;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import com.anmertrix.Quote;
+import com.anmertrix.dao.QuoteDao;
+import com.anmertrix.dao.file.QuoteDaoFile;
 
 public class QuoteDaoTest {
 	

@@ -1,4 +1,7 @@
-package com.anmertrix;
+package com.anmertrix.dao.memory;
+
+import com.anmertrix.Category;
+import com.anmertrix.dao.CategoryDao;
 
 
 public class CategoryDaoMemory extends CategoryDao {

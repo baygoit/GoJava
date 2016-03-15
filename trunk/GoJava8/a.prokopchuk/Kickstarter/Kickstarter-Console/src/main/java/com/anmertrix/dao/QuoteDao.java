@@ -1,12 +1,14 @@
-package com.anmertrix;
+package com.anmertrix.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.anmertrix.Quote;
+
 public abstract class QuoteDao {
 
-	List<Quote> quotes = new ArrayList<Quote>();
+	protected List<Quote> quotes = new ArrayList<Quote>();
 
 	public String getRandomQuote() {
 		Random random = new Random();

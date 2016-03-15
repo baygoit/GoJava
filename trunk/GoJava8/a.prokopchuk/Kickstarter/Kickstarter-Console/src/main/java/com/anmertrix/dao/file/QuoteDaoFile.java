@@ -1,9 +1,10 @@
-package com.anmertrix;
+package com.anmertrix.dao.file;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 
 import com.anmertrix.Quote;
+import com.anmertrix.dao.QuoteDao;
 
 public class QuoteDaoFile extends QuoteDao {
 
