@@ -1,7 +1,7 @@
 [ {
-  "name" : "Sport",
+  "name" : "Sport(file)",
   "projects" : [ {
-    "name" : "Cube soccer ball",
+    "name" : "Cube soccer ball(file)",
     "description" : "Test description",
     "requiredBudget" : 2000,
     "gatheredBudget" : 1000,
