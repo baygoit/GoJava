@@ -38,7 +38,7 @@ public class ProjectDaoMemory extends ProjectDao {
 		categoryDao.getCategories().get(2).setProject(project5);
 
 		Project project6 = new Project();
-		project5.setProjectData("ARoglyph", "Test description", 5600, 100, 13,
+		project5.setProjectData("ARoglyph", "Test description", 5600, 100, 11,
 				"Test history");
 		categoryDao.getCategories().get(2).setProject(project6);
 
