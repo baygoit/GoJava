@@ -1,9 +1,9 @@
 package site;
 
-import categories.Book;
+import categories.Category;
 
 public class CategoryPage extends Page {
-	CategoryPage(Book kickstarter) {
+	CategoryPage(Category kickstarter) {
 		super(kickstarter);
 }
 

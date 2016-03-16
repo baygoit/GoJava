@@ -1,10 +1,11 @@
 package site;
 
-import categories.Book;
+
+import categories.Category;
 
 public class ListPage extends Page {
 
-	ListPage(Book kickstarter) {
+	ListPage(Category kickstarter) {
 		super(kickstarter);
 		
 	}
@@ -19,7 +20,7 @@ public class ListPage extends Page {
 
 			int numberChoice = Integer.parseInt(userChoice);
 
-			if (numberChoice <= kickstarter.book.size()) {
+			if (numberChoice <= kickstarter.category.size()) {
 
 				direction = new ProfilePage(numberChoice, kickstarter);
 				direction.openPage();

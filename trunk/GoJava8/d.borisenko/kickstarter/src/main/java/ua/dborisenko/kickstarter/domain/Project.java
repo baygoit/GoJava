@@ -14,6 +14,7 @@ public class Project {
     private String rewardInfo;
     private List<Investment> investments = new ArrayList<Investment>();
     private List<Question> questions = new ArrayList<Question>();
+
     public void setId(int id) {
         this.id = id;
     }
@@ -85,19 +86,19 @@ public class Project {
     public void setRewardInfo(String rewardInfo) {
         this.rewardInfo = rewardInfo;
     }
-    
+
     public List<Question> getQuestions() {
         return questions;
     }
-    
+
     public void addQuestion(Question question) {
         questions.add(question);
     }
-    
+
     public List<Investment> getInvestments() {
         return investments;
     }
-    
+
     public void addInvestment(Investment investment) {
         investments.add(investment);
     }

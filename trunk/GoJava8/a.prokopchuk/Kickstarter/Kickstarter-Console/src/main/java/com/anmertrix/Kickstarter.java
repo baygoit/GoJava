@@ -1,6 +1,16 @@
 package com.anmertrix;
 
+import java.io.IOException;
 import java.util.List;
+
+import com.anmertrix.dao.CategoryDao;
+import com.anmertrix.dao.ProjectDao;
+import com.anmertrix.dao.QuoteDao;
+import com.anmertrix.dao.file.CategoryDaoFile;
+import com.anmertrix.dao.file.QuoteDaoFile;
+import com.anmertrix.dao.memory.CategoryDaoMemory;
+import com.anmertrix.dao.memory.ProjectDaoMemory;
+import com.anmertrix.dao.memory.QuoteDaoMemory;
 
 public class Kickstarter {
 
@@ -10,31 +20,48 @@ public class Kickstarter {
 		this.io = io;
 	}
 
-	public static void main(String[] args) {
-		Kickstarter run = new Kickstarter(new ConsoleIO());
-		run.start();
+	public static void main(String[] args) throws IOException {
+		new Kickstarter(new ConsoleIO()).run();
 
 	}
 
-	private void start() {
-		QuoteDao quoteDao = new QuoteDaoFile();
+	private void run() throws IOException {
+		String read_env = System.getenv("READ_OBJECT_KICKSTARTER");
+		QuoteDao quoteDao;
+		System.out.println(read_env);
+		CategoryDao categoryDao;
+		if (read_env.equals("file")) {
+			quoteDao = new QuoteDaoFile();
+			categoryDao = new CategoryDaoFile();
+		} else if (read_env.equals("memory")) {
+			quoteDao = new QuoteDaoMemory();
+			categoryDao = new CategoryDaoMemory();
+		} else {
+			System.out.println("Add environment variable READ_OBJECT_KICKSTARTER.");
+			return;
+		}
 		quoteDao.fillQuotes();
-		CategorySource categorySource = new CategorySource();
-		ProjectSource projectSource = new ProjectSource(categorySource);
+		categoryDao.fillCategory();
+		
+		ProjectDao projectSource = new ProjectDaoMemory(categoryDao);
+		if (read_env.equals("memory")) {
+			projectSource.fillCategory();
+		}
 
 		io.println(quoteDao.getRandomQuote());
 
 		while (true) {
-			io.println(categorySource.getCategoriesMenu());
+			io.println(categoryDao.getCategoriesMenu());
 
 			int numberCategory = 0;
 			numberCategory = getParseInputNumber(io.readConsole());
 			if (numberCategory == -1) {
+				io.print("Bye..!");
 				break;
 			} else {
 				try {
 					io.print("You select: ");
-					io.println(categorySource
+					io.println(categoryDao
 							.getNameSelectedCategory(numberCategory));
 				} catch (Exception e) {
 					System.out.println("There is no such category!");
@@ -44,7 +71,7 @@ public class Kickstarter {
 
 			while (true) {
 				io.println(projectSource.getProjectList(numberCategory));
-
+				io.println("______________________________");
 				int numberProject = 0;
 				numberProject = getParseInputNumber(io.readConsole());
 				if (numberProject == -1) {
@@ -58,7 +85,7 @@ public class Kickstarter {
 					int numberMenuItem = 0;
 					numberMenuItem = getParseInputNumber(io.readConsole());
 
-					Category category = categorySource
+					Category category = categoryDao
 							.getCategory(numberCategory);
 					List<Project> projects = category.getProjects();
 					Project project = projects.get(numberProject);
@@ -68,11 +95,25 @@ public class Kickstarter {
 						io.print("Enter your guestion: ");
 						String guestion = io.readConsole();
 						project.setQuestion(guestion);
+						io.println("______________________________");
 						continue;
 
 					} else if (numberMenuItem == 1) {
+						io.println("Enter your amount of money to invest:  ");
+						int amountNumber = 0;
+						amountNumber = getParseInputNumber(io.readConsole());
+						if (amountNumber == -1) {
+							break;
+						} 
+						project.setGatheredBudget(amountNumber);
+						io.println("______________________________");
+						continue;
+
+					} else if (numberMenuItem == 2) {
 						io.println("Select one or enter 0 - to exit:  ");
-						io.println("1 - 1$     2 - 10$     3 - 40$ ");
+						io.println("1 - 1$ - BIG THANK!");
+						io.println("2 - 20$ - Solo supporter!");
+						io.println("3 - 40$ - Calm supporter!");
 						int numberCount = 0;
 						numberCount = getParseInputNumber(io.readConsole());
 						if (numberCount == -1) {
@@ -84,6 +125,7 @@ public class Kickstarter {
 						} else if (numberCount == 2) {
 							project.setGatheredBudget(40);
 						}
+						io.println("______________________________");
 						continue;
 
 					} else if (numberMenuItem == 2) {

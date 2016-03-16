@@ -6,7 +6,6 @@ import java.util.List;
 import ua.dborisenko.kickstarter.domain.Category;
 
 public abstract class CategoryDao {
-
     protected List<Category> categories = new ArrayList<Category>();
 
     public abstract void fillCategories();
@@ -37,7 +36,7 @@ public abstract class CategoryDao {
         return categories.get(number);
     }
 
-    public List<Category> getAll() {
+    public List<Category> getAllCategories() {
         return categories;
     }
 }

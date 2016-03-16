@@ -20,7 +20,7 @@ public class ProjectView extends View {
         for (Question question : project.getQuestions()) {
             addContentString("Q: " + question.getRequest());
             if (question.getReply() != null) {
-                addContentString("A: " + question.getReply());  
+                addContentString("A: " + question.getReply());
             }
         }
         addContentString(SOLID_LINE);

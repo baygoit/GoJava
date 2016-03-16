@@ -1,0 +1,5 @@
+1#Start UP 1 (file) #10000#40# "Описание Sart UP 1"#"http://youtobe/ksdfgh1"
+2#Start UP 2 (file) #20000#30# "Описание Sart UP 2"#"http://youtobe/ksdfgh2"
+3#Start UP 3 (file) #30000#20# "Описание Sart UP 3"#"http://youtobe/ksdfgh3"
+4#Start UP 4 (file) #40000#10# "Описание Sart UP 4"#"http://youtobe/ksdfgh4"
+

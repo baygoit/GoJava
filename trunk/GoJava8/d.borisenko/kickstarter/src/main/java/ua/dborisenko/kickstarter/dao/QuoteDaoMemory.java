@@ -3,7 +3,6 @@ package ua.dborisenko.kickstarter.dao;
 import ua.dborisenko.kickstarter.domain.Quote;
 
 public class QuoteDaoMemory extends QuoteDao {
-
     private static int quoteIdGenerator = 1;
 
     private int getQuoteId() {

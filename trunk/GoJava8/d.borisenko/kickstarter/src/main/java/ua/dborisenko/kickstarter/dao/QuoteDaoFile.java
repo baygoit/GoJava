@@ -6,7 +6,6 @@ import java.io.FileReader;
 import ua.dborisenko.kickstarter.domain.Quote;
 
 public class QuoteDaoFile extends QuoteDao {
-
     private String quotesFileName = "./src/main/resources/quotes.txt";
 
     public void setQuotesFileName(String quotesFileName) {

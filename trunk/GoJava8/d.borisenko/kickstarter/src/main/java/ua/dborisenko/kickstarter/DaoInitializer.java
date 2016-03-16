@@ -6,45 +6,49 @@ import ua.dborisenko.kickstarter.dao.CategoryDaoMemory;
 import ua.dborisenko.kickstarter.dao.QuoteDao;
 import ua.dborisenko.kickstarter.dao.QuoteDaoFile;
 import ua.dborisenko.kickstarter.dao.QuoteDaoMemory;
+import ua.dborisenko.kickstarter.dao.QuoteDaoSql;
 
 class DaoInitializer {
+    private static final String DAO_MODE_ENV_NAME = "KICKSTARTER_DAO_MODE";
 
-    static enum DaoMode {
-        MEMORY, FILES
+	static enum DaoMode {
+		MEMORY, FILES, SQL;
+
+		public static DaoMode fromName(String mode) {
+			try {
+				return DaoMode.valueOf(mode.toUpperCase());
+			} catch (NullPointerException | IllegalArgumentException e) {
+				return DaoMode.MEMORY;
+			}
+		}
     }
 
-    private DaoMode getDaoMode(String[] args) {
-        DaoMode daoMode = DaoMode.MEMORY;
-        if (args.length > 0) {
-            String arg1 = args[0].toUpperCase().trim();
-            if (arg1.equals(DaoMode.FILES.toString())) {
-                daoMode = DaoMode.FILES;
-            }
-        }
-        return daoMode;
+    private DaoMode getDaoMode() {
+        return DaoMode.fromName(System.getenv(DAO_MODE_ENV_NAME));
     }
 
-    QuoteDao initQuoteDao(String[] args) {
-        DaoMode daoMode = getDaoMode(args);
+    QuoteDao initQuoteDao() {
+        DaoMode daoMode = getDaoMode();
         QuoteDao quoteDao = null;
-        if (DaoMode.FILES == daoMode) {
+		if (daoMode == DaoMode.SQL) {
+			quoteDao = new QuoteDaoSql();
+		} else if (daoMode == DaoMode.FILES) {
             try {
                 quoteDao = new QuoteDaoFile();
                 quoteDao.fillQuotes();
             } catch (IllegalStateException e) {
                 e.printStackTrace();
-                daoMode = DaoMode.MEMORY;
             }
         }
-        if (DaoMode.MEMORY == daoMode) {
+		if (quoteDao == null) {
             quoteDao = new QuoteDaoMemory();
             quoteDao.fillQuotes();
         }
         return quoteDao;
     }
 
-    CategoryDao initCategoryDao(String[] args) {
-        DaoMode daoMode = getDaoMode(args);
+    CategoryDao initCategoryDao() {
+        DaoMode daoMode = getDaoMode();
         CategoryDao categoryDao = null;
         if (DaoMode.FILES == daoMode) {
             try {
@@ -52,10 +56,9 @@ class DaoInitializer {
                 categoryDao.fillCategories();
             } catch (IllegalStateException e) {
                 e.printStackTrace();
-                daoMode = DaoMode.MEMORY;
             }
         }
-        if (DaoMode.MEMORY == daoMode) {
+		if (categoryDao == null) {
             categoryDao = new CategoryDaoMemory();
             categoryDao.fillCategories();
         }
