@@ -3,6 +3,7 @@ package ua.dborisenko.kickstarter;
 import ua.dborisenko.kickstarter.dao.CategoryDao;
 import ua.dborisenko.kickstarter.dao.CategoryDaoFile;
 import ua.dborisenko.kickstarter.dao.CategoryDaoMemory;
+import ua.dborisenko.kickstarter.dao.CategoryDaoSql;
 import ua.dborisenko.kickstarter.dao.QuoteDao;
 import ua.dborisenko.kickstarter.dao.QuoteDaoFile;
 import ua.dborisenko.kickstarter.dao.QuoteDaoMemory;
@@ -11,57 +12,45 @@ import ua.dborisenko.kickstarter.dao.QuoteDaoSql;
 class DaoInitializer {
     private static final String DAO_MODE_ENV_NAME = "KICKSTARTER_DAO_MODE";
 
-	static enum DaoMode {
-		MEMORY, FILES, SQL;
+    static enum DaoMode {
+        MEMORY, FILES, SQL;
 
-		public static DaoMode fromName(String mode) {
-			try {
-				return DaoMode.valueOf(mode.toUpperCase());
-			} catch (NullPointerException | IllegalArgumentException e) {
-				return DaoMode.MEMORY;
-			}
-		}
-    }
-
-    private DaoMode getDaoMode() {
-        return DaoMode.fromName(System.getenv(DAO_MODE_ENV_NAME));
+        public static DaoMode fromName(String mode) {
+            try {
+                return DaoMode.valueOf(mode.toUpperCase());
+            } catch (NullPointerException | IllegalArgumentException e) {
+                return DaoMode.MEMORY;
+            }
+        }
     }
 
     QuoteDao initQuoteDao() {
-        DaoMode daoMode = getDaoMode();
-        QuoteDao quoteDao = null;
-		if (daoMode == DaoMode.SQL) {
-			quoteDao = new QuoteDaoSql();
-		} else if (daoMode == DaoMode.FILES) {
-            try {
-                quoteDao = new QuoteDaoFile();
-                quoteDao.fillQuotes();
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            }
-        }
-		if (quoteDao == null) {
-            quoteDao = new QuoteDaoMemory();
+        DaoMode daoMode = DaoMode.fromName(System.getenv(DAO_MODE_ENV_NAME));
+        if (daoMode == DaoMode.SQL) {
+            return new QuoteDaoSql();
+        } else if (daoMode == DaoMode.FILES) {
+            QuoteDaoFile quoteDao = new QuoteDaoFile();
             quoteDao.fillQuotes();
+            return quoteDao;
+        } else {
+            QuoteDaoMemory quoteDao = new QuoteDaoMemory();
+            quoteDao.fillQuotes();
+            return quoteDao;
         }
-        return quoteDao;
     }
 
     CategoryDao initCategoryDao() {
-        DaoMode daoMode = getDaoMode();
-        CategoryDao categoryDao = null;
-        if (DaoMode.FILES == daoMode) {
-            try {
-                categoryDao = new CategoryDaoFile();
-                categoryDao.fillCategories();
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            }
+        DaoMode daoMode = DaoMode.fromName(System.getenv(DAO_MODE_ENV_NAME));
+        if (daoMode == DaoMode.SQL) {
+            return new CategoryDaoSql();
+        } else if (daoMode == DaoMode.FILES) {
+            CategoryDaoFile categoryDao = new CategoryDaoFile();
+            categoryDao.fillData();
+            return categoryDao;
+        } else {
+            CategoryDaoMemory categoryDao = new CategoryDaoMemory();
+            categoryDao.fillData();
+            return categoryDao;
         }
-		if (categoryDao == null) {
-            categoryDao = new CategoryDaoMemory();
-            categoryDao.fillCategories();
-        }
-        return categoryDao;
     }
 }

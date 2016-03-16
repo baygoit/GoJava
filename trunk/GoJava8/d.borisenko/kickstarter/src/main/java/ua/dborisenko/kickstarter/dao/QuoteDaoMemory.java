@@ -1,12 +1,24 @@
 package ua.dborisenko.kickstarter.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import ua.dborisenko.kickstarter.domain.Quote;
 
-public class QuoteDaoMemory extends QuoteDao {
+public class QuoteDaoMemory implements QuoteDao {
+    private List<Quote> quotes = new ArrayList<Quote>();
     private static int quoteIdGenerator = 1;
 
     private int getQuoteId() {
         return (quoteIdGenerator++);
+    }
+
+    @Override
+    public Quote getRandomQuote() {
+        Random random = new Random();
+        int quoteNumber = random.nextInt(quotes.size());
+        return quotes.get(quoteNumber);
     }
 
     public void fillQuotes() {
