@@ -2,7 +2,6 @@ package ua.dborisenko.kickstarter.dao;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Investment;
@@ -64,7 +63,7 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             categories.clear();
             throw new IllegalStateException("Cannot read questions from file");
         }
@@ -88,7 +87,7 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             categories.clear();
             throw new IllegalStateException("Cannot read questions from file");
         }
@@ -111,7 +110,7 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             categories.clear();
             throw new IllegalStateException("Cannot read rewards from file");
         }
@@ -136,7 +135,7 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             categories.clear();
             throw new IllegalStateException("Cannot read projects from file");
         }
@@ -152,7 +151,8 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
                 category.setName(categoryParts[1]);
                 categories.add(category);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
+            categories.clear();
             throw new IllegalStateException("Cannot read categories from file");
         }
     }
