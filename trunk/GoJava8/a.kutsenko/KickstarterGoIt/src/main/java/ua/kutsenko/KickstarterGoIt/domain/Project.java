@@ -1,26 +1,28 @@
-package ua.kutsenko.KickstarterGoIt;
+package ua.kutsenko.KickstarterGoIt.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class Project {
 	private String name;
 	private String decription;
 	private int requiredBudget;
 	private int gatheredBudget;
-	private int daysLeft;
+	private int daysToGo;
 	private String historyProject;
 	private String urlToVideo;
 	private String qA;
 	private List<Project> projectList = new ArrayList<Project>();
 
 	public Project(String name, String description, int requiredBudget, int gatheredBudget
-			, int daysLeft,String history , String url , String qA) {
+			, int daysToGo,String history , String url , String qA) {
 		this.name = name;
 		this.decription = description;
 		this.requiredBudget = requiredBudget;
 		this.gatheredBudget = gatheredBudget;
-		this.daysLeft = daysLeft;
+		this.daysToGo = daysToGo;
 		this.historyProject = history;
 		this.urlToVideo = url;
 		this.qA = qA;
@@ -59,14 +61,6 @@ public class Project {
 		return projectList;
 	}
 
-	public void printProjets(Category category) {
-		for (int i = 0; i < category.getProjectList().size(); i++) {
-			Project project = projectList.get(i);
-			System.out.print(i + 1 + " - ");
-			printProject(project);
-		}
-
-	}
 
 	
 
@@ -82,7 +76,6 @@ public class Project {
 		return qA;
 	}
 
-	
 
 	public String getName() {
 		return name;
@@ -101,19 +94,32 @@ public class Project {
 	}
 
 	public int getDaysLeft() {
-		return daysLeft;
+		return daysToGo;
 	}
 
 	public String getHistoryProject() {
 		// TODO Auto-generated method stub
 		return historyProject;
 	}
+	
+	
 	private void printProject(Project project) {
 		System.out.println("Name project - " + project.getName());
 		System.out.println("Description project - " + project.getDecription());
 		System.out.println("Required budget - " + project.getRequiredBudget() + "$");
 		System.out.println("Gathered budget - " + project.getGatheredBudget() + "$");
 		System.out.println("days to go project - " + project.getDaysLeft());
-		System.out.println("--------------------");		
+		System.out.println("--------------------");
+		
 	}
+	public void printProjets(Category category) {
+		for (int i = 0; i < category.getProjectList().size(); i++) {
+			Project project = projectList.get(i);
+			System.out.print(i + 1 + " - ");
+			printProject(project);
+		}
+		
+	}
+	
+
 }
