@@ -12,7 +12,7 @@ import ua.dborisenko.kickstarter.dao.QuoteDaoSql;
 class DaoInitializer {
     private static final String DAO_MODE_ENV_NAME = "KICKSTARTER_DAO_MODE";
 
-    static enum DaoMode {
+    private static enum DaoMode {
         MEMORY, FILES, SQL;
 
         public static DaoMode fromName(String mode) {

@@ -18,6 +18,11 @@ import ua.dborisenko.kickstarter.view.RewardsView;
 import ua.dborisenko.kickstarter.view.View;
 
 public class Kickstarter {
+    private static final String MENU_ACTION_RETURN = "0";
+    private static final String MENU_ACTION_INVEST = "1";
+    private static final String MENU_ACTION_QUESTION = "2";
+    private static final String MENU_ACTION_CUSTOM_AMOUNT = "0";
+
     private static enum MenuPosition {
         CATEGORIES, CATEGORY, PROJECT, REWARDS, EXIT
     }
@@ -88,7 +93,7 @@ public class Kickstarter {
     void handleViewRewardsResult(String inputData) {
         Investment investment = new Investment();
         try {
-            if (inputData.equals("0")) {
+            if (MENU_ACTION_CUSTOM_AMOUNT.equals(inputData)) {
                 currentView.showHint("Enter the investment amount:");
                 investment.setAmount(Integer.valueOf(currentView.getInput()));
             } else {
@@ -110,11 +115,11 @@ public class Kickstarter {
     }
 
     void handleViewProjectResult(String inputData) {
-        if (inputData.equals("0")) {
+        if (MENU_ACTION_RETURN.equals(inputData)) {
             prepareMenuCategory();
-        } else if (inputData.equals("1")) {
+        } else if (MENU_ACTION_INVEST.equals(inputData)) {
             prepareMenuRewards();
-        } else if (inputData.equals("2")) {
+        } else if (MENU_ACTION_QUESTION.equals(inputData)) {
             currentView.showHint("Enter your question");
             Question question = new Question();
             question.setRequest(currentView.getInput());
@@ -124,7 +129,7 @@ public class Kickstarter {
     }
 
     void handleViewCategoryResult(String inputData) {
-        if (inputData.equals("0")) {
+        if (MENU_ACTION_RETURN.equals(inputData)) {
             prepareMenuCategories();
         } else {
             try {
@@ -140,7 +145,7 @@ public class Kickstarter {
     }
 
     void handleViewCategoriesResult(String inputData) {
-        if (inputData.equals("0")) {
+        if (MENU_ACTION_RETURN.equals(inputData)) {
             menuPosition = MenuPosition.EXIT;
         } else {
             try {
