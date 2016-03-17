@@ -70,21 +70,21 @@ public class ManagementSystem {
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT category_id, name, description, required_budget, gathered_budget, days_left, history, url FROM project");
 			while(rs.next()) {
-				int category_id = rs.getInt("category_id");
+				int categoryId = rs.getInt("category_id");
 				String name = rs.getString("name");
 				String description = rs.getString("description");
-				int required_budget = rs.getInt("required_budget");
-				int gathered_budget = rs.getInt("gathered_budget");
-				int days_left = rs.getInt("days_left");
+				int requiredBudget = rs.getInt("required_budget");
+				int gatheredBudget = rs.getInt("gathered_budget");
+				int daysLeft = rs.getInt("days_left");
 				String history = rs.getString("history");
 				String url = rs.getString("url");
 				
 				Project project = new Project();
-				project.setProjectData(name, description, required_budget, gathered_budget, days_left, history);
+				project.setProjectData(name, description, requiredBudget, gatheredBudget, daysLeft, history);
 				project.setURL(url);
 				
 				
-				categoryDao.getCategories().get(category_id - 1).setProject(project);
+				categoryDao.getCategories().get(categoryId - 1).setProject(project);
 				
 			}
 		} catch (SQLException e) {
