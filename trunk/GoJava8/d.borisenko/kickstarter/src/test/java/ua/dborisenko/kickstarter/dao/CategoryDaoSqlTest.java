@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class CategoryDaoSqlTest {
@@ -32,7 +31,6 @@ public class CategoryDaoSqlTest {
         assertThat(categoryNamesDb, is(categoryNames));
     }
 
-    @Ignore
     @Test(expected = RuntimeException.class)
     public void getCategoryNamesTestFail() throws SQLException {
         CategoryDaoSql categoryDaoSqlMock = spy(CategoryDaoSql.class);
