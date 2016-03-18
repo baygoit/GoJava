@@ -14,6 +14,11 @@ import ua.nenya.dao.UserDao;
 public class UserDaoFileImpl implements UserDao{
 	
 	private List<User> users = new ArrayList<>();
+	private String fileName = "src/main/resources/users.json";
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
 	public List<User> getUsers() {
 		return users;
@@ -21,10 +26,9 @@ public class UserDaoFileImpl implements UserDao{
 
 	@Override
 	public void initUsers() {
-		File file = new File("src/main/resources/users.json");
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			users = mapper.readValue(file, new TypeReference<List<User>>() {
+			users = mapper.readValue(new File(fileName), new TypeReference<List<User>>() {
 			});
 		} catch (IOException e) {
 			e.printStackTrace();
