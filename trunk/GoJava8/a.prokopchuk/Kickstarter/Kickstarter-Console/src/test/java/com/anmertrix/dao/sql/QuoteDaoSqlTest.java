@@ -46,6 +46,7 @@ public class QuoteDaoSqlTest {
 
 	}
 
+	@Test
 	public void testGetRandomQuote() throws SQLException {
 		ResultSet rs = mock(ResultSet.class);
 		when(rs.getString("author")).thenReturn("author");
