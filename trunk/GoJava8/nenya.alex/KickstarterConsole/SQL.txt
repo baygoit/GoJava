@@ -1,0 +1,5 @@
+//Quotes table
+CREATE TABLE QUOTES (id INTEGER PRIMARY KEY, quote VARCHAR(200) NOT NULL)
+INSERT INTO QUOTES VALUES (1, 'Healthy curiosity is a great key in innovation.')
+INSERT INTO QUOTES VALUES (2, 'Everyone here has the sense that right now is one of those moments when we are influencing the future.')
+INSERT INTO QUOTES VALUES (3, 'Great things in business are never done by one person. They are done by a team of people.')

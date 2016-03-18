@@ -6,6 +6,7 @@ import java.util.Locale;
  * Created by roman on 13.03.16.
  */
 public class Progect {
+    private double gatheredBudget;
     private  Integer nubberProject;
     private String name;
     private int amount;
@@ -17,17 +18,16 @@ public class Progect {
     private String demoVideo;
     private String questionAnswers;
 
-    /*public Progect(String name, int amount, int days, Locale.Category category, String description, int exist, String history, String demoVideo, String questionAnswers) {
-        this.name = name;
-        this.amount = amount;
-        this.days = days;
-        this.category = category;
-        this.description = description;
-        this.exist = 0;
-        this.history = null;
-        this.demoVideo = demoVideo;
-        this.questionAnswers = null;
-    }*/
+
+
+    public double getGatheredBudget() {
+        return gatheredBudget;
+    }
+
+    public void setGatheredBudget(double gatheredBudget) {
+        this.gatheredBudget = gatheredBudget;
+    }
+
     public int getNubberProject() {
         return nubberProject;
     }
@@ -107,6 +107,16 @@ public class Progect {
         this.amount = amount;
     }
 
-
+    @Override
+    public String toString() {
+        return "Progect:" +
+                "№ " + nubberProject +
+                ", name='" + name + '\'' +
+                ", days=" + days +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", gathered budget ='" + gatheredBudget + '\'' +
+                '}'+"\n";
+    }
 
 }

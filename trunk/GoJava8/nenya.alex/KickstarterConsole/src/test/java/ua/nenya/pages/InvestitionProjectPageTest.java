@@ -46,15 +46,19 @@ public class InvestitionProjectPageTest {
         verify(mockIo, times(17)).writeln(captor.capture());
         assertEquals(
                 "[Choose one of the items bellow, , "
-                + "0	-	Exit, "
-                + "1	-	ONE, "
-                + "2	-	TWO, "
-                + "3	-	FIVE, "
-                + "4	-	ANY_AMOUNT, "
-                + "One hundreds of dollars, "
+                		 + "0	-	Exit, "
+                         + "1	-	100$ Invest one hundred dollars and get bottle of water!!!, "
+                         + "2	-	200$ Invest two hundreds dollars and get tickets to the movie!!!, "
+                         + "3	-	500$ Invest five hundreds dollars and get a lunch in the restaurant!!!, "
+                         + "4	-	Any amount investition, "
+                + "Invest one hundred dollars and get bottle of water!!!, "
                 + "Your investition has added!, , "
                 + "Choose one of the items bellow, , "
-                + "0	-	Exit, 1	-	ONE, 2	-	TWO, 3	-	FIVE, 4	-	ANY_AMOUNT]"
+                + "0	-	Exit, "
+                + "1	-	100$ Invest one hundred dollars and get bottle of water!!!, "
+                + "2	-	200$ Invest two hundreds dollars and get tickets to the movie!!!, "
+                + "3	-	500$ Invest five hundreds dollars and get a lunch in the restaurant!!!, "
+                + "4	-	Any amount investition]"
                 , captor.getAllValues().toString());
 	}
 	
@@ -69,14 +73,18 @@ public class InvestitionProjectPageTest {
         verify(mockIo, times(16)).writeln(captor.capture());
         assertEquals(
                 "[Choose one of the items bellow, , "
-                + "0	-	Exit, "
-                + "1	-	ONE, "
-                + "2	-	TWO, "
-                + "3	-	FIVE, "
-                + "4	-	ANY_AMOUNT, "
+                		 + "0	-	Exit, "
+                         + "1	-	100$ Invest one hundred dollars and get bottle of water!!!, "
+                         + "2	-	200$ Invest two hundreds dollars and get tickets to the movie!!!, "
+                         + "3	-	500$ Invest five hundreds dollars and get a lunch in the restaurant!!!, "
+                         + "4	-	Any amount investition, "
                 + "Your investition has added!, , "
                 + "Choose one of the items bellow, , "
-                + "0	-	Exit, 1	-	ONE, 2	-	TWO, 3	-	FIVE, 4	-	ANY_AMOUNT]"
+                + "0	-	Exit, "
+                + "1	-	100$ Invest one hundred dollars and get bottle of water!!!, "
+                + "2	-	200$ Invest two hundreds dollars and get tickets to the movie!!!, "
+                + "3	-	500$ Invest five hundreds dollars and get a lunch in the restaurant!!!, "
+                + "4	-	Any amount investition]"
                 , captor.getAllValues().toString());
 	}
 	
@@ -91,14 +99,18 @@ public class InvestitionProjectPageTest {
         verify(mockIo, times(16)).writeln(captor.capture());
         assertEquals(
                 "[Choose one of the items bellow, , "
-                + "0	-	Exit, "
-                + "1	-	ONE, "
-                + "2	-	TWO, "
-                + "3	-	FIVE, "
-                + "4	-	ANY_AMOUNT, "
+                		 + "0	-	Exit, "
+                         + "1	-	100$ Invest one hundred dollars and get bottle of water!!!, "
+                         + "2	-	200$ Invest two hundreds dollars and get tickets to the movie!!!, "
+                         + "3	-	500$ Invest five hundreds dollars and get a lunch in the restaurant!!!, "
+                         + "4	-	Any amount investition, "
                 + "Your investition has added!, , "
                 + "Choose one of the items bellow, , "
-                + "0	-	Exit, 1	-	ONE, 2	-	TWO, 3	-	FIVE, 4	-	ANY_AMOUNT]"
+                + "0	-	Exit, "
+                + "1	-	100$ Invest one hundred dollars and get bottle of water!!!, "
+                + "2	-	200$ Invest two hundreds dollars and get tickets to the movie!!!, "
+                + "3	-	500$ Invest five hundreds dollars and get a lunch in the restaurant!!!, "
+                + "4	-	Any amount investition]"
                 , captor.getAllValues().toString());
 	}
 	
@@ -114,14 +126,17 @@ public class InvestitionProjectPageTest {
         assertEquals(
                 "[Choose one of the items bellow, , "
                 + "0	-	Exit, "
-                + "1	-	ONE, "
-                + "2	-	TWO, "
-                + "3	-	FIVE, "
-                + "4	-	ANY_AMOUNT, "
+                + "1	-	100$ Invest one hundred dollars and get bottle of water!!!, "
+                + "2	-	200$ Invest two hundreds dollars and get tickets to the movie!!!, "
+                + "3	-	500$ Invest five hundreds dollars and get a lunch in the restaurant!!!, "
+                + "4	-	Any amount investition, "
                 + "Wrong entering!, , "
                 + "Choose one of the items bellow, , "
                 + "0	-	Exit, "
-                + "1	-	ONE, 2	-	TWO, 3	-	FIVE, 4	-	ANY_AMOUNT]"
+                + "1	-	100$ Invest one hundred dollars and get bottle of water!!!, "
+                + "2	-	200$ Invest two hundreds dollars and get tickets to the movie!!!, "
+                + "3	-	500$ Invest five hundreds dollars and get a lunch in the restaurant!!!, "
+                + "4	-	Any amount investition]"
                 , captor.getAllValues().toString());
 	}
 	
@@ -136,10 +151,18 @@ public class InvestitionProjectPageTest {
         verify(mockIo, times(16)).writeln(captor.capture());
         assertEquals(
                 "[Choose one of the items bellow, , "
-                + "0	-	Exit, 1	-	ONE, 2	-	TWO, 3	-	FIVE, "
-                + "4	-	ANY_AMOUNT, Your investition has added!, , "
+                		 + "0	-	Exit, "
+                         + "1	-	100$ Invest one hundred dollars and get bottle of water!!!, "
+                         + "2	-	200$ Invest two hundreds dollars and get tickets to the movie!!!, "
+                         + "3	-	500$ Invest five hundreds dollars and get a lunch in the restaurant!!!, "
+                         + "4	-	Any amount investition, "
+                + "Your investition has added!, , "
                 + "Choose one of the items bellow, , "
-                + "0	-	Exit, 1	-	ONE, 2	-	TWO, 3	-	FIVE, 4	-	ANY_AMOUNT]"
+                + "0	-	Exit, "
+                + "1	-	100$ Invest one hundred dollars and get bottle of water!!!, "
+                + "2	-	200$ Invest two hundreds dollars and get tickets to the movie!!!, "
+                + "3	-	500$ Invest five hundreds dollars and get a lunch in the restaurant!!!, "
+                + "4	-	Any amount investition]"
                 , captor.getAllValues().toString());
 	}
 }

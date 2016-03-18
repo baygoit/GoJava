@@ -1,6 +1,0 @@
-1#1#(file) Chess competition in Vasyuki-city#The grandest chess tournament in the world.#300#1#Here should be the project history... or your advertising#http://new-vasyuki.ru#10 - bad, 100 - good.
-2#1#(file) New football team creation#We are going to create football dream team called "Berdychiv".#500000#300#Here should be the project history... or your advertising#http://bestliga.i.ua#200 - free ticket, 2000 - you`re a team leader.
-3#2#(file) Solar expedition#We`re going to organize night expedition to Sun#1000#31#Here should be the project history... or your advertising#http://newhome.com#.1 - cool, 2 - cooler, 10 - ticket to Sun
-4#2#(file) Growing of apple-trees at Mars#The best of space and agriculture together!#35000#60#Here should be the project history... or your advertising#http://notthatapple.com#300 - 3 apples 400 - apple charcoal, 500 - iphone 7z
-5#3#(file) World of managers#New amazing online game - feel yourself as an office employee!#50100#120#Here should be the project history... or your advertising#http://wom.com#100 - magic chair 200 - sacred cravat, 300 - job offer
-6#3#(file) Beer drinker simulator#Most realistic physic ever!#20500#309#Here should be the project history... or your advertising#http://twobeerornottwobeer.to#for each 22 money give free beer mug 

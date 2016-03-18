@@ -4,82 +4,51 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
-/**
- * Created by roman on 14.03.16.
- */
 public class ProgectFile {
-//    private static final String ENTITY_SEPARATOR = "#";
-//    private String projectsFileName = "src/com/goit/file/Sourses/progects.txt";
-//
-//
-//    //public ProgectFile(String categoriesFileName) {
-//        //this.projectsFileName = categoriesFileName;
-//    //}
-//    void addProgects() {
-////        Progect progect = new Progect();
-////        Categories categories = new Categories();
-//        ArrayList a = new ArrayList();
-//        try (BufferedReader is = new BufferedReader(new FileReader(projectsFileName))) {
-//            String line;
-//            while ((line = is.readLine()) != null) {
-//                String[] projectParts = line.split(ENTITY_SEPARATOR);
-//                a.add(projectParts);
-//                System.out.println(a);
-//
-////                //project.setId(Integer.valueOf(projectParts[0]));
-////                progect.setName(projectParts[2]);
-////                progect.setDescription(projectParts[3]);
-////               // project.setRequiredSum(Integer.valueOf(projectParts[4]));
-////               // project.setDaysLeft(Integer.valueOf(projectParts[5]));
-////                progect.setHistory(projectParts[6]);
-////               // project.setVideoUrl(projectParts[7]);
-////               // project.setRewardInfo(projectParts[8]);
-////                for (Categories categories  : categories.categoriesWhisFileList) {
-////                    if (String.valueOf(projectParts[1]).equals(categories.categoriesWhisFileList())) {
-////                        categories.addProgect(progect);
-////                    }
-////                }
-//            }
-//        } catch (IOException e) {
-//           // categories.clear();
-//         //   throw new IllegalStateException("Cannot read projects from file");
-//        }
-//        //addProgects();
-//    }
-//}
 
+    private List<List<Progect>> categoriSListFile = new ArrayList<>();
 
-//public class Main {
-//
+    public void addProgects() {
+        String filePath1 = "src/com/goit/file/Sourses/projects1.txt";
+        String filePath2 = "src/com/goit/file/Sourses/projects2.txt";
+        String filePath3 = "src/com/goit/file/Sourses/projects3.txt";
+        categoriSListFile.add(getCategoryList1(filePath1));
+        categoriSListFile.add(getCategoryList1(filePath2));
+        categoriSListFile.add(getCategoryList1(filePath3));
+    }
 
-    public  void addProgects () {
-        Progect progect = new Progect();
+    public List<List<Progect>> getCategoriSListFile() {
+        return categoriSListFile;
+    }
+
+    public List<Progect> getCategoryList1(String filePath) {
         BufferedReader reader = null;
-        String thisLine = null;
-        //List<Progect> projects = new ArrayList<>());
-        List<Progect> progects = new ArrayList<>();
-
+        String thisLine;
+        List<Progect> categoriList1 = new ArrayList<>();
         try {
-            reader = new BufferedReader(new FileReader("src/com/goit/file/Sourses/projects1.txt"));
+            reader = new BufferedReader(new FileReader(filePath));
+
             while ((thisLine = reader.readLine()) != null) {
+                Progect progect = new Progect();
                 String[] projectParts = thisLine.split("#");
                 progect.setNubberProject(Integer.valueOf(projectParts[0]));
                 progect.setName(projectParts[1]);
                 progect.setAmount(Integer.valueOf(projectParts[2]));
                 progect.setDays(Integer.valueOf(projectParts[3]));
                 progect.setDescription(projectParts[4]);
-                progect.setDemoVideo(projectParts[5]);
-                progects.add(progect);
+                progect.setGatheredBudget(Double.valueOf(projectParts[5]));
+                progect.setHistory(projectParts[6]);
+                progect.setDemoVideo(projectParts[7]);
+                progect.setQuestionAnswers(projectParts[8]);
 
+                categoriList1.add(progect);
             }
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-           // System.out.println("test");
             e.printStackTrace();
         } finally {
             if (reader != null) {
@@ -90,6 +59,6 @@ public class ProgectFile {
                 }
             }
         }
-        System.out.println(progects);
+        return categoriList1;
     }
 }

@@ -11,7 +11,7 @@ public class Category {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -19,7 +19,7 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -32,11 +32,11 @@ public class Category {
         projects.add(project);
     }
 
-    public Project getProjectByListNumber(int number) {
-        return projects.get(number);
-    }
-    
     public int getProjectsCount() {
         return projects.size();
+    }
+
+    public Project getProjectByIndex(int index) {
+        return projects.get(index);
     }
 }

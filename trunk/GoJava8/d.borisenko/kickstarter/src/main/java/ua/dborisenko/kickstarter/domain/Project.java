@@ -11,9 +11,9 @@ public class Project {
     private int requiredSum;
     private int daysLeft;
     private String videoUrl;
-    private String rewardInfo;
     private List<Investment> investments = new ArrayList<Investment>();
     private List<Question> questions = new ArrayList<Question>();
+    private List<Reward> rewards = new ArrayList<Reward>();
 
     public void setId(int id) {
         this.id = id;
@@ -79,12 +79,12 @@ public class Project {
         return videoUrl;
     }
 
-    public String getRewardInfo() {
-        return rewardInfo;
+    public List<Reward> getRewards() {
+        return rewards;
     }
 
-    public void setRewardInfo(String rewardInfo) {
-        this.rewardInfo = rewardInfo;
+    public void addReward(Reward reward) {
+        this.rewards.add(reward);
     }
 
     public List<Question> getQuestions() {
@@ -101,5 +101,9 @@ public class Project {
 
     public void addInvestment(Investment investment) {
         investments.add(investment);
+    }
+
+    public Reward getRewardByIndex(int index) {
+        return rewards.get(index);
     }
 }

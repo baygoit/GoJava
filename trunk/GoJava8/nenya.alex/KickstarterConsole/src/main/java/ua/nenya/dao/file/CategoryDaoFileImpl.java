@@ -13,7 +13,12 @@ import ua.nenya.dao.CategoryDao;
 
 public class CategoryDaoFileImpl implements CategoryDao {
 	private List<Category> categories = new ArrayList<Category>();
+	private String fileName = "src/main/resources/caterories.json";
 	
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
 	public List<Category> getCategories() {
 		return categories;
@@ -21,10 +26,9 @@ public class CategoryDaoFileImpl implements CategoryDao {
 
 	@Override
 	public void initCategories() {
-		File file = new File("src/main/resources/caterories.json");
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			categories = mapper.readValue(file, new TypeReference<List<Category>>() {
+			categories = mapper.readValue(new File(fileName), new TypeReference<List<Category>>() {
 			});
 		} catch (IOException e) {
 			e.printStackTrace();

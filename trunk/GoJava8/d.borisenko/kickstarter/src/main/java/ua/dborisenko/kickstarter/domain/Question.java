@@ -8,10 +8,11 @@ public class Question {
     private int id;
     private String request;
     private String reply;
-    
+
     public String getRequest() {
         return request;
     }
+<<<<<<< HEAD
 <<<<<<< HEAD
     public void setRequest(String request) {
         this.request = request;
@@ -31,22 +32,25 @@ public class Question {
     
 =======
     
+=======
+
+>>>>>>> f2f574367cce5808911338e7010bfff559aef67c
     public void setRequest(String request) {
         this.request = request;
     }
-    
+
     public String getReply() {
         return reply;
     }
-    
+
     public void setReply(String reply) {
         this.reply = reply;
     }
-    
+
     public int getId() {
         return id;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }

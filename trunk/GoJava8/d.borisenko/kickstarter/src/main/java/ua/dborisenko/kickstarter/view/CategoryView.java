@@ -10,9 +10,9 @@ public class CategoryView extends View {
         addContentString("Category: " + category.getName());
         addContentString("Projects:");
         addContentString(SOLID_LINE);
-        Project project = new Project();
+        Project project;
         for (int i = 0; i < category.getProjectsCount(); i++) {
-            project = category.getProjects().get(i);
+            project = category.getProjectByIndex(i);
             addContentString(((i + 1) + ": " + project.getName() + " (collected: " + project.getCollectedSum() + "/"
                     + project.getRequiredSum() + ")"));
             addContentString(project.getDescription());

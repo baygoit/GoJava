@@ -1,0 +1,12 @@
+1#1#10#You are a bad guy
+2#1#20#You are a good guy
+3#2#50#A free ticket
+4#2#100#You`re a team leader.
+5#3#5#Cool postcard
+6#3#7#Ticket to the Sun
+7#4#500#A pack of apple charcoal
+8#4#1000#Iphone 7z
+9#5#20#Magic chair
+10#5#200#Golden parachute
+11#6#100#Free bottle of beer
+12#6#1000#Two bottles of beer and we`ll call you best friend for a whole day.
