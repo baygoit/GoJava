@@ -1,6 +1,7 @@
 package com.anmertrix;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.anmertrix.dao.CategoryDao;
@@ -17,9 +18,19 @@ import com.anmertrix.dao.sql.QuoteDaoSql;
 
 public class Kickstarter {
 
+	private static final String SQL_MODE = "sql";
+
+	private static final String MEMORY_MODE = "memory";
+
+	private static final String FILE_MODE = "file";
+
+	private static final int EXIT_INPUT = -1;
+
+	private static final String KICKSTARTER_MODE = "KICKSTARTER_MODE";
+
 	private IO io;
-	public static ManagementSystem ms = new ManagementSystem();
-	String read_env = System.getenv("READ_OBJECT_KICKSTARTER");
+	private ConnectionManager connectionManager;
+	private String mode;
 
 	public Kickstarter(IO io) {
 		this.io = io;
@@ -31,13 +42,9 @@ public class Kickstarter {
 
 	private void run() throws IOException {
 		
-		if (read_env.isEmpty()) {
-			System.out.println("Add environment variable READ_OBJECT_KICKSTARTER.");
-			return;
-		}
+		initMode();
 		
-		System.out.println("Read data: " + read_env);
-		
+		initCategoryManager();
 		QuoteDao quoteDao = initQuoteDao();
 		quoteDao.fillQuotes();
 		CategoryDao categoryDao = initCategoryDao();
@@ -45,16 +52,17 @@ public class Kickstarter {
 		ProjectDao projectDao = initProjectDao(categoryDao);
 		io.println(quoteDao.getRandomQuote());
 
-		while (true) {
+		int numberCategory = 0;
+		while (numberCategory != EXIT_INPUT) {
 			io.println(categoryDao.getCategoriesMenu());
-			int numberCategory = numberCategory(categoryDao);
+			numberCategory = numberCategory(categoryDao);
 
-			while (true) {
+			while (numberCategory != EXIT_INPUT) {
 				io.println(projectDao.getProjectList(numberCategory));
 				io.println("______________________________");
 				int numberProject = 0;
 				numberProject = getParseInputNumber(io.readConsole());
-				if (numberProject == -1) {
+				if (numberProject == EXIT_INPUT) {
 					break;
 				} else {
 					io.println("You select: " + projectDao.getInfoSelectedProject(numberCategory, numberProject));
@@ -63,7 +71,7 @@ public class Kickstarter {
 					Category category = categoryDao.getCategory(numberCategory);
 					List<Project> projects = category.getProjects();
 					Project project = projects.get(numberProject);
-					if (numberMenuItem == -1) {
+					if (numberMenuItem == EXIT_INPUT) {
 						break;
 					} else if (numberMenuItem == 0) {
 						selectQuestion(project);
@@ -89,6 +97,30 @@ public class Kickstarter {
 				}
 			}
 		}
+
+		destroyConnectionManager();
+	}
+
+	private void destroyConnectionManager() {
+		if (connectionManager != null) {
+			try {
+				connectionManager.closeConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	private void initMode() {
+		mode = System.getenv(KICKSTARTER_MODE);
+		// TODO Add more info about supported modes
+		// TODO Add more checks
+		if (mode == null || mode.isEmpty()) {
+			throw new IllegalStateException("Environment variable " + KICKSTARTER_MODE + " is not found not empty.");
+		}
+		
+		System.err.println("Mode is " + mode);
 	}
 
 	public int getParseInputNumber(String text) {
@@ -104,25 +136,31 @@ public class Kickstarter {
 		return result - 1;
 	}
 	
+	private void initCategoryManager() {
+		if (SQL_MODE.equals(mode)) {
+			connectionManager = new ConnectionManager();
+		}
+	}
+
     private QuoteDao initQuoteDao() {
     	QuoteDao quoteDao = null;
-    	if (read_env.equals("file")) {
+		if (FILE_MODE.equals(mode)) {
 			quoteDao = new QuoteDaoFile();
-		} else if (read_env.equals("memory")) {
+		} else if (MEMORY_MODE.equals(mode)) {
 			quoteDao = new QuoteDaoMemory();
-		} else if (read_env.equals("sql")) {
-			quoteDao = new QuoteDaoSql();
+		} else if (SQL_MODE.equals(mode)) {
+			quoteDao = new QuoteDaoSql(connectionManager);
 		}
     	return quoteDao;
     }
     
     private ProjectDao initProjectDao(CategoryDao categoryDao) {
     	ProjectDao projectDao = new ProjectDaoMemory(categoryDao);
-		if (read_env.equals("memory")) {
+		if (MEMORY_MODE.equals(mode)) {
 			projectDao = new ProjectDaoMemory(categoryDao);
 			projectDao.fillCategory();
-		} else if (read_env.equals("sql")) {
-			projectDao = new ProjectDaoSql(categoryDao);
+		} else if (SQL_MODE.equals(mode)) {
+			projectDao = new ProjectDaoSql(connectionManager, categoryDao);
 			projectDao.fillCategory();
 		}
     	return projectDao;
@@ -130,23 +168,21 @@ public class Kickstarter {
     
     private CategoryDao initCategoryDao() {
     	CategoryDao categoryDao = null;
-    	if (read_env.equals("file")) {
+		if (FILE_MODE.equals(mode)) {
     		categoryDao = new CategoryDaoFile();
-		} else if (read_env.equals("memory")) {
+		} else if (MEMORY_MODE.equals(mode)) {
 			categoryDao = new CategoryDaoMemory();
-		} else if (read_env.equals("sql")) {
-			categoryDao = new CategoryDaoSql();
+		} else if (SQL_MODE.equals(mode)) {
+			categoryDao = new CategoryDaoSql(connectionManager);
 		}
     	return categoryDao;
     }
     
     private int numberCategory(CategoryDao categoryDao) {
-    	int numberCategory = 0;
-    	while (true) {
+		int numberCategory = EXIT_INPUT;
+		do {
 			numberCategory = getParseInputNumber(io.readConsole());
-			if (numberCategory == -1) {
-				throw new RuntimeException("Bye..!");
-			} else {
+			if (numberCategory != EXIT_INPUT) {
 				try {
 					io.print("You select: ");
 					io.println(categoryDao.getNameSelectedCategory(numberCategory));
@@ -156,7 +192,7 @@ public class Kickstarter {
 					continue;
 				}
 			}
-    	}
+		} while (numberCategory != EXIT_INPUT);
 		return numberCategory;
     }
     
@@ -167,7 +203,7 @@ public class Kickstarter {
 		io.println("3 - 40$ - Calm supporter!");
 		int numberCount = 0;
 		numberCount = getParseInputNumber(io.readConsole());
-		if (numberCount == -1) {
+		if (numberCount == EXIT_INPUT) {
 			return true;
 		} else if (numberCount == 0) {
 			project.setGatheredBudget(1);
@@ -185,7 +221,7 @@ public class Kickstarter {
     	io.println("Enter your amount of money to invest or enter 0 - to exit:  ");
 		int amountNumber = 0;
 		amountNumber = getParseInputNumber(io.readConsole());
-		if (amountNumber == -1) {
+		if (amountNumber == EXIT_INPUT) {
 			return true;
 		} 
 		project.setGatheredBudget(amountNumber + 1);
