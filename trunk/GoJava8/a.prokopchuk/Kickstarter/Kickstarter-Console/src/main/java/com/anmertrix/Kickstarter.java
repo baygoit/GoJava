@@ -19,18 +19,18 @@ import com.anmertrix.dao.sql.QuoteDaoSql;
 public class Kickstarter {
 
 	private static final String SQL_MODE = "sql";
-
 	private static final String MEMORY_MODE = "memory";
-
 	private static final String FILE_MODE = "file";
-
 	private static final int EXIT_INPUT = -1;
 
 	private static final String KICKSTARTER_MODE = "KICKSTARTER_MODE";
+    protected static final String SOLID_LINE = "─────────────────────────────────────────";
 
 	private IO io;
 	private ConnectionManager connectionManager;
 	private String mode;
+	private CategoryDao categoryDao;
+    private QuoteDao quoteDao;
 
 	public Kickstarter(IO io) {
 		this.io = io;
@@ -43,13 +43,11 @@ public class Kickstarter {
 	private void run() throws IOException {
 		
 		initMode();
-		
-		initCategoryManager();
-		QuoteDao quoteDao = initQuoteDao();
-		quoteDao.fillQuotes();
-		CategoryDao categoryDao = initCategoryDao();
-		categoryDao.fillCategory();
+		initConnectionManager();
+		initQuoteDao();
+		initCategoryDao();
 		ProjectDao projectDao = initProjectDao(categoryDao);
+		
 		io.println(quoteDao.getRandomQuote());
 
 		int numberCategory = 0;
@@ -59,7 +57,7 @@ public class Kickstarter {
 
 			while (numberCategory != EXIT_INPUT) {
 				io.println(projectDao.getProjectList(numberCategory));
-				io.println("______________________________");
+				io.println(SOLID_LINE);
 				int numberProject = 0;
 				numberProject = getParseInputNumber(io.readConsole());
 				if (numberProject == EXIT_INPUT) {
@@ -136,22 +134,21 @@ public class Kickstarter {
 		return result - 1;
 	}
 	
-	private void initCategoryManager() {
+	private void initConnectionManager() {
 		if (SQL_MODE.equals(mode)) {
 			connectionManager = new ConnectionManager();
 		}
 	}
 
-    private QuoteDao initQuoteDao() {
-    	QuoteDao quoteDao = null;
+    private void initQuoteDao() {
 		if (FILE_MODE.equals(mode)) {
-			quoteDao = new QuoteDaoFile();
+			this.quoteDao = new QuoteDaoFile();
 		} else if (MEMORY_MODE.equals(mode)) {
-			quoteDao = new QuoteDaoMemory();
+			this.quoteDao = new QuoteDaoMemory();
 		} else if (SQL_MODE.equals(mode)) {
-			quoteDao = new QuoteDaoSql(connectionManager);
+			this.quoteDao = new QuoteDaoSql(connectionManager);
 		}
-    	return quoteDao;
+		quoteDao.fillQuotes();
     }
     
     private ProjectDao initProjectDao(CategoryDao categoryDao) {
@@ -166,16 +163,15 @@ public class Kickstarter {
     	return projectDao;
     }
     
-    private CategoryDao initCategoryDao() {
-    	CategoryDao categoryDao = null;
+    private void initCategoryDao() {
 		if (FILE_MODE.equals(mode)) {
-    		categoryDao = new CategoryDaoFile();
+    		this.categoryDao = new CategoryDaoFile();
 		} else if (MEMORY_MODE.equals(mode)) {
-			categoryDao = new CategoryDaoMemory();
+			this.categoryDao = new CategoryDaoMemory();
 		} else if (SQL_MODE.equals(mode)) {
-			categoryDao = new CategoryDaoSql(connectionManager);
+			this.categoryDao = new CategoryDaoSql(connectionManager);
 		}
-    	return categoryDao;
+		categoryDao.fillCategory();
     }
     
     private int numberCategory(CategoryDao categoryDao) {
@@ -188,7 +184,7 @@ public class Kickstarter {
 					io.println(categoryDao.getNameSelectedCategory(numberCategory));
 					break;
 				} catch (Exception e) {
-					System.out.println("There is no such category!");
+					io.println("There is no such category!");
 					continue;
 				}
 			}
@@ -212,7 +208,7 @@ public class Kickstarter {
 		} else if (numberCount == 2) {
 			project.setGatheredBudget(40);
 		}
-		io.println("______________________________");
+		io.println(SOLID_LINE);
 		
 		return false;
     }
@@ -225,7 +221,7 @@ public class Kickstarter {
 			return true;
 		} 
 		project.setGatheredBudget(amountNumber + 1);
-		io.println("______________________________");
+		io.println(SOLID_LINE);
 		
 		return false;
     }
@@ -234,11 +230,11 @@ public class Kickstarter {
     	io.print("Enter your guestion: ");
 		String guestion = io.readConsole();
 		project.setQuestion(guestion);
-		io.println("______________________________");
+		io.println(SOLID_LINE);
     }
     
     private int getNumberMenuItem(ProjectDao projectDao) {
-		io.println("______________________________");
+		io.println(SOLID_LINE);
 		io.print(projectDao.getProjectMenu());
 		
 		return getParseInputNumber(io.readConsole());

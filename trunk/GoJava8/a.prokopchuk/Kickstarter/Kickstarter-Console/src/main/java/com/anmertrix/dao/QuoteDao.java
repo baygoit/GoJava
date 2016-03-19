@@ -13,7 +13,7 @@ public abstract class QuoteDao {
 	public String getRandomQuote() {
 		Random random = new Random();
 		int randomNumber = random.nextInt(quotes.size());
-		String quote = quotes.get(randomNumber).getQuoteText() + "("
+		String quote = quotes.get(randomNumber).getQuoteText() + " ("
 				+ quotes.get(randomNumber).getAuthor() + ")";
 		return quote;
 	}

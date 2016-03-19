@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.anmertrix.ConnectionManager;
+import com.anmertrix.Quote;
 import com.anmertrix.dao.QuoteDao;
 
 public class QuoteDaoSql extends QuoteDao {
@@ -17,17 +18,12 @@ public class QuoteDaoSql extends QuoteDao {
 
 	@Override
 	public void fillQuotes() {
-		// no need
-	}
-
-	@Override
-	public String getRandomQuote() {
 		try (Statement statement = connectionManager.getConnection().createStatement()) {
 			ResultSet rs = statement.executeQuery("SELECT author, text FROM quote order by rand() limit 1");
 			rs.next();
 			String author = rs.getString("author");
 			String text = rs.getString("text");
-			return text + " (" + author + ")";
+			quotes.add(new Quote(author, text));
 		} catch (SQLException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}

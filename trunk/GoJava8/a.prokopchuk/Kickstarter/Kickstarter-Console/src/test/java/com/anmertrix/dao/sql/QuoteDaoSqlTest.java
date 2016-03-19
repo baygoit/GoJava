@@ -39,7 +39,7 @@ public class QuoteDaoSqlTest {
 	public void testGetRandomQuoteGetConnectionException() throws SQLException {
 		when(connectionManager.getConnection()).thenThrow(new SQLException());
 		try {
-			quoteDaoSql.getRandomQuote();
+			quoteDaoSql.fillQuotes();
 		} finally {
 			verify(connectionManager).getConnection();
 		}
@@ -59,7 +59,7 @@ public class QuoteDaoSqlTest {
 		when(connection.createStatement()).thenReturn(statement);
 
 		when(connectionManager.getConnection()).thenReturn(connection);
-
+		quoteDaoSql.fillQuotes();
 		String quote = quoteDaoSql.getRandomQuote();
 		assertThat(quote, is("quote (author)"));
 
