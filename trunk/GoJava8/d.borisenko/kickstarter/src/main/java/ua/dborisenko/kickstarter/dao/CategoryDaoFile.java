@@ -2,19 +2,20 @@ package ua.dborisenko.kickstarter.dao;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Investment;
 import ua.dborisenko.kickstarter.domain.Project;
 import ua.dborisenko.kickstarter.domain.Question;
+import ua.dborisenko.kickstarter.domain.Reward;
 
-public class CategoryDaoFile extends CategoryDao {
+public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
     private static final String ENTITY_SEPARATOR = "#";
     private String categoriesFileName = "./src/main/resources/categories.txt";
     private String projectsFileName = "./src/main/resources/projects.txt";
     private String questionsFileName = "./src/main/resources/questions.txt";
     private String investmentsFileName = "./src/main/resources/investments.txt";
+    private String rewardsFileName = "./src/main/resources/rewards.txt";
 
     public void setCategoriesFileName(String fileName) {
         this.categoriesFileName = fileName;
@@ -32,7 +33,20 @@ public class CategoryDaoFile extends CategoryDao {
         this.investmentsFileName = fileName;
     }
 
-    void addQuestions() {
+    public void setRewardsFileName(String fileName) {
+        this.rewardsFileName = fileName;
+    }
+
+    @Override
+    public void fillData() {
+        fillCategories();
+        fillProjects();
+        fillQuestions();
+        fillInvestments();
+        fillRewards();
+    }
+
+    void fillQuestions() {
         try (BufferedReader is = new BufferedReader(new FileReader(questionsFileName))) {
             String line;
             while ((line = is.readLine()) != null) {
@@ -49,13 +63,13 @@ public class CategoryDaoFile extends CategoryDao {
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             categories.clear();
             throw new IllegalStateException("Cannot read questions from file");
         }
     }
 
-    void addInvestments() {
+    void fillInvestments() {
         try (BufferedReader is = new BufferedReader(new FileReader(investmentsFileName))) {
             String line;
             while ((line = is.readLine()) != null) {
@@ -73,13 +87,36 @@ public class CategoryDaoFile extends CategoryDao {
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             categories.clear();
             throw new IllegalStateException("Cannot read questions from file");
         }
     }
 
-    void addProjects() {
+    void fillRewards() {
+        try (BufferedReader is = new BufferedReader(new FileReader(rewardsFileName))) {
+            String line;
+            while ((line = is.readLine()) != null) {
+                String[] rewardParts = line.split(ENTITY_SEPARATOR);
+                Reward reward = new Reward();
+                reward.setId(Integer.valueOf(rewardParts[0]));
+                reward.setAmount(Integer.valueOf(rewardParts[2]));
+                reward.setDescription(rewardParts[3]);
+                for (Category category : categories) {
+                    for (Project project : category.getProjects()) {
+                        if (Integer.valueOf(rewardParts[1]).equals(project.getId())) {
+                            project.addReward(reward);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            categories.clear();
+            throw new IllegalStateException("Cannot read rewards from file");
+        }
+    }
+
+    void fillProjects() {
         try (BufferedReader is = new BufferedReader(new FileReader(projectsFileName))) {
             String line;
             while ((line = is.readLine()) != null) {
@@ -92,20 +129,19 @@ public class CategoryDaoFile extends CategoryDao {
                 project.setDaysLeft(Integer.valueOf(projectParts[5]));
                 project.setHistory(projectParts[6]);
                 project.setVideoUrl(projectParts[7]);
-                project.setRewardInfo(projectParts[8]);
                 for (Category category : categories) {
                     if (Integer.valueOf(projectParts[1]).equals(category.getId())) {
                         category.addProject(project);
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             categories.clear();
             throw new IllegalStateException("Cannot read projects from file");
         }
     }
 
-    public void fillCategories() {
+    void fillCategories() {
         try (BufferedReader is = new BufferedReader(new FileReader(categoriesFileName))) {
             String line;
             while ((line = is.readLine()) != null) {
@@ -115,11 +151,9 @@ public class CategoryDaoFile extends CategoryDao {
                 category.setName(categoryParts[1]);
                 categories.add(category);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
+            categories.clear();
             throw new IllegalStateException("Cannot read categories from file");
         }
-        addProjects();
-        addQuestions();
-        addInvestments();
     }
 }

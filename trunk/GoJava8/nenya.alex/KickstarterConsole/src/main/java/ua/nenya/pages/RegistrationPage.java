@@ -1,9 +1,8 @@
 package ua.nenya.pages;
 
-import java.io.FileOutputStream;
+
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +14,7 @@ import ua.nenya.project.User;
 import ua.nenya.util.IO;
 
 public class RegistrationPage {
-	private static final String LP_FILE_NAME = "src/resources/users.txt";
+	private static final String USERS_FILE_NAME = "src/main/resources/users.json";
 
 	public User registration(List<User> users, IO io) {
 		io.write("Enter login: ");
@@ -88,7 +87,7 @@ public class RegistrationPage {
 		ObjectMapper mapper = new ObjectMapper();
 		 try {
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.writeValue(new FileWriter("src/main/resources/users.json"), object);
+			mapper.writeValue(new FileWriter(USERS_FILE_NAME), object);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

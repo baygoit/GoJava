@@ -1,7 +1,7 @@
 package ua.nenya.dao.memory;
 
 
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,11 @@ import ua.nenya.dao.CategoryDao;
 public class CategoryDaoMemoryImpl implements CategoryDao{
 	
 	private List<Category> categories = new ArrayList<Category>();
+	private File file = new File("src/main/resources/caterories.json");
+
+	public void setFile(File file) {
+		this.file = file;
+	}
 
 	public List<Category> getCategories() {
 		return categories;
@@ -49,7 +54,9 @@ public class CategoryDaoMemoryImpl implements CategoryDao{
 					100000, 7000, 120));
 			categories.add(categoryArt);
 			
+			if(file.length() == 0){
 			convertToJSON(categories);
+			}
 	}
 	 
 	 private void convertToJSON(Object object) {
@@ -57,7 +64,7 @@ public class CategoryDaoMemoryImpl implements CategoryDao{
 		ObjectMapper mapper = new ObjectMapper();
 		 try {
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.writeValue(new FileWriter("src/main/resources/caterories.json"), object);
+			mapper.writeValue(file, object);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

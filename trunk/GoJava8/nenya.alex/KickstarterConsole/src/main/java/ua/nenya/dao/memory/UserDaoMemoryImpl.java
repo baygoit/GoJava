@@ -2,7 +2,6 @@ package ua.nenya.dao.memory;
 
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +16,12 @@ import ua.nenya.dao.UserDao;
 public class UserDaoMemoryImpl implements UserDao{
 	
 	private List<User> users = new ArrayList<>();
+	private File file = new File("src/main/resources/users.json");
+	
+	public void setFile(File file) {
+		this.file = file;
+	}
+
 	private ObjectMapper mapper = new ObjectMapper();
 
 	public List<User> getUsers() {
@@ -27,7 +32,6 @@ public class UserDaoMemoryImpl implements UserDao{
 	@Override
 	public void initUsers() {
 		List<User> usersList = new ArrayList<>();
-		File file = new File("src/main/resources/users.json");
 		User userZero = new User("a","a","a@a.ua");
 		if(file.length() == 0){
 			usersList.add(userZero);
@@ -50,7 +54,7 @@ public class UserDaoMemoryImpl implements UserDao{
 		
 		 try {
 			mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-			mapper.writeValue(new FileWriter("src/main/resources/users.json"), object);
+			mapper.writeValue(file, object);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

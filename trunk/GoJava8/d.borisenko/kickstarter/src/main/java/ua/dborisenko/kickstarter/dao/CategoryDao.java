@@ -1,42 +1,19 @@
 package ua.dborisenko.kickstarter.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ua.dborisenko.kickstarter.domain.Category;
+import ua.dborisenko.kickstarter.domain.Investment;
+import ua.dborisenko.kickstarter.domain.Project;
+import ua.dborisenko.kickstarter.domain.Question;
 
-public abstract class CategoryDao {
-    protected List<Category> categories = new ArrayList<Category>();
+public interface CategoryDao {
 
-    public abstract void fillCategories();
+    public Category getByName(String name);
 
-    public void add(Category category) {
-        categories.add(category);
-    }
+    public List<String> getCategoryNames();
 
-    public Category getByName(String name) {
-        for (Category category : categories) {
-            if (category.getName().equals(name)) {
-                return category;
-            }
-        }
-        throw new IllegalArgumentException("Category not found.");
-    }
+    public void addInvestment(Project project, Investment investment);
 
-    public Category getById(int id) {
-        for (Category category : categories) {
-            if (category.getId() == id) {
-                return category;
-            }
-        }
-        throw new IllegalArgumentException("Category not found.");
-    }
-
-    public Category getByListNumber(int number) {
-        return categories.get(number);
-    }
-
-    public List<Category> getAllCategories() {
-        return categories;
-    }
+    public void addQuestion(Project project, Question question);
 }

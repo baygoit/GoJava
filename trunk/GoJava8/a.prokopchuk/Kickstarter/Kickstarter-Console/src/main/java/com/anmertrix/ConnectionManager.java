@@ -10,46 +10,29 @@ import java.util.List;
 
 import com.anmertrix.dao.CategoryDao;
 
-public class ManagementSystem {
+// TODO I need ConnectionManager interface and implementation for mockito
+public class ConnectionManager {
 	
-	private static Connection connection;
+	private Connection connection;
     
-    protected ManagementSystem() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
+	private void openConnection() throws SQLException {
             String url = "jdbc:mysql://s14.thehost.com.ua/kickstarter";
             connection = DriverManager.getConnection(url, "kickstarter", "kickstarter");
-        } catch (ClassNotFoundException e) {
-           // no
-        } catch (SQLException e) {
-        	// no
-        }
-        
     }
 
-    public synchronized ManagementSystem getInstance() throws Exception {
-        return this;
-    }
-    
-    public String getRandomQuote() {
-		try {
-			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT id, author, text FROM quote order by rand() limit 1");
-			rs.next();
-			String author = rs.getString("author");
-			String text = rs.getString("text");
-			return text + "(" + author + ")";
-		} catch (SQLException e) {
-			throw new RuntimeException(e.getMessage(), e);
+	public synchronized Connection getConnection() throws SQLException {
+		if (connection == null || connection.isClosed()) {
+			openConnection();
 		}
-	}
+		return connection;
+    }
     
     public List<Category> getCategories() {
     	
     	List<Category> categories = new ArrayList<Category>();
     	
 		try {
-			Statement statement = connection.createStatement();
+			Statement statement = getConnection().createStatement();
 			ResultSet rs = statement.executeQuery("SELECT name FROM category");
 			while(rs.next()) {
 				String name = rs.getString("name");
@@ -67,7 +50,7 @@ public class ManagementSystem {
     	List<Project> projects = new ArrayList<Project>();
     	
 		try {
-			Statement statement = connection.createStatement();
+			Statement statement = getConnection().createStatement();
 			ResultSet rs = statement.executeQuery("SELECT category_id, name, description, required_budget, gathered_budget, days_left, history, url FROM project");
 			while(rs.next()) {
 				int category_id = rs.getInt("category_id");
@@ -92,5 +75,9 @@ public class ManagementSystem {
 		}
 		
 		return projects;
+	}
+
+	public void closeConnection() throws SQLException {
+		connection.close();
 	}
 }

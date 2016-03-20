@@ -83,15 +83,6 @@ public class Project {
 	}
 
 	
-	private void printProject(Project project) {
-		System.out.println("Name project - " + project.getName());
-		System.out.println("Description project - " + project.getDecription());
-		System.out.println("Required budget - " + project.getRequiredBudget() + "$");
-		System.out.println("Gathered budget - " + project.getGatheredBudget() + "$");
-		System.out.println("days to go project - " + project.getDaysLeft());
-		System.out.println("--------------------");
-		
-	}
 
 	public String getName() {
 		return name;
@@ -116,5 +107,13 @@ public class Project {
 	public String getHistoryProject() {
 		// TODO Auto-generated method stub
 		return historyProject;
+	}
+	private void printProject(Project project) {
+		System.out.println("Name project - " + project.getName());
+		System.out.println("Description project - " + project.getDecription());
+		System.out.println("Required budget - " + project.getRequiredBudget() + "$");
+		System.out.println("Gathered budget - " + project.getGatheredBudget() + "$");
+		System.out.println("days to go project - " + project.getDaysLeft());
+		System.out.println("--------------------");		
 	}
 }

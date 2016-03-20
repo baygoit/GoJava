@@ -9,7 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
+import ua.nenya.dao.QuoteDao;
 import ua.nenya.dao.memory.CategoryDaoMemoryImpl;
+import ua.nenya.dao.memory.QuoteDaoMemoryImpl;
 import ua.nenya.dao.memory.UserDaoMemoryImpl;
 import ua.nenya.main.Kickstarter;
 import ua.nenya.project.Category;
@@ -26,6 +28,8 @@ public class KickstarterTest {
 	private Project newSongProject;
 	private List<Category> list = new ArrayList<>();
 	private List<User> userList = new ArrayList<>();
+	private QuoteDao quoteInit;
+	
 	@Before
 	public void init() {
 		mockIo = mock(IO.class);
@@ -54,17 +58,17 @@ public class KickstarterTest {
 		list.add(musicCategory);
 		list.add(filmsCategory);
 		
-		
-		
 		categoryInit.getCategories().add(musicCategory);
 		categoryInit.getCategories().add(filmsCategory);
+		
+		quoteInit = new QuoteDaoMemoryImpl();
 	}
 
 	@Test
 	public void kikstarterTestEnter0() {
 		when(mockIo.readConsole()).thenReturn("0");
-		
-		new Kickstarter(userList, categoryInit.getCategories(), mockIo).run();
+		quoteInit.initQuotes();
+		new Kickstarter(quoteInit, userList, categoryInit.getCategories(), mockIo).run();
 		
 		InOrder order = inOrder(mockIo);
 	      order.verify(mockIo).writeln("Choose one of the items bellow");
@@ -77,8 +81,8 @@ public class KickstarterTest {
 	@Test
 	public void kikstarterTestEnter10() {
 		when(mockIo.readConsole()).thenReturn("1").thenReturn("0");
-		
-		new Kickstarter(userList, categoryInit.getCategories(), mockIo).run();
+		quoteInit.initQuotes();
+		new Kickstarter(quoteInit, userList, categoryInit.getCategories(), mockIo).run();
 		
 		InOrder order = inOrder(mockIo);
 	      order.verify(mockIo).writeln("Choose one of the items bellow");
@@ -95,8 +99,8 @@ public class KickstarterTest {
 	@Test
 	public void kikstarterTestEnter20() {
 		when(mockIo.readConsole()).thenReturn("2").thenReturn("0");
-		
-		new Kickstarter(userList, categoryInit.getCategories(), mockIo).run();
+		quoteInit.initQuotes();
+		new Kickstarter(quoteInit, userList, categoryInit.getCategories(), mockIo).run();
 		InOrder order = inOrder(mockIo);
 	      order.verify(mockIo).writeln("Choose one of the items bellow");
 	      order.verify(mockIo).writeln("1	-	Go to categories");

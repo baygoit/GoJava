@@ -19,10 +19,16 @@
 	</build>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<mysql-connector-version>5.1.38</mysql-connector-version>
 		<junit-version>4.12</junit-version>
 		<mockito-version>1.10.19</mockito-version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-version}</version>
+		</dependency>
 		<dependency>
 			<scope>test</scope>
 			<groupId>junit</groupId>
