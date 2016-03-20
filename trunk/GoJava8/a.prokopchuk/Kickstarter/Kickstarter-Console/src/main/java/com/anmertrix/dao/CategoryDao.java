@@ -23,12 +23,13 @@ public abstract class CategoryDao {
 
 	public String getCategoriesMenu() {
 		StringBuffer result = new StringBuffer();
-		result.append("Please, select category or enter 0 - to exit: \n");
 		for (int i = 0; i < categories.size(); i++) {
 			result.append(i + 1).append(" - ")
 					.append(categories.get(i).getName()).append("    ");
 		}
-
+		result.append("0 - EXIT");
+		result.append("\n \n");
+		result.append("Please, select category...");
 		return result.toString().trim();
 	}
 

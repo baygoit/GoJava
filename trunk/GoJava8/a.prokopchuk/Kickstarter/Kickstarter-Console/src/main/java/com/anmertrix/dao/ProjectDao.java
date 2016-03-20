@@ -8,6 +8,7 @@ import com.anmertrix.Project;
 public abstract class ProjectDao {
 
 	protected CategoryDao categoryDao;
+	protected static final String SOLID_LINE = "─────────────────────────────────────────";
 
 	public ProjectDao(CategoryDao categoryDao) {
 		this.categoryDao = categoryDao;
@@ -15,7 +16,6 @@ public abstract class ProjectDao {
 
 	public String getProjectList(int idCategory) {
 		StringBuilder result = new StringBuilder();
-		result.append("Please, select project or enter 0 - to exit: \n");
 		Category category = categoryDao.getCategory(idCategory);
 		List<Project> projects = category.getProjects();
 
@@ -23,16 +23,11 @@ public abstract class ProjectDao {
 			Project project = projects.get(i);
 			result.append(i + 1)
 					.append(" - ")
-					.append(project.getName() + "\n")
-					.append("Description: " + project.getDescription() + "\n")
-					.append("Required budget: " + project.getRequiredBudget()
-							+ "\n")
-					.append("Gathered budget: " + project.getGatheredBudget()
-							+ "\n")
-					.append("Days left: " + project.getDaysLeft())
-					.append("\n" + "\n");
+					.append(project.getName() + "\n");
 		}
-
+		result.append("0 - EXIT \n")
+			.append("\n")
+			.append("Please, select project...");
 		return result.toString().trim();
 	}
 
@@ -43,6 +38,7 @@ public abstract class ProjectDao {
 
 		StringBuilder result = new StringBuilder();
 		result.append(project.getName() + "\n")
+				.append(SOLID_LINE + "\n")
 				.append("Description: " + project.getDescription() + "\n")
 				.append("Required budget: " + project.getRequiredBudget()
 						+ "\n")
@@ -58,11 +54,12 @@ public abstract class ProjectDao {
 	public String getProjectMenu() {
 		StringBuilder result = new StringBuilder();
 
-		result.append("Please, select menu item or enter 0 - to exit: \n")
-				.append("1 - Ask a question").append("    ")
+		result.append("1 - Ask a question").append("    ")
 				.append("2 - Invest project").append("    ")
 				.append("3 - Rewards").append("    ")
-				.append("4 - Return to project list");
+				.append("0 - EXIT")
+				.append("\n \n")
+				.append("Please, select menu item...");
 
 		return result.toString().trim();
 	}
