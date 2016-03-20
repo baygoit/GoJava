@@ -18,12 +18,11 @@ import com.anmertrix.dao.sql.QuoteDaoSql;
 
 public class Kickstarter {
 
-	private static final String SQL_MODE = "sql";
-	private static final String MEMORY_MODE = "memory";
-	private static final String FILE_MODE = "file";
-	private static final int EXIT_INPUT = -1;
+	private static final String SQL_MODE = "SQL";
+	private static final String MEMORY_MODE = "MEMORY";
+	private static final String FILE_MODE = "FILE";
+	private static final int EXIT_INPUT = 0;
 
-	private static final String KICKSTARTER_MODE = "KICKSTARTER_MODE";
     protected static final String SOLID_LINE = "─────────────────────────────────────────";
 
 	private IO io;
@@ -42,7 +41,7 @@ public class Kickstarter {
 
 	private void run() throws IOException {
 		
-		initMode();
+		mode = DaoSwitch.getMode();
 		initConnectionManager();
 		initQuoteDao();
 		initCategoryDao();
@@ -50,52 +49,50 @@ public class Kickstarter {
 		
 		io.println(quoteDao.getRandomQuote());
 
-		int numberCategory = 0;
+		int numberCategory = -1;
 		while (numberCategory != EXIT_INPUT) {
 			io.println(categoryDao.getCategoriesMenu());
 			numberCategory = numberCategory(categoryDao);
 
 			while (numberCategory != EXIT_INPUT) {
-				io.println(projectDao.getProjectList(numberCategory));
+				io.println(projectDao.getProjectList(numberCategory - 1));
 				io.println(SOLID_LINE);
-				int numberProject = 0;
-				numberProject = getParseInputNumber(io.readConsole());
+				int numberProject = getParseInputNumber(io.readConsole());
 				if (numberProject == EXIT_INPUT) {
 					break;
 				} else {
-					io.println("You select: " + projectDao.getInfoSelectedProject(numberCategory, numberProject));
+					io.println("You select: " + projectDao.getInfoSelectedProject(numberCategory - 1, numberProject - 1));
 					int numberMenuItem = getNumberMenuItem(projectDao);
 					
-					Category category = categoryDao.getCategory(numberCategory);
+					Category category = categoryDao.getCategory(numberCategory - 1);
 					List<Project> projects = category.getProjects();
-					Project project = projects.get(numberProject);
+					Project project = projects.get(numberProject - 1);
 					if (numberMenuItem == EXIT_INPUT) {
 						break;
-					} else if (numberMenuItem == 0) {
+					} else if (numberMenuItem == 1) {
 						selectQuestion(project);
 						continue;
-					} else if (numberMenuItem == 1) {
+					} else if (numberMenuItem == 2) {
 						if (selectInvest(project)) {
 							break;
 						}
 						continue;
-					} else if (numberMenuItem == 2) {
+					} else if (numberMenuItem == 3) {
 						if (selectReward(project)) {
 							break;
 						}
 						continue;
-					} else if (numberMenuItem == 3) {
+					} else if (numberMenuItem == 4) {
 						continue;
 					}
 				}
 				io.println("Enter 0 to see all projects.");
 				int number = getParseInputNumber(io.readConsole());
-				if (number == 0) {
+				if (number == EXIT_INPUT) {
 					continue;
 				}
 			}
 		}
-
 		destroyConnectionManager();
 	}
 
@@ -110,28 +107,15 @@ public class Kickstarter {
 
 	}
 
-	private void initMode() {
-		mode = System.getenv(KICKSTARTER_MODE);
-		// TODO Add more info about supported modes
-		// TODO Add more checks
-		if (mode == null || mode.isEmpty()) {
-			throw new IllegalStateException("Environment variable " + KICKSTARTER_MODE + " is not found not empty.");
-		}
-		
-		System.err.println("Mode is " + mode);
-	}
-
 	public int getParseInputNumber(String text) {
 		int result = 0;
-
 		try {
 			result = (Integer.parseInt(text));
 		} catch (NumberFormatException e) {
-			io.println("You can enter only numbers. \"" + text
-					+ "\" is not a number.\n ");
+			io.println("You can enter only numbers. \"" + text + "\" is not a number.\n ");
 		}
 
-		return result - 1;
+		return result;
 	}
 	
 	private void initConnectionManager() {
@@ -175,21 +159,20 @@ public class Kickstarter {
     }
     
     private int numberCategory(CategoryDao categoryDao) {
-		int numberCategory = EXIT_INPUT;
+		int categoryId = EXIT_INPUT;
 		do {
-			numberCategory = getParseInputNumber(io.readConsole());
-			if (numberCategory != EXIT_INPUT) {
+			categoryId = getParseInputNumber(io.readConsole());
+			if (categoryId != EXIT_INPUT) {
 				try {
-					io.print("You select: ");
-					io.println(categoryDao.getNameSelectedCategory(numberCategory));
+					io.println("You select: " + categoryDao.getNameSelectedCategory(categoryId - 1));
 					break;
 				} catch (Exception e) {
 					io.println("There is no such category!");
 					continue;
 				}
 			}
-		} while (numberCategory != EXIT_INPUT);
-		return numberCategory;
+		} while (categoryId != EXIT_INPUT);
+		return categoryId;
     }
     
     private boolean selectReward(Project project) {
@@ -197,15 +180,14 @@ public class Kickstarter {
 		io.println("1 - 1$ - BIG THANK!");
 		io.println("2 - 20$ - Solo supporter!");
 		io.println("3 - 40$ - Calm supporter!");
-		int numberCount = 0;
-		numberCount = getParseInputNumber(io.readConsole());
+		int numberCount = getParseInputNumber(io.readConsole());
 		if (numberCount == EXIT_INPUT) {
 			return true;
-		} else if (numberCount == 0) {
-			project.setGatheredBudget(1);
 		} else if (numberCount == 1) {
-			project.setGatheredBudget(10);
+			project.setGatheredBudget(1);
 		} else if (numberCount == 2) {
+			project.setGatheredBudget(10);
+		} else if (numberCount == 3) {
 			project.setGatheredBudget(40);
 		}
 		io.println(SOLID_LINE);
@@ -220,7 +202,7 @@ public class Kickstarter {
 		if (amountNumber == EXIT_INPUT) {
 			return true;
 		} 
-		project.setGatheredBudget(amountNumber + 1);
+		project.setGatheredBudget(amountNumber);
 		io.println(SOLID_LINE);
 		
 		return false;
