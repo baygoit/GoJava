@@ -10,6 +10,10 @@ public class ProgramStart {
 		MemoryCard mc = new MemoryCard();
 		Category kickstarter = mc.loadBase();
 		
+		//SqlDAO dao = new SqlDAO();
+		//Category kickstarter = dao.loadBase();
+		//dao.sendMassage(1, "Jimbo", "Hello");
+		
 		Page direction = new StartPage(kickstarter);
 		direction.openPage();
 

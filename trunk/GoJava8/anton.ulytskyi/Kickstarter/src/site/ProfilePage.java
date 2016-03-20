@@ -3,6 +3,7 @@ package site;
 
 import categories.Category;
 import categories.MemoryCard;
+import categories.SqlDAO;
 
 public class ProfilePage extends Page {
 
@@ -12,6 +13,7 @@ public class ProfilePage extends Page {
 	}
 	
 int id;
+
 	
 	@Override
 	public void openPage() {
@@ -42,7 +44,12 @@ int id;
 		String comment = console.read();
 		kickstarter.addComment(id,author, comment);
 		console.write("Thank You for Your comment!");
+		
+		if(MemoryCard.switcher==true){
 		new MemoryCard().saveBase(kickstarter);
+		}else{
+			new SqlDAO().sendMassage(id, author, comment);
+		}
 	}
 
 	private void invest() {
@@ -59,8 +66,12 @@ int id;
 				String card = console.read();
 				if(checkSuccess(card)){
 					kickstarter.sendCash(id, cash);
+					if(MemoryCard.switcher==true){
+						new MemoryCard().saveBase(kickstarter);
+						}else{
+							new SqlDAO().sendMoney(id, cash, card);
+						}
 					console.write("The transaction was successful.");
-					new MemoryCard().saveBase(kickstarter);
 					openPage();
 				}
 			}		

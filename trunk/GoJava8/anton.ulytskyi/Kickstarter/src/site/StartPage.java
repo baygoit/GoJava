@@ -63,10 +63,8 @@ public class StartPage extends Page {
 
 			Statement myStmt = (Statement) myConn.createStatement();
 
-			Random random = new Random();
 			ResultSet myRs = myStmt
-					.executeQuery("select quote from quotes where number ="
-							+ (random.nextInt(3) + 1) + ";");
+					.executeQuery("SELECT * FROM quotes ORDER BY RAND() limit 1");
 
 			while (myRs.next()) {
 				return myRs.getString("quote");
