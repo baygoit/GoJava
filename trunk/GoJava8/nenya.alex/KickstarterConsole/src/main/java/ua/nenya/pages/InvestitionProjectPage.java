@@ -1,74 +1,51 @@
 package ua.nenya.pages;
 
-import java.util.Arrays;
+
 import java.util.List;
 
 import ua.nenya.project.Project;
+import ua.nenya.project.Reward;
 import ua.nenya.util.IO;
 import ua.nenya.util.ListUtilits;
-import ua.nenya.enums.PaymentSaleEnum;
 
 public class InvestitionProjectPage {
 	
-	public boolean investInProject(Project project, IO io, ListUtilits listUtil) {
-		boolean b = false;
+	public void investInProject(Project project, IO io, ListUtilits listUtil) {
 		io.write("Enter your name: ");
 		String name = io.readConsole();
 		io.write("Enter a number of card: ");
 		String card = io.readConsole();
 		int index;
-		List<PaymentSaleEnum> listOfSale = Arrays.asList(PaymentSaleEnum.values());
-		while ((index = listUtil.choseIndexFromList(listOfSale, io)) != 0) {
-			b = true;
-			PaymentSaleEnum item = listOfSale.get(index-1);
-			if (item == PaymentSaleEnum.ONE) {
-				io.writeln(PaymentSaleEnum.ONE.getDescriptionOfAmount());
-				investOneHundred(io, project);
-				b = true;
-			}
-			if (item == PaymentSaleEnum.TWO) {
-				investTwoHundreds(io, project);
-				b = true;
-			}
-			if (item == PaymentSaleEnum.FIVE) {
-				investFiveHundreds(io, project);
-				b = true;
-			}
-			if (item == PaymentSaleEnum.ANY_AMOUNT) {
+		List<Reward> rewards = project.getRewards();
+		while ((index = listUtil.choseIndexFromList(rewards, io)) != 0) {
+			Reward item = rewards.get(index-1);
+			if (item.getName().equals("Any amount")) {
 				investAnyAmount(io, project);
-				b = true;
+			}else{
+				if(investWithReward(item, io, project)){
+					for(int i = 0; i < rewards.size(); i++){
+						if(rewards.get(i).equals(item)){
+							rewards.remove(i);
+							break;
+						}
+					}
+				}
+			}
+			
+		}
+
+	}
+
+	private boolean investWithReward(Reward item, IO io, Project project) {
+		io.write("Are you sure? (y/n): ");
+		if (io.readConsole().equals("y")) {
+			if(addInvestition(item.getAmount(), project)){
+			io.writeln("Your investition has added!");
+			io.writeln("");
+			return true;
 			}
 		}
-		return b;
-
-	}
-
-	private void investFiveHundreds(IO io, Project project) {
-		io.write("Are you sure? (y/n): ");
-		if (io.readConsole().equals("y")) {
-			addInvestition(PaymentSaleEnum.FIVE.getAmount(), project);
-			io.writeln("Your investition has added!");
-			io.writeln("");
-		}
-
-	}
-
-	private void investTwoHundreds(IO io, Project project) {
-		io.write("Are you sure? (y/n): ");
-		if (io.readConsole().equals("y")) {
-			addInvestition(PaymentSaleEnum.TWO.getAmount(), project);
-			io.writeln("Your investition has added!");
-			io.writeln("");
-		}
-	}
-
-	private void investOneHundred(IO io, Project project) {
-		io.write("Are you sure? (y/n): ");
-		if (io.readConsole().equals("y")) {
-			addInvestition(PaymentSaleEnum.ONE.getAmount(), project);
-			io.writeln("Your investition has added!");
-			io.writeln("");
-		}
+		return false;
 	}
 
 	private void investAnyAmount(IO io, Project project) {
@@ -77,9 +54,10 @@ public class InvestitionProjectPage {
 		if (isAmountValid(amount, io)) {
 			io.write("Are you sure? (y/n): ");
 			if (io.readConsole().equals("y")) {
-				addInvestition(Integer.parseInt(amount), project);
+				if(addInvestition(Integer.parseInt(amount), project)){
 				io.writeln("Your investition has added!");
 				io.writeln("");
+				}
 			}
 		}
 	}
@@ -99,7 +77,10 @@ public class InvestitionProjectPage {
 		}
 	}
 	
-	private void addInvestition(int i, Project project) {
-		project.setAvailableAmount(project.getAvailableAmount()+i);
+	private boolean addInvestition(int amount, Project project) {
+		int previousAmount = project.getAvailableAmount();
+		project.setAvailableAmount(previousAmount+amount);
+		int realAmount = project.getAvailableAmount();
+		return realAmount ==  previousAmount + amount;
 	}
 }
