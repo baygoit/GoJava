@@ -41,12 +41,11 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
     public void fillData() {
         fillCategories();
         fillProjects();
-        fillQuestions();
         fillInvestments();
-        fillRewards();
     }
 
-    void fillQuestions() {
+    @Override
+    public void getQuestions(Project project) {
         try (BufferedReader is = new BufferedReader(new FileReader(questionsFileName))) {
             String line;
             while ((line = is.readLine()) != null) {
@@ -55,12 +54,8 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
                 question.setId(Integer.valueOf(questionParts[0]));
                 question.setRequest(questionParts[2]);
                 question.setReply(questionParts[3]);
-                for (Category category : categories) {
-                    for (Project project : category.getProjects()) {
-                        if (Integer.valueOf(questionParts[1]).equals(project.getId())) {
-                            project.addQuestion(question);
-                        }
-                    }
+                if (Integer.valueOf(questionParts[1]).equals(project.getId())) {
+                    project.addQuestion(question);
                 }
             }
         } catch (Exception e) {
@@ -92,8 +87,9 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
             throw new IllegalStateException("Cannot read questions from file");
         }
     }
-
-    void fillRewards() {
+    
+    @Override
+    public void getRewards(Project project) {
         try (BufferedReader is = new BufferedReader(new FileReader(rewardsFileName))) {
             String line;
             while ((line = is.readLine()) != null) {
@@ -102,13 +98,9 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
                 reward.setId(Integer.valueOf(rewardParts[0]));
                 reward.setAmount(Integer.valueOf(rewardParts[2]));
                 reward.setDescription(rewardParts[3]);
-                for (Category category : categories) {
-                    for (Project project : category.getProjects()) {
-                        if (Integer.valueOf(rewardParts[1]).equals(project.getId())) {
-                            project.addReward(reward);
-                        }
-                    }
-                }
+                if (Integer.valueOf(rewardParts[1]).equals(project.getId())) {
+                    project.addReward(reward);
+                } 
             }
         } catch (Exception e) {
             categories.clear();
