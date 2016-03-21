@@ -53,7 +53,7 @@ public class CategoryDaoSqlTest {
         assertThat(category.getId(), is(1));
         assertThat(category.getName(), is("testname"));
     }
-    
+
     @Test
     public void getProjectsTest() throws SQLException {
         when(rs.getInt("id")).thenReturn(1);
@@ -74,7 +74,7 @@ public class CategoryDaoSqlTest {
         assertThat(project.getRequiredSum(), is(222));
         assertThat(project.getVideoUrl(), is("testvideourl"));
     }
-    
+
     @Test
     public void getQuestionsTest() throws SQLException {
         when(rs.getInt("id")).thenReturn(1);
@@ -88,7 +88,7 @@ public class CategoryDaoSqlTest {
         assertThat(question.getRequest(), is("testrequest"));
         assertThat(question.getReply(), is("testreply"));
     }
-    
+
     @Test
     public void getRewardsTest() throws SQLException {
         when(rs.getInt("id")).thenReturn(1);
@@ -102,9 +102,9 @@ public class CategoryDaoSqlTest {
         assertThat(reward.getAmount(), is(111));
         assertThat(reward.getDescription(), is("testdescription"));
     }
-    
+
     @Test
-    public void addInvestmentTest() throws SQLException  {
+    public void addInvestmentTest() throws SQLException {
         Project project = new Project();
         Investment investment = new Investment();
         investment.setAmount(111);
@@ -112,9 +112,9 @@ public class CategoryDaoSqlTest {
         assertThat(project.getCollectedSum(), is(111));
         verify(statement).executeUpdate(anyString());
     }
-    
+
     @Test
-    public void addQuestionTest() throws SQLException  {
+    public void addQuestionTest() throws SQLException {
         Project project = new Project();
         Question question = new Question();
         question.setRequest("testrequest");

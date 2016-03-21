@@ -120,7 +120,8 @@ public class CategoryDaoSql extends DaoSql implements CategoryDao {
     @Override
     public void addInvestment(Project project, Investment investment) {
         try (Statement statement = getConnection().createStatement()){
-            statement.executeUpdate("INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES ("
+            statement
+                    .executeUpdate("INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES ("
                     + project.getId() + ", '" + investment.getCardHolderName() + "', '" + investment.getCardNumber()
                     + "', " + investment.getAmount() + ")");
             project.addInvestment(investment);

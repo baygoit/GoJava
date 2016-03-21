@@ -87,7 +87,7 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
             throw new IllegalStateException("Cannot read questions from file");
         }
     }
-    
+
     @Override
     public void getRewards(Project project) {
         try (BufferedReader is = new BufferedReader(new FileReader(rewardsFileName))) {
@@ -100,7 +100,7 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
                 reward.setDescription(rewardParts[3]);
                 if (Integer.valueOf(rewardParts[1]).equals(project.getId())) {
                     project.addReward(reward);
-                } 
+                }
             }
         } catch (Exception e) {
             categories.clear();

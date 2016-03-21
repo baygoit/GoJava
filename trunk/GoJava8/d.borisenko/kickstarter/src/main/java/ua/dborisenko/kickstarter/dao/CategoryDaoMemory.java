@@ -53,18 +53,18 @@ public class CategoryDaoMemory implements CategoryDao {
             if (questionMap.containsKey(project.getId())) {
                 project.addQuestion(questionMap.get(project.getId()));
             }
-        }    
+        }
     }
-    
+
     @Override
     public void getRewards(Project project) {
         for (Map<Integer, Reward> rewardMap : rewards) {
             if (rewardMap.containsKey(project.getId())) {
                 project.addReward(rewardMap.get(project.getId()));
             }
-        }    
+        }
     }
-    
+
     private int getProjectId() {
         return (projectIdGenerator++);
     }
@@ -99,8 +99,8 @@ public class CategoryDaoMemory implements CategoryDao {
         fillQuestions();
         fillRewards();
     }
-    
-    private void fillCategories() {    
+
+    private void fillCategories() {
         categories.add(0, makeCategory("Sport"));
         categories.add(1, makeCategory("Space investigation"));
         categories.add(2, makeCategory("Game development"));
@@ -120,7 +120,7 @@ public class CategoryDaoMemory implements CategoryDao {
         categories.get(2).addProject(makeProject("Carmageddon 5 mobile", "Test description", "Test history", 741652,
                 6500, 115, "http://series40.com/games/carmageddon"));
     }
-    
+
     private void fillRewards() {
         for (int i = 1; i <= 6; i++) {
             Reward reward = new Reward();
@@ -131,9 +131,9 @@ public class CategoryDaoMemory implements CategoryDao {
             rewards.get(i - 1).put(i, reward);
         }
     }
-    
+
     private void fillQuestions() {
-        for (int i = 1; i<=6; i++) {
+        for (int i = 1; i <= 6; i++) {
             Question question = new Question();
             question.setId(i);
             question.setRequest("Test question");
