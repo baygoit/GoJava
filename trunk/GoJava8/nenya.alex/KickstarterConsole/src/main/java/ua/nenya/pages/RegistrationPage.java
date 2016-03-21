@@ -10,13 +10,15 @@ import java.util.regex.Pattern;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import ua.nenya.main.KickstarterInitilizer;
 import ua.nenya.project.User;
 import ua.nenya.util.IO;
 
 public class RegistrationPage {
 	private static final String USERS_FILE_NAME = "src/main/resources/users.json";
 
-	public User registration(List<User> users, IO io) {
+	public User registration(KickstarterInitilizer initilizer, IO io) {
+		List<User> users = initilizer.getUserDao().getUsers();
 		io.write("Enter login: ");
 		String login = io.readConsole();
 		if (!isLoginValid(users, io, login)) {

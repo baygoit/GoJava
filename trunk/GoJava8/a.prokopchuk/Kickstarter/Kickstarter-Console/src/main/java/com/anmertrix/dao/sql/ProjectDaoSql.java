@@ -1,23 +1,21 @@
 package com.anmertrix.dao.sql;
 
-import com.anmertrix.Kickstarter;
+import com.anmertrix.ConnectionManager;
 import com.anmertrix.dao.CategoryDao;
 import com.anmertrix.dao.ProjectDao;
 
 public class ProjectDaoSql  extends ProjectDao  {
 
-	public ProjectDaoSql(CategoryDao categoryDao) {
+	private ConnectionManager connectionManager;
+
+	public ProjectDaoSql(ConnectionManager connectionManager, CategoryDao categoryDao) {
 		super(categoryDao);
+		this.connectionManager = connectionManager;
 	}
 
 	@Override
 	public void fillCategory() {
-		try {
-			Kickstarter.ms.getInstance().getProjects(categoryDao);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		connectionManager.getProjects(categoryDao);
 	}
 	
 	

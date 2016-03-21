@@ -8,10 +8,11 @@ import ua.nenya.project.Project;
 import ua.nenya.util.IO;
 import ua.nenya.util.ListUtilits;
 import ua.nenya.enums.InvestitionOrAskingEnum;
+import ua.nenya.main.KickstarterInitilizer;
 
 public class ProjectPage {
 
-	public void showTotalProject(IO io, Category category, ListUtilits listUtil) {
+	public void showTotalProject(KickstarterInitilizer initilizer, IO io, Category category, ListUtilits listUtil) {
 		List<Project> projects = category.getProjects();
 		for (int i = 0; i < projects.size(); i++) {
 			printMainInformation(projects.get(i), io);
