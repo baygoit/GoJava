@@ -6,7 +6,7 @@ import java.util.Calendar;
 
 import org.junit.Test;
 
-public class BookTests {
+public class BookTest {
 
 	Category puppet = new Category();
 
