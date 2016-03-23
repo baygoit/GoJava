@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.anmertrix.Category;
+import com.anmertrix.Project;
 import com.anmertrix.dao.CategoryDao;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -39,6 +40,12 @@ public class CategoryDaoFile implements CategoryDao {
 	@Override
 	public List<Category> getCategories() {
 		return categories;
+	}
+
+	@Override
+	public List<Project> getProjectsByCategoryId(int index) {
+		Category category = getCategory(index);
+		return category.getProjects();
 	}
 	
 	

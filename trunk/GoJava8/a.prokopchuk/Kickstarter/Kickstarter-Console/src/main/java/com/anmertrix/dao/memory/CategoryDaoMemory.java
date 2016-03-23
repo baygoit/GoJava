@@ -76,4 +76,10 @@ public class CategoryDaoMemory implements CategoryDao {
 		return categories;
 	}
 
+	@Override
+	public List<Project> getProjectsByCategoryId(int index) {
+		Category category = getCategory(index);
+		return category.getProjects();
+	}
+
 }

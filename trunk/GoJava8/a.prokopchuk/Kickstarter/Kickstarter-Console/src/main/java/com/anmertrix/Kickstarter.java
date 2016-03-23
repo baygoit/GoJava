@@ -50,17 +50,15 @@ public class Kickstarter {
 		while (selectedMenuItemCategory != EXIT_INPUT) {
 			showCategoriesMenu();
 			while (selectedMenuItemCategory != EXIT_INPUT) {
-				io.print(showProjects(selectedMenuItemCategory));
+				io.print(showProjects());
 				int numberProject = getParseInputNumber(io.readConsole());
 				if (numberProject == EXIT_INPUT) {
 					break;
 				} else {
 					io.println(SOLID_LINE);
-					io.println(showSelectedProject(selectedMenuItemCategory, numberProject));
+					io.println(showSelectedProject(numberProject));
 					int numberMenuItem = getNumberMenuItem();
-					
-					Category category = categoryDao.getCategory(selectedMenuItemCategory);
-					List<Project> projects = category.getProjects();
+					List<Project> projects = categoryDao.getProjectsByCategoryId(selectedMenuItemCategory);
 					Project project = projects.get(numberProject - 1);
 					if (numberMenuItem == EXIT_INPUT) {
 						break;
@@ -100,16 +98,12 @@ public class Kickstarter {
 		io.println(getQuoteText());
 	}
 	
-	public String showProjects(int idCategory) {
+	public String showProjects() {
 		StringBuilder result = new StringBuilder();
-		Category category = categoryDao.getCategory(idCategory);
-		List<Project> projects = category.getProjects();
-		System.out.println(projects.size());
+		List<Project> projects = categoryDao.getProjectsByCategoryId(selectedMenuItemCategory);
 		for (int i = 0; i < projects.size(); i++) {
 			Project project = projects.get(i);
-			result.append(i + 1)
-					.append(" - ")
-					.append(project.getName() + "\n");
+			result.append(i + 1).append(" - ").append(project.getName() + "\n");
 		}
 		result.append("0 - EXIT \n")
 			.append("\n")
@@ -117,9 +111,8 @@ public class Kickstarter {
 		return result.toString().trim();
 	}
 
-	public String showSelectedProject(int idCategory, int idProject) {
-		Category category = categoryDao.getCategory(idCategory);
-		List<Project> projects = category.getProjects();
+	public String showSelectedProject(int idProject) {
+		List<Project> projects = categoryDao.getProjectsByCategoryId(selectedMenuItemCategory);
 		Project project = projects.get(idProject);
 
 		StringBuilder result = new StringBuilder();

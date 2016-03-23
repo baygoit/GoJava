@@ -57,16 +57,16 @@ public class CategoryDaoSql implements CategoryDao {
 		
 		return categories;
 	}
-	
-	public List<Project> getProjects(CategoryDao categoryDao) {
-    	
-    	List<Project> projects = new ArrayList<Project>();
+
+	@Override
+	public List<Project> getProjectsByCategoryId(int index) {
+		
+		List<Project> projects = new ArrayList<Project>();
     	
 		try {
 			Statement statement = connectionManager.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT category_id, name, description, required_budget, gathered_budget, days_left, history, url FROM project");
+			ResultSet rs = statement.executeQuery("SELECT name, description, required_budget, gathered_budget, days_left, history, url FROM project WHERE category_id=" + index);
 			while(rs.next()) {
-				int category_id = rs.getInt("category_id");
 				String name = rs.getString("name");
 				String description = rs.getString("description");
 				int required_budget = rs.getInt("required_budget");
@@ -79,9 +79,7 @@ public class CategoryDaoSql implements CategoryDao {
 				project.setProjectData(name, description, required_budget, gathered_budget, days_left, history);
 				project.setURL(url);
 				
-				
-				categoryDao.getCategories().get(category_id - 1).setProject(project);
-				
+				projects.add(project);				
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e.getMessage(), e);
