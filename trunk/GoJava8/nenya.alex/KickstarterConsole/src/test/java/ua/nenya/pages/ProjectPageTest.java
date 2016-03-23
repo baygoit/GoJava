@@ -11,7 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import ua.nenya.dao.CategoryDao;
 import ua.nenya.dao.memory.CategoryDaoMemoryImpl;
+import ua.nenya.main.KickstarterInitilizer;
 import ua.nenya.pages.ProjectPage;
 import ua.nenya.project.Category;
 import ua.nenya.project.Project;
@@ -21,8 +23,8 @@ import ua.nenya.util.ListUtilits;
 public class ProjectPageTest {
 	private IO mockIo;
 	private Category musicCategory;
-	private CategoryDaoMemoryImpl categoryInit;
 	private Project newSongProject;
+	private KickstarterInitilizer initilizer = new KickstarterInitilizer();
 	
 	@Before
 	public void init() {
@@ -34,19 +36,20 @@ public class ProjectPageTest {
 		Project oldSongProject = new Project("Old song", "description of old song", 1100, 110, 1100);
 		
 		
-		categoryInit = new CategoryDaoMemoryImpl();
 		musicCategory = new Category("Music");
 		musicCategory.getProjects().add(newSongProject);
 		musicCategory.getProjects().add(oldSongProject);
 		
-		categoryInit.getCategories().add(musicCategory);
+		CategoryDao cDao = new CategoryDaoMemoryImpl();
+		initilizer.setCategoryDao(cDao);
+		initilizer.getCategoryDao().getCategories().add(musicCategory);
 		
 	}
 	@Test
 	public void projectPageTestShowMusic() {
 		when(mockIo.readConsole()).thenReturn("1").thenReturn("0");
 		
-		new ProjectPage().showTotalProject(mockIo, musicCategory, new ListUtilits());
+		new ProjectPage().showTotalProject(initilizer, mockIo, musicCategory, new ListUtilits());
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mockIo, times(37)).writeln(captor.capture());
         assertEquals(
@@ -92,9 +95,9 @@ public class ProjectPageTest {
 		
 		when(mockIo.readConsole()).thenReturn("1").thenReturn("1").thenReturn("0");
 		
-		new ProjectPage().showTotalProject(mockIo, musicCategory, new ListUtilits());
+		new ProjectPage().showTotalProject(initilizer, mockIo, musicCategory, new ListUtilits());
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(mockIo, times(49)).writeln(captor.capture());
+        verify(mockIo, times(46)).writeln(captor.capture());
         assertEquals(
                 "[Progect name:		New Song, "
                 + "Description:		description of new song, "
@@ -128,10 +131,7 @@ public class ProjectPageTest {
                 + "2	-	Ask a question, "
                 + "Choose one of the items bellow, , "
                 + "0	-	Exit, "
-                + "1	-	100$ Invest one hundred dollars and get bottle of water!!!, "
-                + "2	-	200$ Invest two hundreds dollars and get tickets to the movie!!!, "
-                + "3	-	500$ Invest five hundreds dollars and get a lunch in the restaurant!!!, "
-                + "4	-	Any amount investition, "
+                + "1	-	Any amount , "
                 + "Choose one of the items bellow, , "
                 + "0	-	Exit, "
                 + "1	-	Invest in project, "
@@ -148,7 +148,7 @@ public class ProjectPageTest {
 		
 		when(mockIo.readConsole()).thenReturn("1").thenReturn("2").thenReturn("0");
 		
-		new ProjectPage().showTotalProject(mockIo, musicCategory, new ListUtilits());
+		new ProjectPage().showTotalProject(initilizer, mockIo, musicCategory, new ListUtilits());
 		
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mockIo, times(43)).writeln(captor.capture());

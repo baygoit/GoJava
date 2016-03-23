@@ -1,32 +1,44 @@
 package ua.dborisenko.kickstarter.dao;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.junit.Test;
+
+import com.mysql.jdbc.Statement;
 
 import ua.dborisenko.kickstarter.domain.Quote;
 
 public class QuoteDaoSqlTest {
 
-    private static QuoteDaoSql quoteDao = new QuoteDaoSql();
-
     @Test
-    public void getRandomQuoteTest() {
-        assertThat(quoteDao.getRandomQuote(), notNullValue());
+    public void getRandomQuoteTest() throws SQLException {
+        ResultSet rs = mock(ResultSet.class);
+        when(rs.getString("author")).thenReturn("testauthor");
+        when(rs.getString("text")).thenReturn("testtext");
+        Statement statement = mock(Statement.class);
+        when(statement.executeQuery(anyString())).thenReturn(rs);
+        Connection connection = mock(Connection.class);
+        when(connection.createStatement()).thenReturn(statement);
+        QuoteDaoSql quoteDao = spy(QuoteDaoSql.class);
+        when(quoteDao.getConnection()).thenReturn(connection);
+        Quote quote = quoteDao.getRandomQuote();
+        assertThat(quote.getAuthor(), is("testauthor"));
+        assertThat(quote.getText(), is("testtext"));
     }
     
-    @Test
-    public void getRandomQuoteTestIsRandom() {
-        boolean randomFlag = false;
-        Quote quote1 = quoteDao.getRandomQuote();
-        for (int i = 0; i < 1000; i++) {
-            if (!quote1.getText().equals(quoteDao.getRandomQuote().getText())) {
-                randomFlag = true;
-                break;
-            }
-        }
-        assertTrue(randomFlag);
+    @Test (expected = IllegalStateException.class)
+    public void getRandomQuoteTestFail() throws SQLException {
+        QuoteDaoSql quoteDao = spy(QuoteDaoSql.class);
+        when(quoteDao.getConnection()).thenReturn(null);
+        quoteDao.getRandomQuote();
     }
 }

@@ -82,11 +82,13 @@ public class Kickstarter {
 
     void prepareMenuProject() {
         menuPosition = MenuPosition.PROJECT;
+        categoryDao.getQuestions(currentProject);
         currentView = new ProjectView(currentProject, currentCategory.getName());
     }
 
     void prepareMenuRewards() {
         menuPosition = MenuPosition.REWARDS;
+        categoryDao.getRewards(currentProject);
         currentView = new RewardsView(currentProject);
     }
 

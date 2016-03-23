@@ -1,16 +1,18 @@
 package ua.nenya.project;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Project implements GettingNameInterface {
 	private String name;
 	private String description;
 	private int allAmount;
 	private int availableAmount;
-	
-
 	private int daysRemain;
 	private String history = "";
 	private String video = "";
 	private String questionAnswer = "";
+	private List<Reward> rewards = new ArrayList<>(); 
 	
 	public Project() {
 	}
@@ -22,6 +24,7 @@ public class Project implements GettingNameInterface {
 		this.allAmount = allAmount;
 		this.availableAmount = availableAmount;
 		this.daysRemain = daysRemain;
+		rewards.add(new Reward("Any amount", ""));
 	}
 
 
@@ -73,4 +76,8 @@ public class Project implements GettingNameInterface {
 		this.questionAnswer = questionAnswer;
 	}
 
+	public List<Reward> getRewards() {
+		return rewards;
+	}
+	
 }

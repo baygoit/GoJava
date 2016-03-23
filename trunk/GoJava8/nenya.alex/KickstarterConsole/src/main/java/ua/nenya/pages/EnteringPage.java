@@ -10,13 +10,14 @@ import ua.nenya.project.User;
 import ua.nenya.util.IO;
 import ua.nenya.util.ListUtilits;
 import ua.nenya.enums.RegistrationPageEnum;
+import ua.nenya.main.KickstarterInitilizer;
 
 public class EnteringPage {
 
 	private CreatingProjectPage createProjectPage = new CreatingProjectPage();
 	private RegistrationPage registrationPage = new RegistrationPage();
 
-	public void enter(List<User> users, List<Category> categories, IO io, ListUtilits listUtil) {
+	public void enter(KickstarterInitilizer initilizer, IO io, ListUtilits listUtil) {
 		List<RegistrationPageEnum> list = new ArrayList<>(Arrays.asList(RegistrationPageEnum.values()));
 		int index;
 		while ((index = listUtil.choseIndexFromList(list, io)) != 0) {
@@ -28,16 +29,16 @@ public class EnteringPage {
 				io.write("Enter password: ");
 				String password = io.readConsole();
 				io.writeln("");
-				enterCreateProjectPage(users, categories, io, listUtil, login, password);
+				enterCreateProjectPage(initilizer, io, listUtil, login, password);
 			} else {
 
-				User newUser = registrationPage.registration(users, io);
+				User newUser = registrationPage.registration(initilizer, io);
 				if (newUser == null) {
 					return;
 				}
 				String login = newUser.getLogin();
 				String password = newUser.getPassword();
-				enterCreateProjectPage(users, categories, io, listUtil, login, password);
+				enterCreateProjectPage(initilizer, io, listUtil, login, password);
 				io.writeln("");
 			}
 
@@ -45,8 +46,10 @@ public class EnteringPage {
 
 	}
 
-	private void enterCreateProjectPage(List<User> users, List<Category> categories, IO io, ListUtilits listUtil,
+	private void enterCreateProjectPage(KickstarterInitilizer initilizer, IO io, ListUtilits listUtil,
 			String login, String password) {
+		List<User> users = initilizer.getUserDao().getUsers();
+		List<Category> categories = initilizer.getCategoryDao().getCategories();
 		if (isUserValid(users, io, login, password)) {
 			createProjectPage.createProject(io, categories, listUtil);
 		}

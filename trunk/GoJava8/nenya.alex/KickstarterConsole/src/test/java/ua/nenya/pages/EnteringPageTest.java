@@ -6,15 +6,16 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import ua.nenya.dao.CategoryDao;
+import ua.nenya.dao.UserDao;
 import ua.nenya.dao.memory.CategoryDaoMemoryImpl;
 import ua.nenya.dao.memory.UserDaoMemoryImpl;
+import ua.nenya.main.KickstarterInitilizer;
 import ua.nenya.pages.EnteringPage;
 import ua.nenya.project.Category;
 import ua.nenya.project.Project;
@@ -24,48 +25,40 @@ import ua.nenya.util.ListUtilits;
 
 public class EnteringPageTest {
 	private IO mockIo;
-	private Category musicCategory;
-	private CategoryDaoMemoryImpl categoryInit;
-	private UserDaoMemoryImpl users;
-	private Project newSongProject;
-	private List<Category> list = new ArrayList<>();
-	private List<User> userList = new ArrayList<>();
+	private KickstarterInitilizer initilizer = new KickstarterInitilizer();
 	
 	@Before
 	public void init() {
 		mockIo = mock(IO.class);
 		
-		users = new UserDaoMemoryImpl();
+		UserDao users = new UserDaoMemoryImpl();
 		User userAlex = new User("alex", "111", "a@a.ua");
-		users.getUsers().add(userAlex);
-		userList = users.getUsers();
 
 		
-		newSongProject = new Project("New Song", "description of new song", 100, 10, 100);
-		newSongProject.setHistory("hystory of new song");
-		newSongProject.setVideo("video about new song");
-		newSongProject.setQuestionAnswer("question about new song");
 		Project oldSongProject = new Project("Old song", "description of old song", 1100, 110, 1100);
 		Project filmProject = new Project("Film", "description of film", 200, 20, 200);
 		
-		categoryInit = new CategoryDaoMemoryImpl();
-		musicCategory = new Category("Music");
+		
+		Category musicCategory = new Category("Music");
 		musicCategory.getProjects().add(oldSongProject);
 		
 		Category filmsCategory = new Category("Films");
 		filmsCategory.getProjects().add(filmProject);
-		list.add(musicCategory);
-		list.add(filmsCategory);
 		
-		categoryInit.getCategories().add(musicCategory);
-		categoryInit.getCategories().add(filmsCategory);
+		CategoryDao cDao = new CategoryDaoMemoryImpl();
+		initilizer.setCategoryDao(cDao);
+		initilizer.getCategoryDao().getCategories().add(musicCategory);
+		initilizer.getCategoryDao().getCategories().add(filmsCategory);
+		
+		initilizer.setUserDao(users);
+		initilizer.getUserDao().getUsers().add(userAlex);
 	}
 	
 	@Test
 	public void enteringPageTestEnterRegistered() {
 		
 		when(mockIo.readConsole()).thenReturn("1").thenReturn("alex").thenReturn("111").thenReturn("0");
-		new EnteringPage().enter(userList, categoryInit.getCategories(), mockIo, new ListUtilits());
+		new EnteringPage().enter(initilizer, mockIo, new ListUtilits());
 	    
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mockIo, times(18)).writeln(captor.capture());
@@ -91,7 +84,7 @@ public class EnteringPageTest {
 	public void enteringPageTestEnterNotRegistered1() {
 		
 		when(mockIo.readConsole()).thenReturn("1").thenReturn("").thenReturn("111").thenReturn("0");
-		new EnteringPage().enter(userList, categoryInit.getCategories(), mockIo, new ListUtilits());
+		new EnteringPage().enter(initilizer, mockIo, new ListUtilits());
 	    
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mockIo, times(14)).writeln(captor.capture());
@@ -113,7 +106,7 @@ public class EnteringPageTest {
 	public void enteringPageTestEnterNotRegistered2() {
 		
 		when(mockIo.readConsole()).thenReturn("1").thenReturn("alex").thenReturn("222").thenReturn("0");
-		new EnteringPage().enter(userList, categoryInit.getCategories(), mockIo, new ListUtilits());
+		new EnteringPage().enter(initilizer, mockIo, new ListUtilits());
 	    
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mockIo, times(14)).writeln(captor.capture());
@@ -135,7 +128,7 @@ public class EnteringPageTest {
 	public void enteringPageTestRegistretionNull() {
 		
 		when(mockIo.readConsole()).thenReturn("2").thenReturn("0");
-		new EnteringPage().enter(userList, categoryInit.getCategories(), mockIo, new ListUtilits());
+		new EnteringPage().enter(initilizer, mockIo, new ListUtilits());
 	    
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mockIo, times(8)).writeln(captor.capture());
@@ -153,7 +146,7 @@ public class EnteringPageTest {
 	public void enteringPageTestRegistretionNotNull() {
 		
 		when(mockIo.readConsole()).thenReturn("2").thenReturn("q").thenReturn("q").thenReturn("q").thenReturn("q@q.ua").thenReturn("0");
-		new EnteringPage().enter(userList, categoryInit.getCategories(), mockIo, new ListUtilits());
+		new EnteringPage().enter(initilizer, mockIo, new ListUtilits());
 	    
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mockIo, times(20)).writeln(captor.capture());

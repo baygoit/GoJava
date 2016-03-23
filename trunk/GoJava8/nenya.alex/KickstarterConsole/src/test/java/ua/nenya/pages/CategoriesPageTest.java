@@ -10,7 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import ua.nenya.dao.CategoryDao;
 import ua.nenya.dao.memory.CategoryDaoMemoryImpl;
+import ua.nenya.main.KickstarterInitilizer;
 import ua.nenya.pages.CategoriesPage;
 import ua.nenya.project.Category;
 import ua.nenya.project.Project;
@@ -21,8 +23,8 @@ public class CategoriesPageTest {
 
 	private IO mockIo;
 	private Category musicCategory;
-	private CategoryDaoMemoryImpl categoryInit;
 	private Project newSongProject;
+	private KickstarterInitilizer initilizer = new KickstarterInitilizer();
 	
 	@Before
 	public void init() {
@@ -34,20 +36,20 @@ public class CategoriesPageTest {
 		Project oldSongProject = new Project("Old song", "description of old song", 1100, 110, 1100);
 		
 		
-		categoryInit = new CategoryDaoMemoryImpl();
 		musicCategory = new Category("Music");
 		musicCategory.getProjects().add(newSongProject);
 		musicCategory.getProjects().add(oldSongProject);
 		
-		categoryInit.getCategories().add(musicCategory);
-		
+		CategoryDao cDao = new CategoryDaoMemoryImpl();
+		initilizer.setCategoryDao(cDao);
+		initilizer.getCategoryDao().getCategories().add(musicCategory);
 	}
 
 	@Test
 	public void categoriesPageTest() {
 		when(mockIo.readConsole()).thenReturn("1").thenReturn("0");
 		
-		new CategoriesPage().showAllCategories(categoryInit.getCategories(), mockIo, new ListUtilits());
+		new CategoriesPage().showAllCategories(initilizer, mockIo, new ListUtilits());
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mockIo, times(26)).writeln(captor.capture());
         assertEquals(
