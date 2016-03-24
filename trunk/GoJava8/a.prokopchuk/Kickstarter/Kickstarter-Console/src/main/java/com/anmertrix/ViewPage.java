@@ -99,12 +99,12 @@ public class ViewPage {
 	}
 
 	public boolean isExit() {
-		destroyConnectionManager();
 		return isExit;
 	}
 
 	public void setExit(boolean isExit) {
 		this.isExit = isExit;
+		destroyConnectionManager();
 	}
 
 	public int getSelectedMenuItemCategory() {
