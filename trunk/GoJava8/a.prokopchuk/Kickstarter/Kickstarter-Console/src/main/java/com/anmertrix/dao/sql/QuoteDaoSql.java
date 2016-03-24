@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.anmertrix.ConnectionManager;
-import com.anmertrix.Quote;
 import com.anmertrix.dao.QuoteDao;
+import com.anmertrix.domain.Quote;
 
 public class QuoteDaoSql implements QuoteDao {
 

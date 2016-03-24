@@ -12,6 +12,9 @@ import com.anmertrix.dao.memory.CategoryDaoMemory;
 import com.anmertrix.dao.memory.QuoteDaoMemory;
 import com.anmertrix.dao.sql.CategoryDaoSql;
 import com.anmertrix.dao.sql.QuoteDaoSql;
+import com.anmertrix.domain.Category;
+import com.anmertrix.domain.Project;
+import com.anmertrix.domain.Quote;
 
 public class Kickstarter {
 

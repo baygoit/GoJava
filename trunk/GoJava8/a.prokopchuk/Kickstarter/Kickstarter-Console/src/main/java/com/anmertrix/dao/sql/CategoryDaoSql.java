@@ -7,10 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.anmertrix.Category;
 import com.anmertrix.ConnectionManager;
-import com.anmertrix.Project;
 import com.anmertrix.dao.CategoryDao;
+import com.anmertrix.domain.Category;
+import com.anmertrix.domain.Project;
 
 public class CategoryDaoSql implements CategoryDao {
 

@@ -1,6 +1,6 @@
 package com.anmertrix.dao;
 
-import com.anmertrix.Quote;
+import com.anmertrix.domain.Quote;
 
 public interface QuoteDao {
 	

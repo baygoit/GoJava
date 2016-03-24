@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.anmertrix.Quote;
 import com.anmertrix.dao.QuoteDao;
+import com.anmertrix.domain.Quote;
 
 public class QuoteDaoFile implements QuoteDao {
 

@@ -21,7 +21,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.anmertrix.ConnectionManager;
-import com.anmertrix.Quote;
+import com.anmertrix.domain.Quote;
 
 @RunWith(MockitoJUnitRunner.class)
 public class QuoteDaoSqlTest {

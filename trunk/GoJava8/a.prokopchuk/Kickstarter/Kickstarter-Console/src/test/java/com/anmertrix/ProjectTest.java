@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.anmertrix.domain.Project;
+
 public class ProjectTest {
 
 	@Test

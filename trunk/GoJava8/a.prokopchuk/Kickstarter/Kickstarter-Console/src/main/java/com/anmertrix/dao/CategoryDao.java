@@ -3,8 +3,8 @@ package com.anmertrix.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.anmertrix.Category;
-import com.anmertrix.Project;
+import com.anmertrix.domain.Category;
+import com.anmertrix.domain.Project;
 
 public interface CategoryDao {
 	

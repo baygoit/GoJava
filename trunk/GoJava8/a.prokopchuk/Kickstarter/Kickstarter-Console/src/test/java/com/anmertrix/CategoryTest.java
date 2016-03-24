@@ -4,6 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.anmertrix.domain.Category;
+import com.anmertrix.domain.Project;
+
 public class CategoryTest {
 
 	@Test

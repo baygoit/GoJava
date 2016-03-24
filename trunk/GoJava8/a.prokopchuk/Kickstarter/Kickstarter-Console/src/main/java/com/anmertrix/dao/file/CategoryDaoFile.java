@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.anmertrix.Category;
-import com.anmertrix.Project;
 import com.anmertrix.dao.CategoryDao;
+import com.anmertrix.domain.Category;
+import com.anmertrix.domain.Project;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;

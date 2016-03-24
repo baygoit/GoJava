@@ -1,4 +1,4 @@
-package com.anmertrix;
+package com.anmertrix.domain;
 
 import java.util.ArrayList;
 import java.util.List;

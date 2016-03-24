@@ -2,9 +2,9 @@ package com.anmertrix.dao.memory;
 
 import java.util.List;
 
-import com.anmertrix.Category;
-import com.anmertrix.Project;
 import com.anmertrix.dao.CategoryDao;
+import com.anmertrix.domain.Category;
+import com.anmertrix.domain.Project;
 
 
 public class CategoryDaoMemory implements CategoryDao {
