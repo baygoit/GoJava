@@ -51,11 +51,13 @@ public class CategoryDaoFileTest {
     @Test(expected = IllegalStateException.class)
     public void fillQuestionsWrongFileTest() {
         categoryDao.setCategoriesFileName(categoriesFileName);
-        categoryDao.fillCategories();
         categoryDao.setProjectsFileName(projectsFileName);
-        categoryDao.fillProjects();
         categoryDao.setQuestionsFileName(questionsWrongFileName);
-        categoryDao.fillQuestions();
+        categoryDao.fillCategories();
+        categoryDao.fillProjects();
+        Category category = categoryDao.categories.get(0);
+        Project project = category.getProjectByIndex(0);
+        categoryDao.getQuestions(project);
     }
     
     @Test(expected = IllegalStateException.class)
@@ -71,11 +73,13 @@ public class CategoryDaoFileTest {
     @Test(expected = IllegalStateException.class)
     public void fillRewardsWrongFileTest() {
         categoryDao.setCategoriesFileName(categoriesFileName);
-        categoryDao.fillCategories();
         categoryDao.setProjectsFileName(projectsFileName);
-        categoryDao.fillProjects();
         categoryDao.setRewardsFileName(rewardsWrongFileName);
-        categoryDao.fillRewards();
+        categoryDao.fillCategories();
+        categoryDao.fillProjects();
+        Category category = categoryDao.categories.get(0);
+        Project project = category.getProjectByIndex(0);
+        categoryDao.getRewards(project);
     }
     
     @Test
@@ -102,9 +106,9 @@ public class CategoryDaoFileTest {
         categoryDao.setQuestionsFileName(questionsFileName);
         categoryDao.fillCategories();
         categoryDao.fillProjects();
-        categoryDao.fillQuestions();
         Category category = categoryDao.categories.get(0);
         Project project = category.getProjectByIndex(0);
+        categoryDao.getQuestions(project);
         Question question = project.getQuestions().get(0);
         assertThat(question.getId(), is(1));
         assertThat(question.getRequest(), is("testrequest"));
@@ -135,9 +139,9 @@ public class CategoryDaoFileTest {
         categoryDao.setRewardsFileName(rewardsFileName);
         categoryDao.fillCategories();
         categoryDao.fillProjects();
-        categoryDao.fillRewards();
         Category category = categoryDao.categories.get(0);
         Project project = category.getProjectByIndex(0);
+        categoryDao.getRewards(project);
         Reward reward = project.getRewards().get(0);
         assertThat(reward.getId(), is(1));
         assertThat(reward.getAmount(), is(111));

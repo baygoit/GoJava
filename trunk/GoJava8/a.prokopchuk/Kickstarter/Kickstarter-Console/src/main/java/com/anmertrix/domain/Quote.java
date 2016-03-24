@@ -1,4 +1,4 @@
-package com.anmertrix;
+package com.anmertrix.domain;
 
 public class Quote {
 

@@ -1,4 +1,4 @@
-package com.anmertrix;
+package com.anmertrix.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Category {
 		return name;
 	}
 	
-	public void getName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

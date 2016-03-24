@@ -2,8 +2,8 @@ package ua.nenya.util;
 
 import java.util.List;
 
-import ua.nenya.enums.PaymentSaleEnum;
 import ua.nenya.project.GettingNameInterface;
+import ua.nenya.project.Reward;
 
 public class ListUtilits {
 	
@@ -31,9 +31,9 @@ public class ListUtilits {
 		io.writeln("0	-	Exit");
 		for (int i = 1; i <= list.size(); i++) {
 				GettingNameInterface it = (GettingNameInterface) list.get(i-1);
-				if(it instanceof PaymentSaleEnum){
-					PaymentSaleEnum itt = (PaymentSaleEnum) it;
-				io.writeln(i + "	-	" + itt.getName()+" "+ itt.getDescriptionOfAmount());
+				if(it instanceof Reward){
+					Reward itt = (Reward) it;
+				io.writeln(i + "	-	" + itt.getName()+" "+ itt.getDescription());
 				}else{
 					io.writeln(i + "	-	" + it.getName());
 				}

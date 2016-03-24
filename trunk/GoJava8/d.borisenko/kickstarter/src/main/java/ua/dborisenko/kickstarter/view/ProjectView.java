@@ -5,7 +5,11 @@ import ua.dborisenko.kickstarter.domain.Question;
 
 public class ProjectView extends View {
 
-    public ProjectView(Project project, String categoryName) {
+    public static final String INPUT_TO_RETURN = "0";
+    public static final String INPUT_TO_INVEST = "1";
+    public static final String INPUT_TO_QUESTION = "2";
+
+    public void showContent(Project project, String categoryName) {
         addContentString(HEADER_BLOCK);
         addContentString("Project " + project.getName());
         addContentString(SOLID_LINE);
@@ -25,8 +29,13 @@ public class ProjectView extends View {
         }
         addContentString(SOLID_LINE);
         addContentString("Please select action:");
-        addContentString("1: Invest into the project");
-        addContentString("2: Ask a question");
-        addContentString("0: Return");
+        addContentString(INPUT_TO_INVEST + ": Invest into the project");
+        addContentString(INPUT_TO_QUESTION + ": Ask a question");
+        addContentString(INPUT_TO_RETURN + ": Return");
+        ioHandler.writeMessage(content.toString());
+    }
+
+    public void showMsgEnterQuestion() {
+        showMessage("Enter your question:");
     }
 }

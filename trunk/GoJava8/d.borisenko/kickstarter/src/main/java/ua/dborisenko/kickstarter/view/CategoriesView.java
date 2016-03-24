@@ -6,7 +6,10 @@ import ua.dborisenko.kickstarter.domain.Quote;
 
 public class CategoriesView extends View {
 
-    public CategoriesView(List<String> categoryNames, Quote quote) {
+    public static final String INPUT_TO_EXIT = "0";
+
+    public void showContent(List<String> categoryNames, Quote quote) {
+        content = new StringBuilder();
         addContentString(HEADER_BLOCK);
         addContentString("*** The phrase of the day: ***");
         addContentString("\"" + quote.getText() + "\" " + quote.getAuthor() + ".");
@@ -17,6 +20,11 @@ public class CategoriesView extends View {
             addContentString(((i + 1) + ": " + categoryNames.get(i)));
         }
         addContentString(SOLID_LINE);
-        addContentString("Enter category number or \"0\" to exit: ");
+        addContentString("Enter category number or \"" + INPUT_TO_EXIT + "\" to exit: ");
+        ioHandler.writeMessage(content.toString());
+    }
+
+    public void showMsgGoodbye() {
+        showMessage("Goodbye! Thanks for all the fish.");
     }
 }

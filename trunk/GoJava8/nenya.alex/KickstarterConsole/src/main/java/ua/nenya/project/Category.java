@@ -13,19 +13,20 @@ public class Category implements GettingNameInterface {
 	private String name;
 	private List<Project> projects = new ArrayList<>();
 	
-	public List<Project> getProjects() {
-		return projects;
-	}
+	
 
 	public Category() {
 	}
 
-	public Category(String name) {
-		this.name = name;
+	public List<Project> getProjects() {
+		return projects;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 }

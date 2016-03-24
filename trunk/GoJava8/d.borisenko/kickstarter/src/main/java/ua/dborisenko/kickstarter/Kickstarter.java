@@ -1,27 +1,24 @@
 package ua.dborisenko.kickstarter;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import ua.dborisenko.kickstarter.dao.CategoryDao;
 import ua.dborisenko.kickstarter.dao.QuoteDao;
 import ua.dborisenko.kickstarter.domain.Category;
-import ua.dborisenko.kickstarter.domain.Error;
 import ua.dborisenko.kickstarter.domain.Investment;
 import ua.dborisenko.kickstarter.domain.Project;
 import ua.dborisenko.kickstarter.domain.Question;
 import ua.dborisenko.kickstarter.domain.Reward;
 import ua.dborisenko.kickstarter.view.CategoriesView;
 import ua.dborisenko.kickstarter.view.CategoryView;
-import ua.dborisenko.kickstarter.view.ErrorView;
 import ua.dborisenko.kickstarter.view.ProjectView;
 import ua.dborisenko.kickstarter.view.RewardsView;
-import ua.dborisenko.kickstarter.view.View;
 
 public class Kickstarter {
-    private static final String MENU_ACTION_RETURN = "0";
-    private static final String MENU_ACTION_INVEST = "1";
-    private static final String MENU_ACTION_QUESTION = "2";
-    private static final String MENU_ACTION_CUSTOM_AMOUNT = "0";
+    private static final String ERR_NOT_FOUND = "The requested element isn't found.";
+    private static final String ERR_WRONG_INPUT = "Wrong input data.";
+    private static final String ERR_UNKNOWN_POSITION = "Unknown menu position";
 
     private static enum MenuPosition {
         CATEGORIES, CATEGORY, PROJECT, REWARDS, EXIT
@@ -33,103 +30,105 @@ public class Kickstarter {
     private Project currentProject;
     private CategoryDao categoryDao;
     private QuoteDao quoteDao;
-    private View currentView;
+    private CategoriesView categoriesView = new CategoriesView();
+    private CategoryView categoryView = new CategoryView();
+    private ProjectView projectView = new ProjectView();
+    private RewardsView rewardsView = new RewardsView();
 
-    public void run() {
+    public void run() throws SQLException {
         DaoInitializer daoInitializer = new DaoInitializer();
-        quoteDao = daoInitializer.initQuoteDao();
-        categoryDao = daoInitializer.initCategoryDao();
+        quoteDao = daoInitializer.getQuoteDao();
+        categoryDao = daoInitializer.getCategoryDao();
         prepareMenuCategories();
         showMenu();
-    }
-
-    void showError(int errorCode, String errorName, String errorDescription) {
-        Error error = new Error(errorCode, errorName, errorDescription);
-        ErrorView viewError = new ErrorView(error);
-        viewError.show();
-        viewError.getInput();
+        daoInitializer.closeSqlConnections();
     }
 
     void showMenu() {
         while (menuPosition != MenuPosition.EXIT) {
-            currentView.show();
-            String inputData = currentView.getInput();
             if (MenuPosition.CATEGORIES == menuPosition) {
-                handleViewCategoriesResult(inputData);
+                handleViewCategoriesResult(categoriesView.getInput());
             } else if (MenuPosition.CATEGORY == menuPosition) {
-                handleViewCategoryResult(inputData);
+                handleViewCategoryResult(categoryView.getInput());
             } else if (MenuPosition.PROJECT == menuPosition) {
-                handleViewProjectResult(inputData);
+                handleViewProjectResult(projectView.getInput());
             } else if (MenuPosition.REWARDS == menuPosition) {
-                handleViewRewardsResult(inputData);
+                handleViewRewardsResult(rewardsView.getInput());
             } else {
-                showError(501, "Not Implemented", "Unknown view type.");
+                throw new IllegalStateException(ERR_UNKNOWN_POSITION);
             }
         }
-        currentView.showHint("Goodbye! Thanks for all the fish.");
+        categoriesView.showMsgGoodbye();
     }
 
     void prepareMenuCategories() {
         menuPosition = MenuPosition.CATEGORIES;
         categoryNamesList = categoryDao.getCategoryNames();
-        currentView = new CategoriesView(categoryNamesList, quoteDao.getRandomQuote());
+        categoriesView.showContent(categoryNamesList, quoteDao.getRandomQuote());
     }
 
     void prepareMenuCategory() {
         menuPosition = MenuPosition.CATEGORY;
-        currentView = new CategoryView(currentCategory);
+        categoryView.showContent(currentCategory);
     }
 
     void prepareMenuProject() {
         menuPosition = MenuPosition.PROJECT;
-        currentView = new ProjectView(currentProject, currentCategory.getName());
+        categoryDao.getQuestions(currentProject);
+        projectView.showContent(currentProject, currentCategory.getName());
     }
 
     void prepareMenuRewards() {
         menuPosition = MenuPosition.REWARDS;
-        currentView = new RewardsView(currentProject);
+        categoryDao.getRewards(currentProject);
+        rewardsView.showContent(currentProject);
     }
 
     void handleViewRewardsResult(String inputData) {
         Investment investment = new Investment();
         try {
-            if (MENU_ACTION_CUSTOM_AMOUNT.equals(inputData)) {
-                currentView.showHint("Enter the investment amount:");
-                investment.setAmount(Integer.valueOf(currentView.getInput()));
+            if (RewardsView.INPUT_TO_CUSTOM_AMOUNT.equals(inputData)) {
+                rewardsView.showMsgEnterAmount();
+                investment.setAmount(Integer.valueOf(rewardsView.getInput()));
             } else {
                 int rewardIndex = Integer.valueOf(inputData) - 1;
                 Reward reward = currentProject.getRewardByIndex(rewardIndex);
                 investment.setAmount(reward.getAmount());
             }
-            currentView.showHint("Enter your name:");
-            investment.setCardHolderName(currentView.getInput());
-            currentView.showHint("Enter your card number: ");
-            investment.setCardNumber(currentView.getInput());
+            rewardsView.showMsgEnterName();
+            investment.setCardHolderName(rewardsView.getInput());
+            rewardsView.showMsgEnterCardNumber();
+            investment.setCardNumber(rewardsView.getInput());
             categoryDao.addInvestment(currentProject, investment);
             prepareMenuProject();
-        } catch (NumberFormatException e) {
-            showError(400, "Bad Request", "Wrong input data.");
         } catch (IndexOutOfBoundsException e) {
-            showError(404, "Not Found", "The requested element isn`t found.");
+            rewardsView.showError(ERR_NOT_FOUND);
+            prepareMenuProject();
+        } catch (NumberFormatException e) {
+            rewardsView.showError(ERR_WRONG_INPUT);
+            prepareMenuProject();
         }
     }
 
     void handleViewProjectResult(String inputData) {
-        if (MENU_ACTION_RETURN.equals(inputData)) {
+        if (ProjectView.INPUT_TO_RETURN.equals(inputData)) {
             prepareMenuCategory();
-        } else if (MENU_ACTION_INVEST.equals(inputData)) {
+        } else if (ProjectView.INPUT_TO_INVEST.equals(inputData)) {
             prepareMenuRewards();
-        } else if (MENU_ACTION_QUESTION.equals(inputData)) {
-            currentView.showHint("Enter your question");
+        } else if (ProjectView.INPUT_TO_QUESTION.equals(inputData)) {
+            projectView.showMsgEnterQuestion();
             Question question = new Question();
-            question.setRequest(currentView.getInput());
+            question.setRequest(projectView.getInput());
             categoryDao.addQuestion(currentProject, question);
-            currentView = new ProjectView(currentProject, currentCategory.getName());
+            projectView.showContent(currentProject, currentCategory.getName());
+        } else {
+            projectView.showError(ERR_WRONG_INPUT);
+            prepareMenuProject();
         }
     }
 
     void handleViewCategoryResult(String inputData) {
-        if (MENU_ACTION_RETURN.equals(inputData)) {
+        if (CategoryView.INPUT_TO_RETURN.equals(inputData)) {
             prepareMenuCategories();
         } else {
             try {
@@ -137,15 +136,17 @@ public class Kickstarter {
                 currentProject = currentCategory.getProjectByIndex(projectIndex);
                 prepareMenuProject();
             } catch (IndexOutOfBoundsException e) {
-                showError(404, "Not Found", "The requested element isn`t found.");
+                categoryView.showError(ERR_NOT_FOUND);
+                prepareMenuCategory();
             } catch (NumberFormatException e) {
-                showError(400, "Bad Request", "Wrong input data.");
+                categoryView.showError(ERR_WRONG_INPUT);
+                prepareMenuCategory();
             }
         }
     }
 
     void handleViewCategoriesResult(String inputData) {
-        if (MENU_ACTION_RETURN.equals(inputData)) {
+        if (CategoriesView.INPUT_TO_EXIT.equals(inputData)) {
             menuPosition = MenuPosition.EXIT;
         } else {
             try {
@@ -153,9 +154,11 @@ public class Kickstarter {
                 currentCategory = categoryDao.getByName(categoryNamesList.get(categoryIndex));
                 prepareMenuCategory();
             } catch (IndexOutOfBoundsException e) {
-                showError(404, "Not Found", "The requested element isn`t found.");
+                categoriesView.showError(ERR_NOT_FOUND);
+                prepareMenuCategories();
             } catch (NumberFormatException e) {
-                showError(400, "Bad Request", "Wrong input data.");
+                categoriesView.showError(ERR_WRONG_INPUT);
+                prepareMenuCategories();
             }
         }
     }
