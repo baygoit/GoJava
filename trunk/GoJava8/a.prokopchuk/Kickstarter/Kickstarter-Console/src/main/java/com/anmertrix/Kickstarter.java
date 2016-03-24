@@ -113,7 +113,7 @@ public class Kickstarter {
 
 	public String showSelectedProject(int idProject) {
 		List<Project> projects = categoryDao.getProjectsByCategoryId(selectedMenuItemCategory);
-		Project project = projects.get(idProject);
+		Project project = projects.get(idProject - 1);
 
 		StringBuilder result = new StringBuilder();
 		result.append(project.getName() + "\n")
@@ -203,11 +203,7 @@ public class Kickstarter {
 			if (categoryId != EXIT_INPUT) {
 				try {
 					io.println(SOLID_LINE);
-					if (SQL_MODE.equals(mode)) {
-						io.println(categoryDao.getCategory(categoryId).getName());
-					} else {
-						io.println(categoryDao.getCategory(categoryId - 1).getName());
-					}
+					io.println(categoryDao.getCategory(categoryId).getName());
 					io.println(SOLID_LINE);
 					break;
 				} catch (Exception e) {
