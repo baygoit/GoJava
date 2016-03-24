@@ -12,9 +12,9 @@ public interface CategoryDao {
     public Category getByName(String name);
 
     public List<String> getCategoryNames();
-    
+
     public void getQuestions(Project project);
-    
+
     public void getRewards(Project project);
 
     public void addInvestment(Project project, Investment investment);

@@ -11,6 +11,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
+					<mainClass>ua.dborisenko.kickstarter.AppStarter</mainClass>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
@@ -19,27 +20,27 @@
 	</build>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<mysql-connector-version>5.1.38</mysql-connector-version>
-		<junit-version>4.12</junit-version>
-		<mockito-version>1.10.19</mockito-version>
+		<version-mysql-connector>5.1.38</version-mysql-connector>
+		<version-junit>4.12</version-junit>
+		<version-mockito>1.10.19</version-mockito>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector-version}</version>
+			<version>${version-mysql-connector}</version>
 		</dependency>
 		<dependency>
 			<scope>test</scope>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit-version}</version>
+			<version>${version-junit}</version>
 		</dependency>
 		<dependency>
 			<scope>test</scope>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>${mockito-version}</version>
+			<version>${version-mockito}</version>
 		</dependency>
 	</dependencies>
 </project>

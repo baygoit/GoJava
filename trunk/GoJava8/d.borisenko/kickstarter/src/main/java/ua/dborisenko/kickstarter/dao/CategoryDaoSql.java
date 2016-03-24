@@ -16,9 +16,9 @@ public class CategoryDaoSql extends DaoSql implements CategoryDao {
 
     @Override
     public void getQuestions(Project project) {
-        try (Statement statement = getConnection().createStatement()){
-            ResultSet rs = statement.executeQuery(
-                    "SELECT id, request, reply FROM questions WHERE project_id = " + project.getId());
+        try (Statement statement = getConnection().createStatement()) {
+            ResultSet rs = statement
+                    .executeQuery("SELECT id, request, reply FROM questions WHERE project_id = " + project.getId());
             while (rs.next()) {
                 Question question = new Question();
                 question.setId(rs.getInt("id"));
@@ -33,9 +33,9 @@ public class CategoryDaoSql extends DaoSql implements CategoryDao {
 
     @Override
     public void getRewards(Project project) {
-        try (Statement statement = getConnection().createStatement()){
-            ResultSet rs = statement.executeQuery(
-                    "SELECT id, amount, description FROM rewards WHERE project_id = " + project.getId());
+        try (Statement statement = getConnection().createStatement()) {
+            ResultSet rs = statement
+                    .executeQuery("SELECT id, amount, description FROM rewards WHERE project_id = " + project.getId());
             while (rs.next()) {
                 Reward reward = new Reward();
                 reward.setId(rs.getInt("id"));
@@ -49,9 +49,9 @@ public class CategoryDaoSql extends DaoSql implements CategoryDao {
     }
 
     private void getInvestments(Project project) {
-        try (Statement statement = getConnection().createStatement()){
-            ResultSet rs = statement.executeQuery(
-                    "SELECT id, cardholder_name, card_number, amount FROM investments WHERE project_id = "
+        try (Statement statement = getConnection().createStatement()) {
+            ResultSet rs = statement
+                    .executeQuery("SELECT id, cardholder_name, card_number, amount FROM investments WHERE project_id = "
                             + project.getId());
             while (rs.next()) {
                 Investment investment = new Investment();
@@ -67,10 +67,10 @@ public class CategoryDaoSql extends DaoSql implements CategoryDao {
     }
 
     private void getProjects(Category category) {
-        try (Statement statement = getConnection().createStatement()){ 
+        try (Statement statement = getConnection().createStatement()) {
             ResultSet rs = statement.executeQuery(
-                "SELECT id, name, description, history, required_sum, days_left, video_url FROM projects WHERE category_id = "
-                        + category.getId());
+                    "SELECT id, name, description, history, required_sum, days_left, video_url FROM projects WHERE category_id = "
+                            + category.getId());
             while (rs.next()) {
                 Project project = new Project();
                 project.setId(rs.getInt("id"));
@@ -90,7 +90,7 @@ public class CategoryDaoSql extends DaoSql implements CategoryDao {
 
     @Override
     public Category getByName(String name) {
-        try (Statement statement = getConnection().createStatement()){    
+        try (Statement statement = getConnection().createStatement()) {
             ResultSet rs = statement.executeQuery("SELECT id, name FROM categories WHERE name = '" + name + "'");
             rs.next();
             Category category = new Category();
@@ -105,7 +105,7 @@ public class CategoryDaoSql extends DaoSql implements CategoryDao {
 
     @Override
     public List<String> getCategoryNames() {
-        try (Statement statement = getConnection().createStatement()){
+        try (Statement statement = getConnection().createStatement()) {
             ResultSet rs = statement.executeQuery("SELECT name FROM categories ORDER BY name");
             List<String> names = new ArrayList<String>();
             while (rs.next()) {
@@ -119,11 +119,11 @@ public class CategoryDaoSql extends DaoSql implements CategoryDao {
 
     @Override
     public void addInvestment(Project project, Investment investment) {
-        try (Statement statement = getConnection().createStatement()){
+        try (Statement statement = getConnection().createStatement()) {
             statement
                     .executeUpdate("INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES ("
-                    + project.getId() + ", '" + investment.getCardHolderName() + "', '" + investment.getCardNumber()
-                    + "', " + investment.getAmount() + ")");
+                            + project.getId() + ", '" + investment.getCardHolderName() + "', '"
+                            + investment.getCardNumber() + "', " + investment.getAmount() + ")");
             project.addInvestment(investment);
         } catch (SQLException e) {
             throw new IllegalStateException(e.getMessage(), e);
@@ -132,7 +132,7 @@ public class CategoryDaoSql extends DaoSql implements CategoryDao {
 
     @Override
     public void addQuestion(Project project, Question question) {
-        try (Statement statement = getConnection().createStatement()){
+        try (Statement statement = getConnection().createStatement()) {
             statement.executeUpdate("INSERT INTO questions (project_id, request) VALUES (" + project.getId() + ", '"
                     + question.getRequest() + "')");
             project.addQuestion(question);

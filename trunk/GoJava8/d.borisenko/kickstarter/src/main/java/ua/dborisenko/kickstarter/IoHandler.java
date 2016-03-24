@@ -18,7 +18,11 @@ public class IoHandler {
         return input;
     }
 
-    public void write(String outputData) {
-        System.out.print(outputData);
+    public void writeMessage(String message) {
+        System.out.print(message);
+    }
+
+    public void writeError(String error) {
+        System.err.print(error);
     }
 }

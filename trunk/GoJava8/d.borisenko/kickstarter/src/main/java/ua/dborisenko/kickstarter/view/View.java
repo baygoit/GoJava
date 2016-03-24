@@ -10,7 +10,7 @@ public abstract class View {
             "╔═══════════════════════════════════════╗\n"
           + "║              Kickstarter              ║\n" 
           + "╚═══════════════════════════════════════╝";
-
+    
     protected void addContentString(String inputString) {
         this.content.append(inputString + "\n");
     }
@@ -19,11 +19,15 @@ public abstract class View {
         return ioHandler.read();
     }
 
-    public void showHint(String hint) {
-        ioHandler.write(hint + "\n");
+    void showMessage(String message) {
+        ioHandler.writeMessage(message + "\n");
     }
-
-    public void show() {
-        ioHandler.write(content.toString());
+    
+    public void showError(String error) {
+        ioHandler.writeError(SOLID_LINE + "\n");
+        ioHandler.writeError("ERROR:\n");
+        ioHandler.writeError(error + "\n");
+        ioHandler.writeError("Press Enter to return...\n");
+        getInput();
     }
 }
