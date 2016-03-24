@@ -21,7 +21,7 @@ class DaoSwitch {
 			return mode;
 		}
 
-		public static boolean contains(String mode) {
+		private static boolean contains(String mode) {
 			for (DataSourceTypes choice : values()) {
 				if (choice.name().equals(mode)) {
 					return true;
@@ -31,7 +31,7 @@ class DaoSwitch {
 		}
 	}
 	
-	public static String getMode() {
+	static String getMode() {
 		return DataSourceTypes.initMode();
 	}
 	

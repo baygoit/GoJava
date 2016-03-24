@@ -1,4 +1,4 @@
-package pages;
+package com.anmertrix.pages;
 
 import java.util.List;
 
@@ -19,13 +19,13 @@ public class RewardPage implements Page {
 		viewPage.io.println(SOLID_LINE);
 		showMenu(project);
 		selectReward(project);
-		
 		viewPage.setPage(new ProjectPage());
 	}
 	
 	private void selectReward(Project project) {
-		boolean isExitSelect = false;
+		boolean isExitSelect;
 		do {
+			isExitSelect = false;
 			int numberItem = viewPage.getInputNumber();
 			if (numberItem == EXIT_INPUT) {
 				viewPage.setPage(new ProjectPage());
@@ -43,7 +43,6 @@ public class RewardPage implements Page {
 				isExitSelect = true;
 			}
 		} while (isExitSelect);
-		viewPage.setPage(new ProjectPage());
 	}
 
 	private void showMenu(Project project) {

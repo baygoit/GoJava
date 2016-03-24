@@ -1,4 +1,4 @@
-package pages;
+package com.anmertrix.pages;
 
 import java.util.List;
 

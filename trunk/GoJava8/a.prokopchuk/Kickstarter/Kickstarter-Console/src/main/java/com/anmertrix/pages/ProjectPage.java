@@ -1,4 +1,4 @@
-package pages;
+package com.anmertrix.pages;
 
 import java.util.List;
 
@@ -27,22 +27,34 @@ public class ProjectPage implements Page {
 		}
 		viewPage.io.println(SOLID_LINE);
 		showProjectMenu();
-		int numberMenuItem = viewPage.getInputNumber();
-		if (numberMenuItem == EXIT_INPUT) {
-			viewPage.setPage(new ExitPage());
-		} else if (numberMenuItem == 1) {
-			viewPage.setPage(new QuestionPage());
-		} else if (numberMenuItem == 2) {
-			viewPage.setPage(new InvestmentPage());
-		} else if (numberMenuItem == 3) {
-			viewPage.setPage(new RewardPage());
-		} else if (numberMenuItem == 4) {
-			viewPage.setPage(new ProjectsPage());
-		} else if (numberMenuItem == 5) {
-			viewPage.setPage(new CategoriesPage());
-		}
+		selectMenuItem();		
 	}
 	
+	private void selectMenuItem() {
+		boolean isExitSelect;
+		int numberMenuItem;
+		do {
+			isExitSelect = false;
+			numberMenuItem = viewPage.getInputNumber();
+			if (numberMenuItem == EXIT_INPUT) {
+				viewPage.setPage(new ExitPage());
+			} else if (numberMenuItem == 1) {
+				viewPage.setPage(new QuestionPage());
+			} else if (numberMenuItem == 2) {
+				viewPage.setPage(new InvestmentPage());
+			} else if (numberMenuItem == 3) {
+				viewPage.setPage(new RewardPage());
+			} else if (numberMenuItem == 4) {
+				viewPage.setPage(new ProjectsPage());
+			} else if (numberMenuItem == 5) {
+				viewPage.setPage(new CategoriesPage());
+			} else {
+				viewPage.io.print("Plese, select right menu item...");
+				isExitSelect = true;
+			}
+		} while (isExitSelect);
+	}
+
 	void showSelectedProject(Project project) {
 		viewPage.io.println("Description: " + project.getDescription());
 		viewPage.io.println("Required budget: " + project.getRequiredBudget());

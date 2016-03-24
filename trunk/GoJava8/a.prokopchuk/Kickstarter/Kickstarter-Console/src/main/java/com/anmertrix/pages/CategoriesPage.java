@@ -1,4 +1,4 @@
-package pages;
+package com.anmertrix.pages;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class CategoriesPage implements Page {
 		}
 	}
 	
-	public String getQuoteText() {
+	private String getQuoteText() {
 		Quote quote = viewPage.quoteDao.getRandomQuote();
 		return quote.getQuoteText() + " (" + quote.getAuthor() + ")";
 	}

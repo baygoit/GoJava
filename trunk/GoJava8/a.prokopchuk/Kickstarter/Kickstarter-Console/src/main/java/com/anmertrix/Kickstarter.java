@@ -2,7 +2,7 @@ package com.anmertrix;
 
 import java.io.IOException;
 
-import pages.CategoriesPage;
+import com.anmertrix.pages.CategoriesPage;
 
 public class Kickstarter {
 

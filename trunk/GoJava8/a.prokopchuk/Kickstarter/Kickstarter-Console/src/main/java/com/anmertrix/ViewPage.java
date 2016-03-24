@@ -10,17 +10,16 @@ import com.anmertrix.dao.memory.CategoryDaoMemory;
 import com.anmertrix.dao.memory.QuoteDaoMemory;
 import com.anmertrix.dao.sql.CategoryDaoSql;
 import com.anmertrix.dao.sql.QuoteDaoSql;
-
-import pages.Page;
+import com.anmertrix.pages.Page;
 
 public class ViewPage {
 	
 	private static final String SQL_MODE = "SQL";
 	private static final String MEMORY_MODE = "MEMORY";
 	private static final String FILE_MODE = "FILE";
-	protected static final String HEADER = "                    ***  KICKSTARTER   ***   ";
+	private static final String HEADER = "                    ***  KICKSTARTER   ***   ";
 	
-	Page page;
+	private Page page;
 	public IO io;
 	private ConnectionManager connectionManager;
     public QuoteDao quoteDao;
