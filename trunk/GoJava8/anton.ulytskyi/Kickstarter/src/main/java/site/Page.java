@@ -1,13 +1,10 @@
 package site;
 
-import categories.Category;
+import categories.Kickstarter;
 import usermanager.ConsoleManager;
 
 public abstract class Page {
-	Page(Category kickstarter){
-		this.kickstarter = kickstarter;
-	}
-	
+		
 	static final String FIRST_CHOICE = "1";
 	static final String SECOND_CHOICE = "2";
 	static final String THIRD_CHOICE = "3";
@@ -20,7 +17,11 @@ public abstract class Page {
 
 	public ConsoleManager console = new ConsoleManager();
 	public Page direction;
-	public Category kickstarter;
+	public Kickstarter kickstarter;
+
+	Page(Kickstarter kickstarter){
+		this.kickstarter = kickstarter;
+	}
 
 	public abstract void openPage();
 
