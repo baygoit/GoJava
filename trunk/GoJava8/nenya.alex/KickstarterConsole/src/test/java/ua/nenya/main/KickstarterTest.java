@@ -16,42 +16,59 @@ import ua.nenya.util.IO;
 public class KickstarterTest {
 
 	private IO mockIo;
-	private KickstarterInitilizer initilizer = new KickstarterInitilizer();
+	private DaoInitilizer initilizer = new DaoInitilizer();
 	
 	@Before
 	public void init() {
 		mockIo = mock(IO.class);
-		Project newSongProject = new Project("New Song", "description of new song", 100, 10, 100);
+		Project newSongProject = new Project();
+		newSongProject.setName("New Song");
+		newSongProject.setDescription("description of new song");
+		newSongProject.setNeededAmount(100);
+		newSongProject.setAvailableAmount(10);
+		newSongProject.setDaysRemain(100);
 		newSongProject.setHistory("hystory of new song");
 		newSongProject.setVideo("video about new song");
-		newSongProject.setQuestionAnswer("question about new song");
-		Project oldSongProject = new Project("Old song", "description of old song", 1100, 110, 1100);
-		Project filmProject = new Project("Film", "description of film", 200, 20, 200);
+		Project oldSongProject = new Project();
+		oldSongProject.setName("Old song");
+		oldSongProject.setDescription("description of old song");
+		oldSongProject.setNeededAmount(1100);
+		oldSongProject.setAvailableAmount(110);
+		oldSongProject.setDaysRemain(1100);
+		Project filmProject = new Project();
+		filmProject.setName("Film");
+		filmProject.setDescription("description of film");
+		filmProject.setNeededAmount(200);
+		filmProject.setAvailableAmount(20);
+		filmProject.setDaysRemain(200);
 		
 		
-		Category musicCategory = new Category("Music");
+		Category musicCategory = new Category();
+		musicCategory.setName("Music");
 		musicCategory.getProjects().add(newSongProject);
 		musicCategory.getProjects().add(oldSongProject);
 		
-		Category filmsCategory = new Category("Films");
+		Category filmsCategory = new Category();
+		filmsCategory.setName("Films");
 		filmsCategory.getProjects().add(filmProject);
 		
 		CategoryDao cDao = new CategoryDaoMemoryImpl();
 		initilizer.setCategoryDao(cDao);
-		initilizer.getCategoryDao().getCategories().add(musicCategory);
-		initilizer.getCategoryDao().getCategories().add(filmsCategory);
+		((CategoryDaoMemoryImpl) initilizer.getCategoryDao()).getCategories().add(musicCategory);
+		((CategoryDaoMemoryImpl) initilizer.getCategoryDao()).getCategories().add(filmsCategory);
 	}
 
 	@Test
 	public void kikstarterTestEnter0() {
 		when(mockIo.readConsole()).thenReturn("0");
-		initilizer.initKickstarter("memory");
+		initilizer.initDao("memory");
 		new Kickstarter(initilizer, mockIo).run();
 		
 		InOrder order = inOrder(mockIo);
 	      order.verify(mockIo).writeln("Choose one of the items bellow");
-	      order.verify(mockIo).writeln("1	-	Go to categories");
-	      order.verify(mockIo).writeln("2	-	Create new project");
+	      order.verify(mockIo).writeln("0	-	Exit");
+	      order.verify(mockIo).writeln("1	-	Music");
+	      order.verify(mockIo).writeln("2	-	Films");
 
 	}
 	
@@ -59,36 +76,17 @@ public class KickstarterTest {
 	@Test
 	public void kikstarterTestEnter10() {
 		when(mockIo.readConsole()).thenReturn("1").thenReturn("0");
-		initilizer.initKickstarter("file");
+		initilizer.initDao("file");
+		initilizer.getCategoryDao().initCategories();
 		new Kickstarter(initilizer, mockIo).run();
 		
 		InOrder order = inOrder(mockIo);
-	      order.verify(mockIo).writeln("Choose one of the items bellow");
-	      order.verify(mockIo).writeln("1	-	Go to categories");
-	      order.verify(mockIo).writeln("2	-	Create new project");
-	      order.verify(mockIo).writeln("You've chosen Go to categories");
 	      order.verify(mockIo).writeln("Choose one of the items bellow");
 	      order.verify(mockIo).writeln("0	-	Exit");
 	      order.verify(mockIo).writeln("1	-	Music");
 	      order.verify(mockIo).writeln("2	-	Films");
+	      order.verify(mockIo).writeln("You've chosen Music");
+	      order.verify(mockIo).writeln("Choose one of the items bellow");
 		
 	}
-	
-	@Test
-	public void kikstarterTestEnter20() {
-		when(mockIo.readConsole()).thenReturn("2").thenReturn("0");
-		initilizer.initKickstarter("db");
-		new Kickstarter(initilizer, mockIo).run();
-		InOrder order = inOrder(mockIo);
-	      order.verify(mockIo).writeln("Choose one of the items bellow");
-	      order.verify(mockIo).writeln("1	-	Go to categories");
-	      order.verify(mockIo).writeln("2	-	Create new project");
-	      order.verify(mockIo).writeln("You've chosen Create new project");
-	      order.verify(mockIo).writeln("Choose one of the items bellow");
-	      order.verify(mockIo).writeln("0	-	Exit");
-	      order.verify(mockIo).writeln("1	-	Enter");
-	      order.verify(mockIo).writeln("2	-	Registration");
-
-	}
-		
 }

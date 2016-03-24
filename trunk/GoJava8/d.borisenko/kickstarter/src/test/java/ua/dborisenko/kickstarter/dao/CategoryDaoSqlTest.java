@@ -45,6 +45,12 @@ public class CategoryDaoSqlTest {
         assertThat(categoriyNames.get(0), is("testname"));
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void getCategoryNamesFailTest() throws SQLException {
+        when(categoryDao.getConnection()).thenThrow(new SQLException());
+        categoryDao.getCategoryNames();
+    }
+
     @Test
     public void getByNameTest() throws SQLException {
         when(rs.getString("name")).thenReturn("testname");
@@ -52,6 +58,12 @@ public class CategoryDaoSqlTest {
         Category category = categoryDao.getByName("");
         assertThat(category.getId(), is(1));
         assertThat(category.getName(), is("testname"));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getByNameFailTest() throws SQLException {
+        when(categoryDao.getConnection()).thenThrow(new SQLException());
+        categoryDao.getByName("test");
     }
 
     @Test
@@ -75,6 +87,12 @@ public class CategoryDaoSqlTest {
         assertThat(project.getVideoUrl(), is("testvideourl"));
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void getProjectsFailTest() throws SQLException {
+        when(categoryDao.getConnection()).thenReturn(connection).thenThrow(new SQLException());
+        categoryDao.getByName("test");
+    }
+
     @Test
     public void getQuestionsTest() throws SQLException {
         when(rs.getInt("id")).thenReturn(1);
@@ -87,6 +105,13 @@ public class CategoryDaoSqlTest {
         assertThat(question.getId(), is(1));
         assertThat(question.getRequest(), is("testrequest"));
         assertThat(question.getReply(), is("testreply"));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void getQuestionsFailTest() throws SQLException {
+        when(categoryDao.getConnection()).thenThrow(new SQLException());
+        Project project = new Project();
+        categoryDao.getQuestions(project);
     }
 
     @Test
@@ -103,6 +128,13 @@ public class CategoryDaoSqlTest {
         assertThat(reward.getDescription(), is("testdescription"));
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void getRewardsFailTest() throws SQLException {
+        when(categoryDao.getConnection()).thenThrow(new SQLException());
+        Project project = new Project();
+        categoryDao.getRewards(project);
+    }
+
     @Test
     public void addInvestmentTest() throws SQLException {
         Project project = new Project();
@@ -113,6 +145,14 @@ public class CategoryDaoSqlTest {
         verify(statement).executeUpdate(anyString());
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void addInvestmentFailTest() throws SQLException {
+        when(categoryDao.getConnection()).thenThrow(new SQLException());
+        Project project = new Project();
+        Investment investment = new Investment();
+        categoryDao.addInvestment(project, investment);
+    }
+
     @Test
     public void addQuestionTest() throws SQLException {
         Project project = new Project();
@@ -121,5 +161,35 @@ public class CategoryDaoSqlTest {
         categoryDao.addQuestion(project, question);
         assertThat(project.getQuestions().get(0).getRequest(), is("testrequest"));
         verify(statement).executeUpdate(anyString());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void addQuestionFailTest() throws SQLException {
+        when(categoryDao.getConnection()).thenThrow(new SQLException());
+        Project project = new Project();
+        Question question = new Question();
+        categoryDao.addQuestion(project, question);
+    }
+
+    @Test
+    public void getInvestmentsTest() throws SQLException {
+        when(rs.getInt("id")).thenReturn(1);
+        when(rs.getInt("amount")).thenReturn(111);
+        when(rs.getString("cardholder_name")).thenReturn("testcardholdername");
+        when(rs.getString("card_number")).thenReturn("testcardnumber");
+        when(rs.next()).thenReturn(true).thenReturn(false);
+        Project project = new Project();
+        categoryDao.getInvestments(project);
+        Investment investment = project.getInvestments().get(0);
+        assertThat(investment.getId(), is(1));
+        assertThat(investment.getCardHolderName(), is("testcardholdername"));
+        assertThat(investment.getCardNumber(), is("testcardnumber"));
+    }
+    
+    @Test(expected = IllegalStateException.class)
+    public void getInvestmentsFailTest() throws SQLException {
+        when(categoryDao.getConnection()).thenThrow(new SQLException());
+        Project project = new Project();
+        categoryDao.getInvestments(project);
     }
 }

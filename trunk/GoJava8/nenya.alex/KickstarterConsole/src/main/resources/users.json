@@ -1,9 +1,0 @@
-[ {
-  "login" : "alex",
-  "password" : "111",
-  "email" : "a@a.ua"
-}, {
-  "login" : "a",
-  "password" : "a",
-  "email" : "a@a.ua"
-} ]

@@ -12,8 +12,8 @@ public class KickstarterMain {
 		IO io = new ConsoleIOImpl();
 		String switcher = System.getenv(ENTERING_MODE_ENV_NAME);
 		System.err.println(ENTERING_MODE_ENV_NAME + ": " + switcher);
-		KickstarterInitilizer initilizer = new KickstarterInitilizer();
-		initilizer.initKickstarter(switcher);
+		DaoInitilizer initilizer = new DaoInitilizer();
+		initilizer.initDao(switcher);
 		new Kickstarter(initilizer, io).run();
 	}
 

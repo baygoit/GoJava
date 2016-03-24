@@ -48,7 +48,7 @@ public class CategoryDaoSql extends DaoSql implements CategoryDao {
         }
     }
 
-    private void getInvestments(Project project) {
+    void getInvestments(Project project) {
         try (Statement statement = getConnection().createStatement()) {
             ResultSet rs = statement
                     .executeQuery("SELECT id, cardholder_name, card_number, amount FROM investments WHERE project_id = "
