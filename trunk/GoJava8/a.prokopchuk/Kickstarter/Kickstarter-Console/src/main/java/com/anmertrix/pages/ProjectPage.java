@@ -16,7 +16,7 @@ public class ProjectPage implements Page {
 		try {
 			Project project = projects.get(viewPage.getSelectedMenuItemProject() - 1);
 			viewPage.io.println(SOLID_LINE);
-			viewPage.io.println(project.getName());
+			viewPage.io.println(project.getName()); //time
 			viewPage.io.println(SOLID_LINE);
 			showSelectedProject(project);
 		} catch (Exception e) {
