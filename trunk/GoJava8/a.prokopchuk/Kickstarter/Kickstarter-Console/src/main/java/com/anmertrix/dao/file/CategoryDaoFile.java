@@ -18,7 +18,7 @@ public class CategoryDaoFile implements CategoryDao {
 	private final static String baseFile = "./src/main/resources/categories.json";
 	protected List<Category> categories = new ArrayList<Category>();
 
-	public void fillCategory() {
+	public CategoryDaoFile() {
 	    ObjectMapper mapper = new ObjectMapper();
 	    
 		try {
