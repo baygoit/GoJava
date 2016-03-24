@@ -5,27 +5,27 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class KickstarterInitilizerTest {
-	private KickstarterInitilizer initilizer = new KickstarterInitilizer();
+	private DaoInitilizer initilizer = new DaoInitilizer();
 	
 	
 	@Test
 	public void kikstarterInitilizerTest1() {
-		initilizer.initKickstarter("memory");
-		assertNotNull(initilizer.getCategoryDao().getCategories());
+		initilizer.initDao("memory");
+		assertNotNull(initilizer.getCategoryDao().initCategories());
 	}
 	
 	
 	@Test
 	public void kikstarterInitilizerTest2() {
-		initilizer.initKickstarter("file");
-		assertNotNull(initilizer.getCategoryDao().getCategories());
+		initilizer.initDao("file");
+		assertNotNull(initilizer.getCategoryDao().initCategories());
 	}
 	
 	
 	@Test
 	public void kikstarterInitilizerTest3() {
-		initilizer.initKickstarter("db");
-		assertNotNull(initilizer.getCategoryDao().getCategories());
+		initilizer.initDao("db");
+		assertNotNull(initilizer.getCategoryDao().initCategories());
 	}
 
 }

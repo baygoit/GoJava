@@ -3,12 +3,12 @@
   "projects" : [ {
     "name" : "A new funny song",
     "description" : "We want to write a new funny song!",
-    "allAmount" : 2000,
+    "neededAmount" : 2000,
     "availableAmount" : 1000,
     "daysRemain" : 7,
     "history" : "",
     "video" : "",
-    "questionAnswer" : "",
+    "questions" : [ ],
     "rewards" : [ {
       "name" : "Any amount",
       "amount" : 0,
@@ -37,12 +37,12 @@
   }, {
     "name" : "A lonly song",
     "description" : "We want to write a new sad song!",
-    "allAmount" : 400,
+    "neededAmount" : 400,
     "availableAmount" : 10,
     "daysRemain" : 3,
     "history" : "",
     "video" : "",
-    "questionAnswer" : "",
+    "questions" : [ ],
     "rewards" : [ {
       "name" : "Any amount",
       "amount" : 0,
@@ -66,12 +66,12 @@
   "projects" : [ {
     "name" : "Terminator 88",
     "description" : "All money we'll gather is for new blockbuster!",
-    "allAmount" : 200000,
+    "neededAmount" : 200000,
     "availableAmount" : 1000,
     "daysRemain" : 365,
     "history" : "",
     "video" : "",
-    "questionAnswer" : "",
+    "questions" : [ ],
     "rewards" : [ {
       "name" : "Any amount",
       "amount" : 0,
@@ -92,12 +92,12 @@
   }, {
     "name" : "Dirty Garry",
     "description" : "It'll be a western about wild west!",
-    "allAmount" : 10000,
+    "neededAmount" : 10000,
     "availableAmount" : 3000,
     "daysRemain" : 150,
     "history" : "",
     "video" : "",
-    "questionAnswer" : "",
+    "questions" : [ ],
     "rewards" : [ {
       "name" : "Any amount",
       "amount" : 0,
@@ -117,12 +117,12 @@
   "projects" : [ {
     "name" : "Exhibition of photos",
     "description" : "Exhibition of photos of Kiev!",
-    "allAmount" : 7000,
+    "neededAmount" : 7000,
     "availableAmount" : 1000,
     "daysRemain" : 15,
     "history" : "",
     "video" : "",
-    "questionAnswer" : "",
+    "questions" : [ ],
     "rewards" : [ {
       "name" : "Any amount",
       "amount" : 0,
@@ -151,12 +151,12 @@
   }, {
     "name" : "Exhibition of plates",
     "description" : "Exhibition of old plates!",
-    "allAmount" : 100000,
+    "neededAmount" : 100000,
     "availableAmount" : 7000,
     "daysRemain" : 120,
     "history" : "",
     "video" : "",
-    "questionAnswer" : "",
+    "questions" : [ ],
     "rewards" : [ {
       "name" : "Any amount",
       "amount" : 0,

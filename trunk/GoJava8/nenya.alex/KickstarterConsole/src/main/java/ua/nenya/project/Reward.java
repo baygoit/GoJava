@@ -3,14 +3,16 @@ package ua.nenya.project;
 public class Reward implements GettingNameInterface{
 	private String name;
 	private int amount;
-	
 	private String description;
 	
 	public Reward() {
 	}
-	
-	public Reward(String name, String description) {
+
+	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
