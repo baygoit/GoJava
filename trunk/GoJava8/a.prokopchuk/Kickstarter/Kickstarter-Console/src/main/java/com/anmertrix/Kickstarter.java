@@ -5,32 +5,30 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.anmertrix.dao.CategoryDao;
-import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.dao.QuoteDao;
 import com.anmertrix.dao.file.CategoryDaoFile;
 import com.anmertrix.dao.file.QuoteDaoFile;
 import com.anmertrix.dao.memory.CategoryDaoMemory;
-import com.anmertrix.dao.memory.ProjectDaoMemory;
 import com.anmertrix.dao.memory.QuoteDaoMemory;
 import com.anmertrix.dao.sql.CategoryDaoSql;
-import com.anmertrix.dao.sql.ProjectDaoSql;
 import com.anmertrix.dao.sql.QuoteDaoSql;
 
 public class Kickstarter {
 
-	private static final String SQL_MODE = "sql";
+	private static final String SQL_MODE = "SQL";
+	private static final String MEMORY_MODE = "MEMORY";
+	private static final String FILE_MODE = "FILE";
+	private static final int EXIT_INPUT = 0;
 
-	private static final String MEMORY_MODE = "memory";
-
-	private static final String FILE_MODE = "file";
-
-	private static final int EXIT_INPUT = -1;
-
-	private static final String KICKSTARTER_MODE = "KICKSTARTER_MODE";
+	protected static final String HEADER = "                    ***  KICKSTARTER   ***   ";
+    protected static final String SOLID_LINE = "─────────────────────────────────────────";
 
 	private IO io;
 	private ConnectionManager connectionManager;
 	private String mode;
+	private QuoteDao quoteDao;
+	private CategoryDao categoryDao;
+    private int selectedMenuItemCategory;
 
 	public Kickstarter(IO io) {
 		this.io = io;
@@ -42,63 +40,107 @@ public class Kickstarter {
 
 	private void run() throws IOException {
 		
-		initMode();
-		
-		initCategoryManager();
-		QuoteDao quoteDao = initQuoteDao();
-		quoteDao.fillQuotes();
-		CategoryDao categoryDao = initCategoryDao();
-		categoryDao.fillCategory();
-		ProjectDao projectDao = initProjectDao(categoryDao);
-		io.println(quoteDao.getRandomQuote());
+		mode = DaoSwitch.getMode();
+		initConnectionManager();
+		initQuoteDao();
+		initCategoryDao();
+		showHeader();
 
-		int numberCategory = 0;
-		while (numberCategory != EXIT_INPUT) {
-			io.println(categoryDao.getCategoriesMenu());
-			numberCategory = numberCategory(categoryDao);
-
-			while (numberCategory != EXIT_INPUT) {
-				io.println(projectDao.getProjectList(numberCategory));
-				io.println("______________________________");
-				int numberProject = 0;
-				numberProject = getParseInputNumber(io.readConsole());
+		selectedMenuItemCategory = -1;
+		while (selectedMenuItemCategory != EXIT_INPUT) {
+			showCategoriesMenu();
+			while (selectedMenuItemCategory != EXIT_INPUT) {
+				io.print(showProjects());
+				int numberProject = getParseInputNumber(io.readConsole());
 				if (numberProject == EXIT_INPUT) {
 					break;
 				} else {
-					io.println("You select: " + projectDao.getInfoSelectedProject(numberCategory, numberProject));
-					int numberMenuItem = getNumberMenuItem(projectDao);
-					
-					Category category = categoryDao.getCategory(numberCategory);
-					List<Project> projects = category.getProjects();
-					Project project = projects.get(numberProject);
+					io.println(SOLID_LINE);
+					io.println(showSelectedProject(numberProject));
+					int numberMenuItem = getNumberMenuItem();
+					List<Project> projects = categoryDao.getProjectsByCategoryId(selectedMenuItemCategory);
+					Project project = projects.get(numberProject - 1);
 					if (numberMenuItem == EXIT_INPUT) {
 						break;
-					} else if (numberMenuItem == 0) {
-						selectQuestion(project);
-						continue;
 					} else if (numberMenuItem == 1) {
-						if (selectInvest(project)) {
-							break;
-						}
-						continue;
+						selectQuestion(project);
 					} else if (numberMenuItem == 2) {
-						if (selectReward(project)) {
-							break;
-						}
-						continue;
+						selectInvest(project);
 					} else if (numberMenuItem == 3) {
-						continue;
+						selectReward(project);
 					}
-				}
-				io.println("Enter 0 to see all projects.");
-				int number = getParseInputNumber(io.readConsole());
-				if (number == 0) {
+					io.println(SOLID_LINE);
 					continue;
 				}
 			}
 		}
-
 		destroyConnectionManager();
+	}
+
+	private void showCategoriesMenu() {
+		io.println(SOLID_LINE);
+		List<Category> categories = categoryDao.getCategories();
+		
+		StringBuffer result = new StringBuffer();
+		for (int i = 0; i < categories.size(); i++) {
+			result.append(i + 1).append(" - ")
+					.append(categories.get(i).getName()).append("    ");
+		}
+		result.append("0 - EXIT");
+		result.append("\n \n");
+		result.append("Please, select category...");
+		io.print(result.toString());
+		selectedMenuItemCategory = numberCategory();
+	}
+
+	private void showHeader() {
+		io.println(HEADER);
+		io.println(getQuoteText());
+	}
+	
+	public String showProjects() {
+		StringBuilder result = new StringBuilder();
+		List<Project> projects = categoryDao.getProjectsByCategoryId(selectedMenuItemCategory);
+		for (int i = 0; i < projects.size(); i++) {
+			Project project = projects.get(i);
+			result.append(i + 1).append(" - ").append(project.getName() + "\n");
+		}
+		result.append("0 - EXIT \n")
+			.append("\n")
+			.append("Please, select project...");
+		return result.toString().trim();
+	}
+
+	public String showSelectedProject(int idProject) {
+		List<Project> projects = categoryDao.getProjectsByCategoryId(selectedMenuItemCategory);
+		Project project = projects.get(idProject);
+
+		StringBuilder result = new StringBuilder();
+		result.append(project.getName() + "\n")
+				.append(SOLID_LINE + "\n")
+				.append("Description: " + project.getDescription() + "\n")
+				.append("Required budget: " + project.getRequiredBudget()
+						+ "\n")
+				.append("Gathered budget: " + project.getGatheredBudget()
+						+ "\n")
+				.append("Days left: " + project.getDaysLeft() + "\n")
+				.append("History: " + project.getHistory() + "\n")
+				.append("Video URL: " + project.getURL() + "\n")
+				.append("Question and answer: \n" + project.getQuestionAnswer());
+		return result.toString();
+	}
+
+	public String getProjectMenu() {
+		StringBuilder result = new StringBuilder();
+		result.append("1 - Ask a question").append("    ")
+				.append("2 - Invest project").append("    ")
+				.append("3 - Rewards").append("    ")
+				.append("4 - Exit to categories menu").append("    ")
+				.append("0 - EXIT")
+				.append("\n \n")
+				.append("Please, select menu item...");
+
+		return result.toString().trim();
 	}
 
 	private void destroyConnectionManager() {
@@ -111,136 +153,113 @@ public class Kickstarter {
 		}
 
 	}
-
-	private void initMode() {
-		mode = System.getenv(KICKSTARTER_MODE);
-		// TODO Add more info about supported modes
-		// TODO Add more checks
-		if (mode == null || mode.isEmpty()) {
-			throw new IllegalStateException("Environment variable " + KICKSTARTER_MODE + " is not found not empty.");
-		}
-		
-		System.err.println("Mode is " + mode);
-	}
-
-	public int getParseInputNumber(String text) {
-		int result = 0;
-
-		try {
-			result = (Integer.parseInt(text));
-		} catch (NumberFormatException e) {
-			io.println("You can enter only numbers. \"" + text
-					+ "\" is not a number.\n ");
-		}
-
-		return result - 1;
-	}
 	
-	private void initCategoryManager() {
+	private void initConnectionManager() {
 		if (SQL_MODE.equals(mode)) {
 			connectionManager = new ConnectionManager();
 		}
 	}
 
-    private QuoteDao initQuoteDao() {
-    	QuoteDao quoteDao = null;
+	public int getParseInputNumber(String text) {
+		int result = 0;
+		try {
+			result = (Integer.parseInt(text));
+		} catch (NumberFormatException e) {
+			io.println("You can enter only numbers. \"" + text + "\" is not a number.\n ");
+		}
+
+		return result;
+	}
+	
+	public String getQuoteText() {
+		Quote quote = quoteDao.getRandomQuote();
+		return quote.getQuoteText() + " (" + quote.getAuthor() + ")";
+	}
+
+    private void initQuoteDao() {
 		if (FILE_MODE.equals(mode)) {
-			quoteDao = new QuoteDaoFile();
+			this.quoteDao = new QuoteDaoFile();
 		} else if (MEMORY_MODE.equals(mode)) {
-			quoteDao = new QuoteDaoMemory();
+			this.quoteDao = new QuoteDaoMemory();
 		} else if (SQL_MODE.equals(mode)) {
-			quoteDao = new QuoteDaoSql(connectionManager);
+			this.quoteDao = new QuoteDaoSql(connectionManager);
 		}
-    	return quoteDao;
     }
     
-    private ProjectDao initProjectDao(CategoryDao categoryDao) {
-    	ProjectDao projectDao = new ProjectDaoMemory(categoryDao);
-		if (MEMORY_MODE.equals(mode)) {
-			projectDao = new ProjectDaoMemory(categoryDao);
-			projectDao.fillCategory();
-		} else if (SQL_MODE.equals(mode)) {
-			projectDao = new ProjectDaoSql(connectionManager, categoryDao);
-			projectDao.fillCategory();
-		}
-    	return projectDao;
-    }
-    
-    private CategoryDao initCategoryDao() {
-    	CategoryDao categoryDao = null;
+    private void initCategoryDao() {
 		if (FILE_MODE.equals(mode)) {
-    		categoryDao = new CategoryDaoFile();
+    		this.categoryDao = new CategoryDaoFile();
 		} else if (MEMORY_MODE.equals(mode)) {
-			categoryDao = new CategoryDaoMemory();
+			this.categoryDao = new CategoryDaoMemory();
 		} else if (SQL_MODE.equals(mode)) {
-			categoryDao = new CategoryDaoSql(connectionManager);
+			this.categoryDao = new CategoryDaoSql(connectionManager);
 		}
-    	return categoryDao;
     }
     
-    private int numberCategory(CategoryDao categoryDao) {
-		int numberCategory = EXIT_INPUT;
+    private int numberCategory() {
+		int categoryId = EXIT_INPUT;
 		do {
-			numberCategory = getParseInputNumber(io.readConsole());
-			if (numberCategory != EXIT_INPUT) {
+			categoryId = getParseInputNumber(io.readConsole());
+			if (categoryId != EXIT_INPUT) {
 				try {
-					io.print("You select: ");
-					io.println(categoryDao.getNameSelectedCategory(numberCategory));
+					io.println(SOLID_LINE);
+					if (SQL_MODE.equals(mode)) {
+						io.println(categoryDao.getCategory(categoryId).getName());
+					} else {
+						io.println(categoryDao.getCategory(categoryId - 1).getName());
+					}
+					io.println(SOLID_LINE);
 					break;
 				} catch (Exception e) {
-					System.out.println("There is no such category!");
+					io.println("There is no such category!");
 					continue;
 				}
 			}
-		} while (numberCategory != EXIT_INPUT);
-		return numberCategory;
+		} while (categoryId != EXIT_INPUT);
+		return categoryId;
     }
     
-    private boolean selectReward(Project project) {
-    	io.println("Select one or enter 0 - to exit:  ");
+    private void selectReward(Project project) {
+    	io.println(SOLID_LINE);
+    	io.println("Rewards");
+    	io.println(SOLID_LINE);
 		io.println("1 - 1$ - BIG THANK!");
 		io.println("2 - 20$ - Solo supporter!");
 		io.println("3 - 40$ - Calm supporter!");
-		int numberCount = 0;
-		numberCount = getParseInputNumber(io.readConsole());
-		if (numberCount == EXIT_INPUT) {
-			return true;
-		} else if (numberCount == 0) {
+		io.println("0 - EXIT");
+		io.print("Please, select menu item...");
+		int numberCount = getParseInputNumber(io.readConsole());
+		if (numberCount == 1) {
 			project.setGatheredBudget(1);
-		} else if (numberCount == 1) {
-			project.setGatheredBudget(10);
 		} else if (numberCount == 2) {
+			project.setGatheredBudget(10);
+		} else if (numberCount == 3) {
 			project.setGatheredBudget(40);
 		}
-		io.println("______________________________");
-		
-		return false;
     }
     
-    private boolean selectInvest(Project project) {
+    private void selectInvest(Project project) {
+    	io.println(SOLID_LINE);
+    	io.println("Invest project");
+    	io.println(SOLID_LINE);
     	io.println("Enter your amount of money to invest or enter 0 - to exit:  ");
 		int amountNumber = 0;
 		amountNumber = getParseInputNumber(io.readConsole());
 		if (amountNumber == EXIT_INPUT) {
-			return true;
+			return;
 		} 
-		project.setGatheredBudget(amountNumber + 1);
-		io.println("______________________________");
-		
-		return false;
+		project.setGatheredBudget(amountNumber);
     }
     
     private void selectQuestion(Project project) {
     	io.print("Enter your guestion: ");
 		String guestion = io.readConsole();
 		project.setQuestion(guestion);
-		io.println("______________________________");
     }
     
-    private int getNumberMenuItem(ProjectDao projectDao) {
-		io.println("______________________________");
-		io.print(projectDao.getProjectMenu());
-		
+    private int getNumberMenuItem() {
+		io.println(SOLID_LINE);
+		io.print(getProjectMenu());
 		return getParseInputNumber(io.readConsole());
     }
 

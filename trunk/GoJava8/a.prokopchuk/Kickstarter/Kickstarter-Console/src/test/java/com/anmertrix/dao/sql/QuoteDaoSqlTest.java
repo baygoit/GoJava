@@ -21,6 +21,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.anmertrix.ConnectionManager;
+import com.anmertrix.Quote;
 
 @RunWith(MockitoJUnitRunner.class)
 public class QuoteDaoSqlTest {
@@ -59,9 +60,9 @@ public class QuoteDaoSqlTest {
 		when(connection.createStatement()).thenReturn(statement);
 
 		when(connectionManager.getConnection()).thenReturn(connection);
-
-		String quote = quoteDaoSql.getRandomQuote();
-		assertThat(quote, is("quote (author)"));
+		Quote quote = quoteDaoSql.getRandomQuote();
+		String quoteText = quote.getQuoteText() + " (" + quote.getAuthor() + ")";
+		assertThat(quoteText, is("quote (author)"));
 
 		verify(connectionManager).getConnection();
 
