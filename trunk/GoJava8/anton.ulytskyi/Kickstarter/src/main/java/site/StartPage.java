@@ -1,22 +1,16 @@
 package site;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Random;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-import categories.Category;
-import categories.MemoryCard;
+import categories.Kickstarter;
 
 public class StartPage extends Page {
 
-	public StartPage(Category kickstarter) {
+	public StartPage(Kickstarter kickstarter) {
 		super(kickstarter);
 	}
 
@@ -63,14 +57,12 @@ public class StartPage extends Page {
 
 			Statement myStmt = (Statement) myConn.createStatement();
 
-			Random random = new Random();
 			ResultSet myRs = myStmt
-					.executeQuery("select quote from quotes where number ="
-							+ (random.nextInt(3) + 1) + ";");
+					.executeQuery("SELECT * FROM quotes ORDER BY RAND() limit 1");
 
 			while (myRs.next()) {
 				return myRs.getString("quote");
-				
+
 			}
 		} catch (Exception exc) {
 			exc.printStackTrace();

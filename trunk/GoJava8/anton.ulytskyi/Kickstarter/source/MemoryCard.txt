@@ -1,6 +1,0 @@
-1|Romeo & Juliet|William Shakespeare|APORIA|1259|210|10.03.2016| |What’s in a name? |That which we call a rose by any other name would smell as sweet.
-2|Bill Clinton|2012 DNC Speech|APORIA|909|12|9.03.2016| |We’re all in this together’ is a far better or ‘You’re on your own.’ So who’s right?|www.della.com
-3|WHAT IS BETTER?|ETERNAL BLISS OR A SIMPLE BREAD?|SOPHISM|3599|98|5.03.2016| |What is better than eternal bliss? Nothing. But a slice of bread is better|www.music.com
-4|Have|IS IT POSSIBLE TO GIVE WHAT WE DON'T HAVE?|SOPHISM|5999|21|6.03.2016| !@#$%Sam: `Hi`!@#$%Sisi: `=)`|Yes, greedy man gives his cash with sorrow. However, he doesn't have the cash with sorrow, so he gives what he doesn't have.|www.apple.com
-5|Liar|Epimendies paradox|PARADOX|5129|458|8.03.2016| |A Cretan sails to Greece and says to some Greek men who are standing upon the shore: `All Cretans are liars.`Did he speak the truth, or did he lie?|www.google.com
-
