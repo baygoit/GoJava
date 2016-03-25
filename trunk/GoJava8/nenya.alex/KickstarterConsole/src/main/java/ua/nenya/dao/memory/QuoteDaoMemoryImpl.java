@@ -44,7 +44,7 @@ public class QuoteDaoMemoryImpl implements QuoteDao{
 		quotes.add(new Quote("Healthy curiosity is a great key in innovation."));
 		quotes.add(new Quote("Everyone here has the sense that right now is one of those moments when we are influencing the future."));
 		quotes.add(new Quote("Great things in business are never done by one person. They're done by a team of people."));
-		if(file.length() == 0){
+		if(file.length() == 0 || !file.exists()){
 			convertToJSON(quotes);
 		}
     }

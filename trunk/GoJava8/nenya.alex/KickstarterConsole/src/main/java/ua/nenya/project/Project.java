@@ -1,27 +1,25 @@
 package ua.nenya.project;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Project implements GettingNameInterface {
 	private String name;
 	private String description;
-	private int allAmount;
+	private int neededAmount;
 	private int availableAmount;
-	
-
 	private int daysRemain;
 	private String history = "";
 	private String video = "";
-	private String questionAnswer = "";
+	private List<Question> questions = new ArrayList<>();
+	private Reward anyAmountReward = new Reward();
+	private List<Reward> rewards = new ArrayList<>(); 
 	
-	public Project() {
-	}
 
-	public Project(String name, String description, int allAmount,
-			int availableAmount, int daysRemain) {
-		this.name = name;
-		this.description = description;
-		this.allAmount = allAmount;
-		this.availableAmount = availableAmount;
-		this.daysRemain = daysRemain;
+	public Project() {
+		anyAmountReward.setName("Any amount");
+		anyAmountReward.setDescription("");
+		rewards.add(anyAmountReward);
 	}
 
 
@@ -33,8 +31,8 @@ public class Project implements GettingNameInterface {
 		return description;
 	}
 
-	public int getAllAmount() {
-		return allAmount;
+	public int getNeededAmount() {
+		return neededAmount;
 	}
 
 	public int getAvailableAmount() {
@@ -65,12 +63,42 @@ public class Project implements GettingNameInterface {
 		this.video = video;
 	}
 
-	public String getQuestionAnswer() {
-		return questionAnswer;
+	public List<Question> getQuestions() {
+		return questions;
 	}
 
-	public void setQuestionAnswer(String questionAnswer) {
-		this.questionAnswer = questionAnswer;
+	public List<Reward> getRewards() {
+		return rewards;
 	}
 
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public void setNeededAmount(int allAmount) {
+		this.neededAmount = allAmount;
+	}
+
+
+	public void setDaysRemain(int daysRemain) {
+		this.daysRemain = daysRemain;
+	}
+
+
+	public void setRewards(List<Reward> rewards) {
+		this.rewards = rewards;
+	}
+
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+	
 }

@@ -26,8 +26,10 @@ public class ListUtilitsTest {
 	@Before
 	public void init() {
 		mockIo = mock(IO.class);
-		Category musicCategory = new Category("Music");
-		Category filmsCategory = new Category("Films");
+		Category musicCategory = new Category();
+		musicCategory.setName("Music");
+		Category filmsCategory = new Category();
+		filmsCategory.setName("Films");
 		list.add(musicCategory);
 		list.add(filmsCategory);
 	}

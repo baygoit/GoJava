@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.anmertrix.domain.Quote;
+
 public class QuoteTest {
 
 	@Test

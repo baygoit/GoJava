@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ua.nenya.dao.CategoryDao;
+
 
 public class CategoryDaoFileImplTest {
 	
@@ -12,7 +14,7 @@ public class CategoryDaoFileImplTest {
 		CategoryDaoFileImpl cdfi = new CategoryDaoFileImpl();
 		cdfi.setFileName("src/test/resources/caterories.json");
 		cdfi.initCategories();
-		assertNotNull(cdfi.getCategories().get(0));
+		assertNotNull(cdfi.initCategories().get(0));
 	}
 
 }
