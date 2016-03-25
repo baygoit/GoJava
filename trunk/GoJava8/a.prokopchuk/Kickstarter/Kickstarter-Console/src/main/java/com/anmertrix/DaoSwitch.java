@@ -11,19 +11,20 @@ class DaoSwitch {
 		MEMORY, FILE, SQL;
 
 		private static String initMode() {
-			String mode = System.getenv(KICKSTARTER_MODE).toUpperCase();
+			String mode = System.getenv(KICKSTARTER_MODE);
 			// TODO Add more checks
 			if (mode == null || mode.isEmpty() || !contains(mode)) {
 				throw new IllegalStateException("Environment variable "
 						+ KICKSTARTER_MODE + " is not found or empty. Please, establish any variable: " + Arrays.asList(DataSourceTypes.values()).toString().replace("[", "").replace("]", "") );
 			}
+			mode = mode.toUpperCase();
 			System.err.println("Mode is " + mode);
 			return mode;
 		}
 
 		private static boolean contains(String mode) {
 			for (DataSourceTypes choice : values()) {
-				if (choice.name().equals(mode)) {
+				if (choice.name().equals(mode.toUpperCase())) {
 					return true;
 				}
 			}
