@@ -44,7 +44,6 @@ public class QuoteDaoSqlTest {
 		} finally {
 			verify(connectionManager).getConnection();
 		}
-
 	}
 
 	@Test
@@ -65,7 +64,6 @@ public class QuoteDaoSqlTest {
 		assertThat(quoteText, is("quote (author)"));
 
 		verify(connectionManager).getConnection();
-
 	}
 
 }
