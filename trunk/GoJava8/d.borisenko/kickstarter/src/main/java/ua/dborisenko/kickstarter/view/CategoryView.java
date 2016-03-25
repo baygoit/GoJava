@@ -5,7 +5,9 @@ import ua.dborisenko.kickstarter.domain.Project;
 
 public class CategoryView extends View {
 
-    public CategoryView(Category category) {
+    public static final String INPUT_TO_RETURN = "0";
+
+    public void showContent(Category category) {
         addContentString(HEADER_BLOCK);
         addContentString("Category: " + category.getName());
         addContentString("Projects:");
@@ -18,6 +20,7 @@ public class CategoryView extends View {
             addContentString(project.getDescription());
         }
         addContentString(SOLID_LINE);
-        addContentString("Enter project number or \"0\" to return:");
+        addContentString("Enter project number or \"" + INPUT_TO_RETURN + "\" to return:");
+        ioHandler.writeMessage(content.toString());
     }
 }
