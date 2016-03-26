@@ -24,7 +24,8 @@ public class InvestitionProjectPage {
 		io.write("Enter a number of card: ");
 		String card = io.readConsole();
 		int index;
-		List<Reward> rewards = initilizer.getCategoryDao().initRewards(project);
+		CategoryDao categoryDao= initilizer.getCategoryDao();
+		List<Reward> rewards = categoryDao.initRewards(project);
 		while ((index = listUtil.choseIndexFromList(rewards, io)) != 0) {
 			Reward item = rewards.get(index-1);
 			if (item.getName().equals("Any amount")) {

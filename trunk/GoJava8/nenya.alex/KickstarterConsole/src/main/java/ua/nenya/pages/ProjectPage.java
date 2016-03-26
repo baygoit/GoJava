@@ -9,12 +9,14 @@ import ua.nenya.project.Project;
 import ua.nenya.project.Question;
 import ua.nenya.util.IO;
 import ua.nenya.util.ListUtilits;
+import ua.nenya.dao.CategoryDao;
 import ua.nenya.main.DaoInitilizer;
 
 public class ProjectPage {
 	private DaoInitilizer initilizer;
 	private IO io;
 	private ListUtilits listUtil;
+	private CategoryDao categoryDao;
 
 	private enum InvestitionOrAskingEnum implements GettingNameInterface {
 		INVEST_IN_PROJECT("Invest in project"), ASK_A_QUESTION("Ask a question");
@@ -35,15 +37,16 @@ public class ProjectPage {
 		this.initilizer = initilizer;
 		this.io = io;
 		this.listUtil = listUtil;
-		List<Project> projects = initilizer.getCategoryDao().initProjects(category);
+		categoryDao = initilizer.getCategoryDao();
+		List<Project> projects = categoryDao.initProjects(category);
 		for (int i = 0; i < projects.size(); i++) {
 			printMainInformation(projects.get(i));
 			io.writeln("------------------------------------------");
 		}
-		showChosenProject(projects);
+		showChosenProject(projects, category);
 	}
 
-	private void showChosenProject(List<Project> projects) {
+	private void showChosenProject(List<Project> projects, Category category) {
 		int index;
 		while ((index = listUtil.choseIndexFromList(projects, io)) != 0) {
 			Project chosenProject = projects.get(index - 1);
@@ -61,6 +64,7 @@ public class ProjectPage {
 					askQuestion(chosenProject);
 				}
 			}
+			projects = categoryDao.initProjects(category);
 		}
 	}
 
