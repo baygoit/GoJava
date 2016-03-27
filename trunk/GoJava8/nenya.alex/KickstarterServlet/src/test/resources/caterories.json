@@ -1,0 +1,178 @@
+[ {
+  "name" : "Music",
+  "projects" : [ {
+    "name" : "A new funny song",
+    "description" : "We want to write a new funny song!",
+    "neededAmount" : 2000,
+    "availableAmount" : 1000,
+    "daysRemain" : 7,
+    "history" : "",
+    "video" : "",
+    "questions" : [ ],
+    "rewards" : [ {
+      "name" : "Any amount",
+      "amount" : 0,
+      "description" : ""
+    }, {
+      "name" : "100$",
+      "amount" : 100,
+      "description" : "Invest one hundred dollars and get bottle of water!!!"
+    }, {
+      "name" : "100$",
+      "amount" : 100,
+      "description" : "Invest one hundred dollars and get five bottles of water!!!"
+    }, {
+      "name" : "200$",
+      "amount" : 200,
+      "description" : "Invest two hundreds dollars and get two tickets to the movie!!!"
+    }, {
+      "name" : "200$",
+      "amount" : 200,
+      "description" : "Invest two hundreds dollars and get tickets to the movie for all family!!!"
+    }, {
+      "name" : "500$",
+      "amount" : 500,
+      "description" : "Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!"
+    } ]
+  }, {
+    "name" : "A lonly song",
+    "description" : "We want to write a new sad song!",
+    "neededAmount" : 400,
+    "availableAmount" : 10,
+    "daysRemain" : 3,
+    "history" : "",
+    "video" : "",
+    "questions" : [ ],
+    "rewards" : [ {
+      "name" : "Any amount",
+      "amount" : 0,
+      "description" : ""
+    }, {
+      "name" : "100$",
+      "amount" : 100,
+      "description" : "Invest one hundred dollars and get bottle of water!!!"
+    }, {
+      "name" : "200$",
+      "amount" : 200,
+      "description" : "Invest two hundreds dollars and get two tickets to the movie!!!"
+    }, {
+      "name" : "500$",
+      "amount" : 500,
+      "description" : "Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!"
+    } ]
+  } ]
+}, {
+  "name" : "Films",
+  "projects" : [ {
+    "name" : "Terminator 88",
+    "description" : "All money we'll gather is for new blockbuster!",
+    "neededAmount" : 200000,
+    "availableAmount" : 1000,
+    "daysRemain" : 365,
+    "history" : "",
+    "video" : "",
+    "questions" : [ ],
+    "rewards" : [ {
+      "name" : "Any amount",
+      "amount" : 0,
+      "description" : ""
+    }, {
+      "name" : "100$",
+      "amount" : 100,
+      "description" : "Invest one hundred dollars and get bottle of water!!!"
+    }, {
+      "name" : "200$",
+      "amount" : 200,
+      "description" : "Invest two hundreds dollars and get two tickets to the movie!!!"
+    }, {
+      "name" : "200$",
+      "amount" : 200,
+      "description" : "Invest two hundreds dollars and get tickets to the movie for all family!!!"
+    } ]
+  }, {
+    "name" : "Dirty Garry",
+    "description" : "It'll be a western about wild west!",
+    "neededAmount" : 10000,
+    "availableAmount" : 3000,
+    "daysRemain" : 150,
+    "history" : "",
+    "video" : "",
+    "questions" : [ ],
+    "rewards" : [ {
+      "name" : "Any amount",
+      "amount" : 0,
+      "description" : ""
+    }, {
+      "name" : "100$",
+      "amount" : 100,
+      "description" : "Invest one hundred dollars and get bottle of water!!!"
+    }, {
+      "name" : "100$",
+      "amount" : 100,
+      "description" : "Invest one hundred dollars and get five bottles of water!!!"
+    } ]
+  } ]
+}, {
+  "name" : "Art",
+  "projects" : [ {
+    "name" : "Exhibition of photos",
+    "description" : "Exhibition of photos of Kiev!",
+    "neededAmount" : 7000,
+    "availableAmount" : 1000,
+    "daysRemain" : 15,
+    "history" : "",
+    "video" : "",
+    "questions" : [ ],
+    "rewards" : [ {
+      "name" : "Any amount",
+      "amount" : 0,
+      "description" : ""
+    }, {
+      "name" : "100$",
+      "amount" : 100,
+      "description" : "Invest one hundred dollars and get bottle of water!!!"
+    }, {
+      "name" : "100$",
+      "amount" : 100,
+      "description" : "Invest one hundred dollars and get five bottles of water!!!"
+    }, {
+      "name" : "200$",
+      "amount" : 200,
+      "description" : "Invest two hundreds dollars and get two tickets to the movie!!!"
+    }, {
+      "name" : "200$",
+      "amount" : 200,
+      "description" : "Invest two hundreds dollars and get tickets to the movie for all family!!!"
+    }, {
+      "name" : "500$",
+      "amount" : 500,
+      "description" : "Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!"
+    } ]
+  }, {
+    "name" : "Exhibition of plates",
+    "description" : "Exhibition of old plates!",
+    "neededAmount" : 100000,
+    "availableAmount" : 7000,
+    "daysRemain" : 120,
+    "history" : "",
+    "video" : "",
+    "questions" : [ ],
+    "rewards" : [ {
+      "name" : "Any amount",
+      "amount" : 0,
+      "description" : ""
+    }, {
+      "name" : "200$",
+      "amount" : 200,
+      "description" : "Invest two hundreds dollars and get two tickets to the movie!!!"
+    }, {
+      "name" : "200$",
+      "amount" : 200,
+      "description" : "Invest two hundreds dollars and get tickets to the movie for all family!!!"
+    }, {
+      "name" : "500$",
+      "amount" : 500,
+      "description" : "Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!"
+    } ]
+  } ]
+} ]
