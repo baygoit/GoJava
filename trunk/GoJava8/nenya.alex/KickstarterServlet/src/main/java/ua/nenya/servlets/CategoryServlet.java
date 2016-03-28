@@ -5,17 +5,14 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nenya.dao.CategoryDao;
-import ua.nenya.main.DaoInitilizer;
 import ua.nenya.project.Category;
 
 //@WebServlet("/category")
-public class CategoryServlet extends HttpServlet implements EnteringMode{
+public class CategoryServlet extends CommonServlet{
 	private static final long serialVersionUID = 1L;
     
     public CategoryServlet() {
@@ -24,11 +21,10 @@ public class CategoryServlet extends HttpServlet implements EnteringMode{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		DaoInitilizer initilizer = new DaoInitilizer();
-		initilizer.initDao(switcher);
-		CategoryDao categoryDao = initilizer.getCategoryDao();		 
         PrintWriter printWriter = response.getWriter();
-        
+        initDao();
+        CategoryDao categoryDao = initilizer.getCategoryDao();
+        printWriter.println("<p><a href = \"quote\"> Back </a></p>");
         showCategories(categoryDao, printWriter);
        
 	}

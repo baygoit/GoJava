@@ -16,8 +16,7 @@ import ua.nenya.dao.QuoteDao;
 public class QuoteDaoFileImpl implements QuoteDao{
 	
 	private List<Quote> quotes = new ArrayList<>();
-	private String fileName = "src/main/resources/quotes.json";
-	//private String fileName = "WEB-INF/quotes.json";
+	private String fileName = "C:/workspace/GoJava8/KickstarterServlet/src/main/resources/quotes.json";
 
 	
 	public void setFileName(String fileName) {

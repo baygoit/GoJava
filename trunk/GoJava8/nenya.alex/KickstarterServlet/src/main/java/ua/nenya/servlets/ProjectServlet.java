@@ -5,19 +5,16 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nenya.dao.CategoryDao;
-import ua.nenya.main.DaoInitilizer;
 import ua.nenya.project.Category;
 import ua.nenya.project.Project;
 import ua.nenya.project.Question;
 
 //@WebServlet("/project")
-public class ProjectServlet extends HttpServlet implements EnteringMode{
+public class ProjectServlet extends CommonServlet{
 	private static final long serialVersionUID = 1L;
     
     public ProjectServlet() {
@@ -26,8 +23,7 @@ public class ProjectServlet extends HttpServlet implements EnteringMode{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter printWriter = response.getWriter();
-		DaoInitilizer initilizer = new DaoInitilizer();
-		initilizer.initDao(switcher);
+		initDao();
 		CategoryDao categoryDao = initilizer.getCategoryDao();
 		List<Category> categories = categoryDao.initCategories();
 		String projectIndexStr = request.getParameter("projectIndex");
@@ -43,9 +39,10 @@ public class ProjectServlet extends HttpServlet implements EnteringMode{
 		Category category = categories.get(categoryIndex); 
 		List<Project> projects = categoryDao.initProjects(category);
 		Project project = projects.get(projectIndex);
+		printWriter.println("<p><a href = \"projects?categoryIndex="+categoryIndex+"\"> Back </a></p>");
 		showAllProject(project, printWriter, categoryDao);
-		printWriter.println("<p><h2>1. <a href = \"investment?projectIndex="+projectIndex+"&categoryIndex="+categoryIndex+"\">Invest in project</a></h2></p>");
-		printWriter.println("<p><h2>2. <a href = \"question?projectIndex="+projectIndex+"&categoryIndex="+categoryIndex+"\">Ask a question</a></h2></p>");
+		printWriter.println("<p><h2>1. <a href = \"investment?categoryIndex="+categoryIndex+"&projectIndex="+projectIndex+"\">Invest in project</a></h2></p>");
+		printWriter.println("<p><h2>2. <a href = \"question?categoryIndex="+categoryIndex+"&projectIndex="+projectIndex+"\">Ask a question</a></h2></p>");
 	}
 
 	

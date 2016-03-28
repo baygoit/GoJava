@@ -17,8 +17,8 @@ import ua.nenya.dao.QuoteDao;
 public class QuoteDaoMemoryImpl implements QuoteDao{
 
 	private List<Quote> quotes = new ArrayList<>();
-	private File file = new File("src/main/resources/quotes.json");
-
+	//private File file = new File("src/main/resources/quotes.json");
+	private File file = new File("C:/workspace/GoJava8/KickstarterServlet/src/main/resources/quotes.json");
 	public void setFile(File file) {
 		this.file = file;
 	}

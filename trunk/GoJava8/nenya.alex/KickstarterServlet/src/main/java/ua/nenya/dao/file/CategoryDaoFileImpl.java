@@ -16,7 +16,7 @@ import ua.nenya.dao.CategoryDao;
 
 public class CategoryDaoFileImpl implements CategoryDao {
 	private List<Category> categories = new ArrayList<Category>();
-	private String fileName = "src/main/resources/caterories.json";
+	private String fileName = "C:/workspace/GoJava8/KickstarterServlet/src/main/resources/caterories.json";
 	
 
 	public void setFileName(String fileName) {

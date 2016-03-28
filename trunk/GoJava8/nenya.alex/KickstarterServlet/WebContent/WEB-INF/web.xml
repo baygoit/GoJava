@@ -27,7 +27,6 @@
     <servlet-name>QuestionServlet</servlet-name>
     <servlet-class>ua.nenya.servlets.QuestionServlet</servlet-class>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>QuoteServlet</servlet-name>
     <url-pattern>/quote</url-pattern>
