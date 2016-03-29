@@ -35,8 +35,4 @@ public class Category {
     public int getProjectsCount() {
         return projects.size();
     }
-
-    public Project getProjectByIndex(int index) {
-        return projects.get(index);
-    }
 }

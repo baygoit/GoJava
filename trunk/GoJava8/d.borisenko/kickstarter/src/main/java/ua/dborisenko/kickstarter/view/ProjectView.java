@@ -1,41 +1,43 @@
 package ua.dborisenko.kickstarter.view;
 
+import java.io.PrintWriter;
+
+import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Project;
 import ua.dborisenko.kickstarter.domain.Question;
 
 public class ProjectView extends View {
 
-    public static final String INPUT_TO_RETURN = "0";
-    public static final String INPUT_TO_INVEST = "1";
-    public static final String INPUT_TO_QUESTION = "2";
-
-    public void showContent(Project project, String categoryName) {
-        addContentString(HEADER_BLOCK);
-        addContentString("Project " + project.getName());
-        addContentString(SOLID_LINE);
-        addContentString("Category:        " + categoryName);
-        addContentString("Description:     " + project.getDescription());
-        addContentString("Required sum:    " + project.getRequiredSum());
-        addContentString("Collected sum:   " + project.getCollectedSum());
-        addContentString("History:         " + project.getHistory());
-        addContentString("Video link:      " + project.getVideoUrl());
-        addContentString("Questions and answers:");
-        addContentString(SOLID_LINE);
+    public void show(PrintWriter writer, Project project, Category category) {
+        this.pageTitle = project.getName();
+        addContentString(getHeaderBlock());
+        addContentString("<p>Project details:<br/><table>");
+        addContentString("<tr><td>Description:</td><td>" + project.getDescription() + "</td></tr>");
+        addContentString("<tr><td>Required sum:</td><td>" + project.getRequiredSum() + "</td></tr>");
+        addContentString("<tr><td>Collected sum:</td><td>" + project.getCollectedSum() + "</td></tr>");
+        addContentString("<tr><td>History:</td><td>" + project.getHistory() + "</td></tr>");
+        addContentString("<tr><td>Video link:</td><td>" + project.getVideoUrl() + "</td></tr>");
+        addContentString("</table>");
+        addContentString("Questions and answers:<hr>");
         for (Question question : project.getQuestions()) {
-            addContentString("Q: " + question.getRequest());
+            addContentString("Q: " + question.getRequest() + "<br/>");
             if (question.getReply() != null) {
-                addContentString("A: " + question.getReply());
+                addContentString("A: " + question.getReply() + "<br/>");
             }
         }
-        addContentString(SOLID_LINE);
-        addContentString("Please select action:");
-        addContentString(INPUT_TO_INVEST + ": Invest into the project");
-        addContentString(INPUT_TO_QUESTION + ": Ask a question");
-        addContentString(INPUT_TO_RETURN + ": Return");
-        ioHandler.writeMessage(content.toString());
-    }
-
-    public void showMsgEnterQuestion() {
-        showMessage("Enter your question:");
+        addContentString("<hr>");
+        addContentString("<a href='?page=investment&id=" + project.getId() + "'>Invest into the project</a><br/>");
+        addContentString("Ask a question<br/>");
+        // addContentString("<form method='post'
+        // action='/kickstarter/?page=category&id=1'>");
+        addContentString("<form name='add_question' method='POST' action='' accept-charset='utf-8'>");
+        addContentString("<input type='hidden' name='requested_action' value='ADD_QUESTION'>");
+        addContentString("<input type='hidden' name='project_id' value='" + project.getId() + "'>");
+        addContentString("<input type='textarea' maxlength='1024' name='question_request' cols='200' rows='5'>");
+        addContentString("<input type='submit' value='Send'>");
+        addContentString("</form>");
+        addContentString("<a href='?page=category&id=" + category.getId() + "'>Return to the list of projects</a>");
+        addContentString(getFooterBlock());
+        writer.println(content.toString());
     }
 }

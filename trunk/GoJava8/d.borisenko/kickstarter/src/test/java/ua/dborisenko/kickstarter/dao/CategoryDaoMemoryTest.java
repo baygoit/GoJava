@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Investment;
 import ua.dborisenko.kickstarter.domain.Project;
-import ua.dborisenko.kickstarter.domain.Question;
 
 public class CategoryDaoMemoryTest {
 
@@ -24,50 +24,17 @@ public class CategoryDaoMemoryTest {
     
     @Test
     public void getByNameTest() {
-        assertThat(categoryDao.getByName("Sport"), notNullValue());
+        assertThat(categoryDao.getCategoryById(1), notNullValue());
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void getByNameTestWrong() {
-        categoryDao.getByName("Blablabla");
+        categoryDao.getCategoryById(999);
     }
     
     @Test
-    public void getCategoryNamesTest() { 
-        List<String> categoryNames = categoryDao.getCategoryNames();
+    public void getCategoriesTest() { 
+        List<Category> categoryNames = categoryDao.getCategories();
         assertTrue(categoryNames.size() > 0);
-    }
-
-    @Test
-    public void addInvestmentsTest() {
-        Investment investment = new Investment();
-        investment.setCardHolderName("testcardholdername");
-        investment.setCardNumber("111222333");
-        investment.setAmount(100);
-        Project project = new Project();
-        categoryDao.addInvestment(project, investment);
-        boolean resultFlag = false;
-        for (Investment currentInvestment : project.getInvestments()) {
-            if (currentInvestment == investment) {
-                resultFlag = true;
-            }
-        }
-        assertTrue(resultFlag);
-    }
-    
-    @Test
-    public void addQuestionTest() {
-        Question question = new Question();
-        question.setRequest("testrequest");
-        question.setReply("testreply");
-        Project project = new Project();
-        categoryDao.addQuestion(project, question);
-        boolean resultFlag = false;
-        for (Question currentQuestion : project.getQuestions()) {
-            if (currentQuestion == question) {
-                resultFlag = true;
-            }
-        }
-        assertTrue(resultFlag);
     }
 }

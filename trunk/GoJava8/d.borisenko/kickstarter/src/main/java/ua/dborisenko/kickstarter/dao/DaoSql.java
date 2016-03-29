@@ -10,6 +10,11 @@ public abstract class DaoSql {
     private Connection connection;
 
     Connection getConnection() throws SQLException {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new IllegalStateException(e);
+        }
         for (int i = 1; i <= CONN_MAX_TRIES_COUNT && (connection == null || connection.isClosed()); i++) {
             try {
                 connection = DriverManager.getConnection(CONNECTION_STRING);

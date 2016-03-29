@@ -1,26 +1,25 @@
 package ua.dborisenko.kickstarter.view;
 
+import java.io.PrintWriter;
+
 import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Project;
 
 public class CategoryView extends View {
 
-    public static final String INPUT_TO_RETURN = "0";
-
-    public void showContent(Category category) {
-        addContentString(HEADER_BLOCK);
-        addContentString("Category: " + category.getName());
-        addContentString("Projects:");
-        addContentString(SOLID_LINE);
-        Project project;
-        for (int i = 0; i < category.getProjectsCount(); i++) {
-            project = category.getProjectByIndex(i);
-            addContentString(((i + 1) + ": " + project.getName() + " (collected: " + project.getCollectedSum() + "/"
-                    + project.getRequiredSum() + ")"));
-            addContentString(project.getDescription());
+    public void show(PrintWriter writer, Category category) {
+        this.pageTitle = category.getName();
+        addContentString(getHeaderBlock());
+        addContentString("<p>Choose the project:</p>");
+        addContentString("<ul>");
+        for (Project project : category.getProjects()) {
+            addContentString("<li><a href='?page=project&id=" + project.getId() + "'>" + project.getName()
+                    + " (collected: " + project.getCollectedSum() + "/" + project.getRequiredSum() + ")</a><br/>");
+            addContentString(project.getDescription() + "</li>");
         }
-        addContentString(SOLID_LINE);
-        addContentString("Enter project number or \"" + INPUT_TO_RETURN + "\" to return:");
-        ioHandler.writeMessage(content.toString());
+        addContentString("</ul>");
+        addContentString("<a href='?page=categories'>Return to the main page</a>");
+        addContentString(getFooterBlock());
+        writer.println(content.toString());
     }
 }

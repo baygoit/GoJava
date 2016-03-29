@@ -1,33 +1,32 @@
 package ua.dborisenko.kickstarter.view;
 
-import ua.dborisenko.kickstarter.IoHandler;
-
 public abstract class View {
+    private static final String APP_TITLE = "Kickstarter";
+    protected String pageTitle;
     protected StringBuilder content = new StringBuilder();
-    protected IoHandler ioHandler = new IoHandler();
-    protected static final String SOLID_LINE = "─────────────────────────────────────────";
-    protected static final String HEADER_BLOCK = 
-            "╔═══════════════════════════════════════╗\n"
-          + "║              Kickstarter              ║\n" 
-          + "╚═══════════════════════════════════════╝";
-    
+
+    protected String getHeaderBlock() {
+        StringBuilder block = new StringBuilder();
+        block.append("<!DOCTYPE html>\n");
+        block.append("<head>\n");
+        block.append("<title>" + APP_TITLE + ": " + pageTitle + "</title>\n");
+        block.append("</head>\n");
+        block.append("<body>\n");
+        block.append("<h1>" + APP_TITLE + "</h1>\n");
+        block.append("<h2>" + pageTitle + "</h2>\n<hr>\n");
+        return block.toString();
+    };
+
+    protected String getFooterBlock() {
+        StringBuilder block = new StringBuilder();
+        block.append("<hr>\n");
+        block.append("</body>\n");
+        block.append("</html>\n");
+        return block.toString();
+    };
+
     protected void addContentString(String inputString) {
         this.content.append(inputString + "\n");
     }
 
-    public String getInput() {
-        return ioHandler.read();
-    }
-
-    void showMessage(String message) {
-        ioHandler.writeMessage(message + "\n");
-    }
-    
-    public void showError(String error) {
-        ioHandler.writeError(SOLID_LINE + "\n");
-        ioHandler.writeError("ERROR:\n");
-        ioHandler.writeError(error + "\n");
-        ioHandler.writeError("Press Enter to return...\n");
-        getInput();
-    }
 }

@@ -1,38 +1,37 @@
 package ua.dborisenko.kickstarter.view;
 
+import java.io.PrintWriter;
+
 import ua.dborisenko.kickstarter.domain.Project;
 import ua.dborisenko.kickstarter.domain.Reward;
 
 public class RewardsView extends View {
 
-    public static final String INPUT_TO_CUSTOM_AMOUNT = "0";
-
-    public void showContent(Project project) {
-        addContentString(HEADER_BLOCK);
-        addContentString("Project " + project.getName());
-        addContentString("Money left to collect: " + (project.getRequiredSum() - project.getCollectedSum()));
-        addContentString("Rewards: ");
-        addContentString(SOLID_LINE);
-        Reward reward;
-        for (int i = 0; i < project.getRewards().size(); i++) {
-            reward = project.getRewardByIndex(i);
-            addContentString((i + 1) + ": $" + reward.getAmount() + " - " + reward.getDescription());
+    public void show(PrintWriter writer, Project project) {
+        this.pageTitle = "Investment";
+        addContentString(getHeaderBlock());
+        addContentString("Project " + project.getName() + "<br/>");
+        addContentString("Money left to collect: " + (project.getRequiredSum() - project.getCollectedSum()) + "<br/>");
+        addContentString("Select your reward:<br/><hr>");
+        addContentString("<form name='add_investment' method='POST' action='' accept-charset='utf-8'>");
+        addContentString("<input type='hidden' name='requested_action' value='ADD_INVESTMENT'>");
+        addContentString("<input type='hidden' name='project_id' value='" + project.getId() + "'>");
+        for (Reward reward : project.getRewards()) {
+            addContentString("<input type='radio' name='amount' value='" + reward.getAmount() + "'>$ "
+                    + reward.getAmount() + " - " + reward.getDescription() + "</input><br/>");
         }
-        addContentString(INPUT_TO_CUSTOM_AMOUNT + ": custom value");
-        addContentString(SOLID_LINE);
-        addContentString("Select the amount according to reward list: ");
-        ioHandler.writeMessage(content.toString());
-    }
-
-    public void showMsgEnterAmount() {
-        showMessage("Enter the investment amount:");
-    }
-
-    public void showMsgEnterName() {
-        showMessage("Enter the investor's name:");
-    }
-
-    public void showMsgEnterCardNumber() {
-        showMessage("Enter your card number:");
+        addContentString("<input type='radio' name='amount' value=0 checked>Custom amount</input><br/>");
+        addContentString("<hr>");
+        addContentString(
+                "<label>Custom amount sum (It can`t becomes an unavailable until Javascript is absent yet)</label><br/>");
+        addContentString("<input type='number' name='custom_amount' value='0'/></br>");
+        addContentString("<label>Cardholder name</label><br/>");
+        addContentString("<input type='text' name='cardholder_name'/><br>");
+        addContentString("<label>Card number</label><br/>");
+        addContentString("<input type='text' name='card_number'/><br/>");
+        addContentString("<input type='submit' value='Invest'/><br/>");
+        addContentString("</form>");
+        addContentString("<a href='?page=project&id=" + project.getId() + "'>Return to the project page</a>");
+        writer.println(content.toString());
     }
 }

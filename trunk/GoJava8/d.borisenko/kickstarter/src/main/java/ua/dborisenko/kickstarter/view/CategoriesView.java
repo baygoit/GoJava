@@ -1,30 +1,27 @@
 package ua.dborisenko.kickstarter.view;
 
+import java.io.PrintWriter;
 import java.util.List;
 
+import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Quote;
 
 public class CategoriesView extends View {
 
-    public static final String INPUT_TO_EXIT = "0";
-
-    public void showContent(List<String> categoryNames, Quote quote) {
+    public void show(PrintWriter writer, List<Category> categories, Quote quote) {
+        this.pageTitle = "categories";
         content = new StringBuilder();
-        addContentString(HEADER_BLOCK);
-        addContentString("*** The phrase of the day: ***");
-        addContentString("\"" + quote.getText() + "\" " + quote.getAuthor() + ".");
-        addContentString(SOLID_LINE);
-        addContentString("Project categories list");
-        addContentString(SOLID_LINE);
-        for (int i = 0; i < categoryNames.size(); i++) {
-            addContentString(((i + 1) + ": " + categoryNames.get(i)));
+        addContentString(getHeaderBlock());
+        addContentString("<p>The phrase of the day:<br/>");
+        addContentString("\"" + quote.getText() + "\" " + quote.getAuthor() + ".</p>");
+        addContentString("<hr>");
+        addContentString("Choose the category:");
+        addContentString("<ul>");
+        for (Category category : categories) {
+            addContentString(
+                    "<li><a href='?page=category&id=" + category.getId() + "'>" + category.getName() + "</a></li>");
         }
-        addContentString(SOLID_LINE);
-        addContentString("Enter category number or \"" + INPUT_TO_EXIT + "\" to exit: ");
-        ioHandler.writeMessage(content.toString());
-    }
-
-    public void showMsgGoodbye() {
-        showMessage("Goodbye! Thanks for all the fish.");
+        addContentString("</ul>");
+        writer.println(content.toString());
     }
 }

@@ -3,6 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>dmitriyborisenko</groupId>
 	<artifactId>kickstarter</artifactId>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kickstarter</name>
 	<build>
@@ -16,19 +17,6 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<mainClass>ua.dborisenko.kickstarter.AppStarter</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 	<properties>
@@ -36,6 +24,7 @@
 		<version-mysql-connector>5.1.38</version-mysql-connector>
 		<version-junit>4.12</version-junit>
 		<version-mockito>1.10.19</version-mockito>
+		<version-servlet-api>2.5</version-servlet-api>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -54,6 +43,12 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>${version-mockito}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${version-servlet-api}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
