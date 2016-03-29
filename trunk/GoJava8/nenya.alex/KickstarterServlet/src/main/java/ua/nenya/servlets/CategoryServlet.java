@@ -22,7 +22,6 @@ public class CategoryServlet extends CommonServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
         PrintWriter printWriter = response.getWriter();
-        initDao();
         CategoryDao categoryDao = initilizer.getCategoryDao();
         printWriter.println("<p><a href = \"quote\"> Back </a></p>");
         showCategories(categoryDao, printWriter);
