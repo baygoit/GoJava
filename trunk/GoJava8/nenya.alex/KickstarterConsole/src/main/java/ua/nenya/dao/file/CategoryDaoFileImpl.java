@@ -9,6 +9,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ua.nenya.project.Category;
+import ua.nenya.project.Project;
+import ua.nenya.project.Question;
+import ua.nenya.project.Reward;
 import ua.nenya.dao.CategoryDao;
 
 public class CategoryDaoFileImpl implements CategoryDao {
@@ -25,7 +28,7 @@ public class CategoryDaoFileImpl implements CategoryDao {
 	}
 
 	@Override
-	public void initCategories() {
+	public List<Category> initCategories() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			categories = mapper.readValue(new File(fileName), new TypeReference<List<Category>>() {
@@ -33,7 +36,35 @@ public class CategoryDaoFileImpl implements CategoryDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return categories;
 
+	}
+
+
+	@Override
+	public List<Project> initProjects(Category category) {
+		return category.getProjects();
+	}
+
+	@Override
+	public List<Reward> initRewards(Project project) {
+		return project.getRewards();
+	}
+
+	@Override
+	public List<Question> initQuestions(Project project) {
+		return project.getQuestions();
+	}
+
+	@Override
+	public void writeQuestionInProject(Project project, Question question) {
+		project.getQuestions().add(question);
+	}
+
+	@Override
+	public void writeIvestmentInProject(Project project, int amount) {
+		int previousAmount = project.getAvailableAmount();
+		project.setAvailableAmount(previousAmount+amount);
 	}
 
 }

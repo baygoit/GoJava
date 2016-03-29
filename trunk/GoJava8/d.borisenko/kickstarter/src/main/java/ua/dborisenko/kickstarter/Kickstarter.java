@@ -1,164 +1,115 @@
 package ua.dborisenko.kickstarter;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import ua.dborisenko.kickstarter.dao.CategoryDao;
 import ua.dborisenko.kickstarter.dao.QuoteDao;
 import ua.dborisenko.kickstarter.domain.Category;
-import ua.dborisenko.kickstarter.domain.Error;
 import ua.dborisenko.kickstarter.domain.Investment;
 import ua.dborisenko.kickstarter.domain.Project;
 import ua.dborisenko.kickstarter.domain.Question;
-import ua.dborisenko.kickstarter.domain.Reward;
 import ua.dborisenko.kickstarter.view.CategoriesView;
 import ua.dborisenko.kickstarter.view.CategoryView;
-import ua.dborisenko.kickstarter.view.ErrorView;
 import ua.dborisenko.kickstarter.view.ProjectView;
 import ua.dborisenko.kickstarter.view.RewardsView;
-import ua.dborisenko.kickstarter.view.View;
 
-public class Kickstarter {
-    private static final String MENU_ACTION_RETURN = "0";
-    private static final String MENU_ACTION_INVEST = "1";
-    private static final String MENU_ACTION_QUESTION = "2";
-    private static final String MENU_ACTION_CUSTOM_AMOUNT = "0";
+public class Kickstarter extends HttpServlet {
 
-    private static enum MenuPosition {
-        CATEGORIES, CATEGORY, PROJECT, REWARDS, EXIT
-    }
-
-    private MenuPosition menuPosition;
-    private List<String> categoryNamesList;
-    private Category currentCategory;
-    private Project currentProject;
+    private static final long serialVersionUID = 1L;
     private CategoryDao categoryDao;
     private QuoteDao quoteDao;
-    private View currentView;
 
-    public void run() {
+    @Override
+    public void init(ServletConfig config) throws ServletException {
         DaoInitializer daoInitializer = new DaoInitializer();
-        quoteDao = daoInitializer.initQuoteDao();
-        categoryDao = daoInitializer.initCategoryDao();
-        prepareMenuCategories();
-        showMenu();
+        quoteDao = daoInitializer.getQuoteDao();
+        categoryDao = daoInitializer.getCategoryDao();
     }
 
-    void showError(int errorCode, String errorName, String errorDescription) {
-        Error error = new Error(errorCode, errorName, errorDescription);
-        ErrorView viewError = new ErrorView(error);
-        viewError.show();
-        viewError.getInput();
-    }
-
-    void showMenu() {
-        while (menuPosition != MenuPosition.EXIT) {
-            currentView.show();
-            String inputData = currentView.getInput();
-            if (MenuPosition.CATEGORIES == menuPosition) {
-                handleViewCategoriesResult(inputData);
-            } else if (MenuPosition.CATEGORY == menuPosition) {
-                handleViewCategoryResult(inputData);
-            } else if (MenuPosition.PROJECT == menuPosition) {
-                handleViewProjectResult(inputData);
-            } else if (MenuPosition.REWARDS == menuPosition) {
-                handleViewRewardsResult(inputData);
-            } else {
-                showError(501, "Not Implemented", "Unknown view type.");
-            }
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String requestedPage = request.getParameter("page");
+        if ("categories".equals(requestedPage) || request.getQueryString() == null) {
+            showCategories(response.getWriter());
+        } else if ("category".equals(requestedPage)) {
+            int id = Integer.valueOf(request.getParameter("id"));
+            showCategory(response.getWriter(), id);
+        } else if ("project".equals(requestedPage)) {
+            int id = Integer.valueOf(request.getParameter("id"));
+            showProject(response.getWriter(), id);
+        } else if ("investment".equals(requestedPage)) {
+            int id = Integer.valueOf(request.getParameter("id"));
+            showRewards(response.getWriter(), id);
+        } else {
+            throw new IllegalArgumentException("Unknown page type!");
         }
-        currentView.showHint("Goodbye! Thanks for all the fish.");
     }
 
-    void prepareMenuCategories() {
-        menuPosition = MenuPosition.CATEGORIES;
-        categoryNamesList = categoryDao.getCategoryNames();
-        currentView = new CategoriesView(categoryNamesList, quoteDao.getRandomQuote());
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String requestedAction = request.getParameter("requested_action");
+        if ("ADD_QUESTION".equals(requestedAction)) {
+            addQuestion(request, response);
+        } else if ("ADD_INVESTMENT".equals(requestedAction)) {
+            addInvestment(request, response);
+        } else {
+            throw new IllegalArgumentException("Unknown action type!");
+        }
     }
 
-    void prepareMenuCategory() {
-        menuPosition = MenuPosition.CATEGORY;
-        currentView = new CategoryView(currentCategory);
-    }
-
-    void prepareMenuProject() {
-        menuPosition = MenuPosition.PROJECT;
-        categoryDao.getQuestions(currentProject);
-        currentView = new ProjectView(currentProject, currentCategory.getName());
-    }
-
-    void prepareMenuRewards() {
-        menuPosition = MenuPosition.REWARDS;
-        categoryDao.getRewards(currentProject);
-        currentView = new RewardsView(currentProject);
-    }
-
-    void handleViewRewardsResult(String inputData) {
+    private void addInvestment(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int projectId = Integer.valueOf(request.getParameter("project_id"));
         Investment investment = new Investment();
-        try {
-            if (MENU_ACTION_CUSTOM_AMOUNT.equals(inputData)) {
-                currentView.showHint("Enter the investment amount:");
-                investment.setAmount(Integer.valueOf(currentView.getInput()));
-            } else {
-                int rewardIndex = Integer.valueOf(inputData) - 1;
-                Reward reward = currentProject.getRewardByIndex(rewardIndex);
-                investment.setAmount(reward.getAmount());
-            }
-            currentView.showHint("Enter your name:");
-            investment.setCardHolderName(currentView.getInput());
-            currentView.showHint("Enter your card number: ");
-            investment.setCardNumber(currentView.getInput());
-            categoryDao.addInvestment(currentProject, investment);
-            prepareMenuProject();
-        } catch (NumberFormatException e) {
-            showError(400, "Bad Request", "Wrong input data.");
-        } catch (IndexOutOfBoundsException e) {
-            showError(404, "Not Found", "The requested element isn`t found.");
-        }
-    }
-
-    void handleViewProjectResult(String inputData) {
-        if (MENU_ACTION_RETURN.equals(inputData)) {
-            prepareMenuCategory();
-        } else if (MENU_ACTION_INVEST.equals(inputData)) {
-            prepareMenuRewards();
-        } else if (MENU_ACTION_QUESTION.equals(inputData)) {
-            currentView.showHint("Enter your question");
-            Question question = new Question();
-            question.setRequest(currentView.getInput());
-            categoryDao.addQuestion(currentProject, question);
-            currentView = new ProjectView(currentProject, currentCategory.getName());
-        }
-    }
-
-    void handleViewCategoryResult(String inputData) {
-        if (MENU_ACTION_RETURN.equals(inputData)) {
-            prepareMenuCategories();
+        investment.setCardHolderName(request.getParameter("cardholder_name"));
+        investment.setCardNumber(request.getParameter("card_number"));
+        if (Integer.valueOf(request.getParameter("amount")) == 0) {
+            investment.setAmount(Integer.valueOf(request.getParameter("custom_amount")));
         } else {
-            try {
-                int projectIndex = Integer.valueOf(inputData) - 1;
-                currentProject = currentCategory.getProjectByIndex(projectIndex);
-                prepareMenuProject();
-            } catch (IndexOutOfBoundsException e) {
-                showError(404, "Not Found", "The requested element isn`t found.");
-            } catch (NumberFormatException e) {
-                showError(400, "Bad Request", "Wrong input data.");
-            }
+            investment.setAmount(Integer.valueOf(request.getParameter("amount")));
         }
+        categoryDao.addInvestment(projectId, investment);
+        showProject(response.getWriter(), projectId);
     }
 
-    void handleViewCategoriesResult(String inputData) {
-        if (MENU_ACTION_RETURN.equals(inputData)) {
-            menuPosition = MenuPosition.EXIT;
-        } else {
-            try {
-                int categoryIndex = Integer.valueOf(inputData) - 1;
-                currentCategory = categoryDao.getByName(categoryNamesList.get(categoryIndex));
-                prepareMenuCategory();
-            } catch (IndexOutOfBoundsException e) {
-                showError(404, "Not Found", "The requested element isn`t found.");
-            } catch (NumberFormatException e) {
-                showError(400, "Bad Request", "Wrong input data.");
-            }
-        }
+    private void addQuestion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int projectId = Integer.valueOf(request.getParameter("project_id"));
+        Question question = new Question();
+        question.setRequest(request.getParameter("question_request"));
+        categoryDao.addQuestion(projectId, question);
+        showProject(response.getWriter(), projectId);
+    }
+
+    void showCategories(PrintWriter writer) {
+        List<Category> categories = categoryDao.getCategories();
+        CategoriesView view = new CategoriesView();
+        view.show(writer, categories, quoteDao.getRandomQuote());
+    }
+
+    void showCategory(PrintWriter writer, int id) {
+        Category category = categoryDao.getCategoryById(id);
+        CategoryView view = new CategoryView();
+        view.show(writer, category);
+    }
+
+    void showProject(PrintWriter writer, int id) {
+        Project project = categoryDao.getProjectById(id);
+        ProjectView view = new ProjectView();
+        Category category = categoryDao.getCategoryByProjectId(id);
+        view.show(writer, project, category);
+    }
+
+    void showRewards(PrintWriter writer, int id) {
+        Project project = categoryDao.getProjectById(id);
+        categoryDao.getRewards(project);
+        RewardsView view = new RewardsView();
+        view.show(writer, project);
     }
 }

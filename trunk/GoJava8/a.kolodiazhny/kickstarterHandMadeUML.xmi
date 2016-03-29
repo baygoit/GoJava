@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI verified="false" xmi.version="1.2" timestamp="2016-03-09T16:17:35" xmlns:UML="http://schema.omg.org/spec/UML/1.3">
+<XMI verified="false" xmi.version="1.2" timestamp="2016-03-13T23:55:43" xmlns:UML="http://schema.omg.org/spec/UML/1.3">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://umbrello.kde.org</XMI.exporter>
-   <XMI.exporterVersion>1.6.4</XMI.exporterVersion>
+   <XMI.exporterVersion>1.6.9</XMI.exporterVersion>
    <XMI.exporterEncoding>UnicodeUTF8</XMI.exporterEncoding>
   </XMI.documentation>
   <XMI.metamodel xmi.version="1.3" href="UML.xml" xmi.name="UML"/>
@@ -14,6 +14,7 @@
     <UML:Stereotype visibility="public" isSpecification="false" namespace="m1" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="folder" name="folder"/>
     <UML:Stereotype visibility="public" isSpecification="false" namespace="m1" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="datatype" name="datatype"/>
     <UML:Stereotype visibility="public" isSpecification="false" namespace="m1" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="interface" name="interface"/>
+    <UML:Stereotype visibility="public" isSpecification="false" namespace="m1" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="enum" name="enum"/>
     <UML:Model stereotype="folder" visibility="public" isSpecification="false" namespace="m1" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="Logical View" name="Logical View">
      <UML:Namespace.ownedElement>
       <UML:Package stereotype="folder" visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="Datatypes" name="Datatypes">
@@ -59,11 +60,15 @@
         <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="ts3lRVMGBmbh" type="0QqnNFNBOwgc" name="" aggregation="none"/>
        </UML:Association.connection>
       </UML:Association>
-      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="6NnhdBYXc4xH" name="QuotaSource">
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="6NnhdBYXc4xH" name="QuotaMemoryDaoImpl">
        <UML:Classifier.feature>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="U3T4Xn8sZpTk" type="8Iw1lETphXKT" name="quotas"/>
-        <UML:Operation visibility="private" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="8En7abbk5YB0" name="init"/>
-        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="ApzE3g2rT2Ev" name="getRandomQuota"/>
+        <UML:Operation visibility="private" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="8En7abbk5YB0" name="fillQuotas"/>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="ApzE3g2rT2Ev" name="getRandomQuota">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter kind="return" xmi.id="" type="nwiHjVcYhnBC"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
         <UML:Operation visibility="protected" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="2pXbUXXwf6Uz" name="getQuotaByID">
          <UML:BehavioralFeature.parameter>
           <UML:Parameter kind="return" xmi.id="0USbTnI7V7By" type="nwiHjVcYhnBC"/>
@@ -181,9 +186,9 @@
       <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="UhhUPpd6JtOu" name="KickStarter">
        <UML:Classifier.feature>
         <UML:Attribute visibility="private" isSpecification="false" xmi.id="b9BlwPQ0OU5A" type="BxdA9x7uEVWo" name="console"/>
-        <UML:Attribute visibility="private" isSpecification="false" xmi.id="K6K2wEAfme52" type="6NnhdBYXc4xH" name="quotaSource"/>
-        <UML:Attribute visibility="private" isSpecification="false" xmi.id="GftgqqipGIuE" type="Kzqdl32mRIKg" name="categorySource"/>
-        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="JawAsXONxvUk" name="start"/>
+        <UML:Attribute visibility="private" isSpecification="false" xmi.id="VdZr0TmH9im7" type="EJHNYgOjOOww" name="quotaDao"/>
+        <UML:Attribute visibility="private" isSpecification="false" xmi.id="BXv83HuWkjDp" type="UoD3W0cWxVOo" name="categoryDao"/>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="JawAsXONxvUk" name="run"/>
         <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="jS2Nj6pNf1rE" name="init"/>
         <UML:Operation visibility="private" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="us5XrwloJpvP" name="showQuota"/>
         <UML:Operation visibility="private" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="yIU9p8Z4BZgI" name="showApplicationTitle"/>
@@ -203,67 +208,286 @@
       </UML:Class>
       <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="OCcYjUiEDDbE" name="APPLICATION_VERSION"/>
       <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="Evj7dwrvDVTk" name="String"/>
+      <UML:Interface stereotype="interface" visibility="public" isSpecification="false" namespace="Logical View" isAbstract="true" isLeaf="false" isRoot="false" xmi.id="EJHNYgOjOOww" name="QuotaDao">
+       <UML:Classifier.feature>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="wWx5fyZuIpFq" name="getRandomQuoata">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter kind="return" xmi.id="OZm61m60lG2c" type="nwiHjVcYhnBC"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+       </UML:Classifier.feature>
+      </UML:Interface>
+      <UML:Abstraction visibility="public" isSpecification="false" namespace="Logical View" supplier="EJHNYgOjOOww" xmi.id="zjj6QVBgiS21" client="6NnhdBYXc4xH" name=""/>
+      <UML:Association visibility="public" isSpecification="false" namespace="Logical View" xmi.id="lpN1EHvTAyBW" name="">
+       <UML:Association.connection>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="false" isSpecification="false" xmi.id="wLpdEEjanVhn" type="0QqnNFNBOwgc" name="" aggregation="none"/>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="Hll01mckbzlp" type="6NnhdBYXc4xH" name="" aggregation="none"/>
+       </UML:Association.connection>
+      </UML:Association>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="HhGPdRtZliAz" name="KickStarterRunner">
+       <UML:Classifier.feature>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="wDiXBTKQ8anj" name="main"/>
+        <UML:Operation visibility="private" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="ZDLog7jGidIW" name="getApplicationMode">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter visibility="private" isSpecification="false" xmi.id="dvsq2LCIsu8F" type="BxdA9x7uEVWo" value="" name="io"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+       </UML:Classifier.feature>
+      </UML:Class>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="0gGlMRiGIGuf" name="QuotaDaoFactory">
+       <UML:Classifier.feature>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="JBEpYrrSSwDD" name="getQuotaDao">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter kind="return" xmi.id="jmXPm5ccNEXO" type="EJHNYgOjOOww"/>
+          <UML:Parameter visibility="private" isSpecification="false" xmi.id="xwgycfTGI2yL" type="OBX4QDFfBur7" value="" name="mode"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+       </UML:Classifier.feature>
+      </UML:Class>
+      <UML:Enumeration stereotype="enum" visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="OBX4QDFfBur7" name="ApplicatioMode">
+       <UML:EnumerationLiteral visibility="public" isSpecification="false" namespace="OBX4QDFfBur7" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="atkJX0e34RGb" name="MEMORY"/>
+       <UML:EnumerationLiteral visibility="public" isSpecification="false" namespace="OBX4QDFfBur7" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="YcIG9Bxi2f1X" name="FILE"/>
+       <UML:EnumerationLiteral visibility="public" isSpecification="false" namespace="OBX4QDFfBur7" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="N04yDFWlpozy" name="DB"/>
+      </UML:Enumeration>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="sHwpZBlw9ptM" name="new_class"/>
+      <UML:Association visibility="public" isSpecification="false" namespace="Logical View" xmi.id="VV6Wx997g0YF" name="">
+       <UML:Association.connection>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="false" isSpecification="false" xmi.id="rJex1qbtoBsZ" type="0gGlMRiGIGuf" name="" aggregation="none"/>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="eDOUe1V8WceS" type="OBX4QDFfBur7" name="" aggregation="none"/>
+       </UML:Association.connection>
+      </UML:Association>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="e8a73QL1RAZP" name="new_class_1"/>
+      <UML:Association visibility="public" isSpecification="false" namespace="Logical View" xmi.id="GF3RPuukiimV" name="">
+       <UML:Association.connection>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="nBw1ASHZKXPK" type="HhGPdRtZliAz" name="" aggregation="none"/>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="Nci7NOPedS30" type="UhhUPpd6JtOu" name="" aggregation="none"/>
+       </UML:Association.connection>
+      </UML:Association>
+      <UML:Package visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="ORG2tgolM9ya" name="new_package_1">
+       <UML:Namespace.ownedElement/>
+      </UML:Package>
+      <UML:Dependency visibility="public" isSpecification="false" namespace="Logical View" supplier="6NnhdBYXc4xH" xmi.id="r0dghi3yLMLr" client="0gGlMRiGIGuf" name=""/>
+      <UML:Association visibility="public" isSpecification="false" namespace="Logical View" xmi.id="cOVvkolvwA15" name="">
+       <UML:Association.connection>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="noDpTrgyCwV2" type="HhGPdRtZliAz" name="" aggregation="none"/>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="nmhef2BFPhB7" type="0gGlMRiGIGuf" name="" aggregation="none"/>
+       </UML:Association.connection>
+      </UML:Association>
+      <UML:Association visibility="public" isSpecification="false" namespace="Logical View" xmi.id="Vw3Q42VrpheG" name="">
+       <UML:Association.connection>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="WKCiEiizUNe9" type="0gGlMRiGIGuf" name="" aggregation="none"/>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="OpPnUYuySvOW" type="OBX4QDFfBur7" name="" aggregation="none"/>
+       </UML:Association.connection>
+      </UML:Association>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="wrLjW0z2IBjX" name="ConfigReader">
+       <UML:Classifier.feature>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="fM5yVoTNDxi2" name="getMode">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter visibility="private" isSpecification="false" xmi.id="oVgsj9hL4TmL" type="dK46DqZVZ26V" value="" name="properties"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="bxBRGqTpS17J" name="readConfig">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter kind="return" xmi.id="" type="dK46DqZVZ26V"/>
+          <UML:Parameter visibility="private" isSpecification="false" xmi.id="IZkpZoKz7EAF" type="nwiHjVcYhnBC" value="" name="fileName"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+       </UML:Classifier.feature>
+      </UML:Class>
+      <UML:Association visibility="public" isSpecification="false" namespace="Logical View" xmi.id="49Byz9MNyfBg" name="">
+       <UML:Association.connection>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="LVKtBhwq1zmW" type="wrLjW0z2IBjX" name="" aggregation="none"/>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="nFt0Ba1FjADj" type="OBX4QDFfBur7" name="" aggregation="none"/>
+       </UML:Association.connection>
+      </UML:Association>
+      <UML:Association visibility="public" isSpecification="false" namespace="Logical View" xmi.id="KX4GCGwYlGPw" name="">
+       <UML:Association.connection>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="vJlwGVQ3lI2w" type="HhGPdRtZliAz" name="" aggregation="none"/>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="q19XBMGTrJh2" type="wrLjW0z2IBjX" name="" aggregation="none"/>
+       </UML:Association.connection>
+      </UML:Association>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="dK46DqZVZ26V" name="Properties"/>
+      <UML:Association visibility="public" isSpecification="false" namespace="Logical View" xmi.id="ABFDbDRtk9iH" name="">
+       <UML:Association.connection>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="x0G5COI0ryqY" type="BxdA9x7uEVWo" name="" aggregation="none"/>
+        <UML:AssociationEnd changeability="changeable" visibility="public" isNavigable="true" isSpecification="false" xmi.id="5Xt8zdT9piKO" type="HhGPdRtZliAz" name="" aggregation="none"/>
+       </UML:Association.connection>
+      </UML:Association>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="wePRTOsFE5wB" name="QuotaDbImpl">
+       <UML:Classifier.feature>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="adw2o0eOF9SL" name="getRandomQuota">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter kind="return" xmi.id="IZipOK7J5Ujx" type="nwiHjVcYhnBC"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+       </UML:Classifier.feature>
+      </UML:Class>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="rQ4sTcTHBpXH" name="QuotaFileImpl">
+       <UML:GeneralizableElement.generalization>
+        <UML:Generalization xmi.idref="cS8lMMsaggD8"/>
+       </UML:GeneralizableElement.generalization>
+       <UML:Classifier.feature>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="EMofRR20DksT" name="fillQuotas"/>
+       </UML:Classifier.feature>
+      </UML:Class>
+      <UML:Abstraction visibility="public" isSpecification="false" namespace="Logical View" supplier="EJHNYgOjOOww" xmi.id="DpdRyK8jR7dP" client="wePRTOsFE5wB" name=""/>
+      <UML:Generalization discriminator="" visibility="public" isSpecification="false" namespace="Logical View" child="rQ4sTcTHBpXH" xmi.id="cS8lMMsaggD8" parent="6NnhdBYXc4xH" name=""/>
+      <UML:Dependency visibility="public" isSpecification="false" namespace="Logical View" supplier="rQ4sTcTHBpXH" xmi.id="Qof4SqCY5Jn2" client="0gGlMRiGIGuf" name=""/>
+      <UML:Dependency visibility="public" isSpecification="false" namespace="Logical View" supplier="wePRTOsFE5wB" xmi.id="hDfnUSnjzJOy" client="0gGlMRiGIGuf" name=""/>
+      <UML:Interface stereotype="interface" visibility="public" isSpecification="false" namespace="Logical View" isAbstract="true" isLeaf="false" isRoot="false" xmi.id="UoD3W0cWxVOo" name="CategoryDao">
+       <UML:Classifier.feature>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="tfBmS90uvBvP" name="getCategories">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter kind="return" xmi.id="eTvOC6BztuJN" type="v9Yq5jClLYbQ"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="pCjOFqQOzLRH" name="getCategoryById">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter kind="return" xmi.id="w2qEhnpbiJFU" type="xy2eSfAzEIbb"/>
+          <UML:Parameter visibility="private" isSpecification="false" xmi.id="CujYHIzvlsJv" type="kWWtbX0B08bs" value="" name="id"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="5qEJIotuZbtE" name="addCategory">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter visibility="private" isSpecification="false" xmi.id="pSc1ziPuiF8N" type="xy2eSfAzEIbb" value="" name="category"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+        <UML:Operation visibility="public" isSpecification="false" isQuery="false" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="DTAk44yrUZqS" name="isVsalidCategory">
+         <UML:BehavioralFeature.parameter>
+          <UML:Parameter visibility="private" isSpecification="false" xmi.id="FFMxVSJVOGCa" type="nwiHjVcYhnBC" value="" name="category"/>
+         </UML:BehavioralFeature.parameter>
+        </UML:Operation>
+       </UML:Classifier.feature>
+      </UML:Interface>
+      <UML:Class visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="yTtqLCDAMuYa" name="new_class_2"/>
      </UML:Namespace.ownedElement>
      <XMI.extension xmi.extender="umbrello">
       <diagrams>
-       <diagram showopsig="1" linecolor="#ff0000" snapx="25" showattribassocs="1" snapy="25" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="class diagram" font="Ubuntu,9,-1,5,50,0,0,0,0,0" canvasheight="3775.152173913043" canvaswidth="2347.489130434783" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#d3d3d3" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="92" xmi.id="j7qm14sl8m1S" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
+       <diagram showopsig="1" linecolor="#ff0000" snapx="25" showattribassocs="1" snapy="25" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="class diagram" font="Ubuntu,9,-1,5,50,0,0,0,0,0" canvasheight="2162,896728515625" canvaswidth="2130" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#d3d3d3" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffff00" zoom="62" xmi.id="j7qm14sl8m1S" documentation="&#x9;&#x9;" showscope="1" snapgrid="0" showatts="1" type="1">
         <widgets>
-         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1907.577932731748" showattsigs="601" showstereotype="1" y="-2142.31439704676" showattributes="1" font="Ubuntu,9,-1,5,75,0,0,0,0,0" localid="XMCIIua2QAY5" width="159" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="0QqnNFNBOwgc" showscope="1" height="81" showopsigs="601"/>
-         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1907.630229696472" showattsigs="601" showstereotype="1" y="-1998.195242001641" showattributes="1" font="Ubuntu,9,-1,5,75,0,0,0,0,0" localid="RWyiUL7itsTK" width="233" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="6NnhdBYXc4xH" showscope="1" height="101" showopsigs="601"/>
-         <interfacewidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="0" x="-1168.218237020373" showstereotype="1" y="-1976.040277225713" font="Ubuntu,9,-1,5,75,1,0,0,0,0" drawascircle="0" localid="jaPCxD8RpnBc" width="144" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="BxdA9x7uEVWo" showscope="1" height="63" showopsigs="601"/>
-         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1163.081019595241" showattsigs="601" showstereotype="1" y="-1858.794008947676" showattributes="1" font="Ubuntu,9,-1,5,75,0,0,0,0,0" localid="FSXYdaWlv49V" width="144" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="ccRkyDqyBSzZ" showscope="1" height="78" showopsigs="601"/>
-         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1902.764561115669" showattsigs="601" showstereotype="1" y="-1691.009023789992" showattributes="1" font="Ubuntu,9,-1,5,75,0,0,0,0,0" localid="SHthMEbja0gU" width="156.5" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="xy2eSfAzEIbb" showscope="1" height="138" showopsigs="601"/>
-         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1901.88679245283" showattsigs="601" showstereotype="1" y="-1511.525840853159" showattributes="1" font="Ubuntu,9,-1,5,75,0,0,0,0,0" localid="xTrbcC5i8cfL" width="154" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="SvkWBQyeBtYo" showscope="1" height="119.5094339622642" showopsigs="601"/>
-         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1902.78917145201" showattsigs="601" showstereotype="1" y="-1869.934372436423" showattributes="1" font="Ubuntu,9,-1,5,75,0,0,0,0,0" localid="uwwDMhcLs7I1" width="227.6521739130435" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="Kzqdl32mRIKg" showscope="1" height="123.7957342083675" showopsigs="601"/>
-         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1552.088148981335" showattsigs="601" showstereotype="1" y="-2000.908451240243" showattributes="1" font="Ubuntu,9,-1,5,75,0,0,0,0,0" localid="wkBFcU6xkDxr" width="241.695652173913" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="UhhUPpd6JtOu" showscope="1" height="205.8917145200985" showopsigs="601"/>
-         <floatingtext linecolor="none" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-1648.913043478261" showstereotype="1" y="-2134.782608695652" text="US 1 + 2. Completed" font="Ubuntu,28,-1,5,50,0,0,0,0,0" localid="jq0SRugaVVIB" pretext="" role="700" width="347" isinstance="0" posttext="" usefillcolor="1" fillcolor="#ffff00" xmi.id="STE9Kt445toS" height="47"/>
+         <classwidget linecolor="#ff0000" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-772,1976052308694" showattsigs="601" showstereotype="1" y="-1798,245189177684" showattributes="1" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="XMCIIua2QAY5" width="113" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="0QqnNFNBOwgc" showscope="1" height="56" showopsigs="601"/>
+         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-865,734110514323" showattsigs="601" showstereotype="1" y="-1909,793679261819" showattributes="1" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="RWyiUL7itsTK" width="213" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="6NnhdBYXc4xH" showscope="1" height="70" showopsigs="601"/>
+         <interfacewidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="0" x="-1859,627743704443" showattsigs="600" showstereotype="1" y="-2119,093041507542" showattributes="0" font="Ubuntu,9,-1,5,50,0,0,0,0,0" drawascircle="0" localid="jaPCxD8RpnBc" width="144" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="BxdA9x7uEVWo" showscope="1" height="56" showopsigs="601"/>
+         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2089,619262392409" showattsigs="601" showstereotype="1" y="-2121,531224556064" showattributes="1" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="FSXYdaWlv49V" width="144" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="ccRkyDqyBSzZ" showscope="1" height="49" showopsigs="601"/>
+         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2065,563313802084" showattsigs="601" showstereotype="1" y="-1568,581258138021" showattributes="1" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="SHthMEbja0gU" width="142" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="xy2eSfAzEIbb" showscope="1" height="84" showopsigs="601"/>
+         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-2087,80224609375" showattsigs="601" showstereotype="1" y="-1367,863891601562" showattributes="1" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="xTrbcC5i8cfL" width="153" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="SvkWBQyeBtYo" showscope="1" height="105" showopsigs="601"/>
+         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1789,381891066028" showattsigs="601" showstereotype="1" y="-1476,830887989331" showattributes="1" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="uwwDMhcLs7I1" width="213" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="Kzqdl32mRIKg" showscope="1" height="98" showopsigs="601"/>
+         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1537,692260742188" showattsigs="601" showstereotype="1" y="-2157,896728515625" showattributes="1" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="wkBFcU6xkDxr" width="171" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="UhhUPpd6JtOu" showscope="1" height="168" showopsigs="601"/>
+         <interfacewidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="0" x="-1099,912118765024" showattsigs="601" showstereotype="1" y="-2086,323580228365" showattributes="0" font="Ubuntu,9,-1,5,50,0,0,0,0,0" drawascircle="0" localid="JgwWxaTC53Jd" width="173" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="EJHNYgOjOOww" showscope="1" height="42" showopsigs="601"/>
+         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1543,838134765625" showattsigs="601" showstereotype="1" y="-1911,623779296875" showattributes="1" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="utagMFRdyAbz" width="167" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="HhGPdRtZliAz" showscope="1" height="49" showopsigs="601"/>
+         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1214,7635936248" showattsigs="601" showstereotype="1" y="-1647,597211788862" showattributes="1" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="VLGRWqRQ37yC" width="293" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="0gGlMRiGIGuf" showscope="1" height="35" showopsigs="601"/>
+         <enumwidget width="100" showstereotype="1" x="-1568,260814177685" usesdiagramusefillcolor="0" y="-1661,682548327324" usesdiagramfillcolor="0" isinstance="0" localid="Kk67fKqjLxIX" fillcolor="#ffff00" height="112" linecolor="none" xmi.id="OBX4QDFfBur7" showpackage="1" textcolor="#000000" usefillcolor="1" linewidth="0" font="Ubuntu,9,-1,5,50,0,0,0,0,0"/>
+         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1600,014110076122" showattsigs="601" showstereotype="1" y="-1772,383228791066" showattributes="1" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="tRULp8TBwqyO" width="244" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="wrLjW0z2IBjX" showscope="1" height="49" showopsigs="601"/>
+         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-1053,180314309346" showattsigs="601" showstereotype="1" y="-1908,995037220843" showattributes="1" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="NoLrUWWDLZ9G" width="98,45161290322585" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="rQ4sTcTHBpXH" showscope="1" height="78,54838709677415" showopsigs="601"/>
+         <interfacewidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="0" x="-2108,333333333333" showattsigs="601" showstereotype="1" y="-1933,333333333333" showattributes="0" font="Ubuntu,9,-1,5,50,0,0,0,0,0" drawascircle="0" localid="VTph45bvZiFY" width="211" isinstance="0" usefillcolor="1" fillcolor="#ffff00" xmi.id="UoD3W0cWxVOo" showscope="1" height="84" showopsigs="601"/>
+         <boxwidget width="696,6666870117188" showstereotype="1" x="-1266,666625976562" usesdiagramusefillcolor="0" y="-2111,666748046875" usesdiagramfillcolor="0" isinstance="0" localid="CFWHhFDFSY38" fillcolor="#ffff00" height="388,3333435058594" linecolor="#000000" xmi.id="dkPLLfqyaipb" textcolor="#000000" usefillcolor="1" linewidth="0" font="Ubuntu,9,-1,5,50,0,0,0,0,0"/>
         </widgets>
         <messages/>
         <associations>
          <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="1" widgetaid="ccRkyDqyBSzZ" usesdiagramfillcolor="1" fillcolor="none" linecolor="none" seqnum="" totalcounta="2" xmi.id="vbA7cxjKQ0mh" widgetbid="BxdA9x7uEVWo" totalcountb="2" type="502" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
           <linepath layout="Polyline">
-           <startpoint startx="-1093.515802203937" starty="-1858.794008947676"/>
-           <endpoint endx="-1093.515802203937" endy="-1913.040277225713"/>
+           <startpoint startx="-1945,619262392409" starty="-2091,673686668832"/>
+           <endpoint endx="-1859,627743704443" endy="-2091,673686668832"/>
           </linepath>
          </assocwidget>
-         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="0" widgetaid="6NnhdBYXc4xH" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="RC7TUuqU2TIV" widgetbid="0QqnNFNBOwgc" totalcountb="2" type="501" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="0" widgetaid="xy2eSfAzEIbb" usesdiagramfillcolor="1" fillcolor="none" linecolor="none" seqnum="" totalcounta="2" xmi.id="EXdjg3hKCYr0" widgetbid="SvkWBQyeBtYo" totalcountb="2" type="501" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
           <linepath layout="Polyline">
-           <startpoint startx="-1810.534454470878" starty="-1998.195242001641"/>
-           <endpoint endx="-1810.534454470878" endy="-2061.31439704676"/>
+           <startpoint startx="-1991,325927734375" starty="-1484,581258138021"/>
+           <endpoint endx="-1991,325927734375" endy="-1367,863891601562"/>
           </linepath>
          </assocwidget>
-         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="0" widgetaid="xy2eSfAzEIbb" usesdiagramfillcolor="10" fillcolor="none" linecolor="none" seqnum="" totalcounta="2" xmi.id="EXdjg3hKCYr0" widgetbid="SvkWBQyeBtYo" totalcountb="2" type="501" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="1" widgetaid="Kzqdl32mRIKg" usesdiagramfillcolor="1" fillcolor="none" linecolor="none" seqnum="" totalcounta="2" xmi.id="GhHBUUhBplfG" widgetbid="xy2eSfAzEIbb" totalcountb="2" type="501" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
           <linepath layout="Polyline">
-           <startpoint startx="-1821.712879409352" starty="-1553.009023789992"/>
-           <endpoint endx="-1821.712879409352" endy="-1511.525840853159"/>
+           <startpoint startx="-1789,381891066028" starty="-1476,830887989331"/>
+           <endpoint endx="-1923,563313802084" endy="-1484,581258138021"/>
           </linepath>
          </assocwidget>
-         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="31" widgetaid="Kzqdl32mRIKg" usesdiagramfillcolor="11" fillcolor="none" linecolor="none" seqnum="" totalcounta="2" xmi.id="GhHBUUhBplfG" widgetbid="xy2eSfAzEIbb" totalcountb="2" type="501" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="0" widgetaid="6NnhdBYXc4xH" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="zjj6QVBgiS21" widgetbid="EJHNYgOjOOww" totalcountb="2" type="511" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
           <linepath layout="Polyline">
-           <startpoint startx="-1834.308039376538" starty="-1746.138638228056"/>
-           <endpoint endx="-1834.308039376538" endy="-1691.009023789992"/>
+           <startpoint startx="-865,734110514323" starty="-1909,793679261819"/>
+           <endpoint endx="-926,9121187650239" endy="-2044,323580228365"/>
           </linepath>
          </assocwidget>
-         <assocwidget linecolor="none" indexa="1" usesdiagramfillcolor="0" widgetbid="BxdA9x7uEVWo" indexb="1" linewidth="none" seqnum="" textcolor="none" usesdiagramusefillcolor="0" totalcounta="2" totalcountb="2" widgetaid="UhhUPpd6JtOu" font="Ubuntu,9,-1,5,50,0,0,0,0,0" visibilityA="1" visibilityB="1" usefillcolor="1" fillcolor="#ffff00" changeabilityA="900" xmi.id="b9BlwPQ0OU5A" changeabilityB="900" type="510">
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="0" widgetaid="0QqnNFNBOwgc" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="lpN1EHvTAyBW" widgetbid="6NnhdBYXc4xH" totalcountb="2" type="512" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
           <linepath layout="Polyline">
-           <startpoint startx="-1310.392496807422" starty="-1936.778016457634"/>
-           <endpoint endx="-1168.218237020373" endy="-1936.778016457634"/>
+           <startpoint startx="-723,864271897536" starty="-1798,245189177684"/>
+           <endpoint endx="-723,864271897536" endy="-1839,793679261819"/>
           </linepath>
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="-1221.696497889939" showstereotype="1" y="-1934.778016457634" text="console" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="PZEyyQYU81CM" pretext="-" role="710" width="54" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="EOvSJjwsr5en" height="18"/>
          </assocwidget>
-         <assocwidget linecolor="none" indexa="1" usesdiagramfillcolor="0" widgetbid="6NnhdBYXc4xH" indexb="1" linewidth="none" seqnum="" textcolor="none" usesdiagramusefillcolor="0" totalcounta="2" totalcountb="2" widgetaid="UhhUPpd6JtOu" font="Ubuntu,9,-1,5,50,0,0,0,0,0" visibilityA="1" visibilityB="1" usefillcolor="1" fillcolor="#ffff00" changeabilityA="900" xmi.id="K6K2wEAfme52" changeabilityB="900" type="510">
+         <assocwidget linecolor="none" indexa="1" usesdiagramfillcolor="0" widgetbid="BxdA9x7uEVWo" indexb="1" linewidth="none" seqnum="" textcolor="none" usesdiagramusefillcolor="1" totalcounta="2" totalcountb="2" widgetaid="UhhUPpd6JtOu" font="Ubuntu,9,-1,5,50,0,0,0,0,0" visibilityA="1" visibilityB="1" usefillcolor="1" fillcolor="#ffff00" changeabilityA="900" xmi.id="b9BlwPQ0OU5A" changeabilityB="900" type="510">
           <linepath layout="Polyline">
-           <startpoint startx="-1552.088148981335" starty="-1945.473668631547"/>
-           <endpoint endx="-1674.630229696472" endy="-1945.473668631547"/>
+           <startpoint startx="-1537,692260742188" starty="-2080,834976991413"/>
+           <endpoint endx="-1715,627743704443" endy="-2080,834976991413"/>
           </linepath>
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="-1672.630229696472" showstereotype="1" y="-1943.473668631547" text="quotaSource" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="07syTfL6k9lI" pretext="-" role="710" width="81" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="roUC5YXQcrSY" height="18"/>
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="-1717,260498046875" showstereotype="1" y="-2051,462768554688" text="console" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="qpgtyUdKd8M3" pretext="-" role="710" width="54" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="JbjSTYamGetv" height="18"/>
          </assocwidget>
-         <assocwidget linecolor="none" indexa="1" usesdiagramfillcolor="182" widgetbid="Kzqdl32mRIKg" indexb="1" linewidth="none" seqnum="" textcolor="none" usesdiagramusefillcolor="0" totalcounta="2" totalcountb="2" widgetaid="UhhUPpd6JtOu" font="Ubuntu,9,-1,5,50,0,0,0,0,0" visibilityA="1" visibilityB="1" usefillcolor="1" fillcolor="none" changeabilityA="900" xmi.id="GftgqqipGIuE" changeabilityB="900" type="510">
+         <assocwidget linecolor="none" indexa="1" usesdiagramfillcolor="0" widgetbid="EJHNYgOjOOww" indexb="1" linewidth="none" seqnum="" textcolor="none" usesdiagramusefillcolor="1" totalcounta="2" totalcountb="2" widgetaid="UhhUPpd6JtOu" font="Ubuntu,9,-1,5,50,0,0,0,0,0" visibilityA="1" visibilityB="1" usefillcolor="1" fillcolor="#ffff00" changeabilityA="900" xmi.id="VdZr0TmH9im7" changeabilityB="900" type="510">
           <linepath layout="Polyline">
-           <startpoint startx="-1552.088148981335" starty="-1852.625432372318"/>
-           <endpoint endx="-1675.136997538966" endy="-1852.625432372318"/>
+           <startpoint startx="-1366,692260742188" starty="-2065,37744140625"/>
+           <endpoint endx="-1099,912118765024" endy="-2065,37744140625"/>
           </linepath>
-          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="-1675.223954060706" showstereotype="1" y="-1850.625432372318" text="categorySource" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="4qO9cmc8Hv1I" pretext="-" role="710" width="97" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="70s0NuKeaCIO" height="18"/>
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="-1174,853149414062" showstereotype="1" y="-2063,37744140625" text="quotaDao" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="Lpo2p7QRF1YG" pretext="-" role="710" width="66" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="PrIq2rDQkngI" height="18"/>
+         </assocwidget>
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="0" widgetaid="HhGPdRtZliAz" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="GF3RPuukiimV" widgetbid="UhhUPpd6JtOu" totalcountb="2" type="503" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+          <linepath layout="Polyline">
+           <startpoint startx="-1505,290283203125" starty="-1911,623779296875"/>
+           <endpoint endx="-1505,290283203125" endy="-1989,896728515625"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="1" widgetaid="0gGlMRiGIGuf" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="r0dghi3yLMLr" widgetbid="6NnhdBYXc4xH" totalcountb="2" type="502" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+          <linepath layout="Polyline">
+           <startpoint startx="-921,7635936248" starty="-1647,597211788862"/>
+           <endpoint endx="-865,734110514323" endy="-1839,793679261819"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="1" widgetaid="HhGPdRtZliAz" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="cOVvkolvwA15" widgetbid="0gGlMRiGIGuf" totalcountb="2" type="503" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+          <linepath layout="Polyline">
+           <startpoint startx="-1376,838134765625" starty="-1862,623779296875"/>
+           <endpoint endx="-1214,7635936248" endy="-1647,597211788862"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="0" widgetaid="0gGlMRiGIGuf" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="Vw3Q42VrpheG" widgetbid="OBX4QDFfBur7" totalcountb="2" type="503" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+          <linepath layout="Polyline">
+           <startpoint startx="-1214,7635936248" starty="-1620,015881660657"/>
+           <endpoint endx="-1468,260814177685" endy="-1620,015881660657"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="1" widgetaid="wrLjW0z2IBjX" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="49Byz9MNyfBg" widgetbid="OBX4QDFfBur7" totalcountb="2" type="503" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+          <linepath layout="Polyline">
+           <startpoint startx="-1499,347443409455" starty="-1723,383228791066"/>
+           <endpoint endx="-1499,347443409455" endy="-1661,682548327324"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="1" widgetaid="HhGPdRtZliAz" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="KX4GCGwYlGPw" widgetbid="wrLjW0z2IBjX" totalcountb="2" type="503" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+          <linepath layout="Polyline">
+           <startpoint startx="-1499,347443409455" starty="-1862,623779296875"/>
+           <endpoint endx="-1499,347443409455" endy="-1772,383228791066"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="177" widgetaid="BxdA9x7uEVWo" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="ABFDbDRtk9iH" widgetbid="HhGPdRtZliAz" totalcountb="2" type="503" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+          <linepath layout="Polyline">
+           <startpoint startx="-1715,627743704443" starty="-2063,093041507542"/>
+           <endpoint endx="-1543,838134765625" endy="-1911,623779296875"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="0" widgetaid="rQ4sTcTHBpXH" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="cS8lMMsaggD8" widgetbid="6NnhdBYXc4xH" totalcountb="2" type="500" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+          <linepath layout="Polyline">
+           <startpoint startx="-954,7287014061205" starty="-1879,102564102564"/>
+           <endpoint endx="-865,734110514323" endy="-1879,102564102564"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="48" widgetaid="0gGlMRiGIGuf" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="Qof4SqCY5Jn2" widgetbid="rQ4sTcTHBpXH" totalcountb="2" type="502" textcolor="none" usefillcolor="1" linewidth="none" font="Ubuntu,9,-1,5,50,0,0,0,0,0">
+          <linepath layout="Polyline">
+           <startpoint startx="-1012,051282051282" starty="-1647,597211788862"/>
+           <endpoint endx="-1012,051282051282" endy="-1830,446650124069"/>
+          </linepath>
+         </assocwidget>
+         <assocwidget linecolor="none" indexa="1" usesdiagramfillcolor="0" widgetbid="UoD3W0cWxVOo" indexb="1" linewidth="none" seqnum="" textcolor="none" usesdiagramusefillcolor="0" totalcounta="2" totalcountb="2" widgetaid="UhhUPpd6JtOu" font="Ubuntu,9,-1,5,50,0,0,0,0,0" visibilityA="1" visibilityB="1" usefillcolor="1" fillcolor="#ffff00" changeabilityA="900" xmi.id="BXv83HuWkjDp" changeabilityB="900" type="510">
+          <linepath layout="Polyline">
+           <startpoint startx="-1537,692260742188" starty="-1989,896728515625"/>
+           <endpoint endx="-1897,333333333333" endy="-1933,333333333333"/>
+          </linepath>
+          <floatingtext linecolor="none" usesdiagramfillcolor="1" linewidth="none" textcolor="none" usesdiagramusefillcolor="1" x="-1862" showstereotype="1" y="-1937,333333333333" text="categoryDao" font="Ubuntu,9,-1,5,50,0,0,0,0,0" localid="nniMVxsMa382" pretext="-" role="710" width="81" isinstance="0" posttext="" usefillcolor="1" fillcolor="none" xmi.id="A9v5KqTUOOaR" height="18"/>
          </assocwidget>
         </associations>
        </diagram>
@@ -286,13 +510,18 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings viewid="j7qm14sl8m1S" uniqueid="pnR6eafSpzV4" documentation=""/>
+  <docsettings viewid="j7qm14sl8m1S" uniqueid="FFMxVSJVOGCa" documentation=""/>
   <listview>
    <listitem open="1" type="800" id="Views">
     <listitem open="1" type="821" id="Component View"/>
     <listitem open="1" type="827" id="Deployment View"/>
     <listitem open="1" type="836" id="Entity Relationship Model"/>
     <listitem open="1" type="801" id="Logical View">
+     <listitem open="1" type="831" id="OBX4QDFfBur7">
+      <listitem open="0" type="839" id="N04yDFWlpozy"/>
+      <listitem open="0" type="839" id="YcIG9Bxi2f1X"/>
+      <listitem open="0" type="839" id="atkJX0e34RGb"/>
+     </listitem>
      <listitem open="1" type="813" id="OCcYjUiEDDbE"/>
      <listitem open="1" type="813" id="xy2eSfAzEIbb">
       <listitem open="0" type="815" id="2Bqs52LYklsc"/>
@@ -300,6 +529,12 @@
       <listitem open="0" type="814" id="yE7F6mbKNIsL"/>
       <listitem open="0" type="814" id="pTVFa9BmERq1"/>
       <listitem open="0" type="815" id="bLOenBUT2h89"/>
+     </listitem>
+     <listitem open="1" type="817" id="UoD3W0cWxVOo">
+      <listitem open="0" type="815" id="5qEJIotuZbtE"/>
+      <listitem open="0" type="815" id="tfBmS90uvBvP"/>
+      <listitem open="0" type="815" id="pCjOFqQOzLRH"/>
+      <listitem open="0" type="815" id="DTAk44yrUZqS"/>
      </listitem>
      <listitem open="1" type="813" id="Kzqdl32mRIKg">
       <listitem open="0" type="815" id="fZggCiyJEE4B"/>
@@ -310,11 +545,15 @@
       <listitem open="0" type="815" id="rePqG36uPJiN"/>
      </listitem>
      <listitem open="0" type="807" id="j7qm14sl8m1S" label="class diagram"/>
+     <listitem open="1" type="813" id="wrLjW0z2IBjX">
+      <listitem open="0" type="815" id="fM5yVoTNDxi2"/>
+      <listitem open="0" type="815" id="bxBRGqTpS17J"/>
+     </listitem>
      <listitem open="1" type="813" id="ccRkyDqyBSzZ">
       <listitem open="0" type="815" id="pC08QlXE7NkQ"/>
       <listitem open="0" type="815" id="PYu0sTjhdkn1"/>
      </listitem>
-     <listitem open="1" type="830" id="Datatypes">
+     <listitem open="0" type="830" id="Datatypes">
       <listitem open="1" type="829" id="E8I2L2Zrt8Ot"/>
       <listitem open="1" type="829" id="cKhLRV7RZxCg"/>
       <listitem open="1" type="829" id="3qZhYlqoo9oL"/>
@@ -335,20 +574,28 @@
       <listitem open="0" type="815" id="fDY3PTEXu4I6"/>
      </listitem>
      <listitem open="1" type="813" id="UhhUPpd6JtOu">
-      <listitem open="0" type="814" id="GftgqqipGIuE"/>
+      <listitem open="0" type="814" id="BXv83HuWkjDp"/>
       <listitem open="0" type="814" id="b9BlwPQ0OU5A"/>
       <listitem open="0" type="815" id="lEkRMhezEPDt"/>
       <listitem open="0" type="815" id="jS2Nj6pNf1rE"/>
-      <listitem open="0" type="814" id="K6K2wEAfme52"/>
+      <listitem open="0" type="814" id="VdZr0TmH9im7"/>
       <listitem open="0" type="815" id="lpNo9o8F3NJC"/>
+      <listitem open="0" type="815" id="JawAsXONxvUk"/>
       <listitem open="0" type="815" id="rkmjhcVlRbne"/>
       <listitem open="0" type="815" id="yIU9p8Z4BZgI"/>
       <listitem open="0" type="815" id="islpLAajiYt3"/>
       <listitem open="0" type="815" id="us5XrwloJpvP"/>
-      <listitem open="0" type="815" id="JawAsXONxvUk"/>
+     </listitem>
+     <listitem open="1" type="813" id="HhGPdRtZliAz">
+      <listitem open="0" type="815" id="ZDLog7jGidIW"/>
+      <listitem open="0" type="815" id="wDiXBTKQ8anj"/>
      </listitem>
      <listitem open="1" type="813" id="N0MPvblN7k3a"/>
+     <listitem open="1" type="813" id="sHwpZBlw9ptM"/>
+     <listitem open="1" type="813" id="e8a73QL1RAZP"/>
+     <listitem open="1" type="813" id="yTtqLCDAMuYa"/>
      <listitem open="1" type="818" id="IJFJsgUfWWZA"/>
+     <listitem open="1" type="818" id="ORG2tgolM9ya"/>
      <listitem open="1" type="813" id="SvkWBQyeBtYo">
       <listitem open="0" type="814" id="YTfIWVydU12g"/>
       <listitem open="0" type="814" id="RNuzAFNUcQIY"/>
@@ -357,15 +604,28 @@
       <listitem open="0" type="814" id="7y4OEkXYSljz"/>
       <listitem open="0" type="814" id="JP2ow8D9m5qg"/>
      </listitem>
+     <listitem open="1" type="813" id="dK46DqZVZ26V"/>
      <listitem open="1" type="813" id="0QqnNFNBOwgc">
       <listitem open="0" type="814" id="I9Df9bTuwjG7"/>
       <listitem open="0" type="814" id="HGgPLsC1TV4H"/>
       <listitem open="0" type="815" id="IEPWsosk0tBW"/>
      </listitem>
+     <listitem open="1" type="817" id="EJHNYgOjOOww">
+      <listitem open="0" type="815" id="wWx5fyZuIpFq"/>
+     </listitem>
+     <listitem open="1" type="813" id="0gGlMRiGIGuf">
+      <listitem open="0" type="815" id="JBEpYrrSSwDD"/>
+     </listitem>
+     <listitem open="1" type="813" id="wePRTOsFE5wB">
+      <listitem open="0" type="815" id="adw2o0eOF9SL"/>
+     </listitem>
+     <listitem open="1" type="813" id="rQ4sTcTHBpXH">
+      <listitem open="0" type="815" id="EMofRR20DksT"/>
+     </listitem>
      <listitem open="0" type="813" id="6NnhdBYXc4xH">
+      <listitem open="0" type="815" id="8En7abbk5YB0"/>
       <listitem open="0" type="815" id="2pXbUXXwf6Uz"/>
       <listitem open="0" type="815" id="ApzE3g2rT2Ev"/>
-      <listitem open="0" type="815" id="8En7abbk5YB0"/>
       <listitem open="0" type="814" id="U3T4Xn8sZpTk"/>
      </listitem>
      <listitem open="1" type="813" id="Evj7dwrvDVTk"/>

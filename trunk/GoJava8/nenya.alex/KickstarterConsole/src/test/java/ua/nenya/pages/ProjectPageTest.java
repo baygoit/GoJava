@@ -6,6 +6,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,45 +15,101 @@ import org.mockito.ArgumentCaptor;
 
 import ua.nenya.dao.CategoryDao;
 import ua.nenya.dao.memory.CategoryDaoMemoryImpl;
-import ua.nenya.main.KickstarterInitilizer;
+import ua.nenya.main.DaoInitilizer;
 import ua.nenya.pages.ProjectPage;
 import ua.nenya.project.Category;
 import ua.nenya.project.Project;
+import ua.nenya.project.Question;
 import ua.nenya.util.IO;
 import ua.nenya.util.ListUtilits;
 
 public class ProjectPageTest {
 	private IO mockIo;
 	private Category musicCategory;
+	private DaoInitilizer initilizer;
+	private CategoryDao cDao;
 	private Project newSongProject;
-	private KickstarterInitilizer initilizer = new KickstarterInitilizer();
+	private List <Project> projects = new ArrayList<>();
+	private List<Question> questions = new ArrayList<>();
 	
 	@Before
 	public void init() {
 		mockIo = mock(IO.class);
-		newSongProject = new Project("New Song", "description of new song", 100, 10, 100);
+		initilizer = mock(DaoInitilizer.class);
+		cDao = mock(CategoryDaoMemoryImpl.class);
+		
+		newSongProject = new Project();
+		newSongProject.setName("New Song");
+		newSongProject.setDescription("description of new song");
+		newSongProject.setNeededAmount(100);
+		newSongProject.setAvailableAmount(10);
+		newSongProject.setDaysRemain(100);
 		newSongProject.setHistory("hystory of new song");
 		newSongProject.setVideo("video about new song");
-		newSongProject.setQuestionAnswer("question about new song");
-		Project oldSongProject = new Project("Old song", "description of old song", 1100, 110, 1100);
 		
+		Question question = new Question();
+		question.setName("Who?");
+		questions.add(question);
 		
-		musicCategory = new Category("Music");
+		newSongProject.setQuestions(questions);
+		
+		Project oldSongProject = new Project();
+		oldSongProject.setName("Old song");
+		oldSongProject.setDescription("description of old song");
+		oldSongProject.setNeededAmount(1100);
+		oldSongProject.setAvailableAmount(110);
+		oldSongProject.setDaysRemain(1100);
+		
+		projects.add(newSongProject);
+		projects.add(oldSongProject);
+		
+		musicCategory = new Category();
+		musicCategory.setName("Music");
 		musicCategory.getProjects().add(newSongProject);
 		musicCategory.getProjects().add(oldSongProject);
-		
-		CategoryDao cDao = new CategoryDaoMemoryImpl();
-		initilizer.setCategoryDao(cDao);
-		initilizer.getCategoryDao().getCategories().add(musicCategory);
-		
+	
 	}
+	
+	@Test
+	public void projectPageTestChoseExit() {
+		when(mockIo.readConsole()).thenReturn("0");
+		when(initilizer.getCategoryDao()).thenReturn(cDao);
+		when(cDao.initProjects(musicCategory)).thenReturn(projects);
+		
+		
+		new ProjectPage().showAllProjectsOfCategory(initilizer, mockIo, musicCategory, new ListUtilits());
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(17)).writeln(captor.capture());
+        assertEquals(
+                "[Progect name:		New Song, "
+                + "Description:		description of new song, "
+                + "Needed amount:		100, "
+                + "Available amount:	10, "
+                + "Remaining days:		100, "
+                + "------------------------------------------, "
+                + "Progect name:		Old song, "
+                + "Description:		description of old song, "
+                + "Needed amount:		1100, "
+                + "Available amount:	110, "
+                + "Remaining days:		1100, "
+                + "------------------------------------------, "
+                + "Choose one of the items bellow, , "
+                + "0	-	Exit, "
+                + "1	-	New Song, "
+                + "2	-	Old song]"
+                , captor.getAllValues().toString());
+	}
+	
 	@Test
 	public void projectPageTestShowMusic() {
 		when(mockIo.readConsole()).thenReturn("1").thenReturn("0");
+		when(initilizer.getCategoryDao()).thenReturn(cDao);
+		when(cDao.initProjects(musicCategory)).thenReturn(projects);
+		when(cDao.initQuestions(newSongProject)).thenReturn(questions);
 		
-		new ProjectPage().showTotalProject(initilizer, mockIo, musicCategory, new ListUtilits());
+		new ProjectPage().showAllProjectsOfCategory(initilizer, mockIo, musicCategory, new ListUtilits());
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(mockIo, times(37)).writeln(captor.capture());
+        verify(mockIo, times(38)).writeln(captor.capture());
         assertEquals(
                 "[Progect name:		New Song, "
                 + "Description:		description of new song, "
@@ -77,7 +135,7 @@ public class ProjectPageTest {
                 + "Remaining days:		100, "
                 + "History:		hystory of new song, "
                 + "Video:		video about new song, "
-                + "Q&A:		question about new song, "
+                + "Q&A:		, 1.	Who?, "
                 + "------------------------------------------, "
                 + "Choose one of the items bellow, , "
                 + "0	-	Exit, "
@@ -94,8 +152,10 @@ public class ProjectPageTest {
 	public void projectPageTestInvest() {
 		
 		when(mockIo.readConsole()).thenReturn("1").thenReturn("1").thenReturn("0");
+		when(initilizer.getCategoryDao()).thenReturn(cDao);
+		when(cDao.initProjects(musicCategory)).thenReturn(projects);
 		
-		new ProjectPage().showTotalProject(initilizer, mockIo, musicCategory, new ListUtilits());
+		new ProjectPage().showAllProjectsOfCategory(initilizer, mockIo, musicCategory, new ListUtilits());
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(mockIo, times(46)).writeln(captor.capture());
         assertEquals(
@@ -123,7 +183,7 @@ public class ProjectPageTest {
                 + "Remaining days:		100, "
                 + "History:		hystory of new song, "
                 + "Video:		video about new song, "
-                + "Q&A:		question about new song, "
+                + "Q&A:		, No questions!, "
                 + "------------------------------------------, "
                 + "Choose one of the items bellow, , "
                 + "0	-	Exit, "
@@ -131,7 +191,6 @@ public class ProjectPageTest {
                 + "2	-	Ask a question, "
                 + "Choose one of the items bellow, , "
                 + "0	-	Exit, "
-                + "1	-	Any amount , "
                 + "Choose one of the items bellow, , "
                 + "0	-	Exit, "
                 + "1	-	Invest in project, "
@@ -144,14 +203,16 @@ public class ProjectPageTest {
 	}
 	
 	@Test
-	public void projectPageTestAskQuestion() {
+	public void projectPageTestAskQuestionNo() {
 		
-		when(mockIo.readConsole()).thenReturn("1").thenReturn("2").thenReturn("0");
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("2").thenReturn("n").thenReturn("0");
+		when(initilizer.getCategoryDao()).thenReturn(cDao);
+		when(cDao.initProjects(musicCategory)).thenReturn(projects);
 		
-		new ProjectPage().showTotalProject(initilizer, mockIo, musicCategory, new ListUtilits());
+		new ProjectPage().showAllProjectsOfCategory(initilizer, mockIo, musicCategory, new ListUtilits());
 		
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        verify(mockIo, times(43)).writeln(captor.capture());
+        verify(mockIo, times(44)).writeln(captor.capture());
         assertEquals(
                 "[Progect name:		New Song, "
                 + "Description:		description of new song, "
@@ -177,7 +238,7 @@ public class ProjectPageTest {
                 + "Remaining days:		100, "
                 + "History:		hystory of new song, "
                 + "Video:		video about new song, "
-                + "Q&A:		question about new song, "
+                + "Q&A:		, No questions!, "
                 + "------------------------------------------, "
                 + "Choose one of the items bellow, , "
                 + "0	-	Exit, "
@@ -193,5 +254,56 @@ public class ProjectPageTest {
                 + "2	-	Old song]"
                 , captor.getAllValues().toString());
 	}
-
+	@Test
+	public void projectPageTestAskQuestionYes() {
+		
+		when(mockIo.readConsole()).thenReturn("1").thenReturn("2").thenReturn("y").thenReturn("0");
+		when(initilizer.getCategoryDao()).thenReturn(cDao);
+		when(cDao.initProjects(musicCategory)).thenReturn(projects);
+		
+		new ProjectPage().showAllProjectsOfCategory(initilizer, mockIo, musicCategory, new ListUtilits());
+		
+		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(mockIo, times(44)).writeln(captor.capture());
+        assertEquals(
+                "[Progect name:		New Song, "
+                + "Description:		description of new song, "
+                + "Needed amount:		100, "
+                + "Available amount:	10, "
+                + "Remaining days:		100, "
+                + "------------------------------------------, "
+                + "Progect name:		Old song, "
+                + "Description:		description of old song, "
+                + "Needed amount:		1100, "
+                + "Available amount:	110, "
+                + "Remaining days:		1100, "
+                + "------------------------------------------, "
+                + "Choose one of the items bellow, , "
+                + "0	-	Exit, "
+                + "1	-	New Song, "
+                + "2	-	Old song, "
+                + "You've chosen New Song, "
+                + "Progect name:		New Song, "
+                + "Description:		description of new song, "
+                + "Needed amount:		100, "
+                + "Available amount:	10, "
+                + "Remaining days:		100, "
+                + "History:		hystory of new song, "
+                + "Video:		video about new song, "
+                + "Q&A:		, No questions!, "
+                + "------------------------------------------, "
+                + "Choose one of the items bellow, , "
+                + "0	-	Exit, "
+                + "1	-	Invest in project, "
+                + "2	-	Ask a question, , "
+                + "Choose one of the items bellow, , "
+                + "0	-	Exit, "
+                + "1	-	Invest in project, "
+                + "2	-	Ask a question, "
+                + "Choose one of the items bellow, , "
+                + "0	-	Exit, "
+                + "1	-	New Song, "
+                + "2	-	Old song]"
+                , captor.getAllValues().toString());
+	}
 }

@@ -1,7 +1,7 @@
 package ua.dborisenko.kickstarter.dao;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 
 import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Investment;
@@ -11,11 +11,11 @@ import ua.dborisenko.kickstarter.domain.Reward;
 
 public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
     private static final String ENTITY_SEPARATOR = "#";
-    private String categoriesFileName = "./src/main/resources/categories.txt";
-    private String projectsFileName = "./src/main/resources/projects.txt";
-    private String questionsFileName = "./src/main/resources/questions.txt";
-    private String investmentsFileName = "./src/main/resources/investments.txt";
-    private String rewardsFileName = "./src/main/resources/rewards.txt";
+    private String categoriesFileName = "/categories.txt";
+    private String projectsFileName = "/projects.txt";
+    private String questionsFileName = "/questions.txt";
+    private String investmentsFileName = "/investments.txt";
+    private String rewardsFileName = "/rewards.txt";
 
     public void setCategoriesFileName(String fileName) {
         this.categoriesFileName = fileName;
@@ -46,9 +46,10 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
 
     @Override
     public void getQuestions(Project project) {
-        try (BufferedReader is = new BufferedReader(new FileReader(questionsFileName))) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(questionsFileName)))) {
             String line;
-            while ((line = is.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] questionParts = line.split(ENTITY_SEPARATOR);
                 Question question = new Question();
                 question.setId(Integer.valueOf(questionParts[0]));
@@ -60,14 +61,15 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
             }
         } catch (Exception e) {
             categories.clear();
-            throw new IllegalStateException("Cannot read questions from file");
+            throw new IllegalStateException(e);
         }
     }
 
     void fillInvestments() {
-        try (BufferedReader is = new BufferedReader(new FileReader(investmentsFileName))) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(investmentsFileName)))) {
             String line;
-            while ((line = is.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] investmentParts = line.split(ENTITY_SEPARATOR);
                 Investment investment = new Investment();
                 investment.setId(Integer.valueOf(investmentParts[0]));
@@ -84,15 +86,17 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
             }
         } catch (Exception e) {
             categories.clear();
-            throw new IllegalStateException("Cannot read questions from file");
+            throw new IllegalStateException(e);
         }
     }
 
     @Override
     public void getRewards(Project project) {
-        try (BufferedReader is = new BufferedReader(new FileReader(rewardsFileName))) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(rewardsFileName)))) {
             String line;
-            while ((line = is.readLine()) != null) {
+            project.getRewards().clear();
+            while ((line = reader.readLine()) != null) {
                 String[] rewardParts = line.split(ENTITY_SEPARATOR);
                 Reward reward = new Reward();
                 reward.setId(Integer.valueOf(rewardParts[0]));
@@ -104,14 +108,15 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
             }
         } catch (Exception e) {
             categories.clear();
-            throw new IllegalStateException("Cannot read rewards from file");
+            throw new IllegalStateException(e);
         }
     }
 
     void fillProjects() {
-        try (BufferedReader is = new BufferedReader(new FileReader(projectsFileName))) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(projectsFileName)))) {
             String line;
-            while ((line = is.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] projectParts = line.split(ENTITY_SEPARATOR);
                 Project project = new Project();
                 project.setId(Integer.valueOf(projectParts[0]));
@@ -129,14 +134,15 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
             }
         } catch (Exception e) {
             categories.clear();
-            throw new IllegalStateException("Cannot read projects from file");
+            throw new IllegalStateException(e);
         }
     }
 
     void fillCategories() {
-        try (BufferedReader is = new BufferedReader(new FileReader(categoriesFileName))) {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(categoriesFileName)))) {
             String line;
-            while ((line = is.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] categoryParts = line.split(ENTITY_SEPARATOR);
                 Category category = new Category();
                 category.setId(Integer.valueOf(categoryParts[0]));
@@ -145,7 +151,7 @@ public class CategoryDaoFile extends CategoryDaoMemory implements CategoryDao {
             }
         } catch (Exception e) {
             categories.clear();
-            throw new IllegalStateException("Cannot read categories from file");
+            throw new IllegalStateException(e);
         }
     }
 }

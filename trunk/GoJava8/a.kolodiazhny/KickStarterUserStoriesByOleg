@@ -73,3 +73,38 @@ I see a request to select menu item and menu item “0 - exit”
 I select “0 - exit” menu item
 I see a list of projects
 And I am able to select another project in the category 
+
+US 6 Invest
+As a Guest
+I want to invest to the project
+So I can support it
+Use case 1
+I am on the project details screen
+I see the menu with action I can do and one of the action is “Invest” the project
+I select this menu item
+I see the request for inputting card holder name, card number and amount
+I input all that data
+I moved to the project details screen
+I see that gathered budget is changed
+
+US 7 Ask a question
+As a Guest
+I want to ask a question to the project authors
+So...
+Use case 1
+I am on the project details
+I see the menu with actions and one of them is “Ask a question”
+I select it
+I see the request for inputting a question
+I enter the question
+I sending it
+I see the project details with my question
+
+US8 Award
+As a Guest
+I want to understand what is my award for investment
+So I can select the right amount of money to invest
+Use case 1
+I see several option on payment page (example, 1 - 1$, 2 - 10$, 3 - 40$) with description what is an award if I change each of them
+I can select any of it and pay or pay any amount as previously
+Note: There is a plan that the project author will handle awards descriptions.

@@ -1,11 +1,11 @@
 package site;
 
-import categories.Category;
+import categories.Kickstarter;
 
 public class CategoryPage extends Page {
-	CategoryPage(Category kickstarter) {
+	CategoryPage(Kickstarter kickstarter) {
 		super(kickstarter);
-}
+	}
 
 	@Override
 	public void openPage() {
@@ -13,21 +13,21 @@ public class CategoryPage extends Page {
 
 		String userChoice = console.read();
 		direction = new ListPage(kickstarter);
-		
+
 		if (userChoice.equals(FIRST_CHOICE)) {
-			console.write(PARADOX+":");
+			console.write(PARADOX + ":");
 			console.write(DECORATION);
 			console.write(kickstarter.openCatalog(PARADOX));
 			direction.openPage();
-			
+
 		} else if (userChoice.equals(SECOND_CHOICE)) {
-			console.write(SOPHISM+":");
+			console.write(SOPHISM + ":");
 			console.write(DECORATION);
 			console.write((kickstarter.openCatalog(SOPHISM)));
 			direction.openPage();
 
 		} else if (userChoice.equals(THIRD_CHOICE)) {
-			console.write(APORIA+":");
+			console.write(APORIA + ":");
 			console.write(DECORATION);
 			console.write((kickstarter.openCatalog(APORIA)));
 			direction.openPage();
@@ -41,19 +41,19 @@ public class CategoryPage extends Page {
 		} else {
 			openPage();
 		}
-		
+
 	}
 
 	@Override
 	void openPreviousPage() {
 		direction = new StartPage(kickstarter);
 		direction.openPage();
-		
+
 	}
 
 	@Override
 	void showVision() {
-	
+
 		console.write(DECORATION);
 		console.write("Please, choose category:");
 		console.write(DECORATION);
@@ -64,7 +64,7 @@ public class CategoryPage extends Page {
 		console.write("p. Go to the previous page.");
 		console.write("0. Exit");
 		console.write(DECORATION);
-		
+
 	}
-	
+
 }
