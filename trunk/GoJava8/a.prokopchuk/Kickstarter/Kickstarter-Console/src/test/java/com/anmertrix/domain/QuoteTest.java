@@ -1,4 +1,4 @@
-package com.anmertrix;
+package com.anmertrix.domain;
 
 import static org.junit.Assert.assertTrue;
 

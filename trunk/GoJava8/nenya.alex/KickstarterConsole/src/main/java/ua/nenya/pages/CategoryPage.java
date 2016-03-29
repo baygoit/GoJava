@@ -2,6 +2,7 @@ package ua.nenya.pages;
 
 import java.util.List;
 
+import ua.nenya.dao.CategoryDao;
 import ua.nenya.main.DaoInitilizer;
 import ua.nenya.pages.ProjectPage;
 import ua.nenya.project.Category;
@@ -14,7 +15,9 @@ public class CategoryPage {
 
 	public void showAllCategories(DaoInitilizer initilizer, IO io, ListUtilits listUtil) {
 		int index;
-		List<Category> categories = initilizer.getCategoryDao().initCategories();
+		CategoryDao categoryDao = initilizer.getCategoryDao();
+		List<Category> categories = categoryDao.initCategories();
+		
 		while ((index = listUtil.choseIndexFromList(categories, io)) != 0) {
 			Category chosenCategory = categories.get(index - 1);
 			io.writeln("You've chosen " + chosenCategory.getName());

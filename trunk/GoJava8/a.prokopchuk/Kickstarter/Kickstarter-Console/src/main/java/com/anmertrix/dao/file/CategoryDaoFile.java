@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CategoryDaoFile implements CategoryDao {
 
-	private final static String baseFile = "./src/main/resources/categories.json";
+	private String baseFile = "./src/main/resources/categories.json";
 	protected List<Category> categories = new ArrayList<Category>();
 
 	public CategoryDaoFile() {
@@ -31,6 +31,10 @@ public class CategoryDaoFile implements CategoryDao {
 			e.printStackTrace();
 		}
 	 }
+	
+	public void setCategoriesFileName(String fileName) {
+        this.baseFile = fileName;
+    }
 
 	@Override
 	public Category getCategory(int index) {
