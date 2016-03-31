@@ -1,22 +1,28 @@
-package com.anmertrix.pages;
+package com.anmertrix.page;
 
 import java.util.List;
 
+import com.anmertrix.IO;
 import com.anmertrix.ViewPage;
+import com.anmertrix.dao.CategoryDao;
 import com.anmertrix.domain.Project;
 
 public class ProjectsPage implements Page {
 	
-	ViewPage viewPage;
+	private ViewPage viewPage;
+	private IO io;
+	private CategoryDao categoryDao;
 	
 	@Override
 	public void viewPage(ViewPage viewPage) {
 		this.viewPage = viewPage;
+		this.io = viewPage.getIo();
+		this.categoryDao = viewPage.getCategoryDao();
 		
 		try {
-			viewPage.io.println(SOLID_LINE);
-			viewPage.io.println(viewPage.categoryDao.getCategory(viewPage.getSelectedMenuItemCategory()).getName());
-			viewPage.io.println(SOLID_LINE);
+			io.println(SOLID_LINE);
+			io.println(categoryDao.getCategory(viewPage.getSelectedMenuItemCategory()).getName());
+			io.println(SOLID_LINE);
 		} catch (Exception e) {
 			System.err.println("There is no such category!");
 			e.printStackTrace();
@@ -34,14 +40,14 @@ public class ProjectsPage implements Page {
 	}
 	
 	public void showProjects() {
-		List<Project> projects = viewPage.categoryDao.getProjectsByCategoryId(viewPage.getSelectedMenuItemCategory());
+		List<Project> projects = categoryDao.getProjectsByCategoryId(viewPage.getSelectedMenuItemCategory());
 		for (int i = 0; i < projects.size(); i++) {
 			Project project = projects.get(i);
-			viewPage.io.println((i + 1) + " - " + project.getName());
+			io.println((i + 1) + " - " + project.getName());
 		}
-		viewPage.io.println("0 - to back");
-		viewPage.io.println("");
-		viewPage.io.print("Please, select project...");
+		io.println("0 - to back");
+		io.println("");
+		io.print("Please, select project...");
 	}
 
 }

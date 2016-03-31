@@ -7,19 +7,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.anmertrix.ConnectionManager;
 import com.anmertrix.dao.CategoryDao;
 import com.anmertrix.domain.Category;
 import com.anmertrix.domain.Project;
 
-public class CategoryDaoSql implements CategoryDao {
+public class CategoryDaoSql extends DaoSql implements CategoryDao {
 
-	private ConnectionManager connectionManager;
 	protected List<Category> categories = new ArrayList<Category>();
-
-	public CategoryDaoSql(ConnectionManager connectionManager) {
-		this.connectionManager = connectionManager;
-	}
 
 	@Override
 	public Category getCategory(int index) {
@@ -65,12 +59,12 @@ public class CategoryDaoSql implements CategoryDao {
     	
 		try {
 			Statement statement = connectionManager.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT name, description, required_budget, gathered_budget, days_left, history, url FROM project WHERE category_id=" + index);
+			ResultSet rs = statement.executeQuery("SELECT name, description, required_budget, days_left, history, url FROM project WHERE category_id=" + index);
 			while(rs.next()) {
 				String name = rs.getString("name");
 				String description = rs.getString("description");
 				int required_budget = rs.getInt("required_budget");
-				int gathered_budget = rs.getInt("gathered_budget");
+				int gathered_budget = 0;
 				int days_left = rs.getInt("days_left");
 				String history = rs.getString("history");
 				String url = rs.getString("url");
@@ -86,5 +80,11 @@ public class CategoryDaoSql implements CategoryDao {
 		}
 		
 		return projects;
+	}
+	
+	@Override
+	public void initData() {
+		// TODO Auto-generated method stub
+		
 	}
 }

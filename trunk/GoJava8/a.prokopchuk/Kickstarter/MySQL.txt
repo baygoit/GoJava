@@ -1,0 +1,163 @@
+DROP DATABASE IF EXISTS kickstarter;
+CREATE DATABASE kickstarter DEFAULT CHARACTER SET 'utf8';
+USE kickstarter;
+
+/*quote table*/
+CREATE TABLE quote (
+    id int unsigned not null auto_increment,  
+    author VARCHAR(200) NOT NULL, 
+    text VARCHAR(200) NOT NULL, 
+    primary key (id)
+)engine=InnoDB;
+
+INSERT INTO quote (author, text) VALUES ('Robin Sharma', 'By pursuing the things that petrify you, you become peerless.');
+INSERT INTO quote (author, text) VALUES ('Robin Sharma', 'Protect your pristine reputation. It is an asset of priceless value.');
+INSERT INTO quote (author, text) VALUES ('Robin Sharma', 'You have the life you have settled for.');
+INSERT INTO quote (author, text) VALUES ('Robin Sharma', 'Buy a smaller TV and build a larger library.');
+INSERT INTO quote (author, text) VALUES ('Robin Sharma', 'Genius is more about what you have the discipline to say no to versus yes to.');
+
+/*category table*/
+CREATE TABLE category (
+    id int not null auto_increment, 
+    name VARCHAR(50) NOT NULL, 
+    primary key (id)
+)engine=InnoDB;
+
+INSERT INTO category (name) VALUES ('Sport(BD)');
+INSERT INTO category (name) VALUES ('IT');
+INSERT INTO category (name) VALUES ('Medicine');
+INSERT INTO category (name) VALUES ('Photo');
+INSERT INTO category (name) VALUES ('Music');
+INSERT INTO category (name) VALUES ('Video');
+
+/*project table*/
+CREATE TABLE project (
+    id int not null auto_increment, 
+    category_id int not null, 
+    name VARCHAR(50) NOT NULL, 
+    description VARCHAR(200) NOT NULL, 
+    required_budget int not null, 
+    days_left int not null, 
+    history VARCHAR(500), 
+    url VARCHAR(50), 
+    PRIMARY KEY(id),
+    FOREIGN KEY (category_id) REFERENCES category(id) ON UPDATE CASCADE ON DELETE RESTRICT
+)engine=InnoDB;
+
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (1, 'Cube soccer ball(BD)',
+    'Test description',
+    2000, 7, 'Test history',
+    'Test url');
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (1, 'La Liga Weekly Podcast',
+    'Test description',
+    400, 3, 'Test history',
+    'Test url');
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (2, 'Author’s vocabulary',
+    'Test description',
+    200000, 365, 'Test history',
+    'Test url');
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (2, 'Reporter camera',
+    'Test description',
+    10000, 150, 'Test history',
+    'Test url');
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (3, 'Yes Cart',
+    'Test description',
+    7000, 15, 'Test history',
+    'Test url');
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (3, 'ARoglyph',
+    'Test description',
+    15000, 30, 'Test history',
+    'Test url');
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (4, 'Start Control',
+    'Test description',
+    16000, 40, 'Test history',
+    'Test url');
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (4, 'OldStyleRacing',
+    'Test description',
+    17000, 17, 'Test history',
+    'Test url');
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (5, 'Poughkeepsie',
+    'Test description',
+    9000, 120, 'Test history',
+    'Test url');
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (5, 'Photobook',
+    'Test description',
+    7000, 10, 'Test history',
+    'Test url');
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (6, 'Portraits & Stories',
+    'Test description',
+    89000, 20, 'Test history',
+    'Test url');
+INSERT INTO project (category_id, name, description, required_budget, days_left,
+history, url) VALUES (6, 'Alzheimer',
+    'Test description',
+    8000, 120, 'Test history',
+    'Test url');
+
+/*reward table*/
+CREATE TABLE reward (
+    id int unsigned not null auto_increment, 
+    name VARCHAR(50) NOT NULL, 
+    amount int, 
+    description VARCHAR(200), 
+    PRIMARY KEY(id)
+)engine=InnoDB;
+
+INSERT INTO reward (name, amount, description) VALUES ('1$', 1, 'You obtain a reward: BIG THANK!');
+INSERT INTO reward (name, amount, description) VALUES ('10$', 10, 'You obtain a reward: Solo supporter!');
+INSERT INTO reward (name, amount, description) VALUES ('100$', 100, 'You obtain a reward: Calm supporter!');
+
+/*question table*/
+CREATE TABLE question (
+    id int unsigned not null auto_increment, 
+    project_id int not null, 
+    question VARCHAR(500) NOT NULL, 
+    PRIMARY KEY(id),
+    FOREIGN KEY (project_id) REFERENCES project(id) ON UPDATE CASCADE ON DELETE RESTRICT
+)engine=InnoDB;
+
+INSERT INTO question (project_id, question) VALUES (1, 'Why?');
+INSERT INTO question (project_id, question) VALUES (1, 'Who?');
+INSERT INTO question (project_id, question) VALUES (1, 'What?');
+INSERT INTO question (project_id, question) VALUES (2, 'Which?');
+INSERT INTO question (project_id, question) VALUES (2, 'Is it really?');
+INSERT INTO question (project_id, question) VALUES (3, 'Who?');
+INSERT INTO question (project_id, question) VALUES (4, 'What?');
+INSERT INTO question (project_id, question) VALUES (5, 'Which?');
+INSERT INTO question (project_id, question) VALUES (6, 'Is it really?');
+
+/*investments table*/
+CREATE TABLE investments (
+    id int unsigned not null auto_increment, 
+    project_id int not null, 
+    cardholder_name varchar(50) NOT NULL,
+    card_number varchar(16) NOT NULL,
+    amount int not null, 
+    PRIMARY KEY(id), 
+    FOREIGN KEY (project_id) REFERENCES project(id) ON UPDATE CASCADE ON DELETE RESTRICT
+)engine=InnoDB;
+
+INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (1, 'Josh Jenison', '2345543223455432', 230);
+INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (1, 'Tim Holin', '8998899889988998', 300);
+INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (1, 'Hin Opin', '8778877887788778', 10);
+INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (2, 'Kil Margin', '5665566556655665', 45);
+INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (2, 'Tony Tuson', '4554455445544554', 50);
+INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (3, 'Rob Tovn', '6776677667766776', 80);
+INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (4, 'Hunt Enison', '2442424224422442', 60);
+INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (5, 'Bilin Lion', '6776554455567765', 50);
+INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (6, 'Troy Noris', '5252525245454545', 700);
+
+CREATE USER 'kickstarter'@'%' IDENTIFIED BY PASSWORD 'kickstarter';
+GRANT ALL PRIVILEGES ON kickstarter . * TO 'kickstarter'@'%';
+FLUSH PRIVILEGES;

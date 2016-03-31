@@ -14,8 +14,11 @@ class DaoSwitch {
 			String mode = System.getenv(KICKSTARTER_MODE);
 			// TODO Add more checks
 			if (mode == null || mode.isEmpty() || !contains(mode)) {
-				throw new IllegalStateException("Environment variable "
-						+ KICKSTARTER_MODE + " is not found or empty. Please, establish any variable: " + Arrays.asList(DataSourceTypes.values()).toString().replace("[", "").replace("]", "") );
+				mode = "SQL";
+				System.err.println("Environment variable "
+						+ KICKSTARTER_MODE + " is not found or empty. Please, establish any variable: " 
+						+ Arrays.asList(DataSourceTypes.values()).toString().replace("[", "").replace("]", "") 
+						+ ". Default value is \"" + mode + "\"");
 			}
 			mode = mode.toUpperCase();
 			System.err.println("Mode is " + mode);

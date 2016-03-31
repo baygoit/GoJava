@@ -1,4 +1,4 @@
-package com.anmertrix.pages;
+package com.anmertrix.page;
 
 import com.anmertrix.ViewPage;
 
