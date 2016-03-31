@@ -34,8 +34,8 @@ public class QuoteDaoSqlTest {
         assertThat(quote.getAuthor(), is("testauthor"));
         assertThat(quote.getText(), is("testtext"));
     }
-    
-    @Test (expected = IllegalStateException.class)
+
+    @Test(expected = IllegalStateException.class)
     public void getRandomQuoteTestFail() throws SQLException {
         QuoteDaoSql quoteDao = spy(QuoteDaoSql.class);
         when(quoteDao.getConnection()).thenReturn(null);

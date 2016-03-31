@@ -51,30 +51,30 @@ CREATE TABLE investments (
     PRIMARY KEY (id)
     );
     
-INSERT INTO quotes (author, text) VALUES ('David Allen','(db) You can do anything, but not everything');
-INSERT INTO quotes (author, text) VALUES ('Wayne Gretzky','(db) You miss 100 percent of the shots you never take.');
-INSERT INTO quotes (author, text) VALUES ('Abraham Maslow','(db) To the man who only has a hammer, everything he encounters begins to look like a nail.');
-INSERT INTO quotes (author, text) VALUES ('Oscar Levant','(db) What the world needs is more geniuses with humility, there are so few of us left.');
-INSERT INTO quotes (author, text) VALUES ('Lily Tomlin','(db) Sometimes I worry about being a success in a mediocre world.');
-INSERT INTO quotes (author, text) VALUES ('André Gide','(db) Believe those who are seeking the truth. Doubt those who find it.');
-INSERT INTO quotes (author, text) VALUES ('Charles F. Kettering','(db) An inventor is simply a fellow who doesn’t take his education too seriously.');
-INSERT INTO quotes (author, text) VALUES ('House M.D.','(db) Everybody lies.');
+INSERT INTO quotes (author, text) VALUES ('David Allen','You can do anything, but not everything');
+INSERT INTO quotes (author, text) VALUES ('Wayne Gretzky','You miss 100 percent of the shots you never take.');
+INSERT INTO quotes (author, text) VALUES ('Abraham Maslow','To the man who only has a hammer, everything he encounters begins to look like a nail.');
+INSERT INTO quotes (author, text) VALUES ('Oscar Levant','What the world needs is more geniuses with humility, there are so few of us left.');
+INSERT INTO quotes (author, text) VALUES ('Lily Tomlin','Sometimes I worry about being a success in a mediocre world.');
+INSERT INTO quotes (author, text) VALUES ('Andre Gide','Believe those who are seeking the truth. Doubt those who find it.');
+INSERT INTO quotes (author, text) VALUES ('Charles F. Kettering','An inventor is simply a fellow who does not take his education too seriously.');
+INSERT INTO quotes (author, text) VALUES ('House M.D.','Everybody lies.');
 
-INSERT INTO categories (name) VALUES ('(db) Sport');
-INSERT INTO categories (name) VALUES ('(db) Space investigation');
-INSERT INTO categories (name) VALUES ('(db) Game development');
+INSERT INTO categories (name) VALUES ('Sport');
+INSERT INTO categories (name) VALUES ('Space investigation');
+INSERT INTO categories (name) VALUES ('Game development');
 
-INSERT INTO projects (category_id, name, description, history, required_sum, days_left, video_url) VALUES
+INSERT INTO projects (category_id, name, description, required_sum, days_left, history, video_url) VALUES
     (1, 'Chess competition in Vasyuki-city', 'The grandest chess tournament in the world.', 300, 1, 'Here should be the project history... or your advertising', 'http://new-vasyuki.ru');
-INSERT INTO projects (category_id, name, description, history, required_sum, days_left, video_url) VALUES
+INSERT INTO projects (category_id, name, description, required_sum, days_left, history, video_url) VALUES
     (1, 'New football team creation', 'We are going to create football dream team called "Berdychiv".', 500000, 300, 'Here should be the project history... or your advertising', 'http://bestliga.i.ua');
-INSERT INTO projects (category_id, name, description, history, required_sum, days_left, video_url) VALUES
-    (2, 'Solar expedition', 'We`re going to organize night expedition to Sun', 1000, 31, 'Here should be the project history... or your advertising', 'http://newhome.com');
-INSERT INTO projects (category_id, name, description, history, required_sum, days_left, video_url) VALUES
+INSERT INTO projects (category_id, name, description, required_sum, days_left, history, video_url) VALUES
+    (2, 'Solar expedition', 'We are going to organize night expedition to Sun', 1000, 31, 'Here should be the project history... or your advertising', 'http://newhome.com');
+INSERT INTO projects (category_id, name, description, required_sum, days_left, history, video_url) VALUES
     (2, 'Growing of apple-trees at Mars', 'The best of space and agriculture together!', 35000, 60, 'Here should be the project history... or your advertising', 'http://notthatapple.com');
-INSERT INTO projects (category_id, name, description, history, required_sum, days_left, video_url) VALUES
+INSERT INTO projects (category_id, name, description, required_sum, days_left, history, video_url) VALUES
     (3, 'World of managers', 'New amazing online game - feel yourself as an office employee!', 50100, 120, 'Here should be the project history... or your advertising', 'http://wom.com');
-INSERT INTO projects (category_id, name, description, history, required_sum, days_left, video_url) VALUES
+INSERT INTO projects (category_id, name, description, required_sum, days_left, history, video_url) VALUES
     (3, 'Beer drinker simulator', 'Most realistic physic ever!', 20500, 309, 'Here should be the project history... or your advertising', 'http://twobeerornottwobeer.to');
 
 INSERT INTO questions (project_id, request, reply) VALUES (1, 'What is the meaning of life?', '42');
@@ -95,7 +95,7 @@ INSERT INTO rewards (project_id, amount, description) VALUES (4, 1000, 'Iphone 7
 INSERT INTO rewards (project_id, amount, description) VALUES (5, 20, 'Magic chair.');
 INSERT INTO rewards (project_id, amount, description) VALUES (5, 200, 'Golden parachute.');
 INSERT INTO rewards (project_id, amount, description) VALUES (6, 100, 'Free bottle of beer.');
-INSERT INTO rewards (project_id, amount, description) VALUES (6, 1000, 'Two bottles of beer and we`ll call you best friend for a whole day.');
+INSERT INTO rewards (project_id, amount, description) VALUES (6, 1000, 'Two bottles of beer and we will call you best friend for a whole day.');
 
 CREATE USER 'kickstarter'@'%' IDENTIFIED BY '123';
 GRANT ALL PRIVILEGES ON kickstarter . * TO 'kickstarter'@'%';

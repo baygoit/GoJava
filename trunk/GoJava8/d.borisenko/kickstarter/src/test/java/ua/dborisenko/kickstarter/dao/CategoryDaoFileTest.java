@@ -3,8 +3,6 @@ package ua.dborisenko.kickstarter.dao;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.util.List;
-
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -12,7 +10,6 @@ import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Investment;
 import ua.dborisenko.kickstarter.domain.Project;
 import ua.dborisenko.kickstarter.domain.Question;
-import ua.dborisenko.kickstarter.domain.Reward;
 
 public class CategoryDaoFileTest {
     private static CategoryDaoFile categoryDao = new CategoryDaoFile();
@@ -20,13 +17,11 @@ public class CategoryDaoFileTest {
     private String projectsFileName = "./src/test/resources/projects.txt";
     private String questionsFileName = "./src/test/resources/questions.txt";
     private String investmentsFileName = "./src/test/resources/investments.txt";
-    private String rewardsFileName = "./src/test/resources/rewards.txt";
     private String categoriesWrongFileName = "./src/test/resources/categories_wrongformat.txt";
     private String projectsWrongFileName = "./src/test/resources/projects_wrongformat.txt";
     private String questionsWrongFileName = "./src/test/resources/questions_wrongformat.txt";
     private String investmentsWrongFileName = "./src/test/resources/investments_wrongformat.txt";
-    private String rewardsWrongFileName = "./src/test/resources/rewards_wrongformat.txt";
-    
+
     @Ignore
     @Test
     public void fillCategoriesTest() {
@@ -36,13 +31,13 @@ public class CategoryDaoFileTest {
         assertThat(category.getId(), is(1));
         assertThat(category.getName(), is("testcategory"));
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void fillCategoriesWrongFileTest() {
         categoryDao.setCategoriesFileName(categoriesWrongFileName);
         categoryDao.fillCategories();
     }
-    
+
     @Ignore
     @Test(expected = IllegalStateException.class)
     public void fillProjectsWrongFileTest() {
@@ -51,7 +46,7 @@ public class CategoryDaoFileTest {
         categoryDao.setProjectsFileName(projectsWrongFileName);
         categoryDao.fillProjects();
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void fillQuestionsWrongFileTest() {
         categoryDao.setCategoriesFileName(categoriesFileName);
@@ -62,7 +57,7 @@ public class CategoryDaoFileTest {
         Project project = categoryDao.getProjectById(1);
         categoryDao.getQuestions(project);
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void fillInvestmentsWrongFileTest() {
         categoryDao.setCategoriesFileName(categoriesFileName);
@@ -72,7 +67,7 @@ public class CategoryDaoFileTest {
         categoryDao.setInvestmentsFileName(investmentsWrongFileName);
         categoryDao.fillInvestments();
     }
-    
+
     @Ignore
     @Test
     public void fillProjectsTest() {
@@ -89,7 +84,7 @@ public class CategoryDaoFileTest {
         assertThat(project.getDaysLeft(), is(222));
         assertThat(project.getVideoUrl(), is("testvideourl"));
     }
-    
+
     @Ignore
     @Test
     public void fillQuestionsTest() {
@@ -105,7 +100,7 @@ public class CategoryDaoFileTest {
         assertThat(question.getRequest(), is("testrequest"));
         assertThat(question.getReply(), is("testreply"));
     }
-    
+
     @Ignore
     @Test
     public void fillInvestmentsTest() {

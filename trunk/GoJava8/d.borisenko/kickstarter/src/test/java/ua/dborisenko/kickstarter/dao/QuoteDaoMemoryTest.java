@@ -11,29 +11,29 @@ import ua.dborisenko.kickstarter.domain.Quote;
 
 public class QuoteDaoMemoryTest {
 
-	private static QuoteDaoMemory quoteDao = new QuoteDaoMemory();
+    private static QuoteDaoMemory quoteDao = new QuoteDaoMemory();
 
-	@BeforeClass
-	public static void prepareData() {
-	    quoteDao.fillQuotes();
-	}
-	
-	@Test
-	public void getRandomQuoteTest() {
-		assertThat(quoteDao.getRandomQuote(), notNullValue());
-	}
-	
-	@Test
-	public void getRandomQuoteTestIsRandom() {
-	    boolean randomFlag = false;
-	    Quote quote1 = quoteDao.getRandomQuote();
-	    for (int i = 0; i < 1000; i++) {
-	        if (!quote1.getText().equals(quoteDao.getRandomQuote().getText())) {
-	            randomFlag = true;
-	            break;
-	        }
-	    }
-	    assertTrue(randomFlag);
-	}
+    @BeforeClass
+    public static void prepareData() {
+        quoteDao.fillQuotes();
+    }
+
+    @Test
+    public void getRandomQuoteTest() {
+        assertThat(quoteDao.getRandomQuote(), notNullValue());
+    }
+
+    @Test
+    public void getRandomQuoteTestIsRandom() {
+        boolean randomFlag = false;
+        Quote quote1 = quoteDao.getRandomQuote();
+        for (int i = 0; i < 1000; i++) {
+            if (!quote1.getText().equals(quoteDao.getRandomQuote().getText())) {
+                randomFlag = true;
+                break;
+            }
+        }
+        assertTrue(randomFlag);
+    }
 
 }

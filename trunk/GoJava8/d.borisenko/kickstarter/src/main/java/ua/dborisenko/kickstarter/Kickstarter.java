@@ -1,10 +1,11 @@
 package ua.dborisenko.kickstarter;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,38 +17,46 @@ import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Investment;
 import ua.dborisenko.kickstarter.domain.Project;
 import ua.dborisenko.kickstarter.domain.Question;
-import ua.dborisenko.kickstarter.view.CategoriesView;
-import ua.dborisenko.kickstarter.view.CategoryView;
-import ua.dborisenko.kickstarter.view.ProjectView;
-import ua.dborisenko.kickstarter.view.RewardsView;
 
 public class Kickstarter extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    private DaoInitializer daoInitializer;
     private CategoryDao categoryDao;
     private QuoteDao quoteDao;
+    private ServletContext context;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        DaoInitializer daoInitializer = new DaoInitializer();
+        daoInitializer = new DaoInitializer();
         quoteDao = daoInitializer.getQuoteDao();
         categoryDao = daoInitializer.getCategoryDao();
+        context = config.getServletContext();
+    }
+
+    @Override
+    public void destroy() {
+        try {
+            daoInitializer.closeSqlConnections();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestedPage = request.getParameter("page");
         if ("categories".equals(requestedPage) || request.getQueryString() == null) {
-            showCategories(response.getWriter());
+            showCategories(request, response);
         } else if ("category".equals(requestedPage)) {
             int id = Integer.valueOf(request.getParameter("id"));
-            showCategory(response.getWriter(), id);
+            showCategory(request, response, id);
         } else if ("project".equals(requestedPage)) {
             int id = Integer.valueOf(request.getParameter("id"));
-            showProject(response.getWriter(), id);
+            showProject(request, response, id);
         } else if ("investment".equals(requestedPage)) {
             int id = Integer.valueOf(request.getParameter("id"));
-            showRewards(response.getWriter(), id);
+            showInvestment(request, response, id);
         } else {
             throw new IllegalArgumentException("Unknown page type!");
         }
@@ -65,7 +74,8 @@ public class Kickstarter extends HttpServlet {
         }
     }
 
-    private void addInvestment(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void addInvestment(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         int projectId = Integer.valueOf(request.getParameter("project_id"));
         Investment investment = new Investment();
         investment.setCardHolderName(request.getParameter("cardholder_name"));
@@ -76,40 +86,57 @@ public class Kickstarter extends HttpServlet {
             investment.setAmount(Integer.valueOf(request.getParameter("amount")));
         }
         categoryDao.addInvestment(projectId, investment);
-        showProject(response.getWriter(), projectId);
+        showProject(request, response, projectId);
     }
 
-    private void addQuestion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void addQuestion(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         int projectId = Integer.valueOf(request.getParameter("project_id"));
         Question question = new Question();
         question.setRequest(request.getParameter("question_request"));
         categoryDao.addQuestion(projectId, question);
-        showProject(response.getWriter(), projectId);
+        showProject(request, response, projectId);
     }
 
-    void showCategories(PrintWriter writer) {
-        List<Category> categories = categoryDao.getCategories();
-        CategoriesView view = new CategoriesView();
-        view.show(writer, categories, quoteDao.getRandomQuote());
+    void showCategories(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("title", "Categories");
+        request.setAttribute("quote", quoteDao.getRandomQuote());
+        request.setAttribute("categories", categoryDao.getCategories());
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/categories.jsp");
+        dispatcher.forward(request, response);
+
     }
 
-    void showCategory(PrintWriter writer, int id) {
+    void showCategory(HttpServletRequest request, HttpServletResponse response, int id)
+            throws ServletException, IOException {
+        request.setAttribute("title", "Projects");
         Category category = categoryDao.getCategoryById(id);
-        CategoryView view = new CategoryView();
-        view.show(writer, category);
+        request.setAttribute("category", category);
+        request.setAttribute("projects", category.getProjects());
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/category.jsp");
+        dispatcher.forward(request, response);
     }
 
-    void showProject(PrintWriter writer, int id) {
+    void showProject(HttpServletRequest request, HttpServletResponse response, int id)
+            throws ServletException, IOException {
         Project project = categoryDao.getProjectById(id);
-        ProjectView view = new ProjectView();
+        request.setAttribute("title", project.getName());
+        request.setAttribute("project", project);
+        request.setAttribute("questions", project.getQuestions());
         Category category = categoryDao.getCategoryByProjectId(id);
-        view.show(writer, project, category);
+        request.setAttribute("category", category);
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/project.jsp");
+        dispatcher.forward(request, response);
     }
 
-    void showRewards(PrintWriter writer, int id) {
+    void showInvestment(HttpServletRequest request, HttpServletResponse response, int id)
+            throws ServletException, IOException {
+        request.setAttribute("title", "Investment");
         Project project = categoryDao.getProjectById(id);
         categoryDao.getRewards(project);
-        RewardsView view = new RewardsView();
-        view.show(writer, project);
+        request.setAttribute("project", project);
+        request.setAttribute("rewards", project.getRewards());
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/investment.jsp");
+        dispatcher.forward(request, response);
     }
 }

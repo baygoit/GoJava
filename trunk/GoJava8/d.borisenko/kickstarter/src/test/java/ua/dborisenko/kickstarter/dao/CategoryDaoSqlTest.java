@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
@@ -14,6 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.mysql.jdbc.Statement;
@@ -141,7 +141,7 @@ public class CategoryDaoSqlTest {
         assertThat(investment.getCardHolderName(), is("testcardholdername"));
         assertThat(investment.getCardNumber(), is("testcardnumber"));
     }
-    
+
     @Test(expected = IllegalStateException.class)
     public void getInvestmentsFailTest() throws SQLException {
         when(categoryDao.getConnection()).thenThrow(new SQLException());
