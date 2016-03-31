@@ -18,20 +18,6 @@ public class CategoryDaoFile implements CategoryDao {
 	private String baseFile = "./src/main/resources/categories.json";
 	protected List<Category> categories = new ArrayList<Category>();
 
-	public CategoryDaoFile() {
-	    ObjectMapper mapper = new ObjectMapper();
-	    
-		try {
-			categories = mapper.readValue(new File(baseFile), new TypeReference<List<Category>>(){});
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	 }
-	
 	public void setCategoriesFileName(String fileName) {
         this.baseFile = fileName;
     }
@@ -52,5 +38,19 @@ public class CategoryDaoFile implements CategoryDao {
 		return category.getProjects();
 	}
 	
+	@Override
+	public void initData() {
+		ObjectMapper mapper = new ObjectMapper();
+	    
+		try {
+			categories = mapper.readValue(new File(baseFile), new TypeReference<List<Category>>(){});
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

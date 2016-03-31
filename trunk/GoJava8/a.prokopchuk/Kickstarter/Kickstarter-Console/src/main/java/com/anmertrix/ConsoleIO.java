@@ -10,10 +10,8 @@ public class ConsoleIO implements IO {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				System.in));
 		String result = null;
-
 		try {
 			result = reader.readLine();
-
 		} catch (IOException e) {
 			result = "-1";
 		}

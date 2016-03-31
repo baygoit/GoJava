@@ -13,4 +13,5 @@ public interface CategoryDao {
 	
 	List<Category> getCategories();
 
+	void initData();
 }

@@ -22,7 +22,6 @@ public class QuestionServlet extends CommonServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter printWriter = response.getWriter();
-		initDao();
 		CategoryDao categoryDao = initilizer.getCategoryDao();
 		List<Category> categories = categoryDao.initCategories();
 		

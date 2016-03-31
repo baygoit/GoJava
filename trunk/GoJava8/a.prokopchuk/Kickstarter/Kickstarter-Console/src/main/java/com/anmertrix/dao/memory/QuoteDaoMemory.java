@@ -11,18 +11,38 @@ public class QuoteDaoMemory implements QuoteDao {
 	
 	protected List<Quote> quotes = new ArrayList<Quote>();
 	
-	public QuoteDaoMemory() {
-		quotes.add(new Quote("author1(Memory)", "Quote1"));
-		quotes.add(new Quote("author2(Memory)", "Quote2"));
-		quotes.add(new Quote("author3(Memory)", "Quote3"));
-		quotes.add(new Quote("author4(Memory)", "Quote4"));
-		quotes.add(new Quote("author5(Memory)", "Quote5"));
-	}
-
 	@Override
 	public Quote getRandomQuote() {
 		Random random = new Random();
 		int randomNumber = random.nextInt(quotes.size());
 		return quotes.get(randomNumber);
+	}
+	
+	@Override
+	public void initData() {
+		Quote quote1 = new Quote();
+		quote1.setAuthor("author1(Memory)");
+		quote1.setQuoteText("Quote1");
+		quotes.add(quote1);
+		
+		Quote quote2 = new Quote();
+		quote2.setAuthor("author2(Memory)");
+		quote2.setQuoteText("Quote2");
+		quotes.add(quote2);
+		
+		Quote quote3 = new Quote();
+		quote3.setAuthor("author3(Memory)");
+		quote3.setQuoteText("Quote3");
+		quotes.add(quote3);
+		
+		Quote quote4 = new Quote();
+		quote4.setAuthor("author4(Memory)");
+		quote4.setQuoteText("Quote4");
+		quotes.add(quote4);
+		
+		Quote quote5 = new Quote();
+		quote5.setAuthor("author5(Memory)");
+		quote5.setQuoteText("Quote5");
+		quotes.add(quote5);
 	}
 }

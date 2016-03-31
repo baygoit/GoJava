@@ -12,7 +12,7 @@ public class CommonServlet extends HttpServlet {
 	private String switcher = System.getenv(ENTERING_MODE_ENV_NAME);
 	protected DaoInitilizer initilizer = new DaoInitilizer();
 	
-	public void initDao(){
+	public void init() {
 		initilizer.initDao(switcher);
 	}
 
