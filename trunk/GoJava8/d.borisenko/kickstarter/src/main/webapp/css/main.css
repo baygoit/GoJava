@@ -1,8 +1,9 @@
 @CHARSET "UTF-8";
+
 body {
-    background-color: #b7cac9;
-    font: 10pt Arial,Helvetica,sans-serif;
-    color: #555;
+	background-color: #b7cac9;
+	font: 10pt Arial, Helvetica, sans-serif;
+	color: #555;
 }
 
 .button {
@@ -14,28 +15,29 @@ body {
 	margin: 5px auto;
 	min-height: 25px;
 }
+
 .button:hover {
 	background-color: #f0f0f0;
-	background: linear-gradient(to top, #cae8ce, #d7fadc);	
+	background: linear-gradient(to top, #cae8ce, #d7fadc);
 }
 
 .div_main_header {
-    margin: 0 auto;
-    padding: 3px 0px 2px;
-    font-size: 12pt;
-    font-weight: bold;
-    text-align: center;   
-    background-color: #b7cac9;
+	margin: 0 auto;
+	padding: 3px 0px 2px;
+	font-size: 12pt;
+	font-weight: bold;
+	text-align: center;
+	background-color: #b7cac9;
 }
 
 .div_main_wrapper {
 	background: #ffffff none repeat scroll 0 0;
-    border: 1px solid #606060;
-    border-radius: 10px;
-    box-shadow: 5px 5px 8px rgba(50, 80, 80, 0.5);
-    margin: 10px auto;
-    padding: 20px;
-    width: 95%;
+	border: 1px solid #606060;
+	border-radius: 10px;
+	box-shadow: 5px 5px 8px rgba(50, 80, 80, 0.5);
+	margin: 10px auto;
+	padding: 20px;
+	width: 95%;
 }
 
 .div_main_footer {
@@ -46,7 +48,7 @@ body {
 
 .quote_text {
 	font-style: italic;
-	color: #115533;	
+	color: #115533;
 }
 
 .quote_author {
@@ -55,14 +57,14 @@ body {
 }
 
 .subheader {
-	font-weight: bold;	
+	font-weight: bold;
 }
 
 .question {
-	font-style: italic;	
+	font-style: italic;
 }
 
 .reward_amount {
 	font-weight: bold;
-	color: #00a000;		
+	color: #00a000;
 }
