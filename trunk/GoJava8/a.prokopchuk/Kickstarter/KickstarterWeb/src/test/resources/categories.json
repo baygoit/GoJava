@@ -1,0 +1,127 @@
+[ {
+  "name" : "category test",
+  "projects" : [ {
+    "name" : "project test",
+    "description" : "Test description",
+    "requiredBudget" : 2000,
+    "gatheredBudget" : 1000,
+    "daysLeft" : 7,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  }, {
+    "name" : "La Liga Weekly Podcast",
+    "description" : "Test description",
+    "requiredBudget" : 400,
+    "gatheredBudget" : 10,
+    "daysLeft" : 3,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  } ]
+}, {
+  "name" : "IT",
+  "projects" : [ {
+    "name" : "Author’s vocabulary",
+    "description" : "Test description",
+    "requiredBudget" : 200000,
+    "gatheredBudget" : 1000,
+    "daysLeft" : 365,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  }, {
+    "name" : "Reporter camera",
+    "description" : "Test description",
+    "requiredBudget" : 10000,
+    "gatheredBudget" : 3000,
+    "daysLeft" : 150,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  } ]
+}, {
+  "name" : "Medicine",
+  "projects" : [ {
+    "name" : "Yes Cart",
+    "description" : "Test description",
+    "requiredBudget" : 7000,
+    "gatheredBudget" : 1000,
+    "daysLeft" : 15,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  }, {
+    "name" : "ARoglyph",
+    "description" : "Test description",
+    "requiredBudget" : 100000,
+    "gatheredBudget" : 7000,
+    "daysLeft" : 120,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  } ]
+}, {
+  "name" : "Photo",
+  "projects" : [ {
+    "name" : "Start Control",
+    "description" : "Test description",
+    "requiredBudget" : 7000,
+    "gatheredBudget" : 1000,
+    "daysLeft" : 15,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  }, {
+    "name" : "OldStyleRacing",
+    "description" : "Test description",
+    "requiredBudget" : 100000,
+    "gatheredBudget" : 7000,
+    "daysLeft" : 120,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  } ]
+}, {
+  "name" : "Music",
+  "projects" : [ {
+    "name" : "Poughkeepsie",
+    "description" : "Test description",
+    "requiredBudget" : 7000,
+    "gatheredBudget" : 1000,
+    "daysLeft" : 15,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  }, {
+    "name" : "Photobook",
+    "description" : "Test description",
+    "requiredBudget" : 100000,
+    "gatheredBudget" : 7000,
+    "daysLeft" : 120,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  } ]
+}, {
+  "name" : "Video",
+  "projects" : [ {
+    "name" : "Portraits & Stories",
+    "description" : "Test description",
+    "requiredBudget" : 7000,
+    "gatheredBudget" : 1000,
+    "daysLeft" : 15,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  }, {
+    "name" : "Alzheimer",
+    "description" : "Test description",
+    "requiredBudget" : 100000,
+    "gatheredBudget" : 7000,
+    "daysLeft" : 120,
+    "history" : "Test history",
+    "url" : "Test URL",
+    "questionAnswer" : ""
+  } ]
+} ]
