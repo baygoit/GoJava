@@ -9,15 +9,19 @@ import ua.dborisenko.kickstarter.domain.Question;
 
 public interface CategoryDao {
 
-    public Category getByName(String name);
+    public Category getCategoryById(int id);
 
-    public List<String> getCategoryNames();
+    public Project getProjectById(int id);
+
+    public List<Category> getCategories();
 
     public void getQuestions(Project project);
 
     public void getRewards(Project project);
 
-    public void addInvestment(Project project, Investment investment);
+    public void addInvestment(int projectId, Investment investment);
 
-    public void addQuestion(Project project, Question question);
+    public void addQuestion(int projectId, Question question);
+
+    public Category getCategoryByProjectId(int id);
 }

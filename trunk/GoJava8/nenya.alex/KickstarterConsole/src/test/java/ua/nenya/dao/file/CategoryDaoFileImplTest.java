@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import ua.nenya.dao.CategoryDao;
 
 
 public class CategoryDaoFileImplTest {

@@ -17,11 +17,12 @@ public class CategoryDaoMemory implements CategoryDao {
     List<Map<Integer, Reward>> rewards = new ArrayList<>();
     private static int projectIdGenerator = 1;
     private static int categoryIdGenerator = 1;
+    private static int rewardIdGenerator = 1;
 
     @Override
-    public Category getByName(String name) {
+    public Category getCategoryById(int id) {
         for (Category category : categories) {
-            if (category.getName().equals(name)) {
+            if (category.getId() == id) {
                 return category;
             }
         }
@@ -29,22 +30,30 @@ public class CategoryDaoMemory implements CategoryDao {
     }
 
     @Override
-    public List<String> getCategoryNames() {
-        List<String> categoryNames = new ArrayList<String>();
+    public Project getProjectById(int id) {
         for (Category category : categories) {
-            categoryNames.add(category.getName());
+            for (Project project : category.getProjects()) {
+                if (project.getId() == id) {
+                    return project;
+                }
+            }
         }
-        return categoryNames;
+        throw new IllegalArgumentException("Project not found.");
     }
 
     @Override
-    public void addInvestment(Project project, Investment investment) {
-        project.addInvestment(investment);
+    public List<Category> getCategories() {
+        return categories;
     }
 
     @Override
-    public void addQuestion(Project project, Question question) {
-        project.addQuestion(question);
+    public void addInvestment(int projectId, Investment investment) {
+        getProjectById(projectId).addInvestment(investment);
+    }
+
+    @Override
+    public void addQuestion(int projectId, Question question) {
+        getProjectById(projectId).addQuestion(question);
     }
 
     @Override
@@ -58,6 +67,7 @@ public class CategoryDaoMemory implements CategoryDao {
 
     @Override
     public void getRewards(Project project) {
+        project.getRewards().clear();
         for (Map<Integer, Reward> rewardMap : rewards) {
             if (rewardMap.containsKey(project.getId())) {
                 project.addReward(rewardMap.get(project.getId()));
@@ -71,6 +81,10 @@ public class CategoryDaoMemory implements CategoryDao {
 
     private int getCategoryId() {
         return (categoryIdGenerator++);
+    }
+
+    private int getRewardId() {
+        return (rewardIdGenerator++);
     }
 
     private Project makeProject(String name, String description, String history, int requiredSum, int collectedSum,
@@ -107,6 +121,10 @@ public class CategoryDaoMemory implements CategoryDao {
     }
 
     private void fillProjects() {
+        Project project = makeProject("Cube soccer ball", "Test description", "Test history", 4000, 2300, 12,
+                "http://freakysoccer.biz");
+        Reward reward = new Reward();
+        project.addReward(reward);
         categories.get(0).addProject(makeProject("Cube soccer ball", "Test description", "Test history", 4000, 2300, 12,
                 "http://freakysoccer.biz"));
         categories.get(0).addProject(makeProject("New stadium building", "Test description", "Test history", 23000000,
@@ -124,9 +142,9 @@ public class CategoryDaoMemory implements CategoryDao {
     private void fillRewards() {
         for (int i = 1; i <= 6; i++) {
             Reward reward = new Reward();
-            reward.setId(i);
+            reward.setId(getRewardId());
             reward.setAmount(100);
-            reward.setDescription("Test reward");
+            reward.setDescription("T-shirt");
             rewards.add(new HashMap<>());
             rewards.get(i - 1).put(i, reward);
         }
@@ -141,5 +159,17 @@ public class CategoryDaoMemory implements CategoryDao {
             questions.add(new HashMap<>());
             questions.get(i - 1).put(i, question);
         }
+    }
+
+    @Override
+    public Category getCategoryByProjectId(int id) {
+        for (Category category : categories) {
+            for (Project project : category.getProjects()) {
+                if (project.getId() == id) {
+                    return category;
+                }
+            }
+        }
+        throw new IllegalArgumentException("Project not found.");
     }
 }

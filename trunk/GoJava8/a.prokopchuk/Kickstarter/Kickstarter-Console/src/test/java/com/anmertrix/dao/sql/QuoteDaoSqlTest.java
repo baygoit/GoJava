@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,10 +22,12 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.anmertrix.ConnectionManager;
+import com.anmertrix.dao.QuoteDao;
 import com.anmertrix.domain.Quote;
 
+@Ignore
 @RunWith(MockitoJUnitRunner.class)
-public class QuoteDaoSqlTest {
+public class QuoteDaoSqlTest extends DaoSql {
 
 	@Mock
 	private ConnectionManager connectionManager;
@@ -44,7 +47,6 @@ public class QuoteDaoSqlTest {
 		} finally {
 			verify(connectionManager).getConnection();
 		}
-
 	}
 
 	@Test
@@ -65,7 +67,6 @@ public class QuoteDaoSqlTest {
 		assertThat(quoteText, is("quote (author)"));
 
 		verify(connectionManager).getConnection();
-
 	}
 
 }

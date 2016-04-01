@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<web-app>
+	<servlet>
+		<servlet-name>kickstarter</servlet-name>
+		<servlet-class>ua.dborisenko.kickstarter.Kickstarter</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>kickstarter</servlet-name>
+		<url-pattern></url-pattern>
+	</servlet-mapping>
+</web-app>

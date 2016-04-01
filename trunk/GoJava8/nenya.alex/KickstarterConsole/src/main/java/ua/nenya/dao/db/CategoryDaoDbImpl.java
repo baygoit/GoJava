@@ -24,15 +24,13 @@ public class CategoryDaoDbImpl implements CategoryDao {
 	@Override
 	public List<Category> initCategories() {
 		List<Category> categories = new ArrayList<Category>();
-		String query = "SELECT * FROM categories";
+		String query = "SELECT category_name FROM categories ORDER BY category_name";
 		try (Statement statement = connectionManager.getConnection().createStatement()) {
 			ResultSet set = statement.executeQuery(query);
 			while (set.next()) {
 				Category category = new Category();
 				category.setName(set.getString("category_name"));
-				if (category != null) {
-					categories.add(category);
-				}
+				categories.add(category);
 			}
 			set.close();
 		} catch (SQLException e) {
@@ -46,7 +44,7 @@ public class CategoryDaoDbImpl implements CategoryDao {
 		List<Project> projects = new ArrayList<>();
 		String query = "SELECT project_name, description, all_amount, available_amount, days_remain,"
 				+ " history, video FROM categories INNER JOIN projects ON "
-				+ "categories.id = projects.category_id WHERE category_name = '" + category.getName() + "'";
+				+ "categories.id = projects.category_id WHERE category_name = '" + category.getName() + "' ORDER BY project_name";
 		try (Statement statement = connectionManager.getConnection().createStatement()) {
 			ResultSet set = statement.executeQuery(query);
 			while (set.next()) {
@@ -161,7 +159,7 @@ public class CategoryDaoDbImpl implements CategoryDao {
 		
 		int previousAmount = project.getAvailableAmount();
 		int newAmount = previousAmount + amount;
-		project.setAvailableAmount(newAmount);		
+		//project.setAvailableAmount(newAmount);		
 		
 		String query = "UPDATE Projects SET available_amount = "
 		+ newAmount+ " WHERE project_name = '"+ project.getName()+"';";
@@ -173,19 +171,5 @@ public class CategoryDaoDbImpl implements CategoryDao {
 			e.getStackTrace();
 		}
 	}
-
-//	private int getPreviousAmount(Project project) {
-//		String queryPreviousAmount = "SELECT available_amount FROM projects WHERE project_name = '" + project.getName()+ "'";
-//		int previousAmount = 0;
-//		try (Statement statement = connectionManager.getConnection().createStatement()) {
-//			ResultSet set = statement.executeQuery(queryPreviousAmount);
-//			set.next();
-//			previousAmount = set.getInt("available_amount");
-//			set.close();
-//		} catch (SQLException e) {
-//			e.getStackTrace();
-//		}
-//		return previousAmount;
-//	}
 
 }

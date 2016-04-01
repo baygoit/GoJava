@@ -1,0 +1,49 @@
+<%@include file='header.jsp'%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+		Project: <label class="subheader">${project.name}</label>
+		<hr/>
+		<table>
+			<tr>
+				<td>Description:</td>
+				<td>${project.description}</td>
+			</tr>
+			<tr>
+				<td>Required sum:</td>
+				<td>${project.requiredSum}</td>
+			</tr>
+			<tr>
+				<td>Collected sum:</td>
+				<td>${project.collectedSum}</td>
+			</tr>
+			<tr>
+				<td>Days left to start:</td>
+				<td>${project.daysLeft}</td>
+			</tr>
+			<tr>
+				<td>History:</td>
+				<td>${project.history}</td>
+			</tr>
+			<tr>
+				<td>Video:</td>
+				<td><a href="${project.videoUrl}">${project.videoUrl}</a></td>
+			</tr>
+		</table>
+		Questions and answers:<hr/>
+		<c:forEach var="question" items="${questions}">
+			Q: <label class="question">${question.request}</label><br/>
+			<c:if test="${null != question.reply}"> 
+				A: <label class="answer">${question.reply}</label><br/>
+			</c:if>
+ 		</c:forEach>
+ 		<hr/>
+		Ask a question<br/>
+		<form name='add_question' method='POST' action='' accept-charset='utf-8'>
+			<input type='hidden' name='requested_action' value='ADD_QUESTION'/>
+			<input type='hidden' name='project_id' value='${project.id}'/>
+			<textarea maxlength='1024' name='question_request' cols='50' rows='2'></textarea><br/>
+			<input class='button' type='submit' value='Send'>
+		</form>
+		<br/>
+		<a href='?page=investment&id=${project.id}'>Invest in the project</a><br/><br/>
+		<a href='?page=category&id=${category.id}'>Return</a>
+<%@include file='footer.jsp'%>

@@ -3,6 +3,7 @@ package ua.dborisenko.kickstarter.dao;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import ua.dborisenko.kickstarter.domain.Quote;
@@ -11,7 +12,8 @@ public class QuoteDaoFileTest {
     private static QuoteDaoFile quoteDao = new QuoteDaoFile();
     private String quotesFileName = "./src/test/resources/quotes.txt";
     private String quotesWrongFileName = "./src/test/resources/quotes_wrongformat.txt";
-    
+
+    @Ignore
     @Test
     public void fillQuotesTest() {
         quoteDao.setQuotesFileName(quotesFileName);
@@ -20,7 +22,8 @@ public class QuoteDaoFileTest {
         assertThat(quote.getText(), is("Quote"));
         assertThat(quote.getAuthor(), is("Author"));
     }
-    
+
+    @Ignore
     @Test(expected = IllegalStateException.class)
     public void fillQuotesWrongFileTest() {
         quoteDao.setQuotesFileName(quotesWrongFileName);

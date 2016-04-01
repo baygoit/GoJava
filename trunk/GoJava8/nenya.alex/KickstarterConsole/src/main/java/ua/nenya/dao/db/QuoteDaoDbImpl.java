@@ -19,7 +19,7 @@ public class QuoteDaoDbImpl implements QuoteDao {
 
 	@Override
 	public Quote getRandomQuote(Random random) {
-		String query = "SELECT * FROM quotes ORDER BY random()";
+		String query = "SELECT quote FROM quotes ORDER BY random()";
 		try (Statement statement = connectionManager.getConnection().createStatement()) {
 			statement.setMaxRows(1);
 			ResultSet set = statement.executeQuery(query);

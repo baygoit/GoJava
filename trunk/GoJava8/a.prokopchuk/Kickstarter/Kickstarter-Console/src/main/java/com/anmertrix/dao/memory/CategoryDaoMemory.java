@@ -1,5 +1,6 @@
 package com.anmertrix.dao.memory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.anmertrix.dao.CategoryDao;
@@ -9,7 +10,26 @@ import com.anmertrix.domain.Project;
 
 public class CategoryDaoMemory implements CategoryDao {
 	
-	public CategoryDaoMemory() {
+	protected List<Category> categories = new ArrayList<Category>();
+	
+	@Override
+	public Category getCategory(int index) {
+		return categories.get(index - 1);
+	}
+
+	@Override
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	@Override
+	public List<Project> getProjectsByCategoryId(int index) {
+		Category category = getCategory(index);
+		return category.getProjects();
+	}
+	
+	@Override
+	public void initData() {
 		categories.add(new Category("Sport"));
 		categories.add(new Category("IT"));
 		categories.add(new Category("Medicine"));
@@ -64,22 +84,6 @@ public class CategoryDaoMemory implements CategoryDao {
 		Project project12 = new Project();
 		project12.setProjectData("Alzheimer", "Test description", 5000, 400, 11, "Test history");
 		categories.get(5).setProject(project12);
-	}
-
-	@Override
-	public Category getCategory(int index) {
-		return categories.get(index - 1);
-	}
-
-	@Override
-	public List<Category> getCategories() {
-		return categories;
-	}
-
-	@Override
-	public List<Project> getProjectsByCategoryId(int index) {
-		Category category = getCategory(index);
-		return category.getProjects();
 	}
 
 }
