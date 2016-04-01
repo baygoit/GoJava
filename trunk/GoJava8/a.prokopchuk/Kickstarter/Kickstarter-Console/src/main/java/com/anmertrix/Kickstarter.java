@@ -2,7 +2,7 @@ package com.anmertrix;
 
 import java.io.IOException;
 
-import com.anmertrix.pages.CategoriesPage;
+import com.anmertrix.page.CategoriesPage;
 
 public class Kickstarter {
 
@@ -12,6 +12,7 @@ public class Kickstarter {
 
 	private void run() {
 		ViewPage viewPage = new ViewPage(new ConsoleIO());
+		viewPage.initData();
 		viewPage.setPage(new CategoriesPage());
 		while (!viewPage.isExit()) {
 			viewPage.viewPage();

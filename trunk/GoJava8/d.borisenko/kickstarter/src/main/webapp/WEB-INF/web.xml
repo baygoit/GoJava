@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
 <web-app>
 	<servlet>
 		<servlet-name>kickstarter</servlet-name>
@@ -8,6 +9,6 @@
 
 	<servlet-mapping>
 		<servlet-name>kickstarter</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern></url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -14,17 +14,16 @@ public class QuoteDaoFile implements QuoteDao {
 	private String quotesFileName = "./src/main/resources/quotes.txt";
 	protected List<Quote> quotes = new ArrayList<Quote>();
 	
-	public QuoteDaoFile() {
-		fillQuotes();
-	}
-	
-	public void fillQuotes() {
+	@Override
+	public void initData() {
 		try (BufferedReader is = new BufferedReader(new FileReader(
 				quotesFileName))) {
 			String line;
 			while ((line = is.readLine()) != null) {
 				String[] quoteParts = line.split(";");
-				Quote quote = new Quote(quoteParts[0], quoteParts[1]);
+				Quote quote = new Quote();
+				quote.setAuthor(quoteParts[0]);
+				quote.setQuoteText(quoteParts[1]);
 				quotes.add(quote);
 			}
 		} catch (Exception e) {

@@ -5,18 +5,28 @@ public class Quote {
     private String text;
     private String author;
 
-    public Quote(int id, String author, String text) {
+    public Quote() {
+
+    }
+
+    public void setId(int id) {
         this.id = id;
-        this.author = author;
-        this.text = text;
     }
 
     public int getId() {
         return id;
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
     public String getText() {
         return text;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getAuthor() {

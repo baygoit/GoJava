@@ -12,7 +12,7 @@ public class QuoteDaoFileTest {
     private static QuoteDaoFile quoteDao = new QuoteDaoFile();
     private String quotesFileName = "./src/test/resources/quotes.txt";
     private String quotesWrongFileName = "./src/test/resources/quotes_wrongformat.txt";
-    
+
     @Ignore
     @Test
     public void fillQuotesTest() {
@@ -22,7 +22,7 @@ public class QuoteDaoFileTest {
         assertThat(quote.getText(), is("Quote"));
         assertThat(quote.getAuthor(), is("Author"));
     }
-    
+
     @Ignore
     @Test(expected = IllegalStateException.class)
     public void fillQuotesWrongFileTest() {

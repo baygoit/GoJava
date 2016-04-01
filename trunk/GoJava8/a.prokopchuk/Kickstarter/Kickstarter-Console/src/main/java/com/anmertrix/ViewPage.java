@@ -1,7 +1,5 @@
 package com.anmertrix;
 
-import java.sql.SQLException;
-
 import com.anmertrix.dao.CategoryDao;
 import com.anmertrix.dao.QuoteDao;
 import com.anmertrix.dao.file.CategoryDaoFile;
@@ -9,8 +7,9 @@ import com.anmertrix.dao.file.QuoteDaoFile;
 import com.anmertrix.dao.memory.CategoryDaoMemory;
 import com.anmertrix.dao.memory.QuoteDaoMemory;
 import com.anmertrix.dao.sql.CategoryDaoSql;
+import com.anmertrix.dao.sql.DaoSql;
 import com.anmertrix.dao.sql.QuoteDaoSql;
-import com.anmertrix.pages.Page;
+import com.anmertrix.page.Page;
 
 public class ViewPage {
 	
@@ -20,10 +19,9 @@ public class ViewPage {
 	private static final String HEADER = "                    ***  KICKSTARTER   ***   ";
 	
 	private Page page;
-	public IO io;
-	private ConnectionManager connectionManager;
-    public QuoteDao quoteDao;
-	public CategoryDao categoryDao;
+	private IO io;
+	private QuoteDao quoteDao;
+    private CategoryDao categoryDao;
 	
 	private boolean isExit = false;
 	private int selectedMenuItemCategory;
@@ -32,14 +30,39 @@ public class ViewPage {
 
 	public ViewPage(IO io) {
 		mode = DaoSwitch.getMode();
-		initConnectionManager();
-		initQuoteDao();
-		initCategoryDao();
+		if (FILE_MODE.equals(mode)) {
+			this.quoteDao = new QuoteDaoFile();
+			this.categoryDao = new CategoryDaoFile();
+		} else if (MEMORY_MODE.equals(mode)) {
+			this.quoteDao = new QuoteDaoMemory();
+			this.categoryDao = new CategoryDaoMemory();
+		} else if (SQL_MODE.equals(mode)) {
+			this.quoteDao = new QuoteDaoSql();
+			this.categoryDao = new CategoryDaoSql();
+		}
 		this.io = io;
 	}
 	
 	public void setPage(Page page) {
 		this.page = page;
+	}
+	
+	public QuoteDao getQuoteDao() {
+		return quoteDao;
+	}
+
+	public CategoryDao getCategoryDao() {
+		return categoryDao;
+	}
+	
+	public IO getIo() {
+		return io;
+	}
+	
+	public void initData() {
+		DaoSql.initConnectionManager();
+		quoteDao.initData();
+		categoryDao.initData();
 	}
 	
 	void viewPage() {
@@ -49,49 +72,13 @@ public class ViewPage {
 		page.viewPage(this);
 	}
 	
-	private void initQuoteDao() {
-		if (FILE_MODE.equals(mode)) {
-			this.quoteDao = new QuoteDaoFile();
-		} else if (MEMORY_MODE.equals(mode)) {
-			this.quoteDao = new QuoteDaoMemory();
-		} else if (SQL_MODE.equals(mode)) {
-			this.quoteDao = new QuoteDaoSql(connectionManager);
-		}
-    }
-    
-    private void initCategoryDao() {
-		if (FILE_MODE.equals(mode)) {
-    		this.categoryDao = new CategoryDaoFile();
-		} else if (MEMORY_MODE.equals(mode)) {
-			this.categoryDao = new CategoryDaoMemory();
-		} else if (SQL_MODE.equals(mode)) {
-			this.categoryDao = new CategoryDaoSql(connectionManager);
-		}
-    }
-
-	private void destroyConnectionManager() {
-		if (connectionManager != null) {
-			try {
-				connectionManager.closeConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	private void initConnectionManager() {
-		if (SQL_MODE.equals(mode)) {
-			connectionManager = new ConnectionManager();
-		}
-	}
-	
 	public int getInputNumber() {
 		String text = io.readConsole();
 		int result = 0;
 		try {
 			result = (Integer.parseInt(text));
 		} catch (NumberFormatException e) {
-			io.println("You can enter only numbers. \"" + text + "\" is not a number.\n ");
+			io.println("You can enter only numbers. \"" + text + "\" is not a number.");
 		}
 
 		return result;
@@ -103,7 +90,6 @@ public class ViewPage {
 
 	public void setExit(boolean isExit) {
 		this.isExit = isExit;
-		destroyConnectionManager();
 	}
 
 	public int getSelectedMenuItemCategory() {

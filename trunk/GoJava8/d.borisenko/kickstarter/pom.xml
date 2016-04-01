@@ -12,7 +12,6 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
-					<mainClass>ua.dborisenko.kickstarter.AppStarter</mainClass>
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
@@ -25,30 +24,43 @@
 		<version-junit>4.12</version-junit>
 		<version-mockito>1.10.19</version-mockito>
 		<version-servlet-api>2.5</version-servlet-api>
+		<version-jstl>1.2</version-jstl>
+		<version-commons-dbcp2>2.1.1</version-commons-dbcp2>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${version-mysql-connector}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<scope>test</scope>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${version-junit}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<scope>test</scope>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>${version-mockito}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>${version-servlet-api}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${version-jstl}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>${version-commons-dbcp2}</version>
 		</dependency>
 	</dependencies>
 </project>

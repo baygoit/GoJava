@@ -10,7 +10,10 @@ public class QuoteTest {
 
 	@Test
 	public void getQuoteTest() {
-		Quote quote = new Quote("author", "test");
+		Quote quote = new Quote();
+		quote.setAuthor("author");
+		quote.setQuoteText("test");
 		assertTrue("test" == quote.getQuoteText());
+		assertTrue("author" == quote.getAuthor());
 	}
 }

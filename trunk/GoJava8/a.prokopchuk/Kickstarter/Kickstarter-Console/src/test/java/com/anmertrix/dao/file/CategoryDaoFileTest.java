@@ -15,8 +15,9 @@ public class CategoryDaoFileTest {
 	@Test
 	public void testGetCategories() {
         categoryDao.setCategoriesFileName(baseFile);
+        categoryDao.initData();
         Category category = categoryDao.categories.get(0);
-        assertThat(category.getName(), is("Sport(file)"));
+        assertThat(category.getName(), is("Test Category"));
 	}
 
 }

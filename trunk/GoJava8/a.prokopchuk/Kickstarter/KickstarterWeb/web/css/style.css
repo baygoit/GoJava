@@ -1,0 +1,11 @@
+.logo {
+	width:600px;
+	display: inline-block;
+}
+.logo img {
+	width: 100%;
+}
+.header {
+	text-align: center;
+}
+
