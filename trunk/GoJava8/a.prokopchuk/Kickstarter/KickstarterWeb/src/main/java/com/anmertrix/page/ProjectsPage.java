@@ -1,9 +1,9 @@
 package com.anmertrix.page;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,12 +16,10 @@ public class ProjectsPage extends Page {
 
 	private static final long serialVersionUID = 1L;
 	
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=utf-8");
- 
-        PrintWriter pw = resp.getWriter();
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
         CategoryDao categoryDao = page.getCategoryDao();
-        String categoryIdStr = req.getParameter("categoryId");
+        String categoryIdStr = request.getParameter("categoryId");
 		int categoryId = 0;
 		try {
 			categoryId = Integer.parseInt(categoryIdStr);
@@ -29,14 +27,13 @@ public class ProjectsPage extends Page {
 			e.printStackTrace();
 		}
 		Category category = categoryDao.getCategory(categoryId);
-		pw.println("<H2>" + category.getName() + "</H2>");
 		List<Project> projects = categoryDao.getProjectsByCategoryId(categoryId);
 		
-		pw.println("<ul>");
-		for (Project project: projects) {
-			pw.println("<li><a href=\"project?projectId=" + project.getId() + "\">" + project.getName() + "</a></li>");
-		}
-		pw.println("</ul>");
+		request.setAttribute("category", category);
+        request.setAttribute("projects", projects);
+        
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Projects.jsp");
+        dispatcher.forward(request, response);
     }
 
 }
