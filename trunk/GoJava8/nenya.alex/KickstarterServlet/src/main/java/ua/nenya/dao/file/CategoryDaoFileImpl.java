@@ -3,6 +3,8 @@ package ua.nenya.dao.file;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -17,6 +19,7 @@ import ua.nenya.dao.CategoryDao;
 public class CategoryDaoFileImpl implements CategoryDao {
 	private List<Category> categories = new ArrayList<Category>();
 	private String fileName = "C:/workspace/GoJava8/KickstarterServlet/src/main/resources/caterories.json";
+	//private String fileName = "src/main/resources/caterories.json";
 	
 
 	public void setFileName(String fileName) {
@@ -24,11 +27,18 @@ public class CategoryDaoFileImpl implements CategoryDao {
 	}
 
 	public List<Category> getCategories() {
+		Collections.sort(categories, new Comparator<Category>() {
+
+			@Override
+			public int compare(Category category1, Category category2) {
+				return category1.getName().compareTo(category2.getName());
+			}
+		});
 		return categories;
 	}
 
 	@Override
-	public List<Category> initCategories() {
+	public void initCategories() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			categories = mapper.readValue(new File(fileName), new TypeReference<List<Category>>() {
@@ -36,14 +46,21 @@ public class CategoryDaoFileImpl implements CategoryDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return categories;
 
 	}
 
 
 	@Override
 	public List<Project> initProjects(Category category) {
-		return category.getProjects();
+		List<Project> projects = category.getProjects();
+		Collections.sort(projects, new Comparator<Project>() {
+
+			@Override
+			public int compare(Project project1, Project project2) {
+				return project1.getName().compareTo(project2.getName());
+			}
+		});
+		return projects;
 	}
 
 	@Override

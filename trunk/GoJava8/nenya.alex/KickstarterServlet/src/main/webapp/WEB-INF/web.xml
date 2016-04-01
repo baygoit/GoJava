@@ -3,10 +3,7 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <servlet-name>QuoteServlet</servlet-name>
-    <servlet-class>ua.nenya.servlets.QuoteServlet</servlet-class>
-  </servlet>
+  
   <servlet>
     <servlet-name>CategoryServlet</servlet-name>
     <servlet-class>ua.nenya.servlets.CategoryServlet</servlet-class>
@@ -27,10 +24,8 @@
     <servlet-name>QuestionServlet</servlet-name>
     <servlet-class>ua.nenya.servlets.QuestionServlet</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>QuoteServlet</servlet-name>
-    <url-pattern>/quote</url-pattern>
-  </servlet-mapping>
+  
+  
   <servlet-mapping>
     <servlet-name>CategoryServlet</servlet-name>
     <url-pattern>/category</url-pattern>

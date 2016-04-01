@@ -3,7 +3,7 @@ package ua.nenya.project;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project implements GettingNameInterface {
+public class Project {
 	private String name;
 	private String description;
 	private int neededAmount;

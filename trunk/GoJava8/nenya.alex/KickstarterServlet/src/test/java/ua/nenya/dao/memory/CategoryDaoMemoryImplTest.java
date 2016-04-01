@@ -13,7 +13,7 @@ public class CategoryDaoMemoryImplTest {
 		CategoryDaoMemoryImpl cdmi = new CategoryDaoMemoryImpl();
 		cdmi.setFile(new File("src/test/resources/caterories.json"));
 		cdmi.initCategories();
-		assertNotNull(cdmi.initCategories().get(0));
+		assertNotNull(cdmi.getCategories().get(0));
 	}
 
 }

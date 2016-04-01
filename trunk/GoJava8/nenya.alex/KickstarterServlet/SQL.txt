@@ -1,73 +1,72 @@
-//QUOTES table
+
 CREATE TABLE QUOTES (id SERIAL PRIMARY KEY, quote VARCHAR(200) NOT NULL UNIQUE);
-INSERT INTO QUOTES (quote) VALUES ('Healthy curiosity is a great key in innovation.');
-INSERT INTO QUOTES (quote) VALUES ('Everyone here has the sense that right now is one of those moments when we are influencing the future.');
-INSERT INTO QUOTES (quote) VALUES ('Great things in business are never done by one person. They are done by a team of people.');
+INSERT INTO QUOTES (quote) VALUES ('Healthy curiosity is a great key in innovation.DB');
+INSERT INTO QUOTES (quote) VALUES ('Everyone here has the sense that right now is one of those moments when we are influencing the future.DB');
+INSERT INTO QUOTES (quote) VALUES ('Great things in business are never done by one person. They are done by a team of people.DB');
 
-//CATEGORIES table
+
 CREATE TABLE CATEGORIES (id SERIAL PRIMARY KEY, category_name VARCHAR(50) NOT NULL UNIQUE);
-INSERT INTO CATEGORIES (category_name) VALUES ('Music');
-INSERT INTO CATEGORIES (category_name) VALUES ('Films');
-INSERT INTO CATEGORIES (category_name) VALUES ('Art');
+INSERT INTO CATEGORIES (category_name) VALUES ('MusicDB');
+INSERT INTO CATEGORIES (category_name) VALUES ('FilmsDB');
+INSERT INTO CATEGORIES (category_name) VALUES ('ArtDB');
 
-//PROJECTS table
 CREATE TABLE PROJECTS (id SERIAL PRIMARY KEY, category_id INTEGER REFERENCES Categories, project_name VARCHAR(50) NOT NULL UNIQUE, 
 description VARCHAR(200) NOT NULL, all_amount INTEGER NOT NULL,
 available_amount INTEGER NOT NULL, days_remain INTEGER NOT NULL,
 history VARCHAR(500), video VARCHAR(50));
 INSERT INTO PROJECTS (category_id, project_name, description, all_amount, available_amount, days_remain,
-history, video) VALUES (1, 'A new funny song',
+history, video) VALUES (1, 'A new funny songDB',
     'We want to write a new funny song!',
     2000, 1000, 7, 'History of funny song',
     'video about funny song');
 INSERT INTO PROJECTS (category_id, project_name, description, all_amount, available_amount, days_remain,
-history, video) VALUES (1, 'A lonely song',
+history, video) VALUES (1, 'A lonely songDB',
     'We want to write a new sad song!',
     400, 10, 3, 'History of lonely song',
     'video about lonely song');
 INSERT INTO PROJECTS (category_id, project_name, description, all_amount, available_amount, days_remain,
-history, video) VALUES (2, 'Terminator 88',
+history, video) VALUES (2, 'Terminator 88DB',
     'All money we will gather is for new blockbuster!',
     200000, 1000, 365, 'History of Terminator',
     'video about Terminator');
 INSERT INTO PROJECTS (category_id, project_name, description, all_amount, available_amount, days_remain,
-history, video) VALUES (2, 'Dirty Garry',
+history, video) VALUES (2, 'Dirty GarryDB',
     'It will be a western about wild west!',
     10000, 3000, 150, 'History of wild west',
     'video about Garry');
 INSERT INTO PROJECTS (category_id, project_name, description, all_amount, available_amount, days_remain,
-history, video) VALUES (3, 'Exhibition of photos',
+history, video) VALUES (3, 'Exhibition of photosDB',
     'Exhibition of photos of Kiev!',
     7000, 1000, 15, 'History of photos',
     'video about exhibition');
 INSERT INTO PROJECTS (category_id, project_name, description, all_amount, available_amount, days_remain,
-history, video) VALUES (3, 'Exhibition of plates',
+history, video) VALUES (3, 'Exhibition of platesDB',
     'Exhibition of old plates!',
     100000, 7000, 120, 'History of plates',
     'video about exhibition');
 
-// REWARDS table
-CREATE TABLE REWARDS (id SERIAL PRIMARY KEY, project_id INTEGER REFERENCES Project, name VARCHAR(50) NOT NULL, amount INTEGER, description VARCHAR(200));
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (1, '100$', 100, 'Invest one hundred dollars and get bottle of water!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (1, '100$', 100, 'Invest one hundred dollars and get five bottles of water!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (1, '200$', 200, 'Invest two hundreds dollars and get two tickets to the movie!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (1, '200$', 200, 'Invest two hundreds dollars and get tickets to the movie for all family!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (1, '500$', 500, 'Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (2, '100$', 100, 'Invest one hundred dollars and get bottle of water!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (2, '100$', 100, 'Invest one hundred dollars and get five bottles of water!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (3, '200$', 200, 'Invest two hundreds dollars and get two tickets to the movie!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (3, '200$', 200, 'Invest two hundreds dollars and get tickets to the movie for all family!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (3, '500$', 500, 'Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (4, '100$', 100, 'Invest one hundred dollars and get bottle of water!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (4, '100$', 100, 'Invest one hundred dollars and get five bottles of water!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (4, '200$', 200, 'Invest two hundreds dollars and get two tickets to the movie!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (4, '200$', 200, 'Invest two hundreds dollars and get tickets to the movie for all family!!!');
-INSERT INTO Rewards (project_id, name, amount, description) VALUES (4, '500$', 500, 'Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!');
 
-//QUESTIONS table
-CREATE TABLE QUESTIONS (id SERIAL PRIMARY KEY, project_id INTEGER REFERENCES Project, question VARCHAR(500) NOT NULL UNIQUE);
-INSERT INTO Questions (project_id, question) VALUES (1, 'Why?');
-INSERT INTO Questions (project_id, question) VALUES (1, 'Who?');
-INSERT INTO Questions (project_id, question) VALUES (2, 'What?');
-INSERT INTO Questions (project_id, question) VALUES (2, 'Which?');
-INSERT INTO Questions (project_id, question) VALUES (3, 'Is it really?');
+CREATE TABLE REWARDS (id SERIAL PRIMARY KEY, project_id INTEGER REFERENCES Projects, name VARCHAR(50) NOT NULL, amount INTEGER, description VARCHAR(200));
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (1, '100$DB', 100, 'Invest one hundred dollars and get bottle of water!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (1, '100$DB', 100, 'Invest one hundred dollars and get five bottles of water!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (1, '200$DB', 200, 'Invest two hundreds dollars and get two tickets to the movie!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (1, '200$DB', 200, 'Invest two hundreds dollars and get tickets to the movie for all family!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (1, '500$DB', 500, 'Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (2, '100$DB', 100, 'Invest one hundred dollars and get bottle of water!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (2, '100$DB', 100, 'Invest one hundred dollars and get five bottles of water!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (3, '200$DB', 200, 'Invest two hundreds dollars and get two tickets to the movie!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (3, '200$DB', 200, 'Invest two hundreds dollars and get tickets to the movie for all family!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (3, '500$DB', 500, 'Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (4, '100$DB', 100, 'Invest one hundred dollars and get bottle of water!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (4, '100$DB', 100, 'Invest one hundred dollars and get five bottles of water!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (4, '200$DB', 200, 'Invest two hundreds dollars and get two tickets to the movie!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (4, '200$DB', 200, 'Invest two hundreds dollars and get tickets to the movie for all family!!!');
+INSERT INTO Rewards (project_id, name, amount, description) VALUES (4, '500$DB', 500, 'Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!');
+
+
+CREATE TABLE QUESTIONS (id SERIAL PRIMARY KEY, project_id INTEGER REFERENCES Projects, question VARCHAR(500) NOT NULL UNIQUE);
+INSERT INTO Questions (project_id, question) VALUES (1, 'Why?DB');
+INSERT INTO Questions (project_id, question) VALUES (1, 'Who?DB');
+INSERT INTO Questions (project_id, question) VALUES (2, 'What?DB');
+INSERT INTO Questions (project_id, question) VALUES (2, 'Which?DB');
+INSERT INTO Questions (project_id, question) VALUES (3, 'Is it really?DB');

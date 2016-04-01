@@ -13,21 +13,21 @@ public class KickstarterInitilizerTest {
 	@Test
 	public void kikstarterInitilizerTest1() {
 		initilizer.initDao("memory");
-		assertNotNull(initilizer.getCategoryDao().initCategories());
+		assertNotNull(initilizer.getCategoryDao().getCategories());
 	}
 	
 	
 	@Test
 	public void kikstarterInitilizerTest2() {
 		initilizer.initDao("file");
-		assertNotNull(initilizer.getCategoryDao().initCategories());
+		assertNotNull(initilizer.getCategoryDao().getCategories());
 	}
 	
 	
 	@Test
 	public void kikstarterInitilizerTest3() {
 		initilizer.initDao("db");
-		assertNotNull(initilizer.getCategoryDao().initCategories());
+		assertNotNull(initilizer.getCategoryDao().getCategories());
 	}
 
 }

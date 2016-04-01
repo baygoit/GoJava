@@ -26,30 +26,29 @@ public class DaoInitilizer {
 
 	public void initDao(String switcher) {
 		if (DaoMode.DB.name.equalsIgnoreCase(switcher)) {
-			System.err.println("FromDB");
 
 			quoteDao = new QuoteDaoDbImpl(connectionManager);
 			quoteDao.initQuotes();
 
 			categoryDao = new CategoryDaoDbImpl(connectionManager);
+			categoryDao.initCategories();
 
 		} else {
 			if (DaoMode.FILE.name.equalsIgnoreCase(switcher)) {
-				System.err.println("FromFile");
 
 				quoteDao = new QuoteDaoFileImpl();
 				quoteDao.initQuotes();
 
 				categoryDao = new CategoryDaoFileImpl();
+				categoryDao.initCategories();
 
 			} else {
-				System.err.println("FromMemory");
 
 				quoteDao = new QuoteDaoMemoryImpl();
 				quoteDao.initQuotes();
 
 				categoryDao = new CategoryDaoMemoryImpl();
-
+				categoryDao.initCategories();
 			}
 		}
 	}

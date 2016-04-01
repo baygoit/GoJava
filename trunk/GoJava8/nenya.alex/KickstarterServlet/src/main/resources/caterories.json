@@ -1,7 +1,7 @@
 [ {
-  "name" : "Music",
+  "name" : "MusicF",
   "projects" : [ {
-    "name" : "A new funny song",
+    "name" : "A new funny songF",
     "description" : "We want to write a new funny song!",
     "neededAmount" : 2000,
     "availableAmount" : 1000,
@@ -10,32 +10,32 @@
     "video" : "",
     "questions" : [ ],
     "rewards" : [ {
-      "name" : "Any amount",
+      "name" : "Any amountF",
       "amount" : 0,
       "description" : ""
     }, {
-      "name" : "100$",
+      "name" : "100$F",
       "amount" : 100,
       "description" : "Invest one hundred dollars and get bottle of water!!!"
     }, {
-      "name" : "100$",
+      "name" : "100$F",
       "amount" : 100,
       "description" : "Invest one hundred dollars and get five bottles of water!!!"
     }, {
-      "name" : "200$",
+      "name" : "200$F",
       "amount" : 200,
       "description" : "Invest two hundreds dollars and get two tickets to the movie!!!"
     }, {
-      "name" : "200$",
+      "name" : "200$F",
       "amount" : 200,
       "description" : "Invest two hundreds dollars and get tickets to the movie for all family!!!"
     }, {
-      "name" : "500$",
+      "name" : "500$F",
       "amount" : 500,
       "description" : "Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!"
     } ]
   }, {
-    "name" : "A lonly song",
+    "name" : "A lonly songF",
     "description" : "We want to write a new sad song!",
     "neededAmount" : 400,
     "availableAmount" : 10,
@@ -44,27 +44,27 @@
     "video" : "",
     "questions" : [ ],
     "rewards" : [ {
-      "name" : "Any amount",
+      "name" : "Any amountF",
       "amount" : 0,
       "description" : ""
     }, {
-      "name" : "100$",
+      "name" : "100$F",
       "amount" : 100,
       "description" : "Invest one hundred dollars and get bottle of water!!!"
     }, {
-      "name" : "200$",
+      "name" : "200$F",
       "amount" : 200,
       "description" : "Invest two hundreds dollars and get two tickets to the movie!!!"
     }, {
-      "name" : "500$",
+      "name" : "500$F",
       "amount" : 500,
       "description" : "Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!"
     } ]
   } ]
 }, {
-  "name" : "Films",
+  "name" : "FilmsF",
   "projects" : [ {
-    "name" : "Terminator 88",
+    "name" : "Terminator 88F",
     "description" : "All money we'll gather is for new blockbuster!",
     "neededAmount" : 200000,
     "availableAmount" : 1000,
@@ -73,24 +73,24 @@
     "video" : "",
     "questions" : [ ],
     "rewards" : [ {
-      "name" : "Any amount",
+      "name" : "Any amountF",
       "amount" : 0,
       "description" : ""
     }, {
-      "name" : "100$",
+      "name" : "100$F",
       "amount" : 100,
       "description" : "Invest one hundred dollars and get bottle of water!!!"
     }, {
-      "name" : "200$",
+      "name" : "200$F",
       "amount" : 200,
       "description" : "Invest two hundreds dollars and get two tickets to the movie!!!"
     }, {
-      "name" : "200$",
+      "name" : "200$F",
       "amount" : 200,
       "description" : "Invest two hundreds dollars and get tickets to the movie for all family!!!"
     } ]
   }, {
-    "name" : "Dirty Garry",
+    "name" : "Dirty GarryF",
     "description" : "It'll be a western about wild west!",
     "neededAmount" : 10000,
     "availableAmount" : 3000,
@@ -99,23 +99,23 @@
     "video" : "",
     "questions" : [ ],
     "rewards" : [ {
-      "name" : "Any amount",
+      "name" : "Any amountF",
       "amount" : 0,
       "description" : ""
     }, {
-      "name" : "100$",
+      "name" : "100$F",
       "amount" : 100,
       "description" : "Invest one hundred dollars and get bottle of water!!!"
     }, {
-      "name" : "100$",
+      "name" : "100$F",
       "amount" : 100,
       "description" : "Invest one hundred dollars and get five bottles of water!!!"
     } ]
   } ]
 }, {
-  "name" : "Art",
+  "name" : "ArtF",
   "projects" : [ {
-    "name" : "Exhibition of photos",
+    "name" : "Exhibition of photosF",
     "description" : "Exhibition of photos of Kiev!",
     "neededAmount" : 7000,
     "availableAmount" : 1000,
@@ -124,32 +124,32 @@
     "video" : "",
     "questions" : [ ],
     "rewards" : [ {
-      "name" : "Any amount",
+      "name" : "Any amountF",
       "amount" : 0,
       "description" : ""
     }, {
-      "name" : "100$",
+      "name" : "100$F",
       "amount" : 100,
       "description" : "Invest one hundred dollars and get bottle of water!!!"
     }, {
-      "name" : "100$",
+      "name" : "100$F",
       "amount" : 100,
       "description" : "Invest one hundred dollars and get five bottles of water!!!"
     }, {
-      "name" : "200$",
+      "name" : "200$F",
       "amount" : 200,
       "description" : "Invest two hundreds dollars and get two tickets to the movie!!!"
     }, {
-      "name" : "200$",
+      "name" : "200$F",
       "amount" : 200,
       "description" : "Invest two hundreds dollars and get tickets to the movie for all family!!!"
     }, {
-      "name" : "500$",
+      "name" : "500$F",
       "amount" : 500,
       "description" : "Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!"
     } ]
   }, {
-    "name" : "Exhibition of plates",
+    "name" : "Exhibition of platesF",
     "description" : "Exhibition of old plates!",
     "neededAmount" : 100000,
     "availableAmount" : 7000,
@@ -158,19 +158,19 @@
     "video" : "",
     "questions" : [ ],
     "rewards" : [ {
-      "name" : "Any amount",
+      "name" : "Any amountF",
       "amount" : 0,
       "description" : ""
     }, {
-      "name" : "200$",
+      "name" : "200$F",
       "amount" : 200,
       "description" : "Invest two hundreds dollars and get two tickets to the movie!!!"
     }, {
-      "name" : "200$",
+      "name" : "200$F",
       "amount" : 200,
       "description" : "Invest two hundreds dollars and get tickets to the movie for all family!!!"
     }, {
-      "name" : "500$",
+      "name" : "500$F",
       "amount" : 500,
       "description" : "Invest five hundreds dollars and get a lunch for two persons in the restaurant!!!"
     } ]

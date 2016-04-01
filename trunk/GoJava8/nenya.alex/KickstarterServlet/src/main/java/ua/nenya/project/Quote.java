@@ -9,12 +9,13 @@ public class Quote {
 	public Quote() {
 	}
 	
-	public Quote(String name) {
-		this.name = name;
-	}
-
 	public String getName() {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
 }

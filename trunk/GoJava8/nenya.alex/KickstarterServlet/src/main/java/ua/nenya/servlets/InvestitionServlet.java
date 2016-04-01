@@ -23,7 +23,7 @@ public class InvestitionServlet extends CommonServlet {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter printWriter = response.getWriter();
 		CategoryDao categoryDao = initilizer.getCategoryDao();
-		List<Category> categories = categoryDao.initCategories();
+		List<Category> categories = categoryDao.getCategories();
 		String projectIndexStr = request.getParameter("projectIndex");
 		String categoryIndexStr = request.getParameter("categoryIndex");
 		int projectIndex = 0;

@@ -1,6 +1,6 @@
 package ua.nenya.project;
 
-public class Reward implements GettingNameInterface{
+public class Reward{
 	private String name;
 	private int amount;
 	private String description;

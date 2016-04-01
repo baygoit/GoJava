@@ -71,6 +71,7 @@
                 </configuration>
             </plugin>
         </plugins>
+    <finalName>kickstarter</finalName>
     </build>
     
 </project>

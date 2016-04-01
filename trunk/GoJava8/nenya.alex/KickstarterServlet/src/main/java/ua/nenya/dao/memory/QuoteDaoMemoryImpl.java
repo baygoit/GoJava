@@ -41,9 +41,15 @@ public class QuoteDaoMemoryImpl implements QuoteDao{
 
 	@Override
 	public void initQuotes() {
-		quotes.add(new Quote("Healthy curiosity is a great key in innovation."));
-		quotes.add(new Quote("Everyone here has the sense that right now is one of those moments when we are influencing the future."));
-		quotes.add(new Quote("Great things in business are never done by one person. They're done by a team of people."));
+		Quote quote1 = new Quote();
+		quote1.setName("Healthy curiosity is a great key in innovation.");
+		Quote quote2 = new Quote();
+		quote2.setName("Everyone here has the sense that right now is one of those moments when we are influencing the future.");
+		Quote quote3 = new Quote();
+		quote3.setName("Great things in business are never done by one person. They're done by a team of people.");
+		quotes.add(quote1);
+		quotes.add(quote2);
+		quotes.add(quote3);
 		if(file.length() == 0 || !file.exists()){
 			convertToJSON(quotes);
 		}

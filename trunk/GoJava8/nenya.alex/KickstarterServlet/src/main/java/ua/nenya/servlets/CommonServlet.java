@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServlet;
 
 import ua.nenya.main.DaoInitilizer;
 
-//@WebServlet("/CommonServlet")
 public class CommonServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

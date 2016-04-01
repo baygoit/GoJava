@@ -13,7 +13,7 @@ public class CategoryDaoFileImplTest {
 		CategoryDaoFileImpl cdfi = new CategoryDaoFileImpl();
 		cdfi.setFileName("src/test/resources/caterories.json");
 		cdfi.initCategories();
-		assertNotNull(cdfi.initCategories().get(0));
+		assertNotNull(cdfi.getCategories().get(0));
 	}
 
 }

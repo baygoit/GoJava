@@ -1,6 +1,6 @@
 package ua.nenya.project;
 
-public class Question implements GettingNameInterface{
+public class Question{
 
 	String name;
 

@@ -16,14 +16,14 @@ import ua.nenya.util.ConnectionManager;
 public class CategoryDaoDbImpl implements CategoryDao {
 
 	private ConnectionManager connectionManager;
+	private List<Category> categories = new ArrayList<Category>();
 
 	public CategoryDaoDbImpl(ConnectionManager connectionManager) {
 		this.connectionManager = connectionManager;
 	}
 
 	@Override
-	public List<Category> initCategories() {
-		List<Category> categories = new ArrayList<Category>();
+	public void initCategories() {
 		String query = "SELECT category_name FROM categories ORDER BY category_name";
 		try (Statement statement = connectionManager.getConnection().createStatement()) {
 			ResultSet set = statement.executeQuery(query);
@@ -36,7 +36,6 @@ public class CategoryDaoDbImpl implements CategoryDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return categories;
 	}
 
 	@Override
@@ -169,6 +168,11 @@ public class CategoryDaoDbImpl implements CategoryDao {
 		} catch (SQLException e) {
 			e.getStackTrace();
 		}
+	}
+
+	@Override
+	public List<Category> getCategories() {
+		return categories;
 	}
 
 }

@@ -111,7 +111,7 @@ public class CategoryDaoDbImplTest {
 
 		when(connectionManager.getConnection()).thenReturn(connection);
 
-		List<Category> categoriesFromMethod = new CategoryDaoDbImpl(connectionManager).initCategories();
+		List<Category> categoriesFromMethod = new CategoryDaoDbImpl(connectionManager).getCategories();
 
 		assertEquals(categories.get(0).getName(), categoriesFromMethod.get(0).getName());
 		assertEquals(categories.get(1).getName(), categoriesFromMethod.get(1).getName());
