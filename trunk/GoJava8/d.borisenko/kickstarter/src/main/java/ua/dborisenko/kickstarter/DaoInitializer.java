@@ -67,7 +67,7 @@ class DaoInitializer {
 
     void closeSqlConnections() throws SQLException {
         for (DaoSql daoSql : daoSqlList) {
-            daoSql.closeConnection();
+            daoSql.closePool();
         }
     }
 }

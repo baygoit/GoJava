@@ -9,7 +9,7 @@ import java.util.Random;
 
 import ua.dborisenko.kickstarter.domain.Quote;
 
-public class QuoteDaoFile implements QuoteDao {
+public class QuoteDaoFile extends QuoteDaoMemory implements QuoteDao {
     private List<Quote> quotes = new ArrayList<Quote>();
     private String quotesFileName = "/quotes.txt";
 
@@ -30,7 +30,7 @@ public class QuoteDaoFile implements QuoteDao {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] quoteParts = line.split("#");
-                Quote quote = new Quote(Integer.valueOf(quoteParts[0]), quoteParts[1], quoteParts[2]);
+                Quote quote = makeQuote(Integer.valueOf(quoteParts[0]), quoteParts[1], quoteParts[2]);
                 quotes.add(quote);
             }
         } catch (IOException e) {

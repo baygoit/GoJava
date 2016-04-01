@@ -21,20 +21,29 @@ public class QuoteDaoMemory implements QuoteDao {
         return quotes.get(quoteNumber);
     }
 
+    protected Quote makeQuote(int id, String author, String text) {
+        Quote quote = new Quote();
+        quote.setId(id);
+        quote.setId(getQuoteId());
+        quote.setText(text);
+        quote.setAuthor(author);
+        return quote;
+    }
+
     public void fillQuotes() {
-        quotes.add(new Quote(getQuoteId(), "H. Jackson Brown",
+        quotes.add(makeQuote(getQuoteId(), "H. Jackson Brown",
                 "The best preparation for tomorrow is doing your best today."));
-        quotes.add(new Quote(getQuoteId(), "Audrey Hepburn",
+        quotes.add(makeQuote(getQuoteId(), "Audrey Hepburn",
                 "Nothing is impossible, the word itself says 'I'm possible'!"));
-        quotes.add(new Quote(getQuoteId(), "Milton Berle", "If opportunity doesn't knock, build a door."));
-        quotes.add(new Quote(getQuoteId(), "Swami Sivananda",
+        quotes.add(makeQuote(getQuoteId(), "Milton Berle", "If opportunity doesn't knock, build a door."));
+        quotes.add(makeQuote(getQuoteId(), "Swami Sivananda",
                 "Put your heart, mind, and soul into even your smallest acts. This is the secret of success."));
-        quotes.add(new Quote(getQuoteId(), "GLadOS", "We do what we must because we can. For the good of all of us."));
-        quotes.add(new Quote(getQuoteId(), "Arnold H. Glasow",
+        quotes.add(makeQuote(getQuoteId(), "GLadOS", "We do what we must because we can. For the good of all of us."));
+        quotes.add(makeQuote(getQuoteId(), "Arnold H. Glasow",
                 "Success is simple. Do what's right, the right way, at the right time."));
         quotes.add(
-                new Quote(getQuoteId(), "Galeazzo Ciano", "Victory has a thousand fathers, but defeat is an orphan."));
-        quotes.add(new Quote(getQuoteId(), "Miguel de Cervantes",
+                makeQuote(getQuoteId(), "Galeazzo Ciano", "Victory has a thousand fathers, but defeat is an orphan."));
+        quotes.add(makeQuote(getQuoteId(), "Miguel de Cervantes",
                 "In order to attain the impossible, one must attempt the absurd."));
     }
 }
