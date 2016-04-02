@@ -1,5 +1,0 @@
-Author1;Quote1
-Author2;Quote2
-Author3;Quote3
-Author4;Quote4
-Author5;Quote5

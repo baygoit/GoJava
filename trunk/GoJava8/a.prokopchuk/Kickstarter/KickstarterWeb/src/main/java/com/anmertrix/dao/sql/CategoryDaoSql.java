@@ -91,7 +91,7 @@ public class CategoryDaoSql implements CategoryDao {
 		Project project = new Project();
     	
 		try (Statement statement = connectionManager.getConnection().createStatement()) {
-			ResultSet rs = statement.executeQuery("SELECT name, description, required_budget, days_left, history, url, COALESCE(SUM(amount),0) FROM project JOIN investment ON (project.id = investment.project_id) WHERE project_id=" + index);
+			ResultSet rs = statement.executeQuery("SELECT name, description, required_budget, days_left, history, url, COALESCE(SUM(amount),0) AS sum_amount FROM project JOIN investment ON (project.id = investment.project_id) WHERE project_id=" + index);
 			
 			rs.next();
 			String name = rs.getString("name");
@@ -100,7 +100,7 @@ public class CategoryDaoSql implements CategoryDao {
 			int days_left = rs.getInt("days_left");
 			String history = rs.getString("history");
 			String url = rs.getString("url");
-			int gathered_budget = rs.getInt("COALESCE(SUM(amount),0)");
+			int gathered_budget = rs.getInt("sum_amount");
 				
 			project.setProjectData(index, name, description, required_budget, gathered_budget, days_left, history);
 			project.setUrl(url);
