@@ -8,12 +8,9 @@ public class Project {
 	private int gatheredBudget;
 	private int daysLeft;
 	private String history;
-	private String url = "test url";
+	private String url;
 	private StringBuilder questionAnswer = new StringBuilder();
 
-	public Project() {
-		// TODO Auto-generated constructor stub
-	}
 	public int getId() {
 		return id;
 	}
@@ -51,7 +48,7 @@ public class Project {
 	}
 
 	public void setGatheredBudget(int count) {
-		this.gatheredBudget = gatheredBudget + count;
+		this.gatheredBudget = count;
 	}
 
 	public int getDaysLeft() {
@@ -70,11 +67,11 @@ public class Project {
 		this.history = history;
 	}
 
-	public String getURL() {
+	public String getUrl() {
 		return url;
 	}
 
-	public void setURL(String url) {
+	public void setUrl(String url) {
 		this.url = url;
 	}
 

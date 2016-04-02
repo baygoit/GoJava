@@ -18,10 +18,10 @@
 </div>
 	<h2>${project.name}</h2>
 	<p>Description: ${project.description}</p>
-	<p>Description: ${project.requiredBudget}</p>
-	<p>Description: ${project.gatheredBudget}</p>
-	<p>Description: ${project.daysLeft}</p>
-	<p>Description: ${project.history}</p>
-	<p>Description: ${project.url}</p>
+	<p>Required budget: ${project.requiredBudget}</p>
+	<p>Gathered budget: ${project.gatheredBudget}</p>
+	<p>Days left: ${project.daysLeft}</p>
+	<p>History: ${project.history}</p>
+	<p>Video URL: ${project.url}</p>
 </body>
 </html>

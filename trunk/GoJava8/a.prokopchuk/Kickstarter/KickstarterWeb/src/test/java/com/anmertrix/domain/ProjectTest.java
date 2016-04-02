@@ -60,8 +60,8 @@ public class ProjectTest {
 	@Test
 	public void setGetUrlTest() {
 		Project project = new Project();
-		project.setURL("qqq");
-		assertEquals("qqq", project.getURL());
+		project.setUrl("qqq");
+		assertEquals("qqq", project.getUrl());
 	}
 
 	@Test

@@ -28,7 +28,7 @@ public class ProjectPage extends Page {
 		
         request.setAttribute("project", project);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Project.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/Project.jsp");
         dispatcher.forward(request, response);
 		
 		

@@ -32,7 +32,7 @@ public class ProjectsPage extends Page {
 		request.setAttribute("category", category);
         request.setAttribute("projects", projects);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Projects.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/Projects.jsp");
         dispatcher.forward(request, response);
     }
 

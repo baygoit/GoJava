@@ -19,7 +19,7 @@
 	<h2>${category.name}</h2>
 	<ul>
 		<c:forEach var="project" items="${projects}">
-			<li><a href="project?projectIdId=${project.id}">${project.name}</a></li>
+			<li><a href="project?projectId=${project.id}">${project.name}</a></li>
 		</c:forEach>
 	</ul>
 </body>
