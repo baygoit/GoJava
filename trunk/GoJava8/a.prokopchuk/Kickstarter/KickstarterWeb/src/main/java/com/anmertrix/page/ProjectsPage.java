@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.anmertrix.dao.CategoryDao;
 import com.anmertrix.domain.Category;
 import com.anmertrix.domain.Project;
 
@@ -18,7 +17,6 @@ public class ProjectsPage extends Page {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-        CategoryDao categoryDao = page.getCategoryDao();
         String categoryIdStr = request.getParameter("categoryId");
 		int categoryId = 0;
 		try {

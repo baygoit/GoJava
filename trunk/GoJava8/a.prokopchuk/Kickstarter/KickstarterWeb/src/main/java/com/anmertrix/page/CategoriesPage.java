@@ -3,8 +3,6 @@ package com.anmertrix.page;
 import java.io.IOException;
 import java.util.List;
 
-import com.anmertrix.dao.CategoryDao;
-import com.anmertrix.dao.QuoteDao;
 import com.anmertrix.domain.Category;
 import com.anmertrix.domain.Quote;
 
@@ -19,8 +17,6 @@ public class CategoriesPage extends Page {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  
-        QuoteDao quoteDao = page.getQuoteDao();
-        CategoryDao categoryDao = page.getCategoryDao();
         Quote quote = quoteDao.getRandomQuote();
         List<Category> categories = categoryDao.getCategories();
         
