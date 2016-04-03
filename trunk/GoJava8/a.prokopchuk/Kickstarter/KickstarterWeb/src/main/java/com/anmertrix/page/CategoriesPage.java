@@ -23,7 +23,7 @@ public class CategoriesPage extends Page {
         request.setAttribute("categories", categories);
         request.setAttribute("quote", quote);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/Categories.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/categories.jsp");
         dispatcher.forward(request, response);
         
     }

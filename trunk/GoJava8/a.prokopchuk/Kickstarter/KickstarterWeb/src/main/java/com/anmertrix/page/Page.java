@@ -5,8 +5,10 @@ import javax.servlet.http.HttpServlet;
 
 import com.anmertrix.ConnectionManager;
 import com.anmertrix.dao.CategoryDao;
+import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.dao.QuoteDao;
 import com.anmertrix.dao.sql.CategoryDaoSql;
+import com.anmertrix.dao.sql.ProjectDaoSql;
 import com.anmertrix.dao.sql.QuoteDaoSql;
 
 public abstract class Page extends HttpServlet {
@@ -16,11 +18,13 @@ public abstract class Page extends HttpServlet {
 	private ConnectionManager connectionManager;
 	protected QuoteDao quoteDao;
 	protected CategoryDao categoryDao;
+	protected ProjectDao projectDao;
 	
 	public void init() throws ServletException {
 		connectionManager = new ConnectionManager();
 		this.quoteDao = new QuoteDaoSql(connectionManager);
 		this.categoryDao = new CategoryDaoSql(connectionManager);
+		this.projectDao = new ProjectDaoSql(connectionManager);
 	}
 
 }

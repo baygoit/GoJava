@@ -25,12 +25,12 @@ public class ProjectsPage extends Page {
 			e.printStackTrace();
 		}
 		Category category = categoryDao.getCategory(categoryId);
-		List<Project> projects = categoryDao.getProjectsByCategoryId(categoryId);
+		List<Project> projects = projectDao.getProjectsByCategoryId(categoryId);
 		
 		request.setAttribute("category", category);
         request.setAttribute("projects", projects);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/Projects.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/projects.jsp");
         dispatcher.forward(request, response);
     }
 

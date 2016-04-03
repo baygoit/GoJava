@@ -22,11 +22,11 @@ public class ProjectPage extends Page {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-		Project project = categoryDao.getProjectById(projectId);
+		Project project = projectDao.getProjectById(projectId);
 		
         request.setAttribute("project", project);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/Project.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/project.jsp");
         dispatcher.forward(request, response);
 		
 		
