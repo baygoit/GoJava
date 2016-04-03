@@ -25,30 +25,18 @@ public class ProjectsServlet extends CommonServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Category> categories = categoryDao.getCategories();
-		Category category = getCategoryByIndex(request, categories);
+		String categoryName = request.getParameter("categoryName");
+		Category category = new Category();
+		category.setName(categoryName);
 
 		List<Project> projects = categoryDao.initProjects(category);
 
 		request.setAttribute("projects", projects);
+		request.setAttribute("category", category);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/projects.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/projects.jsp");
 		dispatcher.forward(request, response);
 
-	}
-
-	private Category getCategoryByIndex(HttpServletRequest request, List<Category> categories) {
-		String categoryIndexStr = request.getParameter("categoryIndex");
-
-		int categoryIndex = 0;
-		try {
-			categoryIndex = Integer.parseInt(categoryIndexStr);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-		request.setAttribute("categoryIndex", categoryIndex);
-		Category category = categories.get(categoryIndex);
-		return category;
 	}
 
 }

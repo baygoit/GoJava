@@ -8,11 +8,11 @@ import ua.nenya.project.Question;
 import ua.nenya.project.Reward;
 
 public interface CategoryDao {
-	List<Category> getCategories();
-	void initCategories();
+	List<Category> initCategories();
 	List<Project> initProjects(Category category);
 	List<Reward> initRewards(Project project);
 	List<Question> initQuestions(Project project);
-	void writeQuestionInProject(Project project, Question question);
-	void writeIvestmentInProject(Project project, int amount);
+	void writeQuestionInProject(String projectName, String question);
+	void writeIvestmentInProject(String projectName, int amount);
+	Project getProjectByName(String projectName);
 }

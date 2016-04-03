@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiResourceLocking="true">
+            <Resource 
+              name="jdbc/Kickstarter" 
+              auth="Container"
+              type="javax.sql.DataSource" 
+              username="postgres" 
+              password="111111"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://127.0.0.1:5432/Kickstarter"
+              validationQuery="select 1"
+              maxActive="10" 
+              maxIdle="4"
+             />
+</Context>
+<!--Context antiResourceLocking="true">
+            <Resource 
+              name="jdbc/yehifwbp" 
+              auth="Container"
+              type="javax.sql.DataSource" 
+              username="yehifwbp" 
+              password="-LpA9PHJlrE7O5jZawaXznuAMLXNHDJ_"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgres://yehifwbp:-LpA9PHJlrE7O5jZawaXznuAMLXNHDJ_@pellefant.db.elephantsql.com:5432/yehifwbp"
+              validationQuery="select 1"
+              maxActive="10" 
+              maxIdle="4"
+             />
+</Context-->

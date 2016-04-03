@@ -1,8 +1,5 @@
 package ua.nenya.project;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-
-@JsonAutoDetect
 public class Quote {
 	private String name;
 

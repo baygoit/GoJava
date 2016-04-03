@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nenya.dao.CategoryDao;
 import ua.nenya.project.Project;
 import ua.nenya.project.Question;
+import ua.nenya.project.Reward;
 
-
-public class ProjectServlet extends CommonServlet {
+public class InvestmentServlet extends CommonServlet {
 	private static final long serialVersionUID = 1L;
 	private CategoryDao categoryDao;
 
@@ -23,10 +23,8 @@ public class ProjectServlet extends CommonServlet {
 		categoryDao = initilizer.getCategoryDao();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String projectName = request.getParameter("projectName");
 		String categoryName = request.getParameter("categoryName");
 		
@@ -36,35 +34,56 @@ public class ProjectServlet extends CommonServlet {
 		Project project = categoryDao.getProjectByName(projectName);
 		request.setAttribute("project", project);
 
-		List<Question> questions = categoryDao.initQuestions(project);
+		List<Reward> rewards = categoryDao.initRewards(project);
 
-		request.setAttribute("questions", questions);
+		request.setAttribute("rewards", rewards);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/project.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/investment.jsp");
 		dispatcher.forward(request, response);
-
 	}
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String questionString = request.getParameter("question");
+		String amountString = request.getParameter("amount");
 		String projectName = request.getParameter("projectName");
 		String categoryName = request.getParameter("categoryName");
 		
 		request.setAttribute("categoryName", categoryName);
 		request.setAttribute("projectName", projectName);
-		
-		categoryDao.writeQuestionInProject(projectName, questionString);
-		
 
+		if(amountString.equals("0")){
+			String investitionString = request.getParameter("investition");
+			if(isAmountValid(investitionString)){
+				categoryDao.writeIvestmentInProject(projectName, Integer.parseInt(investitionString));
+			}else{
+				//TODO Exception
+			}
+		}else{
+				categoryDao.writeIvestmentInProject(projectName, Integer.parseInt(amountString));
+		}
+		
 		Project project = categoryDao.getProjectByName(projectName);
 		request.setAttribute("project", project);
 		
 		List<Question> questions = categoryDao.initQuestions(project);
 
 		request.setAttribute("questions", questions);
+		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/project.jsp");
 		dispatcher.forward(request, response);
 	}
-
+	
+	private boolean isAmountValid(String amount) {
+		int i = -1;
+		try {
+			i = Integer.parseInt(amount);
+		} catch (NumberFormatException e) {
+			e.getStackTrace();
+		}
+		if (i < 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

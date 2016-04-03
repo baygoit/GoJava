@@ -3,7 +3,6 @@ package ua.nenya.dao.db;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -11,9 +10,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,25 +19,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 
+import ua.nenya.dao.CategoryDao;
 import ua.nenya.project.Category;
 import ua.nenya.project.Project;
 import ua.nenya.project.Question;
-import ua.nenya.project.Quote;
 import ua.nenya.project.Reward;
 import ua.nenya.util.ConnectionManager;
 
-@RunWith(MockitoJUnitRunner.class)
+
 public class CategoryDaoDbImplTest {
 
-	@Mock
+	
 	private ConnectionManager connectionManager;
-
-	@Mock
-	private Quote quote;
-
-	@InjectMocks
-	private QuoteDaoDbImpl quoteDao;
 
 	private Category musicCategory;
 	private Project newSongProject;
@@ -53,6 +44,8 @@ public class CategoryDaoDbImplTest {
 	@Before
 	public void init() {
 
+		connectionManager = mock(ConnectionManager.class);
+		
 		newSongProject = new Project();
 		newSongProject.setName("New Song");
 		newSongProject.setDescription("description of new song");
@@ -111,7 +104,8 @@ public class CategoryDaoDbImplTest {
 
 		when(connectionManager.getConnection()).thenReturn(connection);
 
-		List<Category> categoriesFromMethod = new CategoryDaoDbImpl(connectionManager).getCategories();
+		CategoryDao categoryDao = new CategoryDaoDbImpl(connectionManager);
+		List<Category> categoriesFromMethod = categoryDao.initCategories();
 
 		assertEquals(categories.get(0).getName(), categoriesFromMethod.get(0).getName());
 		assertEquals(categories.get(1).getName(), categoriesFromMethod.get(1).getName());
@@ -138,7 +132,7 @@ public class CategoryDaoDbImplTest {
 		List<Project> projectsFromMethod = new CategoryDaoDbImpl(connectionManager).initProjects(musicCategory);
 
 		assertEquals(projects.get(0).getName(), projectsFromMethod.get(0).getName());
-		verify(connectionManager, times(2)).getConnection();
+		verify(connectionManager, times(3)).getConnection();
 	}
 	
 	@Test
@@ -181,7 +175,7 @@ public class CategoryDaoDbImplTest {
 
 		List<Reward> rewardsFromMethod = new CategoryDaoDbImpl(connectionManager).initRewards(newSongProject);
 
-		assertEquals(rewards.get(0).getName(), rewardsFromMethod.get(1).getName());
+		assertEquals(rewards.get(0).getName(), rewardsFromMethod.get(0).getName());
 		verify(connectionManager).getConnection();
 	}
 	
@@ -199,9 +193,9 @@ public class CategoryDaoDbImplTest {
 
 		when(connectionManager.getConnection()).thenReturn(connection);
 
-		new CategoryDaoDbImpl(connectionManager).writeQuestionInProject(newSongProject, new Question());
+		new CategoryDaoDbImpl(connectionManager).writeQuestionInProject("New Song", "Question?");
 
-		verify(connectionManager, times(2)).getConnection();
+		verify(connectionManager, times(4)).getConnection();
 	}
 	
 	@Test
@@ -218,8 +212,8 @@ public class CategoryDaoDbImplTest {
 
 		when(connectionManager.getConnection()).thenReturn(connection);
 
-		new CategoryDaoDbImpl(connectionManager).writeIvestmentInProject(newSongProject, 123);
+		new CategoryDaoDbImpl(connectionManager).writeIvestmentInProject("New Song", 123);
 
-		verify(connectionManager).getConnection();
+		verify(connectionManager, times(2)).getConnection();
 	}
 }
