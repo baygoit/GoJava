@@ -3,7 +3,8 @@ package ua.nenya.project;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project implements GettingNameInterface {
+public class Project {
+	private int id;
 	private String name;
 	private String description;
 	private int neededAmount;
@@ -100,5 +101,16 @@ public class Project implements GettingNameInterface {
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	
 }

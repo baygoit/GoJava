@@ -24,7 +24,8 @@ public class QuoteDaoDbImpl implements QuoteDao {
 			statement.setMaxRows(1);
 			ResultSet set = statement.executeQuery(query);
 			set.next();
-			quote = new Quote(set.getString("quote"));
+			quote = new Quote();
+			quote.setName(set.getString("quote"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

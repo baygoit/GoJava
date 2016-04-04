@@ -1,23 +1,35 @@
 package ua.nenya.util;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public class ConnectionManager {
 
 	private Connection connection;
-	private String url = "jdbc:postgresql://127.0.0.1:5432/postgres";
-	private String user = "postgres";
-	private String password = "111111";
-
-	private void openConnection() throws SQLException {
+ 
+	private void openConnection(){
 		try {
 			Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		connection = DriverManager.getConnection(url, user, password);
+		
+            try {
+                Context context = new InitialContext();
+                DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/Kickstarter");
+                //DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/yehifwbp");
+                connection = dataSource.getConnection();
+            } catch (NamingException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        
 	}
 
 	public synchronized Connection getConnection() throws SQLException {
@@ -27,8 +39,4 @@ public class ConnectionManager {
 		return connection;
 	}
 
-	
-	public void closeConnection() throws SQLException {
-		connection.close();
-	}
 }

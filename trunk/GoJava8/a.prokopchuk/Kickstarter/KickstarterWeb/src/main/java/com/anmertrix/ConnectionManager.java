@@ -1,37 +1,28 @@
 package com.anmertrix;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-// TODO I need ConnectionManager interface and implementation for mockito
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class ConnectionManager {
 	
-	private Connection connection;
-    
-	private void openConnection() {
-            String url = "jdbc:mysql://s14.thehost.com.ua/kickstarter";
-            try {
-            	Class.forName("com.mysql.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-            try {
-				connection = DriverManager.getConnection(url, "kickstarter", "kickstarter");
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-            
-    }
-
-	public synchronized Connection getConnection() throws SQLException {
-		if (connection == null || connection.isClosed()) {
-			openConnection();
-		}
+	public Connection getConnection() throws SQLException {
+		Connection connection = null;
+		try {
+			Context ctx = new InitialContext();
+			Context envCtx = (Context) ctx.lookup("java:comp/env");
+			DataSource dataSource = (DataSource) envCtx.lookup("jdbc/KickstarterDS");
+			connection = dataSource.getConnection();
+			
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 		return connection;
     }
-
-	public void closeConnection() throws SQLException {
-		connection.close();
-	}
 }

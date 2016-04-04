@@ -19,7 +19,11 @@ public class ConnectionManager {
         String host = "tantor.db.elephantsql.com";
         String port = "5432";
         String url = "jdbc:postgresql://" + host + ":" + port + "/" + dbName + "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
-
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         connection = DriverManager.getConnection(url, user, pass);
     }
 

@@ -3,17 +3,13 @@ package ua.nenya.project;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-import ua.nenya.project.GettingNameInterface;
 import ua.nenya.project.Project;
 
-@JsonAutoDetect
-public class Category implements GettingNameInterface {
+public class Category{
+	private int id;
 	private String name;
 	private List<Project> projects = new ArrayList<>();
-	
-	
 
 	public Category() {
 	}
@@ -29,4 +25,13 @@ public class Category implements GettingNameInterface {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 }

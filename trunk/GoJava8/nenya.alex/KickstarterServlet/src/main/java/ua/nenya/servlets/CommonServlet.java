@@ -1,19 +1,22 @@
 package ua.nenya.servlets;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServlet;
 
 import ua.nenya.main.DaoInitilizer;
+import ua.nenya.project.Category;
 
-//@WebServlet("/CommonServlet")
 public class CommonServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	static final String ENTERING_MODE_ENV_NAME = "ENTERING_MODE";
-	private String switcher = System.getenv(ENTERING_MODE_ENV_NAME);
 	protected DaoInitilizer initilizer = new DaoInitilizer();
+	protected List<Category> categories = new ArrayList<>();
 	
 	public void init() {
-		initilizer.initDao(switcher);
+		initilizer.initDao();
+		categories = initilizer.getCategoryDao().initCategories();
 	}
 
 }

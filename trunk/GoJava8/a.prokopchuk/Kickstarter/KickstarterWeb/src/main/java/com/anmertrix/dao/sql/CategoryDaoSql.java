@@ -10,12 +10,10 @@ import java.util.List;
 import com.anmertrix.ConnectionManager;
 import com.anmertrix.dao.CategoryDao;
 import com.anmertrix.domain.Category;
-import com.anmertrix.domain.Project;
 
 public class CategoryDaoSql implements CategoryDao {
 
 	private ConnectionManager connectionManager;
-	protected List<Category> categories = new ArrayList<Category>();
 
 	public CategoryDaoSql(ConnectionManager connectionManager) {
 		this.connectionManager = connectionManager;
@@ -26,8 +24,7 @@ public class CategoryDaoSql implements CategoryDao {
 		
 		Category category = new Category();
     	
-		try {
-			Statement statement = connectionManager.getConnection().createStatement();
+		try (Statement statement = connectionManager.getConnection().createStatement()) {
 			ResultSet rs = statement.executeQuery("SELECT name FROM category WHERE id=" + index);
 			rs.next();
 			String name = rs.getString("name");
@@ -44,8 +41,7 @@ public class CategoryDaoSql implements CategoryDao {
 		
 		List<Category> categories = new ArrayList<Category>();
     	
-		try {
-			Statement statement = connectionManager.getConnection().createStatement();
+		try (Statement statement = connectionManager.getConnection().createStatement()) {
 			ResultSet rs = statement.executeQuery("SELECT id, name FROM category");
 			while(rs.next()) {
 				int id = rs.getInt("id");
@@ -59,64 +55,6 @@ public class CategoryDaoSql implements CategoryDao {
 		}
 		
 		return categories;
-	}
-
-	@Override
-	public List<Project> getProjectsByCategoryId(int index) {
-		
-		List<Project> projects = new ArrayList<Project>();
-    	
-		try {
-			Statement statement = connectionManager.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT id, name, description, required_budget, days_left, history, url FROM project WHERE category_id=" + index);
-			while(rs.next()) {
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				String description = rs.getString("description");
-				int required_budget = rs.getInt("required_budget");
-				int gathered_budget = rs.getInt("gathered_budget");
-				int days_left = rs.getInt("days_left");
-				String history = rs.getString("history");
-				String url = rs.getString("url");
-				
-				Project project = new Project();
-				project.setProjectData(id, name, description, required_budget, gathered_budget, days_left, history);
-				project.setURL(url);
-				
-				projects.add(project);				
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-		
-		return projects;
-	}
+	}	
 	
-	@Override
-	public Project getProjectById(int index) {
-		
-		Project project = new Project();
-    	
-		try {
-			Statement statement = connectionManager.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT id, name, description, required_budget, gathered_budget, days_left, history, url FROM project WHERE id=" + index);
-			rs.next();
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				String description = rs.getString("description");
-				int required_budget = rs.getInt("required_budget");
-				int gathered_budget = rs.getInt("gathered_budget");
-				int days_left = rs.getInt("days_left");
-				String history = rs.getString("history");
-				String url = rs.getString("url");
-				
-				project.setProjectData(id, name, description, required_budget, gathered_budget, days_left, history);
-				project.setURL(url);
-				
-		} catch (SQLException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-		
-		return project;
-	}
 }

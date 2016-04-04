@@ -1,54 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <servlet-name>QuoteServlet</servlet-name>
-    <servlet-class>ua.nenya.servlets.QuoteServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>CategoryServlet</servlet-name>
-    <servlet-class>ua.nenya.servlets.CategoryServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>ProjectsServlet</servlet-name>
-    <servlet-class>ua.nenya.servlets.ProjectsServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>ProjectServlet</servlet-name>
-    <servlet-class>ua.nenya.servlets.ProjectServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>InvestitionServlet</servlet-name>
-    <servlet-class>ua.nenya.servlets.InvestitionServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>QuestionServlet</servlet-name>
-    <servlet-class>ua.nenya.servlets.QuestionServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>QuoteServlet</servlet-name>
-    <url-pattern>/quote</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>CategoryServlet</servlet-name>
-    <url-pattern>/category</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>ProjectsServlet</servlet-name>
-    <url-pattern>/projects</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>ProjectServlet</servlet-name>
-    <url-pattern>/project</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>InvestitionServlet</servlet-name>
-    <url-pattern>/investment</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>QuestionServlet</servlet-name>
-    <url-pattern>/question</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>CategoryServlet</servlet-name>
+		<servlet-class>ua.nenya.servlets.CategoryServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ProjectsServlet</servlet-name>
+		<servlet-class>ua.nenya.servlets.ProjectsServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ProjectServlet</servlet-name>
+		<servlet-class>ua.nenya.servlets.ProjectServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>InvestmentServlet</servlet-name>
+		<servlet-class>ua.nenya.servlets.InvestmentServlet</servlet-class>
+	</servlet>
+
+
+
+	<servlet-mapping>
+		<servlet-name>CategoryServlet</servlet-name>
+		<url-pattern>/categoryServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ProjectsServlet</servlet-name>
+		<url-pattern>/projectsServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ProjectServlet</servlet-name>
+		<url-pattern>/projectServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>InvestmentServlet</servlet-name>
+		<url-pattern>/investmentServlet</url-pattern>
+	</servlet-mapping>
+
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/Kickstarter</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/yehifwbp</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
 </web-app>
