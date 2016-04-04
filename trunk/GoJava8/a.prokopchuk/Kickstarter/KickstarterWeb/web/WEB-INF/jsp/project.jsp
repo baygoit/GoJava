@@ -12,6 +12,26 @@
 	<p>Video URL: ${project.url}</p>
 	
 	<h3>Question:</h3>
-	
+	<div class="questions">
+		<c:forEach var="question" items="${questions}">
+			<p class="question">${question.question}</p>
+				<c:forEach var="answer" items="${question.answers}">
+					<p class="answer">${answer.answer}</p>
+				</c:forEach>
+		</c:forEach>
+	</div>
+	<form class="form-horizontal" action="" method="POST">
+		<div class="form-group col-sm-7">
+			<input required type="text" class="form-control" id="inputQuestion"
+				name="question" placeholder="Enter your question">
+			<input id="projectId" type="hidden" name="projectId"
+				value="${project.id}" />
+		</div>
+		<div class="form-group col-sm-7">
+			<button type="submit" class="btn btn-default">Ask</button>
+		</div>
+	</form>
+
+
 
 <jsp:include page="footer.jsp" />

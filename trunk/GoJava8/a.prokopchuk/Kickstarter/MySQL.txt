@@ -4,7 +4,7 @@ USE kickstarter;
 
 /*quote table*/
 CREATE TABLE quote (
-    id int unsigned not null auto_increment,  
+    id int not null auto_increment,  
     author VARCHAR(200) NOT NULL, 
     text VARCHAR(200) NOT NULL, 
     primary key (id)
@@ -107,7 +107,7 @@ history, url) VALUES (6, 'Alzheimer',
 
 /*reward table*/
 CREATE TABLE reward (
-    id int unsigned not null auto_increment, 
+    id intquestion_id not null auto_increment, 
     name VARCHAR(50) NOT NULL, 
     amount int, 
     description VARCHAR(200), 
@@ -120,7 +120,7 @@ INSERT INTO reward (name, amount, description) VALUES ('100$', 100, 'You obtain 
 
 /*question table*/
 CREATE TABLE question (
-    id int unsigned not null auto_increment, 
+    id int not null auto_increment, 
     project_id int not null, 
     question VARCHAR(500) NOT NULL, 
     PRIMARY KEY(id),
@@ -137,9 +137,28 @@ INSERT INTO question (project_id, question) VALUES (4, 'What?');
 INSERT INTO question (project_id, question) VALUES (5, 'Which?');
 INSERT INTO question (project_id, question) VALUES (6, 'Is it really?');
 
+/*answer table*/
+CREATE TABLE answer (
+    id int not null auto_increment, 
+    question_id int not null, 
+    answer VARCHAR(500) NOT NULL, 
+    PRIMARY KEY(id),
+    FOREIGN KEY (question_id) REFERENCES question(id) ON UPDATE CASCADE ON DELETE RESTRICT
+)engine=InnoDB;
+
+INSERT INTO answer (question_id, answer) VALUES (1, 'test1!');
+INSERT INTO answer (question_id, answer) VALUES (1, 'test2!');
+INSERT INTO answer (question_id, answer) VALUES (1, 'test3!');
+INSERT INTO answer (question_id, answer) VALUES (2, 'test4!');
+INSERT INTO answer (question_id, answer) VALUES (2, 'test5!');
+INSERT INTO answer (question_id, answer) VALUES (3, 'test6!');
+INSERT INTO answer (question_id, answer) VALUES (4, 'test7!');
+INSERT INTO answer (question_id, answer) VALUES (5, 'test8!');
+INSERT INTO answer (question_id, answer) VALUES (6, 'test9!');
+
 /*investment table*/
 CREATE TABLE investment (
-    id int unsigned not null auto_increment, 
+    id int not null auto_increment, 
     project_id int not null, 
     cardholder_name varchar(50) NOT NULL,
     card_number varchar(16) NOT NULL,

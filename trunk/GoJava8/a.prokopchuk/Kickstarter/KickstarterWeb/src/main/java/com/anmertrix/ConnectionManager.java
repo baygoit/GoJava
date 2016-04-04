@@ -9,20 +9,33 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class ConnectionManager {
-	
-	public Connection getConnection() throws SQLException {
-		Connection connection = null;
+
+	private Connection connection;
+
+	private void openConnection() {
 		try {
-			Context ctx = new InitialContext();
-			Context envCtx = (Context) ctx.lookup("java:comp/env");
-			DataSource dataSource = (DataSource) envCtx.lookup("jdbc/KickstarterDS");
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			Context context = new InitialContext();
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/KickstarterDS");
 			connection = dataSource.getConnection();
-			
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}
+
+	}
+
+	public synchronized Connection getConnection() throws SQLException {
+		if (connection == null || connection.isClosed()) {
+			openConnection();
+		}
 		return connection;
-    }
+	}
+
 }
