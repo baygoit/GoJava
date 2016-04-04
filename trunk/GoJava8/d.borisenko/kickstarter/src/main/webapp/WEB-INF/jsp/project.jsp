@@ -1,5 +1,6 @@
-<%@include file='header.jsp'%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="title" value="${project.name}" scope="request"/>
+<%@include file='header.jsp'%>
 		Project: <label class="subheader">${project.name}</label>
 		<hr/>
 		<table>
@@ -44,6 +45,6 @@
 			<input class='button' type='submit' value='Send'>
 		</form>
 		<br/>
-		<a href='?page=investment&id=${project.id}'>Invest in the project</a><br/><br/>
+		<a href='?page=investment&project_id=${project.id}'>Invest in the project</a><br/><br/>
 		<a href='?page=category&id=${category.id}'>Return</a>
 <%@include file='footer.jsp'%>

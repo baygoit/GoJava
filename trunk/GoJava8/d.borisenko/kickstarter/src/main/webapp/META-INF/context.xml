@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Context>
+	<Resource 
+		name="jdbc/dataSource"
+		auth="Container"
+		type="javax.sql.DataSource"
+		username="dborisenko"
+		password="b3cbcf"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://www.db4free.net:3306/kickstarter_db?useSSL=false"
+		maxTotal="10"
+		maxIdle="3"
+		maxWaitMillis="10000"
+	/>
+</Context>

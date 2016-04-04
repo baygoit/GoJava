@@ -1,5 +1,6 @@
-<%@include file='header.jsp'%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="title" value="Investment" scope="request"/>
+<%@include file='header.jsp'%>
 		<label class="subheader">Investment</label><br/><br/>
 		Project: ${project.name}<br/>
 		Money left to collect: ${project.requiredSum - project.collectedSum}<br/>

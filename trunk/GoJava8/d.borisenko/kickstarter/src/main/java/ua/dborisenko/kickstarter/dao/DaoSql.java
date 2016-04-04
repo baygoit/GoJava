@@ -4,31 +4,32 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.commons.dbcp2.BasicDataSource;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public abstract class DaoSql {
-    private static final String JDBC_DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
-    private static final String JDBC_CONNECTION_STRING = "jdbc:mysql://172.21.6.128:3306/kickstarter?user=kickstarter&password=123&useSSL=false";
-    private static final int MAX_CONNECTIONS_COUNT = 5;
-    private BasicDataSource connectionPool;
+    private DataSource dataSource;
 
     public DaoSql() {
-        initPool();
+        initDataSource();
     }
-
-    private void initPool() {
-        connectionPool = new BasicDataSource();
-        connectionPool.setDriverClassName(JDBC_DRIVER_CLASS_NAME);
-        connectionPool.setUrl(JDBC_CONNECTION_STRING);
-        connectionPool.setInitialSize(MAX_CONNECTIONS_COUNT);
+    
+    void setDataSource(DataSource ds) {
+        dataSource = ds;
+    }
+    
+    void initDataSource() {
+        try {
+            InitialContext initContext= new InitialContext();
+            dataSource = (DataSource) initContext.lookup("java:comp/env/jdbc/dataSource");
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
     }
 
     Connection getConnection() throws SQLException {
-        return connectionPool.getConnection();
-    }
-
-    public void closePool() throws SQLException {
-        connectionPool.close();
+        return dataSource.getConnection();
     }
 
     protected void closeStatement(Statement statement) throws SQLException {

@@ -1,3 +1,0 @@
-1#Sport (file)
-2#Space investigation (file)
-3#Game development (file)

@@ -1,5 +1,6 @@
-<%@include file='header.jsp'%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="title" value="Projects" scope="request"/>
+<%@include file='header.jsp'%>
 		Category: <label class="subheader">${category.name}</label><br/><br/>
 		Project list:<br/>
 		<hr/>
