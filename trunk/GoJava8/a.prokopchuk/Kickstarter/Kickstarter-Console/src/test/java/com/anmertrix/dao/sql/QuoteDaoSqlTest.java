@@ -22,7 +22,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.anmertrix.ConnectionManager;
-import com.anmertrix.dao.QuoteDao;
 import com.anmertrix.domain.Quote;
 
 @Ignore
