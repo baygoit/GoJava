@@ -1,4 +1,4 @@
-package com.anmertrix.page;
+package com.anmertrix.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +11,7 @@ import com.anmertrix.dao.sql.CategoryDaoSql;
 import com.anmertrix.dao.sql.ProjectDaoSql;
 import com.anmertrix.dao.sql.QuoteDaoSql;
 
-public abstract class Page extends HttpServlet {
+public abstract class Servlet extends HttpServlet {
 	
  	private static final long serialVersionUID = 1L;
  	

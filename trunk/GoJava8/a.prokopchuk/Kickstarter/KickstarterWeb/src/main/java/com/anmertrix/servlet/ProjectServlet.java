@@ -1,4 +1,4 @@
-package com.anmertrix.page;
+package com.anmertrix.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +12,7 @@ import com.anmertrix.domain.Answer;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
 
-public class ProjectPage extends Page {
+public class ProjectServlet extends Servlet {
 
 	private static final long serialVersionUID = 1L;
 	

@@ -1,4 +1,4 @@
-package com.anmertrix.page;
+package com.anmertrix.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CategoriesPage extends Page {
+public class CategoriesServlet extends Servlet {
 	
 	private static final long serialVersionUID = 1L;
 	

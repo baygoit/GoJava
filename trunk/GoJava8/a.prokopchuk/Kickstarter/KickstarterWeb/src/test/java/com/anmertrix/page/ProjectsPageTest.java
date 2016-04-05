@@ -26,6 +26,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.anmertrix.dao.CategoryDao;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.domain.Category;
+import com.anmertrix.servlet.ProjectsServlet;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectsPageTest {
@@ -39,7 +40,7 @@ public class ProjectsPageTest {
 	@Mock
 	private HttpServletResponse response;
 	@InjectMocks
-	private ProjectsPage projectsPage = spy(ProjectsPage.class);
+	private ProjectsServlet projectsPage = spy(ProjectsServlet.class);
 	
 	@Test
 	public void testDoGet() throws ServletException, IOException {
