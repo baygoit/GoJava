@@ -2,16 +2,16 @@ package ua.nenya.dao;
 
 import java.util.List;
 
-import ua.nenya.project.Category;
-import ua.nenya.project.Project;
-import ua.nenya.project.Question;
-import ua.nenya.project.Reward;
+import ua.nenya.domain.Category;
+import ua.nenya.domain.Project;
+import ua.nenya.domain.Question;
+import ua.nenya.domain.Reward;
 
 public interface CategoryDao {
-	List<Category> initCategories();
-	List<Project> initProjects(Category category);
-	List<Reward> initRewards(Project project);
-	List<Question> initQuestions(Project project);
+	List<Category> getCategories();
+	List<Project> getProjects(String categoryName);
+	List<Reward> getRewards(String projectName);
+	List<Question> getQuestions(String projectName);
 	void writeQuestionInProject(String projectName, String question);
 	void writeIvestmentInProject(String projectName, int amount);
 	Project getProjectByName(String projectName);

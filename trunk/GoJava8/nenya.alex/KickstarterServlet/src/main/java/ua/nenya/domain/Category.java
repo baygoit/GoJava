@@ -1,10 +1,9 @@
-package ua.nenya.project;
+package ua.nenya.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-import ua.nenya.project.Project;
+import ua.nenya.domain.Project;
 
 public class Category{
 	private int id;

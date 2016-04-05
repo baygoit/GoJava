@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nenya.dao.CategoryDao;
-import ua.nenya.project.Category;
-import ua.nenya.project.Project;
+import ua.nenya.domain.Project;
 
 public class ProjectsServlet extends CommonServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,19 +19,17 @@ public class ProjectsServlet extends CommonServlet {
 	@Override
 	public void init() {
 		super.init();
-		categoryDao = initilizer.getCategoryDao();
+		categoryDao = getInitilizer().getCategoryDao();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String categoryName = request.getParameter("categoryName");
-		Category category = new Category();
-		category.setName(categoryName);
 
-		List<Project> projects = categoryDao.initProjects(category);
+		List<Project> projects = categoryDao.getProjects(categoryName);
 
 		request.setAttribute("projects", projects);
-		request.setAttribute("category", category);
+		request.setAttribute("categoryName", categoryName);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/projects.jsp");
 		dispatcher.forward(request, response);

@@ -1,4 +1,4 @@
-package ua.nenya.project;
+package ua.nenya.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +13,8 @@ public class Project {
 	private String history = "";
 	private String video = "";
 	private List<Question> questions = new ArrayList<>();
-	private Reward anyAmountReward = new Reward();
 	private List<Reward> rewards = new ArrayList<>(); 
 	
-
-	public Project() {
-		anyAmountReward.setName("Any amount");
-		anyAmountReward.setDescription("");
-		rewards.add(anyAmountReward);
-	}
 
 
 	public String getName() {

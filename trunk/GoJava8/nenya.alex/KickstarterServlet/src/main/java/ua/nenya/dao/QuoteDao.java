@@ -2,7 +2,7 @@ package ua.nenya.dao;
 
 import java.util.Random;
 
-import ua.nenya.project.Quote;
+import ua.nenya.domain.Quote;
 
 public interface QuoteDao {
 	

@@ -1,13 +1,11 @@
-package ua.nenya.project;
+package ua.nenya.domain;
 
-public class Question{
+public class Quote {
+	private String name;
 
-	String name;
-
-	
-	public Question() {
+	public Quote() {
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -15,5 +13,6 @@ public class Question{
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	
 }

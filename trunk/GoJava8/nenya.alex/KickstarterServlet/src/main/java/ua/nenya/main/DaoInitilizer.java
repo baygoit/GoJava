@@ -17,7 +17,6 @@ public class DaoInitilizer {
 			quoteDao.initQuotes();
 
 			categoryDao = new CategoryDaoDbImpl(connectionManager);
-			categoryDao.initCategories();
 		
 	}
 

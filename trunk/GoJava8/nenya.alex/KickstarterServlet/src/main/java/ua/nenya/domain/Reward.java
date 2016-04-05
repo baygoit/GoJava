@@ -1,4 +1,4 @@
-package ua.nenya.project;
+package ua.nenya.domain;
 
 public class Reward{
 	private String name;

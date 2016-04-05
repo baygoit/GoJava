@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nenya.dao.CategoryDao;
-import ua.nenya.project.Project;
-import ua.nenya.project.Question;
-import ua.nenya.project.Reward;
+import ua.nenya.domain.Project;
+import ua.nenya.domain.Reward;
 
 public class InvestmentServlet extends CommonServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +19,7 @@ public class InvestmentServlet extends CommonServlet {
 	@Override
 	public void init() {
 		super.init();
-		categoryDao = initilizer.getCategoryDao();
+		categoryDao = getInitilizer().getCategoryDao();
 	}
 
 	
@@ -34,7 +33,7 @@ public class InvestmentServlet extends CommonServlet {
 		Project project = categoryDao.getProjectByName(projectName);
 		request.setAttribute("project", project);
 
-		List<Reward> rewards = categoryDao.initRewards(project);
+		List<Reward> rewards = categoryDao.getRewards(projectName);
 
 		request.setAttribute("rewards", rewards);
 
@@ -47,10 +46,6 @@ public class InvestmentServlet extends CommonServlet {
 		String amountString = request.getParameter("amount");
 		String projectName = request.getParameter("projectName");
 		String categoryName = request.getParameter("categoryName");
-		
-		request.setAttribute("categoryName", categoryName);
-		request.setAttribute("projectName", projectName);
-
 		if(amountString.equals("0")){
 			String investitionString = request.getParameter("investition");
 			if(isAmountValid(investitionString)){
@@ -61,16 +56,8 @@ public class InvestmentServlet extends CommonServlet {
 		}else{
 				categoryDao.writeIvestmentInProject(projectName, Integer.parseInt(amountString));
 		}
-		
-		Project project = categoryDao.getProjectByName(projectName);
-		request.setAttribute("project", project);
-		
-		List<Question> questions = categoryDao.initQuestions(project);
 
-		request.setAttribute("questions", questions);
-		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/project.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("projectServlet?categoryName="+categoryName+"&projectName="+projectName);
 	}
 	
 	private boolean isAmountValid(String amount) {
