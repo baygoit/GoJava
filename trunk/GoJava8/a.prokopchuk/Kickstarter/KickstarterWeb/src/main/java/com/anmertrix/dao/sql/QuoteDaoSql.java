@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.anmertrix.ConnectionManager;
+import com.anmertrix.dao.DaoException;
 import com.anmertrix.dao.QuoteDao;
 import com.anmertrix.domain.Quote;
 
@@ -24,7 +25,7 @@ public class QuoteDaoSql implements QuoteDao {
 			String text = rs.getString("text");
 			return new Quote(author, text);
 		} catch (SQLException e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw new DaoException(e);
 		}
 	}
 

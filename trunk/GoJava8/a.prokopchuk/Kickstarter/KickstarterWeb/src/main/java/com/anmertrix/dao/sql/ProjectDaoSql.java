@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.anmertrix.ConnectionManager;
+import com.anmertrix.dao.DaoException;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.domain.Answer;
 import com.anmertrix.domain.Project;
@@ -38,7 +39,7 @@ public class ProjectDaoSql implements ProjectDao {
 			}
 			return projects;
 		} catch (SQLException e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw new DaoException(e);
 		}
 	}
 	
@@ -63,7 +64,7 @@ public class ProjectDaoSql implements ProjectDao {
 			project.setUrl(url);
 				
 		} catch (SQLException e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw new DaoException(e);
 		}
 		
 		return project;
@@ -87,7 +88,7 @@ public class ProjectDaoSql implements ProjectDao {
 			}
 			return questions;
 		} catch (SQLException e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw new DaoException(e);
 		}
 	}
 	
@@ -109,7 +110,7 @@ public class ProjectDaoSql implements ProjectDao {
 			}
 			return answers;
 		} catch (SQLException e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw new DaoException(e);
 		}
 	}
 	
@@ -124,7 +125,7 @@ public class ProjectDaoSql implements ProjectDao {
 			statement.execute();
 			
 		} catch (SQLException e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw new DaoException(e);
 		}
 	}
 

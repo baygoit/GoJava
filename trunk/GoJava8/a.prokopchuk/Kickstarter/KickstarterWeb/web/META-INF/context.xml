@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<Context path="/kickstarter">
+    <Resource 
+        driverClassName="com.mysql.jdbc.Driver" 
+        maxActive="8" 
+        maxIdle="4" 
+        maxWait="5000" 
+        name="jdbc/KickstarterDS"
+        auth="Container" 
+        username="kickstarter" 
+        password="kickstarter" 
+        type="javax.sql.DataSource" 
+        url="jdbc:mysql://s14.thehost.com.ua/kickstarter" 
+        validationQuery="SELECT 1">
+    </Resource>
+</Context>

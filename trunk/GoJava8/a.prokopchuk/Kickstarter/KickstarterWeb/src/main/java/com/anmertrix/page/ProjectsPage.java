@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.anmertrix.dao.NoResultException;
 import com.anmertrix.domain.Category;
 import com.anmertrix.domain.Project;
 
@@ -22,10 +23,19 @@ public class ProjectsPage extends Page {
 		try {
 			categoryId = Integer.parseInt(categoryIdStr);
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			response.sendError(400);
+			return;
 		}
-		Category category = categoryDao.getCategory(categoryId);
-		List<Project> projects = projectDao.getProjectsByCategoryId(categoryId);
+
+		Category category = null;
+		try {
+			category = categoryDao.getCategory(categoryId);
+		} catch (NoResultException e) {
+			response.sendError(404);
+			return;
+		}
+		
+		List<Project> projects = projectDao.getProjectsByCategoryId(category.getId());
 		
 		request.setAttribute("category", category);
         request.setAttribute("projects", projects);

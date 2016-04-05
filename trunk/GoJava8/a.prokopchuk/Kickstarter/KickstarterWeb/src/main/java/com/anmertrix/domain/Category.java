@@ -1,22 +1,11 @@
 package com.anmertrix.domain;
 
-import java.util.ArrayList;
-import java.util.List;
  
 public class Category {
 	
-	public Category() {
-		
-	}
 	private int id;
 	private String name;
-	
-	private List<Project> projects = new ArrayList<Project>();
 
-	public Category(String name) {
-		this.name = name;
-	}
-	
 	public int getId() {
 		return id;
 	}
@@ -31,17 +20,5 @@ public class Category {
 	
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public void setProject(Project project) {
-		projects.add(project);
-	}
-
-	public List<Project> getProjects() {
-		return projects;
-	}
-
-	public Project getProject(int i) {
-		return projects.get(i);
 	}
 }
