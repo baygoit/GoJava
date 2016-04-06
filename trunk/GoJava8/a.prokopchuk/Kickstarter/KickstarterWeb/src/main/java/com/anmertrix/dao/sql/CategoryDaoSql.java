@@ -15,7 +15,6 @@ import com.anmertrix.domain.Category;
 public class CategoryDaoSql implements CategoryDao {
 
 	private static final String SELECT_CATEGORIES = "SELECT id, name FROM category";
-
 	private static final String SELECT_CATEGORY_BY_ID = "SELECT name FROM category WHERE id=?";
 
 	private ConnectionManager connectionManager;
@@ -25,15 +24,15 @@ public class CategoryDaoSql implements CategoryDao {
 	}
 
 	@Override
-	public Category getCategory(int id) {
+	public Category getCategory(int category_id) {
 		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(SELECT_CATEGORY_BY_ID)) {
-			statement.setInt(1, id);
+			statement.setInt(1, category_id);
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
 				String name = rs.getString("name");
 
 				Category category = new Category();
-				category.setId(id);
+				category.setId(category_id);
 				category.setName(name);
 				return category;
 			} else {

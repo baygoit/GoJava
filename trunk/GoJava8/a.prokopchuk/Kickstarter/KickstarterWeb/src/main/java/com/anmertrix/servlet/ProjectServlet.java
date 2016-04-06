@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.anmertrix.dao.NoResultException;
 import com.anmertrix.domain.Answer;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
@@ -23,9 +24,18 @@ public class ProjectServlet extends Servlet {
 		try {
 			projectId = Integer.parseInt(projectIdStr);
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			response.sendError(400);
+			return;
 		}
-		Project project = projectDao.getProjectById(projectId);
+		
+		Project project = null;
+		try {
+			project = projectDao.getProjectById(projectId);
+		} catch (NoResultException e) {
+			response.sendError(404);
+			return;
+		}
+		
 		List<Question> questions = projectDao.getQuestionByProjectId(projectId);
 		
 		for (Question question: questions) {

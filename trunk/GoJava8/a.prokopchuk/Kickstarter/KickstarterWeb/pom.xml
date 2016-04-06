@@ -65,7 +65,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
-					<warSourceDirectory>web</warSourceDirectory>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<outputDirectory>/home/andriy/JAVA/apache-tomcat-8.0.23/webapps</outputDirectory>
 				</configuration>

@@ -6,7 +6,7 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>Categories</servlet-name>
-    <servlet-class>com.anmertrix.page.CategoriesPage</servlet-class>
+    <servlet-class>com.anmertrix.servlet.CategoriesServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Categories</servlet-name>
@@ -14,7 +14,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Projects</servlet-name>
-    <servlet-class>com.anmertrix.page.ProjectsPage</servlet-class>
+    <servlet-class>com.anmertrix.servlet.ProjectsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Projects</servlet-name>
@@ -22,7 +22,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Project</servlet-name>
-    <servlet-class>com.anmertrix.page.ProjectPage</servlet-class>
+    <servlet-class>com.anmertrix.servlet.ProjectServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Project</servlet-name>
