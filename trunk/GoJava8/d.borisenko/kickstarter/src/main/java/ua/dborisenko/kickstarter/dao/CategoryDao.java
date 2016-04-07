@@ -25,7 +25,7 @@ public class CategoryDao extends DaoSql {
     private static final String QUERY_GET_INVESTMENTS = "SELECT id, cardholder_name, card_number, amount FROM investments WHERE project_id = ?";
     private static final String QUERY_ADD_INVESTMENT = "INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (?, ?, ?, ?)";
     private static final String QUERY_GET_REWARDS = "SELECT id, amount, description FROM rewards WHERE project_id = ?";
-    
+
     public void getQuestions(Project project) {
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(QUERY_GET_QUESTIONS);

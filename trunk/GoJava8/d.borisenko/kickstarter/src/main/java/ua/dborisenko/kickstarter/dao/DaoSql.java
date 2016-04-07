@@ -14,14 +14,14 @@ public abstract class DaoSql {
     public DaoSql() {
         initDataSource();
     }
-    
+
     void setDataSource(DataSource ds) {
         dataSource = ds;
     }
-    
+
     void initDataSource() {
         try {
-            InitialContext initContext= new InitialContext();
+            InitialContext initContext = new InitialContext();
             dataSource = (DataSource) initContext.lookup("java:comp/env/jdbc/dataSource");
         } catch (NamingException e) {
             e.printStackTrace();
