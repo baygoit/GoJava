@@ -3,28 +3,26 @@ package com.anmertrix.servlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-import com.anmertrix.ConnectionManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import com.anmertrix.dao.CategoryDao;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.dao.QuoteDao;
-import com.anmertrix.dao.sql.CategoryDaoSql;
-import com.anmertrix.dao.sql.ProjectDaoSql;
-import com.anmertrix.dao.sql.QuoteDaoSql;
 
 public abstract class Servlet extends HttpServlet {
 	
  	private static final long serialVersionUID = 1L;
  	
-	private ConnectionManager connectionManager;
+	@Autowired
 	protected QuoteDao quoteDao;
+	@Autowired
 	protected CategoryDao categoryDao;
+	@Autowired
 	protected ProjectDao projectDao;
 	
 	public void init() throws ServletException {
-		connectionManager = new ConnectionManager();
-		this.quoteDao = new QuoteDaoSql(connectionManager);
-		this.categoryDao = new CategoryDaoSql(connectionManager);
-		this.projectDao = new ProjectDaoSql(connectionManager);
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 
 }
