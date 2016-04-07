@@ -15,7 +15,7 @@
 			<input type='radio' name='amount' value='0' checked/>Custom amount
 			<hr/>
 			Custom amount<br/>
-			<input type='number' name='custom_amount' value='0'/><br/>
+			<input type='number' name='custom_amount' max='2147483647' min='1' value='1'/><br/>
 			Cardholder name<br/>
 			<input type='text' name='cardholder_name'/><br/>
 			Card number<br/>

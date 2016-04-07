@@ -3,16 +3,17 @@ package ua.dborisenko.kickstarter.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 import ua.dborisenko.kickstarter.domain.Quote;
 
 public class QuoteDao extends DaoSql {
+    private static final String QUERY_SELECT_RANDOM_QUOTE = "SELECT id, author, text FROM quotes order by rand() limit 1";
 
     public Quote getRandomQuote() {
         try (Connection connection = getConnection()) {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT id, author, text FROM quotes order by rand() limit 1");
+            PreparedStatement statement = connection.prepareStatement(QUERY_SELECT_RANDOM_QUOTE);
+            ResultSet rs = statement.executeQuery();
             rs.next();
             int id = rs.getInt("id");
             String author = rs.getString("author");
