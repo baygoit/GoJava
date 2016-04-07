@@ -5,10 +5,6 @@ public class Quote {
     private String text;
     private String author;
 
-    public Quote() {
-
-    }
-
     public void setId(int id) {
         this.id = id;
     }
