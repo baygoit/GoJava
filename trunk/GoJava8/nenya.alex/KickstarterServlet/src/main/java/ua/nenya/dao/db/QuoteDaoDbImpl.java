@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.Random;
 
 import ua.nenya.dao.QuoteDao;
-import ua.nenya.project.Quote;
+import ua.nenya.domain.Quote;
 import ua.nenya.util.ConnectionManager;
 
 public class QuoteDaoDbImpl implements QuoteDao {

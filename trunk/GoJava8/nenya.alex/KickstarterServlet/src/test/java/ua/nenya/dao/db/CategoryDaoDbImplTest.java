@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -12,6 +14,7 @@ import static org.mockito.Mockito.when;
 
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,10 +25,10 @@ import org.junit.Before;
 import org.junit.Ignore;
 
 import ua.nenya.dao.CategoryDao;
-import ua.nenya.project.Category;
-import ua.nenya.project.Project;
-import ua.nenya.project.Question;
-import ua.nenya.project.Reward;
+import ua.nenya.domain.Category;
+import ua.nenya.domain.Project;
+import ua.nenya.domain.Question;
+import ua.nenya.domain.Reward;
 import ua.nenya.util.ConnectionManager;
 
 
@@ -89,93 +92,93 @@ public class CategoryDaoDbImplTest {
 	}
 
 	@Test
-	public void testInitCategories() throws SQLException {
+	public void testGetCategories() throws SQLException {
 
 		ResultSet rs = mock(ResultSet.class);
 		when(rs.next()).thenReturn(true).thenReturn(true).thenReturn(false);
 		when(rs.getString("category_name")).thenReturn("Music").thenReturn("Film");
 		
 
-		Statement statement = mock(Statement.class);
-		when(statement.executeQuery(anyString())).thenReturn(rs);
+		PreparedStatement statement = mock(PreparedStatement.class);
+		when(statement.executeQuery()).thenReturn(rs);
 
 		Connection connection = mock(Connection.class);
-		when(connection.createStatement()).thenReturn(statement);
+		when(connection.prepareStatement(anyString())).thenReturn(statement);
 
 		when(connectionManager.getConnection()).thenReturn(connection);
 
 		CategoryDao categoryDao = new CategoryDaoDbImpl(connectionManager);
-		List<Category> categoriesFromMethod = categoryDao.initCategories();
+		List<Category> categoriesFromMethod = categoryDao.getCategories();
 
-		assertEquals(categories.get(0).getName(), categoriesFromMethod.get(0).getName());
-		assertEquals(categories.get(1).getName(), categoriesFromMethod.get(1).getName());
+		assertThat(categoriesFromMethod.get(0).getName(), is("Music"));
+		assertThat(categoriesFromMethod.get(1).getName(), is("Film"));
 		verify(connectionManager).getConnection();
 
 	}
 
 	@Test
-	public void testInitProjects() throws SQLException {
+	public void testGetProjects() throws SQLException {
 
 		ResultSet rs = mock(ResultSet.class);
 		when(rs.next()).thenReturn(true).thenReturn(false);
 		when(rs.getString("project_name")).thenReturn("New Song");
 		
 
-		Statement statement = mock(Statement.class);
-		when(statement.executeQuery(anyString())).thenReturn(rs);
+		PreparedStatement statement = mock(PreparedStatement.class);
+		when(statement.executeQuery()).thenReturn(rs);
 
 		Connection connection = mock(Connection.class);
-		when(connection.createStatement()).thenReturn(statement);
+		when(connection.prepareStatement(anyString())).thenReturn(statement);
 
 		when(connectionManager.getConnection()).thenReturn(connection);
 
-		List<Project> projectsFromMethod = new CategoryDaoDbImpl(connectionManager).initProjects(musicCategory);
+		List<Project> projectsFromMethod = new CategoryDaoDbImpl(connectionManager).getProjects(musicCategory.getName());
 
-		assertEquals(projects.get(0).getName(), projectsFromMethod.get(0).getName());
+		assertThat(projectsFromMethod.get(0).getName(), is("New Song") );
 		verify(connectionManager, times(3)).getConnection();
 	}
 	
 	@Test
-	public void testInitQuestions() throws SQLException {
+	public void testGetQuestions() throws SQLException {
 
 		ResultSet rs = mock(ResultSet.class);
 		when(rs.next()).thenReturn(true).thenReturn(false);
 		when(rs.getString("question")).thenReturn("Who?");
 		
 
-		Statement statement = mock(Statement.class);
-		when(statement.executeQuery(anyString())).thenReturn(rs);
+		PreparedStatement statement = mock(PreparedStatement.class);
+		when(statement.executeQuery()).thenReturn(rs);
 
 		Connection connection = mock(Connection.class);
-		when(connection.createStatement()).thenReturn(statement);
+		when(connection.prepareStatement(anyString())).thenReturn(statement);
 
 		when(connectionManager.getConnection()).thenReturn(connection);
 
-		List<Question> questionsFromMethod = new CategoryDaoDbImpl(connectionManager).initQuestions(newSongProject);
+		List<Question> questionsFromMethod = new CategoryDaoDbImpl(connectionManager).getQuestions(newSongProject.getName());
 
-		assertEquals(questions.get(0).getName(), questionsFromMethod.get(0).getName());
+		assertThat(questionsFromMethod.get(0).getName(), is("Who?"));
 		verify(connectionManager).getConnection();
 	}
 	
 	@Test
-	public void testInitRewards() throws SQLException {
+	public void testGetRewards() throws SQLException {
 
 		ResultSet rs = mock(ResultSet.class);
 		when(rs.next()).thenReturn(true).thenReturn(false);
 		when(rs.getString("name")).thenReturn("reward");
 		
 
-		Statement statement = mock(Statement.class);
-		when(statement.executeQuery(anyString())).thenReturn(rs);
+		PreparedStatement statement = mock(PreparedStatement.class);
+		when(statement.executeQuery()).thenReturn(rs);
 
 		Connection connection = mock(Connection.class);
-		when(connection.createStatement()).thenReturn(statement);
+		when(connection.prepareStatement(anyString())).thenReturn(statement);
 
 		when(connectionManager.getConnection()).thenReturn(connection);
 
-		List<Reward> rewardsFromMethod = new CategoryDaoDbImpl(connectionManager).initRewards(newSongProject);
+		List<Reward> rewardsFromMethod = new CategoryDaoDbImpl(connectionManager).getRewards(newSongProject.getName());
 
-		assertEquals(rewards.get(0).getName(), rewardsFromMethod.get(0).getName());
+		assertThat(rewardsFromMethod.get(0).getName(), is("reward"));
 		verify(connectionManager).getConnection();
 	}
 	
@@ -185,11 +188,11 @@ public class CategoryDaoDbImplTest {
 		ResultSet rs = mock(ResultSet.class);
 				
 
-		Statement statement = mock(Statement.class);
-		when(statement.executeQuery(anyString())).thenReturn(rs);
+		PreparedStatement statement = mock(PreparedStatement.class);
+		when(statement.executeQuery()).thenReturn(rs);
 
 		Connection connection = mock(Connection.class);
-		when(connection.createStatement()).thenReturn(statement);
+		when(connection.prepareStatement(anyString())).thenReturn(statement);
 
 		when(connectionManager.getConnection()).thenReturn(connection);
 
@@ -199,21 +202,79 @@ public class CategoryDaoDbImplTest {
 	}
 	
 	@Test
-	public void testWriteIvestmentInProject() throws SQLException {
+	public void testWriteQuestionNullInProject() throws SQLException {
 
 		ResultSet rs = mock(ResultSet.class);
 				
 
-		Statement statement = mock(Statement.class);
-		when(statement.executeQuery(anyString())).thenReturn(rs);
+		PreparedStatement statement = mock(PreparedStatement.class);
+		when(statement.executeQuery()).thenReturn(rs);
 
 		Connection connection = mock(Connection.class);
-		when(connection.createStatement()).thenReturn(statement);
+		when(connection.prepareStatement(anyString())).thenReturn(statement);
+
+		when(connectionManager.getConnection()).thenReturn(connection);
+
+		new CategoryDaoDbImpl(connectionManager).writeQuestionInProject("New Song", null);
+
+		verify(connectionManager).getConnection();
+	}
+	
+	@Test
+	public void testWriteQuestionEmptyInProject() throws SQLException {
+
+		ResultSet rs = mock(ResultSet.class);
+				
+
+		PreparedStatement statement = mock(PreparedStatement.class);
+		when(statement.executeQuery()).thenReturn(rs);
+
+		Connection connection = mock(Connection.class);
+		when(connection.prepareStatement(anyString())).thenReturn(statement);
+
+		when(connectionManager.getConnection()).thenReturn(connection);
+
+		new CategoryDaoDbImpl(connectionManager).writeQuestionInProject("New Song", "");
+
+		verify(connectionManager).getConnection();
+	}
+	
+	@Test
+	public void testWriteIvestmentInProject() throws SQLException {
+
+		ResultSet rs = mock(ResultSet.class);
+		PreparedStatement statement = mock(PreparedStatement.class);
+		when(statement.executeQuery()).thenReturn(rs);
+
+		Connection connection = mock(Connection.class);
+		when(connection.prepareStatement(anyString())).thenReturn(statement);
 
 		when(connectionManager.getConnection()).thenReturn(connection);
 
 		new CategoryDaoDbImpl(connectionManager).writeIvestmentInProject("New Song", 123);
 
 		verify(connectionManager, times(2)).getConnection();
+	}
+	
+	@Test
+	public void testGetProjectByName() throws SQLException {
+
+		ResultSet rs = mock(ResultSet.class);
+		when(rs.next()).thenReturn(true).thenReturn(false);
+		when(rs.getString("project_name")).thenReturn("New Song");
+		
+
+		PreparedStatement statement = mock(PreparedStatement.class);
+		when(statement.executeQuery()).thenReturn(rs);
+
+		Connection connection = mock(Connection.class);
+		when(connection.prepareStatement(anyString())).thenReturn(statement);
+
+		when(connectionManager.getConnection()).thenReturn(connection);
+
+		Project project = new CategoryDaoDbImpl(connectionManager).getProjectByName("New Song");
+
+		assertThat(project.getName(), is("New Song"));
+		verify(connectionManager, times(3)).getConnection();
 	}
 }

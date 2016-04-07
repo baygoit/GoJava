@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nenya.dao.CategoryDao;
-import ua.nenya.project.Project;
-import ua.nenya.project.Question;
+import ua.nenya.domain.Project;
+import ua.nenya.domain.Question;
 
 
 public class ProjectServlet extends CommonServlet {
@@ -20,7 +20,7 @@ public class ProjectServlet extends CommonServlet {
 	@Override
 	public void init() {
 		super.init();
-		categoryDao = initilizer.getCategoryDao();
+		categoryDao = getInitilizer().getCategoryDao();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +36,7 @@ public class ProjectServlet extends CommonServlet {
 		Project project = categoryDao.getProjectByName(projectName);
 		request.setAttribute("project", project);
 
-		List<Question> questions = categoryDao.initQuestions(project);
+		List<Question> questions = categoryDao.getQuestions(projectName);
 
 		request.setAttribute("questions", questions);
 
@@ -51,20 +51,9 @@ public class ProjectServlet extends CommonServlet {
 		String projectName = request.getParameter("projectName");
 		String categoryName = request.getParameter("categoryName");
 		
-		request.setAttribute("categoryName", categoryName);
-		request.setAttribute("projectName", projectName);
-		
 		categoryDao.writeQuestionInProject(projectName, questionString);
-		
-
-		Project project = categoryDao.getProjectByName(projectName);
-		request.setAttribute("project", project);
-		
-		List<Question> questions = categoryDao.initQuestions(project);
-
-		request.setAttribute("questions", questions);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/project.jsp");
-		dispatcher.forward(request, response);
+	
+		response.sendRedirect("projectServlet?categoryName="+categoryName+"&projectName="+projectName);
 	}
 
 }

@@ -1,17 +1,21 @@
 package com.anmertrix.dao.sql;
 
-
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.anmertrix.ConnectionManager;
 import com.anmertrix.dao.CategoryDao;
+import com.anmertrix.dao.DaoException;
+import com.anmertrix.dao.NoResultException;
 import com.anmertrix.domain.Category;
 
 public class CategoryDaoSql implements CategoryDao {
+
+	private static final String SELECT_CATEGORIES = "SELECT id, name FROM category";
+	private static final String SELECT_CATEGORY_BY_ID = "SELECT name FROM category WHERE id=?";
 
 	private ConnectionManager connectionManager;
 
@@ -20,41 +24,45 @@ public class CategoryDaoSql implements CategoryDao {
 	}
 
 	@Override
-	public Category getCategory(int index) {
-		
-		Category category = new Category();
-    	
-		try (Statement statement = connectionManager.getConnection().createStatement()) {
-			ResultSet rs = statement.executeQuery("SELECT name FROM category WHERE id=" + index);
-			rs.next();
-			String name = rs.getString("name");
-			category.setName(name);
+	public Category getCategory(int category_id) {
+		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(SELECT_CATEGORY_BY_ID)) {
+			statement.setInt(1, category_id);
+			ResultSet rs = statement.executeQuery();
+			if (rs.next()) {
+				String name = rs.getString("name");
+
+				Category category = new Category();
+				category.setId(category_id);
+				category.setName(name);
+				return category;
+			} else {
+				throw new NoResultException("No category found");
+			}
 		} catch (SQLException e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw new DaoException(e);
 		}
-		
-		return category;
+
 	}
-	
+
 	@Override
 	public List<Category> getCategories() {
-		
-		List<Category> categories = new ArrayList<Category>();
-    	
-		try (Statement statement = connectionManager.getConnection().createStatement()) {
-			ResultSet rs = statement.executeQuery("SELECT id, name FROM category");
-			while(rs.next()) {
+		List<Category> categories = new ArrayList<>();
+
+		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(SELECT_CATEGORIES)) {
+			ResultSet rs = statement.executeQuery();
+			while (rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
-				Category category = new Category(name);
+				Category category = new Category();
+				category.setName(name);
 				category.setId(id);
 				categories.add(category);
 			}
 		} catch (SQLException e) {
-			throw new RuntimeException(e.getMessage(), e);
+			throw new DaoException(e);
 		}
-		
+
 		return categories;
-	}	
-	
+	}
+
 }
