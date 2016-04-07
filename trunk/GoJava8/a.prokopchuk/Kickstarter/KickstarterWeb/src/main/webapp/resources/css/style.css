@@ -84,3 +84,10 @@ footer .container{
 .content {
 	min-height: calc(100vh - 50px);
 }
+
+.reward_block h3 {
+	text-align:left;
+}
+
+
+

@@ -23,8 +23,7 @@ public class CategoriesServlet extends Servlet {
         request.setAttribute("categories", categories);
         request.setAttribute("quote", quote);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/categories.jsp");
-        dispatcher.forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);
         
     }
 	

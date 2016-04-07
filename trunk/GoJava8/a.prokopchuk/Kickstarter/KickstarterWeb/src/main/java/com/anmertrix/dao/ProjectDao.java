@@ -6,6 +6,7 @@ import com.anmertrix.domain.Answer;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
+import com.anmertrix.domain.Reward;
 
 public interface ProjectDao {
 	
@@ -22,5 +23,7 @@ public interface ProjectDao {
 	List<Payment> getPaymentsByProjectId(int project_id);
 
 	void insertPayment(Payment payment);
+
+	List<Reward> getRewards();
 
 }

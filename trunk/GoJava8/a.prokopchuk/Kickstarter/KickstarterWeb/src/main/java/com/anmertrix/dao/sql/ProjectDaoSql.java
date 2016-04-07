@@ -14,6 +14,7 @@ import com.anmertrix.domain.Answer;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
+import com.anmertrix.domain.Reward;
 
 public class ProjectDaoSql implements ProjectDao {
 	
@@ -25,6 +26,7 @@ public class ProjectDaoSql implements ProjectDao {
 	private static final String INSERT_QUESTION = "INSERT INTO question (project_id, question) VALUES (?, ?)";
 	private static final String SELECT_PAYMENTS = "SELECT id, cardholder_name, amount FROM payment WHERE project_id=?";
 	private static final String INSERT_PAYMENT = "INSERT INTO payment (project_id, cardholder_name, card_number, amount) VALUES (?, ?, ?, ?)";
+	private static final String SELECT_REWARDS = "SELECT id, name, amount, description FROM reward";
 	
 	public ProjectDaoSql(ConnectionManager connectionManager) {
 		this.connectionManager = connectionManager;
@@ -175,6 +177,31 @@ public class ProjectDaoSql implements ProjectDao {
 			statement.setInt(4, payment.getAmount());
 			statement.execute();
 			
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		}
+	}
+
+	@Override
+	public List<Reward> getRewards() {
+		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(SELECT_REWARDS)) {
+			ResultSet rs = statement.executeQuery();
+			
+			List<Reward> rewards = new ArrayList<>();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				int amount = rs.getInt("amount");
+				String description = rs.getString("description");
+				
+				Reward reward = new Reward();
+				reward.setId(id);
+				reward.setName(name);
+				reward.setAmount(amount);
+				reward.setDescription(description);
+				rewards.add(reward);				
+			}
+			return rewards;
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		}

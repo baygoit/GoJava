@@ -55,17 +55,16 @@
 							</c:forEach>
 						</div>
 						<form name='add_payment' class="form-horizontal" action="" method="POST">
-							
+							<input type='hidden' name='requested_action' value='ADD_PAYMENT'/>
+							<input id="projectId" type="hidden" name="projectId" value="${project.id}" />
 							<div class="row">
 								<div class="form-group col-sm-3">
 									<input required type="text" class="form-control" id="inputCardholderName"
 										name="cardholder_name" placeholder="Your name...">
-									<input id="projectId" type="hidden" name="projectId" value="${project.id}" />
-									<input type='hidden' name='requested_action' value='ADD_PAYMENT'/>
 								</div>
 								<div class="form-group col-sm-3">
 									<input required type="text" class="form-control" id="inputCardNumber"
-										name="card_number" placeholder="Your card number...">
+										name="card_number" pattern="[0-9]{13,16}" placeholder="Your card number...">
 								</div>
 								<div class="form-group col-sm-3">
 									<input required type="text" class="form-control" id="inputAmount"
@@ -77,7 +76,47 @@
 							</div>
 						</form>
 					</div>
-					
+
+					<div class="reward_block">
+						<h3>Rewards:</h3>
+						<div class="row">
+							<c:forEach var="reward" items="${rewards}">
+								<div class="form-group col-sm-4 text-center">
+									<div><span class="reward_name">${reward.name}</span></div>
+									<div><span class="reward_amount">${reward.description}</span></div>
+									<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+								        Invest
+								    </button>
+								</div>
+								<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+									aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-hidden="true">&times;</button>
+											<form name='add_reward' class="form-horizontal" action="" method="POST">
+												<input id="projectId" type="hidden" name="projectId" value="${project.id}" />
+												<input type='hidden' name='requested_action' value='ADD_PAYMENT' />
+												<input type="hidden" id="inputAmount" name="payment_amount" value="${reward.amount}">
+												<div class="modal-body">
+													<input required type="text" class="form-control" id="inputCardholderName"
+														name="cardholder_name" placeholder="Your name...">
+													<input required type="text" class="form-control" id="inputCardNumber"
+														name="card_number" pattern="[0-9]{13,16}" placeholder="Your card number...">
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+													<button type="submit" class="btn btn-primary">Invest</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+
+							</c:forEach>
+						</div>
+					</div>
+
 				</div>
             </div>
         </div>

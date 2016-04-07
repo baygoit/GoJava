@@ -30,7 +30,6 @@ public class CategoryDaoSql implements CategoryDao {
 			ResultSet rs = statement.executeQuery();
 			if (rs.next()) {
 				String name = rs.getString("name");
-
 				Category category = new Category();
 				category.setId(category_id);
 				category.setName(name);
