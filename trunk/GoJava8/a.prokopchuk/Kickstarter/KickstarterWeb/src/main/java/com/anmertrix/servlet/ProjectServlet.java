@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.anmertrix.dao.NoResultException;
 import com.anmertrix.domain.Answer;
+import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
 
@@ -24,7 +25,7 @@ public class ProjectServlet extends Servlet {
 		try {
 			projectId = Integer.parseInt(projectIdStr);
 		} catch (NumberFormatException e) {
-			response.sendError(400);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
 		
@@ -32,7 +33,7 @@ public class ProjectServlet extends Servlet {
 		try {
 			project = projectDao.getProjectById(projectId);
 		} catch (NoResultException e) {
-			response.sendError(404);
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
 		
@@ -43,8 +44,11 @@ public class ProjectServlet extends Servlet {
 			question.setAnswers(answers);
 		}
 		
+		List<Payment> payments = projectDao.getPaymentsByProjectId(projectId);
+		
         request.setAttribute("project", project);
         request.setAttribute("questions", questions);
+        request.setAttribute("payments", payments);
         
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/project.jsp");
         dispatcher.forward(request, response);
@@ -54,12 +58,35 @@ public class ProjectServlet extends Servlet {
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        
+		
+		String requestedAction = req.getParameter("requested_action");
+		
+		if ("ADD_QUESTION".equals(requestedAction)) {
+           addQuestion(req, resp);
+       } else if ("ADD_PAYMENT".equals(requestedAction)) {
+    	   addPayment(req, resp);
+       } 		
+		
+    }
+	
+	private void addQuestion(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		req.setCharacterEncoding("UTF-8");
 		Question question = new Question();
 		question.setQuestion(req.getParameter("question").trim());
 		question.setProjectId(Integer.parseInt(req.getParameter("projectId")));
 		projectDao.insertQuestion(question);
 		resp.sendRedirect("project?projectId=" + question.getProjectId());
-    }
+	}
+	
+	private void addPayment(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		req.setCharacterEncoding("UTF-8");
+		
+		Payment payment = new Payment();
+		payment.setCardholderName(req.getParameter("cardholder_name").trim());
+		payment.setCardNumber(req.getParameter("card_number").trim());
+		payment.setAmount(Integer.parseInt(req.getParameter("payment_amount").trim()));
+		payment.setProjectId(Integer.parseInt(req.getParameter("projectId")));
+		projectDao.insertPayment(payment);
+		resp.sendRedirect("project?projectId=" + payment.getProjectId());
+	}
 }

@@ -1,37 +1,87 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<jsp:include page="header.jsp" />
+<jsp:include page="header.jsp">
+	<jsp:param value="${project.name}" name="title" />
+</jsp:include>
 
-	<h2>${project.name}</h2>
-	<p>Description: ${project.description}</p>
-	<p>Required budget: ${project.requiredBudget}</p>
-	<p>Gathered budget: ${project.gatheredBudget}</p>
-	<p>Days left: ${project.daysLeft}</p>
-	<p>History: ${project.history}</p>
-	<p>Video URL: ${project.url}</p>
-	
-	<h3>Question:</h3>
-	<div class="questions">
-		<c:forEach var="question" items="${questions}">
-			<p class="question">${question.question}</p>
-				<c:forEach var="answer" items="${question.answers}">
-					<p class="answer">${answer.answer}</p>
-				</c:forEach>
-		</c:forEach>
-	</div>
-	<form class="form-horizontal" action="" method="POST">
-		<div class="form-group col-sm-7">
-			<input required type="text" class="form-control" id="inputQuestion"
-				name="question" placeholder="Enter your question">
-			<input id="projectId" type="hidden" name="projectId"
-				value="${project.id}" />
-		</div>
-		<div class="form-group col-sm-7">
-			<button type="submit" class="btn btn-default">Ask</button>
-		</div>
-	</form>
-
-
+<div class="categories">
+	<div class="container">
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12 text-center test-box">
+					<h2>${project.name}</h2>
+					<div class="info_block">
+						<p><span>Description:</span> ${project.description}</p>
+						<p><span>Required budget:</span> ${project.requiredBudget}</p>
+						<p><span>Gathered budget:</span> ${project.gatheredBudget}</p>
+						<p><span>Days left:</span> ${project.daysLeft}</p>
+						<p><span>History:</span> ${project.history}</p>
+						<p><span>Video URL:</span> ${project.url}</p>
+					</div>
+					<div class="question_block">
+						<h3>Question and answers:</h3>
+						<div class="questions">
+							<c:forEach var="question" items="${questions}">
+								<div class="question"><span>${question.question}</span> </div>
+									<c:forEach var="answer" items="${question.answers}">
+										<div class="answer"><span>${answer.answer}</span> </div>
+									</c:forEach>
+							</c:forEach>
+						</div>
+						<form name='add_question' class="form-horizontal" action="" method="POST">
+							<div class="row">
+								<div class="form-group col-sm-8">
+									<input required type="text" class="form-control" id="inputQuestion"
+										name="question" placeholder="Enter your question...">
+									<input id="projectId" type="hidden" name="projectId" value="${project.id}" />
+									<input type='hidden' name='requested_action' value='ADD_QUESTION'/>
+								</div>
+								<div class="question_submit form-group col-sm-2">
+									<button type="submit" class="btn btn-default">Ask</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					
+					<div class="payment_block">
+						<h3>Payments:</h3>
+						<div class="payments">
+							<c:forEach var="payment" items="${payments}">
+								<div class="payment row">
+									<span class="cardholder_name col-sm-3">${payment.cardholderName}</span>
+									<span class="amount col-sm-2">${payment.amount}</span>
+								</div>
+							</c:forEach>
+						</div>
+						<form name='add_payment' class="form-horizontal" action="" method="POST">
+							
+							<div class="row">
+								<div class="form-group col-sm-3">
+									<input required type="text" class="form-control" id="inputCardholderName"
+										name="cardholder_name" placeholder="Your name...">
+									<input id="projectId" type="hidden" name="projectId" value="${project.id}" />
+									<input type='hidden' name='requested_action' value='ADD_PAYMENT'/>
+								</div>
+								<div class="form-group col-sm-3">
+									<input required type="text" class="form-control" id="inputCardNumber"
+										name="card_number" placeholder="Your card number...">
+								</div>
+								<div class="form-group col-sm-3">
+									<input required type="text" class="form-control" id="inputAmount"
+										name="payment_amount" placeholder="Payment amount...">
+								</div>
+								<div class="payment_submit form-group col-sm-2">
+									<button type="submit" class="btn btn-default">Invest</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+            </div>
+        </div>
+    </div>  
+</div>
 
 <jsp:include page="footer.jsp" />

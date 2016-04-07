@@ -23,7 +23,7 @@ public class ProjectsServlet extends Servlet {
 		try {
 			categoryId = Integer.parseInt(categoryIdStr);
 		} catch (NumberFormatException e) {
-			response.sendError(400);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
 
@@ -31,7 +31,7 @@ public class ProjectsServlet extends Servlet {
 		try {
 			category = categoryDao.getCategory(categoryId);
 		} catch (NoResultException e) {
-			response.sendError(404);
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
 		

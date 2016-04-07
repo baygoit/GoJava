@@ -11,6 +11,7 @@ import com.anmertrix.dao.DaoException;
 import com.anmertrix.dao.NoResultException;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.domain.Answer;
+import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
 
@@ -18,10 +19,12 @@ public class ProjectDaoSql implements ProjectDao {
 	
 	private ConnectionManager connectionManager;
 	private static final String SELECT_PROJECTS = "SELECT id, name FROM project WHERE category_id=?";
-	private static final String SELECT_PROJECT = "SELECT name, description, required_budget, days_left, history, url, COALESCE(SUM(amount),0) AS sum_amount FROM project JOIN investment ON (project.id = investment.project_id) WHERE project_id=?";
+	private static final String SELECT_PROJECT = "SELECT name, description, required_budget, days_left, history, url, COALESCE(SUM(amount),0) AS sum_amount FROM project JOIN payment ON (project.id = payment.project_id) WHERE project_id=?";
 	private static final String SELECT_QUESTIONS = "SELECT id, question FROM question WHERE project_id=?";
 	private static final String SELECT_ANSWERS = "SELECT id, answer FROM answer WHERE question_id=?";
 	private static final String INSERT_QUESTION = "INSERT INTO question (project_id, question) VALUES (?, ?)";
+	private static final String SELECT_PAYMENTS = "SELECT id, cardholder_name, amount FROM payment WHERE project_id=?";
+	private static final String INSERT_PAYMENT = "INSERT INTO payment (project_id, cardholder_name, card_number, amount) VALUES (?, ?, ?, ?)";
 	
 	public ProjectDaoSql(ConnectionManager connectionManager) {
 		this.connectionManager = connectionManager;
@@ -131,6 +134,45 @@ public class ProjectDaoSql implements ProjectDao {
 		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(INSERT_QUESTION)) {
 			statement.setInt(1, question.getProjectId());
 			statement.setString(2, question.getQuestion());
+			statement.execute();
+			
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		}
+	}
+	
+	@Override
+	public List<Payment> getPaymentsByProjectId(int project_id) {
+		
+		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(SELECT_PAYMENTS)) {
+			statement.setInt(1, project_id);
+			ResultSet rs = statement.executeQuery();
+			
+			List<Payment> payments = new ArrayList<>();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String cardholderName = rs.getString("cardholder_name");
+				int amount = rs.getInt("amount");
+				
+				Payment payment = new Payment();
+				payment.setId(id);
+				payment.setCardholderName(cardholderName);
+				payment.setAmount(amount);
+				payments.add(payment);				
+			}
+			return payments;
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		}
+	}
+
+	@Override
+	public void insertPayment(Payment payment) {
+		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(INSERT_PAYMENT)) {
+			statement.setInt(1, payment.getProjectId());
+			statement.setString(2, payment.getCardholderName());
+			statement.setString(3, payment.getCardNumber());
+			statement.setInt(4, payment.getAmount());
 			statement.execute();
 			
 		} catch (SQLException e) {
