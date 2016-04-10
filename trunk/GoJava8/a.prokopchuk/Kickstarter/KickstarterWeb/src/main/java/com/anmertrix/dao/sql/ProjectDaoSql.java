@@ -47,7 +47,6 @@ public class ProjectDaoSql implements ProjectDao {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
-				
 				Project project = new Project();
 				project.setId(id);
 				project.setName(name);
