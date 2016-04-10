@@ -1,9 +1,9 @@
 package com.anmertrix.dao.sql;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.sql.DataSource;
 
@@ -23,12 +23,16 @@ public class QuoteDaoSql implements QuoteDao {
 	private DataSource dataSource;
 
 	public Quote getRandomQuote() {
-		try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement()) {
-			ResultSet rs = statement.executeQuery(SELECT_QUOTE);
+		try (Connection connection = dataSource.getConnection(); 
+				PreparedStatement statement = connection.prepareStatement(SELECT_QUOTE)) {
+			ResultSet rs = statement.executeQuery();
 			rs.next();
 			String author = rs.getString("author");
 			String text = rs.getString("text");
-			return new Quote(author, text);
+			Quote quote = new Quote();
+			quote.setAuthor(author);
+			quote.setQuoteText(text);
+			return quote;
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		}

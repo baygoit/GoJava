@@ -9,9 +9,9 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.sql.DataSource;
 
@@ -26,20 +26,35 @@ import com.anmertrix.domain.Quote;
 
 @RunWith(MockitoJUnitRunner.class)
 public class QuoteDaoSqlTest {
+	
+	private static final String SELECT_QUOTE = "SELECT 1";
 
 	@Mock
 	private DataSource dataSource;
+	@Mock
+	private Connection connection;
 	@InjectMocks
 	private QuoteDaoSql quoteDaoSql;
 
 	@After
 	public void tearDown() {
 		verifyNoMoreInteractions(dataSource);
+		verifyNoMoreInteractions(connection);
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testGetRandomQuoteGetConnectionException() throws SQLException {
 		when(dataSource.getConnection()).thenThrow(new SQLException());
+		try {
+			quoteDaoSql.getRandomQuote();
+		} finally {
+			verify(dataSource).getConnection();
+		}
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void testGetRandomQuoteCreateStatementException() throws SQLException {
+		when(connection.prepareStatement(SELECT_QUOTE)).thenThrow(new SQLException());
 		try {
 			quoteDaoSql.getRandomQuote();
 		} finally {
@@ -53,11 +68,11 @@ public class QuoteDaoSqlTest {
 		when(rs.getString("author")).thenReturn("author");
 		when(rs.getString("text")).thenReturn("quote");
 
-		Statement statement = mock(Statement.class);
-		when(statement.executeQuery(anyString())).thenReturn(rs);
+		PreparedStatement statement = mock(PreparedStatement.class);
+		when(statement.executeQuery()).thenReturn(rs);
 
 		Connection connection = mock(Connection.class);
-		when(connection.createStatement()).thenReturn(statement);
+		when(connection.prepareStatement(anyString())).thenReturn(statement);
 
 		when(dataSource.getConnection()).thenReturn(connection);
 		Quote quote = quoteDaoSql.getRandomQuote();
