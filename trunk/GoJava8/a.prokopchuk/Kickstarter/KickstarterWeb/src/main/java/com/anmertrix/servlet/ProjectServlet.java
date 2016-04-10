@@ -13,6 +13,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.anmertrix.dao.NoResultException;
 import com.anmertrix.dao.ProjectDao;
+import com.anmertrix.dao.RewardDao;
 import com.anmertrix.domain.Answer;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
@@ -27,6 +28,8 @@ public class ProjectServlet extends HttpServlet {
 	
 	@Autowired
 	protected ProjectDao projectDao;
+	@Autowired
+	protected RewardDao rewardDao;
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -35,15 +38,15 @@ public class ProjectServlet extends HttpServlet {
         	return;
         }
 		
-		List<Question> questions = projectDao.getQuestionByProjectId(project.getId());
+		List<Question> questions = projectDao.getQuestionsByProjectId(project.getId());
 		
 		for (Question question: questions) {
-			List<Answer> answers = projectDao.getAnswerByQuestionId(question.getId());
+			List<Answer> answers = projectDao.getAnswersByQuestionId(question.getId());
 			question.setAnswers(answers);
 		}
 		
 		List<Payment> payments = projectDao.getPaymentsByProjectId(project.getId());
-		List<Reward> rewards = projectDao.getRewards();
+		List<Reward> rewards = rewardDao.getRewards();
 		
         request.setAttribute("project", project);
         request.setAttribute("questions", questions);
@@ -67,6 +70,7 @@ public class ProjectServlet extends HttpServlet {
 		}
 		
 		try {
+			projectDao.projectExists(projectId);
 			return projectDao.getProjectById(projectId);
 		} catch (NoResultException e) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);

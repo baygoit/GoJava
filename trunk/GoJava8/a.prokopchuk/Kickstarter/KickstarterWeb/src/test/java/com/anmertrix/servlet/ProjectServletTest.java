@@ -28,6 +28,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import com.anmertrix.dao.NoResultException;
 import com.anmertrix.dao.ProjectDao;
+import com.anmertrix.dao.RewardDao;
 import com.anmertrix.domain.Project;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -35,6 +36,8 @@ public class ProjectServletTest {
 	
 	@Mock
 	private ProjectDao projectDao;
+	@Mock
+	private RewardDao rewardDao;
 	@Mock
 	private HttpServletRequest request;
 	@Mock
@@ -47,10 +50,10 @@ public class ProjectServletTest {
 		when(request.getParameter("projectId")).thenReturn("2");
 
 		when(projectDao.getProjectById(2)).thenReturn(new Project());
-		when(projectDao.getQuestionByProjectId(2)).thenReturn(new ArrayList<>());
-		when(projectDao.getAnswerByQuestionId(1)).thenReturn(new ArrayList<>());
+		when(projectDao.getQuestionsByProjectId(2)).thenReturn(new ArrayList<>());
+		when(projectDao.getAnswersByQuestionId(1)).thenReturn(new ArrayList<>());
 		when(projectDao.getPaymentsByProjectId(2)).thenReturn(new ArrayList<>());
-		when(projectDao.getRewards()).thenReturn(new ArrayList<>());
+		when(rewardDao.getRewards()).thenReturn(new ArrayList<>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);
