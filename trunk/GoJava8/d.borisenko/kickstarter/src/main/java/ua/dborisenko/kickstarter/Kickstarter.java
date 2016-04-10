@@ -10,9 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
 import ua.dborisenko.kickstarter.dao.CategoryDao;
+import ua.dborisenko.kickstarter.dao.InvestmentDao;
 import ua.dborisenko.kickstarter.dao.NoResultException;
+import ua.dborisenko.kickstarter.dao.ProjectDao;
+import ua.dborisenko.kickstarter.dao.QuestionDao;
 import ua.dborisenko.kickstarter.dao.QuoteDao;
+import ua.dborisenko.kickstarter.dao.RewardDao;
 import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Investment;
 import ua.dborisenko.kickstarter.domain.Project;
@@ -26,15 +33,24 @@ public class Kickstarter extends HttpServlet {
     private static final String PROJECT_OUT_URL = "?page=project&id=";
     private static final String CATEGORY_JSP_PATH = "/WEB-INF/jsp/category.jsp";
     private static final String CATEGORIES_JSP_PATH = "/WEB-INF/jsp/categories.jsp";
+    @Autowired
     private CategoryDao categoryDao;
+    @Autowired
+    private ProjectDao projectDao;
+    @Autowired
+    private InvestmentDao investmentDao;
+    @Autowired
+    private QuestionDao questionDao;
+    @Autowired
+    private RewardDao rewardDao;
+    @Autowired
     private QuoteDao quoteDao;
     private ServletContext context;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        quoteDao = new QuoteDao();
-        categoryDao = new CategoryDao();
         context = config.getServletContext();
+        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
     }
 
     @Override
@@ -72,6 +88,29 @@ public class Kickstarter extends HttpServlet {
         }
     }
 
+    void showCategories(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("quote", quoteDao.getRandomQuote());
+        request.setAttribute("categories", categoryDao.getCategories());
+        RequestDispatcher dispatcher = context.getRequestDispatcher(CATEGORIES_JSP_PATH);
+        dispatcher.forward(request, response);
+
+    }
+
+    void showCategory(HttpServletRequest request, HttpServletResponse response, int id)
+            throws ServletException, IOException {
+        try {
+            Category category = categoryDao.getCategoryById(id);
+            projectDao.getProjects(category);
+            request.setAttribute("category", category);
+            request.setAttribute("projects", category.getProjects());
+            RequestDispatcher dispatcher = context.getRequestDispatcher(CATEGORY_JSP_PATH);
+            dispatcher.forward(request, response);
+        } catch (NoResultException e) {
+            response.sendError(404);
+            return;
+        }
+    }
+
     private void addInvestment(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -88,7 +127,7 @@ public class Kickstarter extends HttpServlet {
                 response.sendError(400);
                 return;
             }
-            categoryDao.addInvestment(projectId, investment);
+            investmentDao.addInvestment(projectId, investment);
             response.sendRedirect(PROJECT_OUT_URL + projectId);
         } catch (NumberFormatException e) {
             response.sendError(400);
@@ -101,39 +140,18 @@ public class Kickstarter extends HttpServlet {
             int projectId = Integer.valueOf(request.getParameter("project_id"));
             Question question = new Question();
             question.setRequest(request.getParameter("question_request"));
-            categoryDao.addQuestion(projectId, question);
+            questionDao.addQuestion(projectId, question);
             response.sendRedirect(PROJECT_OUT_URL + projectId);
         } catch (NumberFormatException e) {
             response.sendError(400);
         }
     }
 
-    void showCategories(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("quote", quoteDao.getRandomQuote());
-        request.setAttribute("categories", categoryDao.getCategories());
-        RequestDispatcher dispatcher = context.getRequestDispatcher(CATEGORIES_JSP_PATH);
-        dispatcher.forward(request, response);
-
-    }
-
-    void showCategory(HttpServletRequest request, HttpServletResponse response, int id)
-            throws ServletException, IOException {
-        try {
-            Category category = categoryDao.getCategoryById(id);
-            request.setAttribute("category", category);
-            request.setAttribute("projects", category.getProjects());
-            RequestDispatcher dispatcher = context.getRequestDispatcher(CATEGORY_JSP_PATH);
-            dispatcher.forward(request, response);
-        } catch (NoResultException e) {
-            response.sendError(404);
-            return;
-        }
-    }
-
     void showProject(HttpServletRequest request, HttpServletResponse response, int id)
             throws ServletException, IOException {
         try {
-            Project project = categoryDao.getProjectById(id);
+            Project project = projectDao.getProjectById(id);
+            questionDao.getQuestions(project);
             request.setAttribute("project", project);
             request.setAttribute("questions", project.getQuestions());
             Category category = categoryDao.getCategoryByProjectId(id);
@@ -149,8 +167,8 @@ public class Kickstarter extends HttpServlet {
     void showInvestment(HttpServletRequest request, HttpServletResponse response, int projectId)
             throws ServletException, IOException {
         try {
-            Project project = categoryDao.getProjectById(projectId);
-            categoryDao.getRewards(project);
+            Project project = projectDao.getProjectById(projectId);
+            rewardDao.getRewards(project);
             request.setAttribute("project", project);
             request.setAttribute("rewards", project.getRewards());
             RequestDispatcher dispatcher = context.getRequestDispatcher(INVESTMENT_JSP_PATH);

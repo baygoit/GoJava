@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 	</div>	
 	<div class="div_main_footer">
-   		(&#596;) Copyleft for GoIT     
+   		Build: @PROJECT_BUILD_DATE@ (@PROJECT_BUILD_TIMEZONE@)<br/>
+   		(&#596;) Copyleft for GoIT
 	</div>
 </body>
 </html>
