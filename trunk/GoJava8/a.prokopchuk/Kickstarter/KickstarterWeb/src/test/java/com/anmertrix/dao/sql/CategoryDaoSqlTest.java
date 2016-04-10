@@ -14,13 +14,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.anmertrix.ConnectionManager;
 import com.anmertrix.dao.NoResultException;
 import com.anmertrix.domain.Category;
 
@@ -28,9 +29,9 @@ import com.anmertrix.domain.Category;
 public class CategoryDaoSqlTest {
 
 	@Mock
-	private ConnectionManager connectionManager;
+	private DataSource dataSource;
 	@InjectMocks
-	private CategoryDaoSql categoryDaoSql = new CategoryDaoSql(connectionManager);
+	private CategoryDaoSql categoryDaoSql;
 
 	@Test
 	public void testGetCategory() throws SQLException {
@@ -44,7 +45,7 @@ public class CategoryDaoSqlTest {
 		Connection connection = mock(Connection.class);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 
-		when(connectionManager.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 
 		Category category = categoryDaoSql.getCategory(10);
 		assertThat(category.getId(), is(10));
@@ -65,7 +66,7 @@ public class CategoryDaoSqlTest {
 		Connection connection = mock(Connection.class);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 
-		when(connectionManager.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 
 		categoryDaoSql.getCategory(0);
 	}
@@ -80,7 +81,7 @@ public class CategoryDaoSqlTest {
 		Connection connection = mock(Connection.class);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 
-		when(connectionManager.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 
 		List<Category> categories = categoryDaoSql.getCategories();
 		assertThat(categories.isEmpty(), is(true));
@@ -99,7 +100,7 @@ public class CategoryDaoSqlTest {
 		Connection connection = mock(Connection.class);
 		when(connection.prepareStatement(anyString())).thenReturn(ps);
 
-		when(connectionManager.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 
 		List<Category> categories = categoryDaoSql.getCategories();
 		Category category = categories.get(0);

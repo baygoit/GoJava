@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.sql.DataSource;
+
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,29 +22,28 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.anmertrix.ConnectionManager;
 import com.anmertrix.domain.Quote;
 
 @RunWith(MockitoJUnitRunner.class)
 public class QuoteDaoSqlTest {
 
 	@Mock
-	private ConnectionManager connectionManager;
+	private DataSource dataSource;
 	@InjectMocks
 	private QuoteDaoSql quoteDaoSql;
 
 	@After
 	public void tearDown() {
-		verifyNoMoreInteractions(connectionManager);
+		verifyNoMoreInteractions(dataSource);
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testGetRandomQuoteGetConnectionException() throws SQLException {
-		when(connectionManager.getConnection()).thenThrow(new SQLException());
+		when(dataSource.getConnection()).thenThrow(new SQLException());
 		try {
 			quoteDaoSql.getRandomQuote();
 		} finally {
-			verify(connectionManager).getConnection();
+			verify(dataSource).getConnection();
 		}
 	}
 
@@ -58,12 +59,12 @@ public class QuoteDaoSqlTest {
 		Connection connection = mock(Connection.class);
 		when(connection.createStatement()).thenReturn(statement);
 
-		when(connectionManager.getConnection()).thenReturn(connection);
+		when(dataSource.getConnection()).thenReturn(connection);
 		Quote quote = quoteDaoSql.getRandomQuote();
 		String quoteText = quote.getQuoteText() + " (" + quote.getAuthor() + ")";
 		assertThat(quoteText, is("quote (author)"));
 
-		verify(connectionManager).getConnection();
+		verify(dataSource).getConnection();
 	}
 
 }

@@ -1,12 +1,17 @@
 package com.anmertrix.dao.sql;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.anmertrix.ConnectionManager;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.anmertrix.dao.DaoException;
 import com.anmertrix.dao.NoResultException;
 import com.anmertrix.dao.ProjectDao;
@@ -14,10 +19,11 @@ import com.anmertrix.domain.Answer;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
+import com.anmertrix.domain.Reward;
 
+@Repository
 public class ProjectDaoSql implements ProjectDao {
 	
-	private ConnectionManager connectionManager;
 	private static final String SELECT_PROJECTS = "SELECT id, name FROM project WHERE category_id=?";
 	private static final String SELECT_PROJECT = "SELECT name, description, required_budget, days_left, history, url, COALESCE(SUM(amount),0) AS sum_amount FROM project JOIN payment ON (project.id = payment.project_id) WHERE project_id=?";
 	private static final String SELECT_QUESTIONS = "SELECT id, question FROM question WHERE project_id=?";
@@ -25,14 +31,16 @@ public class ProjectDaoSql implements ProjectDao {
 	private static final String INSERT_QUESTION = "INSERT INTO question (project_id, question) VALUES (?, ?)";
 	private static final String SELECT_PAYMENTS = "SELECT id, cardholder_name, amount FROM payment WHERE project_id=?";
 	private static final String INSERT_PAYMENT = "INSERT INTO payment (project_id, cardholder_name, card_number, amount) VALUES (?, ?, ?, ?)";
-	
-	public ProjectDaoSql(ConnectionManager connectionManager) {
-		this.connectionManager = connectionManager;
-	}
+	private static final String SELECT_REWARDS = "SELECT id, name, amount, description FROM reward";
+
+	@Autowired
+	private DataSource dataSource;
 	
 	@Override
 	public List<Project> getProjectsByCategoryId(int category_id) {
-		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(SELECT_PROJECTS)) {
+
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(SELECT_PROJECTS)) {
 			statement.setInt(1, category_id);
 			ResultSet rs = statement.executeQuery();
 			List<Project> projects = new ArrayList<Project>();
@@ -57,7 +65,8 @@ public class ProjectDaoSql implements ProjectDao {
 		
 		Project project = new Project();
     	
-		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(SELECT_PROJECT)) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(SELECT_PROJECT)) {
 			statement.setInt(1, project_id);
 			ResultSet rs = statement.executeQuery();
 			
@@ -85,7 +94,8 @@ public class ProjectDaoSql implements ProjectDao {
 	@Override
 	public List<Question> getQuestionByProjectId(int project_id) {
 		
-		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(SELECT_QUESTIONS)) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(SELECT_QUESTIONS)) {
 			statement.setInt(1, project_id);
 			ResultSet rs = statement.executeQuery();
 			
@@ -108,7 +118,8 @@ public class ProjectDaoSql implements ProjectDao {
 	@Override
 	public List<Answer> getAnswerByQuestionId(int question_id) {
 		
-		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(SELECT_ANSWERS)) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(SELECT_ANSWERS)) {
 			statement.setInt(1, question_id);
 			ResultSet rs = statement.executeQuery();
 			
@@ -131,7 +142,9 @@ public class ProjectDaoSql implements ProjectDao {
 	
 	@Override
 	public void insertQuestion(Question question) {		
-		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(INSERT_QUESTION)) {
+
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(INSERT_QUESTION)) {
 			statement.setInt(1, question.getProjectId());
 			statement.setString(2, question.getQuestion());
 			statement.execute();
@@ -144,7 +157,8 @@ public class ProjectDaoSql implements ProjectDao {
 	@Override
 	public List<Payment> getPaymentsByProjectId(int project_id) {
 		
-		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(SELECT_PAYMENTS)) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(SELECT_PAYMENTS)) {
 			statement.setInt(1, project_id);
 			ResultSet rs = statement.executeQuery();
 			
@@ -168,13 +182,42 @@ public class ProjectDaoSql implements ProjectDao {
 
 	@Override
 	public void insertPayment(Payment payment) {
-		try (PreparedStatement statement = connectionManager.getConnection().prepareStatement(INSERT_PAYMENT)) {
+
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(INSERT_PAYMENT)) {
 			statement.setInt(1, payment.getProjectId());
 			statement.setString(2, payment.getCardholderName());
 			statement.setString(3, payment.getCardNumber());
 			statement.setInt(4, payment.getAmount());
 			statement.execute();
 			
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		}
+	}
+
+	@Override
+	public List<Reward> getRewards() {
+
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(SELECT_REWARDS)) {
+			ResultSet rs = statement.executeQuery();
+			
+			List<Reward> rewards = new ArrayList<>();
+			while(rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				int amount = rs.getInt("amount");
+				String description = rs.getString("description");
+				
+				Reward reward = new Reward();
+				reward.setId(id);
+				reward.setName(name);
+				reward.setAmount(amount);
+				reward.setDescription(description);
+				rewards.add(reward);				
+			}
+			return rewards;
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		}

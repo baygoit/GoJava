@@ -21,7 +21,6 @@
 							<li><a href="projects?categoryId=${category.id}">${category.name}</a></li>
 						</c:forEach>
 					</ul>
-	
                 </div>
             </div>
         </div>

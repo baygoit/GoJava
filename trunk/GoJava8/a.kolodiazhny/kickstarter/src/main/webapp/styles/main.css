@@ -1,0 +1,26 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+	background: #F4F4F4;
+	margin-bottom: 40px !important;
+}
+
+footer {
+  position: absolute;
+  margin-top: 20 px;
+  bottom: 0;
+  overflow: hidden;
+  height: 40px;
+}
+
+.textcopyright {
+	font-size: 1.005em;
+	padding-top: 15px;
+}
+
+.list-group.categories {
+    width: 400px;
+}

@@ -13,10 +13,13 @@ import com.anmertrix.domain.Answer;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
+import com.anmertrix.domain.Reward;
 
 public class ProjectServlet extends Servlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final String ADD_QUESTION = "ADD_QUESTION";
+	private static final String ADD_PAYMENT = "ADD_PAYMENT";
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -45,29 +48,32 @@ public class ProjectServlet extends Servlet {
 		}
 		
 		List<Payment> payments = projectDao.getPaymentsByProjectId(projectId);
+		List<Reward> rewards = projectDao.getRewards();
 		
         request.setAttribute("project", project);
         request.setAttribute("questions", questions);
         request.setAttribute("payments", payments);
+        request.setAttribute("rewards", rewards);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/project.jsp");
-        dispatcher.forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/jsp/project.jsp").forward(request, response);
 		
 		
     }
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-		
+			throws ServletException, IOException {
+
 		String requestedAction = req.getParameter("requested_action");
 		
-		if ("ADD_QUESTION".equals(requestedAction)) {
-           addQuestion(req, resp);
-       } else if ("ADD_PAYMENT".equals(requestedAction)) {
-    	   addPayment(req, resp);
-       } 		
-		
-    }
+		if (ADD_QUESTION.equals(requestedAction)) {
+			addQuestion(req, resp);
+		} else if (ADD_PAYMENT.equals(requestedAction)) {
+			addPayment(req, resp);
+		}
+
+	}
+	
+	
 	
 	private void addQuestion(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		req.setCharacterEncoding("UTF-8");
