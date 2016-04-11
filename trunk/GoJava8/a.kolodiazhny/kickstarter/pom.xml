@@ -14,6 +14,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdk.version>1.7</jdk.version>
         <spring-version>4.2.3.RELEASE</spring-version>
+        <tomcat.deploy.user>admin</tomcat.deploy.user>
+		<tomcat.deploy.password></tomcat.deploy.password>
     </properties>
 
     <dependencies>
@@ -30,6 +32,11 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
             <version>${spring-version}</version>
         </dependency>
         <dependency>
@@ -91,8 +98,8 @@
                     <url>http://localhost:8080/manager/text</url>
                     <server>TomcatServer</server>
                     <path>/kickstarter</path>
-                    <username>tomcat</username>
-                    <password>tomcat</password>
+                    <username>${tomcat.deploy.user}</username>
+                    <password>${tomcat.deploy.password}</password>
                 </configuration>
             </plugin>
 

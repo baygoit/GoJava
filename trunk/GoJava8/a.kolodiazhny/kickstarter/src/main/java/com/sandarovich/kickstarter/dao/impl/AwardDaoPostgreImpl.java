@@ -1,20 +1,22 @@
 package com.sandarovich.kickstarter.dao.impl;
 
 
-import com.sandarovich.kickstarter.dao.AwardDao;
-import com.sandarovich.kickstarter.dao.exception.DaoException;
-import com.sandarovich.kickstarter.model.Award;
-import com.sandarovich.kickstarter.model.Project;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.sandarovich.kickstarter.dao.AwardDao;
+import com.sandarovich.kickstarter.dao.exception.DaoException;
+import com.sandarovich.kickstarter.model.Award;
+import com.sandarovich.kickstarter.model.Project;
 
 @Repository
 public class AwardDaoPostgreImpl implements AwardDao {
@@ -39,7 +41,6 @@ public class AwardDaoPostgreImpl implements AwardDao {
                 award.setName(rs.getString("name"));
                 awards.add(award);
             }
-            rs.close();
         } catch (SQLException e) {
             throw new DaoException(e);
         }

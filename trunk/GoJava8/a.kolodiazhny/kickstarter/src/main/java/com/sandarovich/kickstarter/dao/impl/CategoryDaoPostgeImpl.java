@@ -1,21 +1,23 @@
 package com.sandarovich.kickstarter.dao.impl;
 
 
-import com.sandarovich.kickstarter.dao.CategoryDao;
-import com.sandarovich.kickstarter.dao.exception.DaoException;
-import com.sandarovich.kickstarter.dao.exception.NoResultException;
-import com.sandarovich.kickstarter.model.Category;
-import com.sandarovich.kickstarter.model.Project;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.sandarovich.kickstarter.dao.CategoryDao;
+import com.sandarovich.kickstarter.dao.exception.DaoException;
+import com.sandarovich.kickstarter.dao.exception.NoResultException;
+import com.sandarovich.kickstarter.model.Category;
+import com.sandarovich.kickstarter.model.Project;
 
 @Repository
 public class CategoryDaoPostgeImpl implements CategoryDao {
@@ -37,7 +39,7 @@ public class CategoryDaoPostgeImpl implements CategoryDao {
 
     @Override
     public List<Category> getCategories() {
-        List<Category> result = new ArrayList<>();
+		List<Category> categories = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_CATEGORIES)) {
@@ -46,13 +48,12 @@ public class CategoryDaoPostgeImpl implements CategoryDao {
                 Category category = new Category();
                 category.setId(rs.getInt("id"));
                 category.setName(rs.getString("name"));
-                result.add(category);
+				categories.add(category);
             }
-            rs.close();
         } catch (SQLException e) {
             throw new DaoException(e);
         }
-        return result;
+		return categories;
     }
 
     @Override
@@ -61,16 +62,14 @@ public class CategoryDaoPostgeImpl implements CategoryDao {
              PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_CATEGORY)) {
             statement.setInt(1, categoryId);
             ResultSet rs = statement.executeQuery();
-            Category category;
-            if (rs.next()) {
-                String name = rs.getString("name");
-                rs.close();
-                category = new Category();
-                category.setId(categoryId);
-                category.setName(name);
-            } else {
-                throw new NoResultException("No category found");
-            }
+			if (!rs.next()) {
+				throw new NoResultException("No category found");
+			}
+
+			Category category = new Category();
+			category.setId(categoryId);
+			category.setName(rs.getString("name"));
+
             return category;
         } catch (SQLException e) {
             throw new DaoException(e);

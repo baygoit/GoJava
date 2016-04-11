@@ -1,20 +1,29 @@
 package com.sandarovich.kickstarter;
 
-import com.sandarovich.kickstarter.dao.*;
-import com.sandarovich.kickstarter.dao.exception.NoResultException;
-import com.sandarovich.kickstarter.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
+import com.sandarovich.kickstarter.dao.AwardDao;
+import com.sandarovich.kickstarter.dao.CategoryDao;
+import com.sandarovich.kickstarter.dao.ProjectDao;
+import com.sandarovich.kickstarter.dao.QuestionDao;
+import com.sandarovich.kickstarter.dao.QuoteDao;
+import com.sandarovich.kickstarter.dao.exception.NoResultException;
+import com.sandarovich.kickstarter.model.Award;
+import com.sandarovich.kickstarter.model.Category;
+import com.sandarovich.kickstarter.model.Payment;
+import com.sandarovich.kickstarter.model.Project;
+import com.sandarovich.kickstarter.model.Question;
+import com.sandarovich.kickstarter.model.Quote;
 
 
 public class KickstarterWeb extends HttpServlet {
@@ -36,24 +45,12 @@ public class KickstarterWeb extends HttpServlet {
     private ProjectDao projectDao;
     @Autowired
     private QuestionDao questionDao;
-
     @Autowired
     private AwardDao awardDao;
 
-    private ServletContext context;
-
-    public void init(ServletConfig config) {
-        SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-        context = config.getServletContext();
-    }
-
-    public void destroy() {
-        quoteDao = null;
-        categoryDao = null;
-        questionDao = null;
-        projectDao = null;
-    }
-
+	public void init() {
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+	}
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -68,6 +65,7 @@ public class KickstarterWeb extends HttpServlet {
     private void addInvestment(HttpServletRequest req, HttpServletResponse res) throws IOException {
         int projectId = 0;
         Payment payment = new Payment();
+        try {
         if (req.getParameter("award") == null || req.getParameter("award").isEmpty()) {
             payment.setAmount(Double.valueOf(req.getParameter("amount")));
         } else {
@@ -75,11 +73,10 @@ public class KickstarterWeb extends HttpServlet {
         }
         payment.setCardHolder(req.getParameter("cardHolder"));
         payment.setCardNumber(req.getParameter("cardNumber"));
-        try {
             projectId = Integer.valueOf(req.getParameter("projectId"));
             projectDao.findProjectById(projectId);
         } catch (NumberFormatException | NoResultException e) {
-            res.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        	res.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
         projectDao.invest(payment, projectId);
@@ -97,7 +94,7 @@ public class KickstarterWeb extends HttpServlet {
         Question question = new Question();
         question.setText(req.getParameter("question"));
         questionDao.addQuestion(question, projectId);
-        res.sendRedirect("/kickstarter/kickstarter?view=project&id=" + projectId);
+		res.sendRedirect("kickstarter?view=project&id=" + projectId);
     }
 
     @Override
@@ -138,7 +135,7 @@ public class KickstarterWeb extends HttpServlet {
         req.setAttribute("project", project);
         req.setAttribute("title", "Invest");
         req.setAttribute("awards", awards);
-        RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/layouts/invest.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/layouts/invest.jsp");
         rd.forward(req, res);
     }
 
@@ -159,7 +156,7 @@ public class KickstarterWeb extends HttpServlet {
         }
         req.setAttribute("title", "Question");
         req.setAttribute("project", project);
-        RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/layouts/question.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/layouts/question.jsp");
         rd.forward(req, res);
     }
 
@@ -182,11 +179,13 @@ public class KickstarterWeb extends HttpServlet {
         List<Question> questions;
         questions = questionDao.getQuestions(project);
         Category category = categoryDao.findCategoryByProject(project);
+
         req.setAttribute("title", project.getName());
         req.setAttribute("project", project);
         req.setAttribute("questions", questions);
         req.setAttribute("category", category);
-        RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/layouts/project.jsp");
+
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/layouts/project.jsp");
         rd.forward(req, res);
     }
 
@@ -205,25 +204,31 @@ public class KickstarterWeb extends HttpServlet {
             res.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
+
         req.setAttribute("title", category.getName());
         req.setAttribute("category", category);
         req.setAttribute("projects", projectDao.getProjects(category));
-        RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/layouts/category.jsp");
+
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/layouts/category.jsp");
         rd.forward(req, res);
     }
 
     private void showCategoriesPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		List<Category> categories = categoryDao.getCategories();
+
         req.setAttribute("title", "Categories");
-        List<Category> categories = categoryDao.getCategories();
         req.setAttribute("categories", categories);
-        RequestDispatcher rd = context.getRequestDispatcher("/WEB-INF/layouts/categories.jsp");
+
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/layouts/categories.jsp");
         rd.forward(req, res);
     }
 
     private void showMainPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         Quote quote = quoteDao.getRandomQuota();
+
         req.setAttribute("quote", "\"" + quote.getQuote() + "\" - " + quote.getAuthor());
         req.setAttribute("title", "Kickstarter");
+
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/layouts/index.jsp");
         rd.forward(req, res);
     }

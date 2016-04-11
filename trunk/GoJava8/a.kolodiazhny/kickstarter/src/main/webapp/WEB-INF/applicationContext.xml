@@ -10,4 +10,8 @@
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="java:comp/env/jdbc/kickstarter"/>
     </bean>
+    
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+    	<property name="dataSource" ref="dataSource" />
+    </bean>
 </beans>
