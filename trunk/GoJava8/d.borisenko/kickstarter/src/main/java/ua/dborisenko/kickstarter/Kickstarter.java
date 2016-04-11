@@ -28,11 +28,11 @@ import ua.dborisenko.kickstarter.domain.Question;
 public class Kickstarter extends HttpServlet {
 
     private static final long serialVersionUID = 8987512933446595305L;
-    private static final String INVESTMENT_JSP_PATH = "/WEB-INF/jsp/investment.jsp";
-    private static final String PROJECT_JSP_PATH = "/WEB-INF/jsp/project.jsp";
-    private static final String PROJECT_OUT_URL = "?page=project&id=";
-    private static final String CATEGORY_JSP_PATH = "/WEB-INF/jsp/category.jsp";
-    private static final String CATEGORIES_JSP_PATH = "/WEB-INF/jsp/categories.jsp";
+    static final String INVESTMENT_JSP_PATH = "/WEB-INF/jsp/investment.jsp";
+    static final String PROJECT_JSP_PATH = "/WEB-INF/jsp/project.jsp";
+    static final String PROJECT_OUT_URL = "?page=project&id=";
+    static final String CATEGORY_JSP_PATH = "/WEB-INF/jsp/category.jsp";
+    static final String CATEGORIES_JSP_PATH = "/WEB-INF/jsp/categories.jsp";
     @Autowired
     private CategoryDao categoryDao;
     @Autowired

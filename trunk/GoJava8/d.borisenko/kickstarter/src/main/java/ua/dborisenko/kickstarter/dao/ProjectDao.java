@@ -40,7 +40,7 @@ public class ProjectDao {
                 investmentDao.getInvestments(project);
                 category.addProject(project);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new IllegalStateException(e);
         }
     }
@@ -63,7 +63,7 @@ public class ProjectDao {
             project.setVideoUrl(rs.getString("video_url"));
             investmentDao.getInvestments(project);
             return project;
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new IllegalStateException(e);
         }
     }

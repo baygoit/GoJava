@@ -19,14 +19,16 @@ public class QuoteDao {
     private DataSource dataSource;
 
     public Quote getRandomQuote() {
+        Quote quote = new Quote();
         try (Connection connection = dataSource.getConnection();
                 PreparedStatement statement = connection.prepareStatement(QUERY_SELECT_RANDOM_QUOTE)) {
             ResultSet rs = statement.executeQuery();
-            rs.next();
+            if (!rs.next()) {
+                return quote;
+            }
             int id = rs.getInt("id");
             String author = rs.getString("author");
             String text = rs.getString("text");
-            Quote quote = new Quote();
             quote.setId(id);
             quote.setAuthor(author);
             quote.setText(text);

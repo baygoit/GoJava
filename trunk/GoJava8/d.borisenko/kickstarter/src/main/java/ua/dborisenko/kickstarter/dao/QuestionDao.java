@@ -32,7 +32,7 @@ public class QuestionDao {
                 question.setReply(rs.getString("reply"));
                 project.addQuestion(question);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new IllegalStateException(e);
         }
     }
@@ -43,7 +43,7 @@ public class QuestionDao {
             statement.setInt(1, projectId);
             statement.setString(2, question.getRequest());
             statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new IllegalStateException(e);
         }
     }

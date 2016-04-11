@@ -31,7 +31,7 @@ public class RewardDao {
                 reward.setDescription(rs.getString("description"));
                 project.addReward(reward);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new IllegalStateException(e);
         }
     }

@@ -34,7 +34,7 @@ public class InvestmentDao {
                 investment.setAmount(rs.getInt("amount"));
                 project.addInvestment(investment);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new IllegalStateException(e);
         }
     }
@@ -47,7 +47,7 @@ public class InvestmentDao {
             statement.setString(3, investment.getCardNumber());
             statement.setInt(4, investment.getAmount());
             statement.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new IllegalStateException(e);
         }
     }

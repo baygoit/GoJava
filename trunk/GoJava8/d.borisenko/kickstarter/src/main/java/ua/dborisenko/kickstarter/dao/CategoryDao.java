@@ -35,7 +35,7 @@ public class CategoryDao {
             category.setId(rs.getInt("id"));
             category.setName(rs.getString("name"));
             return category;
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new IllegalStateException(e);
         }
     }
@@ -52,7 +52,7 @@ public class CategoryDao {
                 categories.add(category);
             }
             return categories;
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new IllegalStateException(e);
         }
     }
@@ -69,7 +69,7 @@ public class CategoryDao {
             category.setId(rs.getInt("c.id"));
             category.setName(rs.getString("c.name"));
             return category;
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new IllegalStateException(e);
         }
     }
