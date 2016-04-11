@@ -1,4 +1,4 @@
-package com.anmertrix.page;
+package com.anmertrix.servlet;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -24,40 +24,40 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.anmertrix.dao.CategoryDao;
-import com.anmertrix.dao.ProjectDao;
-import com.anmertrix.domain.Category;
-import com.anmertrix.servlet.ProjectsServlet;
+import com.anmertrix.dao.QuoteDao;
+import com.anmertrix.domain.Quote;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProjectsPageTest {
-
+public class CategoriesServletTest {
+	
+	
 	@Mock
-	private CategoryDao categoryDao;
+	private QuoteDao quoteDao;
 	@Mock
-	private ProjectDao projectDao;
+	private CategoryDao categoryDao;	
 	@Mock
 	private HttpServletRequest request;
 	@Mock
 	private HttpServletResponse response;
+	
 	@InjectMocks
-	private ProjectsServlet projectsPage = spy(ProjectsServlet.class);
+	private CategoriesServlet categoriesServlet = spy(CategoriesServlet.class);
 	
 	@Test
 	public void testDoGet() throws ServletException, IOException {
-		when(request.getParameter("categoryId")).thenReturn("3");
+		
+		when(quoteDao.getRandomQuote()).thenReturn(new Quote());
 
-		when(categoryDao.getCategory(3)).thenReturn(new Category());
-
-		when(projectDao.getProjectsByCategoryId(3)).thenReturn(new ArrayList<>());
+		when(categoryDao.getCategories()).thenReturn(new ArrayList<>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 
 		ServletContext context = mock(ServletContext.class);
 		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
 
-		doReturn(context).when(projectsPage).getServletContext();
+		doReturn(context).when(categoriesServlet).getServletContext();
 
-		projectsPage.doGet(request, response);
+		categoriesServlet.doGet(request, response);
 
 		verify(dispatcher).forward(any(), any());
 

@@ -11,7 +11,6 @@ public class CategoryTest {
 	public void setGetNameTest() {
 		Category category = new Category();
 		category.setName("test2");
-
 		assertThat(category.getName(), is("test2"));
 	}
 	

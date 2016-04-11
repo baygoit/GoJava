@@ -19,19 +19,18 @@ import com.anmertrix.domain.Answer;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
-import com.anmertrix.domain.Reward;
 
 @Repository
 public class ProjectDaoSql implements ProjectDao {
 	
 	private static final String SELECT_PROJECTS = "SELECT id, name FROM project WHERE category_id=?";
+	private static final String PROJECT_EXISTS = "SELECT * FROM project WHERE id=?";
 	private static final String SELECT_PROJECT = "SELECT name, description, required_budget, days_left, history, url, COALESCE(SUM(amount),0) AS sum_amount FROM project JOIN payment ON (project.id = payment.project_id) WHERE project_id=?";
 	private static final String SELECT_QUESTIONS = "SELECT id, question FROM question WHERE project_id=?";
 	private static final String SELECT_ANSWERS = "SELECT id, answer FROM answer WHERE question_id=?";
 	private static final String INSERT_QUESTION = "INSERT INTO question (project_id, question) VALUES (?, ?)";
 	private static final String SELECT_PAYMENTS = "SELECT id, cardholder_name, amount FROM payment WHERE project_id=?";
 	private static final String INSERT_PAYMENT = "INSERT INTO payment (project_id, cardholder_name, card_number, amount) VALUES (?, ?, ?, ?)";
-	private static final String SELECT_REWARDS = "SELECT id, name, amount, description FROM reward";
 
 	@Autowired
 	private DataSource dataSource;
@@ -48,7 +47,6 @@ public class ProjectDaoSql implements ProjectDao {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
-				
 				Project project = new Project();
 				project.setId(id);
 				project.setName(name);
@@ -61,15 +59,29 @@ public class ProjectDaoSql implements ProjectDao {
 	}
 	
 	@Override
+	public void projectExists(int project_id){
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(PROJECT_EXISTS)) {
+			statement.setInt(1, project_id);
+			ResultSet rs = statement.executeQuery();
+			
+			if (rs.next()) {
+				return;
+			} else {
+				throw new NoResultException("No project found");
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e);
+		}
+	}
+	
+	@Override
 	public Project getProjectById(int project_id) {
-		
 		Project project = new Project();
-    	
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(SELECT_PROJECT)) {
 			statement.setInt(1, project_id);
 			ResultSet rs = statement.executeQuery();
-			
 			if (rs.next()) {
 				String name = rs.getString("name");
 				String description = rs.getString("description");
@@ -85,14 +97,13 @@ public class ProjectDaoSql implements ProjectDao {
 			} else {
 				throw new NoResultException("No project found");
 			}
-				
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		}
 	}
 	
 	@Override
-	public List<Question> getQuestionByProjectId(int project_id) {
+	public List<Question> getQuestionsByProjectId(int project_id) {
 		
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(SELECT_QUESTIONS)) {
@@ -116,7 +127,7 @@ public class ProjectDaoSql implements ProjectDao {
 	}
 	
 	@Override
-	public List<Answer> getAnswerByQuestionId(int question_id) {
+	public List<Answer> getAnswersByQuestionId(int question_id) {
 		
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(SELECT_ANSWERS)) {
@@ -191,33 +202,6 @@ public class ProjectDaoSql implements ProjectDao {
 			statement.setInt(4, payment.getAmount());
 			statement.execute();
 			
-		} catch (SQLException e) {
-			throw new DaoException(e);
-		}
-	}
-
-	@Override
-	public List<Reward> getRewards() {
-
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection.prepareStatement(SELECT_REWARDS)) {
-			ResultSet rs = statement.executeQuery();
-			
-			List<Reward> rewards = new ArrayList<>();
-			while(rs.next()) {
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				int amount = rs.getInt("amount");
-				String description = rs.getString("description");
-				
-				Reward reward = new Reward();
-				reward.setId(id);
-				reward.setName(name);
-				reward.setAmount(amount);
-				reward.setDescription(description);
-				rewards.add(reward);				
-			}
-			return rewards;
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		}
