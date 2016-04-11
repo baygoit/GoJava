@@ -28,8 +28,9 @@ public class RewardDaoSql implements RewardDao {
 	public List<Reward> getRewards() {
 
 		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection.prepareStatement(SELECT_REWARDS)) {
-			ResultSet rs = statement.executeQuery();
+				PreparedStatement statement = connection.prepareStatement(SELECT_REWARDS);
+				ResultSet rs = statement.executeQuery()) {
+			
 			
 			List<Reward> rewards = new ArrayList<>();
 			while(rs.next()) {

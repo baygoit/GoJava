@@ -2,7 +2,11 @@ package com.anmertrix.dao.sql;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.contains;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,6 +41,10 @@ public class ProjectDaoSqlTest {
     PreparedStatement preparedStatement;
 	@Mock
     ResultSet resultSet;
+	@Mock
+    Question question;
+	@Mock
+	Payment payment;
 	@InjectMocks
 	private ProjectDaoSql projectDaoSql;
 	
@@ -56,6 +64,9 @@ public class ProjectDaoSqlTest {
 		Project project = projects.get(0);
 		assertThat(project.getId(), is(1));
 		assertThat(project.getName(), is("test name"));
+		
+		verify(preparedStatement).setInt(1, 1);
+		verify(connection).prepareStatement(contains("SELECT id, name FROM project WHERE category_id=?"));
 	}
 
 	@Test
@@ -336,6 +347,74 @@ public class ProjectDaoSqlTest {
 			projectDaoSql.getPaymentsByProjectId(1);
 		} finally {
 			verify(dataSource).getConnection();
+		}
+	}
+	
+	@Test
+	public void testInsertQuestion() throws SQLException {
+		projectDaoSql.insertQuestion(question);
+
+		verify(connection, times(1)).prepareStatement(anyString());
+		verify(preparedStatement, times(1)).setString(anyInt(), anyString());
+		verify(preparedStatement, times(1)).setInt(anyInt(), anyInt());
+		verify(preparedStatement, times(1)).execute();
+		
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void testInsertQuestionGetConnectionException() throws SQLException {
+		when(dataSource.getConnection()).thenThrow(new SQLException());
+		try {
+			projectDaoSql.insertQuestion(question);
+		} finally {
+			verify(dataSource).getConnection();
+			verify(preparedStatement, never()).execute();
+		}
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void testInsertQuestionCreateStatementException() throws SQLException {
+		when(connection.prepareStatement(anyString())).thenThrow(new SQLException());
+		try {
+			projectDaoSql.insertQuestion(question);
+		} finally {
+			verify(dataSource).getConnection();
+			verify(preparedStatement, never()).execute();
+			verify(connection).close();
+		}
+	}
+	
+	@Test
+	public void testInsertPayment() throws SQLException {
+		projectDaoSql.insertPayment(payment);
+
+		verify(connection, times(1)).prepareStatement(anyString());
+		verify(preparedStatement, times(2)).setString(anyInt(), anyString());
+		verify(preparedStatement, times(2)).setInt(anyInt(), anyInt());
+		verify(preparedStatement, times(1)).execute();
+		
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void testInsertPaymentGetConnectionException() throws SQLException {
+		when(dataSource.getConnection()).thenThrow(new SQLException());
+		try {
+			projectDaoSql.insertPayment(payment);
+		} finally {
+			verify(dataSource).getConnection();
+			verify(preparedStatement, never()).execute();
+		}
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void testInsertPaymentCreateStatementException() throws SQLException {
+		when(connection.prepareStatement(anyString())).thenThrow(new SQLException());
+		try {
+			projectDaoSql.insertPayment(payment);
+		} finally {
+			verify(dataSource).getConnection();
+			verify(preparedStatement, never()).execute();
+			verify(connection).close();
 		}
 	}
 }
