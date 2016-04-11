@@ -3,8 +3,11 @@ package com.anmertrix.dao.sql;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.never;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,7 +45,7 @@ public class RewardDaoSqlTest {
 		when(dataSource.getConnection()).thenReturn(connection);
 		when(preparedStatement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
-	}
+	}	
 
 	@Test
 	public void testGetRewards() throws SQLException {
@@ -58,12 +61,33 @@ public class RewardDaoSqlTest {
 		assertThat(reward.getName(), is("test name"));
 		assertThat(reward.getAmount(), is(10));
 		assertThat(reward.getDescription(), is("test description"));
+		
+		verify(connection).prepareStatement(contains("SELECT id, name, amount, description FROM reward"));
+		
+		assertThat(rewards.isEmpty(), is(false));
+		assertThat(rewards.size(), is(1));
+		
+		verify(resultSet, times(2)).next();
+		verify(resultSet, times(2)).getInt(anyString());
+		verify(resultSet, times(2)).getString(anyString());
+		verify(dataSource, times(1)).getConnection();
+		verify(connection, times(1)).prepareStatement(anyString());
+		verify(preparedStatement, times(1)).executeQuery();
+		
+		verify(connection).close();
+		verify(preparedStatement).close();
+		verify(resultSet).close();
+		
 	}
 	
 	@Test
 	public void testGetRewardsNotFound() throws SQLException {
 		List<Reward> rewards = rewardDaoSql.getRewards();
 		assertThat(rewards.isEmpty(), is(true));
+		
+		verify(connection).close();
+		verify(preparedStatement).close();
+		verify(resultSet).close();
 	}
 	
 	@Test(expected = RuntimeException.class)
@@ -74,6 +98,10 @@ public class RewardDaoSqlTest {
 		} finally {
 			verify(dataSource).getConnection();
 		}
+		verify(preparedStatement, never()).executeQuery();
+		verify(connection).close();
+		verify(preparedStatement).close();
+		verify(resultSet).close();
 	}
 	
 	@Test(expected = RuntimeException.class)
@@ -83,7 +111,10 @@ public class RewardDaoSqlTest {
 			rewardDaoSql.getRewards();
 		} finally {
 			verify(dataSource).getConnection();
+			verify(connection).close();
 		}
+		verify(preparedStatement).close();
+		verify(resultSet).close();
 	}
 	
 	@Test(expected = RuntimeException.class)
@@ -93,7 +124,10 @@ public class RewardDaoSqlTest {
 			rewardDaoSql.getRewards();
 		} finally {
 			verify(dataSource).getConnection();
+			verify(connection).close();
+			verify(preparedStatement).close();	
 		}
+		verify(resultSet).close();
 	}
 	
 }

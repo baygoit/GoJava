@@ -6,14 +6,31 @@
               <h2>${title}</h1>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Add question:</div>
+                <div class="panel-heading">Invest:</div>
                 <div class="panel-body">
                     <form role="form" name='add_invest' method='POST' action=''>
                         <div class="form-group">
-                            <input type='hidden' name='action' value='addInvest'/>
+                            <input type='hidden' name='action' value='addInvestment'/>
                         	<input type='hidden' name='projectId' value='${project.id}'/>
-                            <label for="question">Please fill your question:</label>
-                            <textarea rows="5" type="question" class="form-control" name="question"></textarea>
+                            <label for="cardHolder">Card Holder</label>
+                            <input class="form-control" name="cardHolder" placeholder="Bob" value="Bob"/>
+                            <label for="cardNumber">Card Number</label>
+                            <input class="form-control" pattern="[0-9]{12}" name="cardNumber" title="Format: 12 digits" placeholder="123456789011"  value="123456789011"/>
+                            <label for="amount">Amount</label>
+                            <input class="form-control" pattern="[0-9]{3}" name="amount" placeholder="100" value="100" title="Format: 3 digits"/>
+                        </div>
+                        <label for="awards">Awards:</label>
+                        <div id="awards" class="container">
+                            <div class="row">
+                                <c:forEach var="award" items="${awards}" varStatus="varStatus">
+                                    <div class="col-xs-4">
+                                        <button type="submit" value="${award.amount}" class="btn btn-default btn-small" name="award">
+                                            ${award.amount}$-
+                                            ${award.name}
+                                        </button>
+                                    </div>
+                                </c:forEach>
+                            </div>
                         </div>
                         <button type="submit" value="send" class="btn btn-default">Submit</button>
                         <a class="btn btn-default" href='?view=project&id=${project.id}'>Return</a>

@@ -1,4 +1,4 @@
-package com.sandarovich.kickstarter.domain;
+package com.sandarovich.kickstarter.model;
 
 /**
  * Created by Olexander Koldoiazhnhy 2016

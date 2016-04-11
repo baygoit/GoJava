@@ -84,11 +84,11 @@
 								<div class="form-group col-sm-4 text-center">
 									<div><span class="reward_name">${reward.name}</span></div>
 									<div><span class="reward_amount">${reward.description}</span></div>
-									<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+									<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal-${reward.id}">
 								        Invest
 								    </button>
 								</div>
-								<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+								<div class="modal fade" id="myModal-${reward.id}" tabindex="-1" role="dialog"
 									aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
