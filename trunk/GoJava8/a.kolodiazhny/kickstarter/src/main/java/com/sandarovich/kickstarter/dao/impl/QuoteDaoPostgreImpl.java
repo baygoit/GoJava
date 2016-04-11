@@ -32,7 +32,7 @@ public class QuoteDaoPostgreImpl implements QuoteDao {
 
     @Override
     public Quote getRandomQuota() {
-		return this.jdbcTemplate.queryForObject(SQL_GET_RANDOM_QUOTE,
+		return jdbcTemplate.queryForObject(SQL_GET_RANDOM_QUOTE,
 				new QuoteRowMapper());
     }
 }
