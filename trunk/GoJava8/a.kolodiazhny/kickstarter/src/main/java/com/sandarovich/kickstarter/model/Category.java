@@ -1,4 +1,4 @@
-package com.sandarovich.kickstarter.domain;
+package com.sandarovich.kickstarter.model;
 
 public class Category {
 

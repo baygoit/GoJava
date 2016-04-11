@@ -1,4 +1,4 @@
-package com.sandarovich.kickstarter.dao;
+package com.sandarovich.kickstarter.dao.exception;
 
 
 public class NoResultException extends DaoException {

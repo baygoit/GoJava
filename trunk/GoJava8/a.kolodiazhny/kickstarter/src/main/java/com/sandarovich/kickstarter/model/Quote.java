@@ -1,11 +1,8 @@
-package com.sandarovich.kickstarter.domain;
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+package com.sandarovich.kickstarter.model;
 
 /**
  * Quote
  */
-@JsonAutoDetect
 public class Quote {
 
     private String author;
@@ -20,10 +17,6 @@ public class Quote {
         this.quote = quote;
     }
 
-    @Override
-    public String toString() {
-        return author + ": " + "\"" + quote + "\"";
-    }
     public String getQuote() {
         return quote;
     }

@@ -24,3 +24,7 @@ footer {
 .list-group.categories {
     width: 400px;
 }
+
+#awards {
+    margin: 20px !important;
+}
