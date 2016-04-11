@@ -34,9 +34,6 @@ public class ProjectServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Project project = getSelectedProject(request, response);
-        if (project == null) {
-        	return;
-        }
 		
 		List<Question> questions = projectDao.getQuestionsByProjectId(project.getId());
 		
@@ -66,6 +63,7 @@ public class ProjectServlet extends HttpServlet {
 			projectId = Integer.parseInt(projectIdStr);
 		} catch (NumberFormatException e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			
 			return null;
 		}
 		
@@ -91,7 +89,7 @@ public class ProjectServlet extends HttpServlet {
 
 	}
 	
-	private void addQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	void addQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.setCharacterEncoding("UTF-8");
 		Question question = new Question();
 		question.setQuestion(request.getParameter("question").trim());
@@ -100,7 +98,7 @@ public class ProjectServlet extends HttpServlet {
 		response.sendRedirect("project?projectId=" + question.getProjectId());
 	}
 	
-	private void addPayment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	void addPayment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.setCharacterEncoding("UTF-8");
 		
 		Payment payment = new Payment();

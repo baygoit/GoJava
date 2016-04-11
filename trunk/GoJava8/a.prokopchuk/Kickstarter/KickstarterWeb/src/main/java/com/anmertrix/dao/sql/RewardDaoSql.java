@@ -31,7 +31,6 @@ public class RewardDaoSql implements RewardDao {
 				PreparedStatement statement = connection.prepareStatement(SELECT_REWARDS);
 				ResultSet rs = statement.executeQuery()) {
 			
-			
 			List<Reward> rewards = new ArrayList<>();
 			while(rs.next()) {
 				int id = rs.getInt("id");

@@ -88,6 +88,10 @@ footer .container{
 .reward_block h3 {
 	text-align:left;
 }
-
-
+.page404 img {
+	max-width: 100%;
+}
+.page404 {
+    display: inline-block;
+}
 

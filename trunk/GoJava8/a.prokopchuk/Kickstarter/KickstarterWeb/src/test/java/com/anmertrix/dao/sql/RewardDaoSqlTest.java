@@ -130,4 +130,10 @@ public class RewardDaoSqlTest {
 		verify(resultSet).close();
 	}
 	
+	@Test(expected = RuntimeException.class)
+    public void getRewardsFailTest() throws SQLException {
+        when(dataSource.getConnection()).thenReturn(null);
+        rewardDaoSql.getRewards();
+    }
+	
 }
