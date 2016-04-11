@@ -1,21 +1,9 @@
 package ua.nenya.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ua.nenya.domain.Project;
 
 public class Category{
 	private int id;
 	private String name;
-	private List<Project> projects = new ArrayList<>();
-
-	public Category() {
-	}
-
-	public List<Project> getProjects() {
-		return projects;
-	}
 	
 	public String getName() {
 		return name;

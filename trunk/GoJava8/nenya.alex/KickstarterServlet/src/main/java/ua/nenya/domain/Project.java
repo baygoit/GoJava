@@ -1,7 +1,5 @@
 package ua.nenya.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Project {
 	private int id;
@@ -12,8 +10,6 @@ public class Project {
 	private int daysRemain;
 	private String history = "";
 	private String video = "";
-	private List<Question> questions = new ArrayList<>();
-	private List<Reward> rewards = new ArrayList<>(); 
 	
 
 
@@ -57,14 +53,6 @@ public class Project {
 		this.video = video;
 	}
 
-	public List<Question> getQuestions() {
-		return questions;
-	}
-
-	public List<Reward> getRewards() {
-		return rewards;
-	}
-
 
 	public void setName(String name) {
 		this.name = name;
@@ -83,16 +71,6 @@ public class Project {
 
 	public void setDaysRemain(int daysRemain) {
 		this.daysRemain = daysRemain;
-	}
-
-
-	public void setRewards(List<Reward> rewards) {
-		this.rewards = rewards;
-	}
-
-
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
 	}
 
 

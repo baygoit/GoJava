@@ -26,6 +26,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.nenya.dao.CategoryDao;
+import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Project;
 
 @Ignore
@@ -34,6 +35,9 @@ public class ProjectsServletTest {
 
 	@Mock
 	private CategoryDao categoryDao;
+	
+	@Mock
+	private ProjectDao projectDao;
 	
 	@Mock
 	private HttpServletRequest request;
@@ -46,7 +50,7 @@ public class ProjectsServletTest {
 	public void testDoGet() throws ServletException, IOException {
 		when(request.getParameter("categoryName")).thenReturn("Film");
 
-		when(categoryDao.getProjects("Film")).thenReturn(new ArrayList<Project>());
+		when(projectDao.getProjects("Film")).thenReturn(new ArrayList<Project>());
 
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);

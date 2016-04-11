@@ -8,21 +8,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.nenya.dao.CategoryDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
 
 public class InvestmentServlet extends CommonServlet {
 	private static final long serialVersionUID = 1L;
-	private CategoryDao categoryDao;
 
-	@Override
-	public void init() {
-		super.init();
-		categoryDao = getInitilizer().getCategoryDao();
-	}
-
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String projectName = request.getParameter("projectName");
 		String categoryName = request.getParameter("categoryName");
@@ -30,10 +21,10 @@ public class InvestmentServlet extends CommonServlet {
 		request.setAttribute("categoryName", categoryName);
 		request.setAttribute("projectName", projectName);
 		
-		Project project = categoryDao.getProjectByName(projectName);
+		Project project = getProjectDao().getProjectByName(projectName);
 		request.setAttribute("project", project);
 
-		List<Reward> rewards = categoryDao.getRewards(projectName);
+		List<Reward> rewards = getInvestmentDao().getRewards(projectName);
 
 		request.setAttribute("rewards", rewards);
 
@@ -48,29 +39,30 @@ public class InvestmentServlet extends CommonServlet {
 		String categoryName = request.getParameter("categoryName");
 		if(amountString.equals("0")){
 			String investitionString = request.getParameter("investition");
-			if(isAmountValid(investitionString)){
-				categoryDao.writeIvestmentInProject(projectName, Integer.parseInt(investitionString));
-			}else{
-				//TODO Exception
+			if(!isAmountValid(investitionString, response)){
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bad!!!");
+				return;
 			}
+			getInvestmentDao().writeIvestmentInProject(projectName, Integer.parseInt(investitionString));
 		}else{
-				categoryDao.writeIvestmentInProject(projectName, Integer.parseInt(amountString));
+			getInvestmentDao().writeIvestmentInProject(projectName, Integer.parseInt(amountString));
 		}
 
 		response.sendRedirect("projectServlet?categoryName="+categoryName+"&projectName="+projectName);
 	}
 	
-	private boolean isAmountValid(String amount) {
+	private boolean isAmountValid(String amount, HttpServletResponse response) {
 		int i = -1;
 		try {
 			i = Integer.parseInt(amount);
 		} catch (NumberFormatException e) {
-			e.getStackTrace();
+			try {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			} ;
 		}
-		if (i < 0) {
-			return false;
-		} else {
-			return true;
-		}
+		return i >= 0;
+
 	}
 }

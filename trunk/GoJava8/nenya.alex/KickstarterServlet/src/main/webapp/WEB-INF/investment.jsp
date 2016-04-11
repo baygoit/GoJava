@@ -15,11 +15,17 @@
 			<p><input type="radio" name="amount" value="${reward.amount}">${reward.name} - ${reward.description}</p>
 		</c:forEach>
 	<hr/>
-    <p><b>Enter amount of investition</b></p>
-        <input type="text" name="investition" /> <input type="hidden"
+    <p><b>Enter amount of investment</b></p>
+        <input type="text" name="investition"/>
+       <p><b> Your name</b></p>
+			<input type='text' name='cardholder_name'/><br/>
+			<p><b> Card number</b></p>
+			<input type='text' name='card_number'/><br/>
+         <input type="hidden"
             name="categoryName" value="${categoryName}" /> <input type="hidden"
-            name="projectName" value="${projectName}" /> <input type="submit"
-            value="Submit" />
+            name="projectName" value="${projectName}" /> 
+            <p><input type="submit"
+            value="Submit" /></p>
     </form>
     
 </body>

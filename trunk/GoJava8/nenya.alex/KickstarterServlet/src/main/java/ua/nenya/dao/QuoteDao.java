@@ -6,7 +6,7 @@ import ua.nenya.domain.Quote;
 
 public interface QuoteDao {
 	
-	void initQuotes();
+	//void initQuotes();
 	
 	Quote getRandomQuote(Random random);
 }
