@@ -103,7 +103,4 @@ public class Project {
         investments.add(investment);
     }
 
-    public Reward getRewardByIndex(int index) {
-        return rewards.get(index);
-    }
 }
