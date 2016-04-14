@@ -12,10 +12,10 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -27,15 +27,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.anmertrix.dao.NoResultException;
+import com.anmertrix.dao.AnswerDao;
+import com.anmertrix.dao.PaymentDao;
 import com.anmertrix.dao.ProjectDao;
+import com.anmertrix.dao.QuestionDao;
 import com.anmertrix.dao.RewardDao;
-import com.anmertrix.domain.Answer;
 import com.anmertrix.domain.Project;
-import com.anmertrix.domain.Question;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectServletTest {
@@ -44,6 +43,12 @@ public class ProjectServletTest {
 	private ProjectDao projectDao;
 	@Mock
 	private RewardDao rewardDao;
+	@Mock
+	private AnswerDao answerDao;
+	@Mock
+	private QuestionDao questionDao;
+	@Mock
+	private PaymentDao paymentDao;
 	@Mock
 	private HttpServletRequest request;
 	@Mock
@@ -54,11 +59,11 @@ public class ProjectServletTest {
 	@Test
 	public void testDoGet() throws ServletException, IOException {
 		when(request.getParameter("projectId")).thenReturn("2");
-
-		when(projectDao.getProjectById(2)).thenReturn(new Project());
-		when(projectDao.getQuestionsByProjectId(2)).thenReturn(new ArrayList<>());
-		when(projectDao.getAnswersByQuestionId(1)).thenReturn(new ArrayList<>());
-		when(projectDao.getPaymentsByProjectId(2)).thenReturn(new ArrayList<>());
+		when(projectDao.projectExists(anyInt())).thenReturn(true);
+		when(projectDao.getProjectById(anyInt())).thenReturn(new Project());
+		when(questionDao.getQuestionsByProjectId(anyInt())).thenReturn(new ArrayList<>());
+		when(answerDao.getAnswersByProjectId(anyInt())).thenReturn(new ArrayList<>());
+		when(paymentDao.getPaymentsByProjectId(anyInt())).thenReturn(new ArrayList<>());
 		when(rewardDao.getRewards()).thenReturn(new ArrayList<>());
 		
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
@@ -74,10 +79,42 @@ public class ProjectServletTest {
 		when(request.getParameter("requested_action")).thenReturn("ADD_QUESTION");
 		when(request.getParameter("question")).thenReturn("Test");
 		when(request.getParameter("projectId")).thenReturn("1");
+		when(projectDao.projectExists(anyInt())).thenReturn(true);
 		projectServlet.doPost(request, response);
 		assertThat(request.getParameter("requested_action"), is("ADD_QUESTION"));
 		verify(projectServlet).addQuestion(request, response);
 		verify(projectServlet, never()).addPayment(request, response);
+	}
+	
+	@Test
+	public void testDoPostQuestionNotValid() throws ServletException, IOException {
+		when(request.getParameter("requested_action")).thenReturn("ADD_QUESTION");
+		when(request.getParameter("question")).thenReturn("Test");
+		when(request.getParameter("projectId")).thenReturn("1");
+		when(projectDao.projectExists(anyInt())).thenReturn(false);
+		projectServlet.doPost(request, response);
+		assertThat(request.getParameter("requested_action"), is("ADD_QUESTION"));
+		verify(projectServlet).addQuestion(request, response);
+		verify(projectServlet, never()).addPayment(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_NOT_FOUND);
+	}
+	
+	@Test
+	public void testDoPostValidationQuestion() throws ServletException, IOException {
+		when(request.getParameter("requested_action")).thenReturn("ADD_QUESTION");
+		when(request.getParameter("question")).thenReturn("TestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteTestQuoteQuote1");
+		when(request.getParameter("projectId")).thenReturn("1");
+		projectServlet.doPost(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_BAD_REQUEST);
+	}
+	
+	@Test
+	public void testDoPostValidationQuestionEmpty() throws ServletException, IOException {
+		when(request.getParameter("requested_action")).thenReturn("ADD_QUESTION");
+		when(request.getParameter("question")).thenReturn("");
+		when(request.getParameter("projectId")).thenReturn("1");
+		projectServlet.doPost(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_BAD_REQUEST);
 	}
 	
 	@Test
@@ -86,7 +123,8 @@ public class ProjectServletTest {
 		when(request.getParameter("cardholder_name")).thenReturn("TestName");
 		when(request.getParameter("card_number")).thenReturn("1111222233334444");
 		when(request.getParameter("payment_amount")).thenReturn("100");
-		when(request.getParameter("projectId")).thenReturn("3");
+		when(request.getParameter("projectId")).thenReturn("1");
+		when(projectDao.projectExists(anyInt())).thenReturn(true);
 		projectServlet.doPost(request, response);
 		assertThat(request.getParameter("requested_action"), is("ADD_PAYMENT"));
 		verify(projectServlet, never()).addQuestion(request, response);
@@ -94,23 +132,111 @@ public class ProjectServletTest {
 	}
 	
 	@Test
-	public void testDoGetProjectBadRequest() throws ServletException, IOException {
-		when(request.getParameter("projectId")).thenReturn("noNumber");
-		assertThat(projectServlet.getSelectedProject(request, response), is(nullValue()));
-		verify(projectDao, never()).getQuestionsByProjectId(anyInt());
+	public void testDoPostPaymentNotValid() throws ServletException, IOException {
+		when(request.getParameter("requested_action")).thenReturn("ADD_PAYMENT");
+		when(request.getParameter("cardholder_name")).thenReturn("TestName");
+		when(request.getParameter("card_number")).thenReturn("1111222233334444");
+		when(request.getParameter("payment_amount")).thenReturn("100");
+		when(request.getParameter("projectId")).thenReturn("1");
+		when(projectDao.projectExists(anyInt())).thenReturn(false);
+		projectServlet.doPost(request, response);
+		assertThat(request.getParameter("requested_action"), is("ADD_PAYMENT"));
+		verify(projectServlet, never()).addQuestion(request, response);
+		verify(projectServlet).addPayment(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_NOT_FOUND);
 	}
 	
 	@Test
-	public void testDoGetProjectNotFound() throws ServletException, IOException {
-		when(request.getParameter("projectId")).thenReturn("123");
-		when(projectDao.getProjectById(123)).thenThrow(new NoResultException("No project found"));
-		assertThat(projectServlet.getSelectedProject(request, response), is(nullValue()));	
-		verify(projectDao, never()).getQuestionsByProjectId(anyInt());
+	public void testDoPostPaymentValidationCardholderNameEmpty() throws ServletException, IOException {
+		when(request.getParameter("requested_action")).thenReturn("ADD_PAYMENT");
+		when(request.getParameter("cardholder_name")).thenReturn("");
+		when(request.getParameter("card_number")).thenReturn("1111222233334444");
+		when(request.getParameter("payment_amount")).thenReturn("100");
+		when(request.getParameter("projectId")).thenReturn("1");
+		projectServlet.doPost(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_BAD_REQUEST);
 	}
 	
-	@Spy
-	private List<Question> questionsTest = new ArrayList<>();
-	@Spy
-	private List<Answer> answersTest = new ArrayList<>();
+	@Test
+	public void testDoPostPaymentValidationCardholderNameMore() throws ServletException, IOException {
+		when(request.getParameter("requested_action")).thenReturn("ADD_PAYMENT");
+		when(request.getParameter("cardholder_name")).thenReturn("TestNamesTestNamesTestNamesTestNamesTestNamesTestNamesTestNames");
+		when(request.getParameter("card_number")).thenReturn("1111222233334444");
+		when(request.getParameter("payment_amount")).thenReturn("100");
+		when(request.getParameter("projectId")).thenReturn("1");
+		projectServlet.doPost(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_BAD_REQUEST);
+	}
 
+	@Test
+	public void testDoPostPaymentValidationCardNumberMore() throws ServletException, IOException {
+		when(request.getParameter("requested_action")).thenReturn("ADD_PAYMENT");
+		when(request.getParameter("cardholder_name")).thenReturn("test");
+		when(request.getParameter("card_number")).thenReturn("434343434343434343433");
+		when(request.getParameter("payment_amount")).thenReturn("100");
+		when(request.getParameter("projectId")).thenReturn("1");
+		projectServlet.doPost(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_BAD_REQUEST);
+	}
+	
+	@Test
+	public void testDoPostPaymentValidationCardNumberLess() throws ServletException, IOException {
+		when(request.getParameter("requested_action")).thenReturn("ADD_PAYMENT");
+		when(request.getParameter("cardholder_name")).thenReturn("test");
+		when(request.getParameter("card_number")).thenReturn("111122");
+		when(request.getParameter("payment_amount")).thenReturn("100");
+		when(request.getParameter("projectId")).thenReturn("1");
+		projectServlet.doPost(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_BAD_REQUEST);
+	}
+	
+	@Test
+	public void testDoPostPaymentValidationCardNumberNoNumber() throws ServletException, IOException {
+		when(request.getParameter("requested_action")).thenReturn("ADD_PAYMENT");
+		when(request.getParameter("cardholder_name")).thenReturn("test");
+		when(request.getParameter("card_number")).thenReturn("11117434fd354224");
+		when(request.getParameter("payment_amount")).thenReturn("100");
+		when(request.getParameter("projectId")).thenReturn("1");
+		projectServlet.doPost(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_BAD_REQUEST);
+	}
+	
+	@Test
+	public void testDoPostPaymentValidationAmountNoNumber() throws ServletException, IOException {
+		when(request.getParameter("requested_action")).thenReturn("ADD_PAYMENT");
+		when(request.getParameter("cardholder_name")).thenReturn("test");
+		when(request.getParameter("card_number")).thenReturn("111174345354224");
+		when(request.getParameter("payment_amount")).thenReturn("100f");
+		when(request.getParameter("projectId")).thenReturn("1");
+		projectServlet.doPost(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_BAD_REQUEST);
+	}
+	
+	@Test
+	public void testDoPostPaymentValidationAmountLess() throws ServletException, IOException {
+		when(request.getParameter("requested_action")).thenReturn("ADD_PAYMENT");
+		when(request.getParameter("cardholder_name")).thenReturn("test");
+		when(request.getParameter("card_number")).thenReturn("111174345354224");
+		when(request.getParameter("payment_amount")).thenReturn("-31");
+		when(request.getParameter("projectId")).thenReturn("1");
+		projectServlet.doPost(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_BAD_REQUEST);
+	}
+	
+	@Test
+	public void testDoGetProjectBadRequest() throws ServletException, IOException {
+		when(request.getParameter("projectId")).thenReturn("noNumber");
+		assertThat(projectServlet.getSelectedProject(request, response), is(nullValue()));
+		verify(questionDao, never()).getQuestionsByProjectId(anyInt());
+	}
+
+	@Test
+	public void testDoGetProjectNotFound() throws ServletException, IOException {
+		when(request.getParameter("projectId")).thenReturn("233");
+		when(projectDao.projectExists(anyInt())).thenReturn(false);
+		projectServlet.doGet(request, response);
+		assertThat(projectServlet.getSelectedProject(request, response), is(nullValue()));
+		verify(response, times(1)).sendError(HttpServletResponse.SC_NOT_FOUND);
+		verify(questionDao, never()).getQuestionsByProjectId(anyInt());
+	}
 }

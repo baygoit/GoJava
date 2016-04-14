@@ -15,7 +15,6 @@
                     </h1>
                     <h3 class="brand-name">${quote.quoteText}</h3>
                     <h2><small>(${quote.author})</small></h2>
-
 					<ul>
 						<c:forEach var="category" items="${categories}">
 							<li><a href="projects?categoryId=${category.id}">${category.name}</a></li>
@@ -26,4 +25,5 @@
         </div>
     </div>  
 </div>
+
 <jsp:include page="footer.jsp" />

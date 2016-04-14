@@ -1,6 +1,7 @@
 package com.anmertrix.dao.sql;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.contains;
@@ -22,7 +23,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.anmertrix.dao.NoResultException;
 import com.anmertrix.domain.Category;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -60,9 +60,9 @@ public class CategoryDaoSqlTest {
 		verify(connection).prepareStatement(contains("category"));
 	}
 
-	@Test(expected = NoResultException.class)
+	@Test
 	public void testGetCategoryNotFound() throws SQLException {
-		categoryDaoSql.getCategory(0);
+		assertThat(categoryDaoSql.getCategory(0), is(nullValue()));
 	}
 	
 	@Test(expected = RuntimeException.class)

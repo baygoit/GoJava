@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 
 import com.anmertrix.dao.CategoryDao;
 import com.anmertrix.dao.DaoException;
-import com.anmertrix.dao.NoResultException;
 import com.anmertrix.domain.Category;
 
 @Repository
@@ -40,7 +39,7 @@ public class CategoryDaoSql implements CategoryDao {
 				category.setName(name);
 				return category;
 			} else {
-				throw new NoResultException("No category found");
+				return null;
 			}
 		} catch (SQLException e) {
 			throw new DaoException(e);

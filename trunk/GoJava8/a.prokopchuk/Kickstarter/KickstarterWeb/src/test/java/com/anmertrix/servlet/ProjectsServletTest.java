@@ -1,10 +1,11 @@
 package com.anmertrix.servlet;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,7 +25,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.anmertrix.dao.CategoryDao;
-import com.anmertrix.dao.NoResultException;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.domain.Category;
 import com.anmertrix.servlet.ProjectsServlet;
@@ -44,28 +44,24 @@ public class ProjectsServletTest {
 	private HttpServletRequest request;
 	@Mock
 	private HttpServletResponse response;
+	@Mock
+	private RequestDispatcher dispatcher;
+	@Mock
+	private ServletContext context;
 	@InjectMocks
 	private ProjectsServlet projectsPage = spy(ProjectsServlet.class);
 	
 	@Test
 	public void testDoGet() throws ServletException, IOException {
 		when(request.getParameter("categoryId")).thenReturn("3");
-
 		when(categoryDao.getCategory(3)).thenReturn(new Category());
-
 		when(projectDao.getProjectsByCategoryId(3)).thenReturn(new ArrayList<>());
-
-		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-
-		ServletContext context = mock(ServletContext.class);
 		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
-
 		doReturn(context).when(projectsPage).getServletContext();
 
 		projectsPage.doGet(request, response);
 
 		verify(dispatcher).forward(any(), any());
-
 	}
 	
 	@Test
@@ -76,11 +72,10 @@ public class ProjectsServletTest {
 	
 	@Test
 	public void testDoGetCategory() throws ServletException, IOException {
-		when(request.getParameter("categoryId")).thenReturn("123");
-		when(categoryDao.getCategory(123)).thenThrow(new NoResultException("No category found"));
+		when(categoryDao.getCategory(anyInt())).thenReturn(null);
+		when(request.getParameter("categoryId")).thenReturn("3");
+		projectsPage.doGet(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_NOT_FOUND);
 		assertThat(projectsPage.getSelectedCategory(request, response), is(nullValue()));
 	}
-
-	
-	
 }

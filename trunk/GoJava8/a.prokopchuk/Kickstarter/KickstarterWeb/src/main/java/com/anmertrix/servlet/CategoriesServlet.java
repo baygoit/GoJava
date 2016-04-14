@@ -19,6 +19,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 public class CategoriesServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+    static final String CATEGORIES_JSP_PATH = "/WEB-INF/jsp/categories.jsp";
 	
 	@Autowired
 	protected QuoteDao quoteDao;
@@ -33,7 +34,7 @@ public class CategoriesServlet extends HttpServlet {
         request.setAttribute("categories", categories);
         request.setAttribute("quote", quote);
         
-        getServletContext().getRequestDispatcher("/WEB-INF/jsp/categories.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher(CATEGORIES_JSP_PATH).forward(request, response);
         
     }
 

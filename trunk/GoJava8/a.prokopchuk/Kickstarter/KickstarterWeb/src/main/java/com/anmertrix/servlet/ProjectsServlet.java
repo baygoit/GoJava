@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.anmertrix.dao.CategoryDao;
-import com.anmertrix.dao.NoResultException;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.domain.Category;
 import com.anmertrix.domain.Project;
@@ -21,11 +20,12 @@ import com.anmertrix.domain.Project;
 public class ProjectsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	static final String PROJECTS_JSP_PATH = "/WEB-INF/jsp/projects.jsp";
 	
 	@Autowired
-	protected CategoryDao categoryDao;
+	private CategoryDao categoryDao;
 	@Autowired
-	protected ProjectDao projectDao;
+	private ProjectDao projectDao;
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -39,24 +39,21 @@ public class ProjectsServlet extends HttpServlet {
 		request.setAttribute("category", category);
         request.setAttribute("projects", projects);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/jsp/projects.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(PROJECTS_JSP_PATH);
         dispatcher.forward(request, response);
     }
 	
 	public Category getSelectedCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String categoryIdStr = request.getParameter("categoryId");
-		int categoryId = 0;
 		try {
-			categoryId = Integer.parseInt(categoryIdStr);
+			int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+			Category category = categoryDao.getCategory(categoryId);
+			if (category == null) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				return null;
+			}
+			return category;
 		} catch (NumberFormatException e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-			return null;
-		}
-
-		try {
-			return categoryDao.getCategory(categoryId);
-		} catch (NoResultException e) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 	}

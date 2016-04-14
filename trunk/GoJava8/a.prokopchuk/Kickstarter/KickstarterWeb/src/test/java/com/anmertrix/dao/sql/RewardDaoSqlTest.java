@@ -57,23 +57,21 @@ public class RewardDaoSqlTest {
 
 		List<Reward> rewards = rewardDaoSql.getRewards();
 		Reward reward = rewards.get(0);
+		
 		assertThat(reward.getId(), is(1));
 		assertThat(reward.getName(), is("test name"));
 		assertThat(reward.getAmount(), is(10));
 		assertThat(reward.getDescription(), is("test description"));
-		
-		verify(connection).prepareStatement(contains("SELECT id, name, amount, description FROM reward"));
-		
 		assertThat(rewards.isEmpty(), is(false));
 		assertThat(rewards.size(), is(1));
 		
+		verify(connection).prepareStatement(contains("SELECT id, name, amount, description FROM reward"));
 		verify(resultSet, times(2)).next();
 		verify(resultSet, times(2)).getInt(anyString());
 		verify(resultSet, times(2)).getString(anyString());
 		verify(dataSource, times(1)).getConnection();
 		verify(connection, times(1)).prepareStatement(anyString());
 		verify(preparedStatement, times(1)).executeQuery();
-		
 		verify(connection).close();
 		verify(preparedStatement).close();
 		verify(resultSet).close();
