@@ -1,18 +1,17 @@
-<%@ include file="header.jsp" %>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="/WEB-INF/pages/header.jsp" />
         <div class="container">
-            <%@ include file="navigation.jsp" %>
+            <jsp:include page="navigation.jsp" />
             <div class="page-header">
-              <h2>${title}</h2>
+              <h2>${title}</h1>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">Invest:</div>
                 <div class="panel-body">
-                    <form role="form" name='add_invest' method='POST' action=''>
+                    <form role="form" name="add_invest" method="POST" action="">
                         <div class="form-group">
-                            <input type='hidden' name='action' value='addInvestment'/>
-                        	<input type='hidden' name='projectId' value='${project.id}'/>
+                            <input type="hidden" name="action" value="paymentAdd"/>
+                        	<input type="hidden" name="projectId" value="${project.id}"/>
                             <label for="cardHolder">Card Holder</label>
                             <input class="form-control" name="cardHolder" placeholder="Bob" value="Bob"/>
                             <label for="cardNumber">Card Number</label>
@@ -40,4 +39,4 @@
             </div>
             <h3></h3>
         </div>
-<%@ include file="footer.jsp" %>
+<jsp:include page="footer.jsp" />

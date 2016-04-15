@@ -1,13 +1,9 @@
 package com.sandarovich.kickstarter.model;
 
-/**
- * Created by Olexander Koldoiazhnhy 2016
- */
-
 public class Project {
     private int id;
     private String name;
-    private String desription;
+    private String description;
     private double requiredBudget;
     private double gatheredBudget;
     private int daysLeft;
@@ -30,12 +26,12 @@ public class Project {
         this.name = name;
     }
 
-    public String getDesription() {
-        return desription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesription(String desription) {
-        this.desription = desription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getRequiredBudget() {

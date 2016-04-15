@@ -1,9 +1,5 @@
 package com.sandarovich.kickstarter.model;
 
-/**
- * Payment
- */
-
 public class Payment {
     private int id;
     private double amount;

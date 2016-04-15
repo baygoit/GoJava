@@ -1,8 +1,8 @@
-<%@ include file="header.jsp" %>
+<jsp:include page="header.jsp" />
         <div class="container">
-            <%@ include file="navigation.jsp" %>
+            <jsp:include page="navigation.jsp" />
             <div class="page-header">
-                <h1>KickStarter <small>${quote}</small></h1>
+                <h1>KickStarter <small>"${quote.text} -"${quote.author}</small></h1>
             </div>
             <div class="jumbotron">
                 <h2>Categories</h2>
@@ -10,4 +10,4 @@
                  <p><a class="btn btn-primary btn-lg" href="?view=categories" role="button">Learn more</a></p>
             </div>
         </div>
-<%@ include file="footer.jsp" %>
+<jsp:include page="footer.jsp" />

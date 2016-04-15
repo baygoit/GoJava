@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface QuestionDao {
     List<Question> getQuestions(Project project);
-
     void addQuestion(Question question, int projectId);
 }

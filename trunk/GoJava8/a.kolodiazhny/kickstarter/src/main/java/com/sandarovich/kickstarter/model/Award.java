@@ -1,8 +1,5 @@
 package com.sandarovich.kickstarter.model;
 
-/**
- * Award
- */
 public class Award {
 
     private int id;

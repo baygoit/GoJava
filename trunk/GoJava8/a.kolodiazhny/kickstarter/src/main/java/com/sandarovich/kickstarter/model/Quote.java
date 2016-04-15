@@ -6,19 +6,19 @@ package com.sandarovich.kickstarter.model;
 public class Quote {
 
     private String author;
-    private String quote;
+    private String text;
 
     public Quote() {
 
     }
 
-    public Quote(String author, String quote) {
+    public Quote(String author, String text) {
         this.author = author;
-        this.quote = quote;
+        this.text = text;
     }
 
-    public String getQuote() {
-        return quote;
+    public String getText() {
+        return text;
     }
     public String getAuthor() {
         return author;

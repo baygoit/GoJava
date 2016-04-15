@@ -10,7 +10,7 @@
                     <table class="table">
                         <tr>
                             <td>Name</td>
-                            <td>Short Desription</td>
+                            <td>Short Description</td>
                             <td>Required Budget</td>
                             <td>Gathered Budget</td>
                             <td>Days left</td>
@@ -18,7 +18,7 @@
                         <c:forEach var="project" items="${projects}">
                             <tr>
                                 <td><a href="?view=project&id=${project.id}">${project.name}</a></td>
-                                <td>${project.desription}</td>
+                                <td>${project.description}</td>
                                 <td>${project.requiredBudget}</td>
                                 <td>${project.gatheredBudget}</td>
                                 <td>${project.daysLeft}</td>
