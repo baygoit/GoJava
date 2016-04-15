@@ -16,7 +16,7 @@ import ua.dborisenko.kickstarter.domain.Category;
 @Repository
 public class CategoryDao {
 
-    private final class CategoryRowMapper implements RowMapper<Category> {
+    final class CategoryRowMapper implements RowMapper<Category> {
         @Override
         public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
             Category category = new Category();
@@ -26,24 +26,22 @@ public class CategoryDao {
         }
     }
 
-    private static final String QUERY_GET_CATEGORY_BY_PROJECT_ID = "SELECT c.id, c.name FROM categories c INNER JOIN projects p ON (p.category_id = c.id) WHERE p.id = ?";
-    private static final String QUERY_GET_CATEGORY_BY_ID = "SELECT id, name FROM categories WHERE id = ?";
-    private static final String QUERY_GET_CATEGORIES = "SELECT id, name FROM categories ORDER BY name";
+    static final String QUERY_GET_BY_PROJECT_ID = "SELECT c.id, c.name FROM categories c INNER JOIN projects p ON (p.category_id = c.id) WHERE p.id = ?";
+    static final String QUERY_GET_BY_ID = "SELECT id, name FROM categories WHERE id = ?";
+    static final String QUERY_GET_ALL = "SELECT id, name FROM categories ORDER BY name";
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     public Category getById(int id) {
-        return jdbcTemplate.queryForObject(QUERY_GET_CATEGORY_BY_ID, new Object[] { id }, new CategoryRowMapper());
+        return jdbcTemplate.queryForObject(QUERY_GET_BY_ID, new Object[] { id }, new CategoryRowMapper());
     }
 
     public List<Category> getAll() {
-        return jdbcTemplate.query(QUERY_GET_CATEGORIES, new CategoryRowMapper());
+        return jdbcTemplate.query(QUERY_GET_ALL, new CategoryRowMapper());
     }
 
     public Category getByProjectId(int id) {
-        Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("id", String.valueOf(id));
-        return jdbcTemplate.queryForObject(QUERY_GET_CATEGORY_BY_PROJECT_ID, new Object[] { id },
+        return jdbcTemplate.queryForObject(QUERY_GET_BY_PROJECT_ID, new Object[] { id },
                 new CategoryRowMapper());
     }
 }

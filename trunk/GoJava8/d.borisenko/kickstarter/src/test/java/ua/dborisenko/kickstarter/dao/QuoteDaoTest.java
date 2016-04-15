@@ -2,7 +2,7 @@ package ua.dborisenko.kickstarter.dao;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -45,6 +45,6 @@ public class QuoteDaoTest {
     @Test
     public void getRandomTest() throws SQLException {
         quoteDao.getRandom();
-        verify(jdbcTemplate).queryForObject(anyString(), Matchers.any(QuoteRowMapper.class));
+        verify(jdbcTemplate).queryForObject(eq(QuoteDao.QUERY_SELECT_RANDOM_QUOTE), Matchers.any(QuoteRowMapper.class));
     }
 }
