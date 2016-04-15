@@ -1,4 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
 	</div>	
 	<div class="div_main_footer">
    		Build: @PROJECT_BUILD_DATE@ (@PROJECT_BUILD_TIMEZONE@)<br/>

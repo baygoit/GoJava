@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="title" value="${project.name}" scope="request"/>
-<%@include file='header.jsp'%>
+<jsp:include page="header.jsp"/>
 		Project: <label class="subheader">${project.name}</label>
 		<hr/>
 		<table>
@@ -31,20 +31,24 @@
 		</table>
 		Questions and answers:<hr/>
 		<c:forEach var="question" items="${questions}">
-			Q: <label class="question">${question.request}</label><br/>
+			Q: <label class="question">${question.request}</label>
+			<br/>
 			<c:if test="${null != question.reply}"> 
-				A: <label class="answer">${question.reply}</label><br/>
+			A: <label class="answer">${question.reply}</label>
+			<br/>
 			</c:if>
  		</c:forEach>
  		<hr/>
 		Ask a question<br/>
-		<form name='add_question' method='POST' action='' accept-charset='utf-8'>
-			<input type='hidden' name='requested_action' value='ADD_QUESTION'/>
-			<input type='hidden' name='project_id' value='${project.id}'/>
-			<textarea maxlength='1024' name='question_request' cols='50' rows='2'></textarea><br/>
-			<input class='button' type='submit' value='Send'>
+		<form name="add_question" method="POST" action="" accept-charset="utf-8">
+			<input type="hidden" name="action" value="add_question"/>
+			<input type="hidden" name="project_id" value="${project.id}"/>
+			<textarea maxlength="1024" name="question_request" cols="50" rows="2"></textarea>
+			<br/>
+			<input class="button" type="submit" value="Send">
 		</form>
 		<br/>
-		<a href='?page=investment&project_id=${project.id}'>Invest in the project</a><br/><br/>
-		<a href='?page=category&id=${category.id}'>Return</a>
-<%@include file='footer.jsp'%>
+		<a href="?page=investment&project_id=${project.id}">Invest in the project</a>
+		<br/><br/>
+		<a href="?page=category&id=${category.id}">Return</a>
+<jsp:include page="footer.jsp"/>

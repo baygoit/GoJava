@@ -28,8 +28,8 @@ public class Category {
         return projects;
     }
 
-    public void addProject(Project project) {
-        projects.add(project);
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     public int getProjectsCount() {

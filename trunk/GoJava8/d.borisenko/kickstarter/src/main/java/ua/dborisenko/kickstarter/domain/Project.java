@@ -83,24 +83,24 @@ public class Project {
         return rewards;
     }
 
-    public void addReward(Reward reward) {
-        this.rewards.add(reward);
+    public void setRewards(List<Reward> rewards) {
+        this.rewards = rewards;
     }
 
     public List<Question> getQuestions() {
         return questions;
     }
 
-    public void addQuestion(Question question) {
-        questions.add(question);
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     public List<Investment> getInvestments() {
         return investments;
     }
 
-    public void addInvestment(Investment investment) {
-        investments.add(investment);
+    public void setInvestment(List<Investment> investments) {
+        this.investments = investments;
     }
 
 }
