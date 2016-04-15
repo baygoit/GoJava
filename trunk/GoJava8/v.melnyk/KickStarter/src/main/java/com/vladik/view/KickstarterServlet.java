@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class KickstarterServlet extends javax.servlet.http.HttpServlet {
-    static final String INVESTMENT_JSP_PATH = "/WEB-INF/jsp/investment.jsp";
+    static final String PAYMENT_JSP_PATH = "/WEB-INF/jsp/payment.jsp";
     static final String PROJECT_JSP_PATH = "/WEB-INF/jsp/project.jsp";
     static final String PROJECT_OUT_URL = "?page=project&id=";
     static final String CATEGORY_JSP_PATH = "/WEB-INF/jsp/category.jsp";
@@ -88,12 +88,12 @@ public class KickstarterServlet extends javax.servlet.http.HttpServlet {
     void showCategory(HttpServletRequest request, HttpServletResponse response, int id)
             throws ServletException, IOException {
 
-            Category category = categoryDaoMysql.getCategoryById(id);
-            projectDaoMysql.getProjectsFromCategory(category);
-            request.setAttribute("category", category);
-            request.setAttribute("projects", category.getProjects());
-            RequestDispatcher dispatcher = context.getRequestDispatcher(CATEGORY_JSP_PATH);
-            dispatcher.forward(request, response);
+        Category category = categoryDaoMysql.getCategoryById(id);
+        projectDaoMysql.getProjectsFromCategory(category);
+        request.setAttribute("category", category);
+        request.setAttribute("projects", category.getProjects());
+        RequestDispatcher dispatcher = context.getRequestDispatcher(CATEGORY_JSP_PATH);
+        dispatcher.forward(request, response);
 
     }
 
@@ -137,26 +137,26 @@ public class KickstarterServlet extends javax.servlet.http.HttpServlet {
     void showProject(HttpServletRequest request, HttpServletResponse response, int id)
             throws ServletException, IOException {
 
-            Project project = projectDaoMysql.getProjectById(id);
-            faqDaoMysql.getProjectFaqs(project);
-            request.setAttribute("project", project);
-            request.setAttribute("questions", project.getFaqList());
-            Category category = categoryDaoMysql.getCategoryById(id);
-            request.setAttribute("category", category);
-            RequestDispatcher dispatcher = context.getRequestDispatcher(PROJECT_JSP_PATH);
-            dispatcher.forward(request, response);
+        Project project = projectDaoMysql.getProjectById(id);
+        faqDaoMysql.getProjectFaqs(project);
+        request.setAttribute("project", project);
+        request.setAttribute("questions", project.getFaqList());
+        Category category = categoryDaoMysql.getCategoryById(id);
+        request.setAttribute("category", category);
+        RequestDispatcher dispatcher = context.getRequestDispatcher(PROJECT_JSP_PATH);
+        dispatcher.forward(request, response);
 
     }
 
     void showInvestment(HttpServletRequest request, HttpServletResponse response, int projectId)
             throws ServletException, IOException {
 
-            Project project = projectDaoMysql.getProjectById(projectId);
-            rewardsDaoMysql.getRewardsForProject(project);
-            request.setAttribute("project", project);
-            request.setAttribute("rewards", project.getRewardList());
-            RequestDispatcher dispatcher = context.getRequestDispatcher(INVESTMENT_JSP_PATH);
-            dispatcher.forward(request, response);
+        Project project = projectDaoMysql.getProjectById(projectId);
+        rewardsDaoMysql.getRewardsForProject(project);
+        request.setAttribute("project", project);
+        request.setAttribute("rewards", project.getRewardList());
+        RequestDispatcher dispatcher = context.getRequestDispatcher(PAYMENT_JSP_PATH);
+        dispatcher.forward(request, response);
 
     }
 }
