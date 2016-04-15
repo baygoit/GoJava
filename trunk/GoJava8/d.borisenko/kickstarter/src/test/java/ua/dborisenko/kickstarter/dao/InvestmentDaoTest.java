@@ -46,7 +46,7 @@ public class InvestmentDaoTest {
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
         Project project = new Project();
-        investmentDao.getInvestments(project);
+        investmentDao.getAllForProject(project);
         assertThat(project.getInvestments().size(), is(1));
         assertThat(project.getInvestments().get(0).getId(), is(1));
         assertThat(project.getInvestments().get(0).getCardHolderName(), is("testcardholder_name"));
@@ -58,7 +58,7 @@ public class InvestmentDaoTest {
     public void getInvestmentsFailTest() throws SQLException {
         when(dataSource.getConnection()).thenReturn(null);
         Project project = new Project();
-        investmentDao.getInvestments(project);
+        investmentDao.getAllForProject(project);
     }
     
     @Test
@@ -70,7 +70,7 @@ public class InvestmentDaoTest {
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
         Investment investment = new Investment();
-        investmentDao.addInvestment(1, investment);
+        investmentDao.addToProject(1, investment);
         verify(statement).executeUpdate();
     }
     
@@ -78,7 +78,7 @@ public class InvestmentDaoTest {
     public void addInvestmentFailTest() throws SQLException {
         when(dataSource.getConnection()).thenReturn(null);
         Investment investment = new Investment();
-        investmentDao.addInvestment(1, investment);
+        investmentDao.addToProject(1, investment);
     }
 
 }

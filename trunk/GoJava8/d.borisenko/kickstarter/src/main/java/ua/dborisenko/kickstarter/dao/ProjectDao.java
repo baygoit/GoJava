@@ -44,7 +44,7 @@ public class ProjectDao {
     public Project getProjectById(int id) {
         Project project = jdbcTemplate.queryForObject(QUERY_GET_PROJECT_BY_ID, new Object[] { id },
                 new ProjectRowMapper());
-        investmentDao.getInvestments(project);
+        investmentDao.getAllForProject(project);
         return project;
     }
 }

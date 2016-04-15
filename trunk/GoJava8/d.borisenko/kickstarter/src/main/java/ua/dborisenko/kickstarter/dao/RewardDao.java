@@ -29,7 +29,7 @@ public class RewardDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void getRewards(Project project) {
+    public void getAllForProject(Project project) {
         project.setRewards(
                 jdbcTemplate.query(QUERY_GET_REWARDS, new Object[] { project.getId() }, new RewardRowMapper()));
     }

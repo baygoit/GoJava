@@ -31,12 +31,12 @@ public class InvestmentDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    void getInvestments(Project project) {
+    void getAllForProject(Project project) {
         project.setInvestment(
                 jdbcTemplate.query(QUERY_GET_INVESTMENTS, new Object[] { project.getId() }, new InvestmentRowMapper()));
     }
 
-    public void addInvestment(int projectId, Investment investment) {
+    public void addToProject(int projectId, Investment investment) {
         jdbcTemplate.update(QUERY_ADD_INVESTMENT, projectId, investment.getCardHolderName(), investment.getCardNumber(),
                 investment.getAmount());
     }

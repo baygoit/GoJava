@@ -34,8 +34,8 @@ public class CategoryController {
     private ProjectDao projectDao;
     
     void showCategories(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute(QUOTE_ATTR_NAME, quoteDao.getRandomQuote());
-        request.setAttribute(CATEGORIES_ATTR_NAME, categoryDao.getCategories());
+        request.setAttribute(QUOTE_ATTR_NAME, quoteDao.getRandom());
+        request.setAttribute(CATEGORIES_ATTR_NAME, categoryDao.getAll());
         RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(CATEGORIES_JSP_PATH);
         dispatcher.forward(request, response);
     }
@@ -44,7 +44,7 @@ public class CategoryController {
             throws ServletException, IOException {
         try {
             int id = Integer.valueOf(request.getParameter(ID_PARAM_NAME));
-            Category category = categoryDao.getCategoryById(id);
+            Category category = categoryDao.getById(id);
             projectDao.getProjects(category);
             request.setAttribute(CATEGORY_ATTR_NAME, category);
             request.setAttribute(PROJECTS_ATTR_NAME, category.getProjects());

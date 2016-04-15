@@ -44,7 +44,7 @@ public class QuestionDaoTest {
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
         Project project = new Project();
-        questionDao.getQuestions(project);
+        questionDao.getAllForProject(project);
         assertThat(project.getQuestions().size(), is(1));
         assertThat(project.getQuestions().get(0).getId(), is(1));
         assertThat(project.getQuestions().get(0).getRequest(), is("testrequest"));
@@ -54,7 +54,7 @@ public class QuestionDaoTest {
     public void getQuestionsFailTest() throws SQLException {
         when(dataSource.getConnection()).thenReturn(null);
         Project project = new Project();
-        questionDao.getQuestions(project);
+        questionDao.getAllForProject(project);
     }
     
     @Test
@@ -66,7 +66,7 @@ public class QuestionDaoTest {
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
         Question question = new Question();
-        questionDao.addQuestion(1, question);
+        questionDao.addToProject(1, question);
         verify(statement).executeUpdate();
     }
     
@@ -74,7 +74,7 @@ public class QuestionDaoTest {
     public void addQuestionFailTest() throws SQLException {
         when(dataSource.getConnection()).thenReturn(null);
         Question question = new Question();
-        questionDao.addQuestion(1, question);
+        questionDao.addToProject(1, question);
     }
 
 }

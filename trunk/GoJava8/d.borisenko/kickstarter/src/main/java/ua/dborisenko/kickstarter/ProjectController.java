@@ -35,10 +35,10 @@ public class ProjectController {
         try {
             int id = Integer.valueOf(request.getParameter(ID_PARAM_NAME));
             Project project = projectDao.getProjectById(id);
-            questionDao.getQuestions(project);
+            questionDao.getAllForProject(project);
             request.setAttribute(PROJECT_ATTR_NAME, project);
             request.setAttribute(QUESTIONS_ATTR_NAME, project.getQuestions());
-            Category category = categoryDao.getCategoryByProjectId(id);
+            Category category = categoryDao.getByProjectId(id);
             request.setAttribute(CATEGORY_ATTR_NAME, category);
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(PROJECT_JSP_PATH);
             dispatcher.forward(request, response);

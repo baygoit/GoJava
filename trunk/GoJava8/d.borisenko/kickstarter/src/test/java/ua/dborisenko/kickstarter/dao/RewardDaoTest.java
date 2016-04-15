@@ -43,7 +43,7 @@ public class RewardDaoTest {
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
         Project project = new Project();
-        rewardDao.getRewards(project);
+        rewardDao.getAllForProject(project);
         assertThat(project.getRewards().size(), is(1));
         assertThat(project.getRewards().get(0).getId(), is(1));
         assertThat(project.getRewards().get(0).getDescription(), is("testdescription"));
@@ -54,6 +54,6 @@ public class RewardDaoTest {
     public void getRewardsFailTest() throws SQLException {
         when(dataSource.getConnection()).thenReturn(null);
         Project project = new Project();
-        rewardDao.getRewards(project);
+        rewardDao.getAllForProject(project);
     }
 }

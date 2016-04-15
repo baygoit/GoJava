@@ -42,7 +42,7 @@ public class QuoteDaoTest {
         Connection connection = mock(Connection.class);
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
-        Quote quote = quoteDao.getRandomQuote();
+        Quote quote = quoteDao.getRandom();
         assertThat(quote.getAuthor(), is("testauthor"));
         assertThat(quote.getText(), is("testtext"));
     }
@@ -56,7 +56,7 @@ public class QuoteDaoTest {
         Connection connection = mock(Connection.class);
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
-        Quote quote = quoteDao.getRandomQuote();
+        Quote quote = quoteDao.getRandom();
         assertThat(quote.getAuthor(), is(nullValue()));
         assertThat(quote.getText(), is(nullValue()));
     }
@@ -64,7 +64,7 @@ public class QuoteDaoTest {
     @Test(expected = IllegalStateException.class)
     public void getRandomQuoteTestFail() throws SQLException {
         when(dataSource.getConnection()).thenReturn(null);
-        quoteDao.getRandomQuote();
+        quoteDao.getRandom();
     }
 
 }

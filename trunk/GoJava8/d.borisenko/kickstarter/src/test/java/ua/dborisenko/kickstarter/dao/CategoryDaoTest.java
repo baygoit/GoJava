@@ -42,7 +42,7 @@ public class CategoryDaoTest {
         Connection connection = mock(Connection.class);
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
-        Category category = categoryDao.getCategoryById(1);
+        Category category = categoryDao.getById(1);
         assertThat(category.getId(), is(1));
         assertThat(category.getName(), is("testname"));
     }
@@ -56,13 +56,13 @@ public class CategoryDaoTest {
         Connection connection = mock(Connection.class);
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
-        categoryDao.getCategoryById(1);
+        categoryDao.getById(1);
     }
     
     @Test(expected = IllegalStateException.class)
     public void getCategoryByIdFailTest() throws SQLException {
         when(dataSource.getConnection()).thenReturn(null);
-        categoryDao.getCategoryById(1);
+        categoryDao.getById(1);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class CategoryDaoTest {
         Connection connection = mock(Connection.class);
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
-        List<Category> categories = categoryDao.getCategories();
+        List<Category> categories = categoryDao.getAll();
         assertThat(categories.size(), is(1));
         assertThat(categories.get(0).getId(), is(1));
         assertThat(categories.get(0).getName(), is("testname"));
@@ -85,7 +85,7 @@ public class CategoryDaoTest {
     @Test(expected = IllegalStateException.class)
     public void getCategoriesFailTest() throws SQLException {
         when(dataSource.getConnection()).thenReturn(null);
-        categoryDao.getCategories();
+        categoryDao.getAll();
     }
     
     @Test
@@ -99,7 +99,7 @@ public class CategoryDaoTest {
         Connection connection = mock(Connection.class);
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
-        Category category = categoryDao.getCategoryByProjectId(1);
+        Category category = categoryDao.getByProjectId(1);
         assertThat(category.getId(), is(1));
         assertThat(category.getName(), is("testname"));
     }
@@ -113,12 +113,12 @@ public class CategoryDaoTest {
         Connection connection = mock(Connection.class);
         when(connection.prepareStatement(anyString())).thenReturn(statement);
         when(dataSource.getConnection()).thenReturn(connection);
-        categoryDao.getCategoryByProjectId(1);
+        categoryDao.getByProjectId(1);
     }
     
     @Test(expected = IllegalStateException.class)
     public void getCategoryByProjectIdFailTest() throws SQLException {
         when(dataSource.getConnection()).thenReturn(null);
-        categoryDao.getCategoryByProjectId(1);
+        categoryDao.getByProjectId(1);
     }
 }

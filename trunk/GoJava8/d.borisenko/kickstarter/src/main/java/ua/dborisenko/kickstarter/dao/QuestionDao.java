@@ -30,12 +30,12 @@ public class QuestionDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void getQuestions(Project project) {
+    public void getAllForProject(Project project) {
         project.setQuestions(
                 jdbcTemplate.query(QUERY_GET_QUESTIONS, new Object[] { project.getId() }, new QuestionRowMapper()));
     }
 
-    public void addQuestion(int projectId, Question question) {
+    public void addToProject(int projectId, Question question) {
         jdbcTemplate.update(QUERY_ADD_QUESTION, projectId, question.getRequest());
     }
 

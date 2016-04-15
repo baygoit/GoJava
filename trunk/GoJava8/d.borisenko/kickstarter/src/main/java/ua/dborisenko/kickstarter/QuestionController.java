@@ -29,7 +29,7 @@ public class QuestionController {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.EMPTY_STRING);
                 return;
             }
-            questionDao.addQuestion(projectId, question);
+            questionDao.addToProject(projectId, question);
             response.sendRedirect(PROJECT_OUT_URL + projectId);
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NUMBER_FORMAT);

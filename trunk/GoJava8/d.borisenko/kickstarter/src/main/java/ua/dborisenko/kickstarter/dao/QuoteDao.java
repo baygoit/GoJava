@@ -27,7 +27,7 @@ public class QuoteDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Quote getRandomQuote() {
+    public Quote getRandom() {
         return jdbcTemplate.queryForObject(QUERY_SELECT_RANDOM_QUOTE, new QuoteRowMapper());
     }
 }

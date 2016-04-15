@@ -32,15 +32,15 @@ public class CategoryDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Category getCategoryById(int id) {
+    public Category getById(int id) {
         return jdbcTemplate.queryForObject(QUERY_GET_CATEGORY_BY_ID, new Object[] { id }, new CategoryRowMapper());
     }
 
-    public List<Category> getCategories() {
+    public List<Category> getAll() {
         return jdbcTemplate.query(QUERY_GET_CATEGORIES, new CategoryRowMapper());
     }
 
-    public Category getCategoryByProjectId(int id) {
+    public Category getByProjectId(int id) {
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("id", String.valueOf(id));
         return jdbcTemplate.queryForObject(QUERY_GET_CATEGORY_BY_PROJECT_ID, new Object[] { id },
