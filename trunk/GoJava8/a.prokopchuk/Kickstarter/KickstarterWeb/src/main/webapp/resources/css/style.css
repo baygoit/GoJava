@@ -94,4 +94,64 @@ footer .container{
 .page404 {
     display: inline-block;
 }
+.logo-index img {
+    width: 600px;
+    max-width: 100%;
+}
+#index {
+    height: 100vh;
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    margin: 0px;
+    text-align: center;
+    background-image: url("/kickstarter/resources/images/bg.jpg");
+    background-size: 100% auto;
+}
+.form-group-reward {
+	box-shadow: 0 0 17px rgba(0,0,0,0.12);
+    max-width: 300px;
+    margin: auto;
+    padding: 10px 0px;
+}
+.form-group-reward:hover {
+	-webkit-box-shadow: 0 0 17px rgba(0,0,0,0.42);
+	box-shadow: 0 0 17px rgba(0,0,0,0.42);
+}
 
+.form-group-item {
+	margin: 10px 0px;
+}
+.btn-reward {
+	margin: 10px 0px;
+}
+.reward-modal .modal-content {
+    width: 400px;
+    max-width: 100%;
+}
+
+.header-index a{
+	text-decoration: none;
+	color: #999;
+	text-shadow: 0 0 3px white;
+    font-size: 34px;
+}
+.header-index a:hover{
+	color: #BAAFAF;
+}
+.header-index {
+	padding-top:40px;
+}
+
+.tab-content {
+	padding: 20px;
+}
+
+.project-list {
+	padding: 0px;
+}
+
+.project-list li {
+    padding: 10px 0px;
+    font-size: 20px;
+}

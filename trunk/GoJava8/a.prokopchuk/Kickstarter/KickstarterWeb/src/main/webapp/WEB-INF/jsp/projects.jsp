@@ -9,9 +9,9 @@
 	<div class="container">
         <div class="row">
             <div class="box">
-                <div class="col-lg-12 text-center test-box">
+                <div class="col-lg-12 text-center">
 					<h2>${category.name}</h2>
-					<ul>
+					<ul class="project-list">
 						<c:forEach var="project" items="${projects}">
 							<li><a href="project?projectId=${project.id}">${project.name}</a></li>
 						</c:forEach>
