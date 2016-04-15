@@ -14,7 +14,7 @@ import ua.dborisenko.kickstarter.domain.Project;
 @Repository
 public class InvestmentDao {
 
-    private final class InvestmentRowMapper implements RowMapper<Investment> {
+    final class InvestmentRowMapper implements RowMapper<Investment> {
         @Override
         public Investment mapRow(ResultSet rs, int rowNum) throws SQLException {
             Investment investment = new Investment();
@@ -26,18 +26,19 @@ public class InvestmentDao {
         }
     }
 
-    private static final String QUERY_GET_INVESTMENTS = "SELECT id, cardholder_name, card_number, amount FROM investments WHERE project_id = ?";
-    private static final String QUERY_ADD_INVESTMENT = "INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (?, ?, ?, ?)";
+    static final String GET_INVESTMENTS_QUERY = "SELECT id, cardholder_name, card_number, amount FROM investments WHERE project_id = ?";
+    static final String ADD_INVESTMENT_QUERY = "INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (?, ?, ?, ?)";
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    private InvestmentRowMapper mapper = new InvestmentRowMapper();
 
     void getAllForProject(Project project) {
         project.setInvestment(
-                jdbcTemplate.query(QUERY_GET_INVESTMENTS, new Object[] { project.getId() }, new InvestmentRowMapper()));
+                jdbcTemplate.query(GET_INVESTMENTS_QUERY, new Object[] { project.getId() }, mapper));
     }
 
     public void addToProject(int projectId, Investment investment) {
-        jdbcTemplate.update(QUERY_ADD_INVESTMENT, projectId, investment.getCardHolderName(), investment.getCardNumber(),
+        jdbcTemplate.update(ADD_INVESTMENT_QUERY, projectId, investment.getCardHolderName(), investment.getCardNumber(),
                 investment.getAmount());
     }
 }

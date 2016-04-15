@@ -43,19 +43,19 @@ public class CategoryDaoTest {
     @Test
     public void getByIdTest() {
         categoryDao.getById(1);
-        verify(jdbcTemplate).queryForObject(eq(CategoryDao.QUERY_GET_BY_ID), eq(new Object[] { 1 }), Matchers.any(CategoryRowMapper.class));
+        verify(jdbcTemplate).queryForObject(eq(CategoryDao.GET_BY_ID_QUERY), eq(new Object[] { 1 }), Matchers.any(CategoryRowMapper.class));
         
     }
 
     @Test
     public void getAllTest() {
         categoryDao.getAll();
-        verify(jdbcTemplate).query(eq(CategoryDao.QUERY_GET_ALL), Matchers.any(CategoryRowMapper.class));
+        verify(jdbcTemplate).query(eq(CategoryDao.GET_ALL_QUERY), Matchers.any(CategoryRowMapper.class));
     }
     
     @Test
     public void getByProjectIdTest() {
         categoryDao.getByProjectId(1);
-        verify(jdbcTemplate).queryForObject(eq(CategoryDao.QUERY_GET_BY_PROJECT_ID), eq(new Object[] { 1 }), Matchers.any(CategoryRowMapper.class));
+        verify(jdbcTemplate).queryForObject(eq(CategoryDao.GET_BY_PROJECT_ID_QUERY), eq(new Object[] { 1 }), Matchers.any(CategoryRowMapper.class));
     }
 }

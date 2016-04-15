@@ -45,6 +45,6 @@ public class QuoteDaoTest {
     @Test
     public void getRandomTest() throws SQLException {
         quoteDao.getRandom();
-        verify(jdbcTemplate).queryForObject(eq(QuoteDao.QUERY_SELECT_RANDOM_QUOTE), Matchers.any(QuoteRowMapper.class));
+        verify(jdbcTemplate).queryForObject(eq(QuoteDao.GET_RANDOM_QUERY), Matchers.any(QuoteRowMapper.class));
     }
 }

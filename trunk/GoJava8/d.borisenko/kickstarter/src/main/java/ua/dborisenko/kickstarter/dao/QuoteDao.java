@@ -24,11 +24,12 @@ public class QuoteDao {
         }
     }
 
-    static final String QUERY_SELECT_RANDOM_QUOTE = "SELECT id, author, text FROM quotes order by rand() limit 1";
+    static final String GET_RANDOM_QUERY = "SELECT id, author, text FROM quotes order by rand() limit 1";
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    private QuoteRowMapper mapper = new QuoteRowMapper();
 
     public Quote getRandom() {
-        return jdbcTemplate.queryForObject(QUERY_SELECT_RANDOM_QUOTE, new QuoteRowMapper());
+        return jdbcTemplate.queryForObject(GET_RANDOM_QUERY, mapper);
     }
 }
