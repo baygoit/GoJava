@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import ua.dborisenko.kickstarter.domain.Category;
 @Ignore
@@ -47,7 +48,7 @@ public class CategoryDaoTest {
         assertThat(category.getName(), is("testname"));
     }
 
-    @Test(expected = NoResultException.class)
+    @Test(expected = EmptyResultDataAccessException.class)
     public void getCategoryByIdEmptyTest() throws SQLException {
         ResultSet rs =  mock(ResultSet.class);
         when(rs.next()).thenReturn(false);
@@ -104,7 +105,7 @@ public class CategoryDaoTest {
         assertThat(category.getName(), is("testname"));
     }
 
-    @Test(expected = NoResultException.class)
+    @Test(expected = EmptyResultDataAccessException.class)
     public void getCategoryByProjectIdEmptyTest() throws SQLException {
         ResultSet rs =  mock(ResultSet.class);
         when(rs.next()).thenReturn(false);

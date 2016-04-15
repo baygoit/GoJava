@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import ua.dborisenko.kickstarter.dao.InvestmentDao;
-import ua.dborisenko.kickstarter.dao.NoResultException;
 import ua.dborisenko.kickstarter.dao.ProjectDao;
 import ua.dborisenko.kickstarter.dao.RewardDao;
 import ua.dborisenko.kickstarter.domain.Investment;
@@ -66,7 +66,7 @@ public class InvestmentController {
             request.setAttribute(REWARDS_ATTR_NAME, project.getRewards());
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(INVESTMENT_JSP_PATH);
             dispatcher.forward(request, response);
-        } catch (NoResultException e) {
+        } catch (EmptyResultDataAccessException e) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, ErrorText.PROJECT_NOT_FOUND);
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NUMBER_FORMAT);

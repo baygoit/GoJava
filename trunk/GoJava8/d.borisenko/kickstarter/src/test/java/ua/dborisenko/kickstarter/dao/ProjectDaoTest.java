@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Project;
@@ -94,7 +95,7 @@ public class ProjectDaoTest {
         assertThat(project.getVideoUrl(), is("testvideo_url"));
     }
 
-    @Test(expected = NoResultException.class)
+    @Test(expected = EmptyResultDataAccessException.class)
     public void getProjectByIdEmptyTest() throws SQLException {
         ResultSet rs =  mock(ResultSet.class);
         when(rs.next()).thenReturn(false);

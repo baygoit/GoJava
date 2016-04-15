@@ -13,17 +13,18 @@ import ua.dborisenko.kickstarter.domain.Quote;
 @Repository
 public class QuoteDao {
 
-    private final class QuoteRowMapper implements RowMapper<Quote> {
+    final class QuoteRowMapper implements RowMapper<Quote> {
         @Override
         public Quote mapRow(ResultSet rs, int rowNum) throws SQLException {
             Quote quote = new Quote();
+            quote.setId(rs.getInt("id"));
             quote.setAuthor(rs.getString("author"));
             quote.setText(rs.getString("text"));
             return quote;
         }
     }
 
-    private static final String QUERY_SELECT_RANDOM_QUOTE = "SELECT id, author, text FROM quotes order by rand() limit 1";
+    static final String QUERY_SELECT_RANDOM_QUOTE = "SELECT id, author, text FROM quotes order by rand() limit 1";
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

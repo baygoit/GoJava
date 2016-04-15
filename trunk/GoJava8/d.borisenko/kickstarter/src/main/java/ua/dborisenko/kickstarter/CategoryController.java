@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import ua.dborisenko.kickstarter.dao.CategoryDao;
-import ua.dborisenko.kickstarter.dao.NoResultException;
 import ua.dborisenko.kickstarter.dao.ProjectDao;
 import ua.dborisenko.kickstarter.dao.QuoteDao;
 import ua.dborisenko.kickstarter.domain.Category;
@@ -50,7 +50,7 @@ public class CategoryController {
             request.setAttribute(PROJECTS_ATTR_NAME, category.getProjects());
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(CATEGORY_JSP_PATH);
             dispatcher.forward(request, response);
-        } catch (NoResultException e) {
+        } catch (EmptyResultDataAccessException e) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, ErrorText.CATEGORY_NOT_FOUND);
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,ErrorText.NUMBER_FORMAT);
