@@ -4,11 +4,17 @@ import java.util.List;
 
 import com.vladik.model.Payment;
 import com.vladik.model.Project;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.sql.DataSource;
 
 public abstract class AbstractPaymentDao {
 
-    public final String SEMICOLON_DELIMITER = ";";
-    public final String NEW_LINE_SEPARATOR = "\n";
+    @Autowired
+    public DataSource dataSource;
+    @Autowired
+    public JdbcTemplate jdbcTemplate;
 
     public abstract void add(Payment element);
 

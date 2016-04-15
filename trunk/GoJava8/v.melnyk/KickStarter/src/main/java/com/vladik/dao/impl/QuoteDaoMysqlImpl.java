@@ -1,16 +1,13 @@
-package com.vladik.dao.database;
+package com.vladik.dao.impl;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import com.vladik.dao.ConnectionProvider;
-import com.vladik.model.Quote;
 import com.vladik.dao.AbstractQuoteDao;
+import com.vladik.model.Quote;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.stereotype.Repository;
 
+import java.sql.*;
+
+@Repository
 public class QuoteDaoMysqlImpl extends AbstractQuoteDao {
     private static final String INSERT_QUOTE = "INSERT INTO Quotes (text, author) VALUES (?, ?)";
     private static final String DELETE_QUOTE = "DELETE FROM Quotes WHERE author = ?";
@@ -20,9 +17,9 @@ public class QuoteDaoMysqlImpl extends AbstractQuoteDao {
     @Override
     public void add(Quote quote) {
         try {
-            Connection connection = ConnectionProvider.getConnection();
+            Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(INSERT_QUOTE);
-            statement.setString(1, quote.getQuoteText());
+            statement.setString(1, quote.getText());
             statement.setString(2, quote.getAuthor());
             statement.executeUpdate();
 
@@ -34,7 +31,7 @@ public class QuoteDaoMysqlImpl extends AbstractQuoteDao {
     @Override
     public void remove(Quote quote) {
         try {
-            Connection connection = ConnectionProvider.getConnection();
+            Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(DELETE_QUOTE);
             statement.setString(1, quote.getAuthor());
             statement.executeUpdate();
@@ -48,7 +45,7 @@ public class QuoteDaoMysqlImpl extends AbstractQuoteDao {
     public int getSize() {
         int amountOfQuotes = 0;
         try {
-            Connection connection = ConnectionProvider.getConnection();
+            Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(COUNT_ALL_QUOTES);
             while (resultSet.next()) {
@@ -62,19 +59,6 @@ public class QuoteDaoMysqlImpl extends AbstractQuoteDao {
 
     @Override
     public Quote getRandomQuote() {
-        Quote randomQuote = null;
-        try {
-            Connection connection = ConnectionProvider.getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SELECT_RANDOM_QUOTE);
-            while (resultSet.next()) {
-                randomQuote = new Quote();
-                randomQuote.setQuoteText(resultSet.getString("text"));
-                randomQuote.setAuthor(resultSet.getString("author"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return randomQuote;
+        return (Quote) jdbcTemplate.queryForObject(SELECT_RANDOM_QUOTE,new BeanPropertyRowMapper(Quote.class));
     }
 }

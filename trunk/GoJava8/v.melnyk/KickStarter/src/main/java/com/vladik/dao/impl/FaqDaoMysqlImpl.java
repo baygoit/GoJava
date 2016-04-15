@@ -1,19 +1,15 @@
-package com.vladik.dao.database;
+package com.vladik.dao.impl;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.vladik.dao.AbstractFaqDao;
+import com.vladik.model.Faq;
+import com.vladik.model.Project;
+import org.springframework.stereotype.Repository;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vladik.dao.ConnectionProvider;
-import com.vladik.model.Faq;
-import com.vladik.dao.AbstractFaqDao;
-import com.vladik.model.Project;
-
+@Repository
 public class FaqDaoMysqlImpl extends AbstractFaqDao {
     private static final String INSERT_FAQ = "INSERT INTO Faqs (project_id, question) VALUES (?, ?)";
     private static final String DELETE_FAQ = "DELETE FROM Faqs WHERE project_id = ?";
@@ -24,7 +20,7 @@ public class FaqDaoMysqlImpl extends AbstractFaqDao {
     @Override
     public void add(Faq faq) {
         try {
-            Connection connection = ConnectionProvider.getConnection();
+            Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(INSERT_FAQ);
 
             statement.setInt(1, faq.getProjectID());
@@ -39,7 +35,7 @@ public class FaqDaoMysqlImpl extends AbstractFaqDao {
     @Override
     public void remove(Faq faq) {
         try {
-            Connection connection = ConnectionProvider.getConnection();
+            Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(DELETE_FAQ);
 
             statement.setInt(1, faq.getProjectID());
@@ -54,7 +50,7 @@ public class FaqDaoMysqlImpl extends AbstractFaqDao {
     public List<Faq> getAll() {
         List<Faq> faqs = new ArrayList<>();
         try {
-            Connection connection = ConnectionProvider.getConnection();
+            Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SELECT_ALL_FAQS);
 
@@ -76,7 +72,7 @@ public class FaqDaoMysqlImpl extends AbstractFaqDao {
     public int getSize() {
         int amountOfCatrgories = 0;
         try {
-            Connection connection = ConnectionProvider.getConnection();
+            Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(COUNT_ALL_FAQS);
             while (resultSet.next()) {
@@ -93,10 +89,10 @@ public class FaqDaoMysqlImpl extends AbstractFaqDao {
     public String getProjectFaqs(Project project) {
         StringBuilder result = new StringBuilder();
         try {
-            Connection connection = ConnectionProvider.getConnection();
+            Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(SELECT_PROJECT_FAQS);
 
-            statement.setInt(1, project.getUniqueID());
+            statement.setInt(1, project.getId());
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {

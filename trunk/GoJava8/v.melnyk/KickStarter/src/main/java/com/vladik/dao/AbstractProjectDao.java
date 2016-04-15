@@ -1,14 +1,20 @@
 package com.vladik.dao;
 
-import java.util.List;
-
 import com.vladik.model.Category;
+import com.vladik.model.Payment;
 import com.vladik.model.Project;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import javax.sql.DataSource;
+import java.util.List;
 
 public abstract class AbstractProjectDao {
 
-    public final String SEMICOLON_DELIMITER = ";";
-    public final String NEW_LINE_SEPARATOR = "\n";
+    @Autowired
+    public DataSource dataSource;
+    @Autowired
+    public JdbcTemplate jdbcTemplate;
 
     public abstract void add(Project element);
 
@@ -19,5 +25,9 @@ public abstract class AbstractProjectDao {
     public abstract int getSize();
 
     public abstract List<Project> getProjectsFromCategory(Category category);
+
+    public abstract Project getProjectById(int id);
+
+    public abstract void invest(Payment payment, int projectId);
 
 }

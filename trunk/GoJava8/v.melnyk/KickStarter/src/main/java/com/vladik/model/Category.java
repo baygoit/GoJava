@@ -1,18 +1,20 @@
 package com.vladik.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Category implements Serializable {
-    private int uniqueID;
+    private int id;
     private String name;
-//    public static String TABLE_NAME = "Categories";
+    private List<Project> projects = new ArrayList<Project>();
 
-    public int getUniqueID() {
-        return uniqueID;
+    public int getId() {
+        return id;
     }
 
-    public void setUniqueID(int uniqueID) {
-        this.uniqueID = uniqueID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -23,8 +25,19 @@ public class Category implements Serializable {
         this.name = name;
     }
 
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void addProject(Project project) {
+        projects.add(project);
+    }
+
+    public int getProjectsCount() {
+        return projects.size();
+    }
     @Override
     public String toString() {
-        return "id : " + uniqueID + ", name : " + name;
+        return "id : " + id + ", name : " + name;
     }
 }

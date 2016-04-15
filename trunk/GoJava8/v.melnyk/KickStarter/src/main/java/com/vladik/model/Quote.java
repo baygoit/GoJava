@@ -1,16 +1,15 @@
 package com.vladik.model;
 
 public class Quote {
-    private String quoteText;
     private String author;
-//    public static final String TABLE_NAME = "Quotes";
+    private String text;
 
-    public String getQuoteText() {
-        return quoteText;
+    public String getText() {
+        return text;
     }
 
-    public void setQuoteText(String title) {
-        this.quoteText = title;
+    public void setText(String title) {
+        this.text = title;
     }
 
     public String getAuthor() {
@@ -19,5 +18,13 @@ public class Quote {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @Override
+    public String toString() {
+        return "Quote{" +
+                "text='" + text + '\'' +
+                ", author='" + author + '\'' +
+                '}';
     }
 }

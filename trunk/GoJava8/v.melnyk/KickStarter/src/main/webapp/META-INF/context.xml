@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiResourceLocking="true">
+    <Resource
+            name="jdbc/dataSource"
+            global="jdbc/dataSource"
+            driverClassName="com.mysql.jdbc.Driver"
+            username="vladmelnyk"
+            password="password"
+            maxActive="10"
+            maxIdle="2"
+            maxWait="5000"
+            type="javax.sql.DataSource"
+            url="jdbc:mysql://www.db4free.net:3306/kickstartergoit?useSSL=false"
+            validationQuery="SELECT 1"
+            auth="Container">
+    </Resource>
+</Context>

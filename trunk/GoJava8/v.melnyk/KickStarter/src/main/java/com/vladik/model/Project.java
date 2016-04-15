@@ -1,20 +1,21 @@
 package com.vladik.model;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+import java.util.*;
 
 public class Project {
-    private int uniqueID;
+    private int id;
     private int categoryID;
     private String title;
     private String briefDescription;
     private String fullDescription;
     private String videoLink;
     private int requiredSum;
-    private int collectedSum;
     private int daysLeft;
-//    public static final String TABLE_NAME = "Projects";
+    private int collectedSum;
+    private List<Payment> paymentList = new ArrayList<Payment>();
+    private List<Faq> faqList = new ArrayList<Faq>();
+    private List<Reward> rewardList = new ArrayList<Reward>();
+
 
     public String getTitle() {
         return title;
@@ -49,6 +50,10 @@ public class Project {
     }
 
     public int getCollectedSum() {
+        int collectedSum = 0;
+        for (Payment payment : paymentList) {
+            collectedSum += payment.getDonatingSum();
+        }
         return collectedSum;
     }
 
@@ -84,13 +89,49 @@ public class Project {
         this.categoryID = categoryID;
     }
 
-    public int getUniqueID() {
-        return uniqueID;
+    public int getId() {
+        return id;
     }
 
-    public void setUniqueID(int uniqueID) {
-        this.uniqueID = uniqueID;
+    public void setId(int id) {
+        this.id = id;
     }
+
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
+
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = paymentList;
+    }
+
+    public void addPayment(Payment payment) {
+        paymentList.add(payment);
+    }
+
+    public List<Faq> getFaqList() {
+        return faqList;
+    }
+
+    public void setFaqList(List<Faq> faqList) {
+        this.faqList = faqList;
+    }
+
+    public void addFaq(Faq faq) {
+        faqList.add(faq);
+    }
+
+    public List<Reward> getRewardList() {
+        return rewardList;
+    }
+
+    public void setRewardList(List<Reward> rewardList) {
+        this.rewardList = rewardList;
+    }
+    public void addReward(Reward reward) {
+        rewardList.add(reward);
+    }
+
 
     protected int getDaysLeft(int day, int month, int year) {
         TimeZone timeZone = TimeZone.getTimeZone("Europe/Kiev");
@@ -109,5 +150,20 @@ public class Project {
         long days = difference / (1000 * 60 * 60 * 24);
 
         return (int) days;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", categoryID=" + categoryID +
+                ", title='" + title + '\'' +
+                ", briefDescription='" + briefDescription + '\'' +
+                ", fullDescription='" + fullDescription + '\'' +
+                ", videoLink='" + videoLink + '\'' +
+                ", requiredSum=" + requiredSum +
+                ", collectedSum=" + collectedSum +
+                ", daysLeft=" + daysLeft +
+                '}';
     }
 }

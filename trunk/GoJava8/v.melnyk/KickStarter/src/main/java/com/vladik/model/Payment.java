@@ -2,10 +2,9 @@ package com.vladik.model;
 
 public class Payment {
     private int projectID;
-    private String userName;
-    private long creditCardNumber;
+    private String cardholderName;
+    private long cardNumber;
     private int donatingSum;
-//    public static final String TABLE_NAME = "Payments";
 
     public int getProjectID() {
         return projectID;
@@ -15,20 +14,20 @@ public class Payment {
         this.projectID = projectID;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getCardholderName() {
+        return cardholderName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setCardholderName(String cardholderName) {
+        this.cardholderName = cardholderName;
     }
 
-    public long getCreditCardNumber() {
-        return creditCardNumber;
+    public long getCardNumber() {
+        return cardNumber;
     }
 
-    public void setCreditCardNumber(long creditCardNumber) {
-        this.creditCardNumber = creditCardNumber;
+    public void setCardNumber(long cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     public int getDonatingSum() {
@@ -37,5 +36,15 @@ public class Payment {
 
     public void setDonatingSum(int donatingSum) {
         this.donatingSum = donatingSum;
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "projectID=" + projectID +
+                ", cardholderName='" + cardholderName + '\'' +
+                ", cardNumber=" + cardNumber +
+                ", donatingSum=" + donatingSum +
+                '}';
     }
 }

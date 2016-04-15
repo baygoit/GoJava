@@ -4,7 +4,6 @@ public class Faq {
     private int projectID;
     private String question;
     private String answer;
-//    public static final String TABLE_NAME = "Faqs";
 
     public int getProjectID() {
         return projectID;
@@ -30,4 +29,12 @@ public class Faq {
         this.answer = answer;
     }
 
+    @Override
+    public String toString() {
+        return "Faq{" +
+                "projectID=" + projectID +
+                ", question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                '}';
+    }
 }
