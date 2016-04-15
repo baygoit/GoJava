@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiResourceLocking="true">
+    <Resource name="jdbc/kickstarter"
+              global="jdbc/kickstarter"
+              auth="Container"
+              type="javax.sql.DataSource"
+              username="kickstarter"
+              password="kickstarter"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://kickstarterdb.c6tpu7dauy4w.us-west-2.rds.amazonaws.com:5432/kickstarterDb?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
+              validationQuery="select 1"
+              maxTotal="5"
+              minIdle="3"
+              maxIdle="4"/>
+</Context>
+
