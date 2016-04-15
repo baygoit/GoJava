@@ -50,7 +50,7 @@ public class InvestmentController {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NEGATIVE_AMOUNT);
                 return;
             }
-            investmentDao.addToProject(projectId, investment);
+            investmentDao.add(projectId, investment);
             response.sendRedirect(PROJECT_OUT_URL + projectId);
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NUMBER_FORMAT);
@@ -60,7 +60,7 @@ public class InvestmentController {
     void showInvestment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int projectId = Integer.valueOf(request.getParameter(PROJECT_ID_PARAM_NAME));
-            Project project = projectDao.getProjectById(projectId);
+            Project project = projectDao.getById(projectId);
             rewardDao.getAllForProject(project);
             request.setAttribute(PROJECT_ATTR_NAME, project);
             request.setAttribute(REWARDS_ATTR_NAME, project.getRewards());

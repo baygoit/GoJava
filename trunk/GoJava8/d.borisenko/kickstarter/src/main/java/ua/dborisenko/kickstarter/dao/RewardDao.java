@@ -14,7 +14,7 @@ import ua.dborisenko.kickstarter.domain.Reward;
 @Repository
 public class RewardDao {
 
-    private final class RewardRowMapper implements RowMapper<Reward> {
+    final class RewardRowMapper implements RowMapper<Reward> {
         @Override
         public Reward mapRow(ResultSet rs, int rowNum) throws SQLException {
             Reward reward = new Reward();
@@ -25,12 +25,12 @@ public class RewardDao {
         }
     }
 
-    private static final String QUERY_GET_REWARDS = "SELECT id, amount, description FROM rewards WHERE project_id = ?";
+    static final String GET_ALL_BY_PROJECT_ID_QUERY = "SELECT id, amount, description FROM rewards WHERE project_id = ?";
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    private RewardRowMapper mapper = new RewardRowMapper();
 
     public void getAllForProject(Project project) {
-        project.setRewards(
-                jdbcTemplate.query(QUERY_GET_REWARDS, new Object[] { project.getId() }, new RewardRowMapper()));
+        project.setRewards(jdbcTemplate.query(GET_ALL_BY_PROJECT_ID_QUERY, new Object[] { project.getId() }, mapper));
     }
 }

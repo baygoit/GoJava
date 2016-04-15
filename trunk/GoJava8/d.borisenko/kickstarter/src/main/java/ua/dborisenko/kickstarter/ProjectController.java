@@ -34,7 +34,7 @@ public class ProjectController {
     void showProject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.valueOf(request.getParameter(ID_PARAM_NAME));
-            Project project = projectDao.getProjectById(id);
+            Project project = projectDao.getById(id);
             questionDao.getAllForProject(project);
             request.setAttribute(PROJECT_ATTR_NAME, project);
             request.setAttribute(QUESTIONS_ATTR_NAME, project.getQuestions());

@@ -51,18 +51,18 @@ public class InvestmentDaoTest {
         Project project = new Project();
         project.setId(1);
         investmentDao.getAllForProject(project);
-        verify(jdbcTemplate).query(eq(InvestmentDao.GET_INVESTMENTS_QUERY), eq(new Object[] { 1 }), Matchers.any(InvestmentRowMapper.class));
+        verify(jdbcTemplate).query(eq(InvestmentDao.GET_ALL_BY_PROJECT_ID_QUERY), eq(new Object[] { 1 }), Matchers.any(InvestmentRowMapper.class));
     }
     
     @Test
-    public void addInvestmentTest() {
+    public void addTest() {
         Investment investment = new Investment();
         investment.setId(1);
         investment.setCardHolderName("testcardholder_name");
         investment.setCardNumber("testcard_number");
         investment.setAmount(100);
-        investmentDao.addToProject(1, investment);
-        verify(jdbcTemplate).update(InvestmentDao.ADD_INVESTMENT_QUERY, 1, investment.getCardHolderName(), investment.getCardNumber(),
+        investmentDao.add(1, investment);
+        verify(jdbcTemplate).update(InvestmentDao.ADD_QUERY, 1, investment.getCardHolderName(), investment.getCardNumber(),
                 investment.getAmount());
     }
 }

@@ -45,7 +45,7 @@ public class CategoryController {
         try {
             int id = Integer.valueOf(request.getParameter(ID_PARAM_NAME));
             Category category = categoryDao.getById(id);
-            projectDao.getProjects(category);
+            projectDao.getAllForCategory(category);
             request.setAttribute(CATEGORY_ATTR_NAME, category);
             request.setAttribute(PROJECTS_ATTR_NAME, category.getProjects());
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(CATEGORY_JSP_PATH);

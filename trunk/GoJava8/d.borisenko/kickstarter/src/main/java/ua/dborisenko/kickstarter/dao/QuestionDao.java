@@ -14,7 +14,7 @@ import ua.dborisenko.kickstarter.domain.Question;
 @Repository
 public class QuestionDao {
 
-    private final class QuestionRowMapper implements RowMapper<Question> {
+    final class QuestionRowMapper implements RowMapper<Question> {
         @Override
         public Question mapRow(ResultSet rs, int rowNum) throws SQLException {
             Question question = new Question();
@@ -25,18 +25,19 @@ public class QuestionDao {
         }
     }
 
-    private static final String QUERY_GET_QUESTIONS = "SELECT id, request, reply FROM questions WHERE project_id = ?";
-    private static final String QUERY_ADD_QUESTION = "INSERT INTO questions (project_id, request) VALUES (?, ?)";
+    static final String GET_BY_PROJECT_ID_QUERY = "SELECT id, request, reply FROM questions WHERE project_id = ?";
+    static final String ADD_QUERY = "INSERT INTO questions (project_id, request) VALUES (?, ?)";
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    private QuestionRowMapper mapper = new QuestionRowMapper();
 
     public void getAllForProject(Project project) {
         project.setQuestions(
-                jdbcTemplate.query(QUERY_GET_QUESTIONS, new Object[] { project.getId() }, new QuestionRowMapper()));
+                jdbcTemplate.query(GET_BY_PROJECT_ID_QUERY, new Object[] { project.getId() }, mapper));
     }
 
-    public void addToProject(int projectId, Question question) {
-        jdbcTemplate.update(QUERY_ADD_QUESTION, projectId, question.getRequest());
+    public void add(int projectId, Question question) {
+        jdbcTemplate.update(ADD_QUERY, projectId, question.getRequest());
     }
 
 }

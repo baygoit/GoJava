@@ -99,7 +99,7 @@ public class Project {
         return investments;
     }
 
-    public void setInvestment(List<Investment> investments) {
+    public void setInvestments(List<Investment> investments) {
         this.investments = investments;
     }
 

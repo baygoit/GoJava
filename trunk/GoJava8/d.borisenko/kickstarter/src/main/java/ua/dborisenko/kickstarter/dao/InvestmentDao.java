@@ -26,19 +26,19 @@ public class InvestmentDao {
         }
     }
 
-    static final String GET_INVESTMENTS_QUERY = "SELECT id, cardholder_name, card_number, amount FROM investments WHERE project_id = ?";
-    static final String ADD_INVESTMENT_QUERY = "INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (?, ?, ?, ?)";
+    static final String GET_ALL_BY_PROJECT_ID_QUERY = "SELECT id, cardholder_name, card_number, amount FROM investments WHERE project_id = ?";
+    static final String ADD_QUERY = "INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (?, ?, ?, ?)";
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private InvestmentRowMapper mapper = new InvestmentRowMapper();
 
     void getAllForProject(Project project) {
-        project.setInvestment(
-                jdbcTemplate.query(GET_INVESTMENTS_QUERY, new Object[] { project.getId() }, mapper));
+        project.setInvestments(
+                jdbcTemplate.query(GET_ALL_BY_PROJECT_ID_QUERY, new Object[] { project.getId() }, mapper));
     }
 
-    public void addToProject(int projectId, Investment investment) {
-        jdbcTemplate.update(ADD_INVESTMENT_QUERY, projectId, investment.getCardHolderName(), investment.getCardNumber(),
+    public void add(int projectId, Investment investment) {
+        jdbcTemplate.update(ADD_QUERY, projectId, investment.getCardHolderName(), investment.getCardNumber(),
                 investment.getAmount());
     }
 }
