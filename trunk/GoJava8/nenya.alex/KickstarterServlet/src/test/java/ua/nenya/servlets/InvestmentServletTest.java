@@ -1,6 +1,6 @@
 package ua.nenya.servlets;
 
-
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -17,21 +17,24 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.nenya.dao.CategoryDao;
+import ua.nenya.dao.InvestmentDao;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Project;
+import ua.nenya.domain.Question;
+import ua.nenya.domain.Reward;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ProjectsServletTest {
+public class InvestmentServletTest {
 
 	@Mock
-	private CategoryDao categoryDao;
+	private InvestmentDao investmentDao;
 	@Mock
 	private ProjectDao projectDao;
 	@Mock
@@ -39,38 +42,45 @@ public class ProjectsServletTest {
 	@Mock
 	private HttpServletResponse response;
 	@InjectMocks
-	private ProjectsServlet projectsServlet = spy(ProjectsServlet.class);
+	private InvestmentServlet invesmentServlet = spy(InvestmentServlet.class);
 	
 	@Test
-	public void testDoGetCategoryExists() throws ServletException, IOException {
+	public void testDoGetTrue() throws ServletException, IOException {
+		when(request.getParameter("projectName")).thenReturn("Project");
+		when(projectDao.isProjectExist("Project")).thenReturn(true);
 		when(request.getParameter("categoryName")).thenReturn("Film");
-		when(categoryDao.isCategoryExist("Film")).thenReturn(true);
-		when(projectDao.getProjects("Film")).thenReturn(new ArrayList<Project>());
-
+		when(projectDao.getProjectByName("Project")).thenReturn(new Project());
+		when(investmentDao.getRewards("Project")).thenReturn(new ArrayList<Reward>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);
 		
 		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
-		doReturn(context).when(projectsServlet).getServletContext();
+		doReturn(context).when(invesmentServlet).getServletContext();
 
-		projectsServlet.doGet(request, response);
+		invesmentServlet.doGet(request, response);
 		verify(dispatcher).forward(request, response);
 	}
-	
+
 	@Test
-	public void testDoGetCategoryDoesntExist() throws ServletException, IOException {
+	public void testDoGetFalse() throws ServletException, IOException {
+		when(request.getParameter("projectName")).thenReturn("Project");
+		when(projectDao.isProjectExist("Project")).thenReturn(false);
 		when(request.getParameter("categoryName")).thenReturn("Film");
-		when(categoryDao.isCategoryExist("Film")).thenReturn(false);
-		when(projectDao.getProjects("Film")).thenReturn(new ArrayList<Project>());
-		
+		when(projectDao.getProjectByName("Project")).thenReturn(new Project());
+		when(investmentDao.getRewards("Project")).thenReturn(new ArrayList<Reward>());
+
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);
 		
 		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
-		doReturn(context).when(projectsServlet).getServletContext();
+		doReturn(context).when(invesmentServlet).getServletContext();
 
-		projectsServlet.doGet(request, response);
+		invesmentServlet.doGet(request, response);
+	}
+	@Ignore
+	@Test
+	public void testDoPost() {
 	}
 
 }

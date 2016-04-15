@@ -8,4 +8,5 @@ public interface ProjectDao {
 
 	List<Project> getProjects(String categoryName);
 	Project getProjectByName(String projectName);
+	boolean isProjectExist(String projectName);
 }

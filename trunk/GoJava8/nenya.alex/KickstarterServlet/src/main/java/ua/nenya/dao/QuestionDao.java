@@ -8,5 +8,5 @@ public interface QuestionDao {
 	
 	List<Question> getQuestions(String projectName);
 	void writeQuestionInProject(String projectName, String question);
-
+	boolean isQuestionValid(String projectName, String question);
 }

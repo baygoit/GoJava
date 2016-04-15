@@ -5,8 +5,6 @@ public class Reward{
 	private int amount;
 	private String description;
 	
-	public Reward() {
-	}
 
 	public void setName(String name) {
 		this.name = name;

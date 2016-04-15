@@ -16,7 +16,7 @@
 		</c:forEach>
 	<hr/>
     <p><b>Enter amount of investment</b></p>
-        <input type="text" name="investition"/>
+        <input type="number" name="investment" max="2147483647" min="1"/>
        <p><b> Your name</b></p>
 			<input type='text' name='cardholder_name'/><br/>
 			<p><b> Card number</b></p>

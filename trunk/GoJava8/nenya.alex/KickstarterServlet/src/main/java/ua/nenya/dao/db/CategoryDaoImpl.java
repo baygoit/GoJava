@@ -1,15 +1,10 @@
 package ua.nenya.dao.db;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ua.nenya.dao.CategoryDao;
@@ -18,27 +13,21 @@ import ua.nenya.domain.Category;
 @Repository
 public class CategoryDaoImpl implements CategoryDao {
 
-	private static final String GET_ALL_CATEGORIES = "SELECT category_name, id FROM categories ORDER BY category_name";
+	private static final String GET_ALL_CATEGORIES = "SELECT name, id FROM categories ORDER BY name";
+
+	private static final String GET_COUNT_CATEGORY_BY_NAME = "SELECT COUNT(name) FROM Categories WHERE name = ?";
 
 	@Autowired
-	private DataSource dataSource;
+	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public List<Category> getCategories() {
-		List<Category> categories = new ArrayList<Category>();
-		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection.prepareStatement(GET_ALL_CATEGORIES)) {
-			ResultSet set = statement.executeQuery();
-			while (set.next()) {
-				Category category = new Category();
-				category.setName(set.getString("category_name"));
-				category.setId(set.getInt("id"));
-				categories.add(category);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return categories;
+		return jdbcTemplate.query(GET_ALL_CATEGORIES, new BeanPropertyRowMapper<Category>(Category.class));
+	}
+
+	@Override
+	public boolean isCategoryExist(String categoryName) {
+		return jdbcTemplate.queryForObject(GET_COUNT_CATEGORY_BY_NAME, new Object[] { categoryName }, Integer.class) == 1;
 	}
 
 }

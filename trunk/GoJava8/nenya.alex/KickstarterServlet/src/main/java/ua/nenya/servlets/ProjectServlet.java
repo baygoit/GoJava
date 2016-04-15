@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.nenya.dao.ProjectDao;
+
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
 
@@ -18,25 +18,20 @@ public class ProjectServlet extends CommonServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		String projectName = request.getParameter("projectName");
+		request.setAttribute("projectName", projectName);
 		
-		String projectName = request.getParameter("projectName");	
-		
-		if(!isProjectExists(projectName)){
+		if(!getProjectDao().isProjectExist(projectName)){
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
 		
 		String categoryName = request.getParameter("categoryName");
-		
 		request.setAttribute("categoryName", categoryName);
-		request.setAttribute("projectName", projectName);
-		
 		Project project = getProjectDao().getProjectByName(projectName);
 		request.setAttribute("project", project);
 
 		List<Question> questions = getQuestionDao().getQuestions(projectName);
-
 		request.setAttribute("questions", questions);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/project.jsp");
@@ -44,29 +39,19 @@ public class ProjectServlet extends CommonServlet {
 
 	}
 
-	private boolean isProjectExists(String projectName) {
-		ProjectDao projectDao = getProjectDao();
-		Project project = projectDao.getProjectByName(projectName);
-		return project.getName()!= null;
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String questionString = request.getParameter("question");
-		if(!isQuestionValid(questionString)){
+		String question = request.getParameter("question");
+		String projectName = request.getParameter("projectName");
+		String categoryName = request.getParameter("categoryName");
+		if(!getQuestionDao().isQuestionValid(projectName, question)){
+			request.setAttribute("question", question);
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
-		String projectName = request.getParameter("projectName");
-		String categoryName = request.getParameter("categoryName");
-		
-		getQuestionDao().writeQuestionInProject(projectName, questionString);
+		getQuestionDao().writeQuestionInProject(projectName, question);
 	
 		response.sendRedirect("projectServlet?categoryName="+categoryName+"&projectName="+projectName);
-	}
-
-	private boolean isQuestionValid(String questionString) {
-		return questionString != null && !questionString.isEmpty() && !questionString.equals("null");
 	}
 
 }

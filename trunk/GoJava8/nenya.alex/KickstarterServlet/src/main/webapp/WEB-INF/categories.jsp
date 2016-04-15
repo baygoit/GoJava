@@ -7,12 +7,10 @@
 </head>
 <body>
 	<h3>${quote.name}</h3>
-	<hr/>
-	<h4>Choose one of the items bellow</h4>
-	<c:forEach var="category" items="${categories}" varStatus="varStatus">
+	<hr />
+	<c:forEach var="category" items="${categories}">
 		<p>
-			${varStatus.count}. <a
-				href="projectsServlet?categoryName=${category.name}">${category.name}</a>
+			<a href="projectsServlet?categoryName=${category.name}">${category.name}</a>
 		</p>
 	</c:forEach>
 

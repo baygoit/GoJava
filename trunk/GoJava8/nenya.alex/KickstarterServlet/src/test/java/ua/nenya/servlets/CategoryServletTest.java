@@ -1,5 +1,4 @@
 package ua.nenya.servlets;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -9,17 +8,13 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -31,13 +26,14 @@ import ua.nenya.dao.QuoteDao;
 import ua.nenya.domain.Category;
 import ua.nenya.domain.Quote;
 
-@Ignore
+
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryServletTest {
 
 	@Mock
 	private CategoryDao categoryDao;
-	
+	@Mock
+	private QuoteDao quoteDao;
 	@Mock
 	private HttpServletRequest request;
 	@Mock
@@ -47,20 +43,17 @@ public class CategoryServletTest {
 	
 	@Test
 	public void testDoGet() throws ServletException, IOException {
-
-		QuoteDao quoteDao = mock(QuoteDao.class);
-		when(quoteDao.getRandomQuote(new Random())).thenReturn(new Quote());
-		
+		when(quoteDao.getRandomQuote()).thenReturn(new Quote());
 		when(categoryDao.getCategories()).thenReturn(new ArrayList<Category>());
 		
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-
 		ServletContext context = mock(ServletContext.class);
+		
 		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
-
 		doReturn(context).when(categoryServlet).getServletContext();
+		
 		categoryServlet.doGet(request, response);
-		verify(dispatcher).forward((ServletRequest) any(), (ServletResponse) any());
+		verify(dispatcher).forward( request, response);
 
 	}
 

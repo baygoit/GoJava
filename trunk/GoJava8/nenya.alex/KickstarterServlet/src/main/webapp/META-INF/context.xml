@@ -15,13 +15,13 @@
 </Context>
 <!--Context antiResourceLocking="true">
             <Resource 
-              name="jdbc/yehifwbp" 
+              name="jdbc/dc7jic6f3ikj0a" 
               auth="Container"
               type="javax.sql.DataSource" 
-              username="yehifwbp" 
-              password="-LpA9PHJlrE7O5jZawaXznuAMLXNHDJ_"
+              username="sfdnpqghfnwasj" 
+              password="3ePn6uUN5bWh2r0J0p_0UMObWy"
               driverClassName="org.postgresql.Driver"
-              url="jdbc:postgres://yehifwbp:-LpA9PHJlrE7O5jZawaXznuAMLXNHDJ_@pellefant.db.elephantsql.com:5432/yehifwbp"
+              url="jdbc:postgres://sfdnpqghfnwasj:3ePn6uUN5bWh2r0J0p_0UMObWy@ec2-54-83-3-38.compute-1.amazonaws.com:5432/dc7jic6f3ikj0a"
               validationQuery="select 1"
               maxActive="10" 
               maxIdle="4"

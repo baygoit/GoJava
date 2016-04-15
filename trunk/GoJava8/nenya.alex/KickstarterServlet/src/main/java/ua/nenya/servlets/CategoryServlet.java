@@ -2,7 +2,6 @@ package ua.nenya.servlets;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +16,7 @@ public class CategoryServlet extends CommonServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Quote quote = getQuoteDao().getRandomQuote(new Random());
+		Quote quote = getQuoteDao().getRandomQuote();
 		request.setAttribute("quote", quote);
 		List<Category> categories = getCategoryDao().getCategories();
 		request.setAttribute("categories", categories);

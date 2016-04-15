@@ -1,63 +1,59 @@
 package ua.nenya.dao.db;
 
-import static org.junit.Assert.*;
-
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
-import javax.sql.DataSource;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import ua.nenya.domain.Category;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.when;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CategoryDaoDbImplTest {
 
 	@Mock
-	private DataSource dataSource;
+	private JdbcTemplate jdbcTemplate;
 	@InjectMocks
-	private CategoryDaoImpl categoryDaoImpl; 
+	private CategoryDaoImpl categoryDaoImpl;
 
+	private List<Category> categories = new ArrayList<>();
 
+	@Before
+	public void init() {
+		Category category = new Category();
+		category.setName("Category Art");
+		categories.add(category);
+	}
+
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testGetCategories() throws SQLException {
-
-		ResultSet rs = mock(ResultSet.class);
-		when(rs.next()).thenReturn(true).thenReturn(true).thenReturn(false);
-		when(rs.getString("category_name")).thenReturn("Music").thenReturn("Film");
-		
-
-		PreparedStatement statement = mock(PreparedStatement.class);
-		when(statement.executeQuery()).thenReturn(rs);
-
-		Connection connection = mock(Connection.class);
-		when(connection.prepareStatement(anyString())).thenReturn(statement);
-
-		when(dataSource.getConnection()).thenReturn(connection);
-
-		
-		List<Category> categoriesFromMethod = categoryDaoImpl.getCategories();
-
-		assertThat(categoriesFromMethod.get(0).getName(), is("Music"));
-		assertThat(categoriesFromMethod.get(1).getName(), is("Film"));
-		verify(dataSource).getConnection();
+		when(jdbcTemplate.query(anyString(), Matchers.any(BeanPropertyRowMapper.class))).thenReturn(categories);
+		List<Category> testCategories = categoryDaoImpl.getCategories();
+		assertThat(testCategories.get(0).getName(), is("Category Art"));
 
 	}
 
-	
+	@Ignore
+	@Test
+	public void testIsCategoryExist() throws SQLException {
+		when(jdbcTemplate.queryForObject(eq(anyString()), eq(new Object[] { "Category Art" }), Integer.class))
+				.thenReturn(1);
+
+		assertThat(categoryDaoImpl.isCategoryExist("Category Art"), is(true));
+	}
 }
