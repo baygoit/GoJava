@@ -5,7 +5,6 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<link rel="icon" type="image/png" href="<c:url value="/resources/images/favicon.ico" />"/>
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -25,7 +24,7 @@
 		<div class="header">
 			<div class="logo" >
 				<a href="/kickstarter">
-					<img src="<c:url value="/resources/images/logo.jpg" />">
+					<img src="<c:url value="/resources/images/logo.jpg" />" alt="logo">
 				</a>
 			</div>
 		</div>

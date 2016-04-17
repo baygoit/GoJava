@@ -1,6 +1,7 @@
 .logo {
 	width:600px;
 	display: inline-block;
+	max-width: 100%;
 }
 .logo img {
 	width: 100%;
@@ -13,32 +14,44 @@ ul {
     list-style:none;
 }
 
-.test-box ul {
-	margin-top:40px;
-	list-style: none;
-	text-align: center;
-	display: -webkit-box;
-    -webkit-box-pack: justify;
-    display: -webkit-flex;
-    -webkit-justify-content: space-between;
-    display: flex;
-    justify-content: space-between;
-    text-align: justify;
-    text-align-last: justify;
-    /*text-justify: newspaper; /* IE7- */
-    /*zoom: 1; /* IE7- */
+@media (min-width:480px){
+	.test-box ul {
+		padding-left: 0px;
+		margin-top:40px;
+		list-style: none;
+		text-align: center;
+		display: -webkit-box;
+	    -webkit-box-pack: justify;
+	    display: -webkit-flex;
+	    -webkit-justify-content: space-between;
+	    display: flex;
+	    justify-content: space-between;
+	    text-align: justify;
+	    text-align-last: justify;
+	    /*text-justify: newspaper; /* IE7- */
+	    /*zoom: 1; /* IE7- */
+	}
+	
+	.test-box ul li {
+		font-size: 18px;
+		display : inline-block;
+		vertical-align: top;
+		text-align: center;
+		display: -webkit-box;
+		/*display: inline;  /* IE7- */
+	    /*zoom: 1; /* IE7- */
+	}
+}
+@media (max-width:480px){
+	.test-box ul {
+		padding-left: 0px;
+	}
+	.test-box ul li {
+		padding: 10px 0px;
+	    font-size: 20px;
+	}
 }
 
-.test-box ul li {
-	font-size: 18px;
-	display : inline-block;
-	vertical-align: top;
-	text-align: center;
-	display: -webkit-box;
-	/*display: inline;  /* IE7- */
-    /*zoom: 1; /* IE7- */
-}
-    
 .question_block, .payment_block {
     text-align:left;
 }
@@ -107,7 +120,16 @@ footer .container{
     text-align: center;
     background-image: url("/kickstarter/resources/images/bg.jpg");
     background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center;
 }
+
+@media (max-width:767px){
+	#index {
+    	background-size: auto 100%;
+	}
+}
+
 .form-group-reward {
 	box-shadow: 0 0 17px rgba(0,0,0,0.12);
     max-width: 300px;
@@ -142,7 +164,11 @@ footer .container{
 .header-index {
 	padding-top:40px;
 }
-
+@media (max-width:480px){
+	.header-index a{
+    	font-size: 26px;
+	}
+}
 .tab-content {
 	padding: 20px;
 }
@@ -154,4 +180,13 @@ footer .container{
 .project-list li {
     padding: 10px 0px;
     font-size: 20px;
+}
+
+.video_block iframe {
+	max-width: 100%;
+}
+@media (max-width:540px){
+	.video_block iframe {
+		height:auto
+	}
 }

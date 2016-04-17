@@ -46,11 +46,11 @@ public class ProjectsServlet extends HttpServlet {
 	public Category getSelectedCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-			Category category = categoryDao.getCategory(categoryId);
-			if (category == null) {
+			if (!categoryDao.categoryExists(categoryId)) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 				return null;
 			}
+			Category category = categoryDao.getCategory(categoryId);
 			return category;
 		} catch (NumberFormatException e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);

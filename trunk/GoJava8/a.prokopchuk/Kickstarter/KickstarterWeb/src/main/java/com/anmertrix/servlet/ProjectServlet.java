@@ -45,7 +45,6 @@ public class ProjectServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Project project = getSelectedProject(request, response);
 		if (project == null) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
 		List<Question> questions = questionDao.getQuestionsByProjectId(project.getId());
@@ -64,6 +63,7 @@ public class ProjectServlet extends HttpServlet {
 	public Project getSelectedProject(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			if (!validateProjectId(request, response)) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 				return null;
 			}
 			return projectDao.getProjectById(Integer.parseInt(request.getParameter("projectId")));
@@ -92,7 +92,7 @@ public class ProjectServlet extends HttpServlet {
 				throw new NoResultException("No project found");
 			}
 			Question question = new Question();
-			question.setQuestion(request.getParameter("question").trim());
+			question.setQuestion(request.getParameter("question").trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"));
 			question.setProjectId(Integer.parseInt(request.getParameter("projectId")));
 			questionDao.insertQuestion(question);
 			response.sendRedirect(PROJECT_OUT_URL + question.getProjectId());
@@ -105,7 +105,7 @@ public class ProjectServlet extends HttpServlet {
 	
 	private boolean validateQuestion(HttpServletRequest request,
 			HttpServletResponse response) {
-		String question = request.getParameter("question").trim();
+		String question = request.getParameter("question").trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
 		if (question.length() < 2 || question.length() > 500) {
 			return false;
 		}
@@ -122,7 +122,7 @@ public class ProjectServlet extends HttpServlet {
 				throw new NoResultException("No project found");
 			}
 			Payment payment = new Payment();
-			payment.setCardholderName(request.getParameter("cardholder_name").trim());
+			payment.setCardholderName(request.getParameter("cardholder_name").trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"));
 			payment.setCardNumber(request.getParameter("card_number").trim());
 			payment.setAmount(Integer.parseInt(request.getParameter("payment_amount").trim()));
 			payment.setProjectId(Integer.parseInt(request.getParameter("projectId")));
@@ -136,7 +136,7 @@ public class ProjectServlet extends HttpServlet {
 	}
 	
 	private boolean validateCardholderName(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String cardholderName = request.getParameter("cardholder_name").trim();
+		String cardholderName = request.getParameter("cardholder_name").trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
 		if (cardholderName.length() < 2 || cardholderName.length() > 50) {
 			return false;
 		}
@@ -153,7 +153,7 @@ public class ProjectServlet extends HttpServlet {
 	
 	private boolean validateAmount(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException {
 		int amount = Integer.parseInt(request.getParameter("payment_amount").trim());
-		if (amount <= 0) {
+		if (amount <= 0 || amount > 1000000) {
 			return false;
 		}
 		return true;

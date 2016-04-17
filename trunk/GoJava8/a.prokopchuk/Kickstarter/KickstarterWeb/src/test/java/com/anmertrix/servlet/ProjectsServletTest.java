@@ -58,7 +58,7 @@ public class ProjectsServletTest {
 		when(projectDao.getProjectsByCategoryId(3)).thenReturn(new ArrayList<>());
 		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
 		doReturn(context).when(projectsPage).getServletContext();
-
+		when(categoryDao.categoryExists(anyInt())).thenReturn(true);
 		projectsPage.doGet(request, response);
 
 		verify(dispatcher).forward(any(), any());
@@ -72,10 +72,17 @@ public class ProjectsServletTest {
 	
 	@Test
 	public void testDoGetCategory() throws ServletException, IOException {
-		when(categoryDao.getCategory(anyInt())).thenReturn(null);
 		when(request.getParameter("categoryId")).thenReturn("3");
+		when(categoryDao.categoryExists(anyInt())).thenReturn(false);
 		projectsPage.doGet(request, response);
-		verify(response, times(1)).sendError(HttpServletResponse.SC_NOT_FOUND);
 		assertThat(projectsPage.getSelectedCategory(request, response), is(nullValue()));
+	}
+	
+	@Test
+	public void testDoGetCategoryNotFound() throws ServletException, IOException {
+		when(request.getParameter("categoryId")).thenReturn("34");
+		when(categoryDao.categoryExists(anyInt())).thenReturn(false);
+		projectsPage.getSelectedCategory(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_NOT_FOUND);
 	}
 }
