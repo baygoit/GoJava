@@ -35,9 +35,8 @@ public class Selected extends HttpServlet {
 		
         List<String> project = kickstarter.findProfile(Integer.parseInt(id));
         
-      // если закоментировать код от данного участка, до слудующего комментария - код работает, 
-      // но не могу заставить сервлет брать данные из JCP и на основе их делать операции 
-      // типо инвестиций и комментариев
+      // if make a comment from here to other comment - my Servlet work but can`t invest or 
+      // leave a questions, how to fix it?
         
         String amount = req.getParameter("invest");
         String author = req.getParameter("author");
@@ -54,8 +53,8 @@ public class Selected extends HttpServlet {
         		(!text.equals("text") || !text.equals(null) || !text.equals(""))){
         	broker.say(Integer.parseInt(amount), author, text);
         }
-        
-       // если закомментировать до сюдого - страница отображается, куда смотреть, что исправлять?
+        //!!!
+       // if I comment till that it`s work, but now i get 505 - what can I do?
         
         req.setAttribute("project", project);
       	req.getRequestDispatcher("Project.jsp").forward(req, resp);
