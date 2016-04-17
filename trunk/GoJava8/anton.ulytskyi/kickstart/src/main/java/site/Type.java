@@ -22,10 +22,25 @@ public class Type extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
- try {
+try {
 		SQLLoader base = new SQLLoader();
-		BaseOfProjects kickstarter = base.reload();
+		BaseOfProjects kickstarter;
 		
+			kickstarter = base.reload();
+		
+		String type = req.getQueryString();
+		List<Project> projects = kickstarter.selectCategory(type);
+		
+		req.setAttribute("type", type);
+		req.setAttribute("projects", projects);
+   	 req.getRequestDispatcher("Type.jsp").forward(req, resp);
+   	 
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/** 
+		 * try {
 			String type = req.getQueryString();
         PrintWriter out = resp.getWriter();
         List<Project> projects = kickstarter.selectCategory(type);
@@ -49,8 +64,6 @@ public class Type extends HttpServlet {
 			e.printStackTrace();
 		}
    
-      
- 
+      */ 
     }
-
 }

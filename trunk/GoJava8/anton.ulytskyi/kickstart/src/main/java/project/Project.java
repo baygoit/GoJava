@@ -1,12 +1,14 @@
 package project;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Project {
 
-	private static final String LINE_SEPARATOR = System.lineSeparator();
-	private static final String DOUBLE_LINE_SEPARATOR = LINE_SEPARATOR + LINE_SEPARATOR;
+
 	private static final int TRANSLATIONS_INTO_DAYS = 86400000;
+	private static final String LINE_SEPARATOR = "";
 
 	private int id;
 	private String name;
@@ -38,14 +40,20 @@ public class Project {
 		return information;
 	}
 
-	public String openProfile(int id) {
+	public List<String> openProfile(int id) {
 		
-		String information = "<h1>"+name + "</h1>"+"<br />"+"Budget: "
-				+ haveMoney + "USD/" + needMoney + "USD.<br />Days after start: "
-				+ getDaysLeft(start) + " days.<br />" +  history 
-				+"<br />" +url + "<br /><br />"+"Comments: <br />" +comments;
+		List<String> project = new ArrayList<>();
+		project.add(name);
+		project.add("Budget: "+ haveMoney + "USD/" + needMoney + "USD.");
+		project.add("Days after start: "+ getDaysLeft(start) + " days.");
+		project.add(history);
+		project.add(url);
+		project.add(LINE_SEPARATOR);
+		project.add("Comments: ");
+		project.add(LINE_SEPARATOR);
+		project.add(comments);
 	
-		return information;
+		return project;
 	}
 
 	public String getDaysLeft(Calendar start) {
