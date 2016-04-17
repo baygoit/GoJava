@@ -6,7 +6,7 @@ import ua.nenya.domain.Question;
 
 public interface QuestionDao {
 	
-	List<Question> getQuestions(String projectName);
-	void writeQuestionInProject(String projectName, String question);
-	boolean isQuestionValid(String projectName, String question);
+	List<Question> getQuestions(int proId);
+	void writeQuestionInProject(int proId, String question);
+	boolean isQuestionValid(int integer, String question);
 }

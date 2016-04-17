@@ -7,7 +7,7 @@
 </head>
 <body>
     <p>
-        <a href="projectServlet?categoryName=${categoryName}&projectName=${projectName}"> Back </a>
+        <a href="projectServlet?projectId=${projectId}"> Back </a>
     </p>
 	<form action="investmentServlet" method="POST">
 	<p><input type="radio" name="amount" value="0" checked/>Any amount </p>
@@ -16,14 +16,13 @@
 		</c:forEach>
 	<hr/>
     <p><b>Enter amount of investment</b></p>
-        <input type="number" name="investment" max="2147483647" min="1"/>
+        <input type="number" name="investment" max="2147483647" min="1" />
        <p><b> Your name</b></p>
 			<input type='text' name='cardholder_name'/><br/>
 			<p><b> Card number</b></p>
 			<input type='text' name='card_number'/><br/>
          <input type="hidden"
-            name="categoryName" value="${categoryName}" /> <input type="hidden"
-            name="projectName" value="${projectName}" /> 
+            name="projectId" value="${projectId}" /> 
             <p><input type="submit"
             value="Submit" /></p>
     </form>

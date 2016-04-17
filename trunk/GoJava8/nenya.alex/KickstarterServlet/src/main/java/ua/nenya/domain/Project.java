@@ -3,16 +3,14 @@ package ua.nenya.domain;
 
 public class Project {
 	private int id;
+	private int categoryId;
 	private String name;
 	private String description;
 	private int neededAmount;
-	private int availableAmount;
 	private int daysRemain;
-	private String history = "";
-	private String video = "";
+	private String history;
+	private String video;
 	
-
-
 	public String getName() {
 		return name;
 	}
@@ -23,14 +21,6 @@ public class Project {
 
 	public int getNeededAmount() {
 		return neededAmount;
-	}
-
-	public int getAvailableAmount() {
-		return availableAmount;
-	}
-	
-	public void setAvailableAmount(int availableAmount) {
-		this.availableAmount = availableAmount;
 	}
 
 	public int getDaysRemain() {
@@ -81,6 +71,14 @@ public class Project {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 	
 	

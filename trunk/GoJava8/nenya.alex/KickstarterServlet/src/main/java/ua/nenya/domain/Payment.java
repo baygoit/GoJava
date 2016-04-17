@@ -1,28 +1,10 @@
 package ua.nenya.domain;
 
-public class Reward{
+public class Payment {
 	private int id;
 	private int projectId;
-	private String name;
 	private int amount;
-	private String description;
 	
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
 	
 	public int getAmount() {
 		return amount;

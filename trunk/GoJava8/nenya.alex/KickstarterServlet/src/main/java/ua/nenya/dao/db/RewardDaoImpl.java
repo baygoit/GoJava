@@ -1,40 +1,42 @@
 package ua.nenya.dao.db;
 
-import java.util.Random;
+import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import ua.nenya.dao.QuoteDao;
-import ua.nenya.domain.Quote;
+import ua.nenya.dao.RewardDao;
+import ua.nenya.domain.Reward;
 import ua.nenya.util.HibernateUtil;
 
 @Repository
-public class QuoteDaoImpl implements QuoteDao {
+public class RewardDaoImpl implements RewardDao {
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Quote getRandomQuote() {
+	public List<Reward> getRewards(int projectId) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Quote quote = null;
 		Transaction transaction = null;
+		List<Reward> rewards = null;
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
-			long count = (long) session.createCriteria(Quote.class).setProjection(Projections.rowCount())
-					.uniqueResult();
-			Random random = new Random();
-			int randomNumber = random.nextInt((int) count);
-			quote = session.get(Quote.class, randomNumber + 1);
+			Criteria criteria = session.createCriteria(Reward.class);
+			criteria.add(Restrictions.eq("projectId", projectId));
+			criteria.addOrder(Order.asc("id"));
+			rewards = criteria.list();
 			transaction.commit();
 		} catch (HibernateException e) {
 			if (transaction != null)
 				transaction.rollback();
 			e.printStackTrace();
 		}
-		return quote;
+		return rewards;
 	}
 
 }

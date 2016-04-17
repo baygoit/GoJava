@@ -13,7 +13,7 @@
 	<c:forEach var="project" items="${projects}">
 		<p>
 			<a
-				href="projectServlet?categoryName=${categoryName}&projectName=${project.name}">${project.name}</a>
+				href="projectServlet?categoryId=${categoryId}&projectId=${project.id}">${project.name}</a>
 		</p>
 		<p>
 			<b>Project name:</b> ${project.name}
@@ -25,7 +25,7 @@
 			<b>Needed amount:</b> ${project.neededAmount}
 		</p>
 		<p>
-			<b>Available amount:</b> ${project.availableAmount}
+			<b>Available amount:</b>????
 		</p>
 		<p>
 			<b>Remaining days:</b> ${project.daysRemain}

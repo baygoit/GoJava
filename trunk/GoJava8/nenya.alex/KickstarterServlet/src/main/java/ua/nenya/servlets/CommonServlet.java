@@ -12,6 +12,7 @@ import ua.nenya.dao.InvestmentDao;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.dao.QuestionDao;
 import ua.nenya.dao.QuoteDao;
+import ua.nenya.dao.RewardDao;
 
 public class CommonServlet extends HttpServlet {
 
@@ -27,6 +28,8 @@ public class CommonServlet extends HttpServlet {
 	private QuestionDao questionDao;
 	@Autowired
 	private InvestmentDao investmentDao;
+	@Autowired
+	private RewardDao rewardDao;
 	
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
@@ -50,6 +53,10 @@ public class CommonServlet extends HttpServlet {
 
 	public InvestmentDao getInvestmentDao() {
 		return investmentDao;
+	}
+
+	public RewardDao getRewardDao() {
+		return rewardDao;
 	}
 
 	

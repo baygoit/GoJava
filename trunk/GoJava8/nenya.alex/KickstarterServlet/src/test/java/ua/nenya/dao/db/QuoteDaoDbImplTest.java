@@ -1,5 +1,6 @@
 package ua.nenya.dao.db;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,6 +21,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import ua.nenya.domain.Quote;
 
+@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class QuoteDaoDbImplTest {
 

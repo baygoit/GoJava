@@ -1,39 +1,58 @@
 package ua.nenya.dao.db;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ua.nenya.dao.InvestmentDao;
-import ua.nenya.domain.Reward;
+import ua.nenya.domain.Payment;
+import ua.nenya.util.HibernateUtil;
 
 @Repository
 public class InvestmentDaoImpl implements InvestmentDao {
 
-	private static final String GET_REWARDS_BY_PROJECT_NAME = "SELECT rewards.name, amount, rewards.description AS description FROM projects "
-			+ "INNER JOIN rewards ON projects.id = rewards.project_id WHERE projects.name = ?";
-	private static final String GET_PROJECT_ID_BY_PROJECT_NAME = "SELECT id FROM projects WHERE name = ?";
-	private static final String WRITE_INVESTMENT_IN_PROJECT = "INSERT INTO PAYMENTS (project_id, amount) VALUES (?, ?)";
+	@Override
+	public void writeIvestmentInProject(int projectId, int amount) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Transaction transaction = null;
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+		Payment payment = new Payment();
+		payment.setProjectId(projectId);
+		payment.setAmount(amount);
+
+		try (Session session = sessionFactory.openSession()) {
+			transaction = session.beginTransaction();
+			session.save(payment);
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null)
+				transaction.rollback();
+			e.printStackTrace();
+		}
+	}
 
 	@Override
-	public List<Reward> getRewards(String projectName) {
-		return jdbcTemplate.query(GET_REWARDS_BY_PROJECT_NAME, new Object[] { projectName },
-				new BeanPropertyRowMapper<Reward>(Reward.class));
+	public long getPaymentSum(int projectId) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Transaction transaction = null;
+		long sum = 0;
+		try (Session session = sessionFactory.openSession()) {
+			transaction = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Payment.class);
+			criteria.add(Restrictions.eq("projectId", projectId));
+			sum = (long) criteria.setProjection(Projections.sum("amount")).uniqueResult();
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null)
+				transaction.rollback();
+			e.printStackTrace();
+		}
+		return sum;
 	}
 
-	@Override
-	public void writeIvestmentInProject(String projectName, int amount) {
-		int id = getProjectId(projectName);
-		jdbcTemplate.update(WRITE_INVESTMENT_IN_PROJECT, new Object[] { id, amount });
-	}
-
-	private int getProjectId(String projectName) {
-		return jdbcTemplate.queryForObject(GET_PROJECT_ID_BY_PROJECT_NAME, new Object[] { projectName }, Integer.class);
-	}
 }

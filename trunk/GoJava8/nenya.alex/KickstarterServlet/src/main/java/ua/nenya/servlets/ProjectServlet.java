@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+import ua.nenya.dao.InvestmentDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
 
@@ -18,20 +18,34 @@ public class ProjectServlet extends CommonServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String projectName = request.getParameter("projectName");
-		request.setAttribute("projectName", projectName);
+		String projectId = request.getParameter("projectId");
+		int proId = 0;
+		try {
+			proId = Integer.valueOf(projectId);
+		} catch (NumberFormatException e) {
+			request.setAttribute("Id", projectId);
+			request.setAttribute("TestId", -1);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		}
+		request.setAttribute("projectId", proId);
 		
-		if(!getProjectDao().isProjectExist(projectName)){
+		if(!getProjectDao().isProjectExist(proId)){
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
 		
-		String categoryName = request.getParameter("categoryName");
-		request.setAttribute("categoryName", categoryName);
-		Project project = getProjectDao().getProjectByName(projectName);
+		InvestmentDao investmentDao = getInvestmentDao();
+		long investmentSum = investmentDao.getPaymentSum(proId);
+		request.setAttribute("investmentSum", investmentSum);
+		
+		int categoryId = getProjectDao().getCategoryId(proId);
+		request.setAttribute("categoryId", categoryId);
+		
+		Project project = getProjectDao().getProject(proId);
 		request.setAttribute("project", project);
 
-		List<Question> questions = getQuestionDao().getQuestions(projectName);
+		List<Question> questions = getQuestionDao().getQuestions(proId);
 		request.setAttribute("questions", questions);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/project.jsp");
@@ -42,16 +56,15 @@ public class ProjectServlet extends CommonServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String question = request.getParameter("question");
-		String projectName = request.getParameter("projectName");
-		String categoryName = request.getParameter("categoryName");
-		if(!getQuestionDao().isQuestionValid(projectName, question)){
+		String projectId = request.getParameter("projectId");
+		int proId = Integer.valueOf(projectId);
+		if(!getQuestionDao().isQuestionValid(proId, question)){
 			request.setAttribute("question", question);
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
-		getQuestionDao().writeQuestionInProject(projectName, question);
-	
-		response.sendRedirect("projectServlet?categoryName="+categoryName+"&projectName="+projectName);
+		getQuestionDao().writeQuestionInProject(proId, question);
+		response.sendRedirect("projectServlet?projectId="+proId);
 	}
 
 }

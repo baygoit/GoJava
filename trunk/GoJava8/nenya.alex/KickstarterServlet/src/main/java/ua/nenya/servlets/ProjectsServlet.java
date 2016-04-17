@@ -18,16 +18,26 @@ public class ProjectsServlet extends CommonServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String categoryName = request.getParameter("categoryName");
-		request.setAttribute("categoryName", categoryName);
-		
-		if(!getCategoryDao().isCategoryExist(categoryName)){
+		String categoryId = request.getParameter("categoryId");
+		int id = 0;
+		try {
+			id = Integer.valueOf(categoryId);
+		} catch (NumberFormatException e) {
+			request.setAttribute("Id", categoryId);
+			request.setAttribute("TestId", -1);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		}
+				
+		if(!getCategoryDao().isCategoryExist(id)){
+			request.setAttribute("categoryId", id);
+			request.setAttribute("categoryTestId", -1);
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
+		request.setAttribute("categoryId", id);
 		ProjectDao projectDao = getProjectDao();
-		List<Project> projects = projectDao.getProjects(categoryName);
-
+		List<Project> projects = projectDao.getProjects(id);
 		
 		request.setAttribute("projects", projects);
 		
