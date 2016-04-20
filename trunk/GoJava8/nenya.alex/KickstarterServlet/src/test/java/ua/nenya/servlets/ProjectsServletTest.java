@@ -17,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -41,10 +40,11 @@ public class ProjectsServletTest {
 	private HttpServletResponse response;
 	@InjectMocks
 	private ProjectsServlet projectsServlet = spy(ProjectsServlet.class);
-	@Ignore
+	
+	
 	@Test
-	public void testDoGetCategoryExists() throws ServletException, IOException {
-		when(request.getParameter("categoryName")).thenReturn("Film");
+	public void testDoGetIdIsValidCategoryExists() throws ServletException, IOException {
+		when(request.getParameter("categoryId")).thenReturn("1");
 		when(categoryDao.isCategoryExist(1)).thenReturn(true);
 		when(projectDao.getProjects(1)).thenReturn(new ArrayList<Project>());
 
@@ -58,10 +58,25 @@ public class ProjectsServletTest {
 		projectsServlet.doGet(request, response);
 		verify(dispatcher).forward(request, response);
 	}
+	@Test
+	public void testDoGetIdIsInvalidCategoryExists() throws ServletException, IOException {
+		when(request.getParameter("categoryId")).thenReturn("invalid");
+		when(categoryDao.isCategoryExist(1)).thenReturn(true);
+		when(projectDao.getProjects(1)).thenReturn(new ArrayList<Project>());
+
+
+		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
+		ServletContext context = mock(ServletContext.class);
+		
+		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
+		doReturn(context).when(projectsServlet).getServletContext();
+
+		projectsServlet.doGet(request, response);
+	}
 	
 	@Test
 	public void testDoGetCategoryDoesntExist() throws ServletException, IOException {
-		when(request.getParameter("categoryName")).thenReturn("Film");
+		when(request.getParameter("categoryId")).thenReturn("1");
 		when(categoryDao.isCategoryExist(1)).thenReturn(false);
 		when(projectDao.getProjects(1)).thenReturn(new ArrayList<Project>());
 		

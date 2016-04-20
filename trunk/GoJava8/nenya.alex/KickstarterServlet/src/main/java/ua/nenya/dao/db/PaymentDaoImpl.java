@@ -9,31 +9,33 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import ua.nenya.dao.InvestmentDao;
+import ua.nenya.dao.PaymentDao;
 import ua.nenya.domain.Payment;
 import ua.nenya.util.HibernateUtil;
 
 @Repository
-public class InvestmentDaoImpl implements InvestmentDao {
+public class PaymentDaoImpl implements PaymentDao {
 
 	@Override
-	public void writeIvestmentInProject(int projectId, int amount) {
+	public int writePaymentInProject(int projectId, int amount) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Transaction transaction = null;
 
 		Payment payment = new Payment();
 		payment.setProjectId(projectId);
 		payment.setAmount(amount);
+		int id = 0;
 
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
-			session.save(payment);
+			id = (int) session.save(payment);
 			transaction.commit();
 		} catch (HibernateException e) {
 			if (transaction != null)
 				transaction.rollback();
 			e.printStackTrace();
 		}
+		return id;
 	}
 
 	@Override

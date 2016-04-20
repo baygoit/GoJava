@@ -1,5 +1,7 @@
 package ua.nenya.domain;
 
+
+
 public class Quote {
 	private int id;
 	private String name;

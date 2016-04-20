@@ -12,10 +12,14 @@ public class QuestionTest {
 	@Before
 	public void init() {
 		question.setName("?");
+		question.setId(1);
+		question.setProjectId(1);
 	}
 	@Test
 	public void testGetName() {
 		assertThat(question.getName(), is("?"));
+		assertThat(question.getId(), is(1));
+		assertThat(question.getProjectId(), is(1));
 	}
 
 }

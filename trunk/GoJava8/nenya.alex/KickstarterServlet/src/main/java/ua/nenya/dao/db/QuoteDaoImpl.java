@@ -15,7 +15,8 @@ import ua.nenya.util.HibernateUtil;
 
 @Repository
 public class QuoteDaoImpl implements QuoteDao {
-
+	
+	
 	@Override
 	public Quote getRandomQuote() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();

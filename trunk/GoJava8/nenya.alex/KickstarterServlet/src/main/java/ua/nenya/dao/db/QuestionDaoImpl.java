@@ -41,7 +41,7 @@ public class QuestionDaoImpl implements QuestionDao {
 	}
 
 	@Override
-	public void writeQuestionInProject(int projectId, String stringQuestion) {
+	public int writeQuestionInProject(int projectId, String stringQuestion) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Transaction transaction = null;
 
@@ -49,18 +49,20 @@ public class QuestionDaoImpl implements QuestionDao {
 		question.setProjectId(projectId);
 		question.setName(stringQuestion);
 
+		int id = 0;
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
-			session.save(question);
+			id = (int) session.save(question);
 			transaction.commit();
 		} catch (HibernateException e) {
 			if (transaction != null)
 				transaction.rollback();
 			e.printStackTrace();
 		}
+		return id;
 	}
 
-	public boolean isQuestionValid(int projectId, String question) {
+	public boolean isQuestionAbsent(int projectId, String question) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Transaction transaction = null;
 		long count = 0;
@@ -76,7 +78,7 @@ public class QuestionDaoImpl implements QuestionDao {
 				transaction.rollback();
 			e.printStackTrace();
 		}
-		return count == 0 && !question.isEmpty();
+		return count == 0;
 	}
 
 }

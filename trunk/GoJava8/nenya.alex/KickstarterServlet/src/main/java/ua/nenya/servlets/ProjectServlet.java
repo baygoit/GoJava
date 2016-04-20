@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.nenya.dao.InvestmentDao;
+import ua.nenya.dao.PaymentDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
 
@@ -35,7 +35,7 @@ public class ProjectServlet extends CommonServlet {
 			return;
 		}
 		
-		InvestmentDao investmentDao = getInvestmentDao();
+		PaymentDao investmentDao = getInvestmentDao();
 		long investmentSum = investmentDao.getPaymentSum(proId);
 		request.setAttribute("investmentSum", investmentSum);
 		
@@ -58,7 +58,7 @@ public class ProjectServlet extends CommonServlet {
 		String question = request.getParameter("question");
 		String projectId = request.getParameter("projectId");
 		int proId = Integer.valueOf(projectId);
-		if(!getQuestionDao().isQuestionValid(proId, question)){
+		if(!getQuestionDao().isQuestionAbsent(proId, question) | question.isEmpty()){
 			request.setAttribute("question", question);
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;

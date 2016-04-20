@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="ua.nenya.domain.Project" table="projects">
+      <id name="id" type="int">
+         <generator class="native"/>
+      </id>
+      <property name="categoryId" column="category_id" type="int"/>
+      <property name="name" type="string"/>
+      <property name="description" type="string"/>
+      <property name="neededAmount" column="needed_amount" type="integer"/>
+      <!-- <property name="availableAmount" type="integer"/>-->
+      <property name="daysRemain" column="days_remain" type="integer"/>
+      <property name="history" type="string"/>
+      <property name="video" type="string"/>
+   </class>
+</hibernate-mapping>

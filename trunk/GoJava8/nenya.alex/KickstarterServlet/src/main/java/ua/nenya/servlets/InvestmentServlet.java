@@ -66,9 +66,9 @@ public class InvestmentServlet extends CommonServlet {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 				return;
 			}
-			getInvestmentDao().writeIvestmentInProject(proId, investment);
+			getInvestmentDao().writePaymentInProject(proId, investment);
 		} else {
-			getInvestmentDao().writeIvestmentInProject(proId, Integer.parseInt(amountString));
+			getInvestmentDao().writePaymentInProject(proId, Integer.parseInt(amountString));
 		}
 
 		response.sendRedirect("projectServlet?projectId=" + proId);

@@ -40,14 +40,14 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	@Override
-	public boolean isCategoryExist(int id) {
+	public boolean isCategoryExist(int categoryId) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Transaction transaction = null;
 		long count = 0;
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
 			Criteria criteria = session.createCriteria(Category.class);
-			criteria.add(Restrictions.eq("id", id));
+			criteria.add(Restrictions.eq("id", categoryId));
 			count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 			transaction.commit();
 		} catch (HibernateException e) {

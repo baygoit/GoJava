@@ -11,9 +11,14 @@ public class QuoteTest {
 	@Before
 	public void init() {
 		quote.setName("Q");
+		quote.setId(1);
 	}
 	@Test
 	public void testGetName() {
 		assertThat(quote.getName(), is("Q"));
+	}
+	@Test
+	public void testGetId() {
+		assertThat(quote.getId(), is(1));
 	}
 }

@@ -21,14 +21,14 @@ public class ProjectDaoImpl implements ProjectDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Project> getProjects(int id) {
+	public List<Project> getProjects(int categoryId) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Transaction transaction = null;
 		List<Project> projects = null;
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
 			Criteria criteria = session.createCriteria(Project.class);
-			criteria.add(Restrictions.eq("categoryId", id));
+			criteria.add(Restrictions.eq("categoryId", categoryId));
 			criteria.addOrder(Order.asc("name"));
 			projects = criteria.list();
 			transaction.commit();
@@ -41,13 +41,13 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 	@Override
-	public Project getProject(int id) {
+	public Project getProject(int projectId) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Transaction transaction = null;
 		Project project = null;
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
-			project = session.get(Project.class, id);
+			project = session.get(Project.class, projectId);
 			transaction.commit();
 		} catch (HibernateException e) {
 			if (transaction != null)
@@ -58,14 +58,14 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 	@Override
-	public boolean isProjectExist(int id) {
+	public boolean isProjectExist(int projectId) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Transaction transaction = null;
 		long count = 0;
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
 			Criteria criteria = session.createCriteria(Project.class);
-			criteria.add(Restrictions.eq("id", id));
+			criteria.add(Restrictions.eq("id", projectId));
 			count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 			transaction.commit();
 		} catch (HibernateException e) {
@@ -77,15 +77,15 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 	@Override
-	public int getCategoryId(int id) {
+	public int getCategoryId(int projectId) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Transaction transaction = null;
 		Project project = null;
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
 			Criteria criteria = session.createCriteria(Project.class);
-			criteria.add(Restrictions.eq("id", id));
-			project = session.get(Project.class, id);
+			criteria.add(Restrictions.eq("id", projectId));
+			project = session.get(Project.class, projectId);
 			transaction.commit();
 		} catch (HibernateException e) {
 			if (transaction != null)
