@@ -51,12 +51,14 @@ public class ProjectServlet extends HttpServlet {
 		List<Answer> answers = answerDao.getAnswersByProjectId(project.getId());
 		List<Payment> payments = paymentDao.getPaymentsByProjectId(project.getId());
 		List<Reward> rewards = rewardDao.getRewards();
+		int categoryId = projectDao.getCategoryIdByProjectId(project.getId());
 		
 		request.setAttribute("project", project);
 		request.setAttribute("questions", questions);
 		request.setAttribute("answers", answers);
 		request.setAttribute("payments", payments);
 		request.setAttribute("rewards", rewards);
+		request.setAttribute("categoryId", categoryId);
 		getServletContext().getRequestDispatcher(PROJECT_JSP_PATH).forward(request, response);
 	}
 	

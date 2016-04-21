@@ -25,6 +25,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.anmertrix.dao.CategoryDao;
+import com.anmertrix.dao.PaymentDao;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.domain.Category;
 import com.anmertrix.servlet.ProjectsServlet;
@@ -41,6 +42,8 @@ public class ProjectsServletTest {
 	@Mock
 	private ProjectDao projectDao;
 	@Mock
+	private PaymentDao paymentDao;
+	@Mock
 	private HttpServletRequest request;
 	@Mock
 	private HttpServletResponse response;
@@ -56,6 +59,7 @@ public class ProjectsServletTest {
 		when(request.getParameter("categoryId")).thenReturn("3");
 		when(categoryDao.getCategory(3)).thenReturn(new Category());
 		when(projectDao.getProjectsByCategoryId(3)).thenReturn(new ArrayList<>());
+		when(paymentDao.getGatheredBudgets()).thenReturn(new ArrayList<>());
 		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
 		doReturn(context).when(projectsPage).getServletContext();
 		when(categoryDao.categoryExists(anyInt())).thenReturn(true);

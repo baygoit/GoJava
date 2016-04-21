@@ -5,7 +5,7 @@ public class Project {
 	private String name;
 	private String description;
 	private int requiredBudget;
-	private int gatheredBudget;
+	private long gatheredBudget;
 	private int daysLeft;
 	private String history;
 	private String url;
@@ -43,11 +43,11 @@ public class Project {
 		this.requiredBudget = requiredBudget;
 	}
 
-	public int getGatheredBudget() {
+	public long getGatheredBudget() {
 		return gatheredBudget;
 	}
 
-	public void setGatheredBudget(int count) {
+	public void setGatheredBudget(long count) {
 		this.gatheredBudget = count;
 	}
 

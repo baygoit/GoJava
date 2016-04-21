@@ -10,6 +10,11 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12 text-center">
+                	<ul class="breadcrumb">
+                		<li><a href="/">Home</a></li>
+						<li><a href="categories">Categories</a></li>
+						<li><a href="projects?categoryId=${categoryId}">Projects</a></li>
+					</ul>
 					<h2>${project.name}</h2>
 					<div class="info_block">
 						<p><span>Required budget:</span> ${project.requiredBudget}</p>

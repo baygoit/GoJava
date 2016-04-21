@@ -1,3 +1,7 @@
+a, a:hover { 
+	text-decoration: none;
+}
+
 .logo {
 	width:600px;
 	display: inline-block;
@@ -33,7 +37,7 @@ ul {
 	}
 	
 	.test-box ul li {
-		font-size: 18px;
+		font-size: 24px;
 		display : inline-block;
 		vertical-align: top;
 		text-align: center;
@@ -131,13 +135,14 @@ footer .container{
 }
 
 .form-group-reward {
+	-webkit-box-shadow: 0 0 17px rgba(0,0,0,0.1);
 	box-shadow: 0 0 17px rgba(0,0,0,0.12);
     max-width: 300px;
     margin: auto;
     padding: 10px 0px;
 }
 .form-group-reward:hover {
-	-webkit-box-shadow: 0 0 17px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 0 0 17px rgba(0,0,0,0.3);
 	box-shadow: 0 0 17px rgba(0,0,0,0.42);
 }
 
@@ -177,11 +182,6 @@ footer .container{
 	padding: 0px;
 }
 
-.project-list li {
-    padding: 10px 0px;
-    font-size: 20px;
-}
-
 .video_block iframe {
 	max-width: 100%;
 }
@@ -189,4 +189,32 @@ footer .container{
 	.video_block iframe {
 		height:auto
 	}
+}
+
+.project-list-item {
+	padding: 15px;
+    margin: 15px 0px;
+	-webkit-box-shadow: 0 0 17px rgba(0,0,0,0.1);
+	box-shadow: 0 0 17px rgba(0,0,0,0.12);
+}
+
+.project-list-item:hover {
+	-webkit-box-shadow: 0 0 17px rgba(0,0,0,0.3);
+	box-shadow: 0 0 17px rgba(0,0,0,0.42);
+	
+}
+.project-list-item a{
+	color:#000;
+}
+.project-list-item a{
+	color:#000;
+}
+
+.project-list-item-name {
+	color:#337ab7;
+	font-size: 21px;
+}
+.breadcrumb {
+	background-color: #fff;
+	font-size: 16px;
 }

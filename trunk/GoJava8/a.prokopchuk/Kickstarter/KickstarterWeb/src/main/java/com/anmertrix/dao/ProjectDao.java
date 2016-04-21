@@ -12,4 +12,6 @@ public interface ProjectDao {
 
 	Project getProjectById(int projectId);
 
+	int getCategoryIdByProjectId(int projectId);
+
 }
