@@ -1,12 +1,12 @@
 package ua.dborisenko.kickstarter.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 public class Category {
+
     private int id;
     private String name;
-    private List<Project> projects = new ArrayList<Project>();
+    private Set<Project> projects;
 
     public void setId(int id) {
         this.id = id;
@@ -24,11 +24,11 @@ public class Category {
         return name;
     }
 
-    public List<Project> getProjects() {
+    public Set<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(List<Project> projects) {
+    public void setProjects(Set<Project> projects) {
         this.projects = projects;
     }
 

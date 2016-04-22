@@ -1,6 +1,7 @@
 package ua.dborisenko.kickstarter.domain;
 
 public class Quote {
+
     private int id;
     private String text;
     private String author;

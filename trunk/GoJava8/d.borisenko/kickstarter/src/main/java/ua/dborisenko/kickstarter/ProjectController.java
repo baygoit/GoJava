@@ -19,6 +19,7 @@ import ua.dborisenko.kickstarter.domain.Project;
 
 @Repository
 public class ProjectController {
+
     static final String ID_PARAM_NAME = "id";
     static final String CATEGORY_ATTR_NAME = "category";
     static final String QUESTIONS_ATTR_NAME = "questions";
@@ -38,7 +39,7 @@ public class ProjectController {
             questionDao.getAllForProject(project);
             request.setAttribute(PROJECT_ATTR_NAME, project);
             request.setAttribute(QUESTIONS_ATTR_NAME, project.getQuestions());
-            Category category = categoryDao.getByProjectId(id);
+            Category category = categoryDao.getByProject(project);
             request.setAttribute(CATEGORY_ATTR_NAME, category);
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(PROJECT_JSP_PATH);
             dispatcher.forward(request, response);

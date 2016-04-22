@@ -1,24 +1,33 @@
 package ua.dborisenko.kickstarter.dao;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
 import java.sql.SQLException;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(MockitoJUnitRunner.class)
+import ua.dborisenko.kickstarter.domain.Quote;
+
+@ContextConfiguration(locations = { "classpath:testApplicationContext.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)
 public class QuoteDaoTest {
 
-    @InjectMocks 
+    @Autowired
     private QuoteDao quoteDao;
-        
+
     @Test
-	@Ignore
     public void getRandomTest() throws SQLException {
-        quoteDao.getRandom();
-		// verify(jdbcTemplate).queryForObject(eq(QuoteDao.GET_RANDOM_QUERY),
-		// Matchers.any(QuoteRowMapper.class));
+        Quote quote = new Quote();
+        quote.setAuthor("testauthor");
+        quote.setText("testtext");
+        quoteDao.add(quote);
+        Quote resultQuote = quoteDao.getRandom();
+        assertThat(resultQuote.getAuthor(), is("testauthor"));
+        assertThat(resultQuote.getText(), is("testtext"));
     }
 }

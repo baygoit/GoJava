@@ -97,6 +97,3 @@ INSERT INTO rewards (project_id, amount, description) VALUES (5, 200, 'Golden pa
 INSERT INTO rewards (project_id, amount, description) VALUES (6, 100, 'Free bottle of beer.');
 INSERT INTO rewards (project_id, amount, description) VALUES (6, 1000, 'Two bottles of beer and we will call you best friend for a whole day.');
 
-CREATE USER 'kickstarter'@'%' IDENTIFIED BY '123';
-GRANT ALL PRIVILEGES ON kickstarter . * TO 'kickstarter'@'%';
-FLUSH PRIVILEGES;

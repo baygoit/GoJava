@@ -19,6 +19,7 @@ import ua.dborisenko.kickstarter.domain.Project;
 
 @Repository
 public class InvestmentController {
+    
     static final String REWARDS_ATTR_NAME = "rewards";
     static final String PROJECT_ATTR_NAME = "project";
     static final String CUSTOM_AMOUNT_PARAM_NAME = "custom_amount";
@@ -38,7 +39,9 @@ public class InvestmentController {
     void addInvestment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int projectId = Integer.valueOf(request.getParameter(PROJECT_ID_PARAM_NAME));
+            Project project = projectDao.getById(projectId);
             Investment investment = new Investment();
+            investment.setProject(project);
             investment.setCardHolderName(request.getParameter(CARDHOLDER_NAME_PARAM_NAME));
             investment.setCardNumber(request.getParameter(CARD_NUMBER_PARAM_NAME));
             if (Integer.valueOf(request.getParameter(AMOUNT_PARAM_NAME)) == 0) {
@@ -50,7 +53,7 @@ public class InvestmentController {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NEGATIVE_AMOUNT);
                 return;
             }
-            investmentDao.add(projectId, investment);
+            investmentDao.add(investment);
             response.sendRedirect(PROJECT_OUT_URL + projectId);
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NUMBER_FORMAT);

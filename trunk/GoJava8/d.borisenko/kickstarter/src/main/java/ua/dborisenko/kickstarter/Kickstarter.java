@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 public class Kickstarter extends HttpServlet {
+
     private static final long serialVersionUID = 8987512933446595305L;
     private static final String REQUESTED_PAGE_PARAM_NAME = "page";
     private static final String REQUESTED_ACTION_PARAM_NAME = "action";
@@ -61,7 +62,8 @@ public class Kickstarter extends HttpServlet {
         } else if (REQUESTED_ACTION.add_investment.toString().equals(requestedAction)) {
             investmentController.addInvestment(request, response);
         } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, ErrorText.ACTION_NOT_FOUND);        }
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, ErrorText.ACTION_NOT_FOUND);
+        }
     }
 
 }

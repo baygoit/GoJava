@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="ua.dborisenko.kickstarter.domain.Project" table="projects">
+		<id name="id" type="int">
+			<generator class="native" />
+		</id>
+		<many-to-one name="category" class="ua.dborisenko.kickstarter.domain.Category" fetch="select">
+			<column name="category_id" not-null="true" />
+		</many-to-one>
+		<property name="name" type="string" />
+		<property name="description" type="string" />
+		<property name="history" type="string" />
+		<property name="videoUrl" type="string" column="video_url" />
+		<property name="requiredSum" type="int" column="required_sum" />
+		<property name="daysLeft" type="int" column="days_left" />
+		<set name="rewards" table="rewards" inverse="true" lazy="true"
+			fetch="select">
+			<key>
+				<column name="project_id" not-null="true" />
+			</key>
+			<one-to-many class="ua.dborisenko.kickstarter.domain.Reward" />
+		</set>
+		<set name="questions" table="questions" inverse="true" lazy="true"
+			fetch="select">
+			<key>
+				<column name="project_id" not-null="true" />
+			</key>
+			<one-to-many class="ua.dborisenko.kickstarter.domain.Question" />
+		</set>
+		<set name="investments" table="investments" inverse="true" lazy="false"
+			fetch="select">
+			<key>
+				<column name="project_id" not-null="true" />
+			</key>
+			<one-to-many class="ua.dborisenko.kickstarter.domain.Investment" />
+		</set>
+	</class>
+</hibernate-mapping>

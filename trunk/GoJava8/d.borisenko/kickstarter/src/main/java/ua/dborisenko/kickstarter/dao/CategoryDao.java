@@ -1,45 +1,55 @@
 package ua.dborisenko.kickstarter.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import ua.dborisenko.kickstarter.domain.Category;
+import ua.dborisenko.kickstarter.domain.Project;
 
 @Repository
 public class CategoryDao {
 
-    final class CategoryRowMapper implements RowMapper<Category> {
-        @Override
-        public Category mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Category category = new Category();
-            category.setId(rs.getInt("id"));
-            category.setName(rs.getString("name"));
-            return category;
-        }
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    public void add(Category category) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        session.save(category);
+        tx.commit();
     }
 
-    static final String GET_BY_PROJECT_ID_QUERY = "SELECT c.id, c.name FROM categories c INNER JOIN projects p ON (p.category_id = c.id) WHERE p.id = ?";
-    static final String GET_BY_ID_QUERY = "SELECT id, name FROM categories WHERE id = ?";
-    static final String GET_ALL_QUERY = "SELECT id, name FROM categories ORDER BY name";
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-    private CategoryRowMapper mapper = new CategoryRowMapper();
-
     public Category getById(int id) {
-        return jdbcTemplate.queryForObject(GET_BY_ID_QUERY, new Object[] { id }, mapper);
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Category where id = " + id);
+        Category category = (Category) query.list().get(0);
+        tx.commit();
+        return category;
     }
 
     public List<Category> getAll() {
-        return jdbcTemplate.query(GET_ALL_QUERY, mapper);
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Category order by name");
+        List<Category> categories = query.list();
+        tx.commit();
+        return categories;
     }
 
-    public Category getByProjectId(int id) {
-        return jdbcTemplate.queryForObject(GET_BY_PROJECT_ID_QUERY, new Object[] { id }, mapper);
+    public Category getByProject(Project project) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session
+                .createQuery("select p.category from Project p inner join p.category where p.id = " + project.getId());
+        Category category = (Category) query.list().get(0);
+        tx.commit();
+        return category;
     }
 }

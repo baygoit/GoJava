@@ -1,7 +1,9 @@
 package ua.dborisenko.kickstarter.domain;
 
-public class Question {
+public class Question implements Comparable<Question> {
+
     private int id;
+    private Project project;
     private String request;
     private String reply;
 
@@ -27,5 +29,18 @@ public class Question {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    @Override
+    public int compareTo(Question question) {
+        return this.id - question.getId();
     }
 }

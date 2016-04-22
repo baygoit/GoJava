@@ -1,11 +1,13 @@
 package ua.dborisenko.kickstarter.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import ua.dborisenko.kickstarter.domain.Investment;
@@ -14,32 +16,22 @@ import ua.dborisenko.kickstarter.domain.Project;
 @Repository
 public class InvestmentDao {
 
-    final class InvestmentRowMapper implements RowMapper<Investment> {
-        @Override
-        public Investment mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Investment investment = new Investment();
-            investment.setId(rs.getInt("id"));
-            investment.setAmount(rs.getInt("amount"));
-            investment.setCardHolderName(rs.getString("cardholder_name"));
-            investment.setCardNumber(rs.getString("card_number"));
-            return investment;
-        }
-    }
-
-    static final String GET_ALL_BY_PROJECT_ID_QUERY = "SELECT id, cardholder_name, card_number, amount FROM investments WHERE project_id = ?";
-    static final String ADD_QUERY = "INSERT INTO investments (project_id, cardholder_name, card_number, amount) VALUES (?, ?, ?, ?)";
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-    private InvestmentRowMapper mapper = new InvestmentRowMapper();
+    private SessionFactory sessionFactory;
 
     void getAllForProject(Project project) {
-        project.setInvestments(
-                jdbcTemplate.query(GET_ALL_BY_PROJECT_ID_QUERY, new Object[] { project.getId() }, mapper));
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Investment where project_id = " + project.getId());
+        Set<Investment> investments = new HashSet<Investment>(query.list());
+        tx.commit();
+        project.setInvestments(investments);
     }
 
-    public void add(int projectId, Investment investment) {
-        jdbcTemplate.update(ADD_QUERY, projectId, investment.getCardHolderName(), investment.getCardNumber(),
-                investment.getAmount());
+    public void add(Investment investment) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        session.save(investment);
+        tx.commit();
     }
 }
-

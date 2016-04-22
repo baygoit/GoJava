@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC 
  "-//Hibernate/Hibernate Mapping DTD//EN"
- "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-   <class name="ua.dborisenko.kickstarter.domain.Quote" table="quotes">
-      <id name="id" type="int">
-         <generator class="native"/>
-      </id>
-      <property name="text" type="string"/>
-      <property name="author" type="string"/>
-   </class>
+	<class name="ua.dborisenko.kickstarter.domain.Quote" table="quotes">
+		<id name="id" type="int">
+			<generator class="native" />
+		</id>
+		<property name="text" type="string" />
+		<property name="author" type="string" />
+	</class>
+	<sql-query name="getRandomQuote">
+		<return alias="quotes" class="ua.dborisenko.kickstarter.domain.Quote" />
+<!-- 	<![CDATA[CALL get_random_quote()]]>  -->
+		<![CDATA[SELECT id, author, text FROM quotes ORDER BY rand() limit 1]]>
+	</sql-query>
 </hibernate-mapping>

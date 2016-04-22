@@ -2,59 +2,47 @@ package ua.dborisenko.kickstarter.dao;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Matchers;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ua.dborisenko.kickstarter.dao.QuestionDao.QuestionRowMapper;
+import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Project;
 import ua.dborisenko.kickstarter.domain.Question;
 
-@RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(locations = { "classpath:testApplicationContext.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)
 public class QuestionDaoTest {
 
-    @Mock
-    private JdbcTemplate jdbcTemplate;
-    @InjectMocks 
+    @Autowired
     private QuestionDao questionDao;
-    
-    @Test
-    public void mapRowTest() throws SQLException  {
-        ResultSet rs = mock(ResultSet.class);
-        when(rs.getInt("id")).thenReturn(111);
-        when(rs.getString("request")).thenReturn("testrequest");
-        QuestionRowMapper mapper = questionDao.new QuestionRowMapper();
-        Question question = mapper.mapRow(rs, 1);
-        assertThat(question.getId(), is(111));
-        assertThat(question.getRequest(), is("testrequest"));
-    }
-    
+    @Autowired
+    private ProjectDao projectDao;
+    @Autowired
+    private CategoryDao categoryDao;
+
     @Test
     public void getAllForProjectTest() {
+        Category category = new Category();
+        categoryDao.add(category);
         Project project = new Project();
-        project.setId(1);
-        questionDao.getAllForProject(project);
-        verify(jdbcTemplate).query(eq(QuestionDao.GET_BY_PROJECT_ID_QUERY), eq(new Object[] { 1 }), Matchers.any(QuestionRowMapper.class));
-    }
-    
-    @Test
-    public void addTest() {
+        project.setCategory(category);
+        project.setName("testname");
+        projectDao.add(project);
         Question question = new Question();
-        question.setId(1);
         question.setRequest("testrequest");
-        questionDao.add(1, question);
-        verify(jdbcTemplate).update(QuestionDao.ADD_QUERY, 1, question.getRequest());
+        question.setReply("testreply");
+        question.setProject(project);
+        questionDao.add(question);
+        questionDao.getAllForProject(project);
+        assertThat(project.getQuestions().isEmpty(), is(false));
+        for (Question currentQuestion : project.getQuestions()) {
+            assertThat(currentQuestion.getRequest(), is("testrequest"));
+            assertThat(currentQuestion.getReply(), is("testreply"));
+        }
     }
+
 }

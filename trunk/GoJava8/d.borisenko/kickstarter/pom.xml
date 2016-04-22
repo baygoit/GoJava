@@ -127,14 +127,16 @@
 		<version-javax.servlet-api>3.1.0</version-javax.servlet-api>
 		<version-jstl>1.2</version-jstl>
 		<version-tomcat-dbcp>8.5.0</version-tomcat-dbcp>
+		<version-hibernate>5.1.0.Final</version-hibernate>
+		<version-hsqldb>2.3.3</version-hsqldb>
 		<build.timezone>GMT+3</build.timezone>
 	</properties>
 	<dependencies>
-<dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-core</artifactId>
-    <version>5.1.0.Final</version>
-</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${version-hibernate}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -158,6 +160,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
+			<version>${version-spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
 			<version>${version-spring}</version>
 		</dependency>
 		<dependency>
@@ -188,6 +195,12 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${version-jstl}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>${version-hsqldb}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

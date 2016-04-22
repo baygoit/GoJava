@@ -1,7 +1,9 @@
 package ua.dborisenko.kickstarter.domain;
 
 public class Investment {
+
     private int id;
+    private Project project;
     private String cardHolderName;
     private String cardNumber;
     private int amount;
@@ -36,5 +38,13 @@ public class Investment {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

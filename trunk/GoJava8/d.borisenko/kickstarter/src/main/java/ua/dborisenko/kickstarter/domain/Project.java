@@ -1,19 +1,20 @@
 package ua.dborisenko.kickstarter.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
-public class Project {
+public class Project implements Comparable<Project> {
+
     private int id;
+    private Category category;
     private String name;
     private String description;
     private String history;
     private int requiredSum;
     private int daysLeft;
     private String videoUrl;
-    private List<Investment> investments = new ArrayList<Investment>();
-    private List<Question> questions = new ArrayList<Question>();
-    private List<Reward> rewards = new ArrayList<Reward>();
+    private Set<Investment> investments;
+    private Set<Question> questions;
+    private Set<Reward> rewards;
 
     public void setId(int id) {
         this.id = id;
@@ -79,28 +80,41 @@ public class Project {
         return videoUrl;
     }
 
-    public List<Reward> getRewards() {
+    public Set<Reward> getRewards() {
         return rewards;
     }
 
-    public void setRewards(List<Reward> rewards) {
+    public void setRewards(Set<Reward> rewards) {
         this.rewards = rewards;
     }
 
-    public List<Question> getQuestions() {
+    public Set<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<Question> questions) {
+    public void setQuestions(Set<Question> questions) {
         this.questions = questions;
     }
 
-    public List<Investment> getInvestments() {
+    public Set<Investment> getInvestments() {
         return investments;
     }
 
-    public void setInvestments(List<Investment> investments) {
+    public void setInvestments(Set<Investment> investments) {
         this.investments = investments;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @Override
+    public int compareTo(Project project) {
+        return this.name.compareTo(project.getName());
     }
 
 }

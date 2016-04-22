@@ -1,7 +1,9 @@
 package ua.dborisenko.kickstarter.domain;
 
-public class Reward {
+public class Reward implements Comparable<Reward> {
+
     private int id;
+    private Project project;
     private int amount;
     private String description;
 
@@ -27,5 +29,18 @@ public class Reward {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    @Override
+    public int compareTo(Reward reward) {
+        return this.amount - reward.getAmount();
     }
 }

@@ -18,7 +18,7 @@ import ua.dborisenko.kickstarter.domain.Category;
 
 @Repository
 public class CategoryController {
-    
+
     static final String ID_PARAM_NAME = "id";
     static final String PROJECTS_ATTR_NAME = "projects";
     static final String CATEGORY_ATTR_NAME = "category";
@@ -32,16 +32,15 @@ public class CategoryController {
     private CategoryDao categoryDao;
     @Autowired
     private ProjectDao projectDao;
-    
+
     void showCategories(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute(QUOTE_ATTR_NAME, quoteDao.getRandom());
         request.setAttribute(CATEGORIES_ATTR_NAME, categoryDao.getAll());
         RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(CATEGORIES_JSP_PATH);
         dispatcher.forward(request, response);
     }
-    
-    void showCategory(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+
+    void showCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.valueOf(request.getParameter(ID_PARAM_NAME));
             Category category = categoryDao.getById(id);
@@ -53,7 +52,7 @@ public class CategoryController {
         } catch (EmptyResultDataAccessException e) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, ErrorText.CATEGORY_NOT_FOUND);
         } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST,ErrorText.NUMBER_FORMAT);
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NUMBER_FORMAT);
         }
     }
 }
