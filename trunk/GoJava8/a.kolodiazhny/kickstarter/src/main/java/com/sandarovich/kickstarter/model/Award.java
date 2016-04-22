@@ -2,10 +2,19 @@ package com.sandarovich.kickstarter.model;
 
 public class Award {
 
-    private int id;
+    private long id;
     private double amount;
     private String name;
     private String description;
+    private long projectid;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public double getAmount() {
         return amount;
@@ -30,5 +39,13 @@ public class Award {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long getProjectid() {
+        return projectid;
+    }
+
+    public void setProjectid(long projectid) {
+        this.projectid = projectid;
     }
 }

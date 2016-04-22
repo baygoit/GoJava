@@ -2,7 +2,7 @@
         <div class="container">
             <jsp:include page="navigation.jsp" />
             <div class="page-header">
-                <h1>KickStarter <small>"${quote.text} -"${quote.author}</small></h1>
+                <h1>KickStarter <small>"${quote.text} " - ${quote.author}</small></h1>
             </div>
             <div class="jumbotron">
                 <h2>Categories</h2>

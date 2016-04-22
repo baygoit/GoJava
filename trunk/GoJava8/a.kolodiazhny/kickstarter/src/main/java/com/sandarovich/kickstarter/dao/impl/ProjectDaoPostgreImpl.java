@@ -28,7 +28,12 @@ public class ProjectDaoPostgreImpl implements ProjectDao {
             "SELECT id, name, description, required_budget, days_left, video_link, history " +
                     "FROM project " +
                     "WHERE id=?;";
-
+    private static final String SQL_FIND_CATEGORY_ID =
+            "SELECT categoryid " +
+                    "FROM project " +
+                    "WHERE id=? " +
+                    "GROUP by categoryid " +
+                    "LIMIT(1);";
     @Autowired
     private DataSource dataSource;
 
@@ -42,7 +47,14 @@ public class ProjectDaoPostgreImpl implements ProjectDao {
     }
 
     @Override
-    public List<Project> getByCategory(int categoryId) {
+    public Long getCategoryId(long projectId) {
+        return jdbcTemplate.queryForObject(SQL_FIND_CATEGORY_ID,
+                new Object[]{projectId},
+                Long.class);
+    }
+
+    @Override
+    public List<Project> getByCategoryId(long categoryId) {
         return jdbcTemplate.query(
                 SQL_FIND_PROJECTS_BY_CATEGORY,
                 new Object[]{categoryId},

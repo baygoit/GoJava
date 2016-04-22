@@ -1,10 +1,8 @@
 package com.sandarovich.kickstarter.model;
 
-/**
- * Quote
- */
 public class Quote {
 
+    private int id;
     private String author;
     private String text;
 
@@ -12,15 +10,28 @@ public class Quote {
 
     }
 
-    public Quote(String author, String text) {
-        this.author = author;
-        this.text = text;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getText() {
         return text;
     }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     public String getAuthor() {
         return author;
     }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 }
+

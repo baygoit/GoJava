@@ -1,39 +1,33 @@
 package com.sandarovich.kickstarter.dao.impl;
 
 import com.sandarovich.kickstarter.dao.QuoteDao;
+import com.sandarovich.kickstarter.dao.exception.DaoException;
 import com.sandarovich.kickstarter.model.Quote;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import com.sandarovich.kickstarter.util.HibernateUtil;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.Random;
 
 @Repository
 public class QuoteDaoPostgreImpl implements QuoteDao {
-
-    public static final String SQL_GET_RANDOM_QUOTE = "SELECT text, author " +
-        "FROM " +
-        "public.quote " +
-        "ORDER BY RANDOM() LIMIT(1);";
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-
     @Override
     public Quote getRandomQuota() {
-        Quote quote = jdbcTemplate.queryForObject(SQL_GET_RANDOM_QUOTE, new QuoteRowMapper());
-        return quote != null ? quote : new Quote("No Author", "No text");
-    }
-
-    private final class QuoteRowMapper implements RowMapper<Quote> {
-        public Quote mapRow(ResultSet rs, int rowNum) throws SQLException {
-            String author = rs.getString("author");
-            String text = rs.getString("text");
-            return new Quote(author, text);
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Quote quote;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            int quoteCount = ((Long) session.createCriteria(Quote.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+            int randomQuoteIndex = new Random().nextInt(quoteCount) + 1;
+            quote = session.get(Quote.class, randomQuoteIndex);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            throw new DaoException(e);
         }
+        return quote;
     }
 }
 
