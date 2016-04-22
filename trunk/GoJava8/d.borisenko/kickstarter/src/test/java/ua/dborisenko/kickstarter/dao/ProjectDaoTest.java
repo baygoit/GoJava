@@ -2,48 +2,65 @@ package ua.dborisenko.kickstarter.dao;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Matchers;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Project;
-@Ignore
-@RunWith(MockitoJUnitRunner.class)
+
+
+@ContextConfiguration(locations = { "classpath:testApplicationContext.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)
 public class ProjectDaoTest {
 
-    @Mock
-    private JdbcTemplate jdbcTemplate;
-    @Mock
-    private InvestmentDao investmentDao;
-    @InjectMocks 
+    @Autowired
     private ProjectDao projectDao;
-    
+    @Autowired
+    private CategoryDao categoryDao;
+
     @Test
-    public void getAllForCategoryTest()  {
+    public void getAllForCategoryTest() {
         Category category = new Category();
-        category.setId(1);
+        categoryDao.add(category);
+        Project project = new Project();
+        project.setCategory(category);
+        project.setName("testname");
+        project.setDescription("testdescription");
+        project.setHistory("testhistory");
+        project.setVideoUrl("testvideourl");
+        project.setDaysLeft(10);
+        projectDao.add(project);
         projectDao.getAllForCategory(category);
-//        verify(jdbcTemplate).query(eq(ProjectDao.GET_ALL_BY_CATEGORY_QUERY), eq(new Object[] { 1 }), Matchers.any(ProjectRowMapper.class));
+        assertThat(category.getProjects().isEmpty(), is(false));
+        for (Project currentProject : category.getProjects()) {
+            assertThat(currentProject.getName(), is("testname"));
+            assertThat(currentProject.getDescription(), is("testdescription"));
+            assertThat(currentProject.getHistory(), is("testhistory"));
+            assertThat(currentProject.getVideoUrl(), is("testvideourl"));
+            assertThat(currentProject.getDaysLeft(), is(10));
+        }
     }
-    
+
     @Test
     public void getByIdTest() {
+        Category category = new Category();
+        categoryDao.add(category);
+        Project project = new Project();
+        project.setCategory(category);
+        project.setName("testname");
+        project.setDescription("testdescription");
+        project.setHistory("testhistory");
+        project.setVideoUrl("testvideourl");
+        project.setDaysLeft(10);
+        projectDao.add(project);
         projectDao.getById(1);
-//        verify(jdbcTemplate).queryForObject(eq(ProjectDao.GET_BY_ID_QUERY), eq(new Object[] { 1 }), Matchers.any(ProjectRowMapper.class));
+        assertThat(project.getName(), is("testname"));
+        assertThat(project.getDescription(), is("testdescription"));
+        assertThat(project.getHistory(), is("testhistory"));
+        assertThat(project.getDaysLeft(), is(10));
     }
 }
-
