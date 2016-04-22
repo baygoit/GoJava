@@ -9,15 +9,15 @@
 <body>
 	<b>Error 404!!!</b>
 	<c:choose>
-		<c:when test="${categoryName != null}">
+		<c:when test="${categoryTestId == -1}">
 			<p>
-				Attention!!! Category <b>${categoryName}</b> doesn't exist!!!
+				Attention!!! Category with id <b>${categoryId}</b> doesn't exist!!!
 			</p>
 			<br />
 		</c:when>
 		<c:otherwise>
 			<p>
-				Attention!!! Project <b>${projectName}</b> doesn't exist!!!
+				Attention!!! Project with id <b>${projectId}</b> doesn't exist!!!
 			</p>
 			<br />
 		</c:otherwise>

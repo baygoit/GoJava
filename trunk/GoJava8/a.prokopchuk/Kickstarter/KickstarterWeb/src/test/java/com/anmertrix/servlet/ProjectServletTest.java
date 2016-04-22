@@ -236,7 +236,16 @@ public class ProjectServletTest {
 		when(projectDao.projectExists(anyInt())).thenReturn(false);
 		projectServlet.doGet(request, response);
 		assertThat(projectServlet.getSelectedProject(request, response), is(nullValue()));
-		verify(response, times(1)).sendError(HttpServletResponse.SC_NOT_FOUND);
 		verify(questionDao, never()).getQuestionsByProjectId(anyInt());
 	}
+	
+	@Test
+	public void testSelectedProjectNotFoundProject() throws ServletException, IOException {
+		when(request.getParameter("projectId")).thenReturn("233");
+		when(projectDao.projectExists(anyInt())).thenReturn(false);
+		projectServlet.getSelectedProject(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_NOT_FOUND);
+	}
+	
+	
 }

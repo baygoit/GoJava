@@ -10,6 +10,11 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12 text-center">
+                	<ul class="breadcrumb">
+                		<li><a href="/">Home</a></li>
+						<li><a href="categories">Categories</a></li>
+						<li><a href="projects?categoryId=${categoryId}">Projects</a></li>
+					</ul>
 					<h2>${project.name}</h2>
 					<div class="info_block">
 						<p><span>Required budget:</span> ${project.requiredBudget}</p>
@@ -19,7 +24,7 @@
 					</div>
 					
 					<ul id="myTab" class="nav nav-tabs nav-justified">
-						<li class="active"><a href="#question_block">Question & Answer</a></li>
+						<li class="active"><a href="#question_block">Question/Answer</a></li>
 						<li><a href="#history_block">History</a></li>
   						<li><a href="#payment_block">Payment</a></li>
   						<li><a href="#reward_block">Reward</a></li>
@@ -43,8 +48,8 @@
 								<div class="row">
 									<div class="form-group col-sm-8">
 										<input required type="text" class="form-control" id="inputQuestion"
-											name="question" pattern="[A-Za-zА-Яа-яЁё0-9\s]{2,500}" placeholder="Enter your question...">
-										<input id="projectId" type="hidden" name="projectId" value="${project.id}" />
+											name="question" maxlength="400" placeholder="Enter your question...">
+										<input type="hidden" name="projectId" value="${project.id}" />
 										<input type="hidden" name="requested_action" value="ADD_QUESTION"/>
 									</div>
 									<div class="question_submit form-group col-sm-2">
@@ -68,19 +73,19 @@
 							</div>
 							<form name="add_payment" class="form-horizontal" action="" method="POST" accept-charset="utf-8">
 								<input type="hidden" name="requested_action" value="ADD_PAYMENT"/>
-								<input id="projectId" type="hidden" name="projectId" value="${project.id}" />
+								<input type="hidden" name="projectId" value="${project.id}" />
 								<div class="row">
 									<div class="form-group col-sm-3">
-										<input required type="text" class="form-control" id="inputCardholderName"
-											name="cardholder_name" pattern="[A-Za-zА-Яа-яЁё0-9\s]{2,50}" placeholder="Your name...">
+										<input required type="text" class="form-control"
+											name="cardholder_name" pattern="[A-Za-zА-Яа-яЁё0-9\s]{2,50}" placeholder="Your name..." title="От 2 до 50 букв включительно!">
 									</div>
 									<div class="form-group col-sm-3">
-										<input required type="text" pattern="[0-9]{13,16}" class="form-control" id="inputCardNumber"
-											name="card_number" placeholder="Your card number...">
+										<input required type="text" pattern="[0-9]{13,16}" class="form-control"
+											name="card_number" placeholder="Your card number..." title="Только цифры, oт 13 до 16 цифр включительно!">
 									</div>
 									<div class="form-group col-sm-3">
-										<input required type="number" max='2147483647' min='1' class="form-control" id="inputAmount"
-											name="payment_amount" placeholder="Payment amount...">
+										<input required type="number" max='1000000' min='1' class="form-control"
+											name="payment_amount" placeholder="Payment amount..." title="Только цифры, oт 1 до 1000000 включительно!">
 									</div>
 									<div class="payment_submit form-group col-sm-2">
 										<button type="submit" class="btn btn-default">Invest</button>
@@ -108,14 +113,14 @@
 												<button type="button" class="close" data-dismiss="modal"
 													aria-hidden="true">&times;</button>
 												<form name="add_reward" class="form-horizontal" action="" method="POST" accept-charset="utf-8">
-													<input id="projectId" type="hidden" name="projectId" value="${project.id}" />
+													<input type="hidden" name="projectId" value="${project.id}" />
 													<input type="hidden" name="requested_action" value="ADD_PAYMENT" />
-													<input type="hidden" id="inputAmount" name="payment_amount" value="${reward.amount}">
+													<input type="hidden" name="payment_amount" value="${reward.amount}">
 													<div class="modal-body">
-														<input required type="text" class="form-control form-group-item" id="inputCardholderName"
-															name="cardholder_name" pattern="[A-Za-zА-Яа-яЁё0-9\s]{2,50}"  placeholder="Your name...">
-														<input required type="text" class="form-control form-group-item" id="inputCardNumber"
-															name="card_number" pattern="[0-9]{13,16}" placeholder="Your card number...">
+														<input required type="text" class="form-control form-group-item"
+															name="cardholder_name" pattern="[A-Za-zА-Яа-яЁё0-9\s]{2,50}"  placeholder="Your name..." title="От 2 до 50 букв включительно!">
+														<input required type="text" class="form-control form-group-item"
+															name="card_number" pattern="[0-9]{13,16}" placeholder="Your card number..." title="Только цифры, oт 13 до 16 цифр включительно!">
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -129,7 +134,7 @@
 							</div>
 						</div>
 						<div id="video_block" class="video_block tab-pane fade">
-							<iframe width="560" height="315" src="${project.url}" frameborder="0" allowfullscreen></iframe>
+							<iframe width="560" height="315" src="${project.url}"></iframe>
 						</div>
 					</div>
 				</div>

@@ -1,6 +1,9 @@
 package ua.nenya.domain;
 
+
+
 public class Quote {
+	private int id;
 	private String name;
 
 	public String getName() {
@@ -9,6 +12,14 @@ public class Quote {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	

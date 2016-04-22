@@ -16,20 +16,27 @@ public class InvestmentServlet extends CommonServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String projectName = request.getParameter("projectName");
-		request.setAttribute("projectName", projectName);
-		if (!getProjectDao().isProjectExist(projectName)) {
+		String projectId = request.getParameter("projectId");
+		int proId = 0;
+		try {
+			proId = Integer.parseInt(projectId);
+		} catch (NumberFormatException e) {
+			request.setAttribute("Id", projectId);
+			request.setAttribute("TestId", -1);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		}
+		request.setAttribute("projectId", proId);
+		
+		if(!getProjectDao().isProjectExist(proId)){
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
 
-		String categoryName = request.getParameter("categoryName");
-		request.setAttribute("categoryName", categoryName);
-
-		Project project = getProjectDao().getProjectByName(projectName);
+		Project project = getProjectDao().getProject(proId);
 		request.setAttribute("project", project);
 
-		List<Reward> rewards = getInvestmentDao().getRewards(projectName);
+		List<Reward> rewards = getRewardDao().getRewards(proId);
 		request.setAttribute("rewards", rewards);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/investment.jsp");
@@ -39,16 +46,32 @@ public class InvestmentServlet extends CommonServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String amountString = request.getParameter("amount");
-		String projectName = request.getParameter("projectName");
-		String categoryName = request.getParameter("categoryName");
+		String projectId = request.getParameter("projectId");
+		int proId = 0;
+		try {
+			proId = Integer.parseInt(projectId);
+		} catch (NumberFormatException e) {
+			request.setAttribute("Id", projectId);
+			request.setAttribute("TestId", -1);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			return;
+		}
 		if ("0".equals(amountString)) {
 			String investmentString = request.getParameter("investment");
-			getInvestmentDao().writeIvestmentInProject(projectName, Integer.parseInt(investmentString));
+			int investment = 0;
+			try{
+			investment = Integer.parseInt(investmentString);
+			}catch(NumberFormatException e){
+				request.setAttribute("investment", -1);
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				return;
+			}
+			getInvestmentDao().writePaymentInProject(proId, investment);
 		} else {
-			getInvestmentDao().writeIvestmentInProject(projectName, Integer.parseInt(amountString));
+			getInvestmentDao().writePaymentInProject(proId, Integer.parseInt(amountString));
 		}
 
-		response.sendRedirect("projectServlet?categoryName=" + categoryName + "&projectName=" + projectName);
+		response.sendRedirect("projectServlet?projectId=" + proId);
 	}
 
 }

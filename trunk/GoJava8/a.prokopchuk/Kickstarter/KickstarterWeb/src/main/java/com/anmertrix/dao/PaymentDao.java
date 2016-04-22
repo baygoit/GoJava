@@ -10,4 +10,6 @@ public interface PaymentDao {
 
 	void insertPayment(Payment payment);
 
+	List<Long> getGatheredBudgets();
+
 }

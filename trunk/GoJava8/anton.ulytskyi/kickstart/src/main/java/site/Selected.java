@@ -18,33 +18,72 @@ import java.util.List;
  
 public class Selected extends HttpServlet {
 
-	//public static BaseOfProjects projects = new BaseOfProjects();
+	private static final int MAX_INVEST = 100000;
+	
 	
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
 		try {
-			String id = req.getQueryString();
-        PrintWriter out = resp.getWriter();
+		String id = req.getQueryString();
+        
        
         SQLLoader base = new SQLLoader();
         BaseOfProjects kickstarter;
+		kickstarter = base.reload();
 		
-			kickstarter = base.reload();
-		
-        String profile = kickstarter.findProfile(Integer.parseInt(id));
+        List<String> project = kickstarter.findProfile(Integer.parseInt(id));
         
-        out.print("<h1>"+FirstPage.DECORATION+"</h1>");
-       
-        	out.println(profile);
+      // if make a comment from here to other comment - my Servlet work but can`t invest or 
+      // leave a questions, how to fix it?
         
-        out.print("<h1>"+FirstPage.DECORATION+"</h1>");
-        out.print("<a href=\"/kickstart-0.0.1-SNAPSHOT/categories\">previous</a>");
+        String amount = req.getParameter("invest");
+        String author = req.getParameter("author");
+        String text = req.getParameter("text");
+        
+        SQLManager broker = new SQLManager();
+        
+        if(isWriteNumber(amount)){
+        	int cash = Integer.parseInt(amount);
+        	broker.invest(cash, Integer.parseInt(id));
+        }
+        
+        if((!author.equals("author") && !author.equals(null) && !author.equals(""))&&
+        		(!text.equals("text") || !text.equals(null) || !text.equals(""))){
+        	broker.say(Integer.parseInt(amount), author, text);
+        }
+        //!!!
+       // if I comment till that it`s work, but now i get 505 - what can I do?
+        
+        req.setAttribute("project", project);
+      	req.getRequestDispatcher("Project.jsp").forward(req, resp);
+      	 
         } catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
+    @Override
+    public void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+    	
+    
+		doGet(req, resp);
+	}
+
+	private boolean isWriteNumber(String amount) {
+		int test;
+		try {
+		  test = Integer.parseInt(amount);
+		} catch (NumberFormatException e) {
+			return false; 
+		}
+		if(test>0 && test<MAX_INVEST){
+		return true;
+		}else{
+			return false;
+		}
+	}
 
 }

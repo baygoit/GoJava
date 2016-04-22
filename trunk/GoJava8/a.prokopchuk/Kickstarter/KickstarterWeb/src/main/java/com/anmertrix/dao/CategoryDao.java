@@ -9,5 +9,7 @@ public interface CategoryDao {
 	Category getCategory(int index);
 	
 	List<Category> getCategories();
+
+	boolean categoryExists(int categoryId);
 	
 }

@@ -20,10 +20,20 @@ public class Categories extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
  
-		SQLLoader base = new SQLLoader();
     	try {
+		SQLLoader base = new SQLLoader();
+    	
 			List<String> categories = base.getCategories();
-		
+			
+			 req.setAttribute("categories", categories);
+	    	 req.getRequestDispatcher("Categories.jsp").forward(req, resp);
+	
+       } catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+      
+    	/**
         PrintWriter out = resp.getWriter();
         out.print("<h1>"+FirstPage.DECORATION+"</h1>");
         out.print("<h1>Categories</h1>");
@@ -36,12 +46,7 @@ public class Categories extends HttpServlet {
         
         out.print("<h1>"+FirstPage.DECORATION+"</h1>");
         out.print("<a href=\"/kickstart-0.0.1-SNAPSHOT/\">previous</a>");
-       } catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-      
- 
+        */
     }
 
 }

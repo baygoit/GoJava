@@ -17,8 +17,8 @@ public class BaseOfProjects {
 		}
 		return categoryProjects;
 	}
-	public String findProfile(int id){
-		String result = "project not found";
+	public List<String> findProfile(int id){
+		List<String> result = new ArrayList<>();
 		for(Project p:projects){
 			if(id==p.getId()){
 				result = p.openProfile(id);

@@ -1,4 +1,4 @@
-CREATE TABLE QUOTES (name VARCHAR(200) NOT NULL UNIQUE);
+CREATE TABLE QUOTES (id SERIAL PRIMARY KEY, name VARCHAR(200) NOT NULL UNIQUE);
 INSERT INTO QUOTES (name) VALUES ('Healthy curiosity is a great key in innovation.');
 INSERT INTO QUOTES (name) VALUES ('Everyone here has the sense that right now is one of those moments when we are influencing the future.');
 INSERT INTO QUOTES (name) VALUES ('Great things in business are never done by one person. They are done by a team of people.');

@@ -1,6 +1,5 @@
 package ua.nenya.servlets;
 
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -24,17 +23,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import ua.nenya.dao.InvestmentDao;
+import ua.nenya.dao.PaymentDao;
 import ua.nenya.dao.ProjectDao;
+import ua.nenya.dao.RewardDao;
 import ua.nenya.domain.Project;
-import ua.nenya.domain.Question;
 import ua.nenya.domain.Reward;
 
 @RunWith(MockitoJUnitRunner.class)
 public class InvestmentServletTest {
 
 	@Mock
-	private InvestmentDao investmentDao;
+	private PaymentDao investmentDao;
+	@Mock
+	private RewardDao rewardDao;
 	@Mock
 	private ProjectDao projectDao;
 	@Mock
@@ -45,12 +46,11 @@ public class InvestmentServletTest {
 	private InvestmentServlet invesmentServlet = spy(InvestmentServlet.class);
 	
 	@Test
-	public void testDoGetTrue() throws ServletException, IOException {
-		when(request.getParameter("projectName")).thenReturn("Project");
-		when(projectDao.isProjectExist("Project")).thenReturn(true);
-		when(request.getParameter("categoryName")).thenReturn("Film");
-		when(projectDao.getProjectByName("Project")).thenReturn(new Project());
-		when(investmentDao.getRewards("Project")).thenReturn(new ArrayList<Reward>());
+	public void testDoGetProjectIdValidProjectExists() throws ServletException, IOException {
+		when(request.getParameter("projectId")).thenReturn("1");
+		when(projectDao.isProjectExist(1)).thenReturn(true);
+		when(projectDao.getProject(1)).thenReturn(new Project());
+		when(rewardDao.getRewards(1)).thenReturn(new ArrayList<Reward>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);
@@ -61,14 +61,12 @@ public class InvestmentServletTest {
 		invesmentServlet.doGet(request, response);
 		verify(dispatcher).forward(request, response);
 	}
-
 	@Test
-	public void testDoGetFalse() throws ServletException, IOException {
-		when(request.getParameter("projectName")).thenReturn("Project");
-		when(projectDao.isProjectExist("Project")).thenReturn(false);
-		when(request.getParameter("categoryName")).thenReturn("Film");
-		when(projectDao.getProjectByName("Project")).thenReturn(new Project());
-		when(investmentDao.getRewards("Project")).thenReturn(new ArrayList<Reward>());
+	public void testDoGetProjectIdInvalidProjectExists() throws ServletException, IOException {
+		when(request.getParameter("projectId")).thenReturn("uio");
+		when(projectDao.isProjectExist(1)).thenReturn(true);
+		when(projectDao.getProject(1)).thenReturn(new Project());
+		when(rewardDao.getRewards(1)).thenReturn(new ArrayList<Reward>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);
@@ -78,9 +76,52 @@ public class InvestmentServletTest {
 
 		invesmentServlet.doGet(request, response);
 	}
-	@Ignore
 	@Test
-	public void testDoPost() {
+	public void testDoGetProjectIdValidProjectDoesntExist() throws ServletException, IOException {
+		when(request.getParameter("projectId")).thenReturn("1");
+		when(projectDao.isProjectExist(1)).thenReturn(false);
+		when(projectDao.getProject(1)).thenReturn(new Project());
+		when(rewardDao.getRewards(1)).thenReturn(new ArrayList<Reward>());
+
+		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
+		ServletContext context = mock(ServletContext.class);
+		
+		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
+		doReturn(context).when(invesmentServlet).getServletContext();
+
+		invesmentServlet.doGet(request, response);
+	}
+	
+	@Test
+	public void testDoPostProjectIdValidAmountIsntO() throws ServletException, IOException {
+		when(request.getParameter("amount")).thenReturn("100");
+		when(request.getParameter("projectId")).thenReturn("1");
+		invesmentServlet.doPost(request, response);
+		verify(investmentDao).writePaymentInProject(1, 100);
+		verify(response).sendRedirect(anyString());
+	}
+	@Test
+	public void testDoPostProjectIdValidAmountIsOInvestmentValid() throws ServletException, IOException {
+		when(request.getParameter("amount")).thenReturn("0");
+		when(request.getParameter("projectId")).thenReturn("1");
+		when(request.getParameter("investment")).thenReturn("100");
+		invesmentServlet.doPost(request, response);
+		verify(investmentDao).writePaymentInProject(1, 100);
+		verify(response).sendRedirect(anyString());
+	}
+	
+	@Test
+	public void testDoPostProjectIdValidAmountIsOInvestmentInvalid() throws ServletException, IOException {
+		when(request.getParameter("amount")).thenReturn("0");
+		when(request.getParameter("projectId")).thenReturn("1");
+		when(request.getParameter("investment")).thenReturn("invalid");
+		invesmentServlet.doPost(request, response);
 	}
 
+	@Test
+	public void testDoPostProjectIdInvalid() throws ServletException, IOException {
+		when(request.getParameter("amount")).thenReturn("100");
+		when(request.getParameter("projectId")).thenReturn("invalid");
+		invesmentServlet.doPost(request, response);
+	}
 }

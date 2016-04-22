@@ -1,44 +1,52 @@
 package ua.nenya.dao.db;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Matchers.anyString;
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyObject;
 
-import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
 
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.ContextHierarchy;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ua.nenya.domain.Quote;
 
-@RunWith(MockitoJUnitRunner.class)
-public class QuoteDaoDbImplTest {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextHierarchy({
+	@ContextConfiguration(locations="classpath*:/aplicationContextTest.xml"),
+	  @ContextConfiguration(locations="classpath*:/QuoteTest.hbm.xml")
+	})
+public class QuoteDaoDbImplTest{
 
-	@Mock
-	private JdbcTemplate jdbcTemplate;
+	private EmbeddedDatabase db;
+	private QuoteDaoImpl quoteDao = new QuoteDaoImpl();
+	
+	@Before
+	public void setUp() {
+		db = new EmbeddedDatabaseBuilder()
+	    		.setType(EmbeddedDatabaseType.H2)
+	    		.addScript("/insertQuote.sql")
+	    		.build();
+	}
 
-	@InjectMocks
-	private QuoteDaoImpl quoteDao;
-
-	@SuppressWarnings("unchecked")
+	@After
+	public void tearDown() {
+		db = new EmbeddedDatabaseBuilder()
+	    		.setType(EmbeddedDatabaseType.H2)
+	    		.addScript("/deleteQuote.sql")
+	    		.build();
+	}
+	
 	@Test
 	public void testGetRandomQuote() throws SQLException {
-		Quote quote = new Quote();
-		quote.setName("Some quote");
-
-		when(jdbcTemplate.queryForObject(anyString(), (RowMapper<Quote>) anyObject())).thenReturn(quote);
-		Quote testQuote = quoteDao.getRandomQuote();
-		assertThat(testQuote.getName(), is("Some quote"));
-
+		assertNotNull(quoteDao.getRandomQuote());
 	}
 
 }

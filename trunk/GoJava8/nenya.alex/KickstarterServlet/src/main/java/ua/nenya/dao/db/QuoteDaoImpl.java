@@ -1,23 +1,41 @@
 package ua.nenya.dao.db;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import java.util.Random;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.springframework.stereotype.Repository;
 
 import ua.nenya.dao.QuoteDao;
 import ua.nenya.domain.Quote;
+import ua.nenya.util.HibernateUtil;
 
 @Repository
 public class QuoteDaoImpl implements QuoteDao {
-	private static final String GET_QUOTE = "SELECT name FROM quotes ORDER BY random() LIMIT(1)";
-
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-
+	
+	
 	@Override
 	public Quote getRandomQuote() {
-		return jdbcTemplate.queryForObject(GET_QUOTE, new BeanPropertyRowMapper<Quote>(Quote.class));
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Quote quote = null;
+		Transaction transaction = null;
+		try (Session session = sessionFactory.openSession()) {
+			transaction = session.beginTransaction();
+			long count = (long) session.createCriteria(Quote.class).setProjection(Projections.rowCount())
+					.uniqueResult();
+			Random random = new Random();
+			int randomNumber = random.nextInt((int) count);
+			quote = session.get(Quote.class, randomNumber + 1);
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null)
+				transaction.rollback();
+			e.printStackTrace();
+		}
+		return quote;
 	}
 
 }

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:include page="header.jsp">
-	<jsp:param value="Category" name="title" />
+	<jsp:param value="Categories" name="title" />
 </jsp:include>
 
 <div class="categories">
@@ -13,7 +13,7 @@
                 	<h1 class="brand-before">
                         <small>Quote of the day</small>
                     </h1>
-                    <h3 class="brand-name">${quote.quoteText}</h3>
+                    <h3 class="brand-name quoteId-${quote.id}">${quote.text}</h3>
                     <h2><small>(${quote.author})</small></h2>
 					<ul>
 						<c:forEach var="category" items="${categories}">

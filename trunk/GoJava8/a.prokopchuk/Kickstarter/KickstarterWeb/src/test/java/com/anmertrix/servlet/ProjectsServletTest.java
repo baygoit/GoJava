@@ -25,6 +25,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.anmertrix.dao.CategoryDao;
+import com.anmertrix.dao.PaymentDao;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.domain.Category;
 import com.anmertrix.servlet.ProjectsServlet;
@@ -41,6 +42,8 @@ public class ProjectsServletTest {
 	@Mock
 	private ProjectDao projectDao;
 	@Mock
+	private PaymentDao paymentDao;
+	@Mock
 	private HttpServletRequest request;
 	@Mock
 	private HttpServletResponse response;
@@ -56,9 +59,10 @@ public class ProjectsServletTest {
 		when(request.getParameter("categoryId")).thenReturn("3");
 		when(categoryDao.getCategory(3)).thenReturn(new Category());
 		when(projectDao.getProjectsByCategoryId(3)).thenReturn(new ArrayList<>());
+		when(paymentDao.getGatheredBudgets()).thenReturn(new ArrayList<>());
 		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
 		doReturn(context).when(projectsPage).getServletContext();
-
+		when(categoryDao.categoryExists(anyInt())).thenReturn(true);
 		projectsPage.doGet(request, response);
 
 		verify(dispatcher).forward(any(), any());
@@ -72,10 +76,17 @@ public class ProjectsServletTest {
 	
 	@Test
 	public void testDoGetCategory() throws ServletException, IOException {
-		when(categoryDao.getCategory(anyInt())).thenReturn(null);
 		when(request.getParameter("categoryId")).thenReturn("3");
+		when(categoryDao.categoryExists(anyInt())).thenReturn(false);
 		projectsPage.doGet(request, response);
-		verify(response, times(1)).sendError(HttpServletResponse.SC_NOT_FOUND);
 		assertThat(projectsPage.getSelectedCategory(request, response), is(nullValue()));
+	}
+	
+	@Test
+	public void testDoGetCategoryNotFound() throws ServletException, IOException {
+		when(request.getParameter("categoryId")).thenReturn("34");
+		when(categoryDao.categoryExists(anyInt())).thenReturn(false);
+		projectsPage.getSelectedCategory(request, response);
+		verify(response, times(1)).sendError(HttpServletResponse.SC_NOT_FOUND);
 	}
 }

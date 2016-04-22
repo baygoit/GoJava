@@ -18,6 +18,7 @@ public class CategoryDaoSql implements CategoryDao {
 
 	private static final String SELECT_CATEGORIES = "SELECT id, name FROM category";
 	private static final String SELECT_CATEGORY_BY_ID = "SELECT id, name FROM category WHERE id=?";
+	private static final String CATEGORY_EXISTS = "SELECT count(*) FROM category WHERE id=?";
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -34,6 +35,12 @@ public class CategoryDaoSql implements CategoryDao {
 	@Override
 	public Category getCategory(int categoryId) {
 		return jdbcTemplate.queryForObject(SELECT_CATEGORY_BY_ID, new Object[]{categoryId}, new CategoryRowMapper());
+	}
+	
+	@Override
+	public boolean categoryExists(int categoryId){
+		int count = jdbcTemplate.queryForObject(CATEGORY_EXISTS, new Object[]{categoryId}, Integer.class);
+		return count > 0;
 	}
 
 	@Override

@@ -21,17 +21,19 @@ public class FirstPage extends HttpServlet {
     	SQLQuotes baseOfQuotes = new SQLQuotes();
     	String quote = baseOfQuotes.showQuote();
     	
+    	 req.setAttribute("quote", quote);
+    	 
+         req.getRequestDispatcher("Quote.jsp").forward(req, resp);
+    
+    	/**
         PrintWriter out = resp.getWriter();
         out.print("<h1>"+DECORATION+"</h1>");
         out.print("<h1>"+quote+"</h1>");
         out.print("<h1>"+DECORATION+"</h1>");
         
         out.print("<a href=\"/kickstart-0.0.1-SNAPSHOT/categories\">Go!</a>");
-        
-        
-        
-      
- 
+        */
+  
     }
 
 }

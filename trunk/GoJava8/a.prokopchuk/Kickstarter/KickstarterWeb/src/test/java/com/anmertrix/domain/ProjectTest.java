@@ -45,7 +45,7 @@ public class ProjectTest {
 	@Test
 	public void setGetCollectedSumTest() {
 		project.setGatheredBudget(100);
-		assertThat(project.getGatheredBudget(), is(100));
+		assertThat(project.getGatheredBudget(), is(100L));
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class ProjectTest {
 		assertThat(project.getName(), is("test1"));
 		assertThat(project.getDescription(), is("test2"));
 		assertThat(project.getRequiredBudget(), is(1));
-		assertThat(project.getGatheredBudget(), is(2));
+		assertThat(project.getGatheredBudget(), is(2L));
 		assertThat(project.getDaysLeft(), is(3));
 		assertThat(project.getHistory(), is("test3"));
 	}

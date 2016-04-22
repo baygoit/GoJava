@@ -41,11 +41,12 @@ public class ProjectsServletTest {
 	@InjectMocks
 	private ProjectsServlet projectsServlet = spy(ProjectsServlet.class);
 	
+	
 	@Test
-	public void testDoGetCategoryExists() throws ServletException, IOException {
-		when(request.getParameter("categoryName")).thenReturn("Film");
-		when(categoryDao.isCategoryExist("Film")).thenReturn(true);
-		when(projectDao.getProjects("Film")).thenReturn(new ArrayList<Project>());
+	public void testDoGetIdIsValidCategoryExists() throws ServletException, IOException {
+		when(request.getParameter("categoryId")).thenReturn("1");
+		when(categoryDao.isCategoryExist(1)).thenReturn(true);
+		when(projectDao.getProjects(1)).thenReturn(new ArrayList<Project>());
 
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
@@ -57,12 +58,27 @@ public class ProjectsServletTest {
 		projectsServlet.doGet(request, response);
 		verify(dispatcher).forward(request, response);
 	}
+	@Test
+	public void testDoGetIdIsInvalidCategoryExists() throws ServletException, IOException {
+		when(request.getParameter("categoryId")).thenReturn("invalid");
+		when(categoryDao.isCategoryExist(1)).thenReturn(true);
+		when(projectDao.getProjects(1)).thenReturn(new ArrayList<Project>());
+
+
+		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
+		ServletContext context = mock(ServletContext.class);
+		
+		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
+		doReturn(context).when(projectsServlet).getServletContext();
+
+		projectsServlet.doGet(request, response);
+	}
 	
 	@Test
 	public void testDoGetCategoryDoesntExist() throws ServletException, IOException {
-		when(request.getParameter("categoryName")).thenReturn("Film");
-		when(categoryDao.isCategoryExist("Film")).thenReturn(false);
-		when(projectDao.getProjects("Film")).thenReturn(new ArrayList<Project>());
+		when(request.getParameter("categoryId")).thenReturn("1");
+		when(categoryDao.isCategoryExist(1)).thenReturn(false);
+		when(projectDao.getProjects(1)).thenReturn(new ArrayList<Project>());
 		
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);

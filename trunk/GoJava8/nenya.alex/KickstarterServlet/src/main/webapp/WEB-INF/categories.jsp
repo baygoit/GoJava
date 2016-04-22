@@ -10,7 +10,7 @@
 	<hr />
 	<c:forEach var="category" items="${categories}">
 		<p>
-			<a href="projectsServlet?categoryName=${category.name}">${category.name}</a>
+			<a href="projectsServlet?categoryId=${category.id}">${category.name}</a>
 		</p>
 	</c:forEach>
 

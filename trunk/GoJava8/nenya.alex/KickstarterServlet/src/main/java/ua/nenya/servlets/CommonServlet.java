@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ua.nenya.dao.CategoryDao;
-import ua.nenya.dao.InvestmentDao;
+import ua.nenya.dao.PaymentDao;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.dao.QuestionDao;
 import ua.nenya.dao.QuoteDao;
+import ua.nenya.dao.RewardDao;
 
 public class CommonServlet extends HttpServlet {
 
@@ -26,7 +27,9 @@ public class CommonServlet extends HttpServlet {
 	@Autowired
 	private QuestionDao questionDao;
 	@Autowired
-	private InvestmentDao investmentDao;
+	private PaymentDao investmentDao;
+	@Autowired
+	private RewardDao rewardDao;
 	
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
@@ -48,9 +51,12 @@ public class CommonServlet extends HttpServlet {
 		return questionDao;
 	}
 
-	public InvestmentDao getInvestmentDao() {
+	public PaymentDao getInvestmentDao() {
 		return investmentDao;
 	}
 
-	
+	public RewardDao getRewardDao() {
+		return rewardDao;
+	}
+
 }

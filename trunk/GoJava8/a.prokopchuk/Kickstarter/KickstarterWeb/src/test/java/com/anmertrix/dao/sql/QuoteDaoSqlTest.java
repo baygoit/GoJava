@@ -55,7 +55,7 @@ public class QuoteDaoSqlTest {
 		when(resultSet.getString("author")).thenReturn("author");
 		when(resultSet.getString("text")).thenReturn("quote");
 		Quote quote = quoteDaoSql.getRandomQuote();
-		String quoteText = quote.getQuoteText() + " (" + quote.getAuthor() + ")";
+		String quoteText = quote.getText() + " (" + quote.getAuthor() + ")";
 		assertThat(quoteText, is("quote (author)"));
 		verify(dataSource).getConnection();
 	}

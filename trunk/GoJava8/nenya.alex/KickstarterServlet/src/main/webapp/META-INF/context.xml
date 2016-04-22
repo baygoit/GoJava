@@ -1,29 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiResourceLocking="true">
             <Resource 
-              name="jdbc/Kickstarter" 
-              auth="Container"
-              type="javax.sql.DataSource" 
-              username="postgres" 
-              password="111111"
-              driverClassName="org.postgresql.Driver"
-              url="jdbc:postgresql://127.0.0.1:5432/Kickstarter"
-              validationQuery="select 1"
-              maxActive="10" 
-              maxIdle="4"
-             />
-</Context>
-<!--Context antiResourceLocking="true">
-            <Resource 
-              name="jdbc/dc7jic6f3ikj0a" 
+              name="jdbc/dataSource" 
               auth="Container"
               type="javax.sql.DataSource" 
               username="sfdnpqghfnwasj" 
               password="3ePn6uUN5bWh2r0J0p_0UMObWy"
               driverClassName="org.postgresql.Driver"
-              url="jdbc:postgres://sfdnpqghfnwasj:3ePn6uUN5bWh2r0J0p_0UMObWy@ec2-54-83-3-38.compute-1.amazonaws.com:5432/dc7jic6f3ikj0a"
+              url="jdbc:postgresql://ec2-54-83-3-38.compute-1.amazonaws.com:5432/dc7jic6f3ikj0a?user=sfdnpqghfnwasj&amp;password=3ePn6uUN5bWh2r0J0p_0UMObWy&amp;ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
               validationQuery="select 1"
               maxActive="10" 
               maxIdle="4"
+              maxWaitMillis="10000"
              />
-</Context-->
+</Context>
