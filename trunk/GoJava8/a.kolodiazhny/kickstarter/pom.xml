@@ -17,8 +17,12 @@
         <tomcat.deploy.username>tomcat</tomcat.deploy.username>
         <tomcat.deploy.password>tomcat</tomcat.deploy.password>
     </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.1.0.Final</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>

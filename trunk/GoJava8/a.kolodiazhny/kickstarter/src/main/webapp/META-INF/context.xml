@@ -9,8 +9,8 @@
               driverClassName="org.postgresql.Driver"
               url="jdbc:postgresql://kickstarterdb.c6tpu7dauy4w.us-west-2.rds.amazonaws.com:5432/kickstarterDb?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"
               validationQuery="select 1"
-              maxTotal="5"
-              minIdle="3"
-              maxIdle="4"/>
+              maxTotal="10"
+              minIdle="7"
+              maxIdle="10"/>
 </Context>
 

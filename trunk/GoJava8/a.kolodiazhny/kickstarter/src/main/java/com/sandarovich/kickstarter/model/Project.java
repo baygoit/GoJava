@@ -1,7 +1,7 @@
 package com.sandarovich.kickstarter.model;
 
 public class Project {
-    private int id;
+    private long id;
     private String name;
     private String description;
     private double requiredBudget;
@@ -10,11 +10,14 @@ public class Project {
     private String videoLink;
     private String history;
 
-    public int getId() {
+    public Project() {
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
