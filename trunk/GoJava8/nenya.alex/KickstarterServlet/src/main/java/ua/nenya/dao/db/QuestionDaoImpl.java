@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -46,7 +47,7 @@ public class QuestionDaoImpl implements QuestionDao {
 		Transaction transaction = null;
 
 		Question question = new Question();
-		question.setProjectId(projectId);
+		// question.setProjectId(projectId);
 		question.setName(stringQuestion);
 
 		int id = 0;
@@ -55,11 +56,35 @@ public class QuestionDaoImpl implements QuestionDao {
 			id = (int) session.save(question);
 			transaction.commit();
 		} catch (HibernateException e) {
-			if (transaction != null)
-				transaction.rollback();
 			e.printStackTrace();
+			if (transaction != null) {
+				transaction.rollback();
+			}
 		}
 		return id;
+	}
+
+	public List<Question> getByProjectName(String name) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Transaction transaction = null;
+		List<Question> questions = null;
+		try (Session session = sessionFactory.openSession()) {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("from Question q where q.project.name=:projectName");
+			query.setParameter("projectName", name);
+			questions = query.list();
+			transaction.commit();
+		} catch (HibernateException e) {
+			if (transaction != null) {
+				try {
+					transaction.rollback();
+				} catch (Exception te) {
+					te.printStackTrace();
+				}
+			}
+			throw e;
+		}
+		return questions;
 	}
 
 	public boolean isQuestionAbsent(int projectId, String question) {
