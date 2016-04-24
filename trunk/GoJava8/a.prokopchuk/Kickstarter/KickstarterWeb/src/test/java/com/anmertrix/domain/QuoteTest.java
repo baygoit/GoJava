@@ -18,10 +18,10 @@ public class QuoteTest {
 
 	@Test
 	public void getSetQuoteTest() {
-		quote.setId(3);
+		quote.setId(3L);
 		quote.setAuthor("author");
 		quote.setText("test");
-		assertThat(quote.getId(), is(3));
+		assertThat(quote.getId(), is(3L));
 		assertThat(quote.getText(), is("test"));
 		assertThat(quote.getAuthor(), is("author"));
 	}

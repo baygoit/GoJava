@@ -1,15 +1,11 @@
 package com.anmertrix.dao;
 
-import java.util.List;
-
 import com.anmertrix.domain.Payment;
 
 public interface PaymentDao {
 	
-	List<Payment> getPaymentsByProjectId(int project_id);
+	long getGatheredBudgetByProjectId(long projectId);
 
 	void insertPayment(Payment payment);
-
-	List<Long> getGatheredBudgets();
 
 }

@@ -1,7 +1,8 @@
 package com.anmertrix.servlet;
 
 import java.io.IOException;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,12 +17,9 @@ import com.anmertrix.dao.NoResultException;
 import com.anmertrix.dao.PaymentDao;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.dao.QuestionDao;
-import com.anmertrix.dao.RewardDao;
-import com.anmertrix.domain.Answer;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
-import com.anmertrix.domain.Reward;
 
 public class ProjectServlet extends HttpServlet {
 
@@ -34,8 +32,6 @@ public class ProjectServlet extends HttpServlet {
 	@Autowired
 	private ProjectDao projectDao;
 	@Autowired
-	private RewardDao rewardDao;
-	@Autowired
 	private PaymentDao paymentDao;
 	@Autowired
 	private AnswerDao answerDao;
@@ -47,18 +43,17 @@ public class ProjectServlet extends HttpServlet {
 		if (project == null) {
 			return;
 		}
-		List<Question> questions = questionDao.getQuestionsByProjectId(project.getId());
-		List<Answer> answers = answerDao.getAnswersByProjectId(project.getId());
-		List<Payment> payments = paymentDao.getPaymentsByProjectId(project.getId());
-		List<Reward> rewards = rewardDao.getRewards();
-		int categoryId = projectDao.getCategoryIdByProjectId(project.getId());
+		long projectId = project.getId();
+		project.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(projectId));
 		
+		LocalDate finalDate = project.getFinalDate().toLocalDate();
+		LocalDate today = LocalDate.now();
+		
+		if (today.isBefore(finalDate)) {
+			project.setDaysLeft((int) ChronoUnit.DAYS.between(today, finalDate));
+		}
+
 		request.setAttribute("project", project);
-		request.setAttribute("questions", questions);
-		request.setAttribute("answers", answers);
-		request.setAttribute("payments", payments);
-		request.setAttribute("rewards", rewards);
-		request.setAttribute("categoryId", categoryId);
 		getServletContext().getRequestDispatcher(PROJECT_JSP_PATH).forward(request, response);
 	}
 	
@@ -68,7 +63,7 @@ public class ProjectServlet extends HttpServlet {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 				return null;
 			}
-			return projectDao.getProjectById(Integer.parseInt(request.getParameter("projectId")));
+			return projectDao.getProjectById(Long.parseLong(request.getParameter("projectId")));
 		} catch (NumberFormatException e) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
@@ -93,11 +88,13 @@ public class ProjectServlet extends HttpServlet {
 			} else if (!validateProjectId(request, response)) {
 				throw new NoResultException("No project found");
 			}
+			long projectId = Long.parseLong(request.getParameter("projectId"));
+			Project project = projectDao.getProjectById(projectId);
 			Question question = new Question();
 			question.setQuestion(request.getParameter("question").trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"));
-			question.setProjectId(Integer.parseInt(request.getParameter("projectId")));
+			question.setProject(project);
 			questionDao.insertQuestion(question);
-			response.sendRedirect(PROJECT_OUT_URL + question.getProjectId());
+			response.sendRedirect(PROJECT_OUT_URL + projectId);
 		} catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } catch (NoResultException e) {
@@ -123,13 +120,15 @@ public class ProjectServlet extends HttpServlet {
 			} else if (!validateProjectId(request, response)) {
 				throw new NoResultException("No project found");
 			}
+			long projectId = Long.parseLong(request.getParameter("projectId"));
+			Project project = projectDao.getProjectById(projectId);
 			Payment payment = new Payment();
 			payment.setCardholderName(request.getParameter("cardholder_name").trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"));
 			payment.setCardNumber(request.getParameter("card_number").trim());
 			payment.setAmount(Integer.parseInt(request.getParameter("payment_amount").trim()));
-			payment.setProjectId(Integer.parseInt(request.getParameter("projectId")));
+			payment.setProject(project);
 			paymentDao.insertPayment(payment);
-			response.sendRedirect(PROJECT_OUT_URL + payment.getProjectId());
+			response.sendRedirect(PROJECT_OUT_URL + projectId);
 		} catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } catch (NoResultException e) {
@@ -162,7 +161,7 @@ public class ProjectServlet extends HttpServlet {
 	}
 	
 	private boolean validateProjectId(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException {
-		int projectId = Integer.parseInt(request.getParameter("projectId"));
+		long projectId = Long.parseLong(request.getParameter("projectId"));
 		return projectDao.projectExists(projectId);
 	}
 

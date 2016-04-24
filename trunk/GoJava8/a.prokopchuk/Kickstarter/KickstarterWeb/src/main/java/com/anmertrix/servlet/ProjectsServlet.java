@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.anmertrix.dao.CategoryDao;
+import com.anmertrix.dao.PaymentDao;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.domain.Category;
 import com.anmertrix.domain.Project;
@@ -26,6 +27,8 @@ public class ProjectsServlet extends HttpServlet {
 	private CategoryDao categoryDao;
 	@Autowired
 	private ProjectDao projectDao;
+	@Autowired
+	private PaymentDao paymentDao;
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -36,6 +39,10 @@ public class ProjectsServlet extends HttpServlet {
 		
 		List<Project> projects = projectDao.getProjectsByCategoryId(category.getId());
 		
+		for (Project project: projects) {
+			project.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(project.getId()));
+		}
+		
 		request.setAttribute("category", category);
         request.setAttribute("projects", projects);
         
@@ -45,7 +52,7 @@ public class ProjectsServlet extends HttpServlet {
 	
 	public Category getSelectedCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
-			int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+			long categoryId = Long.parseLong(request.getParameter("categoryId"));
 			if (!categoryDao.categoryExists(categoryId)) {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 				return null;

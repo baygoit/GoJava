@@ -11,14 +11,8 @@ public class QuestionTest {
 	
 	@Test
 	public void setGetIdTest() {
-		question.setId(22);
-		assertThat(question.getId(), is(22));
-	}
-	
-	@Test
-	public void setGetProjectIdTest() {
-		question.setProjectId(2);
-		assertThat(question.getProjectId(), is(2));
+		question.setId(22L);
+		assertThat(question.getId(), is(22L));
 	}
 	
 	@Test
