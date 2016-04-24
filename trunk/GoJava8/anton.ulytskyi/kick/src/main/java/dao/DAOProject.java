@@ -1,4 +1,4 @@
-package project;
+package dao;
 
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -12,30 +12,31 @@ import java.util.List;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
-public class SQLLoader {
+import domain.BaseOfProjects;
+import domain.Project;
 
-	Connection connection;
-	Statement statement;
+public class DAOProject {
+
 	public BaseOfProjects kickstarter = new BaseOfProjects();
 
 	public BaseOfProjects reload() throws ClassNotFoundException {
-
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = (Connection) DriverManager
-					.getConnection(
-							"jdbc:mysql://www.db4free.net:3306/kickbase?autoReconnect=true&useSSL=false",
-							"author", "xzxzzxzxcaa");
-			statement = (Statement) connection.createStatement();
+		Class.forName("com.mysql.jdbc.Driver");
+		try (Connection connection = (Connection) DriverManager
+				.getConnection(
+						"jdbc:mysql://www.db4free.net:3306/kickbase?autoReconnect=true&useSSL=false",
+						"author", "xzxzzxzxcaa");
+				Statement statement = (Statement) connection.createStatement()) {
 			ResultSet result = statement.executeQuery("SELECT * FROM projects");
 
 			while (result.next()) {
 				Date date = result.getDate("start");
 				Calendar start = new GregorianCalendar();
 				start.setTime(date);
-				kickstarter.projects.add(new Project(result.getInt("id"),
-						result.getString("name"), result.getString("category"),
-						0, result.getInt("need_money"), start, "", result
+				kickstarter.getProjects().add(
+						new Project(result.getInt("id"), result
+								.getString("name"), result
+								.getString("category"), 0, result
+								.getInt("need_money"), start, "", result
 								.getString("story"), result.getString("url")));
 			}
 			result.close();
@@ -44,7 +45,6 @@ public class SQLLoader {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("SQL problems");
 		}
 		return kickstarter;
 	}
@@ -53,16 +53,15 @@ public class SQLLoader {
 
 		ResultSet questions;
 		try {
-			for (Project project : kickstarter.projects) {
+			for (Project project : kickstarter.getProjects()) {
 				StringBuilder sb = new StringBuilder();
-				questions = statement
+				questions = statement2
 						.executeQuery("SELECT `author`, `text` FROM `comments` WHERE id = "
 								+ project.getId());
 				while (questions.next()) {
 
 					sb.append(questions.getString("author") + ": "
-							+ questions.getString("text")
-							+ "<br />");
+							+ questions.getString("text") + "<br />");
 
 				}
 				if (questions != null) {
@@ -72,7 +71,6 @@ public class SQLLoader {
 				questions.close();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -82,7 +80,7 @@ public class SQLLoader {
 
 		ResultSet sum;
 		try {
-			for (Project project : kickstarter.projects) {
+			for (Project project : kickstarter.getProjects()) {
 
 				sum = statement
 						.executeQuery("SELECT SUM(amount) FROM accounting WHERE id = "
@@ -95,34 +93,29 @@ public class SQLLoader {
 				sum.close();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-	public List<String> getCategories() throws ClassNotFoundException{
+
+	public List<String> getCategories() throws ClassNotFoundException {
 		List<String> categories = new ArrayList<>();
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			connection = (Connection) DriverManager
-					.getConnection(
-							"jdbc:mysql://www.db4free.net:3306/kickbase?autoReconnect=true&useSSL=false",
-							"author", "xzxzzxzxcaa");
-			statement = (Statement) connection.createStatement();
-			ResultSet result = statement.executeQuery("SELECT * FROM categories");
+		Class.forName("com.mysql.jdbc.Driver");
+		try (Connection connection = (Connection) DriverManager
+				.getConnection(
+						"jdbc:mysql://www.db4free.net:3306/kickbase?autoReconnect=true&useSSL=false",
+						"author", "xzxzzxzxcaa");
+				Statement statement = (Statement) connection.createStatement()) {
+			ResultSet result = statement
+					.executeQuery("SELECT * FROM categories");
 
 			while (result.next()) {
-			categories.add(result.getString("category"));
+				categories.add(result.getString("category"));
 			}
-			result.close();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("SQL problems");
 		}
 		return categories;
 	}
 
-	}
-
+}

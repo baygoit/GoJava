@@ -5,19 +5,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import project.BaseOfProjects;
-import project.Project;
-import project.SQLLoader;
-import project.SQLManager;
-import project.SQLQuotes;
+import dao.DAOProject;
+import dao.DAOManager;
+import domain.BaseOfProjects;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
  
 public class Selected extends HttpServlet {
 
+	private static final long serialVersionUID = 1L;
 	private static final int MAX_INVEST = 100000;
 	
 	
@@ -28,48 +26,54 @@ public class Selected extends HttpServlet {
 		try {
 		String id = req.getQueryString();
         
-       
-        SQLLoader base = new SQLLoader();
+		DAOProject base = new DAOProject();
         BaseOfProjects kickstarter;
 		kickstarter = base.reload();
 		
         List<String> project = kickstarter.findProfile(Integer.parseInt(id));
-        
-      // if make a comment from here to other comment - my Servlet work but can`t invest or 
-      // leave a questions, how to fix it?
-        
-        String amount = req.getParameter("invest");
-        String author = req.getParameter("author");
-        String text = req.getParameter("text");
-        
-        SQLManager broker = new SQLManager();
-        
-        if(isWriteNumber(amount)){
-        	int cash = Integer.parseInt(amount);
-        	broker.invest(cash, Integer.parseInt(id));
-        }
-        
-        if((!author.equals("author") && !author.equals(null) && !author.equals(""))&&
-        		(!text.equals("text") || !text.equals(null) || !text.equals(""))){
-        	broker.say(Integer.parseInt(amount), author, text);
-        }
-        //!!!
-       // if I comment till that it`s work, but now i get 505 - what can I do?
-        
+       
         req.setAttribute("project", project);
+        req.setAttribute("projectId", id);
       	req.getRequestDispatcher("Project.jsp").forward(req, resp);
       	 
         } catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
+    
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
     	
-    
-		doGet(req, resp);
+    	DAOManager broker = new DAOManager();
+    	String id = req.getParameter("projectId");
+    	String amount = req.getParameter("invest");
+        String author = req.getParameter("author");
+        String text = req.getParameter("text");
+        
+        if(isWriteNumber(amount)){
+        	int cash = Integer.parseInt(amount);
+        	try {
+				broker.invest(cash, Integer.parseInt(id));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+        }
+        
+        if((!author.equals("author") && !author.equals(null) && !author.equals(""))&&
+        		(!text.equals("text") || !text.equals(null) || !text.equals(""))){
+        	try {
+				broker.say(Integer.parseInt(id), author, text);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+        }
+    	
+        resp.sendRedirect("selected?" + id);
 	}
 
 	private boolean isWriteNumber(String amount) {

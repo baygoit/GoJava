@@ -8,7 +8,7 @@
 <h1>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`</h1>
     <h1>${quote}</h1>
 <h1>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`</h1>
-<a href=/kickstart-0.0.1-SNAPSHOT/categories>Go!</a>
+<a href="categories">Go!</a>
 </center>
 </body>
 </html>
