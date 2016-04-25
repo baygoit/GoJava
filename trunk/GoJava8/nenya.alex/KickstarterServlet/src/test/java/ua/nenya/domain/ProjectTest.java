@@ -16,7 +16,7 @@ public class ProjectTest {
 		project.setName("New Song");
 		project.setDescription("description of new song");
 		project.setNeededAmount(100);
-		project.setDaysRemain(100);
+		project.setRemainingDays(100);
 		project.setHistory("hystory of new song");
 		project.setVideo("video about new song");
 		project.setCategoryId(1);
@@ -27,7 +27,7 @@ public class ProjectTest {
 		assertThat(project.getName(), is("New Song"));
 		assertThat(project.getDescription(), is("description of new song"));
 		assertThat(project.getNeededAmount(), is(100));
-		assertThat(project.getDaysRemain(), is(100));
+		assertThat(project.getRemainingDays(), is(100));
 		assertThat(project.getHistory(), is("hystory of new song"));
 		assertThat(project.getVideo(), is("video about new song"));
 		assertThat(project.getCategoryId(), is(1));

@@ -10,10 +10,7 @@
     <property name="hibernate.connection.password"></property>
     <property name="hibernate.connection.url">jdbc:h2:mem:testdb</property>
     <property name="hibernate.connection.username">sa</property>
-   <!-- Assume test is the database name -->
-   <!--property name="hibernate.connection.datasource">
-      java:comp/env/jdbc/test
-   </property-->
+   
    
    <property name="show_sql">true</property>
 
@@ -22,8 +19,7 @@
    <mapping class="ua.nenya.domain.Category"/>
    <mapping class="ua.nenya.domain.Project"/>
    <mapping class="ua.nenya.domain.Question"/>
-   <!-- List of XML mapping files -->
-    <mapping resource="RewardTest.hbm.xml"/>
-    <mapping resource="PaymentTest.hbm.xml"/>
+   <mapping class="ua.nenya.domain.Reward"/>
+   <mapping class="ua.nenya.domain.Payment"/>
 </session-factory>
 </hibernate-configuration>

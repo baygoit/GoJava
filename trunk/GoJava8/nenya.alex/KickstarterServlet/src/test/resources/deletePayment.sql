@@ -1,1 +1,1 @@
-TRUNCATE TABLE Payments
+TRUNCATE TABLE Payment;

@@ -4,13 +4,14 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ua.nenya.dao.CategoryDao;
 import ua.nenya.domain.Category;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -24,14 +25,12 @@ import java.util.Comparator;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextHierarchy({
-	@ContextConfiguration(locations="classpath*:/aplicationContextTest.xml"),
-	  @ContextConfiguration(locations="classpath*:/CategoryTest.hbm.xml")
-	})
+@ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 public class CategoryDaoDbImplTest {
 
 	private static EmbeddedDatabase db;
-	private CategoryDaoImpl categoryDao = new CategoryDaoImpl();
+	@Autowired
+	private CategoryDao categoryDao;
 	private static List<Category> categories = new ArrayList<>();
 	
 	@BeforeClass
@@ -40,6 +39,7 @@ public class CategoryDaoDbImplTest {
 		
 		db = new EmbeddedDatabaseBuilder()
 	    		.setType(EmbeddedDatabaseType.H2)
+	    		.addScript("/createCategory.sql")
 	    		.addScript("/insertCategory.sql")
 	    		.build();
 	}
@@ -51,6 +51,7 @@ public class CategoryDaoDbImplTest {
 	    		.addScript("/deleteCategory.sql")
 	    		.build();
 	}
+	
 	@Test
 	public void testGetCategories(){
 		
@@ -64,7 +65,7 @@ public class CategoryDaoDbImplTest {
 		
 		List<Category> categoriesTest = categoryDao.getCategories();
 		assertNotNull(categoriesTest);
-		assertThat(categories, is(categoriesTest));
+		assertThat(categoriesTest.get(0).getName(), is(categories.get(0).getName()));
 
 	}
 

@@ -1,1 +1,1 @@
-TRUNCATE TABLE Questions;
+TRUNCATE TABLE Question;

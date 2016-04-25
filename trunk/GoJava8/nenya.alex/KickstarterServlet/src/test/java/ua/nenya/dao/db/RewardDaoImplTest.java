@@ -8,43 +8,45 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ua.nenya.dao.RewardDao;
 import ua.nenya.domain.Reward;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextHierarchy({
-	@ContextConfiguration(locations="classpath*:/aplicationContextTest.xml"),
-	  @ContextConfiguration(locations="classpath*:/RewardTest.hbm.xml")
-	})
+@ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 public class RewardDaoImplTest {
 
-	private static EmbeddedDatabase db;
-	private RewardDaoImpl rewardDaoImpl = new RewardDaoImpl();
+	private EmbeddedDatabase db;
+	@Autowired
+	private RewardDao rewardDao;
 
-	private static List<Reward> rewards = new ArrayList<>();
+	private List<Reward> rewards = new ArrayList<>();
 
-	@BeforeClass
-	public static void setUp() {
+	@Before
+	public void setUp() {
 		initRewards();
 		db = new EmbeddedDatabaseBuilder()
 	    		.setType(EmbeddedDatabaseType.H2)
+	    		.addScript("/createReward.sql")
 	    		.addScript("/insertReward.sql")
 	    		.build();
 	}
 
 
-	@AfterClass
-	public static void tearDown() {
+	@After
+	public void tearDown() {
 		db = new EmbeddedDatabaseBuilder()
 	    		.setType(EmbeddedDatabaseType.H2)
 	    		.addScript("/deleteReward.sql")
@@ -59,13 +61,13 @@ public class RewardDaoImplTest {
 			}
 		});
 		
-		List<Reward> testRewards = rewardDaoImpl.getRewards(1);
+		List<Reward> testRewards = rewardDao.getRewards(1);
 		assertNotNull(testRewards);
-		assertThat(rewards, is(testRewards));
+		assertThat(rewards.get(0).getName(), is(testRewards.get(0).getName()));
 	}
 
 
-	private static void initRewards() {
+	private void initRewards() {
 		Reward reward100 = new Reward();
 		reward100.setId(1);
 		reward100.setProjectId(1);

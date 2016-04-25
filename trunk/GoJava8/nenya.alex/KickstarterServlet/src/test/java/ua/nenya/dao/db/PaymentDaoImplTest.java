@@ -7,27 +7,28 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ua.nenya.dao.PaymentDao;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextHierarchy({
-	@ContextConfiguration(locations="classpath*:/aplicationContextTest.xml"),
-	  @ContextConfiguration(locations="classpath*:/PaymentTest.hbm.xml")
-	})
+@ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 public class PaymentDaoImplTest {
 
 	private static EmbeddedDatabase db;
-	private PaymentDaoImpl paymentDaoImpl = new PaymentDaoImpl();
+	@Autowired
+	private PaymentDao paymentDao;
 
 	@BeforeClass
 	public static void setUp() {
 		db = new EmbeddedDatabaseBuilder()
 	    		.setType(EmbeddedDatabaseType.H2)
+	    		.addScript("/createPayment.sql")
 	    		.addScript("/insertPayment.sql")
 	    		.build();
 	}
@@ -41,14 +42,14 @@ public class PaymentDaoImplTest {
 	
 	@Test
 	public void testGetPaymentSum(){
-		long sum = paymentDaoImpl.getPaymentSum(1);
+		long sum = paymentDao.getPaymentSum(1);
 		assertThat(sum, is(100L));
 	}
 	
 
 	@Test
 	public void testWritePaymentInProject() {
-		int id = paymentDaoImpl.writePaymentInProject(1, 100);
+		int id = paymentDao.writePaymentInProject(1, 100);
 		assertThat(id, is(4));
 	}
 

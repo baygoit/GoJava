@@ -1,4 +1,3 @@
-CREATE TABLE PAYMENTS (id SERIAL PRIMARY KEY, project_id INTEGER, amount INTEGER);
-INSERT INTO PAYMENTS (project_id, amount) VALUES (1, 25);
-INSERT INTO PAYMENTS (project_id, amount) VALUES (1, 75);
-INSERT INTO PAYMENTS (project_id, amount) VALUES (2, 10);
+INSERT INTO PAYMENT (project_id, amount) VALUES (1, 25);
+INSERT INTO PAYMENT (project_id, amount) VALUES (1, 75);
+INSERT INTO PAYMENT (project_id, amount) VALUES (2, 10);
