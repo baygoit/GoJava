@@ -1,8 +1,7 @@
 package ua.dborisenko.kickstarter.dao;
 
-import java.util.Set;
-import java.util.TreeSet;
-
+import org.hibernate.Hibernate;
+import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,28 +18,22 @@ public class ProjectDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void add(Project project) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        session.save(project);
-        tx.commit();
-    }
-
     public void getAllForCategory(Category category) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("from Project where category_id = " + category.getId());
-        Set<Project> projects = new TreeSet<Project>(query.list());
+        session.lock(category, LockMode.NONE);
+        Hibernate.initialize(category.getProjects());
         tx.commit();
-        category.setProjects(projects);
+        session.close();
     }
 
     public Project getById(int id) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         Query query = session.createQuery("from Project where id = " + id);
         Project project = (Project) query.list().get(0);
         tx.commit();
+        session.close();
         return project;
     }
 }

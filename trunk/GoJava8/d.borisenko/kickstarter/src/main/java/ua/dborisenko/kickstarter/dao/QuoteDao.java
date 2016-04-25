@@ -1,5 +1,7 @@
 package ua.dborisenko.kickstarter.dao;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,19 +17,15 @@ public class QuoteDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void add(Quote quote) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        session.save(quote);
-        tx.commit();
-    }
-
     public Quote getRandom() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.getNamedQuery("getRandomQuote");
-        Quote quote = (Quote) query.list().get(0);
+        Query query = session.createSQLQuery("SELECT id, author, text FROM quotes ORDER BY rand() limit 1")
+                .addEntity(Quote.class);
+        List<Quote> resultList = query.list();
+        Quote quote = resultList.get(0);
         tx.commit();
+        session.close();
         return quote;
     }
 }

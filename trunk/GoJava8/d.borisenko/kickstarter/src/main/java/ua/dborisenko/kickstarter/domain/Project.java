@@ -2,18 +2,48 @@ package ua.dborisenko.kickstarter.domain;
 
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.SortNatural;
+
+@Entity
+@Table(name = "projects")
 public class Project implements Comparable<Project> {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
+    @Column
     private String name;
+    @Column
     private String description;
+    @Column
     private String history;
+    @Column(name = "required_sum")
     private int requiredSum;
+    @Column(name = "days_left")
     private int daysLeft;
+    @Column(name = "video_url")
     private String videoUrl;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
     private Set<Investment> investments;
+    @OneToMany(mappedBy = "project")
+    @SortNatural
     private Set<Question> questions;
+    @OneToMany(mappedBy = "project")
+    @SortNatural
     private Set<Reward> rewards;
 
     public void setId(int id) {

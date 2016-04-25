@@ -1,10 +1,27 @@
 package ua.dborisenko.kickstarter.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "rewards")
 public class Reward implements Comparable<Reward> {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
     private Project project;
+    @Column
     private int amount;
+    @Column
     private String description;
 
     public int getId() {

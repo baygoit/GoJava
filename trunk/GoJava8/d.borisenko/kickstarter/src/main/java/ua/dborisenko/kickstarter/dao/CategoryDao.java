@@ -18,38 +18,34 @@ public class CategoryDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void add(Category category) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        session.save(category);
-        tx.commit();
-    }
-
     public Category getById(int id) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         Query query = session.createQuery("from Category where id = " + id);
         Category category = (Category) query.list().get(0);
         tx.commit();
+        session.close();
         return category;
     }
 
     public List<Category> getAll() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         Query query = session.createQuery("from Category order by name");
         List<Category> categories = query.list();
         tx.commit();
+        session.close();
         return categories;
     }
 
     public Category getByProject(Project project) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         Query query = session
                 .createQuery("select p.category from Project p inner join p.category where p.id = " + project.getId());
         Category category = (Category) query.list().get(0);
         tx.commit();
+        session.close();
         return category;
     }
 }

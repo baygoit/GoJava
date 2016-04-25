@@ -1,9 +1,7 @@
 package ua.dborisenko.kickstarter.dao;
 
-import java.util.Set;
-import java.util.TreeSet;
-
-import org.hibernate.Query;
+import org.hibernate.Hibernate;
+import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,19 +18,21 @@ public class QuestionDao {
     private SessionFactory sessionFactory;
 
     public void add(Question question) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(question);
         tx.commit();
+        session.flush();
+        session.close();
     }
 
     public void getAllForProject(Project project) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("from Question where project_id = " + project.getId());
-        Set<Question> questions = new TreeSet<Question>(query.list());
+        session.lock(project, LockMode.NONE);
+        Hibernate.initialize(project.getQuestions());
         tx.commit();
-        project.setQuestions(questions);
+        session.close();
     }
 
 }

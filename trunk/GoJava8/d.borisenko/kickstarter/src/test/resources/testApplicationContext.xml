@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
@@ -11,14 +10,14 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="mappingResources">
+		<property name="annotatedClasses">
 			<list>
-				<value>Quote.hbm.xml</value>
-				<value>Category.hbm.xml</value>
-				<value>Project.hbm.xml</value>
-				<value>Question.hbm.xml</value>
-				<value>Reward.hbm.xml</value>
-				<value>Investment.hbm.xml</value>
+				<value>ua.dborisenko.kickstarter.domain.Quote</value>
+				<value>ua.dborisenko.kickstarter.domain.Reward</value>
+				<value>ua.dborisenko.kickstarter.domain.Question</value>
+				<value>ua.dborisenko.kickstarter.domain.Investment</value>
+				<value>ua.dborisenko.kickstarter.domain.Project</value>
+				<value>ua.dborisenko.kickstarter.domain.Category</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
