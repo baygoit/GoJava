@@ -36,7 +36,7 @@
 		<p>
 
 			<sql:query dataSource="${snapshot}" var="result">
-        SELECT SUM(amount) AS sum FROM payments GROUP BY project_id HAVING project_id = ${project.id};
+        SELECT SUM(amount) AS sum FROM payment GROUP BY project_id HAVING project_id = ${project.id};
         </sql:query>
 
 			<b>Available amount:</b>
@@ -46,7 +46,7 @@
 
 		</p>
 		<p>
-			<b>Remaining days:</b> ${project.daysRemain}
+			<b>Remaining days:</b> ${project.remainingDays}
 		</p>
 	</c:forEach>
 

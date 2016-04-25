@@ -1,1 +1,1 @@
-TRUNCATE TABLE Rewards;
+TRUNCATE TABLE Reward;

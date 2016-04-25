@@ -11,27 +11,27 @@ import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Project;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextHierarchy({
-	@ContextConfiguration(locations="classpath*:/aplicationContextTest.xml"),
-	  @ContextConfiguration(locations="classpath*:/ProjectTest.hbm.xml")
-	})
+@ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 public class ProjectDaoImplTest {
 	
 
 	private static EmbeddedDatabase db;
-	private ProjectDaoImpl projectDao = new ProjectDaoImpl();
+	@Autowired
+	private ProjectDao projectDao;
 	private static List<Project> projects = new ArrayList<>();
 	private static Project songProject2;
 	
@@ -40,6 +40,7 @@ public class ProjectDaoImplTest {
 		initProjects();
 		db = new EmbeddedDatabaseBuilder()
 	    		.setType(EmbeddedDatabaseType.H2)
+	    		.addScript("/createProject.sql")
 	    		.addScript("/insertProject.sql")
 	    		.build();
 	}
@@ -63,13 +64,13 @@ public class ProjectDaoImplTest {
 		
 		List<Project> testProjects = projectDao.getProjects(10);
 		assertNotNull(testProjects);
-		assertThat(projects, is(testProjects));
+		assertThat(testProjects.get(0).getName(), is(projects.get(0).getName()));
 	}
 
 	@Test
 	public void testGetProject(){
 		Project testProject = projectDao.getProject(2);
-		assertThat(testProject, is(songProject2));
+		assertThat(testProject.getName(), is(songProject2.getName()));
 	}
 
 	@Test
@@ -94,7 +95,7 @@ public class ProjectDaoImplTest {
 		songProject1.setName("song1");
 		songProject1.setDescription("Funny song!");
 		songProject1.setNeededAmount(2000);
-		songProject1.setDaysRemain(7);
+		songProject1.setRemainingDays(7);
 		songProject1.setHistory("History");
 		songProject1.setVideo("video");
 		
@@ -104,7 +105,7 @@ public class ProjectDaoImplTest {
 		songProject2.setName("song2");
 		songProject2.setDescription("Sad song!");
 		songProject2.setNeededAmount(400);
-		songProject2.setDaysRemain(3);
+		songProject2.setRemainingDays(3);
 		songProject2.setHistory("History");
 		songProject2.setVideo("video");
 		

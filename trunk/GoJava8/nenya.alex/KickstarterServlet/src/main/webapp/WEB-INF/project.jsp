@@ -13,7 +13,7 @@
 	<p><b>Description:</b> ${project.description}</p>
 	<p><b>Needed amount:</b> ${project.neededAmount}</p>
 	<p><b>Available amount:</b> ${investmentSum} </p>
-	<p><b>Remaining days:</b> ${project.daysRemain}</p>
+	<p><b>Remaining days:</b> ${project.remainingDays}</p>
 	<p><b>History:</b> ${project.history}</p>
 	<p><b>Video:</b> ${project.video}</p>
 	<p><b>Q&A:</b></p>
