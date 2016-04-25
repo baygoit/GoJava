@@ -17,11 +17,12 @@
    
    <property name="show_sql">true</property>
 
+   <!-- List of mapped classes -->
+   <mapping class="ua.nenya.domain.Quote"/>
+   <mapping class="ua.nenya.domain.Category"/>
+   <mapping class="ua.nenya.domain.Project"/>
+   <mapping class="ua.nenya.domain.Question"/>
    <!-- List of XML mapping files -->
-   <mapping resource="QuoteTest.hbm.xml"/>
-   <mapping resource="CategoryTest.hbm.xml"/>
-   <mapping resource="ProjectTest.hbm.xml"/>
-    <mapping resource="QuestionTest.hbm.xml"/>
     <mapping resource="RewardTest.hbm.xml"/>
     <mapping resource="PaymentTest.hbm.xml"/>
 </session-factory>

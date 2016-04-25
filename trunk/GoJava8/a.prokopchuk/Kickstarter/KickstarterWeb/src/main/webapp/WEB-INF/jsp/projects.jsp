@@ -25,7 +25,7 @@
 											<p><span>Description: ${project.description}</span></p>
 											<p><span>Required budget: ${project.requiredBudget}</span></p>
 											<p><span>Gathered budget: ${project.gatheredBudget}</span></p>
-											<p><span>Days left: ${project.daysLeft}</span></p>
+											<p><span>Days left: ${project.finalDate}</span></p>
 										</a>
 									</div>
 								</div>

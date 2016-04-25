@@ -108,16 +108,18 @@ history, url) VALUES (6, 'Alzheimer',
 
 /*reward table*/
 CREATE TABLE reward (
-    id intquestion_id not null auto_increment, 
+    id intquestion_id not null auto_increment,
+    project_id int NOT NULL,
     name VARCHAR(50) NOT NULL, 
-    amount int, 
+    amount int NOT NULL, 
     description VARCHAR(200), 
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    FOREIGN KEY (project_id) REFERENCES project(id) ON UPDATE CASCADE ON DELETE RESTRICT
 )engine=InnoDB;
 
-INSERT INTO reward (name, amount, description) VALUES ('1$', 1, 'You obtain a reward: BIG THANK!');
-INSERT INTO reward (name, amount, description) VALUES ('10$', 10, 'You obtain a reward: Solo supporter!');
-INSERT INTO reward (name, amount, description) VALUES ('100$', 100, 'You obtain a reward: Calm supporter!');
+INSERT INTO reward (project_id, name, amount, description) VALUES (1, '1$', 1, 'You obtain a reward: BIG THANK!');
+INSERT INTO reward (project_id, name, amount, description) VALUES (2, '10$', 10, 'You obtain a reward: Solo supporter!');
+INSERT INTO reward (project_id, name, amount, description) VALUES (3, '100$', 100, 'You obtain a reward: Calm supporter!');
 
 /*question table*/
 CREATE TABLE question (

@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,7 +73,7 @@ public class ProjectDaoSqlTest {
 		when(resultSet.getString("name")).thenReturn("test name");
 		when(resultSet.getString("description")).thenReturn("test description");
 		when(resultSet.getInt("required_budget")).thenReturn(10);
-		when(resultSet.getInt("days_left")).thenReturn(5);
+		when(resultSet.getDate("final_date")).thenReturn(new Date(342353634));
 		when(resultSet.getString("history")).thenReturn("test history");
 		when(resultSet.getString("url")).thenReturn("test url");
 		when(resultSet.getInt("sum_amount")).thenReturn(100);
@@ -83,15 +84,10 @@ public class ProjectDaoSqlTest {
 		assertThat(project.getName(), is("test name"));
 		assertThat(project.getDescription(), is("test description"));
 		assertThat(project.getRequiredBudget(), is(10));
-		assertThat(project.getDaysLeft(), is(5));
+		assertThat(project.getFinalDate(), is(342353634));
 		assertThat(project.getHistory(), is("test history"));
 		assertThat(project.getUrl(), is("test url"));
 		assertThat(project.getGatheredBudget(), is(100));
 	}
-	
-	@Test(expected = RuntimeException.class)
-	public void testProjectNotFound() throws SQLException {
-		when(resultSet.next()).thenReturn(false);
-		projectDaoSql.getProjectById(1);
-	}
+
 }

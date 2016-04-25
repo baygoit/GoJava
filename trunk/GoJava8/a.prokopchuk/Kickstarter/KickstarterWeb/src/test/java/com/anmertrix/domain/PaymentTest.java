@@ -11,14 +11,8 @@ public class PaymentTest {
 	
 	@Test
 	public void setGetIdTest() {
-		payment.setId(24);
-		assertThat(payment.getId(), is(24));
-	}
-	
-	@Test
-	public void setGetProjectIdTest() {
-		payment.setProjectId(2);
-		assertThat(payment.getProjectId(), is(2));
+		payment.setId(24L);
+		assertThat(payment.getId(), is(24L));
 	}
 	
 	@Test

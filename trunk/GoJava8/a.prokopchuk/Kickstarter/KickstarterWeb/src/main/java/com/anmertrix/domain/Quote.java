@@ -1,16 +1,30 @@
 package com.anmertrix.domain;
 
-public class Quote {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	private int id;
+@Entity
+@Table(name = "quote")
+public class Quote {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
+	@Column(name = "author")
 	private String author;
+	@Column(name = "text")
 	private String text;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

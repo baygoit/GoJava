@@ -1,10 +1,34 @@
 package com.anmertrix.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "reward")
 public class Reward {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private int id;
+	
+	@ManyToOne
+	@JoinColumn(name = "project_id")
+	private Project project;
+	
+	@Column
 	private String name;
+	
+	@Column
 	private int amount;
+	
+	@Column
 	private String description;
 	
 	public int getId() {
@@ -31,5 +55,10 @@ public class Reward {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	public Project getProject() {
+		return project;
+	}
+	public void setProject(Project project) {
+		this.project = project;
+	}
 }

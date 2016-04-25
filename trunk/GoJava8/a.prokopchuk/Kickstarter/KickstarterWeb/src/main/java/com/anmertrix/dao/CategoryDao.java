@@ -6,10 +6,10 @@ import com.anmertrix.domain.Category;
 
 public interface CategoryDao {
 	
-	Category getCategory(int index);
-	
 	List<Category> getCategories();
 
-	boolean categoryExists(int categoryId);
+	boolean categoryExists(long categoryId);
+
+	Category getCategory(long categoryId);
 	
 }

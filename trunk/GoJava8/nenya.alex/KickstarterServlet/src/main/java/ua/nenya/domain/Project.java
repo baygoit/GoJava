@@ -1,14 +1,33 @@
 package ua.nenya.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "projects")
 public class Project {
+	@Id
+	@GenericGenerator(name = "kaugen", strategy = "increment")
+	@GeneratedValue(generator = "kaugen")
 	private int id;
+	@Column(name = "category_id")
 	private int categoryId;
+	@Column
 	private String name;
+	@Column
 	private String description;
+	@Column(name = "needed_amount")
 	private int neededAmount;
+	@Column(name = "days_remain")
 	private int daysRemain;
+	@Column
 	private String history;
+	@Column
 	private String video;
 	
 	public String getName() {

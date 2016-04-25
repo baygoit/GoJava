@@ -13,12 +13,13 @@
                 	<ul class="breadcrumb">
                 		<li><a href="/">Home</a></li>
 						<li><a href="categories">Categories</a></li>
-						<li><a href="projects?categoryId=${categoryId}">Projects</a></li>
+						<li><a href="projects?categoryId=${project.categoryId}">Projects</a></li>
 					</ul>
 					<h2>${project.name}</h2>
 					<div class="info_block">
 						<p><span>Required budget:</span> ${project.requiredBudget}</p>
 						<p><span>Gathered budget:</span> ${project.gatheredBudget}</p>
+						<p><span>Final date:</span> ${project.finalDate}</p>
 						<p><span>Days left:</span> ${project.daysLeft}</p>
 						<p><span>Description:</span> ${project.description}</p>
 					</div>
@@ -34,13 +35,11 @@
 					<div id="myTabContent" class="tab-content">
 						<div id="question_block" class="question_block tab-pane fade active in">
 							<h3>Question and answers:</h3>
-							<div class="questions">
-								<c:forEach var="question" items="${questions}">
-									<div class="question"><span>${question.question}</span> </div>
-										<c:forEach var="answer" items="${answers}">
-											<c:if test="${question.id == answer.questionId}">
-												<div class="answer"><span>${answer.answer}</span> </div>
-											</c:if>
+							<div class="questions test-${questions.size()}">
+								<c:forEach var="question" items="${project.questions}">
+									<div class="question question-${question.id}"><span>${question.question}</span> </div>
+										<c:forEach var="answer" items="${question.answers}">
+											<div class="answer answer-${answer.id}"><span>${answer.answer}</span> </div>
 										</c:forEach>
 								</c:forEach>
 							</div>
@@ -64,7 +63,7 @@
 						<div id="payment_block" class="payment_block tab-pane fade">
 							<h3>Payments:</h3>
 							<div class="payments">
-								<c:forEach var="payment" items="${payments}">
+								<c:forEach var="payment" items="${project.payments}">
 									<div class="payment row">
 										<span class="cardholder_name col-sm-3">${payment.cardholderName}</span>
 										<span class="amount col-sm-2">${payment.amount}</span>
@@ -96,7 +95,7 @@
 						<div id="reward_block" class="reward_block tab-pane fade">
 							<h3>Rewards:</h3>
 							<div class="row">
-								<c:forEach var="reward" items="${rewards}">
+								<c:forEach var="reward" items="${project.rewards}">
 									<div class="form-group col-sm-4 text-center">
 										<div class="form-group-reward">
 											<div class="form-group-item"><span class="reward_name">${reward.name}</span></div>

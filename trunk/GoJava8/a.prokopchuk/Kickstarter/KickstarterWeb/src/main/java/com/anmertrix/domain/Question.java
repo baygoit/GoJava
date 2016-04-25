@@ -1,16 +1,46 @@
 package com.anmertrix.domain;
 
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+@Entity
+@Table(name = "question")
 public class Question {
 	
-	private int id;
-	private int projectId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name = "project_id")
+	private Project project;
+	
+	@Column
 	private String question;
 	
-	public int getId() {
+	@OneToMany(mappedBy = "question", fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<Answer> answers;
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -22,12 +52,20 @@ public class Question {
 		this.question = question;
 	}
 	
-	public int getProjectId() {
-		return projectId;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setProjectId(int project_id) {
-		this.projectId = project_id;
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
 	}
 
 }

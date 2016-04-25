@@ -1,7 +1,7 @@
 package com.anmertrix.servlet;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -51,18 +51,20 @@ public class ProjectsServletTest {
 	private RequestDispatcher dispatcher;
 	@Mock
 	private ServletContext context;
+	@Mock
+	private Category category;
 	@InjectMocks
 	private ProjectsServlet projectsPage = spy(ProjectsServlet.class);
-	
 	@Test
 	public void testDoGet() throws ServletException, IOException {
 		when(request.getParameter("categoryId")).thenReturn("3");
-		when(categoryDao.getCategory(3)).thenReturn(new Category());
-		when(projectDao.getProjectsByCategoryId(3)).thenReturn(new ArrayList<>());
-		when(paymentDao.getGatheredBudgets()).thenReturn(new ArrayList<>());
+		when(categoryDao.getCategory(anyLong())).thenReturn(new Category());
+		when(categoryDao.categoryExists(anyLong())).thenReturn(true);
+		when(category.getId()).thenReturn(3L);
+		when(projectDao.getProjectsByCategoryId(anyLong())).thenReturn(new ArrayList<>());
 		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
+		when(paymentDao.getGatheredBudgetByProjectId(anyLong())).thenReturn(3L);
 		doReturn(context).when(projectsPage).getServletContext();
-		when(categoryDao.categoryExists(anyInt())).thenReturn(true);
 		projectsPage.doGet(request, response);
 
 		verify(dispatcher).forward(any(), any());
@@ -77,7 +79,7 @@ public class ProjectsServletTest {
 	@Test
 	public void testDoGetCategory() throws ServletException, IOException {
 		when(request.getParameter("categoryId")).thenReturn("3");
-		when(categoryDao.categoryExists(anyInt())).thenReturn(false);
+		when(categoryDao.categoryExists(anyLong())).thenReturn(false);
 		projectsPage.doGet(request, response);
 		assertThat(projectsPage.getSelectedCategory(request, response), is(nullValue()));
 	}
@@ -85,7 +87,7 @@ public class ProjectsServletTest {
 	@Test
 	public void testDoGetCategoryNotFound() throws ServletException, IOException {
 		when(request.getParameter("categoryId")).thenReturn("34");
-		when(categoryDao.categoryExists(anyInt())).thenReturn(false);
+		when(categoryDao.categoryExists(anyLong())).thenReturn(false);
 		projectsPage.getSelectedCategory(request, response);
 		verify(response, times(1)).sendError(HttpServletResponse.SC_NOT_FOUND);
 	}

@@ -1,22 +1,83 @@
 package com.anmertrix.domain;
 
-public class Project {
-	private int id;
-	private String name;
-	private String description;
-	private int requiredBudget;
-	private long gatheredBudget;
-	private int daysLeft;
-	private String history;
-	private String url;
-	private StringBuilder questionAnswer = new StringBuilder();
+import java.sql.Date;
+import java.util.List;
 
-	public int getId() {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+@Entity
+@Table(name = "project")
+public class Project {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
+	
+	@Column(name = "category_id")
+	private Long categoryId;
+
+	@Column(name = "name")
+	private String name;
+	
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "required_budget")
+	private int requiredBudget;
+	
+	@Transient
+	private long gatheredBudget;
+	
+	@Column(name = "final_date")
+	private Date finalDate;
+	
+	@Transient
+	private int daysLeft;
+	
+	@Column(name = "history")
+	private String history;
+	
+	@Column(name = "url")
+	private String url;
+	
+	@OneToMany(mappedBy = "project", fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<Question> questions;
+	
+	@OneToMany(mappedBy = "project", fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<Payment> payments;
+	
+	@OneToMany(mappedBy = "project", fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<Reward> rewards;
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
+	}
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 	
 	public String getName() {
@@ -51,6 +112,14 @@ public class Project {
 		this.gatheredBudget = count;
 	}
 
+	public Date getFinalDate() {
+		return finalDate;
+	}
+
+	public void setFinalDate(Date finalDate) {
+		this.finalDate = finalDate;
+	}
+
 	public int getDaysLeft() {
 		return daysLeft;
 	}
@@ -74,23 +143,31 @@ public class Project {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
 
-	public String getQuestionAnswer() {
-		return questionAnswer.toString();
+	public List<Question> getQuestions() {
+		return questions;
 	}
 
-	public void setQuestion(String question) {
-		this.questionAnswer.append(question + "\n");
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
 	}
 
-	public void setProjectData(int id, String name, String description,
-			int requiredBudget, int gatheredBudget, int daysLeft, String history) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.requiredBudget = requiredBudget;
-		this.gatheredBudget = gatheredBudget;
-		this.daysLeft = daysLeft;
-		this.history = history;
+	public List<Payment> getPayments() {
+		return payments;
 	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
+	}
+
+	public List<Reward> getRewards() {
+		return rewards;
+	}
+
+	public void setRewards(List<Reward> rewards) {
+		this.rewards = rewards;
+	}
+	
+	
 }

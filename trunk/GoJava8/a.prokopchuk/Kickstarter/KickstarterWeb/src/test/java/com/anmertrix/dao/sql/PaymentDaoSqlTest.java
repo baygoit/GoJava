@@ -1,7 +1,5 @@
 package com.anmertrix.dao.sql;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.times;
@@ -12,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -47,20 +44,6 @@ public class PaymentDaoSqlTest {
 		when(dataSource.getConnection()).thenReturn(connection);
 		when(preparedStatement.executeQuery()).thenReturn(resultSet);
 		when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
-	}
-	
-	@Ignore
-	@Test
-	public void testGetPaymentsByProjectId() throws SQLException {
-		when(resultSet.next()).thenReturn(true, false);
-		when(resultSet.getInt("id")).thenReturn(1);
-		when(resultSet.getString("cardholder_name")).thenReturn("test cardholder name");
-		when(resultSet.getInt("amount")).thenReturn(100);
-		List<Payment> payments = paymentDaoSql.getPaymentsByProjectId(1);
-		Payment payment = payments.get(0);
-		assertThat(payment.getId(), is(1));
-		assertThat(payment.getCardholderName(), is("test cardholder name"));
-		assertThat(payment.getAmount(), is(100));
 	}
 	
 	@Ignore

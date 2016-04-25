@@ -1,25 +1,43 @@
 package com.anmertrix.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "payment")
 public class Payment {
 	
-	private int id;
-	private int projectId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name = "project_id")
+	private Project project;
+	
+	@Column(name = "card_number")
 	private String cardNumber;
+	
+	@Column(name = "cardholder_name")
 	private String cardholderName;
+	
+	@Column
 	private int amount;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getProjectId() {
-		return projectId;
-	}
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
-	}
+	
 	public String getCardNumber() {
 		return cardNumber;
 	}
@@ -38,5 +56,11 @@ public class Payment {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-
+	public Project getProject() {
+		return project;
+	}
+	public void setProject(Project project) {
+		this.project = project;
+	}
+	
 }

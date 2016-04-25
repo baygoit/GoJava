@@ -12,11 +12,10 @@
 			java:comp/env/jdbc/dataSource
 		</property>
 
-
-		<mapping resource="Quote.hbm.xml" />
-		<mapping resource="Category.hbm.xml" />
-		<mapping resource="Project.hbm.xml" />
-		<mapping resource="Question.hbm.xml" />
+		<mapping class="ua.nenya.domain.Quote"/>
+	    <mapping class="ua.nenya.domain.Category"/>
+	    <mapping class="ua.nenya.domain.Project"/>
+	    <mapping class="ua.nenya.domain.Question"/>
 		<mapping resource="Reward.hbm.xml" />
 		<mapping resource="Payment.hbm.xml" />
 	</session-factory>

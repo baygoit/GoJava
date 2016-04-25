@@ -17,9 +17,19 @@
    </property>
    
    <property name="show_sql">true</property>
+   
+   <property name="hibernate.current_session_context_class">
+     org.hibernate.context.internal.ThreadLocalSessionContext
+   </property>
 
    <!-- List of XML mapping files -->
-   <mapping resource="Quote.hbm.xml"/>
-
+   <mapping class="com.anmertrix.domain.Quote" />
+   <mapping class="com.anmertrix.domain.Category" />
+   <mapping class="com.anmertrix.domain.Project" />
+   <mapping class="com.anmertrix.domain.Question" />
+   <mapping class="com.anmertrix.domain.Answer" />
+   <mapping class="com.anmertrix.domain.Payment" />
+   <mapping class="com.anmertrix.domain.Reward" />
+	
 </session-factory>
 </hibernate-configuration>
