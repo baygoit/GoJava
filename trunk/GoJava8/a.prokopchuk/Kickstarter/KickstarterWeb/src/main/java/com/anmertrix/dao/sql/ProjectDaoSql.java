@@ -55,6 +55,7 @@ public class ProjectDaoSql implements ProjectDao {
 		Project project = null;
 		try (Session session = sessionFactory.openSession()) {
 			project = session.get(Project.class, projectId);
+			project.getQuestions();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		}
