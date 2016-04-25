@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -25,8 +26,8 @@ public class Project {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "category_id")
-	private Long categoryId;
+	@ManyToOne
+	private Category category;
 
 	@Column(name = "name")
 	private String name;
@@ -72,12 +73,12 @@ public class Project {
 		this.id = id;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
 	public String getName() {
