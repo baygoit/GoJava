@@ -9,18 +9,20 @@ import org.hibernate.SessionFactory;
 import org.hibernate.context.internal.ThreadLocalSessionContext;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.anmertrix.dao.CategoryDao;
 import com.anmertrix.domain.Category;
-import com.anmertrix.dao.sql.HibernateUtil;
 
 @Repository
 public class CategoryDaoSql implements CategoryDao {
 
+	@Autowired
+	private SessionFactory sessionFactory;
+
 	@Override
 	public Category getCategory(long categoryId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Category category = null;
 		try (Session session = sessionFactory.openSession()) {
 			category = session.get(Category.class, categoryId);
@@ -32,7 +34,6 @@ public class CategoryDaoSql implements CategoryDao {
 
 	@Override
 	public boolean categoryExists(long categoryId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		int count = 0;
 		try (Session session = sessionFactory.openSession()) {
 			Criteria criteria = session.createCriteria(Category.class);
@@ -48,7 +49,6 @@ public class CategoryDaoSql implements CategoryDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Category> getCategories() {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		List<Category> categories = null;
 		try (Session session = sessionFactory.openSession()) {
 			ThreadLocalSessionContext.bind(session);

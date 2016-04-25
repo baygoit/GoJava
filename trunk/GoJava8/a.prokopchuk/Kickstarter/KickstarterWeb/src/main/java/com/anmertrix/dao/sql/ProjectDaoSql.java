@@ -15,18 +15,18 @@ import org.springframework.stereotype.Repository;
 
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.domain.Project;
-import com.anmertrix.dao.sql.HibernateUtil;
 
 @Repository
 public class ProjectDaoSql implements ProjectDao {
 	
+	@Autowired
+	private SessionFactory sessionFactory;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Project> getProjectsByCategoryId(long categoryId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		List<Project> projects = null;
 		try (Session session = sessionFactory.openSession()) {
 			ThreadLocalSessionContext.bind(session);
@@ -39,7 +39,6 @@ public class ProjectDaoSql implements ProjectDao {
 	
 	@Override
 	public boolean projectExists(long projectId){
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		int count = 0;
 		try (Session session = sessionFactory.openSession()) {
 			Criteria criteria = session.createCriteria(Project.class);
@@ -54,7 +53,6 @@ public class ProjectDaoSql implements ProjectDao {
 	
 	@Override
 	public Project getProjectById(long projectId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Project project = null;
 		try (Session session = sessionFactory.openSession()) {
 			project = session.get(Project.class, projectId);

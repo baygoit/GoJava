@@ -13,5 +13,28 @@
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.anmertrix.domain.Quote</value>
+			   	<value>com.anmertrix.domain.Category</value>
+			   	<value>com.anmertrix.domain.Project</value>
+			   	<value>com.anmertrix.domain.Question</value>
+			   	<value>com.anmertrix.domain.Answer</value>
+			   	<value>com.anmertrix.domain.Payment</value>
+			   	<value>com.anmertrix.domain.Reward</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</prop>
+			</props>
+		</property>
+	</bean>
+	
 </beans>

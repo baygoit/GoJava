@@ -17,6 +17,9 @@ public class PaymentDaoSql implements PaymentDao {
 	private static final String SELECT_GATHERED_BUDGET = "SELECT COALESCE(SUM(amount),0) FROM payment WHERE project_id=?";
 	
 	@Autowired
+	private SessionFactory sessionFactory;
+
+	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
@@ -26,7 +29,6 @@ public class PaymentDaoSql implements PaymentDao {
 
 	@Override
 	public void insertPayment(Payment payment) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Transaction transaction = null;
 		try (Session session = sessionFactory.openSession()) {
 			transaction = session.beginTransaction();
