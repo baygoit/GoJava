@@ -21,7 +21,8 @@ public class CategoryDao {
     public Category getById(int id) {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("from Category where id = " + id);
+        Query query = session.createQuery("from Category where id = :id");
+        query.setInteger("id", id);
         Category category = (Category) query.list().get(0);
         tx.commit();
         session.close();
@@ -41,8 +42,8 @@ public class CategoryDao {
     public Category getByProject(Project project) {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        Query query = session
-                .createQuery("select p.category from Project p inner join p.category where p.id = " + project.getId());
+        Query query = session.createQuery("select p.category from Project p inner join p.category where p.id = :id");
+        query.setInteger("id", project.getId());
         Category category = (Category) query.list().get(0);
         tx.commit();
         session.close();

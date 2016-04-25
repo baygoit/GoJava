@@ -30,7 +30,8 @@ public class ProjectDao {
     public Project getById(int id) {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("from Project where id = " + id);
+        Query query = session.createQuery("from Project where id = :id");
+        query.setInteger("id", id);
         Project project = (Project) query.list().get(0);
         tx.commit();
         session.close();
