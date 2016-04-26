@@ -44,6 +44,11 @@
             <version>${spring-version}</version>
         </dependency>
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit-version}</version>
@@ -93,7 +98,7 @@
 				<configuration>
 					<warSourceDirectory>src/main/webapp</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<outputDirectory>/home/andriy/JAVA/apache-tomcat-8.0.23/webapps</outputDirectory>
+					<outputDirectory>C:/dev/apps/apache-tomcat-7.0.65/webapps</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -25,8 +26,8 @@ public class Project {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "category_id")
-	private Long categoryId;
+	@ManyToOne
+	private Category category;
 
 	@Column(name = "name")
 	private String name;
@@ -52,15 +53,15 @@ public class Project {
 	@Column(name = "url")
 	private String url;
 	
-	@OneToMany(mappedBy = "project", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Question> questions;
 	
-	@OneToMany(mappedBy = "project", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Payment> payments;
 	
-	@OneToMany(mappedBy = "project", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Reward> rewards;
 
@@ -72,12 +73,12 @@ public class Project {
 		this.id = id;
 	}
 
-	public Long getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
 	public String getName() {

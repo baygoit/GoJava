@@ -13,7 +13,7 @@
                 	<ul class="breadcrumb">
                 		<li><a href="/">Home</a></li>
 						<li><a href="categories">Categories</a></li>
-						<li><a href="projects?categoryId=${project.categoryId}">Projects</a></li>
+						<li><a href="projects?categoryId=${project.category.id}">Projects</a></li>
 					</ul>
 					<h2>${project.name}</h2>
 					<div class="info_block">
