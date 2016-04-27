@@ -24,29 +24,27 @@ public class CategoryDao {
     private SessionFactory sessionFactory;
 
     public Category getById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            Query query = session.createQuery(GET_BY_ID_HQL);
-            query.setInteger("id", id);
-            Category category = (Category) query.list().get(0);
-            return category;
-        }
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery(GET_BY_ID_HQL);
+        query.setInteger("id", id);
+        Category category = (Category) query.list().get(0);
+        return category;
     }
 
     @SuppressWarnings("unchecked")
     public List<Category> getAll() {
-        try (Session session = sessionFactory.openSession()) {
-            Query query = session.createQuery(GET_ALL_HQL);
-            List<Category> categories = query.list();
-            return categories;
-        }
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery(GET_ALL_HQL);
+        List<Category> categories = query.list();
+        return categories;
+
     }
 
     public Category getByProject(Project project) {
-        try (Session session = sessionFactory.openSession()) {
-            Query query = session.createQuery(GET_BY_PROJECT_ID_HQL);
-            query.setInteger("id", project.getId());
-            Category category = (Category) query.list().get(0);
-            return category;
-        }
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery(GET_BY_PROJECT_ID_HQL);
+        query.setInteger("id", project.getId());
+        Category category = (Category) query.list().get(0);
+        return category;
     }
 }

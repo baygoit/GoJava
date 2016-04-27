@@ -19,9 +19,8 @@ public class RewardDao {
     private SessionFactory sessionFactory;
 
     public void getAllForProject(Project project) {
-        try (Session session = sessionFactory.openSession()) {
-            session.lock(project, LockMode.NONE);
-            Hibernate.initialize(project.getRewards());
-        }
+        Session session = sessionFactory.getCurrentSession();
+        session.lock(project, LockMode.NONE);
+        Hibernate.initialize(project.getRewards());
     }
 }

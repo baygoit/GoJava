@@ -18,16 +18,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="annotatedClasses">
-			<list>
-				<value>ua.dborisenko.kickstarter.domain.Quote</value>
-				<value>ua.dborisenko.kickstarter.domain.Reward</value>
-				<value>ua.dborisenko.kickstarter.domain.Question</value>
-				<value>ua.dborisenko.kickstarter.domain.Investment</value>
-				<value>ua.dborisenko.kickstarter.domain.Project</value>
-				<value>ua.dborisenko.kickstarter.domain.Category</value>
-			</list>
-		</property>
+		<property name="packagesToScan" value="ua.dborisenko.kickstarter.domain" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>

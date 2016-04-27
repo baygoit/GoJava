@@ -22,11 +22,10 @@ public class QuoteDao {
 
     @SuppressWarnings("unchecked")
     public Quote getRandom() {
-        try (Session session = sessionFactory.openSession()) {
-            Query query = session.createSQLQuery(GET_RANDOM_QUOTE_SQL).addEntity(Quote.class);
-            List<Quote> resultList = query.list();
-            Quote quote = resultList.get(0);
-            return quote;
-        }
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createSQLQuery(GET_RANDOM_QUOTE_SQL).addEntity(Quote.class);
+        List<Quote> resultList = query.list();
+        Quote quote = resultList.get(0);
+        return quote;
     }
 }

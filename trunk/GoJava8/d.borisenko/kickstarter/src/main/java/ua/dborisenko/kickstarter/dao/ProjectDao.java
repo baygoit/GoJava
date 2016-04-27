@@ -22,18 +22,16 @@ public class ProjectDao {
     private SessionFactory sessionFactory;
 
     public void getAllForCategory(Category category) {
-        try (Session session = sessionFactory.openSession()) {
-            session.lock(category, LockMode.NONE);
-            Hibernate.initialize(category.getProjects());
-        }
+        Session session = sessionFactory.getCurrentSession();
+        session.lock(category, LockMode.NONE);
+        Hibernate.initialize(category.getProjects());
     }
 
     public Project getById(int id) {
-        try (Session session = sessionFactory.openSession()) {
-            Query query = session.createQuery(GET_BY_ID_HQL);
-            query.setInteger("id", id);
-            Project project = (Project) query.list().get(0);
-            return project;
-        }
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery(GET_BY_ID_HQL);
+        query.setInteger("id", id);
+        Project project = (Project) query.list().get(0);
+        return project;
     }
 }

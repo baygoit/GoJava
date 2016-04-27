@@ -22,17 +22,15 @@ public class QuestionDao {
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
     public void add(Question question) {
-        try (Session session = sessionFactory.openSession()) {
-            session.save(question);
-            session.flush();
-        }
+        Session session = sessionFactory.getCurrentSession();
+        session.save(question);
+        session.flush();
     }
 
     public void getAllForProject(Project project) {
-        try (Session session = sessionFactory.openSession()) {
-            session.lock(project, LockMode.NONE);
-            Hibernate.initialize(project.getQuestions());
-        }
+        Session session = sessionFactory.getCurrentSession();
+        session.lock(project, LockMode.NONE);
+        Hibernate.initialize(project.getQuestions());
     }
 
 }

@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,6 +6,10 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="stylesheet" type="text/css" href="./css/main.css" />
+<script src="./js/jquery-2.2.3.min.js"></script>
+<c:if test="${null != script}">
+<script src="${script}"></script>
+</c:if>
 <title>Kickstarter: ${title}</title>
 </head>
 <body>

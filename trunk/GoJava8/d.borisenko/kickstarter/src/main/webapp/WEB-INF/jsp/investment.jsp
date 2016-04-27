@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="title" value="Investment" scope="request"/>
+<c:set var="script" value="./js/investment.js" scope="request"/>
 <jsp:include page="header.jsp"/>
 		<label class="subheader">Investment</label><br/><br/>
 		Project: ${project.name}<br/>
@@ -10,14 +11,14 @@
 			<input type="hidden" name="action" value="add_investment">
 			<input type="hidden" name="project_id" value="${project.id}">
 			<c:forEach var="reward" items="${rewards}">
-				<input type="radio" name="amount" value="${reward.amount}"/><label class="reward_amount">$ ${reward.amount}</label> - ${reward.description}<br/>
+				<input type="radio" name="amount" value="${reward.amount}" onclick="updateCustomAmount()"/><label class="reward_amount">$ ${reward.amount}</label> - ${reward.description}<br/>
 			</c:forEach>
-			<input type="radio" name="amount" value="0" checked/>Custom amount
+			<input id="radio_custom" type="radio" name="amount" value="0" checked onclick="updateCustomAmount()"/>Custom amount
 			<hr/>
-			Custom amount<br/>
-			<input type="number" name="custom_amount" max="2147483647" min="1" value="1"/><br/>
+			<label id="lb_custom_amount">Custom amount</label><br/>
+			<input id="in_custom_amount" type="number" name="custom_amount" max="2147483647" min="1" value="1"/><br/>
 			Cardholder name<br/>
-			<input type="text" name="cardholder_name"/><br/>
+			<input type="text" name="cardholder_name" autofocus/><br/>
 			Card number<br/>
 			<input type="text" name="card_number"/><br/>
 			<input class="button" type="submit" value="Invest"/><br/>

@@ -11,16 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.dborisenko.kickstarter.domain.Investment;
 
 @Repository
-@Transactional(propagation=Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
+@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
 public class InvestmentDao {
 
     @Autowired
-    private SessionFactory sessionFactory;
+        private SessionFactory sessionFactory;
 
     public void add(Investment investment) {
-        try (Session session = sessionFactory.openSession()) {
-            session.save(investment);
-            session.flush();
-        }
+        Session session = sessionFactory.getCurrentSession();
+        session.save(investment);
+        session.flush();
     }
 }
