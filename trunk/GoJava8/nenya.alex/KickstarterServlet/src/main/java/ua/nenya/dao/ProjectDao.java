@@ -6,8 +6,9 @@ import ua.nenya.domain.Project;
 
 public interface ProjectDao {
 
-	List<Project> getProjects(int id);
-	Project getProject(int proId);
+	List<Project> getProjectsByCategoryId(int id);
+	Project getProjectByProjectId(int proId);
 	boolean isProjectExist(int proId);
-	int getCategoryId(int proId);
+	void getProjectPayments(Project project);
+	long getPaymentSum(Project project);
 }

@@ -28,7 +28,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.nenya.dao.QuestionDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
-import ua.nenya.util.HibernateUtil;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

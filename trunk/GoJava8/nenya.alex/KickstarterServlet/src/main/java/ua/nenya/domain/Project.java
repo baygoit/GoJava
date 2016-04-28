@@ -1,10 +1,17 @@
 package ua.nenya.domain;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -12,23 +19,28 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "PROJECT")
 public class Project {
 	@Id
-	@GenericGenerator(name = "kaugen", strategy = "increment")
-	@GeneratedValue(generator = "kaugen")
+	@GenericGenerator(name = "project_id", strategy = "increment")
+	@GeneratedValue(generator = "project_id")
 	private int id;
-	@Column(name = "category_id")
-	private int categoryId;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 	@Column
 	private String name;
 	@Column
 	private String description;
 	@Column(name = "needed_amount")
 	private int neededAmount;
+	@Transient
+	private long availableAmount;
 	@Column(name = "remaining_days")
 	private int remainingDays;
 	@Column
 	private String history;
 	@Column
 	private String video;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	private List<Payment> payments; 
 	
 	public String getName() {
 		return name;
@@ -83,14 +95,6 @@ public class Project {
 		this.id = id;
 	}
 
-	public int getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-
 	public int getRemainingDays() {
 		return remainingDays;
 	}
@@ -99,4 +103,29 @@ public class Project {
 		this.remainingDays = remainingDays;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
+	}
+
+	public long getAvailableAmount() {
+		return availableAmount;
+	}
+
+	public void setAvailableAmount(long availableAmount) {
+		this.availableAmount = availableAmount;
+	}
+	
+	
 }

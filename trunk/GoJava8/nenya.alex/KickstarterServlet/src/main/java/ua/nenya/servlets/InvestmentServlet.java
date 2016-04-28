@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
 
@@ -33,7 +34,7 @@ public class InvestmentServlet extends CommonServlet {
 			return;
 		}
 
-		Project project = getProjectDao().getProject(proId);
+		Project project = getProjectDao().getProjectByProjectId(proId);
 		request.setAttribute("project", project);
 
 		List<Reward> rewards = getRewardDao().getRewards(proId);
@@ -45,6 +46,7 @@ public class InvestmentServlet extends CommonServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String amountString = request.getParameter("amount");
 		String projectId = request.getParameter("projectId");
 		int proId = 0;
@@ -56,6 +58,7 @@ public class InvestmentServlet extends CommonServlet {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
+		Payment payment;
 		if ("0".equals(amountString)) {
 			String investmentString = request.getParameter("investment");
 			int investment = 0;
@@ -66,12 +69,22 @@ public class InvestmentServlet extends CommonServlet {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 				return;
 			}
-			getInvestmentDao().writePaymentInProject(proId, investment);
+			payment = createPayment(proId, investment);
+			getInvestmentDao().writePaymentInProject(payment);
 		} else {
-			getInvestmentDao().writePaymentInProject(proId, Integer.parseInt(amountString));
+			payment = createPayment(proId, Integer.parseInt(amountString));
+			getInvestmentDao().writePaymentInProject(payment);
 		}
 
 		response.sendRedirect("projectServlet?projectId=" + proId);
+	}
+
+	private Payment createPayment(int proId, int investment) {
+		Payment payment = new Payment();
+		payment.setAmount(investment);
+		payment.setProject(getProjectDao().getProjectByProjectId(proId));
+		return payment;
+		
 	}
 
 }

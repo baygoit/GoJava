@@ -14,14 +14,12 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "QUESTION")
 public class Question{
 	@Id
-	@GenericGenerator(name = "kaugen", strategy = "increment")
-	@GeneratedValue(generator = "kaugen")
+	@GenericGenerator(name = "question_id", strategy = "increment")
+	@GeneratedValue(generator = "question_id")
 	private int id;
-//	@ManyToOne
-//	@JoinColumn(name = "project_id")
-//	private Project project;
-	@Column(name = "project_id")
-	private int projectId;
+	@ManyToOne
+	@JoinColumn(name = "project_id")
+	private Project project;
 	@Column
 	private String name;
 
@@ -38,25 +36,16 @@ public class Question{
 		return id;
 	}
 
-//	public Project getProject() {
-//		return project;
-//	}
-//
-//	public void setProject(Project project) {
-//		this.project = project;
-//	}
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public int getProjectId() {
-		return projectId;
-	}
-
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
-	}
-	
-	
 }

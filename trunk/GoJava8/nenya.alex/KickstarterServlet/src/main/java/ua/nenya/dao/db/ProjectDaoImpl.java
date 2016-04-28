@@ -1,99 +1,82 @@
 package ua.nenya.dao.db;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
+import org.hibernate.Hibernate;
+import org.hibernate.LockMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.nenya.dao.ProjectDao;
+import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
-import ua.nenya.util.HibernateUtil;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
 
+	private static final String GET_PROJECTS_BY_CATEGORY_ID = "FROM Project P WHERE P.category.id=:categoryId ORDER BY P.name";
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Project> getProjects(int categoryId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Transaction transaction = null;
-		List<Project> projects = null;
-		try (Session session = sessionFactory.openSession()) {
-			transaction = session.beginTransaction();
-			Criteria criteria = session.createCriteria(Project.class);
-			criteria.add(Restrictions.eq("categoryId", categoryId));
-			criteria.addOrder(Order.asc("name"));
-			projects = criteria.list();
-			transaction.commit();
-		} catch (HibernateException e) {
-			if (transaction != null)
-				transaction.rollback();
-			e.printStackTrace();
+	public List<Project> getProjectsByCategoryId(int categoryId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(GET_PROJECTS_BY_CATEGORY_ID);
+		query.setParameter("categoryId", categoryId);
+		List<Project> projects = query.list();
+		
+		List<Project> resultProjects = new ArrayList<>();
+		for(Project it: projects){
+			long sum = getPaymentSum(it);
+			it.setAvailableAmount(sum);
+			resultProjects.add(it);
 		}
-		return projects;
+		return resultProjects;
 	}
 
+	@Transactional(readOnly = true)
 	@Override
-	public Project getProject(int projectId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Transaction transaction = null;
-		Project project = null;
-		try (Session session = sessionFactory.openSession()) {
-			transaction = session.beginTransaction();
-			project = session.get(Project.class, projectId);
-			transaction.commit();
-		} catch (HibernateException e) {
-			if (transaction != null)
-				transaction.rollback();
-			e.printStackTrace();
-		}
-		return project;
+	public Project getProjectByProjectId(int projectId) {
+		Session session = sessionFactory.getCurrentSession();
+		return session.get(Project.class, projectId);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public boolean isProjectExist(int projectId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Transaction transaction = null;
-		long count = 0;
-		try (Session session = sessionFactory.openSession()) {
-			transaction = session.beginTransaction();
-			Criteria criteria = session.createCriteria(Project.class);
-			criteria.add(Restrictions.eq("id", projectId));
-			count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
-			transaction.commit();
-		} catch (HibernateException e) {
-			if (transaction != null)
-				transaction.rollback();
-			e.printStackTrace();
-		}
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Project.class);
+		criteria.add(Restrictions.eq("id", projectId));
+		long count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 		return count == 1;
 	}
 
+	@Transactional(readOnly = true)
 	@Override
-	public int getCategoryId(int projectId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Transaction transaction = null;
-		Project project = null;
-		try (Session session = sessionFactory.openSession()) {
-			transaction = session.beginTransaction();
-			Criteria criteria = session.createCriteria(Project.class);
-			criteria.add(Restrictions.eq("id", projectId));
-			project = session.get(Project.class, projectId);
-			transaction.commit();
-		} catch (HibernateException e) {
-			if (transaction != null)
-				transaction.rollback();
-			e.printStackTrace();
-		}
-		return project.getCategoryId();
+	public void getProjectPayments(Project project) {
+		Session session = sessionFactory.getCurrentSession();
+        session.lock(project, LockMode.NONE);
+        Hibernate.initialize(project.getPayments());
 	}
-	
 
+	@Transactional(readOnly = true)
+	@Override
+	public long getPaymentSum(Project project) {
+		long sum = 0;
+		List<Payment> payments = project.getPayments();
+		for(Payment it: payments){
+			sum = sum + it.getAmount();
+		}
+		return sum;
+	}
 }

@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -12,11 +13,11 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "REWARD")
 public class Reward{
 	@Id
-	@GenericGenerator(name = "kaugen", strategy = "increment")
-	@GeneratedValue(generator = "kaugen")
+	@GenericGenerator(name = "reward_id", strategy = "increment")
+	@GeneratedValue(generator = "reward_id")
 	private int id;
-	@Column(name = "project_id")
-	private int projectId;
+	@ManyToOne
+	private Project project;
 	@Column
 	private String name;
 	@Column
@@ -57,13 +58,13 @@ public class Reward{
 		this.id = id;
 	}
 
-	public int getProjectId() {
-		return projectId;
+	public Project getProject() {
+		return project;
+		
 	}
 
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
+	public void setProject(Project project) {
+		this.project = project;
 	}
-
 	
 }

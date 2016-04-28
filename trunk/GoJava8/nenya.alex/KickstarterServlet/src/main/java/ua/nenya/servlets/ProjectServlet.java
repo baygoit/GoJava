@@ -8,7 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.nenya.dao.PaymentDao;
+import ua.nenya.domain.Category;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
 
@@ -29,20 +29,20 @@ public class ProjectServlet extends CommonServlet {
 			return;
 		}
 		request.setAttribute("projectId", proId);
+		Project project = getProjectDao().getProjectByProjectId(proId);
 		
 		if(!getProjectDao().isProjectExist(proId)){
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
-		
-		PaymentDao investmentDao = getInvestmentDao();
-		long investmentSum = investmentDao.getPaymentSum(proId);
+		getProjectDao().getProjectPayments(project);
+		long investmentSum = getProjectDao().getPaymentSum(project);
 		request.setAttribute("investmentSum", investmentSum);
 		
-		int categoryId = getProjectDao().getCategoryId(proId);
-		request.setAttribute("categoryId", categoryId);
 		
-		Project project = getProjectDao().getProject(proId);
+		Category category = project.getCategory(); 
+		request.setAttribute("categoryId", category.getId());
+		
 		request.setAttribute("project", project);
 
 		List<Question> questions = getQuestionDao().getQuestions(proId);
@@ -55,15 +55,20 @@ public class ProjectServlet extends CommonServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String question = request.getParameter("question");
+		String questionStr = request.getParameter("question");
 		String projectId = request.getParameter("projectId");
 		int proId = Integer.valueOf(projectId);
-		if(!getQuestionDao().isQuestionAbsent(proId, question) | question.isEmpty()){
-			request.setAttribute("question", question);
+		
+		Question question = new Question();
+		question.setName(questionStr);
+		question.setProject(getProjectDao().getProjectByProjectId(proId));
+		
+		if(questionStr.isEmpty()){
+			request.setAttribute("question", questionStr);
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
-		getQuestionDao().writeQuestionInProject(proId, question);
+		getQuestionDao().writeQuestionInProject(question);
 		response.sendRedirect("projectServlet?projectId="+proId);
 	}
 
