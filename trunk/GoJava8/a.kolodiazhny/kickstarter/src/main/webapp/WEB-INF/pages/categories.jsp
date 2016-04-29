@@ -7,7 +7,10 @@
             </div>
             <div class="list-group categories">
             <c:forEach var="category" items="${categories}">
-                <a href="?view=category&id=${category.id}" class="list-group-item">${category.id} - ${category.name}</a>
+                <a href="?view=category&id=${category.id}" class="list-group-item">
+                    ${category.id} - ${category.name}
+                    <span class="badge">${category.projectCount}</span>
+                </a>
             </c:forEach>
             </div>
         </div>

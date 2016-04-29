@@ -1,13 +1,44 @@
 package com.sandarovich.kickstarter.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.SortNatural;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "project")
 public class Project {
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+    @Fetch(value = FetchMode.SUBSELECT)
+    List<Payment> payments;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+    @SortNatural
+    @Fetch(value = FetchMode.SUBSELECT)
+    List<Question> questions;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+    @SortNatural
+    @Fetch(value = FetchMode.SUBSELECT)
+    List<Award> awards;
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private long id;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "categoryid")
+    private Category category;
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
+    @Column(name = "required_budget")
     private double requiredBudget;
-    private double gatheredBudget;
+    @Column(name = "days_left")
     private int daysLeft;
+    @Column(name = "video_link")
     private String videoLink;
+    @Column(name = "history")
     private String history;
 
     public Project() {
@@ -69,12 +100,43 @@ public class Project {
         this.history = history;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public double getGatheredBudget() {
-        return gatheredBudget;
+        double result = 0;
+        for (Payment payment : payments) {
+            result += payment.getAmount();
+        }
+        return result;
     }
 
-    public void setGatheredBudget(double gatheredBudget) {
-        this.gatheredBudget = gatheredBudget;
+    public List<Payment> getPayments() {
+        return payments;
     }
 
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    public List<Award> getAwards() {
+        return awards;
+    }
+
+    public void setAwards(List<Award> awards) {
+        this.awards = awards;
+    }
 }
