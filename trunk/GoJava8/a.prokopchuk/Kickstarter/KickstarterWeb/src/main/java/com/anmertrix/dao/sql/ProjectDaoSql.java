@@ -2,13 +2,10 @@ package com.anmertrix.dao.sql;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,17 +17,16 @@ import com.anmertrix.domain.Question;
 @Repository
 public class ProjectDaoSql implements ProjectDao {
 	
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
 	public List<Project> getProjectsByCategoryId(long categoryId) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Project p where p.category.id=:categoryId");
+		Query query = em.createQuery("from Project p where p.category.id=:categoryId");
 		query.setParameter("categoryId", categoryId);
-		List<Project> projects = query.list();
+		List<Project> projects = query.getResultList();
 		projects.forEach(b -> b.setGatheredBudget(b.getPayments().stream().mapToLong(a -> a.getAmount()).sum()));
 		return projects;
 	}
@@ -38,19 +34,13 @@ public class ProjectDaoSql implements ProjectDao {
 	@Override
 	@Transactional(readOnly = true)
 	public boolean projectExists(long projectId){
-		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(Project.class);
-		criteria.add(Restrictions.eq("id", projectId));
-		criteria.setProjection(Projections.rowCount());
-		long count = (long) criteria.uniqueResult();
-		return count > 0;
+		return em.find(Project.class, projectId) != null;
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public Project getProjectById(long projectId) {
-		Session session = sessionFactory.getCurrentSession();
-		Project project = session.get(Project.class, projectId);
+		Project project = em.find(Project.class, projectId);
 		for (Question question : project.getQuestions()) {
 			question.getAnswers().size();
 		}
