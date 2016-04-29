@@ -6,7 +6,7 @@
 		<hr/>
 		<ul>
 		<c:forEach var="project" items="${projects}">
-			<li><a href="?page=project&id=${project.id}">${project.name}</a> (collected: ${project.collectedSum} / ${project.requiredSum}), ${project.daysLeft} days left: ${project.description}</li>
+			<li><a href="?page=project&id=${project.id}">${project.name}</a> (collected: ${project.collectedSum} / ${project.requiredSum}), ${project.remainingDays} days left: ${project.description}</li>
 		</c:forEach>
 		</ul>
 		<a href="?page=categories">Return</a>

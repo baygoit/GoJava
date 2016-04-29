@@ -18,7 +18,7 @@
 			</tr>
 			<tr>
 				<td>Days left to start:</td>
-				<td>${project.daysLeft}</td>
+				<td>${project.remainingDays}</td>
 			</tr>
 			<tr>
 				<td>History:</td>

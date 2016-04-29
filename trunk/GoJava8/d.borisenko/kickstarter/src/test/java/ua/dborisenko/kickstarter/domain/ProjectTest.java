@@ -36,7 +36,7 @@ public class ProjectTest {
             project.setDescription("testdescription");
             project.setHistory("testhistory");
             project.setVideoUrl("testvideourl");
-            project.setDaysLeft(10);
+            project.setRemainingDays(10);
             project.setRequiredSum(100);
             project.setCategory(category);
             session.save(category);
@@ -54,7 +54,7 @@ public class ProjectTest {
             assertThat(resultProject.getDescription(), is("testdescription"));
             assertThat(resultProject.getHistory(), is("testhistory"));
             assertThat(resultProject.getVideoUrl(), is("testvideourl"));
-            assertThat(resultProject.getDaysLeft(), is(10));
+            assertThat(resultProject.getRemainingDays(), is(10));
             assertThat(resultProject.getRequiredSum(), is(100));
         }
     }

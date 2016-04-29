@@ -27,8 +27,6 @@ public class Kickstarter extends HttpServlet {
     @Autowired
     private CategoryController categoryController;
     @Autowired
-    private QuestionController questionController;
-    @Autowired
     private ProjectController projectController;
     @Autowired
     private InvestmentController investmentController;
@@ -58,7 +56,7 @@ public class Kickstarter extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestedAction = request.getParameter(REQUESTED_ACTION_PARAM_NAME);
         if (REQUESTED_ACTION.add_question.toString().equals(requestedAction)) {
-            questionController.addQuestion(request, response);
+            projectController.addQuestion(request, response);
         } else if (REQUESTED_ACTION.add_investment.toString().equals(requestedAction)) {
             investmentController.addInvestment(request, response);
         } else {

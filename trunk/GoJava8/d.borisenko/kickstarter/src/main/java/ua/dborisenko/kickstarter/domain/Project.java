@@ -34,7 +34,7 @@ public class Project implements Comparable<Project> {
     @Column(name = "required_sum")
     private int requiredSum;
     @Column(name = "days_left")
-    private int daysLeft;
+    private int remainingDays;
     @Column(name = "video_url")
     private String videoUrl;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
@@ -94,12 +94,12 @@ public class Project implements Comparable<Project> {
         return collectedSum;
     }
 
-    public void setDaysLeft(int daysLeft) {
-        this.daysLeft = daysLeft;
+    public void setRemainingDays(int remainingDays) {
+        this.remainingDays = remainingDays;
     }
 
-    public int getDaysLeft() {
-        return daysLeft;
+    public int getRemainingDays() {
+        return remainingDays;
     }
 
     public void setVideoUrl(String videoURL) {
