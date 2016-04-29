@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
+import com.anmertrix.domain.Question;
 
 @Repository
 public class ProjectDaoSql implements ProjectDao {
@@ -50,6 +51,10 @@ public class ProjectDaoSql implements ProjectDao {
 	public Project getProjectById(long projectId) {
 		Session session = sessionFactory.getCurrentSession();
 		Project project = session.get(Project.class, projectId);
+		for (Question question : project.getQuestions()) {
+			question.getAnswers().size();
+		}
+		project.getRewards().size();
 		List<Payment> payments = project.getPayments();
 		long sum = payments.stream().mapToLong(b -> b.getAmount()).sum();
 		project.setGatheredBudget(sum);
