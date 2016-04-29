@@ -1,12 +1,13 @@
 package ua.nenya.domain;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,38 +20,34 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:aplicationContextTest.xml" })
-public class QuoteMappingTest {
+public class RewardMapingTest {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
 
 	@Test
-	public void testQuoteUsage() {
-		int id2;
-
+	public void testRewardUsage() {
+		int id;
 		try (Session session = sessionFactory.openSession()) {
+			Reward reward = new Reward();
+			reward.setAmount(100);
+			reward.setDescription("description");
+			reward.setName("reward");
 
-			Quote quote1 = new Quote();
-			quote1.setName("Quote1");
-			Quote quote2 = new Quote();
-			quote2.setName("Quote2");
-
-			int id1 = (int) session.save(quote1);
-			id2 = (int) session.save(quote2);
+			id = (int) session.save(reward);
 			session.flush();
 		}
-
 		try (Session session = sessionFactory.openSession()) {
+			List<Reward> rewards = session.createQuery("FROM Reward").list();
+			assertThat(rewards.get(0).getName(), is("reward"));
+			assertThat(rewards.get(0).getAmount(), is(100));
+			assertThat(rewards.get(0).getDescription(), is("description"));
 
-			List<Quote> quotes = session.createQuery("FROM Quote").list();
-			session.flush();
-			assertThat(quotes.get(0).getName(), is("Quote1"));
-			assertThat(quotes.get(1).getName(), is("Quote2"));
-
-			Quote quote = session.get(Quote.class, id2);
-			assertThat(quote.getName(), is("Quote2"));
-
+			Reward reward = session.get(Reward.class, id);
+			assertThat(reward.getName(), is("reward"));
+			assertThat(reward.getAmount(), is(100));
+			assertThat(reward.getDescription(), is("description"));
 		}
-
 	}
 }

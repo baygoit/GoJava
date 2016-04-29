@@ -2,41 +2,31 @@ package ua.nenya.dao.db;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.nenya.dao.RewardDao;
 import ua.nenya.domain.Reward;
-import ua.nenya.util.HibernateUtil;
 
 @Repository
 public class RewardDaoImpl implements RewardDao {
 
+	private static final String GET_REWARDS_BY_PROJECT_ID = "FROM Reward R WHERE R.project.id=:projectId ORDER BY R.id";
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	@Transactional
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Reward> getRewards(int projectId) {
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Transaction transaction = null;
-		List<Reward> rewards = null;
-		try (Session session = sessionFactory.openSession()) {
-			transaction = session.beginTransaction();
-			Criteria criteria = session.createCriteria(Reward.class);
-			criteria.add(Restrictions.eq("projectId", projectId));
-			criteria.addOrder(Order.asc("id"));
-			rewards = criteria.list();
-			transaction.commit();
-		} catch (HibernateException e) {
-			if (transaction != null)
-				transaction.rollback();
-			e.printStackTrace();
-		}
-		return rewards;
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(GET_REWARDS_BY_PROJECT_ID);
+		query.setParameter("projectId", projectId);
+		return query.list();
 	}
 
 }

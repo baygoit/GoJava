@@ -46,7 +46,7 @@ public class ProjectsServletTest {
 	public void testDoGetIdIsValidCategoryExists() throws ServletException, IOException {
 		when(request.getParameter("categoryId")).thenReturn("1");
 		when(categoryDao.isCategoryExist(1)).thenReturn(true);
-		when(projectDao.getProjects(1)).thenReturn(new ArrayList<Project>());
+		when(projectDao.getProjectsByCategoryId(1)).thenReturn(new ArrayList<Project>());
 
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
@@ -62,7 +62,7 @@ public class ProjectsServletTest {
 	public void testDoGetIdIsInvalidCategoryExists() throws ServletException, IOException {
 		when(request.getParameter("categoryId")).thenReturn("invalid");
 		when(categoryDao.isCategoryExist(1)).thenReturn(true);
-		when(projectDao.getProjects(1)).thenReturn(new ArrayList<Project>());
+		when(projectDao.getProjectsByCategoryId(1)).thenReturn(new ArrayList<Project>());
 
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
@@ -78,7 +78,7 @@ public class ProjectsServletTest {
 	public void testDoGetCategoryDoesntExist() throws ServletException, IOException {
 		when(request.getParameter("categoryId")).thenReturn("1");
 		when(categoryDao.isCategoryExist(1)).thenReturn(false);
-		when(projectDao.getProjects(1)).thenReturn(new ArrayList<Project>());
+		when(projectDao.getProjectsByCategoryId(1)).thenReturn(new ArrayList<Project>());
 		
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);

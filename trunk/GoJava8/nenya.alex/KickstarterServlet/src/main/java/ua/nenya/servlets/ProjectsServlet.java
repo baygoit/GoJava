@@ -37,10 +37,9 @@ public class ProjectsServlet extends CommonServlet {
 		}
 		request.setAttribute("categoryId", id);
 		ProjectDao projectDao = getProjectDao();
-		List<Project> projects = projectDao.getProjects(id);
+		List<Project> projects = projectDao.getProjectsByCategoryId(id);
 		
 		request.setAttribute("projects", projects);
-		
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/projects.jsp");
 		dispatcher.forward(request, response);

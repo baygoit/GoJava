@@ -3,8 +3,8 @@ package ua.nenya.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -13,11 +13,11 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "PAYMENT")
 public class Payment {
 	@Id
-	@GenericGenerator(name = "kaugen", strategy = "increment")
-	@GeneratedValue(generator = "kaugen")
+	@GenericGenerator(name = "payment_id", strategy = "increment")
+	@GeneratedValue(generator = "payment_id")
 	private int id;
-	@Column(name = "project_id")
-	private int projectId;
+	@ManyToOne
+	private Project project;
 	@Column
 	private int amount;
 	
@@ -38,11 +38,12 @@ public class Payment {
 		this.id = id;
 	}
 
-	public int getProjectId() {
-		return projectId;
+	public Project getProject() {
+		return project;
 	}
 
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
+	public void setProject(Project project) {
+		this.project = project;
 	}
+
 }

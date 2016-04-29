@@ -1,9 +1,9 @@
 package ua.nenya.dao;
 
+import ua.nenya.domain.Payment;
 
 public interface PaymentDao {
 	
-	long getPaymentSum(int projectId);
-	int writePaymentInProject(int i, int amount);
+	int writePaymentInProject(Payment payment);
 
 }

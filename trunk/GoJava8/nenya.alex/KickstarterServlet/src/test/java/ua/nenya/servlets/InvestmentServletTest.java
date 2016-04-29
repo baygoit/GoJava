@@ -49,7 +49,7 @@ public class InvestmentServletTest {
 	public void testDoGetProjectIdValidProjectExists() throws ServletException, IOException {
 		when(request.getParameter("projectId")).thenReturn("1");
 		when(projectDao.isProjectExist(1)).thenReturn(true);
-		when(projectDao.getProject(1)).thenReturn(new Project());
+		when(projectDao.getProjectByProjectId(1)).thenReturn(new Project());
 		when(rewardDao.getRewards(1)).thenReturn(new ArrayList<Reward>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
@@ -65,7 +65,7 @@ public class InvestmentServletTest {
 	public void testDoGetProjectIdInvalidProjectExists() throws ServletException, IOException {
 		when(request.getParameter("projectId")).thenReturn("uio");
 		when(projectDao.isProjectExist(1)).thenReturn(true);
-		when(projectDao.getProject(1)).thenReturn(new Project());
+		when(projectDao.getProjectByProjectId(1)).thenReturn(new Project());
 		when(rewardDao.getRewards(1)).thenReturn(new ArrayList<Reward>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
@@ -80,7 +80,7 @@ public class InvestmentServletTest {
 	public void testDoGetProjectIdValidProjectDoesntExist() throws ServletException, IOException {
 		when(request.getParameter("projectId")).thenReturn("1");
 		when(projectDao.isProjectExist(1)).thenReturn(false);
-		when(projectDao.getProject(1)).thenReturn(new Project());
+		when(projectDao.getProjectByProjectId(1)).thenReturn(new Project());
 		when(rewardDao.getRewards(1)).thenReturn(new ArrayList<Reward>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);

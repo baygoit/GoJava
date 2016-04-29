@@ -19,6 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ua.nenya.dao.QuoteDao;
+import ua.nenya.domain.Quote;
 
 
 

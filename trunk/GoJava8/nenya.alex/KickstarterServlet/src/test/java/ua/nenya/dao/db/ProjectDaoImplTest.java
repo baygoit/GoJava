@@ -62,14 +62,14 @@ public class ProjectDaoImplTest {
 			}
 		});
 		
-		List<Project> testProjects = projectDao.getProjects(10);
+		List<Project> testProjects = projectDao.getProjectsByCategoryId(10);
 		assertNotNull(testProjects);
 		assertThat(testProjects.get(0).getName(), is(projects.get(0).getName()));
 	}
 
 	@Test
 	public void testGetProject(){
-		Project testProject = projectDao.getProject(2);
+		Project testProject = projectDao.getProjectByProjectId(2);
 		assertThat(testProject.getName(), is(songProject2.getName()));
 	}
 
@@ -83,15 +83,11 @@ public class ProjectDaoImplTest {
 		assertThat(projectDao.isProjectExist(12), is(false));
 	}
 
-	@Test
-	public void testGetCategoryId() {
-		assertThat(projectDao.getCategoryId(1), is(10));
-	}
+	
 	
 	private static void initProjects() {
 		Project songProject1 = new Project();
 		songProject1.setId(1);
-		songProject1.setCategoryId(10);
 		songProject1.setName("song1");
 		songProject1.setDescription("Funny song!");
 		songProject1.setNeededAmount(2000);
@@ -101,7 +97,6 @@ public class ProjectDaoImplTest {
 		
 		songProject2 = new Project();
 		songProject2.setId(2);
-		songProject2.setCategoryId(10);
 		songProject2.setName("song2");
 		songProject2.setDescription("Sad song!");
 		songProject2.setNeededAmount(400);

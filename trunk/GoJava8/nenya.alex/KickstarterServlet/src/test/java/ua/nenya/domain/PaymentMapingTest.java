@@ -1,7 +1,7 @@
 package ua.nenya.domain;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -19,38 +19,27 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:aplicationContextTest.xml" })
-public class QuoteMappingTest {
+public class PaymentMapingTest {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-
 	@Test
-	public void testQuoteUsage() {
-		int id2;
-
+	public void testPaymentUsage() {
+		int id;
 		try (Session session = sessionFactory.openSession()) {
+			Payment payment = new Payment();
+			payment.setAmount(100);
 
-			Quote quote1 = new Quote();
-			quote1.setName("Quote1");
-			Quote quote2 = new Quote();
-			quote2.setName("Quote2");
-
-			int id1 = (int) session.save(quote1);
-			id2 = (int) session.save(quote2);
+			id = (int) session.save(payment);
 			session.flush();
 		}
-
 		try (Session session = sessionFactory.openSession()) {
+			List<Payment> payments = session.createQuery("FROM Payment").list();
+			assertThat(payments.get(0).getAmount(), is(100));
 
-			List<Quote> quotes = session.createQuery("FROM Quote").list();
-			session.flush();
-			assertThat(quotes.get(0).getName(), is("Quote1"));
-			assertThat(quotes.get(1).getName(), is("Quote2"));
-
-			Quote quote = session.get(Quote.class, id2);
-			assertThat(quote.getName(), is("Quote2"));
-
+			Payment payment = session.get(Payment.class, id);
+			assertThat(payment.getAmount(), is(100));
 		}
-
 	}
+
 }

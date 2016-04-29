@@ -3,7 +3,6 @@ package ua.nenya.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,8 +12,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "CATEGORY")
 public class Category{
 	@Id
-	@GenericGenerator(name = "kaugen", strategy = "increment")
-	@GeneratedValue(generator = "kaugen")
+	@GenericGenerator(name = "category_id", strategy = "increment")
+	@GeneratedValue(generator = "category_id")
 	private int id;
 	@Column
 	private String name;

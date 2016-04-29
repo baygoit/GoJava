@@ -27,6 +27,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ua.nenya.dao.PaymentDao;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.dao.QuestionDao;
+import ua.nenya.domain.Category;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
 
@@ -35,6 +36,10 @@ public class ProjectServletTest {
 	
 	@Mock
 	private PaymentDao investmentDao;
+	@Mock
+	private Project project;
+	@Mock
+	private Category category;
 	@Mock
 	private QuestionDao questionDao;
 	@Mock
@@ -52,9 +57,10 @@ public class ProjectServletTest {
 		when(projectDao.isProjectExist(1)).thenReturn(true);
 		
 		when(investmentDao.getPaymentSum(1)).thenReturn(100l);
-		when(projectDao.getCategoryId(1)).thenReturn(1);
 		
-		when(projectDao.getProject(1)).thenReturn(new Project());
+		when(projectDao.getProjectByProjectId(1)).thenReturn(project);
+		when(project.getCategory()).thenReturn(category);
+		
 		when(questionDao.getQuestions(1)).thenReturn(new ArrayList<Question>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
@@ -72,9 +78,10 @@ public class ProjectServletTest {
 		when(projectDao.isProjectExist(1)).thenReturn(true);
 		
 		when(investmentDao.getPaymentSum(1)).thenReturn(100l);
-		when(projectDao.getCategoryId(1)).thenReturn(1);
 		
-		when(projectDao.getProject(1)).thenReturn(new Project());
+		when(projectDao.getProjectByProjectId(1)).thenReturn(new Project());
+		when(project.getCategory()).thenReturn(new Category());
+		
 		when(questionDao.getQuestions(1)).thenReturn(new ArrayList<Question>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
@@ -91,9 +98,9 @@ public class ProjectServletTest {
 		when(request.getParameter("projectId")).thenReturn("1");
 		when(projectDao.isProjectExist(1)).thenReturn(false);
 		when(investmentDao.getPaymentSum(1)).thenReturn(100l);
-		when(projectDao.getCategoryId(1)).thenReturn(1);
 		
-		when(projectDao.getProject(1)).thenReturn(new Project());
+		when(projectDao.getProjectByProjectId(1)).thenReturn(new Project());
+		when(project.getCategory()).thenReturn(new Category());
 		when(questionDao.getQuestions(1)).thenReturn(new ArrayList<Question>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
@@ -110,9 +117,9 @@ public class ProjectServletTest {
 	public void testDoPostQuestionValid() throws ServletException, IOException {
 		when(request.getParameter("question")).thenReturn("Question");
 		when(request.getParameter("projectId")).thenReturn("1");
-		when(questionDao.isQuestionAbsent(1, "Question")).thenReturn(true);
+		when(questionDao.isQuestionAbsent(1, new Question())).thenReturn(true);
 		projectServlet.doPost(request, response);
-		verify(questionDao).writeQuestionInProject(1, "Question");
+		verify(questionDao).writeQuestionInProject(new Question());
 		verify(response).sendRedirect(anyString());
 	}
 	
@@ -120,7 +127,7 @@ public class ProjectServletTest {
 	public void testDoPostQuestionInvalid() throws ServletException, IOException {
 		when(request.getParameter("question")).thenReturn("Question");
 		when(request.getParameter("projectId")).thenReturn("1");
-		when(questionDao.isQuestionAbsent(1, "Question")).thenReturn(false);
+		when(questionDao.isQuestionAbsent(1, new Question())).thenReturn(false);
 		projectServlet.doPost(request, response);
 	}
 }
