@@ -20,7 +20,7 @@ public class Payment {
 	
 	@ManyToOne
 	@JoinColumn(name = "project_id")
-	private Project project_p;
+	private Project project;
 	
 	@Column(name = "card_number")
 	private String cardNumber;
@@ -57,10 +57,10 @@ public class Payment {
 		this.amount = amount;
 	}
 	public Project getProject() {
-		return project_p;
+		return project;
 	}
 	public void setProject(Project project) {
-		this.project_p = project;
+		this.project = project;
 	}
 	
 }

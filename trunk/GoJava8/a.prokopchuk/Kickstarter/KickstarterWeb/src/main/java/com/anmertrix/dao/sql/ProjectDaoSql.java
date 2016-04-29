@@ -50,8 +50,6 @@ public class ProjectDaoSql implements ProjectDao {
 	public Project getProjectById(long projectId) {
 		Session session = sessionFactory.getCurrentSession();
 		Project project = session.get(Project.class, projectId);
-		project.getQuestions();
-		project.getRewards();
 		List<Payment> payments = project.getPayments();
 		long sum = payments.stream().mapToLong(b -> b.getAmount()).sum();
 		project.setGatheredBudget(sum);

@@ -26,8 +26,8 @@ public class ProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String ADD_QUESTION = "ADD_QUESTION";
 	private static final String ADD_PAYMENT = "ADD_PAYMENT";
-	static final String PROJECT_OUT_URL = "project?projectId=";
-	static final String PROJECT_JSP_PATH = "/WEB-INF/jsp/project.jsp";
+	private static final String PROJECT_OUT_URL = "project?projectId=";
+	private static final String PROJECT_JSP_PATH = "/WEB-INF/jsp/project.jsp";
 	
 	@Autowired
 	private ProjectDao projectDao;
