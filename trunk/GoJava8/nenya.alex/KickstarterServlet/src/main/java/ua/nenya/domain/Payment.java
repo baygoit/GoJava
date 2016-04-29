@@ -16,11 +16,12 @@ public class Payment {
 	@GenericGenerator(name = "payment_id", strategy = "increment")
 	@GeneratedValue(generator = "payment_id")
 	private int id;
+	
 	@ManyToOne
 	private Project project;
+	
 	@Column
 	private int amount;
-	
 	
 	public int getAmount() {
 		return amount;

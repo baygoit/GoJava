@@ -22,23 +22,32 @@ public class Project {
 	@GenericGenerator(name = "project_id", strategy = "increment")
 	@GeneratedValue(generator = "project_id")
 	private int id;
+	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
+	
 	@Column
 	private String name;
+	
 	@Column
 	private String description;
+	
 	@Column(name = "needed_amount")
 	private int neededAmount;
+	
 	@Transient
 	private long availableAmount;
+	
 	@Column(name = "remaining_days")
 	private int remainingDays;
+	
 	@Column
 	private String history;
+	
 	@Column
 	private String video;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
 	private List<Payment> payments; 
 	
@@ -70,26 +79,21 @@ public class Project {
 		this.video = video;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
 	public void setNeededAmount(int allAmount) {
 		this.neededAmount = allAmount;
 	}
 
-
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
@@ -126,6 +130,5 @@ public class Project {
 	public void setAvailableAmount(long availableAmount) {
 		this.availableAmount = availableAmount;
 	}
-	
 	
 }

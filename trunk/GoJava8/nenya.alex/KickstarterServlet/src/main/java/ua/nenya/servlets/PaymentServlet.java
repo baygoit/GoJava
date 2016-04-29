@@ -12,7 +12,7 @@ import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
 
-public class InvestmentServlet extends CommonServlet {
+public class PaymentServlet extends CommonServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,18 +29,18 @@ public class InvestmentServlet extends CommonServlet {
 		}
 		request.setAttribute("projectId", proId);
 		
-		if(!getProjectDao().isProjectExist(proId)){
+		if(!projectDao.isProjectExist(proId)){
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
 
-		Project project = getProjectDao().getProjectByProjectId(proId);
+		Project project = projectDao.getProjectByProjectId(proId);
 		request.setAttribute("project", project);
 
-		List<Reward> rewards = getRewardDao().getRewards(proId);
+		List<Reward> rewards = rewardDao.getRewards(proId);
 		request.setAttribute("rewards", rewards);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/investment.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/payment.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -70,10 +70,10 @@ public class InvestmentServlet extends CommonServlet {
 				return;
 			}
 			payment = createPayment(proId, investment);
-			getInvestmentDao().writePaymentInProject(payment);
+			paymentDao.writePaymentInProject(payment);
 		} else {
 			payment = createPayment(proId, Integer.parseInt(amountString));
-			getInvestmentDao().writePaymentInProject(payment);
+			paymentDao.writePaymentInProject(payment);
 		}
 
 		response.sendRedirect("projectServlet?projectId=" + proId);
@@ -82,9 +82,8 @@ public class InvestmentServlet extends CommonServlet {
 	private Payment createPayment(int proId, int investment) {
 		Payment payment = new Payment();
 		payment.setAmount(investment);
-		payment.setProject(getProjectDao().getProjectByProjectId(proId));
+		payment.setProject(projectDao.getProjectByProjectId(proId));
 		return payment;
-		
 	}
 
 }

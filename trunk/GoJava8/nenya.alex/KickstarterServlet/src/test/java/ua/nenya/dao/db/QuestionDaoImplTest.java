@@ -29,7 +29,7 @@ import ua.nenya.dao.QuestionDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
 
-
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 public class QuestionDaoImplTest {
@@ -79,68 +79,27 @@ public class QuestionDaoImplTest {
 		assertThat(testQuestions.get(0).getName(), is(questions.get(0).getName()));
 
 	}
-//	@Ignore
-//	@Test
-//	public void testGetQuestionsByProjectName() {
-//		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-//		Session session = sessionFactory.openSession();
-//
-//		Project project = new Project();
-//		String name = "projectName";
-//		project.setName(name);
-//		project.setDescription("description");
-//		project.setNeededAmount(123);
-//		project.setRemainingDays(12);
-//
-//		session.save(project);
-//		session.flush();
-//
-//		Question question = new Question();
-////		question.setProject(project);
-//		question.setId(1);
-//		question.setName("question");
-//
-//		session.save(question);
-//		session.flush();
-//
-//		List<Question> testQuestions = questionDao.getByProjectName(name);
-//		assertThat(testQuestions.isEmpty(), is(false));
-//	}
 
 	@Test
 	public void testWriteQuestionInProject() throws SQLException {
 
-		int id = questionDao.writeQuestionInProject(12, "Wow!?");
+		int id = questionDao.writeQuestionInProject(new Question());
 		assertThat(id, is(4));
 	}
 	
-	@Test
-	public void testIsQuestionAbsentNo() {
-		boolean testQuestion = questionDao.isQuestionAbsent(22, "What?");
-		assertThat(testQuestion, is(false));
-	}
-	
-	@Test
-	public void testIsQuestionAbsentYes() {
-		boolean testQuestion = questionDao.isQuestionAbsent(22, "Why?");
-		assertThat(testQuestion, is(true));
-	}
 	
 	private static void initQuestions() {
 		Question question1 = new Question();
 		question1.setId(1);
 		question1.setName("Why?");
-		question1.setProjectId(12);
 		
 		Question question2 = new Question();
 		question2.setId(2);
 		question2.setName("Who?");
-		question2.setProjectId(12);
 		
 		question3 = new Question();
 		question3.setId(3);
 		question3.setName("What?");
-		question3.setProjectId(22);
 		questions.add(question1);
 		questions.add(question2);
 	}

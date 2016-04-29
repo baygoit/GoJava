@@ -22,7 +22,7 @@ import ua.nenya.dao.QuoteDao;
 import ua.nenya.domain.Quote;
 
 
-
+@Ignore
 @ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class QuoteDaoDbImplTest{

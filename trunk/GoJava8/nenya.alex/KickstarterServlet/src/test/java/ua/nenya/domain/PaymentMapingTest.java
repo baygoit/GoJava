@@ -23,6 +23,8 @@ public class PaymentMapingTest {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testPaymentUsage() {
 		int id;

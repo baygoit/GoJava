@@ -16,8 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hamcrest.core.AnyOf;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -56,7 +54,7 @@ public class ProjectServletTest {
 		when(request.getParameter("projectId")).thenReturn("1");
 		when(projectDao.isProjectExist(1)).thenReturn(true);
 		
-		when(investmentDao.getPaymentSum(1)).thenReturn(100l);
+		when(projectDao.getPaymentSum(project)).thenReturn(100l);
 		
 		when(projectDao.getProjectByProjectId(1)).thenReturn(project);
 		when(project.getCategory()).thenReturn(category);
@@ -77,7 +75,7 @@ public class ProjectServletTest {
 		when(request.getParameter("projectId")).thenReturn("invalidId");
 		when(projectDao.isProjectExist(1)).thenReturn(true);
 		
-		when(investmentDao.getPaymentSum(1)).thenReturn(100l);
+		when(projectDao.getPaymentSum(project)).thenReturn(100l);
 		
 		when(projectDao.getProjectByProjectId(1)).thenReturn(new Project());
 		when(project.getCategory()).thenReturn(new Category());
@@ -97,7 +95,7 @@ public class ProjectServletTest {
 	public void testDoGetProjectDoesntExist() throws ServletException, IOException {
 		when(request.getParameter("projectId")).thenReturn("1");
 		when(projectDao.isProjectExist(1)).thenReturn(false);
-		when(investmentDao.getPaymentSum(1)).thenReturn(100l);
+		when(projectDao.getPaymentSum(project)).thenReturn(100l);
 		
 		when(projectDao.getProjectByProjectId(1)).thenReturn(new Project());
 		when(project.getCategory()).thenReturn(new Category());
@@ -117,17 +115,9 @@ public class ProjectServletTest {
 	public void testDoPostQuestionValid() throws ServletException, IOException {
 		when(request.getParameter("question")).thenReturn("Question");
 		when(request.getParameter("projectId")).thenReturn("1");
-		when(questionDao.isQuestionAbsent(1, new Question())).thenReturn(true);
+		when(questionDao.writeQuestionInProject(new Question())).thenReturn(1);
 		projectServlet.doPost(request, response);
-		verify(questionDao).writeQuestionInProject(new Question());
 		verify(response).sendRedirect(anyString());
 	}
 	
-	@Test
-	public void testDoPostQuestionInvalid() throws ServletException, IOException {
-		when(request.getParameter("question")).thenReturn("Question");
-		when(request.getParameter("projectId")).thenReturn("1");
-		when(questionDao.isQuestionAbsent(1, new Question())).thenReturn(false);
-		projectServlet.doPost(request, response);
-	}
 }

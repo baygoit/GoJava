@@ -24,6 +24,7 @@ public class QuoteMappingTest {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testQuoteUsage() {
 		int id2;
@@ -35,7 +36,7 @@ public class QuoteMappingTest {
 			Quote quote2 = new Quote();
 			quote2.setName("Quote2");
 
-			int id1 = (int) session.save(quote1);
+			session.save(quote1);
 			id2 = (int) session.save(quote2);
 			session.flush();
 		}

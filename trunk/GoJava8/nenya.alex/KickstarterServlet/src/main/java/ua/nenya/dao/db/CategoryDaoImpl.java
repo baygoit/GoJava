@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.nenya.dao.CategoryDao;
 import ua.nenya.domain.Category;
 
+
+@Transactional(readOnly = true)
 @Repository
 public class CategoryDaoImpl implements CategoryDao {
 
@@ -22,7 +24,6 @@ public class CategoryDaoImpl implements CategoryDao {
 	private SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
-	@Transactional(readOnly = true)
 	@Override
 	public List<Category> getCategories() {
 		Session session = sessionFactory.getCurrentSession();
@@ -31,7 +32,6 @@ public class CategoryDaoImpl implements CategoryDao {
 		return criteria.list();
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	public boolean isCategoryExist(int categoryId) {
 		Session session = sessionFactory.getCurrentSession();

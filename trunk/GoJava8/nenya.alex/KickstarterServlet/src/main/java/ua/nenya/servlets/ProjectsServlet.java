@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Project;
 
 public class ProjectsServlet extends CommonServlet {
@@ -29,14 +28,13 @@ public class ProjectsServlet extends CommonServlet {
 			return;
 		}
 				
-		if(!getCategoryDao().isCategoryExist(id)){
+		if(!categoryDao.isCategoryExist(id)){
 			request.setAttribute("categoryId", id);
 			request.setAttribute("categoryTestId", -1);
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
 		request.setAttribute("categoryId", id);
-		ProjectDao projectDao = getProjectDao();
 		List<Project> projects = projectDao.getProjectsByCategoryId(id);
 		
 		request.setAttribute("projects", projects);

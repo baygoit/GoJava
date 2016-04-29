@@ -9,7 +9,7 @@
     <p>
         <a href="projectServlet?projectId=${projectId}"> Back </a>
     </p>
-	<form action="investmentServlet" method="POST">
+	<form action="paymentServlet" method="POST">
 	<p><input type="radio" name="amount" value="0" checked/>Any amount </p>
 		<c:forEach var="reward" items="${rewards}" varStatus="varStatus">
 			<p><input type="radio" name="amount" value="${reward.amount}">${reward.name} - ${reward.description}</p>

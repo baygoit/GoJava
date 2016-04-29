@@ -1,6 +1,5 @@
 package ua.nenya.servlets;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
@@ -19,44 +18,25 @@ public class CommonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
-	private QuoteDao quoteDao;
+	protected QuoteDao quoteDao;
+	
 	@Autowired
-	private CategoryDao categoryDao;
+	protected CategoryDao categoryDao;
+	
 	@Autowired
-	private ProjectDao projectDao;
+	protected ProjectDao projectDao;
+	
 	@Autowired
-	private QuestionDao questionDao;
+	protected QuestionDao questionDao;
+	
 	@Autowired
-	private PaymentDao investmentDao;
+	protected PaymentDao paymentDao;
+	
 	@Autowired
-	private RewardDao rewardDao;
+	protected RewardDao rewardDao;
 	
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-	}
-
-	public QuoteDao getQuoteDao() {
-		return quoteDao;
-	}
-
-	public CategoryDao getCategoryDao() {
-		return categoryDao;
-	}
-
-	public ProjectDao getProjectDao() {
-		return projectDao;
-	}
-
-	public QuestionDao getQuestionDao() {
-		return questionDao;
-	}
-
-	public PaymentDao getInvestmentDao() {
-		return investmentDao;
-	}
-
-	public RewardDao getRewardDao() {
-		return rewardDao;
 	}
 
 }

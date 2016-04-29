@@ -15,6 +15,7 @@ public class Category{
 	@GenericGenerator(name = "category_id", strategy = "increment")
 	@GeneratedValue(generator = "category_id")
 	private int id;
+	
 	@Column
 	private String name;
 	
@@ -33,6 +34,4 @@ public class Category{
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	
 }

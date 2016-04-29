@@ -17,12 +17,13 @@ public class Question{
 	@GenericGenerator(name = "question_id", strategy = "increment")
 	@GeneratedValue(generator = "question_id")
 	private int id;
+	
 	@ManyToOne
 	@JoinColumn(name = "project_id")
 	private Project project;
+	
 	@Column
 	private String name;
-
 
 	public String getName() {
 		return name;

@@ -19,6 +19,7 @@ import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
 
+@Transactional(readOnly = true)
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
 
@@ -26,7 +27,6 @@ public class ProjectDaoImpl implements ProjectDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Project> getProjectsByCategoryId(int categoryId) {
@@ -44,14 +44,12 @@ public class ProjectDaoImpl implements ProjectDao {
 		return resultProjects;
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	public Project getProjectByProjectId(int projectId) {
 		Session session = sessionFactory.getCurrentSession();
 		return session.get(Project.class, projectId);
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	public boolean isProjectExist(int projectId) {
 		Session session = sessionFactory.getCurrentSession();
@@ -61,7 +59,6 @@ public class ProjectDaoImpl implements ProjectDao {
 		return count == 1;
 	}
 
-	@Transactional(readOnly = true)
 	@Override
 	public void getProjectPayments(Project project) {
 		Session session = sessionFactory.getCurrentSession();
@@ -69,7 +66,7 @@ public class ProjectDaoImpl implements ProjectDao {
         Hibernate.initialize(project.getPayments());
 	}
 
-	@Transactional(readOnly = true)
+	
 	@Override
 	public long getPaymentSum(Project project) {
 		long sum = 0;
@@ -79,4 +76,5 @@ public class ProjectDaoImpl implements ProjectDao {
 		}
 		return sum;
 	}
+	
 }

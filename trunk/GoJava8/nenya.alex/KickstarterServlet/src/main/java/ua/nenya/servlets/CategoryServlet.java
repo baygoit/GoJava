@@ -16,9 +16,9 @@ public class CategoryServlet extends CommonServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Quote quote = getQuoteDao().getRandomQuote();
+		Quote quote = quoteDao.getRandomQuote();
 		request.setAttribute("quote", quote);
-		List<Category> categories = getCategoryDao().getCategories();
+		List<Category> categories = categoryDao.getCategories();
 		request.setAttribute("categories", categories);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/categories.jsp");

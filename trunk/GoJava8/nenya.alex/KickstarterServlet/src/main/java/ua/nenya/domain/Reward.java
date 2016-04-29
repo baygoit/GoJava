@@ -16,15 +16,18 @@ public class Reward{
 	@GenericGenerator(name = "reward_id", strategy = "increment")
 	@GeneratedValue(generator = "reward_id")
 	private int id;
+	
 	@ManyToOne
 	private Project project;
+	
 	@Column
 	private String name;
+	
 	@Column
 	private int amount;
+	
 	@Column
 	private String description;
-	
 
 	public void setName(String name) {
 		this.name = name;
@@ -60,7 +63,6 @@ public class Reward{
 
 	public Project getProject() {
 		return project;
-		
 	}
 
 	public void setProject(Project project) {

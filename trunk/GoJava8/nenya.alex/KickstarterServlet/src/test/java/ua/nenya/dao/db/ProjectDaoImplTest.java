@@ -23,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Project;
-
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 public class ProjectDaoImplTest {

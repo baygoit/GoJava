@@ -26,6 +26,7 @@ public class CategoryMappingTest {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testCategoryUsage() {
 		int id;

@@ -12,7 +12,6 @@ import ua.nenya.domain.Category;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
 
-
 public class ProjectServlet extends CommonServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -29,23 +28,22 @@ public class ProjectServlet extends CommonServlet {
 			return;
 		}
 		request.setAttribute("projectId", proId);
-		Project project = getProjectDao().getProjectByProjectId(proId);
-		
-		if(!getProjectDao().isProjectExist(proId)){
+		Project project = projectDao.getProjectByProjectId(proId);
+
+		if (!projectDao.isProjectExist(proId)) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
-		getProjectDao().getProjectPayments(project);
-		long investmentSum = getProjectDao().getPaymentSum(project);
+		projectDao.getProjectPayments(project);
+		long investmentSum = projectDao.getPaymentSum(project);
 		request.setAttribute("investmentSum", investmentSum);
-		
-		
-		Category category = project.getCategory(); 
+
+		Category category = project.getCategory();
 		request.setAttribute("categoryId", category.getId());
-		
+
 		request.setAttribute("project", project);
 
-		List<Question> questions = getQuestionDao().getQuestions(proId);
+		List<Question> questions = questionDao.getQuestions(proId);
 		request.setAttribute("questions", questions);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/project.jsp");
@@ -58,18 +56,13 @@ public class ProjectServlet extends CommonServlet {
 		String questionStr = request.getParameter("question");
 		String projectId = request.getParameter("projectId");
 		int proId = Integer.valueOf(projectId);
-		
+
 		Question question = new Question();
 		question.setName(questionStr);
-		question.setProject(getProjectDao().getProjectByProjectId(proId));
-		
-		if(questionStr.isEmpty()){
-			request.setAttribute("question", questionStr);
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-			return;
-		}
-		getQuestionDao().writeQuestionInProject(question);
-		response.sendRedirect("projectServlet?projectId="+proId);
+		question.setProject(projectDao.getProjectByProjectId(proId));
+
+		questionDao.writeQuestionInProject(question);
+		response.sendRedirect("projectServlet?projectId=" + proId);
 	}
 
 }

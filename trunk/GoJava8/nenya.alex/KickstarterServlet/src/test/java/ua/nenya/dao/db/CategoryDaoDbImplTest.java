@@ -2,6 +2,7 @@ package ua.nenya.dao.db;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 public class CategoryDaoDbImplTest {

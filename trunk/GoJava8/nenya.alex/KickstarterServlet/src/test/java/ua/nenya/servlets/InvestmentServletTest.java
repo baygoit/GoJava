@@ -16,7 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -26,6 +25,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ua.nenya.dao.PaymentDao;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.dao.RewardDao;
+import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
 
@@ -43,7 +43,7 @@ public class InvestmentServletTest {
 	@Mock
 	private HttpServletResponse response;
 	@InjectMocks
-	private InvestmentServlet invesmentServlet = spy(InvestmentServlet.class);
+	private PaymentServlet invesmentServlet = spy(PaymentServlet.class);
 	
 	@Test
 	public void testDoGetProjectIdValidProjectExists() throws ServletException, IOException {
@@ -96,8 +96,8 @@ public class InvestmentServletTest {
 	public void testDoPostProjectIdValidAmountIsntO() throws ServletException, IOException {
 		when(request.getParameter("amount")).thenReturn("100");
 		when(request.getParameter("projectId")).thenReturn("1");
+		when(investmentDao.writePaymentInProject(new Payment())).thenReturn(1);
 		invesmentServlet.doPost(request, response);
-		verify(investmentDao).writePaymentInProject(1, 100);
 		verify(response).sendRedirect(anyString());
 	}
 	@Test
@@ -105,8 +105,8 @@ public class InvestmentServletTest {
 		when(request.getParameter("amount")).thenReturn("0");
 		when(request.getParameter("projectId")).thenReturn("1");
 		when(request.getParameter("investment")).thenReturn("100");
+		when(investmentDao.writePaymentInProject(new Payment())).thenReturn(1);
 		invesmentServlet.doPost(request, response);
-		verify(investmentDao).writePaymentInProject(1, 100);
 		verify(response).sendRedirect(anyString());
 	}
 	

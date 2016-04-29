@@ -26,6 +26,7 @@ public class QuestionMappingTest {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testQuestionUsage() {
 		int id;
@@ -41,7 +42,6 @@ public class QuestionMappingTest {
 			assertThat(questions.get(0).getName(), is("What?"));
 
 			Question question = session.get(Question.class, id);
-			//assertThat(question.getProject(), is(project));
 			assertThat(question.getName(), is("What?"));
 		}
 	}

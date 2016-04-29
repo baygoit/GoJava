@@ -27,6 +27,7 @@ public class ProjectMapingTest {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testProjectUsage() {
 		int id;
