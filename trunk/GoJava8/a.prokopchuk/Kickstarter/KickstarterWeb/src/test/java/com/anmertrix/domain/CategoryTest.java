@@ -14,4 +14,11 @@ public class CategoryTest {
 		assertThat(category.getName(), is("test2"));
 	}
 	
+	@Test
+	public void setGetIdTest() {
+		Category category = new Category();
+		category.setId(22L);
+		assertThat(category.getId(), is(22L));
+	}
+	
 }

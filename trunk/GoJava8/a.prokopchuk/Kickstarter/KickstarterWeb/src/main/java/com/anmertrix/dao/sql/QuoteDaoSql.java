@@ -24,17 +24,18 @@ public class QuoteDaoSql implements QuoteDao {
 
 	@Transactional(readOnly = true, isolation = Isolation.SERIALIZABLE)
 	public Quote getRandomQuote() {
-		try (Session session = sessionFactory.openSession()) {
-			long count = (long) session.createCriteria(Quote.class).setProjection(Projections.rowCount()).uniqueResult();
-			if (count < 1) {
-				throw new NoResultException("Where is my quote?");
-			}
-
-			int index = new Random().nextInt((int) count);
-			Criteria crit = session.createCriteria(Quote.class);
-			crit.setFirstResult(index);
-			crit.setMaxResults(1);
-			return (Quote) crit.uniqueResult();
+		Session session = sessionFactory.getCurrentSession();
+		long count = (long) session.createCriteria(Quote.class)
+				.setProjection(Projections.rowCount()).uniqueResult();
+		if (count < 1) {
+			throw new NoResultException("Where is my quote?");
 		}
+
+		int index = new Random().nextInt((int) count);
+		Criteria crit = session.createCriteria(Quote.class);
+		crit.setFirstResult(index);
+		crit.setMaxResults(1);
+		return (Quote) crit.uniqueResult();
+
 	}
 }

@@ -32,5 +32,12 @@ public class PaymentTest {
 		payment.setAmount(30);
 		assertThat(payment.getAmount(), is(30));
 	}
+	
+	@Test
+	public void setGetProjectTest() {
+		Project project = new Project();
+		payment.setProject(project);
+		assertThat(payment.getProject(), is(project));
+	}
 
 }

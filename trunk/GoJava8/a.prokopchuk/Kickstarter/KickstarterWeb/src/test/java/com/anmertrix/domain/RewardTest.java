@@ -32,5 +32,12 @@ public class RewardTest {
 		reward.setDescription("test description");
 		assertThat(reward.getDescription(), is("test description"));
 	}
+	
+	@Test
+	public void setGetProjectTest() {
+		Project project = new Project();
+		reward.setProject(project);
+		assertThat(reward.getProject(), is(project));
+	}
 
 }

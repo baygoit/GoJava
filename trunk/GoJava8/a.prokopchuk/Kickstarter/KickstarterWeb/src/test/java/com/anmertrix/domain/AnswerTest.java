@@ -20,5 +20,12 @@ public class AnswerTest {
 		answer.setAnswer("testAnswer");
 		assertThat(answer.getAnswer(), is("testAnswer"));
 	}
+	
+	@Test
+	public void setGetQuestionTest() {
+		Question question = new Question();
+		answer.setQuestion(question);
+		assertThat(answer.getQuestion(), is(question));
+	}
 
 }

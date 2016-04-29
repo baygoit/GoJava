@@ -43,16 +43,12 @@ public class ProjectServlet extends HttpServlet {
 		if (project == null) {
 			return;
 		}
-		long projectId = project.getId();
-		project.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(projectId));
-		
 		LocalDate finalDate = project.getFinalDate().toLocalDate();
 		LocalDate today = LocalDate.now();
-		
 		if (today.isBefore(finalDate)) {
 			project.setDaysLeft((int) ChronoUnit.DAYS.between(today, finalDate));
 		}
-
+		
 		request.setAttribute("project", project);
 		getServletContext().getRequestDispatcher(PROJECT_JSP_PATH).forward(request, response);
 	}

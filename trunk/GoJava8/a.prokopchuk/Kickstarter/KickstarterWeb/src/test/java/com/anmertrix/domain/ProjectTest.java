@@ -3,6 +3,10 @@ package com.anmertrix.domain;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import com.anmertrix.domain.Project;
@@ -41,17 +45,50 @@ public class ProjectTest {
 		project.setRequiredBudget(10);
 		assertThat(project.getRequiredBudget(), is(10));
 	}
-
+	
 	@Test
-	public void setGetCollectedSumTest() {
+	public void setGetGatheredBudgetTest() {
 		project.setGatheredBudget(100);
 		assertThat(project.getGatheredBudget(), is(100L));
+	}
+	
+	@Test
+	public void setGetFinalDateTest() {
+		project.setFinalDate(new Date(111111111));
+		assertThat(project.getFinalDate(), is(new Date(111111111)));
+	}
+	
+	@Test
+	public void setGetDaysLeftTest() {
+		project.setDaysLeft(33);
+		assertThat(project.getDaysLeft(), is(33));
 	}
 
 	@Test
 	public void setGetUrlTest() {
 		project.setUrl("qqq");
 		assertThat(project.getUrl(), is("qqq"));
+	}
+	
+	@Test
+	public void setGetQuestionsTest() {
+		List<Question> questions = new ArrayList<>();
+		project.setQuestions(questions);
+		assertThat(project.getQuestions(), is(questions));
+	}
+	
+	@Test
+	public void setGetPaymentsTest() {
+		List<Payment> payments = new ArrayList<>();
+		project.setPayments(payments);
+		assertThat(project.getPayments(), is(payments));
+	}
+	
+	@Test
+	public void setGetRewardsTest() {
+		List<Reward> rewards = new ArrayList<>();
+		project.setRewards(rewards);
+		assertThat(project.getRewards(), is(rewards));
 	}
 
 }

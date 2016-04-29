@@ -53,16 +53,14 @@ public class Project {
 	@Column(name = "url")
 	private String url;
 	
-	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "project_q", fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Question> questions;
 	
-	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)
+	@OneToMany(mappedBy = "project_p", fetch = FetchType.EAGER)
 	private List<Payment> payments;
 	
-	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)
+	@OneToMany(mappedBy = "project_r", fetch = FetchType.EAGER)
 	private List<Reward> rewards;
 
 	public long getId() {

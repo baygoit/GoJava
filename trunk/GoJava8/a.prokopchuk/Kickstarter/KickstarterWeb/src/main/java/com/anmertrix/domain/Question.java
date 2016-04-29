@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,12 +24,12 @@ public class Question {
 	
 	@ManyToOne
 	@JoinColumn(name = "project_id")
-	private Project project;
+	private Project project_q;
 	
 	@Column
 	private String question;
 	
-	@OneToMany(mappedBy = "question")
+	@OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
 	private List<Answer> answers;
 
 	public Long getId() {
@@ -48,11 +49,11 @@ public class Question {
 	}
 	
 	public Project getProject() {
-		return project;
+		return project_q;
 	}
 
 	public void setProject(Project project) {
-		this.project = project;
+		this.project_q = project;
 	}
 
 	public List<Answer> getAnswers() {

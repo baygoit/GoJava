@@ -20,7 +20,7 @@ public class Reward {
 	
 	@ManyToOne
 	@JoinColumn(name = "project_id")
-	private Project project;
+	private Project project_r;
 	
 	@Column
 	private String name;
@@ -56,9 +56,9 @@ public class Reward {
 		this.description = description;
 	}
 	public Project getProject() {
-		return project;
+		return project_r;
 	}
 	public void setProject(Project project) {
-		this.project = project;
+		this.project_r = project;
 	}
 }
