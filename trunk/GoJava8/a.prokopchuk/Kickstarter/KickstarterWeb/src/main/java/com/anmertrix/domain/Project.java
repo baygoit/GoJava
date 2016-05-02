@@ -9,12 +9,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name = "project")
+@NamedQueries({ 
+	@NamedQuery(name = "Project.getProjects", query = "from Project p where p.category.id=:categoryId"),  
+	@NamedQuery(name = "Project.count", query = "SELECT COUNT(p) AS cnt FROM Project p")
+ })
 public class Project {
 	
 	@Id

@@ -11,8 +11,8 @@ public class RewardTest {
 	
 	@Test
 	public void setGetIdTest() {
-		reward.setId(34);
-		assertThat(reward.getId(), is(34));
+		reward.setId(34L);
+		assertThat(reward.getId(), is(34L));
 	}
 	
 	@Test

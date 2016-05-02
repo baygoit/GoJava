@@ -1,5 +1,7 @@
 package com.anmertrix.dao.sql;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,6 +15,15 @@ import com.anmertrix.domain.Question;
 public class QuestionDaoSql implements QuestionDao {
 	@PersistenceContext
 	private EntityManager em;
+	
+	@Override
+	@Transactional
+	public List<Question> getQuestionsByProjectId(long projectId) {
+		List<Question> questions = em.createNamedQuery("Question.getQuestions", Question.class)
+				.setParameter("projectId", projectId).getResultList();
+		questions.forEach(b -> b.getAnswers().size());
+		return questions;
+	}
 
 	@Override
 	@Transactional

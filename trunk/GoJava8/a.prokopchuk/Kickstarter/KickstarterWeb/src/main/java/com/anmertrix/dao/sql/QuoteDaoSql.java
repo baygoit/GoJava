@@ -17,6 +17,6 @@ public class QuoteDaoSql implements QuoteDao {
 
 	@Transactional(readOnly = true)
 	public Quote getRandomQuote() {
-		return em.find(Quote.class, 1l);
+ 		return em.createNamedQuery("Quote.getRandom", Quote.class).setMaxResults(1).getSingleResult();
 	}
 }

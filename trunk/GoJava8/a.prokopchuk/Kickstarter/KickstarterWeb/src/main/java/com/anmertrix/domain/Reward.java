@@ -7,16 +7,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "reward")
+@NamedQuery(name = "Reward.getRewards", query = "from Reward r where r.project.id=:projectId")
 public class Reward {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private int id;
+	private long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "project_id")
@@ -31,10 +33,10 @@ public class Reward {
 	@Column
 	private String description;
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getName() {

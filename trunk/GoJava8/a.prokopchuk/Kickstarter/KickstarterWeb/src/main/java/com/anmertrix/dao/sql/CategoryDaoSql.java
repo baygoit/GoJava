@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,20 +24,35 @@ public class CategoryDaoSql implements CategoryDao {
 	@Override
 	@Transactional(readOnly = true)
 	public Category getCategory(long categoryId) {
-		return em.find(Category.class, categoryId);
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Category> criteria = criteriaBuilder.createQuery(Category.class);
+		Root<Category> category = criteria.from(Category.class);
+		TypedQuery<Category> query = em.createQuery(
+		    criteria.select(category).where(criteriaBuilder.equal(category.get("id"), categoryId)));
+		return query.getSingleResult();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public boolean categoryExists(long categoryId) {
-		return em.find(Category.class, categoryId) != null;
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+		Root<Category> category = criteriaQuery.from(Category.class);
+		criteriaQuery.select(criteriaBuilder.count(category));
+		criteriaQuery.where(criteriaBuilder.equal(category.get("id"), categoryId));
+		TypedQuery<Long> typedQuery = em.createQuery(criteriaQuery);
+		return typedQuery.getSingleResult() > 0;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
 	public List<Category> getCategories() {
-		return em.createQuery("from Category").getResultList();
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Category> criteria = criteriaBuilder.createQuery(Category.class);
+		Root<Category> category = criteria.from(Category.class);
+		TypedQuery<Category> query = em.createQuery(criteria.select(category));
+		return query.getResultList();
+		//return em.createNamedQuery("Category.getCategories", Category.class).getResultList();
 	}
 
 }

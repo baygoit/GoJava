@@ -3,6 +3,7 @@ package com.anmertrix.servlet;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +18,11 @@ import com.anmertrix.dao.NoResultException;
 import com.anmertrix.dao.PaymentDao;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.dao.QuestionDao;
+import com.anmertrix.dao.RewardDao;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
+import com.anmertrix.domain.Reward;
 
 public class ProjectServlet extends HttpServlet {
 
@@ -33,6 +36,8 @@ public class ProjectServlet extends HttpServlet {
 	private ProjectDao projectDao;
 	@Autowired
 	private PaymentDao paymentDao;
+	@Autowired
+	private RewardDao rewardDao;
 	@Autowired
 	private AnswerDao answerDao;
 	@Autowired
@@ -48,7 +53,14 @@ public class ProjectServlet extends HttpServlet {
 		if (today.isBefore(finalDate)) {
 			project.setDaysLeft((int) ChronoUnit.DAYS.between(today, finalDate));
 		}
+		long projectId = project.getId();
+		List<Reward> rewards = rewardDao.getRewards(projectId);
+		List<Payment> payments = paymentDao.getPaymentsByProjectId(projectId);
+		List<Question> questions = questionDao.getQuestionsByProjectId(projectId);
 		
+		request.setAttribute("questions", questions);
+		request.setAttribute("rewards", rewards);
+		request.setAttribute("payments", payments);
 		request.setAttribute("project", project);
 		getServletContext().getRequestDispatcher(PROJECT_JSP_PATH).forward(request, response);
 	}

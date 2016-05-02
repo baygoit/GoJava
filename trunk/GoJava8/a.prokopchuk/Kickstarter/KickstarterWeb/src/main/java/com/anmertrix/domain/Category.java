@@ -9,6 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "category")
+//@NamedQueries({ @NamedQuery(name = "Category.getCategories", query = "SELECT c from Category c") })
 public class Category {
 	
 	@Id
