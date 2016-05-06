@@ -2,52 +2,46 @@ package ua.nenya.dao.db;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.nenya.dao.QuoteDao;
 import ua.nenya.domain.Quote;
 
-
-@Ignore
+@Transactional
 @ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class QuoteDaoDbImplTest{
 
-	private EmbeddedDatabase db;
 	@Autowired
 	private QuoteDao quoteDao;
 	
+	@PersistenceContext
+	private EntityManager em;
+	
 	@Before
 	public void setUp() {
-		db = new EmbeddedDatabaseBuilder()
-	    		.setType(EmbeddedDatabaseType.H2)
-	    		.addScript("/createQuote.sql")
-	    		.addScript("/insertQuote.sql")
-	    		.build();
-	}
-
-	@After
-	public void tearDown() {
-		db = new EmbeddedDatabaseBuilder()
-	    		.setType(EmbeddedDatabaseType.H2)
-	    		.addScript("/deleteQuote.sql")
-	    		.build();
+		Quote quote = new Quote();
+		quote.setName("Quote1");
+		em.persist(quote);
 	}
 	
+	@After
+	public void tearDown() {
+		em.createQuery("DELETE FROM Quote").executeUpdate();
+	}
 	
 	@Test
 	public void testGetRandomQuote() throws SQLException {

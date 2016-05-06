@@ -5,6 +5,6 @@ import java.util.List;
 import ua.nenya.domain.Question;
 
 public interface QuestionDao {
-	List<Question> getQuestions(int proId);
-	int writeQuestionInProject(Question question);
+	List<Question> getQuestions(Long proId);
+	Question writeQuestionInProject(Question question);
 }

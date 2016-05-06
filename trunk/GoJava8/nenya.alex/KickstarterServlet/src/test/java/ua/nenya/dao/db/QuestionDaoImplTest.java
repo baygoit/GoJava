@@ -6,101 +6,86 @@ import static org.junit.Assert.assertThat;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.nenya.dao.QuestionDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
 
-@Ignore
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 public class QuestionDaoImplTest {
 
-	private static EmbeddedDatabase db;
+	@PersistenceContext
+	private EntityManager em;
+	
 	@Autowired
 	private QuestionDao questionDao;
 
-	private static List<Question> questions = new ArrayList<>();
-	private static Question question3;
+	private List<Question> questions = new ArrayList<>();
+	private Question question = new Question();
+	private Project pro;
 
-	@BeforeClass
-	public static void setUp() {
+	private Question q2;
+
+	@Before
+	public void setUp() {
+		question.setName("Why?");
 		initQuestions();
-
-		db = new EmbeddedDatabaseBuilder()
-	    		.setType(EmbeddedDatabaseType.H2)
-	    		//.addScript("/createProject.sql")
-	    		.addScript("/createQuestion.sql")
-	    		//.addScript("/insertProject.sql")
-	    		.addScript("/insertQuestion.sql")
-	    		.build();
 	}
-
-
-	@AfterClass
-	public static void tearDown() {
-		db = new EmbeddedDatabaseBuilder()
-	    		.setType(EmbeddedDatabaseType.H2)
-	    		.addScript("/deleteQuestion.sql")
-//				.addScript("/deleteProject.sql")
-	    		.build();
+	
+	@After
+	public void tearDown() {
+		em.createQuery("DELETE FROM Question").executeUpdate();
+		em.createQuery("DELETE FROM Project").executeUpdate();
 	}
-
+	
 	@Test
 	public void testGetQuestions() {
-
-		Collections.sort(questions, new Comparator<Question>() {
-			@Override
-			public int compare(Question o1, Question o2) {
-				return o1.getId()-o2.getId();
-			}
-		});
-		
-		List<Question> testQuestions = questionDao.getQuestions(12);
+		List<Question> testQuestions = questionDao.getQuestions(pro.getId());
 		assertNotNull(testQuestions);
 		assertThat(testQuestions.get(0).getName(), is(questions.get(0).getName()));
-
+		assertThat(testQuestions.get(1).getName(), is(q2.getName()));
+		assertThat(testQuestions.get(1).getId(), is(q2.getId()));
 	}
 
 	@Test
 	public void testWriteQuestionInProject() throws SQLException {
-
-		int id = questionDao.writeQuestionInProject(new Question());
-		assertThat(id, is(4));
+		Question newQuestion = questionDao.writeQuestionInProject(question);
+		Question questionTest = em.find(Question.class, newQuestion.getId());
+		assertThat(questionTest.getName(), is(question.getName()));
 	}
 	
-	
-	private static void initQuestions() {
+	private void initQuestions() {
+		Project project = new Project();
+		project.setName("project");
+		pro = em.merge(project);
+		
 		Question question1 = new Question();
-		question1.setId(1);
-		question1.setName("Why?");
+		question1.setName("Who?");
+		question1.setProject(pro);
+		em.merge(question1);
 		
 		Question question2 = new Question();
-		question2.setId(2);
-		question2.setName("Who?");
+		question2.setName("What?");
+		question2.setProject(pro);
+		q2 = em.merge(question2);
 		
-		question3 = new Question();
-		question3.setId(3);
-		question3.setName("What?");
 		questions.add(question1);
 		questions.add(question2);
+
 	}
 }

@@ -2,10 +2,14 @@ package ua.nenya.dao.db;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,18 +19,21 @@ import ua.nenya.domain.Reward;
 @Repository
 public class RewardDaoImpl implements RewardDao {
 
-	private static final String GET_REWARDS_BY_PROJECT_ID = "FROM Reward R WHERE R.project.id=:projectId ORDER BY R.id";
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 
 	@Transactional
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Reward> getRewards(int projectId) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(GET_REWARDS_BY_PROJECT_ID);
-		query.setParameter("projectId", projectId);
-		return query.list();
+	public List<Reward> getRewards(Long projectId) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Reward> criteriaQuery = criteriaBuilder.createQuery(Reward.class);
+		Root<Reward> root = criteriaQuery.from(Reward.class);
+		criteriaQuery.select(root);
+		Predicate criteria = criteriaBuilder.equal(root.get("project").get("id"), projectId);
+		criteriaQuery.where(criteria);
+		criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
+		TypedQuery<Reward> typedQuery = em.createQuery(criteriaQuery);
+		return typedQuery.getResultList();
 	}
 
 }

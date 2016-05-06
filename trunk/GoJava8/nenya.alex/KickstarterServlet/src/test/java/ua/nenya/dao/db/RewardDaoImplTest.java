@@ -4,84 +4,81 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.nenya.dao.RewardDao;
+import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
-@Ignore
+
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 public class RewardDaoImplTest {
 
-	private EmbeddedDatabase db;
+	@PersistenceContext
+	private EntityManager em;
+	
 	@Autowired
 	private RewardDao rewardDao;
-
+	private Project pro;
 	private List<Reward> rewards = new ArrayList<>();
+
+	private Reward r2;
 
 	@Before
 	public void setUp() {
 		initRewards();
-		db = new EmbeddedDatabaseBuilder()
-	    		.setType(EmbeddedDatabaseType.H2)
-	    		.addScript("/createReward.sql")
-	    		.addScript("/insertReward.sql")
-	    		.build();
 	}
-
 
 	@After
-	public void tearDown() {
-		db = new EmbeddedDatabaseBuilder()
-	    		.setType(EmbeddedDatabaseType.H2)
-	    		.addScript("/deleteReward.sql")
-	    		.build();
+	public void tearDown(){
+		em.createQuery("DELETE FROM Reward").executeUpdate();
+		em.createQuery("DELETE FROM Project").executeUpdate();
 	}
+	
 	@Test
 	public void testGetRewards() {
-		Collections.sort(rewards, new Comparator<Reward>() {
-			@Override
-			public int compare(Reward o1, Reward o2) {
-				return o1.getId()-o2.getId();
-			}
-		});
-		
-		List<Reward> testRewards = rewardDao.getRewards(1);
+		List<Reward> testRewards = rewardDao.getRewards(pro.getId());
 		assertNotNull(testRewards);
-		assertThat(rewards.get(0).getName(), is(testRewards.get(0).getName()));
+		assertThat(testRewards.get(0).getName(), is(rewards.get(0).getName()));
+		assertThat(testRewards.get(1).getName(), is(r2.getName()));
+		assertThat(testRewards.get(1).getId(), is(r2.getId()));
 	}
 
-
 	private void initRewards() {
-		Reward reward100 = new Reward();
-		reward100.setId(1);
-		reward100.setAmount(100);
-		reward100.setName("100$");
-		reward100.setDescription("Reward100");
+		Project project = new Project();
+		project.setName("project");
+		pro = em.merge(project);
 		
-		Reward reward200 = new Reward();
-		reward200.setId(2);
-		reward200.setAmount(200);
-		reward200.setName("200$");
-		reward200.setDescription("Reward200");
+		Reward reward1 = new Reward();
+		reward1.setAmount(100);
+		reward1.setName("100$");
+		reward1.setDescription("Reward100");
+		reward1.setProject(pro);
 		
-		rewards.add(reward100);
-		rewards.add(reward200);
+		Reward reward2 = new Reward();
+		reward2.setAmount(200);
+		reward2.setName("200$");
+		reward2.setDescription("Reward200");
+		reward2.setProject(pro);
+
+		em.merge(reward1);
+		r2 = em.merge(reward2);
+		
+		rewards.add(reward1);
+		rewards.add(reward2);
+		
 	}
 }

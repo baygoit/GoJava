@@ -1,10 +1,9 @@
 package ua.nenya.dao.db;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import ua.nenya.dao.PaymentDao;
@@ -13,16 +12,14 @@ import ua.nenya.domain.Payment;
 @Repository
 public class PaymentDaoImpl implements PaymentDao {
 
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 
-	@Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
+	@Transactional
 	@Override
-	public int writePaymentInProject(Payment payment) {
-		Session session = sessionFactory.getCurrentSession();
-		int id = (int) session.save(payment);
-		return id;
+	public Payment writePaymentInProject(Payment payment) {
+		em.persist(payment);
+		return payment;
 	}
-
 	
 }

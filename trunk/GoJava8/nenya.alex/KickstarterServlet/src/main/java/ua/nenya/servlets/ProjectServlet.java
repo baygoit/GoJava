@@ -18,9 +18,9 @@ public class ProjectServlet extends CommonServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String projectId = request.getParameter("projectId");
-		int proId = 0;
+		Long proId = 0L;
 		try {
-			proId = Integer.valueOf(projectId);
+			proId = Long.valueOf(projectId);
 		} catch (NumberFormatException e) {
 			request.setAttribute("Id", projectId);
 			request.setAttribute("TestId", -1);
@@ -34,9 +34,6 @@ public class ProjectServlet extends CommonServlet {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
-		projectDao.getProjectPayments(project);
-		long investmentSum = projectDao.getPaymentSum(project);
-		request.setAttribute("investmentSum", investmentSum);
 
 		Category category = project.getCategory();
 		request.setAttribute("categoryId", category.getId());
@@ -55,7 +52,7 @@ public class ProjectServlet extends CommonServlet {
 			throws ServletException, IOException {
 		String questionStr = request.getParameter("question");
 		String projectId = request.getParameter("projectId");
-		int proId = Integer.valueOf(projectId);
+		Long proId = Long.valueOf(projectId);
 
 		Question question = new Question();
 		question.setName(questionStr);

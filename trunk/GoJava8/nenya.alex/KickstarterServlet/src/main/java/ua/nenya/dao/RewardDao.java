@@ -5,5 +5,5 @@ import java.util.List;
 import ua.nenya.domain.Reward;
 
 public interface RewardDao {
-	List<Reward> getRewards(int id);
+	List<Reward> getRewards(Long id);
 }

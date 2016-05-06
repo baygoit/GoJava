@@ -18,9 +18,9 @@ public class PaymentServlet extends CommonServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String projectId = request.getParameter("projectId");
-		int proId = 0;
+		Long proId = 0L;
 		try {
-			proId = Integer.parseInt(projectId);
+			proId = Long.parseLong(projectId);
 		} catch (NumberFormatException e) {
 			request.setAttribute("Id", projectId);
 			request.setAttribute("TestId", -1);
@@ -49,16 +49,15 @@ public class PaymentServlet extends CommonServlet {
 		
 		String amountString = request.getParameter("amount");
 		String projectId = request.getParameter("projectId");
-		int proId = 0;
+		Long proId = 0L;
 		try {
-			proId = Integer.parseInt(projectId);
+			proId = Long.parseLong(projectId);
 		} catch (NumberFormatException e) {
 			request.setAttribute("Id", projectId);
 			request.setAttribute("TestId", -1);
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
-		Payment payment;
 		if ("0".equals(amountString)) {
 			String investmentString = request.getParameter("investment");
 			int investment = 0;
@@ -69,17 +68,15 @@ public class PaymentServlet extends CommonServlet {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 				return;
 			}
-			payment = createPayment(proId, investment);
-			paymentDao.writePaymentInProject(payment);
+			paymentDao.writePaymentInProject(createPayment(proId, investment));
 		} else {
-			payment = createPayment(proId, Integer.parseInt(amountString));
-			paymentDao.writePaymentInProject(payment);
+			paymentDao.writePaymentInProject(createPayment(proId, Integer.parseInt(amountString)));
 		}
 
 		response.sendRedirect("projectServlet?projectId=" + proId);
 	}
 
-	private Payment createPayment(int proId, int investment) {
+	private Payment createPayment(Long proId, int investment) {
 		Payment payment = new Payment();
 		payment.setAmount(investment);
 		payment.setProject(projectDao.getProjectByProjectId(proId));

@@ -1,16 +1,13 @@
 package ua.nenya.dao.db;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.nenya.dao.CategoryDao;
 import ua.nenya.domain.Category;
@@ -25,38 +22,35 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-@Ignore
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
+@ContextConfiguration(locations = { "classpath:aplicationContextTest.xml" })
 public class CategoryDaoDbImplTest {
 
-	private static EmbeddedDatabase db;
+	@PersistenceContext
+	private EntityManager em;
+
 	@Autowired
 	private CategoryDao categoryDao;
-	private static List<Category> categories = new ArrayList<>();
-	
-	@BeforeClass
-	public static void setUp() {
-		initCategories();
-		
-		db = new EmbeddedDatabaseBuilder()
-	    		.setType(EmbeddedDatabaseType.H2)
-	    		.addScript("/createCategory.sql")
-	    		.addScript("/insertCategory.sql")
-	    		.build();
-	}
+	private List<Category> categories = new ArrayList<>();
+	private Category music;
+	private Category film;
 
-	@AfterClass
-	public static void tearDown() {
-		db = new EmbeddedDatabaseBuilder()
-	    		.setType(EmbeddedDatabaseType.H2)
-	    		.addScript("/deleteCategory.sql")
-	    		.build();
-	}
-	
-	@Test
-	public void testGetCategories(){
-		
+	@Before
+	public void init() {
+		Category musicCategory = new Category();
+		musicCategory.setName("Music");
+
+		Category filmCategory = new Category();
+		filmCategory.setName("Films");
+
+		film = em.merge(filmCategory);
+		music = em.merge(musicCategory);
+		categories.add(musicCategory);
+		categories.add(filmCategory);
 		Collections.sort(categories, new Comparator<Category>() {
 
 			@Override
@@ -64,35 +58,30 @@ public class CategoryDaoDbImplTest {
 				return o1.getName().compareTo(o2.getName());
 			}
 		});
-		
+	}
+	
+	@After
+	public void tearDown() {
+		em.createQuery("DELETE FROM Category").executeUpdate();
+	}
+
+	@Test
+	public void testGetCategories() {
 		List<Category> categoriesTest = categoryDao.getCategories();
 		assertNotNull(categoriesTest);
 		assertThat(categoriesTest.get(0).getName(), is(categories.get(0).getName()));
-
+		assertThat(categoriesTest.get(1).getName(), is("Music"));
+		assertThat(categoriesTest.get(1).getId(), is(music.getId()));
 	}
 
-	
 	@Test
 	public void testIsCategoryExistYes() throws SQLException {
-		assertThat(categoryDao.isCategoryExist(1), is(true));
+		assertThat(categoryDao.isCategoryExist(music.getId()), is(true));
+		assertThat(categoryDao.isCategoryExist(film.getId()), is(true));
 	}
-	
+
 	@Test
 	public void testIsCategoryExistNo() throws SQLException {
-		assertThat(categoryDao.isCategoryExist(3), is(false));
+		assertThat(categoryDao.isCategoryExist(3L), is(false));
 	}
-	
-
-	private static void initCategories() {
-		Category musicCategory = new Category();
-		musicCategory.setId(1);
-		musicCategory.setName("Music");
-		
-		Category filmCategory = new Category();
-		filmCategory.setId(2);
-		filmCategory.setName("Films");
-		categories.add(musicCategory);
-		categories.add(filmCategory);
-	}
-
 }

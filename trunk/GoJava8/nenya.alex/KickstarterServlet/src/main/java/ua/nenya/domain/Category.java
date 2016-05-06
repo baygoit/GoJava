@@ -3,18 +3,23 @@ package ua.nenya.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-
 @Entity
+@NamedQueries({ 
+	@NamedQuery(name = "Category.getCategories", query = "select c from Category c order by c.name"),
+	@NamedQuery(name = "Category.Count", query = "select count(c) from Category c where c.id=:categoryId"),
+	})
 @Table(name = "CATEGORY")
 public class Category{
 	@Id
-	@GenericGenerator(name = "category_id", strategy = "increment")
-	@GeneratedValue(generator = "category_id")
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 	
 	@Column
 	private String name;
@@ -27,11 +32,11 @@ public class Category{
 		this.name = name;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 }

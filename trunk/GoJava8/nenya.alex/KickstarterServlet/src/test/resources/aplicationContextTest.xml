@@ -22,6 +22,7 @@
     http://www.springframework.org/schema/task/spring-task-4.2.xsd">
 
     <context:component-scan base-package="ua.nenya" />
+    <context:annotation-config />
     
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver" />
@@ -29,24 +30,30 @@
         <property name="username" value="sa" />
         <property name="password" value="" />
     </bean>
-
-    <bean id="sessionFactory"
-        class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
+    
+    <bean id="entityManagerFactory"  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+     
+        <property name="dataSource" ref="dataSource" />
+ 
+        <property name="persistenceUnitName" value="demoJPAUnit" />
+         
         <property name="packagesToScan" value="ua.nenya.domain" />
-        <property name="hibernateProperties">
+ 
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+        </property>
+         
+        <property name="jpaProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
                 <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
                 <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
             </props>
         </property>
     </bean>
 
- <tx:annotation-driven />
-    <bean id="transactionManager"
-        class="org.springframework.orm.hibernate5.HibernateTransactionManager"
-        p:sessionFactory-ref="sessionFactory">
-    </bean>
-   <context:annotation-config transaction-manager="transactionManager" />
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+   <tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

@@ -3,18 +3,20 @@ package ua.nenya.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@NamedQuery(name = "Quote.Random", query = "select q from Quote q order by rand()")
 @Table(name = "QUOTE")
 public class Quote {
 	@Id
-	@GenericGenerator(name = "quote_id", strategy = "increment")
-	@GeneratedValue(generator = "quote_id")
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 	
 	@Column
 	private String name;
@@ -27,11 +29,11 @@ public class Quote {
 		this.name = name;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

@@ -2,26 +2,33 @@ package ua.nenya.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@NamedQueries({ 
+	@NamedQuery(name = "Project.getByCategoryId", query = "select p from Project p where p.category.id=:categoryId order by p.name"),
+	@NamedQuery(name = "Project.Count", query = "select count(p) from Project p where p.id=:projectId"),
+	})
 @Table(name = "PROJECT")
 public class Project {
 	@Id
-	@GenericGenerator(name = "project_id", strategy = "increment")
-	@GeneratedValue(generator = "project_id")
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
@@ -48,7 +55,7 @@ public class Project {
 	@Column
 	private String video;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.PERSIST)
 	private List<Payment> payments; 
 	
 	public String getName() {
@@ -91,11 +98,11 @@ public class Project {
 		this.neededAmount = allAmount;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

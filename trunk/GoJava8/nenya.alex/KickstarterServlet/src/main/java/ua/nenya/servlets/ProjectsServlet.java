@@ -18,9 +18,9 @@ public class ProjectsServlet extends CommonServlet {
 			throws ServletException, IOException {
 		
 		String categoryId = request.getParameter("categoryId");
-		int id = 0;
+		Long catId = 0l;
 		try {
-			id = Integer.valueOf(categoryId);
+			catId = Long.valueOf(categoryId);
 		} catch (NumberFormatException e) {
 			request.setAttribute("Id", categoryId);
 			request.setAttribute("TestId", -1);
@@ -28,14 +28,14 @@ public class ProjectsServlet extends CommonServlet {
 			return;
 		}
 				
-		if(!categoryDao.isCategoryExist(id)){
-			request.setAttribute("categoryId", id);
+		if(!categoryDao.isCategoryExist(catId)){
+			request.setAttribute("categoryId", catId);
 			request.setAttribute("categoryTestId", -1);
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
-		request.setAttribute("categoryId", id);
-		List<Project> projects = projectDao.getProjectsByCategoryId(id);
+		request.setAttribute("categoryId", catId);
+		List<Project> projects = projectDao.getProjectsByCategoryId(catId);
 		
 		request.setAttribute("projects", projects);
 
