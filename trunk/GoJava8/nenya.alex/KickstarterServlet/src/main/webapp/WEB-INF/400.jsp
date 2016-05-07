@@ -29,7 +29,7 @@
 								</c:when>
 								<c:otherwise>
 									<p>
-										Attention!!! Question <b>${question}</b> already exists!!!
+										Attention!!! Question <b>${question}</b> in this project already exists!!!
 									</p>
 									<br />
 								</c:otherwise>

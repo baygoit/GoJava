@@ -1,10 +1,8 @@
 package ua.nenya.dao.db;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +41,6 @@ public class QuestionDaoImplTest {
 
 	@Before
 	public void setUp() {
-		question.setName("Why?");
 		initQuestions();
 	}
 	
@@ -63,10 +60,16 @@ public class QuestionDaoImplTest {
 	}
 
 	@Test
-	public void testWriteQuestionInProject() throws SQLException {
+	public void testWriteQuestionInProjectNewQuestion(){
 		Question newQuestion = questionDao.writeQuestionInProject(question);
 		Question questionTest = em.find(Question.class, newQuestion.getId());
 		assertThat(questionTest.getName(), is(question.getName()));
+	}
+	
+	@Test
+	public void testWriteQuestionInProjectOldQuestion(){
+		questionDao.writeQuestionInProject(question);
+		assertNull(questionDao.writeQuestionInProject(question));
 	}
 	
 	private void initQuestions() {
@@ -86,6 +89,8 @@ public class QuestionDaoImplTest {
 		
 		questions.add(question1);
 		questions.add(question2);
-
+		
+		question.setName("Why?");
+		question.setProject(pro);
 	}
 }

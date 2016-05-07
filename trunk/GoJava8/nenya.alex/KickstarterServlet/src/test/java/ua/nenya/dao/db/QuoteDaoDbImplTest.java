@@ -7,8 +7,6 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-import java.sql.SQLException;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -44,7 +42,7 @@ public class QuoteDaoDbImplTest{
 	}
 	
 	@Test
-	public void testGetRandomQuote() throws SQLException {
+	public void testGetRandomQuote(){
 		assertNotNull(quoteDao.getRandomQuote());
 	}
 

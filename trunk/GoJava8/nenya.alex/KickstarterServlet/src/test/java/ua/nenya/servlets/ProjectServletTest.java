@@ -33,6 +33,8 @@ import ua.nenya.domain.Question;
 public class ProjectServletTest {
 	
 	@Mock
+	private Question question;
+	@Mock
 	private PaymentDao investmentDao;
 	@Mock
 	private Project project;
@@ -110,9 +112,19 @@ public class ProjectServletTest {
 	public void testDoPostQuestionValid() throws ServletException, IOException {
 		when(request.getParameter("question")).thenReturn("Question");
 		when(request.getParameter("projectId")).thenReturn("1");
+		when(questionDao.writeQuestionInProject((Question) anyObject())).thenReturn(question);
 		projectServlet.doPost(request, response);
-		verify(questionDao).writeQuestionInProject((Question) anyObject());
 		verify(response).sendRedirect(anyString());
+		
 	}
-	
+
+	@Test
+	public void testDoPostQuestionInvalid() throws ServletException, IOException {
+		when(request.getParameter("question")).thenReturn("Question");
+		when(request.getParameter("projectId")).thenReturn("1");
+		when(questionDao.writeQuestionInProject((Question) anyObject())).thenReturn(null);
+		projectServlet.doPost(request, response);
+		verify(response).sendError(anyInt());
+		
+	}
 }

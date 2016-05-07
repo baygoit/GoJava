@@ -16,7 +16,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -75,13 +74,13 @@ public class CategoryDaoDbImplTest {
 	}
 
 	@Test
-	public void testIsCategoryExistYes() throws SQLException {
+	public void testIsCategoryExistYes(){
 		assertThat(categoryDao.isCategoryExist(music.getId()), is(true));
 		assertThat(categoryDao.isCategoryExist(film.getId()), is(true));
 	}
 
 	@Test
-	public void testIsCategoryExistNo() throws SQLException {
+	public void testIsCategoryExistNo(){
 		assertThat(categoryDao.isCategoryExist(3L), is(false));
 	}
 }

@@ -22,7 +22,7 @@ public class RewardDaoImpl implements RewardDao {
 	@PersistenceContext
 	private EntityManager em;
 
-	@Transactional
+	@Transactional(readOnly = true)
 	@Override
 	public List<Reward> getRewards(Long projectId) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();

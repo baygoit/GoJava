@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -19,10 +20,11 @@ import ua.nenya.domain.Question;
 @Transactional
 @Repository
 public class QuestionDaoImpl implements QuestionDao {
-	
+
 	@PersistenceContext
-	private EntityManager em; 
-	
+	private EntityManager em;
+
+	@Transactional(readOnly = true)
 	@Override
 	public List<Question> getQuestions(Long projectId) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
@@ -35,11 +37,24 @@ public class QuestionDaoImpl implements QuestionDao {
 		TypedQuery<Question> typedQuery = em.createQuery(criteriaQuery);
 		return typedQuery.getResultList();
 	}
-	
+
 	@Override
 	public Question writeQuestionInProject(Question question) {
-		em.persist(question);
+		if (!isQuestionExist(question)) {
+			em.persist(question);
+		} else {
+			question = null;
+		}
 		return question;
+	}
+
+	@Transactional(readOnly = true)
+	private boolean isQuestionExist(Question question) {
+		Query query = em.createNamedQuery("Question.Count");
+		query.setParameter("name", question.getName());
+		query.setParameter("projectId", question.getProject().getId());
+		long count = (long) query.getSingleResult();
+		return count==1;
 	}
 
 }

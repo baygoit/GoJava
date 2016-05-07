@@ -7,9 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQuery(name = "Question.Count", query = "select count(q) from Question q where q.name=:name and q.project.id=:projectId")
 @Table(name = "QUESTION")
 public class Question{
 	@Id

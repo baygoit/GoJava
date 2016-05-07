@@ -58,8 +58,15 @@ public class ProjectServlet extends CommonServlet {
 		question.setName(questionStr);
 		question.setProject(projectDao.getProjectByProjectId(proId));
 
-		questionDao.writeQuestionInProject(question);
-		response.sendRedirect("projectServlet?projectId=" + proId);
+		Question savedQuestion = questionDao.writeQuestionInProject(question);
+		if(savedQuestion != null){
+			response.sendRedirect("projectServlet?projectId=" + proId);
+		}else{
+			request.setAttribute("question", question.getName());
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+		}
+		
+		
 	}
 
 }
