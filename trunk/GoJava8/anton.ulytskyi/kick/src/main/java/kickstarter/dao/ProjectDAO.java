@@ -11,20 +11,21 @@ import kickstarter.domain.Project;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ProjectDAO  {
+public class ProjectDAO {
 
 	@PersistenceContext
-    protected EntityManager emf;
-	
+	protected EntityManager emf;
 
 	@SuppressWarnings("unchecked")
 	public List<Project> findProjectsOfCategory(String category) {
-		return emf.createQuery("from projects where category = '"+category+"'").getResultList();
+		return emf.createQuery(
+				"from projects where category = '" + category + "'")
+				.getResultList();
 	}
+
 	public Project openProject(int id) {
-		Query query = emf.createQuery("from projects where id = '"+id+"'");
+		Query query = emf.createQuery("from projects where id = '" + id + "'");
 		return (Project) query.getSingleResult();
 	}
 
 }
-

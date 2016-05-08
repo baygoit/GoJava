@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 
-
 import kickstarter.manager.Manager;
 
 public class Type extends HttpServlet {
@@ -21,7 +20,8 @@ public class Type extends HttpServlet {
 		Manager operator = new Manager();
 
 		String type = req.getQueryString();
-		HashMap<Integer, String> projects = operator.getAllProjectsByCategory(type);
+		HashMap<Integer, String> projects = operator
+				.getAllProjectsByCategory(type);
 
 		req.setAttribute("type", type);
 		req.setAttribute("projects", projects);

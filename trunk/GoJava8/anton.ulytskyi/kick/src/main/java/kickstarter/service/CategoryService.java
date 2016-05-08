@@ -8,14 +8,12 @@ import kickstarter.domain.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Service("CategoryService")
+public class CategoryService {
+	@Autowired
+	protected CategoryDAO dao;
 
-	@Service("CategoryService")
-	public class CategoryService {
-	    @Autowired
-	    protected CategoryDAO dao;
-
-	    public List<Category> findAll()
-	    {
-	        return this.dao.findAll();
-	    }
+	public List<Category> findAll() {
+		return this.dao.findAll();
 	}
+}

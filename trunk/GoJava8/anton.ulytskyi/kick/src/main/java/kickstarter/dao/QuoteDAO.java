@@ -13,13 +13,13 @@ import org.springframework.stereotype.Repository;
 public class QuoteDAO {
 
 	@PersistenceContext
-    protected EntityManager emf;
-	
+	protected EntityManager emf;
+
 	@SuppressWarnings("unchecked")
 	public List<Quote> findAll() {
-		
+
 		return emf.createQuery("from quotes q").getResultList();
-			
+
 	}
 
 }

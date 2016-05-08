@@ -23,13 +23,13 @@ public class Comments implements Serializable {
 
 	@Column(name = "id")
 	private int id;
-	
+
 	@Column(name = "date")
 	private Date date;
 
 	@Column(name = "author")
 	private String author;
-	
+
 	@Column(name = "text")
 	private String text;
 
@@ -73,8 +73,4 @@ public class Comments implements Serializable {
 		this.number = number;
 	}
 
-
-	
-
 }
-

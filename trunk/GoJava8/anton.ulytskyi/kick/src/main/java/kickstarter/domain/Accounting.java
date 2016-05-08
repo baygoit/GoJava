@@ -10,8 +10,8 @@ import javax.persistence.Table;
 
 @Entity(name = "accounting")
 @Table(name = "accounting")
-public class Accounting implements Serializable{
-	
+public class Accounting implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -25,29 +25,35 @@ public class Accounting implements Serializable{
 	private int id;
 	@Column(name = "amount")
 	private int amount;
-	
-	
+
 	public int getInvoice() {
 		return invoice;
 	}
+
 	public void setInvoice(int invoice) {
 		this.invoice = invoice;
 	}
+
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public int getAmount() {
 		return amount;
 	}
+
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
