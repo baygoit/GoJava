@@ -75,12 +75,12 @@
 			<version>${hiberate.version}</version>
 		</dependency>
 
-		<dependency>
+	<!--  	<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-annotations</artifactId>
 			<version>${hibernate.annotation.version}</version>
 		</dependency>
-
+-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -88,12 +88,12 @@
 		</dependency> 
 		
 
-		<dependency>
+	 	<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>${cglib.version}</version>
 		</dependency>
-		
+	
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -107,5 +107,11 @@
 			<scope>provided</scope>
 		</dependency>
 		
+<!--		<dependency>
+	<groupId>org.slf4j</groupId>
+	<artifactId>slf4j-log4j12</artifactId>
+	<version>1.5.6</version>
+</dependency>
+	-->	
 	</dependencies>
 </project>

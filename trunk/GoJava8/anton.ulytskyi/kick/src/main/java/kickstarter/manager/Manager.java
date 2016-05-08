@@ -103,7 +103,7 @@ public class Manager {
 		projectInformation.add(project.getHistory());
 		projectInformation.add("Budjet: " + getMoneyCollected(id) + "/"
 				+ project.getNeedMoney() + " USD.");
-		projectInformation.add("Ñontinues "
+		projectInformation.add("continuation: "
 				+ getDaysFromStart(project.getStart()) + " days.");
 		projectInformation.add("");
 		projectInformation.add("Comments:");
