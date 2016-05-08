@@ -1,15 +1,16 @@
-package site;
+package kickstarter.web;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.DAOQuote;
-
 import java.io.IOException;
+import java.util.List;
 
-public class FirstPage extends HttpServlet {
+import kickstarter.manager.Manager;
+
+public class Categories extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,11 +18,12 @@ public class FirstPage extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		DAOQuote baseOfQuotes = new DAOQuote();
-		String quote = baseOfQuotes.showQuote();
+		Manager operator = new Manager();
 
-		req.setAttribute("quote", quote);
-		req.getRequestDispatcher("Quote.jsp").forward(req, resp);
+		List<String> categories = operator.getAllCategories();
+
+		req.setAttribute("categories", categories);
+		req.getRequestDispatcher("Categories.jsp").forward(req, resp);
 
 	}
 

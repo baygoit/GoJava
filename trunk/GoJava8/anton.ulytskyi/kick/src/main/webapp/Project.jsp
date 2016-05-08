@@ -6,7 +6,7 @@
 
 <head>
     
-<title>Kickstart</title>
+<title>Kickstarter</title>
 
 </head>
 

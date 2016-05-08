@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-  <title>Kickstart</title>
+  <title>Kickstarter</title>
 </head>
 <body>
  <center> <h1>Category</h1>
@@ -13,7 +13,7 @@
                      <br>
 		</c:forEach>
 	
-<h1>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`</h1>
+<h1>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h1>
 <a href="/">previous</a> </center> 
 </body>
 </html>
