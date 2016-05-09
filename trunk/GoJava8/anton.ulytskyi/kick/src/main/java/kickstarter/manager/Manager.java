@@ -77,7 +77,7 @@ public class Manager {
 		return projectsForWeb;
 	}
 
-	private int getMoneyCollected(int id) {
+	public int getMoneyCollected(int id) {
 		try {
 			AccountingService service = (AccountingService) ctx
 					.getBean("accountingService");

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public class AccountingDAO {
 
 	@PersistenceContext
-	protected EntityManager emf;
+	public EntityManager emf;
 
 	public Number getTheSumOfAccount(int id) {
 
@@ -28,4 +28,5 @@ public class AccountingDAO {
 
 		emf.persist(transaction);
 	}
+	
 }
