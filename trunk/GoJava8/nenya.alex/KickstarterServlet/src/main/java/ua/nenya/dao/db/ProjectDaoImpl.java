@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
+import ua.nenya.domain.Reward;
 
 @Transactional(readOnly = true)
 @Repository
@@ -62,6 +64,20 @@ public class ProjectDaoImpl implements ProjectDao {
 		query.setParameter("projectId", projectId);
 		long count = (long) query.getSingleResult();
 		return count == 1L;
+	}
+	
+	@Override
+	public List<Reward> getRewardsByProjectId(Long projectId) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Reward> criteriaQuery = criteriaBuilder.createQuery(Reward.class);
+		Root<Reward> root = criteriaQuery.from(Reward.class);
+		root.fetch("project", JoinType.INNER);
+		criteriaQuery.select(root);
+		Predicate criteria = criteriaBuilder.equal(root.get("project").get("id"), projectId);
+		criteriaQuery.where(criteria);
+		criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
+		TypedQuery<Reward> typedQuery = em.createQuery(criteriaQuery);
+		return typedQuery.getResultList();		
 	}
 
 	private long getPaymentSum(Long projectId){

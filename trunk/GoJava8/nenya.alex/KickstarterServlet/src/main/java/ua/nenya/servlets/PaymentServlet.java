@@ -37,7 +37,7 @@ public class PaymentServlet extends CommonServlet {
 		Project project = projectDao.getProjectByProjectId(proId);
 		request.setAttribute("project", project);
 
-		List<Reward> rewards = rewardDao.getRewards(proId);
+		List<Reward> rewards = projectDao.getRewardsByProjectId(proId);
 		request.setAttribute("rewards", rewards);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/payment.jsp");

@@ -2,7 +2,6 @@
 package ua.nenya.domain;
  
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 import java.util.List;
@@ -47,7 +46,7 @@ public class QuoteMappingTest {
 
 	@SuppressWarnings("unchecked")
 	@Test
-	public void testQuoteUsage1() {
+	public void testQuoteUsage() {
 		List<Quote> quotes = em.createQuery("FROM Quote").getResultList();
 		assertThat(quotes.get(0).getName(), is("Quote1"));
 		assertThat(quotes.get(1).getName(), is("Quote2"));
@@ -56,9 +55,4 @@ public class QuoteMappingTest {
 		assertThat(quote.getName(), is("Quote2"));
 	}
 	
-	@Test
-	public void testQuoteUsage2() {
-		List<Quote> quotes = em.createNamedQuery("Quote.Random", Quote.class).getResultList();
-		assertNotNull(quotes);
-	}
 }

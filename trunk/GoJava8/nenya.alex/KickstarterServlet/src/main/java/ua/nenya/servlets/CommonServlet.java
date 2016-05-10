@@ -11,7 +11,6 @@ import ua.nenya.dao.PaymentDao;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.dao.QuestionDao;
 import ua.nenya.dao.QuoteDao;
-import ua.nenya.dao.RewardDao;
 
 public class CommonServlet extends HttpServlet {
 
@@ -31,9 +30,6 @@ public class CommonServlet extends HttpServlet {
 	
 	@Autowired
 	protected PaymentDao paymentDao;
-	
-	@Autowired
-	protected RewardDao rewardDao;
 	
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);

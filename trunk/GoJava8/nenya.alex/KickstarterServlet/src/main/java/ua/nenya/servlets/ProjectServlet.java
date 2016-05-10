@@ -65,8 +65,6 @@ public class ProjectServlet extends CommonServlet {
 			request.setAttribute("question", question.getName());
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 		}
-		
-		
 	}
 
 }

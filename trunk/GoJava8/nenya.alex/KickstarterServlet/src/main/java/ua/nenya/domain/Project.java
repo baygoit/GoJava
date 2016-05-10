@@ -56,7 +56,7 @@ public class Project {
 	private String video;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.PERSIST)
-	private List<Payment> payments; 
+	private List<Reward> rewards; 
 	
 	public String getName() {
 		return name;
@@ -121,21 +121,21 @@ public class Project {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-
-	public List<Payment> getPayments() {
-		return payments;
-	}
-
-	public void setPayments(List<Payment> payments) {
-		this.payments = payments;
-	}
-
+	
 	public long getAvailableAmount() {
 		return availableAmount;
 	}
 
 	public void setAvailableAmount(long availableAmount) {
 		this.availableAmount = availableAmount;
+	}
+
+	public List<Reward> getRewards() {
+		return rewards;
+	}
+
+	public void setRewards(List<Reward> rewards) {
+		this.rewards = rewards;
 	}
 	
 }

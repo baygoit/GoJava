@@ -25,10 +25,11 @@ import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Category;
 import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
+import ua.nenya.domain.Reward;
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
+@ContextConfiguration(locations={"classpath:aplicationContextTest.xml"})
 public class ProjectDaoImplTest {
 	
 	@PersistenceContext
@@ -40,6 +41,8 @@ public class ProjectDaoImplTest {
 	private Project project1;
 	private Project project2;
 	private Category music;
+	private List<Reward> rewards = new ArrayList<>();
+	private Reward r2;
 	
 	@Before
 	public void setUp() {
@@ -49,6 +52,7 @@ public class ProjectDaoImplTest {
 	@After
 	public void tearDown() {
 		em.createQuery("DELETE FROM Payment").executeUpdate();
+		em.createQuery("DELETE FROM Reward").executeUpdate();
 		em.createQuery("DELETE FROM Project").executeUpdate();
 		em.createQuery("DELETE FROM Category").executeUpdate();
 	}
@@ -77,6 +81,15 @@ public class ProjectDaoImplTest {
 	@Test
 	public void testIsProjectExistNo() {
 		assertThat(projectDao.isProjectExist(100L), is(false));
+	}
+	
+	@Test
+	public void testGetRewardsByProjectId() {
+		List<Reward> testRewards = projectDao.getRewardsByProjectId(project1.getId());
+		assertNotNull(testRewards);
+		assertThat(testRewards.get(0).getName(), is(rewards.get(0).getName()));
+		assertThat(testRewards.get(1).getName(), is(r2.getName()));
+		assertThat(testRewards.get(1).getId(), is(r2.getId()));
 	}
 	
 	private void initProjects() {
@@ -117,6 +130,24 @@ public class ProjectDaoImplTest {
 		payment2.setAmount(200);
 		payment2.setProject(project2);
 		em.merge(payment2);
+		
+		Reward reward1 = new Reward();
+		reward1.setAmount(100);
+		reward1.setName("100$");
+		reward1.setDescription("Reward100");
+		reward1.setProject(project1);
+		
+		Reward reward2 = new Reward();
+		reward2.setAmount(200);
+		reward2.setName("200$");
+		reward2.setDescription("Reward200");
+		reward2.setProject(project1);
+
+		em.merge(reward1);
+		r2 = em.merge(reward2);
+		
+		rewards.add(reward1);
+		rewards.add(reward2);
 		
 		Collections.sort(projects, new Comparator<Project>() {
 			@Override

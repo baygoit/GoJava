@@ -24,7 +24,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import ua.nenya.dao.PaymentDao;
 import ua.nenya.dao.ProjectDao;
-import ua.nenya.dao.RewardDao;
 import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
@@ -34,8 +33,6 @@ public class PaymentServletTest {
 
 	@Mock
 	private PaymentDao investmentDao;
-	@Mock
-	private RewardDao rewardDao;
 	@Mock
 	private ProjectDao projectDao;
 	@Mock
@@ -50,7 +47,7 @@ public class PaymentServletTest {
 		when(request.getParameter("projectId")).thenReturn("1");
 		when(projectDao.isProjectExist(1L)).thenReturn(true);
 		when(projectDao.getProjectByProjectId(1L)).thenReturn(new Project());
-		when(rewardDao.getRewards(1L)).thenReturn(new ArrayList<Reward>());
+		when(projectDao.getRewardsByProjectId(1L)).thenReturn(new ArrayList<Reward>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);
@@ -66,7 +63,7 @@ public class PaymentServletTest {
 		when(request.getParameter("projectId")).thenReturn("uio");
 		when(projectDao.isProjectExist(1L)).thenReturn(true);
 		when(projectDao.getProjectByProjectId(1L)).thenReturn(new Project());
-		when(rewardDao.getRewards(1L)).thenReturn(new ArrayList<Reward>());
+		when(projectDao.getRewardsByProjectId(1L)).thenReturn(new ArrayList<Reward>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);
@@ -81,8 +78,8 @@ public class PaymentServletTest {
 		when(request.getParameter("projectId")).thenReturn("1");
 		when(projectDao.isProjectExist(1L)).thenReturn(false);
 		when(projectDao.getProjectByProjectId(1L)).thenReturn(new Project());
-		when(rewardDao.getRewards(1L)).thenReturn(new ArrayList<Reward>());
-
+		when(projectDao.getRewardsByProjectId(1L)).thenReturn(new ArrayList<Reward>());
+		
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);
 		
