@@ -1,63 +1,60 @@
 package com.anmertrix.domain;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:testApplicationContext.xml" })
 public class PaymentMappingTest {
 	
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
+	private Payment pt;
 
 	@Before
-	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-		} catch (Exception e) {
-			e.printStackTrace();
-			StandardServiceRegistryBuilder.destroy(registry);
-		}
+	public void setUp() {
+		Payment payment1 = new Payment();
+		payment1.setCardholderName("Payment1");
+		
+		Payment payment2 = new Payment();
+		payment2.setCardholderName("Payment2");
+		em.merge(payment1);
+		pt = em.merge(payment2);
 	}
 
 	@After
-	public void tearDown() throws Exception {
-		if (sessionFactory != null) {
-			sessionFactory.close();
-		}
+	public void tearDown() {
+		em.createQuery("DELETE FROM Payment").executeUpdate();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testBasicUsage() {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		List<Payment> payments = em.createQuery("FROM Payment").getResultList();
+		assertThat(payments.get(0).getCardholderName(), is("Payment1"));
+		assertThat(payments.get(0).getId(), is(1L));
+		assertThat(payments.get(1).getCardholderName(), is("Payment2"));
+		assertThat(payments.get(1).getId(), is(2L));
 
-		Payment payment1 = new Payment();
-		payment1.setCardholderName("Anton");
-		payment1.setCardNumber("1234567891011111");
-		payment1.setAmount(100);
-
-		Payment payment2 = new Payment();
-		payment2.setCardholderName("Anna");
-		payment2.setCardNumber("3214367891011222");
-		payment2.setAmount(200);
-
-		session.save(payment1);
-		session.save(payment2);
-		session.getTransaction().commit();
-		session.close();
-
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		System.out.println("Get by id");
-		Payment payment = (Payment) session.get(Payment.class, 1l);
-		System.out.println(payment);
-		session.close();
+		Payment payment = em.find(Payment.class, pt.getId());
+		assertThat(payment.getCardholderName(), is("Payment2"));
+		assertThat(payment.getId(), is(2L));
 	}
 
 }

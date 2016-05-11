@@ -2,101 +2,67 @@ package com.anmertrix.domain;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:testApplicationContext.xml" })
 public class QuoteMappingTest {
-	
-	private SessionFactory sessionFactory;
+
+	@PersistenceContext
+	private EntityManager em;
+	private Quote q;
 	
 	@Before
-	public void setUp() throws Exception {
-		// A SessionFactory is set up once for an application!
-		// configures settings from hibernate.cfg.xml
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-				.configure().build();
-		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata()
-					.buildSessionFactory();
-		} catch (Exception e) {
-			e.printStackTrace();
-			// The registry would be destroyed by the SessionFactory, but we had
-			// trouble building the SessionFactory
-			// so destroy it manually.
-			StandardServiceRegistryBuilder.destroy(registry);
-		}
-	}
+	public void setUp() {
+		Quote quote1 = new Quote();
+		quote1.setText("Quote1");
+		quote1.setAuthor("Author1");
+		Quote quote2 = new Quote();
+		quote2.setText("Quote2");
+		quote2.setAuthor("Author2");
+		Quote quote3 = new Quote();
+		quote3.setText("Quote3");
+		quote3.setAuthor("Author3");
 
-	@After
-	public void tearDown() throws Exception {
-		if (sessionFactory != null) {
-			sessionFactory.close();
-		}
+		em.merge(quote1);
+		q = em.merge(quote2);
+		em.merge(quote3);
 	}
 	
+	@After
+	public void tearDown() {
+		em.createQuery("DELETE FROM Quote").executeUpdate();
+	}
+
+	@SuppressWarnings("unchecked")
 	@Test
-	public void testGetRandomQuote() {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+	public void testQuoteUsage() {
+		List<Quote> quotes = em.createQuery("FROM Quote").getResultList();
+		assertThat(quotes.get(0).getText(), is("Quote1"));
+		assertThat(quotes.get(0).getAuthor(), is("Author1"));
+		assertThat(quotes.get(0).getId(), is(1L));
+		assertThat(quotes.get(1).getText(), is("Quote2"));
+		assertThat(quotes.get(1).getAuthor(), is("Author2"));
+		assertThat(quotes.get(1).getId(), is(2L));
 
-		Quote quote1 = new Quote();
-		quote1.setText("Quote 1");
-		quote1.setAuthor("Author 1");
-
-		Quote quote2 = new Quote();
-		quote2.setText("Quote 2");
-		quote2.setAuthor("Author 2");
-
-		session.save(quote1);
-		session.save(quote2);
-		session.getTransaction().commit();
-		session.close();
-
-		// now lets pull events from the database and list them
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		System.out.println("Get by id");
-		Quote quote = session.get(Quote.class, 1l);
-		System.out.println(quote.getText());
-
-		session.close();
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		@SuppressWarnings("unchecked")
-		List<Quote> result1 = (List<Quote>) session.createQuery("from Quote q").list();
-		for (Quote aQuote : result1) {
-			System.out.println(aQuote.getText());
-		}
-
-		session.close();
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		System.out.println("Get by id");
-		quote = session.get(Quote.class, 1l);
-		System.out.println(quote.getText());
-
-		quote.setText("Changed");
-
-		session.getTransaction().commit();
-		session.close();
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		System.out.println("Get by id");
-		quote = session.get(Quote.class, 1l);
-		System.out.println(quote.getText());
-
-		session.getTransaction().commit();
-		session.close();
-
+		Quote quote = em.find(Quote.class, q.getId());
+		assertThat(quote.getText(), is("Quote2"));
+		assertThat(quote.getAuthor(), is("Author2"));
+		assertThat(quote.getId(), is(2L));
 	}
 }

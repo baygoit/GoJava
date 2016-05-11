@@ -1,64 +1,60 @@
 package com.anmertrix.domain;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:testApplicationContext.xml" })
 public class RewardMappingTest {
 	
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
+	private Reward r;
 
 	@Before
-	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-		} catch (Exception e) {
-			e.printStackTrace();
-			StandardServiceRegistryBuilder.destroy(registry);
-		}
+	public void setUp() {
+		Reward reward1 = new Reward();
+		reward1.setName("Reward1");
+		
+		Reward reward2 = new Reward();
+		reward2.setName("Reward2");
+		em.merge(reward1);
+		r = em.merge(reward2);
 	}
 
 	@After
-	public void tearDown() throws Exception {
-		if (sessionFactory != null) {
-			sessionFactory.close();
-		}
+	public void tearDown() {
+		em.createQuery("DELETE FROM Reward").executeUpdate();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testBasicUsage() {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		List<Reward> rewards = em.createQuery("FROM Reward").getResultList();
+		assertThat(rewards.get(0).getName(), is("Reward1"));
+		assertThat(rewards.get(0).getId(), is(1L));
+		assertThat(rewards.get(1).getName(), is("Reward2"));
+		assertThat(rewards.get(1).getId(), is(2L));
 
-		Reward reward1 = new Reward();
-		reward1.setName("test1");
-		reward1.setAmount(1000);
-		reward1.setDescription("AAA");
-
-		Reward reward2 = new Reward();
-		reward1.setName("test2");
-		reward2.setAmount(2000);
-		reward2.setDescription("BBB");
-
-		session.save(reward1);
-		session.save(reward2);
-
-		session.getTransaction().commit();
-		session.close();
-
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		System.out.println("Get by id");
-		Reward reward = (Reward) session.get(Reward.class, 1l);
-		System.out.println(reward);
-		session.close();
+		Reward reward = em.find(Reward.class, r.getId());
+		assertThat(reward.getName(), is("Reward2"));
+		assertThat(reward.getId(), is(2L));
 	}
 
 }

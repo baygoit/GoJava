@@ -206,8 +206,9 @@ footer .container{
 .project-list-item a{
 	color:#000;
 }
-.project-list-item a{
-	color:#000;
+.project-list-item span{
+	display: inline-block;
+    margin: 5px 0px;
 }
 
 .project-list-item-name {

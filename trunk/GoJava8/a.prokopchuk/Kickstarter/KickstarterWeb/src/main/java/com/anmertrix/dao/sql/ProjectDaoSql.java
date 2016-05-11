@@ -40,7 +40,7 @@ public class ProjectDaoSql implements ProjectDao {
 	@Transactional(readOnly = true)
 	public Project getProjectById(long projectId) {
 		Project project = em.find(Project.class, projectId);
-		project.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(project.getId()));
+		project.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(project.getId())); // TODO
 		return project;
 	}
 	

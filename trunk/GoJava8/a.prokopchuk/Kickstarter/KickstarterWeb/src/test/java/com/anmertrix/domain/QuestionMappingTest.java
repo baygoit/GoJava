@@ -1,59 +1,60 @@
 package com.anmertrix.domain;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "classpath:testApplicationContext.xml" })
 public class QuestionMappingTest {
 	
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
+	private Question q;
 
 	@Before
-	public void setUp() throws Exception {
-		final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-		try {
-			sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-		} catch (Exception e) {
-			e.printStackTrace();
-			StandardServiceRegistryBuilder.destroy(registry);
-		}
+	public void setUp() {
+		Question question1 = new Question();
+		question1.setQuestion("Question1");
+		
+		Question question2 = new Question();
+		question2.setQuestion("Question2");
+		em.merge(question1);
+		q = em.merge(question2);
 	}
 
 	@After
-	public void tearDown() throws Exception {
-		if (sessionFactory != null) {
-			sessionFactory.close();
-		}
+	public void tearDown() {
+		em.createQuery("DELETE FROM Question").executeUpdate();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testBasicUsage() {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		List<Question> questions = em.createQuery("FROM Question").getResultList();
+		assertThat(questions.get(0).getQuestion(), is("Question1"));
+		assertThat(questions.get(0).getId(), is(1L));
+		assertThat(questions.get(1).getQuestion(), is("Question2"));
+		assertThat(questions.get(1).getId(), is(2L));
 
-		Question question1 = new Question();
-		question1.setQuestion("question1");
-
-		Question question2 = new Question();
-		question2.setQuestion("question2");
-
-		session.save(question1);
-		session.save(question2);
-		session.getTransaction().commit();
-		session.close();
-
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-
-		System.out.println("Get by id");
-		Question question = (Question) session.get(Question.class, 1l);
-		System.out.println(question);
-		session.close();
+		Question question = em.find(Question.class, q.getId());
+		assertThat(question.getQuestion(), is("Question2"));
+		assertThat(question.getId(), is(2L));
 	}
 
 }

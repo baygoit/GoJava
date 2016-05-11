@@ -6,16 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 
 @Entity
 @Table(name = "quote")
-@NamedQueries({ @NamedQuery(name = "Quote.getRandom", query = "SELECT q FROM Quote AS q ORDER BY RAND()") })
 public class Quote {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	

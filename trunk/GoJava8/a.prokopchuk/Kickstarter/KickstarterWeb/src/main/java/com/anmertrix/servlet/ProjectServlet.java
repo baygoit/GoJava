@@ -91,7 +91,7 @@ public class ProjectServlet extends HttpServlet {
 	
 	void addQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
-			if (!validateQuestion(request, response)) {
+			if (!validateQuestion(request)) {
 				throw new NumberFormatException();
 			} else if (!validateProjectId(request, response)) {
 				throw new NoResultException("No project found");
@@ -110,13 +110,9 @@ public class ProjectServlet extends HttpServlet {
 		}
 	}
 	
-	private boolean validateQuestion(HttpServletRequest request,
-			HttpServletResponse response) {
+	private boolean validateQuestion(HttpServletRequest request) {
 		String question = request.getParameter("question").trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
-		if (question.length() < 2 || question.length() > 500) {
-			return false;
-		}
-		return true;
+		return !(question.length() < 2 || question.length() > 500);
 	}
 
 	void addPayment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -146,26 +142,17 @@ public class ProjectServlet extends HttpServlet {
 	
 	private boolean validateCardholderName(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String cardholderName = request.getParameter("cardholder_name").trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
-		if (cardholderName.length() < 2 || cardholderName.length() > 50) {
-			return false;
-		}
-		return true;
+		return !(cardholderName.length() < 2 || cardholderName.length() > 50);
 	}
 	
 	private boolean validateCardNumber(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String cardNumber = request.getParameter("card_number").trim();
-		if (cardNumber.length() < 13 || cardNumber.length() > 16 || !cardNumber.matches("^-?\\d+$")) {
-			return false;
-		}
-		return true;
+		return !(cardNumber.length() < 13 || cardNumber.length() > 16 || !cardNumber.matches("^-?\\d+$"));
 	}
 	
 	private boolean validateAmount(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException {
 		int amount = Integer.parseInt(request.getParameter("payment_amount").trim());
-		if (amount <= 0 || amount > 1000000) {
-			return false;
-		}
-		return true;
+		return amount >= 0 && amount < 1000000;
 	}
 	
 	private boolean validateProjectId(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException {

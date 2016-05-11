@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "payment")
 @NamedQueries({ 
-	@NamedQuery(name = "Payment.getPayments", query = "from Payment p where p.project.id=:projectId"),
+	@NamedQuery(name = "Payment.getPayments", query = "SELECT p from Payment p where p.project.id=:projectId"),
 	@NamedQuery(name = "Payment.getGatheredBudget", query = "SELECT SUM(p.amount) FROM Payment p WHERE p.project.id = :projectId")
 })
 public class Payment {

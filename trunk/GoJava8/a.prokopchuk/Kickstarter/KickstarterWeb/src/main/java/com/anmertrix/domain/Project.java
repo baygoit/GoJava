@@ -18,13 +18,13 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "project")
 @NamedQueries({ 
-	@NamedQuery(name = "Project.getProjects", query = "from Project p where p.category.id=:categoryId"),  
-	@NamedQuery(name = "Project.count", query = "SELECT COUNT(p) AS cnt FROM Project p")
+	@NamedQuery(name = "Project.getProjects", query = "SELECT p from Project p where p.category.id=:categoryId"),  
+	@NamedQuery(name = "Project.count", query = "SELECT COUNT(p) FROM Project p")
  })
 public class Project {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	

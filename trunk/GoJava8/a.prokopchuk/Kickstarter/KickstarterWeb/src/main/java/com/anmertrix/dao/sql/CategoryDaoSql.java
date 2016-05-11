@@ -38,8 +38,7 @@ public class CategoryDaoSql implements CategoryDao {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
 		Root<Category> category = criteriaQuery.from(Category.class);
-		criteriaQuery.select(criteriaBuilder.count(category));
-		criteriaQuery.where(criteriaBuilder.equal(category.get("id"), categoryId));
+		criteriaQuery.select(criteriaBuilder.count(category)).where(criteriaBuilder.equal(category.get("id"), categoryId));
 		TypedQuery<Long> typedQuery = em.createQuery(criteriaQuery);
 		return typedQuery.getSingleResult() > 0;
 	}

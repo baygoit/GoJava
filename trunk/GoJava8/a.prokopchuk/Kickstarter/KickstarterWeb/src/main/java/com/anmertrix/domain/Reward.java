@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "reward")
-@NamedQuery(name = "Reward.getRewards", query = "from Reward r where r.project.id=:projectId")
+@NamedQuery(name = "Reward.getRewards", query = "SELECT r from Reward r where r.project.id=:projectId")
 public class Reward {
 
 	@Id
