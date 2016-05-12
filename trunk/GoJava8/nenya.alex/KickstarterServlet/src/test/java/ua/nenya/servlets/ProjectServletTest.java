@@ -1,6 +1,6 @@
 package ua.nenya.servlets;
 
-import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -16,8 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hamcrest.core.AnyOf;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -34,6 +32,8 @@ import ua.nenya.domain.Question;
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectServletTest {
 	
+	@Mock
+	private Question question;
 	@Mock
 	private PaymentDao investmentDao;
 	@Mock
@@ -54,14 +54,12 @@ public class ProjectServletTest {
 	@Test
 	public void testDoGetProjectIdValidProjectExists() throws ServletException, IOException {
 		when(request.getParameter("projectId")).thenReturn("1");
-		when(projectDao.isProjectExist(1)).thenReturn(true);
+		when(projectDao.isProjectExist(1L)).thenReturn(true);
 		
-		when(investmentDao.getPaymentSum(1)).thenReturn(100l);
-		
-		when(projectDao.getProjectByProjectId(1)).thenReturn(project);
+		when(projectDao.getProjectByProjectId(1L)).thenReturn(project);
 		when(project.getCategory()).thenReturn(category);
 		
-		when(questionDao.getQuestions(1)).thenReturn(new ArrayList<Question>());
+		when(questionDao.getQuestions(1L)).thenReturn(new ArrayList<Question>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);
@@ -75,14 +73,12 @@ public class ProjectServletTest {
 	@Test
 	public void testDoGetProjectIdInvalidProjectExists() throws ServletException, IOException {
 		when(request.getParameter("projectId")).thenReturn("invalidId");
-		when(projectDao.isProjectExist(1)).thenReturn(true);
+		when(projectDao.isProjectExist(1L)).thenReturn(true);
 		
-		when(investmentDao.getPaymentSum(1)).thenReturn(100l);
-		
-		when(projectDao.getProjectByProjectId(1)).thenReturn(new Project());
+		when(projectDao.getProjectByProjectId(1L)).thenReturn(new Project());
 		when(project.getCategory()).thenReturn(new Category());
 		
-		when(questionDao.getQuestions(1)).thenReturn(new ArrayList<Question>());
+		when(questionDao.getQuestions(1L)).thenReturn(new ArrayList<Question>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);
@@ -96,12 +92,11 @@ public class ProjectServletTest {
 	@Test
 	public void testDoGetProjectDoesntExist() throws ServletException, IOException {
 		when(request.getParameter("projectId")).thenReturn("1");
-		when(projectDao.isProjectExist(1)).thenReturn(false);
-		when(investmentDao.getPaymentSum(1)).thenReturn(100l);
+		when(projectDao.isProjectExist(1L)).thenReturn(false);
 		
-		when(projectDao.getProjectByProjectId(1)).thenReturn(new Project());
+		when(projectDao.getProjectByProjectId(1L)).thenReturn(new Project());
 		when(project.getCategory()).thenReturn(new Category());
-		when(questionDao.getQuestions(1)).thenReturn(new ArrayList<Question>());
+		when(questionDao.getQuestions(1L)).thenReturn(new ArrayList<Question>());
 
 		RequestDispatcher dispatcher = mock(RequestDispatcher.class);
 		ServletContext context = mock(ServletContext.class);
@@ -117,17 +112,19 @@ public class ProjectServletTest {
 	public void testDoPostQuestionValid() throws ServletException, IOException {
 		when(request.getParameter("question")).thenReturn("Question");
 		when(request.getParameter("projectId")).thenReturn("1");
-		when(questionDao.isQuestionAbsent(1, new Question())).thenReturn(true);
+		when(questionDao.writeQuestionInProject((Question) anyObject())).thenReturn(question);
 		projectServlet.doPost(request, response);
-		verify(questionDao).writeQuestionInProject(new Question());
 		verify(response).sendRedirect(anyString());
+		
 	}
-	
+
 	@Test
 	public void testDoPostQuestionInvalid() throws ServletException, IOException {
 		when(request.getParameter("question")).thenReturn("Question");
 		when(request.getParameter("projectId")).thenReturn("1");
-		when(questionDao.isQuestionAbsent(1, new Question())).thenReturn(false);
+		when(questionDao.writeQuestionInProject((Question) anyObject())).thenReturn(null);
 		projectServlet.doPost(request, response);
+		verify(response).sendError(anyInt());
+		
 	}
 }

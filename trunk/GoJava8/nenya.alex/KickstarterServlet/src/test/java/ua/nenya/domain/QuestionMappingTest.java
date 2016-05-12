@@ -4,14 +4,15 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import static org.hamcrest.CoreMatchers.is;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Isolation;
@@ -23,26 +24,30 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = { "classpath:aplicationContextTest.xml" })
 public class QuestionMappingTest {
 
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
+	private Question q;
 	
+	@Before
+	public void setUp() {
+		Question question = new Question();
+		question.setName("What?");
+		q = em.merge(question);
+	}
+	
+	@After
+	public void tearDown() {
+		em.createQuery("DELETE FROM Question").executeUpdate();
+	}
+
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testQuestionUsage() {
-		int id;
-		try (Session session = sessionFactory.openSession()) {
-			Question question = new Question();
-			question.setName("What?");
+		List<Question> questions = em.createQuery("select q from Question q").getResultList();
+		assertThat(questions.get(0).getName(), is("What?"));
 
-			id = (int) session.save(question);
-			session.flush();
-		}
-		try (Session session = sessionFactory.openSession()) {
-			List<Question> questions = session.createQuery("FROM Question").list();
-			assertThat(questions.get(0).getName(), is("What?"));
-
-			Question question = session.get(Question.class, id);
-			//assertThat(question.getProject(), is(project));
-			assertThat(question.getName(), is("What?"));
-		}
+		Question questionTest = em.find(Question.class, q.getId());
+		assertThat(questionTest.getName(), is("What?"));
+		assertThat(questionTest.getId(), is(q.getId()));
 	}
 }

@@ -39,10 +39,6 @@ public class ProjectsServlet extends HttpServlet {
 		
 		List<Project> projects = projectDao.getProjectsByCategoryId(category.getId());
 		
-		for (Project project: projects) {
-			project.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(project.getId()));
-		}
-		
 		request.setAttribute("category", category);
         request.setAttribute("projects", projects);
         

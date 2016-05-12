@@ -3,80 +3,91 @@ package ua.nenya.dao.db;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.hibernate.LockMode;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
+import ua.nenya.domain.Reward;
 
+@Transactional(readOnly = true)
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
 
-	private static final String GET_PROJECTS_BY_CATEGORY_ID = "FROM Project P WHERE P.category.id=:categoryId ORDER BY P.name";
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 
-	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Project> getProjectsByCategoryId(int categoryId) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(GET_PROJECTS_BY_CATEGORY_ID);
+	public List<Project> getProjectsByCategoryId(Long categoryId) {
+		Query query = em.createNamedQuery("Project.getByCategoryId");
 		query.setParameter("categoryId", categoryId);
-		List<Project> projects = query.list();
+		List<Project> projects = query.getResultList();
 		
 		List<Project> resultProjects = new ArrayList<>();
 		for(Project it: projects){
-			long sum = getPaymentSum(it);
+			long sum = getPaymentSum(it.getId());
 			it.setAvailableAmount(sum);
 			resultProjects.add(it);
 		}
 		return resultProjects;
 	}
 
-	@Transactional(readOnly = true)
 	@Override
-	public Project getProjectByProjectId(int projectId) {
-		Session session = sessionFactory.getCurrentSession();
-		return session.get(Project.class, projectId);
+	public Project getProjectByProjectId(Long projectId) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Project> criteriaQuery = criteriaBuilder.createQuery(Project.class);
+		Root<Project> root = criteriaQuery.from(Project.class);
+		criteriaQuery.select(root);
+		Predicate criteria = criteriaBuilder.equal(root.get("id"), projectId);
+		criteriaQuery.where(criteria);
+		TypedQuery<Project> typedQuery = em.createQuery(criteriaQuery);
+		Project project = typedQuery.getSingleResult();
+		project.setAvailableAmount(getPaymentSum(projectId));
+		return project;
 	}
 
-	@Transactional(readOnly = true)
 	@Override
-	public boolean isProjectExist(int projectId) {
-		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(Project.class);
-		criteria.add(Restrictions.eq("id", projectId));
-		long count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
-		return count == 1;
+	public boolean isProjectExist(Long projectId) {
+		Query query = em.createNamedQuery("Project.Count");
+		query.setParameter("projectId", projectId);
+		long count = (long) query.getSingleResult();
+		return count == 1L;
+	}
+	
+	@Override
+	public List<Reward> getRewardsByProjectId(Long projectId) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Reward> criteriaQuery = criteriaBuilder.createQuery(Reward.class);
+		Root<Reward> root = criteriaQuery.from(Reward.class);
+		root.fetch("project", JoinType.INNER);
+		criteriaQuery.select(root);
+		Predicate criteria = criteriaBuilder.equal(root.get("project").get("id"), projectId);
+		criteriaQuery.where(criteria);
+		criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
+		TypedQuery<Reward> typedQuery = em.createQuery(criteriaQuery);
+		return typedQuery.getResultList();		
 	}
 
-	@Transactional(readOnly = true)
-	@Override
-	public void getProjectPayments(Project project) {
-		Session session = sessionFactory.getCurrentSession();
-        session.lock(project, LockMode.NONE);
-        Hibernate.initialize(project.getPayments());
+	private long getPaymentSum(Long projectId){
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+		Root<Payment> payment = criteriaQuery.from(Payment.class);
+		criteriaQuery.multiselect(criteriaBuilder.sum(payment.<Long>get("amount")));
+		Predicate criteria = criteriaBuilder.equal(payment.get("project").get("id"), projectId);
+		criteriaQuery.where(criteria);
+		return em.createQuery(criteriaQuery).getSingleResult();
 	}
 
-	@Transactional(readOnly = true)
-	@Override
-	public long getPaymentSum(Project project) {
-		long sum = 0;
-		List<Payment> payments = project.getPayments();
-		for(Payment it: payments){
-			sum = sum + it.getAmount();
-		}
-		return sum;
-	}
 }

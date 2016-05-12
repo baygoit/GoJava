@@ -3,6 +3,7 @@ package com.anmertrix.servlet;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,22 +18,26 @@ import com.anmertrix.dao.NoResultException;
 import com.anmertrix.dao.PaymentDao;
 import com.anmertrix.dao.ProjectDao;
 import com.anmertrix.dao.QuestionDao;
+import com.anmertrix.dao.RewardDao;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
 import com.anmertrix.domain.Question;
+import com.anmertrix.domain.Reward;
 
 public class ProjectServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String ADD_QUESTION = "ADD_QUESTION";
 	private static final String ADD_PAYMENT = "ADD_PAYMENT";
-	static final String PROJECT_OUT_URL = "project?projectId=";
-	static final String PROJECT_JSP_PATH = "/WEB-INF/jsp/project.jsp";
+	private static final String PROJECT_OUT_URL = "project?projectId=";
+	private static final String PROJECT_JSP_PATH = "/WEB-INF/jsp/project.jsp";
 	
 	@Autowired
 	private ProjectDao projectDao;
 	@Autowired
 	private PaymentDao paymentDao;
+	@Autowired
+	private RewardDao rewardDao;
 	@Autowired
 	private AnswerDao answerDao;
 	@Autowired
@@ -43,16 +48,19 @@ public class ProjectServlet extends HttpServlet {
 		if (project == null) {
 			return;
 		}
-		long projectId = project.getId();
-		project.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(projectId));
-		
 		LocalDate finalDate = project.getFinalDate().toLocalDate();
 		LocalDate today = LocalDate.now();
-		
 		if (today.isBefore(finalDate)) {
 			project.setDaysLeft((int) ChronoUnit.DAYS.between(today, finalDate));
 		}
-
+		long projectId = project.getId();
+		List<Reward> rewards = rewardDao.getRewards(projectId);
+		List<Payment> payments = paymentDao.getPaymentsByProjectId(projectId);
+		List<Question> questions = questionDao.getQuestionsByProjectId(projectId);
+		
+		request.setAttribute("questions", questions);
+		request.setAttribute("rewards", rewards);
+		request.setAttribute("payments", payments);
 		request.setAttribute("project", project);
 		getServletContext().getRequestDispatcher(PROJECT_JSP_PATH).forward(request, response);
 	}
@@ -83,7 +91,7 @@ public class ProjectServlet extends HttpServlet {
 	
 	void addQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		try {
-			if (!validateQuestion(request, response)) {
+			if (!validateQuestion(request)) {
 				throw new NumberFormatException();
 			} else if (!validateProjectId(request, response)) {
 				throw new NoResultException("No project found");
@@ -102,13 +110,9 @@ public class ProjectServlet extends HttpServlet {
 		}
 	}
 	
-	private boolean validateQuestion(HttpServletRequest request,
-			HttpServletResponse response) {
+	private boolean validateQuestion(HttpServletRequest request) {
 		String question = request.getParameter("question").trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
-		if (question.length() < 2 || question.length() > 500) {
-			return false;
-		}
-		return true;
+		return !(question.length() < 2 || question.length() > 500);
 	}
 
 	void addPayment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -138,26 +142,17 @@ public class ProjectServlet extends HttpServlet {
 	
 	private boolean validateCardholderName(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String cardholderName = request.getParameter("cardholder_name").trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
-		if (cardholderName.length() < 2 || cardholderName.length() > 50) {
-			return false;
-		}
-		return true;
+		return !(cardholderName.length() < 2 || cardholderName.length() > 50);
 	}
 	
 	private boolean validateCardNumber(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String cardNumber = request.getParameter("card_number").trim();
-		if (cardNumber.length() < 13 || cardNumber.length() > 16 || !cardNumber.matches("^-?\\d+$")) {
-			return false;
-		}
-		return true;
+		return !(cardNumber.length() < 13 || cardNumber.length() > 16 || !cardNumber.matches("^-?\\d+$"));
 	}
 	
 	private boolean validateAmount(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException {
 		int amount = Integer.parseInt(request.getParameter("payment_amount").trim());
-		if (amount <= 0 || amount > 1000000) {
-			return false;
-		}
-		return true;
+		return amount >= 0 && amount < 1000000;
 	}
 	
 	private boolean validateProjectId(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException {

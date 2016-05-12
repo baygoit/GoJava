@@ -21,11 +21,11 @@
 								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 									<div class="project-list-item">
 										<a href="project?projectId=${project.id}">
-											<p class="project-list-item-name"><span>${project.name}</span></p>
-											<p><span>Description: ${project.description}</span></p>
-											<p><span>Required budget: ${project.requiredBudget}</span></p>
-											<p><span>Gathered budget: ${project.gatheredBudget}</span></p>
-											<p><span>Days left: ${project.finalDate}</span></p>
+											<span class="project-list-item-name">${project.name}</span>
+											<span>Description: ${project.description}</span>
+											<span>Required budget: ${project.requiredBudget}</span>
+											<span>Gathered budget: ${project.gatheredBudget}</span>
+											<span>Days left: ${project.finalDate}</span>
 										</a>
 									</div>
 								</div>

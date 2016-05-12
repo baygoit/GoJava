@@ -1,2 +1,0 @@
-INSERT INTO CATEGORY (name) VALUES ('Music');
-INSERT INTO CATEGORY (name) VALUES ('Films');

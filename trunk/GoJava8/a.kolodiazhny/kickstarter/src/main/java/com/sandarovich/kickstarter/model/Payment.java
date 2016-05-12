@@ -1,10 +1,23 @@
 package com.sandarovich.kickstarter.model;
 
-public class Payment {
-    private int id;
-    private double amount;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "payment")
+public class Payment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "projectid")
+    private Project project;
+
+    @Column(name = "amount")
+    private double amount;
+    @Column(name = "cardholder")
     private String cardHolder;
+    @Column(name = "cardnumber")
     private String cardNumber;
 
     public double getAmount() {
@@ -31,4 +44,11 @@ public class Payment {
         this.cardNumber = cardNumber;
     }
 
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 }

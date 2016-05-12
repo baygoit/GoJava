@@ -3,54 +3,47 @@ package ua.nenya.dao.db;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.nenya.dao.PaymentDao;
+import ua.nenya.domain.Payment;
 
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={ "classpath:aplicationContextTest.xml"})
 public class PaymentDaoImplTest {
 
-	private static EmbeddedDatabase db;
+	@PersistenceContext
+	private EntityManager em;
 	@Autowired
 	private PaymentDao paymentDao;
+	private Payment payment = new Payment();
 
-	@BeforeClass
-	public static void setUp() {
-		db = new EmbeddedDatabaseBuilder()
-	    		.setType(EmbeddedDatabaseType.H2)
-	    		.addScript("/createPayment.sql")
-	    		.addScript("/insertPayment.sql")
-	    		.build();
+	@Before
+	public void setUp() {
+		payment.setAmount(100);
 	}
-	@AfterClass
-	public static void tearDown() {
-		db = new EmbeddedDatabaseBuilder()
-	    		.setType(EmbeddedDatabaseType.H2)
-	    		.addScript("/deletePayment.sql")
-	    		.build();
+
+	@After
+	public void tearDown() {
+		em.createQuery("DELETE FROM Payment").executeUpdate();
 	}
 	
-	@Test
-	public void testGetPaymentSum(){
-		long sum = paymentDao.getPaymentSum(1);
-		assertThat(sum, is(100L));
-	}
-	
-
 	@Test
 	public void testWritePaymentInProject() {
-		int id = paymentDao.writePaymentInProject(1, 100);
-		assertThat(id, is(4));
+		Payment newPayment = paymentDao.writePaymentInProject(payment);
+		Payment paymentTest = em.find(Payment.class, newPayment.getId());
+		assertThat(paymentTest.getAmount(), is(payment.getAmount()));
 	}
 
 }

@@ -12,16 +12,15 @@ import ua.nenya.domain.Category;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
 
-
 public class ProjectServlet extends CommonServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String projectId = request.getParameter("projectId");
-		int proId = 0;
+		Long proId = 0L;
 		try {
-			proId = Integer.valueOf(projectId);
+			proId = Long.valueOf(projectId);
 		} catch (NumberFormatException e) {
 			request.setAttribute("Id", projectId);
 			request.setAttribute("TestId", -1);
@@ -29,23 +28,19 @@ public class ProjectServlet extends CommonServlet {
 			return;
 		}
 		request.setAttribute("projectId", proId);
-		Project project = getProjectDao().getProjectByProjectId(proId);
-		
-		if(!getProjectDao().isProjectExist(proId)){
+		Project project = projectDao.getProjectByProjectId(proId);
+
+		if (!projectDao.isProjectExist(proId)) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
 		}
-		getProjectDao().getProjectPayments(project);
-		long investmentSum = getProjectDao().getPaymentSum(project);
-		request.setAttribute("investmentSum", investmentSum);
-		
-		
-		Category category = project.getCategory(); 
+
+		Category category = project.getCategory();
 		request.setAttribute("categoryId", category.getId());
-		
+
 		request.setAttribute("project", project);
 
-		List<Question> questions = getQuestionDao().getQuestions(proId);
+		List<Question> questions = questionDao.getQuestions(proId);
 		request.setAttribute("questions", questions);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/project.jsp");
@@ -57,19 +52,19 @@ public class ProjectServlet extends CommonServlet {
 			throws ServletException, IOException {
 		String questionStr = request.getParameter("question");
 		String projectId = request.getParameter("projectId");
-		int proId = Integer.valueOf(projectId);
-		
+		Long proId = Long.valueOf(projectId);
+
 		Question question = new Question();
 		question.setName(questionStr);
-		question.setProject(getProjectDao().getProjectByProjectId(proId));
-		
-		if(questionStr.isEmpty()){
-			request.setAttribute("question", questionStr);
+		question.setProject(projectDao.getProjectByProjectId(proId));
+
+		Question savedQuestion = questionDao.writeQuestionInProject(question);
+		if(savedQuestion != null){
+			response.sendRedirect("projectServlet?projectId=" + proId);
+		}else{
+			request.setAttribute("question", question.getName());
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-			return;
 		}
-		getQuestionDao().writeQuestionInProject(question);
-		response.sendRedirect("projectServlet?projectId="+proId);
 	}
 
 }

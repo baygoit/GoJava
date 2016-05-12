@@ -2,15 +2,15 @@ package com.anmertrix.dao.sql;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.context.internal.ThreadLocalSessionContext;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.anmertrix.dao.CategoryDao;
 import com.anmertrix.domain.Category;
@@ -18,45 +18,40 @@ import com.anmertrix.domain.Category;
 @Repository
 public class CategoryDaoSql implements CategoryDao {
 
-	@Autowired
-	private SessionFactory sessionFactory;
-
+	@PersistenceContext
+	private EntityManager em;
+	
 	@Override
+	@Transactional(readOnly = true)
 	public Category getCategory(long categoryId) {
-		Category category = null;
-		try (Session session = sessionFactory.openSession()) {
-			category = session.get(Category.class, categoryId);
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
-		return category;
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Category> criteria = criteriaBuilder.createQuery(Category.class);
+		Root<Category> category = criteria.from(Category.class);
+		TypedQuery<Category> query = em.createQuery(
+		    criteria.select(category).where(criteriaBuilder.equal(category.get("id"), categoryId)));
+		return query.getSingleResult();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public boolean categoryExists(long categoryId) {
-		int count = 0;
-		try (Session session = sessionFactory.openSession()) {
-			Criteria criteria = session.createCriteria(Category.class);
-			criteria.add(Restrictions.eq("id", categoryId));
-			criteria.setProjection(Projections.rowCount());
-			count = ((Number) criteria.uniqueResult()).intValue();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
-		return count > 0;
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+		Root<Category> category = criteriaQuery.from(Category.class);
+		criteriaQuery.select(criteriaBuilder.count(category)).where(criteriaBuilder.equal(category.get("id"), categoryId));
+		TypedQuery<Long> typedQuery = em.createQuery(criteriaQuery);
+		return typedQuery.getSingleResult() > 0;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(readOnly = true)
 	public List<Category> getCategories() {
-		List<Category> categories = null;
-		try (Session session = sessionFactory.openSession()) {
-			ThreadLocalSessionContext.bind(session);
-			categories = (List<Category>) sessionFactory.getCurrentSession().createCriteria(Category.class).list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		}
-		return categories;
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Category> criteria = criteriaBuilder.createQuery(Category.class);
+		Root<Category> category = criteria.from(Category.class);
+		TypedQuery<Category> query = em.createQuery(criteria.select(category));
+		return query.getResultList();
+		//return em.createNamedQuery("Category.getCategories", Category.class).getResultList();
 	}
 
 }

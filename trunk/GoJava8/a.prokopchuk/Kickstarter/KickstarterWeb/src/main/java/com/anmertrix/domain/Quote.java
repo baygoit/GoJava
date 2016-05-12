@@ -12,11 +12,13 @@ import javax.persistence.Table;
 public class Quote {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
+	
 	@Column(name = "author")
 	private String author;
+	
 	@Column(name = "text")
 	private String text;
 	

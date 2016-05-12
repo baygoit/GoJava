@@ -1,42 +1,60 @@
 package ua.nenya.dao.db;
 
-
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import ua.nenya.dao.QuestionDao;
 import ua.nenya.domain.Question;
 
+@Transactional
 @Repository
 public class QuestionDaoImpl implements QuestionDao {
 
-	private static final String GET_QUESTIONS_BY_PROJECT_ID = "FROM Question q WHERE q.project.id=:projectId ORDER BY q.id";
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
 
 	@Transactional(readOnly = true)
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Question> getQuestions(int projectId) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(GET_QUESTIONS_BY_PROJECT_ID);
-		query.setParameter("projectId", projectId);
-		return query.list();
+	public List<Question> getQuestions(Long projectId) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<Question> criteriaQuery = criteriaBuilder.createQuery(Question.class);
+		Root<Question> root = criteriaQuery.from(Question.class);
+		criteriaQuery.select(root);
+		Predicate criteria = criteriaBuilder.equal(root.get("project").get("id"), projectId);
+		criteriaQuery.where(criteria);
+		criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
+		TypedQuery<Question> typedQuery = em.createQuery(criteriaQuery);
+		return typedQuery.getResultList();
 	}
 
-	@Transactional(propagation = Propagation.SUPPORTS, rollbackFor=Exception.class)
 	@Override
-	public int writeQuestionInProject(Question question) {
-		Session session = sessionFactory.getCurrentSession();
-		int id = (int) session.save(question);
-		return id;
+	public Question writeQuestionInProject(Question question) {
+		if (!isQuestionExist(question)) {
+			em.persist(question);
+		} else {
+			question = null;
+		}
+		return question;
+	}
+
+	@Transactional(readOnly = true)
+	private boolean isQuestionExist(Question question) {
+		Query query = em.createNamedQuery("Question.Count");
+		query.setParameter("name", question.getName());
+		query.setParameter("projectId", question.getProject().getId());
+		long count = (long) query.getSingleResult();
+		return count==1;
 	}
 
 }

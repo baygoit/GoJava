@@ -4,6 +4,6 @@ import ua.nenya.domain.Payment;
 
 public interface PaymentDao {
 	
-	int writePaymentInProject(Payment payment);
+	Payment writePaymentInProject(Payment payment);
 
 }

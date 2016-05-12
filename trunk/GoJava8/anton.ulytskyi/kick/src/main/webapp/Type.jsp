@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Kickstart</title>
+    <title>Kickstarter</title>
 </head>
 <body>
 <center>
@@ -11,7 +11,7 @@
 <h1>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h1>
   
 		<c:forEach items="${projects}" var="project">
-<a href="selected?${project.getId()}">${project.showShortInformation()}</a>
+<a href="selected?${project.getKey()}">${project.getValue()}</a>
                      <br>
 		</c:forEach>
 	

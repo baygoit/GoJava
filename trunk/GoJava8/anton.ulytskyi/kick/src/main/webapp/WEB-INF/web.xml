@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
- 
+  
+
     <servlet>
         <servlet-name>FirstPage</servlet-name>
-        <servlet-class>site.FirstPage</servlet-class>
+        <servlet-class>kickstarter.web.FirstPage</servlet-class>
     </servlet>
  
     <servlet-mapping>
@@ -15,7 +18,7 @@
     </servlet-mapping>
       <servlet>
         <servlet-name>Categories</servlet-name>
-        <servlet-class>site.Categories</servlet-class>
+        <servlet-class>kickstarter.web.Categories</servlet-class>
     </servlet>
  
     <servlet-mapping>
@@ -25,7 +28,7 @@
     
         <servlet>
         <servlet-name>Type</servlet-name>
-        <servlet-class>site.Type</servlet-class>
+        <servlet-class>kickstarter.web.Type</servlet-class>
     </servlet>
  
     <servlet-mapping>
@@ -35,7 +38,7 @@
     
           <servlet>
         <servlet-name>Selected</servlet-name>
-        <servlet-class>site.Selected</servlet-class>
+        <servlet-class>kickstarter.web.Selected</servlet-class>
     </servlet>
  
     <servlet-mapping>

@@ -5,24 +5,26 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 @Entity
 @Table(name = "project")
+@NamedQueries({ 
+	@NamedQuery(name = "Project.getProjects", query = "SELECT p from Project p where p.category.id=:categoryId"),  
+	@NamedQuery(name = "Project.count", query = "SELECT COUNT(p) FROM Project p")
+ })
 public class Project {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
@@ -47,22 +49,19 @@ public class Project {
 	@Transient
 	private int daysLeft;
 	
-	@Column(name = "history")
+	@Column
 	private String history;
 	
-	@Column(name = "url")
+	@Column
 	private String url;
 	
-	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)
+	@OneToMany(mappedBy = "project")
 	private List<Question> questions;
 	
-	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)
+	@OneToMany(mappedBy = "project")
 	private List<Payment> payments;
 	
-	@OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)
+	@OneToMany(mappedBy = "project")
 	private List<Reward> rewards;
 
 	public long getId() {

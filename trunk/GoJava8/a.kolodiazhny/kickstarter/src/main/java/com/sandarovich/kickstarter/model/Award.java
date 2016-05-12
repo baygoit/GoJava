@@ -1,12 +1,24 @@
 package com.sandarovich.kickstarter.model;
 
-public class Award {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "award")
+public class Award {
+    @Id
+    @GeneratedValue
     private long id;
+
+    @Column(name = "amount")
     private double amount;
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
-    private long projectid;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "projectid")
+    private Project project;
 
     public long getId() {
         return id;
@@ -32,7 +44,6 @@ public class Award {
         this.description = description;
     }
 
-
     public String getName() {
         return name;
     }
@@ -41,11 +52,11 @@ public class Award {
         this.name = name;
     }
 
-    public long getProjectid() {
-        return projectid;
+    public Project getProject() {
+        return project;
     }
 
-    public void setProjectid(long projectid) {
-        this.projectid = projectid;
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

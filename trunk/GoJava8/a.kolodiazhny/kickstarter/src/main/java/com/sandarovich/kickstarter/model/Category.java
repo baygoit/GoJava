@@ -1,9 +1,23 @@
 package com.sandarovich.kickstarter.model;
 
-public class Category {
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "category ")
+public class Category {
+    @Id
+    @GeneratedValue
     private long id;
+    @Column(name = "name")
     private String name;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "category")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Project> projects;
 
     public Category() {
 
@@ -24,4 +38,17 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public int getProjectCount() {
+        return projects.size();
+    }
+
 }

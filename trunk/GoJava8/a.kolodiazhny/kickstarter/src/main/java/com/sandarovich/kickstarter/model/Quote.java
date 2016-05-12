@@ -1,14 +1,18 @@
 package com.sandarovich.kickstarter.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "quote")
 public class Quote {
 
+    @Id
+    @GeneratedValue
     private int id;
+    @Column(name = "author")
     private String author;
+    @Column(name = "text")
     private String text;
-
-    public Quote() {
-
-    }
 
     public int getId() {
         return id;

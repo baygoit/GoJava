@@ -1,1 +1,1 @@
-teacher directory : )
+Java Rules: )

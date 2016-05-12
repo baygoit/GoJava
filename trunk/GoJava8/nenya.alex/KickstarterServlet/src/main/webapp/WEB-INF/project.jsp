@@ -12,7 +12,7 @@
 	<p><b>Project name:</b> ${project.name}</p>
 	<p><b>Description:</b> ${project.description}</p>
 	<p><b>Needed amount:</b> ${project.neededAmount}</p>
-	<p><b>Available amount:</b> ${investmentSum} </p>
+	<p><b>Available amount:</b> ${project.availableAmount} </p>
 	<p><b>Remaining days:</b> ${project.remainingDays}</p>
 	<p><b>History:</b> ${project.history}</p>
 	<p><b>Video:</b> ${project.video}</p>
@@ -24,13 +24,13 @@
 	<hr/>
 	<p><b>Ask a question</b></p>
 	<form action="projectServlet" method="POST">
-		<input type="text" name="question" /> 
+		<input type="text" name="question" required="required"/> 
 		<input type="hidden" name="projectId" value="${projectId}" /> 
 		<input type="submit" value="Submit" />
 	</form>
     <hr/>
 	<p>	   
-			<a href="investmentServlet?projectId=${projectId}">Invest in project</a>
+			<a href="paymentServlet?projectId=${projectId}">Invest in project</a>
 	</p>
 	
 </body>

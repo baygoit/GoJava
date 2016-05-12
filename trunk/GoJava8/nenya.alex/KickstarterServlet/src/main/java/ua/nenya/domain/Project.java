@@ -2,45 +2,61 @@ package ua.nenya.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@NamedQueries({ 
+	@NamedQuery(name = "Project.getByCategoryId", query = "select p from Project p where p.category.id=:categoryId order by p.name"),
+	@NamedQuery(name = "Project.Count", query = "select count(p) from Project p where p.id=:projectId"),
+	})
 @Table(name = "PROJECT")
 public class Project {
 	@Id
-	@GenericGenerator(name = "project_id", strategy = "increment")
-	@GeneratedValue(generator = "project_id")
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
+	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
+	
 	@Column
 	private String name;
+	
 	@Column
 	private String description;
+	
 	@Column(name = "needed_amount")
 	private int neededAmount;
+	
 	@Transient
 	private long availableAmount;
+	
 	@Column(name = "remaining_days")
 	private int remainingDays;
+	
 	@Column
 	private String history;
+	
 	@Column
 	private String video;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
-	private List<Payment> payments; 
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.PERSIST)
+	private List<Reward> rewards; 
 	
 	public String getName() {
 		return name;
@@ -70,28 +86,23 @@ public class Project {
 		this.video = video;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
 	public void setNeededAmount(int allAmount) {
 		this.neededAmount = allAmount;
 	}
 
-
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -110,15 +121,7 @@ public class Project {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-
-	public List<Payment> getPayments() {
-		return payments;
-	}
-
-	public void setPayments(List<Payment> payments) {
-		this.payments = payments;
-	}
-
+	
 	public long getAvailableAmount() {
 		return availableAmount;
 	}
@@ -126,6 +129,13 @@ public class Project {
 	public void setAvailableAmount(long availableAmount) {
 		this.availableAmount = availableAmount;
 	}
-	
+
+	public List<Reward> getRewards() {
+		return rewards;
+	}
+
+	public void setRewards(List<Reward> rewards) {
+		this.rewards = rewards;
+	}
 	
 }

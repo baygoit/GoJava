@@ -6,7 +6,7 @@
               <h2>${title}</h1>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Invest:</div>
+                <div class="panel-heading">Payment:</div>
                 <div class="panel-body">
                     <form role="form" name="add_invest" method="POST" action="">
                         <div class="form-group">
@@ -17,7 +17,11 @@
                             <label for="cardNumber">Card Number</label>
                             <input class="form-control" pattern="[0-9]{12}" name="cardNumber" title="Format: 12 digits" placeholder="123456789011"  value="123456789011"/>
                             <label for="amount">Amount</label>
-                            <input class="form-control" pattern="[0-9]{3}" name="amount" placeholder="100" value="100" title="Format: 3 digits"/>
+                            <input class="form-control" name="amount" placeholder="100" value="100" title="Format: 3 digits"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" value="send" class="btn btn-default">Submit</button>
+                            <a class="btn btn-default" href='?view=project&id=${project.id}'>Return</a>
                         </div>
                         <label for="awards">Awards:</label>
                         <div id="awards" class="container">
@@ -32,11 +36,8 @@
                                 </c:forEach>
                             </div>
                         </div>
-                        <button type="submit" value="send" class="btn btn-default">Submit</button>
-                        <a class="btn btn-default" href='?view=project&id=${project.id}'>Return</a>
                     </form>
                 </div>
             </div>
-            <h3></h3>
         </div>
 <jsp:include page="footer.jsp" />

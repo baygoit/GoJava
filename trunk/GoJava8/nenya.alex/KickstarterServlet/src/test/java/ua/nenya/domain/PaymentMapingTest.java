@@ -3,13 +3,13 @@ package ua.nenya.domain;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Isolation;
@@ -21,25 +21,29 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(locations = { "classpath:aplicationContextTest.xml" })
 public class PaymentMapingTest {
 
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager em;
+	private Payment p;
+	
+	@Before
+	public void setUp() {
+		Payment payment = new Payment();
+		payment.setAmount(100);
+		p = em.merge(payment);
+	}
+	
+	@After
+	public void tearDown() {
+		em.createQuery("DELETE FROM Payment").executeUpdate();
+	}
+
 	@Test
 	public void testPaymentUsage() {
-		int id;
-		try (Session session = sessionFactory.openSession()) {
-			Payment payment = new Payment();
-			payment.setAmount(100);
+		Payment paymentTest1 = (Payment) em.createQuery("FROM Payment").getSingleResult();
+		assertThat(paymentTest1.getAmount(), is(100));
 
-			id = (int) session.save(payment);
-			session.flush();
-		}
-		try (Session session = sessionFactory.openSession()) {
-			List<Payment> payments = session.createQuery("FROM Payment").list();
-			assertThat(payments.get(0).getAmount(), is(100));
-
-			Payment payment = session.get(Payment.class, id);
-			assertThat(payment.getAmount(), is(100));
-		}
+		Payment paymentTest = em.find(Payment.class, p.getId());
+		assertThat(paymentTest.getAmount(), is(100));
 	}
 
 }

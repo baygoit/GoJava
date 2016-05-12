@@ -1,8 +1,10 @@
 package com.anmertrix.dao.sql;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,15 +13,22 @@ import com.anmertrix.domain.Question;
 
 @Repository
 public class QuestionDaoSql implements QuestionDao {
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	@Transactional
+	@PersistenceContext
+	private EntityManager em;
+	
 	@Override
+	@Transactional
+	public List<Question> getQuestionsByProjectId(long projectId) {
+		List<Question> questions = em.createNamedQuery("Question.getQuestions", Question.class)
+				.setParameter("projectId", projectId).getResultList();
+		questions.forEach(b -> b.getAnswers().size());
+		return questions;
+	}
+
+	@Override
+	@Transactional
 	public void insertQuestion(Question question) {
-		try (Session session = sessionFactory.openSession()) {
-			session.save(question);
-		}
+		em.persist(question);
 	}
 
 }

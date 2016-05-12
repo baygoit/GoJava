@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ua.nenya</groupId>
-	<artifactId>KickstarterServer</artifactId>
+	<artifactId>kickstarter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
@@ -22,12 +22,6 @@
             <scope>provided</scope>
         </dependency>
         
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate-version}</version>
-		</dependency>
-		
 		<dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
@@ -123,7 +117,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>kickstarterMy</finalName>
+		<finalName>kickstarter</finalName>
 	</build>
 
 </project>

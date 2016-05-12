@@ -67,6 +67,7 @@ INSERT INTO REWARD (project_id, name, amount, description) VALUES (6, '100$', 10
 INSERT INTO REWARD (project_id, name, amount, description) VALUES (6, '100$', 100, 'Invest one hundred dollars and get five bottles of water!!!');
 
 CREATE TABLE QUESTION (id SERIAL PRIMARY KEY, project_id INTEGER REFERENCES PROJECT, name VARCHAR(500) NOT NULL);
+--ALTER TABLE QUESTION ADD CONSTRAINT uq_Question UNIQUE(project_id, name(255));--
 INSERT INTO QUESTION (project_id, name) VALUES (1, 'Why?');
 INSERT INTO QUESTION (project_id, name) VALUES (1, 'Who?');
 INSERT INTO QUESTION (project_id, name) VALUES (2, 'What?');

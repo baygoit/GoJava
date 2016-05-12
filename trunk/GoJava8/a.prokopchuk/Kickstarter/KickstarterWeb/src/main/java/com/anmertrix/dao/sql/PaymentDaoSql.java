@@ -1,9 +1,10 @@
 package com.anmertrix.dao.sql;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,25 +14,24 @@ import com.anmertrix.domain.Payment;
 @Repository
 public class PaymentDaoSql implements PaymentDao {
 	
-	private static final String SELECT_GATHERED_BUDGET = "SELECT COALESCE(SUM(amount),0) FROM payment WHERE project_id=?";
+	@PersistenceContext
+	private EntityManager em;
 	
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+	@Override
+	public List<Payment> getPaymentsByProjectId(long projectId) {
+		return em.createNamedQuery("Payment.getPayments", Payment.class)
+				.setParameter("projectId", projectId).getResultList();
+	}
 	
 	@Override
 	public long getGatheredBudgetByProjectId(long projectId) {
-		return jdbcTemplate.queryForObject(SELECT_GATHERED_BUDGET, new Object[] { projectId }, Long.class);
+		Long result = (Long) em.createNamedQuery("Payment.getGatheredBudget").setParameter("projectId", projectId).getSingleResult();
+		return (result != null) ? result : 0;
 	}
 
-	@Transactional
 	@Override
+	@Transactional
 	public void insertPayment(Payment payment) {
-		try (Session session = sessionFactory.openSession()) {
-			session.save(payment);
-		}
+		em.persist(payment);
 	}
-
 }

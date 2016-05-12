@@ -63,7 +63,6 @@ public class ProjectsServletTest {
 		when(category.getId()).thenReturn(3L);
 		when(projectDao.getProjectsByCategoryId(anyLong())).thenReturn(new ArrayList<>());
 		when(context.getRequestDispatcher(anyString())).thenReturn(dispatcher);
-		when(paymentDao.getGatheredBudgetByProjectId(anyLong())).thenReturn(3L);
 		doReturn(context).when(projectsPage).getServletContext();
 		projectsPage.doGet(request, response);
 
