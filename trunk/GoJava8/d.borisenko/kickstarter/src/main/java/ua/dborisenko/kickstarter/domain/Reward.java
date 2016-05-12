@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "rewards")
-public class Reward implements Comparable<Reward> {
+public class Reward {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +26,6 @@ public class Reward implements Comparable<Reward> {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getDescription() {
@@ -54,10 +50,5 @@ public class Reward implements Comparable<Reward> {
 
     public void setProject(Project project) {
         this.project = project;
-    }
-
-    @Override
-    public int compareTo(Reward reward) {
-        return this.amount - reward.getAmount();
     }
 }

@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThat;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,9 +23,14 @@ public class CategoryTest {
     public void mappingTest() {
         Category category = new Category();
         category.setName("testname");
+        Project project = new Project();
+        project.setCategory(category);
         em.persist(category);
-        Query query = em.createQuery("FROM Category");
-        Category resultCategory = (Category) query.getSingleResult();
+        em.persist(project);
+        em.clear();
+        int id = category.getId();
+        Category resultCategory = em.find(Category.class, id);
         assertThat(resultCategory.getName(), is("testname"));
+        assertThat(resultCategory.getProjects().size(), is(1));
     }
 }

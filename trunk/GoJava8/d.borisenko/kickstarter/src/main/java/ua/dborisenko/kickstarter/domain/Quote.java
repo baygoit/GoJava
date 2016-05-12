@@ -21,10 +21,6 @@ public class Quote {
     @Column
     private String author;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getId() {
         return id;
     }

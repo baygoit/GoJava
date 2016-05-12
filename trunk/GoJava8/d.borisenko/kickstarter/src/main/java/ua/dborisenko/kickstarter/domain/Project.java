@@ -53,10 +53,6 @@ public class Project {
     @OrderBy("amount")
     private List<Reward> rewards;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getId() {
         return id;
     }
@@ -121,24 +117,12 @@ public class Project {
         return rewards;
     }
 
-    public void setRewards(List<Reward> rewards) {
-        this.rewards = rewards;
-    }
-
     public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
-
     public Set<Investment> getInvestments() {
         return investments;
-    }
-
-    public void setInvestments(Set<Investment> investments) {
-        this.investments = investments;
     }
 
     public Category getCategory() {
@@ -148,5 +132,4 @@ public class Project {
     public void setCategory(Category category) {
         this.category = category;
     }
-
 }

@@ -19,7 +19,6 @@ import ua.dborisenko.kickstarter.domain.Category;
 @Transactional
 public class CategoryDao {
 
-    private static final String GET_ALL_JPQL = "from Category order by name";
     @PersistenceContext
     private EntityManager em;
 
@@ -36,8 +35,7 @@ public class CategoryDao {
 
     @SuppressWarnings("unchecked")
     public List<Category> getAll() {
-        Query query = em.createQuery(GET_ALL_JPQL);
+        Query query = em.createNamedQuery("Category.getAll");
         return (List<Category>) query.getResultList();
     }
-
 }

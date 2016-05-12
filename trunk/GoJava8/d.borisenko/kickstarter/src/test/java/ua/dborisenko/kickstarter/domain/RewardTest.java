@@ -1,11 +1,11 @@
 package ua.dborisenko.kickstarter.domain;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,9 +32,11 @@ public class RewardTest {
         em.persist(category);
         em.persist(project);
         em.persist(reward);
-        Query query = em.createQuery("FROM Reward");
-        Reward resultReward = (Reward) query.getSingleResult();
+        em.clear();
+        int id = reward.getId();
+        Reward resultReward = em.find(Reward.class, id);
         assertThat(resultReward.getDescription(), is("testdescription"));
         assertThat(resultReward.getAmount(), is(100));
+        assertThat(resultReward.getProject(), is(notNullValue()));
     }
 }

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,8 +27,9 @@ public class QuoteTest {
         quote.setAuthor("testauthor");
         quote.setText("testtext");
         em.persist(quote);
-        Query query = em.createQuery("FROM Quote");
-        Quote resultQuote = (Quote) query.getSingleResult();
+        em.clear();
+        int id = quote.getId();
+        Quote resultQuote = em.find(Quote.class, id);
         assertThat(resultQuote.getAuthor(), is("testauthor"));
         assertThat(resultQuote.getText(), is("testtext"));
     }
