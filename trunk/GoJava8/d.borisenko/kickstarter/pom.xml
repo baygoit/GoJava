@@ -75,6 +75,10 @@
 							<token>@PROJECT_BUILD_TIMEZONE@</token>
 							<value>${project.build.timezone}</value>
 						</replacement>
+						<replacement>
+							<token>@PROJECT_VERSION@</token>
+							<value>${project.version}</value>
+						</replacement>
 					</replacements>
 				</configuration>
 			</plugin>
@@ -155,7 +159,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
+			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${version-hibernate}</version>
 		</dependency>
 		<dependency>

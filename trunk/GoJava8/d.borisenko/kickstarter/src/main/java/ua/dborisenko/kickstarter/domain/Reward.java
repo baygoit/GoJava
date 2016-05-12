@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Reward implements Comparable<Reward> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
     @JoinColumn(name = "project_id")

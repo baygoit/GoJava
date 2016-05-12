@@ -5,6 +5,10 @@
 		<hr/>
 		<table>
 			<tr>
+				<td>Category:</td>
+				<td>${project.category.name}</td>
+			</tr>
+			<tr>
 				<td>Description:</td>
 				<td>${project.description}</td>
 			</tr>
@@ -50,5 +54,5 @@
 		<br/>
 		<a href="?page=investment&project_id=${project.id}">Invest in the project</a>
 		<br/><br/>
-		<a href="?page=category&id=${category.id}">Return</a>
+		<a href="?page=category&id=${project.category.id}">Return</a>
 <jsp:include page="footer.jsp"/>

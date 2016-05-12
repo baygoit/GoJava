@@ -12,7 +12,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import ua.dborisenko.kickstarter.dao.CategoryDao;
-import ua.dborisenko.kickstarter.dao.ProjectDao;
 import ua.dborisenko.kickstarter.dao.QuoteDao;
 import ua.dborisenko.kickstarter.domain.Category;
 
@@ -30,8 +29,6 @@ public class CategoryController {
     private QuoteDao quoteDao;
     @Autowired
     private CategoryDao categoryDao;
-    @Autowired
-    private ProjectDao projectDao;
 
     void showCategories(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute(QUOTE_ATTR_NAME, quoteDao.getRandom());
@@ -43,8 +40,7 @@ public class CategoryController {
     void showCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.valueOf(request.getParameter(ID_PARAM_NAME));
-            Category category = categoryDao.getById(id);
-            projectDao.getAllForCategory(category);
+            Category category = categoryDao.getWithProjects(id);
             request.setAttribute(CATEGORY_ATTR_NAME, category);
             request.setAttribute(PROJECTS_ATTR_NAME, category.getProjects());
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(CATEGORY_JSP_PATH);

@@ -30,10 +30,25 @@ public class InvestmentController {
     @Autowired
     private ProjectDao projectDao;
 
+    void showInvestment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            int projectId = Integer.valueOf(request.getParameter(PROJECT_ID_PARAM_NAME));
+            Project project = projectDao.getWithRewards(projectId);
+            request.setAttribute(PROJECT_ATTR_NAME, project);
+            request.setAttribute(REWARDS_ATTR_NAME, project.getRewards());
+            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(INVESTMENT_JSP_PATH);
+            dispatcher.forward(request, response);
+        } catch (EmptyResultDataAccessException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, ErrorText.PROJECT_NOT_FOUND);
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NUMBER_FORMAT);
+        }
+    }
+    
     void addInvestment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int projectId = Integer.valueOf(request.getParameter(PROJECT_ID_PARAM_NAME));
-            Project project = projectDao.getById(projectId);
+            Project project = projectDao.get(projectId);
             Investment investment = new Investment();
             investment.setProject(project);
             investment.setCardHolderName(request.getParameter(CARDHOLDER_NAME_PARAM_NAME));
@@ -49,22 +64,6 @@ public class InvestmentController {
             }
             projectDao.addInvestment(investment);
             response.sendRedirect(PROJECT_OUT_URL + projectId);
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NUMBER_FORMAT);
-        }
-    }
-
-    void showInvestment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            int projectId = Integer.valueOf(request.getParameter(PROJECT_ID_PARAM_NAME));
-            Project project = projectDao.getById(projectId);
-            projectDao.getRewards(project);
-            request.setAttribute(PROJECT_ATTR_NAME, project);
-            request.setAttribute(REWARDS_ATTR_NAME, project.getRewards());
-            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher(INVESTMENT_JSP_PATH);
-            dispatcher.forward(request, response);
-        } catch (EmptyResultDataAccessException e) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, ErrorText.PROJECT_NOT_FOUND);
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NUMBER_FORMAT);
         }

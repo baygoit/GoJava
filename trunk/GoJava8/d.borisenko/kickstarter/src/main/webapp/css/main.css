@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body {
-	background-color: #b7cac9;
+	background-color: #BAE3C2;
 	font: 10pt Arial, Helvetica, sans-serif;
 	color: #555;
 }
@@ -27,7 +27,7 @@ body {
 	font-size: 12pt;
 	font-weight: bold;
 	text-align: center;
-	background-color: #b7cac9;
+	background-color: #BAE3C2;
 }
 
 .div_main_wrapper {

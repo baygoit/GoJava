@@ -5,15 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "quotes")
-public class Quote implements java.io.Serializable {
+@NamedNativeQuery(name = "Quote.getRandom", query = "SELECT * FROM quotes ORDER BY RAND() LIMIT 1", resultClass = Quote.class)
+public class Quote {
 
-    private static final long serialVersionUID = 9022736236822027997L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
     private String text;
