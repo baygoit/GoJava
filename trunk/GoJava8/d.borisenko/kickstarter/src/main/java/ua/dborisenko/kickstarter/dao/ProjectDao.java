@@ -54,12 +54,9 @@ public class ProjectDao {
 
     public void addInvestment(Investment investment) {
         em.persist(investment);
-        em.flush();
-    }
-    
-    public void addQuestion(Question question) {
-        em.persist(question);
-        em.flush();
     }
 
+    public void addQuestion(Question question) {
+        em.persist(question);
+    }
 }
