@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoryTest {
     @PersistenceContext
     private EntityManager em;
-    
+
     @Test
     public void mappingTest() {
         Category category = new Category();

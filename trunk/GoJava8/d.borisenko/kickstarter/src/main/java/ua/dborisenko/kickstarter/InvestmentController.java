@@ -44,7 +44,7 @@ public class InvestmentController {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NUMBER_FORMAT);
         }
     }
-    
+
     void addInvestment(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int projectId = Integer.valueOf(request.getParameter(PROJECT_ID_PARAM_NAME));

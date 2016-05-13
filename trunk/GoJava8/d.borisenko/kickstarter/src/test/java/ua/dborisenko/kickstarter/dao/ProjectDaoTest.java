@@ -26,6 +26,7 @@ import ua.dborisenko.kickstarter.domain.Question;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectDaoTest {
+
     @Mock
     private EntityManager em;
     @Mock

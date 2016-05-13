@@ -22,7 +22,7 @@ public class QuoteDaoTest {
     private TypedQuery<Quote> query;
     @InjectMocks
     private QuoteDao quoteDao;
-    
+
     @Test
     public void getRandomTest() {
         when(em.createNamedQuery("Quote.getRandom", Quote.class)).thenReturn(query);

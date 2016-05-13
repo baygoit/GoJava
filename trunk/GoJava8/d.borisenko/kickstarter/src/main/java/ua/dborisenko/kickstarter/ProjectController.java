@@ -27,7 +27,7 @@ public class ProjectController {
     static final String PROJECT_OUT_URL = "?page=project&id=";
     @Autowired
     private ProjectDao projectDao;
-  
+
     void showProject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.valueOf(request.getParameter(ID_PARAM_NAME));
@@ -42,7 +42,7 @@ public class ProjectController {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NUMBER_FORMAT);
         }
     }
-    
+
     void addQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int projectId = Integer.valueOf(request.getParameter(PROJECT_ID_PARAM_NAME));

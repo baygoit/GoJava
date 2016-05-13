@@ -13,14 +13,14 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 public class Kickstarter extends HttpServlet {
 
     private static final long serialVersionUID = 8987512933446595305L;
-    private static final String REQUESTED_PAGE_PARAM_NAME = "page";
-    private static final String REQUESTED_ACTION_PARAM_NAME = "action";
+    static final String REQUESTED_PAGE_PARAM_NAME = "page";
+    static final String REQUESTED_ACTION_PARAM_NAME = "action";
 
-    private static enum REQUESTED_ACTION {
+    static enum REQUESTED_ACTION {
         add_question, add_investment
     };
 
-    private static enum REQUESTED_PAGE {
+    static enum REQUESTED_PAGE {
         categories, category, project, investment
     }
 
