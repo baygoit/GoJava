@@ -25,7 +25,7 @@ public class Kickstarter extends HttpServlet {
     }
 
     @Autowired
-    private CategoryController categoryController;
+    private CategoryControllerOld categoryController;
     @Autowired
     private ProjectController projectController;
     @Autowired

@@ -45,7 +45,7 @@ public class CategoryControllerTest {
     @Mock
     private CategoryDao categoryDao;
     @InjectMocks
-    private CategoryController categoryController;
+    private CategoryControllerOld categoryController;
 
     @Before
     public void setUp() {
@@ -60,29 +60,29 @@ public class CategoryControllerTest {
         List<Category> categories = new ArrayList<>();
         when(categoryDao.getAll()).thenReturn(categories);
         categoryController.showCategories(request, response);
-        verify(request).setAttribute(CategoryController.QUOTE_ATTR_NAME, quote);
-        verify(request).setAttribute(CategoryController.CATEGORIES_ATTR_NAME, categories);
-        verify(context).getRequestDispatcher(CategoryController.CATEGORIES_JSP_PATH);
+        verify(request).setAttribute(CategoryControllerOld.QUOTE_ATTR_NAME, quote);
+        verify(request).setAttribute(CategoryControllerOld.CATEGORIES_ATTR_NAME, categories);
+        verify(context).getRequestDispatcher(CategoryControllerOld.CATEGORIES_JSP_PATH);
         verify(dispatcher).forward(request, response);
     }
 
     @Test
     public void showCategoryTest() throws ServletException, IOException {
-        when(request.getParameter(CategoryController.ID_PARAM_NAME)).thenReturn("42");
+        when(request.getParameter(CategoryControllerOld.ID_PARAM_NAME)).thenReturn("42");
         Category category = mock(Category.class);
         List<Project> projects = new ArrayList<>();
         when(category.getProjects()).thenReturn(projects);
         when(categoryDao.getWithProjects(42)).thenReturn(category);
         categoryController.showCategory(request, response);
-        verify(request).setAttribute(CategoryController.CATEGORY_ATTR_NAME, category);
-        verify(request).setAttribute(CategoryController.PROJECTS_ATTR_NAME, projects);
-        verify(context).getRequestDispatcher(CategoryController.CATEGORY_JSP_PATH);
+        verify(request).setAttribute(CategoryControllerOld.CATEGORY_ATTR_NAME, category);
+        verify(request).setAttribute(CategoryControllerOld.PROJECTS_ATTR_NAME, projects);
+        verify(context).getRequestDispatcher(CategoryControllerOld.CATEGORY_JSP_PATH);
         verify(dispatcher).forward(request, response);
     }
 
     @Test
     public void showCategoryEmptyTest() throws ServletException, IOException {
-        when(request.getParameter(CategoryController.ID_PARAM_NAME)).thenReturn("42");
+        when(request.getParameter(CategoryControllerOld.ID_PARAM_NAME)).thenReturn("42");
         when(categoryDao.getWithProjects(42)).thenThrow(new EmptyResultDataAccessException(1));
         categoryController.showCategory(request, response);
         verify(response).sendError(HttpServletResponse.SC_NOT_FOUND, ErrorText.CATEGORY_NOT_FOUND);
@@ -90,7 +90,7 @@ public class CategoryControllerTest {
 
     @Test
     public void showCategoryWrongNumberTest() throws ServletException, IOException {
-        when(request.getParameter(CategoryController.ID_PARAM_NAME)).thenReturn("foo");
+        when(request.getParameter(CategoryControllerOld.ID_PARAM_NAME)).thenReturn("foo");
         categoryController.showCategory(request, response);
         verify(response).sendError(HttpServletResponse.SC_BAD_REQUEST, ErrorText.NUMBER_FORMAT);
     }

@@ -20,7 +20,7 @@ public class KickstarterTest {
     @Mock
     private HttpServletResponse response;
     @Mock
-    private CategoryController categoryController;
+    private CategoryControllerOld categoryController;
     @Mock
     private ProjectController projectController;
     @Mock

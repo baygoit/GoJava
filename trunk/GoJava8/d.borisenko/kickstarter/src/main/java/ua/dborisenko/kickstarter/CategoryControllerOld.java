@@ -16,7 +16,7 @@ import ua.dborisenko.kickstarter.dao.QuoteDao;
 import ua.dborisenko.kickstarter.domain.Category;
 
 @Repository
-public class CategoryController {
+public class CategoryControllerOld {
 
     static final String ID_PARAM_NAME = "id";
     static final String PROJECTS_ATTR_NAME = "projects";
