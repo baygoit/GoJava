@@ -9,5 +9,5 @@
 			<li><a href="?page=project&id=${project.id}">${project.name}</a> (collected: ${project.collectedSum} / ${project.requiredSum}), ${project.remainingDays} days left: ${project.description}</li>
 		</c:forEach>
 		</ul>
-		<a href="?page=categories">Return</a>
+		<a href="<c:url value="/" />">Return</a>
 <jsp:include page="footer.jsp"/>

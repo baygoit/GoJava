@@ -8,7 +8,7 @@
 		<hr/>
 		<ul>
 		<c:forEach var="category" items="${categories}">
-			<li><a href="?page=category&id=${category.id}">${category.name}</a></li>
+			<li><a href="<c:url value="/category/${category.id}" />">${category.name}</a></li>
 		</c:forEach>
 		</ul>
 <jsp:include page="footer.jsp"/>
