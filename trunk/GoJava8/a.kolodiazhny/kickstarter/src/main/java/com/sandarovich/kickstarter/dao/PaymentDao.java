@@ -5,4 +5,6 @@ import com.sandarovich.kickstarter.model.Payment;
 
 public interface PaymentDao {
     void pay(Payment payment);
+
+    double getGatheredBudgetByProjectId(long projecId);
 }

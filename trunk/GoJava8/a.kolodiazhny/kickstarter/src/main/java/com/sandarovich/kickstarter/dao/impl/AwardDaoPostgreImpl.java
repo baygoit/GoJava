@@ -3,22 +3,25 @@ package com.sandarovich.kickstarter.dao.impl;
 import com.sandarovich.kickstarter.dao.AwardDao;
 import com.sandarovich.kickstarter.model.Award;
 import com.sandarovich.kickstarter.model.Project;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
 public class AwardDaoPostgreImpl implements AwardDao {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager em;
 
     @Transactional
     @Override
     public List<Award> getByProject(Project project) {
-        return project.getAwards();
+        Query query = em.createNamedQuery("Award.getByProject");
+        query.setParameter("project", project);
+        return query.getResultList();
     }
 }

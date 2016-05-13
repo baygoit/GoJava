@@ -5,8 +5,10 @@ import com.sandarovich.kickstarter.model.Category;
 import java.util.List;
 
 public interface CategoryDao {
-    List<Category> getCategories();
+    List<Category> getAll();
 
-    Category findById(long id);
+    Category findById(long categoeyId);
+
+    boolean isCategoryExist(long categoryId);
 
 }

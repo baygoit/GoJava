@@ -3,6 +3,10 @@ package com.sandarovich.kickstarter.model;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Payment.getGatheredBudgetByProjectId", query = "SELECT SUM(p.amount) FROM Payment as p WHERE p.project.id = :projectId"),
+        @NamedQuery(name = "Payment.getPaymentsByProjectId", query = "SELECT p from Payment p where p.project.id=:projectId"),
+})
 @Table(name = "payment")
 public class Payment {
     @Id
