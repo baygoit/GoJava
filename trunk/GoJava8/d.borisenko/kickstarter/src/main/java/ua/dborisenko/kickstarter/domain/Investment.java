@@ -53,7 +53,11 @@ public class Investment {
     public int getId() {
         return id;
     }
-
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public Project getProject() {
         return project;
     }

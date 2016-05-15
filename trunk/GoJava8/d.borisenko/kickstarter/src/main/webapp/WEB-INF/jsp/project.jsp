@@ -34,7 +34,7 @@
 			</tr>
 		</table>
 		Questions and answers:<hr/>
-		<c:forEach var="question" items="${questions}">
+		<c:forEach var="question" items="${project.questions}">
 			Q: <label class="question">${question.request}</label>
 			<br/>
 			<c:if test="${null != question.reply}"> 
@@ -44,7 +44,7 @@
  		</c:forEach>
  		<hr/>
 		Ask a question<br/>
-		<form name="add_question" method="POST" action="" accept-charset="utf-8">
+		<form name="add_question" method="POST" action="<c:url value="/project/${project.id}/addQuestion" />" accept-charset="utf-8">
 			<input type="hidden" name="action" value="add_question"/>
 			<input type="hidden" name="project_id" value="${project.id}"/>
 			<textarea maxlength="1024" name="question_request" cols="50" rows="2"></textarea>
@@ -52,7 +52,7 @@
 			<input class="button" type="submit" value="Send">
 		</form>
 		<br/>
-		<a href="?page=investment&project_id=${project.id}">Invest in the project</a>
+		<a href="<c:url value="/investment/${project.id}" />">Invest in the project</a>
 		<br/><br/>
-		<a href="?page=category&id=${project.category.id}">Return</a>
+		<a href="<c:url value="/category/${project.category.id}" />">Return</a>
 <jsp:include page="footer.jsp"/>

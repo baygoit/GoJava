@@ -6,6 +6,26 @@
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kickstarter</name>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.timezone>GMT+3</project.build.timezone>
+		<tomcat.deploy.username>admin</tomcat.deploy.username>
+		<tomcat.deploy.password></tomcat.deploy.password>
+		<tomcat.deploy.url>http://localhost:8082/manager/text</tomcat.deploy.url>
+		<tomcat.deploy.servername>TomcatServer</tomcat.deploy.servername>
+		<version-spring>4.2.5.RELEASE</version-spring>
+		<version-mysql-connector>5.1.38</version-mysql-connector>
+		<version-junit>4.12</version-junit>
+		<version-mockito>1.10.19</version-mockito>
+		<version-javax.servlet-api>3.1.0</version-javax.servlet-api>
+		<version-jstl>1.2</version-jstl>
+		<version-tomcat-dbcp>8.5.0</version-tomcat-dbcp>
+		<version-hibernate>5.1.0.Final</version-hibernate>
+		<version-hsqldb>2.3.3</version-hsqldb>
+		<version-hamcrest>1.3</version-hamcrest>
+	</properties>
+	
 	<build>
 		<finalName>kickstarter</finalName>
 		<plugins>
@@ -138,24 +158,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.build.timezone>GMT+3</project.build.timezone>
-		<tomcat.deploy.username>admin</tomcat.deploy.username>
-		<tomcat.deploy.password></tomcat.deploy.password>
-		<tomcat.deploy.url>http://localhost:8080/manager/html</tomcat.deploy.url>
-		<tomcat.deploy.servername>TomcatServer</tomcat.deploy.servername>
-		<version-spring>4.2.5.RELEASE</version-spring>
-		<version-mysql-connector>5.1.38</version-mysql-connector>
-		<version-junit>4.12</version-junit>
-		<version-mockito>1.10.19</version-mockito>
-		<version-javax.servlet-api>3.1.0</version-javax.servlet-api>
-		<version-jstl>1.2</version-jstl>
-		<version-tomcat-dbcp>8.5.0</version-tomcat-dbcp>
-		<version-hibernate>5.1.0.Final</version-hibernate>
-		<version-hsqldb>2.3.3</version-hsqldb>
-		<version-hamcrest>1.3</version-hamcrest>
-	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate</groupId>

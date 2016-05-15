@@ -5,5 +5,5 @@
 		<h2>Bad request</h2>
 		<hr/>
 		<br/>
-		${requestScope['javax.servlet.error.message']}
+		${errorText}
 <jsp:include page="footer.jsp"/>

@@ -18,6 +18,7 @@ import javax.persistence.NamedEntityGraphs;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.criteria.CriteriaBuilder.In;
 
 @Entity
 @Table(name = "projects")
@@ -55,6 +56,10 @@ public class Project {
 
     public int getId() {
         return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -116,13 +121,25 @@ public class Project {
     public List<Reward> getRewards() {
         return rewards;
     }
+    
+    public void setRewards(List<Reward> rewards) {
+        this.rewards = rewards;
+    }
 
     public List<Question> getQuestions() {
         return questions;
     }
+    
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
 
     public Set<Investment> getInvestments() {
         return investments;
+    }
+    
+    public void setInvestments(Set<Investment> investments) {
+        this.investments = investments;
     }
 
     public Category getCategory() {

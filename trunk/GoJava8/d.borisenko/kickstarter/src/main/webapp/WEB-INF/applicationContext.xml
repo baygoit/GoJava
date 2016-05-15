@@ -14,8 +14,8 @@
                         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<context:component-scan base-package="ua.dborisenko.kickstarter" />
 	<context:annotation-config />
-    <mvc:annotation-driven />
-	
+    <mvc:annotation-driven ignore-default-model-on-redirect="true" />
+
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/dataSource" />
 	</bean>

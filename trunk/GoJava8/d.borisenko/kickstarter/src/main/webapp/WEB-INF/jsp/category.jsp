@@ -5,8 +5,8 @@
 		Project list:<br/>
 		<hr/>
 		<ul>
-		<c:forEach var="project" items="${projects}">
-			<li><a href="?page=project&id=${project.id}">${project.name}</a> (collected: ${project.collectedSum} / ${project.requiredSum}), ${project.remainingDays} days left: ${project.description}</li>
+		<c:forEach var="project" items="${category.projects}">
+			<li><a href="<c:url value="/project/${project.id}" />">${project.name}</a> (collected: ${project.collectedSum} / ${project.requiredSum}), ${project.remainingDays} days left: ${project.description}</li>
 		</c:forEach>
 		</ul>
 		<a href="<c:url value="/" />">Return</a>
