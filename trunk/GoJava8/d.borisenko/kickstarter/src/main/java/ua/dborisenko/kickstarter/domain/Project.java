@@ -18,7 +18,6 @@ import javax.persistence.NamedEntityGraphs;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.criteria.CriteriaBuilder.In;
 
 @Entity
 @Table(name = "projects")
