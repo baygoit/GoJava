@@ -34,16 +34,16 @@ public class InvestmentController {
     }
 
     @RequestMapping(value = "/project/{id}/addInvestment", method = RequestMethod.POST)
-    public ModelAndView addQuestion(@PathVariable("id") Integer projectId, @RequestParam String cardholder_name,
-            @RequestParam String card_number, @RequestParam int amount, @RequestParam int custom_amount) {
+    public ModelAndView addQuestion(@PathVariable("id") Integer projectId, @RequestParam("cardholder_name") String cardholderName,
+            @RequestParam("card_number") String cardNumber, @RequestParam int amount, @RequestParam("custom_amount") int customAmount) {
         ModelAndView mav = new ModelAndView("redirect:/project/" + projectId);
         Project project = projectDao.get(projectId);
         Investment investment = new Investment();
         investment.setProject(project);
-        investment.setCardHolderName(cardholder_name);
-        investment.setCardNumber(card_number);
+        investment.setCardHolderName(cardholderName);
+        investment.setCardNumber(cardNumber);
         if (amount == 0) {
-            investment.setAmount(custom_amount);
+            investment.setAmount(customAmount);
         } else {
             investment.setAmount(amount);
         }

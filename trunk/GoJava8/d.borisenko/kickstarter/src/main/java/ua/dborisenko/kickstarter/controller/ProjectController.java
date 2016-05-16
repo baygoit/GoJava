@@ -34,17 +34,17 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/project/{id}/addQuestion", method = RequestMethod.POST)
-    public ModelAndView addQuestion(@PathVariable("id") Integer projectId, @RequestParam String question_request) {
+    public ModelAndView addQuestion(@PathVariable("id") Integer projectId, @RequestParam("question_request") String questionRequest) {
         ModelAndView mav = new ModelAndView("redirect:/project/" + projectId);
         Project project = projectDao.get(projectId);
         Question question = new Question();
         question.setProject(project);
-        if (question_request.trim().length() == 0) {
+        if (questionRequest.trim().length() == 0) {
             mav.setViewName("error400");
             mav.addObject("errorText", ErrorText.EMPTY_STRING);
             return mav;
         }
-        question.setRequest(question_request);
+        question.setRequest(questionRequest);
         projectDao.addQuestion(question);
         // RedirectView redirect = new RedirectView("error500");
         // redirect.setExposeModelAttributes(false);
