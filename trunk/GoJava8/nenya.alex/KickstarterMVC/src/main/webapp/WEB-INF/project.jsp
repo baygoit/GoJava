@@ -23,7 +23,7 @@
 	</c:forEach>
 	<hr/>
 	<p><b>Ask a question for project "${project.name}"</b></p>
-	<form:form action="add" method="post" modelAttribute="questionForm">
+	<form:form action="${project.id}/add" method="post" modelAttribute="questionForm">
         <form:input type="text" path="name" required="required"/> 
         <form:input type="hidden" path="project.id" value="${project.id}" /> 
         <input type="submit" value="Submit" />

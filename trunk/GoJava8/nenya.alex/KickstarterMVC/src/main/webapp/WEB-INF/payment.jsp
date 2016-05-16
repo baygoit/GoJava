@@ -10,7 +10,7 @@
     <p>
         <a href="<c:url value="/category/project/${project.id}"/>" > Back </a>
     </p>
-	<form:form action="add" method="post" modelAttribute="paymentForm">
+	<form:form action="${project.id}/add" method="post" modelAttribute="paymentForm">
 	   <p><form:radiobutton path="amount" value="0" checked="checked" />Any amount </p>
 		<c:forEach var="reward" items="${rewards}" varStatus="varStatus">
 			<p><form:radiobutton path="amount" value="${reward.amount}"/>${reward.name} - ${reward.description}</p>
