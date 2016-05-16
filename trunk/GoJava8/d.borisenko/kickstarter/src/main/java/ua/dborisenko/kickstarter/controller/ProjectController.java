@@ -46,9 +46,6 @@ public class ProjectController {
         }
         question.setRequest(questionRequest);
         projectDao.addQuestion(question);
-        // RedirectView redirect = new RedirectView("error500");
-        // redirect.setExposeModelAttributes(false);
-        // mav.setView(redirect);
         return mav;
     }
 }
