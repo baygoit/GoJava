@@ -1,6 +1,6 @@
 package com.sandarovich.kickstarter.dto;
 
-public class PaymentDto {
+public class PaymentForm {
 
     private double amount;
     private String cardHolder;

@@ -18,9 +18,9 @@
                  					<td>Amount</td>
             					</tr>
             					    <tr>
-            				    	<td>${dto.projectId}</td>
-            				    	<td>${dto.cardNumber}</td>
-            				    	<td>${dto.amount}</td>
+            				    	<td>${paymentForm.projectId}</td>
+            				    	<td>${paymentForm.cardNumber}</td>
+            				    	<td>${paymentForm.amount}</td>
             				    </tr>
                 			</table>
             			</fieldset>

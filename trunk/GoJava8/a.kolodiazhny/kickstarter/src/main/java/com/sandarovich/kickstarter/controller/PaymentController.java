@@ -1,26 +1,30 @@
 package com.sandarovich.kickstarter.controller;
 
-import com.sandarovich.kickstarter.dao.AwardDao;
-import com.sandarovich.kickstarter.dao.PaymentDao;
-import com.sandarovich.kickstarter.dao.ProjectDao;
-import com.sandarovich.kickstarter.dao.exception.DaoException;
-import com.sandarovich.kickstarter.dto.PaymentDto;
-import com.sandarovich.kickstarter.model.Award;
-import com.sandarovich.kickstarter.model.Payment;
-import com.sandarovich.kickstarter.model.Project;
-import com.sandarovich.kickstarter.service.PaymentService;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Map;
+import com.sandarovich.kickstarter.dao.AwardDao;
+import com.sandarovich.kickstarter.dao.PaymentDao;
+import com.sandarovich.kickstarter.dao.ProjectDao;
+import com.sandarovich.kickstarter.dao.exception.DaoException;
+import com.sandarovich.kickstarter.dto.PaymentForm;
+import com.sandarovich.kickstarter.model.Award;
+import com.sandarovich.kickstarter.model.Payment;
+import com.sandarovich.kickstarter.model.Project;
+import com.sandarovich.kickstarter.service.PaymentService;
+import com.sandarovich.kickstarter.validator.PaymentValidator;
 
 @Controller
+@RequestMapping(value = "/payment")
 public class PaymentController {
     private static final String PAYMENT = "payment";
     private static final String PROJECT = "project";
@@ -38,7 +42,7 @@ public class PaymentController {
     @Autowired
     AwardDao awardDao;
 
-    @RequestMapping(value = "/" + PAYMENT + "/{projectId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
     public String showPayment(@PathVariable Integer projectId, Map<String, Object> model) {
         if (!projectDao.isProjectExist(projectId)) {
             return SC_NOT_FOUND;
@@ -48,32 +52,40 @@ public class PaymentController {
         model.put("title", "Payment");
         model.put("project", project);
         model.put("awards", awards);
-        PaymentDto paymentForm = new PaymentDto();
+		PaymentForm paymentForm = new PaymentForm();
         paymentForm.setProjectId(project.getId());
         model.put("paymentForm", paymentForm);
         return PAYMENT;
     }
 
-    @RequestMapping(value = "/" + PAYMENT + "/{projectId}", method = RequestMethod.POST)
-    ModelAndView addPayment(@ModelAttribute("paymentForm") PaymentDto paymentDto) {
-        ModelAndView mav = new ModelAndView("redirect:/" + PROJECT + "/" + paymentDto.getProjectId());
+	@RequestMapping(value = "/{projectId}", method = RequestMethod.POST)
+	public ModelAndView addPayment(@ModelAttribute("paymentForm") PaymentForm paymentForm, BindingResult errors) {
+		PaymentValidator paymentValidator = new PaymentValidator();
+		paymentValidator.validate(paymentForm, errors);
+
+		if (errors.hasErrors()) {
+			ModelAndView modelAndView = new ModelAndView(PAYMENT);
+			return modelAndView;
+		}
+
+		ModelAndView mav = new ModelAndView("redirect:/" + PROJECT + "/" + paymentForm.getProjectId());
         PaymentService paymentService = new PaymentService();
         mav.setViewName(PAYMENT_ADD_RESULT);
 
         if (paymentService.allowPayment()) {
             Payment payment = new Payment();
-            payment.setCardHolder(paymentDto.getCardHolder());
-            payment.setCardNumber(paymentDto.getCardNumber());
+			payment.setCardHolder(paymentForm.getCardHolder());
+			payment.setCardNumber(paymentForm.getCardNumber());
             double amount;
-            long awardId = paymentDto.getAwardId();
+			long awardId = paymentForm.getAwardId();
             if (awardId != 0) {
                 amount = awardDao.getById(awardId).getAmount();
             } else {
-                amount = paymentDto.getAmount();
+				amount = paymentForm.getAmount();
             }
             payment.setAmount(amount);
-            paymentDto.setAmount(amount);
-            payment.setProject(projectDao.findById(paymentDto.getProjectId()));
+			paymentForm.setAmount(amount);
+			payment.setProject(projectDao.findById(paymentForm.getProjectId()));
             try {
                 paymentDao.pay(payment);
                 mav.addObject("title", PAYMENT_SUCCESS);
@@ -83,7 +95,7 @@ public class PaymentController {
         } else {
             mav.addObject("title", PAYMENT_WAS_NOT_DONE);
         }
-        mav.addObject("dto", paymentDto);
+		mav.addObject("paymentForm", paymentForm);
         return mav;
     }
 }

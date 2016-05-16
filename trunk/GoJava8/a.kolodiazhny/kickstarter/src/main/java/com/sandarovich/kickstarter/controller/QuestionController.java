@@ -1,11 +1,7 @@
 package com.sandarovich.kickstarter.controller;
 
-import com.sandarovich.kickstarter.dao.ProjectDao;
-import com.sandarovich.kickstarter.dao.QuestionDao;
-import com.sandarovich.kickstarter.dao.exception.DaoException;
-import com.sandarovich.kickstarter.dto.QuestionDto;
-import com.sandarovich.kickstarter.model.Project;
-import com.sandarovich.kickstarter.model.Question;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,13 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
+import com.sandarovich.kickstarter.dao.ProjectDao;
+import com.sandarovich.kickstarter.dao.QuestionDao;
+import com.sandarovich.kickstarter.dao.exception.DaoException;
+import com.sandarovich.kickstarter.dto.QuestionDto;
+import com.sandarovich.kickstarter.model.Project;
+import com.sandarovich.kickstarter.model.Question;
 
 @Controller
 public class QuestionController {
     private static final String SC_NOT_FOUND = "404";
+
     private static final String QUESTION = "question";
     private static final String PROJECT = "project";
+
     private static final String QUESTION_ADD_RESULT = "questionAddResult";
     private static final String QUESTION_WAS_ADDED = "Question was added.";
     private static final String QUESTION_WAS_NOT_ADDED = "Question was not added.";
@@ -35,30 +38,37 @@ public class QuestionController {
         if (!projectDao.isProjectExist(projectId)) {
             return SC_NOT_FOUND;
         }
+
         Project project = projectDao.findById(projectId);
         model.put("title", "Question");
         model.put("project", project);
+
         QuestionDto questionForm = new QuestionDto();
         questionForm.setProjectId(project.getId());
+
         model.put("questionForm", questionForm);
         return QUESTION;
     }
 
     @RequestMapping(value = "/" + QUESTION + "/{projectId}", method = RequestMethod.POST)
     public ModelAndView addQuestion(@ModelAttribute("questionForm") QuestionDto questionDto) {
-        ModelAndView mav = new ModelAndView("redirect:/" + PROJECT + "/" + questionDto.getProjectId());
-        mav.setViewName(QUESTION_ADD_RESULT);
+
+		ModelAndView modelAndView = new ModelAndView("redirect:/" + PROJECT + "/" + questionDto.getProjectId());
+		modelAndView.setViewName(QUESTION_ADD_RESULT);
+
         Question question = new Question();
         question.setText(questionDto.getText());
         question.setProject(projectDao.findById(questionDto.getProjectId()));
+
         try {
             questionDao.addQuestion(question);
-            mav.addObject("dto", questionDto);
-            mav.addObject("title", QUESTION_WAS_ADDED);
+			modelAndView.addObject("dto", questionDto);
+			modelAndView.addObject("title", QUESTION_WAS_ADDED);
         } catch (DaoException e) {
-            mav.addObject("title", QUESTION_WAS_NOT_ADDED);
+			modelAndView.addObject("title", QUESTION_WAS_NOT_ADDED);
         }
-        return mav;
+
+		return modelAndView;
 
     }
 }

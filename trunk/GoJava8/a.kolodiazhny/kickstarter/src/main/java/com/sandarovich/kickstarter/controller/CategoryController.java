@@ -1,15 +1,16 @@
 package com.sandarovich.kickstarter.controller;
 
-import com.sandarovich.kickstarter.dao.CategoryDao;
-import com.sandarovich.kickstarter.dao.ProjectDao;
-import com.sandarovich.kickstarter.model.Category;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.Map;
+import com.sandarovich.kickstarter.dao.CategoryDao;
+import com.sandarovich.kickstarter.dao.ProjectDao;
+import com.sandarovich.kickstarter.model.Category;
 
 @Controller
 public class CategoryController {
@@ -18,9 +19,9 @@ public class CategoryController {
     private static final String SC_NOT_FOUND = "404";
 
     @Autowired
-    CategoryDao categoryDao;
+	private CategoryDao categoryDao;
     @Autowired
-    ProjectDao projectDao;
+	private ProjectDao projectDao;
 
     @RequestMapping(value = "/" + CATEGORIES, method = RequestMethod.GET)
     public String showCategories(Map<String, Object> model) {

@@ -1,6 +1,8 @@
 package com.sandarovich.kickstarter.service;
 
+import org.springframework.stereotype.Service;
 
+@Service
 public class PaymentService {
 
     public static final int CARD_NUMBER_LENGTH = 11;

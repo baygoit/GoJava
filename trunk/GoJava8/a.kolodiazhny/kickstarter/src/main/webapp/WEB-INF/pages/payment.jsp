@@ -4,23 +4,30 @@
         <div class="container">
             <jsp:include page="navigation.jsp" />
             <div class="page-header">
-              <h2>${title}</h1>
+              <h2>${title}</h2>
             </div>
             <ol class="breadcrumb">
                 <li><a  href="<c:url value="/project/${project.id}" />">${project.name}</a></li>
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Payment:</div>
+                <form:errors path="*" cssClass="errorblock" element="div" />
                 <div class="panel-body">
                     <form:form action="" method="post" commandName="paymentForm">
                         <div class="form-group">
                             <form:input path="projectId" class="form-control" type="hidden" />
+                            
                             <label for="cardHolder">Card Holder</label>
-                            <form:input path="cardHolder"  class="form-control" placeholder="Bob" value="Bob"/>
+                            <form:input path="cardHolder"  class="form-control" placeholder="Bob" value=""/>
+                            <form:errors path="cardHolder" cssClass="error"/>
+                            
                             <label for="cardNumber">Card Number</label>
-                            <form:input path="cardNumber" class="form-control"  placeholder="123456789011"  value="123456789011"/>
+                            <form:input path="cardNumber" class="form-control"  placeholder="123456789011"  value=""/>
+                            <form:errors path="cardNumber" cssClass="error"/>
+                            
                             <label for="amount">Amount</label>
-                            <form:input path="amount" class="form-control" placeholder="0" value="0"/>
+                            <form:input path="amount" class="form-control" placeholder="0" value=""/>
+                            <form:errors path="amount" cssClass="error"/>
                         </div>
                         <div class="form-group">
                             <button type="submit" value="addPayment" class="btn btn-default">Submit</button>
