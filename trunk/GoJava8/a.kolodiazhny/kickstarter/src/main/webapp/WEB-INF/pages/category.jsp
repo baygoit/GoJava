@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="header.jsp" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <div class="container">
@@ -6,7 +7,7 @@
                 <h2>${title}</h1>
             </div>
             <ol class="breadcrumb">
-                <li><a href="?view=categories">All</a></li>
+                <li><a href="<c:url value="/categories" />">All</a></li>
             </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Projects:</div>
@@ -20,7 +21,7 @@
                         </tr>
                         <c:forEach var="project" items="${projects}">
                             <tr>
-                                <td><a href="?view=project&id=${project.id}">${project.name}</a></td>
+                                <td><a href="<c:url value="/project/${project.id}" />">${project.name}</a></td>
                                 <td>${project.description}</td>
                                 <td>${project.requiredBudget}</td>
                                 <td>${project.gatheredBudget}</td>

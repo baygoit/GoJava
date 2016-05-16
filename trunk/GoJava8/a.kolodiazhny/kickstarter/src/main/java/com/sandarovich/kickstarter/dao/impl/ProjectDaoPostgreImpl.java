@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -26,7 +27,9 @@ public class ProjectDaoPostgreImpl implements ProjectDao {
     @Transactional(readOnly = true)
     @Override
     public Project findById(long projectId) {
-        Project project = em.find(Project.class, projectId);
+        TypedQuery<Project> query = em.createNamedQuery("Project.findById", Project.class);
+        query.setParameter("id", projectId);
+        Project project = query.getSingleResult();
         project.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(projectId));
         return project;
     }

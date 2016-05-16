@@ -6,7 +6,7 @@
               <h2>${title}</h1>
             </div>
              <ol class="breadcrumb">
-                <li><a href="?view=category&id=${category.id}">${category.name}</a></li>
+                <li><a href="<c:url value="/category/${category.id}" />">${category.name}</a></li>
              </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Project:</div>
@@ -27,7 +27,7 @@
                             <td>Gathered:</td>
                             <td>
                                 ${project.gatheredBudget}
-                                <a class="btn btn-default btn-small" href="?view=invest&id=${project.id}" role="button">Invest</a>
+                                <a class="btn btn-default btn-small" href="<c:url value="/payment/${project.id}" />" role="button">Pay</a>
                             </td>
                         </tr>
                         <tr>
@@ -50,7 +50,7 @@
                                         <tr><td>${varStatus.count}. ${question.text}</td></tr>
                                     </c:forEach>
                                 </table>
-                                <a class="btn btn-default btn-small" href="?view=question&id=${project.id}" role="button">Add Question</a>
+                                <a class="btn btn-default btn-small" href="<c:url value="/question/${project.id}" />" role="button">Add Question</a>
                             <td>
                         </tr>
                     </table>

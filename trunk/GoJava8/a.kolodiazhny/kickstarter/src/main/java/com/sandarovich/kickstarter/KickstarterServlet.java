@@ -2,24 +2,22 @@ package com.sandarovich.kickstarter;
 
 import com.sandarovich.kickstarter.dao.*;
 import com.sandarovich.kickstarter.dao.exception.NoResultException;
-import com.sandarovich.kickstarter.model.*;
+import com.sandarovich.kickstarter.model.Payment;
+import com.sandarovich.kickstarter.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 public class KickstarterServlet extends HttpServlet {
 
-    public static final String APPLICATION_TITLE = "Kickstarter";
     private static final String PAGE_IDENTIFIER_PARAMETER = "view";
     private static final String CATEGORY_PAGE = "category";
-    private static final String CATEGORIES_PAGE = "categories";
+
     private static final String PROJECT_PAGE = "project";
     private static final String QUESTION_PAGE = "question";
     private static final String INVEST_PAGE = "invest";
@@ -80,18 +78,18 @@ public class KickstarterServlet extends HttpServlet {
     }
 
     private void addQuestion(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int projectId = 0;
-        try {
-            projectId = Integer.valueOf(request.getParameter("projectId"));
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-        Question question = new Question();
-        question.setText(request.getParameter("question"));
-        question.setProject(projectDao.findById(projectId));
-        questionDao.addQuestion(question);
-        response.sendRedirect("?" + PAGE_IDENTIFIER_PARAMETER + "=project&id=" + projectId);
+//        int projectId = 0;
+//        try {
+//            projectId = Integer.valueOf(request.getParameter("projectId"));
+//        } catch (NumberFormatException e) {
+//            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+//            return;
+//        }
+//        Question question = new Question();
+//        question.setText(request.getParameter("question"));
+//        question.setProject(projectDao.findById(projectId));
+//        questionDao.addQuestion(question);
+//        response.sendRedirect("?" + PAGE_IDENTIFIER_PARAMETER + "=project&id=" + projectId);
     }
 
     @Override
@@ -99,9 +97,9 @@ public class KickstarterServlet extends HttpServlet {
         throws IOException, ServletException {
         String requestPage = request.getParameter(PAGE_IDENTIFIER_PARAMETER);
         if (requestPage == null || request.getQueryString() == null) {
-            showMainPage(request, response);
-        } else if (CATEGORIES_PAGE.equals(requestPage)) {
-            showCategoriesPage(request, response);
+//            showMainPage(request, response);
+//        } else if (CATEGORIES_PAGE.equals(requestPage)) {
+//            showCategoriesPage(request, response);
         } else if (CATEGORY_PAGE.equals(requestPage)) {
             showCategoryPage(request, response);
         } else if (PROJECT_PAGE.equals(requestPage)) {
@@ -114,108 +112,108 @@ public class KickstarterServlet extends HttpServlet {
     }
 
     private void showInvestPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int projectId = 0;
-        try {
-            projectId = Integer.valueOf(request.getParameter("id"));
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-        Project project = null;
-        try {
-            project = projectDao.findById(projectId);
-        } catch (NoResultException e) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-        List<Award> awards = awardDao.getByProject(project);
-        request.setAttribute("project", project);
-        request.setAttribute("title", "Invest");
-        request.setAttribute("awards", awards);
-        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/payment.jsp");
-        rd.forward(request, response);
+//        int projectId = 0;
+//        try {
+//            projectId = Integer.valueOf(request.getParameter("id"));
+//        } catch (NumberFormatException e) {
+//            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+//            return;
+//        }
+//        Project project = null;
+//        try {
+//            project = projectDao.findById(projectId);
+//        } catch (NoResultException e) {
+//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+//            return;
+//        }
+//        List<Award> awards = awardDao.getByProject(project);
+//        request.setAttribute("project", project);
+//        request.setAttribute("title", "Invest");
+//        request.setAttribute("awards", awards);
+//        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/payment.jsp");
+//        rd.forward(request, response);
     }
 
     private void showQuestionPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        long projectId = 0;
-        try {
-            projectId = Long.valueOf(request.getParameter("id"));
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-
-        if (!projectDao.isProjectExist(projectId)) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-
-        Project project = projectDao.findById(projectId);
-        request.setAttribute("title", "Question");
-        request.setAttribute("project", project);
-        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/question.jsp");
-        rd.forward(request, response);
+//        long projectId = 0;
+//        try {
+//            projectId = Long.valueOf(request.getParameter("id"));
+//        } catch (NumberFormatException e) {
+//            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+//            return;
+//        }
+//
+//        if (!projectDao.isProjectExist(projectId)) {
+//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+//            return;
+//        }
+//
+//        Project project = projectDao.findById(projectId);
+//        request.setAttribute("title", "Question");
+//        request.setAttribute("project", project);
+//        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/question.jsp");
+//        rd.forward(request, response);
     }
 
     private void showProjectPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int projectId = 0;
-        try {
-            projectId = Integer.valueOf(request.getParameter("id"));
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-        if (!projectDao.isProjectExist(projectId)) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-        Project project = projectDao.findById(projectId);
-        List<Question> questions;
-        questions = questionDao.getQuestions(project);
-        Category category = project.getCategory();
-        request.setAttribute("title", project.getName());
-        request.setAttribute("project", project);
-        request.setAttribute("questions", questions);
-        request.setAttribute("category", category);
-        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/project.jsp");
-        rd.forward(request, response);
+//        int projectId = 0;
+//        try {
+//            projectId = Integer.valueOf(request.getParameter("id"));
+//        } catch (NumberFormatException e) {
+//            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+//            return;
+//        }
+//        if (!projectDao.isProjectExist(projectId)) {
+//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+//            return;
+//        }
+//        Project project = projectDao.findById(projectId);
+//        List<Question> questions;
+//        questions = questionDao.getQuestions(project);
+//        Category category = project.getCategory();
+//        request.setAttribute("title", project.getName());
+//        request.setAttribute("project", project);
+//        request.setAttribute("questions", questions);
+//        request.setAttribute("category", category);
+//        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/project.jsp");
+//        rd.forward(request, response);
     }
 
     private void showCategoryPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int categoryId = 0;
-        try {
-            categoryId = Integer.valueOf(request.getParameter("id"));
-        } catch (NumberFormatException e) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
-        if (!categoryDao.isCategoryExist(categoryId)) {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-        Category category = categoryDao.findById(categoryId);
-        request.setAttribute("title", category.getName());
-        request.setAttribute("category", category);
-        request.setAttribute("projects", projectDao.findByCategory(category));
-        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/category.jsp");
-        rd.forward(request, response);
+//        int categoryId = 0;
+//        try {
+//            categoryId = Integer.valueOf(request.getParameter("id"));
+//        } catch (NumberFormatException e) {
+//            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+//            return;
+//        }
+//        if (!categoryDao.isCategoryExist(categoryId)) {
+//            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+//            return;
+//        }
+//        Category category = categoryDao.findById(categoryId);
+//        request.setAttribute("title", category.getName());
+//        request.setAttribute("category", category);
+//        request.setAttribute("projects", projectDao.findByCategory(category));
+//        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/category.jsp");
+//        rd.forward(request, response);
     }
 
     private void showCategoriesPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("title", "Categories");
-        List<Category> categories = categoryDao.getAll();
-        request.setAttribute("categories", categories);
-        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/categories.jsp");
-        rd.forward(request, response);
+//        request.setAttribute("title", "Categories");
+//        List<Category> categories = categoryDao.getAll();
+//        request.setAttribute("categories", categories);
+//        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/categories.jsp");
+//        rd.forward(request, response);
     }
 
-    private void showMainPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Quote quote = quoteDao.getRandomQuota();
-        request.setAttribute("quote", quote);
-        request.setAttribute("title", APPLICATION_TITLE);
-        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/index.jsp");
-        rd.forward(request, response);
-    }
+//    private void showMainPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        Quote quote = quoteDao.getRandomQuota();
+//        request.setAttribute("quote", quote);
+//        request.setAttribute("title", APPLICATION_TITLE);
+//        RequestDispatcher rd = request.getRequestDispatcher(WEB_INF_LAYOUTS + "/quote.jsp");
+//        rd.forward(request, response);
+//    }
 
 
 }

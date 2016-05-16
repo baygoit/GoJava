@@ -2,6 +2,7 @@ package com.sandarovich.kickstarter.dao.impl;
 
 
 import com.sandarovich.kickstarter.dao.QuestionDao;
+import com.sandarovich.kickstarter.dao.exception.DaoException;
 import com.sandarovich.kickstarter.model.Project;
 import com.sandarovich.kickstarter.model.Question;
 import org.springframework.stereotype.Repository;
@@ -29,6 +30,10 @@ public class QuestionDaoPostgreImpl implements QuestionDao {
     @Transactional(readOnly = true)
     @Override
     public void addQuestion(Question question) {
-        em.merge(question);
+        try {
+            em.merge(question);
+        } catch (Exception e) {
+            throw new DaoException(e);
+        }
     }
 }
