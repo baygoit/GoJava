@@ -18,10 +18,12 @@ import java.util.Map;
 
 @Controller
 public class QuestionController {
-    private static final String QUESTION = "question";
-    private static final String QUESTION_ADD_RESULT = "questionAddResult";
     private static final String SC_NOT_FOUND = "404";
+    private static final String QUESTION = "question";
     private static final String PROJECT = "project";
+    private static final String QUESTION_ADD_RESULT = "questionAddResult";
+    private static final String QUESTION_WAS_ADDED = "Question was added.";
+    private static final String QUESTION_WAS_NOT_ADDED = "Question was not added.";
 
     @Autowired
     private QuestionDao questionDao;
@@ -52,9 +54,9 @@ public class QuestionController {
         try {
             questionDao.addQuestion(question);
             mav.addObject("dto", questionDto);
-            mav.addObject("title", "Question was added.");
+            mav.addObject("title", QUESTION_WAS_ADDED);
         } catch (DaoException e) {
-            mav.addObject("title", "Question was not added.");
+            mav.addObject("title", QUESTION_WAS_NOT_ADDED);
         }
         return mav;
 

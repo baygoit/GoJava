@@ -24,8 +24,10 @@ import java.util.Map;
 public class PaymentController {
     private static final String PAYMENT = "payment";
     private static final String PROJECT = "project";
-    private static final String PAYMENT_ADD_RESULT = "paymentAddResult";
     private static final String SC_NOT_FOUND = "404";
+    private static final String PAYMENT_ADD_RESULT = "paymentAddResult";
+    private static final String PAYMENT_WAS_NOT_DONE = "Payment was not done";
+    private static final String PAYMENT_SUCCESS = "Payment Success";
 
     @Autowired
     ProjectDao projectDao;
@@ -74,12 +76,12 @@ public class PaymentController {
             payment.setProject(projectDao.findById(paymentDto.getProjectId()));
             try {
                 paymentDao.pay(payment);
-                mav.addObject("title", "Payment Success");
+                mav.addObject("title", PAYMENT_SUCCESS);
             } catch (DaoException e) {
-                mav.addObject("title", "Payment was not done");
+                mav.addObject("title", PAYMENT_WAS_NOT_DONE);
             }
         } else {
-            mav.addObject("title", "Payment was not done");
+            mav.addObject("title", PAYMENT_WAS_NOT_DONE);
         }
         mav.addObject("dto", paymentDto);
         return mav;
