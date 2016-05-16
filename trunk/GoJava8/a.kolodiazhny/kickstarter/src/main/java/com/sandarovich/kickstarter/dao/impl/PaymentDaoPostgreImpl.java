@@ -1,6 +1,7 @@
 package com.sandarovich.kickstarter.dao.impl;
 
 import com.sandarovich.kickstarter.dao.PaymentDao;
+import com.sandarovich.kickstarter.dao.exception.DaoException;
 import com.sandarovich.kickstarter.model.Payment;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,11 @@ public class PaymentDaoPostgreImpl implements PaymentDao {
 
     @Transactional
     public void pay(Payment payment) {
-        em.merge(payment);
+        try {
+            em.merge(payment);
+        } catch (Exception e) {
+            throw new DaoException(e);
+        }
     }
 
     @Transactional(readOnly = true)

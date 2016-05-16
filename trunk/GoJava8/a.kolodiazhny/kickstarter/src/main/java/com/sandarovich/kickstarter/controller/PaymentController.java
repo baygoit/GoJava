@@ -3,6 +3,7 @@ package com.sandarovich.kickstarter.controller;
 import com.sandarovich.kickstarter.dao.AwardDao;
 import com.sandarovich.kickstarter.dao.PaymentDao;
 import com.sandarovich.kickstarter.dao.ProjectDao;
+import com.sandarovich.kickstarter.dao.exception.DaoException;
 import com.sandarovich.kickstarter.dto.PaymentDto;
 import com.sandarovich.kickstarter.model.Award;
 import com.sandarovich.kickstarter.model.Payment;
@@ -51,7 +52,6 @@ public class PaymentController {
         return PAYMENT;
     }
 
-    //TODO Implement functionality to store payment Award Id not only amount as per now
     @RequestMapping(value = "/" + PAYMENT + "/{projectId}", method = RequestMethod.POST)
     ModelAndView addPayment(@ModelAttribute("paymentForm") PaymentDto paymentDto) {
         ModelAndView mav = new ModelAndView("redirect:/" + PROJECT + "/" + paymentDto.getProjectId());
@@ -72,8 +72,12 @@ public class PaymentController {
             payment.setAmount(amount);
             paymentDto.setAmount(amount);
             payment.setProject(projectDao.findById(paymentDto.getProjectId()));
-            paymentDao.pay(payment);
-            mav.addObject("title", "Payment Success");
+            try {
+                paymentDao.pay(payment);
+                mav.addObject("title", "Payment Success");
+            } catch (DaoException e) {
+                mav.addObject("title", "Payment was not done");
+            }
         } else {
             mav.addObject("title", "Payment was not done");
         }
