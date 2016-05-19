@@ -36,16 +36,16 @@ ${information}
 	
 <input type="hidden" name="projectId" value="${projectId}" />
 	
-invest: <input name="invest" value="0">
+invest: <input name="invest"  placeholder="0" value="">
 	
 <input type="submit" name="Invest" value="Invest">
 	
 <div style="font-size:32px;">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
 
-author: <input name="author" value="author">
+author: <input name="author" placeholder="author" value="">
 <br>
 	
-question: <input name="text" value="text">
+question: <input name="text" placeholder="text" value="">
 <br>
 	
 <input type="submit" name="Ask" value="Ask">	

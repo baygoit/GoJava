@@ -11,7 +11,7 @@
 <h1>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h1>
   
 		<c:forEach items="${projects}" var="project">
-<a href="selected?${project.getKey()}">${project.getValue()}</a>
+<a href="selected/${project.getKey()}">${project.getValue()}</a>
                      <br>
 		</c:forEach>
 	

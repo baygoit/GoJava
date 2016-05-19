@@ -9,7 +9,7 @@
 <h1>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</h1>
   
 		<c:forEach items="${categories}" var="type">
-<a href="type?${type}">${type}</a>
+<a href="type/${type}">${type}</a>
                      <br>
 		</c:forEach>
 	
