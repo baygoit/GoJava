@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface AwardDao {
     List<Award> getByProject(Project project);
+
+    Award getById(long id);
 }

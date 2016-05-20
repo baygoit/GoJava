@@ -16,6 +16,7 @@ import ua.nenya.dao.QuestionDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
 
+@RequestMapping(value = "/category/project")
 @Controller
 public class ProjectController {
 
@@ -25,7 +26,7 @@ public class ProjectController {
 	@Autowired
 	protected QuestionDao questionDao;
 	
-	@RequestMapping(value = "/category/project/{projectId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
 	public String showProject(@PathVariable Long projectId, Map<String, Object> model){
 		if (!projectDao.isProjectExist(projectId)) {
 			model.put("projectId", projectId);
@@ -42,9 +43,9 @@ public class ProjectController {
 		return "project";
 	}
 	
-	@RequestMapping(value = "/category/project/add", method = RequestMethod.POST)
-	public String addQuestion(@ModelAttribute("questionForm") Question question, BindingResult result,
-			Map<String, Object> model) {
+	@RequestMapping(value = "/{projectId}/add", method = RequestMethod.POST)
+	public String addQuestion(@PathVariable Long projectId, @ModelAttribute("questionForm") Question question,
+			BindingResult result, Map<String, Object> model) {
 		if (result.hasErrors()) {
 			model.put("project", question.getProject());
 			return "question";
@@ -52,7 +53,6 @@ public class ProjectController {
 
 		Question savedQuestion = questionDao.writeQuestionInProject(question);
 		if (savedQuestion != null) {
-			Long projectId = question.getProject().getId();
 			return "redirect:/category/project/"+projectId;
 		} else {
 			model.put("question", question.getName());

@@ -18,6 +18,7 @@ import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
 
+@RequestMapping(value = "/category/project/payment")
 @Controller
 public class PaymentController {
 
@@ -28,7 +29,7 @@ public class PaymentController {
 	@Autowired
 	protected QuestionDao questionDao;
 
-	@RequestMapping(value = "/category/project/payment/{projectId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
 	public String showRewards(@PathVariable Long projectId, Map<String, Object> model) {
 		if (!projectDao.isProjectExist(projectId)) {
 			model.put("projectId", projectId);
@@ -44,8 +45,8 @@ public class PaymentController {
 		return "payment";
 	}
 
-	@RequestMapping(value = "/category/project/payment/add", method = RequestMethod.POST)
-	public String addPayment(@ModelAttribute("paymentForm") Payment payment, BindingResult result,
+	@RequestMapping(value = "/{projectId}/add", method = RequestMethod.POST)
+	public String addPayment(@PathVariable Long projectId, @ModelAttribute("paymentForm") Payment payment, BindingResult result,
 			Map<String, Object> model) {
 		if (result.hasErrors()) {
 			Project project = payment.getProject();
@@ -62,8 +63,6 @@ public class PaymentController {
 		} else {
 			paymentDao.writePaymentInProject(payment);
 		}
-
-		Long projectId = payment.getProject().getId();
 		return "redirect:/category/project/"+projectId;
 	}
 }

@@ -9,7 +9,8 @@ import java.util.List;
 @Table(name = "project")
 @NamedQueries({
     @NamedQuery(name = "Project.findByCategory", query = "SELECT p from Project as p WHERE p.category = :category"),
-    @NamedQuery(name = "Project.isProjectExist", query = "SELECT COUNT(p) from Project as p WHERE p.id = :id")
+        @NamedQuery(name = "Project.isProjectExist", query = "SELECT COUNT(p) from Project as p WHERE p.id = :id"),
+        @NamedQuery(name = "Project.findById", query = "SELECT p from Project as p WHERE p.id = :id")
 })
 public class Project {
     @OneToMany(mappedBy = "project")
