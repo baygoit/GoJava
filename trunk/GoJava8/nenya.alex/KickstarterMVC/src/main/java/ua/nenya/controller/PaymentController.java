@@ -3,6 +3,8 @@ package ua.nenya.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,26 +15,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.nenya.dao.PaymentDao;
 import ua.nenya.dao.ProjectDao;
-import ua.nenya.dao.QuestionDao;
 import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
 
-@RequestMapping(value = "/category/project/payment")
+@RequestMapping(value = "/payment")
 @Controller
 public class PaymentController {
 
 	@Autowired
-	protected ProjectDao projectDao;
+	private ProjectDao projectDao;
 	@Autowired
-	protected PaymentDao paymentDao;
-	@Autowired
-	protected QuestionDao questionDao;
+	private PaymentDao paymentDao;
 
 	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
-	public String showRewards(@PathVariable Long projectId, Map<String, Object> model) {
+	public String showPaymentForm(@PathVariable Long projectId, Map<String, Object> model) {
 		if (!projectDao.isProjectExist(projectId)) {
 			model.put("projectId", projectId);
+			model.put("projectTestId", -1);
 			return "404";
 		}
 
@@ -42,27 +42,23 @@ public class PaymentController {
 		List<Reward> rewards = projectDao.getRewardsByProjectId(projectId);
 		model.put("rewards", rewards);
 		model.put("paymentForm", new Payment());
-		return "payment";
+		return "paymentForm";
 	}
 
-	@RequestMapping(value = "/{projectId}/add", method = RequestMethod.POST)
-	public String addPayment(@PathVariable Long projectId, @ModelAttribute("paymentForm") Payment payment, BindingResult result,
+	@RequestMapping(value = "/addPayment", method = RequestMethod.POST)
+	public String addPayment(@Valid @ModelAttribute("paymentForm") Payment payment, BindingResult result,
 			Map<String, Object> model) {
+		Long projectId = payment.getProject().getId();
 		if (result.hasErrors()) {
-			Project project = payment.getProject();
-			model.put("project", project);
-			List<Reward> rewards = projectDao.getRewardsByProjectId(project.getId());
+			model.put("project", payment.getProject());
+			List<Reward> rewards = projectDao.getRewardsByProjectId(projectId);
 			model.put("rewards", rewards);
-			return "payment";
+			return "paymentForm";
 		}
 
-		if (payment.getAmount() == 0) {
-			Payment paymentNew = payment;
-			paymentNew.setAmount(payment.getInvestment());
-			paymentDao.writePaymentInProject(paymentNew);
-		} else {
-			paymentDao.writePaymentInProject(payment);
-		}
-		return "redirect:/category/project/"+projectId;
+		paymentDao.writePaymentInProject(payment);
+		
+		return "redirect:/project/"+projectId;
 	}
+	
 }

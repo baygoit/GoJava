@@ -17,13 +17,13 @@ import ua.nenya.domain.Project;
 public class CategoryController {
 	
 	@Autowired
-	protected ProjectDao projectDao;
+	private ProjectDao projectDao;
 	
 	@Autowired
-	protected CategoryDao categoryDao;
+	private CategoryDao categoryDao;
 	
 	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
-	public String showProjects (@PathVariable Long categoryId, Map<String, Object> model){
+	public String showCategory (@PathVariable Long categoryId, Map<String, Object> model){
 		if(!categoryDao.isCategoryExist(categoryId)){
 			model.put("categoryId", categoryId);
 			model.put("categoryTestId", -1);

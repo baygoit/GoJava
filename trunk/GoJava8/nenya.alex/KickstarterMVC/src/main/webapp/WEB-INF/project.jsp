@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,15 @@
 	<p>
 		<a href="<c:url value="/category/${category.id}"/>" > Back </a>
 	</p>
+	<span>
+	    <a href="?lang=en">en</a> 
+	    | 
+	    <a href="?lang=ru">ru</a>
+    </span>
 	<p><b>Project name:</b> ${project.name}</p>
+	
+	<fmt:message key="project.name"></fmt:message>
+	
 	<p><b>Description:</b> ${project.description}</p>
 	<p><b>Needed amount:</b> ${project.neededAmount}</p>
 	<p><b>Available amount:</b> ${project.availableAmount} </p>
@@ -21,15 +30,11 @@
 	<c:forEach var="question" items="${questions}" varStatus="varStatus">
 		<p>${varStatus.count}Q. ${question.name}</p>
 	</c:forEach>
-	<hr/>
-	<p><b>Ask a question for project "${project.name}"</b></p>
-	<form:form action="${project.id}/add" method="post" modelAttribute="questionForm">
-        <form:input type="text" path="name" required="required"/> 
-        <form:input type="hidden" path="project.id" value="${project.id}" /> 
-        <input type="submit" value="Submit" />
-    </form:form>
+    <p>    
+            <a href="<c:url value="/question/${project.id}"/>" >Ask a question</a>
+    </p>
 	<p>	   
-			<a href="<c:url value="/category/project/payment/${project.id}"/>" >Invest in project</a>
+			<a href="<c:url value="/payment/${project.id}"/>" >Invest in project</a>
 	</p>
 	
 </body>

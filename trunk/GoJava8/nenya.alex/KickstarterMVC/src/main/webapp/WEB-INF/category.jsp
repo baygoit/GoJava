@@ -16,7 +16,7 @@
 
 		<p>
 			<a
-				href="<c:url value="/category/project/${project.id}"/>" >${project.name}</a>
+				href="<c:url value="/project/${project.id}"/>" >${project.name}</a>
 		</p>
 		<p>
 			<b>Project name:</b> ${project.name}

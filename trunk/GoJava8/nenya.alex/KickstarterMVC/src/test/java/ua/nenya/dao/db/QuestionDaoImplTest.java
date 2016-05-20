@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,7 @@ public class QuestionDaoImplTest {
 		assertThat(questionTest.getName(), is(question.getName()));
 	}
 	
+	@Ignore
 	@Test
 	public void testWriteQuestionInProjectOldQuestion(){
 		questionDao.writeQuestionInProject(question);

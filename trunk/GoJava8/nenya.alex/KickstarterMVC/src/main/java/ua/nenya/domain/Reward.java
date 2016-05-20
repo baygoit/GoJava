@@ -6,11 +6,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 
 @Entity
 @Table(name = "REWARD")
+@NamedQueries({ 
+			@NamedQuery(name = "Reward.getById", query = "select r from Reward r where r.id=:rewardId"),
+			@NamedQuery(name = "Reward.getProjectByRewardId", query = "select r.project from Reward r where r.id=:rewardId"),
+			@NamedQuery(name = "Reward.Count", query = "select count(r) from Reward r where r.id=:rewardId")
+})
 public class Reward{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,7 +36,18 @@ public class Reward{
 	private String name;
 	
 	@Column
+	@Range(min = 1, max = 2147483647)
 	private int amount;
+	
+	@Transient
+	@NotNull
+	@Length(min = 2, max = 50)
+	private String cardholderName;
+	
+	@Transient
+	@NotNull
+	@Length(min = 11, max = 11)
+	private String cardNumber;
 	
 	@Column
 	private String description;
@@ -68,5 +91,22 @@ public class Reward{
 	public void setProject(Project project) {
 		this.project = project;
 	}
+
+	public String getCardholderName() {
+		return cardholderName;
+	}
+
+	public void setCardholderName(String cardholderName) {
+		this.cardholderName = cardholderName;
+	}
+
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+	
 	
 }

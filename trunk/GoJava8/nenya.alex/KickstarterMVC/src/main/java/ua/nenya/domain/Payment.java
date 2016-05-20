@@ -8,6 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Table(name = "PAYMENT")
@@ -21,15 +26,18 @@ public class Payment {
 	private Project project;
 	
 	@Column
+	@Range(min = 1, max = 2147483647)
 	private int amount;
 	
 	@Transient
-	private int investment;
-	
-	@Transient
+	@NotNull
+	@Size(min=2, max=20,
+	message="Cardholder name must be between 2 and 20 characters long.")
 	private String cardholderName;
 	
 	@Transient
+	@NotNull
+	@Length(min = 16, max = 16)
 	private String cardNumber;
 	
 	public int getAmount() {
@@ -54,14 +62,6 @@ public class Payment {
 
 	public void setProject(Project project) {
 		this.project = project;
-	}
-
-	public int getInvestment() {
-		return investment;
-	}
-
-	public void setInvestment(int investment) {
-		this.investment = investment;
 	}
 
 	public String getCardholderName() {

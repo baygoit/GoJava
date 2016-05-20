@@ -49,7 +49,8 @@ public class QuestionDaoImpl implements QuestionDao {
 	}
 
 	@Transactional(readOnly = true)
-	private boolean isQuestionExist(Question question) {
+	@Override
+	public boolean isQuestionExist(Question question) {
 		Query query = em.createNamedQuery("Question.Count");
 		query.setParameter("name", question.getName());
 		query.setParameter("projectId", question.getProject().getId());
