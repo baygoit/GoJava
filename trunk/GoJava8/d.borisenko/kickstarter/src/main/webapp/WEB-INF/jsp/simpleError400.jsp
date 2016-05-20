@@ -9,5 +9,4 @@
 		<h2><spring:message code="error.badRequest" /></h2>
 		<hr/>
 		<br/>
-		<spring:message code="${errorText}" />
 <jsp:include page="footer.jsp" />

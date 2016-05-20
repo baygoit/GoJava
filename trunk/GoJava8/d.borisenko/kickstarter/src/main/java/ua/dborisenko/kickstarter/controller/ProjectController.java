@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.dborisenko.kickstarter.dao.ProjectDao;
@@ -21,31 +20,17 @@ public class ProjectController {
 
     @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
     public ModelAndView showProject(@PathVariable Integer id) {
-        ModelAndView mav = new ModelAndView("project");
+        ModelAndView modelAndView = new ModelAndView("project");
         try {
             Project project = projectDao.getWithQuestions(id);
-            mav.addObject("project", project);
-            return mav;
+            modelAndView.addObject(project);
+            Question question = new Question();
+            modelAndView.addObject(question);
+            return modelAndView;
         } catch (EmptyResultDataAccessException e) {
-            mav.setViewName("error404");
-            mav.addObject("errorText", ErrorText.PROJECT_NOT_FOUND);
-            return mav;
+            modelAndView.setViewName("error404");
+            modelAndView.addObject("errorText", "error.projectNotFound");
+            return modelAndView;
         }
-    }
-
-    @RequestMapping(value = "/project/{id}/addQuestion", method = RequestMethod.POST)
-    public ModelAndView addQuestion(@PathVariable("id") Integer projectId, @RequestParam("question_request") String questionRequest) {
-        ModelAndView mav = new ModelAndView("redirect:/project/" + projectId);
-        Project project = projectDao.get(projectId);
-        Question question = new Question();
-        question.setProject(project);
-        if (questionRequest.trim().length() == 0) {
-            mav.setViewName("error400");
-            mav.addObject("errorText", ErrorText.EMPTY_STRING);
-            return mav;
-        }
-        question.setRequest(questionRequest);
-        projectDao.addQuestion(question);
-        return mav;
     }
 }

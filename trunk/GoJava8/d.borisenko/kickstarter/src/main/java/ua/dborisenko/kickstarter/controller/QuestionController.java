@@ -11,55 +11,55 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.dborisenko.kickstarter.dao.ProjectDao;
-import ua.dborisenko.kickstarter.domain.Investment;
 import ua.dborisenko.kickstarter.domain.Project;
-import ua.dborisenko.kickstarter.validator.InvestmentValidator;
+import ua.dborisenko.kickstarter.domain.Question;
+import ua.dborisenko.kickstarter.validator.QuestionValidator;
 
 @Controller
-public class InvestmentController {
+public class QuestionController {
 
     @Autowired
     private ProjectDao projectDao;
 
-    private ModelAndView getInvestmentModelAndView(int projectId) {
-        ModelAndView modelAndView = new ModelAndView("investment");
+    private ModelAndView getQuestionModelAndView(int projectId) {
+        ModelAndView modelAndView = new ModelAndView("question");
         try {
-            Project project = projectDao.getWithRewards(projectId);
+            Project project = projectDao.getWithQuestions(projectId);
             modelAndView.addObject(project);
-            return modelAndView;
         } catch (EmptyResultDataAccessException e) {
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.projectNotFound");
             return modelAndView;
         }
-    }
-
-    @RequestMapping(value = "/investment/{projectId}", method = RequestMethod.GET)
-    public ModelAndView showProject(@PathVariable Integer projectId,
-            @ModelAttribute("investment") Investment investment) {
-        ModelAndView modelAndView = getInvestmentModelAndView(projectId);
-        modelAndView.addObject(new Investment());
         return modelAndView;
     }
 
-    @RequestMapping(value = "/investment/{projectId}", method = RequestMethod.POST)
-    public ModelAndView addQuestion(@PathVariable Integer projectId,
-            @ModelAttribute("investment") Investment investment, BindingResult errors) {
-        InvestmentValidator investmentValidator = new InvestmentValidator();
-        investmentValidator.validate(investment, errors);
+    @RequestMapping(value = "/question/{projectId}", method = RequestMethod.GET)
+    public ModelAndView showQuestionForm(@PathVariable Integer projectId,
+            @ModelAttribute("question") Question question) {
+        ModelAndView modelAndView = getQuestionModelAndView(projectId);
+        modelAndView.addObject(new Question());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/question/{projectId}", method = RequestMethod.POST)
+    public ModelAndView addQuestion(@PathVariable Integer projectId, @ModelAttribute("question") Question question,
+            BindingResult errors) {
+        QuestionValidator questionValidator = new QuestionValidator();
+        questionValidator.validate(question, errors);
         if (errors.hasErrors()) {
-            return getInvestmentModelAndView(projectId);
+            return getQuestionModelAndView(projectId);
         }
         ModelAndView modelAndView = new ModelAndView("redirect:/project/" + projectId);
         try {
             Project project = projectDao.get(projectId);
-            investment.setProject(project);
+            question.setProject(project);
         } catch (EmptyResultDataAccessException e) {
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.projectNotFound");
             return modelAndView;
         }
-        projectDao.addInvestment(investment);
+        projectDao.addQuestion(question);
         return modelAndView;
     }
 }

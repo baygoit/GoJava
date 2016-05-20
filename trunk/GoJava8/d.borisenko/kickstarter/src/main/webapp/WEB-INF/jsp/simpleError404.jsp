@@ -9,6 +9,5 @@
 		<h2><spring:message code="error.notFound" /></h2>
 		<hr/>
 		<br/>
-		<spring:message code="${errorText}" />
 <jsp:include page="footer.jsp"/>
 

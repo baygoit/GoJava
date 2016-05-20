@@ -17,11 +17,3 @@
 <body>
 	<div class="div_main_header">Kickstarter</div>
 	<div class="div_main_wrapper">
-		<div id="langmenu">
-			<ul id="ul_lang">
-				<li id="li_eng"><a href="?language=en">ENG</a></li>
-				|
-				<li id="li_eng"><a href="?language=ru">RUS</a></li>
-			</ul>
-		</div>
-		<br />

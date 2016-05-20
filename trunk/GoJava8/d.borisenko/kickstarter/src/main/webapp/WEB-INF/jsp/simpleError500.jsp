@@ -5,10 +5,8 @@
 	<spring:message code="error.error" />
 </c:set>
 <jsp:include page="errorHeader.jsp"/>
-		<h1><spring:message code="error.error" />: 404</h1>
-		<h2><spring:message code="error.notFound" /></h2>
+		<h1><spring:message code="error.error" />: 500</h1>
+		<h2><spring:message code="error.internalServerError" /></h2>
 		<hr/>
 		<br/>
-		<spring:message code="${errorText}" />
 <jsp:include page="footer.jsp"/>
-
