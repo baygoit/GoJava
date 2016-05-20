@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+ 
+
+  <!-- Enable annotation-based Spring MVC controllers (eg: @Controller annotation) -->
+  <mvc:annotation-driven/>
+   
+  <!-- Classpath scanning of @Component, @Service, etc annotated class -->
+  <context:component-scan base-package="pack" />
+  
+
+<tx:annotation-driven transaction-manager="txManager" /> 
+  <!-- Resolve view name into jsp file located on /WEB-INF -->
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/" />
+    <property name="suffix" value=".jsp" />
+  </bean>
+   
+  <!-- MySQL Datasource with Commons DBCP connection pooling -->
+  <bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource"
+   destroy-method="close">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://www.db4free.net:3306/kickbase"/>
+    <property name="username" value="author"/>
+    <property name="password" value="xzxzzxzxcaa"/>
+  </bean>
+   
+  <!-- EntityManagerFactory -->
+  <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
+    <property name="persistenceUnitName" value="persistenceUnit"/>
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+   
+  <!-- Transaction Manager -->
+  <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+  </bean>
+  <bean id="quoteService" class="pack.QuoteService" />
+   
+  <!-- Enable @Transactional annotation -->
+  <tx:annotation-driven/>
+ 
+</beans>
