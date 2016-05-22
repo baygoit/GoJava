@@ -11,7 +11,6 @@ import javax.persistence.PersistenceContext;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,16 +61,9 @@ public class QuestionDaoImplTest {
 
 	@Test
 	public void testWriteQuestionInProjectNewQuestion(){
-		Question newQuestion = questionDao.writeQuestionInProject(question);
-		Question questionTest = em.find(Question.class, newQuestion.getId());
-		assertThat(questionTest.getName(), is(question.getName()));
-	}
-	
-	@Ignore
-	@Test
-	public void testWriteQuestionInProjectOldQuestion(){
 		questionDao.writeQuestionInProject(question);
-		assertNull(questionDao.writeQuestionInProject(question));
+		Question questionTest = em.find(Question.class, question.getId());
+		assertThat(questionTest.getName(), is(question.getName()));
 	}
 	
 	private void initQuestions() {

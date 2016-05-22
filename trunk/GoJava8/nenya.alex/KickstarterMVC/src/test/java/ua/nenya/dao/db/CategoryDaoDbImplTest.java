@@ -34,6 +34,7 @@ public class CategoryDaoDbImplTest {
 
 	@Autowired
 	private CategoryDao categoryDao;
+	
 	private List<Category> categories = new ArrayList<>();
 	private Category music;
 	private Category film;

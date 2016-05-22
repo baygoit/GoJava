@@ -39,13 +39,8 @@ public class QuestionDaoImpl implements QuestionDao {
 	}
 
 	@Override
-	public Question writeQuestionInProject(Question question) {
-		if (!isQuestionExist(question)) {
+	public void writeQuestionInProject(Question question) {
 			em.persist(question);
-		} else {
-			question = null;
-		}
-		return question;
 	}
 
 	@Transactional(readOnly = true)
@@ -55,7 +50,7 @@ public class QuestionDaoImpl implements QuestionDao {
 		query.setParameter("name", question.getName());
 		query.setParameter("projectId", question.getProject().getId());
 		long count = (long) query.getSingleResult();
-		return count==1;
+		return count!=0;
 	}
 
 }

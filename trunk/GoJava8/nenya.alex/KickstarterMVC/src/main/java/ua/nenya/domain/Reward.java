@@ -46,7 +46,6 @@ public class Reward{
 	
 	@Transient
 	@NotNull
-	@Length(min = 11, max = 11)
 	private String cardNumber;
 	
 	@Column

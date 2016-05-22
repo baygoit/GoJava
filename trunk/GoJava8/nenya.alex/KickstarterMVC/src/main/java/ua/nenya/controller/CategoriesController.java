@@ -22,7 +22,7 @@ public class CategoriesController {
 	public String showCategories(Map<String, Object> model) {
 		model.put("quote", quoteDao.getRandomQuote());
 		model.put("categories", categoryDao.getCategories());
-		return "categories";
+		return "categoriesPage";
 	}
 
 }

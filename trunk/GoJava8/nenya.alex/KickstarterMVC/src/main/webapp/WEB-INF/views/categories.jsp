@@ -6,8 +6,6 @@
 <title>Categories</title>
 </head>
 <body>
-	<h3>${quote.name}</h3>
-	<hr />
 	<c:forEach var="category" items="${categories}">
 		<p>
 			<a href="<c:url value="/category/${category.id}"/>">${category.name}</a>

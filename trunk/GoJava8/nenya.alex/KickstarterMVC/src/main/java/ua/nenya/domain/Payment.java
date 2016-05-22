@@ -9,7 +9,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
@@ -31,13 +30,12 @@ public class Payment {
 	
 	@Transient
 	@NotNull
-	@Size(min=2, max=20,
+	@Length(min=2, max=20,
 	message="Cardholder name must be between 2 and 20 characters long.")
 	private String cardholderName;
 	
 	@Transient
 	@NotNull
-	@Length(min = 16, max = 16)
 	private String cardNumber;
 	
 	public int getAmount() {
