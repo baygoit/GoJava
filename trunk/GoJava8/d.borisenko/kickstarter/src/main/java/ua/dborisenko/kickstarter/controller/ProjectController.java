@@ -1,5 +1,7 @@
 package ua.dborisenko.kickstarter.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ public class ProjectController {
 
     @Autowired
     private ProjectDao projectDao;
+    
+    private static final Logger log = LoggerFactory.getLogger(ProjectController.class);
 
     @RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
     public ModelAndView showProject(@PathVariable Integer id) {
@@ -28,6 +32,7 @@ public class ProjectController {
             modelAndView.addObject(question);
             return modelAndView;
         } catch (EmptyResultDataAccessException e) {
+            log.warn("Could not found project with id {}", id);
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.projectNotFound");
             return modelAndView;

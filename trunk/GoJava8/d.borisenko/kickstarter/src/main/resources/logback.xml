@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>../logs/kickstarter.log</file>
+		<encoder>
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] [%logger] %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+	<logger name="ua.dborisenko.kickstarter" level="INFO"
+		additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+	<logger name="org.hibernate" level="INFO">
+		<appender-ref ref="FILE" />
+	</logger>
+		<root level="INFO">
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>

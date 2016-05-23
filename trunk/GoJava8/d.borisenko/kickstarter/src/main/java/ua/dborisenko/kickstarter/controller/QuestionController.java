@@ -1,5 +1,7 @@
 package ua.dborisenko.kickstarter.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ public class QuestionController {
 
     @Autowired
     private ProjectDao projectDao;
+    
+    private static final Logger log = LoggerFactory.getLogger(QuestionController.class);
 
     private ModelAndView getQuestionModelAndView(int projectId) {
         ModelAndView modelAndView = new ModelAndView("question");
@@ -27,6 +31,7 @@ public class QuestionController {
             Project project = projectDao.getWithQuestions(projectId);
             modelAndView.addObject(project);
         } catch (EmptyResultDataAccessException e) {
+            log.warn("Could not found project with id {}", projectId);
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.projectNotFound");
             return modelAndView;
@@ -55,11 +60,13 @@ public class QuestionController {
             Project project = projectDao.get(projectId);
             question.setProject(project);
         } catch (EmptyResultDataAccessException e) {
+            log.warn("Could not found project with id {}", projectId);
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.projectNotFound");
             return modelAndView;
         }
         projectDao.addQuestion(question);
+        log.info("New question with id {} created for project {}", question.getId(), projectId);
         return modelAndView;
     }
 }

@@ -1,5 +1,7 @@
 package ua.dborisenko.kickstarter.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
     
+    private static final Logger log = LoggerFactory.getLogger(CategoryController.class);
+    
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showCategories() {
         ModelAndView mav = new ModelAndView("categories");
@@ -32,6 +36,7 @@ public class CategoryController {
             modelAndView.addObject("category", category);
             return modelAndView;
         } catch (EmptyResultDataAccessException e) {
+            log.warn("Could not found category with id {}", id);
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.categoryNotFound");
             return modelAndView;

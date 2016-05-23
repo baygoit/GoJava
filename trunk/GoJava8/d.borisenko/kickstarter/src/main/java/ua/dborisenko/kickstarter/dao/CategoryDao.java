@@ -9,10 +9,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import ua.dborisenko.kickstarter.controller.QuestionController;
 import ua.dborisenko.kickstarter.domain.Category;
 
 @Repository
@@ -21,6 +24,8 @@ public class CategoryDao {
 
     @PersistenceContext
     private EntityManager em;
+    
+    private static final Logger log = LoggerFactory.getLogger(CategoryDao.class);
 
     public Category getWithProjects(int id) {
         EntityGraph<?> graph = this.em.getEntityGraph("graph.Category.projects");
