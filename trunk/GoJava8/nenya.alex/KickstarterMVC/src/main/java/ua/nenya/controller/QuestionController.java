@@ -1,9 +1,9 @@
 package ua.nenya.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,9 @@ import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,22 +25,29 @@ import ua.nenya.dao.QuestionDao;
 import ua.nenya.dao.QuoteDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
+import ua.nenya.validator.QuestionValidator;
 
 @Controller
-public class ProjectController {
+@RequestMapping(value = "/question")
+public class QuestionController {
+	
 	@Autowired
 	private QuoteDao quoteDao;
-
+	
+	@Autowired
+	private QuestionValidator questionValidator;
+	
 	@Autowired
 	private ProjectDao projectDao;
 	
 	@Autowired
 	private QuestionDao questionDao;
 	
-	private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 	
-	@RequestMapping(value = "/project/{projectId}", method = RequestMethod.GET)
-	public String showProject(@PathVariable Long projectId, Map<String, Object> model){
+	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
+	public String bindQuestion(@PathVariable Long projectId, Map<String, Object> model){
+		
 		if (!projectDao.isProjectExist(projectId)) {
 			logger.error("Project with id "+projectId+" dosen't exist!");
 			model.put("projectId", projectId);
@@ -47,14 +56,33 @@ public class ProjectController {
 		}
 		
 		Project project = projectDao.getProjectByProjectId(projectId);
-		model.put("category", project.getCategory());
 		model.put("project", project);
 		model.put("quote", quoteDao.getRandomQuote());
+		
+		model.put("questionBind", new Question());
+		
+		return "questionPage";
+	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String addQuestion(@Valid @ModelAttribute("questionBind") Question question,
+			BindingResult result, Map<String, Object> model) {
+		
+		questionValidator.validate(question, result);
+		
+		Long projectId = question.getProject().getId();
+		
+		if (result.hasErrors()) {
+			logger.error("Result "+result+" has errors!" );
+			
+			model.put("project", projectDao.getProjectByProjectId(projectId));
+			model.put("quote", quoteDao.getRandomQuote());
+			return "questionPage";
+		}
 
-		List<Question> questions = questionDao.getQuestions(projectId);
-		model.put("questions", questions);
-		model.put("questionForm", new Question());
-		return "projectPage";
+		questionDao.writeQuestionInProject(question);
+		
+		return "redirect:/project/"+projectId;
 	}
 	
 	@ExceptionHandler(TypeMismatchException.class)

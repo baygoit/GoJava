@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @NamedQuery(name = "Question.Count", query = "select count(q) from Question q where q.name=:name and q.project.id=:projectId")
 @Table(name = "QUESTION")
@@ -24,6 +26,7 @@ public class Question{
 	private Project project;
 	
 	@Column
+	@NotEmpty
 	private String name;
 
 	public String getName() {

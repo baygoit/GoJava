@@ -16,10 +16,21 @@
 			<br />
 		</c:when>
 		<c:otherwise>
-			<p>
-				Attention!!! Project with id <b>${projectId}</b> doesn't exist!!!
-			</p>
-			<br />
+			<c:choose>
+				<c:when test="${projectTestId == -1}">
+					<p>
+						Attention!!! Project with id <b>${projectId}</b> doesn't exist!!!
+					</p>
+					<br />
+				</c:when>
+				<c:otherwise>
+					<p>
+						Attention!!! Reward with id <b>${rewardId}</b> doesn't exist!!!
+					</p>
+					<br />
+				</c:otherwise>
+			</c:choose>
+			
 		</c:otherwise>
 	</c:choose>
 

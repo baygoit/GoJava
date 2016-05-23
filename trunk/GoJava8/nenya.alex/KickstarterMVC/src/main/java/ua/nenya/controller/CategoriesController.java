@@ -13,16 +13,16 @@ import ua.nenya.dao.QuoteDao;
 @Controller
 public class CategoriesController {
 	@Autowired
-	protected QuoteDao quoteDao;
+	private QuoteDao quoteDao;
 	
 	@Autowired
-	protected CategoryDao categoryDao;
+	private CategoryDao categoryDao;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String showCategories(Map<String, Object> model) {
 		model.put("quote", quoteDao.getRandomQuote());
 		model.put("categories", categoryDao.getCategories());
-		return "categories";
+		return "categoriesPage";
 	}
 
 }

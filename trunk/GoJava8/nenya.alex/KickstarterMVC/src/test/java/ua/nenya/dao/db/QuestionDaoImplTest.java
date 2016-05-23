@@ -61,15 +61,9 @@ public class QuestionDaoImplTest {
 
 	@Test
 	public void testWriteQuestionInProjectNewQuestion(){
-		Question newQuestion = questionDao.writeQuestionInProject(question);
-		Question questionTest = em.find(Question.class, newQuestion.getId());
-		assertThat(questionTest.getName(), is(question.getName()));
-	}
-	
-	@Test
-	public void testWriteQuestionInProjectOldQuestion(){
 		questionDao.writeQuestionInProject(question);
-		assertNull(questionDao.writeQuestionInProject(question));
+		Question questionTest = em.find(Question.class, question.getId());
+		assertThat(questionTest.getName(), is(question.getName()));
 	}
 	
 	private void initQuestions() {

@@ -8,6 +8,11 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/applicationContext*.xml</param-value>
 	</context-param>
+	
+	<context-param>
+	   <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+	   <param-value>project</param-value>
+    </context-param>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -32,11 +37,11 @@
    
 	<error-page>
 		<error-code>400</error-code>
-		<location>/WEB-INF/400.jsp</location>
+		<location>/WEB-INF/views/400.jsp</location>
 	</error-page>
 	<error-page>
 		<error-code>404</error-code>
-		<location>/WEB-INF/404.jsp</location>
+		<location>/WEB-INF/views/404.jsp</location>
 	</error-page>
 	
 </web-app>
