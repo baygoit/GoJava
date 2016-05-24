@@ -32,6 +32,7 @@ public class QuestionController {
             modelAndView.addObject(project);
         } catch (EmptyResultDataAccessException e) {
             log.warn("Could not found project with id {}", projectId);
+            log.trace("Got exception: ", e);
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.projectNotFound");
             return modelAndView;
@@ -61,6 +62,7 @@ public class QuestionController {
             question.setProject(project);
         } catch (EmptyResultDataAccessException e) {
             log.warn("Could not found project with id {}", projectId);
+            log.trace("Got exception: ", e);
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.projectNotFound");
             return modelAndView;

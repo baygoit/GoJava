@@ -37,6 +37,7 @@ public class CategoryController {
             return modelAndView;
         } catch (EmptyResultDataAccessException e) {
             log.warn("Could not found category with id {}", id);
+            log.trace("Got exception: ", e);
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.categoryNotFound");
             return modelAndView;

@@ -33,6 +33,7 @@ public class ProjectController {
             return modelAndView;
         } catch (EmptyResultDataAccessException e) {
             log.warn("Could not found project with id {}", id);
+            log.trace("Got exception: ", e);
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.projectNotFound");
             return modelAndView;

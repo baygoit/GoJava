@@ -33,6 +33,7 @@ public class InvestmentController {
             return modelAndView;
         } catch (EmptyResultDataAccessException e) {
             log.warn("Could not found project with id {}", projectId);
+            log.trace("Got exception: ", e);
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.projectNotFound");
             return modelAndView;
@@ -61,6 +62,7 @@ public class InvestmentController {
             investment.setProject(project);
         } catch (EmptyResultDataAccessException e) {
             log.warn("Could not found project with id {}", projectId);
+            log.trace("Got exception: ", e);
             modelAndView.setViewName("error404");
             modelAndView.addObject("errorText", "error.projectNotFound");
             return modelAndView;
