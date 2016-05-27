@@ -8,7 +8,7 @@
 			</Pattern>
 		</encoder>
 	</appender>
-	<logger name="ua.dborisenko.kickstarter" level="INFO"
+	<logger name="ua.dborisenko.kickstarter" level="TRACE"
 		additivity="false">
 		<appender-ref ref="FILE" />
 	</logger>

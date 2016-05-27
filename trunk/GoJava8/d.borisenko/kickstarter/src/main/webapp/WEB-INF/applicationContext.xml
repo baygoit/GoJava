@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd
 						http://www.springframework.org/schema/context
@@ -9,7 +10,10 @@
         				http://www.springframework.org/schema/tx
         				http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
                         http://www.springframework.org/schema/mvc 
-                        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+                        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                        http://www.springframework.org/schema/aop
+           				http://www.springframework.org/schema/aop/spring-aop.xsd"
+                        >
 	<context:component-scan base-package="ua.dborisenko.kickstarter" />
 	<context:annotation-config />
 	<mvc:annotation-driven
@@ -63,6 +67,10 @@
 			<property name="paramName" value="language" />
 		</bean>
 	</mvc:interceptors>
+	
+	<aop:aspectj-autoproxy/>
+	<bean id="daoProfilerAspect" class="ua.dborisenko.kickstarter.aspect.DaoProfilerAspect"/>
+	<bean id="daoLoggerAspect" class="ua.dborisenko.kickstarter.aspect.DaoLoggerAspect"/>
 
 	<mvc:resources mapping="/css/**" location="/css/" />
 	<mvc:resources mapping="/js/**" location="/js/" />

@@ -23,9 +23,9 @@ public class CategoryController {
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showCategories() {
-        ModelAndView mav = new ModelAndView("categories");
-        mav.addObject("categories", categoryDao.getAll());
-        return mav;
+        ModelAndView ModelAndView = new ModelAndView("categories");
+        ModelAndView.addObject("categories", categoryDao.getAll());
+        return ModelAndView;
     }
 
     @RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
