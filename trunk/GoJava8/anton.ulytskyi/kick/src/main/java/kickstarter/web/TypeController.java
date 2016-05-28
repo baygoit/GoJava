@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 		
 	
 		@RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
-		public String type(@PathVariable("type") String type, ModelMap model) {
+		public String openTypeController(@PathVariable("type") String type, ModelMap model) {
 			
 			Manager operator = new Manager ();
 		//	String type = request.getQueryString();

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class QuoteController {
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String quote(ModelMap model) {
+	public String showQuote(ModelMap model) {
 		
 		Manager operator = new Manager ();
 

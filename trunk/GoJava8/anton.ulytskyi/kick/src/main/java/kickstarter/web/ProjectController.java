@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 			
 		}
 		@RequestMapping(value = "type/selected/{id}", method = RequestMethod.POST)
-		public String project(
+		public String openProject(
 				HttpServletRequest req, HttpServletRequest resp) {
 
 			String id = req.getParameter("projectId");

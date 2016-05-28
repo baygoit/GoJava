@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CategoryController {
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String categories(ModelMap model) {
+	public String openCategories(ModelMap model) {
 		
 		Manager operator = new Manager ();
 

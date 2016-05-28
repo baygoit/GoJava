@@ -22,7 +22,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Manager {
-	ApplicationContext ctx = (ApplicationContext) new ClassPathXmlApplicationContext(
+	public ApplicationContext ctx = (ApplicationContext) new ClassPathXmlApplicationContext(
 			"spring.xml");
 
 	public String getRandomQuote() {

@@ -16,7 +16,7 @@
 		</c:forEach>
 	
 <h1>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`</h1>
-<a href="categories">previous</a>
+<a href="/kickstarterWEB/categories">previous</a>
 </center>
 </body>
 </html>
