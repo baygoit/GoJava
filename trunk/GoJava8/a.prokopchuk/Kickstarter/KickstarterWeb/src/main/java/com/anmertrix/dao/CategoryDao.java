@@ -8,7 +8,7 @@ public interface CategoryDao {
 	
 	List<Category> getCategories();
 
-	boolean categoryExists(long categoryId);
+	boolean isExists(long categoryId);
 
 	Category getCategory(long categoryId);
 	

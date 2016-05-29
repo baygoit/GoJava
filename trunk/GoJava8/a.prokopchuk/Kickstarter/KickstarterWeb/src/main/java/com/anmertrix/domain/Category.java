@@ -5,11 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "category")
-//@NamedQueries({ @NamedQuery(name = "Category.getCategories", query = "SELECT c from Category c") })
+@NamedQueries({ 
+	@NamedQuery(name = "Category.getCategories", query = "SELECT c from Category c"),
+	@NamedQuery(name = "Category.count", query = "SELECT COUNT(c) FROM Category c where c.id=:categoryId"),
+	@NamedQuery(name = "Category.getCategory", query = "SELECT c from Category c where c.id=:categoryId")
+})
 public class Category {
 	
 	@Id

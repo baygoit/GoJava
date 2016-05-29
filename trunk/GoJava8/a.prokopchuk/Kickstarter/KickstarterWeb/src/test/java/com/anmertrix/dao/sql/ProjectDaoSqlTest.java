@@ -56,7 +56,7 @@ public class ProjectDaoSqlTest {
 		when(resultSet.next()).thenReturn(true, false);
 		when(resultSet.getInt("id")).thenReturn(1);
 		when(resultSet.getString("name")).thenReturn("test name");
-		List<Project> projects = projectDaoSql.getProjectsByCategoryId(1);
+		List<Project> projects = projectDaoSql.getProjects(1);
 		Project project = projects.get(0);
 		assertThat(project.getId(), is(1));
 		assertThat(project.getName(), is("test name"));
@@ -78,7 +78,7 @@ public class ProjectDaoSqlTest {
 		when(resultSet.getString("url")).thenReturn("test url");
 		when(resultSet.getInt("sum_amount")).thenReturn(100);
 		
-		Project project = projectDaoSql.getProjectById(1);
+		Project project = projectDaoSql.getProject(1);
 		
 		assertThat(project.getId(), is(1));
 		assertThat(project.getName(), is("test name"));

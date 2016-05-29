@@ -8,8 +8,8 @@ public interface PaymentDao {
 	
 	void insertPayment(Payment payment);
 
-	long getGatheredBudgetByProjectId(long projectId);
+	long getGatheredBudget(long projectId);
 
-	List<Payment> getPaymentsByProjectId(long projectId);
+	List<Payment> getPayments(long projectId);
 
 }

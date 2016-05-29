@@ -6,10 +6,10 @@ import com.anmertrix.domain.Project;
 
 public interface ProjectDao {
 	
-	List<Project> getProjectsByCategoryId(long categoryId);
+	List<Project> getProjects(long categoryId);
 	
-	boolean projectExists(long projectId);
+	boolean isExists(long projectId);
 
-	Project getProjectById(long projectId);
+	Project getProject(long projectId);
 
 }

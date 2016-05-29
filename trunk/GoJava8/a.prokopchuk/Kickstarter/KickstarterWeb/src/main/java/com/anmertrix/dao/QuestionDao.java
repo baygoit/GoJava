@@ -8,6 +8,6 @@ public interface QuestionDao {
 
 	void insertQuestion(Question question);
 
-	List<Question> getQuestionsByProjectId(long projectId);
+	List<Question> getQuestions(long projectId);
 
 }

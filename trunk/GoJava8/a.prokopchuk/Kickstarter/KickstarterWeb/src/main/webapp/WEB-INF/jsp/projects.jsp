@@ -11,8 +11,8 @@
             <div class="box">
                 <div class="col-lg-12 text-center">
                 	<ul class="breadcrumb">
-                		<li><a href="/">Home</a></li>
-						<li><a href="categories">Categories</a></li>
+                		<li><a href="<c:url value="/" />">Home</a></li>
+						<li><a href="<c:url value="/categories" />">Categories</a></li>
 					</ul>
 					<h2>Selected category: ${category.name}</h2>
 					<div class="row">
@@ -20,7 +20,7 @@
 							<c:forEach var="project" items="${projects}" varStatus="status">
 								<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 									<div class="project-list-item">
-										<a href="project?projectId=${project.id}">
+										<a href="<c:url value="/project/${project.id}" />">
 											<span class="project-list-item-name">${project.name}</span>
 											<span>Description: ${project.description}</span>
 											<span>Required budget: ${project.requiredBudget}</span>

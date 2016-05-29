@@ -17,7 +17,7 @@
 	<div class="content text-center">
 		<div class="page404">
 			<img src="<c:url value="/resources/images/400.png" />">
-			<h1 class="title"><a href="categories">Go to KickStarter</a></h1>
+			<h1 class="title"><a href="<c:url value="categories" />">Go to KickStarter</a></h1>
 		</div>
 	</div>
 	<footer>

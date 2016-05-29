@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="header.jsp">
 	<jsp:param value="${project.name}" name="title" />
@@ -11,9 +13,9 @@
             <div class="box">
                 <div class="col-lg-12 text-center">
                 	<ul class="breadcrumb">
-                		<li><a href="/">Home</a></li>
-						<li><a href="categories">Categories</a></li>
-						<li><a href="projects?categoryId=${project.category.id}">Projects</a></li>
+                		<li><a href="<c:url value="/" />">Home</a></li>
+						<li><a href="<c:url value="/categories" />">Categories</a></li>
+						<li><a href="<c:url value="/category/${project.category.id}" />">Projects</a></li>
 					</ul>
 					<h2>${project.name}</h2>
 					<div class="info_block">
@@ -43,13 +45,11 @@
 										</c:forEach>
 								</c:forEach>
 							</div>
-							<form name="add_question" class="form-horizontal" action="" method="POST" accept-charset="utf-8">
+							<form name="add_question" class="form-horizontal" action="<c:url value="/project/${project.id}/addQuestion" />" method="POST" accept-charset="utf-8">
 								<div class="row">
 									<div class="form-group col-sm-8">
 										<input required type="text" class="form-control" id="inputQuestion"
 											name="question" maxlength="400" placeholder="Enter your question...">
-										<input type="hidden" name="projectId" value="${project.id}" />
-										<input type="hidden" name="requested_action" value="ADD_QUESTION"/>
 									</div>
 									<div class="question_submit form-group col-sm-2">
 										<button type="submit" class="btn btn-default">Ask</button>
@@ -70,27 +70,27 @@
 									</div>
 								</c:forEach>
 							</div>
-							<form name="add_payment" class="form-horizontal" action="" method="POST" accept-charset="utf-8">
-								<input type="hidden" name="requested_action" value="ADD_PAYMENT"/>
-								<input type="hidden" name="projectId" value="${project.id}" />
+							
+							<form:errors path="*" cssClass="errorblock" element="div" />
+							<form:form commandName="paymentForm" action="" method="POST" >
 								<div class="row">
-									<div class="form-group col-sm-3">
-										<input required type="text" class="form-control"
-											name="cardholder_name" pattern="[A-Za-zА-Яа-яЁё0-9\s]{2,50}" placeholder="Your name..." title="От 2 до 50 букв включительно!">
+                 					<div class="form-group col-sm-3">
+										<form:input type="text" cssClass="form-control" path="cardholderName" placeholder="Your name..." />
+										<form:errors path="cardholderName" cssClass="error"/>
 									</div>
 									<div class="form-group col-sm-3">
-										<input required type="text" pattern="[0-9]{13,16}" class="form-control"
-											name="card_number" placeholder="Your card number..." title="Только цифры, oт 13 до 16 цифр включительно!">
+										<form:input type="text" path="cardNumber" cssClass="form-control" placeholder="Your card number..." />
+										<form:errors path="cardNumber" cssClass="error"/>
 									</div>
 									<div class="form-group col-sm-3">
-										<input required type="number" max='1000000' min='1' class="form-control"
-											name="payment_amount" placeholder="Payment amount..." title="Только цифры, oт 1 до 1000000 включительно!">
+										<form:input type="number" path="amount" cssClass="form-control" placeholder="Payment amount..." />
+										<form:errors path="amount" cssClass="error"/>
 									</div>
 									<div class="payment_submit form-group col-sm-2">
 										<button type="submit" class="btn btn-default">Invest</button>
 									</div>
 								</div>
-							</form>
+							</form:form>
 						</div>
 						<div id="reward_block" class="reward_block tab-pane fade">
 							<h3>Rewards:</h3>
