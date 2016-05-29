@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiResourceLocking="true">
     <Resource name="jdbc/kickstarter"
-              global="jdbc/kickstarter"
               auth="Container"
               type="javax.sql.DataSource"
               username="kickstarter"

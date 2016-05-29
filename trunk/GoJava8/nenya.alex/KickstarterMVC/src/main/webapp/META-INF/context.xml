@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiResourceLocking="true">
+            <Resource 
+              name="jdbc/dataSource" 
+              auth="Container"
+              type="javax.sql.DataSource" 
+              username="kickstarterSanya" 
+              password="kickstarterSanya"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://s14.thehost.com.ua/kickstarterSanya"
+              validationQuery="select 1"
+              maxActive="10" 
+              maxIdle="4"
+             />
+</Context>

@@ -11,10 +11,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "questions")
-public class Question implements Comparable<Question> {
+public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
     @JoinColumn(name = "project_id")
@@ -43,7 +43,7 @@ public class Question implements Comparable<Question> {
     public int getId() {
         return id;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -54,10 +54,5 @@ public class Question implements Comparable<Question> {
 
     public void setProject(Project project) {
         this.project = project;
-    }
-
-    @Override
-    public int compareTo(Question question) {
-        return this.id - question.getId();
     }
 }

@@ -1,7 +1,5 @@
 package com.sandarovich.kickstarter.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
@@ -9,31 +7,40 @@ import java.util.List;
 
 @Entity
 @Table(name = "project")
+@NamedQueries({
+    @NamedQuery(name = "Project.findByCategory", query = "SELECT p from Project as p WHERE p.category = :category"),
+        @NamedQuery(name = "Project.isProjectExist", query = "SELECT COUNT(p) from Project as p WHERE p.id = :id"),
+        @NamedQuery(name = "Project.findById", query = "SELECT p from Project as p WHERE p.id = :id")
+})
 public class Project {
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "project")
     List<Payment> payments;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+
+    @OneToMany(mappedBy = "project")
     @SortNatural
-    @Fetch(value = FetchMode.SUBSELECT)
     List<Question> questions;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+
+    @OneToMany(mappedBy = "project")
     @SortNatural
-    @Fetch(value = FetchMode.SUBSELECT)
     List<Award> awards;
+
     @Id
     @GeneratedValue
     @Column(name = "id")
     private long id;
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoryid")
     private Category category;
+
     @Column(name = "name")
     private String name;
     @Column(name = "description")
     private String description;
     @Column(name = "required_budget")
     private double requiredBudget;
+    @Transient
+    private double gatheredBudget;
     @Column(name = "days_left")
     private int daysLeft;
     @Column(name = "video_link")
@@ -42,6 +49,14 @@ public class Project {
     private String history;
 
     public Project() {
+    }
+
+    public double getGatheredBudget() {
+        return gatheredBudget;
+    }
+
+    public void setGatheredBudget(double gatheredBudget) {
+        this.gatheredBudget = gatheredBudget;
     }
 
     public long getId() {
@@ -106,14 +121,6 @@ public class Project {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public double getGatheredBudget() {
-        double result = 0;
-        for (Payment payment : payments) {
-            result += payment.getAmount();
-        }
-        return result;
     }
 
     public List<Payment> getPayments() {

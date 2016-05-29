@@ -3,10 +3,14 @@ package com.sandarovich.kickstarter.model;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Award.getByProject", query = "SELECT a from Award as a WHERE a.project = :project"),
+    @NamedQuery(name = "Award.getById", query = "SELECT a from Award as a WHERE a.id = :id")
+})
 @Table(name = "award")
 public class Award {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "amount")
@@ -16,7 +20,7 @@ public class Award {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "projectid")
     private Project project;
 

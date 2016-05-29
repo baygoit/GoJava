@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body {
-	background-color: #b7cac9;
+	background-color: #BAE3C2;
 	font: 10pt Arial, Helvetica, sans-serif;
 	color: #555;
 }
@@ -21,13 +21,39 @@ body {
 	background: linear-gradient(to top, #cae8ce, #d7fadc);
 }
 
+textarea {
+	resize: none;
+	border: 1px solid #606060;
+	border-radius: 3px;
+	box-shadow: inset 1px 1px 4px rgba(50, 80, 80, 0.5);
+	margin: 5px;
+	padding: 4px;
+}
+
+input[type="text"] {
+	border: 1px solid #606060;
+	border-radius: 3px;
+	box-shadow: inset 1px 1px 4px rgba(50, 80, 80, 0.5);
+	margin: 5px;
+	padding: 4px;
+}
+
+input[type="number"] {
+	border: 1px solid #606060;
+	border-radius: 3px;
+	box-shadow: inset 1px 1px 4px rgba(50, 80, 80, 0.5);
+	margin: 5px;
+	padding: 4px;
+}
+
 .div_main_header {
 	margin: 0 auto;
 	padding: 3px 0px 2px;
-	font-size: 12pt;
+	font-size: 18pt;
 	font-weight: bold;
 	text-align: center;
-	background-color: #b7cac9;
+	text-shadow: 0px 0px 15px #fff;
+	background-color: #BAE3C2;
 }
 
 .div_main_wrapper {
@@ -46,6 +72,15 @@ body {
 	text-align: center;
 }
 
+.subheader {
+	font-weight: bold;
+}
+
+.quote_body {
+	background-color: white;
+	margin: 0px;
+}
+
 .quote_text {
 	font-style: italic;
 	color: #115533;
@@ -56,15 +91,46 @@ body {
 	color: #115533;
 }
 
-.subheader {
-	font-weight: bold;
-}
-
 .question {
 	font-style: italic;
 }
 
 .reward_amount {
+	padding-left: 10px;
 	font-weight: bold;
 	color: #00a000;
+}
+
+.error {
+	color: red;
+}
+
+/* ----------------------------- Langmenu  */
+#langmenu {
+	color: #555;
+	float: right;
+}
+
+#langmenu ul li {
+	display: inline;
+	margin: 5px;
+}
+
+#langmenu ul {
+	margin: 0;
+	padding: 6px 20px 5px;
+	list-style-type: disc;
+}
+
+#langmenu ul li a {
+	background-color: transparent;
+	color: #555;
+	font-weight: regular;
+	padding: 5px 2px;
+	text-decoration: none;
+}
+
+#langmenu ul li a:hover {
+	color: #005875;
+	text-shadow: 0px 0px 15px #0f0;
 }

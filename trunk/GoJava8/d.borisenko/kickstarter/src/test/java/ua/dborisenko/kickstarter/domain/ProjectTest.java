@@ -1,61 +1,61 @@
 package ua.dborisenko.kickstarter.domain;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @ContextConfiguration(locations = { "classpath:testApplicationContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
-@Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
+@Transactional
 public class ProjectTest {
+    @PersistenceContext
+    private EntityManager em;
 
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    @SuppressWarnings("unchecked")
     @Test
     public void mappingTest() {
-        int projectId;
-        try (Session session = sessionFactory.openSession()) {
-            Category category = new Category();
-            Project project = new Project();
-            project.setName("testname");
-            project.setDescription("testdescription");
-            project.setHistory("testhistory");
-            project.setVideoUrl("testvideourl");
-            project.setRemainingDays(10);
-            project.setRequiredSum(100);
-            project.setCategory(category);
-            session.save(category);
-            session.save(project);
-            session.flush();
-            projectId = project.getId();
-        }
-        try (Session session = sessionFactory.openSession()) {
-            Query query = session.createQuery("FROM Project WHERE id = :id");
-            query.setInteger("id", projectId);
-            List<Project> resultList = query.list();
-            Project resultProject = resultList.get(0);
-            session.flush();
-            assertThat(resultProject.getName(), is("testname"));
-            assertThat(resultProject.getDescription(), is("testdescription"));
-            assertThat(resultProject.getHistory(), is("testhistory"));
-            assertThat(resultProject.getVideoUrl(), is("testvideourl"));
-            assertThat(resultProject.getRemainingDays(), is(10));
-            assertThat(resultProject.getRequiredSum(), is(100));
-        }
+        Category category = new Category();
+        Project project = new Project();
+        project.setName("testname");
+        project.setDescription("testdescription");
+        project.setHistory("testhistory");
+        project.setVideoUrl("testvideourl");
+        project.setRemainingDays(10);
+        project.setRequiredSum(100);
+        project.setCategory(category);
+        Investment investment = new Investment();
+        investment.setProject(project);
+        investment.setAmount(42);
+        Reward reward = new Reward();
+        reward.setProject(project);
+        Question question = new Question();
+        question.setProject(project);
+        em.persist(category);
+        em.persist(project);
+        em.persist(investment);
+        em.persist(reward);
+        em.persist(question);
+        em.clear();
+        int id = project.getId();
+        Project resultProject = em.find(Project.class, id);
+        assertThat(resultProject.getName(), is("testname"));
+        assertThat(resultProject.getDescription(), is("testdescription"));
+        assertThat(resultProject.getHistory(), is("testhistory"));
+        assertThat(resultProject.getVideoUrl(), is("testvideourl"));
+        assertThat(resultProject.getRemainingDays(), is(10));
+        assertThat(resultProject.getRequiredSum(), is(100));
+        assertThat(resultProject.getCategory(), is(notNullValue()));
+        assertThat(resultProject.getInvestments().size(), is(1));
+        assertThat(resultProject.getCollectedSum(), is(42));
+        assertThat(resultProject.getRewards().size(), is(1));
+        assertThat(resultProject.getQuestions().size(), is(1));
     }
 }

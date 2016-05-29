@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Investment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
     @JoinColumn(name = "project_id")
@@ -53,11 +53,11 @@ public class Investment {
     public int getId() {
         return id;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }
-
+    
     public Project getProject() {
         return project;
     }

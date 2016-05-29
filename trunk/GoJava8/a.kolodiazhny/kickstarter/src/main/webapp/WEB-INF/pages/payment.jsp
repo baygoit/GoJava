@@ -1,42 +1,50 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <jsp:include page="/WEB-INF/pages/header.jsp" />
         <div class="container">
             <jsp:include page="navigation.jsp" />
             <div class="page-header">
-              <h2>${title}</h1>
+              <h2>${title}</h2>
             </div>
+            <ol class="breadcrumb">
+                <li><a  href="<c:url value="/project/${project.id}" />">${project.name}</a></li>
+            </ol>
             <div class="panel panel-default">
                 <div class="panel-heading">Payment:</div>
+                <form:errors path="*" cssClass="errorblock" element="div" />
                 <div class="panel-body">
-                    <form role="form" name="add_invest" method="POST" action="">
+                    <form:form action="" method="post" commandName="paymentForm">
                         <div class="form-group">
-                            <input type="hidden" name="action" value="paymentAdd"/>
-                        	<input type="hidden" name="projectId" value="${project.id}"/>
+                            <form:input path="projectId" class="form-control" type="hidden" />
+                            
                             <label for="cardHolder">Card Holder</label>
-                            <input class="form-control" name="cardHolder" placeholder="Bob" value="Bob"/>
+                            <form:input path="cardHolder"  class="form-control" placeholder="Bob" value=""/>
+                            <form:errors path="cardHolder" cssClass="error"/>
+                            
                             <label for="cardNumber">Card Number</label>
-                            <input class="form-control" pattern="[0-9]{12}" name="cardNumber" title="Format: 12 digits" placeholder="123456789011"  value="123456789011"/>
+                            <form:input path="cardNumber" class="form-control"  placeholder="123456789011"  value=""/>
+                            <form:errors path="cardNumber" cssClass="error"/>
+                            
                             <label for="amount">Amount</label>
-                            <input class="form-control" name="amount" placeholder="100" value="100" title="Format: 3 digits"/>
+                            <form:input path="amount" class="form-control" placeholder="0" value=""/>
+                            <form:errors path="amount" cssClass="error"/>
                         </div>
                         <div class="form-group">
-                            <button type="submit" value="send" class="btn btn-default">Submit</button>
-                            <a class="btn btn-default" href='?view=project&id=${project.id}'>Return</a>
+                            <button type="submit" value="addPayment" class="btn btn-default">Submit</button>
                         </div>
                         <label for="awards">Awards:</label>
                         <div id="awards" class="container">
                             <div class="row">
                                 <c:forEach var="award" items="${awards}" varStatus="varStatus">
                                     <div class="col-xs-4">
-                                        <button type="submit" value="${award.amount}" class="btn btn-default btn-small" name="award">
-                                            ${award.amount}$-
-                                            ${award.name}
+                                        <button type="submit" name="awardId" class="btn btn-default btn-small"  value="${award.id}">
+                                           ${award.amount}$-${award.name}
                                         </button>
                                     </div>
                                 </c:forEach>
                             </div>
                         </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>

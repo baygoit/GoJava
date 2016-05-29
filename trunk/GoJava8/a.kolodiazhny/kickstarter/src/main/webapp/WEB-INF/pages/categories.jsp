@@ -3,13 +3,12 @@
         <div class="container">
             <jsp:include page="/WEB-INF/pages/navigation.jsp" />
             <div class="page-header">
-                <h2>${title}</h1>
+                <h1>${title}</h1>
             </div>
             <div class="list-group categories">
             <c:forEach var="category" items="${categories}">
-                <a href="?view=category&id=${category.id}" class="list-group-item">
+                <a href="<c:url value="/category/${category.id}" />" class="list-group-item">
                     ${category.id} - ${category.name}
-                    <span class="badge">${category.projectCount}</span>
                 </a>
             </c:forEach>
             </div>

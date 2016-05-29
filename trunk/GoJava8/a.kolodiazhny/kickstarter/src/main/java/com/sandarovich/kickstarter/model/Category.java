@@ -1,22 +1,23 @@
 package com.sandarovich.kickstarter.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "category ")
+@NamedQueries({
+    @NamedQuery(name = "Category.getAll", query = "SELECT c from Category as c"),
+    @NamedQuery(name = "Category.getById", query = "SELECT c from Category as c WHERE c.id = :id"),
+    @NamedQuery(name = "Category.isCategoryExist", query = "SELECT COUNT(c) from Category as c WHERE c.id = :id")
+})
 public class Category {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "category")
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "category")
     private List<Project> projects;
 
     public Category() {
@@ -45,10 +46,6 @@ public class Category {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
-    }
-
-    public int getProjectCount() {
-        return projects.size();
     }
 
 }

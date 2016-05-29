@@ -9,4 +9,6 @@ import java.util.List;
 public interface ProjectDao {
     List<Project> findByCategory(Category category);
     Project findById(long projectId);
+
+    boolean isProjectExist(long projectId);
 }

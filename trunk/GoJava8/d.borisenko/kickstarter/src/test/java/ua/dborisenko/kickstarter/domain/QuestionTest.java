@@ -1,50 +1,42 @@
 package ua.dborisenko.kickstarter.domain;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @ContextConfiguration(locations = { "classpath:testApplicationContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
+@Transactional
 public class QuestionTest {
+    @PersistenceContext
+    private EntityManager em;
 
-    @Autowired
-    private SessionFactory sessionFactory;
-
-    @SuppressWarnings("unchecked")
     @Test
     public void mappingTest() {
-        try (Session session = sessionFactory.openSession()) {
-            Category category = new Category();
-            Project project = new Project();
-            project.setCategory(category);
-            Question question = new Question();
-            question.setRequest("testrequest");
-            question.setReply("testreply");
-            question.setProject(project);
-            session.save(category);
-            session.save(project);
-            session.save(question);
-            session.flush();
-        }
-        try (Session session = sessionFactory.openSession()) {
-            Query query = session.createQuery("FROM Question");
-            List<Question> resultList = query.list();
-            Question resultQuestion = resultList.get(0);
-            session.flush();
-            assertThat(resultQuestion.getRequest(), is("testrequest"));
-            assertThat(resultQuestion.getReply(), is("testreply"));
-        }
+        Category category = new Category();
+        Project project = new Project();
+        project.setCategory(category);
+        Question question = new Question();
+        question.setRequest("testrequest");
+        question.setReply("testreply");
+        question.setProject(project);
+        em.persist(category);
+        em.persist(project);
+        em.persist(question);
+        em.clear();
+        int id = question.getId();
+        Question resultQuestion = em.find(Question.class, id);
+        assertThat(resultQuestion.getRequest(), is("testrequest"));
+        assertThat(resultQuestion.getReply(), is("testreply"));
+        assertThat(resultQuestion.getProject(), is(notNullValue()));
     }
-
 }

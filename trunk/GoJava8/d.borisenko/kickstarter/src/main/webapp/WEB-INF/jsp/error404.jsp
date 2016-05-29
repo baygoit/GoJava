@@ -1,9 +1,14 @@
+<%@page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="title" value="Page not found" scope="request"/>
-<jsp:include page="header.jsp"/>
-		<h1>Error: 404</h1>
-		<h2>Not Found</h2>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<c:set var="title" scope="request">
+	<spring:message code="error.error" />
+</c:set>
+<jsp:include page="errorHeader.jsp"/>
+		<h1><spring:message code="error.error" />: 404</h1>
+		<h2><spring:message code="error.notFound" /></h2>
 		<hr/>
 		<br/>
-		${requestScope['javax.servlet.error.message']}
+		<spring:message code="${errorText}" />
 <jsp:include page="footer.jsp"/>
+

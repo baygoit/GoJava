@@ -1,36 +1,26 @@
 package com.sandarovich.kickstarter.dao.impl;
 
 import com.sandarovich.kickstarter.dao.QuoteDao;
-import com.sandarovich.kickstarter.dao.exception.NoResultException;
 import com.sandarovich.kickstarter.model.Quote;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Random;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Repository
 public class QuoteDaoPostgreImpl implements QuoteDao {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager em;
 
-    @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+    @Transactional(readOnly = true)
     @Override
     public Quote getRandomQuota() {
-
-        try (Session session = sessionFactory.openSession()) {
-            int quoteCount = ((Long) session.createCriteria(Quote.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
-            if (quoteCount < 1) {
-                throw new NoResultException("Quote table is empty");
-            }
-            int randomQuoteIndex = new Random().nextInt(quoteCount) + 1;
-            return session.get(Quote.class, randomQuoteIndex);
-        }
+        Query query = em.createNamedQuery("Quote.getRandom", Quote.class);
+        query.setMaxResults(1);
+        return (Quote) query.getSingleResult();
     }
 }
 

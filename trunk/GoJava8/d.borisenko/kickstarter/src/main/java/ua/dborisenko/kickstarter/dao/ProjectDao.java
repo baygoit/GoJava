@@ -1,66 +1,62 @@
 package ua.dborisenko.kickstarter.dao;
 
-import org.hibernate.Hibernate;
-import org.hibernate.LockMode;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.EntityGraph;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import ua.dborisenko.kickstarter.domain.Category;
 import ua.dborisenko.kickstarter.domain.Investment;
 import ua.dborisenko.kickstarter.domain.Project;
 import ua.dborisenko.kickstarter.domain.Question;
 
 @Repository
-@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
+@Transactional
 public class ProjectDao {
 
-    private static final String GET_BY_ID_HQL = "from Project where id = :id";
-    @Autowired
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager em;
 
-    public void getAllForCategory(Category category) {
-        Session session = sessionFactory.getCurrentSession();
-        session.lock(category, LockMode.NONE);
-        Hibernate.initialize(category.getProjects());
-    }
-
-    public Project getById(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery(GET_BY_ID_HQL);
-        query.setInteger("id", id);
-        Project project = (Project) query.list().get(0);
+    public Project get(int id) {
+        Project project = em.find(Project.class, id);
+        if (project == null) {
+            throw new EmptyResultDataAccessException(1);
+        }
         return project;
     }
 
-    public void getRewards(Project project) {
-        Session session = sessionFactory.getCurrentSession();
-        session.lock(project, LockMode.NONE);
-        Hibernate.initialize(project.getRewards());
+    public Project getWithRewards(int id) {
+        EntityGraph<?> graph = this.em.getEntityGraph("graph.Project.rewards");
+        Map<String, Object> rewards = new HashMap<String, Object>();
+        rewards.put("javax.persistence.fetchgraph", graph);
+        Project project = em.find(Project.class, id, rewards);
+        if (project == null) {
+            throw new EmptyResultDataAccessException(1);
+        }
+        return project;
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
-    public void addQuestion(Question question) {
-        Session session = sessionFactory.getCurrentSession();
-        session.save(question);
-        session.flush();
+    public Project getWithQuestions(int id) {
+        EntityGraph<?> graph = this.em.getEntityGraph("graph.Project.questions");
+        Map<String, Object> questions = new HashMap<String, Object>();
+        questions.put("javax.persistence.fetchgraph", graph);
+        Project project = em.find(Project.class, id, questions);
+        if (project == null) {
+            throw new EmptyResultDataAccessException(1);
+        }
+        return project;
     }
 
-    public void getQuestions(Project project) {
-        Session session = sessionFactory.getCurrentSession();
-        session.lock(project, LockMode.NONE);
-        Hibernate.initialize(project.getQuestions());
-    }
-
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
     public void addInvestment(Investment investment) {
-        Session session = sessionFactory.getCurrentSession();
-        session.save(investment);
-        session.flush();
+        em.persist(investment);
+    }
+
+    public void addQuestion(Question question) {
+        em.persist(question);
     }
 }

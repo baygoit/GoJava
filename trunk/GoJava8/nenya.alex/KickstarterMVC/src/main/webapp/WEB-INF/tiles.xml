@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE tiles-definitions PUBLIC  
+      "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+      "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- Default Main Template -->
+    <definition name="base.definition" template="/WEB-INF/layouts/classic.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/quote.jsp" />
+        <put-attribute name="body" value="" />
+    </definition>
+    
+    <!-- Categories Page -->
+   <definition name="categoriesPage" extends="base.definition">
+      <put-attribute name="body" value="/WEB-INF/views/categories.jsp" />
+   </definition>
+   
+   <!-- Category Page -->
+   <definition name="categoryPage" extends="base.definition">
+      <put-attribute name="body" value="/WEB-INF/views/category.jsp" />
+   </definition>
+   
+   <!-- Project Page -->
+   <definition name="projectPage" extends="base.definition">
+      <put-attribute name="body" value="/WEB-INF/views/project.jsp" />
+   </definition>
+   
+   <!-- Payment Page -->
+   <definition name="paymentPage" extends="base.definition">
+      <put-attribute name="body" value="/WEB-INF/views/paymentForm.jsp" />
+   </definition>
+   
+   <!-- Question Page -->
+   <definition name="questionPage" extends="base.definition">
+      <put-attribute name="body" value="/WEB-INF/views/questionForm.jsp" />
+   </definition>
+   
+   <!-- Reward Page -->
+   <definition name="rewardPage" extends="base.definition">
+      <put-attribute name="body" value="/WEB-INF/views/rewardForm.jsp" />
+   </definition>
+   
+   <!-- 404 Page -->
+   <definition name="404Page" extends="base.definition">
+      <put-attribute name="body" value="/WEB-INF/views/404.jsp" />
+   </definition>
+   
+   <!-- 400 Page -->
+   <definition name="400Page" extends="base.definition">
+      <put-attribute name="body" value="/WEB-INF/views/400.jsp" />
+   </definition>
+   
+   <!-- Error Page -->
+   <definition name="errorPage" extends="base.definition">
+      <put-attribute name="body" value="/WEB-INF/views/error.jsp" />
+   </definition>
+   
+</tiles-definitions>

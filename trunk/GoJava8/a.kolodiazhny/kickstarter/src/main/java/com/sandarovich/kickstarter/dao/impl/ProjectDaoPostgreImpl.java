@@ -1,47 +1,55 @@
 package com.sandarovich.kickstarter.dao.impl;
 
 
+import com.sandarovich.kickstarter.dao.PaymentDao;
 import com.sandarovich.kickstarter.dao.ProjectDao;
-import com.sandarovich.kickstarter.dao.exception.NoResultException;
 import com.sandarovich.kickstarter.model.Category;
 import com.sandarovich.kickstarter.model.Project;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public class ProjectDaoPostgreImpl implements ProjectDao {
 
+    @PersistenceContext
+    private EntityManager em;
+
     @Autowired
-    private SessionFactory sessionFactory;
+    private PaymentDao paymentDao;
 
     @Transactional(readOnly = true)
     @Override
     public Project findById(long projectId) {
-        Session session = sessionFactory.getCurrentSession();
-        Project project = session.get(Project.class, projectId);
-        if (Objects.isNull(project)) {
-            throw new NoResultException("Project not found");
-        }
+        TypedQuery<Project> query = em.createNamedQuery("Project.findById", Project.class);
+        query.setParameter("id", projectId);
+        Project project = query.getSingleResult();
+        project.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(projectId));
         return project;
     }
 
+    @Override
+    public boolean isProjectExist(long projectId) {
+        Query query = em.createNamedQuery("Project.isProjectExist");
+        query.setParameter("id", projectId);
+        long projectCount = (long) query.getSingleResult();
+        return projectCount == 1;
+    }
 
     @Transactional(readOnly = true)
     @Override
     public List<Project> findByCategory(Category category) {
-        Session session = sessionFactory.getCurrentSession();
-        Criteria criteria = session.createCriteria(Project.class);
-        criteria.add(Restrictions.eq("category", category));
-        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        return criteria.list();
+        Query query = em.createNamedQuery("Project.findByCategory");
+        query.setParameter("category", category);
+        List<Project> projects = query.getResultList();
+        projects.forEach(project -> project.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(project.getId())));
+        return projects;
     }
 
 

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("QuoteService")
 @Transactional
 public class QuoteService {
+
 	@Autowired
 	protected QuoteDAO dao;
 
@@ -23,5 +24,5 @@ public class QuoteService {
 	public List<Quote> findAll() {
 		return this.dao.findAll();
 	}
-	
+
 }
