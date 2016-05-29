@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+version="1.0">
+<persistence-unit name="kickstarter" transaction-type="RESOURCE_LOCAL" >
+<class>com.kutsenko.domain.Category</class>
+		<class>com.kutsenko.domain.Project</class>
+		<class>com.kutsenko.domain.Investment</class>
+		<class>com.kutsenko.domain.Question</class>
+		<class>com.kutsenko.domain.Reward</class>
+		<class>com.kutsenko.domain.Quote</class>
+
+</persistence-unit>
+</persistence>
