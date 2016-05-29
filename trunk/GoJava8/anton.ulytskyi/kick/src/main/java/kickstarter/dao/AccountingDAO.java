@@ -28,5 +28,5 @@ public class AccountingDAO {
 
 		emf.persist(transaction);
 	}
-	
+
 }

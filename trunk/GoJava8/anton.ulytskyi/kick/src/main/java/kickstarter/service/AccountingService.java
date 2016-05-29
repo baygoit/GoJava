@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("AccountingService")
 @Transactional
 public class AccountingService {
+	
 	@Autowired
 	protected AccountingDAO dao;
 

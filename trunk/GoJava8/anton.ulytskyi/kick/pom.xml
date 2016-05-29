@@ -82,8 +82,6 @@
 			<version>${hiberate.version}</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-annotations</artifactId> 
-			<version>${hibernate.annotation.version}</version> </dependency> -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -116,8 +114,5 @@
 			<version>4.12</version>
 		</dependency>
 
-
-		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
-			<version>1.5.6</version> </dependency> -->
 	</dependencies>
 </project>

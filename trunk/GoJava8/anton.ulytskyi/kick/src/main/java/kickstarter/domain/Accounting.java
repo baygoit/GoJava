@@ -12,9 +12,6 @@ import javax.persistence.Table;
 @Table(name = "accounting")
 public class Accounting implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "invoice")

@@ -19,7 +19,7 @@ import kickstarter.domain.Quote;
 import kickstarter.manager.Manager;
 
 public class KickstarterTest {
-	
+
 	int expectedNumber = 1;
 	String expectedText = "expected";
 	Date expectedDate = new Date();
@@ -39,7 +39,6 @@ public class KickstarterTest {
 				"file:src/test/resources/spring.xml");
 	}
 
-	
 	@Test
 	public void quoteTest() {
 
@@ -52,7 +51,6 @@ public class KickstarterTest {
 		}
 	}
 
-
 	@Test
 	public void categoriesTest() {
 
@@ -61,7 +59,6 @@ public class KickstarterTest {
 		assertEquals(categories.get(1), "category2");
 	}
 
-	
 	@Test
 	public void projectsTest() {
 
@@ -74,7 +71,6 @@ public class KickstarterTest {
 
 	}
 
-	
 	@Test
 	public void openProjectTest() {
 
@@ -106,12 +102,12 @@ public class KickstarterTest {
 				+ testTime.getSeconds() + ")";
 		String testText = "" + testTime.getTime();
 		operator.addCommentTo(id, testAuthor, testText);
-		
+
 		String testProject = (operator.openProject(id)).toString();
 		assertEquals(testProject.contains(testText), true);
 
 	}
-	
+
 	@Test
 	public void accountingDomainTest() {
 
@@ -183,4 +179,3 @@ public class KickstarterTest {
 		assertEquals(quote.getQuote(), expectedText);
 	}
 }
-
