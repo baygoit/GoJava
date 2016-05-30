@@ -28,7 +28,7 @@ public class QuestionDaoSql implements QuestionDao {
 
 	@Override
 	@Transactional
-	public void insertQuestion(final Question question) {
+	public void insertQuestion(Question question) {
 		em.persist(question);
 	}
 

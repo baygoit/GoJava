@@ -45,17 +45,18 @@
 										</c:forEach>
 								</c:forEach>
 							</div>
-							<form name="add_question" class="form-horizontal" action="<c:url value="/project/${project.id}/addQuestion" />" method="POST" accept-charset="utf-8">
+							<form:errors path="*" cssClass="errorblock" element="div" />
+							<form:form cssClass="form-horizontal" commandName="questionForm" action="${project.id}/addQuestion" method="POST" accept-charset="utf-8">
 								<div class="row">
 									<div class="form-group col-sm-8">
-										<input required type="text" class="form-control" id="inputQuestion"
-											name="question" maxlength="400" placeholder="Enter your question...">
+										<form:input type="text" cssClass="form-control" path="question" placeholder="Enter your question..." />
+										<form:errors path="question" cssClass="error"/>
 									</div>
 									<div class="question_submit form-group col-sm-2">
 										<button type="submit" class="btn btn-default">Ask</button>
 									</div>
 								</div>
-							</form>
+							</form:form>
 						</div>
 						<div id="history_block" class="history_block tab-pane fade">
 							${project.history}
@@ -72,7 +73,7 @@
 							</div>
 							
 							<form:errors path="*" cssClass="errorblock" element="div" />
-							<form:form commandName="paymentForm" action="" method="POST" >
+							<form:form commandName="paymentForm" action="" method="POST"  accept-charset="utf-8">
 								<div class="row">
                  					<div class="form-group col-sm-3">
 										<form:input type="text" cssClass="form-control" path="cardholderName" placeholder="Your name..." />

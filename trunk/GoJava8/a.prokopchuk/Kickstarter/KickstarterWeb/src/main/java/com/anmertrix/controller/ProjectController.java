@@ -17,6 +17,7 @@ import com.anmertrix.dao.QuestionDao;
 import com.anmertrix.dao.RewardDao;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
+import com.anmertrix.domain.Question;
 
 @Controller
 public class ProjectController {
@@ -48,6 +49,7 @@ public class ProjectController {
 		model.put("payments", paymentDao.getPayments(id));
 		model.put("questions", questionDao.getQuestions(id));
 		model.put("paymentForm", new Payment());
+		model.put("questionForm", new Question());
 		
 		return "project";
 	}

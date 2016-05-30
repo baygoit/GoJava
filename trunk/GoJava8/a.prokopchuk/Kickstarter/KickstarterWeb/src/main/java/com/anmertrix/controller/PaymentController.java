@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -20,7 +22,7 @@ import com.anmertrix.dao.QuestionDao;
 import com.anmertrix.dao.RewardDao;
 import com.anmertrix.domain.Payment;
 import com.anmertrix.domain.Project;
-import com.anmertrix.validator.PaymentValidator;
+import com.anmertrix.domain.Question;
 
 @Controller
 public class PaymentController {
@@ -40,12 +42,28 @@ public class PaymentController {
 	@Autowired
 	private QuestionDao questionDao;
 
-	@RequestMapping(value = "/project/{id}", method = RequestMethod.POST)
-	public ModelAndView addPayment(@PathVariable Long id, @ModelAttribute("paymentForm") Payment paymentForm, BindingResult errors, Map<String, Object> model) {
+	@RequestMapping(value = "/project/{projectid}", method = RequestMethod.POST)
+	public ModelAndView addPayment(@PathVariable Long projectid, @Valid @ModelAttribute("paymentForm") Payment paymentForm, BindingResult errors, Map<String, Object> model) {
 		
-		paymentForm.setProject(projectDao.getProject(id));
+		if (errors.hasErrors()) {
+			Project project = projectDao.getProject(projectid);
+			LocalDate finalDate = project.getFinalDate().toLocalDate();
+			LocalDate today = LocalDate.now();
+			if (today.isBefore(finalDate)) {
+				project.setDaysLeft((int) ChronoUnit.DAYS.between(today, finalDate));
+			}
+			model.put("project", project);
+			model.put("rewards", rewardDao.getRewards(projectid));
+			model.put("payments", paymentDao.getPayments(projectid));
+			model.put("questions", questionDao.getQuestions(projectid));
+			model.put("questionForm", new Question());
+			ModelAndView modelAndView = new ModelAndView("project");
+			return modelAndView;
+		}
 		
-		ModelAndView modelAndView = new ModelAndView("redirect:/project/" + id);
+		paymentForm.setProject(projectDao.getProject(projectid));
+		
+		ModelAndView modelAndView = new ModelAndView("redirect:/project/" + projectid);
         
 		String cardHolderName = paymentForm.getCardholderName().trim().replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
 		paymentForm.setCardholderName(cardHolderName);
