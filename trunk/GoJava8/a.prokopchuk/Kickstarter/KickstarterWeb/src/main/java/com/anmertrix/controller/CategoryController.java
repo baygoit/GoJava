@@ -31,7 +31,7 @@ public class CategoryController {
 		Category category = categoryDao.getCategory(id);
 		model.put("category", category);
 		model.put("projects", projectDao.getProjects(id));
-		return "projects";
+		return "category";
 	}
 	
 }

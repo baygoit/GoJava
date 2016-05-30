@@ -13,30 +13,29 @@
             <div class="box">
                 <div class="col-lg-12 text-center">
                 	<ul class="breadcrumb">
-                		<li><a href="<c:url value="/" />">Home</a></li>
-						<li><a href="<c:url value="/categories" />">Categories</a></li>
-						<li><a href="<c:url value="/category/${project.category.id}" />">Projects</a></li>
+                		<li><a href="<c:url value="/" />"><spring:message code="project.homeBreadcrumb" /></a></li>
+						<li><a href="<c:url value="/categories" />"><spring:message code="project.categoriesBreadcrumb" /></a></li>
+						<li><a href="<c:url value="/category/${project.category.id}" />"><spring:message code="project.projectsBreadcrumb" /></a></li>
 					</ul>
 					<h2>${project.name}</h2>
 					<div class="info_block">
-						<p><span>Required budget:</span> ${project.requiredBudget}</p>
-						<p><span>Gathered budget:</span> ${project.gatheredBudget}</p>
-						<p><span>Final date:</span> ${project.finalDate}</p>
-						<p><span>Days left:</span> ${project.daysLeft}</p>
-						<p><span>Description:</span> ${project.description}</p>
+						<p><span><spring:message code="project.requiredBudget" />:</span> ${project.requiredBudget}</p>
+						<p><span><spring:message code="project.gatheredBudget" />:</span> ${project.gatheredBudget}</p>
+						<p><span><spring:message code="project.finalDate" />:</span> ${project.finalDate}</p>
+						<p><span><spring:message code="project.daysLeft" />:</span> ${project.daysLeft}</p>
+						<p><span><spring:message code="project.description" />:</span> ${project.description}</p>
 					</div>
 					
 					<ul id="myTab" class="nav nav-tabs nav-justified">
-						<li class="active"><a href="#question_block">Question/Answer</a></li>
-						<li><a href="#history_block">History</a></li>
-  						<li><a href="#payment_block">Payment</a></li>
-  						<li><a href="#reward_block">Reward</a></li>
-  						<li><a href="#video_block">Video</a></li>
+						<li class="active"><a href="#question_block"><spring:message code="project.questionTab" /></a></li>
+						<li><a href="#history_block"><spring:message code="project.historyTab" /></a></li>
+  						<li><a href="#payment_block"><spring:message code="project.paymentTab" /></a></li>
+  						<li><a href="#reward_block"><spring:message code="project.rewardTab" /></a></li>
+  						<li><a href="#video_block"><spring:message code="project.videoTab" /></a></li>
 					</ul>
 					
 					<div id="myTabContent" class="tab-content">
 						<div id="question_block" class="question_block tab-pane fade active in">
-							<h3>Question and answers:</h3>
 							<div class="questions">
 								<c:forEach var="question" items="${questions}">
 									<div class="question question-${question.id}"><span>${question.question}</span> </div>
@@ -49,11 +48,12 @@
 							<form:form cssClass="form-horizontal" commandName="questionForm" action="${project.id}/addQuestion" method="POST" accept-charset="utf-8">
 								<div class="row">
 									<div class="form-group col-sm-8">
-										<form:input type="text" cssClass="form-control" path="question" placeholder="Enter your question..." />
+										<spring:message code="project.enterQuestion" var="enterQuestion" />
+										<form:input type="text" cssClass="form-control" path="question" placeholder="${enterQuestion}" />
 										<form:errors path="question" cssClass="error"/>
 									</div>
 									<div class="question_submit form-group col-sm-2">
-										<button type="submit" class="btn btn-default">Ask</button>
+										<button type="submit" class="btn btn-default"><spring:message code="project.ask" /></button>
 									</div>
 								</div>
 							</form:form>
@@ -62,7 +62,6 @@
 							${project.history}
 						</div>
 						<div id="payment_block" class="payment_block tab-pane fade">
-							<h3>Payments:</h3>
 							<div class="payments">
 								<c:forEach var="payment" items="${payments}">
 									<div class="payment row">
@@ -76,15 +75,18 @@
 							<form:form commandName="paymentForm" action="" method="POST"  accept-charset="utf-8">
 								<div class="row">
                  					<div class="form-group col-sm-3">
-										<form:input type="text" cssClass="form-control" path="cardholderName" placeholder="Your name..." />
+                 						<spring:message code="project.yourNamePaymnet" var="yourNamePaymnet"/>
+										<form:input type="text" cssClass="form-control" path="cardholderName" placeholder="${yourNamePaymnet}" />
 										<form:errors path="cardholderName" cssClass="error"/>
 									</div>
 									<div class="form-group col-sm-3">
-										<form:input type="text" path="cardNumber" cssClass="form-control" placeholder="Your card number..." />
+										<spring:message code="project.yourCardNumber" var="yourCardNumber" />
+										<form:input type="text" path="cardNumber" cssClass="form-control" placeholder="${yourCardNumber}" />
 										<form:errors path="cardNumber" cssClass="error"/>
 									</div>
 									<div class="form-group col-sm-3">
-										<form:input type="number" path="amount" cssClass="form-control" placeholder="Payment amount..." />
+										<spring:message code="project.paymentAmount" var="paymentAmount" />
+										<form:input type="text" path="amount" cssClass="form-control" placeholder="${paymentAmount}" />
 										<form:errors path="amount" cssClass="error"/>
 									</div>
 									<div class="payment_submit form-group col-sm-2">
@@ -94,7 +96,6 @@
 							</form:form>
 						</div>
 						<div id="reward_block" class="reward_block tab-pane fade">
-							<h3>Rewards:</h3>
 							<div class="row">
 								<c:forEach var="reward" items="${rewards}">
 									<div class="form-group col-sm-4 text-center">
