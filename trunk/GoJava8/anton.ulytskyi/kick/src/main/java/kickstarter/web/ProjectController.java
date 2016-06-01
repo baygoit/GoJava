@@ -6,16 +6,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import kickstarter.manager.Manager;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class ProjectController {
-
+	private static final Logger log = Logger.getLogger(ProjectController.class);
 	private static final int MAX_INVEST = 100000;
 	Manager operator = new Manager();
 
@@ -43,26 +43,20 @@ public class ProjectController {
 
 		if (isWriteNumber(amount)) {
 			int cash = Integer.parseInt(amount);
-			try {
+	
 				operator.sponsor(Integer.parseInt(id), cash);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
+		
 		}
 
 		if ((!author.equals("author") && !author.equals(null) && !author
 				.equals(""))
 				&& (!text.equals("text") || !text.equals(null) || !text
 						.equals(""))) {
-			try {
-				// broker.say(Integer.parseInt(id), author, text);
+		
 				operator.addCommentTo(Integer.parseInt(id), author, text);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
+			
 		}
 
-		// resp.sendRedirect("selected?" + id);
 		return "redirect:" + id;
 	}
 
@@ -71,11 +65,13 @@ public class ProjectController {
 		try {
 			test = Integer.parseInt(amount);
 		} catch (NumberFormatException e) {
+			log.info("attempt to write down not a number in the payment field");
 			return false;
 		}
 		if (test > 0 && test < MAX_INVEST) {
 			return true;
 		} else {
+			log.info("attempt to write down incorrect number in the payment field");
 			return false;
 		}
 	}

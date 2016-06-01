@@ -7,6 +7,22 @@
 	<packaging>war</packaging>
 	<name>A1kickstarter</name>
 
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<sonar.jdbc.url>jdbc:postgresql://localhost/sonarQube</sonar.jdbc.url>
+				<sonar.jdbc.driverClassName>org.postgresql.Driver</sonar.jdbc.driverClassName>
+				<sonar.jdbc.username>Ante</sonar.jdbc.username>
+				<sonar.jdbc.password>C8H11NO2</sonar.jdbc.password>
+				<sonar.host.url>http://localhost:9000</sonar.host.url>
+			</properties>
+		</profile>
+	</profiles>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.framework.version>4.0.2.RELEASE</spring.framework.version>
@@ -14,7 +30,7 @@
 		<hiberate.version>4.1.7.Final</hiberate.version>
 		<hibernate.annotation.version>3.5.6-Final</hibernate.annotation.version>
 		<cglib.version>2.2.2</cglib.version>
-		
+
 	</properties>
 
 	<build>
@@ -33,8 +49,8 @@
 
 
 	<dependencies>
-	
-	<dependency>
+
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.framework.version}</version>
@@ -112,6 +128,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
 		</dependency>
 
 	</dependencies>
