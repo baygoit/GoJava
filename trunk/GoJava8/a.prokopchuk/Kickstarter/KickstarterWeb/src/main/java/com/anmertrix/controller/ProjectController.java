@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,8 @@ public class ProjectController {
 	@Autowired
 	private QuestionDao questionDao;
 	
+	private static final Logger log = Logger.getLogger(ProjectController.class);
+	
 	@RequestMapping(value = "/project/{id}", method = RequestMethod.GET)
 	public String showProject(@PathVariable Long id, Map<String, Object> model) {
 		if (!projectDao.isExists(id)) {
@@ -50,7 +53,7 @@ public class ProjectController {
 		model.put("questions", questionDao.getQuestions(id));
 		model.put("paymentForm", new Payment());
 		model.put("questionForm", new Question());
-		
+		log.info("Это информационное сообщение!");
 		return "project";
 	}
 	
