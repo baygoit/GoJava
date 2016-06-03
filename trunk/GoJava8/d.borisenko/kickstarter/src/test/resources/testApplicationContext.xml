@@ -16,13 +16,24 @@
 	<context:annotation-config />
 	<jdbc:embedded-database id="dataSource" type="HSQL">
 	</jdbc:embedded-database>
+	
+	<bean id="dtoMapper" class="org.dozer.DozerBeanMapper">
+		<property name="mappingFiles">
+			<list>
+				<value>dozer-mapping.xml</value>
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
 	<bean id="transactionManager"
 		class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>
