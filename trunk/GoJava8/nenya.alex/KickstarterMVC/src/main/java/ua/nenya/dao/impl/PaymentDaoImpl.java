@@ -1,4 +1,4 @@
-package ua.nenya.dao.db;
+package ua.nenya.dao.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

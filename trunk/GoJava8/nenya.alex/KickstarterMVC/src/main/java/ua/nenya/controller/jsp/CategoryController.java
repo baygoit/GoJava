@@ -1,5 +1,6 @@
-package ua.nenya.controller;
+package ua.nenya.controller.jsp;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import ua.nenya.dao.CategoryDao;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.dao.QuoteDao;
 import ua.nenya.domain.Project;
+import ua.nenya.service.CategoryService;
+import ua.nenya.service.ProjectService;
 
 @Controller
 public class CategoryController {
@@ -31,15 +33,18 @@ public class CategoryController {
 
 	@Autowired
 	private ProjectDao projectDao;
+	
+	@Autowired
+	private ProjectService projectService;
 
 	@Autowired
-	private CategoryDao categoryDao;
+	private CategoryService categoryService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
 	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
 	public String showCategory(@PathVariable Long categoryId, Map<String, Object> model) {
-		if (!categoryDao.isCategoryExist(categoryId)) {
+		if (!categoryService.isCategoryExistById(categoryId)) {
 			logger.error("Category with id "+categoryId+" dosen't exist!");
 			model.put("categoryId", categoryId);
 			model.put("categoryTestId", -1);
@@ -48,11 +53,22 @@ public class CategoryController {
 		
 		model.put("quote", quoteDao.getRandomQuote());
 		
-		List<Project> projects = projectDao.getProjectsByCategoryId(categoryId);
+		List<Project> projects = getProjectsWithAvailableAmount(projectDao.getProjectsByCategoryId(categoryId));
+		
 		model.put("projects", projects);
 		
 		model.put("categoryId", categoryId);
 		return "categoryPage";
+	}
+
+	private List<Project> getProjectsWithAvailableAmount(List<Project> projects) {
+		List<Project> resultProjects = new ArrayList<>();
+		for(Project it: projects){
+			long sum = projectService.getPaymentSum(it.getId());
+			it.setAvailableAmount(sum);
+			resultProjects.add(it);
+		}
+		return resultProjects;
 	}
 
 	@ExceptionHandler(TypeMismatchException.class)

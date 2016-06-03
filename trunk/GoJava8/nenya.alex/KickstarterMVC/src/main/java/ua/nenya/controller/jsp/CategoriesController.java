@@ -1,4 +1,4 @@
-package ua.nenya.controller;
+package ua.nenya.controller.jsp;
 
 import java.util.Map;
 

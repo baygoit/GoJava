@@ -17,16 +17,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @NamedQueries({ 
 	@NamedQuery(name = "Project.getByCategoryId", query = "select p from Project p where p.category.id=:categoryId order by p.name"),
+	@NamedQuery(name = "Project.getProjects", query = "select p from Project p"),
 	@NamedQuery(name = "Project.Count", query = "select count(p) from Project p where p.id=:projectId"),
+	@NamedQuery(name = "Project.CountByName", query = "select count(p) from Project p where p.name=:projectName"),
 	})
 @Table(name = "PROJECT")
 public class Project {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
@@ -55,6 +59,7 @@ public class Project {
 	@Column
 	private String video;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.PERSIST)
 	private List<Reward> rewards; 
 	

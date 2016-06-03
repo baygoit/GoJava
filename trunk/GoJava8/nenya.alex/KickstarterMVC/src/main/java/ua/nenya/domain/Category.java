@@ -12,12 +12,14 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries({ 
 	@NamedQuery(name = "Category.getCategories", query = "select c from Category c order by c.name"),
+	@NamedQuery(name = "Category.getCategory", query = "select c from Category c where c.id=:categoryId"),
 	@NamedQuery(name = "Category.Count", query = "select count(c) from Category c where c.id=:categoryId"),
+	@NamedQuery(name = "Category.CountByName", query = "select count(c) from Category c where c.name=:categoryName")
 	})
 @Table(name = "CATEGORY")
 public class Category{
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	

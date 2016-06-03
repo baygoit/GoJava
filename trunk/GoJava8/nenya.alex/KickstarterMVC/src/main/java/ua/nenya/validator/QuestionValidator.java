@@ -7,15 +7,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import ua.nenya.controller.CategoryController;
-import ua.nenya.dao.QuestionDao;
+import ua.nenya.controller.jsp.CategoryController;
 import ua.nenya.domain.Question;
+import ua.nenya.service.QuestionService;
 
 @Component
 public class QuestionValidator implements Validator{
 	
 	@Autowired
-	private QuestionDao questionDao;
+	private QuestionService questionService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
@@ -28,7 +28,7 @@ public class QuestionValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		Question question = (Question) target;
 		
-		if (questionDao.isQuestionExist(question)) {
+		if (questionService.isQuestionExist(question)) {
 			logger.info("Question "+question.getName()+" in projectId "+question.getProject().getId()+" already exists");
 			errors.rejectValue("name", "required-unique-question", "Such question already exists!");
 		}

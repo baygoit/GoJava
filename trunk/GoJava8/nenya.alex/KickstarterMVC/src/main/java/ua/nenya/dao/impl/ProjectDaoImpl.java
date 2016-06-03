@@ -1,6 +1,5 @@
-package ua.nenya.dao.db;
+package ua.nenya.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ua.nenya.dao.ProjectDao;
-import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
 
@@ -33,15 +31,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	public List<Project> getProjectsByCategoryId(Long categoryId) {
 		Query query = em.createNamedQuery("Project.getByCategoryId");
 		query.setParameter("categoryId", categoryId);
-		List<Project> projects = query.getResultList();
-		
-		List<Project> resultProjects = new ArrayList<>();
-		for(Project it: projects){
-			long sum = getPaymentSum(it.getId());
-			it.setAvailableAmount(sum);
-			resultProjects.add(it);
-		}
-		return resultProjects;
+		return query.getResultList();
 	}
 
 	@Override
@@ -53,19 +43,9 @@ public class ProjectDaoImpl implements ProjectDao {
 		Predicate criteria = criteriaBuilder.equal(root.get("id"), projectId);
 		criteriaQuery.where(criteria);
 		TypedQuery<Project> typedQuery = em.createQuery(criteriaQuery);
-		Project project = typedQuery.getSingleResult();
-		project.setAvailableAmount(getPaymentSum(projectId));
-		return project;
+		return typedQuery.getSingleResult();
 	}
 
-	@Override
-	public boolean isProjectExist(Long projectId) {
-		Query query = em.createNamedQuery("Project.Count");
-		query.setParameter("projectId", projectId);
-		long count = (long) query.getSingleResult();
-		return count == 1L;
-	}
-	
 	@Override
 	public List<Reward> getRewardsByProjectId(Long projectId) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
@@ -80,14 +60,23 @@ public class ProjectDaoImpl implements ProjectDao {
 		return typedQuery.getResultList();		
 	}
 
-	private long getPaymentSum(Long projectId){
-		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-		CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
-		Root<Payment> payment = criteriaQuery.from(Payment.class);
-		criteriaQuery.multiselect(criteriaBuilder.sum(payment.<Long>get("amount")));
-		Predicate criteria = criteriaBuilder.equal(payment.get("project").get("id"), projectId);
-		criteriaQuery.where(criteria);
-		return em.createQuery(criteriaQuery).getSingleResult();
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Project> getProjects() {
+		Query query = em.createNamedQuery("Project.getProjects");
+		return query.getResultList();
+	}
+
+	@Override
+	public Project deleteProjectByProjectId(Long projectId) {
+		Project project = getProjectByProjectId(projectId);
+		em.remove(project );
+		return project;
+	}
+
+	@Override
+	public Project saveProject(Project project) {
+		return em.merge(project);
 	}
 
 }

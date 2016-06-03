@@ -1,10 +1,9 @@
-package ua.nenya.dao.db;
+package ua.nenya.dao.impl;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -42,15 +41,4 @@ public class QuestionDaoImpl implements QuestionDao {
 	public void writeQuestionInProject(Question question) {
 			em.persist(question);
 	}
-
-	@Transactional(readOnly = true)
-	@Override
-	public boolean isQuestionExist(Question question) {
-		Query query = em.createNamedQuery("Question.Count");
-		query.setParameter("name", question.getName());
-		query.setParameter("projectId", question.getProject().getId());
-		long count = (long) query.getSingleResult();
-		return count!=0;
-	}
-
 }

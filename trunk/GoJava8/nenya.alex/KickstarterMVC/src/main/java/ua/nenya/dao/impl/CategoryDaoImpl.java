@@ -1,10 +1,11 @@
-package ua.nenya.dao.db;
+package ua.nenya.dao.impl;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,11 +26,22 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	@Override
-	public boolean isCategoryExist(Long categoryId) {
-		Query query = em.createNamedQuery("Category.Count");
+	public Category getCategoryByCategoryId(Long categoryId) {
+		Query query = em.createNamedQuery("Category.getCategory");
 		query.setParameter("categoryId", categoryId);
-		long count = (long) query.getSingleResult();
-		return count == 1L;
+		return (Category) query.getSingleResult();
+	}
+
+	@Override
+	public Category deleteCategoryByCategoryId(Long categoryId) {
+		Category category = getCategoryByCategoryId(categoryId);
+		em.remove(category);
+		return category;
+	}
+
+	@Override
+	public Category saveCategory(Category category) {
+			return em.merge(category);
 	}
 
 }

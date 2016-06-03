@@ -1,4 +1,4 @@
-package ua.nenya.dao.db;
+package ua.nenya.dao.impl;
 
 import java.util.Random;
 
@@ -9,7 +9,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.jboss.logging.MessageLogger;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

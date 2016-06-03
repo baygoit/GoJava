@@ -71,17 +71,6 @@ public class ProjectDaoImplTest {
 		Project testProject = projectDao.getProjectByProjectId(project1.getId());
 		assertThat(testProject.getName(), is(project1.getName()));
 	}
-
-	@Test
-	public void testIsProjectExistYes() {
-		assertThat(projectDao.isProjectExist(project1.getId()), is(true));
-		assertThat(projectDao.isProjectExist(project2.getId()), is(true));
-	}
-	
-	@Test
-	public void testIsProjectExistNo() {
-		assertThat(projectDao.isProjectExist(100L), is(false));
-	}
 	
 	@Test
 	public void testGetRewardsByProjectId() {

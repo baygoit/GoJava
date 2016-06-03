@@ -1,4 +1,4 @@
-package ua.nenya.controller;
+package ua.nenya.controller.jsp;
 
 import java.util.Map;
 
@@ -20,67 +20,71 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import ua.nenya.dao.ProjectDao;
-import ua.nenya.dao.QuestionDao;
+import ua.nenya.dao.PaymentDao;
 import ua.nenya.dao.QuoteDao;
+import ua.nenya.dao.RewardDao;
+import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
-import ua.nenya.domain.Question;
-import ua.nenya.validator.QuestionValidator;
+import ua.nenya.domain.Reward;
+import ua.nenya.service.RewardService;
 
+@RequestMapping(value = "/reward")
 @Controller
-@RequestMapping(value = "/question")
-public class QuestionController {
+public class RewardController {
 	
 	@Autowired
 	private QuoteDao quoteDao;
+
+	@Autowired
+	private PaymentDao paymentDao;
 	
 	@Autowired
-	private QuestionValidator questionValidator;
+	private RewardDao rewardDao;
 	
 	@Autowired
-	private ProjectDao projectDao;
+	private RewardService rewardService;
 	
-	@Autowired
-	private QuestionDao questionDao;
-	
-	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
-	
-	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
-	public String bindQuestion(@PathVariable Long projectId, Map<String, Object> model){
-		
-		if (!projectDao.isProjectExist(projectId)) {
-			logger.error("Project with id "+projectId+" dosen't exist!");
-			model.put("projectId", projectId);
-			model.put("projectTestId", -1);
+	private static final Logger logger = LoggerFactory.getLogger(RewardController.class);
+
+	@RequestMapping(value = "/{rewardId}", method = RequestMethod.GET)
+	public String showPaymentForm(@PathVariable Long rewardId, Map<String, Object> model) {
+		if (!rewardService.isRewardExist(rewardId)) {
+			logger.error("Reward with id "+rewardId+" dosen't exist!");
+			model.put("rewardId", rewardId);
 			return "404Page";
 		}
-		
-		Project project = projectDao.getProjectByProjectId(projectId);
+
+		Project project = rewardDao.getProjectByRewardId(rewardId);
 		model.put("project", project);
 		model.put("quote", quoteDao.getRandomQuote());
+
+		Reward reward =  rewardDao.getRewardByRewardId(rewardId);
+		model.put("reward", reward);
 		
-		model.put("questionBind", new Question());
-		
-		return "questionPage";
+		model.put("rewardForm", new Reward());
+		return "rewardPage";
 	}
-	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addQuestion(@Valid @ModelAttribute("questionBind") Question question,
-			BindingResult result, Map<String, Object> model) {
-		
-		questionValidator.validate(question, result);
-		
-		Long projectId = question.getProject().getId();
-		
+
+	@RequestMapping(value = "/addReward", method = RequestMethod.POST)
+	public String addPayment(@Valid @ModelAttribute("rewardForm") Reward reward, BindingResult result,
+			Map<String, Object> model) {
+		Long projectId = reward.getProject().getId();
 		if (result.hasErrors()) {
 			logger.error("Result "+result+" has errors!" );
 			
-			model.put("project", projectDao.getProjectByProjectId(projectId));
+			model.put("project", reward.getProject());
+			model.put("reward", reward);
 			model.put("quote", quoteDao.getRandomQuote());
-			return "questionPage";
+			return "rewardPage";
 		}
 
-		questionDao.writeQuestionInProject(question);
+		Payment payment = new Payment();
+		payment.setAmount(reward.getAmount());
+		payment.setCardholderName(reward.getCardholderName());
+		payment.setCardNumber(reward.getCardNumber());
+		payment.setProject(reward.getProject());
+		
+		paymentDao.writePaymentInProject(payment);
 		
 		return "redirect:/project/"+projectId;
 	}
@@ -98,5 +102,5 @@ public class QuestionController {
         modelAndView.setViewName("errorPage");
         return modelAndView;
 	}
-
+	
 }

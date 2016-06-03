@@ -7,5 +7,4 @@ import ua.nenya.domain.Question;
 public interface QuestionDao {
 	List<Question> getQuestions(Long proId);
 	void writeQuestionInProject(Question question);
-	boolean isQuestionExist(Question question);
 }

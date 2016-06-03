@@ -1,4 +1,4 @@
-package ua.nenya.dao.db;
+package ua.nenya.dao.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,14 +33,6 @@ public class RewardDaoImpl implements RewardDao{
 		query.setParameter("rewardId", rewardId);
 		
 		return (Project) query.getSingleResult();
-	}
-
-	@Override
-	public boolean isRewardExist(Long rewardId) {
-		Query query = em.createNamedQuery("Reward.Count");
-		query.setParameter("rewardId", rewardId);
-		long count = (long) query.getSingleResult();
-		return count == 1L;
 	}
 
 }
