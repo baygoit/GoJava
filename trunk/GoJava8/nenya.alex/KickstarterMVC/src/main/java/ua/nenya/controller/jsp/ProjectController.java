@@ -23,7 +23,6 @@ import ua.nenya.dao.QuestionDao;
 import ua.nenya.dao.QuoteDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
-import ua.nenya.service.ProjectService;
 
 @Controller
 public class ProjectController {
@@ -34,16 +33,13 @@ public class ProjectController {
 	private ProjectDao projectDao;
 	
 	@Autowired
-	private ProjectService projectService;
-	
-	@Autowired
 	private QuestionDao questionDao;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
 	
 	@RequestMapping(value = "/project/{projectId}", method = RequestMethod.GET)
 	public String showProject(@PathVariable Long projectId, Map<String, Object> model){
-		if (!projectService.isProjectExistById(projectId)) {
+		if (!projectDao.isProjectExistById(projectId)) {
 			logger.error("Project with id "+projectId+" dosen't exist!");
 			model.put("projectId", projectId);
 			model.put("projectTestId", -1);
@@ -51,7 +47,7 @@ public class ProjectController {
 		}
 		
 		Project project = projectDao.getProjectByProjectId(projectId);
-		project.setAvailableAmount(projectService.getPaymentSum(projectId));
+		project.setAvailableAmount(projectDao.getPaymentSum(projectId));
 		model.put("category", project.getCategory());
 		model.put("project", project);
 		model.put("quote", quoteDao.getRandomQuote());

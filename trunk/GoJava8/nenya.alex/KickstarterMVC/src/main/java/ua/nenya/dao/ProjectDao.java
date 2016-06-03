@@ -13,4 +13,7 @@ public interface ProjectDao {
 	List<Project> getProjects();
 	Project deleteProjectByProjectId(Long projectId);
 	Project saveProject(Project project);
+	long getPaymentSum(Long projectId);
+	boolean isProjectExistById(Long projectId);
+	boolean isProjectExistByName(String projectName);
 }

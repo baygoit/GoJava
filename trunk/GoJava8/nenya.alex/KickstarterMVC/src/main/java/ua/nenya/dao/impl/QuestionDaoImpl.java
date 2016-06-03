@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,9 +23,9 @@ public class QuestionDaoImpl implements QuestionDao {
 
 	@PersistenceContext
 	private EntityManager em;
-
-	@Transactional(readOnly = true)
+	
 	@Override
+	@Transactional(readOnly = true)
 	public List<Question> getQuestions(Long projectId) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<Question> criteriaQuery = criteriaBuilder.createQuery(Question.class);
@@ -40,5 +41,15 @@ public class QuestionDaoImpl implements QuestionDao {
 	@Override
 	public void writeQuestionInProject(Question question) {
 			em.persist(question);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public boolean isQuestionExist(Question question) {
+		Query query = em.createNamedQuery("Question.Count");
+		query.setParameter("name", question.getName());
+		query.setParameter("projectId", question.getProject().getId());
+		long count = (long) query.getSingleResult();
+		return count!=0;
 	}
 }

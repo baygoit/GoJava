@@ -26,7 +26,6 @@ import ua.nenya.dao.RewardDao;
 import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
-import ua.nenya.service.RewardService;
 
 @RequestMapping(value = "/reward")
 @Controller
@@ -41,14 +40,11 @@ public class RewardController {
 	@Autowired
 	private RewardDao rewardDao;
 	
-	@Autowired
-	private RewardService rewardService;
-	
 	private static final Logger logger = LoggerFactory.getLogger(RewardController.class);
 
 	@RequestMapping(value = "/{rewardId}", method = RequestMethod.GET)
 	public String showPaymentForm(@PathVariable Long rewardId, Map<String, Object> model) {
-		if (!rewardService.isRewardExist(rewardId)) {
+		if (!rewardDao.isRewardExist(rewardId)) {
 			logger.error("Reward with id "+rewardId+" dosen't exist!");
 			model.put("rewardId", rewardId);
 			return "404Page";

@@ -61,6 +61,20 @@ public class RewardDaoImplTest {
 		assertThat(rewardDao.getProjectByRewardId(r2.getId()), is(pro));
 	}
 	
+	@Test
+	public void testIsRewardExistTrue(){
+		assertThat(rewardDao.isRewardExist(r2.getId()), is(true));
+	}
+	
+	@Test
+	public void testIsRewardExistFalse(){
+		Reward reward3 = new Reward();
+		reward3.setName("100$");
+		reward3.setProject(pro);
+		reward3.setId(100L);
+		assertThat(rewardDao.isRewardExist(reward3.getId()), is(false));
+	}
+	
 	private void initRewards() {
 		Project project = new Project();
 		project.setName("project");

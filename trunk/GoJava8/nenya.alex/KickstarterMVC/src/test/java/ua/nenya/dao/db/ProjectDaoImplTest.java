@@ -81,6 +81,17 @@ public class ProjectDaoImplTest {
 		assertThat(testRewards.get(1).getId(), is(r2.getId()));
 	}
 	
+	@Test
+	public void testIsProjectExistYes() {
+		assertThat(projectDao.isProjectExistById(project1.getId()), is(true));
+		assertThat(projectDao.isProjectExistById(project2.getId()), is(true));
+	}
+	
+	@Test
+	public void testIsProjectExistNo() {
+		assertThat(projectDao.isProjectExistById(100L), is(false));
+	}
+	
 	private void initProjects() {
 		Category musicCategory = new Category();
 		musicCategory.setName("Music");

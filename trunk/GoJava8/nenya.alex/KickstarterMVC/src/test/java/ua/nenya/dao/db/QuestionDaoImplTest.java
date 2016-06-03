@@ -66,6 +66,17 @@ public class QuestionDaoImplTest {
 		assertThat(questionTest.getName(), is(question.getName()));
 	}
 	
+	@Test
+	public void testIsQuestionExistTrue(){
+		questionDao.writeQuestionInProject(question);
+		assertThat(questionDao.isQuestionExist(question), is(true));
+	}
+	
+	@Test
+	public void testIsQuestionExistFalse(){
+		assertThat(questionDao.isQuestionExist(question), is(false));
+	}
+	
 	private void initQuestions() {
 		Project project = new Project();
 		project.setName("project");

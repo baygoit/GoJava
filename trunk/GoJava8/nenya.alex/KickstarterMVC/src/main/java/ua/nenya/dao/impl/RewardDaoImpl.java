@@ -20,7 +20,6 @@ public class RewardDaoImpl implements RewardDao{
 	
 	@Override
 	public Reward getRewardByRewardId(Long rewardId) {
-		
 		Query query = em.createNamedQuery("Reward.getById");
 		query.setParameter("rewardId", rewardId);
 		
@@ -33,6 +32,14 @@ public class RewardDaoImpl implements RewardDao{
 		query.setParameter("rewardId", rewardId);
 		
 		return (Project) query.getSingleResult();
+	}
+	
+	@Override
+	public boolean isRewardExist(Long rewardId) {
+		Query query = em.createNamedQuery("Reward.Count");
+		query.setParameter("rewardId", rewardId);
+		long count = (long) query.getSingleResult();
+		return count == 1L;
 	}
 
 }

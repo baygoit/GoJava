@@ -27,7 +27,6 @@ import ua.nenya.dao.QuoteDao;
 import ua.nenya.domain.Payment;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
-import ua.nenya.service.ProjectService;
 
 @RequestMapping(value = "/payment")
 @Controller
@@ -35,9 +34,6 @@ public class PaymentController {
 	
 	@Autowired
 	private QuoteDao quoteDao;
-
-	@Autowired
-	private ProjectService projectService;
 	
 	@Autowired
 	private ProjectDao projectDao;
@@ -49,7 +45,7 @@ public class PaymentController {
 
 	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
 	public String showPaymentForm(@PathVariable Long projectId, Map<String, Object> model) {
-		if (!projectService.isProjectExistById(projectId)) {
+		if (!projectDao.isProjectExistById(projectId)) {
 			logger.error("Project with id "+projectId+" dosen't exist!");
 			model.put("projectId", projectId);
 			model.put("projectTestId", -1);

@@ -12,4 +12,8 @@ public interface CategoryDao {
 	Category deleteCategoryByCategoryId(Long categoryId);
 
 	Category saveCategory(Category category);
+
+	boolean isCategoryExistById(Long categoryId);
+
+	boolean isCategoryExistByName(String categoryName);
 }

@@ -3,6 +3,7 @@ package ua.nenya.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -12,22 +13,28 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import ua.nenya.controller.jsp.CategoryController;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
 
-@Transactional(readOnly = true)
+@Transactional
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
 
 	@PersistenceContext
 	private EntityManager em;
+	
+	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(readOnly = true)
 	public List<Project> getProjectsByCategoryId(Long categoryId) {
 		Query query = em.createNamedQuery("Project.getByCategoryId");
 		query.setParameter("categoryId", categoryId);
@@ -35,6 +42,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Project getProjectByProjectId(Long projectId) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<Project> criteriaQuery = criteriaBuilder.createQuery(Project.class);
@@ -47,6 +55,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Reward> getRewardsByProjectId(Long projectId) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<Reward> criteriaQuery = criteriaBuilder.createQuery(Reward.class);
@@ -62,6 +71,7 @@ public class ProjectDaoImpl implements ProjectDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(readOnly = true)
 	public List<Project> getProjects() {
 		Query query = em.createNamedQuery("Project.getProjects");
 		return query.getResultList();
@@ -77,6 +87,40 @@ public class ProjectDaoImpl implements ProjectDao {
 	@Override
 	public Project saveProject(Project project) {
 		return em.merge(project);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public long getPaymentSum(Long projectId) {
+		long paymentSum;
+		Query query = em.createNamedQuery("Payment.getAmount");
+		query.setParameter("projectId", projectId);
+		try {
+			paymentSum = (long) query.getSingleResult();
+		} catch (NoResultException e) {
+			logger.info("Project with id = "+projectId+" is without payments!");
+			logger.trace("Exception: ", e);
+			return 0;
+		}
+		return paymentSum;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public boolean isProjectExistById(Long projectId) {
+		Query query = em.createNamedQuery("Project.Count");
+		query.setParameter("projectId", projectId);
+		long count = (long) query.getSingleResult();
+		return count == 1L;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public boolean isProjectExistByName(String projectName) {
+		Query query = em.createNamedQuery("Project.CountByName");
+		query.setParameter("projectName", projectName);
+		long count = (long) query.getSingleResult();
+		return count == 1L;
 	}
 
 }

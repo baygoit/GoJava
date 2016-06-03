@@ -7,4 +7,6 @@ public interface RewardDao {
 	Reward getRewardByRewardId(Long projectId);
 
 	Project getProjectByRewardId(Long rewardId);
+
+	boolean isRewardExist(Long rewardId);
 }

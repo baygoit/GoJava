@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.nenya.dao.CategoryDao;
 import ua.nenya.domain.Category;
 
-@Transactional(readOnly = true)
+@Transactional
 @Repository
 public class CategoryDaoImpl implements CategoryDao {
 
@@ -21,11 +21,13 @@ public class CategoryDaoImpl implements CategoryDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(readOnly = true)
 	public List<Category> getCategories() {
 		return em.createNamedQuery("Category.getCategories").getResultList();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Category getCategoryByCategoryId(Long categoryId) {
 		Query query = em.createNamedQuery("Category.getCategory");
 		query.setParameter("categoryId", categoryId);
@@ -42,6 +44,24 @@ public class CategoryDaoImpl implements CategoryDao {
 	@Override
 	public Category saveCategory(Category category) {
 			return em.merge(category);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public boolean isCategoryExistById(Long categoryId) {
+		Query query = em.createNamedQuery("Category.Count");
+		query.setParameter("categoryId", categoryId);
+		long count = (long) query.getSingleResult();
+		return count == 1L;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public boolean isCategoryExistByName(String categoryName) {
+		Query query = em.createNamedQuery("Category.CountByName");
+		query.setParameter("categoryName", categoryName);
+		long count = (long) query.getSingleResult();
+		return count == 1L;
 	}
 
 }

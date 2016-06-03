@@ -22,7 +22,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ua.nenya.controller.jsp.CategoryController;
 import ua.nenya.dao.CategoryDao;
 import ua.nenya.domain.Category;
-import ua.nenya.service.CategoryService;
 
 @RestController
 @RequestMapping("/rest")
@@ -30,9 +29,6 @@ public class CategoriesRestController {
 
 	@Autowired
 	private CategoryDao categoryDao;
-
-	@Autowired
-	private CategoryService categoryService;
 
 	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
@@ -43,7 +39,7 @@ public class CategoriesRestController {
 
 	@RequestMapping(value = "/category/{categoryId}", method = RequestMethod.GET)
 	public Category getCategory(@PathVariable("categoryId") Long categoryId) {
-		if (!categoryService.isCategoryExistById(categoryId)) {
+		if (!categoryDao.isCategoryExistById(categoryId)) {
 			logger.error("Category with id " + categoryId + " dosen't exist!");
 			return new Category();
 		}
@@ -51,9 +47,9 @@ public class CategoriesRestController {
 		return category;
 	}
 
-	@RequestMapping(value = "/category/{categoryId}/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/category/{categoryId}/delete", method = RequestMethod.DELETE)
 	public String deleteCategory(@PathVariable("categoryId") Long categoryId) {
-		if (!categoryService.isCategoryExistById(categoryId)) {
+		if (!categoryDao.isCategoryExistById(categoryId)) {
 			logger.error("Category with id " + categoryId + " dosen't exist!");
 			return "failure";
 		}
@@ -61,7 +57,7 @@ public class CategoriesRestController {
 		return "Category \"" + category.getName() + "\" is deleted successfully";
 	}
 
-	@RequestMapping(value = "/category/add/{categoryJson}", method = RequestMethod.GET)
+	@RequestMapping(value = "/category/add/{categoryJson}", method = RequestMethod.POST)
 	public String addCategory(@PathVariable("categoryJson") String categoryJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		Category category = null;
@@ -72,8 +68,27 @@ public class CategoriesRestController {
 			logger.trace("Exception: ", e);
 		}
 
-		if (!categoryService.isCategoryExistByName(category.getName())) {
-			if (!categoryService.isCategoryExistById(category.getId())) {
+		if (!categoryDao.isCategoryExistByName(category.getName())) {
+			if (!categoryDao.isCategoryExistById(category.getId())) {
+				Category savedCategory = categoryDao.saveCategory(category);
+				logger.info("Saving success!");
+				return "Category \"" + savedCategory.getName() + "\" with id = " + savedCategory.getId()
+						+ " is saved successfully";
+			} else {
+				logger.info("Saving failure!");
+				return "failure";
+			}
+		} else {
+			logger.info("Saving failure!");
+			return "failure";
+		}
+	}
+	
+	@RequestMapping(value = "/category/add", method = RequestMethod.POST)
+	public String addCategory(Category category) {
+		
+		if (!categoryDao.isCategoryExistByName(category.getName())) {
+			if (!categoryDao.isCategoryExistById(category.getId())) {
 				Category savedCategory = categoryDao.saveCategory(category);
 				logger.info("Saving success!");
 				return "Category \"" + savedCategory.getName() + "\" with id = " + savedCategory.getId()
@@ -91,6 +106,6 @@ public class CategoriesRestController {
 	@ExceptionHandler(TypeMismatchException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	public String handleTypeMismatchException(HttpServletRequest request, TypeMismatchException ex) {
-		return "failure";
+		return "failure TypeMismatchException";
 	}
 }

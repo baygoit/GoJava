@@ -25,7 +25,6 @@ import ua.nenya.dao.QuestionDao;
 import ua.nenya.dao.QuoteDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Question;
-import ua.nenya.service.ProjectService;
 import ua.nenya.validator.QuestionValidator;
 
 @Controller
@@ -42,9 +41,6 @@ public class QuestionController {
 	private ProjectDao projectDao;
 	
 	@Autowired
-	private ProjectService projectService;
-	
-	@Autowired
 	private QuestionDao questionDao;
 	
 	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
@@ -52,7 +48,7 @@ public class QuestionController {
 	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
 	public String bindQuestion(@PathVariable Long projectId, Map<String, Object> model){
 		
-		if (!projectService.isProjectExistById(projectId)) {
+		if (!projectDao.isProjectExistById(projectId)) {
 			logger.error("Project with id "+projectId+" dosen't exist!");
 			model.put("projectId", projectId);
 			model.put("projectTestId", -1);

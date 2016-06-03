@@ -22,7 +22,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ua.nenya.controller.jsp.CategoryController;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Project;
-import ua.nenya.service.ProjectService;
 
 @RestController
 @RequestMapping("/rest")
@@ -30,9 +29,6 @@ public class ProjectRestController {
 	
 	@Autowired
 	private ProjectDao projectDao;
-	
-	@Autowired
-	private ProjectService projectService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
 	
@@ -43,16 +39,16 @@ public class ProjectRestController {
 	
 	@RequestMapping(value = "/project/{projectId}", method = RequestMethod.GET)
 	public Project getProject(@PathVariable("projectId") Long projectId) {
-		if (!projectService.isProjectExistById(projectId)) {
+		if (!projectDao.isProjectExistById(projectId)) {
 			logger.error("Project with id "+projectId+" dosen't exist!");
 			return new Project();
 		}
 		return projectDao.getProjectByProjectId(projectId);
 	}
 	
-	@RequestMapping(value = "/project/{projectId}/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/project/{projectId}/delete", method = RequestMethod.DELETE)
 	public String deleteProject(@PathVariable("projectId") Long projectId) {
-		if (!projectService.isProjectExistById(projectId)) {
+		if (!projectDao.isProjectExistById(projectId)) {
 			logger.error("Project with id "+projectId+" dosen't exist!");
 			return "failure";
 		}
@@ -60,7 +56,7 @@ public class ProjectRestController {
 		return "Project \""+project.getName() + "\" is deleted successfully";
 	}
 	
-	@RequestMapping(value = "/project/add/{projectJson}", method = RequestMethod.GET)
+	@RequestMapping(value = "/project/add/{projectJson}", method = RequestMethod.POST)
 	public String addProject(@PathVariable("projectJson") String projectJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		Project project = null;
@@ -71,8 +67,26 @@ public class ProjectRestController {
 			logger.trace("Exception: ", e);
 		}
 		
-		if(!projectService.isProjectExistByName(project.getName())){
-			if(!projectService.isProjectExistById(project.getId())){
+		if(!projectDao.isProjectExistByName(project.getName())){
+			if(!projectDao.isProjectExistById(project.getId())){
+				Project savedProject = projectDao.saveProject(project);
+				logger.info("Saving success!");
+				return "Project \""+savedProject.getName() + "\" with id = "+savedProject.getId()+" is saved successfully";
+			}else{
+				logger.info("Saving failure!");
+				return "failure";
+			}
+		}else{
+			logger.info("Saving failure!");
+			return "failure";
+		}
+	}
+	
+	@RequestMapping(value = "/project/add", method = RequestMethod.POST)
+	public String addProject(Project project) {
+		
+		if(!projectDao.isProjectExistByName(project.getName())){
+			if(!projectDao.isProjectExistById(project.getId())){
 				Project savedProject = projectDao.saveProject(project);
 				logger.info("Saving success!");
 				return "Project \""+savedProject.getName() + "\" with id = "+savedProject.getId()+" is saved successfully";
@@ -89,7 +103,7 @@ public class ProjectRestController {
 	@ExceptionHandler(TypeMismatchException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	public String handleTypeMismatchException(HttpServletRequest request, TypeMismatchException ex) {
-        return "failure";
+        return "failure TypeMismatchException";
 	}
 
 }

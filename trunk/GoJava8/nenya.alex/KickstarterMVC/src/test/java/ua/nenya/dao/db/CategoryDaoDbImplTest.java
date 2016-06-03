@@ -37,6 +37,7 @@ public class CategoryDaoDbImplTest {
 	
 	private List<Category> categories = new ArrayList<>();
 	private Category music;
+	private Category film;
 
 	@Before
 	public void init() {
@@ -46,7 +47,7 @@ public class CategoryDaoDbImplTest {
 		Category filmCategory = new Category();
 		filmCategory.setName("Films");
 
-		em.merge(filmCategory);
+		film = em.merge(filmCategory);
 		music = em.merge(musicCategory);
 		categories.add(musicCategory);
 		categories.add(filmCategory);
@@ -71,5 +72,16 @@ public class CategoryDaoDbImplTest {
 		assertThat(categoriesTest.get(0).getName(), is(categories.get(0).getName()));
 		assertThat(categoriesTest.get(1).getName(), is("Music"));
 		assertThat(categoriesTest.get(1).getId(), is(music.getId()));
+	}
+	
+	@Test
+	public void testIsCategoryExistYes(){
+		assertThat(categoryDao.isCategoryExistById(music.getId()), is(true));
+		assertThat(categoryDao.isCategoryExistById(film.getId()), is(true));
+	}
+
+	@Test
+	public void testIsCategoryExistNo(){
+		assertThat(categoryDao.isCategoryExistById(3L), is(false));
 	}
 }
