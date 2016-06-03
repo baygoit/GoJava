@@ -12,9 +12,6 @@ import javax.persistence.Table;
 @Table(name = "projects")
 public class Project implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id

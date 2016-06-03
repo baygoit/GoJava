@@ -37,8 +37,9 @@ public class AnswerMappingTest {
 		Answer answer2 = new Answer();
 		answer2.setAnswer("Answer2");
 		question = new Question();
+		question.setQuestion("question12");
 		answer2.setQuestion(question);
-		
+		em.merge(question);
 		em.merge(answer1);
 		answer = em.merge(answer2);
 	}
@@ -60,9 +61,7 @@ public class AnswerMappingTest {
 		Answer answerTest = em.find(Answer.class, answer.getId());
 		assertThat(answerTest.getAnswer(), is("Answer2"));
 		assertThat(answerTest.getId(), is(2L));
-		assertThat(answerTest.getQuestion(), is(question));
-		answerTest.setId(5L);
-		assertThat(answerTest.getId(), is(5L));
+		assertThat(answerTest.getQuestion().getQuestion(), is("question12"));
 	}
 	
 }

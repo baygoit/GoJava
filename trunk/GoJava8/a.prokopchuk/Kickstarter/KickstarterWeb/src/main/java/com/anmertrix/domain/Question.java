@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "question")
@@ -28,6 +31,8 @@ public class Question {
 	private Project project;
 	
 	@Column
+	@NotNull
+ 	@Length(min=2, max=500, message="length must be between 2 and 500")
 	private String question;
 	
 	@OneToMany(mappedBy = "question")

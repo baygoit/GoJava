@@ -23,24 +23,25 @@ public class ProjectDaoSql implements ProjectDao {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Project> getProjectsByCategoryId(long categoryId) {
+	public List<Project> getProjects(long categoryId) {
 		List<Project> projects = em.createNamedQuery("Project.getProjects", Project.class)
 				.setParameter("categoryId", categoryId).getResultList();
-		projects.forEach(b -> b.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(b.getId())));
+		projects.forEach(b -> b.setGatheredBudget(paymentDao.getGatheredBudget(b.getId())));
 		return projects;
 	}
-	
+
 	@Override
 	@Transactional(readOnly = true)
-	public boolean projectExists(long projectId){
-		return em.createNamedQuery("Project.count", Long.class).getSingleResult() > 0;
+	public boolean isExists(long projectId){
+		return em.createNamedQuery("Project.count", Long.class).setParameter("projectId", projectId).getSingleResult() > 0;
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Project getProjectById(long projectId) {
-		Project project = em.find(Project.class, projectId);
-		project.setGatheredBudget(paymentDao.getGatheredBudgetByProjectId(project.getId())); // TODO
+	public Project getProject(long projectId) {
+		Project project = em.createNamedQuery("Project.getProject", Project.class)
+				.setParameter("projectId", projectId).getSingleResult();
+		project.setGatheredBudget(paymentDao.getGatheredBudget(projectId));
 		return project;
 	}
 	

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import ua.nenya.controller.CategoryController;
+import ua.nenya.controller.jsp.CategoryController;
 import ua.nenya.dao.QuestionDao;
 import ua.nenya.domain.Question;
 

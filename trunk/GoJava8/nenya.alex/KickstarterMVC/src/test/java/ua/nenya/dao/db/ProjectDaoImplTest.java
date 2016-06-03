@@ -71,17 +71,6 @@ public class ProjectDaoImplTest {
 		Project testProject = projectDao.getProjectByProjectId(project1.getId());
 		assertThat(testProject.getName(), is(project1.getName()));
 	}
-
-	@Test
-	public void testIsProjectExistYes() {
-		assertThat(projectDao.isProjectExist(project1.getId()), is(true));
-		assertThat(projectDao.isProjectExist(project2.getId()), is(true));
-	}
-	
-	@Test
-	public void testIsProjectExistNo() {
-		assertThat(projectDao.isProjectExist(100L), is(false));
-	}
 	
 	@Test
 	public void testGetRewardsByProjectId() {
@@ -90,6 +79,17 @@ public class ProjectDaoImplTest {
 		assertThat(testRewards.get(0).getName(), is(rewards.get(0).getName()));
 		assertThat(testRewards.get(1).getName(), is(r2.getName()));
 		assertThat(testRewards.get(1).getId(), is(r2.getId()));
+	}
+	
+	@Test
+	public void testIsProjectExistYes() {
+		assertThat(projectDao.isProjectExistById(project1.getId()), is(true));
+		assertThat(projectDao.isProjectExistById(project2.getId()), is(true));
+	}
+	
+	@Test
+	public void testIsProjectExistNo() {
+		assertThat(projectDao.isProjectExistById(100L), is(false));
 	}
 	
 	private void initProjects() {

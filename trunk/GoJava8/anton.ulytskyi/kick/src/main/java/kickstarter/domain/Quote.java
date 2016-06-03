@@ -11,9 +11,6 @@ import javax.persistence.Table;
 @Table(name = "quotes")
 public class Quote implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id

@@ -54,7 +54,7 @@ question: <input name="text" placeholder="text" value="">
 
 </form>
 
-<a href="categories">previous</a>
+<a href="/kickstarterWEB/categories">previous</a>
 
 
 </center>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service("CategoryService")
 public class CategoryService {
+
 	@Autowired
 	protected CategoryDAO dao;
 

@@ -21,6 +21,16 @@
 
 <body>
 	<div class="content">
+		<div class="language-panel">
+			<div class="container">
+				<div class="row">
+					<span>
+						<a href="?lang=en"><img src="<c:url value="/resources/images/en.png" />" alt="en"></a>
+						<a href="?lang=ua"><img src="<c:url value="/resources/images/ua.png" />" alt="ua"></a>
+					</span>
+				</div>
+			</div>
+		</div>
 		<div class="header">
 			<div class="logo" >
 				<a href="/kickstarter">

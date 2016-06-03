@@ -12,9 +12,9 @@
  
 <h3>Debug Information:</h3>
  
-Requested URL= ${url}<br><br>
+Requested URL = ${url}<br><br>
  
-Exception= ${exception.message}<br><br>
+Exception = ${exception.message}<br><br>
  
 </body>
 </html>

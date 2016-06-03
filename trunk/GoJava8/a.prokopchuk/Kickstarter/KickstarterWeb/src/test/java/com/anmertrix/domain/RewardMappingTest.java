@@ -48,13 +48,10 @@ public class RewardMappingTest {
 	public void testBasicUsage() {
 		List<Reward> rewards = em.createQuery("FROM Reward").getResultList();
 		assertThat(rewards.get(0).getName(), is("Reward1"));
-		assertThat(rewards.get(0).getId(), is(1L));
 		assertThat(rewards.get(1).getName(), is("Reward2"));
-		assertThat(rewards.get(1).getId(), is(2L));
 
 		Reward reward = em.find(Reward.class, r.getId());
 		assertThat(reward.getName(), is("Reward2"));
-		assertThat(reward.getId(), is(2L));
 	}
 
 }

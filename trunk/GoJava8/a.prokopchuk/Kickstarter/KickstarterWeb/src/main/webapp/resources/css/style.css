@@ -219,3 +219,12 @@ footer .container{
 	background-color: #fff;
 	font-size: 16px;
 }
+.language-panel {
+	position:absolute;
+	text-align:right;
+}
+
+.language-panel a{
+	margin:5px;
+	display: inline-block;
+}

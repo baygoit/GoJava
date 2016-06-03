@@ -6,5 +6,14 @@ import ua.nenya.domain.Category;
 
 public interface CategoryDao {
 	List<Category> getCategories();
-	boolean isCategoryExist(Long id);
+
+	Category getCategoryByCategoryId(Long categoryId);
+
+	Category deleteCategoryByCategoryId(Long categoryId);
+
+	Category saveCategory(Category category);
+
+	boolean isCategoryExistById(Long categoryId);
+
+	boolean isCategoryExistByName(String categoryName);
 }

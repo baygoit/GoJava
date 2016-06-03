@@ -13,12 +13,13 @@ import com.anmertrix.domain.Question;
 
 @Repository
 public class QuestionDaoSql implements QuestionDao {
+	
 	@PersistenceContext
 	private EntityManager em;
 	
 	@Override
 	@Transactional
-	public List<Question> getQuestionsByProjectId(long projectId) {
+	public List<Question> getQuestions(long projectId) {
 		List<Question> questions = em.createNamedQuery("Question.getQuestions", Question.class)
 				.setParameter("projectId", projectId).getResultList();
 		questions.forEach(b -> b.getAnswers().size());

@@ -73,15 +73,15 @@ public class CategoryDaoDbImplTest {
 		assertThat(categoriesTest.get(1).getName(), is("Music"));
 		assertThat(categoriesTest.get(1).getId(), is(music.getId()));
 	}
-
+	
 	@Test
 	public void testIsCategoryExistYes(){
-		assertThat(categoryDao.isCategoryExist(music.getId()), is(true));
-		assertThat(categoryDao.isCategoryExist(film.getId()), is(true));
+		assertThat(categoryDao.isCategoryExistById(music.getId()), is(true));
+		assertThat(categoryDao.isCategoryExistById(film.getId()), is(true));
 	}
 
 	@Test
 	public void testIsCategoryExistNo(){
-		assertThat(categoryDao.isCategoryExist(3L), is(false));
+		assertThat(categoryDao.isCategoryExistById(3L), is(false));
 	}
 }

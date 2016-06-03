@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("CommentsService")
 @Transactional
 public class CommentsService {
+
 	@Autowired
 	protected CommentsDAO dao;
 

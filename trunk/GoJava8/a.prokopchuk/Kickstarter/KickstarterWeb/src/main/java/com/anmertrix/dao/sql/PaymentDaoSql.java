@@ -18,13 +18,13 @@ public class PaymentDaoSql implements PaymentDao {
 	private EntityManager em;
 	
 	@Override
-	public List<Payment> getPaymentsByProjectId(long projectId) {
+	public List<Payment> getPayments(long projectId) {
 		return em.createNamedQuery("Payment.getPayments", Payment.class)
 				.setParameter("projectId", projectId).getResultList();
 	}
 	
 	@Override
-	public long getGatheredBudgetByProjectId(long projectId) {
+	public long getGatheredBudget(long projectId) {
 		Long result = (Long) em.createNamedQuery("Payment.getGatheredBudget").setParameter("projectId", projectId).getSingleResult();
 		return (result != null) ? result : 0;
 	}

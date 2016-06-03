@@ -3,6 +3,7 @@ package com.anmertrix.domain;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,8 @@ import javax.persistence.Transient;
 @Table(name = "project")
 @NamedQueries({ 
 	@NamedQuery(name = "Project.getProjects", query = "SELECT p from Project p where p.category.id=:categoryId"),  
-	@NamedQuery(name = "Project.count", query = "SELECT COUNT(p) FROM Project p")
+	@NamedQuery(name = "Project.count", query = "SELECT COUNT(p) FROM Project p where p.id=:projectId"),
+	@NamedQuery(name = "Project.getProject", query = "SELECT p from Project p where p.id=:projectId")
  })
 public class Project {
 	
@@ -28,7 +30,7 @@ public class Project {
 	@Column(name = "id")
 	private Long id;
 	
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.ALL})
 	private Category category;
 
 	@Column(name = "name")

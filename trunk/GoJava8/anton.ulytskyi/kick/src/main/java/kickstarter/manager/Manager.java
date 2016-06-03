@@ -18,11 +18,14 @@ import kickstarter.service.CommentsService;
 import kickstarter.service.ProjectService;
 import kickstarter.service.QuoteService;
 
+
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Manager {
-	ApplicationContext ctx = (ApplicationContext) new ClassPathXmlApplicationContext(
+	private static final Logger log = Logger.getLogger(Manager.class);
+	public ApplicationContext ctx = (ApplicationContext) new ClassPathXmlApplicationContext(
 			"spring.xml");
 
 	public String getRandomQuote() {
@@ -84,6 +87,7 @@ public class Manager {
 			Number account = service.getTheSumOfAccount(id);
 			return account.intValue();
 		} catch (NullPointerException zero) {
+			log.info("attempt for project with no money get accounting");
 			return 0;
 		}
 	}
