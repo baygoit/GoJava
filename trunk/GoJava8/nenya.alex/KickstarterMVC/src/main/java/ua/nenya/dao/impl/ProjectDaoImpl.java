@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import ua.nenya.controller.jsp.CategoryController;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Project;
 import ua.nenya.domain.Reward;
@@ -30,7 +29,7 @@ public class ProjectDaoImpl implements ProjectDao {
 	@PersistenceContext
 	private EntityManager em;
 	
-	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProjectDaoImpl.class);
 
 	@SuppressWarnings("unchecked")
 	@Override

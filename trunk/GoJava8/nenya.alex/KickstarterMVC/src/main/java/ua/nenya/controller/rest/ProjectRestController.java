@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import ua.nenya.controller.jsp.CategoryController;
 import ua.nenya.dao.ProjectDao;
 import ua.nenya.domain.Project;
 
@@ -28,7 +27,7 @@ public class ProjectRestController {
 	@Autowired
 	private ProjectDao projectDao;
 	
-	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProjectRestController.class);
 	
 	@RequestMapping(value = "/project", method = RequestMethod.GET)
 	public List<Project> getProjects() {

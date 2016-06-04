@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import ua.nenya.controller.jsp.CategoryController;
 import ua.nenya.dao.CategoryDao;
 import ua.nenya.domain.Category;
 
@@ -28,7 +27,7 @@ public class CategoriesRestController {
 	@Autowired
 	private CategoryDao categoryDao;
 
-	private static final Logger logger = LoggerFactory.getLogger(CategoryController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CategoriesRestController.class);
 
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
 	public List<Category> getAllCategories() {

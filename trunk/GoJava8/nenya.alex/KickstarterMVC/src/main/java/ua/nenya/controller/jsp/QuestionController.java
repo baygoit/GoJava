@@ -43,7 +43,7 @@ public class QuestionController {
 	@Autowired
 	private QuestionDao questionDao;
 	
-	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
+	private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
 	
 	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
 	public String bindQuestion(@PathVariable Long projectId, Map<String, Object> model){
