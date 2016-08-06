@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.WebServlet;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
@@ -24,6 +25,7 @@ public class SelectoinCategories extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final Logger log = Logger.getLogger(SelectoinCategories.class);
 
 	@Autowired
 	private QuoteDao quoteDao;
@@ -39,9 +41,11 @@ public class SelectoinCategories extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		log.info("start method doGet()");
+		
 		Quote quote = quoteDao.getRandomQuote();
 		List<Category> categories = categoryDao.getAll();
+		log.info("Categories: " + categories);
 
 		request.setAttribute("content", quote.getContent());
 		request.setAttribute("author", quote.getAuthor());

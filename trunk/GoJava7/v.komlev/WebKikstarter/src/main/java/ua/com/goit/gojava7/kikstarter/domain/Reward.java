@@ -21,7 +21,7 @@ public class Reward {
 
 	@ManyToOne
 	@JoinColumn(name = "project_id")
-	private int projectId;
+	private Project project;
 
 	@Column(name = "amount_donation")
 	private int amountDonation;
@@ -33,8 +33,8 @@ public class Reward {
 		return id;
 	}
 
-	public int getProjectId() {
-		return projectId;
+	public Project getProject() {
+		return project;
 	}
 
 	public int getAmountDonation() {
@@ -49,8 +49,8 @@ public class Reward {
 		this.id = id;
 	}
 
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public void setAmountDonation(int amountDonation) {

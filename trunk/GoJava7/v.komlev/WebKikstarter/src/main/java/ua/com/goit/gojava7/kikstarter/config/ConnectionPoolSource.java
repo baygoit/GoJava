@@ -57,10 +57,10 @@ public class ConnectionPoolSource {
 
 			properties.load(inputStream);
 
-			driver = properties.getProperty("driverOracle");
-			host = properties.getProperty("databaseHostOracle");
-			username = properties.getProperty("usernameOracle");
-			password = properties.getProperty("passwordOracle");
+			driver = properties.getProperty("jdbc.driverClassName");
+			host = properties.getProperty("jdbc.dataBaseUrl");
+			username = properties.getProperty("jdbc.username");
+			password = properties.getProperty("jdbc.password");
 
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -10,6 +10,8 @@
 </head>
 <body>
 
+	<h3><a href="category?category_id=${category.getId()}">Back to list projects</a></h3>
+	<h3><a href="categories">Change category</a></h3>
 	<h2>${project.name}</h2>
 	<br>
 	<table border="1">
@@ -38,6 +40,6 @@
 		</tr>
 	</table>
 	<br>
-	<a href="payment?id=${project.uniqueID}">Donate money</a>
+	<a href="payment?id=${project.getId()}">Donate money</a>
 </body>
 </html>

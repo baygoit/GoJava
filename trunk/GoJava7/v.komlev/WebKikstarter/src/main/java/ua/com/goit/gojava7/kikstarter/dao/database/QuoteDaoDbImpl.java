@@ -2,8 +2,11 @@ package ua.com.goit.gojava7.kikstarter.dao.database;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.hibernate.SessionFactory;
+import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -12,8 +15,8 @@ import ua.com.goit.gojava7.kikstarter.domain.Quote;
 
 @Repository
 public class QuoteDaoDbImpl implements QuoteDao {
-
-	private static final String SELECT_RANDOM_QUOTE = "SELECT * FROM (SELECT * FROM quotes ORDER BY DBMS_RANDOM.VALUE) WHERE rownum = 1";
+	
+	private static final Logger log = Logger.getLogger(QuoteDaoDbImpl.class);
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -27,17 +30,19 @@ public class QuoteDaoDbImpl implements QuoteDao {
 	public void remove(Quote quote) {
 
 	}
-
+	
+	@Transactional
 	@Override
 	public Quote getRandomQuote() {
-		Session session = sessionFactory.openSession();
+		log.info("start method getRandomQuote()");
+		Session session = sessionFactory.getCurrentSession();
 		
-		Quote quote = (Quote) session.createCriteria(Quote.class)
-				.add(Restrictions.sqlRestriction(SELECT_RANDOM_QUOTE))
-				.setMaxResults(1)
-				.uniqueResult();
+		Criteria criteria = session.createCriteria(Quote.class);
+		criteria.add(Restrictions.sqlRestriction("{alias}.id = (select id from (select id from quotes order by dbms_random.value) where rownum = 1)"));
+		criteria.setMaxResults(1);
 		
-		session.close();
+		Quote quote = (Quote) criteria.uniqueResult();
+		log.info("Random Quote ID = "+ quote.getId());
 		
 		return quote;
 	}

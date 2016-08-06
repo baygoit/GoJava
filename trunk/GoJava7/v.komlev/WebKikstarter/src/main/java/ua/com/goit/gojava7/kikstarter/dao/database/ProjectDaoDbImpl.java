@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import ua.com.goit.gojava7.kikstarter.dao.ProjectDao;
 import ua.com.goit.gojava7.kikstarter.domain.Project;
@@ -18,40 +19,39 @@ public class ProjectDaoDbImpl implements ProjectDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Override
-	public void add(Project project) {
-
-	}
-
-
 	@SuppressWarnings("unchecked")
+	@Transactional
 	@Override
 	public List<Project> getProjectsFromCategory(int categoryId) {
-		Session session =sessionFactory.openSession();
-		
-		Criteria criteria=session.createCriteria(Project.class);
-		criteria.add(Restrictions.eq("categories.id", categoryId));
+
+		Session session = sessionFactory.getCurrentSession();
+
+		Criteria criteria = session.createCriteria(Project.class);
+		criteria.add(Restrictions.eq("category.id", categoryId));
 		List<Project> projects = criteria.list();
-		
-		session.close();
+
 		return projects;
 	}
 
+	@Transactional
+	@Override
+	public Project getProjectById(int projectId) {
+		Session session = sessionFactory.getCurrentSession();
+
+		Criteria criteria = session.createCriteria(Project.class);
+		criteria.add(Restrictions.eq("id", projectId));
+		Project project = (Project) criteria.uniqueResult();
+
+		return project;
+	}
+	
 	@Override
 	public void remove(Project project) {
 
 	}
-
+	
 	@Override
-	public Project getProjectById(int projectId) {
-		Session session=sessionFactory.openSession();
-		
-		Criteria criteria=session.createCriteria(Project.class);
-		criteria.add(Restrictions.eq("id", projectId));
-		Project project = (Project) criteria.uniqueResult();
-		
-		session.close();
-		return project;
-	}
+	public void add(Project project) {
 
+	}
 }

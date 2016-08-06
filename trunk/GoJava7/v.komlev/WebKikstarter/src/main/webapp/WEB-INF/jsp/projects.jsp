@@ -10,10 +10,12 @@
 </head>
 <body>
 
-	<h2>${category.name} projects</h2>
+	<h3><a href="categories">Change category</a></h3>
+	<h2>${category.getName()} projects</h2>
+	<br>
 	<br>
 	<c:forEach var="project" items="${projects}">
-		<a href="project?id=${project.uniqueID}">${project.name}</a>
+		<a href="project?project_id=${project.getId()}&category_id=${category.getId()}">${project.getName()}</a>
 		<br>
 		Necessary amount: <c:out value="${project.getRequiredSum()}"/>
 		<br>

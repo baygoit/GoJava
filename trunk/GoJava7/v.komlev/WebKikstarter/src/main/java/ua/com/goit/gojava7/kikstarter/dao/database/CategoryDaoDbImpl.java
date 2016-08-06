@@ -9,19 +9,24 @@ import org.hibernate.Criteria;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import org.apache.log4j.Logger;
 
 import ua.com.goit.gojava7.kikstarter.dao.CategoryDao;
 import ua.com.goit.gojava7.kikstarter.domain.Category;
 
 @Repository
 public class CategoryDaoDbImpl implements CategoryDao {
-	
+
+	private static final Logger log = Logger.getLogger(CategoryDaoDbImpl.class);
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
 	public void add(Category category) {
-		
+
 	}
 
 	@Override
@@ -30,27 +35,27 @@ public class CategoryDaoDbImpl implements CategoryDao {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	@Override
 	public List<Category> getAll() {
-		Session session=sessionFactory.openSession();
-		
-		Criteria criteria=session.createCriteria(Category.class);
-		List<Category> categories=criteria.list();
-		
-		session.close();
+		Session session = sessionFactory.getCurrentSession();
+
+		Criteria criteria = session.createCriteria(Category.class);
+		List<Category> categories = criteria.list();
+
 		return categories;
 	}
 
-
+	@Transactional
 	@Override
 	public Category getCategory(int id) {
-		Session session=sessionFactory.openSession();
-		
-		Criteria criteria=session.createCriteria(Category.class);
-		criteria.add(Restrictions.eq("id", id));
-		Category category=(Category) criteria.uniqueResult();
+		log.info("start method getCategory(), id = " + id);
+		Session session = sessionFactory.getCurrentSession();
 
-		session.close();
+		Criteria criteria = session.createCriteria(Category.class);
+		criteria.add(Restrictions.eq("id", id));
+		Category category = (Category) criteria.uniqueResult();
+
 		return category;
 	}
 

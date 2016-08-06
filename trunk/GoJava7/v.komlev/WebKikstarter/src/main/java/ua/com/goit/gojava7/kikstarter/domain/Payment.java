@@ -30,14 +30,14 @@ public class Payment {
 
 	@ManyToOne
 	@JoinColumn(name = "project_id")
-	private int projectId;
+	private Project project;
 
 	public int getId() {
 		return id;
 	}
 
-	public int getProjectId() {
-		return projectId;
+	public Project getProject() {
+		return project;
 	}
 
 	public String getUserName() {
@@ -56,8 +56,8 @@ public class Payment {
 		this.id = id;
 	}
 
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	public void setUserName(String paymentUserName) {

@@ -17,11 +17,12 @@ public class Project {
 	@Id
 	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "seq_id", allocationSize = 10)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
+	@Column(name = "id")
 	private int id;
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
-	private int categoryID;
+	private Category category;
 
 	@Column(name = "name")
 	private String name;
@@ -48,8 +49,8 @@ public class Project {
 		return id;
 	}
 
-	public int getCategoryID() {
-		return categoryID;
+	public Category getCategory() {
+		return category;
 	}
 
 	public String getName() {
@@ -84,8 +85,8 @@ public class Project {
 		this.id = id;
 	}
 
-	public void setCategoryID(int categoryID) {
-		this.categoryID = categoryID;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public void setName(String projectName) {
@@ -122,9 +123,7 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project: name: " + name + "; general description: " + generalDescription + "; full description: "
-				+ fullDescription + "; video link: " + videoLink + "; required sum: " + requiredSum
-				+ "; collected sum: " + collectedSum + "; days left: " + endOfDays;
+		return "Project: name: " + name + "; general description: " + generalDescription;
 	}
 
 }

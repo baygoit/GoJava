@@ -9,12 +9,13 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "qoutes")
+@Table(name = "quotes")
 public class Quote {
 
 	@Id
 	@SequenceGenerator(name = "SEQ_GEN", sequenceName = "seq_id", allocationSize = 10)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
+	@Column(name = "id")
 	private int id;
 
 	@Column(name = "content")
